@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>見出しがアコーディオンのフックの例</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+*:focus {outline:3px solid #27B;}
+
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6rem;
+}
+p {
+    line-height: 1.8;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+button {
+    font-size: inherit;
+}
+code {
+    font-size: 100%;
+    font-family: inherit;
+}
+kbd {
+    margin: 0 3px;
+    position: relative;
+    top: -2px; 
+    border-radius: 6px;
+    padding: 3px 6px 2px;
+    display: inline-block;
+    border: 1px solid #aaa;
+}
+kbd kbd {
+    border: 0;
+    top: 0;
+    line-height: 1;
+    padding: 0;
+    margin: 0 6px;
+}
+footer {
+    font-size: 1.2rem;
+    margin-top: 30vh;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+footer h2 {
+    font-size: 1.4rem;
+}
+</style>
+</head>
+
+<body>
+<p><a href="./">DEMO一覧に戻る</a> | <a href="http://pauljadam.com" lang="en-US">PaulJAdam.comでさらに詳しく</a></p>
+
+<main>
+<h1>見出しがアコーディオンのフックの例</h1>
+<h2><button id=accordion-button aria-expanded=false onclick="if (document.getElementById('accordion-div').style.display == 'block') {document.getElementById('accordion-div').style.display = 'none'; document.getElementById('accordion-button').setAttribute('aria-expanded','false')} else {document.getElementById('accordion-div').style.display = 'block'; document.getElementById('accordion-button').setAttribute('aria-expanded','true')}">表示非表示切り替え</button></h2>
+<div id="accordion-div" style="display:none;">表示されたコンテンツ</div>
+</main>
+
+<footer>
+<h2>原文</h2>
+
+<p><a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a></p>
+</footer>
+</body>
+</html>
