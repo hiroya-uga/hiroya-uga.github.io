@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>アコーディオンのアクセシビリティ失敗例</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+*:focus {outline:3px solid #27B;}
+
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6rem;
+}
+p {
+    line-height: 1.8;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+button {
+    font-size: inherit;
+}
+code {
+    font-size: 100%;
+    font-family: inherit;
+}
+kbd {
+    margin: 0 3px;
+    position: relative;
+    top: -2px; 
+    border-radius: 6px;
+    padding: 3px 6px 2px;
+    display: inline-block;
+    border: 1px solid #aaa;
+}
+kbd kbd {
+    border: 0;
+    top: 0;
+    line-height: 1;
+    padding: 0;
+    margin: 0 6px;
+}
+footer {
+    font-size: 1.2rem;
+    margin-top: 30vh;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+footer h2 {
+    font-size: 1.4rem;
+}
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="container">
+<p><a href="./">DEMO一覧に戻る</a> | <a href="http://pauljadam.com" lang="en-US">PaulJAdam.comでさらに詳しく</a></p>
+
+<h1>アコーディオンのアクセシビリティ失敗例</h1>
+
+<nav role="navigation" class="navbar navbar-inverse">
+<div class="container-fluid">
+    <div class="navbar-header"> <a class="navbar-brand" href="./csunmobile-index">Workshop</a> </div>
+    <div>
+    <ul class="nav navbar-nav">
+        <li><a href="./csunmobile-form-bad.html">Form Bad</a></li>
+        <li><a href="./csunmobile-form-aria.html">Form ARIA</a></li>
+        <li><a href="./csunmobile-form-html5.html">Form HTML5</a></li>
+        <li class="active"><a aria-current="page" href="./csunmobile-accordion-bad.html">Accordion Bad</a></li>
+        <li><a href="./csunmobile-accordion-aria.html">Accordion ARIA</a></li>
+    </ul>
+    </div>
+</div>
+</nav>
+
+<main role="main">
+<a id="shipping-toggle" style="cursor:pointer; font-weight:bold;">アコーディオンフック <i class="fa fa-plus-square"></i></a>
+<div id="shipping-panel" style="display:none">
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+</main>
+</div>
+
+<script>
+$('#shipping-toggle').click(function(e){
+    $('#shipping-panel').stop(true, false).slideToggle('500');
+    $(this).find('i').toggleClass('fa-plus-square fa-minus-square')
+});
+</script>
+
+<footer>
+<h2>原文</h2>
+
+<p><a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a></p>
+</footer>
+</body>
+</html>
