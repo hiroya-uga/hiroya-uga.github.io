@@ -11,7 +11,9 @@
 
 <main>
 <h1><code>img</code>要素のアクセシブルネームの計算</h1>
-<p><a href="http://www.w3.org/TR/html-aapi/#img-element">HTML to Platform Accessibility APIs Implementation Guide</a> によると、WAI-ARIA属性は<code>img</code>要素のアクセシブルネームの計算に含まれます。ただし、常に最も堅牢な属性を利用して実装することが最善です。アクセシブルネームの計算順序は次の通りです。</p>
+<p><a href="http://www.w3.org/TR/html-aapi/#img-element">HTML to Platform Accessibility APIs Implementation Guide</a> によると、WAI-ARIA属性は<code>img</code>要素のアクセシブルネームの計算に含まれます。ただし、常に最も堅牢な属性を利用して実装することが最善です。</p>
+
+<p>アクセシブルネームの計算順序は次の通りです。</p>
 
 <ol>
   <li><code>aria-labelledby</code>属性を利用する</li>

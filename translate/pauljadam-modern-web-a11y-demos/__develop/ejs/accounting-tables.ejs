@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: '会計テーブル'
+}); %>
+<style>
+/* 固有 */
+th { font-weight: normal; text-align: left ; vertical-align: top; }
+table:nth-of-type(2) thead th {font-weight: bold; text-align: center ;}
+td {text-align: right;}
+th, td {padding:.4em; font-size: 115%; background-color: #E8E6D6; border-top:2px solid white;}
+caption {padding: .8em; font-weight: bold; font-size: 130%; background-color: #C9C5B0; box-shadow: 10px 0 14px -4px black; outline: 4px solid white;}
+table {margin-bottom:2em;width:450px; border-collapse:collapse;  box-shadow: black 0.4em 0.4em 1em; outline: 4px solid white;}
+table:nth-of-type(1) thead th, table:nth-of-type(3) thead th {height: 0px; font-size:0px; }
+td.underline {border-bottom:2px solid black;}
+td.double-underline {border-bottom:5px solid black; border-bottom-style: double;}
+</style>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>会計テーブル</h1>
+<h2><strong>1行が複数行にわたる2つの行ヘッダーを持つ表。</strong><br><span><span><code>thead</code>要素の列ヘッダは <code>font-size: 0px; height: 0px</code> で視覚的に隠されています。</span></h2>
+
+<table>
+  <caption>
+    <strong>CAMPUS APARTMENT LOCATORS</strong><br>損益計算書月<br>2018年7月31日
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">所得タイプ</th>
+      <th scope="col">収入または費用</th>
+      <th scope="col">借方</th>
+      <th scope="col">貸方</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">収入：</th>
+      <th scope="row">サービス収入</th>
+      <td></td>
+      <td>$ 1,900</td>
+    </tr>
+    <tr>
+      <th rowspan="3" scope="rowgroup">経費：</th>
+      <th scope="row">家賃</th>
+      <td>$ 400</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">水道光熱費</th>
+      <td class="underline">100</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row" style="padding-left: 20px;">全費用</th>
+      <td></td>
+      <td class="underline">500</td>
+    </tr>
+    <tr>
+      <th scope="row">当期純利益</th>
+      <td></td>
+      <td></td>
+      <td class="double-underline">$ 1,400</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><small>* iOSのVoiceOverは、CSSで視覚的に隠された列ヘッダを読み上げませんでした。</small></p>
+
+
+<h2><strong>1行が複数行にわたる2つの行ヘッダーを持つ表。</strong><br><span>マークアップは上記の表と同じですが、列ヘッダーが隠されていません。</span></h2>
+
+<table>
+  <caption>
+    <strong>CAMPUS APARTMENT LOCATORS</strong><br>損益計算書月<br>2018年7月31日
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">所得タイプ</th>
+      <th scope="col">収入または費用</th>
+      <th scope="col">借方</th>
+      <th scope="col">貸方</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">収入：</th>
+      <th scope="row">サービス収入</th>
+      <td></td>
+      <td>$ 1,900</td>
+    </tr>
+    <tr>
+      <th rowspan="3" scope="rowgroup">経費：</th>
+      <th scope="row">家賃</th>
+      <td>$ 400</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">水道光熱費</th>
+      <td class="underline">100</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row" style="padding-left: 20px;">全費用</th>
+      <td></td>
+      <td class="underline">500</td>
+    </tr>
+    <tr>
+      <th scope="row">当期純利益</th>
+      <td></td>
+      <td></td>
+      <td class="double-underline">$ 1,400</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><small>* iOSのVoiceOverは各データセルの最初の行ヘッダのみを読み上げます。しかし、固有の行ヘッダーは2列目にあり、読み上げられません。macOSのVoiceOverは、このテーブルをうまく理解し、すべての列と行のヘッダを予想通りに読み上げます。</small></p>
+
+<h2><strong><code>tbody</code>要素に複数の列ヘッダーがある表。</strong><br><span><code>thead</code>要素の列ヘッダは <code>font-size: 0px; height: 0px</code> で視覚的に隠されています。</span></h2>
+
+<table>
+  <caption>
+    <strong>CAMPUS APARTMENT LOCATORS</strong><br>損益計算書月<br>2018年7月31日
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">収入または費用</th>
+      <th scope="col">借方</th>
+      <th scope="col">貸方</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="col">収入：</th>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row" style="padding-left: 20px;">サービス収入</th>
+      <td></td>
+      <td>$ 1,900</td>
+    </tr>
+    <tr>
+      <th scope="col">経費：</th>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row" style="padding-left: 20px;">家賃</th>
+      <td>$ 400</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row" style="padding-left: 20px;">水道光熱費</th>
+      <td class="underline">100</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row" style="padding-left: 40px;">全費用</th>
+      <td></td>
+      <td class="underline">500</td>
+    </tr>
+    <tr>
+      <th scope="row">当期純利益</th>
+      <td></td>
+      <td class="double-underline">$ 1,400</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><small>* iOSのVoiceOverは、各データセルの行ヘッダーと列ヘッダーを読み上げます。 <code>tbody</code>要素内の複数列にわたる列ヘッダーは、iOS・macOSともにVoiceOverは列ヘッダーとしては読み上げませんでした。この表の表現方法が悪いため、スクリーンリーダーが列ヘッダーとして「収入：」と「経費：」という文字列を読み上げることは重要ではありません。</small></p>
+
+<p><small>* このデータテーブルはモバイルユーザーにとって最高のエクスペリエンスです。</small></p>
+
+<p><small>** AndroidのChromeとTalkBackでは、データテーブルのアクセシビリティはサポートされていません。行と列のヘッダーはデータセルには表示されません。</small></p>
+
+<p><small>*** AndroidのFirefoxとTalkBackでは、このページで紹介した両方のテクニックを非常によくサポートしています。 VoiceOverよりも優れています。</small></p>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>
