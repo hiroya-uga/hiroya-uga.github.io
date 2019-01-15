@@ -6,6 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
+@font-face {
+  font-family: "YuGothic M";
+  src: local("Yu Gothic Medium"),
+       local("Yu Gothic");
+  font-weight: 500;
+       /*
+         Chrome 58.0.3029.110 (64-bit) では
+         "Yu Gothic Medium" を認識しないバグあるため
+         "Yu Gothic" と font-weight も併せて指定。
+       */
+}
+
 *:focus {outline:3px solid #27B;}
 
 html {
@@ -13,9 +25,18 @@ html {
 }
 body {
     font-size: 1.6rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    color: #333;
+    padding: 10px 15px;
 }
-p {
+p, li {
+    max-width: 35em;
     line-height: 1.8;
+    letter-spacing: 1.5px;
+    line-height: 1.75;
+}
+a {
+    letter-spacing: 0;
 }
 img {
     max-width: 100%;
@@ -53,6 +74,12 @@ footer {
 footer h2 {
     font-size: 1.4rem;
 }
+h2 {
+    margin-top: 100px;
+}
+h1 + h2 {
+    margin-top: 0;
+}
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -62,9 +89,9 @@ footer h2 {
 
 <body>
 <div class="container">
+<header>
 <p><a href="./">DEMO一覧に戻る</a> | <a href="http://pauljadam.com" lang="en-US">PaulJAdam.comでさらに詳しく</a></p>
-
-<h1>アコーディオンのアクセシビリティ失敗例</h1>
+</header>
 
 <nav role="navigation" class="navbar navbar-inverse">
 <div class="container-fluid">
@@ -82,7 +109,9 @@ footer h2 {
 </nav>
 
 <main role="main">
-<a id="shipping-toggle" style="cursor:pointer; font-weight:bold;">アコーディオンフック <i class="fa fa-plus-square"></i></a>
+<h1>アコーディオンのアクセシビリティ失敗例</h1>
+
+<a id="shipping-toggle" style="cursor:pointer; font-weight:bold; margin: 20px 0 10px; display: inline-block;">アコーディオンフック <i class="fa fa-plus-square"></i></a>
 <div id="shipping-panel" style="display:none">
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
