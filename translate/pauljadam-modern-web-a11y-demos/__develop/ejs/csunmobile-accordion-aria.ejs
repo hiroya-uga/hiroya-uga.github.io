@@ -14,8 +14,6 @@
 <div class="container">
 <%- include('./_include/_body-header.ejs'); %>
 
-<h1>aria-*属性を利用したアコーディオンの実装例</h1>
-
 <nav role="navigation" class="navbar navbar-inverse">
 <div class="container-fluid">
     <div class="navbar-header"> <a class="navbar-brand" href="./csunmobile-index">Workshop</a> </div>
@@ -32,7 +30,9 @@
 </nav>
 
 <main role="main">
-  <button id="shipping-toggle" aria-expanded="false" style="font-weight:bold;">Shipping &amp; Returns <i class="fa fa-plus-square" aria-hidden="true"></i></button>
+<h1>aria-*属性を利用したアコーディオンの実装例</h1>
+
+  <button id="shipping-toggle" aria-expanded="false" style="font-weight:bold; margin: 20px 0 10px;">Shipping &amp; Returns <i class="fa fa-plus-square" aria-hidden="true"></i></button>
   <div id="shipping-panel" style="display:none">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
