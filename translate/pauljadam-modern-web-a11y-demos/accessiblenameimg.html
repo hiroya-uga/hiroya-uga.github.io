@@ -6,6 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
+@font-face {
+  font-family: "YuGothic M";
+  src: local("Yu Gothic Medium"),
+       local("Yu Gothic");
+  font-weight: 500;
+       /*
+         Chrome 58.0.3029.110 (64-bit) では
+         "Yu Gothic Medium" を認識しないバグあるため
+         "Yu Gothic" と font-weight も併せて指定。
+       */
+}
+
 *:focus {outline:3px solid #27B;}
 
 html {
@@ -13,9 +25,18 @@ html {
 }
 body {
     font-size: 1.6rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    color: #333;
+    padding: 10px 15px;
 }
-p {
+p, li {
+    max-width: 35em;
     line-height: 1.8;
+    letter-spacing: 1.5px;
+    line-height: 1.75;
+}
+a {
+    letter-spacing: 0;
 }
 img {
     max-width: 100%;
@@ -53,15 +74,23 @@ footer {
 footer h2 {
     font-size: 1.4rem;
 }
+h2 {
+    margin-top: 100px;
+}
+h1 + h2 {
+    margin-top: 0;
+}
 </style>
 </head>
 
 <body>
+<header>
 <p><a href="./">DEMO一覧に戻る</a> | <a href="http://pauljadam.com" lang="en-US">PaulJAdam.comでさらに詳しく</a></p>
+</header>
 
 <main>
 <h1><code>img</code>要素のアクセシブルネームの計算</h1>
-<p><a href="http://www.w3.org/TR/html-aapi/#img-element">HTML to Platform Accessibility APIs Implementation Guide</a>によると、WAI-ARIA属性は<code>img</code>要素のアクセシブルネームの計算に含まれます。ただし、常に最も堅牢な属性を利用して実装することが最善です。アクセシブルネームの計算順序は次の通りです。</p>
+<p><a href="http://www.w3.org/TR/html-aapi/#img-element">HTML to Platform Accessibility APIs Implementation Guide</a> によると、WAI-ARIA属性は<code>img</code>要素のアクセシブルネームの計算に含まれます。ただし、常に最も堅牢な属性を利用して実装することが最善です。アクセシブルネームの計算順序は次の通りです。</p>
 
 <ol>
   <li><code>aria-labelledby</code>属性を利用する</li>
@@ -86,7 +115,7 @@ footer h2 {
 
 <p>iOSおよびOS X用のVoiceOverでは、オプションの「イメージをナビゲート」で「常にする」「説明付き」「しない」の３項目を選ぶことができます。「説明付き」とはアクセシブルネームを持つ画像のことです。</p>
 
-<p>VoiceOverは、デフォルトだとアクセシブルネームを持たない<code>img</code>要素の場合、画像のファイル名を読み上げます。NVDA及びJAWSは、画像のファイル名を読み上げることはありません。故に、アクセシブルネームを持たない画像がページに存在することをユーザはリスことができません。AndroidのChromeではアクセシブルネームのない画像は無視され、Firefoxでは「graphic」として読み込まれます。</p>
+<p>VoiceOverは、デフォルトだとアクセシブルネームを持たない<code>img</code>要素の場合、画像のファイル名を読み上げます。NVDA及びJAWSは、画像のファイル名を読み上げることはありません。故に、アクセシブルネームを持たない画像がページに存在することをユーザは知ることができません。AndroidのChromeではアクセシブルネームのない画像は無視され、Firefoxでは「graphic」として読み込まれます。</p>
 
 <h2><code>aria-labelledby</code>属性を利用した例</h2>
 
