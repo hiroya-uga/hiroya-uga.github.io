@@ -7,79 +7,114 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
 @font-face {
-  font-family: "YuGothic M";
-  src: local("Yu Gothic Medium"),
-       local("Yu Gothic");
-  font-weight: 500;
-       /*
-         Chrome 58.0.3029.110 (64-bit) では
-         "Yu Gothic Medium" を認識しないバグあるため
-         "Yu Gothic" と font-weight も併せて指定。
-       */
+  font-family: "Yu Gothic";
+  font-weight: 100;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 200;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 300;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 400;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: bold;
+
+  src: local("Yu Gothic Bold");
 }
 
-*:focus {outline:3px solid #27B;}
+*:focus {
+  outline: 3px solid #27b;
+}
 
 html {
-    font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
+  YuGothic, "Yu Gothic",
+  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
+  Meiryo,
+  sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 62.5%;
 }
 body {
-    font-size: 1.6rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-    color: #333;
-    padding: 10px 15px;
-}
-p, li {
-    max-width: 35em;
-    line-height: 1.8;
-    letter-spacing: 1.5px;
-    line-height: 1.75;
-}
-a {
-    letter-spacing: 0;
-}
-img {
-    max-width: 100%;
-    height: auto;
-}
-button {
-    font-size: inherit;
-}
-code {
-    font-size: 100%;
-    font-family: inherit;
-}
-kbd {
-    margin: 0 3px;
-    position: relative;
-    top: -2px; 
-    border-radius: 6px;
-    padding: 3px 6px 2px;
-    display: inline-block;
-    border: 1px solid #aaa;
-}
-kbd kbd {
-    border: 0;
-    top: 0;
-    line-height: 1;
-    padding: 0;
-    margin: 0 6px;
-}
-footer {
-    font-size: 1.2rem;
-    margin-top: 30vh;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-}
-footer h2 {
-    font-size: 1.4rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+  max-width: 1280px;
+  margin: 0 auto !important;
+  padding: 10px 15px;
 }
 h2 {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 h1 + h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
+p ,
+ol ,
+ul {
+  line-height: 1.8;
+  letter-spacing: 1.5px;
+  box-sizing: border-box;
+  max-width: 40em;
+}
+a {
+  letter-spacing: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+button {
+  font-size: inherit;
+}
+code ,
+kbd {
+  font-family: inherit;
+  font-size: 100%;
+}
+kbd {
+  font-size: 95%;
+  line-height: 1;
+  position: relative;
+  top: 0;
+  display: inline-block;
+  margin: 0 3px;
+  padding: 6px 6px 4px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+kbd kbd {
+  top: 0;
+  margin: 0 6px;
+  padding: 0;
+  border: 0;
+}
+footer {
+  font-size: 1.2rem;
+  margin-top: 30vh;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+footer h2 {
+  font-size: 1.4rem;
+}
+
 </style>
 </head>
 
@@ -95,7 +130,7 @@ h1 + h2 {
 <li><a href="csunmobile-accordion-bad.html">accordion-bad.html</a></li>
 <li><a href="csunmobile-accordion-aria.html">accordion-aria.html</a></li>
 <li><a href="accordion-heading.html">accordion-heading.html</a></li>
-<li><a>accounting-tables.html</a></li>
+<li><a href="accounting-tables.html">accounting-tables.html</a></li>
 <li><a>alerttimer.html</a></li>
 <li><a>altbgimg.html</a></li>
 <li><a>annotated-tables.html</a></li>
