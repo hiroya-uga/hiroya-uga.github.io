@@ -1,6 +1,12 @@
 <meta charset="UTF-8">
 <title><%= title %></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%
+var viewport = viewport === false ? '' : true;
+
+if (viewport === true) {
+    viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+}
+%><%- viewport %>
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
 @font-face {
