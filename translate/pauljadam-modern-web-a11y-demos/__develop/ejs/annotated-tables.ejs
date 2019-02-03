@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: '注釈付きテーブル',
+    viewport: false
+}); %>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://musclesoft.github.io/jquery-connections/jquery.connections.js"></script>
+<style>
+*:focus, button:hover, #table-caption:focus, #table-caption:hover { outline: 3px solid #369; outline-offset: 2px; }
+th { font-weight: normal; text-align: left ; vertical-align: top; }
+table:nth-of-type(2) thead th {font-weight: bold; text-align: center ;}
+td {text-align: right;}
+th, td {padding:.4em; font-size: 115%; background-color: #E8E6D6; border-top:2px solid white;}
+caption, #table-caption, #table-caption2 {padding: .8em; font-size: 130%; background-color: #C9C5B0; box-shadow: 10px 0 14px -4px black; outline: 4px solid white; outline-offset: 2px; width: 450px; text-align: center;}
+table {margin-bottom:2em;width:450px; border-collapse:collapse;  box-shadow: black 0.4em 0.4em 1em; outline: 4px solid white; }
+table thead th {height: 0px; font-size:0px; }
+td.underline {border-bottom:2px solid black;}
+td.double-underline {border-bottom:5px solid black; border-bottom-style: double;}
+button {
+    background: none;
+    border: 0;
+    color: inherit;
+    /* cursor: default; */
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    -webkit-appearance: button; /* for input */
+    -webkit-user-select: none; /* for button */
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+[role=tooltip] {border:2px solid #369; color:#369; background-color: white; position: absolute;  border-radius: 15px; text-align: left;padding:1em; font-weight: normal; width: 350px; visibility: hidden;font-size:14pt; margin:1em; }
+.ttbtn::after {content: " ℹ"; alt:"tooltip";}
+.annotations-wrapper, table.all-annotations {float:left;}
+.annotations-wrapper {padding:2em; width: 400px; margin-top:-4em;}
+.annotations-wrapper div {background-color:white;filter: brightness(95%);border:3px solid crimson; color:#369;border-radius: 15px;padding:1em; margin:1em;}
+connection {
+    border: 3px solid crimson;
+    border-radius: 0px;
+}
+.info-cell {border: 3px solid crimson; filter: brightness(95%); }
+.hovered {filter: brightness(80%) !important; }
+.annotations-wrapper div button {text-align: left; font-size: 1.1em;}
+.info-cell-hidden {border: none; filter: brightness(100%); }
+table.t {margin-bottom:2em;width:unset; min-width: 260px; border-collapse:collapse;  box-shadow:unset; outline: unset; }
+table.t tbody>tr>:nth-child(2){
+ border-left:2px solid black;
+}
+table.t td {text-align: justify; padding:4px; font-size: 100%; background-color:unset; border-top:none; word-spacing: 4px;}
+table.t caption  {border-bottom:2px solid black; font-weight:bold; padding: unset; font-size: 100%; background-color: unset; box-shadow: unset; outline: unset; outline-offset: unset; width: unset; text-align: center;}
+table.t tbody>:last-child{ border-top: 2px solid black;}
+div.tcol {float:left;padding:4px;}
+.clos2hovered {color:#895700 !important;outline:2px solid orange; background-color: #ddd !important; }
+.clos1hovered {outline:2px solid green; background-color: #ddd !important; }
+.clos3hovered {outline:2px solid blue; background-color: #ddd !important; }
+.clos4hovered {color:black !important; outline:2px solid gray; background-color: #ddd !important; }
+td:focus {border:3px dashed blue !important;}
+
+main {
+  display: flow-root;
+}
+</style>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>注釈付きテーブル</h1>
+
+<h2>キーボードとスクリーンリーダに対応したアクセシブルなツールチップによる注釈を持つデータテーブルのデモ.</h2>
+
+<button id="table-caption" class="ttbtn" aria-expanded="false"><strong>SMART TOUCH LEARNING</strong><br>損益計算書<br>2018年11月30日まで</button>
+<div role="tooltip">見出しには、事業の名前、明細書のタイトル、および期間が含まれます。損益計算書は常に月や年などの期間を表します。</div>
+
+<table aria-labelledby="table-caption">
+<thead>
+<tr>
+<th scope="col">収入または費用</th>
+<th scope="col">借方</th>
+<th scope="col">貸方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="col">収入：</th>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row" style="padding-left: 20px;">サービス収入</th>
+<td></td>
+<td><button class="ttbtn" aria-expanded="false">$8,500</button> <div role="tooltip">収入項目は常に最初にリストアップされ、必要に応じて小計が表示されます。</div>
+</td>
+</tr>
+<tr>
+<th scope="col">経費：</th>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row" style="padding-left: 20px;">家賃</th>
+<td><button class="ttbtn" aria-expanded="false">$2,000</button> <div role="tooltip">経費項目は大きい額から最小のものへと順にリストされ、必要に応じて小計が表示されます。</div></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">給与経費</th>
+<td class="underline">1,200</td>
+<td></td>
+</tr>
+<tr>
+<th scope="row" style="padding-left: 40px;">全費用</th>
+<td></td>
+<td class="underline">3,200</td>
+</tr>
+<tr>
+<th scope="row">当期純利益</th>
+<td></td>
+<td class="double-underline"><button class="ttbtn" aria-expanded="false">$5,300</button> <div role="tooltip">純利益は、総収入額から総経費を引いて計算されます。</div></td>
+</tr>
+</tbody>
+</table>
+
+<h2>ツールチップを使わず、注釈の表示非表示切り替えを1つのボタンで実装した例。</h2>
+
+<table class="all-annotations" aria-labelledby="table-caption2">
+<thead>
+<tr><td colspan="3" id="table-caption2" class="heading-info info-cell">  <button aria-describedby="heading-info-text"><strong>SMART TOUCH LEARNING</strong><br>損益計算書<br>2018年11月30日まで</button>
+</td></tr>
+<tr>
+<th scope="col">収入または費用</th>
+<th scope="col">借方</th>
+<th scope="col">貸方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="col">収入：</th>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row" style="padding-left: 20px;">サービス収入</th>
+<td></td>
+<td class="service-revenue-info info-cell" id="service-revenue-info-cell"><button aria-describedby="service-revenue-info-text">$8,500</button></td>
+</tr>
+<tr>
+<th scope="col">経費：</th>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row" style="padding-left: 20px;">家賃</th>
+<td class="rent-expense-info info-cell" id="rent-expense-info-cell"><button aria-describedby="rent-expense-info-text">$2,000</button></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">給与経費</th>
+<td class="underline">1,200</td>
+<td></td>
+</tr>
+<tr>
+<th scope="row" style="padding-left: 40px;">全費用</th>
+<td></td>
+<td class="underline">3,200</td>
+</tr>
+<tr>
+<th scope="row">当期純利益</th>
+<td></td>
+<td class="double-underline net-income-info info-cell" id="net-income-info-cell"><button aria-describedby="net-income-info-text">$5,300</button></td>
+</tr>
+</tbody>
+</table>
+
+<div class="annotations-wrapper">
+<h3>注釈</h3>
+<button id="hide-show" style="float:right; margin:-2em 13em 0 0;">隠す</button>
+<div class="heading-info" id="heading-info-text"><button aria-describedby="table-caption2">テーブルキャプションには、事業の名前、明細書名、および期間が含まれます。損益計算書は常に月や年などの期間を明示します。</button></div>
+<div class="service-revenue-info" id="service-revenue-info-text"><button aria-describedby="service-revenue-info-cell">収入項目は常に最初にリストアップされ、必要に応じて小計が表示されます。</button></div>
+<div class="rent-expense-info" id="rent-expense-info-text"><button aria-describedby="rent-expense-info-cell">経費項目は大きい額から最小のものへと順にリストされ、必要に応じて小計が表示されます。</button></div>
+<div class="net-income-info" id="net-income-info-text"><button aria-describedby="net-income-info-cell">純利益は、総収入額から総経費を引いて計算されます。</button></div>
+</div>
+<div style="clear:both"></div>
+<h2>データテーブル同士のセルの関連を表現する</h2>
+<div class="tcol">
+  <table class="t">
+    <caption>内部留保</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Clos. 4 5,000</td>
+        <td>0 Adj. Bal.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>8,550 Clos. 3</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>3,550 Bal.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="tcol">
+<table class="t">
+    <caption>配当金</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 5,000</td>
+        <td>5,000 Clos. 4</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+      <caption>損益勘定</caption>
+      <thead>
+        <tr>
+          <th scope="col">借方</th>
+          <th scope="col">貸方</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clos. 2 8,950</td>
+          <td>17,500 Clos. 1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>8,550 Bal.</td>
+        </tr>
+        <tr>
+          <td>Clos. 3 8,550</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>0 Bal.</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="tcol">
+    <table class="t">
+      <caption>役務収益</caption>
+      <thead>
+        <tr>
+          <th scope="col">借方</th>
+          <th scope="col">貸方</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clos. 1 17,500</td>
+          <td>17,500 Adj. Bal.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>0 Bal.</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="tcol">
+  <table class="t">
+    <caption>賃貸料</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 3,000</td>
+        <td>3,000 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+    <caption>支払給与</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 4,800</td>
+        <td>4,800 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+    <caption>消耗品費</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 400</td>
+        <td>400 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+    <caption>公共料金</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 100</td>
+        <td>100 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+    <caption>減価償却費（建物）</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 250</td>
+        <td>250 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+    <caption>減価償却費（器具・備品）</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 300</td>
+        <td>300 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="t">
+    <caption>支払利息</caption>
+    <thead>
+      <tr>
+        <th scope="col">借方</th>
+        <th scope="col">貸方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Adj. Bal. 100</td>
+        <td>100 Clos. 2</td>
+      </tr>
+      <tr>
+        <td>Bal. 0</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<script>
+    [].forEach.call(document.querySelectorAll('.ttbtn'), function(el) {
+        el.addEventListener('click', function() {
+            if (el.getAttribute('aria-expanded') == 'true') {
+                el.nextElementSibling.style.visibility = 'hidden';
+                el.setAttribute('aria-expanded','false');
+                el.nextElementSibling.removeAttribute('id');
+                el.removeAttribute('aria-describedby');
+            } else {
+                el.nextElementSibling.style.visibility = 'visible';
+                el.setAttribute('aria-expanded','true');
+                el.nextElementSibling.setAttribute('id','tooltip');
+                el.setAttribute('aria-describedby','tooltip');
+            }
+        })
+        el.addEventListener('mouseover', function() {
+            el.nextElementSibling.style.visibility = 'visible';
+                el.setAttribute('aria-expanded','true');
+                el.nextElementSibling.setAttribute('id','tooltip');
+                el.setAttribute('aria-describedby','tooltip');
+        })
+        el.addEventListener('mouseout', function() {
+            el.nextElementSibling.style.visibility = 'hidden';
+                el.setAttribute('aria-expanded','false');
+                el.nextElementSibling.removeAttribute('id');
+                el.removeAttribute('aria-describedby');
+        })
+        el.addEventListener('focus', function() {
+            el.nextElementSibling.style.visibility = 'visible';
+                el.setAttribute('aria-expanded','true');
+                el.nextElementSibling.setAttribute('id','tooltip');
+                el.setAttribute('aria-describedby','tooltip');
+        })
+        el.addEventListener('blur', function() {
+            el.nextElementSibling.style.visibility = 'hidden';
+                el.setAttribute('aria-expanded','false');
+                el.nextElementSibling.removeAttribute('id');
+                el.removeAttribute('aria-describedby');
+        })
+        el.addEventListener('keydown', function() {
+            if(event.keyCode==27){
+                el.nextElementSibling.style.visibility = 'hidden';
+                el.setAttribute('aria-expanded','false');
+                el.nextElementSibling.removeAttribute('id');
+                el.removeAttribute('aria-describedby');
+            };
+        })
+    });
+
+    $('.heading-info').connections();
+    $('.service-revenue-info').connections();
+    $('.rent-expense-info').connections();
+    $('.net-income-info').connections();
+
+    $('.heading-info button').on('mouseover focus', function(e) {
+      $(".heading-info").addClass('hovered');
+    });
+    $('.heading-info button').on('mouseout blur', function(e) {
+      $(".heading-info").removeClass('hovered');
+    });
+    $('.service-revenue-info button').on('mouseover focus', function(e) {
+      $(".service-revenue-info").addClass('hovered');
+    });
+    $('.service-revenue-info button').on('mouseout blur', function(e) {
+      $(".service-revenue-info").removeClass('hovered');
+    });
+    $('.rent-expense-info button').on('mouseover focus', function(e) {
+      $(".rent-expense-info").addClass('hovered');
+    });
+    $('.rent-expense-info button').on('mouseout blur', function(e) {
+      $(".rent-expense-info").removeClass('hovered');
+    });
+    $('.net-income-info button').on('mouseover focus', function(e) {
+      $(".net-income-info").addClass('hovered');
+    });
+    $('.net-income-info button').on('mouseout blur', function(e) {
+      $(".net-income-info").removeClass('hovered');
+    });
+
+
+
+    $('#hide-show').on('click', function(e) {
+      $(".info-cell").toggleClass('info-cell-hidden');
+      if ($(this).text() == "隠す") {
+        $(this).text("表示する");
+        $('connection').hide();
+        $('.annotations-wrapper div').hide();
+      } else {
+          $(this).text("隠す");
+          $('connection').show();
+          $('.annotations-wrapper div').show();
+      };
+
+    });
+
+
+$( "td:contains('Clos. 2')" ).css( "color","#a56900" ).attr('tabindex','0');
+$( "td:contains('Clos. 1')" ).css( "color","green" ).attr('tabindex','0');
+$( "td:contains('Clos. 3')" ).css( "color","blue" ).attr('tabindex','0');
+$( "td:contains('Clos. 4')" ).css( "color","#767676" ).attr('tabindex','0');
+
+$( "td:contains('Clos. 2')" ).on('mouseover focus', function(e) {
+  $("td:contains('Clos. 2')").addClass('clos2hovered');
+});
+$( "td:contains('Clos. 2')" ).on('mouseout blur', function(e) {
+  $("td:contains('Clos. 2')").removeClass('clos2hovered');
+});
+$( "td:contains('Clos. 1')" ).on('mouseover focus', function(e) {
+  $("td:contains('Clos. 1')").addClass('clos1hovered');
+});
+$( "td:contains('Clos. 1')" ).on('mouseout blur', function(e) {
+  $("td:contains('Clos. 1')").removeClass('clos1hovered');
+});
+$( "td:contains('Clos. 3')" ).on('mouseover focus', function(e) {
+  $("td:contains('Clos. 3')").addClass('clos3hovered');
+});
+$( "td:contains('Clos. 3')" ).on('mouseout blur', function(e) {
+  $("td:contains('Clos. 3')").removeClass('clos3hovered');
+});
+$( "td:contains('Clos. 4')" ).on('mouseover focus', function(e) {
+  $("td:contains('Clos. 4')").addClass('clos4hovered');
+});
+$( "td:contains('Clos. 4')" ).on('mouseout blur', function(e) {
+  $("td:contains('Clos. 4')").removeClass('clos4hovered');
+});
+
+
+
+</script>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>
