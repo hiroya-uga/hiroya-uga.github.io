@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>注釈付きテーブル</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
 @font-face {
@@ -533,6 +533,13 @@ main {
 
 
 <script>
+(function () {
+  var resized = function () {
+    [].forEach.call(document.querySelectorAll('connection'), function (el) {
+      el.remove();
+    });
+
+
     [].forEach.call(document.querySelectorAll('.ttbtn'), function(el) {
         el.addEventListener('click', function() {
             if (el.getAttribute('aria-expanded') == 'true') {
@@ -627,36 +634,49 @@ main {
 
     });
 
+    $( "td:contains('Clos. 2')" ).css( "color","#a56900" ).attr('tabindex','0');
+    $( "td:contains('Clos. 1')" ).css( "color","green" ).attr('tabindex','0');
+    $( "td:contains('Clos. 3')" ).css( "color","blue" ).attr('tabindex','0');
+    $( "td:contains('Clos. 4')" ).css( "color","#767676" ).attr('tabindex','0');
 
-$( "td:contains('Clos. 2')" ).css( "color","#a56900" ).attr('tabindex','0');
-$( "td:contains('Clos. 1')" ).css( "color","green" ).attr('tabindex','0');
-$( "td:contains('Clos. 3')" ).css( "color","blue" ).attr('tabindex','0');
-$( "td:contains('Clos. 4')" ).css( "color","#767676" ).attr('tabindex','0');
+    $( "td:contains('Clos. 2')" ).on('mouseover focus', function(e) {
+      $("td:contains('Clos. 2')").addClass('clos2hovered');
+    });
+    $( "td:contains('Clos. 2')" ).on('mouseout blur', function(e) {
+      $("td:contains('Clos. 2')").removeClass('clos2hovered');
+    });
+    $( "td:contains('Clos. 1')" ).on('mouseover focus', function(e) {
+      $("td:contains('Clos. 1')").addClass('clos1hovered');
+    });
+    $( "td:contains('Clos. 1')" ).on('mouseout blur', function(e) {
+      $("td:contains('Clos. 1')").removeClass('clos1hovered');
+    });
+    $( "td:contains('Clos. 3')" ).on('mouseover focus', function(e) {
+      $("td:contains('Clos. 3')").addClass('clos3hovered');
+    });
+    $( "td:contains('Clos. 3')" ).on('mouseout blur', function(e) {
+      $("td:contains('Clos. 3')").removeClass('clos3hovered');
+    });
+    $( "td:contains('Clos. 4')" ).on('mouseover focus', function(e) {
+      $("td:contains('Clos. 4')").addClass('clos4hovered');
+    });
+    $( "td:contains('Clos. 4')" ).on('mouseout blur', function(e) {
+      $("td:contains('Clos. 4')").removeClass('clos4hovered');
+    });
+  };
+  var key = -1;
+  var handler = function () {
+      clearTimeout(key);
 
-$( "td:contains('Clos. 2')" ).on('mouseover focus', function(e) {
-  $("td:contains('Clos. 2')").addClass('clos2hovered');
-});
-$( "td:contains('Clos. 2')" ).on('mouseout blur', function(e) {
-  $("td:contains('Clos. 2')").removeClass('clos2hovered');
-});
-$( "td:contains('Clos. 1')" ).on('mouseover focus', function(e) {
-  $("td:contains('Clos. 1')").addClass('clos1hovered');
-});
-$( "td:contains('Clos. 1')" ).on('mouseout blur', function(e) {
-  $("td:contains('Clos. 1')").removeClass('clos1hovered');
-});
-$( "td:contains('Clos. 3')" ).on('mouseover focus', function(e) {
-  $("td:contains('Clos. 3')").addClass('clos3hovered');
-});
-$( "td:contains('Clos. 3')" ).on('mouseout blur', function(e) {
-  $("td:contains('Clos. 3')").removeClass('clos3hovered');
-});
-$( "td:contains('Clos. 4')" ).on('mouseover focus', function(e) {
-  $("td:contains('Clos. 4')").addClass('clos4hovered');
-});
-$( "td:contains('Clos. 4')" ).on('mouseout blur', function(e) {
-  $("td:contains('Clos. 4')").removeClass('clos4hovered');
-});
+      key = setTimeout(resized, 200);
+  };
+
+  window.addEventListener('resize', handler, {
+      passive: true
+  });
+
+  resized();
+}());
 </script>
 </main>
 
