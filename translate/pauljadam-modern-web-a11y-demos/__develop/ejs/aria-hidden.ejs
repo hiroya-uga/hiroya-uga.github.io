@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: 'aria-hidden'
+}); %>
+<style>
+.hidden {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+[aria-selected=true] {
+border-bottom: 3px solid green;
+}
+/*[aria-hidden=true] {display:none;}voiceover likes this but not visiblity:hidden*/
+</style>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>aria-hidden</h1>
+
+<p>通常のリンク：<a href="#">リンクテキスト</a></p>
+<p><code>aria-hidden</code>を持ったリンク：<a href="#" aria-hidden="true">リンクテキスト</a></p>
+<p><code>aria-hidden</code>を持つ<code>span</code>要素を含むリンク：<a href="#">リンクテキスト<span aria-hidden="true">「span要素のテキスト」</span>リンクテキスト</a></p>
+
+<p style="margin-bottom: 0;"><code>aria-hidden</code>を持った<code>p</code>要素内のリンク：</p>
+<p style="margin: 0 0 200px;" aria-hidden="true"><a href="#">リンクテキスト</a></p>
+
+<h2>隠し文字を持つタブ</h2>
+
+<p><small>※ 動作はしません</small></p>
+
+<div role="tablist">
+    <span role="tab" aria-selected="false"><a href="#">タブ1</a></span>
+    <span role="tab" aria-selected="true"><a href="#"><span class="hidden" aria-hidden="true">選択された</span>タブ2</a></span>
+    <span role="tab" aria-selected="false"><a href="#">タブ3</a></span>
+</div>
+<div role="tablist" style="margin: 0 0 100px;">
+    <a aria-selected="false" role="tab" href="#">タブ1</a>
+    <a aria-selected="true" role="tab" href="#"><span class="hidden" aria-hidden="true">選択された</span>タブ2</a>
+    <a aria-selected="false" role="tab" href="#">タブ3</a>
+</div>
+
+<ul id="tabs" role="tablist">
+<li role="presentation none"><a id="tab1" href="#" onclick="showTab(1);" role="tab" aria-controls="panel1" aria-selected="true"><span class="hidden" aria-hidden="true">選択された</span>タブ1</a></li>
+<li role="presentation none"><a id="tab2" href="#" onclick="showTab(2);" role="tab" aria-controls="panel2" aria-selected="false">タブ2</a></li>
+<li role="presentation none"><a id="tab3" href="#" onclick="showTab(3);" role="tab" aria-controls="panel3" aria-selected="false">タブ3</a></li>
+</ul>
+
+<div id="panel1" role="tabpanel" aria-labelledby="tab1">
+...
+</div>
+<div id="panel2" role="tabpanel" aria-labelledby="tab2" hidden>
+...
+</div>
+<div id="panel3" role="tabpanel" aria-labelledby="tab3" hidden>
+...
+</div>
+
+<script>
+document.querySelectorAll('a[role="tab"]').forEach(function (elm) {
+    elm.removeAttribute('href');
+});
+
+</script>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>
