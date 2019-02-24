@@ -77,10 +77,11 @@ ul {
   box-sizing: border-box;
   max-width: 40em;
 }
-input:not([type]),
-input[type="text"],
+input,
 textarea {
   font-size: 1.6rem;
+}
+input:not([type="range"]):not([type="radio"]):not([type="checkbox"]):not([type="color"]) {
   padding: 6px;
 }
 a {
@@ -124,7 +125,15 @@ footer {
 footer h2 {
   font-size: 1.4rem;
 }
-
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  border: 1px solid #333;
+  padding: 10px;
+}
 </style>
 
 <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
