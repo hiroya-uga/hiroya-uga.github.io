@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: '新しいウィンドウへのリンクの表現'
+}); %>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>新しいウィンドウへのリンクの表現</h1>
+
+<p>新しいウィンドウへのリンクの表現に、BootstrapのCSSとFont Awesome Icons、JavaScriptによる<code>title</code>属性付与を利用します。</p>
+
+<h2>CSSで出力されたBootstrapやFont Awesome Frameworksの別窓アイコンと、別窓で開くことを知らせる説明テキストを<code>title</code>属性にJavaScriptで設定する</h2>
+
+<p>14/7/21 更新: このデモでは、<code>title</code>属性が代替テキストとして利用されているため、VoiceOverのアイコンフォントを抑制するために「CSSによって出力されたコンテンツのためのCSS4 Alt text」を追加しました。<code>title</code>属性ではなく、<code>alt</code>プロパティが利用されている新しいDEMOをご覧ください。<br>→ <a href="./css4altgeneratedcontent.html">CSS4 Alt text for Generated Content</a>.</p>
+
+  <style>
+/*[target=_blank]:after { content: ", new window"; position:absolute; clip: rect(0 0 0 0);}
+*/
+#gnw [target=_blank]:after {font-family: 'Glyphicons Halflings'; content:" \e164"; margin-left: -.8em; alt:"" }
+#gmw [target=_blank]:after {font-family: 'Glyphicons Halflings'; content:" \e237"; margin-left: -.8em; alt:"" }
+#fels [target=_blank]:after {font: normal normal normal 14px/1 FontAwesome; content:" \f14c"; alt:"" }
+#fel [target=_blank]:after {font: normal normal normal 14px/1 FontAwesome; content:" \f08e"; alt:"" }
+  </style>
+<div id="gnw">
+<h3>Bootstrap glyphicon-new-window</h3>
+<p><a href="https://google.com" target="_blank">Google</a></p>
+<p><a href="https://apple.com">Apple</a></p>
+<p><a href="https://yahoo.com" target="_blank">Yahoo</a></p>
+</div>
+<div id="gmw">
+<h3>Bootstrap glyphicon-modal-window</h3>
+<p><a href="https://google.com" target="_blank">Google</a></p>
+<p><a href="https://apple.com">Apple</a></p>
+<p><a href="https://yahoo.com" target="_blank">Yahoo</a></p>
+</div>
+<div id="fels">
+<h3>Font Awesome fa-external-link-square</h3>
+<p><a href="https://google.com" target="_blank">Google</a></p>
+<p><a href="https://apple.com">Apple</a></p>
+<p><a href="https://yahoo.com" target="_blank">Yahoo</a></p>
+</div>
+<div id="fel">
+<h3>Font Awesome fa-external-link</h3>
+<p><a href="https://google.com" target="_blank">Google</a></p>
+<p><a href="https://apple.com">Apple</a></p>
+<p><a href="https://yahoo.com" target="_blank">Yahoo</a></p>
+</div>
+
+<script>
+var allLinks = document.getElementsByTagName('a');
+for(var i = 0; i < allLinks.length; i++){
+	var thisElement = allLinks[i];
+	thisElementAttribute = thisElement.getAttribute("target");
+	if (thisElementAttribute == "_blank") {
+	    thisElement.title = "新しいウィンドウで開きます";
+	}
+}
+</script>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>

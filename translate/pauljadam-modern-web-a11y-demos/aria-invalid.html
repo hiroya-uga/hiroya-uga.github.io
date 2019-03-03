@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>aria-invalid=&#34;true&#34;の実装例</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 100;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 200;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 300;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 400;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: bold;
+
+  src: local("Yu Gothic Bold");
+}
+
+*:focus {
+  outline: 3px solid #27b;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
+  YuGothic, "Yu Gothic",
+  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
+  Meiryo,
+  sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 62.5%;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+  max-width: 1280px;
+  margin: 0 auto !important;
+  padding: 10px 15px;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.8rem;
+  margin-top: 100px;
+}
+h1 + h2 {
+  margin-top: 0;
+}
+em {
+  font-style: normal;
+  font-weight: bold;
+}
+hr {
+  border: 1px solid #ccc;
+  border-width: 0 0 1px;
+  display: block;
+}
+p ,
+ol ,
+ul {
+  line-height: 1.9;
+  letter-spacing: 1.3px;
+  box-sizing: border-box;
+  max-width: 40em;
+}
+strong {
+  color: #c11;
+}
+input,
+select,
+textarea {
+  font-size: 1.6rem;
+}
+textarea,
+select,
+input:not([type="range"]):not([type="radio"]):not([type="checkbox"]):not([type="color"]) {
+  padding: 6px;
+}
+a {
+  letter-spacing: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+button {
+  font-size: inherit;
+}
+code ,
+kbd {
+  font-family: inherit;
+  font-size: 100%;
+}
+kbd {
+  font-size: 95%;
+  line-height: 1;
+  position: relative;
+  top: 0;
+  display: inline-block;
+  margin: 0 3px;
+  padding: 6px 6px 4px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+kbd kbd {
+  top: 0;
+  margin: 0 6px;
+  padding: 0;
+  border: 0;
+}
+footer {
+  font-size: 1.2rem;
+  margin-top: 30vh;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+footer h2 {
+  font-size: 1.4rem;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  border: 1px solid #333;
+  padding: 10px;
+}
+</style>
+
+<style>
+*:focus {outline:3px solid #27B;}
+[aria-required=true],[required] {outline: 2px solid red;}
+</style>
+</head>
+
+<body>
+<header>
+<p><a href="./">DEMO一覧に戻る</a> | <a href="http://pauljadam.com" lang="en-US">PaulJAdam.comでさらに詳しく</a></p>
+</header>
+
+<main>
+<h1><code>aria-invalid="true"</code>の実装例</h1>
+<!-- p><a href="http://pauljadam.com/demos/aria-invalid.html">http://pauljadam.com/demos/aria-invalid.html</a></p -->
+
+<h2><code>fieldset</code>要素内にある<code>label</code>要素と関連づいていないセレクトボックス</h2>
+
+<form action="" name="someform">
+<fieldset>
+<legend>日付を選択してください（必須）</legend>
+<select id="daydropdown" title="日" aria-invalid="true" required>
+</select>
+<select id="monthdropdown" title="月" aria-invalid="true" required>
+</select>
+<select id="yeardropdown" title="年" aria-invalid="true" required>
+</select>
+</fieldset>
+</form>
+
+<h2><code>fieldset</code>要素内にある<code>label</code>要素と関連づいていないテキストフィールド</h2>
+
+<fieldset><legend>お電話番号（必須）</legend>
+<input id="areaCode" name="areaCode" title="市外局番"
+type="text" size="3" value="" aria-invalid="true" required>
+<input id="exchange" name="exchange" title="市内局番"
+type="text" size="3" value="" aria-invalid="true" required>
+<input id="lastDigits" name="lastDigits" title="加入者番号"
+type="text" size="4" value="" aria-invalid="true" required>
+</fieldset>
+
+<h2><code>textarea</code>要素</h2>
+
+<label for="textarea">メッセージ（必須）</label><br>
+<textarea id="textarea" cols="20" rows="10" required aria-invalid="true"></textarea>
+<h2><code>optgroup</code>要素を伴うセレクトボックス</h2>
+<label>食べ物を選択してください（必須）<br>
+<select required aria-invalid="true">
+  <optgroup label="果物">
+    <option>バナナ</option>
+    <option selected>さくらんぼ</option>
+    <option>レモン</option>
+  </optgroup>
+  <optgroup label="野菜">
+    <option>にんじん</option>
+    <option>なす</option>
+    <option>じゃがいも</option>
+  </optgroup>
+</select></label>
+<h2>チェックボックス</h2>
+      <fieldset data-role="controlgroup">
+        <legend>宿泊施設に必要な設備を選択してください（必須）</legend>
+        <input type="checkbox" name="a11y" value="点字" id="a11y_0" required aria-invalid="true">
+        <label for="a11y_0">点字</label>
+        <input type="checkbox" name="a11y" value="大きい文字" id="a11y_1" required aria-invalid="true">
+        <label for="a11y_1">大きい文字</label>
+        <input type="checkbox" name="a11y" value="手話通訳" id="a11y_2" required aria-invalid="true">
+        <label for="a11y_2">手話通訳</label>
+        <input type="checkbox" name="a11y" value="リアルタイム字幕" id="a11y_3" required aria-invalid="true">
+        <label for="a11y_3">リアルタイム字幕</label>
+        <input type="checkbox" name="a11y" value="車椅子" id="a11y_4" required aria-invalid="true">
+        <label for="a11y_4">車椅子</label>
+        </legend>
+      </fieldset>
+<h2>ラジオボタン</h2>
+      <fieldset data-role="controlgroup">
+        <legend>お食事を選択してください（必須）</legend>
+        <label>
+          <input type="radio" name="meal" value="野菜" id="meal_0"  required aria-invalid="true">
+          野菜</label>
+        <label>
+          <input type="radio" name="meal" value="牛肉" id="meal_1"  required aria-invalid="true">
+          牛肉</label>
+        <label>
+          <input type="radio" name="meal" value="鶏肉" id="meal_2"  required aria-invalid="true">
+          鶏肉</label>
+        <label>
+          <input type="radio" name="meal" value="魚" id="meal_3"  required aria-invalid="true">
+          魚（サーモン）</label>
+      </fieldset>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+//populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+window.onload=function(){
+populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
+}
+</script>
+<script type="text/javascript">
+
+/***********************************************
+* Drop Down Date select script- by JavaScriptKit.com
+* This notice MUST stay intact for use
+* Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and more
+***********************************************/
+
+var monthtext=[
+  '1月',
+  '2月',
+  '3月',
+  '4月',
+  '5月',
+  '6月',
+  '7月',
+  '8月',
+  '9月',
+  '10月',
+  '11月',
+  '12月'
+];
+
+function populatedropdown(dayfield, monthfield, yearfield){
+var today=new Date()
+var dayfield=document.getElementById(dayfield)
+var monthfield=document.getElementById(monthfield)
+var yearfield=document.getElementById(yearfield)
+for (var i=0; i<31; i++)
+dayfield.options[i]=new Option(i, i+1)
+dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+for (var m=0; m<12; m++)
+monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+var thisyear=today.getFullYear()
+for (var y=0; y<20; y++){
+yearfield.options[y]=new Option(thisyear, thisyear)
+thisyear+=1
+}
+yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+}
+</script>
+</main>
+
+<footer>
+<h2>原文</h2>
+
+<p><a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a></p>
+</footer>
+</body>
+</html>
