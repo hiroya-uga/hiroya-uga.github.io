@@ -59,7 +59,11 @@ body {
   margin: 0 auto !important;
   padding: 10px 15px;
 }
+h1 {
+  font-size: 2rem;
+}
 h2 {
+  font-size: 1.8rem;
   margin-top: 100px;
 }
 h1 + h2 {
@@ -69,6 +73,11 @@ em {
   font-style: normal;
   font-weight: bold;
 }
+hr {
+  border: 1px solid #ccc;
+  border-width: 0 0 1px;
+  display: block;
+}
 p ,
 ol ,
 ul {
@@ -77,10 +86,16 @@ ul {
   box-sizing: border-box;
   max-width: 40em;
 }
+strong {
+  color: #c11;
+}
 input,
+select,
 textarea {
   font-size: 1.6rem;
 }
+textarea,
+select,
 input:not([type="range"]):not([type="radio"]):not([type="checkbox"]):not([type="color"]) {
   padding: 6px;
 }
