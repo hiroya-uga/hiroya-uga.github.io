@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>アコーディオンのアクセシビリティ失敗例</title>
+<title>CSSによって出力されたコンテンツのためのCSS4 Alt text</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
@@ -151,57 +151,41 @@ th {
 }
 </style>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<style>
+*:focus {outline:3px solid #27B;}
+a[target=_blank]:after {font: normal normal normal 14px/1 FontAwesome; content:" \f08e"; alt:"新しいタブで開きます"; }
+a.iconnullalt:after {font: normal normal normal 14px/1 FontAwesome; content:" \f08e"; alt:""; }
+a.iconnoalt:after {font: normal normal normal 14px/1 FontAwesome; content:" \f08e"; }
+a.new:before {  content: "\1F195"; alt: "新しいタブで開きます";}
+a.decorativealtnull:after {content: " \1F435"; alt: ""; }
+a.decorativealtnullspace:after {content: " \1F435"; alt: " "; }
+</style>
 </head>
 
 <body>
-<div class="container">
 <header>
 <p><a href="./">DEMO一覧に戻る</a> | <a href="http://pauljadam.com" lang="en-US">PaulJAdam.comでさらに詳しく</a></p>
 </header>
 
-<nav role="navigation" class="navbar navbar-inverse">
-<div class="container-fluid">
-    <div class="navbar-header"> <a class="navbar-brand" href="./csunmobile-index">Workshop</a> </div>
-    <div>
-    <ul class="nav navbar-nav">
-        <li><a href="./csunmobile-form-bad.html">Form Bad</a></li>
-        <li><a href="./csunmobile-form-aria.html">Form ARIA</a></li>
-        <li><a href="./csunmobile-form-html5.html">Form HTML5</a></li>
-        <li class="active"><a aria-current="page" href="./csunmobile-accordion-bad.html">Accordion Bad</a></li>
-        <li><a href="./csunmobile-accordion-aria.html">Accordion ARIA</a></li>
-    </ul>
-    </div>
-</div>
-</nav>
+<main>
+<h1>CSSによって出力されたコンテンツのためのCSS4 Alt text</h1>
 
-<main role="main">
-<h1>アコーディオンのアクセシビリティ失敗例</h1>
+<p>Font Awesomeのfa-external-linkアイコンは新しいタブでページが開かれることを表すために利用されます。視覚障害者は視覚的なアイコンを見ることができないため、代替テキストが必要です。「CSS4 alt for generated content」の仕様はiOS 9 and OS X 10.11において動作するようです。意図した代替テキストを提供することを確認しました。 </p>
 
-<a id="shipping-toggle" style="cursor:pointer; font-weight:bold; margin: 20px 0 10px; display: inline-block;">アコーディオンフック <i class="fa fa-plus-square"></i></a>
-<div id="shipping-panel" style="display:none">
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
+<h2>実装例</h2>
+
+<p>Font Awesomeの別窓アイコン：<a href="https://www.google.com" target="_blank">Google</a></p>
+<p>Font Awesomeの別窓アイコンと「New」の絵文字：<a href="https://www.apple.com" target="_blank" class="new">Apple</a></p>
+<p>通常リンク：<a href="https://www.PaulJAdam.com">PaulJAdam.com</a></p>
+<p>装飾的な絵文字と空の代替テキスト： <a href="https://www.PaulJAdam.com/contact.php" class="decorativealtnull">お問い合わせ</a><br>iOSのVoiceOverは「お問い合わせ さるの顔」と読み上げました。</p>
+<p>装飾的な絵文字と代替テキストに1つの半角スペースを持つ例： <a href="https://www.PaulJAdam.com/contact.php" class="decorativealtnullspace">お問い合わせ</a><br>iOSのVoiceOverは「お問い合わせ」と読み上げました。</p>
+<p>CSS代替テキストなしのFont Awesomeのアイコン： <a href="https://www.PaulJAdam.com" class="iconnoalt">PaulJAdam.com</a></p>
+<p>CSS代替テキストに半角スペースを指定したFont Awesomeのアイコン： <a href="https://www.PaulJAdam.com" class="iconnullalt" title="新しいタブで開きます">PaulJAdam.com</a></p>
 </main>
-</div>
-
-<script>
-$('#shipping-toggle').click(function(e){
-    $('#shipping-panel').stop(true, false).slideToggle('500');
-    $(this).find('i').toggleClass('fa-plus-square fa-minus-square')
-});
-</script>
 
 <footer>
 <h2>原文</h2>
