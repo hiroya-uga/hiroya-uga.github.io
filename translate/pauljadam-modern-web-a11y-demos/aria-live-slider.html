@@ -161,31 +161,28 @@ th {
 <main>
     <h1>alertロールを利用したライブスライダー</h1>
     <p role="alert" id="current-temp">現在の気温は摂氏27.0℃です。</p>
-    <label for="temp">温度 </label><input id="temp" type="range" value="270" min="-410" max="411">
+    <label for="temp">温度 </label><input id="temp" type="range" value="27.0" step="0.1" min="-41.0" max="41.1">
 <script>
-// https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger
-Number.isInteger = Number.isInteger || function(value) {
-  return typeof value === 'number' &&
-    isFinite(value) &&
-    Math.floor(value) === value;
-};
 (function () {
     'use strict';
 
     var alert = document.getElementById("current-temp");
     var temp = document.getElementById("temp");
     var addZero = function (num) {
-        if (Number.isInteger(num)) {
+        var val = String(num);
+
+        if (val.indexOf('.') === -1) {
             return String(num) + '.0';
         }
 
         return num;
     }
     var handler = function(){
-          alert.innerHTML = '現在の気温は摂氏'+ addZero(this.value / 10) + '℃です。';
+          alert.innerHTML = '現在の気温は摂氏'+ addZero(this.value) + '℃です。';
     };
 
     temp.addEventListener('input', handler);
+    temp.addEventListener('change', handler); // for VoiceOver
 }());
 </script>
 </main>
