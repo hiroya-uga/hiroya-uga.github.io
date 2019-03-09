@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: 'video要素の autoplay, loop, muted, controls 属性をテスト'
+}); %>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1><code>video</code>要素の autoplay, loop, muted, controls 属性をテスト</h1>
+<h2>autoplay, loop, muted, controls</h2>
+<video  height="270" width="480" poster="https://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg" autoplay loop muted controls>
+        <source src="https://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4">
+        <source src="https://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm">
+        <p class="warning">ご利用中のブラウザはHTML5のvideo要素をサポートしていないようです。</p>
+</video>
+<h2>autoplay, loop</h2>
+<video  height="270" width="480" poster="https://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg" autoplay loop>
+        <source src="https://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4">
+        <source src="https://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm">
+        <p class="warning">ご利用中のブラウザはHTML5のvideo要素をサポートしていないようです。</p>
+</video>
+<h2>autoplay, loop, controls</h2>
+<video  height="270" width="480" poster="https://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg" autoplay loop controls>
+        <source src="https://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4">
+        <source src="https://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm">
+        <p class="warning">ご利用中のブラウザはHTML5のvideo要素をサポートしていないようです。</p>
+</video>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>

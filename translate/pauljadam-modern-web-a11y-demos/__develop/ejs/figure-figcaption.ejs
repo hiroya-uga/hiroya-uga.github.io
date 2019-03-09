@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: 'HTML5のfigure要素とfigcaption要素'
+}); %>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>HTML5の<code>figure</code>要素と<code>figcaption</code>要素</h1>
+<figure>
+  <img src="./img/accessiblenameimg-360bridge.jpg" alt="Pennybacker Bridge" width="800" height="533">
+  <figcaption>図1 - テキサス州オースティンで「360 Bridge」として知られているペニーバッカー橋は、オースティン湖に掛かるスルーアーチタイプの橋で、Loop 360という高速道路の北部と南部を結ぶものです。「テキサスハイウェイの首都」としても知られています。</figcaption>
+</figure>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>
