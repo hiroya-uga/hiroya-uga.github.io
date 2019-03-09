@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: 'アクセシブルなモーダルダイアログ'
+}); %>
+<script src="http://code.jquery.com/jquery.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script>
+$(document).ready(function(e) {
+	$('#trigger-modal').click(function() {
+		$('main').attr('aria-hidden','true');
+		//var lastFocus = document.activeElement; wont' work on iOS
+		var modalOverlay = $('<div>').attr({id:"modalOverlay", id:"modalOverlay"});
+		$(modalOverlay).appendTo('body');
+		$("#trigger-modal").attr('disabled','true');
+		var dialog = $('<div role="dialog">').attr({"aria-labelledby":"dialog-heading", "aria-describedby":"dialog-description", "aria-modal":"true"});
+		$(dialog).html('<div id="firstElement" tabindex="0"></div><h1 id="dialog-heading">アカウントログイン</h1><div id="dialog-description"><p>アカウントにサインインするには、以下にユーザー名とパスワードを入力してください。「新規登録」ボタンをクリックして新しいアカウントを作成します。</p></div><form><label>ユーザー名<br><input id="username" type="text"></label><br><label>パスワード<br><input type="password"></label></form><button id="firstButton">ログイン</button><button>新規登録</button><button id="lastButton" aria-label="アカウントログインダイアログを閉じる">X</button><div id="lastElement" tabindex="0"></div>').appendTo('body');
+		$('#username').focus();
+
+$('#lastElement').focusin(function(e) {
+	   $('#username').focus();
+});
+$('#firstElement').focusin(function(e) {
+	   $('#lastButton').focus();
+});
+
+	$('body').on('keyup', function(e) {
+		if(e.keyCode == '27'){
+    		$('main').attr('aria-hidden','false');
+			$(modalOverlay).remove();
+			$(dialog).remove();
+	    	$("#trigger-modal").removeAttr('disabled').focus();//works on iOS
+		}
+	});
+
+$('[role=dialog] button').click(function(e) {
+    	$('main').attr('aria-hidden','false');
+		$(modalOverlay).remove();
+		$(dialog).remove();
+        //lastFocus.focus(); not working on iOS
+	    $("#trigger-modal").removeAttr('disabled').focus();//works on iOS
+
+});
+		return false;
+	});
+
+});
+</script>
+<style type="text/css">
+*:focus {outline:3px solid blue;}
+#modalOverlay {
+	width:100%;
+	height:100%;
+	z-index:2;
+	background-color:#000;
+	opacity:0.5;
+	position:fixed;
+	top:0;
+	left:0;
+	margin:0;
+	padding:0;
+}
+[role=dialog] {
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 5px;
+	border: thin #000 solid;
+	background-color:#fff;
+	z-index:3;
+	position:fixed;
+	top:25%;
+	left:25%;
+}
+.scroll-frame {
+    overflow: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling:touch;
+	height:400px;
+	width:100%;
+}
+#lastButton {
+ position:absolute;
+top: 0px;
+right: 0px;
+}
+</style>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>アクセシブルなモーダルダイアログ</h1>
+<p>コーディング手順はこちら<br>→ <a href="http://w3c.github.io/aria-practices/#dialog_modal">http://w3c.github.io/aria-practices/#dialog_modal</a></p>
+<h2>WAI-ARIA role=dialog</h2>
+<button id="trigger-modal">モーダルダイアログを開く</button>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>

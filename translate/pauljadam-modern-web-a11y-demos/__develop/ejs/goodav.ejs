@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: '自動再生またはループのないオーディオ/ビデオの良い例'
+}); %>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script>
+$(document).ready(function(e) {
+
+	var v = document.getElementsByTagName("video")[1];
+	v.addEventListener("play", function() { $('#play-pause').html('停止'); }, true);
+	v.addEventListener("pause", function() { $('#play-pause').html('再生'); }, true);
+
+
+	$('#play-pause').click(function(e) {
+		if (!$('#demo-video')[0].paused) {
+		   $('#demo-video')[0].pause();
+		   $('#play-pause').html('再生');
+		} else {
+		   $('#demo-video')[0].play();
+			$('#play-pause').html('停止');
+		}
+    });
+	$('#captions').click(function(e) {
+		if ($('#demo-video')[0].textTracks[0].mode == "showing") {
+		   $('#captions').html('Enable Captions');
+		   $('#demo-video')[0].textTracks[0].mode = "hidden";
+		} else {
+		   $('#demo-video')[0].textTracks[0].mode = "showing";
+			$('#captions').html('Disable Captions');
+		}
+    });
+
+
+});
+</script>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+<h1>自動再生またはループのないオーディオ/ビデオの良い例</h1>
+<video controls>
+<source src="https://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4">
+<source src="https://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm">
+</video>
+<p><a href="badav.html">オーディオ/ビデオの自動再生とループを使った悪い例</a></p>
+<h2>自動再生やループ、独自コントローラーのないより良いオーディオ/ビデオの例</h2>
+<video id="demo-video" controls>
+<source src="https://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4">
+<source src="https://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm">
+</video>
+<div role="group" aria-label="Better Audio/Video Example Player Controls">
+	<button id="play-pause">再生</button>
+<!--	<button id="captions">Disable Captions</button>
+	<button id="full-screen">Full Screen</button>
+--></div>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>
