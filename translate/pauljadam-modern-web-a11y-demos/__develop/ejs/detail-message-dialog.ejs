@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('./_include/_head-meta.ejs', {
+    title: 'WAI-ARIAのrole=&quot;alertdialog&quot;属性を使った詳細メッセージダイアログ'
+}); %>
+<script src="https://code.jquery.com/jquery.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script>
+$(document).ready(function(e) {
+	$('#trigger').click(function() {
+		$('main, [role=navigation]').attr('aria-hidden','true');
+		$('body').attr('style','background-color:gray;');
+		$('a').attr('tabindex','-1');
+		$('a').attr('style','cursor:default;');
+		$('button').attr('disabled','true');
+		var modalOverlay = $('<div>').attr({id:"modalOverlay"});
+		$(modalOverlay).appendTo('body');
+		var dialog = $('<div>').attr({role:"alertdialog", "aria-labelledby":"alertHeading", "aria-describedby":"alertText"});
+		$(dialog).html('<h1 id="alertHeading">警告！番地が一致していません</h1><div id="alertText"><p>入力された住所の郵便番号が正しくないようです。</p><p>入力された値： 東京都hoge区1-2-3</p></div><button id="yes">はい、正しい値です</button><button>修正する</button>').appendTo('#modalOverlay');
+		$('#yes').focus();
+
+
+$('[role=alertdialog] button').click(function(e) {
+    	$('main, [role=navigation]').attr('aria-hidden','false');
+		$('body, a').removeAttr('style');
+		$('a').removeAttr('tabindex');
+		$('button').removeAttr('disabled');
+		$(modalOverlay).remove();
+		$(dialog).remove();
+	    $("#trigger").focus();
+
+});
+		return false;
+	});
+
+
+
+	$('#trigger-spec').click(function() {
+		$('main, [role=navigation]').attr('aria-hidden','true');
+		$('body').attr('style','background-color:gray;');
+		$('a').attr('tabindex','-1');
+		$('a').attr('style','cursor:default;');
+		$('button').attr('disabled','true');
+		var modalOverlay = $('<div>').attr({id:"modalOverlay"});
+		$(modalOverlay).appendTo('body');
+		var dialog = $('<div>').attr({role:"alertdialog", "aria-labelledby":"alertHeading", "aria-describedby":"alertText"});
+		$(dialog).html('<h1 id="alertHeading">警告！番地が一致していません</h1><div id="alertText" tabindex="0" role="document"><p>入力された住所の郵便番号が正しくないようです。</p><p>入力された値： 東京都hoge区1-2-3</p></div><button id="yes">正しい値です</button><button>修正する</button>').appendTo('#modalOverlay');
+		$('#alertText').focus();
+
+$('[role=alertdialog] button').click(function(e) {
+    	$('main, [role=navigation]').attr('aria-hidden','false');
+		$('body, a').removeAttr('style');
+		$('a').removeAttr('tabindex');
+		$('button').removeAttr('disabled');
+		$(modalOverlay).remove();
+		$(dialog).remove();
+	    $("#trigger-spec").focus();
+
+});
+		return false;
+	});
+
+
+
+});
+</script>
+<style type="text/css">
+#modalOverlay {
+	width:100%;
+	height:100%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+[role=alertdialog] {
+    position: relative;
+    width: 80%;
+    margin-left: -40%;
+    height: 400px;
+    margin-top: -200px;
+	padding: 5px;
+	border: thin #000 solid;
+	background-color:#fff;
+}
+</style>
+</head>
+
+<body>
+<%- include('./_include/_body-header.ejs'); %>
+
+<main>
+ <h1>WAI-ARIAのrole=&quot;alertdialog&quot;属性を使った詳細メッセージダイアログ</h1>
+  <p><a href="http://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog">http://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog</a></p>
+  <p><a href="http://www.w3.org/TR/wai-aria-1.1/#alertdialog">http://www.w3.org/TR/wai-aria-1.1/#alertdialog</a></p>
+  <button id="trigger-spec">仕様に準拠した警告メッセージを表示</button><br>
+  <button id="trigger">仕様に適合していない警告メッセージを表示</button>
+</main>
+
+<%- include('./_include/_body-footer.ejs'); %>
+</body>
+</html>
