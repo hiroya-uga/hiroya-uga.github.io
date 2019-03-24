@@ -11,12 +11,31 @@ const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const base = path.join(__dirname, 'md');
 const templatePath = path.join(__dirname, 'template');
+const markedRenderer = new marked.Renderer();
+let toc = [];
+
+markedRenderer.heading = (text, level) => {
+    const title = text.toLowerCase().trim();
+    const id = title.replace(/[\s\.]/g, '-').replace(/--/g, '-');
+
+    if (/^[0-9]/.test(title)) {
+        toc.push({
+            level: level,
+            id: id,
+            title: title
+        });
+
+        return `<h${level} id="${id}"><strong>${title}</strong><a href="#${id}" class="anchor"><span>Anchor Link</span></a></h${level}>`;
+    }
+
+  return `<h${level}>${title}</h${level}>`;
+};
 
 marked.setOptions({
     highlight: (code, lang, callback) => {
         return hljs.highlightAuto(code).value;
     },
-    renderer: new marked.Renderer(),
+    renderer: markedRenderer,
     gfm: true,
     tables: true,
     extra: true,
@@ -42,7 +61,10 @@ Promise.all([
     const dest = async (mdPath, fileName) => {
         const md = await readFile(mdPath, 'utf-8');
         const destPath = path.join(__dirname, '..', fileName.replace(/md$/, 'html'));
-        const src = ((html) => {
+
+        toc = [];
+
+        await writeFile(destPath, ((html) => {
             const dom = new JSDOM(html, {
                 contentType: 'text/html'
             }).window.document;
@@ -55,18 +77,37 @@ Promise.all([
                 html = template.before + html + template.after;
             }
 
-            html = html.replace('${LastUpdate}', `${date.getDate()} ${new Intl.DateTimeFormat('en-US', {
+            html = html.replace(/\${lastUpdate}/i, `${date.getDate()} ${new Intl.DateTimeFormat('en-US', {
                 month: 'long'
             }).format(date)} ${date.getFullYear()}`);
+
+            html = html.replace(/<p>.*?\[toc\].*?<\/p>/i, (() => {
+                let tocSrc = '';
+
+                // level 2 以上
+                toc.forEach(({level, id, title}) => {
+                    const indent = ''.padStart((level - 2) * 4, '    ');
+
+                    // renderer の中で数字始まりなことは検証済み
+                    title = title.replace(/([^0-9.])/, (m, p1) => {
+                        return `</span><span>${p1}`;
+                    });
+
+                    title = `<span>${title}`;
+
+                    tocSrc += `${indent}- [${title}](#${id})\n`;
+                });
+
+                return `<h2>Table of Contents</h2><div id="toc">${marked(tocSrc)}</div>`;
+            })());
+
 
             if (h1) {
                 html = html.replace('${title}', h1.textContent.trim());
             }
 
             return html;
-        })(marked(md));
-
-        await writeFile(destPath, src);
+        })(marked(md)));
 
         browser.reload();
     };
