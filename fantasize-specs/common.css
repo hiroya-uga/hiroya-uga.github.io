@@ -23,6 +23,79 @@ h3 {
   font-weight: normal;
 }
 
+h1 {
+  margin: 30px 0 4px;
+}
+
+h1 + h2 {
+  margin-top: 0;
+}
+
+h2 {
+  margin: 70px 0 18px;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+}
+
+h2 strong,
+h3 strong,
+h4 strong,
+h5 strong,
+h6 strong {
+  font-weight: normal;
+}
+
+h2 a.anchor,
+h3 a.anchor,
+h4 a.anchor,
+h5 a.anchor,
+h6 a.anchor {
+  position: absolute;
+  overflow: hidden;
+  right: 100%;
+  top: 0.12em;
+  font-size: 80%;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  opacity: 0.5;
+}
+h2 a.anchor:focus,
+h2 a.anchor:hover,
+h3 a.anchor:focus,
+h3 a.anchor:hover,
+h4 a.anchor:focus,
+h4 a.anchor:hover,
+h5 a.anchor:focus,
+h5 a.anchor:hover,
+h6 a.anchor:focus,
+h6 a.anchor:hover {
+  opacity: 1;
+}
+
+h2 a.anchor::before,
+h3 a.anchor::before,
+h4 a.anchor::before,
+h5 a.anchor::before,
+h6 a.anchor::before {
+  content: "§";
+}
+
+h2 a.anchor span,
+h3 a.anchor span,
+h4 a.anchor span,
+h5 a.anchor span,
+h6 a.anchor span {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
 dt {
   font-weight: bold;
 }
@@ -36,5 +109,33 @@ a {
 }
 
 main {
-  padding: 0 15px;
+  padding: 0 15px 0 50px;
+}
+
+#toc {
+  margin: 0 0 80px;
+}
+#toc ul {
+  list-style: none;
+  padding-left: 0;
+  font-weight: bold;
+  margin: 5px 0;
+}
+#toc > ul > li {
+  margin: 16px 0;
+}
+#toc ul ul {
+  font-weight: normal;
+}
+#toc a {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+}
+#toc a:focus span:last-child,
+#toc a:hover span:last-child {
+  text-decoration: underline;
+}
+#toc a span:first-child {
+  min-width: 80px;
 }
