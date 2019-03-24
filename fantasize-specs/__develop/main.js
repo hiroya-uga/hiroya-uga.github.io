@@ -15,8 +15,8 @@ const markedRenderer = new marked.Renderer();
 let toc = [];
 
 markedRenderer.heading = (text, level) => {
-    const title = text.toLowerCase().trim();
-    const id = title.replace(/[\s\.]/g, '-').replace(/--/g, '-');
+    const title = text.trim();
+    const id = title.toLowerCase().replace(/[\s\.]/g, '-').replace(/--/g, '-');
 
     if (/^[0-9]/.test(title)) {
         toc.push({
