@@ -47,12 +47,17 @@ Promise.all([
                 contentType: 'text/html'
             }).window.document;
             const h1 = dom.querySelector('h1');
+            const date = new Date();
 
             if (fileName === 'index.html') {
                 html = template.indexBefore + html + template.indexAfter;
             } else {
                 html = template.before + html + template.after;
             }
+
+            html = html.replace('${LastUpdate}', `${date.getDate()} ${new Intl.DateTimeFormat('en-US', {
+                month: 'long'
+            }).format(date)} ${date.getFullYear()}`);
 
             if (h1) {
                 html = html.replace('${title}', h1.textContent.trim());
