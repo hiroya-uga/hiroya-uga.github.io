@@ -27,6 +27,10 @@ dt {
   font-weight: bold;
 }
 
+dd + dt {
+  margin-top: 8px;
+}
+
 a {
   text-decoration: underline;
 }
