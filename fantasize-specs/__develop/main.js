@@ -78,6 +78,8 @@ Promise.all([
     });
 
     fs.readdir(base, function(err, files) {
+        const readmePath = path.join(__dirname, '..', 'README.md');
+
         if (err) {
             throw err;
         }
@@ -88,13 +90,17 @@ Promise.all([
             fs.watch(
                 filePath,
                 () => {
-                    if (fileName === 'README.md') {
-                        fileName = 'index.html';
-                    }
-
                     dest(filePath, fileName);
                 }
             );
         });
+
+        // readme
+        fs.watch(
+            readmePath,
+            () => {
+                dest(readmePath, 'index.html');
+            }
+        );
     });
 });
