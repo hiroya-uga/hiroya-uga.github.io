@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CSS Observer Module</title>
+<title>CSS Observer Module level 1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="common.css">
 </head>
 <body>
-<main><h1>CSS Observer Module</h1><h2>Personal Delusion Draft, 25 March 2019</h2><dl>
+<main><h1>CSS Observer Module level 1</h1><h2>Personal Delusion Draft, 25 March 2019</h2><dl>
 <dt>This version:</dt>
 <dd><a href="https://hiroyau.ga/fantasize-specs/css-observer.html">https://hiroyau.ga/fantasize-specs/css-observer.html</a></dd>
 <dt>Editors:</dt>
@@ -21,40 +21,183 @@
 <h2>Abstract</h2><p>This module introduces the ability to  observe the status of elements, with new css properties and pseudo classes. For example, entering and leaving of elements the screen view area by scroll, and changing the <code>display</code> property of elements. The define of these are approach to enable  interaction implementation without JavaScript.</p>
 <h2>Table of Contents</h2><div id="toc"><ul>
 <li><a href="#1-introduction"><span>1.</span><span> Introduction</a></li>
-<li><a href="#2-the-%3Ccode%3Eobserve%3C/code%3E-property"><span>2.</span><span>The <code>observe</code> property</a></li>
-<li><a href="#3-types-of-observe"><span>3.</span><span> Types of Observe</a><ul>
-<li><a href="#3-1-view-observe"><span>3.1</span><span> View Observe</a></li>
-<li><a href="#3-2-display-observe"><span>3.2</span><span> Display Observe</a></li>
+<li><a href="#2-observers"><span>2.</span><span> Observers</a><ul>
+<li><a href="#2-1-the-%3Ccode%3Eobserve-type%3C/code%3E-property"><span>2.1.</span><span> The <code>observe-type</code> property</a></li>
+<li><a href="#2-3-the-%3Ccode%3Eobserve-disconect%3C/code%3E-property"><span>2.3.</span><span> The <code>observe-disconect</code> property</a></li>
 </ul>
 </li>
-<li><a href="#4-selectos"><span>4.</span><span> Selectos</a><ul>
-<li><a href="#4-1-pseudo-classes"><span>4.1</span><span> Pseudo-classes</a></li>
+<li><a href="#3-selectors"><span>3.</span><span> Selectors</a><ul>
+<li><a href="#3-1-pseudo-classes"><span>3.1.</span><span> Pseudo-classes</a></li>
 </ul>
 </li>
+<li><a href="#4-usege"><span>4.</span><span> Usege</a></li>
 </ul>
 </div>
-<h2 id="1-introduction"><strong>1. Introduction</strong><a href="#1-introduction" class="anchor"><span>Anchor Link</span></a></h2><h2 id="2-the-<code>observe</code>-property"><strong>2.The <code>observe</code> property</strong><a href="#2-the-<code>observe</code>-property" class="anchor"><span>Anchor Link</span></a></h2><div class="propdef">
+<h2 id="1-introduction"><strong>1. Introduction</strong><a href="#1-introduction" class="anchor"><span>Anchor Link</span></a></h2><p>Sometimes in web pages, elements are required a change style when enters the screen by scroll. For example, elements is observed by such as the <a href="https://w3c.github.io/IntersectionObserver/">Intersection Observer API</a>, and change style by manipulating the attributes of the elements entered on the screen is adopted. In that case, may be used CSS Transitions, CSS Animations, and requestAnimationFrame often.</p>
+<p>This module realizes such an expression only with CSS, without processing of start and end of observer by JavaScript.</p>
+<h2 id="2-observers"><strong>2. Observers</strong><a href="#2-observers" class="anchor"><span>Anchor Link</span></a></h2><h3 id="2-1-the-<code>observe-type</code>-property"><strong>2.1. The <code>observe-type</code> property</strong><a href="#2-1-the-<code>observe-type</code>-property" class="anchor"><span>Anchor Link</span></a></h3><div class="propdef">
 <table>
 <tbody>
 <tr>
 <th>Name:</th>
-<td><dfn>observe</dfn></td>
+<td><dfn>observe-type</dfn></td>
 </tr>
 
 <tr>
 <th>value:</th>
-<td>none | [view | view-in | view-out | [ view-in-top || view-in-right || view-in-bottom || view-in-left || view-out-top || view-out-right || view-out-bottom || view-out-left ] ] || display</td>
+<td>none | [view | view-in | view-out | view-top | view-right | view-bottom | view-left | [ view-top-in || view-right-in || view-bottom-in || view-left-in || view-top-out || view-right-out || view-bottom-out || view-left-out ] ] || display</td>
 </tr>
 
 <tr>
 <th>Initial:</th>
 <td>none</td>
 </tr>
+
+<tr>
+<th>Applies to:</th>
+<td>See below</td>
+</tr>
+
+<tr>
+<th>Inherited:</th>
+<td>no</td>
+</tr>
+
+<tr>
+<th>Percentages:</th>
+<td>n/a</td>
+</tr>
+
+<tr>
+<th>Computed value:</th>
+<td>specified keyword(s)</td>
+</tr>
+
+<tr>
+<th>Animation type:</th>
+<td>not animatable</td>
+</tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="3-types-of-observe"><strong>3. Types of Observe</strong><a href="#3-types-of-observe" class="anchor"><span>Anchor Link</span></a></h2><h3 id="3-1-view-observe"><strong>3.1 View Observe</strong><a href="#3-1-view-observe" class="anchor"><span>Anchor Link</span></a></h3><h3 id="3-2-display-observe"><strong>3.2 Display Observe</strong><a href="#3-2-display-observe" class="anchor"><span>Anchor Link</span></a></h3><h2 id="4-selectos"><strong>4. Selectos</strong><a href="#4-selectos" class="anchor"><span>Anchor Link</span></a></h2><h3 id="4-1-pseudo-classes"><strong>4.1 Pseudo-classes</strong><a href="#4-1-pseudo-classes" class="anchor"><span>Anchor Link</span></a></h3></main>
+<dl>
+<dt><dfn>none</dfn></dt>
+<dd>The user agent do not observe element.</dd>
+
+<dt><dfn>view</dfn></dt>
+<dd>The user agent observe entry and exit of elements in all directions.</dd>
+
+<dt><dfn>view-in</dfn></dt>
+<dd>The user agent observe entry of elements in all directions.</dd>
+
+<dt><dfn>view-out</dfn></dt>
+<dd>The user agent observe exit of elements in all directions.</dd>
+
+<dt><dfn>view-*</dfn></dt>
+<dd>This asterisk of notation replaced the move keyword(ex. in, out). This The user agent observe entry or exit elements in all directions.</dd>
+
+<dt><dfn>view-*-in</dfn></dt>
+<dd>This asterisk of notation replaced the direction keyword(ex. top, right, bottom, left). This The user agent observe entry of elements in instructed directions.</dd>
+
+<dt><dfn>view-*-out</dfn></dt>
+<dd>This asterisk of notation replaced the direction keyword(ex. top, right, bottom, left). The user agent observe exit of elements in instructed directions.</dd>
+
+<dt><dfn>display</dfn></dt>
+<dd>The user agent observe css display property of elements. Communicate the CSSOM of change after  ​​to the user agent, before properties change from none to the values ​​that form <a href="https://www.w3.org/TR/CSS22/box.html">box models</a>. This spec is to support CSS transition animation work without requestAnimationFrame, even if display property changes from none to block at same time.</dd>
+<dd class="example">
+
+<pre><code class="language-javascript">target.style.<span class="hljs-built_in">display</span> = <span class="hljs-string">'none'</span>;
+target.style.<span class="hljs-built_in">height</span> = <span class="hljs-number">0</span>;
+
+button.addEventListener(<span class="hljs-string">'click'</span>, function () {
+  target.style.<span class="hljs-built_in">display</span> = <span class="hljs-string">'block'</span>;
+
+  <span class="hljs-comment">// requestAnimationFrame(() =&gt; {</span>
+  target.style.<span class="hljs-built_in">height</span> = <span class="hljs-string">'100px'</span>;
+  <span class="hljs-comment">// });</span>
+});</code></pre>
+</dd>
+<dd class="example">
+
+<pre><code class="language-css"><span class="hljs-selector-tag">a</span> <span class="hljs-selector-tag">div</span> {
+  <span class="hljs-attribute">display</span>: none;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">transition</span>: .<span class="hljs-number">2s</span> height ease-out;
+  <span class="hljs-attribute">observe</span>: display; <span class="hljs-comment">/* The user agent is observing change of display property. */</span>
+}
+
+<span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> <span class="hljs-selector-tag">div</span>,
+<span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:focus</span> <span class="hljs-selector-tag">div</span> {
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>; <span class="hljs-comment">/* CSS Transitions work because the user agent is known that height of this element is 0. */</span>
+}</code></pre>
+</dd>
+</dl>
+
+<h3 id="2-3-the-<code>observe-disconect</code>-property"><strong>2.3. The <code>observe-disconect</code> property</strong><a href="#2-3-the-<code>observe-disconect</code>-property" class="anchor"><span>Anchor Link</span></a></h3><div class="propdef">
+<table>
+<tbody>
+<tr>
+<th>Name:</th>
+<td><dfn>observe-conect</dfn></td>
+</tr>
+
+<tr>
+<th>value:</th>
+<td>once | infinite</td>
+</tr>
+
+<tr>
+<th>Initial:</th>
+<td>once</td>
+</tr>
+
+<tr>
+<th>Applies to:</th>
+<td>See below</td>
+</tr>
+
+<tr>
+<th>Inherited:</th>
+<td>no</td>
+</tr>
+
+<tr>
+<th>Percentages:</th>
+<td>n/a</td>
+</tr>
+
+<tr>
+<th>Computed value:</th>
+<td>specified keyword(s)</td>
+</tr>
+
+<tr>
+<th>Animation type:</th>
+<td>not animatable</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h2 id="3-selectors"><strong>3. Selectors</strong><a href="#3-selectors" class="anchor"><span>Anchor Link</span></a></h2><h3 id="3-1-pseudo-classes"><strong>3.1. Pseudo-classes</strong><a href="#3-1-pseudo-classes" class="anchor"><span>Anchor Link</span></a></h3><h2 id="4-usege"><strong>4. Usege</strong><a href="#4-usege" class="anchor"><span>Anchor Link</span></a></h2><div class="example">
+
+<pre><code class="language-css"><span class="hljs-selector-tag">div</span> {
+   <span class="hljs-attribute">observe</span>: view-top once;
+   <span class="hljs-attribute">transition</span>: .<span class="hljs-number">2s</span> opacity ease-out;
+   <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>; <span class="hljs-comment">/* For not support browsers */</span>
+}
+
+<span class="hljs-selector-tag">div</span><span class="hljs-selector-pseudo">:view-in</span> {
+   <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;  <span class="hljs-comment">/* In the screen */</span>
+}
+
+<span class="hljs-selector-tag">div</span><span class="hljs-selector-pseudo">:view-out</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;   <span class="hljs-comment">/* Out of screen */</span>
+}</code></pre>
+</div></main>
 
 <footer>
 </footer>
