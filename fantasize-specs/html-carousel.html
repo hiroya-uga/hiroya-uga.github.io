@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Carousels</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="common.css">
+</head>
+<body>
+<main>
+<p><a href="../">../</a></p><h1>Carousels</h1><h2>Fantasize Draft, 25 March 2019</h2><dl>
+<dt>This version:</dt>
+<dd><a href="https://hiroyau.ga/fantasize-specs/html-carousel.html">https://hiroyau.ga/fantasize-specs/html-carousel.html</a></dd>
+<dt>Editors:</dt>
+<dd><a href="https://github.com/hiroya-u">Hiroya-u</a></dd>
+<dt>Issue Tracking:</dt>
+<dd><a href="https://github.com/hiroya-u/hiroya-u.github.io/blob/master/fantasize-specs/html-carousel.html">GitHub Issues</a></dd>
+</dl>
+
+
+<h2>Abstract</h2><p>This specification defines a mechanism for bringing standard accessibility to carousels (sometimes referred to as <em>slider</em>).</p>
+<h2>Table of Contents</h2><div id="toc"><ul>
+<li><a href="#1-introduction"><span>1.</span><span> Introduction</a></li>
+<li><a href="#2-concepts"><span>2.</span><span> Concepts</a></li>
+<li><a href="#3-api"><span>3.</span><span> API</a><ul>
+<li><a href="#3-1-related-elements"><span>3.1.</span><span> Related elements</a><ul>
+<li><a href="#3-1-1-the-%3Ccode%3Ecarousel%3C/code%3E-element"><span>3.1.1.</span><span> The <code>carousel</code> element</a></li>
+<li><a href="#3-1-2-the-%3Ccode%3Eslide%3C/code%3E-element"><span>3.1.2</span><span> The <code>slide</code> element</a></li>
+</ul>
+</li>
+<li><a href="#3-2-interfaces"><span>3.2.</span><span> Interfaces</a><ul>
+<li><a href="#3-2-1-swipe"><span>3.2.1</span><span> Swipe</a></li>
+<li><a href="#3-2-2-keyboard"><span>3.2.2</span><span> Keyboard</a></li>
+</ul>
+</li>
+<li><a href="#3-3-css-selectors"><span>3.3.</span><span> CSS Selectors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="1-introduction"><strong>1. Introduction</strong><a href="#1-introduction" class="anchor"><span>Anchor Link</span></a></h2><p>Carousel is a widget that has a lot of problems (mostly related to accessibility) in spite of high demand.</p>
+<p>By standardizing the concept and interface of carousel widget as an element, we hope that issues such as accessibility and performance will be resolved.</p>
+<h2 id="2-concepts"><strong>2. Concepts</strong><a href="#2-concepts" class="anchor"><span>Anchor Link</span></a></h2><h2 id="3-api"><strong>3. API</strong><a href="#3-api" class="anchor"><span>Anchor Link</span></a></h2><h3 id="3-1-related-elements"><strong>3.1. Related elements</strong><a href="#3-1-related-elements" class="anchor"><span>Anchor Link</span></a></h3><h4 id="3-1-1-the-<code>carousel</code>-element"><strong>3.1.1. The <code>carousel</code> element</strong><a href="#3-1-1-the-<code>carousel</code>-element" class="anchor"><span>Anchor Link</span></a></h4><div class="element">
+<dl>
+<dt><a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:</dt>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#interactive-content-2">Interactive content</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#palpable-content-2">Palpable content</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/sec-forms.html#labelable-element">Labelable</a>.</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#contexts-in-which-this-element-can-be-used">Contexts in which this element can be used</a>:</dt>
+<dd>Where <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a> is expected.</dd>
+
+<dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
+<dd>Zero or more <code class="element">slide</code> elements</a>, then, <a href="https://www.w3.org/TR/html52/dom.html#transparent">transparent</a>.</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
+<dd>Neither tag is omissible</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
+<dd><code>current</code> - Number the current index.</dd>
+<dd><code>autoplay</code> - Hint that the carousel can be slide automatically when the page is loaded.</dd>
+<dd><code>loop</code> - Whether to loop the slides.</dd>
+<dd><code>controls</code> - Show user agent controls.</dd>
+<dd><code>direction</code> - Direction the slider.</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
+<dd><code>carousel</code></dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-state-and-property-attributes">Allowed ARIA state and property attributes</a>:</dt>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#global-aria--attributes">Global aria-* attributes</a></dd>
+<dd>Any <code>aria-*</code> attributes <a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-roles-states-and-properties">applicable to the allowed roles</a>.</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:</dt>
+<dd class="interface">
+<pre><code class="idl"><span class="keyword">interface</span> <span class="name">HTMLCarouselElement</span> : <a href="https://www.w3.org/TR/html52/dom.html#htmlelement">HTMLElement</a> {
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> autoplay;
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> controls;
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">unsigned long</span></a> current;
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">DOMString</span></a> direction;
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> loop;<br>
+  <span class="keyword">void</span> play();
+  <span class="keyword">void</span> pause();
+};</code></pre>
+</dd>
+</dl>
+</div>
+
+<p>The <code class="element">carousel</code> element represents a carousel widget that can combine multiple pieces of content into a compact display.</p>
+<p>The <dfn><code>current</code></dfn> attribute represent initial current position. If the <code>current</code> attribute is present, user agents must <a href="https://www.w3.org/TR/html52/infrastructure.html#parse-token-as-an-integer">parse it as an integer</a>, in order to determine the attribute’s value.  The default value is 1.</p>
+<p>The <dfn><code>autoplay</code></dfn> attribute is a <a href="https://www.w3.org/TR/html52/infrastructure.html#boolean-attribute">boolean attribute</a>. When present, the user agent will automatically begin slide of the carousel as soon.</p>
+<p>The <code>autoplay</code> IDL attribute must <a href="https://www.w3.org/TR/html52/infrastructure.html#reflection">reflect</a> the content attribute of the same name.</p>
+<p>The <dfn><code>loop</code></dfn> attribute is a <a href="https://www.w3.org/TR/html52/infrastructure.html#boolean-attribute">boolean attribute</a> that, if specified, indicates that the slide of carousel element is to seek back to the start of the slide upon reaching the end.</p>
+<p>The <code>loop</code> IDL attribute must reflect the content attribute of the same name.</p>
+<p>The <dfn><code>controls</code></dfn> attribute is a <a href="https://www.w3.org/TR/html52/infrastructure.html#boolean-attribute">boolean attribute</a> that, if specified, it indicates that the author has not provided a scripted controller and would like the user agent to provide its own set of controls.</p>
+<p>If the attribute is present, or if scripting is disabled for the media element, then the user agent should <strong>expose a user interface to the user</strong>. This user interface should include features the pager buttons (next, prev), begin button for autoplay, pause button, and dot-Indicator for toggle to arbitrary slide in the carousel. Other controls may also be made available.</p>
+<p>Even when the attribute is absent, however, user agents may provide controls to use of the carousel (e.g., swipe, keyboard interface), but such features should not interfere with the page’s normal rendering.  The user agent may implement this simply by <a href="https://www.w3.org/TR/html52/semantics-embedded-content.html#exposing-a-user-interface">exposing a user interface to the user</a> as if the <code>controls</code> attribute was present.</p>
+<p>If the user agent exposes a user interface to the user by displaying controls over the media element, then the user agent should suppress any user interaction events while the user agent is interacting with this interface. (For example, if the user clicks on a carousel&#39;s pager control, <code>mousedown</code> events and so forth would not simultaneously be fired at elements on the page.)</p>
+<p>Where possible (specifically, for toggling slide, and for toggling autoplay), user interface features exposed by the user agent must be implemented in terms of the DOM API described above, so that, e.g., all the same events fire.</p>
+<p>The <code>controls</code> IDL attribute must reflect the content attribute of the same name.</p>
+<p>The <dfn><code>direction</code></dfn> attribute controls the slide direction of the <code class="element">carousel</code>. It is an <a href="https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes">enumerated attribute</a> with the following keywords .</p>
+<ul>
+<li><code>left</code> - Slide left (right is next content)</li>
+<li><code>right</code> - Slide right (left is next content)</li>
+<li><code>up</code> - Slide up (bottom is next content)</li>
+<li><code>down</code> - Slide down (top is next content)</li>
+</ul>
+<p>The missing value default is the <code>left</code> state.</p>
+<div class="note">
+
+<p>If possible, the <code class="element">carousel</code> needs a label (accessible name) by <code>title</code> attribute or <code>aria-label</code> attribute etc. If omitted, assistive technology is expected to simply speak this element as a &quot;carousel&quot;.</p>
+</div>
+
+<div class="example">
+
+<p>The following example shows the carousel element being used to show 3 slide of 5 slide at once.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-id">#carousel</span> {
+  <span class="hljs-attribute">slide-width</span>: <span class="hljs-number">33%</span>;
+  <span class="hljs-attribute">slide-delay</span>: <span class="hljs-number">3s</span>;
+  <span class="hljs-attribute">slide-duration</span>: .<span class="hljs-number">2s</span>;
+  <span class="hljs-attribute">slide-timing-function</span>: ease-out;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This browser does not seem to support carousel elements.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
+</div>
+
+<div class="example">
+
+<p>The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once. Adjustment of the number of display uses CSS.</p>
+<p>This carousel has a controller displayed, it slide to the right, and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-id">#carousel</span> {
+  <span class="hljs-attribute">slide-width</span>: <span class="hljs-built_in">minmax</span>(200px, 33%);
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">current</span>=<span class="hljs-string">"2"</span> <span class="hljs-attr">autoplay</span> <span class="hljs-attr">direction</span>=<span class="hljs-string">"right"</span> <span class="hljs-attr">loop</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This browser does not seem to support carousel elements.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
+</div>
+
+<h4 id="3-1-2-the-<code>slide</code>-element"><strong>3.1.2 The <code>slide</code> element</strong><a href="#3-1-2-the-<code>slide</code>-element" class="anchor"><span>Anchor Link</span></a></h4><div class="element">
+<dl>
+<dt><a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:</dt>
+<dd>None.</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#contexts-in-which-this-element-can-be-used">Contexts in which this element can be used</a>:</dt>
+<dd>Inside <code class="element">carousel</code> elements.</dd>
+
+<dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
+<dd>Neither tag is omissible</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
+<dd>None</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-state-and-property-attributes">Allowed ARIA state and property attributes</a>:</dt>
+<dd>None</dd>
+
+<dt><a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:</dt>
+<dd>Uses <a href="https://www.w3.org/TR/html52/dom.html#htmlelement"><code> HTMLElement</code></a>.</dd>
+</dl>
+</div>
+
+
+<h3 id="3-2-interfaces"><strong>3.2. Interfaces</strong><a href="#3-2-interfaces" class="anchor"><span>Anchor Link</span></a></h3><h4 id="3-2-1-swipe"><strong>3.2.1 Swipe</strong><a href="#3-2-1-swipe" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-2-keyboard"><strong>3.2.2 Keyboard</strong><a href="#3-2-2-keyboard" class="anchor"><span>Anchor Link</span></a></h4><h3 id="3-3-css-selectors"><strong>3.3. CSS Selectors</strong><a href="#3-3-css-selectors" class="anchor"><span>Anchor Link</span></a></h3></main>
+
+<footer>
+</footer>
+</body>
+</html>
