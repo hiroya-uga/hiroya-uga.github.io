@@ -213,4 +213,3 @@ This carousel has a controller displayed, it slide to the right, and the initial
 
 
 ### 3.3. CSS Selectors
-
