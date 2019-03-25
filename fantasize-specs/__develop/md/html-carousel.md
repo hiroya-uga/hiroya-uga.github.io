@@ -127,9 +127,6 @@ The following example shows the carousel element being used to show 3 slide of 5
 <style>
 #carousel {
   slide-width: 33%;
-  slide-delay: 3s;
-  slide-duration: .2s;
-  slide-timing-function: ease-out;
 }
 </style>
 
@@ -156,6 +153,9 @@ This carousel has a controller displayed, it slide to the right, and the initial
 <style>
 #carousel {
   slide-width: minmax(200px, 33%);
+  slide-delay: 3s;
+  slide-duration: .2s;
+  slide-timing-function: ease-out;
 }
 </style>
 
