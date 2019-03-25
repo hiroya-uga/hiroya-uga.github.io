@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="common.css">
 </head>
 <body>
-<main><h1>CSS Observer Module level 1</h1><h2>Personal Delusion Draft, 25 March 2019</h2><dl>
+<main>
+<p><a href="../">../</a></p><h1>CSS Observer Module level 1</h1><h2>Fantasize Draft, 25 March 2019</h2><dl>
 <dt>This version:</dt>
 <dd><a href="https://hiroyau.ga/fantasize-specs/css-observer.html">https://hiroyau.ga/fantasize-specs/css-observer.html</a></dd>
 <dt>Editors:</dt>
@@ -107,16 +108,18 @@
 <dd>The user agent observe css display property of elements. Communicate the CSSOM of change after  ​​to the user agent, before properties change from none to the values ​​that form <a href="https://www.w3.org/TR/CSS22/box.html">box models</a>. This spec is to support CSS transition animation work without requestAnimationFrame, even if display property changes from none to block at same time.</dd>
 <dd class="example">
 
-<pre><code class="language-javascript">target.style.<span class="hljs-built_in">display</span> = <span class="hljs-string">'none'</span>;
-target.style.<span class="hljs-built_in">height</span> = <span class="hljs-number">0</span>;
+<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sample</span> <span class="hljs-params">()</span> </span>{
+  target.style.display = <span class="hljs-string">'none'</span>;
+  target.style.height = <span class="hljs-number">0</span>;
 
-button.addEventListener(<span class="hljs-string">'click'</span>, function () {
-  target.style.<span class="hljs-built_in">display</span> = <span class="hljs-string">'block'</span>;
+  button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    target.style.display = <span class="hljs-string">'block'</span>;
 
-  <span class="hljs-comment">// requestAnimationFrame(() =&gt; {</span>
-  target.style.<span class="hljs-built_in">height</span> = <span class="hljs-string">'100px'</span>;
-  <span class="hljs-comment">// });</span>
-});</code></pre>
+    <span class="hljs-comment">// requestAnimationFrame(() =&gt; {</span>
+    target.style.height = <span class="hljs-string">'100px'</span>;
+    <span class="hljs-comment">// });</span>
+  });
+}</code></pre>
 </dd>
 <dd class="example">
 
