@@ -107,21 +107,41 @@ code {
   font-family: inherit;
 }
 
-dfn {
+dfn,
+code {
   color: #005a9c;
   font-size: inherit;
   font-family: inherit;
-  font-style: normal;
-  font-weight: bold;
 }
 
 dfn::before,
-dfn::after {
-  content: "'";
+code::before {
+  content: "‘";
+}
+dfn::after,
+code::after {
+  content: "’";
+}
+
+pre code {
+  color: inherit;
+}
+pre code::before,
+pre code::after {
+  display: none;
+}
+
+dfn {
+  font-weight: bold;
+  font-style: italic;
 }
 
 dt {
   font-weight: bold;
+}
+
+dt + dd {
+  margin-top: 3px;
 }
 
 dd + dt {
@@ -197,4 +217,25 @@ main {
   width: 156px;
   text-align: left;
   font-weight: normal;
+}
+
+.example {
+    counter-increment: example;
+    border-left: 8px solid #e0cb52;
+    background: #fcfaee;
+    counter-increment: example;
+    padding: .5em;
+    margin-top: 10px;
+}
+.example::before {
+    text-transform: uppercase;
+    color: #827017;
+    min-width: 7.5em;
+    display: block;
+    content: "Example " counter(example);
+}
+.example pre {
+  background: #fcfadc;
+  padding: 10px;
+  margin: 10px 0;
 }
