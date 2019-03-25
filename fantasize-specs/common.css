@@ -45,15 +45,7 @@ h3 code::after {
 }
 
 h1 {
-  margin: 30px 0 4px;
-}
-
-h1 + h2 {
-  margin-top: 0;
-}
-
-h2 {
-  margin: 70px 0 18px;
+  margin: 30px 0 8px;
 }
 
 h2,
@@ -62,6 +54,15 @@ h4,
 h5,
 h6 {
   position: relative;
+  margin: 70px 0 20px;
+}
+
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6 {
+  margin-top: 0;
 }
 
 h2 strong,
@@ -180,6 +181,10 @@ a {
   text-decoration: underline;
 }
 
+ul {
+  margin: 20px 0;
+}
+
 li {
   margin: 4px 0;
 }
@@ -191,7 +196,7 @@ main {
 }
 
 #toc {
-  margin: 0 0 80px;
+  margin: 30px 0 80px;
 }
 #toc ul {
   font-weight: bold;
