@@ -1,6 +1,6 @@
-# Fantasize specs
+# Fantasized specs
 
-https://hiroyau.ga/fantasize-specs/
+https://hiroyau.ga/fantasized-specs/
 
 These are the spec proposals that I came up with in my daily work.
 
