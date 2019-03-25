@@ -1,6 +1,6 @@
 # CSS Observer Module level 1
 
-## Personal Delusion Draft, ${LastUpdate}
+## Fantasize Draft, ${LastUpdate}
 
 <dl>
 <dt>This version:</dt>
@@ -103,16 +103,18 @@ This module realizes such an expression only with CSS, without processing of sta
 <dd class="example">
 
 ```javascript
-target.style.display = 'none';
-target.style.height = 0;
+function sample () {
+  target.style.display = 'none';
+  target.style.height = 0;
 
-button.addEventListener('click', function () {
-  target.style.display = 'block';
+  button.addEventListener('click', function () {
+    target.style.display = 'block';
 
-  // requestAnimationFrame(() => {
-  target.style.height = '100px';
-  // });
-});
+    // requestAnimationFrame(() => {
+    target.style.height = '100px';
+    // });
+  });
+}
 ```
 
 </dd>
