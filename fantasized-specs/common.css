@@ -125,7 +125,7 @@ code {
 code {
   font-family: inherit;
   font-size: inherit;
-  color: #d93b00;
+  color: #c73500;
 }
 
 code.element::before {
@@ -305,14 +305,14 @@ main {
 }
 .element:not(code) .interface code {
   font-size: 1.4rem;
-  color: #708090;
+  color: #596d80;
 }
 .element:not(code) .interface pre {
   font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
 }
 .element:not(code) .interface .name {
   font-weight: bold;
-  color: #d93b00;
+  color: #c73500;
 }
 .element:not(code) .interface .keyword {
   color: #905;
@@ -338,13 +338,13 @@ main {
 }
 
 .language-html .hljs-tag {
-  color: #690;
+  color: #537f0c;
 }
 .language-html .hljs-attr {
   color: #07a;
 }
 .language-html .hljs-string {
-  color: #a67f59;
+  color: #976930;
 }
 .language-css,
 .language-html .css {
@@ -356,7 +356,7 @@ main {
 .language-html .css .hljs-selector-tag,
 .language-css .hljs-selector-pseudo,
 .language-html .css .hljs-selector-pseudo {
-  color: #690;
+  color: #537f0c;
 }
 .language-css .hljs-attribute,
 .language-html .css .hljs-attribute {
@@ -368,11 +368,11 @@ main {
 }
 .language-css .hljs-built_in,
 .language-html .css .hljs-built_in {
-  color: #a67f59;
+  color: #976930;
 }
 .language-javascript .hljs-string,
 .language-html .javascript .hljs-string {
-  color: #a67f59;
+  color: #976930;
 }
 .language-javascript .hljs-number,
 .language-html .javascript .hljs-number {
@@ -384,8 +384,8 @@ main {
 }
 .language-javascript .hljs-keyword,
 .language-html .javascript .hljs-keyword {
-  color: #999;
+  color: #727272;
 }
 .hljs-comment {
-  color: #708090;
+  color: #596d80;
 }
