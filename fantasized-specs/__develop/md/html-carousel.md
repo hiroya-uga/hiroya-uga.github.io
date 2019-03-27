@@ -45,7 +45,7 @@ By standardizing the concept and interface of carousel widget as an element, we 
 <dd>Where <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a> is expected.</dd>
 
 <dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd>Zero or more <code class="element">slide</code> elements</a>, then, <a href="https://www.w3.org/TR/html52/dom.html#transparent">transparent</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a> other than <a href="https://www.w3.org/TR/html5/dom.html#text-content">text</a>.</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
 <dd>Neither tag is omissible</dd>
@@ -131,13 +131,11 @@ The following example shows the carousel element being used to show 3 slide of 5
 </style>
 
 <carousel id="carousel">
-<slide>First slide</slide>
-<slide>Second slide</slide>
-<slide>Third slide</slide>
-<slide>Forth slide</slide>
-<slide>Fifth slide</slide>
-
-<p>This browser does not seem to support carousel elements.</p>
+<div>First slide</div>
+<div>Second slide</div>
+<div>Third slide</div>
+<div>Forth slide</div>
+<div>Fifth slide</div>
 </carousel>
 ```
 
@@ -160,46 +158,14 @@ This carousel has a controller displayed, it slide to the right, and the initial
 </style>
 
 <carousel id="carousel" controls current="2" autoplay direction="right" loop>
-<slide>First slide</slide>
-<slide>Second slide</slide>
-<slide>Third slide</slide>
-<slide>Forth slide</slide>
-<slide>Fifth slide</slide>
-
-<p>This browser does not seem to support carousel elements.</p>
+<div>First slide</div>
+<div>Second slide</div>
+<div>Third slide</div>
+<div>Forth slide</div>
+<div>Fifth slide</div>
 </carousel>
 ```
 
-</div>
-
-#### 3.1.2 The `slide` element
-
-<div class="element">
-<dl>
-<dt><a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:</dt>
-<dd>None.</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#contexts-in-which-this-element-can-be-used">Contexts in which this element can be used</a>:</dt>
-<dd>Inside <code class="element">carousel</code> elements.</dd>
-
-<dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
-<dd>Neither tag is omissible</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
-<dd>None</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-state-and-property-attributes">Allowed ARIA state and property attributes</a>:</dt>
-<dd>None</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:</dt>
-<dd>Uses <a href="https://www.w3.org/TR/html52/dom.html#htmlelement"><code> HTMLElement</code></a>.</dd>
-</dl>
 </div>
 
 
