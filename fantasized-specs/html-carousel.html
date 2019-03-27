@@ -18,7 +18,7 @@ gtag('config', 'UA-60524027-4');
 </head>
 <body>
 <main>
-<p><a href="../">../</a></p><h1>Carousels</h1><h2>Fantasized Draft, 27 March 2019</h2><dl>
+<p><a href="../">../</a></p><h1>Carousels</h1><h2>Fantasized Draft, 28 March 2019</h2><dl>
 <dt>This version:</dt>
 <dd><a href="https://hiroyau.ga/fantasized-specs/html-carousel.html">https://hiroyau.ga/fantasized-specs/html-carousel.html</a></dd>
 <dt>Editors:</dt>
@@ -35,15 +35,19 @@ gtag('config', 'UA-60524027-4');
 <li><a href="#3-api"><span>3.</span><span> API</a><ul>
 <li><a href="#3-1-related-elements"><span>3.1.</span><span> Related elements</a><ul>
 <li><a href="#3-1-1-the-%3Ccode%3Ecarousel%3C/code%3E-element"><span>3.1.1.</span><span> The <code>carousel</code> element</a></li>
-<li><a href="#3-1-2-the-%3Ccode%3Eslide%3C/code%3E-element"><span>3.1.2</span><span> The <code>slide</code> element</a></li>
+<li><a href="#3-1-2-the-::slide-pseudo-element"><span>3.1.2.</span><span> The ::slide pseudo-element</a></li>
 </ul>
 </li>
-<li><a href="#3-2-interfaces"><span>3.2.</span><span> Interfaces</a><ul>
+<li><a href="#3-2-user-interfaces"><span>3.2.</span><span> User interfaces</a><ul>
 <li><a href="#3-2-1-swipe"><span>3.2.1</span><span> Swipe</a></li>
-<li><a href="#3-2-2-keyboard"><span>3.2.2</span><span> Keyboard</a></li>
+<li><a href="#3-2-2-pager-buttons"><span>3.2.2</span><span> Pager buttons</a></li>
+<li><a href="#3-2-3-dots-indicator"><span>3.2.3</span><span> Dots indicator</a></li>
+<li><a href="#3-2-4-toggle-button-(autoplay-/-pause)"><span>3.2.4</span><span> Toggle button (autoplay / pause)</a></li>
+<li><a href="#3-2-5-keyboard"><span>3.2.5</span><span> Keyboard</a></li>
 </ul>
 </li>
 <li><a href="#3-3-css-selectors"><span>3.3.</span><span> CSS Selectors</a></li>
+<li><a href="#3-4-events"><span>3.4.</span><span> Events</a></li>
 </ul>
 </li>
 </ul>
@@ -62,18 +66,19 @@ gtag('config', 'UA-60524027-4');
 <dd>Where <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a> is expected.</dd>
 
 <dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd>Zero or more <code class="element">slide</code> elements</a>, then, <a href="https://www.w3.org/TR/html52/dom.html#transparent">transparent</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a> other than <a href="https://www.w3.org/TR/html5/dom.html#text-content">text</a> and <a href="https://www.w3.org/TR/html52/syntax.html#void-elements">void elements</a>.</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
 <dd>Neither tag is omissible</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
 <dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
-<dd><code>current</code> - Number the current index.</dd>
 <dd><code>autoplay</code> - Hint that the carousel can be slide automatically when the page is loaded.</dd>
-<dd><code>loop</code> - Whether to loop the slides.</dd>
 <dd><code>controls</code> - Show user agent controls.</dd>
+<dd><code>current</code> - Number the current index.</dd>
 <dd><code>direction</code> - Direction the slider.</dd>
+<dd><code>loop</code> - Whether to loop the slides.</dd>
+<dd><code>type</code> - Slide animation type of carousel.</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
 <dd><code>carousel</code></dd>
@@ -89,7 +94,8 @@ gtag('config', 'UA-60524027-4');
   <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> controls;
   <span class="keyword">attribute</span> <a href=""><span class="keyword">unsigned long</span></a> current;
   <span class="keyword">attribute</span> <a href=""><span class="keyword">DOMString</span></a> direction;
-  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> loop;<br>
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> loop;
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">DOMString</span></a> type;<br>
   <span class="keyword">void</span> play();
   <span class="keyword">void</span> pause();
 };</code></pre>
@@ -109,7 +115,7 @@ gtag('config', 'UA-60524027-4');
 <p>If the user agent exposes a user interface to the user by displaying controls over the media element, then the user agent should suppress any user interaction events while the user agent is interacting with this interface. (For example, if the user clicks on a carousel&#39;s pager control, <code>mousedown</code> events and so forth would not simultaneously be fired at elements on the page.)</p>
 <p>Where possible (specifically, for toggling slide, and for toggling autoplay), user interface features exposed by the user agent must be implemented in terms of the DOM API described above, so that, e.g., all the same events fire.</p>
 <p>The <code>controls</code> IDL attribute must reflect the content attribute of the same name.</p>
-<p>The <dfn><code>direction</code></dfn> attribute controls the slide direction of the <code class="element">carousel</code>. It is an <a href="https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes">enumerated attribute</a> with the following keywords .</p>
+<p>The <dfn><code>direction</code></dfn> attribute controls the swipe direction of the <code class="element">carousel</code>. It is an <a href="https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes">enumerated attribute</a> with the following keywords .</p>
 <ul>
 <li><code>left</code> - Slide left (right is next content)</li>
 <li><code>right</code> - Slide right (left is next content)</li>
@@ -117,85 +123,118 @@ gtag('config', 'UA-60524027-4');
 <li><code>down</code> - Slide down (top is next content)</li>
 </ul>
 <p>The missing value default is the <code>left</code> state.</p>
+<p>The <dfn><code>type</code></dfn> attribute switches the animation type when the carousel slides. It is an <a href="https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes">enumerated attribute</a> with the following keywords .</p>
+<ul>
+<li><code>slide</code> - Slide animation only</li>
+<li><code>fade</code> - Fade in and fade out (without slide animation)</li>
+<li><code>fadeslide</code> - Fade in and fade out while slide animation</li>
+<li><code>crossdissolve</code> - Cross dissolve<!-- - `coververtical` - Slide up animation -->
+<!-- - `fliphorizontal` - Turn over in the horizontal direction animation -->
+
+</li>
+</ul>
+<p>The missing value default is the <code>slide</code> state.</p>
+<p>Also, the <code>title</code> attribute has special semantics on this element.</p>
 <div class="note">
 
 <p>If possible, the <code class="element">carousel</code> needs a label (accessible name) by <code>title</code> attribute or <code>aria-label</code> attribute etc. If omitted, assistive technology is expected to simply speak this element as a &quot;carousel&quot;.</p>
 </div>
 
+<p>All child elements of the <code>carousel</code> element are interpreted as <dfn><a href="#3-1-2-the-::slide-pseudo-element"><code>slides</code></a></dfn>. Browsers that do not support this element will simply looks like lined up the <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow contents</a> of the child elements.</p>
 <div class="example">
 
 <p>The following example shows the carousel element being used to show 3 slide of 5 slide at once.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
-<span class="hljs-selector-id">#carousel</span> {
-  <span class="hljs-attribute">slide-width</span>: <span class="hljs-number">33%</span>;
+<span class="hljs-selector-id">#carousel</span><span class="hljs-selector-pseudo">::slide</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">33%</span>;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This browser does not seem to support carousel elements.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
 </div>
 
 <div class="example">
 
 <p>The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once. Adjustment of the number of display uses CSS.</p>
-<p>This carousel has a controller displayed, it slide to the right, and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.</p>
+<p>This carousel has a controller displayed, it slide to the right, animation type is fadeslide and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
-<span class="hljs-selector-id">#carousel</span> {
-  <span class="hljs-attribute">slide-width</span>: <span class="hljs-built_in">minmax</span>(200px, 33%);
-  <span class="hljs-attribute">slide-delay</span>: <span class="hljs-number">3s</span>;
-  <span class="hljs-attribute">slide-duration</span>: .<span class="hljs-number">2s</span>;
-  <span class="hljs-attribute">slide-timing-function</span>: ease-out;
+<span class="hljs-selector-id">#carousel</span><span class="hljs-selector-pseudo">::slide</span> {
+  <span class="hljs-attribute">min-width</span>: <span class="hljs-number">200px</span>;
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">33%</span>;
+  <span class="hljs-attribute">transition-delay</span>: <span class="hljs-number">3s</span>;
+  <span class="hljs-attribute">transition-duration</span>: .<span class="hljs-number">2s</span>;
+  <span class="hljs-attribute">transition-timing-function</span>: ease-out;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">current</span>=<span class="hljs-string">"2"</span> <span class="hljs-attr">autoplay</span> <span class="hljs-attr">direction</span>=<span class="hljs-string">"right"</span> <span class="hljs-attr">loop</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This browser does not seem to support carousel elements.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"fadeslide"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">current</span>=<span class="hljs-string">"2"</span> <span class="hljs-attr">autoplay</span> <span class="hljs-attr">direction</span>=<span class="hljs-string">"right"</span> <span class="hljs-attr">loop</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
 </div>
 
-<h4 id="3-1-2-the-<code>slide</code>-element"><strong>3.1.2 The <code>slide</code> element</strong><a href="#3-1-2-the-<code>slide</code>-element" class="anchor"><span>Anchor Link</span></a></h4><div class="element">
-<dl>
-<dt><a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:</dt>
-<dd>None.</dd>
+<h4 id="3-1-2-the-::slide-pseudo-element"><strong>3.1.2. The ::slide pseudo-element</strong><a href="#3-1-2-the-::slide-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><p>The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element&#39;s child elements.</p>
+<div class="example">
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#contexts-in-which-this-element-can-be-used">Contexts in which this element can be used</a>:</dt>
-<dd>Inside <code class="element">carousel</code> elements.</dd>
+<p>This pseudo-element selector can be used to style carousel slides.</p>
+<p>For example, the <code>width</code> property of the pseudo-element represents the width of one slide of the carousel. </p>
+<p>If the width is 33.3333%, the <code class="element">carousel</code> element is expected to be drawn in 3 columns. If it is 70%, it is expected that one slide will be drawn in the center and 15% of the previous and next slides of the same width will be drawn on the left and right.</p>
+<p>In addition, if the <code class="element">carousel</code> element has not <code>loop</code> attribute, it is expected that the previous slide when the slide is not advancing and the next slide when the slide is advanced to end are not drawn.</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">carousel</span><span class="hljs-selector-pseudo">::slide</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">33%</span>;
+}</code></pre>
+<p>In addition, the slide animation of the <code class="element">carousel</code> element uses <a href="https://www.w3.org/TR/css-transitions/">CSS Transitions</a>. The author is able to adjust slide animation by overriding the relevant properties.</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">carousel</span><span class="hljs-selector-pseudo">::slide</span> {
+  <span class="hljs-attribute">transition-delay</span>: <span class="hljs-number">3s</span>;
+  <span class="hljs-attribute">transition-duration</span>: .<span class="hljs-number">2s</span>;
+  <span class="hljs-attribute">transition-timing-function</span>: ease-out;
+}</code></pre>
+<p>However, if you override the <code>transition-property</code> value specified by the user agent by default, the carousel will not animate when sliding. Conversely, if you want to disable animation for any reason, you can do so by specifying <code>transition-property</code> as <code>none</code>.</p>
+</div>
 
-<dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.</dd>
+<div class="example">
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
-<dd>Neither tag is omissible</dd>
+<p>In browsers that support the <code class="element">carousel</code> elements, selectors such as <code class="selector">carousel > div</code> and <code class="selector"> carousel > * </code> do not target slides in the <code class="element">carousel</code> elements.</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">carousel</span><span class="hljs-selector-pseudo">::slide</span> { <span class="hljs-comment">/* for carousel supported browsers */</span>
+  <span class="hljs-attribute">min-width</span>: <span class="hljs-number">200px</span>;
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">33%</span>;
+  <span class="hljs-attribute">transition-delay</span>: <span class="hljs-number">3s</span>;
+  <span class="hljs-attribute">transition-duration</span>: .<span class="hljs-number">2s</span>;
+  <span class="hljs-attribute">transition-timing-function</span>: ease-out;
+}
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
+<span class="hljs-selector-tag">carousel</span> &gt; * { <span class="hljs-comment">/* for carousel not supported browsers */</span>
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">30px</span>;
+}</code></pre>
+<p>Note that CSS selectors for elements in slides do not need to use the <code class="selector">::slide</code> pseudo-element. It is more constructive not to use pseudo-element selectors.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-tag">carousel</span> <span class="hljs-selector-tag">div</span> &gt; <span class="hljs-selector-tag">p</span> {
+  <span class="hljs-comment">/* ... */</span>
+}
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
-<dd>None</dd>
+<span class="hljs-selector-tag">carousel</span><span class="hljs-selector-pseudo">::slide</span> &gt; <span class="hljs-selector-tag">p</span> { <span class="hljs-comment">/* The targets of this rule set are same previous one. */</span>
+  <span class="hljs-comment">/* ... */</span>
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-state-and-property-attributes">Allowed ARIA state and property attributes</a>:</dt>
-<dd>None</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:</dt>
-<dd>Uses <a href="https://www.w3.org/TR/html52/dom.html#htmlelement"><code> HTMLElement</code></a>.</dd>
-</dl>
+<span class="hljs-tag">&lt;<span class="hljs-name">carousel</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
 </div>
 
 
-<h3 id="3-2-interfaces"><strong>3.2. Interfaces</strong><a href="#3-2-interfaces" class="anchor"><span>Anchor Link</span></a></h3><h4 id="3-2-1-swipe"><strong>3.2.1 Swipe</strong><a href="#3-2-1-swipe" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-2-keyboard"><strong>3.2.2 Keyboard</strong><a href="#3-2-2-keyboard" class="anchor"><span>Anchor Link</span></a></h4><h3 id="3-3-css-selectors"><strong>3.3. CSS Selectors</strong><a href="#3-3-css-selectors" class="anchor"><span>Anchor Link</span></a></h3></main>
+<h3 id="3-2-user-interfaces"><strong>3.2. User interfaces</strong><a href="#3-2-user-interfaces" class="anchor"><span>Anchor Link</span></a></h3><h4 id="3-2-1-swipe"><strong>3.2.1 Swipe</strong><a href="#3-2-1-swipe" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-2-pager-buttons"><strong>3.2.2 Pager buttons</strong><a href="#3-2-2-pager-buttons" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-3-dots-indicator"><strong>3.2.3 Dots indicator</strong><a href="#3-2-3-dots-indicator" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-4-toggle-button-(autoplay-/-pause)"><strong>3.2.4 Toggle button (autoplay / pause)</strong><a href="#3-2-4-toggle-button-(autoplay-/-pause)" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-5-keyboard"><strong>3.2.5 Keyboard</strong><a href="#3-2-5-keyboard" class="anchor"><span>Anchor Link</span></a></h4><h3 id="3-3-css-selectors"><strong>3.3. CSS Selectors</strong><a href="#3-3-css-selectors" class="anchor"><span>Anchor Link</span></a></h3><h3 id="3-4-events"><strong>3.4. Events</strong><a href="#3-4-events" class="anchor"><span>Anchor Link</span></a></h3></main>
 
 <footer>
 </footer>

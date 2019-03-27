@@ -45,18 +45,19 @@ By standardizing the concept and interface of carousel widget as an element, we 
 <dd>Where <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a> is expected.</dd>
 
 <dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd>Zero or more <code class="element">slide</code> elements</a>, then, <a href="https://www.w3.org/TR/html52/dom.html#transparent">transparent</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a> other than <a href="https://www.w3.org/TR/html5/dom.html#text-content">text</a> and <a href="https://www.w3.org/TR/html52/syntax.html#void-elements">void elements</a>.</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
 <dd>Neither tag is omissible</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
 <dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
-<dd><code>current</code> - Number the current index.</dd>
 <dd><code>autoplay</code> - Hint that the carousel can be slide automatically when the page is loaded.</dd>
-<dd><code>loop</code> - Whether to loop the slides.</dd>
 <dd><code>controls</code> - Show user agent controls.</dd>
+<dd><code>current</code> - Number the current index.</dd>
 <dd><code>direction</code> - Direction the slider.</dd>
+<dd><code>loop</code> - Whether to loop the slides.</dd>
+<dd><code>type</code> - Slide animation type of carousel.</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
 <dd><code>carousel</code></dd>
@@ -72,7 +73,8 @@ By standardizing the concept and interface of carousel widget as an element, we 
   <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> controls;
   <span class="keyword">attribute</span> <a href=""><span class="keyword">unsigned long</span></a> current;
   <span class="keyword">attribute</span> <a href=""><span class="keyword">DOMString</span></a> direction;
-  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> loop;<br>
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">boolean</span></a> loop;
+  <span class="keyword">attribute</span> <a href=""><span class="keyword">DOMString</span></a> type;<br>
   <span class="keyword">void</span> play();
   <span class="keyword">void</span> pause();
 };</code></pre>
@@ -104,7 +106,7 @@ Where possible (specifically, for toggling slide, and for toggling autoplay), us
 
 The `controls` IDL attribute must reflect the content attribute of the same name.
 
-The <dfn>`direction`</dfn> attribute controls the slide direction of the <code class="element">carousel</code>. It is an [enumerated attribute](https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes) with the following keywords .
+The <dfn>`direction`</dfn> attribute controls the swipe direction of the <code class="element">carousel</code>. It is an [enumerated attribute](https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes) with the following keywords .
 
 - `left` - Slide left (right is next content)
 - `right` - Slide right (left is next content)
@@ -113,11 +115,26 @@ The <dfn>`direction`</dfn> attribute controls the slide direction of the <code c
 
 The missing value default is the `left` state.
 
+The <dfn>`type`</dfn> attribute switches the animation type when the carousel slides. It is an [enumerated attribute](https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes) with the following keywords .
+
+- `slide` - Slide animation only
+- `fade` - Fade in and fade out (without slide animation)
+- `fadeslide` - Fade in and fade out while slide animation
+- `crossdissolve` - Cross dissolve
+<!-- - `coververtical` - Slide up animation -->
+<!-- - `fliphorizontal` - Turn over in the horizontal direction animation -->
+
+The missing value default is the `slide` state.
+
+Also, the `title` attribute has special semantics on this element.
+
 <div class="note">
 
 If possible, the <code class="element">carousel</code> needs a label (accessible name) by `title` attribute or `aria-label` attribute etc. If omitted, assistive technology is expected to simply speak this element as a "carousel".
 
 </div>
+
+All child elements of the `carousel` element are interpreted as <dfn>[`slides`](#3-1-2-the-::slide-pseudo-element)</dfn>. Browsers that do not support this element will simply looks like lined up the [flow contents](https://www.w3.org/TR/html52/dom.html#flow-content-2) of the child elements.
 
 <div class="example">
 
@@ -125,19 +142,17 @@ The following example shows the carousel element being used to show 3 slide of 5
 
 ```html
 <style>
-#carousel {
-  slide-width: 33%;
+#carousel::slide {
+  width: 33%;
 }
 </style>
 
 <carousel id="carousel">
-<slide>First slide</slide>
-<slide>Second slide</slide>
-<slide>Third slide</slide>
-<slide>Forth slide</slide>
-<slide>Fifth slide</slide>
-
-<p>This browser does not seem to support carousel elements.</p>
+<div>First slide</div>
+<div>Second slide</div>
+<div>Third slide</div>
+<div>Forth slide</div>
+<div>Fifth slide</div>
 </carousel>
 ```
 
@@ -147,69 +162,123 @@ The following example shows the carousel element being used to show 3 slide of 5
 
 The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once. Adjustment of the number of display uses CSS.
 
-This carousel has a controller displayed, it slide to the right, and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.
+This carousel has a controller displayed, it slide to the right, animation type is fadeslide and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.
 
 ```html
 <style>
-#carousel {
-  slide-width: minmax(200px, 33%);
-  slide-delay: 3s;
-  slide-duration: .2s;
-  slide-timing-function: ease-out;
+#carousel::slide {
+  min-width: 200px;
+  max-width: 33%;
+  transition-delay: 3s;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
 }
 </style>
 
-<carousel id="carousel" controls current="2" autoplay direction="right" loop>
-<slide>First slide</slide>
-<slide>Second slide</slide>
-<slide>Third slide</slide>
-<slide>Forth slide</slide>
-<slide>Fifth slide</slide>
-
-<p>This browser does not seem to support carousel elements.</p>
+<carousel type="fadeslide" id="carousel" controls current="2" autoplay direction="right" loop>
+<div>First slide</div>
+<div>Second slide</div>
+<div>Third slide</div>
+<div>Forth slide</div>
+<div>Fifth slide</div>
 </carousel>
 ```
 
 </div>
 
-#### 3.1.2 The `slide` element
+#### 3.1.2. The ::slide pseudo-element
 
-<div class="element">
-<dl>
-<dt><a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:</dt>
-<dd>None.</dd>
+The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element's child elements.
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#contexts-in-which-this-element-can-be-used">Contexts in which this element can be used</a>:</dt>
-<dd>Inside <code class="element">carousel</code> elements.</dd>
+<div class="example">
 
-<dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.</dd>
+This pseudo-element selector can be used to style carousel slides.
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
-<dd>Neither tag is omissible</dd>
+For example, the `width` property of the pseudo-element represents the width of one slide of the carousel. 
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
+If the width is 33.3333%, the <code class="element">carousel</code> element is expected to be drawn in 3 columns. If it is 70%, it is expected that one slide will be drawn in the center and 15% of the previous and next slides of the same width will be drawn on the left and right.
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
-<dd>None</dd>
+In addition, if the <code class="element">carousel</code> element has not `loop` attribute, it is expected that the previous slide when the slide is not advancing and the next slide when the slide is advanced to end are not drawn.
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-state-and-property-attributes">Allowed ARIA state and property attributes</a>:</dt>
-<dd>None</dd>
+```css
+carousel::slide {
+  width: 33%;
+}
+```
 
-<dt><a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:</dt>
-<dd>Uses <a href="https://www.w3.org/TR/html52/dom.html#htmlelement"><code> HTMLElement</code></a>.</dd>
-</dl>
+In addition, the slide animation of the <code class="element">carousel</code> element uses [CSS Transitions](https://www.w3.org/TR/css-transitions/). The author is able to adjust slide animation by overriding the relevant properties.
+
+```css
+carousel::slide {
+  transition-delay: 3s;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+}
+```
+
+However, if you override the `transition-property` value specified by the user agent by default, the carousel will not animate when sliding. Conversely, if you want to disable animation for any reason, you can do so by specifying `transition-property` as `none`.
+
+</div>
+
+<div class="example">
+
+In browsers that support the <code class="element">carousel</code> elements, selectors such as <code class="selector">carousel > div</code> and <code class="selector"> carousel > * </code> do not target slides in the <code class="element">carousel</code> elements.
+
+```css
+carousel::slide { /* for carousel supported browsers */
+  min-width: 200px;
+  max-width: 33%;
+  transition-delay: 3s;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+}
+
+carousel > * { /* for carousel not supported browsers */
+  margin: 0 0 30px;
+}
+```
+
+Note that CSS selectors for elements in slides do not need to use the <code class="selector">::slide</code> pseudo-element. It is more constructive not to use pseudo-element selectors.
+
+```html
+<style>
+carousel div > p {
+  /* ... */
+}
+
+carousel::slide > p { /* The targets of this rule set are same previous one. */
+  /* ... */
+}
+</style>
+
+<carousel>
+<div><p>lorem ipsum...</p></div>
+<div><p>lorem ipsum...</p></div>
+<div><p>lorem ipsum...</p></div>
+</carousel>
+```
 </div>
 
 
-### 3.2. Interfaces
+### 3.2. User interfaces
 
 
 #### 3.2.1 Swipe
 
 
-#### 3.2.2 Keyboard
+#### 3.2.2 Pager buttons
+
+
+#### 3.2.3 Dots indicator
+
+
+#### 3.2.4 Toggle button (autoplay / pause)
+
+
+#### 3.2.5 Keyboard
 
 
 ### 3.3. CSS Selectors
+
+
+### 3.4. Events
