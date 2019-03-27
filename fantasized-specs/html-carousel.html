@@ -18,7 +18,7 @@ gtag('config', 'UA-60524027-4');
 </head>
 <body>
 <main>
-<p><a href="../">../</a></p><h1>Carousels</h1><h2>Fantasized Draft, 27 March 2019</h2><dl>
+<p><a href="../">../</a></p><h1>Carousels</h1><h2>Fantasized Draft, 28 March 2019</h2><dl>
 <dt>This version:</dt>
 <dd><a href="https://hiroyau.ga/fantasized-specs/html-carousel.html">https://hiroyau.ga/fantasized-specs/html-carousel.html</a></dd>
 <dt>Editors:</dt>
@@ -35,7 +35,6 @@ gtag('config', 'UA-60524027-4');
 <li><a href="#3-api"><span>3.</span><span> API</a><ul>
 <li><a href="#3-1-related-elements"><span>3.1.</span><span> Related elements</a><ul>
 <li><a href="#3-1-1-the-%3Ccode%3Ecarousel%3C/code%3E-element"><span>3.1.1.</span><span> The <code>carousel</code> element</a></li>
-<li><a href="#3-1-2-the-%3Ccode%3Eslide%3C/code%3E-element"><span>3.1.2</span><span> The <code>slide</code> element</a></li>
 </ul>
 </li>
 <li><a href="#3-2-interfaces"><span>3.2.</span><span> Interfaces</a><ul>
@@ -62,7 +61,7 @@ gtag('config', 'UA-60524027-4');
 <dd>Where <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a> is expected.</dd>
 
 <dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd>Zero or more <code class="element">slide</code> elements</a>, then, <a href="https://www.w3.org/TR/html52/dom.html#transparent">transparent</a>.</dd>
+<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a> other than <a href="https://www.w3.org/TR/html5/dom.html#text-content">text</a>.</dd>
 
 <dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
 <dd>Neither tag is omissible</dd>
@@ -132,13 +131,11 @@ gtag('config', 'UA-60524027-4');
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This browser does not seem to support carousel elements.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
 </div>
 
@@ -156,42 +153,12 @@ gtag('config', 'UA-60524027-4');
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">carousel</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"carousel"</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">current</span>=<span class="hljs-string">"2"</span> <span class="hljs-attr">autoplay</span> <span class="hljs-attr">direction</span>=<span class="hljs-string">"right"</span> <span class="hljs-attr">loop</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">slide</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">slide</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This browser does not seem to support carousel elements.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>First slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Second slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
-</div>
-
-<h4 id="3-1-2-the-<code>slide</code>-element"><strong>3.1.2 The <code>slide</code> element</strong><a href="#3-1-2-the-<code>slide</code>-element" class="anchor"><span>Anchor Link</span></a></h4><div class="element">
-<dl>
-<dt><a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:</dt>
-<dd>None.</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#contexts-in-which-this-element-can-be-used">Contexts in which this element can be used</a>:</dt>
-<dd>Inside <code class="element">carousel</code> elements.</dd>
-
-<dt><a data-link-type="dfn" href="https://www.w3.org/TR/html52/dom.html#content-model">Content model</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#tag-omission-in-text-html">Tag omission in text/html</a>:</dt>
-<dd>Neither tag is omissible</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#content-attributes">Content attributes</a>:</dt>
-<dd><a href="https://www.w3.org/TR/html52/dom.html#global-attributes-2">Global attributes</a></dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-role-attribute-values">Allowed ARIA role attribute values</a>:</dt>
-<dd>None</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#allowed-aria-state-and-property-attributes">Allowed ARIA state and property attributes</a>:</dt>
-<dd>None</dd>
-
-<dt><a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:</dt>
-<dd>Uses <a href="https://www.w3.org/TR/html52/dom.html#htmlelement"><code> HTMLElement</code></a>.</dd>
-</dl>
 </div>
 
 
