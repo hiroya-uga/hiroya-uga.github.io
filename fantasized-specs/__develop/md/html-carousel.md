@@ -186,7 +186,7 @@ This carousel has a controller displayed, it slide to the right, animation type 
 
 </div>
 
-#### 3.1.2. The ::slide pseudo-element
+#### 3.1.2. The `::slide` pseudo-element
 
 The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element's child elements.
 
@@ -257,6 +257,63 @@ carousel::slide > p { /* The targets of this rule set are same previous one. */
 <div><p>lorem ipsum...</p></div>
 </carousel>
 ```
+</div>
+
+
+#### 3.1.3. The `::pager-next` and `::pager-prev` pseudo-element
+
+
+#### 3.1.4. The `::dot` pseudo-element
+
+
+#### 3.1.5. The `::toggle` pseudo-element
+
+
+#### 3.1.5. The `::container`, `::slide-track`, and other wrapper pseudo-elements for layout;
+
+- `::container`
+- `::slide-track`
+- `::slide-wrapper`
+- `::dots-wrapper`
+- `::pagers-wrapper`
+
+<div class="example">
+
+Styling such as vertical and horizontal center is often attempted. There is a pseudo-element that plays the role of wrapper for that, but it can also be ignored by `display: contents;`.
+
+```html
+<carousel>
+  <carousel::container>
+    <carousel::slide-wrapper>
+      <carousel::slide-track>
+        <casousel::slide>
+          #contents
+        </casousel::slide>
+        <casousel::slide>
+          #contents
+        </casousel::slide>
+        <casousel::slide>
+          #contents
+        </casousel::slide>
+      </carousel::slide-track>
+
+      <carousel::pagers-wrapper />
+        <carousel::pager-next />
+        <carousel::pager-prev />
+      <carousel::pagers-wrapper />
+    </carousel::slide-wrapper>
+
+    <carousel::dots-wrapper>
+      <carousel::dot />
+      <carousel::dot />
+      <carousel::dot />
+
+      <carousel::toggle />
+    </carousel::dots-wrapper>
+  </carousel::container>
+</carousel>
+```
+
 </div>
 
 
