@@ -35,7 +35,11 @@ gtag('config', 'UA-60524027-4');
 <li><a href="#3-api"><span>3.</span><span> API</a><ul>
 <li><a href="#3-1-related-elements"><span>3.1.</span><span> Related elements</a><ul>
 <li><a href="#3-1-1-the-%3Ccode%3Ecarousel%3C/code%3E-element"><span>3.1.1.</span><span> The <code>carousel</code> element</a></li>
-<li><a href="#3-1-2-the-::slide-pseudo-element"><span>3.1.2.</span><span> The ::slide pseudo-element</a></li>
+<li><a href="#3-1-2-the-%3Ccode%3E::slide%3C/code%3E-pseudo-element"><span>3.1.2.</span><span> The <code>::slide</code> pseudo-element</a></li>
+<li><a href="#3-1-3-the-%3Ccode%3E::pager-next%3C/code%3E-and-%3Ccode%3E::pager-prev%3C/code%3E-pseudo-element"><span>3.1.3.</span><span> The <code>::pager-next</code> and <code>::pager-prev</code> pseudo-element</a></li>
+<li><a href="#3-1-4-the-%3Ccode%3E::dot%3C/code%3E-pseudo-element"><span>3.1.4.</span><span> The <code>::dot</code> pseudo-element</a></li>
+<li><a href="#3-1-5-the-%3Ccode%3E::toggle%3C/code%3E-pseudo-element"><span>3.1.5.</span><span> The <code>::toggle</code> pseudo-element</a></li>
+<li><a href="#3-1-5-the-%3Ccode%3E::container%3C/code%3E,-%3Ccode%3E::slide-track%3C/code%3E,-and-other-wrapper-pseudo-elements-for-layout;"><span>3.1.5.</span><span> The <code>::container</code>, <code>::slide-track</code>, and other wrapper pseudo-elements for layout;</a></li>
 </ul>
 </li>
 <li><a href="#3-2-user-interfaces"><span>3.2.</span><span> User interfaces</a><ul>
@@ -182,7 +186,7 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
 </div>
 
-<h4 id="3-1-2-the-::slide-pseudo-element"><strong>3.1.2. The ::slide pseudo-element</strong><a href="#3-1-2-the-::slide-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><p>The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element&#39;s child elements.</p>
+<h4 id="3-1-2-the-<code>::slide</code>-pseudo-element"><strong>3.1.2. The <code>::slide</code> pseudo-element</strong><a href="#3-1-2-the-<code>::slide</code>-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><p>The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element&#39;s child elements.</p>
 <div class="example">
 
 <p>This pseudo-element selector can be used to style carousel slides.</p>
@@ -231,6 +235,49 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
+</div>
+
+
+<h4 id="3-1-3-the-<code>::pager-next</code>-and-<code>::pager-prev</code>-pseudo-element"><strong>3.1.3. The <code>::pager-next</code> and <code>::pager-prev</code> pseudo-element</strong><a href="#3-1-3-the-<code>::pager-next</code>-and-<code>::pager-prev</code>-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-1-4-the-<code>::dot</code>-pseudo-element"><strong>3.1.4. The <code>::dot</code> pseudo-element</strong><a href="#3-1-4-the-<code>::dot</code>-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-1-5-the-<code>::toggle</code>-pseudo-element"><strong>3.1.5. The <code>::toggle</code> pseudo-element</strong><a href="#3-1-5-the-<code>::toggle</code>-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-1-5-the-<code>::container</code>,-<code>::slide-track</code>,-and-other-wrapper-pseudo-elements-for-layout;"><strong>3.1.5. The <code>::container</code>, <code>::slide-track</code>, and other wrapper pseudo-elements for layout;</strong><a href="#3-1-5-the-<code>::container</code>,-<code>::slide-track</code>,-and-other-wrapper-pseudo-elements-for-layout;" class="anchor"><span>Anchor Link</span></a></h4><ul>
+<li><code>::container</code></li>
+<li><code>::slide-track</code></li>
+<li><code>::slide-wrapper</code></li>
+<li><code>::dots-wrapper</code></li>
+<li><code>::pagers-wrapper</code></li>
+</ul>
+<div class="example">
+
+<p>Styling such as vertical and horizontal center is often attempted. There is a pseudo-element that plays the role of wrapper for that, but it can also be ignored by <code>display: contents;</code>.</p>
+<pre><code class="language-html"><span class="hljs-section">&lt;carousel&gt;</span>
+  <span class="hljs-section">&lt;carousel::container&gt;</span>
+    <span class="hljs-section">&lt;carousel::slide-wrapper&gt;</span>
+      <span class="hljs-section">&lt;carousel::slide-track&gt;</span>
+        <span class="hljs-section">&lt;casousel::slide&gt;</span>
+          <span class="hljs-comment">#contents</span>
+        <span class="hljs-section">&lt;/casousel::slide&gt;</span>
+        <span class="hljs-section">&lt;casousel::slide&gt;</span>
+          <span class="hljs-comment">#contents</span>
+        <span class="hljs-section">&lt;/casousel::slide&gt;</span>
+        <span class="hljs-section">&lt;casousel::slide&gt;</span>
+          <span class="hljs-comment">#contents</span>
+        <span class="hljs-section">&lt;/casousel::slide&gt;</span>
+      <span class="hljs-section">&lt;/carousel::slide-track&gt;</span>
+
+      <span class="hljs-section">&lt;carousel::pagers-wrapper /&gt;</span>
+        <span class="hljs-section">&lt;carousel::pager-next /&gt;</span>
+        <span class="hljs-section">&lt;carousel::pager-prev /&gt;</span>
+      <span class="hljs-section">&lt;carousel::pagers-wrapper /&gt;</span>
+    <span class="hljs-section">&lt;/carousel::slide-wrapper&gt;</span>
+
+    <span class="hljs-section">&lt;carousel::dots-wrapper&gt;</span>
+      <span class="hljs-section">&lt;carousel::dot /&gt;</span>
+      <span class="hljs-section">&lt;carousel::dot /&gt;</span>
+      <span class="hljs-section">&lt;carousel::dot /&gt;</span>
+
+      <span class="hljs-section">&lt;carousel::toggle /&gt;</span>
+    <span class="hljs-section">&lt;/carousel::dots-wrapper&gt;</span>
+  <span class="hljs-section">&lt;/carousel::container&gt;</span>
+<span class="hljs-section">&lt;/carousel&gt;</span></code></pre>
 </div>
 
 
