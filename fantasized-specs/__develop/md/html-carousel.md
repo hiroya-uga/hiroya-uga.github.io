@@ -113,11 +113,15 @@ The <dfn>`direction`</dfn> attribute controls the slide direction of the <code c
 
 The missing value default is the `left` state.
 
+Also, the `title` attribute has special semantics on this element.
+
 <div class="note">
 
 If possible, the <code class="element">carousel</code> needs a label (accessible name) by `title` attribute or `aria-label` attribute etc. If omitted, assistive technology is expected to simply speak this element as a "carousel".
 
 </div>
+
+All child elements of the `carousel` element are interpreted as <dfn>[`slides`](#3-1-2-the-::slide-pseudo-element)</dfn>. Browsers that do not support this element will simply looks like lined up the [flow contents](https://www.w3.org/TR/html52/dom.html#flow-content-2) of the child elements.
 
 <div class="example">
 
@@ -125,8 +129,8 @@ The following example shows the carousel element being used to show 3 slide of 5
 
 ```html
 <style>
-#carousel {
-  slide-width: 33%;
+#carousel::slide {
+  width: 33%;
 }
 </style>
 
@@ -149,11 +153,12 @@ This carousel has a controller displayed, it slide to the right, and the initial
 
 ```html
 <style>
-#carousel {
-  slide-width: minmax(200px, 33%);
-  slide-delay: 3s;
-  slide-duration: .2s;
-  slide-timing-function: ease-out;
+#carousel::slide {
+  min-width: 200px;
+  max-width: 33%;
+  transition-delay: 3s;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
 }
 </style>
 
@@ -167,6 +172,12 @@ This carousel has a controller displayed, it slide to the right, and the initial
 ```
 
 </div>
+
+#### 3.1.2. The ::slide pseudo-element
+
+The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element's child elements.
+
+
 
 
 ### 3.2. Interfaces

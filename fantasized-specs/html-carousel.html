@@ -35,6 +35,7 @@ gtag('config', 'UA-60524027-4');
 <li><a href="#3-api"><span>3.</span><span> API</a><ul>
 <li><a href="#3-1-related-elements"><span>3.1.</span><span> Related elements</a><ul>
 <li><a href="#3-1-1-the-%3Ccode%3Ecarousel%3C/code%3E-element"><span>3.1.1.</span><span> The <code>carousel</code> element</a></li>
+<li><a href="#3-1-2-the-::slide-pseudo-element"><span>3.1.2.</span><span> The ::slide pseudo-element</a></li>
 </ul>
 </li>
 <li><a href="#3-2-interfaces"><span>3.2.</span><span> Interfaces</a><ul>
@@ -116,17 +117,19 @@ gtag('config', 'UA-60524027-4');
 <li><code>down</code> - Slide down (top is next content)</li>
 </ul>
 <p>The missing value default is the <code>left</code> state.</p>
+<p>Also, the <code>title</code> attribute has special semantics on this element.</p>
 <div class="note">
 
 <p>If possible, the <code class="element">carousel</code> needs a label (accessible name) by <code>title</code> attribute or <code>aria-label</code> attribute etc. If omitted, assistive technology is expected to simply speak this element as a &quot;carousel&quot;.</p>
 </div>
 
+<p>All child elements of the <code>carousel</code> element are interpreted as <dfn><a href="#3-1-2-the-::slide-pseudo-element"><code>slides</code></a></dfn>. Browsers that do not support this element will simply looks like lined up the <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow contents</a> of the child elements.</p>
 <div class="example">
 
 <p>The following example shows the carousel element being used to show 3 slide of 5 slide at once.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
-<span class="hljs-selector-id">#carousel</span> {
-  <span class="hljs-attribute">slide-width</span>: <span class="hljs-number">33%</span>;
+<span class="hljs-selector-id">#carousel</span><span class="hljs-selector-pseudo">::slide</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">33%</span>;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
@@ -144,11 +147,12 @@ gtag('config', 'UA-60524027-4');
 <p>The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once. Adjustment of the number of display uses CSS.</p>
 <p>This carousel has a controller displayed, it slide to the right, and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
-<span class="hljs-selector-id">#carousel</span> {
-  <span class="hljs-attribute">slide-width</span>: <span class="hljs-built_in">minmax</span>(200px, 33%);
-  <span class="hljs-attribute">slide-delay</span>: <span class="hljs-number">3s</span>;
-  <span class="hljs-attribute">slide-duration</span>: .<span class="hljs-number">2s</span>;
-  <span class="hljs-attribute">slide-timing-function</span>: ease-out;
+<span class="hljs-selector-id">#carousel</span><span class="hljs-selector-pseudo">::slide</span> {
+  <span class="hljs-attribute">min-width</span>: <span class="hljs-number">200px</span>;
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">33%</span>;
+  <span class="hljs-attribute">transition-delay</span>: <span class="hljs-number">3s</span>;
+  <span class="hljs-attribute">transition-duration</span>: .<span class="hljs-number">2s</span>;
+  <span class="hljs-attribute">transition-timing-function</span>: ease-out;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
@@ -161,7 +165,7 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
 </div>
 
-
+<h4 id="3-1-2-the-::slide-pseudo-element"><strong>3.1.2. The ::slide pseudo-element</strong><a href="#3-1-2-the-::slide-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><p>The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element&#39;s child elements.</p>
 <h3 id="3-2-interfaces"><strong>3.2. Interfaces</strong><a href="#3-2-interfaces" class="anchor"><span>Anchor Link</span></a></h3><h4 id="3-2-1-swipe"><strong>3.2.1 Swipe</strong><a href="#3-2-1-swipe" class="anchor"><span>Anchor Link</span></a></h4><h4 id="3-2-2-keyboard"><strong>3.2.2 Keyboard</strong><a href="#3-2-2-keyboard" class="anchor"><span>Anchor Link</span></a></h4><h3 id="3-3-css-selectors"><strong>3.3. CSS Selectors</strong><a href="#3-3-css-selectors" class="anchor"><span>Anchor Link</span></a></h3></main>
 
 <footer>
