@@ -12,6 +12,7 @@ const writeFile = promisify(fs.writeFile);
 const base = path.join(__dirname, 'md');
 const templatePath = path.join(__dirname, 'template');
 const markedRenderer = new marked.Renderer();
+const cmd = process.argv[2];
 let toc = [];
 
 markedRenderer.heading = (text, level) => {
@@ -109,14 +110,11 @@ Promise.all([
             return html;
         })(marked(md)));
 
-        browser.reload();
-    };
 
-    browser.init({
-        server: {
-            baseDir: '../'
+        if (cmd !== 'build') {
+            browser.reload();
         }
-    });
+    };
 
     fs.readdir(base, function(err, files) {
         const readmePath = path.join(__dirname, '..', 'README.md');
@@ -125,8 +123,15 @@ Promise.all([
             throw err;
         }
 
+
         files.forEach((fileName) => {
             const filePath = path.join(base, fileName);
+
+            if (cmd === 'build') {
+                dest(filePath, fileName);
+
+                return;
+            }
 
             fs.watch(
                 filePath,
@@ -136,6 +141,12 @@ Promise.all([
             );
         });
 
+        if (cmd === 'build') {
+            dest(readmePath, 'index.html');
+
+            return;
+        }
+
         // readme
         fs.watch(
             readmePath,
@@ -144,4 +155,12 @@ Promise.all([
             }
         );
     });
+
+    if (cmd !== 'build') {
+        browser.init({
+            server: {
+                baseDir: '../'
+            }
+        });
+    }
 });
