@@ -171,9 +171,11 @@ dd + dd {
 dt > dfn {
   color: #005a9c;
 }
+code.selector::before,
 dt > dfn::before {
   content: "‘";
 }
+code.selector::after,
 dt > dfn::after {
   content: "’";
 }
@@ -266,13 +268,12 @@ main {
 .note {
   margin-top: 10px;
   padding: 0.5em 1em;
-  counter-increment: example;
-  counter-increment: example;
   border-left: 8px solid;
 }
 .example {
   background: #fcfaee;
   border-left-color: #e0cb52;
+  counter-increment: example;
 }
 .example::before {
   text-transform: uppercase;
