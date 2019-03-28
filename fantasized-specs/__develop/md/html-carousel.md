@@ -100,7 +100,7 @@ If the attribute is present, or if scripting is disabled for the media element, 
 
 Even when the attribute is absent, however, user agents may provide controls to use of the carousel (e.g., swipe, keyboard interface), but such features should not interfere with the page’s normal rendering.  The user agent may implement this simply by [exposing a user interface to the user](https://www.w3.org/TR/html52/semantics-embedded-content.html#exposing-a-user-interface) as if the `controls` attribute was present.
 
-If the user agent exposes a user interface to the user by displaying controls over the media element, then the user agent should suppress any user interaction events while the user agent is interacting with this interface. (For example, if the user clicks on a carousel's pager control, `mousedown` events and so forth would not simultaneously be fired at elements on the page.)
+If the user agent exposes a user interface to the user by displaying controls over the <code class="element">carousel</code> element, then the user agent should suppress any user interaction events while the user agent is interacting with this interface. (For example, if the user clicks on a carousel's pager control, `mousedown` events and so forth would not simultaneously be fired at elements on the page.)
 
 Where possible (specifically, for toggling slide, and for toggling autoplay), user interface features exposed by the user agent must be implemented in terms of the DOM API described above, so that, e.g., all the same events fire.
 
@@ -118,9 +118,10 @@ The missing value default is the `left` state.
 The <dfn>`type`</dfn> attribute switches the animation type when the carousel slides. It is an [enumerated attribute](https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes) with the following keywords .
 
 - `slide` - Slide animation only
-- `fade` - Fade in and fade out (without slide animation)
-- `fadeslide` - Fade in and fade out while slide animation
+- `fade` - Fade out then fade in (without slide animation)
+- `fadeslide` - Fade out then fade in with slide animation
 - `crossdissolve` - Cross dissolve
+- `crossdissolveslide` - Cross dissolve with slide animation
 <!-- - `coververtical` - Slide up animation -->
 <!-- - `fliphorizontal` - Turn over in the horizontal direction animation -->
 
@@ -134,20 +135,22 @@ If possible, the <code class="element">carousel</code> needs a label (accessible
 
 </div>
 
-All child elements of the `carousel` element are interpreted as <dfn>[`slides`](#3-1-2-the-::slide-pseudo-element)</dfn>. Browsers that do not support this element will simply looks like lined up the [flow contents](https://www.w3.org/TR/html52/dom.html#flow-content-2) of the child elements.
+All child elements of the `carousel` element are interpreted as <dfn>[`slides`](#3-1-2-the-%3Ccode%3E::slide%3C/code%3E-pseudo-element)</dfn>. Browsers that do not support this element will simply looks like lined up the [flow contents](https://www.w3.org/TR/html52/dom.html#flow-content-2) of the child elements.
 
 <div class="example">
 
-The following example shows the carousel element being used to show 3 slide of 5 slide at once.
+Adjustment of the number of display uses CSS.
+
+For example, the following example shows the carousel element being used to show 3 slide of 5 slide at once.
 
 ```html
 <style>
-#carousel::slide {
+carousel::slide {
   width: 33%;
 }
 </style>
 
-<carousel id="carousel">
+<carousel>
 <div>First slide</div>
 <div>Second slide</div>
 <div>Third slide</div>
@@ -160,22 +163,19 @@ The following example shows the carousel element being used to show 3 slide of 5
 
 <div class="example">
 
-The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once. Adjustment of the number of display uses CSS.
+The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once.
 
 This carousel has a controller displayed, it slide to the right, animation type is fadeslide and the initial current position is the second one. The carousel is autoplayed at the same time as the page is loaded, and the slide loops.
 
 ```html
 <style>
-#carousel::slide {
+carousel::slide {
   min-width: 200px;
   max-width: 33%;
-  transition-delay: 3s;
-  transition-duration: .2s;
-  transition-timing-function: ease-out;
 }
 </style>
 
-<carousel type="fadeslide" id="carousel" controls current="2" autoplay direction="right" loop>
+<carousel type="fadeslide" controls current="2" autoplay direction="right" loop>
 <div>First slide</div>
 <div>Second slide</div>
 <div>Third slide</div>
@@ -189,6 +189,10 @@ This carousel has a controller displayed, it slide to the right, animation type 
 #### 3.1.2. The `::slide` pseudo-element
 
 The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element's child elements.
+
+The semantics of each slide inherit the semantics of the underlying <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a>.
+
+However, user agents are not actually interpreted the <code class="selector">::slide</code> pseudo-element itself. The accessibility and semantics information that the <code class="element">carousel</code> element exposed to the accessibility API causes such interpretation.
 
 <div class="example">
 
@@ -210,7 +214,6 @@ In addition, the slide animation of the <code class="element">carousel</code> el
 
 ```css
 carousel::slide {
-  transition-delay: 3s;
   transition-duration: .2s;
   transition-timing-function: ease-out;
 }
@@ -228,7 +231,6 @@ In browsers that support the <code class="element">carousel</code> elements, sel
 carousel::slide { /* for carousel supported browsers */
   min-width: 200px;
   max-width: 33%;
-  transition-delay: 3s;
   transition-duration: .2s;
   transition-timing-function: ease-out;
 }
@@ -269,7 +271,7 @@ carousel::slide > p { /* The targets of this rule set are same previous one. */
 #### 3.1.5. The `::toggle` pseudo-element
 
 
-#### 3.1.5. The `::container`, `::slide-track`, and other wrapper pseudo-elements for layout;
+#### 3.1.5. The `::container`, `::slide-track`, and other wrapper pseudo-elements for layout
 
 - `::container`
 - `::slide-track`
@@ -279,7 +281,7 @@ carousel::slide > p { /* The targets of this rule set are same previous one. */
 
 <div class="example">
 
-Styling such as vertical and horizontal center is often attempted. There is a pseudo-element that plays the role of wrapper for that, but it can also be ignored by `display: contents;`.
+Styling such as vertical center and horizontal center is often attempted. There is a pseudo-element that plays the role of wrapper for that, but it can also be ignored by `display: contents;`.
 
 ```html
 <carousel>
@@ -339,3 +341,5 @@ Styling such as vertical and horizontal center is often attempted. There is a ps
 
 
 ### 3.4. Events
+
+## 4. polyfill
