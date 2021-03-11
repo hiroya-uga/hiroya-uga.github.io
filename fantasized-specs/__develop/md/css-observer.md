@@ -6,9 +6,9 @@
 <dt>This version:</dt>
 <dd><a href="https://hiroyau.ga/fantasized-specs/css-observer.html">https://hiroyau.ga/fantasized-specs/css-observer.html</a></dd>
 <dt>Editors:</dt>
-<dd><a href="https://github.com/hiroya-u">Hiroya-u</a></dd>
+<dd><a href="https://github.com/]">Hiroya Uga</a></dd>
 <dt>Issue Tracking:</dt>
-<dd><a href="https://github.com/hiroya-u/hiroya-u.github.io/blob/master/fantasized-specs/css-observer.html">GitHub Issues</a></dd>
+<dd><a href="https://github.com/hiroya-uga/hiroya-uga.github.io/blob/master/fantasized-specs/css-observer.html">GitHub Issues</a></dd>
 </dl>
 
 
