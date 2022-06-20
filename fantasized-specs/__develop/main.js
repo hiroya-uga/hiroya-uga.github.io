@@ -4,7 +4,7 @@ const {promisify} = require('util');
 const fs = require('fs');
 const path = require('path');
 const hljs = require('highlightjs');
-const marked = require('marked');
+const {marked} = require('marked');
 const {JSDOM} = require('jsdom');
 const browser = require('browser-sync').create();
 const readFile = promisify(fs.readFile);
@@ -33,13 +33,9 @@ markedRenderer.heading = (text, level) => {
 };
 
 marked.setOptions({
-    highlight: (code, lang, callback) => {
-        return hljs.highlightAuto(code).value;
-    },
+    highlight: (code, lang, callback) => hljs.highlight(lang, code).value,
     renderer: markedRenderer,
     gfm: true,
-    tables: true,
-    extra: true,
     breaks: false,
     pedantic: false,
     sanitize: false,
@@ -104,11 +100,11 @@ Promise.all([
 
 
             if (h1) {
-                html = html.replace('${title}', h1.textContent.trim());
+                html = html.replace('${title}', h1.textContent?.trim() || '');
             }
 
             return html;
-        })(marked(md)));
+        })(marked.parse(md)));
 
 
         if (cmd !== 'build') {
