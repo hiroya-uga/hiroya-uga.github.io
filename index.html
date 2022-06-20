@@ -6,11 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
-html {
-    font-size: 62.5%;
-}
 body {
-    font-size: 1.6rem;
     padding: 0 15px;
     margin: 0 auto;
     max-width: 1280px;
@@ -18,10 +14,15 @@ body {
 }
 main {
     margin: 0 auto;
+    padding: 0 15px;
     max-width: 800px;
 }
+h1 {
+    margin: 2em 0 1em -10px;
+    font-size: 1.5rem;
+}
 h2,h3,h4,h5,h6 {
-    margin: 80px 0 10px;
+    margin: 80px 0 10px -10px;
 }
 h2,
 h3 {
@@ -34,15 +35,12 @@ h4 + h5,
 h5 + h6 {
     margin-top: 0;
 }
-h1 {
-    font-size: 2.3rem;
-}
 h2 {
-    font-size: 2.3rem;
+    font-size: 1.5rem;
     font-weight: normal;
 }
 h3 {
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-weight: normal;
 }
 a {
@@ -52,49 +50,16 @@ dl {
     margin: 20px 0 0;
 }
 dt {
+    margin-top: 1em;
     font-weight: bold;
 }
 #profile {
     padding: 20px 0 0;
     border-top: 1px solid #ddd;
     margin: 160px 0 0;
-    font-size: 1.4rem;
+    font-size: .875rem;
     letter-spacing: 1.3px;
     font-feature-settings: "palt";
-}
-#profile h2 {
-    font-size: 1.4rem;
-    margin: 0;
-    font-weight: bold;
-    color: inherit;
-}
-#profile h2::after {
-    content: " = {";
-    user-select: none;
-}
-#profile h2 + div::after {
-    content: "};";
-    font-weight: bold;
-    speak: none;
-    user-select: none;
-}
-#profile dl {
-    display: table;
-    margin: 0 0 0 1.5em;
-}
-#profile dl > div {
-    display: table-row;
-}
-#profile dt,
-#profile dd {
-    display: table-cell;
-    font-weight: normal;
-}
-#profile dd::before {
-    content: ":";
-    user-select: none;
-    speak: none;
-    margin: 0 8px 0 0;
 }
 </style>
 </head>
