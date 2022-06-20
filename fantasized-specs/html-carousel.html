@@ -135,9 +135,7 @@ gtag('config', 'UA-60524027-4');
 <li><code>fadeslide</code> - Fade out then fade in with slide animation</li>
 <li><code>crossdissolve</code> - Cross dissolve</li>
 <li><code>crossdissolveslide</code> - Cross dissolve with slide animation<!-- - `coververtical` - Slide up animation -->
-<!-- - `fliphorizontal` - Turn over in the horizontal direction animation -->
-
-</li>
+<!-- - `fliphorizontal` - Turn over in the horizontal direction animation --></li>
 </ul>
 <p>The missing value default is the <code>slide</code> state.</p>
 <p>Also, the <code>title</code> attribute has special semantics on this element.</p>
@@ -163,7 +161,8 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span>
+</code></pre>
 </div>
 
 <div class="example">
@@ -183,7 +182,8 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Third slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Forth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Fifth slide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span>
+</code></pre>
 </div>
 
 <h4 id="3-1-2-the-<code>::slide</code>-pseudo-element"><strong>3.1.2. The <code>::slide</code> pseudo-element</strong><a href="#3-1-2-the-<code>::slide</code>-pseudo-element" class="anchor"><span>Anchor Link</span></a></h4><p>The <dfn><code class="selector">::slide</code></dfn> pseudo-element is produced based on the <code class="element">carousel</code> element&#39;s child elements.</p>
@@ -197,12 +197,14 @@ gtag('config', 'UA-60524027-4');
 <p>In addition, if the <code class="element">carousel</code> element has not <code>loop</code> attribute, it is expected that the previous slide when the slide is not advancing and the next slide when the slide is advanced to end are not drawn.</p>
 <pre><code class="language-css"><span class="hljs-selector-tag">carousel</span><span class="hljs-selector-pseudo">::slide</span> {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">33%</span>;
-}</code></pre>
+}
+</code></pre>
 <p>In addition, the slide animation of the <code class="element">carousel</code> element uses <a href="https://www.w3.org/TR/css-transitions/">CSS Transitions</a>. The author is able to adjust slide animation by overriding the relevant properties.</p>
 <pre><code class="language-css"><span class="hljs-selector-tag">carousel</span><span class="hljs-selector-pseudo">::slide</span> {
   <span class="hljs-attribute">transition-duration</span>: .<span class="hljs-number">2s</span>;
   <span class="hljs-attribute">transition-timing-function</span>: ease-out;
-}</code></pre>
+}
+</code></pre>
 <p>However, if you override the <code>transition-property</code> value specified by the user agent by default, the carousel will not animate when sliding. Conversely, if you want to disable animation for any reason, you can do so by specifying <code>transition-property</code> as <code>none</code>.</p>
 </div>
 
@@ -218,7 +220,8 @@ gtag('config', 'UA-60524027-4');
 
 <span class="hljs-selector-tag">carousel</span> &gt; * { <span class="hljs-comment">/* for carousel not supported browsers */</span>
   <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">30px</span>;
-}</code></pre>
+}
+</code></pre>
 <p>Note that CSS selectors for elements in slides do not need to use the <code class="selector">::slide</code> pseudo-element. It is more constructive not to use pseudo-element selectors.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
 <span class="hljs-selector-tag">carousel</span> <span class="hljs-selector-tag">div</span> &gt; <span class="hljs-selector-tag">p</span> {
@@ -234,7 +237,8 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>lorem ipsum...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span>
+</code></pre>
 </div>
 
 
@@ -248,36 +252,37 @@ gtag('config', 'UA-60524027-4');
 <div class="example">
 
 <p>Styling such as vertical center and horizontal center is often attempted. There is a pseudo-element that plays the role of wrapper for that, but it can also be ignored by <code>display: contents;</code>.</p>
-<pre><code class="language-html"><span class="hljs-section">&lt;carousel&gt;</span>
-  <span class="hljs-section">&lt;carousel::container&gt;</span>
-    <span class="hljs-section">&lt;carousel::slide-wrapper&gt;</span>
-      <span class="hljs-section">&lt;carousel::slide-track&gt;</span>
-        <span class="hljs-section">&lt;casousel::slide&gt;</span>
-          <span class="hljs-comment">#contents</span>
-        <span class="hljs-section">&lt;/casousel::slide&gt;</span>
-        <span class="hljs-section">&lt;casousel::slide&gt;</span>
-          <span class="hljs-comment">#contents</span>
-        <span class="hljs-section">&lt;/casousel::slide&gt;</span>
-        <span class="hljs-section">&lt;casousel::slide&gt;</span>
-          <span class="hljs-comment">#contents</span>
-        <span class="hljs-section">&lt;/casousel::slide&gt;</span>
-      <span class="hljs-section">&lt;/carousel::slide-track&gt;</span>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">carousel</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">carousel::container</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">carousel::slide-wrapper</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::slide-track</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">casousel::slide</span>&gt;</span>
+          #contents
+        <span class="hljs-tag">&lt;/<span class="hljs-name">casousel::slide</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">casousel::slide</span>&gt;</span>
+          #contents
+        <span class="hljs-tag">&lt;/<span class="hljs-name">casousel::slide</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">casousel::slide</span>&gt;</span>
+          #contents
+        <span class="hljs-tag">&lt;/<span class="hljs-name">casousel::slide</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">carousel::slide-track</span>&gt;</span>
 
-      <span class="hljs-section">&lt;carousel::pagers-wrapper /&gt;</span>
-        <span class="hljs-section">&lt;carousel::pager-next /&gt;</span>
-        <span class="hljs-section">&lt;carousel::pager-prev /&gt;</span>
-      <span class="hljs-section">&lt;carousel::pagers-wrapper /&gt;</span>
-    <span class="hljs-section">&lt;/carousel::slide-wrapper&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::pagers-wrapper</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">carousel::pager-next</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">carousel::pager-prev</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::pagers-wrapper</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">carousel::slide-wrapper</span>&gt;</span>
 
-    <span class="hljs-section">&lt;carousel::dots-wrapper&gt;</span>
-      <span class="hljs-section">&lt;carousel::dot /&gt;</span>
-      <span class="hljs-section">&lt;carousel::dot /&gt;</span>
-      <span class="hljs-section">&lt;carousel::dot /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">carousel::dots-wrapper</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::dot</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::dot</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::dot</span> /&gt;</span>
 
-      <span class="hljs-section">&lt;carousel::toggle /&gt;</span>
-    <span class="hljs-section">&lt;/carousel::dots-wrapper&gt;</span>
-  <span class="hljs-section">&lt;/carousel::container&gt;</span>
-<span class="hljs-section">&lt;/carousel&gt;</span></code></pre>
+      <span class="hljs-tag">&lt;<span class="hljs-name">carousel::toggle</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">carousel::dots-wrapper</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">carousel::container</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">carousel</span>&gt;</span>
+</code></pre>
 </div>
 
 

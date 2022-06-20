@@ -22,7 +22,7 @@ gtag('config', 'UA-60524027-4');
 <dt>This version:</dt>
 <dd><a href="https://hiroyau.ga/fantasized-specs/css-observer.html">https://hiroyau.ga/fantasized-specs/css-observer.html</a></dd>
 <dt>Editors:</dt>
-<dd><a href="https://github.com/hiroya-uga">Hiroya Uga</a></dd>
+<dd><a href="https://github.com/]">Hiroya Uga</a></dd>
 <dt>Issue Tracking:</dt>
 <dd><a href="https://github.com/hiroya-uga/hiroya-uga.github.io/blob/master/fantasized-specs/css-observer.html">GitHub Issues</a></dd>
 </dl>
@@ -117,18 +117,19 @@ gtag('config', 'UA-60524027-4');
 <dd>The user agent observe css display property of elements. Communicate the CSSOM of change after  ​​to the user agent, before properties change from none to the values ​​that form <a href="https://www.w3.org/TR/CSS22/box.html">box models</a>. This spec is to support CSS transition animation work without requestAnimationFrame, even if display property changes from none to block at same time.</dd>
 <dd class="example">
 
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sample</span> <span class="hljs-params">()</span> </span>{
+<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sample</span> (<span class="hljs-params"></span>) </span>{
   target.style.display = <span class="hljs-string">'none'</span>;
   target.style.height = <span class="hljs-number">0</span>;
 
-  button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+  button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
     target.style.display = <span class="hljs-string">'block'</span>;
 
     <span class="hljs-comment">// requestAnimationFrame(() =&gt; {</span>
     target.style.height = <span class="hljs-string">'100px'</span>;
     <span class="hljs-comment">// });</span>
   });
-}</code></pre>
+}
+</code></pre>
 </dd>
 <dd class="example">
 
@@ -143,7 +144,8 @@ gtag('config', 'UA-60524027-4');
 <span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:focus</span> <span class="hljs-selector-tag">div</span> {
   <span class="hljs-attribute">display</span>: block;
   <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>; <span class="hljs-comment">/* CSS Transitions work because the user agent is known that height of this element is 0. */</span>
-}</code></pre>
+}
+</code></pre>
 </dd>
 </dl>
 
@@ -208,8 +210,10 @@ gtag('config', 'UA-60524027-4');
 
 <span class="hljs-selector-tag">div</span><span class="hljs-selector-pseudo">:view-out</span> {
   <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;   <span class="hljs-comment">/* Out of screen */</span>
-}</code></pre>
-</div></main>
+}
+</code></pre>
+</div>
+</main>
 
 <footer>
 </footer>
