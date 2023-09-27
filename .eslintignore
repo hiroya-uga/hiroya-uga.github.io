@@ -1,0 +1,17 @@
+# config
+.eslintrc.js
+prettier.config.js
+next.config.js
+tailwind.config.js
+tsconfig.json
+postcss.config.js
+
+# build dir
+build/
+bin/
+obj/
+out/
+.next/
+
+# others
+jquery.connections.js

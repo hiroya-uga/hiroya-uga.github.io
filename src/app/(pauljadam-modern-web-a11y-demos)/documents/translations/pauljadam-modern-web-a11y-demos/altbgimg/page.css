@@ -1,0 +1,25 @@
+img {
+  image-rendering: pixelated;
+}
+.clipped {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute;
+}
+.bg-img {
+  background-image: url("/documents/translations/pauljadam-modern-web-a11y-demos/img/altbgimg-complexImageExample.png");
+  background-repeat: no-repeat;
+  height: 414px;
+  width: 400px;
+  color: rgba(0, 0, 0, 0);
+  image-rendering: pixelated;
+}
+.linked-bg-img a {
+  display: block;
+  height: 414px;
+  text-indent: -9999px;
+}
+.linked-bg-img {
+  background: url("/documents/translations/pauljadam-modern-web-a11y-demos/img/altbgimg-complexImageExample.png") 0 0;
+  width: 400px;
+  image-rendering: pixelated;
+}

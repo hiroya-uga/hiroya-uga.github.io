@@ -1,0 +1,39 @@
+*:focus {
+  outline: 3px solid #27b;
+}
+.body {
+  font: -apple-system-body;
+}
+.caption1 {
+  font: -apple-system-caption1;
+}
+.caption2 {
+  font: -apple-system-caption2;
+}
+.footnote {
+  font: -apple-system-footnote;
+}
+.headline {
+  font: -apple-system-headline;
+}
+.short-body {
+  font: -apple-system-short-body;
+}
+.short-caption1 {
+  font: -apple-system-short-caption1;
+}
+.short-footnote {
+  font: -apple-system-short-footnote;
+}
+.short-headline {
+  font: -apple-system-short-headline;
+}
+.short-subheadline {
+  font: -apple-system-short-subheadline;
+}
+.subheadline {
+  font: -apple-system-subheadline;
+}
+.tall-body {
+  font: -apple-system-tall-body;
+}
