@@ -1,0 +1,24 @@
+/*[target=_blank]:after { content: ", new window"; position:absolute; clip: rect(0 0 0 0);}
+*/
+#gnw [target="_blank"]:after {
+  font-family: "Glyphicons Halflings";
+  content: " \e164";
+  margin-left: -0.8em;
+  alt: "";
+}
+#gmw [target="_blank"]:after {
+  font-family: "Glyphicons Halflings";
+  content: " \e237";
+  margin-left: -0.8em;
+  alt: "";
+}
+#fels [target="_blank"]:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  content: " \f14c";
+  alt: "";
+}
+#fel [target="_blank"]:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  content: " \f08e";
+  alt: "";
+}

@@ -1,0 +1,10 @@
+#shipping-toggle {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+#shipping-toggle:focus,
+#shipping-toggle:hover {
+  color: #23527c;
+  text-decoration: underline;
+}

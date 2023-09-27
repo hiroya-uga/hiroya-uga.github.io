@@ -1,0 +1,46 @@
+th {
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+}
+table:nth-of-type(2) thead th {
+  font-weight: bold;
+  text-align: center;
+}
+td {
+  text-align: right;
+}
+th,
+td {
+  padding: 0.4em;
+  font-size: 115%;
+  background-color: #e8e6d6;
+  border-top: 2px solid white;
+}
+caption {
+  padding: 0.8em;
+  font-weight: bold;
+  font-size: 130%;
+  background-color: #c9c5b0;
+  box-shadow: 10px 0 14px -4px black;
+  outline: 4px solid white;
+}
+table {
+  margin-bottom: 2em;
+  width: 450px;
+  border-collapse: collapse;
+  box-shadow: black 0.4em 0.4em 1em;
+  outline: 4px solid white;
+}
+table:nth-of-type(1) thead th,
+table:nth-of-type(3) thead th {
+  height: 0px;
+  font-size: 0px;
+}
+td.underline {
+  border-bottom: 2px solid black;
+}
+td.double-underline {
+  border-bottom: 5px solid black;
+  border-bottom-style: double;
+}
