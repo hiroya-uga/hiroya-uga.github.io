@@ -1,0 +1,13 @@
+main h1 {
+  font-size: 2rem;
+  margin: 0 0 0.6em;
+}
+
+main h2 {
+  font-size: 1.5rem;
+  margin: 100px 0 0.83em;
+}
+
+main p {
+  margin: 1em 0;
+}

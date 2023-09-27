@@ -1,0 +1,22 @@
+*:focus {
+  outline: 3px solid #27b;
+}
+
+[aria-required="true"],
+[required] {
+  outline: 2px solid red;
+}
+
+select {
+  margin-right: 0.375em;
+}
+
+[type="radio"],
+[type="checkbox"] {
+  margin: 0 0.375em 0 1em;
+}
+
+label:first-of-type > :is([type="radio"], [type="checkbox"]),
+legend + :is([type="radio"][type="checkbox"]) {
+  margin-left: 0;
+}
