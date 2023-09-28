@@ -75,15 +75,17 @@ export default function Home() {
             <tbody>
               {externalMediaList.slice(0, 3).map(({ date, category, title, href }) => {
                 return (
-                  <tr key={href} className="leading-6">
-                    <td className="pr-4 font-mono align-top">
+                  <tr key={href} className="leading-6 sm:leading-7">
+                    <td className="pr-2 font-mono text-xs leading-[inherit] sm:text-sm sm:pr-8">
                       <span className="inline-block">{date}</span>
                     </td>
-                    <td className="pr-4 font-mono text-center uppercase text-xs align-top leading-[inherit]">
+                    <td className="pr-2 font-mono text-center uppercase text-xs leading-[inherit] sm:pr-8">
                       <span className="inline-block">{category}</span>
                     </td>
-                    <td className="pb-3">
-                      <a href={href}>{title}</a>
+                    <td className="pb-6 text-sm leading-[inherit] sm:text-base sm:pb-8">
+                      <a href={href} className="break-all">
+                        {title}
+                      </a>
                     </td>
                   </tr>
                 );
