@@ -1,6 +1,6 @@
 import { Footer } from '@/components/structures/Footer/Footer';
 import { META } from '@/constants/meta';
-import { externalMediaList } from '@/data/externalMediaList';
+import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
 import { Metadata } from 'next';
 
@@ -73,7 +73,7 @@ export default function Home() {
 
           <table className="mb-2">
             <tbody>
-              {externalMediaList.slice(0, 3).map(({ date, category, title, href }) => {
+              {externalMediaLinkList.slice(0, 3).map(({ date, category, title, href }) => {
                 return (
                   <tr key={href} className="leading-6 sm:leading-7">
                     <td className="pr-2 font-mono text-xs leading-[inherit] sm:text-sm sm:pr-8">
