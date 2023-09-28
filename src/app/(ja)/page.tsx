@@ -82,7 +82,7 @@ export default function Home() {
                     <td className="pr-2 font-mono text-center uppercase text-xs leading-[inherit] sm:pr-8">
                       <span className="inline-block">{category}</span>
                     </td>
-                    <td className="pb-6 text-sm leading-[inherit] sm:text-base sm:pb-8">
+                    <td className="pb-6 text-sm leading-[inherit] sm:text-base sm:pb-4">
                       <a href={href} className="break-all">
                         {title}
                       </a>
