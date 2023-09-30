@@ -11,10 +11,9 @@ export default function Page() {
       <h1>{metadata.title}</h1>
 
       <p className="my-4">These are the spec proposals that I came up with in my daily work.</p>
-      <p className="mb-4">日々業務の中で思いついた「あんかこといいなできたらいいな」集。</p>
 
       <ul className="pl-5">
-        <li className="list-disc pl-1">
+        <li className="list-disc pl-1 mb-2">
           <a href="/documents/fantasized-specs/html-carousel">The Carousel element</a>
         </li>
         <li className="list-disc pl-1">
