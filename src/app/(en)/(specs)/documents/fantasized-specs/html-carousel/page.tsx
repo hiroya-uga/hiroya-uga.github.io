@@ -18,11 +18,13 @@ export default function Page() {
         </dd>
         <dt>Editors:</dt>
         <dd>
-          <a href="https://github.com/hiroya-uga">Hiroya Uga</a>
+          <a href={META.github}>Hiroya Uga</a>
         </dd>
         <dt>Issue Tracking:</dt>
         <dd>
-          <a href="https://github.com/hiroya-uga/hiroya-uga.github.io/blob/main/src/app/documents/fantasized-specs/html-carousel/content.mdx">
+          <a
+            href={`${META.repository}/blob/main/src/app/(en)/(specs)/documents/fantasized-specs/html-carousel/content.mdx`}
+          >
             GitHub Issues
           </a>
         </dd>
