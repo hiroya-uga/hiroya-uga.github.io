@@ -1,4 +1,4 @@
-import { Footer } from '@/components/structures/Footer/Footer';
+import { Footer } from '@/components/structures/Footer';
 import { META } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
@@ -13,13 +13,13 @@ export default function Home() {
   return (
     <>
       <header className="py-12 px-4 sm:pt-16">
-        <div className="max-w-[960px] mx-auto">
+        <div className="max-w-content mx-auto">
           <h1 className="text-2xl font-bold">{metadata.title}</h1>
         </div>
       </header>
 
       <main className="px-4">
-        <div className="max-w-[960px] mx-auto">
+        <div className="max-w-content mx-auto">
           <blockquote
             cite="https://www.w3.org/mission/accessibility/"
             className="mb-8 p-4 bg-gray-200 rounded-sm sm:py-6 sm:px-8"
