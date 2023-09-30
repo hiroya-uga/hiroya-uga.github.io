@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/common.css';
-import { Footer } from '@/components/structures/Footer/Footer';
+import { Footer } from '@/components/structures/Footer';
 
 import { usePathname } from 'next/navigation';
 
@@ -61,7 +61,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
   return (
     <>
       <header className="pt-12 px-4 mb-12">
-        <div className="max-w-[960px] mx-auto">
+        <div className="max-w-content mx-auto">
           <p className="border border-gray-400 p-4 rounded mb-4">
             原文：
             <a href={originalPath} hrefLang="en">
@@ -79,14 +79,14 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
 
       {isCsunmobile && (
         <div className="px-4">
-          <div className="max-w-[960px] mx-auto">
+          <div className="max-w-content mx-auto">
             <CsunmobileNavigation fileName={fileName} />
           </div>
         </div>
       )}
 
       <main className="px-4">
-        <div className="max-w-[960px] mx-auto">{children}</div>
+        <div className="max-w-content mx-auto">{children}</div>
       </main>
 
       <Footer />

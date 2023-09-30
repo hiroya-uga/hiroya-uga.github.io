@@ -9,7 +9,7 @@ export const Footer = () => {
 
   return (
     <footer className="mt-48 px-8">
-      <div className="border-t border-t-gray-400 py-10 text-center max-w-[960px] mx-auto sm:pb-12">
+      <div className="border-t border-t-gray-400 py-10 text-center max-w-content mx-auto sm:pb-12">
         <p className="text-xs">
           <small>
             &copy;{' '}

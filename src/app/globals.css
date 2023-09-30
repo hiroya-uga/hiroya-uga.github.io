@@ -23,12 +23,15 @@
 }
 
 body {
-  font-size: 16px;
   line-height: 1.6;
   color: #333;
   background: #f2f2f2;
-  margin: 0;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+mark {
+  background-color: mark;
+  color: marktext;
 }
 
 a {
@@ -64,4 +67,37 @@ td {
   color: #345071;
   background-color: #c8cee1;
   border-radius: 4px;
+}
+
+input {
+  font-size: 1;
+}
+
+summary {
+  display: block;
+  list-style: none;
+  position: relative;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 1.5rem;
+  margin: auto 0;
+  content: "";
+  display: block;
+  background: #333;
+  height: calc(1rem / 2 * tan(60deg));
+  width: 1rem;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transition: 0.2s transform ease-out;
+}
+
+[open] summary::after {
+  transform: rotateX(180deg);
 }
