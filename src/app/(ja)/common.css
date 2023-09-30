@@ -1,0 +1,11 @@
+:where(h1, h2, h3, h4, h5, h6) > code {
+  font-family: monospace;
+}
+
+:where(li, th, td, figcaption, caption, p, span, a) > code {
+  padding: 0.1428em 0.2857em;
+  font-size: 0.875em;
+  color: #345071;
+  background-color: #c8cee1;
+  border-radius: 4px;
+}
