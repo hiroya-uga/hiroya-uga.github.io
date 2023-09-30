@@ -1,3 +1,7 @@
+html[lang] {
+  font-size: 16px; /* for bootstrap */
+}
+
 :where(main, [role="dialog"], [role="alertdialog"]) h1 {
   font-size: 2rem;
   margin: 0.6em 0;
