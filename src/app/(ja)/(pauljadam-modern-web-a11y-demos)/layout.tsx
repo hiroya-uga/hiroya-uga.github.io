@@ -50,9 +50,8 @@ const CsunmobileNavigation = ({ fileName }: { fileName: string }) => {
 };
 
 export default function PauljadamLayout({ children }: { children: React.ReactNode }) {
-  const fileName = usePathname()
-    .replace('/documents/translations/pauljadam-modern-web-a11y-demos/', '')
-    .replace(/\/$/, '');
+  const fileName =
+    usePathname()?.replace('/documents/translations/pauljadam-modern-web-a11y-demos/', '').replace(/\/$/, '') ?? '';
   const isCsunmobile = fileName.startsWith('csunmobile');
   const originalPath = isCsunmobile
     ? `https://pauljadam.com/csunmobile/${fileName.replace('csunmobile-', '')}.html`
