@@ -15,11 +15,11 @@ const pageview = (url: string) => {
 const existsGaId = GA_MEASUREMENT_ID !== '';
 
 export const GoogleAnalytics = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const pathname = usePathname() ?? '';
+  const searchParams = useSearchParams() ?? '';
 
   useEffect(() => {
-    if (!existsGaId) {
+    if (!existsGaId || !pathname) {
       return;
     }
 
