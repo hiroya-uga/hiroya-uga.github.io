@@ -1,5 +1,5 @@
 import { META } from '@/constants/meta';
-import '@/pages/global.css';
+import '@/pages/globals.css';
 
 import { useEffect, useState } from 'react';
 
