@@ -42,9 +42,9 @@ const pageList = [
   ['buttons', true],
   ['canvas', false],
   ['checkbox', true],
-  ['contact-before', false],
-  ['contact-after-aria', false],
-  ['contact-after-html5', false],
+  ['bootcamp-contact-before', false],
+  ['bootcamp-contact-after-aria', false],
+  ['bootcamp-contact-after-html5', false],
   ['css-content-new-window', true],
   ['css-line-through-del-ins-accessibility', false],
   ['css3speech', false],
@@ -62,9 +62,9 @@ const pageList = [
   ['fake-button', true],
   ['focus-after-page-load', false],
   ['figure-figcaption', true],
-  ['form-bad', false],
-  ['form-aria', false],
-  ['form-html5', false],
+  ['csunmobile-form-bad', false],
+  ['csunmobile-form-aria', false],
+  ['csunmobile-form-html5', false],
   ['form-errors-top', false],
   ['fieldsetlegend', false],
   ['focusvisible', false],
@@ -149,7 +149,8 @@ export default function Page() {
 
       <ul>
         {pageList.map(([path, isExist]) => {
-          return <li key={path}>{isExist ? <a href={`${base}/${path}`}>{path}.html</a> : `${path}.html`}</li>;
+          const text = path.replace(/^csunmobile-|^bootcamp-/, '');
+          return <li key={path}>{isExist ? <a href={`${base}/${path}`}>{text}.html</a> : `${text}.html`}</li>;
         })}
       </ul>
     </>
