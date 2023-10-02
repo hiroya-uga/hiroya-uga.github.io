@@ -7,7 +7,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
     <>
       <Header />
 
-      <main className="px-4 sm:pl-10">
+      <main className="px-[16px] sm:pl-10">
         <div className="max-w-content mx-auto">{children}</div>
       </main>
 
