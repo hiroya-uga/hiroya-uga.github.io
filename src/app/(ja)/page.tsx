@@ -190,28 +190,22 @@ export default function Home() {
             </div>
           </div>
 
-          <ul className="flex gap-4 flex-wrap">
+          <ul className="flex gap-4 flex-wrap items-center">
             {(
               [
                 {
-                  href: 'https://x.com/hiroya_UGA',
-                  src: '/common/images/twitter.svg',
-                  width: 32,
-                  height: 32,
-                  alt: 'Twitter',
+                  href: 'https://github.com/hiroya-uga',
+                  src: '/common/images/github.svg',
+                  alt: 'GitHub',
                 },
                 {
-                  href: 'https://github.com/hiroya-uga',
-                  src: '/common/images/github-mark.svg',
-                  width: 32,
-                  height: 32,
-                  alt: 'GitHub',
+                  href: 'https://x.com/hiroya_UGA',
+                  src: '/common/images/twitter.svg',
+                  alt: 'Twitter',
                 },
                 {
                   href: 'https://www.instagram.com/hiroya_uga',
                   src: '/common/images/instagram.svg',
-                  width: 32,
-                  height: 32,
                   alt: 'Instagram',
                 },
               ] as const
@@ -219,7 +213,7 @@ export default function Home() {
               return (
                 <li key={href}>
                   <a href={href}>
-                    <Image {...props} alt={alt} />
+                    <Image {...props} width={32} height={32} alt={alt} />
                   </a>
                 </li>
               );
