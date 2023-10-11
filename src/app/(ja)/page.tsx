@@ -133,10 +133,6 @@ export default function Home() {
                 title: 'ARIA in HTML',
               },
               {
-                href: 'https://www.w3.org/TR/WCAG21/',
-                title: 'Web Content Accessibility Guidelines (WCAG) 2.1',
-              },
-              {
                 href: 'https://w3c.github.io/wcag/guidelines/22/',
                 title: 'Web Content Accessibility Guidelines (WCAG) 2.2',
               },
