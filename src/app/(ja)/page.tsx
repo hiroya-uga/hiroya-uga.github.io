@@ -43,10 +43,16 @@ export default function Home() {
             quasi quos, natus quidem laudantium quisquam non minima rerum?
           </p>
 
-          <h2 className="text-2xl mb-4">Documents</h2>
+          <h2 className="text-2xl mb-4">Menu</h2>
 
           <ul className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
             {[
+              {
+                emoji: '⚗️',
+                href: '/tools/dom-events-watcher',
+                title: 'DOM Event watcher',
+                desctiption: 'どのような操作を行うと、JavaScriptがどのようなイベントを受け取るのかを確認できます。',
+              },
               {
                 emoji: '⚗️',
                 href: '/documents/translations/pauljadam-modern-web-a11y-demos',
@@ -66,7 +72,7 @@ export default function Home() {
               return (
                 <li key={href}>
                   <p>
-                    <a href={href} hrefLang={hrefLang} className="no-underline inline-block" aria-describedby={id}>
+                    <a href={href} hrefLang={hrefLang} className="no-underline block" aria-describedby={id}>
                       <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md">
                         {emoji}
                       </span>
