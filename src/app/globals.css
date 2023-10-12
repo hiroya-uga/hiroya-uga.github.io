@@ -95,3 +95,8 @@ summary::after {
 [open] summary::after {
   transform: rotateX(180deg);
 }
+
+video {
+  display: block;
+  margin: 0 auto;
+}
