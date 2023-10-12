@@ -448,7 +448,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
         </figure>
 
-        <div className="mt-12 text-center grid grid-cols-2 gap-4">
+        <div className="mt-12 text-center flex flex-wrap justify-center gap-x-12 gap-y-8">
           <p>
             <button type="button" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
               何も起こらないただのボタン
