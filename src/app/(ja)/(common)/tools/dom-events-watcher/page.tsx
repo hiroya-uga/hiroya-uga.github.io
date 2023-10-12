@@ -10,10 +10,6 @@ export default function Page() {
   return (
     <>
       <h1>DOM Event Watcher</h1>
-      <p className="mb-8">
-        次の<a href="#container">スクロール可能な領域</a>
-        内のUIを操作すると、JavaScriptがどのようなイベントを受け取るのかを確認できます。
-      </p>
       <DOMEventWatcherContent id={id} />;
     </>
   );
