@@ -78,12 +78,13 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         const mediaProps =
           e.target instanceof HTMLMediaElement
             ? {
-                controls: e.target.controls,
-                volume: e.target.volume,
+                // controls: e.target.controls,
+                volume: `${Math.round(e.target.volume * 10000) / 100}%`,
                 muted: e.target.muted,
                 paused: e.target.paused,
-                currentTime: e.target.currentTime,
+                currentTime: `${Math.round(e.target.currentTime * 100) / 100}s`,
                 loop: e.target.loop,
+                playbackRate: e.target.playbackRate,
               }
             : {};
         const commonOptions = {
@@ -444,7 +445,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
             <video ref={videoRef} {...videoSrc} controls muted className="w-96 h-auto aspect-video max-w-full"></video>
           </p>
 
-          <figcaption>ミュートされた音声ありのサンプル動画（２秒）</figcaption>
+          <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
         </figure>
 
         <div className="mt-12 text-center grid grid-cols-2 gap-4">
