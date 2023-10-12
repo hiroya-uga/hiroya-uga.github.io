@@ -81,7 +81,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 // controls: e.target.controls,
                 volume: `${Math.round(e.target.volume * 10000) / 100}%`,
                 muted: e.target.muted,
-                paused: e.target.paused,
+                // paused: e.target.paused,
                 currentTime: `${Math.round(e.target.currentTime * 100) / 100}s`,
                 loop: e.target.loop,
                 playbackRate: e.target.playbackRate,
