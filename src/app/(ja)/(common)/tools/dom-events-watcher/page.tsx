@@ -10,8 +10,9 @@ export default function Page() {
   return (
     <>
       <h1>DOM Event Watcher</h1>
-      <p className="mb-24">
-        テキストフィールドなどを含む、次のスクロール可能な領域内のUIを操作すると、JavaScriptがどのようなイベントを受け取るのかを確認できます。
+      <p className="mb-8">
+        次の<a href="#container">スクロール可能な領域</a>
+        内のUIを操作すると、JavaScriptがどのようなイベントを受け取るのかを確認できます。
       </p>
       <DOMEventWatcherContent id={id} />;
     </>
@@ -20,5 +21,5 @@ export default function Page() {
 
 export const metadata: Metadata = {
   title: 'DOM Event Watcher',
-  description: 'どのような操作を行うと、JavaScriptがどのようなイベントを受け取るのかを確認できます。',
+  description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
 };

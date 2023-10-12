@@ -50,11 +50,11 @@ export default function Home() {
               {
                 emoji: '⚗️',
                 href: '/tools/dom-events-watcher',
-                title: 'DOM Event watcher',
-                desctiption: 'どのような操作を行うと、JavaScriptがどのようなイベントを受け取るのかを確認できます。',
+                title: 'DOM Event Watcher',
+                desctiption: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
               },
               {
-                emoji: '⚗️',
+                emoji: '📝',
                 href: '/documents/translations/pauljadam-modern-web-a11y-demos',
                 title: "PaulJAdam's Modern Web Accessibility Demos",
                 desctiption: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
