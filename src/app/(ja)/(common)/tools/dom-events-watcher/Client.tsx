@@ -13,6 +13,12 @@ const getNow = () => {
 
 let key = -1;
 
+const inputElementEvents = [
+  'invalid',
+  'search', //Non-standard
+  'select',
+  'selectionchange', // Experimental
+];
 const mediaElementEvents = [
   ...new Set([
     // video
@@ -44,6 +50,8 @@ const mediaElementEvents = [
 
 export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   const ref = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const requiredInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoSrc, setVideoSrc] = useState<{ src?: string }>({});
   const [timestamp, setTimestamp] = useState(getNow());
@@ -274,6 +282,28 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   }, [handler, timestamp, value]);
 
   useEffect(() => {
+    const targets = [inputRef.current, requiredInputRef.current];
+
+    targets.forEach((target) => {
+      if (!target) {
+        return;
+      }
+
+      inputElementEvents.forEach((eventName) => {
+        target.addEventListener(eventName, handler);
+      });
+    });
+
+    return () => {
+      targets.forEach((target) => {
+        inputElementEvents.forEach((eventName) => {
+          target?.removeEventListener(eventName, handler);
+        });
+      });
+    };
+  }, [handler]);
+
+  useEffect(() => {
     const target = videoRef.current;
 
     if (!target) {
@@ -298,7 +328,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
       <p className="mb-2">
         このページの
         <a href="#container" id={`${id}-title`}>
-          あらゆるイベントを受け取るフォーカス・スクロール可能なform要素
+          いろんなイベントを受け取るフォーカス・スクロール可能なform要素
         </a>
         内のUIを操作すると、JavaScriptがどのようなイベントを受け取るのかを確認できます。
       </p>
@@ -313,10 +343,23 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </summary>
 
         <div className="max-h-[70vh] overflow-y-scroll py-4 px-8">
+          <p className="mb-2">このページで採用されているイベント一覧です。一部非標準、非推奨も含まれています。</p>
           <p className="mb-2">form要素には以下のイベントに関するハンドラを登録しています。</p>
 
           <ul className="pl-6 mb-8">
             {eventNames.sort().map((eventName) => {
+              return (
+                <li className="list-disc pl-1 mb-1" key={eventName}>
+                  {eventName}
+                </li>
+              );
+            })}
+          </ul>
+
+          <p className="mb-2">input要素には以下のイベントに関するハンドラを登録しています。</p>
+
+          <ul className="pl-6 mb-8">
+            {inputElementEvents.sort().map((eventName) => {
               return (
                 <li className="list-disc pl-1 mb-1" key={eventName}>
                   {eventName}
@@ -368,6 +411,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <p className="mb-8">
             <input
               id={id}
+              ref={inputRef}
               autoComplete="none"
               aria-describedby={`${id}-description`}
               placeholder="hogehoge"
@@ -383,6 +427,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
           <p className="mb-8">
             <input
+              ref={requiredInputRef}
               id={`${id}-required`}
               autoComplete="none"
               placeholder="hogehoge"
