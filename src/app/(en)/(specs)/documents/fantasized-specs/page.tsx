@@ -10,7 +10,7 @@ export default function Page() {
     <>
       <h1>{metadata.title}</h1>
 
-      <p className="my-4">These are the spec proposals that I came up with in my daily work.</p>
+      <p>These are the spec proposals that I came up with in my daily work.</p>
 
       <ul className="pl-5">
         <li className="list-disc pl-1 mb-2">

@@ -190,6 +190,10 @@ li {
   margin: 4px 0;
 }
 
+main p {
+  margin: 1rem 0;
+}
+
 #toc {
   margin: 30px 0 80px;
 }
