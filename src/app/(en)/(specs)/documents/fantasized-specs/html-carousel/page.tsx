@@ -2,6 +2,8 @@ import Mdx from '@/app/(en)/(specs)/documents/fantasized-specs/html-carousel/con
 import { META } from '@/constants/meta';
 import { DocumentHeadingLevel2 } from '@/mdx-components';
 
+import { Metadata } from 'next';
+
 export default function Page() {
   return (
     <>
@@ -34,3 +36,8 @@ export default function Page() {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'The carousel element - Fantasized specs',
+  description: '',
+};
