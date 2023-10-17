@@ -9,6 +9,9 @@ export const DescriptionTable = () => {
           <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">Flow content</a>.
         </dd>
         <dd>
+          <a href="https://www.w3.org/TR/html52/dom.html#embedded-content-category">Embedded content</a>.
+        </dd>
+        <dd>
           <a href="https://www.w3.org/TR/html52/dom.html#interactive-content-2">Interactive content</a>.
         </dd>
         <dd>
