@@ -3,9 +3,9 @@
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const CheckBoxes = <T extends string>({
   nameSet,
@@ -176,10 +176,16 @@ export const MediaContent = ({ id }: { id: string }) => {
   const idForKeywords = `${id}text`;
   const idForFilterTitle = `${id}filterTitle`;
 
+  const pathname = usePathname();
+  const router = useRouter();
+  const params = useSearchParams();
+
+  const keywordQuery = params?.get('query') ?? '';
+
   const [typesStatus, setTypesStatus] = useState(getDefaultCheckedState(mediaTypes));
   const [categoriesStatus, setCategoriesStatus] = useState(getDefaultCheckedState(mediaCategory));
   const [tagsStatus, setTagsStatus] = useState(getDefaultCheckedState(mediaTags));
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState(keywordQuery);
 
   const isSelectedTypes = Object.values({
     ...typesStatus,
@@ -246,7 +252,7 @@ export const MediaContent = ({ id }: { id: string }) => {
   return (
     <>
       <nav aria-labelledby={idForFilterTitle} className="mb-28">
-        <details className="rounded border border-slate-400 overflow-hidden bg-slate-50">
+        <details className="rounded border border-slate-400 overflow-hidden bg-slate-50" open={keywordQuery !== ''}>
           <summary className="p-4 bg-slate-200 sm:hover:bg-slate-300 sm:transition-colors sm:duration-200">
             <h2 className="m-0 text-lg" id={idForFilterTitle}>
               絞り込む
@@ -301,6 +307,10 @@ export const MediaContent = ({ id }: { id: string }) => {
                   value={keyword}
                   onChange={({ currentTarget }) => {
                     setKeyword(currentTarget.value);
+
+                    router.replace(`${pathname ?? window.location.pathname}?query=${currentTarget.value}`, {
+                      scroll: false,
+                    });
                   }}
                 />
               </span>
