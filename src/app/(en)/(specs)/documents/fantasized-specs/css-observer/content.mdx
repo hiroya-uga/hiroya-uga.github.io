@@ -29,7 +29,7 @@ This module realizes such an expression only with CSS, without processing of sta
   <td>
     none | [view | view-in | view-out | view-top | view-right | view-bottom | view-left | [ view-top-in || view-right-in
     || view-bottom-in || view-left-in || view-top-out || view-right-out || view-bottom-out || view-left-out ] ] ||
-    display
+    display || [&lt;single-observe-property>#](#single-observe-property)
   </td>
 </tr>
 
@@ -40,7 +40,7 @@ This module realizes such an expression only with CSS, without processing of sta
 
 <tr>
   <th>Applies to:</th>
-  <td>See below</td>
+  <td>[all elements](https://drafts.csswg.org/css-pseudo/#generated-content)</td>
 </tr>
 
 <tr>
@@ -147,9 +147,111 @@ a:focus div {
 ```
 
 </dd>
+
+<dt><dfn id="single-observe-property">&lt;single-observe-property></dfn> = all | &lt;custom-ident>;</dt>
+<dd>
+A value of `none` means that no property will transition. Otherwise, a list of properties to be transitioned, or the keyword all which indicates that all properties are to be transitioned, is given.
+</dd>
 </dl>
 
+
+### 2.2. The `observed-wrapper` property
+
+The element with `view-*` in observe-type indicates the direction in which the intersection will be monitored.<br/>
+By default, `observed-wrapper: all` is specified for `document.scrollingElement`, and the default value for other elements is `none`.
+
+<div class="propdef">
+<table>
+<tbody>
+<tr>
+<th>Name:</th>
+<td><dfn>observed-wrapper</dfn></td>
+</tr>
+
+<tr>
+  <th>value:</th>
+  <td>none | top | right | bottom | left | vertical | horizontal | all</td>
+</tr>
+
+<tr>
+  <th>Initial:</th>
+  <td>none</td>
+</tr>
+
+<tr>
+  <th>Applies to:</th>
+  <td>block containers [\[CSS2\]](https://drafts.csswg.org/css-overflow/#biblio-css2), flex containers [\[CSS3-FLEXBOX\]](https://drafts.csswg.org/css-overflow/#biblio-css3-flexbox), and grid containers [\[CSS3-GRID-LAYOUT\]](https://drafts.csswg.org/css-overflow/#biblio-css3-grid-layout)</td>
+</tr>
+
+<tr>
+  <th>Inherited:</th>
+  <td>no</td>
+</tr>
+
+<tr>
+  <th>Percentages:</th>
+  <td>n/a</td>
+</tr>
+
+<tr>
+  <th>Computed value:</th>
+  <td>specified keyword(s)</td>
+</tr>
+
+<tr>
+<th>Animation type:</th>
+<td>not animatable</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<dl>
+<dt><dfn>none</dfn></dt>
+<dd>The user agent do not observe element.</dd>
+
+<dt>
+  <dfn>top</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the top.</dd>
+
+<dt>
+  <dfn>right</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the right.</dd>
+
+<dt>
+  <dfn>left</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the left.</dd>
+
+<dt>
+  <dfn>bottom</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the bottom.</dd>
+
+<dt>
+  <dfn>vertical</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the vertical direction.</dd>
+
+<dt>
+  <dfn>horizontal</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the horizontal direction.</dd>
+
+<dt>
+  <dfn>all</dfn>
+</dt>
+<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on all direction.</dd>
+</dl>
+
+
 ### 2.3. The `observe-disconect` property
+
+Specifies whether to continue monitoring after the rule specified in `observe-type` is met.
 
 <div class="propdef">
 <table>
@@ -171,7 +273,7 @@ a:focus div {
 
 <tr>
   <th>Applies to:</th>
-  <td>See below</td>
+  <td>[all elements](https://drafts.csswg.org/css-pseudo/#generated-content)</td>
 </tr>
 
 <tr>
