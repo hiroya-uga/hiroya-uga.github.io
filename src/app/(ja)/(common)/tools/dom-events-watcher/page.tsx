@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <h1>DOM Event Watcher</h1>
-      <DOMEventWatcherContent id={id} />;
+      <DOMEventWatcherContent id={id} />
     </>
   );
 }
