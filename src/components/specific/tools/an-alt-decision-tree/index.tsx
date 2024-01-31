@@ -259,7 +259,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                 href="/"
                 onClick={(e) => {
                   e.preventDefault();
-                  alert('clicked');
+                  alert('サンプルのため画面遷移はしません');
                 }}
                 className={clsx([
                   isVisible === false ? 'border-gray-300' : 'border-transparent',
@@ -362,7 +362,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                   className="flex justify-center items-center"
                   onClick={(e) => {
                     e.preventDefault();
-                    alert('clicked');
+                    alert('サンプルのため画面遷移はしません');
                   }}
                 >
                   <span
@@ -611,7 +611,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
 
             <div className="py-2 px-3">
               <SampleCodeWrapper
-                code={`<img alt="棒グラフ：４月300、５月500弱、6月300弱、7月900弱、８月500強、9月800弱。折れ線グラフ：４月40%、５月80%、6月55%、7月105%、８月80%強、9月110%超え">`}
+                code={`<img alt="棒グラフ：１週間あたりの海老の消費量（架空のデータ） 日曜日80 月曜日20 火曜日30 水曜日60 木曜日20 金曜日100 土曜日90">`}
               >
                 <figure>
                   <figcaption className="mb-4 text-center">
