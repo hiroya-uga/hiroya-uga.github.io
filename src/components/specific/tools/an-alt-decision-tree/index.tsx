@@ -306,9 +306,9 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                 >
                   <Image
                     src="/tools/an-alt-decision-tree/graph.png"
-                    width={400}
-                    height={293}
-                    alt="棒グラフ：４月300人、５月500人弱、6月300人弱、7月900人弱、８月500人強、9月800人弱。折れ線グラフ：４月40%、５月80%、6月55%、7月105%、８月80%強、9月110%超え"
+                    width={300}
+                    height={300}
+                    alt="棒グラフ：１週間あたりの海老の消費量（架空のデータ） 日曜日80 月曜日20 火曜日30 水曜日60 木曜日20 金曜日100 土曜日90"
                     className={clsx([isVisible ? '' : 'invisible', 'mx-auto'])}
                   />
                 </span>
@@ -621,9 +621,9 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
 
                   <Image
                     src="/tools/an-alt-decision-tree/graph.png"
-                    width={400}
-                    height={293}
-                    alt="棒グラフ：４月300人、５月500人弱、6月300人弱、7月900人弱、８月500人強、9月800人弱。折れ線グラフ：４月40%、５月80%、6月55%、7月105%、８月80%強、9月110%超え"
+                    width={300}
+                    height={300}
+                    alt="棒グラフ：１週間あたりの海老の消費量（架空のデータ） 日曜日80 月曜日20 火曜日30 水曜日60 木曜日20 金曜日100 土曜日90"
                     className="mx-auto"
                   />
                 </figure>
