@@ -26,7 +26,7 @@ export default function Page() {
         <small className="text-xs">※ この決定木はすべてのケースをカバーしているわけではありません。</small>
       </p>
 
-      <section className="mt-8 px-6 pt-10 pb-6 rounded-xl bg-white max-w-3xl mx-auto">
+      <section className="mt-8 px-4 pt-10 pb-6 rounded-xl bg-white max-w-3xl mx-auto sm:px-6">
         <AnAltDecisionTreeContent />
       </section>
     </>

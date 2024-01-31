@@ -23,10 +23,17 @@ const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, '
   }, [index]);
 
   return (
-    <h2 className="w-fit mx-auto text-center mt-0 mb-10" aria-live="assertive" ref={ref} tabIndex={-1}>
+    <h2
+      className="w-fit mx-auto sm:text-center mt-0 mb-10 text-xl sm:text-2xl"
+      aria-live="assertive"
+      ref={ref}
+      tabIndex={-1}
+    >
       <span className="flex justify-center items-center">
         {typeof index === 'number' && (
-          <span className="bg-gray-200 rounded mr-4 p-2 aspect-square h-14 grid place-items-center">Q{index + 1}</span>
+          <span className="bg-gray-200 rounded mr-3 sm:mr-4 p-2 aspect-square h-14 grid place-items-center">
+            Q{index + 1}
+          </span>
         )}
         <strong className="font-normal">{children}</strong>
       </span>
