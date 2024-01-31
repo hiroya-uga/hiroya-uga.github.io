@@ -54,6 +54,13 @@ export default function Home() {
                 desctiption: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
               },
               {
+                emoji: '🌳',
+                href: '/tools/an-alt-decision-tree',
+                title: 'An alt Decision Tree',
+                desctiption:
+                  '画像の代替テキストを決めるための２択チャートです。WAIが公開している「An alt Decision Tree」の日本語訳です。',
+              },
+              {
                 emoji: '📝',
                 href: '/documents/translations/pauljadam-modern-web-a11y-demos',
                 title: "PaulJAdam's Modern Web Accessibility Demos",

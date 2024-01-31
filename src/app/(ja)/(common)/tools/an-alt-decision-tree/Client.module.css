@@ -1,0 +1,47 @@
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slide 200ms ease-out 100ms forwards;
+}
+
+@keyframes goal {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.goal {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: goal 200ms ease-out 100ms forwards;
+}
+
+@keyframes throw {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.throw {
+  opacity: 0;
+  animation: throw 200ms ease-out 100ms forwards;
+}
