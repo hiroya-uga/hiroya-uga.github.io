@@ -301,7 +301,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                     src="/tools/an-alt-decision-tree/graph.png"
                     width={400}
                     height={293}
-                    alt="グラフのイメージ図"
+                    alt="棒グラフ：４月300人、５月500人弱、6月300人弱、7月900人弱、８月500人強、9月800人弱。折れ線グラフ：４月40%、５月80%、6月55%、7月105%、８月80%強、9月110%超え"
                     className={clsx([isVisible ? '' : 'invisible', 'mx-auto'])}
                   />
                 </span>
@@ -616,7 +616,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
                     src="/tools/an-alt-decision-tree/graph.png"
                     width={400}
                     height={293}
-                    alt="棒グラフ：４月300、５月500弱、6月300弱、7月900弱、８月500強、9月800弱。折れ線グラフ：４月40%、５月80%、6月55%、7月105%、８月80%強、9月110%超え"
+                    alt="棒グラフ：４月300人、５月500人弱、6月300人弱、7月900人弱、８月500人強、9月800人弱。折れ線グラフ：４月40%、５月80%、6月55%、7月105%、８月80%強、9月110%超え"
                     className="mx-auto"
                   />
                 </figure>
