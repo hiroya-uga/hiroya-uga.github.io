@@ -19,12 +19,9 @@ export default function Page() {
           <rt>Decision Tree</rt>
         </ruby>
         「<a href="https://www.w3.org/WAI/tutorials/images/decision-tree/">An alt Decision Tree</a>
-        」のざっくり日本語訳です。
+        」の日本語訳です。
       </p>
       <p>代替テキストにお悩みの際にご活用ください。</p>
-      <p className="mt-4">
-        <small className="text-xs">※ この決定木はすべてのケースをカバーしているわけではありません。</small>
-      </p>
 
       <section className="mt-8 px-4 pt-10 pb-6 rounded-xl bg-white max-w-3xl mx-auto sm:px-6">
         <AnAltDecisionTreeContent />
