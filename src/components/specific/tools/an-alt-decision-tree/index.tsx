@@ -1,6 +1,7 @@
 import { CodeBlock } from '@/components/CodeBlock';
 
 import { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -22,217 +23,244 @@ const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, '
     }
   }, [index]);
 
-  return (
-    <h2
-      className="w-fit mx-auto sm:text-center mt-0 mb-10 text-xl sm:text-2xl"
-      aria-live="assertive"
-      ref={ref}
-      tabIndex={-1}
-    >
-      <span className="flex justify-center items-center">
-        {typeof index === 'number' && (
-          <span className="bg-gray-200 rounded mr-3 sm:mr-4 p-2 aspect-square h-14 grid place-items-center">
+  const HeadingInner = () => {
+    if (typeof index === 'number') {
+      return (
+        <h2
+          className="w-fit mx-auto bg-[url(/tools/an-alt-decision-tree/e0880_1.svg)] bg-no-repeat bg-cover sm:text-center mt-0 mb-18 text-lg sm:text-2xl flex justify-center items-center pt-9 pb-16 pl-8 pr-6 sm:w-full sm:max-w-[80%]"
+          ref={ref}
+          tabIndex={-1}
+        >
+          <span className="bg-gray-200 rounded-md mr-3 sm:mr-4 p-1 aspect-square h-10 grid place-items-center">
             Q{index + 1}
           </span>
-        )}
-        <strong className="font-normal">{children}</strong>
-      </span>
-    </h2>
-  );
-};
+          <strong className="font-normal">{children}</strong>
+        </h2>
+      );
+    }
 
-const SampleCodeWrapper = ({
-  title = 'サンプルコード',
-  code,
-  children,
-}: {
-  title?: string;
-  code: string;
-  children: React.ReactNode;
-}) => {
+    return (
+      <h2 className="text-center text-xl sm:text-2xl mt-0 mb-9" ref={ref} tabIndex={-1}>
+        {children}
+      </h2>
+    );
+  };
+
   return (
-    <div className="mb-6 rounded-lg overflow-hidden">
-      <figure className="border border-[#0d1117] border-b-0 mx-auto">
-        <figcaption className="text-sm bg-[#0d1117] text-white p-2">{title}</figcaption>
-
-        <div className="px-4 py-6 sm:px-8 sm:py-16">{children}</div>
-      </figure>
-
-      <Code code={code} />
+    <div aria-live="assertive">
+      <HeadingInner />
     </div>
   );
 };
 
-const SamplePresentation = ({ isVisible }: { isVisible?: boolean }) => {
+// const SampleCodeWrapper = ({
+//   title = 'サンプルコード',
+//   code,
+//   children,
+// }: {
+//   title?: string;
+//   code: string;
+//   children: React.ReactNode;
+// }) => {
+//   return (
+//     <div className="mb-6 rounded-lg overflow-hidden">
+//       <figure className="border border-[#0d1117] border-b-0 mx-auto">
+//         <figcaption className="text-sm bg-[#0d1117] text-white p-2">{title}</figcaption>
+
+//         <div className="px-4 py-6 sm:px-8 sm:py-16">{children}</div>
+//       </figure>
+
+//       <Code code={code} />
+//     </div>
+//   );
+// };
+
+// const SamplePresentation = ({ isVisible }: { isVisible?: boolean }) => {
+//   return (
+//     <div className="flex text-left flex-wrap sm:flex-nowrap gap-4">
+//       <div className="sm:max-w-[150px]">
+//         <div className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
+//           <Image
+//             src="/tools/an-alt-decision-tree/sushi.jpg"
+//             width={120}
+//             height={93}
+//             alt=""
+//             className={clsx([isVisible === false ? 'invisible' : '', 'w-full'])}
+//           />
+//         </div>
+//       </div>
+//       <p className="grow-1">
+//         <span className="inline-block">新鮮な海の幸と職人の技、</span>
+//         <span className="inline-block">心を込めた極上の寿司。</span>
+//         <span className="inline-block">和モダンな空間で至福のひとときをお楽しみください。</span>
+//       </p>
+//     </div>
+//   );
+// };
+
+// const SampleInfomativeImage = ({ isVisible }: { isVisible?: boolean }) => {
+//   return (
+//     <div className="flex items-center justify-center mb-8">
+//       <p className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
+//         <Image
+//           src="/tools/an-alt-decision-tree/shrimp.png"
+//           width={100}
+//           height={80}
+//           alt="海老のお寿司"
+//           className={isVisible === false ? 'invisible' : ''}
+//         />
+//       </p>
+//       <div className="ml-4 text-left">
+//         <p>私の好きなお寿司です！</p>
+//         <p>みなさんはこの寿司ネタお好きですか？</p>
+//         {typeof isVisible === 'boolean' && <p className={isVisible ? 'invisible' : 'font-bold'}>（どの寿司ネタ？）</p>}
+//       </div>
+//     </div>
+//   );
+// };
+
+// const SampleDuplicateText = () => {
+//   return (
+//     <>
+//       <SampleCodeWrapper
+//         title="機能を持つ画像：alt属性を空にできるパターン"
+//         code={`<p>
+//   <a href="___dummy___">
+//     <img alt="">
+//     <span>すてきなフードデリバリー</span>
+//   </a>
+// </p>`}
+//       >
+//         <p>
+//           <a
+//             href=""
+//             className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit"
+//             onClick={(e) => {
+//               e.preventDefault();
+//               alert('サンプルのため画面遷移はしません');
+//             }}
+//           >
+//             <Image
+//               className="w-full"
+//               {...{
+//                 src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
+//                 width: 168,
+//                 height: 130,
+//                 alt: '',
+//               }}
+//             />
+//             <span className="p-2 block bg-slate-00">すてきなフードデリバリー</span>
+//           </a>
+//         </p>
+//       </SampleCodeWrapper>
+
+//       <SampleCodeWrapper
+//         title="機能を持つ画像：alt属性を空にできないパターン"
+//         code={`<p>
+//   <a href="___dummy___">
+//     <img alt="すてきなフードデリバリー">
+//   </a>
+//   <span>すてきなフードデリバリー</span>
+// </p>`}
+//       >
+//         <p className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit">
+//           <a
+//             href=""
+//             onClick={(e) => {
+//               e.preventDefault();
+//               alert('サンプルのため画面遷移はしません');
+//             }}
+//           >
+//             <Image
+//               className="w-full"
+//               {...{
+//                 src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
+//                 width: 168,
+//                 height: 130,
+//                 alt: '',
+//               }}
+//             />
+//           </a>
+//           <span className="p-2 block bg-slate-00">すてきなフードデリバリー</span>
+//         </p>
+//       </SampleCodeWrapper>
+//     </>
+//   );
+// };
+
+// const SummaryEmptyAltForPresentaion = () => {
+//   return (
+//     <>
+//       <p className="mb-6">
+//         <code>alt</code>属性には空文字を指定してください。
+//       </p>
+
+//       <SampleCodeWrapper code={`<img alt="">`}>
+//         <SamplePresentation />
+//       </SampleCodeWrapper>
+
+//       <p>
+//         詳しくは
+//         <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
+//           「装飾画像」（外部サイト）
+//         </a>
+//         を参照してください。
+//       </p>
+//     </>
+//   );
+// };
+
+// const ImageWrapper = ({ caption = '画像のイメージ', children }: { caption?: string; children: React.ReactNode }) => {
+//   return (
+//     <figure className="text-center mb-8 border border-slate-400 max-w-lg mx-auto p-4 pt-6 rounded-2xl">
+//       {children}
+
+//       <figcaption className="text-sm">※ {caption}</figcaption>
+//     </figure>
+//   );
+// };
+
+const Shrimp = () => {
   return (
-    <div className="flex text-left flex-wrap sm:flex-nowrap gap-4">
-      <div className="sm:max-w-[150px]">
-        <div className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
-          <Image
-            src="/tools/an-alt-decision-tree/sushi.jpg"
-            width={120}
-            height={93}
-            alt=""
-            className={clsx([isVisible === false ? 'invisible' : '', 'w-full'])}
-          />
-        </div>
-      </div>
-      <p className="grow-1">
-        <span className="inline-block">新鮮な海の幸と職人の技、</span>
-        <span className="inline-block">心を込めた極上の寿司。</span>
-        <span className="inline-block">和モダンな空間で至福のひとときをお楽しみください。</span>
-      </p>
+    <div className="my-8 sm:my-10">
+      <Image
+        src="/tools/an-alt-decision-tree/shrimp.png"
+        width={200}
+        height={217}
+        alt=""
+        className="mx-auto max-w-[50%]"
+      />
     </div>
-  );
-};
-
-const SampleInfomativeImage = ({ isVisible }: { isVisible?: boolean }) => {
-  return (
-    <div className="flex items-center justify-center mb-8">
-      <p className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
-        <Image
-          src="/tools/an-alt-decision-tree/shrimp.png"
-          width={100}
-          height={80}
-          alt="海老のお寿司"
-          className={isVisible === false ? 'invisible' : ''}
-        />
-      </p>
-      <div className="ml-4 text-left">
-        <p>私の好きなお寿司です！</p>
-        <p>みなさんはこの寿司ネタお好きですか？</p>
-        {typeof isVisible === 'boolean' && <p className={isVisible ? 'invisible' : 'font-bold'}>（どの寿司ネタ？）</p>}
-      </div>
-    </div>
-  );
-};
-
-const SampleDuplicateText = () => {
-  return (
-    <>
-      <SampleCodeWrapper
-        title="機能を持つ画像：alt属性を空にできるパターン"
-        code={`<p>
-  <a href="___dummy___">
-    <img alt="">
-    <span>すてきなフードデリバリー</span>
-  </a>
-</p>`}
-      >
-        <p>
-          <a
-            href=""
-            className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit"
-            onClick={(e) => {
-              e.preventDefault();
-              alert('サンプルのため画面遷移はしません');
-            }}
-          >
-            <Image
-              className="w-full"
-              {...{
-                src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
-                width: 168,
-                height: 130,
-                alt: '',
-              }}
-            />
-            <span className="p-2 block bg-slate-00">すてきなフードデリバリー</span>
-          </a>
-        </p>
-      </SampleCodeWrapper>
-
-      <SampleCodeWrapper
-        title="機能を持つ画像：alt属性を空にできないパターン"
-        code={`<p>
-  <a href="___dummy___">
-    <img alt="すてきなフードデリバリー">
-  </a>
-  <span>すてきなフードデリバリー</span>
-</p>`}
-      >
-        <p className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit">
-          <a
-            href=""
-            onClick={(e) => {
-              e.preventDefault();
-              alert('サンプルのため画面遷移はしません');
-            }}
-          >
-            <Image
-              className="w-full"
-              {...{
-                src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
-                width: 168,
-                height: 130,
-                alt: '',
-              }}
-            />
-          </a>
-          <span className="p-2 block bg-slate-00">すてきなフードデリバリー</span>
-        </p>
-      </SampleCodeWrapper>
-    </>
-  );
-};
-
-const SummaryEmptyAltForPresentaion = () => {
-  return (
-    <>
-      <p className="mb-6">
-        <code>alt</code>属性には空文字を指定してください。
-      </p>
-
-      <SampleCodeWrapper code={`<img alt="">`}>
-        <SamplePresentation />
-      </SampleCodeWrapper>
-
-      <p>
-        詳しくは
-        <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
-          「装飾画像」（外部サイト）
-        </a>
-        を参照してください。
-      </p>
-    </>
-  );
-};
-
-const ImageWrapper = ({ caption = '画像のイメージ', children }: { caption?: string; children: React.ReactNode }) => {
-  return (
-    <figure className="text-center mb-8 border border-slate-400 max-w-lg mx-auto p-4 pt-6 rounded-2xl">
-      {children}
-
-      <figcaption className="text-sm">※ {caption}</figcaption>
-    </figure>
   );
 };
 
 export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const ToggleButton = () => {
-    return (
-      <p className="text-right mb-6">
-        <button
-          aria-live="polite"
-          className="bg-slate-100 p-2 rounded border border-solid border-black"
-          onClick={() => {
-            setIsVisible(!isVisible);
-          }}
-        >
-          {isVisible ? '画像を消す' : '画像を表示する'}
-        </button>
-      </p>
-    );
-  };
+  // const [isVisible, setIsVisible] = useState(true);
+  // const ToggleButton = () => {
+  //   return (
+  //     <p className="text-right mb-6">
+  //       <button
+  //         aria-live="polite"
+  //         className="bg-slate-100 p-2 rounded border border-solid border-black"
+  //         onClick={() => {
+  //           setIsVisible(!isVisible);
+  //         }}
+  //       >
+  //         {isVisible ? '画像を消す' : '画像を表示する'}
+  //       </button>
+  //     </p>
+  //   );
+  // };
 
   switch (index) {
     case 0:
       return (
         <>
-          <Heading index={index}>文字は含まれていますか？</Heading>
-
-          <ImageWrapper caption="文字が入っている画像の例">
+          <Heading index={index}>
+            文字は
+            <span className="inline-block">含まれていますか？</span>
+          </Heading>
+          {/* <ImageWrapper caption="文字が入っている画像の例">
             <Image
               src="/tools/an-alt-decision-tree/fooddelivery-banner.png"
               width={336}
@@ -240,9 +268,12 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
               alt="すてきなフードデリバリー"
               className="mx-auto mb-4"
             />
-          </ImageWrapper>
+          </ImageWrapper> */}
+          <Shrimp />
 
-          <p className="text-center max-w-xl mx-auto">画像の中に文字が書かれているかを確認してください。</p>
+          <p className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+            画像の中に文字が書かれているかを確認してください。
+          </p>
         </>
       );
 
@@ -251,7 +282,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
         <>
           <Heading index={index}>その画像はクリックできますか？</Heading>
 
-          <ImageWrapper caption="クリックできる画像の例">
+          {/* <ImageWrapper caption="クリックできる画像の例">
             <ToggleButton />
 
             <p className="mb-6">
@@ -275,12 +306,19 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                 />
               </a>
             </p>
-          </ImageWrapper>
+          </ImageWrapper> */}
+          <Shrimp />
 
-          <p className="text-center max-w-xl mx-auto">リンクまたはボタンのために使用されているかを確認してください。</p>
-          <p className="text-center max-w-xl mx-auto">
-            画像が存在しない場合、リンクまたはボタンの機能を理解できなくなりますか？
-          </p>
+          <div className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+            <p className="mb-4 sm:mb-0">
+              リンクまたはボタンなど、
+              <span className="inline-block sm:inline">機能のために使用されているかを確認してください。</span>
+            </p>
+            <p>
+              画像が存在しない場合、
+              <span className="inline-block sm:inline">リンクまたはボタンの機能を理解できなくなりますか？</span>
+            </p>
+          </div>
         </>
       );
 
@@ -289,7 +327,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
         <>
           <Heading index={index}>画像には意味がありますか？</Heading>
 
-          <ImageWrapper caption="意味のある画像の例">
+          {/* <ImageWrapper caption="意味のある画像の例">
             <div className="mb-4">
               <ToggleButton />
 
@@ -338,11 +376,13 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                 </span>
               </p>
             </div>
-          </ImageWrapper>
+          </ImageWrapper> */}
 
-          <p className="text-center max-w-xl mx-auto">
-            <span className="inline-block">その画像がないとコンテンツの意味が変わったり、</span>
-            <span className="inline-block">伝わらなくなるかを確認してください。</span>
+          <Shrimp />
+
+          <p className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+            その画像がないとコンテンツの意味が変わったり、
+            <span className="sm:inline-block">伝わらなくなるかを確認してください。</span>
           </p>
         </>
       );
@@ -352,7 +392,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
         <>
           <Heading index={index}>装飾目的の画像ですか？</Heading>
 
-          <ImageWrapper caption="装飾画像の例">
+          {/* <ImageWrapper caption="装飾画像の例">
             <ToggleButton />
 
             <div className="mb-10">
@@ -387,10 +427,12 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 
               <SamplePresentation isVisible={isVisible} />
             </div>
-          </ImageWrapper>
+          </ImageWrapper> */}
 
-          <p className="text-center max-w-xl mx-auto">
-            <span className="inline-block">純粋に装飾のためのもの、</span>
+          <Shrimp />
+
+          <p className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+            純粋に装飾のため、
             <span className="inline-block">またはユーザーに直接関係しないものですか？</span>
           </p>
         </>
@@ -403,141 +445,295 @@ export const AnAltDecisionTreeException = () => {
     <>
       <Heading>例外パターンのようです</Heading>
 
-      <div className="mb-8">
+      <div className="mt-12 mb-8">
         <Image src="/tools/an-alt-decision-tree/exception.png" width={246} height={292} alt="" className="mx-auto" />
       </div>
 
-      <p className="text-center">
-        <span className="inline-block">どのような代替テキストを設定すればいいか不明な場合は、</span>
-        <span className="inline-block">
-          詳しくは
-          <a href="https://www.w3.org/WAI/tutorials/images/" hrefLang="en">
-            WAIのImage Concepts Page（外部サイト）
-          </a>
-          を参照してください。
-        </span>
-      </p>
+      <div className="px-4 sm:px-0 sm:text-center">
+        <p className="mb-4">この決定木はすべてのケースをカバーしているわけではありません。</p>
+
+        <p>
+          どのような代替テキストを設定すればいいか不明な場合は、
+          <span className="inline-block">
+            詳しくは
+            <a href="https://www.w3.org/WAI/tutorials/images/" hrefLang="en">
+              WAIのImage Concepts Page（外部サイト）
+            </a>
+            を参照してください。
+          </span>
+        </p>
+      </div>
     </>
   );
 };
 
-const AnswerContainsText = () => {
+// const AnswerContainsText = () => {
+//   return (
+//     <>
+//       <div className="mb-14 sm:mb-40">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+//           側に同じ内容のテキストが書かれている場合
+//         </h3>
+//         <div className="py-2 px-3">
+//           <p className="mb-8">
+//             <code>alt</code>属性には空文字を指定してください。
+//           </p>
+
+//           <SampleCodeWrapper
+//             title="alt属性を空にできるパターン"
+//             code={`<p>
+//   <img alt="">
+//   <span>すてきなフードデリバリー</span>
+// </p>`}
+//           >
+//             <p className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit">
+//               <Image
+//                 className="w-full"
+//                 {...{
+//                   src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
+//                   width: 168,
+//                   height: 130,
+//                   alt: '',
+//                 }}
+//               />
+//               <span className="p-2 block bg-slate-00">すてきなフードデリバリー</span>
+//             </p>
+//           </SampleCodeWrapper>
+
+//           <p className="mb-6">
+//             ただしリンクなどの機能を持つものの場合は、その機能の中で近くの文字が含まれているときに限り、
+//             <code>alt</code>属性には空文字を指定してください。
+//           </p>
+
+//           <SampleDuplicateText />
+
+//           <p>
+//             詳しくは
+//             <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
+//               「装飾画像」（外部サイト）
+//             </a>
+//             を参照してください。
+//           </p>
+//         </div>
+//       </div>
+
+//       <div className="mb-14 sm:mb-40">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+//           雰囲気づくりや、見た目のためにだけ置かれている場合
+//         </h3>
+//         <div className="py-2 px-3">
+//           <SummaryEmptyAltForPresentaion />
+//         </div>
+//       </div>
+
+//       <div className="mb-14 sm:mb-40">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+//           アイコンなど、特定の機能を説明する役割がある場合
+//         </h3>
+//         <div className="py-2 px-3">
+//           <p className="mb-6">
+//             <code>alt</code>属性に画像の役割を記述してください。
+//           </p>
+
+//           <div className="rounded-lg overflow-hidden mb-4">
+//             <Code code={`<img alt="NEW">`} />
+//           </div>
+
+//           <div className="rounded-lg overflow-hidden mb-6">
+//             <Code code={`<img alt="おすすめ">`} />
+//           </div>
+
+//           <p>
+//             詳しくは
+//             <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
+//               「機能を持った画像」（外部サイト）
+//             </a>
+//             を参照してください。
+//           </p>
+//         </div>
+//       </div>
+
+//       <div className="mb-14 sm:mb-40">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">ロゴや文字画像などの場合</h3>
+//         <div className="py-2 px-3">
+//           <p className="mb-6">
+//             <code>alt</code>属性に画像に書かれているテキストを含めてください。
+//           </p>
+
+//           <div className="rounded-lg overflow-hidden mb-6">
+//             <Code code={`<img alt="テキストテキスト">`} />
+//           </div>
+
+//           <p>
+//             詳しくは「
+//             <a href="https://www.w3.org/WAI/tutorials/images/textual/#styled-text-decorative-effect" hrefLang="en">
+//               テキストの画像（外部サイト）
+//             </a>
+//             」 参照
+//           </p>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
   return (
-    <>
-      <div className="mb-14 sm:mb-40">
-        <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
-          側に同じ内容のテキストが書かれている場合
-        </h3>
-        <div className="py-2 px-3">
-          <p className="mb-8">
-            <code>alt</code>属性には空文字を指定してください。
-          </p>
-
-          <SampleCodeWrapper
-            title="alt属性を空にできるパターン"
-            code={`<p>
-  <img alt="">
-  <span>すてきなフードデリバリー</span>
-</p>`}
+    <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
+      {list.map(([title, content]) => {
+        return (
+          <details
+            // @ts-ignore
+            name="if"
+            key={title}
+            className="group [&:not(:first-child)]:border-t [&:not(:first-child)]:border-solid [&:not(:first-child)]:border-t-gray-200"
           >
-            <p className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit">
-              <Image
-                className="w-full"
-                {...{
-                  src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
-                  width: 168,
-                  height: 130,
-                  alt: '',
-                }}
-              />
-              <span className="p-2 block bg-slate-00">すてきなフードデリバリー</span>
-            </p>
-          </SampleCodeWrapper>
-
-          <p className="mb-6">
-            ただしリンクなどの機能を持つものの場合は、その機能の中で近くの文字が含まれているときに限り、
-            <code>alt</code>属性には空文字を指定してください。
-          </p>
-
-          <SampleDuplicateText />
-
-          <p>
-            詳しくは
-            <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
-              「装飾画像」（外部サイト）
-            </a>
-            を参照してください。
-          </p>
-        </div>
-      </div>
-
-      <div className="mb-14 sm:mb-40">
-        <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
-          雰囲気づくりや、見た目のためにだけ置かれている場合
-        </h3>
-        <div className="py-2 px-3">
-          <SummaryEmptyAltForPresentaion />
-        </div>
-      </div>
-
-      <div className="mb-14 sm:mb-40">
-        <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
-          アイコンなど、特定の機能を説明する役割がある場合
-        </h3>
-        <div className="py-2 px-3">
-          <p className="mb-6">
-            <code>alt</code>属性に画像の役割を記述してください。
-          </p>
-
-          <div className="rounded-lg overflow-hidden mb-4">
-            <Code code={`<img alt="NEW">`} />
-          </div>
-
-          <div className="rounded-lg overflow-hidden mb-6">
-            <Code code={`<img alt="おすすめ">`} />
-          </div>
-
-          <p>
-            詳しくは
-            <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
-              「機能を持った画像」（外部サイト）
-            </a>
-            を参照してください。
-          </p>
-        </div>
-      </div>
-
-      <div className="mb-14 sm:mb-40">
-        <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">ロゴや文字画像などの場合</h3>
-        <div className="py-2 px-3">
-          <p className="mb-6">
-            <code>alt</code>属性に画像に書かれているテキストを含めてください。
-          </p>
-
-          <div className="rounded-lg overflow-hidden mb-6">
-            <Code code={`<img alt="テキストテキスト">`} />
-          </div>
-
-          <p>
-            詳しくは「
-            <a href="https://www.w3.org/WAI/tutorials/images/textual/#styled-text-decorative-effect" hrefLang="en">
-              テキストの画像（外部サイト）
-            </a>
-            」 参照
-          </p>
-        </div>
-      </div>
-    </>
+            <summary className="after:hidden flex cursor-pointer list-none items-center justify-between sm:text-lg text-secondary-900 bg-slate-100 group-first:rounded-t-lg group-last:rounded-b-lg group-last:group-open:rounded-none relative focus:z-10">
+              <span className="px-4 py-2">{title}</span>
+              <span className="w-[32px] mr-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="#777"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="transition-all duration-300 group-open:rotate-180"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </span>
+            </summary>
+            <div className="text-sm border-t border-t-gray-100 px-4 py-6 text-secondary-500 sm:text-base sm:pb-16">
+              {content}
+            </div>
+          </details>
+        );
+      })}
+    </div>
   );
 };
 
 export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
+  const Decorative = () => {
+    return (
+      <>
+        <p className="mb-4">
+          <code>alt</code>属性に空の値を指定します。
+        </p>
+        <p>
+          詳しくは
+          <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
+            「装飾画像」（外部サイト）
+          </a>
+          を参照してください
+        </p>
+      </>
+    );
+  };
+  const Functional = () => {
+    return (
+      <>
+        <p className="mb-4">
+          リンクや実行されたアクションの目的を伝えるために、<code>alt</code>属性を使用します。
+        </p>
+
+        <p>
+          詳しくは
+          <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
+            「機能を持った画像」（外部サイト）
+          </a>
+          を参照してください。
+        </p>
+      </>
+    );
+  };
+  const Textual = () => {
+    return (
+      <>
+        <p className="mb-4">
+          <code>alt</code>属性に画像に書かれているテキストを含めます。
+        </p>
+
+        <p>
+          詳しくは
+          <a href="https://www.w3.org/WAI/tutorials/images/textual/#styled-text-decorative-effect" hrefLang="en">
+            「文字画像」（外部サイト）
+          </a>
+          を参照してください。
+        </p>
+      </>
+    );
+  };
+  const Informative = () => {
+    return (
+      <>
+        <p className="mb-4">
+          意味が伝わるように<code>alt</code>属性に値を設定します。
+        </p>
+
+        <p>
+          詳しくは
+          <a href="https://www.w3.org/WAI/tutorials/images/informative" hrefLang="en">
+            「意味のある画像」（外部サイト）
+          </a>
+          を参照してください。
+        </p>
+      </>
+    );
+  };
+  const Complex = () => {
+    return (
+      <>
+        <p className="mb-4">「画像に含まれている情報」をWebページ内の別の箇所にも含めます。</p>
+
+        <p>
+          詳しくは
+          <a href="https://www.w3.org/WAI/tutorials/images/complex" hrefLang="en">
+            「複雑な画像」（外部サイト）
+          </a>
+          を参照してください。
+        </p>
+      </>
+    );
+  };
+
   switch (index) {
     case 0:
       return (
         <>
           <Heading>文字は含まれている画像</Heading>
-          <AnswerContainsText />
+          <Accordion
+            list={[
+              [
+                '側に同じ内容のテキストが書かれている場合',
+                <>
+                  <Decorative />
+                </>,
+              ],
+              [
+                '雰囲気づくりや、見た目のためにだけ置かれている場合',
+                <>
+                  <Decorative />
+                </>,
+              ],
+              [
+                'アイコンなど、特定の機能を説明する役割がある場合',
+                <>
+                  <Functional />
+                </>,
+              ],
+              [
+                '画像内のテキストがそれ以外に存在しない場合',
+                <>
+                  <Textual />
+                </>,
+              ],
+            ]}
+          />
         </>
       );
 
@@ -546,6 +742,8 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
         <>
           <Heading>クリックできる画像</Heading>
 
+          <Functional />
+          {/*
           <p className="mb-6">
             <code>alt</code>属性に画像の役割を記述してください。
           </p>
@@ -575,7 +773,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
               「機能を持った画像」（外部サイト）
             </a>
             を参照してください。
-          </p>
+          </p> */}
         </>
       );
     }
@@ -585,7 +783,43 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
         <>
           <Heading>意味のある画像</Heading>
 
-          <div className="mb-14 sm:mb-40">
+          <Accordion
+            list={[
+              [
+                '単純なグラフィックまたは写真の場合',
+                <>
+                  <Informative />
+                </>,
+              ],
+              [
+                'グラフまたは複雑な情報の場合',
+                <>
+                  <Complex />
+                </>,
+              ],
+              [
+                '側に同じ内容のテキストが書かれている場合',
+                <>
+                  <p className="mb-4">
+                    <code>alt</code>属性に空の値を指定してください。
+                  </p>
+
+                  <p>
+                    詳しくは
+                    <a
+                      href="https://www.w3.org/WAI/tutorials/images/functional/#logo-image-within-link-text"
+                      hrefLang="en"
+                    >
+                      「機能を持った画像(redundant)」（外部サイト）
+                    </a>
+                    を参照してください。
+                  </p>
+                </>,
+              ],
+            ]}
+          />
+
+          {/* <div className="mb-14 sm:mb-40">
             <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">単純なグラフィックまたは写真の場合</h3>
 
             <div className="py-2 px-3">
@@ -663,7 +897,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
                 」 を参照してください。
               </p>
             </div>
-          </div>
+          </div> */}
         </>
       );
     }
@@ -672,7 +906,9 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
       return (
         <>
           <Heading>装飾画像</Heading>
-          <SummaryEmptyAltForPresentaion />
+
+          <Decorative />
+          {/* <SummaryEmptyAltForPresentaion /> */}
         </>
       );
     }
