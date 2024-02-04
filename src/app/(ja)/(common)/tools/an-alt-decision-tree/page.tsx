@@ -31,6 +31,6 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: 'An alt Decision Tree',
+  title: 'An alt Decision Tree 日本語訳',
   description: 'Altテキストを決める手助けをします。',
 };
