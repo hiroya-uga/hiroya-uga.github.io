@@ -2,7 +2,7 @@
   font-family: monospace;
 }
 
-:where(li, th, td, figcaption, caption, p, span, a) > code {
+:where(li, th, td, figcaption, caption, p, span, a, dd) > code {
   padding: 0.1428em 0.2857em;
   font-size: 0.875em;
   color: #345071;
