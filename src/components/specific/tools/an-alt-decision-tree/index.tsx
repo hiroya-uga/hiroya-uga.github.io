@@ -310,7 +310,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
           <Shrimp />
 
           <div className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
-            <p className="mb-4 sm:mb-0">
+            <p className="mb-2 sm:mb-0">
               リンクまたはボタンなど、
               <span className="inline-block sm:inline">機能のために使用されているかを確認してください。</span>
             </p>
@@ -621,7 +621,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
   const Decorative = () => {
     return (
       <>
-        <p className="mb-4">
+        <p className="mb-2">
           <code>alt</code>属性に空の値を指定します。
         </p>
         <p>
@@ -637,7 +637,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
   const Functional = () => {
     return (
       <>
-        <p className="mb-4">
+        <p className="mb-2">
           リンクや実行されたアクションの目的を伝えるために、<code>alt</code>属性を使用します。
         </p>
 
@@ -654,7 +654,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
   const Textual = () => {
     return (
       <>
-        <p className="mb-4">
+        <p className="mb-2">
           <code>alt</code>属性に画像に書かれているテキストを含めます。
         </p>
 
@@ -671,7 +671,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
   const Informative = () => {
     return (
       <>
-        <p className="mb-4">
+        <p className="mb-2">
           意味が伝わるように<code>alt</code>属性に値を設定します。
         </p>
 
@@ -688,7 +688,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
   const Complex = () => {
     return (
       <>
-        <p className="mb-4">「画像に含まれている情報」をWebページ内の別の箇所にも含めます。</p>
+        <p className="mb-2">「画像に含まれている情報」をWebページ内の別の箇所にも含めます。</p>
 
         <p>
           詳しくは
@@ -800,7 +800,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
               [
                 '側に同じ内容のテキストが書かれている場合',
                 <>
-                  <p className="mb-4">
+                  <p className="mb-2">
                     <code>alt</code>属性に空の値を指定してください。
                   </p>
 
