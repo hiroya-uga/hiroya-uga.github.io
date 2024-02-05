@@ -48,12 +48,6 @@ export default function Home() {
           <ul className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
             {[
               {
-                emoji: '⚗️',
-                href: '/tools/dom-events-watcher',
-                title: 'DOM Event Watcher',
-                desctiption: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
-              },
-              {
                 emoji: '🌳',
                 href: '/tools/an-alt-decision-tree',
                 title: 'An alt Decision Tree',
@@ -61,10 +55,22 @@ export default function Home() {
                   '画像の代替テキストを決めるための２択チャートです。WAIが公開している「An alt Decision Tree」の日本語訳です。',
               },
               {
+                emoji: '🖼',
+                href: '/documents/translations/w3c/wai/tutorials/images',
+                title: '日本語訳：Images Tutorial',
+                desctiption: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
+              },
+              {
                 emoji: '📝',
                 href: '/documents/translations/pauljadam-modern-web-a11y-demos',
-                title: "PaulJAdam's Modern Web Accessibility Demos",
+                title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
                 desctiption: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+              },
+              {
+                emoji: '⚗️',
+                href: '/tools/dom-events-watcher',
+                title: 'DOM Event Watcher',
+                desctiption: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
               },
               {
                 emoji: '💭',
@@ -73,7 +79,7 @@ export default function Home() {
                 desctiption: 'English Only. 日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
                 hrefLang: 'en',
               },
-            ].map(({ emoji, href, title, hrefLang, desctiption }) => {
+            ].map(({ emoji, href, title, hrefLang, desctiption, ...item }) => {
               const id = desctiption && href;
 
               return (
@@ -83,7 +89,10 @@ export default function Home() {
                       <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none">
                         {emoji}
                       </span>
-                      <span className="inline-block leading-normal">{title}</span>
+                      <span className="inline-block leading-normal">
+                        {title}
+                        {/* {item.isWip && <b>（WIP）</b>} */}
+                      </span>
                     </a>
                   </p>
                   {desctiption && (

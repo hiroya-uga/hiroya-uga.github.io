@@ -31,7 +31,7 @@ const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, '
           ref={ref}
           tabIndex={-1}
         >
-          <span className="bg-gray-200 rounded-md mr-3 sm:mr-4 p-1 aspect-square h-10 grid place-items-center">
+          <span className="bg-gray-200 rounded-md mr-3 sm:mr-4 p-1 aspect-square h-10 grid place-items-center leading-none sm:h-12">
             Q{index + 1}
           </span>
           <strong className="font-normal">{children}</strong>
@@ -456,9 +456,7 @@ export const AnAltDecisionTreeException = () => {
           どのような代替テキストを設定すればいいか不明な場合は、
           <span className="inline-block">
             詳しくは
-            <a href="https://www.w3.org/WAI/tutorials/images/" hrefLang="en">
-              WAIのImage Concepts Page（外部サイト）
-            </a>
+            <a href="/documents/translations/w3c/wai/tutorials/images/">Image Tutorial の日本語訳</a>
             を参照してください。
           </span>
         </p>
