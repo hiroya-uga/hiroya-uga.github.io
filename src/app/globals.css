@@ -6,6 +6,13 @@
   .palt {
     font-feature-settings: "palt";
   }
+
+  /* href=#hogehoge の行き先 */
+  .target[id]:not([id^=":"]) {
+    display: block;
+    margin-top: -30px;
+    padding-top: 30px;
+  }
 }
 
 :root {
