@@ -10,16 +10,16 @@ export default function Page() {
       </h1>
 
       <p>
-        <code>img</code>要素の<code>alt</code>属性を省略してはいけません。
+        <code>img</code>要素の<code>alt</code>属性は省略せず、適切な値を設定する必要があります。
       </p>
       <p className="mt-2">
-        どんな時にはどんな値を入れればいいのかを教えてくれる
+        これは、代替テキスト
         <ruby>
           決定木
           <rt>Decision Tree</rt>
         </ruby>
-        「<a href="https://www.w3.org/WAI/tutorials/images/decision-tree/">An alt Decision Tree</a>
-        」の日本語訳です。
+        の<a href="https://www.w3.org/WAI/tutorials/images/decision-tree/">An alt Decision Tree</a>
+        （英語）を参考に用意したチャートです。
       </p>
       <p>代替テキストにお悩みの際にご活用ください。</p>
 
@@ -31,6 +31,6 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: 'An alt Decision Tree 日本語訳',
-  description: 'Altテキストを決める手助けをします。',
+  title: 'An alt Decision Tree - 代替テキスト決定木',
+  description: '画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
 };

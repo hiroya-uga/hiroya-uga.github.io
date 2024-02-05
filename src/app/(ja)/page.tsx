@@ -51,8 +51,7 @@ export default function Home() {
                 emoji: '🌳',
                 href: '/tools/an-alt-decision-tree',
                 title: 'An alt Decision Tree',
-                desctiption:
-                  '画像の代替テキストを決めるための２択チャートです。WAIが公開している「An alt Decision Tree」の日本語訳です。',
+                desctiption: '画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
               },
               {
                 emoji: '🖼',
