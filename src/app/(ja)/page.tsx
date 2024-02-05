@@ -24,6 +24,7 @@ export default function Home() {
         <div className="max-w-content mx-auto">
           <blockquote
             cite="https://www.w3.org/mission/accessibility/"
+            lang="en"
             className="mb-8 p-4 bg-gray-200 rounded-sm sm:py-6 sm:px-8"
           >
             <p className="mb-2">
@@ -38,9 +39,14 @@ export default function Home() {
             </footer>
           </blockquote>
           <p className="mb-12 sm:mb-28 leading-relaxed">
-            Space ga amatteru kara toriaezu Lorem ipsum demo kaite okouka: Lorem ipsum dolor, sit amet consectetur
-            adipisicing elit. Impedit, voluptates vel voluptatem quae eos similique harum at eligendi enim sint pariatur
-            quasi quos, natus quidem laudantium quisquam non minima rerum?
+            <span>
+              Sono uchi main visual wo oku yotei desu. Space ga amatteru kara toriaezu Lorem ipsum demo kaite okouyo:{' '}
+            </span>
+            <span>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit, voluptates vel voluptatem quae eos
+              similique harum at eligendi enim sint pariatur quasi quos, natus quidem laudantium quisquam non minima
+              rerum?
+            </span>
           </p>
 
           <h2 className="text-2xl mb-4">Menu</h2>
@@ -95,7 +101,10 @@ export default function Home() {
                         {title}
                         {/* {item.isWip && <b>（WIP）</b>} */}
                       </span>
-                      <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none">
+                      <span
+                        className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none"
+                        aria-hidden="true"
+                      >
                         {emoji}
                       </span>
                     </a>
