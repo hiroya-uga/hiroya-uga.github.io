@@ -337,7 +337,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         イベントハンドラを持っている要素はform要素のみですが、一部のイベントによってはバブリングしないため直接イベントを受け取る要素にハンドラを登録しています。
       </p>
 
-      <details className="rounded border border-slate-400 overflow-hidden bg-slate-50 mb-28">
+      <details className="rounded border border-slate-400 overflow-hidden bg-white mb-28">
         <summary className="p-4 bg-slate-200 sm:hover:bg-slate-300 sm:transition-colors sm:duration-200">
           サポートしているイベントタイプ
         </summary>

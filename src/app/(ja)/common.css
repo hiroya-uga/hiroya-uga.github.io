@@ -9,3 +9,7 @@
   background-color: #c8cee1;
   border-radius: 4px;
 }
+
+:is([class*="text-"]):not([class^="leading-"]) {
+  line-height: 1.875;
+}

@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <header className="py-12 px-4 sm:py-16">
         <div className="max-w-content mx-auto">
-          <h1 className="text-2xl font-bold">{metadata.title}</h1>
+          <h1 className="text-2xl font-bold leading-none">{metadata.title}</h1>
         </div>
       </header>
 
@@ -37,7 +37,7 @@ export default function Home() {
               <p>—Tim Berners-Lee, W3C Director and inventor of the World Wide Web</p>
             </footer>
           </blockquote>
-          <p className="mb-12 sm:mb-28">
+          <p className="mb-12 sm:mb-28 leading-relaxed">
             Space ga amatteru kara toriaezu Lorem ipsum demo kaite okouka: Lorem ipsum dolor, sit amet consectetur
             adipisicing elit. Impedit, voluptates vel voluptatem quae eos similique harum at eligendi enim sint pariatur
             quasi quos, natus quidem laudantium quisquam non minima rerum?
@@ -78,16 +78,16 @@ export default function Home() {
 
               return (
                 <li key={href}>
-                  <p>
+                  <p className="mb-1">
                     <a href={href} hrefLang={hrefLang} className="no-underline block" aria-describedby={id}>
-                      <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md">
+                      <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none">
                         {emoji}
                       </span>
-                      <span>{title}</span>
+                      <span className="inline-block leading-normal">{title}</span>
                     </a>
                   </p>
                   {desctiption && (
-                    <p className="mt-2 text-xs" id={id}>
+                    <p className="text-xs" id={id}>
                       {desctiption}
                     </p>
                   )}
