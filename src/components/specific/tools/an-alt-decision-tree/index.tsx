@@ -202,7 +202,7 @@ const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, '
 //       <p>
 //         詳しくは
 //         <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
-//           「装飾画像」（外部サイト）
+//           「装飾目的の画像」（外部サイト）
 //         </a>
 //         を参照してください。
 //       </p>
@@ -392,7 +392,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
         <>
           <Heading index={index}>装飾目的の画像ですか？</Heading>
 
-          {/* <ImageWrapper caption="装飾画像の例">
+          {/* <ImageWrapper caption="装飾目的の画像の例">
             <ToggleButton />
 
             <div className="mb-10">
@@ -508,7 +508,7 @@ export const AnAltDecisionTreeException = () => {
 //           <p>
 //             詳しくは
 //             <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
-//               「装飾画像」（外部サイト）
+//               「装飾目的の画像」（外部サイト）
 //             </a>
 //             を参照してください。
 //           </p>
@@ -544,7 +544,7 @@ export const AnAltDecisionTreeException = () => {
 //           <p>
 //             詳しくは
 //             <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
-//               「機能を持った画像」（外部サイト）
+//               「機能を持つ画像」（外部サイト）
 //             </a>
 //             を参照してください。
 //           </p>
@@ -625,7 +625,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
         <p>
           詳しくは
           <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
-            「装飾画像」（外部サイト）
+            「装飾目的の画像」（外部サイト）
           </a>
           を参照してください
         </p>
@@ -642,7 +642,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
         <p>
           詳しくは
           <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
-            「機能を持った画像」（外部サイト）
+            「機能を持つ画像」（外部サイト）
           </a>
           を参照してください。
         </p>
@@ -768,7 +768,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
           <p>
             詳しくは
             <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
-              「機能を持った画像」（外部サイト）
+              「機能を持つ画像」（外部サイト）
             </a>
             を参照してください。
           </p> */}
@@ -808,7 +808,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
                       href="https://www.w3.org/WAI/tutorials/images/functional/#logo-image-within-link-text"
                       hrefLang="en"
                     >
-                      「機能を持った画像(redundant)」（外部サイト）
+                      「機能を持つ画像(redundant)」（外部サイト）
                     </a>
                     を参照してください。
                   </p>
@@ -890,7 +890,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
               <p>
                 詳しくは「
                 <a href="https://www.w3.org/WAI/tutorials/images/functional/#logo-image-within-link-text" hrefLang="en">
-                  （冗長な）機能を持った画像（外部サイト）
+                  （冗長な）機能を持つ画像（外部サイト）
                 </a>
                 」 を参照してください。
               </p>
@@ -903,7 +903,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
     case 3: {
       return (
         <>
-          <Heading>装飾画像</Heading>
+          <Heading>装飾目的の画像</Heading>
 
           <Decorative />
           {/* <SummaryEmptyAltForPresentaion /> */}
