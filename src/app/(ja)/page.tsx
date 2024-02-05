@@ -50,8 +50,9 @@ export default function Home() {
               {
                 emoji: '🌳',
                 href: '/tools/an-alt-decision-tree',
-                title: 'An alt Decision Tree',
-                desctiption: '画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
+                title: '代替テキスト２択チャート',
+                desctiption:
+                  'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
               },
               {
                 emoji: '🖼',
@@ -84,13 +85,18 @@ export default function Home() {
               return (
                 <li key={href}>
                   <p className="mb-1">
-                    <a href={href} hrefLang={hrefLang} className="no-underline block" aria-describedby={id}>
-                      <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none">
-                        {emoji}
-                      </span>
+                    <a
+                      href={href}
+                      hrefLang={hrefLang}
+                      className="no-underline flex flex-col-reverse"
+                      aria-describedby={id}
+                    >
                       <span className="inline-block leading-normal">
                         {title}
                         {/* {item.isWip && <b>（WIP）</b>} */}
+                      </span>
+                      <span className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none">
+                        {emoji}
                       </span>
                     </a>
                   </p>

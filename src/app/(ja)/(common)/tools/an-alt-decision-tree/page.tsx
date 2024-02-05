@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <h1>
-        An alt Decision Tree - <strong className="font-normal">代替テキスト決定木</strong>
+        An alt Decision Tree - <strong className="font-normal">代替テキスト２択チャート</strong>
       </h1>
 
       <p>
@@ -31,6 +31,7 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: 'An alt Decision Tree - 代替テキスト決定木',
-  description: '画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
+  title: '代替テキスト２択チャート',
+  description:
+    'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
 };

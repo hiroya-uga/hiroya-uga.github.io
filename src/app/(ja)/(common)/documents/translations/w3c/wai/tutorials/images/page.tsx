@@ -78,7 +78,7 @@ export default function Page() {
               '文字画像 - Images of Text',
               'https://www.w3.org/WAI/tutorials/images/textual/',
               <>
-                判読可能なテキストが画像内に含まれている場合があります。
+                判読可能なテキストが画像内に含まれている場合がありますが、
                 <span className="sm:inline-block">ロゴ画像ではない場合は画像内テキストを避けるべきです。</span>
                 <span className="sm:inline-block">
                   その上で文字画像を使用する場合、代替テキストには画像と同じ文言が指定する必要があります。
@@ -179,7 +179,7 @@ export default function Page() {
 
       <NoteBox>
         <p>
-          Webサイトから画像を削除すること（いわゆる「テキストのみのバージョン」）は、これらのユーザーや利用状況に対するアクセスの妨げや、機能を低下につながります。
+          Webサイトから画像を削除すること（いわゆる「テキストのみのバージョン」）は、これらのユーザーや利用状況に対してアクセシビリティや機能の低下につながります。
         </p>
       </NoteBox>
 
