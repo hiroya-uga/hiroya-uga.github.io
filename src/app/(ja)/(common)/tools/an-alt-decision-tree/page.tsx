@@ -5,8 +5,9 @@ import { Metadata } from 'next';
 export default function Page() {
   return (
     <>
-      <h1>
-        An alt Decision Tree - <strong className="font-normal">代替テキスト２択チャート</strong>
+      <h1 className="leading-none">
+        <span className="text-sm">An alt Decision Treeに基づく</span>
+        <strong className="font-normal block leading-relaxed">代替テキスト２択チャート</strong>
       </h1>
 
       <p>
