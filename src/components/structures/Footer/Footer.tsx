@@ -1,6 +1,6 @@
 'use client';
 
-import { META } from '@/constants/meta';
+import { SITE_NAME } from '@/constants/meta';
 
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
@@ -16,10 +16,10 @@ export const Footer = () => {
           <small>
             &copy;{' '}
             {isTop ? (
-              META.siteName
+              SITE_NAME
             ) : (
               <a href="/" className="text-inherit">
-                {META.siteName}
+                {SITE_NAME}
               </a>
             )}
           </small>{' '}

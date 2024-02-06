@@ -1,4 +1,4 @@
-import { META } from '@/constants/meta';
+import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
 import '@/pages/globals.css';
 
 import { useEffect, useState } from 'react';
@@ -37,7 +37,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>HTTP 404 未検出 - {META.siteName}</title>
+        <title>HTTP 404 未検出 - {SITE_NAME}</title>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
       </Head>
 
@@ -55,7 +55,7 @@ export default function Page() {
           </li>
           <li>
             <a className="Page_link__nDiOM" href="/">
-              {META.domain}
+              {DOMAIN_NAME}
             </a>{' '}
             ホーム ページを開いてから、表示する情報へのリンクを探してください。
           </li>
