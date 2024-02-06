@@ -1,5 +1,5 @@
 import Mdx from '@/app/(en)/(specs)/documents/fantasized-specs/css-observer/content.mdx';
-import { META } from '@/constants/meta';
+import { DOMAIN_NAME, GITHUB_PROFILE, GITHUB_REPOSITORY } from '@/constants/meta';
 import { DocumentHeadingLevel2 } from '@/mdx-components';
 
 import { Metadata } from 'next';
@@ -14,18 +14,18 @@ export default function Page() {
       <dl>
         <dt>This version:</dt>
         <dd>
-          <a href={`https://${META.domain}/documents/fantasized-specs/css-observer`}>
-            https://{META.domain}/documents/fantasized-specs/css-observer
+          <a href={`https://${DOMAIN_NAME}/documents/fantasized-specs/css-observer`}>
+            https://{DOMAIN_NAME}/documents/fantasized-specs/css-observer
           </a>
         </dd>
         <dt>Editors:</dt>
         <dd>
-          <a href={META.github}>Hiroya Uga</a>
+          <a href={GITHUB_PROFILE}>Hiroya Uga</a>
         </dd>
         <dt>Issue Tracking:</dt>
         <dd>
           <a
-            href={`${META.repository}/blob/main/src/app/(en)/(specs)/documents/fantasized-specs/css-observer/content.mdx`}
+            href={`${GITHUB_REPOSITORY}/blob/main/src/app/(en)/(specs)/documents/fantasized-specs/css-observer/content.mdx`}
           >
             GitHub Issues
           </a>

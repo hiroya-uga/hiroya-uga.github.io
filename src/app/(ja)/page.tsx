@@ -1,5 +1,5 @@
 import { Footer } from '@/components/structures/Footer';
-import { META } from '@/constants/meta';
+import { SITE_NAME } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
 import clsx from 'clsx';
@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata & { title: string } = {
-  title: META.siteName,
+  title: SITE_NAME,
   description: 'Web開発者の物置。',
 };
 

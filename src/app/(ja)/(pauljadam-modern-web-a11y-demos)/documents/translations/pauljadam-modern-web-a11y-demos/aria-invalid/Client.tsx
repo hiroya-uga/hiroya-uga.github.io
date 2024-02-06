@@ -1,12 +1,12 @@
 'use client';
 
-import { META } from '@/constants/meta';
+import { DOMAIN_NAME } from '@/constants/meta';
 
 import { usePathname } from 'next/navigation';
 
 export const SelfLink = () => {
   const pathname = usePathname();
-  const url = `https://${META.domain}${pathname}`;
+  const url = `https://${DOMAIN_NAME}${pathname}`;
 
   return (
     <p>
