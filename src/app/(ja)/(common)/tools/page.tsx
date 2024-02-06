@@ -12,10 +12,10 @@ export default function Page() {
       <SimpleDescriptionList
         list={[
           {
-            key: `An alt Decision Tree - 代替テキスト２択チャート`,
+            key: `代替テキスト２択チャート`,
             title: (
               <>
-                <Link href="/tools/dom-events-watcher">An alt Decision Tree - 代替テキスト２択チャート</Link>
+                <Link href="/tools/an-alt-decision-tree">代替テキスト２択チャート</Link>
               </>
             ),
             description:
@@ -25,7 +25,7 @@ export default function Page() {
             key: `DOM Event Watcher`,
             title: (
               <>
-                <Link href="/tools/an-alt-decision-tree/">DOM Event Watcher</Link>
+                <Link href="/tools/dom-events-watcher/">DOM Event Watcher</Link>
               </>
             ),
             description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
