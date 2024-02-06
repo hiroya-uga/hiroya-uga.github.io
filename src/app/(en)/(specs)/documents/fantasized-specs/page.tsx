@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
   title: 'Fantasized specs',
-  description: 'Web開発者の物置。',
+  description: 'These are the spec proposals that I came up with in my daily work.',
 };
 
 export default function Page() {
