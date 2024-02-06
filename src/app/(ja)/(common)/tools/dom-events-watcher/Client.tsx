@@ -382,191 +382,199 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </div>
       </details>
 
-      <form
-        ref={ref}
-        className="overflow-y-scroll max-h-[30vh] p-4 pb-8 border border-solid border-gray-400"
-        tabIndex={0}
-        id="container"
-        role="group"
-        aria-labelledby={`${id}-title`}
-        aria-describedby={`${id}-container-desc`}
-      >
-        <div className="min-h-[40vh]">
-          <p id={`${id}-container-desc`} className="mb-8">
-            <strong>ここに入力された値はどこにも送信されません。</strong>
-          </p>
+      <div className="sm:flex gap-6 sm:h-[50vh]">
+        <form
+          ref={ref}
+          className="overflow-y-scroll max-h-[30vh] p-4 pb-8 border border-solid border-gray-400 sm:max-h-none sm:max-w-[375px]"
+          tabIndex={0}
+          id="container"
+          role="group"
+          aria-labelledby={`${id}-title`}
+          aria-describedby={`${id}-container-desc`}
+        >
+          <div className="min-h-[40vh]">
+            <p id={`${id}-container-desc`} className="mb-8">
+              <strong>ここに入力された値はどこにも送信されません。</strong>
+            </p>
 
-          <p className="text-center touch-none p-8 border border-solid border-gray-400 mb-8">
-            タッチイベントを無視するp要素
-          </p>
+            <p className="text-center touch-none p-8 border border-solid border-gray-400 mb-8">
+              タッチイベントを無視するp要素
+            </p>
 
-          <p>
-            <label htmlFor={id} className="block w-fit mb-2 font-bold">
-              テキストフィールド
-            </label>
-          </p>
-          <p id={`${id}-description`} className="mb-2">
-            ファイルのドラッグ＆ドロップも可能です。
-          </p>
-          <p className="mb-8">
-            <input
-              id={id}
-              ref={inputRef}
-              autoComplete="none"
-              aria-describedby={`${id}-description`}
-              placeholder="hogehoge"
-              className="p-4 border border-solid border-gray-500 rounded w-full"
-            />
-          </p>
+            <p>
+              <label htmlFor={id} className="block w-fit mb-2 font-bold">
+                テキストフィールド
+              </label>
+            </p>
+            <p id={`${id}-description`} className="mb-2">
+              ファイルのドラッグ＆ドロップも可能です。
+            </p>
+            <p className="mb-8">
+              <input
+                id={id}
+                ref={inputRef}
+                autoComplete="none"
+                aria-describedby={`${id}-description`}
+                placeholder="hogehoge"
+                className="p-4 border border-solid border-gray-500 rounded w-full"
+              />
+            </p>
 
-          <p>
-            <label htmlFor={`${id}-required`} className="block w-fit mb-2 font-bold">
-              テキストフィールド（必須）
-            </label>
-          </p>
+            <p>
+              <label htmlFor={`${id}-required`} className="block w-fit mb-2 font-bold">
+                テキストフィールド（必須）
+              </label>
+            </p>
 
-          <p className="mb-8">
-            <input
-              ref={requiredInputRef}
-              id={`${id}-required`}
-              autoComplete="none"
-              placeholder="hogehoge"
-              required
-              className="p-4 border border-solid border-gray-500 rounded w-full"
-            />
-          </p>
+            <p className="mb-8">
+              <input
+                ref={requiredInputRef}
+                id={`${id}-required`}
+                autoComplete="none"
+                placeholder="hogehoge"
+                required
+                className="p-4 border border-solid border-gray-500 rounded w-full"
+              />
+            </p>
 
-          <fieldset className="mb-8">
-            <legend className="block w-fit mb-2 font-bold">ラジオボタン</legend>
-            <ul>
-              <li>
-                <label>
-                  <input type="radio" name="hoge" />
-                  <span className="pl-2">項目1</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="radio" name="hoge" />
-                  <span className="pl-2">項目2</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="radio" name="hoge" />
-                  <span className="pl-2">項目3</span>
-                </label>
-              </li>
-            </ul>
-          </fieldset>
+            <fieldset className="mb-8">
+              <legend className="block w-fit mb-2 font-bold">ラジオボタン</legend>
+              <ul>
+                <li>
+                  <label>
+                    <input type="radio" name="hoge" />
+                    <span className="pl-2">項目1</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="hoge" />
+                    <span className="pl-2">項目2</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="hoge" />
+                    <span className="pl-2">項目3</span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
 
-          <fieldset className="mb-8">
-            <legend className="block w-fit mb-2 font-bold">チェックボタン</legend>
-            <ul>
-              <li>
-                <label>
-                  <input type="checkbox" name="hoge" />
-                  <span className="pl-2">項目1</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" name="hoge" />
-                  <span className="pl-2">項目2</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" name="hoge" />
-                  <span className="pl-2">項目3</span>
-                </label>
-              </li>
-            </ul>
-          </fieldset>
-        </div>
+            <fieldset className="mb-8">
+              <legend className="block w-fit mb-2 font-bold">チェックボタン</legend>
+              <ul>
+                <li>
+                  <label>
+                    <input type="checkbox" name="hoge" />
+                    <span className="pl-2">項目1</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="hoge" />
+                    <span className="pl-2">項目2</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="hoge" />
+                    <span className="pl-2">項目3</span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
 
-        <figure className="mb-8 text-center">
-          <p className="mb-2">
-            <video ref={videoRef} {...videoSrc} controls muted className="w-96 h-auto aspect-video max-w-full"></video>
-          </p>
+          <figure className="mb-8 text-center">
+            <p className="mb-2">
+              <video
+                ref={videoRef}
+                {...videoSrc}
+                controls
+                muted
+                className="w-96 h-auto aspect-video max-w-full"
+              ></video>
+            </p>
 
-          <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
-        </figure>
+            <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
+          </figure>
 
-        <div className="mt-12 text-center flex flex-wrap justify-center gap-x-12 gap-y-8">
-          <p>
-            <button type="button" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
-              何も起こらないただのボタン
-            </button>
-          </p>
+          <div className="mt-12 text-center flex flex-wrap justify-center gap-x-12 gap-y-8">
+            <p>
+              <button type="button" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
+                何も起こらないただのボタン
+              </button>
+            </p>
 
-          <p>
-            <button type="submit" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
-              送信ボタン
-            </button>
-          </p>
-        </div>
-      </form>
+            <p>
+              <button type="submit" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
+                送信ボタン
+              </button>
+            </p>
+          </div>
+        </form>
 
-      <section>
-        <h2 className="block w-fit mb-2 font-bold">
-          <strong id={`${id}-log-title`}>ログ</strong>（最大300行）
-        </h2>
+        <section>
+          <h2 className="block w-fit mb-2 font-bold sm:mt-0">
+            <strong id={`${id}-log-title`}>ログ</strong>（最大300行）
+          </h2>
 
-        <p>最後の作業から１秒経過すると、次の操作時にタイムスタンプの行が挿入されます。</p>
-        <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
+          <p>最後の作業から１秒経過すると、次の操作時にタイムスタンプの行が挿入されます。</p>
+          <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
 
-        <div className="h-[30vh] py-2 overflow-y-scroll bg-gray-200" tabIndex={0} aria-labelledby={`${id}-log-title`}>
-          <div
-            className="grid grid-cols-[auto_auto_1fr] sm:grid-cols-[auto_auto_auto_1fr]"
-            style={{
-              counterReset: 'log',
-            }}
-          >
-            {value.map((item, index) => {
-              if (typeof item === 'string') {
+          <div className="h-[30vh] py-2 overflow-y-scroll bg-gray-200" tabIndex={0} aria-labelledby={`${id}-log-title`}>
+            <div
+              className="grid grid-cols-[auto_auto_1fr] sm:grid-cols-[auto_auto_auto_1fr]"
+              style={{
+                counterReset: 'log',
+              }}
+            >
+              {value.map((item, index) => {
+                if (typeof item === 'string') {
+                  return (
+                    <p key={item} className="text-right bg-gray-300 px-2 my-1 col-[1_/_4] sm:col-[1_/_5] grid">
+                      ↓ until {item}
+                    </p>
+                  );
+                }
+
+                const [tagName, eventNameValue] = item;
+
+                if (!tagName) {
+                  return <React.Fragment key={index} />;
+                }
+
+                const [eventName, times] = eventNameValue.split('@@@');
+                const [name, options] = eventName.split('__options__');
+
                 return (
-                  <p key={item} className="text-right bg-gray-300 px-2 my-1 col-[1_/_4] sm:col-[1_/_5] grid">
-                    ↓ until {item}
+                  <p
+                    key={index}
+                    className="px-2 before:content-[counter(log)] col-[1_/_4] sm:col-[1_/_5] before:col-[1_/_2] grid grid-cols-[subgrid] grid-rows-[auto_auto] sm:grid-cols-[subgrid] sm:before:text-right before:font-mono before:pr-3 keep-all my-2 sm:my-0"
+                    style={{
+                      counterIncrement: 'log',
+                    }}
+                  >
+                    <span className="col-[2_/_3] row-[1_/_2] sm:row-[1_/_2] sm:col-[2_/_3] pr-3 text-center">
+                      <code className="block sm:inline">{tagName}</code>
+                    </span>
+                    <span className="col-[3_/_4] row-[1_/_2] sm:row-[1_/_2] sm:col-[3_/_4]">
+                      {name}
+                      {times && ` x ${times}`}
+                    </span>
+                    {options && (
+                      <span className="text-orange-800 sm:pl-4 col-[2_/_4] row-[2_/_3] sm:row-[1_/_2] sm:col-[4_/_5]">
+                        {options}
+                      </span>
+                    )}
                   </p>
                 );
-              }
-
-              const [tagName, eventNameValue] = item;
-
-              if (!tagName) {
-                return <React.Fragment key={index} />;
-              }
-
-              const [eventName, times] = eventNameValue.split('@@@');
-              const [name, options] = eventName.split('__options__');
-
-              return (
-                <p
-                  key={index}
-                  className="px-2 before:content-[counter(log)] col-[1_/_4] sm:col-[1_/_5] before:col-[1_/_2] grid grid-cols-[subgrid] grid-rows-[auto_auto] sm:grid-cols-[subgrid] sm:before:text-right before:font-mono before:pr-3 keep-all my-2 sm:my-0"
-                  style={{
-                    counterIncrement: 'log',
-                  }}
-                >
-                  <span className="col-[2_/_3] row-[1_/_2] sm:row-[1_/_2] sm:col-[2_/_3] pr-3 text-center">
-                    <code className="block sm:inline">{tagName}</code>
-                  </span>
-                  <span className="col-[3_/_4] row-[1_/_2] sm:row-[1_/_2] sm:col-[3_/_4]">
-                    {name}
-                    {times && ` x ${times}`}
-                  </span>
-                  {options && (
-                    <span className="text-orange-800 sm:pl-4 col-[2_/_4] row-[2_/_3] sm:row-[1_/_2] sm:col-[4_/_5]">
-                      {options}
-                    </span>
-                  )}
-                </p>
-              );
-            })}
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 };
