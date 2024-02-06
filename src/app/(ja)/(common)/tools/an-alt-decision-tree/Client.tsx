@@ -107,7 +107,7 @@ export const AnAltDecisionTreeContent = () => {
       <div className={clsx([`${styles.slide}`, index === 0 && 'pb-4'])}>
         <AnAltDecisionTreeQuestion index={index} />
 
-        <ul className="mt-12 pt-10 border-t border-t-slate-200 flex justify-center gap-4 flex-wrap mb-10 last:mb-0">
+        <ul className="mt-12 pt-10 border-t border-t-slate-200 flex justify-center gap-4 flex-wrap">
           <li>
             <button
               type="button"
@@ -140,7 +140,7 @@ export const AnAltDecisionTreeContent = () => {
       </div>
 
       {index !== 0 && (
-        <p className="mt-4">
+        <p className="mt-10">
           <button
             type="button"
             className="px-2 py-1 bg-slate-100"
