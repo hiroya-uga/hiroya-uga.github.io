@@ -194,7 +194,7 @@ export default function Page() {
               key: '1.1.1 ノンテキストコンテンツ',
               title: (
                 <>
-                  <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-text-equiv-all">
+                  <a href="https://waic.jp/translations/WCAG20/quickref/#qr-text-equiv-all">
                     <b>1.1.1</b> 非テキストコンテンツ
                   </a>
                 </>
@@ -207,7 +207,7 @@ export default function Page() {
               key: '1.4.5 文字画像',
               title: (
                 <>
-                  <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-visual-audio-contrast-text-presentation">
+                  <a href="https://waic.jp/translations/WCAG20/quickref/#qr-visual-audio-contrast-text-presentation">
                     <b>1.4.5</b> 文字画像
                   </a>
                 </>
@@ -220,7 +220,7 @@ export default function Page() {
               key: '1.4.9 文字画像 (例外なし)',
               title: (
                 <>
-                  <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-visual-audio-contrast-text-images">
+                  <a href="https://waic.jp/translations/WCAG20/quickref/#qr-visual-audio-contrast-text-images">
                     <b>1.4.9</b> 文字画像 (例外なし)
                   </a>
                 </>
