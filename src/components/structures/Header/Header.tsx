@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const Header = () => {
   return (
     <header>
-      <p className="text-[0.625rem] mb-4 lg:mb-0">
+      <p className="text-[0.78125rem] mb-4 lg:mb-0">
         <span className="font-mono block bg-white min-w-[29.2929vh] text-right px-2 lg:fixed lg:-rotate-90 lg:inline-block lg:py-1 lg:origin-top-right lg:right-full lg:top-0 lg:max-w-[100vh] lg:overflow-auto lg:whitespace-nowrap">
           <Link href="/" className="text-[inherit]">
             {SITE_NAME}
