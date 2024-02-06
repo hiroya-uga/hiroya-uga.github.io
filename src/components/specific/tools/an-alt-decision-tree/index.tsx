@@ -703,7 +703,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
     case 0:
       return (
         <>
-          <Heading>文字は含まれている画像</Heading>
+          <Heading>文字が含まれている画像</Heading>
           <Accordion
             list={[
               [
