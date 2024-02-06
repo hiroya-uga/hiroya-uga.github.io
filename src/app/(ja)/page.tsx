@@ -128,7 +128,7 @@ export default function Home() {
                           {/* {item.isWip && <b>（WIP）</b>} */}
                         </span>
                         <span
-                          className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none"
+                          className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-4 rounded-md leading-none font-emoji"
                           aria-hidden="true"
                         >
                           {emoji}
