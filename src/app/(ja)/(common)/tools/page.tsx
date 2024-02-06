@@ -1,5 +1,4 @@
 import { SimpleDescriptionList } from '@/components/List';
-import { TranslationsToc } from '@/components/includes/documents/TranslationsToc';
 
 import { Metadata } from 'next';
 import Link from 'next/link';

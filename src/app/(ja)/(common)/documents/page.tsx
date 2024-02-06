@@ -1,5 +1,4 @@
 import { SimpleDescriptionList } from '@/components/List';
-import { TranslationsToc } from '@/components/includes/documents/TranslationsToc';
 
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -10,14 +9,17 @@ export default function Page() {
       <h1 className="mb-0">資料集</h1>
       <p className="mb-12">ドキュメント系をまとめた階層です。</p>
 
-      <h2>日本語訳</h2>
-
-      <TranslationsToc />
-
-      <h2>その他</h2>
-
       <SimpleDescriptionList
         list={[
+          {
+            key: `日本語訳集`,
+            title: (
+              <>
+                <Link href="/documents/translations/">日本語訳</Link>
+              </>
+            ),
+            description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
+          },
           {
             key: `Fantasized Web Standards and Specifications`,
             title: (
