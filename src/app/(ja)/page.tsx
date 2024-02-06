@@ -45,8 +45,8 @@ export default function Home() {
     <>
       <header className="py-12 px-4 sm:py-16">
         <div className="max-w-content mx-auto">
-          <div className="sm:flex items-center sm:mb-6 text-center">
-            <h1 className="text-2xl font-bold leading-none mb-1">{metadata.title}</h1>
+          <div className="sm:flex items-center sm:mb-2 text-center">
+            <h1 className="text-2xl font-bold leading-none mb-1 sm:mb-0">{metadata.title}</h1>
             <p className="text-xs">
               <span className="px-2 hidden sm:inline">-</span>
               {SITE_SUBTITLE}
