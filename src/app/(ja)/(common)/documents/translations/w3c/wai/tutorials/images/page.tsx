@@ -144,19 +144,19 @@ export default function Page() {
         </span>
       </h2>
 
-      <p className="mb-8">
+      <p className="mb-6">
         画像やグラフィックは、多くの人々、特に認知障害や学習障害を抱えた方々にとってコンテンツをより快適で理解しやすくします。
         <span className="sm:inline-block">
           弱視の人を含む視覚障害のある方にとってそれらは、Webコンテンツの中で自分がどのあたりを読んでいるか理解するための手がかりとしても役立つからです。
         </span>
       </p>
 
-      <p className="mb-8">
+      <p className="mb-6">
         画像はWebサイトで広く使用されています。そのため、画像がアクセシブルではない場合には大きな障壁となる可能性があります。
         <span className="sm:inline-block">アクセシブルな画像は、次のような多くの状況で有益です。</span>
       </p>
 
-      <div className="mb-8">
+      <div className="mb-6">
         <SimpleDescriptionList
           list={[
             {
