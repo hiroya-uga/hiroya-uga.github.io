@@ -532,7 +532,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <code>aria-description</code>
             属性は
             <a href="https://w3c.github.io/aria/#aria-description">WAI-ARIA</a>{' '}
-            1.3に含まれる仕様ですが、2021年9月現在このドキュメントはEditor's Draftです。
+            1.3に含まれる仕様ですが、2024年1月現在このドキュメントはEditor's Draftです。
           </p>
         </NoteBox>
       </div>
