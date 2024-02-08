@@ -1,4 +1,5 @@
 import { SimpleDescriptionList } from '@/components/List';
+import { PageTitle } from '@/components/structures/PageTitle';
 
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -6,8 +7,9 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <>
-      <h1 className="mb-0">ツール集</h1>
-      <p className="mb-12">作ったものをまとめている階層です。</p>
+      <PageTitle title="ツール集">
+        <p>作ったものをまとめている階層です。</p>
+      </PageTitle>
 
       <SimpleDescriptionList
         list={[
@@ -29,6 +31,17 @@ export default function Page() {
               </>
             ),
             description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
+          },
+          {
+            key: `Playground: Accessible Name and Description Computation`,
+            title: (
+              <>
+                <Link href="/tools/accessible-name-and-description-computation">
+                  Playground: Accessible Name and Description Computation
+                </Link>
+              </>
+            ),
+            description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
           },
         ]}
       />

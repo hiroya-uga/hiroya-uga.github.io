@@ -325,18 +325,6 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <p className="mb-2">
-        このページの
-        <a href="#container" id={`${id}-title`}>
-          いろんなイベントを受け取るフォーカス・スクロール可能なform要素
-        </a>
-        内のUIを操作すると、JavaScriptがどのようなイベントを受け取るのかを確認できます。
-      </p>
-
-      <p className="mb-8">
-        イベントハンドラを持っている要素はform要素のみですが、一部のイベントによってはバブリングしないため直接イベントを受け取る要素にハンドラを登録しています。
-      </p>
-
       <details className="rounded border border-slate-400 overflow-hidden bg-white mb-28">
         <summary className="p-4 bg-slate-200 sm:hover:bg-slate-300 sm:transition-colors sm:duration-200">
           サポートしているイベントタイプ

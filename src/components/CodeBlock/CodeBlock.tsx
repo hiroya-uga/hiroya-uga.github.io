@@ -6,9 +6,10 @@ import xml from 'highlight.js/lib/languages/xml';
 type Props = {
   className?: string;
   code: string;
+  language?: string;
 };
 
-export const CodeBlock = ({ code, className }: Props) => {
+export const CodeBlock = ({ code, className, language }: Props) => {
   if (!code) {
     return <></>;
   }
@@ -17,8 +18,8 @@ export const CodeBlock = ({ code, className }: Props) => {
   hljs.registerLanguage('css', css);
   hljs.registerLanguage('javascript', javascript);
 
-  const language = (className ?? '').replace('language-', '') || 'html';
-  const __html = language ? hljs.highlight(code, { language }).value : code;
+  const languageValue = language ?? ((className ?? '').replace('language-', '') || 'html');
+  const __html = language ? hljs.highlight(code, { language: languageValue }).value : code;
 
   return (
     <code

@@ -99,6 +99,12 @@ export default function Home() {
                   desctiption: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
                 },
                 {
+                  emoji: '📛',
+                  href: '/tools/accessible-name-and-description-computation/',
+                  title: 'Playground: Accessible Name and Description Computation',
+                  desctiption: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+                },
+                {
                   emoji: '⚗️',
                   href: '/tools/dom-events-watcher',
                   title: 'DOM Event Watcher',
@@ -108,21 +114,15 @@ export default function Home() {
                   emoji: '💭',
                   href: '/documents/fantasized-specs',
                   title: 'Fantasized Web Standards and Specifications',
-                  desctiption: 'English Only. 日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
-                  hrefLang: 'en',
+                  desctiption: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
                 },
-              ].map(({ emoji, href, title, hrefLang, desctiption, ...item }) => {
+              ].map(({ emoji, href, title, desctiption }) => {
                 const id = desctiption && href;
 
                 return (
                   <li key={href}>
                     <p className="mb-1">
-                      <a
-                        href={href}
-                        hrefLang={hrefLang}
-                        className="no-underline flex flex-col-reverse"
-                        aria-describedby={id}
-                      >
+                      <a href={href} className="no-underline flex flex-col-reverse" aria-describedby={id}>
                         <span className="inline-block leading-normal">
                           {title}
                           {/* {item.isWip && <b>（WIP）</b>} */}
