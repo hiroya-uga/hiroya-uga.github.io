@@ -1,4 +1,5 @@
 import { SimpleDescriptionList } from '@/components/List';
+import { PageTitle } from '@/components/structures/PageTitle';
 
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -6,8 +7,9 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <>
-      <h1 className="mb-0">資料集</h1>
-      <p className="mb-12">ドキュメント系をまとめた階層です。</p>
+      <PageTitle title="資料集">
+        <p>ドキュメント系をまとめた階層です。</p>
+      </PageTitle>
 
       <SimpleDescriptionList
         list={[
@@ -27,7 +29,7 @@ export default function Page() {
                 <Link href="/documents/fantasized-specs/">Fantasized Web Standards and Specifications</Link>
               </>
             ),
-            description: 'English Only. 日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
+            description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
           },
         ]}
       />

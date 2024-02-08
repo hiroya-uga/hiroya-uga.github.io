@@ -1,16 +1,18 @@
+import { PageTitle } from '@/components/structures/PageTitle';
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
   title: 'Fantasized specs',
-  description: 'These are the spec proposals that I came up with in my daily work.',
+  description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
 };
 
 export default function Page() {
   return (
     <>
-      <h1>{metadata.title}</h1>
-
-      <p>These are the spec proposals that I came up with in my daily work.</p>
+      <PageTitle title={metadata.title}>
+        <p>日々業務の中で思いついた「あんなこといいなできたらいいな」集。</p>
+      </PageTitle>
 
       <ul className="pl-5">
         <li className="list-disc pl-1 mb-2">
