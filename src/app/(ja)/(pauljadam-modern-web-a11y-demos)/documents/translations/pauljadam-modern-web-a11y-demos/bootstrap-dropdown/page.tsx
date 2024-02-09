@@ -5,8 +5,8 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'Bootstrapのドロップダウン',
-  description: 'Web開発者の物置。',
+  title: "Bootstrapのドロップダウン - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

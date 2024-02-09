@@ -3,8 +3,8 @@ import { SampleImage } from '@/components/specific/documents/pauljadam-modern-we
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'img要素のアクセシブルネームの計算',
-  description: 'Web開発者の物置。',
+  title: "img要素のアクセシブルネームの計算 - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

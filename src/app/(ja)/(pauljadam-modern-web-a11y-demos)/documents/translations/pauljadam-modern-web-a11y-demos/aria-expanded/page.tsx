@@ -7,8 +7,8 @@ import {
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'aria-expanded属性の状態をスクリーンリーダに伝える',
-  description: 'Web開発者の物置。',
+  title: "aria-expanded属性の状態をスクリーンリーダに伝える - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

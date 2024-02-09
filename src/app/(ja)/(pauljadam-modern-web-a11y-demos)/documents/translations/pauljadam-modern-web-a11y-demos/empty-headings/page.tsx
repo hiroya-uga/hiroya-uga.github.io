@@ -3,8 +3,9 @@ import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/paul
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'VoiceOverでは読み上げられるがJAWSおよびNVDAでは読み上げられない空のヘディングコンテンツ',
-  description: 'Web開発者の物置。',
+  title:
+    "VoiceOverでは読み上げられるがJAWSおよびNVDAでは読み上げられない空のヘディングコンテンツ - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

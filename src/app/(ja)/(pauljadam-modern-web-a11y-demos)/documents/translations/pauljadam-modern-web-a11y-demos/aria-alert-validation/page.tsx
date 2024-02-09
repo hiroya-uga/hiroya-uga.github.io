@@ -3,8 +3,8 @@ import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/doc
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'ARIA Live Regionsまたはrole="alert"を使用してエラーを特定する',
-  description: 'Web開発者の物置。',
+  title: 'ARIA Live Regionsまたはrole="alert"を使用してエラーを特定する - PaulJAdam\'s Modern Web Accessibility Demos',
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

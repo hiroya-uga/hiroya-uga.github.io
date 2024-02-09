@@ -3,8 +3,8 @@ import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/paul
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'aria-labelledby属性のアクセシビリティデモ',
-  description: 'Web開発者の物置。',
+  title: "aria-labelledby属性のアクセシビリティデモ - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

@@ -28,6 +28,6 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: '略語の展開を表すためのtitle属性を持つabbr要素',
-  description: 'Web開発者の物置。',
+  title: "略語の展開を表すためのtitle属性を持つabbr要素 - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };

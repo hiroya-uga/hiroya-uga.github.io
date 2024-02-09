@@ -5,8 +5,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
   title:
-    'WAI-ARIAのaria-describedby属性、aria-required属性、aria-invalid属性、jQueryのfocus()メソッドを使用したシンプルなフォームバリデータ',
-  description: 'Web開発者の物置。',
+    "WAI-ARIAのaria-describedby属性、aria-required属性、aria-invalid属性、jQueryのfocus()メソッドを使用したシンプルなフォームバリデータ - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

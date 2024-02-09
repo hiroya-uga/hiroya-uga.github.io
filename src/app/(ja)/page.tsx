@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export const metadata: Metadata & { title: string } = {
   title: SITE_NAME,
-  description: 'Web開発者の物置。',
+  description: 'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。',
 };
 
 const LinkList = ({

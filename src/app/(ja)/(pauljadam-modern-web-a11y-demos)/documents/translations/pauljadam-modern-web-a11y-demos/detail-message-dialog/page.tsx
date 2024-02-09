@@ -25,6 +25,7 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: 'WAI-ARIAのrole="alertdialog"属性を使った詳細メッセージダイアログ',
-  description: 'Web開発者の物置。',
+  title:
+    'WAI-ARIAのrole="alertdialog"属性を使った詳細メッセージダイアログ - PaulJAdam\'s Modern Web Accessibility Demos',
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
