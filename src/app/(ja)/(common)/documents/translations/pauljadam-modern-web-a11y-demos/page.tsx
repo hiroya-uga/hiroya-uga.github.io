@@ -1,3 +1,5 @@
+import { PageTitle } from '@/components/structures/PageTitle';
+
 import type { Metadata } from 'next';
 
 const pageList = [
@@ -141,11 +143,11 @@ export default function Page() {
 
   return (
     <>
-      <h1>日本語訳：PaulJAdam's Modern Web Accessibility Demos</h1>
-
-      <p className="mb-4">
-        原文：<a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a>
-      </p>
+      <PageTitle title="日本語訳：PaulJAdam's Modern Web Accessibility Demos">
+        <p className="mb-4">
+          原文：<a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a>
+        </p>
+      </PageTitle>
 
       <ul>
         {pageList.map(([path, isExist]) => {

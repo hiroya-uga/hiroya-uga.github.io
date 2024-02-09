@@ -2,6 +2,7 @@
 
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/common.css';
 import { Footer } from '@/components/structures/Footer';
+import { SiteName } from '@/components/structures/Header/SiteName';
 
 import { usePathname } from 'next/navigation';
 
@@ -59,20 +60,24 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
 
   return (
     <>
-      <header className="pt-12 px-4 mb-12">
-        <div className="max-w-content mx-auto">
-          <p className="border border-gray-400 p-4 rounded mb-4">
-            原文：
-            <a href={originalPath} hrefLang="en">
-              {originalPath}
-            </a>
-          </p>
-          <p>
-            <a href="../">DEMO一覧に戻る</a> |{' '}
-            <a href="https://pauljadam.com/demos/" hrefLang="en">
-              PaulJAdam.comでさらに詳しく
-            </a>
-          </p>
+      <header>
+        <SiteName />
+        <div className="pt-4 px-4 mb-12 sm:pt-12">
+          <div className="max-w-content mx-auto">
+            <p className="border border-gray-400 p-4 rounded mb-4">
+              原文：
+              <a href={originalPath} hrefLang="en" className="break-all">
+                {originalPath}
+              </a>
+            </p>
+            <p>
+              {/* SPA遷移を考慮していない画面をリフレッシュさせる必要があるため、a要素を用いる */}
+              <a href="../">DEMO一覧に戻る</a> |{' '}
+              <a href="https://pauljadam.com/demos/" hrefLang="en">
+                PaulJAdam.comでさらに詳しく（外部サイト）
+              </a>
+            </p>
+          </div>
         </div>
       </header>
 

@@ -1,43 +1,10 @@
-import { SITE_NAME, SITE_SUBTITLE } from '@/constants/meta';
+import { SiteName } from '@/components/structures/Header/SiteName';
 
 export const Header = () => {
   // Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう
   return (
     <header>
-      {/* <p className="text-[0.78125rem] mb-4 lg:mb-0">
-        <span className="font-mono block bg-white min-w-[29.2929vh] text-right px-2 lg:fixed lg:-rotate-90 lg:inline-block lg:py-1 lg:origin-top-right lg:right-full lg:top-0 lg:max-w-[100vh] lg:overflow-auto lg:whitespace-nowrap">
-          <a href="/" className="text-[inherit]">
-            {SITE_NAME}
-          </a>{' '}
-          - {SITE_SUBTITLE}
-        </span>
-      </p> */}
-
-      <p className="font-mono text-[0.78125rem] mb-4 lg:mb-0 lg:fixed lg:top-0 lg:left-0 lg:overflow-auto lg:h-full">
-        <span className="block overflow-auto lg:overflow-visible bg-white lg:w-[2rem] lg:min-w-[2rem] lg:min-h-[15rem] lg:h-[29.2929vh] lg:pb-4 lg:box-content">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            role="none presentation"
-            className="ml-auto w-[15rem] min-w-[15rem] h-[1.465rem] lg:w-[2rem] lg:h-[15rem] lg:min-w-[2rem] lg:min-h-[15rem]"
-          >
-            <text x="50%" y="50%" textAnchor="middle" className="translate-y-[4px] lg:hidden">
-              <a href="/">{SITE_NAME}</a>
-              <tspan> - {SITE_SUBTITLE}</tspan>
-            </text>
-
-            <text
-              x="-750%"
-              y="8%"
-              textAnchor="start"
-              className="hidden lg:block border border-red-500"
-              transform="rotate(-90)"
-            >
-              <a href="/">{SITE_NAME}</a>
-              <tspan> - {SITE_SUBTITLE}</tspan>
-            </text>
-          </svg>
-        </span>
-      </p>
+      <SiteName />
 
       <div className="py-8 sm:py-16 px-4 sm:pl-10">
         <div className="max-w-content mx-auto relative">

@@ -45,11 +45,14 @@ export default function Home() {
     <>
       <header className="py-12 px-4 sm:py-16">
         <div className="max-w-content mx-auto">
-          <div className="sm:flex items-center sm:mb-2 text-center">
-            <h1 className="text-2xl font-bold leading-none mb-1 sm:mb-0">{metadata.title}</h1>
+          <div className="md:flex items-center md:mb-2 text-center">
+            <h1 className="text-2xl font-bold leading-none mb-3 md:mb-0">{metadata.title}</h1>
             <p className="text-xs">
-              <span className="px-2 hidden sm:inline">-</span>
-              {SITE_SUBTITLE}
+              <span className="px-2 hidden md:inline">-</span>
+              <span>
+                Web標準とアクセシビリティの話が好きな、
+                <span className="inline-block">大器晩成型のフロントエンドエンジニアの物置。</span>
+              </span>
             </p>
           </div>
         </div>
