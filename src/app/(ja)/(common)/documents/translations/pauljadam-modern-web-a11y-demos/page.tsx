@@ -159,5 +159,5 @@ export default function Page() {
 
 export const metadata: Metadata = {
   title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
-  description: 'Web開発者の物置。',
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };

@@ -3,8 +3,8 @@ import { ButtonInH2 } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documen
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: '見出しがアコーディオンのフックの例',
-  description: 'Web開発者の物置。',
+  title: "見出しがアコーディオンのフックの例 - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

@@ -5,8 +5,8 @@ import { SampleImage } from '@/components/specific/documents/pauljadam-modern-we
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: '背景画像や複雑な画像の代替テキスト',
-  description: 'Web開発者の物置。',
+  title: "背景画像や複雑な画像の代替テキスト - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

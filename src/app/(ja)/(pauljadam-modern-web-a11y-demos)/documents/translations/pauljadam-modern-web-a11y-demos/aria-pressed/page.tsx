@@ -4,8 +4,8 @@ import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/paul
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'VoiceOverのバグ：aria-pressed属性で要素が無視される',
-  description: 'Web開発者の物置。',
+  title: "VoiceOverのバグ：aria-pressed属性で要素が無視される - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {

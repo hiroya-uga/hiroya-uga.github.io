@@ -17,6 +17,6 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: 'アクセシブル施策の失敗例',
-  description: 'Web開発者の物置。',
+  title: "アクセシブル施策の失敗例 - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };

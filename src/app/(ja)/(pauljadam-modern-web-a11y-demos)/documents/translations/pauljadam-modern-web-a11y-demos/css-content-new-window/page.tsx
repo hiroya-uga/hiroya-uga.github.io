@@ -5,8 +5,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
   title:
-    '新しいウィンドウへのリンクであることを伝えるための、BootstrapのCSSとFont Awesome Icons、JavaScriptによるtitle属性付与',
-  description: 'Web開発者の物置。',
+    "新しいウィンドウへのリンクであることを伝えるための、BootstrapのCSSとFont Awesome Icons、JavaScriptによるtitle属性付与 - PaulJAdam's Modern Web Accessibility Demos",
+  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
 };
 
 export default function Page() {
