@@ -1,5 +1,5 @@
 import Mdx from '@/app/(en)/(specs)/documents/fantasized-specs/html-carousel/content.mdx';
-import { DOMAIN_NAME, GITHUB_PROFILE, GITHUB_REPOSITORY } from '@/constants/meta';
+import { GITHUB_PROFILE, GITHUB_REPOSITORY, URL_ORIGIN } from '@/constants/meta';
 import { DocumentHeadingLevel2 } from '@/mdx-components';
 
 import { Metadata } from 'next';
@@ -14,8 +14,8 @@ export default function Page() {
       <dl>
         <dt>This version:</dt>
         <dd>
-          <a href={`https://${DOMAIN_NAME}/documents/fantasized-specs/html-carousel`}>
-            https://{DOMAIN_NAME}/documents/fantasized-specs/html-carousel
+          <a href={`${URL_ORIGIN}/documents/fantasized-specs/html-carousel`}>
+            {URL_ORIGIN}/documents/fantasized-specs/html-carousel
           </a>
         </dd>
         <dt>Editors:</dt>
