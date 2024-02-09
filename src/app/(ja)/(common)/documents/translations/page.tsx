@@ -14,7 +14,7 @@ export default function Page() {
       <SimpleDescriptionList
         list={[
           {
-            key: `PaulJAdam's Modern Web Accessibility Demos`,
+            key: `Images Tutorial`,
             title: (
               <>
                 <Link href="/documents/translations/w3c/wai/tutorials/images/">Images Tutorial</Link>
