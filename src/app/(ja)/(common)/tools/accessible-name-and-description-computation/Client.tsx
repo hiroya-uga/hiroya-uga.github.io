@@ -319,6 +319,15 @@ export const AccessibleNameAndDescriptionComputation = ({
       }
     }
 
+    if (hasName || isUsingTitle || shouldDisplayPlaceholder) {
+      if (!isUsingLabel && !isUsingWrapLabel && !isUsingWrapLabelAll) {
+        errors.push([
+          'info',
+          'フォームコントロールのアクセシブルネームは、可能なかぎりlabel要素を使ってマークアップしましょう。',
+        ]);
+      }
+    }
+
     // aria-で説明が設定されてるとき
     if (isUsingAriaDescribedbyA || isUsingAriaDescribedbyB) {
       if (isUsingAriaDescription) {
@@ -341,7 +350,7 @@ export const AccessibleNameAndDescriptionComputation = ({
       ]);
     }
 
-    if (descriptionPositionIsBottom) {
+    if ((isUsingAriaDescribedbyA || isUsingAriaDescribedbyB) && descriptionPositionIsBottom) {
       errors.push([
         'info',
         '説明文は対象のフォームコントロールよりも前に表示したほうが、特に拡大鏡利用者にとって説明が見つけやすくなります。',
