@@ -2,12 +2,15 @@
 module.exports = {
   content: ['./src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    fontFamily: {
-      emoji:
-        'apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol!important',
-      mono: 'Consolas, Monaco, monospace',
-    },
     extend: {
+      fontSize: {
+        '2xs': '0.625rem',
+      },
+      fontFamily: {
+        emoji:
+          'apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol!important',
+        mono: 'Consolas, Monaco, monospace',
+      },
       maxWidth: {
         content: '60rem',
       },
