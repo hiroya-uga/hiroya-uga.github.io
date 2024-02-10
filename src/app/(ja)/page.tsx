@@ -171,22 +171,7 @@ export default function Home() {
               })}
             </ul>
 
-            <h3 className="text-lg mb-4">Menu</h3>
-
-            <LinkList
-              list={[
-                {
-                  href: '/tools',
-                  title: 'ツール集',
-                },
-                {
-                  href: '/documents',
-                  title: '資料集',
-                },
-              ]}
-            />
-
-            <h3 className="text-lg mt-12 mb-4">External Media Links</h3>
+            <h3 className="text-lg mt-12 mb-4">外部メディア</h3>
 
             <table className="mb-2">
               <tbody>
@@ -209,9 +194,26 @@ export default function Home() {
               </tbody>
             </table>
 
-            <p className="text-right mb-12 sm:mb-28">
-              <a href="/documents/media/">View All</a>
+            <p className="text-right mb-12">
+              <a href="/documents/media/">外部メディアリンク一覧</a>
             </p>
+
+            <h3 className="text-lg mb-4">その他のメニュー</h3>
+
+            <div className="mb-12 sm:mb-28">
+              <LinkList
+                list={[
+                  {
+                    href: '/tools',
+                    title: 'ツール集',
+                  },
+                  {
+                    href: '/documents',
+                    title: '資料集',
+                  },
+                ]}
+              />
+            </div>
 
             <h2 className="text-2xl mb-4">Bookmarks</h2>
 
