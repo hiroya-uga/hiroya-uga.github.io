@@ -631,7 +631,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             onClick={(e) => {
               window.getSelection()?.selectAllChildren(e.currentTarget);
             }}
-            className="font-[Consolas,_Monaco,_monospace] text-sm overflow-auto"
+            className="font-mono text-sm overflow-auto"
           >
             <pre className="p-4 pt-0 w-fit min-w-full">
               <CodeBlock language="html" code={markup} />
