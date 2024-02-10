@@ -38,6 +38,11 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: '資料集',
+  title: "資料集",
   description: 'ドキュメント系をまとめた階層です。',
+  twitter: {
+    card: 'summary_large_image',
+    title: '資料集',
+    description: 'ドキュメント系をまとめた階層です。',
+  },
 };

@@ -3,8 +3,13 @@ import { PageTitle } from '@/components/structures/PageTitle';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'Fantasized specs',
+  title: "Fantasized specs",
   description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fantasized specs',
+    description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
+  },
 };
 
 export default function Page() {

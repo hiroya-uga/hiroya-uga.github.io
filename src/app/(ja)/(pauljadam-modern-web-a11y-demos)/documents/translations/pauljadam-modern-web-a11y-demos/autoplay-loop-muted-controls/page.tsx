@@ -3,6 +3,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata & { title: string } = {
   title: "video要素の autoplay, loop, muted, controls 属性をテスト - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  twitter: {
+    card: 'summary_large_image',
+    title: "video要素の autoplay, loop, muted, controls 属性をテスト - PaulJAdam's Modern Web Accessibility Demos",
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
 };
 
 export default function Page() {

@@ -6,6 +6,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata & { title: string } = {
   title: "スタイリングされたボタンの例 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  twitter: {
+    card: 'summary_large_image',
+    title: "スタイリングされたボタンの例 - PaulJAdam's Modern Web Accessibility Demos",
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
 };
 
 export default function Page() {
