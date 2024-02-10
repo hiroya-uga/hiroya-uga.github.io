@@ -1,6 +1,9 @@
+import { Counter, TopImage } from '@/app/(ja)/Client';
 import { Footer } from '@/components/structures/Footer';
-import { SITE_NAME, SITE_SUBTITLE } from '@/constants/meta';
+import { SITE_NAME } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
+
+import { useMemo } from 'react';
 
 import clsx from 'clsx';
 import { Metadata } from 'next';
@@ -41,6 +44,8 @@ const LinkList = ({
 };
 
 export default function Home() {
+  const count = useMemo(() => Math.floor(Math.random() * (1000000 - 0 + 1)) + 0, []);
+
   return (
     <>
       <header className="py-12 px-4 sm:py-16">
@@ -59,18 +64,31 @@ export default function Home() {
       </header>
 
       <main>
-        <div className="mb-4 max-w-content mx-auto sm:mb-8">
-          <Image src="/main.webp" width={960} height={639} alt="" className="w-full" />
+        <div className="mb-4 max-w-content mx-auto">
+          <TopImage />
         </div>
 
         <div className="px-[16px]">
           <div className="max-w-content mx-auto">
+            <p className="text-sm text-center mb-20 sm:mb-28">
+              <span>ようこそ {SITE_NAME} へ。</span>
+              <span className="block sm:inline">
+                あなたは
+                <Counter count={String(count)} />
+                番目の訪問者かもしれません。
+              </span>
+            </p>
+
+            <h2 className="text-2xl mb-4">The power of the web</h2>
+
             <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className="mb-20 text-center">
               <p className="mb-2 text-xs sm:text-base">
+                “
                 <a href="https://www.w3.org/mission/accessibility/">
                   The power of the Web is in its universality. Access by everyone regardless of disability is an
                   essential aspect.
                 </a>
+                ”
               </p>
 
               <footer className="text-center text-[0.625rem] sm:text-sm">
