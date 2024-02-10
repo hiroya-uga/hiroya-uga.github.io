@@ -650,7 +650,7 @@ export const AccessibleNameAndDescriptionComputation = ({
           <li className="flex">
             <span>※</span>
             <small className="ml-1">
-              問題が検出された際にログが出力されますが、INFO含め指摘ログがない状態がベストです。なお、表示されるログのレベルは作者の主観によって定義されています。
+              問題が検出された際にログが出力されますが、INFO含め指摘ログがない状態がベストです。なお、表示されるログのレベルは作者の主観によって決定されています。
             </small>
           </li>
         </ul>

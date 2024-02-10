@@ -7,6 +7,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata & { title: string } = {
   title: "背景画像や複雑な画像の代替テキスト - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  twitter: {
+    card: 'summary_large_image',
+    title: "背景画像や複雑な画像の代替テキスト - PaulJAdam's Modern Web Accessibility Demos",
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
 };
 
 export default function Page() {

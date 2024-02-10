@@ -5,8 +5,13 @@ import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/paul
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: 'aria-invalid="true"の実装例 - PaulJAdam\'s Modern Web Accessibility Demos',
+  title: "aria-invalid=\"true\"の実装例 - PaulJAdam\'s Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'aria-invalid="true"の実装例 - PaulJAdam\'s Modern Web Accessibility Demos',
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
 };
 
 export default function Page() {

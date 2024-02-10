@@ -5,6 +5,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata & { title: string } = {
   title: "aria-labelledby属性のアクセシビリティデモ - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  twitter: {
+    card: 'summary_large_image',
+    title: "aria-labelledby属性のアクセシビリティデモ - PaulJAdam's Modern Web Accessibility Demos",
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
 };
 
 export default function Page() {

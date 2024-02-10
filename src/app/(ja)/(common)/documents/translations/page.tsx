@@ -40,6 +40,11 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: '日本語訳集 | 資料集',
+  title: "日本語訳集 | 資料集",
   description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
+  twitter: {
+    card: 'summary_large_image',
+    title: '日本語訳集 | 資料集',
+    description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
+  },
 };
