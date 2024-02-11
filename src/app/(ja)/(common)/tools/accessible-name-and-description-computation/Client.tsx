@@ -4,7 +4,7 @@ import { NoteBox } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Switch } from '@/components/Form';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 import 'highlight.js/styles/github.css';
@@ -44,29 +44,55 @@ const SwitchItem = ({ emoji, code, label, ...props }: SwitchItemProps) => {
 };
 
 type OutputTextfieldProps = Omit<React.InputHTMLAttributes<HTMLElement>, 'className' | 'type'> & {
+  isUsingParagraphForAriaDescribedby: boolean;
   isUsingEmoji: boolean;
   isUsingWrapLabel: boolean;
 };
 
-const OutputTextfield = ({ isUsingEmoji, isUsingWrapLabel, ...props }: OutputTextfieldProps) => {
-  const className = clsx(['block w-full py-3 px-2 mt-2 bg-white border border-gray-400 rounded']);
+const OutputTextfield = ({
+  isUsingParagraphForAriaDescribedby,
+  isUsingEmoji,
+  isUsingWrapLabel,
+  ...props
+}: OutputTextfieldProps) => {
+  const Content = useCallback(
+    (inputProps: typeof props) => {
+      const className = clsx(['block w-full py-3 px-2 mt-2 bg-white border border-gray-400 rounded']);
 
-  if (isUsingWrapLabel) {
+      if (isUsingWrapLabel) {
+        return (
+          <label className="p-3 rounded border-2 border-solid border-[#5071a8] block bg-[#5071a822] [&:not(:first-child)]:mt-2">
+            <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
+            <input {...inputProps} className={className} />
+          </label>
+        );
+      }
+
+      return <input {...inputProps} className={className} />;
+    },
+    [isUsingEmoji, isUsingWrapLabel],
+  );
+
+  if (isUsingParagraphForAriaDescribedby) {
     return (
-      <label className="p-3 rounded border-2 border-solid border-[#5071a8] block bg-[#5071a822] [&:not(:first-child)]:mt-2">
-        <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
-        <input {...props} className={className} />
-      </label>
+      <p className="mt-2">
+        <Content {...props} />
+      </p>
     );
   }
 
-  return <input {...props} className={className} />;
+  return <Content {...props} />;
 };
 
 type OutputProps = Pick<React.HTMLAttributes<HTMLElement>, 'children'> & {
   isUsingWrapLabelAll: boolean;
+  isUsingParagraphForAriaDescribedby: boolean;
 };
-const Output = ({ children, isUsingWrapLabelAll }: OutputProps) => {
+const Output = ({ children, isUsingWrapLabelAll, isUsingParagraphForAriaDescribedby }: OutputProps) => {
+  if (isUsingParagraphForAriaDescribedby) {
+    return <>{children}</>;
+  }
+
   if (isUsingWrapLabelAll) {
     return (
       <p>
@@ -105,6 +131,7 @@ export const AccessibleNameAndDescriptionComputation = ({
   const [isUsingAriaDescription, setUsingAriaDescription] = useState(false);
   const [shouldDisplayPlaceholder, setShouldDisplayPlaceholder] = useState(true);
   const [descriptionPositionIsBottom, setDescriptionPositionIsBottom] = useState(false);
+  const [shouldWrapInParagraph, setShouldWrapInParagraph] = useState(true);
   const [isUsingEmoji, setIsUsingEmoji] = useState(false);
 
   const [value, setValue] = useState('');
@@ -129,31 +156,8 @@ export const AccessibleNameAndDescriptionComputation = ({
     input?.replaceWith(placeholder);
     input?.removeAttribute('class');
 
-    let indent = 0;
-    let html = content?.innerHTML ?? '';
-
-    // 雑整形
-    html = html.replace(/ (class)="(.*?)"/g, ``);
-    html = html
-      .replace(/></g, `>\n<`)
-      .replace(/>___INPUT___</g, `>___INPUT___\n<`)
-      .split(`\n`)
-      .map((row, idx, self) => {
-        if (row.startsWith(`</`)) {
-          indent -= 2;
-        } else {
-          indent += 2;
-        }
-
-        if (self[idx - 1]?.indexOf(`</`) !== -1) {
-          indent -= 2;
-        }
-
-        return `${``.padStart(indent, ` `)}${row}`;
-      })
-      .join(`\n`);
-
-    const inputHTML = `\n<input\n${[...(input?.attributes ?? [])]
+    const inputPlaceholder = '<___INPUT___/>';
+    const inputHTML = `<input\n${[...(input?.attributes ?? [])]
       .sort((a, b) => {
         if (a.name < b.name) {
           return -1;
@@ -168,31 +172,47 @@ export const AccessibleNameAndDescriptionComputation = ({
       .map((attr) => {
         return `  ${attr.name}="${attr.value.replaceAll('"', '\\"')}"\n`;
       })
-      .join('')}/>`
-      .split('\n')
-      .join(
-        // 先に作ったインデントに沿って input 要素をインデントさせる
-        (() => {
-          if (html.includes('\n    <')) {
-            return '\n    ';
-          }
+      .join('')}/>`;
+    let indent = 0;
+    let html = content?.innerHTML ?? '';
 
-          return '\n  ';
-        })(),
-      );
+    html = html.replace(/ (class)="(.*?)"/g, ``);
+    html = html.replace('___INPUT___', inputPlaceholder);
+    html = html.replace(/></g, `>\n<`);
 
     html = html
-      .replace('___INPUT___', `${inputHTML}\n`)
-      .replace('\n</label>', '\n  </label>')
-      .replace('<label>\n  <input', '<label>\n\n  <input')
-      .replace('n>\n  <label>', 'n>\n\n  <label>')
-      .replace('n>\n    <input', 'n>\n\n    <input')
-      .replace('n>\n  <input', 'n>\n\n  <input')
-      .replace('l>\n  <input', 'l>\n\n  <input')
-      .replace('>\n\n  </label>', '>\n  </label>')
-      .replace('  </label>\n<span ', '  </label>\n  <span')
-      .replace('span>\n<span', 'span>\n  <span')
-      .replace('/>\n\n</p>', '/>\n</p>');
+      .split('\n')
+      .map((row) => {
+        const isStart = /<[^/]/.test(row);
+
+        return {
+          isStart,
+          isEnd: row.startsWith('</') || (!isStart && row.startsWith('>')),
+          isCompleted: isStart && row.includes('/'),
+          row,
+        };
+      })
+      .map((item, index, self) => {
+        const previous = self[index - 1];
+
+        if (previous && previous.isStart && !previous.isCompleted) {
+          indent++;
+        }
+
+        if (item.isEnd) {
+          indent--;
+        }
+
+        if (item.row === inputPlaceholder) {
+          return inputHTML
+            .split('\n')
+            .map((row) => `${''.padStart(indent * 2, ' ')}${row}`)
+            .join('\n');
+        }
+
+        return `${''.padStart(indent * 2, ' ')}${item.row}`;
+      })
+      .join('\n');
 
     setMarkup([html].join(`\n`));
   }, [
@@ -210,6 +230,7 @@ export const AccessibleNameAndDescriptionComputation = ({
     isUsingAriaDescription,
     shouldDisplayPlaceholder,
     descriptionPositionIsBottom,
+    shouldWrapInParagraph,
     isUsingEmoji,
   ]);
 
@@ -241,7 +262,7 @@ export const AccessibleNameAndDescriptionComputation = ({
         if (!isUsingAriaLabel && !isUsingTitle && shouldDisplayPlaceholder) {
           if (value) {
             errors.push([
-              'warn',
+              'error',
               '本来の目的に反し、placeholder属性がアクセシブルネームとして名前計算されていますが、値が入力されているため視覚的に表示されていません。特に、目で情報を得ているユーザはフォームコントロールの目的を理解するのが困難な可能性があります。',
             ]);
           } else {
@@ -343,6 +364,13 @@ export const AccessibleNameAndDescriptionComputation = ({
           'label要素でアクセシブルネームが提供されていますが、説明文を含んでいるためアクセシブルネームと説明文で内容が重複しています。',
         ]);
       }
+
+      if (shouldWrapInParagraph) {
+        errors.push([
+          'info',
+          '「常にすべてを1つのp要素に含める」がONになっています。このフラグはラベル、説明文の出力位置などに影響します。',
+        ]);
+      }
     } else if (isUsingAriaDescription) {
       errors.push([
         'warn',
@@ -387,9 +415,55 @@ export const AccessibleNameAndDescriptionComputation = ({
     });
   };
 
-  const Description = () => {
+  const Label = () => {
     return (
-      <span className="___row___ block mt-2 empty:mt-0">
+      <span className="___row___ block">
+        {isUsingLabel && (
+          <label htmlFor={inputId} className={clsx([...labelsClassName, 'border-solid', 'mr-2'])}>
+            {isUsingEmoji ? '🍋' : 'ラベルA'}
+          </label>
+        )}
+        {isUsingWrapLabelAll && <span className={clsx([...className, 'mr-2'])}>{isUsingEmoji ? '🍊' : 'ラベルC'}</span>}
+        {isUsingAriaLabelledbyA && (
+          <span id={labelAId} className={clsx([...labelsClassName, 'border-dashed mr-2'])}>
+            {isUsingEmoji ? '🍎' : '擬似ラベルA'}
+          </span>
+        )}
+        {isUsingAriaLabelledbyB && (
+          <span id={labelBId} className={clsx([...labelsClassName, 'border-dashed'])}>
+            {isUsingEmoji ? '🍏' : '擬似ラベルB'}
+          </span>
+        )}
+      </span>
+    );
+  };
+
+  const isUsingParagraphForAriaDescribedby =
+    !shouldWrapInParagraph && !isUsingWrapLabelAll && (isUsingAriaDescribedbyA || isUsingAriaDescribedbyB);
+
+  const Description = () => {
+    if (isUsingParagraphForAriaDescribedby) {
+      return (
+        <div className="___row___ my-2 empty:my-0 first:my-0">
+          {isUsingAriaDescribedbyA && (
+            <p id={describedByAId} className={clsx([...descriptionsClassName, 'border-dotted'])}>
+              {isUsingEmoji ? '🍅' : '説明文A'}
+            </p>
+          )}
+          {isUsingAriaDescribedbyB && (
+            <p
+              id={describedByBId}
+              className={clsx([...descriptionsClassName, 'border-dotted', '[&:not(:first-child)]:ml-2'])}
+            >
+              {isUsingEmoji ? '🥬' : '説明文B'}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <span className="___row___ block my-2 empty:my-0 first:my-0">
         {isUsingAriaDescribedbyA && (
           <span id={describedByAId} className={clsx([...descriptionsClassName, 'border-dotted'])}>
             {isUsingEmoji ? '🍅' : '説明文A'}
@@ -522,6 +596,16 @@ export const AccessibleNameAndDescriptionComputation = ({
               label="説明文をテキストフィールドの下に配置"
             />
             <SwitchItem
+              checked={shouldWrapInParagraph}
+              disabled={
+                isUsingWrapLabelAll || (!isUsingWrapLabel && !isUsingAriaDescribedbyA && !isUsingAriaDescribedbyB)
+              }
+              onChange={() => {
+                setShouldWrapInParagraph(!shouldWrapInParagraph);
+              }}
+              label="常にすべてを1つのp要素に含める"
+            />
+            <SwitchItem
               checked={isUsingEmoji}
               onChange={() => {
                 setIsUsingEmoji(!isUsingEmoji);
@@ -560,31 +644,24 @@ export const AccessibleNameAndDescriptionComputation = ({
 
         <div className="p-5 border border-gray-300 rounded-md mb-6">
           <div ref={outputRef}>
-            <Output isUsingWrapLabelAll={isUsingWrapLabelAll}>
-              <span className="___row___ block">
-                {isUsingLabel && (
-                  <label htmlFor={inputId} className={clsx([...labelsClassName, 'border-solid', 'mr-2'])}>
-                    {isUsingEmoji ? '🍋' : 'ラベルA'}
-                  </label>
-                )}
-                {isUsingWrapLabelAll && (
-                  <span className={clsx([...className, 'mr-2'])}>{isUsingEmoji ? '🍊' : 'ラベルC'}</span>
-                )}
-                {isUsingAriaLabelledbyA && (
-                  <span id={labelAId} className={clsx([...labelsClassName, 'border-dashed mr-2'])}>
-                    {isUsingEmoji ? '🍎' : '擬似ラベルA'}
-                  </span>
-                )}
-                {isUsingAriaLabelledbyB && (
-                  <span id={labelBId} className={clsx([...labelsClassName, 'border-dashed'])}>
-                    {isUsingEmoji ? '🍏' : '擬似ラベルB'}
-                  </span>
-                )}
-              </span>
+            <Output
+              isUsingWrapLabelAll={isUsingWrapLabelAll}
+              isUsingParagraphForAriaDescribedby={isUsingParagraphForAriaDescribedby}
+            >
+              {isUsingParagraphForAriaDescribedby ? (
+                (isUsingAriaLabelledbyA || isUsingAriaLabelledbyB || isUsingLabel) && (
+                  <p>
+                    <Label />
+                  </p>
+                )
+              ) : (
+                <Label />
+              )}
 
               {descriptionPositionIsBottom ? <></> : <Description />}
 
               <OutputTextfield
+                isUsingParagraphForAriaDescribedby={isUsingParagraphForAriaDescribedby}
                 isUsingWrapLabel={isUsingWrapLabel}
                 isUsingEmoji={isUsingEmoji}
                 aria-labelledby={
@@ -659,7 +736,7 @@ export const AccessibleNameAndDescriptionComputation = ({
           <li className="flex">
             <span>※</span>
             <small className="ml-1">
-              問題が検出された際にログが出力されますが、INFO含め指摘ログがない状態がベストです。なお、表示されるログのレベルは作者の主観によって決定されています。
+              問題が検出された際にログが出力されますが、INFO含め指摘ログがない状態を推奨します。なお、表示されるログのレベルは作者の主観によって決定されています。
             </small>
           </li>
         </ul>
