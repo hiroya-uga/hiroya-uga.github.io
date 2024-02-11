@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -109,7 +109,29 @@ const photoDataList = [
 
 const loadedImageCache = new Set<string>();
 
+const Spec = ({ spec }: { spec: string }) => {
+  if (!spec) {
+    return <></>;
+  }
+
+  const array = spec.split('+');
+  const lens = array.shift()?.trim();
+  const other = array.join('+').trim();
+
+  if (lens && other) {
+    return (
+      <>
+        {lens}
+        <span className="block md:inline"> + {other}</span>
+      </>
+    );
+  }
+
+  return lens;
+};
+
 export const TopImage = () => {
+  const captionId = useId();
   const generateRandomArray = useCallback(() => {
     const indexes = Array.from({ length: photoDataList.length }, (_, i) => i);
 
@@ -209,8 +231,9 @@ export const TopImage = () => {
                   width={photoData.width ?? 960}
                   height={photoData.height ?? 640}
                   src={photoData.src}
-                  alt=""
+                  alt={`${photoData.caption} ${photoData.date}`}
                   className="w-full block object-cover h-full"
+                  aria-labelledby={captionId}
                 />
               ))}
           </div>
@@ -231,7 +254,9 @@ export const TopImage = () => {
               </span>
             </span>
             <span className="absolute right-0 bottom-0 pl-4 pr-[60px] min-h-[50px] flex items-center text-white bg-[#00000080] w-full transition-transform translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 leading-tight">
-              <span className={clsx(...transitionClassName)}>{photoData?.spec ?? 'loading...'}</span>
+              <span className={clsx(...transitionClassName)}>
+                <Spec spec={photoData?.spec ?? 'loading...'} />
+              </span>
             </span>
           </figcaption>
         </figure>
