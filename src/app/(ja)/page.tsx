@@ -28,7 +28,7 @@ const LinkList = ({
   }[];
 }) => {
   return (
-    <ul className="mb-2 pl-4 text-xs leading-normal sm:text-sm sm:grid sm:grid-cols-3 sm:gap-4 sm:pl-0">
+    <ul className="mb-2 pl-4 leading-normal sm:text-sm sm:grid sm:grid-cols-3 sm:gap-4 sm:pl-0">
       {list.map(({ title, href }, index, { length }) => {
         return (
           <li
