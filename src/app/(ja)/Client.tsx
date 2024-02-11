@@ -126,9 +126,9 @@ export const TopImage = () => {
     | (typeof photoDataList)[number]
     | {
         error: string;
+        href: string;
         caption: string;
         spec: string;
-        href: string;
         date: string;
       }
     | null
@@ -170,9 +170,9 @@ export const TopImage = () => {
 
         setPhotoData({
           error: '404 NOT FOUND',
+          href: '',
           caption: 'UNKNOWN',
           spec: 'NO DATA',
-          href: 'https://www.instagram.com/hiroya.uga/',
           date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
         });
         setIsLoading(false);
@@ -188,18 +188,17 @@ export const TopImage = () => {
     }
   }, [isFirstRender, updateImage]);
 
+  const transitionClassName = [
+    'transition-[opacity_visibility] duration-300',
+    isLoading ? 'opacity-0' : 'opacity-100',
+    isLoading ? 'invisible' : 'visible',
+  ];
+
   return (
     <>
       <div className="group relative overflow-hidden" tabIndex={0}>
-        <figure
-          aria-live="polite"
-          className={clsx([
-            'relative transition-[opacity_visibility] duration-300 min-h bg-white',
-            isLoading ? 'opacity-0' : 'opacity-100',
-            isLoading ? 'invisible' : 'visible',
-          ])}
-        >
-          <div className="aspect-[3_/_2]">
+        <figure aria-live="polite" className={clsx(['relative min-h bg-white'])}>
+          <div className={clsx(['aspect-[3_/_2]', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (
                 <p className="absolute h-full w-full text-middle text-center grid place-items-center">
@@ -218,20 +217,21 @@ export const TopImage = () => {
 
           <figcaption className="text-white text-2xs sm:text-sm">
             <span className="absolute left-0 top-0 py-2 pl-4 pr-2 text-white bg-[#00000080] w-full flex items-center transition-transform -translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 flex-row-reverse flex-wrap z-10">
-              <span className="w-40 text-right sm:w-52">
+              <span className="w-40 text-right sm:w-56">
                 <a
-                  href={photoData?.href}
+                  href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
                   className="bg-white px-2 py-1 z-10 cursor-pointer leading-tight inline-block no-underline text-black"
                 >
                   See this photo on Instagram!
                 </a>
               </span>
-              <span className="grow leading-tight">
-                {photoData?.caption}, <span className="block sm:inline">{photoData?.date ?? 'yyyy.mm.dd'}</span>
+              <span className={clsx(['grow leading-tight', ...transitionClassName])}>
+                {photoData?.caption && `${photoData?.caption}, `}
+                <span className="block sm:inline">{photoData?.date}</span>
               </span>
             </span>
             <span className="absolute right-0 bottom-0 pl-4 pr-[60px] min-h-[50px] flex items-center text-white bg-[#00000080] w-full transition-transform translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 leading-tight">
-              <span>{photoData?.spec ?? 'loading...'}</span>
+              <span className={clsx(...transitionClassName)}>{photoData?.spec ?? 'loading...'}</span>
             </span>
           </figcaption>
         </figure>
