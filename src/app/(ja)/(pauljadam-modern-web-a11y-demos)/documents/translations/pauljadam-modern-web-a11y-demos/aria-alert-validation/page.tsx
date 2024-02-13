@@ -3,11 +3,12 @@ import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/doc
 import type { Metadata } from 'next';
 
 export const metadata: Metadata & { title: string } = {
-  title: "ARIA Live Regionsまたはrole=\"alert\"を使用してエラーを特定する - PaulJAdam\'s Modern Web Accessibility Demos",
+  title: 'ARIA Live Regionsまたはrole="alert"を使用してエラーを特定する - PaulJAdam\'s Modern Web Accessibility Demos',
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
     card: 'summary_large_image',
-    title: 'ARIA Live Regionsまたはrole="alert"を使用してエラーを特定する - PaulJAdam\'s Modern Web Accessibility Demos',
+    title:
+      'ARIA Live Regionsまたはrole="alert"を使用してエラーを特定する - PaulJAdam\'s Modern Web Accessibility Demos',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
 };

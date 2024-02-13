@@ -61,7 +61,7 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: "Playground: Accessible Name and Description Computation",
+  title: 'Playground: Accessible Name and Description Computation',
   description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
   twitter: {
     card: 'summary_large_image',

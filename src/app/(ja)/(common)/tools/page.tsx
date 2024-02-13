@@ -50,7 +50,7 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: "ツール集",
+  title: 'ツール集',
   description: '作ったものをまとめている階層です。',
   twitter: {
     card: 'summary_large_image',
