@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <>
-      <PageTitle title="DOM Event Watcher">
+      <PageTitle title="Playground: DOM Event Watcher">
         <p className="mb-6">
           このページの
           <a href="#container" id={`${id}-title`}>
