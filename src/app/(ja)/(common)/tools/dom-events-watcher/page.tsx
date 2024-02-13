@@ -29,11 +29,11 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: "DOM Event Watcher",
+  title: 'Playground:DOM Event Watcher',
   description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   twitter: {
     card: 'summary_large_image',
-    title: 'DOM Event Watcher',
+    title: 'Playground:DOM Event Watcher',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
 };
