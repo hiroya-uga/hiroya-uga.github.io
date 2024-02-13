@@ -236,7 +236,7 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: "日本語訳：Images Tutorial",
+  title: '日本語訳：Images Tutorial',
   description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
   twitter: {
     card: 'summary_large_image',
