@@ -1,3 +1,3 @@
 ## [uga.dev](https://uga.dev)
 
-My personal website like a shed.
+Web標準とアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。
