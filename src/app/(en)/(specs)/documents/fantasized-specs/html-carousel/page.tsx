@@ -1,8 +1,12 @@
 import Mdx from '@/app/(en)/(specs)/documents/fantasized-specs/html-carousel/content.mdx';
 import { GITHUB_PROFILE, GITHUB_REPOSITORY, URL_ORIGIN } from '@/constants/meta';
 import { DocumentHeadingLevel2 } from '@/mdx-components';
+import { Metadata } from '@/types/seo';
 
-import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'The carousel element - Fantasized specs',
+  description: '',
+};
 
 export default function Page() {
   return (
@@ -36,8 +40,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata: Metadata = {
-  title: 'The carousel element - Fantasized specs',
-  description: '',
-};

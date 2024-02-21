@@ -2,14 +2,14 @@ import { Counter, TopImage } from '@/app/(ja)/Client';
 import { Footer } from '@/components/structures/Footer';
 import { SITE_NAME } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
+import { Metadata } from '@/types/seo';
 
 import { useMemo } from 'react';
 
 import clsx from 'clsx';
-import { Metadata } from 'next';
 import Image from 'next/image';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata: Metadata = {
   title: SITE_NAME,
   description: 'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。',
   twitter: {

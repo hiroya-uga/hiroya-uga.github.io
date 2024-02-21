@@ -1,10 +1,19 @@
 import { AccessibleNameAndDescriptionComputation } from '@/app/(ja)/(common)/tools/accessible-name-and-description-computation/Client';
 import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { Metadata } from '@/types/seo';
 
 import { useId } from 'react';
 
-import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Playground: Accessible Name and Description Computation',
+  description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Playground: Accessible Name and Description Computation',
+    description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+  },
+};
 
 export default function Page() {
   const anchorLinkId = useId();
@@ -12,7 +21,7 @@ export default function Page() {
 
   return (
     <>
-      <PageTitle title="Playground: Accessible Name and Description Computation">
+      <PageTitle title={metadata.title}>
         <p className="mb-2">
           <b>アクセシブルな名前および説明</b>がどう計算されるかをテストするためのページです。
         </p>
@@ -59,13 +68,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata: Metadata = {
-  title: 'Playground: Accessible Name and Description Computation',
-  description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Playground: Accessible Name and Description Computation',
-    description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-  },
-};

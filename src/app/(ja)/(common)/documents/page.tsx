@@ -1,14 +1,24 @@
 import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { Metadata } from '@/types/seo';
 
-import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '資料集',
+  description: 'ドキュメント系をまとめた階層です。',
+  twitter: {
+    card: 'summary_large_image',
+    title: '資料集',
+    description: 'ドキュメント系をまとめた階層です。',
+  },
+};
 
 export default function Page() {
   return (
     <>
-      <PageTitle title="資料集">
-        <p>ドキュメント系をまとめた階層です。</p>
+      <PageTitle title={metadata.title}>
+        <p>{metadata.description}</p>
       </PageTitle>
 
       <SimpleDescriptionList
@@ -45,13 +55,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata: Metadata = {
-  title: '資料集',
-  description: 'ドキュメント系をまとめた階層です。',
-  twitter: {
-    card: 'summary_large_image',
-    title: '資料集',
-    description: 'ドキュメント系をまとめた階層です。',
-  },
-};
