@@ -1,7 +1,12 @@
 import { AnAltDecisionTreeContent } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { Metadata } from '@/types/seo';
 
-import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'An alt Decision Treeに基づく代替テキスト２択チャート',
+  description:
+    'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
+};
 
 export default function Page() {
   return (
@@ -28,9 +33,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata: Metadata = {
-  title: '代替テキスト２択チャート',
-  description:
-    'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
-};

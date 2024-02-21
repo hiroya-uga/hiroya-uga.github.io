@@ -1,14 +1,24 @@
 import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { Metadata } from '@/types/seo';
 
-import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '日本語訳まとめ',
+  description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
+  twitter: {
+    card: 'summary_large_image',
+    title: '日本語訳まとめ',
+    description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
+  },
+};
 
 export default function Page() {
   return (
     <>
-      <PageTitle title="日本語訳まとめ">
-        <p>仕様書など、外部資料を日本語訳したものをまとめた階層です。</p>
+      <PageTitle title={metadata.title}>
+        <p>{metadata.description}</p>
       </PageTitle>
 
       <SimpleDescriptionList
@@ -38,13 +48,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata: Metadata = {
-  title: '日本語訳まとめ',
-  description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
-  twitter: {
-    card: 'summary_large_image',
-    title: '日本語訳まとめ',
-    description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
-  },
-};
