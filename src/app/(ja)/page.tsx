@@ -4,8 +4,6 @@ import { SITE_NAME } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 import { Metadata } from '@/types/seo';
 
-import { useMemo } from 'react';
-
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -49,8 +47,6 @@ const LinkList = ({
 };
 
 export default function Home() {
-  const count = useMemo(() => Math.floor(Math.random() * (1000000 - 0 + 1)) + 0, []);
-
   return (
     <>
       <header className="py-12 px-4 sm:py-16">
@@ -79,7 +75,7 @@ export default function Home() {
               <span>ようこそ {SITE_NAME} へ。</span>
               <span className="block sm:inline">
                 あなたは
-                <Counter count={String(count)} />
+                <Counter />
                 番目の訪問者かもしれません。
               </span>
             </p>

@@ -1,11 +1,13 @@
 'use client';
 
-import { useCallback, useEffect, useId, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
 
-export const Counter = ({ count }: { count: string }) => {
+export const Counter = () => {
+  const count = useMemo(() => String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0), []);
+
   return <span className="font">{count.padStart(6, '0')}</span>;
 };
 
