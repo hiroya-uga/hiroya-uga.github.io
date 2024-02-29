@@ -725,7 +725,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
                 </>,
               ],
               [
-                '画像内のテキストがそれ以外に存在しない場合',
+                '画像内のテキストが画像の中以外に存在しない場合',
                 <>
                   <Textual />
                 </>,
