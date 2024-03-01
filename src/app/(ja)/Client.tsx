@@ -327,6 +327,11 @@ export const LinkList = ({
                   <a
                     href={japanese}
                     className="sm:border-l sm:border-dotted sm:border-l-gray-400 sm:px-2 sm:grow sm:flex sm:items-center sm:bg-slate-200 sm:rounded-r sm:translate-x-2 sm:translate-y-1 sm:rotate-6 transition-transform [&:not(.clicked)]:transform-none"
+                    onKeyDown={({ currentTarget, key }) => {
+                      if (key === 'Enter') {
+                        currentTarget.classList.add('clicked');
+                      }
+                    }}
                     onMouseDown={({ currentTarget }) => {
                       currentTarget.classList.add('clicked');
                     }}
