@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useId, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -8,14 +8,16 @@ import Image from 'next/image';
 export const Counter = () => {
   const count = useMemo(() => String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0), []);
 
-  return <span className="font">{count.padStart(6, '0')}</span>;
+  return (
+    <span className="font" suppressHydrationWarning>
+      {count.padStart(6, '0')}
+    </span>
+  );
 };
 
 const photoDataList = [
   {
     src: '/main-keishoan.webp',
-    width: 512,
-    height: 640,
     caption: 'Engakuji Keishoan',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'https://www.instagram.com/p/Cm9kBgZPF25/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
@@ -100,8 +102,6 @@ const photoDataList = [
   },
   {
     src: '/main-fujimibashi.webp',
-    width: 960,
-    height: 640,
     caption: 'Fujimi Bashi',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + Nikon D7200',
     href: 'https://www.instagram.com/p/B3n_xUcn86N/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
@@ -132,8 +132,7 @@ const Spec = ({ spec }: { spec: string }) => {
   return lens;
 };
 
-export const TopImage = () => {
-  const captionId = useId();
+export const TopImage = ({ captionId }: { captionId: string }) => {
   const generateRandomArray = useCallback(() => {
     const indexes = Array.from({ length: photoDataList.length }, (_, i) => i);
 
@@ -165,8 +164,6 @@ export const TopImage = () => {
       return;
     }
 
-    const currentItem = photoDataList[indexList[index]];
-
     setIndex(index + 1);
     setIsLoading(true);
 
@@ -175,6 +172,7 @@ export const TopImage = () => {
       setIndex(0);
     }
 
+    const currentItem = photoDataList[indexList[index]];
     const onload = () => {
       loadedImageCache.add(currentItem.src);
       setPhotoData(currentItem);
@@ -202,7 +200,7 @@ export const TopImage = () => {
         setIsLoading(false);
       };
       image.src = currentItem.src;
-    }, 300);
+    }, 350);
   }, [generateRandomArray, index, indexList, isLoading]);
 
   useEffect(() => {
@@ -230,12 +228,13 @@ export const TopImage = () => {
                 </p>
               ) : (
                 <Image
-                  width={photoData.width ?? 960}
-                  height={photoData.height ?? 640}
+                  width={960}
+                  height={640}
                   src={photoData.src}
                   alt={`${photoData.caption} ${photoData.date}`}
                   className="w-full block object-cover h-full"
-                  aria-labelledby={captionId}
+                  aria-describedby={captionId}
+                  priority
                 />
               ))}
           </div>
@@ -255,7 +254,10 @@ export const TopImage = () => {
                 <span className="block sm:inline">{photoData?.date}</span>
               </span>
             </span>
-            <span className="absolute right-0 bottom-0 pl-4 pr-[60px] min-h-[50px] flex items-center text-white bg-[#00000080] w-full transition-transform translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 leading-tight">
+            <span
+              className="absolute right-0 bottom-0 pl-4 pr-[60px] min-h-[50px] flex items-center text-white bg-[#00000080] w-full transition-transform translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 leading-tight"
+              id={captionId}
+            >
               <span className={clsx(...transitionClassName)}>
                 <Spec spec={photoData?.spec ?? 'loading...'} />
               </span>
@@ -287,5 +289,59 @@ export const TopImage = () => {
         </p>
       </div>
     </>
+  );
+};
+
+export const LinkList = ({
+  list,
+}: {
+  list: {
+    href: string;
+    title: string;
+    hrefLang?: string;
+    japanese?: string;
+  }[];
+}) => {
+  return (
+    <ul className="mb-2 pl-4 leading-normal sm:text-sm sm:grid sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-[24px] sm:pl-0 md:grid-cols-3">
+      {list.map(({ title, href, japanese, ...prop }, index, { length }) => {
+        return (
+          <li
+            key={href}
+            className={clsx([
+              index !== length - 1 && 'pb-3 sm:pb-0',
+              'list-disc sm:grid sm:min-h-[calc(1em_+_1em_*_2_*_1.5)]',
+              'break-all',
+            ])}
+          >
+            <div className="sm:flex sm:min-h-[60px]">
+              <a
+                href={href}
+                {...prop}
+                className="sm:grow sm:grid sm:content-center sm:p-2 sm:pl-3 sm:bg-white sm:rounded-l last:rounded-r"
+              >
+                {title}
+              </a>{' '}
+              {japanese && (
+                <span className="sm:shrink-0 sm:flex before:content-['\['] after:content-['\]'] sm:before:hidden sm:after:hidden sm:hover:bg-gray-100 transition-colors">
+                  <a
+                    href={japanese}
+                    className="sm:border-l sm:border-dotted sm:border-l-gray-400 sm:px-2 sm:grow sm:flex sm:items-center sm:bg-slate-200 sm:rounded-r sm:translate-x-2 sm:translate-y-1 sm:rotate-6 transition-transform [&:not(.clicked)]:transform-none"
+                    onMouseDown={({ currentTarget }) => {
+                      currentTarget.classList.add('clicked');
+                    }}
+                    onBlur={({ currentTarget }) => {
+                      currentTarget.classList.remove('clicked');
+                    }}
+                  >
+                    日本語訳
+                  </a>
+                </span>
+              )}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
