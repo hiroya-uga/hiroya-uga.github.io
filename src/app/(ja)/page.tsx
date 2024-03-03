@@ -102,10 +102,10 @@ export default function Home() {
                   desctiption: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
                 },
                 {
-                  emoji: '⚗️',
-                  href: '/tools/dom-events-watcher',
-                  title: 'DOM Event Watcher',
-                  desctiption: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
+                  emoji: '👆',
+                  href: '/tools/touch-event-touches',
+                  title: 'Playground: TouchEvent.touches',
+                  desctiption: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
                 },
                 {
                   emoji: '💭',
