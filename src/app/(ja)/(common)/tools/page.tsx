@@ -53,6 +53,15 @@ export default function Page() {
             ),
             description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
           },
+          {
+            key: `Playground: TouchEvent.touches`,
+            title: (
+              <>
+                <Link href="/tools/touch-event-touches">Playground: TouchEvent.touches</Link>
+              </>
+            ),
+            description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
+          },
         ]}
       />
     </>

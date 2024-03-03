@@ -596,7 +596,7 @@ const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
                   height="24"
                   fill="none"
                   stroke="#777"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   className="transition-all duration-300 group-open:rotate-180"

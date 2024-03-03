@@ -1,0 +1,1 @@
+uga.dev Playground: TouchEvent.touches デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。

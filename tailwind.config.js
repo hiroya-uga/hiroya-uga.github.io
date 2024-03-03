@@ -11,7 +11,12 @@ module.exports = {
           'apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol!important',
         mono: 'Consolas, Monaco, monospace',
       },
+      width: {
+        dialog: '48rem',
+        content: '48rem',
+      },
       maxWidth: {
+        dialog: '48rem',
         content: '60rem',
       },
       backgroundImage: {
