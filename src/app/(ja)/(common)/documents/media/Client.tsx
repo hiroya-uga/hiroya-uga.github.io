@@ -346,10 +346,10 @@ export const MediaContent = ({ id }: { id: string }) => {
                       </a>
                     </p>
 
-                    <p className="text-xs text-gray-600 text-ellipsis overflow-hidden">{href}</p>
+                    <p className="text-xs text-gray-600 mt-1 leading-snug text-ellipsis overflow-hidden">{href}</p>
 
                     {tags && tags.length && (
-                      <ul className="text-xs mt-3 flex flex-wrap gap-2">
+                      <ul className="text-xs mt-2 flex flex-wrap gap-2">
                         {tags.map((tag) => {
                           return (
                             <li key={tag}>
