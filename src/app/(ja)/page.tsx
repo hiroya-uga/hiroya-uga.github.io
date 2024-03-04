@@ -44,7 +44,7 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="px-[16px]">
+        <div className="px-[16px] mb-16 sm:mb-28">
           <div className="max-w-content mx-auto">
             <p className="text-sm text-center mb-20 sm:mb-28">
               <span>ようこそ {SITE_NAME} へ。</span>
@@ -57,7 +57,11 @@ export default function Home() {
 
             <h2 className="text-2xl mb-4">The power of the web</h2>
 
-            <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className="mb-20 text-center">
+            <blockquote
+              cite="https://www.w3.org/mission/accessibility/"
+              lang="en"
+              className="mb-20 text-center sm:mb-24"
+            >
               <p className="mb-2 text-xs sm:text-base">
                 “
                 <a href="https://www.w3.org/mission/accessibility/">
@@ -74,7 +78,7 @@ export default function Home() {
 
             <h2 className="text-2xl mb-4">Pick up</h2>
 
-            <ul className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
+            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
                 {
                   emoji: '🌳',
@@ -141,37 +145,10 @@ export default function Home() {
                 );
               })}
             </ul>
-
-            <h3 className="text-lg mt-12 mb-4">外部メディア</h3>
-
-            <table className="mb-2">
-              <tbody>
-                {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
-                  return (
-                    <tr key={href} className="leading-6 sm:leading-7">
-                      <td className="pr-2 font-mono text-xs leading-[inherit] sm:text-sm sm:pr-8">
-                        <span className="inline-block">{date}</span>
-                      </td>
-                      <td className={clsx([index !== 2 && 'pb-3 sm:pb-4', 'text-sm leading-[inherit] sm:text-base'])}>
-                        <a href={href} className="break-all">
-                          {title}
-                        </a>
-
-                        <p className="text-xs text-gray-600 text-ellipsis overflow-hidden">{new URL(href).hostname}</p>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-
-            <p className="text-right mb-12">
-              <a href="/documents/media/">外部メディアリンク一覧</a>
-            </p>
           </div>
         </div>
 
-        <div className="px-[16px] py-11 pb-12 bg-slate-200 mb-12 sm:mb-28">
+        <div className="px-[16px] py-11 pb-12 bg-slate-200 mb-20 sm:mb-28">
           <div className="max-w-content mx-auto">
             <h2 className="text-2xl mb-4">カテゴリー</h2>
 
@@ -208,6 +185,33 @@ export default function Home() {
 
         <div className="px-[16px]">
           <div className="max-w-content mx-auto">
+            <h2 className="text-2xl mb-7">外部メディア</h2>
+
+            <table className="mb-2">
+              <tbody>
+                {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
+                  return (
+                    <tr key={href} className="leading-6 sm:leading-7">
+                      <td className="pr-2 font-mono text-xs leading-[inherit] sm:text-sm sm:pr-8">
+                        <span className="inline-block">{date}</span>
+                      </td>
+                      <td className={clsx([index !== 2 && 'pb-3 sm:pb-4', 'text-sm leading-[inherit] sm:text-base'])}>
+                        <a href={href} className="break-all">
+                          {title}
+                        </a>
+
+                        <p className="text-xs text-gray-600 text-ellipsis overflow-hidden">{new URL(href).hostname}</p>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+
+            <p className="text-right mb-12 sm:mb-28">
+              <a href="/documents/media/">外部メディアリンク一覧</a>
+            </p>
+
             <h2 className="text-2xl mb-2">Bookmarks</h2>
 
             <p className="mb-4">外部サイトへのリンク集です。</p>
