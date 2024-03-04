@@ -11,27 +11,77 @@ type Touches = Record<
   {
     y: number;
     x: number;
+    force: number;
   }
 >;
 
 const TouchPoints = ({ dataSets }: { dataSets: Touches }) => {
   return (
     <>
-      {Object.entries(dataSets).map(([touchId, { x, y }]) => (
-        <div
-          key={touchId}
-          className="fixed top-0 left-0 z-20 block w-[2.6cm] h-[2.6cm] p-1 mt-[-1.3cm] ml-[-1.3cm] text-2xs pointer-events-none border border-red-600 border-solid select-none"
-          style={{
-            transform: `translate(${x}px, ${y}px)`,
-          }}
-        >
-          <span className="text-2xs whitespace-nowrap absolute left-0 bottom-full">Y: {y}</span>
-          <span className="absolute top-full left-0 -rotate-90">
-            <span className="absolute bottom-full -left-[0.85rem] whitespace-nowrap">ID: {touchId}</span>
-          </span>
-          <span className="text-2xs whitespace-nowrap absolute left-0 top-full">X: {x}</span>
-        </div>
-      ))}
+      {Object.entries(dataSets).map(([touchId, { x, y, force }]) => {
+        const forceValue = (() => {
+          if (force) {
+            const [before, after] = `${Math.floor(force * 100000) / 1000}`.split('.');
+            const beforeValue = before.padStart(2, '0');
+            const afterValue = beforeValue === '100' ? '' : `.${after?.slice(0, 3) ?? '000'}`.padEnd(4, '0');
+
+            return `${beforeValue}${afterValue}%`;
+          }
+
+          return 'not supported';
+        })();
+
+        return (
+          <div
+            key={touchId}
+            className="fixed top-0 left-0 z-20 block w-[3.5cm] h-[3.5cm] p-1 mt-[-1.75cm] ml-[-1.75cm] text-2xs pointer-events-none border border-red-600 border-solid select-none"
+            style={{
+              transform: `translate(${x}px, ${y}px)`,
+            }}
+          >
+            <div className="text-2xs whitespace-nowrap absolute left-0 bottom-full leading-none pb-[0.25rem]">
+              <div>Y: {y}</div>
+              <div>X: {x}</div>
+            </div>
+
+            <div className="text-2xs whitespace-nowrap absolute left-0 bottom-full leading-none pb-[0.25rem]">
+              <div>Y: {y}</div>
+              <div>X: {x}</div>
+            </div>
+
+            <div className="absolute top-0 -left-[2.4rem] rotate-90">
+              <div className="absolute bottom-full left-0 whitespace-nowrap text-2xs leading-none">
+                <div>Y: {y}</div>
+                <div>X: {x}</div>
+              </div>
+            </div>
+
+            <div className="text-2xs whitespace-nowrap absolute left-0 top-full leading-none pt-[0.25rem]">
+              <div>Y: {y}</div>
+              <div>X: {x}</div>
+            </div>
+
+            <div className="absolute bottom-0 -right-[2.4rem] -rotate-90">
+              <div className="absolute bottom-full left-0 whitespace-nowrap text-2xs leading-none">
+                <div>Y: {y}</div>
+                <div>X: {x}</div>
+              </div>
+            </div>
+
+            <div className="absolute top-full left-0 -rotate-90">
+              <div className="absolute bottom-full left-0 whitespace-nowrap">ID: {touchId}</div>
+            </div>
+
+            <div className="text-2xs absolute left-1 top-[0.25rem] leading-none">force: {forceValue}</div>
+
+            <div className="text-2xs absolute right-1 bottom-[0.25rem] leading-none">force: {forceValue}</div>
+
+            <div className="absolute top-[0.85rem] left-full rotate-90">
+              <div className="absolute bottom-full -left-[0.85rem] whitespace-nowrap">ID: {touchId}</div>
+            </div>
+          </div>
+        );
+      })}
     </>
   );
 };
@@ -70,6 +120,7 @@ export const TouchEventTouchesContent = () => {
         touches[touch.identifier] = {
           x: touch.clientX,
           y: touch.clientY,
+          force: touch.force,
         };
       }
 
