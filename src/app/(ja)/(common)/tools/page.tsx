@@ -33,6 +33,33 @@ export default function Page() {
             description:
               'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
           },
+        ]}
+      />
+
+      <h2>Playground</h2>
+
+      <SimpleDescriptionList
+        list={[
+          {
+            key: `Accessible Name and Description Computation`,
+            title: (
+              <>
+                <Link href="/tools/accessible-name-and-description-computation">
+                  Accessible Name and Description Computation
+                </Link>
+              </>
+            ),
+            description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+          },
+          {
+            key: `CSS Units`,
+            title: (
+              <>
+                <Link href="/tools/css-units">CSS Units</Link>
+              </>
+            ),
+            description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
+          },
           {
             key: `DOM Event Watcher`,
             title: (
@@ -43,21 +70,10 @@ export default function Page() {
             description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
           },
           {
-            key: `Playground: Accessible Name and Description Computation`,
+            key: `TouchEvent.touches`,
             title: (
               <>
-                <Link href="/tools/accessible-name-and-description-computation">
-                  Playground: Accessible Name and Description Computation
-                </Link>
-              </>
-            ),
-            description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-          },
-          {
-            key: `Playground: TouchEvent.touches`,
-            title: (
-              <>
-                <Link href="/tools/touch-event-touches">Playground: TouchEvent.touches</Link>
+                <Link href="/tools/touch-event-touches">TouchEvent.touches</Link>
               </>
             ),
             description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',

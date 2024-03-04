@@ -116,3 +116,16 @@ video {
   display: block;
   margin: 0 auto;
 }
+
+@layer base {
+  input[type="range"]::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
