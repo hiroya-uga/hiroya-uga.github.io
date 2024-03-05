@@ -16,7 +16,7 @@ This module realizes such an expression only with CSS, without processing of sta
 
 ### 2.1. The `observe-type` property
 
-<div class="propdef">
+<div className="propdef">
 <table>
 <tbody>
 <tr>
@@ -111,7 +111,7 @@ This module realizes such an expression only with CSS, without processing of sta
 
 <dt><dfn>display</dfn></dt>
 <dd>The user agent observe css display property of elements. Communicate the CSSOM of change after  ​​to the user agent, before properties change from none to the values ​​that form <a href="https://www.w3.org/TR/CSS22/box.html">box models</a>. This spec is to support CSS transition animation work without requestAnimationFrame, even if display property changes from none to block at same time.</dd>
-<dd class="example">
+<dd className="example">
 
 ```javascript
 function sample() {
@@ -129,7 +129,7 @@ function sample() {
 ```
 
 </dd>
-<dd class="example">
+<dd className="example">
 
 ```css
 a div {
@@ -160,7 +160,7 @@ A value of `none` means that no property will transition. Otherwise, a list of p
 The element with `view-*` in observe-type indicates the direction in which the intersection will be monitored.<br/>
 By default, `observed-wrapper: all` is specified for `document.scrollingElement`, and the default value for other elements is `none`.
 
-<div class="propdef">
+<div className="propdef">
 <table>
 <tbody>
 <tr>
@@ -253,7 +253,7 @@ By default, `observed-wrapper: all` is specified for `document.scrollingElement`
 
 Specifies whether to continue monitoring after the rule specified in `observe-type` is met.
 
-<div class="propdef">
+<div className="propdef">
 <table>
 <tbody>
 <tr>
@@ -305,7 +305,7 @@ Specifies whether to continue monitoring after the rule specified in `observe-ty
 
 ## 4. Usege
 
-<div class="example">
+<div className="example">
 
 ```css
 div {

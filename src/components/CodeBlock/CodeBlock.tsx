@@ -19,7 +19,7 @@ export const CodeBlock = ({ code, className, language }: Props) => {
   hljs.registerLanguage('javascript', javascript);
 
   const languageValue = language ?? ((className ?? '').replace('language-', '') || 'html');
-  const __html = language ? hljs.highlight(code, { language: languageValue }).value : code;
+  const __html = hljs.highlight(code, { language: languageValue }).value;
 
   return (
     <code
