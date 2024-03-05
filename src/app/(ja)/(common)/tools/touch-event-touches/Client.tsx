@@ -92,6 +92,7 @@ export const TouchEventTouchesContent = () => {
   const [touchDataSet, setTouchDataSet] = useState<Touches>({});
 
   const ref = useRef<HTMLDivElement>(null);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
   const requestAnimationFrameId = useRef<number>(0);
   const loop = useCallback(() => {
     requestAnimationFrameId.current = requestAnimationFrame(loop);
@@ -154,6 +155,7 @@ export const TouchEventTouchesContent = () => {
       });
     };
     const container = ref.current;
+    const startButton = startButtonRef.current;
     const option: AddEventListenerOptions = {
       passive: false,
     };
@@ -162,12 +164,14 @@ export const TouchEventTouchesContent = () => {
     container?.addEventListener('touchstart', ontouchstartAndMove, option);
     container?.addEventListener('touchmove', ontouchstartAndMove, option);
     container?.addEventListener('touchend', ontouchend, option);
+    startButton?.addEventListener('touchend', ontouchend, option);
 
     return () => {
       container?.removeEventListener('click', preventDefault, option);
       container?.removeEventListener('touchstart', ontouchstartAndMove, option);
       container?.removeEventListener('touchmove', ontouchstartAndMove, option);
       container?.removeEventListener('touchend', ontouchend, option);
+      startButton?.removeEventListener('touchend', ontouchend, option);
     };
   }, [isRunning, loop, touchDataSet]);
 
@@ -204,6 +208,7 @@ export const TouchEventTouchesContent = () => {
           <p>
             <button
               aria-live="assertive"
+              ref={startButtonRef}
               className={clsx([
                 'relative z-20 border border-black rounded py-2 px-8 bg-[rgba(255,255,255,.6)]',
                 isRunning && 'touch-none',
