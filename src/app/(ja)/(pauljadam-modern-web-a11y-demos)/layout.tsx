@@ -4,15 +4,16 @@ import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/common.css';
 import { Footer } from '@/components/structures/Footer';
 import { SiteName } from '@/components/structures/Header/SiteName';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const CsunmobileNavigation = ({ fileName }: { fileName: string }) => {
   const linkList = [
-    ['csunmobile-form-bad', 'Form Bad'],
-    ['csunmobile-form-aria', 'Form ARIA'],
-    ['csunmobile-form-html5', 'Form HTML5'],
-    ['csunmobile-accordion-bad', 'Accordion Bad'],
-    ['csunmobile-accordion-aria', 'Accordion ARIA'],
+    ['../csunmobile-form-bad', 'Form Bad'],
+    ['../csunmobile-form-aria', 'Form ARIA'],
+    ['../csunmobile-form-html5', 'Form HTML5'],
+    ['../csunmobile-accordion-bad', 'Accordion Bad'],
+    ['../csunmobile-accordion-aria', 'Accordion ARIA'],
   ];
 
   return (
@@ -58,6 +59,8 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
     ? `https://pauljadam.com/csunmobile/${fileName.replace('csunmobile-', '')}.html`
     : `https://pauljadam.com/demos/${fileName}.html`;
 
+  console.log('layout');
+
   return (
     <>
       <header>
@@ -72,7 +75,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
             </p>
             <p>
               {/* SPA遷移を考慮していない画面をリフレッシュさせる必要があるため、a要素を用いる */}
-              <a href="../">DEMO一覧に戻る</a> |{' '}
+              <Link href="../">DEMO一覧に戻る</Link> |{' '}
               <a href="https://pauljadam.com/demos/" hrefLang="en">
                 PaulJAdam.comでさらに詳しく（外部サイト）
               </a>
