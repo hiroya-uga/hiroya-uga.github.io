@@ -8,6 +8,7 @@ import { useId } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: SITE_NAME,
@@ -123,7 +124,7 @@ export default function Home() {
                 return (
                   <li key={href}>
                     <p className="mb-1">
-                      <a href={href} className="no-underline flex flex-col-reverse" aria-describedby={id}>
+                      <Link href={href} className="no-underline flex flex-col-reverse" aria-describedby={id}>
                         <span className="inline-block leading-normal">
                           {title}
                           {/* {item.isWip && <b>（WIP）</b>} */}
@@ -134,7 +135,7 @@ export default function Home() {
                         >
                           {emoji}
                         </span>
-                      </a>
+                      </Link>
                     </p>
                     {desctiption && (
                       <p className="text-xs" id={id}>
