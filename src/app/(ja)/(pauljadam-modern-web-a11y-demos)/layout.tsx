@@ -74,8 +74,11 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
               </a>
             </p>
             <p>
-              {/* SPA遷移を考慮していない画面をリフレッシュさせる必要があるため、a要素を用いる */}
-              <Link href="../">DEMO一覧に戻る</Link> |{' '}
+              {/*
+               * SPA遷移を考慮していない画面をリフレッシュさせる必要があるため、a要素を用いる
+               * /documents/translations/pauljadam-modern-web-a11y-demos/buttons/
+               */}
+              <a href="../">DEMO一覧に戻る</a> |{' '}
               <a href="https://pauljadam.com/demos/" hrefLang="en">
                 PaulJAdam.comでさらに詳しく（外部サイト）
               </a>
