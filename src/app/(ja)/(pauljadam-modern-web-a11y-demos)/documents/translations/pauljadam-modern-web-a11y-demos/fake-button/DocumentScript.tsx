@@ -33,7 +33,7 @@ export const DocumentScript = () => {
         alert('いてて！ button[title] がクリックされました!');
       });
     });
-  });
+  }, []);
 
   return <></>;
 };

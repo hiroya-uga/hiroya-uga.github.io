@@ -31,7 +31,7 @@ export const DocumentScript = () => {
         });
       }, 1000);
     });
-  });
+  }, []);
 
   return <></>;
 };

@@ -20,7 +20,7 @@ export const DocumentScript = () => {
 
       btn.addEventListener('click', handleBtnClick);
     });
-  });
+  }, []);
 
   return <></>;
 };

@@ -40,7 +40,7 @@ export const DocumentScript = () => {
       // added code by UGA for React
       document.getElementById('show-hide-style')?.remove();
     };
-  });
+  }, []);
 
   return <></>;
 };

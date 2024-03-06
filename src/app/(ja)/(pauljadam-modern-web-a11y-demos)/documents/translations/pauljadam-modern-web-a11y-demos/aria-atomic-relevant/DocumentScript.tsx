@@ -50,7 +50,7 @@ export const DocumentScript = () => {
       $('#message6').on('input propertychange', updateCharsLeft6);
       $('#message7').on('input propertychange', updateCharsLeft7);
     });
-  });
+  }, []);
 
   return <></>;
 };

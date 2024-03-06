@@ -12,7 +12,7 @@ export const DocumentScript = () => {
         document.getElementById('alert-div')!.innerHTML = '<p>Hello ARIA World!（role="alert"経由）</p>';
       }, 6000);
     });
-  });
+  }, []);
 
   return <></>;
 };

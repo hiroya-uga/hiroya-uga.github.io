@@ -17,7 +17,7 @@ export const DocumentScript = () => {
         }
       }
     });
-  });
+  }, []);
 
   return <></>;
 };

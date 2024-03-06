@@ -13,7 +13,7 @@ export const DocumentScript = () => {
         $(this).find('i').toggleClass('fa-plus-square fa-minus-square');
       });
     });
-  });
+  }, []);
 
   return <></>;
 };
