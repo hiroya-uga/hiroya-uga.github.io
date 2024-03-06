@@ -43,7 +43,7 @@ import jQuery from 'jquery';
     delete options.to;
     delete options.within;
     within.each(function() {
-      var container = this;
+      var container = document.querySelector('main > div') ?? this;
       var done = new Array();
       end1.each(function() {
         var node = this;
