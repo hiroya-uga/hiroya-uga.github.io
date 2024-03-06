@@ -16,7 +16,7 @@ export const DocumentScript = () => {
         $(this).attr('aria-expanded', 'false');
       }
     });
-  });
+  }, []);
 
   return <></>;
 };

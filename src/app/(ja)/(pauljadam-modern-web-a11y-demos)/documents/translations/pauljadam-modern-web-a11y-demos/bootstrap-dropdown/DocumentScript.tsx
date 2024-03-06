@@ -10,7 +10,7 @@ export const DocumentScript = () => {
     $(function () {
       //
     });
-  });
+  }, []);
 
   return <></>;
 };

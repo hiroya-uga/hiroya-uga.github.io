@@ -29,7 +29,7 @@ export const DocumentScriptA = () => {
         }
       }
     });
-  });
+  }, []);
 
   return <></>;
 };
@@ -53,7 +53,7 @@ export const DocumentScriptB = () => {
         }
       }
     });
-  });
+  }, []);
 
   return <></>;
 };
@@ -138,7 +138,7 @@ export const DocumentScriptC = () => {
         tabs[1].click();
       }
     });
-  });
+  }, []);
 
   return <></>;
 };

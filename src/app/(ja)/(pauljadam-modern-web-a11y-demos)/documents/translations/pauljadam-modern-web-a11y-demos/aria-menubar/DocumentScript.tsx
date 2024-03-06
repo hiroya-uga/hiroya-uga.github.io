@@ -60,7 +60,7 @@ export const DocumentScript = () => {
         })();
       });
     });
-  });
+  }, []);
 
   return <></>;
 };

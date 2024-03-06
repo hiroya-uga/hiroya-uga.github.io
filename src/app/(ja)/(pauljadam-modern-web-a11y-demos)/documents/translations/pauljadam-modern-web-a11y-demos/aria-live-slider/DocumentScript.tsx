@@ -12,7 +12,7 @@ export const DocumentScript = () => {
         document.getElementById('current-temp').innerHTML = '現在の気温は摂氏 ' + this.value + ' ℃です。';
       });
     });
-  });
+  }, []);
 
   return <></>;
 };

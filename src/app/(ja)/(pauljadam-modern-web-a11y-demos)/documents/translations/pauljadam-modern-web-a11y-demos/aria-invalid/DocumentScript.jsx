@@ -47,7 +47,7 @@ export const DocumentScript = () => {
 
       populatedropdown('daydropdown', 'monthdropdown', 'yeardropdown');
     });
-  });
+  }, []);
 
   return <></>;
 };

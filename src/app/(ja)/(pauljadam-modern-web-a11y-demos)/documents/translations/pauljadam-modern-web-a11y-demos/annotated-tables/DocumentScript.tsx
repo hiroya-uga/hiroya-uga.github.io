@@ -154,7 +154,7 @@ export const DocumentScript = () => {
 
       resized();
     })();
-  });
+  }, []);
 
   return <></>;
 };

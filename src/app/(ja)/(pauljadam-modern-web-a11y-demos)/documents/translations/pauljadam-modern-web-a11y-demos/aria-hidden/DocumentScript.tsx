@@ -12,7 +12,7 @@ export const DocumentScript = () => {
         elm.removeAttribute('href');
       });
     });
-  });
+  }, []);
 
   return <></>;
 };

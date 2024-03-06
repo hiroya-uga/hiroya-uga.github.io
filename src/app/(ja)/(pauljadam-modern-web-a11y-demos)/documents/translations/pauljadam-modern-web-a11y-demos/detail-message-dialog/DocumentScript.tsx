@@ -72,7 +72,7 @@ export const DocumentScript = () => {
         return false;
       });
     });
-  });
+  }, []);
 
   return <></>;
 };
