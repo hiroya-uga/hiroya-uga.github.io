@@ -21,8 +21,11 @@ export default function Page() {
             決定木
             <rt>Decision Tree</rt>
           </ruby>
-          の<a href="https://www.w3.org/WAI/tutorials/images/decision-tree/">An alt Decision Tree</a>
-          （英語）を参考に用意したチャートです。
+          の
+          <a href="https://www.w3.org/WAI/tutorials/images/decision-tree/ja">
+            altディシジョンツリー（An alt Decision Tree）
+          </a>
+          を参考に用意したチャートです。
         </p>
         <p>代替テキストにお悩みの際にご活用ください。</p>
       </PageTitle>
