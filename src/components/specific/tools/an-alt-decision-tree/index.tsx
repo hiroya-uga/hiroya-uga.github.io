@@ -1,3 +1,4 @@
+import { Details } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 
 import { HTMLAttributes, useEffect, useRef, useState } from 'react';
@@ -580,35 +581,11 @@ const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
       {list.map(([title, content]) => {
         return (
-          <details
-            // @ts-ignore
-            name="if"
-            key={title}
-            className="group [&:not(:first-child)]:border-t [&:not(:first-child)]:border-solid [&:not(:first-child)]:border-t-gray-200"
-          >
-            <summary className="after:hidden flex cursor-pointer list-none items-center justify-between sm:text-lg text-secondary-900 bg-slate-100 group-first:rounded-t-lg group-last:rounded-b-lg group-last:group-open:rounded-none relative focus:z-10">
-              <span className="px-4 py-2">{title}</span>
-              <span className="w-[32px] mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  stroke="#777"
-                  strokeWidth="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="transition-all duration-300 group-open:rotate-180"
-                >
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              </span>
-            </summary>
+          <Details name="if" key={title} summary={title}>
             <div className="text-sm border-t border-t-gray-100 px-4 py-6 text-secondary-500 sm:text-base sm:pb-16">
               {content}
             </div>
-          </details>
+          </Details>
         );
       })}
     </div>

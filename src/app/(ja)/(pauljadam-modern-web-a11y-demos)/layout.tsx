@@ -59,8 +59,6 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
     ? `https://pauljadam.com/csunmobile/${fileName.replace('csunmobile-', '')}.html`
     : `https://pauljadam.com/demos/${fileName}.html`;
 
-  console.log('layout');
-
   return (
     <>
       <header>
