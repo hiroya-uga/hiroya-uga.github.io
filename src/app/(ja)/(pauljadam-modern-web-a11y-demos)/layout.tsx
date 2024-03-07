@@ -63,9 +63,9 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
     <>
       <header>
         <SiteName />
-        <div className="pt-4 px-4 mb-12 sm:pt-12">
-          <div className="max-w-content mx-auto">
-            <p className="border border-gray-400 p-4 rounded mb-4">
+        <div className="mb-12 px-4 pt-4 sm:pt-12">
+          <div className="mx-auto max-w-content">
+            <p className="mb-4 rounded border border-gray-400 p-4">
               原文：
               <a href={originalPath} hrefLang="en" className="break-all">
                 {originalPath}
@@ -87,14 +87,14 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
 
       {isCsunmobile && (
         <div className="px-4">
-          <div className="max-w-content mx-auto">
+          <div className="mx-auto max-w-content">
             <CsunmobileNavigation fileName={fileName} />
           </div>
         </div>
       )}
 
       <main className="px-4">
-        <div className="max-w-content mx-auto">{children}</div>
+        <div className="mx-auto max-w-content">{children}</div>
       </main>
 
       <Footer />

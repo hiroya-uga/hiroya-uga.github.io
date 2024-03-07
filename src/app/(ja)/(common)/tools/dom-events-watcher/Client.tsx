@@ -329,14 +329,14 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
     <>
       <div className="mb-28">
         <Details summary="サポートしているイベントタイプ">
-          <div className="max-h-[70vh] overflow-y-scroll py-4 px-8">
+          <div className="max-h-[70vh] overflow-y-scroll px-8 py-4">
             <p className="mb-2">このページで採用されているイベント一覧です。一部非標準、非推奨も含まれています。</p>
             <p className="mb-2">form要素には以下のイベントに関するハンドラを登録しています。</p>
 
-            <ul className="pl-6 mb-8">
+            <ul className="mb-8 pl-6">
               {eventNames.sort().map((eventName) => {
                 return (
-                  <li className="list-disc pl-1 mb-1" key={eventName}>
+                  <li className="mb-1 list-disc pl-1" key={eventName}>
                     {eventName}
                   </li>
                 );
@@ -345,10 +345,10 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
             <p className="mb-2">input要素には以下のイベントに関するハンドラを登録しています。</p>
 
-            <ul className="pl-6 mb-8">
+            <ul className="mb-8 pl-6">
               {inputElementEvents.sort().map((eventName) => {
                 return (
-                  <li className="list-disc pl-1 mb-1" key={eventName}>
+                  <li className="mb-1 list-disc pl-1" key={eventName}>
                     {eventName}
                   </li>
                 );
@@ -360,7 +360,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
             <ul className="pl-6">
               {mediaElementEvents.sort().map((eventName) => {
                 return (
-                  <li className="list-disc pl-1 mb-1" key={eventName}>
+                  <li className="mb-1 list-disc pl-1" key={eventName}>
                     {eventName}
                   </li>
                 );
@@ -370,11 +370,11 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </Details>
       </div>
 
-      <div className="lg:flex gap-6 lg:h-min">
-        <div className="relative lg:max-w-[375px] lg:min-w-[375px]">
+      <div className="gap-6 lg:flex lg:h-min">
+        <div className="relative lg:min-w-[375px] lg:max-w-[375px]">
           <form
             ref={ref}
-            className="overflow-y-scroll max-h-[30vh] p-4 pb-8 border border-solid border-gray-400 lg:max-h-none lg:absolute lg:left-0 lg:top-0 lg:h-full"
+            className="max-h-[30vh] overflow-y-scroll border border-solid border-gray-400 p-4 pb-8 lg:absolute lg:left-0 lg:top-0 lg:h-full lg:max-h-none"
             tabIndex={0}
             id="container"
             role="group"
@@ -386,12 +386,12 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 <strong>ここに入力された値はどこにも送信されません。</strong>
               </p>
 
-              <p className="text-center touch-none p-8 border border-solid border-gray-400 mb-8">
+              <p className="mb-8 touch-none border border-solid border-gray-400 p-8 text-center">
                 タッチイベントを無視するp要素
               </p>
 
               <p>
-                <label htmlFor={id} className="block w-fit mb-2 font-bold">
+                <label htmlFor={id} className="mb-2 block w-fit font-bold">
                   テキストフィールド
                 </label>
               </p>
@@ -405,12 +405,12 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                   autoComplete="none"
                   aria-describedby={`${id}-description`}
                   placeholder="hogehoge"
-                  className="p-4 border border-solid border-gray-500 rounded w-full"
+                  className="w-full rounded border border-solid border-gray-500 p-4"
                 />
               </p>
 
               <p>
-                <label htmlFor={`${id}-required`} className="block w-fit mb-2 font-bold">
+                <label htmlFor={`${id}-required`} className="mb-2 block w-fit font-bold">
                   テキストフィールド（必須）
                 </label>
               </p>
@@ -422,12 +422,12 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                   autoComplete="none"
                   placeholder="hogehoge"
                   required
-                  className="p-4 border border-solid border-gray-500 rounded w-full"
+                  className="w-full rounded border border-solid border-gray-500 p-4"
                 />
               </p>
 
               <fieldset className="mb-8">
-                <legend className="block w-fit mb-2 font-bold">ラジオボタン</legend>
+                <legend className="mb-2 block w-fit font-bold">ラジオボタン</legend>
                 <ul>
                   <li>
                     <label>
@@ -451,7 +451,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               </fieldset>
 
               <fieldset className="mb-8">
-                <legend className="block w-fit mb-2 font-bold">チェックボタン</legend>
+                <legend className="mb-2 block w-fit font-bold">チェックボタン</legend>
                 <ul>
                   <li>
                     <label>
@@ -482,22 +482,22 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                   {...videoSrc}
                   controls
                   muted
-                  className="w-96 h-auto aspect-video max-w-full"
+                  className="aspect-video h-auto w-96 max-w-full"
                 ></video>
               </p>
 
               <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
             </figure>
 
-            <div className="mt-12 text-center flex flex-wrap justify-center gap-x-12 gap-y-8">
+            <div className="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-8 text-center">
               <p>
-                <button type="button" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
+                <button type="button" className="min-w-[16rem] rounded-lg bg-orange-300 px-4 py-2">
                   何も起こらないただのボタン
                 </button>
               </p>
 
               <p>
-                <button type="submit" className="bg-orange-300 rounded-lg px-4 py-2 min-w-[16rem]">
+                <button type="submit" className="min-w-[16rem] rounded-lg bg-orange-300 px-4 py-2">
                   送信ボタン
                 </button>
               </p>
@@ -506,7 +506,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </div>
 
         <section>
-          <h2 className="block w-fit mb-2 font-bold lg:mt-0">
+          <h2 className="mb-2 block w-fit font-bold lg:mt-0">
             <strong id={`${id}-log-title`}>ログ</strong>（最大300行）
           </h2>
 
@@ -514,7 +514,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
 
           <div
-            className="h-[30vh] py-2 overflow-y-scroll bg-gray-200 sm:h-[50vh]"
+            className="h-[30vh] overflow-y-scroll bg-gray-200 py-2 sm:h-[50vh]"
             tabIndex={0}
             aria-labelledby={`${id}-log-title`}
           >
@@ -527,7 +527,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               {value.map((item, index) => {
                 if (typeof item === 'string') {
                   return (
-                    <p key={item} className="text-right text-xs bg-gray-300 px-2 my-1 col-[1_/_4] sm:col-[1_/_5] grid">
+                    <p key={item} className="col-[1_/_4] my-1 grid bg-gray-300 px-2 text-right text-xs sm:col-[1_/_5]">
                       ↓ until {item}
                     </p>
                   );
@@ -545,20 +545,20 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 return (
                   <p
                     key={index}
-                    className="px-2 text-xs leading-tight before:content-[counter(log)] col-[1_/_4] sm:col-[1_/_5] before:col-[1_/_2] grid grid-cols-[subgrid] grid-rows-[auto_auto] sm:grid-cols-[subgrid] sm:before:text-right before:font-mono before:pr-3 keep-all my-1"
+                    className="keep-all col-[1_/_4] my-1 grid grid-cols-[subgrid] grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1_/_2] before:pr-3 before:font-mono before:content-[counter(log)] sm:col-[1_/_5] sm:grid-cols-[subgrid] sm:before:text-right"
                     style={{
                       counterIncrement: 'log',
                     }}
                   >
-                    <span className="col-[2_/_3] row-[1_/_2] sm:row-[1_/_2] sm:col-[2_/_3] pr-3 text-center leading-[inherit]">
+                    <span className="col-[2_/_3] row-[1_/_2] pr-3 text-center leading-[inherit] sm:col-[2_/_3] sm:row-[1_/_2]">
                       <code className="block sm:inline">{tagName}</code>
                     </span>
-                    <span className="col-[3_/_4] row-[1_/_2] sm:row-[1_/_2] sm:col-[3_/_4]">
+                    <span className="col-[3_/_4] row-[1_/_2] sm:col-[3_/_4] sm:row-[1_/_2]">
                       {name}
                       {times && ` x ${times}`}
                     </span>
                     {options && (
-                      <span className="text-orange-800 leading-[inherit] sm:pl-4 col-[2_/_4] row-[2_/_3] sm:row-[1_/_2] sm:col-[4_/_5]">
+                      <span className="col-[2_/_4] row-[2_/_3] leading-[inherit] text-orange-800 sm:col-[4_/_5] sm:row-[1_/_2] sm:pl-4">
                         {options}
                       </span>
                     )}

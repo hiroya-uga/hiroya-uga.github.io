@@ -12,8 +12,8 @@ export default function Page() {
     <>
       <h1 className="mb-2">日本語訳：Images Tutorial</h1>
 
-      <div className="mb-14 bg-slate-300 p-3 rounded-md">
-        <div className="mb-2 text-sm leading-normal sm:text-base sm:leading-relaxed sm:mb-4">
+      <div className="mb-14 rounded-md bg-slate-300 p-3">
+        <div className="mb-2 text-sm leading-normal sm:mb-4 sm:text-base sm:leading-relaxed">
           <LinkToOriginal
             origins={[
               {
@@ -114,15 +114,15 @@ export default function Page() {
           const isW3C = href.startsWith('https://www.w3.org');
 
           return (
-            <div key={href} className="group rounded p-3 -mx-3 w-full focus-within:bg-slate-200">
-              <dt className="sm:text-lg mb-1 font-bold">
+            <div key={href} className="group -mx-3 w-full rounded p-3 focus-within:bg-slate-200">
+              <dt className="mb-1 font-bold sm:text-lg">
                 <a href={href} hrefLang={isW3C ? 'en' : undefined}>
                   {title}
                   {isW3C && '（外部サイト）'}
                 </a>
                 {isW3C && <b>※翻訳予定</b>}
               </dt>
-              <dd className="text-sm sm:text-base leading-relaxed">{description}</dd>
+              <dd className="text-sm leading-relaxed sm:text-base">{description}</dd>
             </div>
           );
         })}

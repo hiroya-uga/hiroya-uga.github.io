@@ -33,7 +33,7 @@ export default function Page() {
         </p>
       </PageTitle>
 
-      <p className="font-bold mb-2 sm:mb-1">スクリーンリーダの例：</p>
+      <p className="mb-2 font-bold sm:mb-1">スクリーンリーダの例：</p>
 
       <SimpleLinkList
         list={[

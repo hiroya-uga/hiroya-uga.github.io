@@ -21,10 +21,10 @@ const Anchor = () => {
       <Link
         href="../"
         data-id="hoge"
-        className="group rounded-md inline-block py-2 px-4 no-underline sm:hover:bg-white sm:focus:bg-white sm:transition-colors sm:delay-0 sm:duration-300"
+        className="group inline-block rounded-md px-4 py-2 no-underline sm:transition-colors sm:delay-0 sm:duration-300 sm:hover:bg-white sm:focus:bg-white"
       >
         <span className="underline">../</span>
-        <span className="sm:opacity-0 sm:delay-0 sm:duration-300 sm:transition-opacity ml-4 group-focus:opacity-100 group-hover:opacity-100">
+        <span className="ml-4 group-hover:opacity-100 group-focus:opacity-100 sm:opacity-0 sm:transition-opacity sm:delay-0 sm:duration-300">
           １つ上のページへ戻る
         </span>
       </Link>
@@ -34,10 +34,10 @@ const Anchor = () => {
   return (
     <a
       href="../"
-      className="group rounded-md inline-block py-2 px-4 no-underline sm:hover:bg-white sm:focus:bg-white sm:transition-colors sm:delay-0 sm:duration-300"
+      className="group inline-block rounded-md px-4 py-2 no-underline sm:transition-colors sm:delay-0 sm:duration-300 sm:hover:bg-white sm:focus:bg-white"
     >
       <span className="underline">../</span>
-      <span className="sm:opacity-0 sm:delay-0 sm:duration-300 sm:transition-opacity ml-4 group-focus:opacity-100 group-hover:opacity-100">
+      <span className="ml-4 group-hover:opacity-100 group-focus:opacity-100 sm:opacity-0 sm:transition-opacity sm:delay-0 sm:duration-300">
         １つ上のページへ戻る
       </span>
     </a>
@@ -49,8 +49,8 @@ export const Header = () => {
     <header>
       <SiteName />
 
-      <div className="py-8 sm:py-16 px-4 sm:pl-10">
-        <div className="max-w-content mx-auto relative">
+      <div className="px-4 py-8 sm:py-16 sm:pl-10">
+        <div className="relative mx-auto max-w-content">
           <p className="relative -left-4 -top-2">
             <Anchor />
           </p>
