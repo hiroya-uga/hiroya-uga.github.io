@@ -259,10 +259,21 @@ export default function Home() {
                   title: 'ARIA Authoring Practices Guide (APG)',
                 },
                 {
+                  href: 'https://www.w3.org/WAI/tutorials/images/decision-tree/',
+                  hrefLang: 'en',
+                  title: 'An alt Decision Tree',
+                  japanese: 'https://www.w3.org/WAI/tutorials/images/decision-tree/ja',
+                },
+                {
                   href: 'https://www.w3.org/Provider/Style/URI.html',
                   hrefLang: 'en',
                   title: "Hypertext Style: Cool URIs don't change.",
                   japanese: 'https://www.kanzaki.com/docs/Style/URI.html',
+                },
+                {
+                  href: 'https://a11ysupport.io/',
+                  hrefLang: 'en',
+                  title: 'Accessibility Support',
                 },
               ]}
             />

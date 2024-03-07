@@ -1,5 +1,6 @@
 'use client';
 
+import { Details } from '@/components/Box';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
@@ -252,13 +253,14 @@ export const MediaContent = ({ id }: { id: string }) => {
   return (
     <>
       <nav aria-labelledby={idForFilterTitle} className="mb-28">
-        <details className="rounded border border-slate-400 overflow-hidden bg-white" open={keywordQuery !== ''}>
-          <summary className="p-4 bg-slate-200 sm:hover:bg-slate-300 sm:transition-colors sm:duration-200">
+        <Details
+          defaultOpen={keywordQuery !== ''}
+          summary={
             <h2 className="m-0 text-lg" id={idForFilterTitle}>
               絞り込む
             </h2>
-          </summary>
-
+          }
+        >
           <div className="p-6 pb-8 sm:p-8 sm:pt-7 sm:pb-9">
             <div className="flex flex-row-reverse mb-6 sm:mb-10">
               <p className="relative left-2 bottom-2 min-w-[9rem] text-right">
@@ -316,7 +318,7 @@ export const MediaContent = ({ id }: { id: string }) => {
               </span>
             </p>
           </div>
-        </details>
+        </Details>
       </nav>
 
       <section>

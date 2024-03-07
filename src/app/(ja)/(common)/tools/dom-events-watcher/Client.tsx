@@ -1,5 +1,7 @@
 'use client';
 
+import { Details } from '@/components/Box';
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const getNow = () => {
@@ -325,50 +327,48 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <details className="rounded border border-slate-400 overflow-hidden bg-white mb-28">
-        <summary className="p-4 bg-slate-200 sm:hover:bg-slate-300 sm:transition-colors sm:duration-200">
-          サポートしているイベントタイプ
-        </summary>
+      <div className="mb-28">
+        <Details summary="サポートしているイベントタイプ">
+          <div className="max-h-[70vh] overflow-y-scroll py-4 px-8">
+            <p className="mb-2">このページで採用されているイベント一覧です。一部非標準、非推奨も含まれています。</p>
+            <p className="mb-2">form要素には以下のイベントに関するハンドラを登録しています。</p>
 
-        <div className="max-h-[70vh] overflow-y-scroll py-4 px-8">
-          <p className="mb-2">このページで採用されているイベント一覧です。一部非標準、非推奨も含まれています。</p>
-          <p className="mb-2">form要素には以下のイベントに関するハンドラを登録しています。</p>
+            <ul className="pl-6 mb-8">
+              {eventNames.sort().map((eventName) => {
+                return (
+                  <li className="list-disc pl-1 mb-1" key={eventName}>
+                    {eventName}
+                  </li>
+                );
+              })}
+            </ul>
 
-          <ul className="pl-6 mb-8">
-            {eventNames.sort().map((eventName) => {
-              return (
-                <li className="list-disc pl-1 mb-1" key={eventName}>
-                  {eventName}
-                </li>
-              );
-            })}
-          </ul>
+            <p className="mb-2">input要素には以下のイベントに関するハンドラを登録しています。</p>
 
-          <p className="mb-2">input要素には以下のイベントに関するハンドラを登録しています。</p>
+            <ul className="pl-6 mb-8">
+              {inputElementEvents.sort().map((eventName) => {
+                return (
+                  <li className="list-disc pl-1 mb-1" key={eventName}>
+                    {eventName}
+                  </li>
+                );
+              })}
+            </ul>
 
-          <ul className="pl-6 mb-8">
-            {inputElementEvents.sort().map((eventName) => {
-              return (
-                <li className="list-disc pl-1 mb-1" key={eventName}>
-                  {eventName}
-                </li>
-              );
-            })}
-          </ul>
+            <p className="mb-2">video要素には以下のイベントに関するハンドラを登録しています。</p>
 
-          <p className="mb-2">video要素には以下のイベントに関するハンドラを登録しています。</p>
-
-          <ul className="pl-6">
-            {mediaElementEvents.sort().map((eventName) => {
-              return (
-                <li className="list-disc pl-1 mb-1" key={eventName}>
-                  {eventName}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </details>
+            <ul className="pl-6">
+              {mediaElementEvents.sort().map((eventName) => {
+                return (
+                  <li className="list-disc pl-1 mb-1" key={eventName}>
+                    {eventName}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </Details>
+      </div>
 
       <div className="lg:flex gap-6 lg:h-min">
         <div className="relative lg:max-w-[375px] lg:min-w-[375px]">
