@@ -11,7 +11,6 @@ module.exports = {
   importOrder: ['^(react/(.*)$)|^(react(.*)$)', '^[^@](.*)$'],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  plugins: ['@trivago/prettier-plugin-sort-imports'],
 
   overrides: [
     {
