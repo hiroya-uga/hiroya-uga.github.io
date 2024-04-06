@@ -179,7 +179,7 @@ const Line = ({
       <p
         key={unit}
         className={clsx([
-          'mb-2 text-sm sticky -left-2 mt-4 pl-2 leading-snug sm:text-lg',
+          'sticky -left-2 mb-2 mt-4 pl-2 text-sm leading-snug sm:text-lg',
           'sm:mt-6',
           unit === 'px' && 'font-bold',
         ])}
@@ -194,9 +194,9 @@ const Line = ({
       <div
         ref={ref}
         className={clsx([
-          'relative -z-10 border-b border-dashed overflow-hidden border-black block -mt-8 pt-7 mr-8 pointer-events-none bg-slate-300',
+          'pointer-events-none relative -z-10 -mt-8 mr-8 block overflow-hidden border-b border-dashed border-black bg-slate-300 pt-7',
           'sm:-mt-10 sm:pt-9',
-          'after:block after:absolute after:top-0 after:right-0 after:border-r after:border-dashed after:border-black after:h-full',
+          'after:absolute after:right-0 after:top-0 after:block after:h-full after:border-r after:border-dashed after:border-black',
         ])}
         style={{
           width: `${value}${unit}`,
@@ -208,8 +208,8 @@ const Line = ({
         hidden={!shouldShowDescriptions}
         className={clsx(shouldShowDescriptions && 'sticky left-0')}
       >
-        <p className="text-sm pt-1 pr-2 w-full leading-snug sm:text-base sm:pt-2 sm:pb-4">{description}</p>
-        {note && <p className="block text-xs sm:text-sm sm:pt-1">{note}</p>}
+        <p className="w-full pr-2 pt-1 text-sm leading-snug sm:pb-4 sm:pt-2 sm:text-base">{description}</p>
+        {note && <p className="block text-xs sm:pt-1 sm:text-sm">{note}</p>}
       </div>
     </>
   );
@@ -278,14 +278,14 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="mb-2 sticky top-2 flex justify-end items-center gap-x-8 bg-white p-4 rounded z-10">
+      <div className="sticky top-2 z-10 mb-2 flex items-center justify-end gap-x-8 rounded bg-white p-4">
         <p className="grow text-base leading-snug">サンプルは横スクロールできます。</p>
         <p>
           <button
             type="button"
             aria-live="assertive"
             aria-controls={controls}
-            className="border border-solid border-black rounded px-2 sm:px-4 py-2 text-sm leading-snug sm:text-base min-w-[9rem] sm:whitespace-nowrap"
+            className="min-w-[9rem] rounded border border-solid border-black p-2 text-sm leading-snug sm:whitespace-nowrap sm:px-4 sm:text-base"
             onClick={() => setShouldShowDescriptions(!shouldShowDescriptions)}
           >
             {shouldShowDescriptions ? '説明文を隠す' : '説明文を表示する'}
@@ -293,18 +293,18 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
         </p>
       </div>
 
-      <p className="mb-1 text-sm sm:text-base leading-snug flex">
+      <p className="mb-1 flex text-sm leading-snug sm:text-base">
         <span>※</span>
         <small>「CSS上の値 → px換算」で表示されますが、「px換算」の値は小数点四捨五入です。</small>
       </p>
-      <p className="mb-2 text-sm sm:text-base leading-snug flex gap-2">
+      <p className="mb-2 flex gap-2 text-sm leading-snug sm:text-base">
         <span>※</span>
         <small>各種viewportの値は1秒ごとに再取得しています。</small>
       </p>
 
-      <div className="relative border border-solid border-black rounded">
+      <div className="relative rounded border border-solid border-black">
         <div className="overflow-x-auto overflow-y-hidden p-4" tabIndex={0}>
-          <h2 className="font-bold text-lg m-0 mb-2 sticky left-0 sm:text-2xl">絶対値</h2>
+          <h2 className="sticky left-0 m-0 mb-2 text-lg font-bold sm:text-2xl">絶対値</h2>
 
           {Object.entries(ABSOLUTE).map(([unit, description]) => {
             return (
@@ -319,27 +319,27 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             );
           })}
 
-          <h2 className="font-bold text-lg m-0 mb-0 sticky left-0 mt-12 sm:text-2xl sm:mb-2">相対値</h2>
+          <h2 className="sticky left-0 m-0 mt-12 text-lg font-bold sm:mb-2 sm:text-2xl">相対値</h2>
 
-          <dl className="text-xs sm:grid grid-cols-[auto_1fr] gap-x-4 mb-2 sticky left-0 sm:text-base sm:gap-y-1">
+          <dl className="sticky left-0 mb-2 grid-cols-[auto_1fr] gap-x-4 text-xs sm:grid sm:gap-y-1 sm:text-base">
             <div className="flex items-end">
-              <dt className="after:content-[':'] mr-1 leading-snug">サンプルの文字サイズ</dt>
+              <dt className="mr-1 leading-snug after:content-[':']">サンプルの文字サイズ</dt>
               <dd className="text-sm leading-snug sm:text-lg" ref={lineRef}>
                 {em}
               </dd>
             </div>
             <div className="flex items-end">
-              <dt className="after:content-[':'] mr-1 leading-snug">サンプルの行の高さ</dt>
+              <dt className="mr-1 leading-snug after:content-[':']">サンプルの行の高さ</dt>
               <dd className="text-sm leading-snug sm:text-lg">{lh}</dd>
             </div>
 
             <div className="flex items-end">
-              <dt className="after:content-[':'] mr-1 leading-snug">ルート要素の文字サイズ</dt>
+              <dt className="mr-1 leading-snug after:content-[':']">ルート要素の文字サイズ</dt>
               <dd className="text-sm leading-snug sm:text-lg">{rem}</dd>
             </div>
 
-            <div className="flex items-end grow">
-              <dt className="after:content-[':'] mr-1 leading-snug">ルート要素の行の高さ</dt>
+            <div className="flex grow items-end">
+              <dt className="mr-1 leading-snug after:content-[':']">ルート要素の行の高さ</dt>
               <dd className="text-sm leading-snug sm:text-lg">{rlh}</dd>
             </div>
           </dl>
@@ -357,31 +357,31 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             );
           })}
 
-          <h3 className="sticky left-0 mt-8 text-lg sm:text-2xl sm:mb-2 sm:mt-10">
+          <h3 className="sticky left-0 mt-8 text-lg sm:mb-2 sm:mt-10 sm:text-2xl">
             Viewports
-            <span className="relative w-0 h-0 block overflow-hidden pointer-events-none">
-              <span className="absolute w-[100vw] h-[100vh]" ref={vRef}></span>
-              <span className="absolute w-[100svw] h-[100svh]" ref={svRef}></span>
-              <span className="absolute w-[100lvw] h-[100lvh]" ref={lvRef}></span>
-              <span className="absolute w-[100dvw] h-[100dvh]" ref={dvRef}></span>
+            <span className="pointer-events-none relative block h-0 w-0 overflow-hidden">
+              <span className="absolute h-[100vh] w-[100vw]" ref={vRef}></span>
+              <span className="absolute h-[100svh] w-[100svw]" ref={svRef}></span>
+              <span className="absolute h-[100lvh] w-[100lvw]" ref={lvRef}></span>
+              <span className="absolute h-[100dvh] w-[100dvw]" ref={dvRef}></span>
             </span>
           </h3>
 
-          <dl className="text-sm mb-2 sticky left-0 sm:text-base">
+          <dl className="sticky left-0 mb-2 text-sm sm:text-base">
             <div className="flex items-center sm:items-stretch">
-              <dt className="after:content-[':'] mr-1 sm:mr-2">Viewport</dt>
+              <dt className="mr-1 after:content-[':'] sm:mr-2">Viewport</dt>
               <dd className="leading-snug sm:text-lg">{viewport}</dd>
             </div>
             <div className="flex items-center sm:items-stretch">
-              <dt className="after:content-[':'] mr-1 sm:mr-2">Small Viewport</dt>
+              <dt className="mr-1 after:content-[':'] sm:mr-2">Small Viewport</dt>
               <dd className="leading-snug sm:text-lg">{smallViewport}</dd>
             </div>
             <div className="flex items-center sm:items-stretch">
-              <dt className="after:content-[':'] mr-1 sm:mr-2">Large Viewport</dt>
+              <dt className="mr-1 after:content-[':'] sm:mr-2">Large Viewport</dt>
               <dd className="leading-snug sm:text-lg">{largeViewport}</dd>
             </div>
             <div className="flex items-center sm:items-stretch">
-              <dt className="after:content-[':'] mr-1 sm:mr-2">Dynamic Viewport</dt>
+              <dt className="mr-1 after:content-[':'] sm:mr-2">Dynamic Viewport</dt>
               <dd className="leading-snug sm:text-lg">{dynamicViewport}</dd>
             </div>
           </dl>
@@ -403,8 +403,8 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
         </div>
       </div>
 
-      <div className="sticky bottom-6 flex flex-wrap justify-end items-center gap-x-3 bg-white py-2 pl-4 pr-3 rounded mt-10">
-        <p className="grow min-w-[200px]">
+      <div className="sticky bottom-6 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded bg-white py-2 pl-4 pr-3">
+        <p className="min-w-[200px] grow">
           <input
             type="range"
             value={value}
@@ -412,15 +412,15 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             aria-labelledby={`${id}-label`}
             min={0}
             max={200}
-            className="h-11 w-full block"
+            className="block h-11 w-full"
             onChange={({ currentTarget }) => {
               setValue(Number(currentTarget.value));
             }}
           />
         </p>
         <p className="w-28">
-          <label className="flex flex-wrap gap-x-2 focus-within:outline-black focus-within:outline focus-within:outline-2 border border-black rounded pl-1 overflow-hidden outline-offset-4">
-            <span id={`${id}-label`} className="text-2xs block">
+          <label className="flex flex-wrap gap-x-2 overflow-hidden rounded border border-black pl-1 outline-offset-4 focus-within:outline focus-within:outline-2 focus-within:outline-black">
+            <span id={`${id}-label`} className="block text-2xs">
               現在の値
             </span>
 
@@ -430,7 +430,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 min={0}
                 max={200}
                 value={value}
-                className="w-full block text-right outline-none pr-2"
+                className="block w-full pr-2 text-right outline-none"
                 onChange={({ currentTarget }) => {
                   const currentValue = Number(currentTarget.value);
 

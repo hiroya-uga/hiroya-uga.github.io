@@ -30,7 +30,7 @@ export default function Page() {
         <p>代替テキストにお悩みの際にご活用ください。</p>
       </PageTitle>
 
-      <section className="px-4 pt-10 pb-6 rounded-xl bg-white max-w-3xl mx-auto sm:px-6">
+      <section className="mx-auto max-w-3xl rounded-xl bg-white px-4 pb-6 pt-10 sm:px-6">
         <AnAltDecisionTreeContent />
       </section>
     </>

@@ -20,12 +20,12 @@ type SwitchItemProps = Pick<
 
 const SwitchItem = ({ emoji, code, label, ...props }: SwitchItemProps) => {
   return (
-    <li className="pb-2 mb-2 border-b border-b-gray-300 first:border-t first:border-t-gray-300 first:pt-2">
-      <label className="flex wd-fit items-center min-h-[45px]">
-        <span className={clsx(props.disabled && 'opacity-50', 'transition-opacity grow')}>
+    <li className="mb-2 border-b border-b-gray-300 pb-2 first:border-t first:border-t-gray-300 first:pt-2">
+      <label className="wd-fit flex min-h-[45px] items-center">
+        <span className={clsx(props.disabled && 'opacity-50', 'grow transition-opacity')}>
           {emoji && (
             <>
-              <span className="text-2xl font-emoji">{emoji}</span>：
+              <span className="font-emoji text-2xl">{emoji}</span>：
             </>
           )}
           {code ? (
@@ -57,11 +57,11 @@ const OutputTextfield = ({
 }: OutputTextfieldProps) => {
   const Content = useCallback(
     (inputProps: typeof props) => {
-      const className = clsx(['block w-full py-3 px-2 mt-2 bg-white border border-gray-400 rounded']);
+      const className = clsx(['mt-2 block w-full rounded border border-gray-400 bg-white px-2 py-3']);
 
       if (isUsingWrapLabel) {
         return (
-          <label className="p-3 rounded border-2 border-solid border-[#5071a8] block bg-[#5071a822] [&:not(:first-child)]:mt-2">
+          <label className="block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3 [&:not(:first-child)]:mt-2">
             <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
             <input {...inputProps} className={className} />
           </label>
@@ -96,7 +96,7 @@ const Output = ({ children, isUsingWrapLabelAll, isUsingParagraphForAriaDescribe
   if (isUsingWrapLabelAll) {
     return (
       <p>
-        <label className={clsx(['p-3 rounded border-2 border-solid border-[#5071a8] block bg-[#5071a822]'])}>
+        <label className={clsx(['block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3'])}>
           {children}
         </label>
       </p>
@@ -400,10 +400,10 @@ export const AccessibleNameAndDescriptionComputation = ({
       };
 
       return (
-        <li key={message} className="text-sm bg-white rounded-md p-2 my-2">
+        <li key={message} className="my-2 rounded-md bg-white p-2 text-sm">
           <span
             className={clsx([
-              'text-sm px-2 min-w-[4rem] inline-block mr-2 text-center uppercase font-bold',
+              'mr-2 inline-block min-w-[4rem] px-2 text-center text-sm font-bold uppercase',
               getBackgroundColor(level),
             ])}
           >
@@ -425,7 +425,7 @@ export const AccessibleNameAndDescriptionComputation = ({
         )}
         {isUsingWrapLabelAll && <span className={clsx([...className, 'mr-2'])}>{isUsingEmoji ? '🍊' : 'ラベルC'}</span>}
         {isUsingAriaLabelledbyA && (
-          <span id={labelAId} className={clsx([...labelsClassName, 'border-dashed mr-2'])}>
+          <span id={labelAId} className={clsx([...labelsClassName, 'mr-2 border-dashed'])}>
             {isUsingEmoji ? '🍎' : '擬似ラベルA'}
           </span>
         )}
@@ -444,7 +444,7 @@ export const AccessibleNameAndDescriptionComputation = ({
   const Description = () => {
     if (isUsingParagraphForAriaDescribedby) {
       return (
-        <div className="___row___ my-2 empty:my-0 first:my-0">
+        <div className="___row___ my-2 first:my-0 empty:my-0">
           {isUsingAriaDescribedbyA && (
             <p id={describedByAId} className={clsx([...descriptionsClassName, 'border-dotted'])}>
               {isUsingEmoji ? '🍅' : '説明文A'}
@@ -463,7 +463,7 @@ export const AccessibleNameAndDescriptionComputation = ({
     }
 
     return (
-      <span className="___row___ block my-2 empty:my-0 first:my-0">
+      <span className="___row___ my-2 block first:my-0 empty:my-0">
         {isUsingAriaDescribedbyA && (
           <span id={describedByAId} className={clsx([...descriptionsClassName, 'border-dotted'])}>
             {isUsingEmoji ? '🍅' : '説明文A'}
@@ -482,8 +482,8 @@ export const AccessibleNameAndDescriptionComputation = ({
   };
 
   return (
-    <div className="md:grid grid-cols-2">
-      <div className="mb-12 md:pr-14 md:mb-0">
+    <div className="grid-cols-2 md:grid">
+      <div className="mb-12 md:mb-0 md:pr-14">
         <h2>フラグ</h2>
 
         <div className="mb-12">
@@ -642,7 +642,7 @@ export const AccessibleNameAndDescriptionComputation = ({
           <ul aria-label="見つかった問題">{getErrorMessage()}</ul>
         </div>
 
-        <div className="p-5 border border-gray-300 rounded-md mb-6">
+        <div className="mb-6 rounded-md border border-gray-300 p-5">
           <div ref={outputRef}>
             <Output
               isUsingWrapLabelAll={isUsingWrapLabelAll}
@@ -693,10 +693,10 @@ export const AccessibleNameAndDescriptionComputation = ({
           </div>
         </div>
 
-        <div className="rounded-md border border-gray-300 mb-2 bg-white">
+        <div className="mb-2 rounded-md border border-gray-300 bg-white">
           <p
             id={textboxDescId}
-            className="text-[0.625rem] px-4 pt-2 pb-1 mb-2 text-black border-b border-b-gray-400 border-dashed"
+            className="mb-2 border-b border-dashed border-b-gray-400 px-4 pb-1 pt-2 text-[0.625rem] text-black"
           >
             Hint：全選択ショートカットキーまたはマウスクリックでHTML断片を全選択できます。
           </p>
@@ -717,9 +717,9 @@ export const AccessibleNameAndDescriptionComputation = ({
             onClick={(e) => {
               window.getSelection()?.selectAllChildren(e.currentTarget);
             }}
-            className="font-mono text-sm overflow-auto"
+            className="overflow-auto font-mono text-sm"
           >
-            <pre className="p-4 pt-0 w-fit min-w-full">
+            <pre className="w-fit min-w-full p-4 pt-0">
               <CodeBlock language="html" code={markup} />
             </pre>
           </div>

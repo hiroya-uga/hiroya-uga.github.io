@@ -129,3 +129,9 @@ video {
     margin: 0;
   }
 }
+
+@layer components {
+  /* stylelint-disable-next-line */
+  .hljs {
+  }
+}

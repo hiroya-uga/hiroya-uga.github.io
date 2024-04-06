@@ -32,7 +32,7 @@ const ResetButton = ({ setPageState }: { setPageState: (_: { index: number; isCu
     <p className="mt-12 text-right">
       <button
         type="button"
-        className="px-2 py-1 bg-slate-100"
+        className="bg-slate-100 px-2 py-1"
         onClick={() => {
           setPageState({
             index: 0,
@@ -107,11 +107,11 @@ export const AnAltDecisionTreeContent = () => {
       <div className={clsx([`${styles.slide}`, index === 0 && 'pb-4'])}>
         <AnAltDecisionTreeQuestion index={index} />
 
-        <ul className="mt-12 pt-10 border-t border-t-slate-200 flex justify-center gap-4 flex-wrap">
+        <ul className="mt-12 flex flex-wrap justify-center gap-4 border-t border-t-slate-200 pt-10">
           <li>
             <button
               type="button"
-              className="p-4 border border-solid border-black bg-white  rounded min-w-[7rem]"
+              className="min-w-[7rem] rounded border border-solid border-black  bg-white p-4"
               onClick={() => {
                 setPageState({
                   index,
@@ -125,7 +125,7 @@ export const AnAltDecisionTreeContent = () => {
           <li>
             <button
               type="button"
-              className="p-4 border border-solid border-black bg-white rounded min-w-[7rem]"
+              className="min-w-[7rem] rounded border border-solid border-black bg-white p-4"
               onClick={() => {
                 setPageState({
                   index: index + 1,
@@ -143,7 +143,7 @@ export const AnAltDecisionTreeContent = () => {
         <p className="mt-10">
           <button
             type="button"
-            className="px-2 py-1 bg-slate-100"
+            className="bg-slate-100 px-2 py-1"
             onClick={() => {
               router.back();
             }}

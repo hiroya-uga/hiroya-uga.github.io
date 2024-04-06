@@ -39,13 +39,13 @@ export const NoteBox = ({
     >
       <TagName
         className={clsx([
-          'font-bold text-lg mb-2 mt-0 leading-relaxed',
+          'mb-2 mt-0 text-lg font-bold leading-relaxed',
           logLevel === 'note' && 'text-green-800',
           logLevel === 'warn' && 'text-yellow-800',
           logLevel === 'error' && 'text-red-800',
         ])}
       >
-        <span className="font-emoji pr-2">
+        <span className="pr-2 font-emoji">
           {logLevel === 'note' && '💡'}
           {logLevel === 'warn' && '⚠️'}
           {logLevel === 'error' && '🚨'}

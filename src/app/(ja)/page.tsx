@@ -25,12 +25,12 @@ export default function Home() {
 
   return (
     <>
-      <header className="py-12 px-4 sm:py-16">
-        <div className="max-w-content mx-auto">
-          <div className="md:flex items-center md:mb-2 text-center">
-            <h1 className="text-2xl font-bold leading-none mb-3 md:mb-0">{metadata.title}</h1>
+      <header className="px-4 py-12 sm:py-16">
+        <div className="mx-auto max-w-content">
+          <div className="items-center text-center md:mb-2 md:flex">
+            <h1 className="mb-3 text-2xl font-bold leading-none md:mb-0">{metadata.title}</h1>
             <p className="text-xs">
-              <span className="px-2 hidden md:inline">-</span>
+              <span className="hidden px-2 md:inline">-</span>
               <span>
                 Web標準とアクセシビリティの話が好きな、
                 <span className="inline-block">大器晩成型のフロントエンドエンジニアの物置。</span>
@@ -41,13 +41,13 @@ export default function Home() {
       </header>
 
       <main>
-        <div className="mb-4 max-w-content mx-auto">
+        <div className="mx-auto mb-4 max-w-content">
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="px-[16px] mb-16 sm:mb-28">
-          <div className="max-w-content mx-auto">
-            <p className="text-sm text-center mb-20 sm:mb-28">
+        <div className="mb-16 px-[16px] sm:mb-28">
+          <div className="mx-auto max-w-content">
+            <p className="mb-20 text-center text-sm sm:mb-28">
               <span>ようこそ {SITE_NAME} へ。</span>
               <span className="block sm:inline">
                 あなたは
@@ -56,7 +56,7 @@ export default function Home() {
               </span>
             </p>
 
-            <h2 className="text-2xl mb-4">The power of the web</h2>
+            <h2 className="mb-4 text-2xl">The power of the web</h2>
 
             <blockquote
               cite="https://www.w3.org/mission/accessibility/"
@@ -77,7 +77,7 @@ export default function Home() {
               </footer>
             </blockquote>
 
-            <h2 className="text-2xl mb-4">Pick up</h2>
+            <h2 className="mb-4 text-2xl">Pick up</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -124,13 +124,13 @@ export default function Home() {
                 return (
                   <li key={href}>
                     <p className="mb-1">
-                      <Link href={href} className="no-underline flex flex-col-reverse" aria-describedby={id}>
+                      <Link href={href} className="flex flex-col-reverse no-underline" aria-describedby={id}>
                         <span className="inline-block leading-normal">
                           {title}
                           {/* {item.isWip && <b>（WIP）</b>} */}
                         </span>
                         <span
-                          className="grid bg-gray-200 place-content-center text-5xl aspect-[1.618_/_1] mb-3 rounded-md leading-none font-emoji"
+                          className="mb-3 grid aspect-[1.618_/_1] place-content-center rounded-md bg-gray-200 font-emoji text-5xl leading-none"
                           aria-hidden="true"
                         >
                           {emoji}
@@ -149,9 +149,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="px-[16px] py-11 pb-12 bg-slate-200 mb-20 sm:mb-28">
-          <div className="max-w-content mx-auto">
-            <h2 className="text-2xl mb-4">カテゴリー</h2>
+        <div className="mb-20 bg-slate-200 px-[16px] py-11 pb-12 sm:mb-28">
+          <div className="mx-auto max-w-content">
+            <h2 className="mb-4 text-2xl">カテゴリー</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -168,9 +168,9 @@ export default function Home() {
               ].map(({ emoji, href, title }) => {
                 return (
                   <li key={href}>
-                    <a href={href} className="no-underline block">
+                    <a href={href} className="block no-underline">
                       <span
-                        className="grid bg-gray-50 place-content-center text-5xl aspect-[1.618_/_1] mb-2 rounded-md leading-none font-emoji"
+                        className="mb-2 grid aspect-[1.618_/_1] place-content-center rounded-md bg-gray-50 font-emoji text-5xl leading-none"
                         aria-hidden="true"
                       >
                         {emoji}
@@ -185,15 +185,15 @@ export default function Home() {
         </div>
 
         <div className="px-[16px]">
-          <div className="max-w-content mx-auto">
-            <h2 className="text-2xl mb-7">外部メディア</h2>
+          <div className="mx-auto max-w-content">
+            <h2 className="mb-7 text-2xl">外部メディア</h2>
 
             <table className="mb-2">
               <tbody>
                 {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
                   return (
                     <tr key={href} className="leading-6 sm:leading-7">
-                      <td className="pr-2 font-mono text-xs leading-[inherit] sm:text-sm sm:pr-8">
+                      <td className="pr-2 font-mono text-xs leading-[inherit] sm:pr-8 sm:text-sm">
                         <span className="inline-block">{date}</span>
                       </td>
                       <td className={clsx([index !== 2 && 'pb-3 sm:pb-4', 'text-sm leading-[inherit] sm:text-base'])}>
@@ -201,7 +201,7 @@ export default function Home() {
                           {title}
                         </a>
 
-                        <p className="text-xs text-gray-600 text-ellipsis overflow-hidden">{new URL(href).hostname}</p>
+                        <p className="overflow-hidden text-ellipsis text-xs text-gray-600">{new URL(href).hostname}</p>
                       </td>
                     </tr>
                   );
@@ -209,11 +209,11 @@ export default function Home() {
               </tbody>
             </table>
 
-            <p className="text-right mb-12 sm:mb-28">
+            <p className="mb-12 text-right sm:mb-28">
               <a href="/documents/media/">外部メディアリンク一覧</a>
             </p>
 
-            <h2 className="text-2xl mb-2">Bookmarks</h2>
+            <h2 className="mb-2 text-2xl">Bookmarks</h2>
 
             <p className="mb-4">外部サイトへのリンク集です。</p>
 
@@ -278,14 +278,14 @@ export default function Home() {
               ]}
             />
 
-            <div className="mt-12 pt-12 sm:mt-28 sm:pt-28 border-t border-t-gray-400 border-dashed mb-8 grid-cols-[1fr_auto] grid-rows-[auto_1fr] sm:grid sm:gap-x-12 sm:mb-0">
-              <h2 className="text-2xl mt-0 mb-4 row-start-1 row-end-2 col-start-1 col-end-2">PROFILE</h2>
+            <div className="mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-28 sm:grid sm:gap-x-12 sm:pt-28">
+              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-2xl">PROFILE</h2>
 
-              <p className="leading-none mb-8 flex mx-auto pr-4 items-center gap-4 sm:row-start-1 sm:row-end-3 sm:col-start-2 sm:col-end-3 sm:gap-x-6 sm:m-0 max-w-[22.5rem] aspect-[8_/_5] sm:aspect-auto">
-                <span className="whitespace-nowrap grow text-center text-xl leading-tight">
+              <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-[22.5rem] items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
+                <span className="grow whitespace-nowrap text-center text-xl leading-tight">
                   <span className="tracking-widest">宇賀景哉</span>
                   <span
-                    className="block text-xs palt"
+                    className="palt block text-xs"
                     style={{
                       letterSpacing: '0.1375rem',
                     }}
@@ -298,10 +298,10 @@ export default function Home() {
                 </span>
               </p>
 
-              <div className="row-start-2 row-end-3 col-start-1 col-end-2">
-                <div className="sm:max-w-xl sm:mb-4 sm:pr-4">
+              <div className="col-start-1 col-end-2 row-start-2 row-end-3">
+                <div className="sm:mb-4 sm:max-w-xl sm:pr-4">
                   <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
-                  <p className="inline-block sm:palt">
+                  <p className="sm:palt inline-block">
                     「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
                   </p>
                   <p>アイコンは昔の上司がスマホで描いて送ってくれた似顔絵。</p>
@@ -309,7 +309,7 @@ export default function Home() {
               </div>
             </div>
 
-            <ul className="flex gap-4 flex-wrap items-center">
+            <ul className="flex flex-wrap items-center gap-4">
               {(
                 [
                   {
