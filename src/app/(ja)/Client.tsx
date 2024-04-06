@@ -219,11 +219,11 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   return (
     <>
       <div className="group relative overflow-hidden" tabIndex={0}>
-        <figure aria-live="polite" className={clsx(['relative min-h bg-white'])}>
+        <figure aria-live="polite" className={clsx(['min-h relative bg-white'])}>
           <div className={clsx(['aspect-[3_/_2]', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (
-                <p className="absolute h-full w-full text-middle text-center grid place-items-center">
+                <p className="text-middle absolute grid h-full w-full place-items-center text-center">
                   {photoData.error}
                 </p>
               ) : (
@@ -232,19 +232,19 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
                   height={640}
                   src={photoData.src}
                   alt={`${photoData.caption} ${photoData.date}`}
-                  className="w-full block object-cover h-full"
+                  className="block h-full w-full object-cover"
                   aria-describedby={captionId}
                   priority
                 />
               ))}
           </div>
 
-          <figcaption className="text-white text-2xs sm:text-sm">
-            <span className="absolute left-0 top-0 py-2 pl-4 pr-2 text-white bg-[#00000080] w-full flex items-center transition-transform -translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 flex-row-reverse flex-wrap z-10">
+          <figcaption className="text-2xs text-white sm:text-sm">
+            <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse flex-wrap items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
               <span className="w-40 text-right sm:w-56">
                 <a
                   href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
-                  className="bg-white px-2 py-1 z-10 cursor-pointer leading-tight inline-block no-underline text-black"
+                  className="z-10 inline-block cursor-pointer bg-white px-2 py-1 leading-tight text-black no-underline"
                 >
                   See this photo on Instagram!
                 </a>
@@ -255,7 +255,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               </span>
             </span>
             <span
-              className="absolute right-0 bottom-0 pl-4 pr-[60px] min-h-[50px] flex items-center text-white bg-[#00000080] w-full transition-transform translate-y-full group-focus-within:translate-y-0 group-hover:translate-y-0 leading-tight"
+              className="absolute bottom-0 right-0 flex min-h-[50px] w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[60px] leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
               id={captionId}
             >
               <span className={clsx(...transitionClassName)}>
@@ -267,7 +267,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
         <p
           className={clsx([
-            'absolute right-0 bottom-0 z-10 min-w-[50px] min-h-[50px] text-white translate-y-full group-focus-within:translate-y-0 focus-within:translate-y-0  group-hover:translate-y-0',
+            'absolute bottom-0 right-0 z-10 min-h-[50px] min-w-[50px] translate-y-full text-white focus-within:translate-y-0 group-focus-within:translate-y-0  group-hover:translate-y-0',
             'transition-[opacity_visibility_transform]',
             isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
             isFirstRender && isLoading ? 'invisible' : 'visible',
@@ -275,7 +275,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="absolute right-[8px] top-[8px] bg-white rounded-[50%] h-[calc(100%_-_16px)] w-[calc(100%_-_16px)]"
+            className="absolute right-[8px] top-[8px] h-[calc(100%_-_16px)] w-[calc(100%_-_16px)] rounded-[50%] bg-white"
             onClick={() => updateImage()}
           >
             <Image
@@ -283,7 +283,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               width={48}
               height={48}
               alt="ランダムに切り替える"
-              className="opacity-80 block full h-full w-full"
+              className="full block h-full w-full opacity-80"
             />
           </button>
         </p>
@@ -303,7 +303,7 @@ export const LinkList = ({
   }[];
 }) => {
   return (
-    <ul className="mb-2 pl-4 leading-normal sm:text-sm sm:grid sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-[24px] sm:pl-0 md:grid-cols-3">
+    <ul className="mb-2 pl-4 leading-normal sm:grid sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-[24px] sm:pl-0 sm:text-sm md:grid-cols-3">
       {list.map(({ title, href, japanese, ...prop }, index, { length }) => {
         return (
           <li
@@ -318,15 +318,15 @@ export const LinkList = ({
               <a
                 href={href}
                 {...prop}
-                className="sm:grow sm:grid sm:content-center sm:p-2 sm:pl-3 sm:bg-white sm:rounded-l last:rounded-r"
+                className="last:rounded-r sm:grid sm:grow sm:content-center sm:rounded-l sm:bg-white sm:p-2 sm:pl-3"
               >
                 {title}
               </a>{' '}
               {japanese && (
-                <span className="sm:shrink-0 sm:flex before:content-['\['] after:content-['\]'] sm:before:hidden sm:after:hidden sm:hover:bg-gray-100 transition-colors">
+                <span className="transition-colors before:content-['\['] after:content-['\]'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden sm:hover:bg-gray-100">
                   <a
                     href={japanese}
-                    className="sm:border-l sm:border-dotted sm:border-l-gray-400 sm:px-2 sm:grow sm:flex sm:items-center sm:bg-slate-200 sm:rounded-r sm:translate-x-2 sm:translate-y-1 sm:rotate-6 transition-transform [&:not(.clicked)]:transform-none"
+                    className="transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 [&:not(.clicked)]:transform-none"
                     onKeyDown={({ currentTarget, key }) => {
                       if (key === 'Enter') {
                         currentTarget.classList.add('clicked');

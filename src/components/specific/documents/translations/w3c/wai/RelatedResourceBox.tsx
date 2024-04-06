@@ -1,12 +1,12 @@
 export const RelatedResourceBox = ({ children }: { children: React.ReactNode }) => {
   return (
-    <aside className="mt-24 border rounded-md border-[#015a9c] overflow-hidden">
-      <h2 className="m-0 px-4 py-2 bg-[#015a9c] text-white text-xl sm:text-2xl sm:px-6 sm:py-4">
+    <aside className="mt-24 overflow-hidden rounded-md border border-[#015a9c]">
+      <h2 className="m-0 bg-[#015a9c] px-4 py-2 text-xl text-white sm:px-6 sm:py-4 sm:text-2xl">
         <span id="related" className="target">
           関連するWCAGリソース
         </span>
       </h2>
-      <div className="pt-6 px-4 pb-8 sm:px-6 sm:pt-8 sm:pb-10">
+      <div className="px-4 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-8">
         <p className="mb-8">
           これらのチュートリアルは、さまざまな状況でアクセシビリティを実装するためのベストプラクティスガイダンスを提供します。
           <span className="inline-block">

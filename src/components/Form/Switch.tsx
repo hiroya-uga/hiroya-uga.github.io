@@ -10,11 +10,11 @@ export const Switch = (props: Props) => {
   return (
     <span
       className={clsx([
-        'relative block w-16 h-8 border rounded-full cursor-default',
+        'relative block h-8 w-16 cursor-default rounded-full border',
         'transition-[opacity_border-color_background-color]',
         'before:absolute before:left-[1px] before:top-[1px]',
-        'before:h-[calc(100%_-_2px)] before:aspect-square before:bg-white',
-        'before:transition-transform before:rounded-[50%]',
+        'before:aspect-square before:h-[calc(100%_-_2px)] before:bg-white',
+        'before:rounded-[50%] before:transition-transform',
         isChecked && 'before:translate-x-8',
         isChecked ? 'border-green-400 bg-green-400' : 'border-gray-400 bg-gray-400',
         props.disabled && 'opacity-40',
@@ -24,7 +24,7 @@ export const Switch = (props: Props) => {
         {...props}
         type="checkbox"
         role="switch"
-        className="absolute inset-0 w-full h-full appearance-none"
+        className="absolute inset-0 h-full w-full appearance-none"
         onChange={(e) => {
           if (props.onChange) {
             props.onChange(e);

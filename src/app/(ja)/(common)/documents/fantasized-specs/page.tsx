@@ -20,7 +20,7 @@ export default function Page() {
       </PageTitle>
 
       <ul className="pl-5">
-        <li className="list-disc pl-1 mb-2">
+        <li className="mb-2 list-disc pl-1">
           <a href="/documents/fantasized-specs/html-carousel">The Carousel element</a>
         </li>
         <li className="list-disc pl-1">

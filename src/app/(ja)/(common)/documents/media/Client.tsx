@@ -31,7 +31,7 @@ const CheckBoxes = <T extends string>({
         <label className="flex items-center">
           <input
             type="checkbox"
-            className="mr-2 h-4 w-4 inline-block"
+            className="mr-2 inline-block h-4 w-4"
             checked={checked}
             onChange={() => {
               dispatch({
@@ -261,12 +261,12 @@ export const MediaContent = ({ id }: { id: string }) => {
             </h2>
           }
         >
-          <div className="p-6 pb-8 sm:p-8 sm:pt-7 sm:pb-9">
-            <div className="flex flex-row-reverse mb-6 sm:mb-10">
-              <p className="relative left-2 bottom-2 min-w-[9rem] text-right">
+          <div className="p-6 pb-8 sm:p-8 sm:pb-9 sm:pt-7">
+            <div className="mb-6 flex flex-row-reverse sm:mb-10">
+              <p className="relative bottom-2 left-2 min-w-[9rem] text-right">
                 <button
                   type="reset"
-                  className="py-2 px-3 bg-slate-200 rounded sm:hover:bg-slate-300 sm:transition-colors sm:duration-200"
+                  className="rounded bg-slate-200 px-3 py-2 sm:transition-colors sm:duration-200 sm:hover:bg-slate-300"
                   onClick={() => {
                     setTypesStatus(resetStatus<typeof typesStatus>(typesStatus));
                     setTagsStatus(resetStatus<typeof tagsStatus>(tagsStatus));
@@ -277,7 +277,7 @@ export const MediaContent = ({ id }: { id: string }) => {
                 </button>
               </p>
               <fieldset className="grow">
-                <legend className="font-bold mb-3">Types</legend>
+                <legend className="mb-3 font-bold">Types</legend>
                 <ul className="flex flex-wrap gap-2 pl-4">
                   <CheckBoxes nameSet={mediaTypes} stateSet={typesStatus} dispatch={setTypesStatus} />
                 </ul>
@@ -285,27 +285,27 @@ export const MediaContent = ({ id }: { id: string }) => {
             </div>
 
             <fieldset className="mb-6 sm:mb-10">
-              <legend className="font-bold mb-3">Categories</legend>
+              <legend className="mb-3 font-bold">Categories</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
                 <CheckBoxes nameSet={mediaCategory} stateSet={categoriesStatus} dispatch={setCategoriesStatus} />
               </ul>
             </fieldset>
 
             <fieldset className="mb-6 sm:mb-10">
-              <legend className="font-bold mb-3">Tags</legend>
+              <legend className="mb-3 font-bold">Tags</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
                 <CheckBoxes nameSet={mediaTags} stateSet={tagsStatus} dispatch={setTagsStatus} />
               </ul>
             </fieldset>
 
             <p className="flex pr-2">
-              <label htmlFor={idForKeywords} className="font-bold mr-2">
+              <label htmlFor={idForKeywords} className="mr-2 font-bold">
                 <span className="block py-2 pr-2">Keywords</span>
               </label>
               <span className="grow">
                 <input
                   id={idForKeywords}
-                  className="w-full p-2 border border-slate-400 rounded"
+                  className="w-full rounded border border-slate-400 p-2"
                   value={keyword}
                   onChange={({ currentTarget }) => {
                     setKeyword(currentTarget.value);
@@ -322,7 +322,7 @@ export const MediaContent = ({ id }: { id: string }) => {
       </nav>
 
       <section>
-        <div className="flex items-end leading-none mb-8">
+        <div className="mb-8 flex items-end leading-none">
           <h2 className="m-0">メディア一覧</h2>
 
           <p className="ml-4" aria-live="assertive" aria-atomic="true" aria-relevant="all">
@@ -334,28 +334,28 @@ export const MediaContent = ({ id }: { id: string }) => {
           <tbody className="block sm:table-row-group">
             {result.map(({ date, category, title, href, tags }) => {
               return (
-                <tr key={href} className="leading-6 sm:leading-7 grid grid-cols-[auto_1fr] sm:table-row">
-                  <td className="font-mono text-xs leading-[inherit] sm:text-sm block col-start-1 col-end-2 sm:table-cell">
+                <tr key={href} className="grid grid-cols-[auto_1fr] leading-6 sm:table-row sm:leading-7">
+                  <td className="col-start-1 col-end-2 block font-mono text-xs leading-[inherit] sm:table-cell sm:text-sm">
                     <span className="inline-block">{date}</span>
                   </td>
-                  <td className="pl-4 font-mono sm:text-center uppercase text-xs leading-[inherit] sm:px-8 col-start-2 col-end-3 block sm:table-cell">
+                  <td className="col-start-2 col-end-3 block pl-4 font-mono text-xs uppercase leading-[inherit] sm:table-cell sm:px-8 sm:text-center">
                     <span className="inline-block">{category}</span>
                   </td>
-                  <td className="pb-6 text-sm leading-[inherit] sm:text-base sm:pb-8 col-start-1 col-end-3 block sm:table-cell">
+                  <td className="col-start-1 col-end-3 block pb-6 text-sm leading-[inherit] sm:table-cell sm:pb-8 sm:text-base">
                     <p>
                       <a href={href} className="break-all">
                         <Title title={title} keyword={keyword} />
                       </a>
                     </p>
 
-                    <p className="text-xs text-gray-600 mt-1 leading-snug text-ellipsis overflow-hidden">{href}</p>
+                    <p className="mt-1 overflow-hidden text-ellipsis text-xs leading-snug text-gray-600">{href}</p>
 
                     {tags && tags.length && (
-                      <ul className="text-xs mt-2 flex flex-wrap gap-2">
+                      <ul className="mt-2 flex flex-wrap gap-2 text-xs">
                         {tags.map((tag) => {
                           return (
                             <li key={tag}>
-                              <span className="p-1 bg-slate-200">{tag}</span>
+                              <span className="bg-slate-200 p-1">{tag}</span>
                             </li>
                           );
                         })}

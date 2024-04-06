@@ -1,19 +1,18 @@
 import { Details } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 
-import { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { HTMLAttributes, useEffect, useRef } from 'react';
 import React from 'react';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 
-const Code = ({ code }: { code: string }) => {
-  return (
-    <pre className="hljs p-2 sm:p-4 overflow-auto">
-      <CodeBlock code={code} />
-    </pre>
-  );
-};
+// const Code = ({ code }: { code: string }) => {
+//   return (
+//     <pre className="hljs overflow-auto p-2 sm:p-4">
+//       <CodeBlock code={code} />
+//     </pre>
+//   );
+// };
 
 const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, 'children'> & { index?: number }) => {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -28,11 +27,11 @@ const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, '
     if (typeof index === 'number') {
       return (
         <h2
-          className="w-fit mx-auto bg-[url(/tools/an-alt-decision-tree/e0880_1.svg)] bg-no-repeat bg-cover sm:text-center mt-0 mb-18 text-lg sm:text-2xl flex justify-center items-center pt-9 pb-16 pl-8 pr-6 sm:w-full sm:max-w-[80%]"
+          className="mx-auto mb-5 mt-0 flex w-fit items-center justify-center bg-[url(/tools/an-alt-decision-tree/e0880_1.svg)] bg-cover bg-no-repeat pb-16 pl-8 pr-6 pt-9 text-lg sm:w-full sm:max-w-[80%] sm:text-center sm:text-2xl"
           ref={ref}
           tabIndex={-1}
         >
-          <span className="bg-gray-200 rounded-md mr-3 sm:mr-4 p-1 aspect-square h-10 grid place-items-center leading-none sm:h-12">
+          <span className="mr-3 grid aspect-square h-10 place-items-center rounded-md bg-gray-200 p-1 leading-none sm:mr-4 sm:h-12">
             Q{index + 1}
           </span>
           <strong className="font-normal">{children}</strong>
@@ -41,7 +40,7 @@ const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, '
     }
 
     return (
-      <h2 className="text-center text-xl sm:text-2xl mt-0 mb-9" ref={ref} tabIndex={-1}>
+      <h2 className="mb-9 mt-0 text-center text-xl sm:text-2xl" ref={ref} tabIndex={-1}>
         {children}
       </h2>
     );
@@ -272,7 +271,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
           </ImageWrapper> */}
           <Shrimp />
 
-          <p className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+          <p className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
             画像の中に文字が書かれているかを確認してください。
           </p>
         </>
@@ -310,7 +309,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
           </ImageWrapper> */}
           <Shrimp />
 
-          <div className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+          <div className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
             <p className="mb-2 sm:mb-0">
               リンクまたはボタンなど、
               <span className="inline-block sm:inline">機能のために使用されているかを確認してください。</span>
@@ -381,7 +380,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 
           <Shrimp />
 
-          <p className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+          <p className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
             その画像がないとコンテンツの意味が変わったり、
             <span className="sm:inline-block">伝わらなくなるかを確認してください。</span>
           </p>
@@ -432,7 +431,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 
           <Shrimp />
 
-          <p className="max-w-xl mx-auto px-4 sm:px-0 sm:text-center">
+          <p className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
             純粋に装飾のため、
             <span className="inline-block">またはユーザーに直接関係しないものですか？</span>
           </p>
@@ -446,7 +445,7 @@ export const AnAltDecisionTreeException = () => {
     <>
       <Heading>例外パターンのようです</Heading>
 
-      <div className="mt-12 mb-8">
+      <div className="mb-8 mt-12">
         <Image src="/tools/an-alt-decision-tree/exception.png" width={246} height={292} alt="" className="mx-auto" />
       </div>
 
@@ -582,9 +581,7 @@ const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
       {list.map(([title, content]) => {
         return (
           <Details name="if" key={title} summary={title}>
-            <div className="text-sm border-t border-t-gray-100 px-4 py-6 text-secondary-500 sm:text-base sm:pb-16">
-              {content}
-            </div>
+            <div className="border-t border-t-gray-100 px-4 py-6 text-sm sm:pb-16 sm:text-base">{content}</div>
           </Details>
         );
       })}
