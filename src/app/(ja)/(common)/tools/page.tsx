@@ -33,6 +33,15 @@ export default function Page() {
             description:
               'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
           },
+          {
+            key: `文字数カウント`,
+            title: (
+              <>
+                <Link href="/tools/character-count">文字数カウント</Link>
+              </>
+            ),
+            description: '文章の文字数をカウントするツールです。原稿用紙換算、段落数も確認できます。',
+          },
         ]}
       />
 

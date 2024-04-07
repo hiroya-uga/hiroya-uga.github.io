@@ -1,18 +1,24 @@
-import { useState } from 'react';
+'use client';
+
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import clsx from 'clsx';
 
-type Props = Omit<React.InputHTMLAttributes<HTMLElement>, 'type'>;
+type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+  dispatch?: Dispatch<SetStateAction<boolean>>;
+};
 
-export const Switch = (props: Props) => {
-  const [isChecked, setIsChecked] = useState(props.checked);
+export const Switch = ({ dispatch, ...props }: Props) => {
+  const state = useState(props.checked ?? false);
+  const isChecked = props.checked ?? state[0];
+  const setIsChecked = dispatch ?? state[1];
 
   return (
     <span
       className={clsx([
         'relative block h-8 w-16 cursor-default rounded-full border',
         'transition-[opacity_border-color_background-color]',
-        'before:absolute before:left-[1px] before:top-[1px]',
+        'before:absolute before:left-px before:top-px',
         'before:aspect-square before:h-[calc(100%_-_2px)] before:bg-white',
         'before:rounded-[50%] before:transition-transform',
         isChecked && 'before:translate-x-8',
@@ -24,7 +30,8 @@ export const Switch = (props: Props) => {
         {...props}
         type="checkbox"
         role="switch"
-        className="absolute inset-0 h-full w-full appearance-none"
+        checked={props.checked ?? isChecked}
+        className="absolute inset-0 size-full appearance-none"
         onChange={(e) => {
           if (props.onChange) {
             props.onChange(e);
