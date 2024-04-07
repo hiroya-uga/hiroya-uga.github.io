@@ -285,7 +285,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             type="button"
             aria-live="assertive"
             aria-controls={controls}
-            className="min-w-[9rem] rounded border border-solid border-black p-2 text-sm leading-snug sm:whitespace-nowrap sm:px-4 sm:text-base"
+            className="min-w-36 rounded border border-solid border-black p-2 text-sm leading-snug sm:whitespace-nowrap sm:px-4 sm:text-base"
             onClick={() => setShouldShowDescriptions(!shouldShowDescriptions)}
           >
             {shouldShowDescriptions ? '説明文を隠す' : '説明文を表示する'}
@@ -358,12 +358,12 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
           })}
 
           <h3 className="sticky left-0 mt-8 text-lg sm:mb-2 sm:mt-10 sm:text-2xl">
-            Viewports
-            <span className="pointer-events-none relative block h-0 w-0 overflow-hidden">
-              <span className="absolute h-[100vh] w-[100vw]" ref={vRef}></span>
-              <span className="absolute h-[100svh] w-[100svw]" ref={svRef}></span>
-              <span className="absolute h-[100lvh] w-[100lvw]" ref={lvRef}></span>
-              <span className="absolute h-[100dvh] w-[100dvw]" ref={dvRef}></span>
+            Viewport
+            <span className="pointer-events-none relative block size-0 overflow-hidden">
+              <span className="absolute h-screen w-screen" ref={vRef}></span>
+              <span className="absolute h-svh w-svw" ref={svRef}></span>
+              <span className="absolute h-lvh w-lvw" ref={lvRef}></span>
+              <span className="absolute h-dvh w-dvw" ref={dvRef}></span>
             </span>
           </h3>
 

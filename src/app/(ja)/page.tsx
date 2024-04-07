@@ -72,7 +72,7 @@ export default function Home() {
                 ”
               </p>
 
-              <footer className="text-center text-[0.625rem] sm:text-sm">
+              <footer className="text-center text-2xs sm:text-sm">
                 <p>—Tim Berners-Lee, W3C Director and inventor of the World Wide Web</p>
               </footer>
             </blockquote>
@@ -85,41 +85,41 @@ export default function Home() {
                   emoji: '🌳',
                   href: '/tools/an-alt-decision-tree',
                   title: '代替テキスト２択チャート',
-                  desctiption:
+                  description:
                     'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
                 },
                 {
                   emoji: '🖼',
                   href: '/documents/translations/w3c/wai/tutorials/images',
                   title: '日本語訳：Images Tutorial',
-                  desctiption: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
+                  description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
                 },
                 {
                   emoji: '📝',
                   href: '/documents/translations/pauljadam-modern-web-a11y-demos',
                   title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
-                  desctiption: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+                  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
                 },
                 {
                   emoji: '📛',
                   href: '/tools/accessible-name-and-description-computation/',
                   title: 'Playground: Accessible Name and Description Computation',
-                  desctiption: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+                  description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
                 },
                 {
                   emoji: '👆',
                   href: '/tools/touch-event-touches',
                   title: 'Playground: TouchEvent.touches',
-                  desctiption: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
+                  description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
                 },
                 {
                   emoji: '💭',
                   href: '/documents/fantasized-specs',
                   title: 'Fantasized Web Standards and Specifications',
-                  desctiption: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
+                  description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
                 },
-              ].map(({ emoji, href, title, desctiption }) => {
-                const id = desctiption && href;
+              ].map(({ emoji, href, title, description }) => {
+                const id = description && href;
 
                 return (
                   <li key={href}>
@@ -137,9 +137,9 @@ export default function Home() {
                         </span>
                       </Link>
                     </p>
-                    {desctiption && (
+                    {description && (
                       <p className="text-xs" id={id}>
-                        {desctiption}
+                        {description}
                       </p>
                     )}
                   </li>
