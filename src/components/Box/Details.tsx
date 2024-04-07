@@ -1,19 +1,20 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useState } from 'react';
 
 export const Details = ({
   defaultOpen = false,
   name,
   summary,
   children,
+  id,
 }: {
   defaultOpen?: boolean;
   name?: string;
   summary: React.ReactNode;
   children: React.ReactNode;
+  id: string;
 }) => {
-  const id = useId();
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
@@ -44,8 +45,8 @@ export const Details = ({
             fill="none"
             stroke="#777"
             strokeWidth="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="transition-all duration-300 group-open:rotate-180"
           >
             <path d="M6 9l6 6 6-6" />

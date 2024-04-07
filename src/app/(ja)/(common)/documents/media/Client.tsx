@@ -31,7 +31,7 @@ const CheckBoxes = <T extends string>({
         <label className="flex items-center">
           <input
             type="checkbox"
-            className="mr-2 inline-block h-4 w-4"
+            className="mr-2 inline-block size-4"
             checked={checked}
             onChange={() => {
               dispatch({
@@ -255,6 +255,7 @@ export const MediaContent = ({ id }: { id: string }) => {
       <nav aria-labelledby={idForFilterTitle} className="mb-28">
         <Details
           defaultOpen={keywordQuery !== ''}
+          id={`${id}-details`}
           summary={
             <h2 className="m-0 text-lg" id={idForFilterTitle}>
               絞り込む
@@ -263,7 +264,7 @@ export const MediaContent = ({ id }: { id: string }) => {
         >
           <div className="p-6 pb-8 sm:p-8 sm:pb-9 sm:pt-7">
             <div className="mb-6 flex flex-row-reverse sm:mb-10">
-              <p className="relative bottom-2 left-2 min-w-[9rem] text-right">
+              <p className="relative bottom-2 left-2 min-w-36 text-right">
                 <button
                   type="reset"
                   className="rounded bg-slate-200 px-3 py-2 sm:transition-colors sm:duration-200 sm:hover:bg-slate-300"

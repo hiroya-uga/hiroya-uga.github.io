@@ -1,7 +1,7 @@
 import { Details } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 
-import { HTMLAttributes, useEffect, useRef } from 'react';
+import { HTMLAttributes, useEffect, useId, useRef } from 'react';
 import React from 'react';
 
 import Image from 'next/image';
@@ -576,11 +576,13 @@ export const AnAltDecisionTreeException = () => {
 // };
 
 const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
+  const id = useId();
+
   return (
     <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
       {list.map(([title, content]) => {
         return (
-          <Details name="if" key={title} summary={title}>
+          <Details name="if" key={title} summary={title} id={id}>
             <div className="border-t border-t-gray-100 px-4 py-6 text-sm sm:pb-16 sm:text-base">{content}</div>
           </Details>
         );
