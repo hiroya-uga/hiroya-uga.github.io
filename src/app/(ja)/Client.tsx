@@ -9,7 +9,7 @@ export const Counter = () => {
   const count = useMemo(() => String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0), []);
 
   return (
-    <span className="font" suppressHydrationWarning>
+    <span className="mx-1 font-mono" suppressHydrationWarning>
       {count.padStart(6, '0')}
     </span>
   );
@@ -223,16 +223,14 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
           <div className={clsx(['aspect-[3_/_2]', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (
-                <p className="text-middle absolute grid h-full w-full place-items-center text-center">
-                  {photoData.error}
-                </p>
+                <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
               ) : (
                 <Image
                   width={960}
                   height={640}
                   src={photoData.src}
                   alt={`${photoData.caption} ${photoData.date}`}
-                  className="block h-full w-full object-cover"
+                  className="block size-full object-cover"
                   aria-describedby={captionId}
                   priority
                 />
@@ -275,7 +273,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="absolute right-[8px] top-[8px] h-[calc(100%_-_16px)] w-[calc(100%_-_16px)] rounded-[50%] bg-white"
+            className="absolute right-[8px] top-[8px] size-[calc(100%_-_16px)] rounded-[50%] bg-white"
             onClick={() => updateImage()}
           >
             <Image
@@ -283,7 +281,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               width={48}
               height={48}
               alt="ランダムに切り替える"
-              className="full block h-full w-full opacity-80"
+              className="full block size-full opacity-80"
             />
           </button>
         </p>

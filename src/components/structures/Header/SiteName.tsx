@@ -13,11 +13,11 @@ export const SiteName = () => {
       </p> */}
 
       <p className="mb-4 text-[0.78125rem] lg:fixed lg:left-0 lg:top-0 lg:mb-0 lg:h-full lg:overflow-auto">
-        <span className="block overflow-auto bg-white lg:box-content lg:h-[29.2929vh] lg:min-h-[18.5rem] lg:w-[2rem] lg:min-w-[2rem] lg:overflow-visible lg:pb-4">
+        <span className="block overflow-auto bg-white lg:box-content lg:h-[29.2929vh] lg:min-h-[18.5rem] lg:w-8 lg:min-w-8 lg:overflow-visible lg:pb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             role="none presentation"
-            className="ml-auto h-[1.465rem] w-[18.5rem] min-w-[18.5rem] lg:h-[18.5rem] lg:min-h-[18.5rem] lg:w-[2rem] lg:min-w-[2rem]"
+            className="ml-auto h-[1.465rem] w-[18.5rem] min-w-[18.5rem] lg:h-[18.5rem] lg:min-h-[18.5rem] lg:w-8 lg:min-w-8"
           >
             <text x="58%" y="50%" textAnchor="middle" className="translate-y-[4px] lg:hidden">
               {/* bootstrapを読み込んでいる画面だとunderlineがつかない */}
