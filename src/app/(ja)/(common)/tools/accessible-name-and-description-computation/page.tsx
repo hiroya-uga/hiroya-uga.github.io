@@ -6,11 +6,11 @@ import { Metadata } from '@/types/seo';
 import { useId } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Playground: Accessible Name and Description Computation',
+  title: 'Accessible Name and Description Computation Playground',
   description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
   twitter: {
     card: 'summary_large_image',
-    title: 'Playground: Accessible Name and Description Computation',
+    title: 'Accessible Name and Description Computation Playground',
     description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
   },
 };

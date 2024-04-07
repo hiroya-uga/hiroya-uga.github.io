@@ -103,13 +103,13 @@ export default function Home() {
                 {
                   emoji: '📛',
                   href: '/tools/accessible-name-and-description-computation/',
-                  title: 'Playground: Accessible Name and Description Computation',
+                  title: 'Accessible Name and Description Computation Playground',
                   description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
                 },
                 {
                   emoji: '👆',
                   href: '/tools/touch-event-touches',
-                  title: 'Playground: TouchEvent.touches',
+                  title: 'TouchEvent.touches Playground',
                   description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
                 },
                 {

@@ -5,11 +5,11 @@ import { Metadata } from '@/types/seo';
 import { useId } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Playground: DOM Event Watcher',
+  title: 'DOM Event Playground',
   description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   twitter: {
     card: 'summary_large_image',
-    title: 'Playground: DOM Event Watcher',
+    title: 'DOM Event Playground',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
 };
