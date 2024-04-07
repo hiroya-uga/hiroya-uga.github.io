@@ -3,11 +3,11 @@ import { PageTitle } from '@/components/structures/PageTitle';
 import { Metadata } from '@/types/seo';
 
 export const metadata: Metadata = {
-  title: 'Playground: TouchEvent.touches',
+  title: 'TouchEvent.touches Playground',
   description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
   twitter: {
     card: 'summary_large_image',
-    title: 'Playground: TouchEvent.touches',
+    title: 'TouchEvent.touches Playground',
     description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
   },
 };

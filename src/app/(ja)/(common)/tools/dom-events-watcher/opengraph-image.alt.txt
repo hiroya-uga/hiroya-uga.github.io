@@ -1,1 +1,1 @@
-uga.dev Playground: DOM Event Watcher JavaScriptがどのようなイベントを受け取るのかを確認できます。
+uga.dev DOM Event Playground JavaScriptがどのようなイベントを受け取るのかを確認できます。

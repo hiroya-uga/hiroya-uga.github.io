@@ -1,1 +1,1 @@
-uga.dev Playground: Accessible Name and Description Computation アクセシブルな名前および説明がどう計算されるかをテストするためのページです。
+uga.dev Accessible Name and Description Computation Playground アクセシブルな名前および説明がどう計算されるかをテストするためのページです。

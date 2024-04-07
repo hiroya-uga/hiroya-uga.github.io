@@ -5,11 +5,11 @@ import { Metadata } from '@/types/seo';
 import { useId } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Playground: CSS Units',
+  title: 'CSS Units Playground',
   description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
   twitter: {
     card: 'summary_large_image',
-    title: 'Playground: CSS Units',
+    title: 'CSS Units Playground',
     description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
   },
 };
