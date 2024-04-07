@@ -328,7 +328,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   return (
     <>
       <div className="mb-28">
-        <Details summary="サポートしているイベントタイプ">
+        <Details summary="サポートしているイベントタイプ" id={`${id}-details`}>
           <div className="max-h-[70vh] overflow-y-scroll px-8 py-4">
             <p className="mb-2">このページで採用されているイベント一覧です。一部非標準、非推奨も含まれています。</p>
             <p className="mb-2">form要素には以下のイベントに関するハンドラを登録しています。</p>
@@ -491,13 +491,13 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
             <div className="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-8 text-center">
               <p>
-                <button type="button" className="min-w-[16rem] rounded-lg bg-orange-300 px-4 py-2">
+                <button type="button" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2">
                   何も起こらないただのボタン
                 </button>
               </p>
 
               <p>
-                <button type="submit" className="min-w-[16rem] rounded-lg bg-orange-300 px-4 py-2">
+                <button type="submit" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2">
                   送信ボタン
                 </button>
               </p>
@@ -545,7 +545,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 return (
                   <p
                     key={index}
-                    className="keep-all col-[1_/_4] my-1 grid grid-cols-[subgrid] grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1_/_2] before:pr-3 before:font-mono before:content-[counter(log)] sm:col-[1_/_5] sm:grid-cols-[subgrid] sm:before:text-right"
+                    className="keep-all col-[1_/_4] my-1 grid grid-cols-subgrid grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1_/_2] before:pr-3 before:font-mono before:content-[counter(log)] sm:col-[1_/_5] sm:grid-cols-subgrid sm:before:text-right"
                     style={{
                       counterIncrement: 'log',
                     }}
