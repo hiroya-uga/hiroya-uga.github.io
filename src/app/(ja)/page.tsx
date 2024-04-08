@@ -113,10 +113,10 @@ export default function Home() {
                   description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
                 },
                 {
-                  emoji: '💭',
-                  href: '/documents/fantasized-specs',
-                  title: 'Fantasized Web Standards and Specifications',
-                  description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
+                  emoji: '📏',
+                  href: '/tools/css-units/',
+                  title: 'CSS Units Playground',
+                  description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
                 },
               ].map(({ emoji, href, title, description }) => {
                 const id = description && href;
