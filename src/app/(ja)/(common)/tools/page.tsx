@@ -50,39 +50,39 @@ export default function Page() {
       <SimpleDescriptionList
         list={[
           {
-            key: `Accessible Name and Description Computation`,
+            key: `Accessible Name and Description Computation Playground`,
             title: (
               <>
                 <Link href="/tools/accessible-name-and-description-computation">
-                  Accessible Name and Description Computation
+                  Accessible Name and Description Computation Playground
                 </Link>
               </>
             ),
             description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
           },
           {
-            key: `CSS Units`,
+            key: `CSS Units Playground`,
             title: (
               <>
-                <Link href="/tools/css-units">CSS Units</Link>
+                <Link href="/tools/css-units">CSS Units Playground</Link>
               </>
             ),
             description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
           },
           {
-            key: `DOM Event Watcher`,
+            key: `DOM Event Playground`,
             title: (
               <>
-                <Link href="/tools/dom-events-watcher/">DOM Event Watcher</Link>
+                <Link href="/tools/dom-events-watcher/">DOM Event Playground</Link>
               </>
             ),
             description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
           },
           {
-            key: `TouchEvent.touches`,
+            key: `TouchEvent.touches Playground`,
             title: (
               <>
-                <Link href="/tools/touch-event-touches">TouchEvent.touches</Link>
+                <Link href="/tools/touch-event-touches">TouchEvent.touches Playground</Link>
               </>
             ),
             description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
