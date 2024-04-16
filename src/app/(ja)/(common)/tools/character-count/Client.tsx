@@ -10,7 +10,7 @@ const HALF_CHARACTERS_REGEXP = /\s|\d|[a-z]/;
 const VERTICAL_CHARACTERS_REGEXP = /\d|[a-zA-Zａ-ｚＡ-Ｚ]/;
 const SYMBOL_REGEXP = /[、。」』】）］｝〉》]/;
 const END_KAKKO_REGEXP = /[」』】）］｝〉》]$/;
-const BREAK_IGNORE = '__BREAK_IGNORE__';
+const BREAK_SKIP = '__BREAK_SKIP__';
 const segmenter = new Intl.Segmenter('ja-JP', { granularity: 'grapheme' });
 
 const countHalfWidthCharacters = (value: string) => {
@@ -51,10 +51,11 @@ const Character = ({ value }: { value: string }) => {
   const characters = [...segmenter.segment(value)].map(({ segment }) => segment);
   const output = characters.length === 1 ? characters.join('') : characters[0];
   const special = characters.length === 2 ? characters[1] : '';
+  const isVerticalRl = /[、。「」『』【】（）［］｛｝〈〉《》ー～ゃゅょぁぃぅぇぉァィゥェォッャュョヮヵヶ]/.test(value);
 
   if (HALF_CHARACTERS_REGEXP.test(special)) {
     return (
-      <span className={clsx(['grid rotate-90 grid-cols-2'])}>
+      <span className={clsx(['grid  grid-cols-2', isVerticalRl ? 'vertical-rl' : 'rotate-90'])}>
         <span>{output}</span>
         <span className="col-start-2 col-end-3">{special}</span>
       </span>
@@ -63,11 +64,16 @@ const Character = ({ value }: { value: string }) => {
 
   return (
     <>
-      <span className={clsx(VERTICAL_CHARACTERS_REGEXP.test(output) && 'block rotate-90')}>{output}</span>
+      <span
+        className={clsx([isVerticalRl ? 'vertical-rl' : VERTICAL_CHARACTERS_REGEXP.test(output) && 'block rotate-90'])}
+      >
+        {output}
+      </span>
       {special && (
         <span
           className={clsx([
             'absolute bottom-0 left-0',
+            isVerticalRl && 'vertical-rl',
             special === '。' && 'translate-x-[0.6em] translate-y-[-0.15em]',
             special === '、' && 'translate-x-[0.6em] translate-y-[-0.15em]',
             (output === '。' || output === '、') && (special === '」' || special === '』')
@@ -142,13 +148,19 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
     (string: string) => {
       const ROW = 20;
       const SPACE = '　';
-      // console.log('START');
+      const COMBINED = '___COMBINED___';
+      // console.log('%cSTART%c', 'background: #fff; color: red; font-size: 200%;', '');
       const formattedCharacters = [...segmenter.segment(string || '　')].map(({ segment }) => {
         // 正規化
         if (isStrict) {
           {
             if (segment !== '\n' && /\s/.test(segment)) {
               return '　';
+            }
+          }
+          {
+            if (segment === '〜') {
+              return '～';
             }
           }
           {
@@ -204,129 +216,92 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
       // console.log(formattedCharacters);
 
       const nonResolvedBreakLinesCharacters = formattedCharacters.flatMap((character, index, self) => {
-        // 原稿用紙に合わせる
-        counter--;
+        /** 原稿用紙に合わせる */
+        const format = () => {
+          const prev = self[index - 1];
+          const next = self[index + 1];
+          const combineWithNext = () => {
+            const result = character + (next ?? '');
+            self[index + 1] = COMBINED;
+            return result;
+          };
 
-        if (counter < 1 || self[index - 1] === '\n' || character === BREAK_IGNORE) {
-          // console.log({ character });
+          // 直前の行の改行が省略されている、または改行なので、現在は行頭
+          if (prev === BREAK_SKIP || prev === '\n') {
+            counter = ROW;
+          }
 
-          counter = ROW;
-        }
+          if (counter < 1) {
+            counter = ROW;
+          }
 
-        // if (counter !== ROW) {
-        //   console.log({ character, counter });
-        // } else {
-        //   console.log({ character, counter, start: 'start' });
-        // }
+          const isLastChar = counter <= 1;
 
-        if (isStrict) {
+          // console.log({ counter, character, prev, next });
+
+          // 直前の文字と結合されているためスキップし、なかったこととする
+          if (character === COMBINED) {
+            counter++;
+            return [];
+          }
+
+          // 省略改行のため単純にスキップする
+          if (character === BREAK_SKIP) {
+            return [];
+          }
+
+          // 改行を受け取ったが、直前の文字が改行ではなく、かつ行頭であるときはスキップする
+          if (character === '\n' && prev !== '\n' && counter === ROW) {
+            return [];
+          }
+
+          // console.log({ character, isLastChar });
+
           const checkNotHalfCharacterSibling = (value?: string) => {
             return value !== '\n' && HALF_CHARACTERS_REGEXP.test(value ?? '');
           };
 
-          const isLastChar = counter === ROW;
-          const isCharKutoten = character === '。' || character === '、';
-          const isKutotenWithKakkoToji = isCharKutoten && END_KAKKO_REGEXP.test(self[index + 1]);
           const isNextKutoten = self[index + 1] === '。' || self[index + 1] === '、';
+          const isNextKakkotoji = END_KAKKO_REGEXP.test(self[index + 1]);
           const isHalfCharacterSibling =
-            !(counter === ROW - 1 && character === SPACE) &&
-            checkNotHalfCharacterSibling(character) &&
-            checkNotHalfCharacterSibling(self[index + 1]);
+            checkNotHalfCharacterSibling(character) && checkNotHalfCharacterSibling(self[index + 1]);
 
-          // 文末処理したあとの辻褄合わせ
-          if (character === '') {
-            // if (self[index - 1] === '。') {
-            counter++;
-            // } else {
-            // counter = ROW;
-            // }
+          if (isLastChar) {
+            // console.log('%c行頭%c', 'background: #fff; color: #000; font-size: 200%;', '');
 
-            return [];
-          }
-
-          if (counter === ROW && self[index + 1] === '\n') {
-            self[index + 1] = BREAK_IGNORE;
-            return character;
-          }
-
-          if (isKutotenWithKakkoToji) {
-            const result = character + self[index + 1];
-
-            if (isLastChar) {
-              if (self[index + 2] === '\n') {
-                self[index + 2] = BREAK_IGNORE;
-              }
+            if (isNextKutoten || isNextKakkotoji) {
+              return combineWithNext();
             }
-            self[index + 1] = '';
-            return result;
-          }
+          } else {
+            const isCharKutoten = character === '。' || character === '、';
 
-          if (isNextKutoten) {
-            // console.log({ counter, prev: self[index - 1], character, next: self[index + 1], isLastChar });
-
-            if (isLastChar && !/\s/.test(character)) {
-              const result = character + self[index + 1];
-
-              self[index + 1] = '';
-
-              if (self[index + 2] === '\n') {
-                self[index + 2] = BREAK_IGNORE;
-              }
-              return result;
+            if (isCharKutoten && isNextKakkotoji) {
+              return combineWithNext();
             }
           }
 
-          if (isCharKutoten) {
-            if (isLastChar) {
-              if (self[index + 1] === '\n') {
-                self[index + 1] = BREAK_IGNORE;
-                return character;
-              }
-            }
+          if (isHalfCharacterSibling) {
+            return combineWithNext();
           }
 
-          if (isHalfCharacterSibling && self[index + 1]) {
-            const result = character + self[index + 1];
-            self[index + 1] = '';
-            return result;
-          }
+          return character;
+        };
 
-          if (isLastChar && self[index + 1]) {
-            // 文末処理
-            if (SYMBOL_REGEXP.test(self[index + 1])) {
-              if (character === '\n') {
-                return BREAK_IGNORE;
-              }
+        const result = isStrict ? format() : character;
 
-              const result = character + self[index + 1];
-              if (self[index + 1] === '\n') {
-                self[index + 1] = BREAK_IGNORE;
-              } else {
-                self[index + 1] = '';
-              }
-              return result;
-            }
-          }
+        if (isStrict) {
+          counter--;
         }
 
-        return character;
+        return result;
       });
 
       // カウンタの初期化
       counter = ROW;
 
-      // console.log(nonResolvedBreakLinesCharacters);
+      console.log(nonResolvedBreakLinesCharacters);
 
-      const characters = nonResolvedBreakLinesCharacters.flatMap((character, index, self) => {
-        if (character === BREAK_IGNORE) {
-          counter = ROW;
-          return [];
-        }
-
-        if (character === '') {
-          return [];
-        }
-
+      const characters = nonResolvedBreakLinesCharacters.flatMap((character) => {
         if (character === '\n') {
           const result = [...''.padEnd(counter, SPACE)];
           counter = ROW;
@@ -558,22 +533,23 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             {getSegmentedCharacters(value).map((container, containerIndex) => {
               return (
                 <React.Fragment key={containerIndex}>
-                  <h3 className="mb-4 text-lg [&:not(:first-child)]:mt-8">{containerIndex + 1}枚目</h3>
+                  <h3 className="mb-4 text-lg [&:not(:first-child)]:mt-8">{`${containerIndex + 1}件`}</h3>
 
                   <div className="sm:pl-2">
-                    <div
+                    <p
                       className="mx-auto w-min max-w-full overflow-auto text-2xs sm:text-base [&:not(:last-child)]:mb-24"
                       key={containerIndex}
                       tabIndex={0}
+                      aria-label={container.flatMap((array) => array).join('')}
                     >
-                      <div
-                        className="relative mx-auto w-fit bg-white pr-1 text-center before:absolute before:left-0 before:top-0 before:w-full before:border-t before:border-solid before:border-t-[orange]"
+                      <span
+                        className="relative mx-auto block w-fit bg-white pr-1 text-center before:absolute before:left-0 before:top-0 before:w-full before:border-t before:border-solid before:border-t-[orange]"
                         style={{
                           borderRight: '1px solid orange',
                           borderBottom: '1px solid orange',
                         }}
                       >
-                        <p
+                        <span
                           className={clsx([
                             'grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,_1fr)] gap-x-1 leading-none',
                             'before:row-start-1 before:row-end-[21] before:border-l before:border-l-[orange]',
@@ -610,8 +586,6 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                                     key={`${colIndex}_${rowIndex}`}
                                     className={clsx([
                                       'relative box-content block min-h-[1.2ic] w-[1.2ic] overflow-hidden p-1 leading-none',
-                                      /[、。「」『』【】（）［］｛｝〈〉《》ー〜ゃゅょぁぃぅぇぉ]/.test(character) &&
-                                        'vertical-rl',
                                       styles.char,
                                     ])}
                                     style={{
@@ -627,9 +601,9 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               });
                             })}
                           </>
-                        </p>
-                      </div>
-                    </div>
+                        </span>
+                      </span>
+                    </p>
                   </div>
                 </React.Fragment>
               );
