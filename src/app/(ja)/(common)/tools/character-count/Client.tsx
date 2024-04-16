@@ -1,9 +1,17 @@
 'use client';
 
-import { Details } from '@/components/Box';
 import { Switch } from '@/components/Form';
 import clsx from 'clsx';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css';
+
+const HALF_CHARACTERS_REGEXP = /\s|\d|[a-z]/;
+const VERTICAL_CHARACTERS_REGEXP = /\d|[a-zA-Zａ-ｚＡ-Ｚ]/;
+const SYMBOL_REGEXP = /[、。」』】）］｝〉》]/;
+const END_KAKKO_REGEXP = /[」』】）］｝〉》]$/;
+const BREAK_IGNORE = '__BREAK_IGNORE__';
+const segmenter = new Intl.Segmenter('ja-JP', { granularity: 'grapheme' });
 
 const countHalfWidthCharacters = (value: string) => {
   const halfWidthRegex = /[ -~]/g;
@@ -20,7 +28,6 @@ const countCharacters = ({
   isHalfWidthCount?: boolean;
 }) => {
   const halfWidthLength = isHalfWidthCount ? countHalfWidthCharacters(value) / 2 : 0;
-  const segmenter = new Intl.Segmenter('ja-JP', { granularity: 'grapheme' });
   const string = isIgnoreWhitespace ? value.replace(/\s/g, '') : value.replace(/\n/g, '');
 
   return [...segmenter.segment(string)].length - halfWidthLength;
@@ -40,9 +47,40 @@ const countBytes = ({ value }: { value: string }) => {
   return new Blob([value]).size;
 };
 
-const countPages = ({ value }: { value: string }) => {
-  const charCount = countCharacters({ value });
-  return Math.ceil(charCount / 400);
+const Character = ({ value }: { value: string }) => {
+  const characters = [...segmenter.segment(value)].map(({ segment }) => segment);
+  const output = characters.length === 1 ? characters.join('') : characters[0];
+  const special = characters.length === 2 ? characters[1] : '';
+
+  if (HALF_CHARACTERS_REGEXP.test(special)) {
+    return (
+      <span className={clsx(['grid rotate-90 grid-cols-2'])}>
+        <span>{output}</span>
+        <span className="col-start-2 col-end-3">{special}</span>
+      </span>
+    );
+  }
+
+  return (
+    <>
+      <span className={clsx(VERTICAL_CHARACTERS_REGEXP.test(output) && 'block rotate-90')}>{output}</span>
+      {special && (
+        <span
+          className={clsx([
+            'absolute bottom-0 left-0',
+            special === '。' && 'translate-x-[0.6em] translate-y-[-0.15em]',
+            special === '、' && 'translate-x-[0.6em] translate-y-[-0.15em]',
+            (output === '。' || output === '、') && (special === '」' || special === '』')
+              ? 'translate-x-[0.25em] translate-y-[0.25em]'
+              : 'translate-x-[0.175em] translate-y-[0.5em]',
+            ,
+          ])}
+        >
+          {special}
+        </span>
+      )}
+    </>
+  );
 };
 
 const DEFAULT_FONT_SIZE = '16';
@@ -56,6 +94,13 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const [isAutoCount, setIsAutoCount] = useState(false);
   const [isHalfWidthCount, setIsHalfWidthCount] = useState(false);
+  const [isStrict, setIsStrict] = useState(true);
+
+  const [countPages, setCountPages] = useState(1);
+
+  useEffect(() => {
+    setCountPages(document.getElementById('原稿用紙イメージ')?.querySelectorAll('h3').length ?? 1);
+  }, [value]);
 
   useEffect(() => {
     if (isFirstView) {
@@ -71,10 +116,11 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
           fontSize,
           isAutoCount,
           isHalfWidthCount,
+          isStrict,
         }),
       );
     } catch {}
-  }, [currentValue, fontSize, isAutoCount, isFirstView, isHalfWidthCount, value]);
+  }, [currentValue, fontSize, isAutoCount, isFirstView, isHalfWidthCount, value, isStrict]);
 
   useEffect(() => {
     try {
@@ -87,174 +133,508 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
         setFontSize(saveData.fontSize ?? '16');
         setIsAutoCount(saveData.isAutoCount);
         setIsHalfWidthCount(saveData.isHalfWidthCount ?? false);
+        setIsStrict(saveData.isStrict ?? false);
       }
     } catch {}
   }, [isFirstView]);
 
-  return (
-    <div className={clsx(['transition-[opacity_visibility]', isFirstView ? 'invisible opacity-0' : ''])}>
-      <h2>
-        <label htmlFor={id}>本文</label>
-      </h2>
+  const getSegmentedCharacters = useCallback(
+    (string: string) => {
+      const ROW = 20;
+      const SPACE = '　';
+      // console.log('START');
+      const formattedCharacters = [...segmenter.segment(string || '　')].map(({ segment }) => {
+        // 正規化
+        if (isStrict) {
+          {
+            if (segment !== '\n' && /\s/.test(segment)) {
+              return '　';
+            }
+          }
+          {
+            const halfWidthKakko = ['(', ')'];
+            const fullWidthKakko = ['（', '）'];
+            const index = halfWidthKakko.findIndex((item) => item === segment);
 
-      <p className="mb-3">
-        <textarea
-          id={id}
-          className="h-[max(5lh,23vh)] min-h-[108px] w-full resize-y border border-gray-600 px-4 py-2"
-          style={{
-            fontSize: Boolean(fontSize) ? `${fontSize}px` : DEFAULT_FONT_SIZE,
-          }}
-          value={currentValue}
-          onKeyDown={(e) => {
-            if ((e.metaKey || e.ctrlKey) && !e.shiftKey && e.key === 'z') {
-              if (isAutoCount) {
-                setValue(cache);
+            if (index !== -1) {
+              return fullWidthKakko[index] ?? segment;
+            }
+          }
+          {
+            const kanjiNumbers = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+            const fullWidthNumbers = ['０', '１', '２', '３', '４', '５', '６', '７', '８', '９'];
+            const fullIndex = fullWidthNumbers.findIndex((item) => item === segment);
+
+            if (fullIndex !== -1) {
+              return kanjiNumbers[fullIndex] ?? segment;
+            }
+          }
+          {
+            const halfWidthChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            const fullWidthChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+              .split('')
+              .map((char) => String.fromCharCode(char.charCodeAt(0) + 65248))
+              .join('');
+            const index = halfWidthChars.findIndex((item) => item === segment);
+
+            if (index !== -1) {
+              return fullWidthChars[index] ?? segment;
+            }
+          }
+          {
+            const fullWidthChars = 'abcdefghijklmnopqrstuvwxyz'
+              .split('')
+              .map((char) => String.fromCharCode(char.charCodeAt(0) + 65248));
+
+            if (fullWidthChars.includes(segment)) {
+              const halfWidthChars = 'abcdefghijklmnopqrstuvwxyz';
+              const index = fullWidthChars.findIndex((item) => item === segment);
+
+              if (index !== -1) {
+                return halfWidthChars[index] ?? segment;
+              }
+            }
+          }
+        }
+
+        return segment;
+      });
+
+      let counter = ROW;
+      // console.log(formattedCharacters);
+
+      const nonResolvedBreakLinesCharacters = formattedCharacters.flatMap((character, index, self) => {
+        // 原稿用紙に合わせる
+        counter--;
+
+        if (counter < 1 || self[index - 1] === '\n' || character === BREAK_IGNORE) {
+          // console.log({ character });
+
+          counter = ROW;
+        }
+
+        // if (counter !== ROW) {
+        //   console.log({ character, counter });
+        // } else {
+        //   console.log({ character, counter, start: 'start' });
+        // }
+
+        if (isStrict) {
+          const checkNotHalfCharacterSibling = (value?: string) => {
+            return value !== '\n' && HALF_CHARACTERS_REGEXP.test(value ?? '');
+          };
+
+          const isLastChar = counter === ROW;
+          const isCharKutoten = character === '。' || character === '、';
+          const isKutotenWithKakkoToji = isCharKutoten && END_KAKKO_REGEXP.test(self[index + 1]);
+          const isNextKutoten = self[index + 1] === '。' || self[index + 1] === '、';
+          const isHalfCharacterSibling =
+            !(counter === ROW - 1 && character === SPACE) &&
+            checkNotHalfCharacterSibling(character) &&
+            checkNotHalfCharacterSibling(self[index + 1]);
+
+          // 文末処理したあとの辻褄合わせ
+          if (character === '') {
+            // if (self[index - 1] === '。') {
+            counter++;
+            // } else {
+            // counter = ROW;
+            // }
+
+            return [];
+          }
+
+          if (counter === ROW && self[index + 1] === '\n') {
+            self[index + 1] = BREAK_IGNORE;
+            return character;
+          }
+
+          if (isKutotenWithKakkoToji) {
+            const result = character + self[index + 1];
+
+            if (isLastChar) {
+              if (self[index + 2] === '\n') {
+                self[index + 2] = BREAK_IGNORE;
+              }
+            }
+            self[index + 1] = '';
+            return result;
+          }
+
+          if (isNextKutoten) {
+            // console.log({ counter, prev: self[index - 1], character, next: self[index + 1], isLastChar });
+
+            if (isLastChar && !/\s/.test(character)) {
+              const result = character + self[index + 1];
+
+              self[index + 1] = '';
+
+              if (self[index + 2] === '\n') {
+                self[index + 2] = BREAK_IGNORE;
+              }
+              return result;
+            }
+          }
+
+          if (isCharKutoten) {
+            if (isLastChar) {
+              if (self[index + 1] === '\n') {
+                self[index + 1] = BREAK_IGNORE;
+                return character;
+              }
+            }
+          }
+
+          if (isHalfCharacterSibling && self[index + 1]) {
+            const result = character + self[index + 1];
+            self[index + 1] = '';
+            return result;
+          }
+
+          if (isLastChar && self[index + 1]) {
+            // 文末処理
+            if (SYMBOL_REGEXP.test(self[index + 1])) {
+              if (character === '\n') {
+                return BREAK_IGNORE;
               }
 
-              setCurrentValue(cache);
+              const result = character + self[index + 1];
+              if (self[index + 1] === '\n') {
+                self[index + 1] = BREAK_IGNORE;
+              } else {
+                self[index + 1] = '';
+              }
+              return result;
             }
-          }}
-          onChange={({ currentTarget }) => {
-            cache = currentTarget.value;
+          }
+        }
 
-            if (isAutoCount) {
-              setValue(currentTarget.value);
-            }
+        return character;
+      });
 
-            setCurrentValue(currentTarget.value);
-          }}
-        />
-      </p>
+      // カウンタの初期化
+      counter = ROW;
 
-      <p className="text-right">
-        <button
-          type="button"
-          onClick={() => {
-            setValue(currentValue);
-          }}
-          className={clsx([
-            'relative z-20 mr-4 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
-            'transition-[opacity_visibility]',
-            isAutoCount && 'invisible opacity-0',
-          ])}
-        >
-          文字数を数える
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setCurrentValue('');
-            setValue('');
-          }}
-          className="relative z-20 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2"
-        >
-          リセット
-        </button>
-      </p>
+      // console.log(nonResolvedBreakLinesCharacters);
 
-      <div className="mt-24 grid-cols-[60%_40%] text-sm sm:grid lg:text-base">
-        <div className="mb-24 sm:mb-0 sm:pr-14">
-          <h2 className="mt-0">結果</h2>
-          <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 md:w-fit md:grid-cols-2">
-            <p className="col-span-full grid grid-cols-subgrid">
-              <label className="grow" htmlFor={`${id}-文字数`}>
-                文字数
-              </label>
-              <output id={`${id}-文字数`} className="border border-gray-400 bg-white px-2 text-base">
-                {countCharacters({ value, isHalfWidthCount })}
-              </output>
+      const characters = nonResolvedBreakLinesCharacters.flatMap((character, index, self) => {
+        if (character === BREAK_IGNORE) {
+          counter = ROW;
+          return [];
+        }
+
+        if (character === '') {
+          return [];
+        }
+
+        if (character === '\n') {
+          const result = [...''.padEnd(counter, SPACE)];
+          counter = ROW;
+          return result;
+        }
+
+        counter--;
+
+        if (counter < 1) {
+          counter = ROW;
+        }
+
+        return character;
+      });
+
+      const result = [];
+
+      for (let i = 0; i < characters.length; i += 400) {
+        const container = [];
+        let chunk400 = characters.slice(i, i + 400);
+
+        if (chunk400.length !== 400) {
+          chunk400 = [...chunk400, ...[...new Array(400)].map(() => SPACE)].slice(0, 400);
+        }
+
+        for (let j = 0; j < chunk400.length; j += 20) {
+          container.push([...chunk400.slice(j, j + 20)]);
+        }
+
+        result.push(container);
+      }
+
+      return result;
+    },
+    [isStrict],
+  );
+
+  return (
+    <div className={clsx(['transition-[opacity,visibility] md:mt-28', isFirstView ? 'invisible opacity-0' : ''])}>
+      <div className="md:grid md:grid-cols-2 md:gap-8">
+        <div>
+          <div className="md:sticky md:top-8">
+            <h2 className="md:mt-0">
+              <label htmlFor={id}>本文</label>
+            </h2>
+            <p className="mb-3">
+              <textarea
+                id={id}
+                className="h-[max(5lh,23vh)] min-h-[108px] w-full resize-y border border-gray-600 px-4 py-2"
+                style={{
+                  fontSize: Boolean(fontSize) ? `${fontSize}px` : DEFAULT_FONT_SIZE,
+                }}
+                value={currentValue}
+                onKeyDown={(e) => {
+                  if ((e.metaKey || e.ctrlKey) && !e.shiftKey && e.key === 'z') {
+                    if (isAutoCount) {
+                      setValue(cache);
+                    }
+
+                    setCurrentValue(cache);
+                  }
+                }}
+                onChange={({ currentTarget }) => {
+                  cache = currentTarget.value;
+
+                  if (isAutoCount) {
+                    setValue(currentTarget.value);
+                  }
+
+                  setCurrentValue(currentTarget.value);
+                }}
+              />
             </p>
-            <p className="col-span-full grid grid-cols-subgrid">
-              <label className="grow" htmlFor={`${id}-文字数（空白文字を除く）`}>
-                文字数（空白文字を除く）
-              </label>
-              <output id={`${id}-文字数（空白文字を除く）`} className="border border-gray-400 bg-white px-2 text-base">
-                {countCharacters({ value, isIgnoreWhitespace: true, isHalfWidthCount })}
-              </output>
-            </p>
-            <p className="col-span-full grid grid-cols-subgrid">
-              <label className="grow" htmlFor={`${id}-行数`}>
-                行数
-              </label>
-              <output id={`${id}-行数`} className="border border-gray-400 bg-white px-2 text-base">
-                {countLines({ value })}
-              </output>
-            </p>
-            <p className="col-span-full grid grid-cols-subgrid">
-              <label className="grow" htmlFor={`${id}-行数（空行を除く）`}>
-                行数（空行を除く）
-              </label>
-              <output id={`${id}-行数（空行を除く）`} className="border border-gray-400 bg-white px-2 text-base">
-                {countLines({ value, isIgnoreEmptyLines: true })}
-              </output>
-            </p>
-            <p className="col-span-full grid grid-cols-subgrid">
-              <span className="grow">
-                <label htmlFor={`${id}-原稿用紙換算（400文字）`}>原稿用紙換算（400文字）</label>×
-              </span>
-              <output id={`${id}-原稿用紙換算（400文字）`} className="border border-gray-400 bg-white px-2 text-base">
-                {countPages({ value })}枚
-              </output>
-            </p>
-            <p className="col-span-full grid grid-cols-subgrid">
-              <label className="grow" htmlFor={`${id}-バイト数（UTF`}>
-                バイト数（UTF-8）
-              </label>
-              <output id={`${id}-バイト数（UTF`} className="border border-gray-400 bg-white px-2 text-base">
-                {countBytes({ value })}
-              </output>
+            <p className="text-right">
+              <button
+                type="button"
+                onClick={() => {
+                  setValue(currentValue);
+                }}
+                className={clsx([
+                  'relative z-20 mr-4 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
+                  'transition-[opacity_visibility]',
+                  isAutoCount && 'invisible opacity-0',
+                ])}
+              >
+                文字数を数える
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentValue('');
+                  setValue('');
+                }}
+                className="relative z-20 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2"
+              >
+                リセット
+              </button>
             </p>
           </div>
         </div>
 
-        <div>
-          <h2 className="mt-0">設定</h2>
-          <p className="mb-4 text-right">
-            <label>
-              文字サイズ
-              <input
-                type="number"
-                value={fontSize}
-                className="mx-2 w-12 border border-gray-400 px-2 text-right"
-                onChange={({ currentTarget }) => {
-                  const currentValue = currentTarget.value;
+        <div className="text-sm">
+          <div className="text-sm sm:grid sm:grid-cols-[60%_40%] md:block lg:text-base">
+            <div className="mt-16 sm:mb-0 sm:pr-14">
+              <h2 className="mt-0">結果</h2>
+              <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 md:grid-cols-[auto_auto]">
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <label className="grow" htmlFor={`${id}-文字数`}>
+                    文字数
+                  </label>
+                  <output id={`${id}-文字数`} className="border border-gray-400 bg-white px-2 text-base">
+                    {countCharacters({ value, isHalfWidthCount })}
+                  </output>
+                </p>
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <label className="grow" htmlFor={`${id}-文字数（空白文字を除く）`}>
+                    文字数（空白文字を除く）
+                  </label>
+                  <output
+                    id={`${id}-文字数（空白文字を除く）`}
+                    className="border border-gray-400 bg-white px-2 text-base"
+                  >
+                    {countCharacters({ value, isIgnoreWhitespace: true, isHalfWidthCount })}
+                  </output>
+                </p>
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <label className="grow" htmlFor={`${id}-行数`}>
+                    行数
+                  </label>
+                  <output id={`${id}-行数`} className="border border-gray-400 bg-white px-2 text-base">
+                    {countLines({ value })}
+                  </output>
+                </p>
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <label className="grow" htmlFor={`${id}-行数（空行を除く）`}>
+                    行数（空行を除く）
+                  </label>
+                  <output id={`${id}-行数（空行を除く）`} className="border border-gray-400 bg-white px-2 text-base">
+                    {countLines({ value, isIgnoreEmptyLines: true })}
+                  </output>
+                </p>
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <span className="grow">
+                    <label htmlFor={`${id}-原稿用紙換算（400文字）`}>原稿用紙換算（400文字）</label>×
+                  </span>
+                  <output
+                    id={`${id}-原稿用紙換算（400文字）`}
+                    className="border border-gray-400 bg-white px-2 text-base"
+                  >
+                    {countPages}枚
+                  </output>
+                </p>
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <label className="grow" htmlFor={`${id}-バイト数（UTF`}>
+                    バイト数（UTF-8）
+                  </label>
+                  <output id={`${id}-バイト数（UTF`} className="border border-gray-400 bg-white px-2 text-base">
+                    {countBytes({ value })}
+                  </output>
+                </p>
+              </div>
+            </div>
 
-                  if (isNaN(Number(currentValue))) {
-                    setFontSize(DEFAULT_FONT_SIZE);
-                    return;
-                  }
+            <div className="mt-16">
+              <h2 className="mt-0">設定</h2>
+              <p className="mb-4 text-right">
+                <label>
+                  文字サイズ
+                  <input
+                    type="number"
+                    value={fontSize}
+                    className="mx-2 w-12 border border-gray-400 px-2 text-right"
+                    onChange={({ currentTarget }) => {
+                      const currentValue = currentTarget.value;
 
-                  setFontSize(currentValue);
-                }}
-                onBlur={({ currentTarget }) => {
-                  const currentValue = currentTarget.value;
+                      if (isNaN(Number(currentValue))) {
+                        setFontSize(DEFAULT_FONT_SIZE);
+                        return;
+                      }
 
-                  if (currentValue === '') {
-                    setFontSize(DEFAULT_FONT_SIZE);
-                  }
-                }}
-              />
-              px
-            </label>
-          </p>
+                      setFontSize(currentValue);
+                    }}
+                    onBlur={({ currentTarget }) => {
+                      const currentValue = currentTarget.value;
 
-          <p className="mb-4 text-right">
-            <label className="flex items-center gap-2">
-              <span className="grow">リアルタイムカウント</span>
-              <span>
-                <Switch checked={isAutoCount} dispatch={setIsAutoCount} />
-              </span>
-            </label>
-          </p>
+                      if (currentValue === '') {
+                        setFontSize(DEFAULT_FONT_SIZE);
+                      }
+                    }}
+                  />
+                  px
+                </label>
+              </p>
 
-          <p className="text-right">
-            <label className="flex items-center gap-2">
-              <span className="grow">半角文字は２文字で１文字としてカウント</span>
-              <span>
-                <Switch checked={isHalfWidthCount} dispatch={setIsHalfWidthCount} />
-              </span>
-            </label>
-          </p>
+              <p className="mb-4 text-right">
+                <label className="flex items-center gap-2">
+                  <span className="grow">リアルタイムカウント</span>
+                  <span>
+                    <Switch checked={isAutoCount} dispatch={setIsAutoCount} />
+                  </span>
+                </label>
+              </p>
+
+              <p className="mb-4 text-right">
+                <label className="flex items-center gap-2">
+                  <span className="grow">半角文字は２文字で１文字としてカウント</span>
+                  <span>
+                    <Switch checked={isHalfWidthCount} dispatch={setIsHalfWidthCount} />
+                  </span>
+                </label>
+              </p>
+
+              <p className="text-right">
+                <label className="flex items-center gap-2">
+                  <span className="grow">原稿用紙のルールを有効にする（実験中）</span>
+                  <span>
+                    <Switch checked={isStrict} dispatch={setIsStrict} />
+                  </span>
+                </label>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 sm:mt-24 md:col-span-2 md:mt-0">
+          <h2 className="mt-0">原稿用紙イメージ</h2>
+
+          <div id="原稿用紙イメージ">
+            {getSegmentedCharacters(value).map((container, containerIndex) => {
+              return (
+                <React.Fragment key={containerIndex}>
+                  <h3 className="mb-4 text-lg [&:not(:first-child)]:mt-8">{containerIndex + 1}枚目</h3>
+
+                  <div className="sm:pl-2">
+                    <div
+                      className="mx-auto w-min max-w-full overflow-auto text-2xs sm:text-base [&:not(:last-child)]:mb-24"
+                      key={containerIndex}
+                      tabIndex={0}
+                    >
+                      <div
+                        className="relative mx-auto w-fit bg-white pr-1 text-center before:absolute before:left-0 before:top-0 before:w-full before:border-t before:border-solid before:border-t-[orange]"
+                        style={{
+                          borderRight: '1px solid orange',
+                          borderBottom: '1px solid orange',
+                        }}
+                      >
+                        <p
+                          className={clsx([
+                            'grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,_1fr)] gap-x-1 leading-none',
+                            'before:row-start-1 before:row-end-[21] before:border-l before:border-l-[orange]',
+                            'before:col-start-11 before:col-end-12',
+                          ])}
+                          key={containerIndex}
+                        >
+                          <>
+                            <span
+                              aria-hidden={true}
+                              className={clsx([
+                                'col-start-11 col-end-12 row-start-6 row-end-7 text-center',
+                                'vertical-rl pl-[0.1875rem] text-justify text-[orange]',
+                              ])}
+                            >
+                              【
+                            </span>
+                            <span
+                              aria-hidden={true}
+                              className={clsx([
+                                'col-start-11 col-end-12 row-start-[15] row-end-[17] text-center',
+                                'vertical-rl pl-[0.1875rem] text-justify text-[orange]',
+                              ])}
+                            >
+                              】
+                            </span>
+
+                            {container.map((valueSet, colIndexOrigin) => {
+                              return valueSet.map((character, rowIndex) => {
+                                const colIndex = 10 <= colIndexOrigin ? colIndexOrigin + 1 : colIndexOrigin;
+
+                                return (
+                                  <span
+                                    key={`${colIndex}_${rowIndex}`}
+                                    className={clsx([
+                                      'relative box-content block min-h-[1.2ic] w-[1.2ic] overflow-hidden p-1 leading-none',
+                                      /[、。「」『』【】（）［］｛｝〈〉《》ー〜ゃゅょぁぃぅぇぉ]/.test(character) &&
+                                        'vertical-rl',
+                                      styles.char,
+                                    ])}
+                                    style={{
+                                      gridColumnStart: 21 - colIndex,
+                                      gridColumnEnd: 22 - colIndex,
+                                      gridRowStart: rowIndex + 1,
+                                      gridRowEnd: rowIndex + 1 + 1,
+                                    }}
+                                  >
+                                    <Character value={character} />
+                                  </span>
+                                );
+                              });
+                            })}
+                          </>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </React.Fragment>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

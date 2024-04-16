@@ -1,0 +1,7 @@
+.char {
+  display: grid;
+  place-items: center;
+  border-left: 1px solid orange;
+  border-right: 1px solid orange;
+  border-top: 1px solid orange;
+}
