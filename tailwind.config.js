@@ -6,6 +6,9 @@ module.exports = {
       fontSize: {
         '2xs': '0.625rem',
       },
+      colors: {
+        alert: '#c10000',
+      },
       fontFamily: {
         emoji:
           'apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol!important',

@@ -8,10 +8,18 @@ import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css'
 
 const HALF_CHARACTERS_REGEXP = /\s|\d|[a-z]/;
 const VERTICAL_CHARACTERS_REGEXP = /\d|[a-zA-Zａ-ｚＡ-Ｚ]/;
-const SYMBOL_REGEXP = /[、。」』】）］｝〉》]/;
 const END_KAKKO_REGEXP = /[」』】）］｝〉》]$/;
 const BREAK_SKIP = '__BREAK_SKIP__';
-const segmenter = new Intl.Segmenter('ja-JP', { granularity: 'grapheme' });
+const isSegmenterSupported = typeof Intl.Segmenter === 'function';
+const segmenter = isSegmenterSupported
+  ? new Intl.Segmenter('ja-JP', { granularity: 'grapheme' })
+  : {
+      segment(value: string) {
+        return [...value].map((segment) => ({
+          segment,
+        }));
+      },
+    };
 
 const countHalfWidthCharacters = (value: string) => {
   const halfWidthRegex = /[ -~]/g;
@@ -347,6 +355,17 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             <h2 className="md:mt-0">
               <label htmlFor={id}>本文</label>
             </h2>
+            {!isSegmenterSupported && (
+              <p className="mb-3 text-2xs font-bold leading-relaxed text-alert">
+                <strong className="flex">
+                  <span>※</span>
+                  <span>
+                    サポート外のブラウザのようです。一部の特殊文字が正確にカウントできないため、Google
+                    Chromeなどのブラウザをご利用ください。
+                  </span>
+                </strong>
+              </p>
+            )}
             <p className="mb-3">
               <textarea
                 id={id}
