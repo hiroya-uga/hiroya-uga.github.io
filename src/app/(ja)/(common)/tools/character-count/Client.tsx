@@ -307,7 +307,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
       // カウンタの初期化
       counter = ROW;
 
-      console.log(nonResolvedBreakLinesCharacters);
+      // console.log(nonResolvedBreakLinesCharacters);
 
       const characters = nonResolvedBreakLinesCharacters.flatMap((character) => {
         if (character === '\n') {
