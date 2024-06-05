@@ -115,7 +115,7 @@ const Title = ({ title, keyword }: { title: string; keyword: string }) => {
       const currentMatched = title.slice(start, end);
 
       if (end <= readIndex) {
-        console.log({ start, end, readIndex, title, word });
+        // console.log({ start, end, readIndex, title, word });
         return previous;
       }
 
