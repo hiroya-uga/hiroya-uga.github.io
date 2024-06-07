@@ -24,6 +24,15 @@ export default function Page() {
       <SimpleDescriptionList
         list={[
           {
+            key: `UI Practices`,
+            title: (
+              <>
+                <Link href="/documents/ui-practices/">UI Practices</Link>
+              </>
+            ),
+            description: 'Web上に登場するUIに関して考察してみたメモ書き。',
+          },
+          {
             key: `日本語訳まとめ`,
             title: (
               <>

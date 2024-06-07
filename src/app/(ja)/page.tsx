@@ -89,10 +89,10 @@ export default function Home() {
                     'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
                 },
                 {
-                  emoji: '🖼',
-                  href: '/documents/translations/w3c/wai/tutorials/images',
-                  title: '日本語訳：Images Tutorial',
-                  description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
+                  emoji: '🥋',
+                  href: '/documents/ui-practices',
+                  title: 'UI Practices',
+                  description: 'Web上に登場するUIに関して考察してみたメモ書き。',
                 },
                 {
                   emoji: '📝',

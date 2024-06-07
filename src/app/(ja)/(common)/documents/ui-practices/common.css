@@ -1,0 +1,144 @@
+#toc > h2:first-child {
+  margin-top: 0;
+}
+
+#toc ul {
+  li {
+    padding-left: 0.7em;
+    position: relative;
+  }
+
+  li::before {
+    content: "";
+    width: 4px;
+    left: 0;
+    top: calc(0.5lh - 2px);
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentColor;
+    display: block;
+    position: absolute;
+  }
+}
+
+#article :where(h2, h3, h4, h5, h6) {
+  padding-top: 1em;
+  margin-top: 4em;
+  position: relative;
+  padding-left: calc(0.8rem * 3 - 1rem);
+}
+
+#article > h2:first-child {
+  margin-top: calc(-1em + 0.5rem);
+}
+
+#article :where(h1 + h2, h2 + h3, h3 + h4, h4 + h5, h5 + h6) {
+  margin-top: 0;
+}
+
+#article {
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 18.72px;
+  }
+
+  h2,
+  h3 {
+    font-weight: normal;
+  }
+
+  :where(h2, h3) code {
+    color: inherit;
+    padding-inline: 4px;
+    font-family: monospace;
+  }
+
+  > p {
+    margin-block: 1.5em;
+  }
+
+  pre {
+    margin-block: 1em;
+  }
+
+  blockquote > p:first-child {
+    margin-top: 0;
+  }
+
+  blockquote > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+:where(h2, h3) strong {
+  font-weight: normal;
+}
+
+:where(h2, h3, h4, h5, h6) a.anchor {
+  font-size: 80%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: -0.75em;
+  overflow: hidden;
+  width: 2em;
+  height: 2em;
+  opacity: 0.5;
+  transform: translateY(-25%);
+}
+
+:where(h2, h3, h4, h5, h6) a.anchor:where(:focus, :hover) {
+  opacity: 1;
+}
+
+:where(h2, h3, h4, h5, h6) a.anchor::before {
+  content: "§";
+}
+
+:where(h2, h3, h4, h5, h6) a.anchor span {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
+#article table {
+  clear: both;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+#article th,
+#article td {
+  padding: 4px 10px;
+  vertical-align: top;
+  border: 1px solid #777;
+}
+
+#article td:has(img:first-child:last-child) {
+  padding: 0;
+}
+
+#article th {
+  text-align: left;
+  background-color: #ecedf3;
+}
+#article thead th {
+  text-align: center;
+}
+
+#article p img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+#article p:has(img:first-child:last-child) {
+  margin-block: 2em;
+}
