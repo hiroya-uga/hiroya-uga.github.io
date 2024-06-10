@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-async function getArticles() {
+export async function getArticles() {
   const articlesDir = path.join(
     process.cwd(),
     'src',

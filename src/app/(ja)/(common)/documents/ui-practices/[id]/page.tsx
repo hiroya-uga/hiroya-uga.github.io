@@ -12,6 +12,7 @@ import { marked } from 'marked';
 import { JsonLd } from '@/components/Meta';
 import { Metadata } from '@/types/seo';
 import matter from 'gray-matter';
+import { getArticles } from '@/app/(ja)/(common)/documents/ui-practices/page';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -142,6 +143,14 @@ export default async function Post({ params }: { params: { id: string } }) {
     </div>
   );
 }
+
+export const generateStaticParams = async () => {
+  const articles = await getArticles();
+
+  return articles.map((post) => ({
+    id: post.id,
+  }));
+};
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { id } = params;
