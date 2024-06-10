@@ -3,6 +3,7 @@ import { CodeBlock } from '@/components/CodeBlock';
 import React, { Children, HTMLAttributes, ReactNode } from 'react';
 
 import type { MDXComponents } from 'mdx/types';
+import { DISALLOWED_ID_CHARACTERS_REGEX } from '@/constants/regexp';
 
 type TagName = keyof JSX.IntrinsicElements;
 type Props = Pick<HTMLAttributes<HTMLHeadingElement>, 'children'>;
@@ -31,7 +32,7 @@ const headingLevel = (tagName: TagName) => {
       });
       return value;
     };
-    const id = getId(children).replace(/[^\t\n\f\r\x20-\x7E\u00A0-\uD7FF\uE000-\uFFFD\uD800-\uDBFF\uDC00-\uDFFF]/g, '');
+    const id = getId(children).replace(DISALLOWED_ID_CHARACTERS_REGEX, '');
 
     return (
       <DynamicTagComponent tagName={tagName} id={id}>
