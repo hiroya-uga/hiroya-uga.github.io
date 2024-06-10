@@ -4,7 +4,7 @@ import { Header } from '@/components/structures/Header';
 
 export default function CommonLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
       <Header />
 
       <main className="px-[16px] lg:pl-10">
@@ -12,6 +12,6 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
