@@ -327,6 +327,11 @@ export default function Home() {
                     src: '/common/images/instagram.svg',
                     alt: 'Instagram',
                   },
+                  {
+                    href: 'https://codepen.io/hiroya_uga/',
+                    src: '/common/images/codepen.png',
+                    alt: 'Codepen',
+                  },
                 ] as const
               ).map(({ href, alt, ...props }) => {
                 return (
