@@ -1,6 +1,6 @@
 import { CodeBlock } from '@/components/CodeBlock';
 
-import React, { HTMLAttributes, ReactNode } from 'react';
+import React, { Children, HTMLAttributes, ReactNode } from 'react';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -14,16 +14,24 @@ interface DynamicTagProps {
 }
 
 const DynamicTagComponent: React.FC<DynamicTagProps> = ({ tagName, children, ...props }) => {
-  // タグ名とプロパティを使ってReact要素を生成
-  const Element = React.createElement(tagName, props, children);
-
-  // 生成したReact要素を返す
-  return Element;
+  return React.createElement(tagName, props, children);
 };
 
 const headingLevel = (tagName: TagName) => {
   const Heading = ({ children }: Props) => {
-    const id = (children?.toString() ?? '').replace(/[^A-Za-z0-9_\-]/g, '');
+    const getId = (reactNode: ReactNode) => {
+      let value = '';
+
+      Children.forEach(reactNode, (child) => {
+        if (typeof child === 'string') {
+          value += child;
+        } else if (React.isValidElement(child)) {
+          value += getId(child.props.children);
+        }
+      });
+      return value;
+    };
+    const id = getId(children).replace(/[^\t\n\f\r\x20-\x7E\u00A0-\uD7FF\uE000-\uFFFD\uD800-\uDBFF\uDC00-\uDFFF]/g, '');
 
     return (
       <DynamicTagComponent tagName={tagName} id={id}>
@@ -47,8 +55,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h4: headingLevel('h4'),
     h5: headingLevel('h5'),
     h6: headingLevel('h6'),
-    code: ({ children, className }) => {
-      return <CodeBlock code={String(children)} className={className} />;
+    pre: ({ children, className }) => {
+      const getCode = (codeBlock: ReactNode) => {
+        let codes = '';
+
+        Children.forEach(codeBlock, (child) => {
+          if (typeof child === 'string') {
+            codes += child;
+          } else if (React.isValidElement(child)) {
+            codes += getCode(child.props.children);
+          }
+        });
+        return codes;
+      };
+
+      return (
+        <pre>
+          <CodeBlock code={String(getCode(children))} className={className} />
+        </pre>
+      );
     },
     ...components,
   };

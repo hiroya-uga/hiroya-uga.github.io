@@ -1,20 +1,29 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { marked } from 'marked';
 
-const NestedList = ({ headingList }: { headingList: HTMLHeadingElement[] }) => {
+const NestedList = ({ headingList, numberingOnly }: { headingList: HTMLHeadingElement[]; numberingOnly?: boolean }) => {
   const src: string[] = [];
 
   headingList.forEach((heading) => {
-    const innerHTML = (heading.querySelector('strong') ?? heading).innerHTML ?? '';
-    const { id } = heading;
-    const [indexText, ...textContent] = innerHTML.split(/\s/);
-    const depth = indexText.match(/\./g)?.length ?? 0;
-    const indent = ''.padStart(depth * 2, ' ');
+    if (numberingOnly) {
+      const innerHTML = (heading.querySelector('strong') ?? heading).innerHTML ?? '';
+      const { id } = heading;
+      const [indexText, ...textContent] = innerHTML.split(/\s/);
+      const depth = indexText.match(/\./g)?.length ?? 0;
+      const indent = ''.padStart(depth * 4, ' ');
 
-    src.push(`${indent}- [<span>${indexText}</span><span>${textContent.join(' ')}</span>](#${id})`);
+      src.push(`${indent}- [<span>${indexText}</span><span>${textContent.join(' ')}</span>](#${id})`);
+    } else {
+      const textContent = (heading.querySelector('strong') ?? heading).textContent ?? '';
+      const id = heading.id ?? heading.textContent;
+      const depth = (parseInt(heading.tagName.slice(1), 10) || 1) - 1;
+      const indent = ''.padStart(depth * 2, ' ');
+
+      src.push(`${indent}- [${textContent}](#${id})`);
+    }
   });
 
   return (
@@ -26,16 +35,32 @@ const NestedList = ({ headingList }: { headingList: HTMLHeadingElement[] }) => {
   );
 };
 
-export const Toc = () => {
+export const Toc = ({
+  title = 'Table of Contents',
+  numberingOnly,
+  setLoaded,
+}: {
+  title?: string;
+  numberingOnly?: boolean;
+  setLoaded: Dispatch<SetStateAction<boolean>>;
+}) => {
   const [headingList, setHeadingList] = useState<HTMLHeadingElement[]>([]);
 
   useEffect(() => {
     setHeadingList(
-      [...document.querySelectorAll<HTMLHeadingElement>('h2, h3, h4, h5, h6')].filter(({ textContent }) => {
-        return /^[0-9]/.test(textContent ?? '');
-      }),
+      [...document.querySelectorAll<HTMLHeadingElement>(':is(h2, h3, h4, h5, h6):where(main *)')].filter(
+        ({ textContent }) => {
+          if (numberingOnly) {
+            return /^[0-9]/.test(textContent ?? '');
+          }
+
+          return true;
+        },
+      ),
     );
-  }, []);
+
+    setLoaded(true);
+  }, [numberingOnly, setLoaded]);
 
   if (headingList.length === 0) {
     return <></>;
@@ -43,10 +68,10 @@ export const Toc = () => {
 
   return (
     <>
-      <h2>Table of Contents</h2>
+      <h2>{title}</h2>
 
       <div id="toc">
-        <NestedList headingList={headingList} />
+        <NestedList headingList={headingList} numberingOnly={numberingOnly} />
       </div>
     </>
   );
