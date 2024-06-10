@@ -9,6 +9,7 @@ import { useId } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { SNS_LINKS } from '@/constants/sns';
 
 export const metadata: Metadata = {
   title: SITE_NAME,
@@ -310,30 +311,7 @@ export default function Home() {
             </div>
 
             <ul className="flex flex-wrap items-center gap-4">
-              {(
-                [
-                  {
-                    href: 'https://github.com/hiroya-uga',
-                    src: '/common/images/github.svg',
-                    alt: 'GitHub',
-                  },
-                  {
-                    href: 'https://x.com/hiroya_UGA',
-                    src: '/common/images/twitter.svg',
-                    alt: 'Twitter',
-                  },
-                  {
-                    href: 'https://www.instagram.com/hiroya_uga',
-                    src: '/common/images/instagram.svg',
-                    alt: 'Instagram',
-                  },
-                  {
-                    href: 'https://codepen.io/hiroya_uga/',
-                    src: '/common/images/codepen.png',
-                    alt: 'Codepen',
-                  },
-                ] as const
-              ).map(({ href, alt, ...props }) => {
+              {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
                     <a href={href}>
