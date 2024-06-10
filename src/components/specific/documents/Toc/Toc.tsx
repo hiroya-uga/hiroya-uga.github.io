@@ -3,6 +3,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { marked } from 'marked';
+import { DISALLOWED_ID_CHARACTERS_REGEX } from '@/constants/regexp';
 
 const NestedList = ({ headingList, numberingOnly }: { headingList: HTMLHeadingElement[]; numberingOnly?: boolean }) => {
   const src: string[] = [];
@@ -13,16 +14,18 @@ const NestedList = ({ headingList, numberingOnly }: { headingList: HTMLHeadingEl
       const { id } = heading;
       const [indexText, ...textContent] = innerHTML.split(/\s/);
       const depth = indexText.match(/\./g)?.length ?? 0;
-      const indent = ''.padStart(depth * 4, ' ');
+      const indent = ''.padStart(depth * 4 - 4, ' ');
 
-      src.push(`${indent}- [<span>${indexText}</span><span>${textContent.join(' ')}</span>](#${id})`);
+      src.push(
+        `${indent}- [<span>${indexText}</span><span>${textContent.join(' ')}</span>](#${id.replace(DISALLOWED_ID_CHARACTERS_REGEX, '')})`,
+      );
     } else {
       const textContent = (heading.querySelector('strong') ?? heading).textContent ?? '';
       const id = heading.id ?? heading.textContent;
       const depth = (parseInt(heading.tagName.slice(1), 10) || 1) - 1;
       const indent = ''.padStart(depth * 2, ' ');
 
-      src.push(`${indent}- [${textContent}](#${id})`);
+      src.push(`${indent}- [${textContent}](#${id.replace(DISALLOWED_ID_CHARACTERS_REGEX, '')})`);
     }
   });
 
@@ -42,7 +45,7 @@ export const Toc = ({
 }: {
   title?: string;
   numberingOnly?: boolean;
-  setLoaded: Dispatch<SetStateAction<boolean>>;
+  setLoaded?: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [headingList, setHeadingList] = useState<HTMLHeadingElement[]>([]);
 
@@ -59,7 +62,7 @@ export const Toc = ({
       ),
     );
 
-    setLoaded(true);
+    setLoaded?.(true);
   }, [numberingOnly, setLoaded]);
 
   if (headingList.length === 0) {
