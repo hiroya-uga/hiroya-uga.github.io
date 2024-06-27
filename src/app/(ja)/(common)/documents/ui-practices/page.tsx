@@ -63,15 +63,17 @@ export default async function ArticlesPage() {
               href={`/documents/ui-practices/${id}`}
               className="group relative grid grid-rows-[auto_1fr] overflow-hidden rounded border border-solid border-gray-600 leading-normal no-underline"
             >
-              <Image
-                src={`/documents/ui-practices/ogimages/${id}.jpg`}
-                width={1200}
-                height={630}
-                alt=""
-                className="aspect-video object-cover"
-              />
-              <span className="absolute right-0 top-0 block rounded-bl bg-black/70 px-2 text-right text-sm text-white">
-                {publishedAt}
+              <span className="relative">
+                <Image
+                  src={`/documents/ui-practices/ogimages/${id}.jpg`}
+                  width={1200}
+                  height={630}
+                  alt=""
+                  className="aspect-video object-cover"
+                />
+                <span className="absolute bottom-0 right-0 block rounded-tl bg-black/70 px-2 text-right text-sm text-white">
+                  {publishedAt}
+                </span>
               </span>
               <span className="relative block bg-white px-3 pb-6 pt-4">
                 <span className="group-hover:underline">{title}</span>
