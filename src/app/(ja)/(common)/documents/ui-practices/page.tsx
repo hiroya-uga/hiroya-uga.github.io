@@ -56,18 +56,28 @@ export default async function ArticlesPage() {
         <p>{metadata.description}</p>
       </PageTitle>
 
-      <ul>
+      <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
         {articles.map(({ id, title, publishedAt, dev }) => (
-          <li key={id} className="sm:w-1/3">
+          <li key={id} className="flex">
             <Link
               href={`/documents/ui-practices/${id}`}
-              className="group block overflow-hidden rounded border border-solid border-gray-600 no-underline"
+              className="group relative grid grid-rows-[auto_1fr] overflow-hidden rounded border border-solid border-gray-600 leading-normal no-underline"
             >
-              <Image src={`/documents/ui-practices/ogimages/${id}.jpg`} width={1200} height={630} alt="" />
-              <span className="relative block bg-white px-3 pb-3 pt-2 leading-normal">
-                <span className="block pb-1 text-right text-gray-500">{publishedAt}</span>
+              <Image
+                src={`/documents/ui-practices/ogimages/${id}.jpg`}
+                width={1200}
+                height={630}
+                alt=""
+                className="aspect-video object-cover"
+              />
+              <span className="absolute right-0 top-0 block rounded-bl bg-black/70 px-2 text-right text-sm text-white">
+                {publishedAt}
+              </span>
+              <span className="relative block bg-white px-3 pb-6 pt-4">
                 <span className="group-hover:underline">{title}</span>
-                {dev.length !== 0 && <span className="mt-2 block text-right text-xs">{dev.join(', ')}</span>}
+              </span>
+              <span className="block bg-white px-3 pb-2">
+                {dev.length !== 0 && <span className="block text-right text-xs">{dev.join(', ')}</span>}
               </span>
             </Link>
           </li>
