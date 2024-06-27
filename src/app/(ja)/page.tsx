@@ -314,7 +314,7 @@ export default function Home() {
               {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
-                    <a href={href}>
+                    <a href={href} className="block rounded">
                       <Image {...props} width={32} height={32} alt={alt} />
                     </a>
                   </li>

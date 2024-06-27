@@ -242,7 +242,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               <span className="w-40 text-right sm:w-56">
                 <a
                   href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
-                  className="z-10 inline-block cursor-pointer bg-white px-2 py-1 leading-tight text-black no-underline"
+                  className="z-10 inline-block cursor-pointer bg-white px-2 py-1 leading-tight text-black no-underline focus-visible:outline-[white]"
                 >
                   See this photo on Instagram!
                 </a>
@@ -273,7 +273,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="absolute right-[8px] top-[8px] size-[calc(100%_-_16px)] rounded-[50%] bg-white"
+            className="absolute right-[8px] top-[8px] size-[calc(100%_-_16px)] rounded-[50%] bg-white focus-visible:outline-[white]"
             onClick={() => updateImage()}
           >
             <Image
@@ -281,7 +281,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               width={48}
               height={48}
               alt="ランダムに切り替える"
-              className="full block size-full opacity-80"
+              className="block size-full opacity-80"
             />
           </button>
         </p>
@@ -316,7 +316,7 @@ export const LinkList = ({
               <a
                 href={href}
                 {...prop}
-                className="last:rounded-r sm:grid sm:grow sm:content-center sm:rounded-l sm:bg-white sm:p-2 sm:pl-3"
+                className="last:rounded-r focus:relative focus:z-10 sm:grid sm:grow sm:content-center sm:rounded-l sm:bg-white sm:p-2 sm:pl-3"
               >
                 {title}
               </a>{' '}
