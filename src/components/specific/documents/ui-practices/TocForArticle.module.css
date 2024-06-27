@@ -1,0 +1,20 @@
+.toc > h2:first-child {
+  margin-top: 0;
+}
+
+.toc ul li {
+  padding-left: 0.7em;
+  position: relative;
+}
+
+.toc ul li::before {
+  content: "";
+  width: 4px;
+  left: 0;
+  top: calc(0.5lh - 2px);
+  height: 4px;
+  border-radius: 50%;
+  background-color: currentColor;
+  display: block;
+  position: absolute;
+}
