@@ -22,7 +22,7 @@ export const Footer = () => {
               {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
-                    <a href={href}>
+                    <a href={href} className="block rounded">
                       <Image {...props} width={32} height={32} alt={alt} className="size-7 lg:size-7" />
                     </a>
                   </li>
