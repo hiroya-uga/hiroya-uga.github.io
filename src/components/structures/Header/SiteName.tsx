@@ -16,7 +16,7 @@ export const SiteName = () => {
         <span className="block overflow-auto bg-white lg:box-content lg:h-[29.2929vh] lg:min-h-[18.5rem] lg:w-8 lg:min-w-8 lg:overflow-visible lg:pb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            role="none presentation"
+            role="none"
             className="ml-auto h-[1.465rem] w-[18.5rem] min-w-[18.5rem] lg:h-[18.5rem] lg:min-h-[18.5rem] lg:w-8 lg:min-w-8"
           >
             <text x="58%" y="50%" textAnchor="middle" className="translate-y-[4px] lg:hidden">
