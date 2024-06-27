@@ -61,12 +61,12 @@ export default async function ArticlesPage() {
           <li key={id} className="sm:w-1/3">
             <Link
               href={`/documents/ui-practices/${id}`}
-              className="block overflow-hidden rounded border border-solid border-gray-600 no-underline"
+              className="group block overflow-hidden rounded border border-solid border-gray-600 no-underline"
             >
               <Image src={`/documents/ui-practices/ogimages/${id}.jpg`} width={1200} height={630} alt="" />
               <span className="relative block bg-white px-3 pb-3 pt-2 leading-normal">
                 <span className="block pb-1 text-right text-gray-500">{publishedAt}</span>
-                <span>{title}</span>
+                <span className="group-hover:underline">{title}</span>
                 {dev.length !== 0 && <span className="mt-2 block text-right text-xs">{dev.join(', ')}</span>}
               </span>
             </Link>
