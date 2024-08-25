@@ -13,6 +13,22 @@ const list: {
   tags?: Tags;
 }[] = [
   {
+    type: 'podcast',
+    category: 'WebDev',
+    date: '2024-07-25',
+    title: 'ep.160『HTMLの品質チェックをもっと身近に！Nu HTML Checker セルフホスティングへの道』',
+    href: 'https://uit-inside.linecorp.com/episode/160',
+    tags: ['HTML', 'CSS', 'Tools'],
+  },
+  {
+    type: 'podcast',
+    category: 'WebDev',
+    date: '2022-07-29',
+    title: 'ep.126 UIT Meetup vol.16「ちゃんとやってる？アクセシビリティ」 Aftershow',
+    href: 'https://uit-inside.linecorp.com/episode/126',
+    tags: ['Accessibility', 'EventReport'],
+  },
+  {
     type: 'video',
     category: 'WebDev',
     date: '2022-07-01',
