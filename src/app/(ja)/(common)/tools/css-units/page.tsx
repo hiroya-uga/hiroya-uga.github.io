@@ -7,11 +7,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: 'CSS Units Playground',
   description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'CSS Units Playground',
-    description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
-  },
 });
 
 export default function Page() {

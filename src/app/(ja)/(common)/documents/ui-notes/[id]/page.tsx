@@ -13,6 +13,7 @@ import { MainVisual } from '@/components/specific/documents/ui-notes/MainVisual'
 import { JsonLd } from '@/components/Meta';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/ui-notes/page';
+import { Metadata } from 'next/types';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;

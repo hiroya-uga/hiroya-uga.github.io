@@ -7,11 +7,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: 'DOM Event Playground',
   description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'DOM Event Playground',
-    description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
-  },
 });
 
 export default function Page() {

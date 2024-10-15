@@ -9,11 +9,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: "aria-expanded属性の状態をスクリーンリーダに伝える - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "aria-expanded属性の状態をスクリーンリーダに伝える - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
 });
 
 export default function Page() {

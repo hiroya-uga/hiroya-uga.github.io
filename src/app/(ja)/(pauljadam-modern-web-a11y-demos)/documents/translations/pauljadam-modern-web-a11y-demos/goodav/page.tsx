@@ -5,11 +5,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: "自動再生またはループのないオーディオ/ビデオの良い例 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "自動再生またはループのないオーディオ/ビデオの良い例 - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
 });
 
 export default function Page() {

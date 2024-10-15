@@ -7,11 +7,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: 'ツール集',
   description: '作ったものをまとめている階層です。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ツール集',
-    description: '作ったものをまとめている階層です。',
-  },
 });
 
 export default function Page() {
