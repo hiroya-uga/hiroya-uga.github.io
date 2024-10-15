@@ -110,7 +110,7 @@ export default async function Post({ params }: { params: { id: string } }) {
           <></>
         ) : (
           <div className="flex flex-wrap items-center gap-2">
-            <p className="leading-none">前提技術：</p>
+            <p className="leading-none">キーワード：</p>
             <ul className="flex flex-wrap items-center gap-2">
               {dev?.map((item) => (
                 <li key={item} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
