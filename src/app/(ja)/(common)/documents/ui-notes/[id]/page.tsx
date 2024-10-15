@@ -81,7 +81,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     description?: string;
     publishedAt: string;
     updatedAt?: string;
-    dev?: string[];
+    keywords?: string[];
   }>({
     source: fileContents,
     components,
@@ -93,7 +93,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     },
   });
 
-  const { title, description, publishedAt, updatedAt, dev } = frontmatter;
+  const { title, description, publishedAt, updatedAt, keywords } = frontmatter;
 
   return (
     <div>
@@ -106,15 +106,15 @@ export default async function Post({ params }: { params: { id: string } }) {
           <span>公開日：{publishedAt}</span>
           {updatedAt && publishedAt !== updatedAt && <span>最終更新：{updatedAt}</span>}
         </p>
-        {dev?.length === 0 ? (
+        {keywords?.length === 0 ? (
           <></>
         ) : (
           <div className="flex flex-wrap items-center gap-2">
             <p className="leading-none">キーワード：</p>
             <ul className="flex flex-wrap items-center gap-2">
-              {dev?.map((item) => (
-                <li key={item} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
-                  {item}
+              {keywords?.map((keyword) => (
+                <li key={keyword} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
+                  {keyword}
                 </li>
               ))}
             </ul>

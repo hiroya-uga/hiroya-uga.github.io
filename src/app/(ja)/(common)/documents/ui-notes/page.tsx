@@ -28,7 +28,7 @@ export async function getArticles() {
       id: filename.replace(/\.mdx$/, ''),
       title: '',
       publishedAt: '',
-      dev: [],
+      keywords: [],
       ...data,
     };
   });
@@ -46,8 +46,8 @@ export default async function ArticlesPage() {
       </PageTitle>
 
       <ul className="grid gap-2 md:grid-cols-3">
-        {articles.map(({ id, title, publishedAt, dev }) => {
-          const shouldShowKeywords = dev.length !== 0;
+        {articles.map(({ id, title, publishedAt, keywords }) => {
+          const shouldShowKeywords = keywords.length !== 0;
 
           return (
             <li key={id}>
@@ -90,7 +90,7 @@ export default async function ArticlesPage() {
                       'md:col-start-1 md:col-end-2 md:row-start-3 md:row-end-4',
                     ])}
                   >
-                    {dev.join(', ')}
+                    {keywords.join(', ')}
                   </span>
                 )}
               </Link>
