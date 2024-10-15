@@ -46,7 +46,7 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="mb-8 px-[16px] sm:mb-28">
+        <div className="mb-8 px-[var(--content-padding-inline)] sm:mb-28">
           <div className="mx-auto max-w-content">
             <p className="mb-20 text-center text-sm sm:mb-28">
               <span>ようこそ {SITE_NAME} へ。</span>
@@ -59,7 +59,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-8 bg-white px-[16px] py-8 sm:mb-28 sm:pb-11 sm:pt-7">
+        <div className="mb-8 bg-white px-[var(--content-padding-inline)] py-8 sm:mb-28 sm:pb-11 sm:pt-7">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 mt-0 text-xl font-bold sm:text-2xl">The power of the web</h2>
 
@@ -80,7 +80,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-16 px-[16px] sm:mb-28">
+        <div className="mb-16 px-[var(--content-padding-inline)] sm:mb-28">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
@@ -158,7 +158,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-20 bg-slate-200 px-[16px] py-11 pb-12 sm:mb-28">
+        <div className="mb-20 bg-slate-200 px-[var(--content-padding-inline)] py-11 pb-12 sm:mb-28">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">カテゴリー</h2>
 
@@ -193,7 +193,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="px-[16px]">
+        <div className="px-[var(--content-padding-inline)]">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">外部メディア</h2>
 
