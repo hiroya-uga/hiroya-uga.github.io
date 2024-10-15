@@ -1,17 +1,17 @@
 'use client';
 
-import styles from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client.module.css';
+
+import React, { useCallback, useEffect, useState } from 'react';
+
+import clsx from 'clsx';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   AnAltDecisionTreeAnswer,
   AnAltDecisionTreeException,
   AnAltDecisionTreeQuestion,
 } from '@/components/specific/tools/an-alt-decision-tree';
-
-import React, { useCallback, useEffect, useState } from 'react';
-
-import clsx from 'clsx';
 import 'highlight.js/styles/github-dark.css';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import styles from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client.module.css';
 
 const formatIndex = (value: string | number | undefined | null) => {
   const index = typeof value !== 'number' ? Number(value) : value;

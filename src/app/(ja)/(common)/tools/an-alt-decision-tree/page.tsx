@@ -1,12 +1,13 @@
 import { AnAltDecisionTreeContent } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Metadata } from '@/types/seo';
 
-export const metadata: Metadata = {
+import { getMetadata } from '@/utils/seo';
+
+export const metadata = getMetadata({
   title: 'An alt Decision Treeに基づく代替テキスト２択チャート',
   description:
     'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
-};
+});
 
 export default function Page() {
   return (

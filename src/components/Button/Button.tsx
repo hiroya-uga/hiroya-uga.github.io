@@ -4,7 +4,7 @@ export const Button = (props: Omit<LinkProps, 'className'> & { children: React.R
   return (
     <Link
       {...props}
-      className="no-underline text-black bg-slate-200 px-4 py-3 rounded-lg text-sm hover:bg-slate-300 inline-block transition-colors"
+      className="inline-block rounded-lg bg-slate-200 px-4 py-3 text-sm text-black no-underline transition-colors hover:bg-slate-300"
     />
   );
 };

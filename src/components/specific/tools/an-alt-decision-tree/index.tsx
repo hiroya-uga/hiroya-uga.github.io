@@ -1,10 +1,10 @@
-import { Details } from '@/components/Box';
-import { CodeBlock } from '@/components/CodeBlock';
 
 import { HTMLAttributes, useEffect, useId, useRef } from 'react';
 import React from 'react';
 
 import Image from 'next/image';
+import { CodeBlock } from '@/components/CodeBlock';
+import { Details } from '@/components/Box';
 
 // const Code = ({ code }: { code: string }) => {
 //   return (

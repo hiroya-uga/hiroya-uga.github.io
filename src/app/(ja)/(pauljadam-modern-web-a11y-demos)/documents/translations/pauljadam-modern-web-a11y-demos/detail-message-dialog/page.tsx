@@ -1,7 +1,6 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/detail-message-dialog/DocumentScript';
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/detail-message-dialog/page.css';
-
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
 export default function Page() {
   return (
@@ -24,8 +23,8 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title:
     'WAI-ARIAのrole="alertdialog"属性を使った詳細メッセージダイアログ - PaulJAdam\'s Modern Web Accessibility Demos',
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-};
+});

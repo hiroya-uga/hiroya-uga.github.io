@@ -1,11 +1,11 @@
 'use client';
 
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/common.css';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Footer } from '@/components/structures/Footer';
 import { SiteName } from '@/components/structures/Header/SiteName';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const CsunmobileNavigation = ({ fileName }: { fileName: string }) => {
   const linkList = [

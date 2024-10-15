@@ -1,8 +1,8 @@
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/accounting-tables/page.css';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "会計テーブル - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
@@ -10,12 +10,12 @@ export const metadata: Metadata & { title: string } = {
     title: "会計テーブル - PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
 
       <h2>
         1行が複数行にわたる2つの行ヘッダーを持つ表。

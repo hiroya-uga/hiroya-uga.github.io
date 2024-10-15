@@ -1,7 +1,6 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile-accordion-bad/DocumentScript';
+import { getMetadata } from '@/utils/seo';
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile-accordion-bad/page.css';
-
-import type { Metadata } from 'next';
 
 export default function Page() {
   return (
@@ -42,12 +41,7 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title: "アコーディオンのアクセシビリティ失敗例 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "アコーディオンのアクセシビリティ失敗例 - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
-};
+});

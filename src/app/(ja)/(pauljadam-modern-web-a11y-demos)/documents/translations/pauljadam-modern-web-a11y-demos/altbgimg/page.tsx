@@ -2,9 +2,9 @@ import { DivWithOnClickEvent } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/altbgimg/page.css';
 import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "背景画像や複雑な画像の代替テキスト - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
@@ -12,12 +12,12 @@ export const metadata: Metadata & { title: string } = {
     title: "背景画像や複雑な画像の代替テキスト - PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
 
       <h2>背景画像</h2>
 

@@ -1,9 +1,8 @@
-import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
-import '@/pages/globals.css';
-
-import { useEffect, useState } from 'react';
-
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
+
+import '@/pages/globals.css';
 
 export default function Page() {
   const [browserName, setBrowserName] = useState('');

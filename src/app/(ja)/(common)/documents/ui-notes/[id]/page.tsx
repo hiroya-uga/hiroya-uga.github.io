@@ -1,17 +1,17 @@
 import fs from 'fs';
 import path from 'path';
-import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 import remarkGfm from 'remark-gfm';
-
 import { compileMDX } from 'next-mdx-remote/rsc';
+import { marked } from 'marked';
+import matter from 'gray-matter';
+import { useMDXComponents as getMDXComponents } from '@/mdx-components';
+
 import { SpecBlockQuote } from '@/components/SpecBlockQuote';
 import { ExampleBox } from '@/components/Box';
 import { TocForArticle } from '@/components/specific/documents/ui-notes/TocForArticle';
 import { MainVisual } from '@/components/specific/documents/ui-notes/MainVisual';
-import { marked } from 'marked';
 import { JsonLd } from '@/components/Meta';
-import { Metadata } from '@/types/seo';
-import matter from 'gray-matter';
+
 import { getArticles } from '@/app/(ja)/(common)/documents/ui-notes/page';
 
 export default async function Post({ params }: { params: { id: string } }) {

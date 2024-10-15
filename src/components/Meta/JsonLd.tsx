@@ -1,5 +1,5 @@
-import { URL_ORIGIN } from '@/constants/meta';
 import { Article, WebPage, WithContext } from 'schema-dts';
+import { URL_ORIGIN } from '@/constants/meta';
 
 export const JsonLd = ({
   title,

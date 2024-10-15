@@ -1,23 +1,17 @@
+import Script from 'next/script';
+import { getMetadata } from '@/utils/seo';
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/DocumentScript';
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/page.css';
 
-import type { Metadata } from 'next';
-import Script from 'next/script';
-
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "Bootstrapのドロップダウン - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "Bootstrapのドロップダウン - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
 
       <DocumentScript />
 

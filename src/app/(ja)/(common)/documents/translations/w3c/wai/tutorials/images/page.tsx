@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { getMetadata } from '@/utils/seo';
 import { NoteBox } from '@/components/Box';
 import { SimpleDescriptionList } from '@/components/List';
 import { LinkToOriginal } from '@/components/specific/documents/translations/LinkToOriginal';
@@ -5,8 +7,6 @@ import { WEB_SPEC_TRANSLATIONS_NOTE } from '@/components/specific/documents/tran
 import { RelatedResourceBox } from '@/components/specific/documents/translations/w3c/wai';
 import { PageTitle } from '@/components/structures/PageTitle';
 
-import type { Metadata } from 'next';
-import Link from 'next/link';
 
 export default function Page() {
   return (
@@ -236,12 +236,7 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title: '日本語訳：Images Tutorial',
   description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: '日本語訳：Images Tutorial',
-    description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
-  },
-};
+});

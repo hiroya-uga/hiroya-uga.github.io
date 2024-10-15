@@ -1,11 +1,11 @@
+import { useId } from 'react';
 import { AccessibleNameAndDescriptionComputation } from '@/app/(ja)/(common)/tools/accessible-name-and-description-computation/Client';
 import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Metadata } from '@/types/seo';
 
-import { useId } from 'react';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title: 'Accessible Name and Description Computation Playground',
   description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
   twitter: {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Accessible Name and Description Computation Playground',
     description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
   },
-};
+});
 
 export default function Page() {
   const anchorLinkId = useId();
@@ -21,7 +21,7 @@ export default function Page() {
 
   return (
     <>
-      <PageTitle title={metadata.title}>
+      <PageTitle title={metadata.pageTitle}>
         <p className="mb-2">
           <b>アクセシブルな名前および説明</b>がどう計算されるかをテストするためのページです。
         </p>

@@ -1,8 +1,8 @@
 import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "HTML5のfigure要素とfigcaption要素 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
@@ -10,7 +10,7 @@ export const metadata: Metadata & { title: string } = {
     title: "HTML5のfigure要素とfigcaption要素 - PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-};
+});
 
 export default function Page() {
   return (

@@ -1,12 +1,13 @@
 import Mdx from '@/app/(en)/(specs)/documents/fantasized-specs/css-observer/content.mdx';
 import { GITHUB_PROFILE, GITHUB_REPOSITORY, URL_ORIGIN } from '@/constants/meta';
 import { DocumentHeadingLevel2 } from '@/mdx-components';
-import { Metadata } from '@/types/seo';
 
-export const metadata: Metadata = {
+import { getMetadata } from '@/utils/seo';
+
+export const metadata = getMetadata({
   title: 'CSS Observer Module level 1 - Fantasized specs',
   description: '',
-};
+});
 
 export default function Page() {
   return (
