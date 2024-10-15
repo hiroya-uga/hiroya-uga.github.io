@@ -14,6 +14,7 @@ import { JsonLd } from '@/components/Meta';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/ui-notes/page';
 import { Metadata } from 'next/types';
+import { SITE_NAME } from '@/constants/meta';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -180,7 +181,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 
   const { data } = matter(fileContents);
-  const title = data.title;
+  const title = `${data.title} | ${SITE_NAME}`;
   const description = data.description?.replaceAll('`', '') ?? '';
 
   return {
