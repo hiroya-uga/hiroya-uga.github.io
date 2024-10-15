@@ -1,6 +1,6 @@
 import { PageTitle } from '@/components/structures/PageTitle';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
 const pageList = [
   ['a11y-gone-wrong', true],
@@ -159,12 +159,7 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
-};
+});

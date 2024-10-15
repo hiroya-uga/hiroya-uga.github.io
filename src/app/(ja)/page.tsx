@@ -1,26 +1,21 @@
+import { useId } from 'react';
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Counter, LinkList, TopImage } from '@/app/(ja)/Client';
 import { Footer } from '@/components/structures/Footer';
 import { SITE_NAME } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
-import { Metadata } from '@/types/seo';
 
-import { useId } from 'react';
-
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
 import { SNS_LINKS } from '@/constants/sns';
 import { Button } from '@/components/Button/Button';
 
-export const metadata: Metadata = {
+import { getMetadata } from '@/utils/seo';
+
+export const metadata = getMetadata({
   title: SITE_NAME,
   description: 'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。',
-  twitter: {
-    card: 'summary_large_image',
-    title: SITE_NAME,
-    description: 'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。',
-  },
-};
+});
 
 export default function Home() {
   const captionId = useId();
@@ -30,7 +25,7 @@ export default function Home() {
       <header className="px-4 pb-12 pt-10 lg:pb-[3.75rem] lg:pt-14">
         <div className="mx-auto max-w-content">
           <div className="items-center text-center lg:mb-2 lg:flex">
-            <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl lg:mb-0">{metadata.title}</h1>
+            <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl lg:mb-0">{metadata.pageTitle}</h1>
             <p className="text-xs">
               <span className="hidden px-2 md:inline">-</span>
               <span>
@@ -321,11 +316,11 @@ export default function Home() {
               </div>
             </div>
 
-            <ul className="flex flex-wrap items-center justify-center gap-4 sm:gap-2 sm:justify-start sm:-m-2">
+            <ul className="flex flex-wrap items-center justify-center gap-4 sm:-m-2 sm:justify-start sm:gap-2">
               {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
-                    <a href={href} className="block rounded-lg p-2 sm:p-3 hover:bg-gray-300 transition-colors">
+                    <a href={href} className="block rounded-lg p-2 transition-colors hover:bg-gray-300 sm:p-3">
                       <Image {...props} width={32} height={32} alt={alt} className="sm:size-7" />
                     </a>
                   </li>

@@ -1,10 +1,10 @@
+import Link from 'next/link';
 import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Metadata } from '@/types/seo';
 
-import Link from 'next/link';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title: 'ツール集',
   description: '作ったものをまとめている階層です。',
   twitter: {
@@ -12,12 +12,12 @@ export const metadata: Metadata = {
     title: 'ツール集',
     description: '作ったものをまとめている階層です。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <PageTitle title={metadata.title}>
+      <PageTitle title={metadata.pageTitle}>
         <p>{metadata.description}</p>
       </PageTitle>
 

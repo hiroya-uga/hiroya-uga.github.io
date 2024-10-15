@@ -1,10 +1,10 @@
 'use client';
 
-import { NoteBox } from '@/components/Box';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
+import { NoteBox } from '@/components/Box';
 
 type Touches = Record<
   string,

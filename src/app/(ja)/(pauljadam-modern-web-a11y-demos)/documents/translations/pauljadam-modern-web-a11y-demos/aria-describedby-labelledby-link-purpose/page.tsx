@@ -1,12 +1,12 @@
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-describedby-labelledby-link-purpose/page.css';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title:
     "機械的に関連づけるためのaria-Labelledby属性 VS aria-describedby属性 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-};
+});
 
 export default function Page() {
   return (

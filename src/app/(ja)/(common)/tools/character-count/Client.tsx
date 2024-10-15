@@ -1,8 +1,8 @@
 'use client';
 
-import { Switch } from '@/components/Form';
 import clsx from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
+import { Switch } from '@/components/Form';
 
 import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css';
 

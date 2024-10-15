@@ -1,8 +1,8 @@
 'use client';
 
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Details } from '@/components/Box';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const getNow = () => {
   const date = new Date();

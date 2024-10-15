@@ -1,9 +1,10 @@
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/apple-system-css-font/page.css';
+
 import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "-apple-system-関連のfont-family値 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
@@ -11,12 +12,12 @@ export const metadata: Metadata & { title: string } = {
     title: "-apple-system-関連のfont-family値 - PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
 
       <SampleImage
         filename="/apple-system-css-font-IMG_0371.png"

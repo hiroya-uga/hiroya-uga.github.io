@@ -1,12 +1,12 @@
 'use client';
 
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import clsx from 'clsx';
 import { NoteBox } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Switch } from '@/components/Form';
 
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
-import clsx from 'clsx';
 import 'highlight.js/styles/github.css';
 
 type SwitchItemProps = Pick<

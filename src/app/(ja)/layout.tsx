@@ -1,9 +1,9 @@
 'use client';
 
 import '@/app/(ja)/common.css';
+import { Inter } from 'next/font/google';
 import GoogleAnalytics from '@/lib/gtag';
 
-import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 

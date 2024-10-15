@@ -1,8 +1,8 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/goodav/DocumentScript';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "自動再生またはループのないオーディオ/ビデオの良い例 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
@@ -10,14 +10,14 @@ export const metadata: Metadata & { title: string } = {
     title: "自動再生またはループのないオーディオ/ビデオの良い例 - PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
       <DocumentScript />
 
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
       <video controls>
         <source src="https://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4" />
         <source src="https://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm" />

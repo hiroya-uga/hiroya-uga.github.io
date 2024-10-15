@@ -1,10 +1,10 @@
+import { useId } from 'react';
 import { DOMEventWatcherContent } from '@/app/(ja)/(common)/tools/dom-events-watcher/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Metadata } from '@/types/seo';
 
-import { useId } from 'react';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata = {
+export const metadata = getMetadata({
   title: 'DOM Event Playground',
   description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   twitter: {
@@ -12,14 +12,14 @@ export const metadata: Metadata = {
     title: 'DOM Event Playground',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
-};
+});
 
 export default function Page() {
   const id = useId();
 
   return (
     <>
-      <PageTitle title={metadata.title}>
+      <PageTitle title={metadata.pageTitle}>
         <p className="mb-6">
           このページの
           <a href="#container" id={`${id}-title`}>

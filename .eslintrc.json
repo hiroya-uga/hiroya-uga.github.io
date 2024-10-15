@@ -23,6 +23,7 @@
         "prefix": "@",
         "rootDir": "src"
       }
-    ]
+    ],
+    "import/order": ["error"]
   }
 }

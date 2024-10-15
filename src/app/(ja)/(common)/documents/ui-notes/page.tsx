@@ -4,18 +4,15 @@ import path from 'path';
 import Link from 'next/link';
 import matter from 'gray-matter';
 import Image from 'next/image';
-import { Metadata } from '@/types/seo';
+
 import { PageTitle } from '@/components/structures/PageTitle';
 
-export const metadata: Metadata = {
+import { getMetadata } from '@/utils/seo';
+
+export const metadata = getMetadata({
   title: 'UI Notes',
   description: 'Web上に登場するUIに関するメモ書き。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'UI Notes',
-    description: 'Web上に登場するUIに関するメモ書き。',
-  },
-};
+});
 
 export async function getArticles() {
   const articlesDir = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'ui-notes', 'contents');
@@ -43,7 +40,7 @@ export default async function ArticlesPage() {
 
   return (
     <>
-      <PageTitle title={metadata.title}>
+      <PageTitle title={metadata.pageTitle}>
         <p>{metadata.description}</p>
       </PageTitle>
 

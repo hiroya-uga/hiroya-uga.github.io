@@ -1,8 +1,8 @@
 'use client';
 
-import { Toc } from '@/components/specific/documents/Toc';
 import clsx from 'clsx';
 import { useState } from 'react';
+import { Toc } from '@/components/specific/documents/Toc';
 
 import styles from '@/components/specific/documents/ui-notes/TocForArticle.module.css';
 

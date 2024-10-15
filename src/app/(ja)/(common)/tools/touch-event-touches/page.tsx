@@ -1,8 +1,9 @@
 import { TouchEventTouchesContent } from '@/app/(ja)/(common)/tools/touch-event-touches/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Metadata } from '@/types/seo';
 
-export const metadata: Metadata = {
+import { getMetadata } from '@/utils/seo';
+
+export const metadata = getMetadata({
   title: 'TouchEvent.touches Playground',
   description:
     'タッチ操作のテストができます。デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかを確認しましょう。',
@@ -12,12 +13,12 @@ export const metadata: Metadata = {
     description:
       'タッチ操作のテストができます。デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかを確認しましょう。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <PageTitle title={metadata.title}>
+      <PageTitle title={metadata.pageTitle}>
         <p>{metadata.description}</p>
       </PageTitle>
       <p>Startボタンを押した後に画面をタッチすると指の座標が表示されます。</p>

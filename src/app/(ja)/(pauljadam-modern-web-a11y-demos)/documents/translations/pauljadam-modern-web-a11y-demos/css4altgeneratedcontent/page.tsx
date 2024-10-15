@@ -1,8 +1,8 @@
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/css4altgeneratedcontent/page.css';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "CSSによって出力されたコンテンツのためのCSS4 Alt text - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   twitter: {
@@ -10,14 +10,14 @@ export const metadata: Metadata & { title: string } = {
     title: "CSSによって出力されたコンテンツのためのCSS4 Alt text - PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-};
+});
 
 export default function Page() {
   return (
     <>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
 
       <p>
         Font

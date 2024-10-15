@@ -1,8 +1,8 @@
 import '@/app/globals.css';
+import { Metadata } from 'next';
 import { Console } from '@/components/Jokes/Console';
 import { URL_ORIGIN } from '@/constants/meta';
 
-import { Metadata } from 'next';
 
 export default function DocumentLayout({ children }: { children: React.ReactNode }) {
   return (

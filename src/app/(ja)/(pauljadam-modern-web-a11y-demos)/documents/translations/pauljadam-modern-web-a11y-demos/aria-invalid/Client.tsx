@@ -1,8 +1,8 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { URL_ORIGIN } from '@/constants/meta';
 
-import { usePathname } from 'next/navigation';
 
 export const SelfLink = () => {
   const pathname = usePathname();

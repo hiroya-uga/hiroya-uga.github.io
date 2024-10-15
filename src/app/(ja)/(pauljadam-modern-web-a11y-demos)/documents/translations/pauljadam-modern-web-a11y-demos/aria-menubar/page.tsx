@@ -1,22 +1,17 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-menubar/DocumentScript';
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-menubar/page.css';
 
-import type { Metadata } from 'next';
+import { getMetadata } from '@/utils/seo';
 
-export const metadata: Metadata & { title: string } = {
+export const metadata = getMetadata({
   title: "メニューバーの実装例 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "メニューバーの実装例 - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
-};
+});
 
 export default function Page() {
   return (
     <>
-      <h1>{metadata.title}</h1>
+      <h1>{metadata.pageTitle}</h1>
 
       <DocumentScript />
 
