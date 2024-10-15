@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SNS_LINKS } from '@/constants/sns';
+import { Button } from '@/components/Button/Button';
 
 export const metadata: Metadata = {
   title: SITE_NAME,
@@ -160,7 +161,7 @@ export default function Home() {
 
         <div className="mb-20 bg-slate-200 px-[var(--content-padding-inline)] py-11 pb-12 sm:mb-28">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-4 text-xl font-bold sm:text-2xl">カテゴリー</h2>
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl">Category</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -195,7 +196,7 @@ export default function Home() {
 
         <div className="px-[var(--content-padding-inline)]">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-4 text-xl font-bold sm:text-2xl">外部メディア</h2>
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl">Media</h2>
 
             <table className="mb-2">
               <tbody>
@@ -219,7 +220,7 @@ export default function Home() {
             </table>
 
             <p className="mb-12 text-right sm:mb-28">
-              <a href="/documents/media/">外部メディアリンク一覧</a>
+              <Button href="/documents/media/">Media一覧を見る</Button>
             </p>
 
             <h2 className="mb-2 text-xl font-bold sm:text-2xl">Bookmarks</h2>
@@ -287,7 +288,7 @@ export default function Home() {
               ]}
             />
 
-            <div className="mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-28 sm:grid sm:gap-x-12 sm:pt-28">
+            <div className="mb-10 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-28 sm:grid sm:gap-x-12 sm:pt-28">
               <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl">
                 PROFILE
               </h2>
@@ -309,8 +310,8 @@ export default function Home() {
                 </span>
               </p>
 
-              <div className="col-start-1 col-end-2 row-start-2 row-end-3">
-                <div className="sm:mb-4 sm:max-w-xl sm:pr-4">
+              <div className="col-start-1 col-end-2 row-start-2 row-end-3 sm:mb-6">
+                <div className="sm:max-w-xl sm:pr-4">
                   <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
                   <p className="sm:palt inline-block">
                     「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
@@ -320,12 +321,12 @@ export default function Home() {
               </div>
             </div>
 
-            <ul className="flex flex-wrap items-center gap-4">
+            <ul className="flex flex-wrap items-center justify-center gap-4 sm:gap-2 sm:justify-start sm:-m-2">
               {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
-                    <a href={href} className="block rounded">
-                      <Image {...props} width={32} height={32} alt={alt} />
+                    <a href={href} className="block rounded-lg p-2 sm:p-3 hover:bg-gray-300 transition-colors">
+                      <Image {...props} width={32} height={32} alt={alt} className="sm:size-7" />
                     </a>
                   </li>
                 );

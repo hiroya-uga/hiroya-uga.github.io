@@ -142,7 +142,7 @@ export const SEO: Record<string, string> = {
   // ['voiosmultifocusbug', false],
   // ['web-speech-api', false],
   // ['youtubeHTML5embed', false],
-  '/documents/media': '外部メディアリンク一覧',
+  '/documents/media': 'Media',
   '/documents/fantasized-specs': 'Fantasized specs',
   '/documents/fantasized-specs/html-carousel': 'The Carousel element',
   '/documents/fantasized-specs/css-observer': 'CSS Observer Module level 1',

@@ -5,11 +5,11 @@ import { Metadata } from '@/types/seo';
 import { useId } from 'react';
 
 export const metadata: Metadata = {
-  title: '外部メディアリンク一覧',
+  title: 'Media',
   description: '社内ブログや動画コンテンツへの参加、寄稿などのリンクをまとめています。',
   twitter: {
     card: 'summary_large_image',
-    title: '外部メディアリンク一覧',
+    title: 'Media',
     description: '社内ブログや動画コンテンツへの参加、寄稿などのリンクをまとめています。',
   },
 };
