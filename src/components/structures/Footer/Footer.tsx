@@ -6,8 +6,35 @@ import { SNS_LINKS } from '@/constants/sns';
 
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+
+const Anchor = ({ href, className, children }: { href: string; className: string; children: React.ReactNode }) => {
+  const pathname = usePathname() ?? '';
+  const [shouldLinkComponent, setShouldLinkComponent] = useState(false);
+
+  useEffect(() => {
+    setShouldLinkComponent(
+      ![/fantasized-specs/, /pauljadam-modern-web-a11y-demos/].some((regexp) => regexp.test(pathname)),
+    );
+  }, []);
+
+  if (shouldLinkComponent) {
+    // Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう
+    return (
+      <Link href={href} className={className}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  );
+};
 
 const ListItem = () => {
   const pathname = usePathname() ?? '';
@@ -35,9 +62,9 @@ const ListItem = () => {
 
           return (
             <li key={path} className='after:px-2 after:content-["/"]'>
-              <a href={path} className="text-inherit">
+              <Anchor href={path} className="text-inherit">
                 {SEO[path]}
-              </a>
+              </Anchor>
             </li>
           );
         }
