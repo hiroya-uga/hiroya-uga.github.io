@@ -76,10 +76,10 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="/documents/translations/pauljadam-modern-web-a11y-demos/img/accessiblenameimg-360bridge.jpg"
+          filename="/accessiblenameimg-360bridge.jpg"
           aria-labelledby="penny-label"
-          width="800"
-          height="533"
+          width={800}
+          height={533}
         />
       </p>
 
@@ -91,10 +91,10 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="accessiblenameimg-360bridge.jpg"
+          filename="/accessiblenameimg-360bridge.jpg"
           aria-label="ペニーバッカー橋（aria-label属性指定）"
-          width="800"
-          height="533"
+          width={800}
+          height={533}
         />
       </p>
 
@@ -104,10 +104,10 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="/documents/translations/pauljadam-modern-web-a11y-demos/img/accessiblenameimg-360bridge.jpg"
+          filename="/accessiblenameimg-360bridge.jpg"
           alt="ペニーバッカー橋（alt属性指定）"
-          width="800"
-          height="533"
+          width={800}
+          height={533}
         />
       </p>
 
@@ -117,31 +117,27 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="/documents/translations/pauljadam-modern-web-a11y-demos/img/accessiblenameimg-360bridge.jpg"
+          filename="/accessiblenameimg-360bridge.jpg"
           title="ペニーバッカー橋（title属性指定）"
-          width="800"
-          height="533"
+          width={800}
+          height={533}
         />
       </p>
 
       <h2>アクセシブルネームを持たない例</h2>
 
       <p>
-        <SampleImage
-          filename="/documents/translations/pauljadam-modern-web-a11y-demos/img/accessiblenameimg-360bridge.jpg"
-          width="800"
-          height="533"
-        />
+        <SampleImage filename="/accessiblenameimg-360bridge.jpg" width={800} height={533} />
       </p>
 
       <h2>Android版FirefoxとTalkBackを使用してスクリーンリータが出力した様子のスクリーンショット</h2>
 
       <p>
         <SampleImage
-          filename="/documents/translations/pauljadam-modern-web-a11y-demos/img/accessiblenameimg-titleasnametalkbackfirefox.jpg"
+          filename="/accessiblenameimg-titleasnametalkbackfirefox.jpg"
           alt='TalkBack reads "Pennybacker Bridge via title attribute graphic"'
-          width="607"
-          height="1080"
+          width={607}
+          height={1080}
         />
       </p>
     </>

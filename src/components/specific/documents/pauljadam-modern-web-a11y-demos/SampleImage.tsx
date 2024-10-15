@@ -1,17 +1,13 @@
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 
 export const SampleImage = ({
   filename,
+  alt = '',
   ...props
-}: Pick<
-  React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>,
-  'height' | 'width' | 'alt' | 'srcSet' | 'title'
-> & {
+}: Pick<ImageProps, 'height' | 'width' | 'title'> & {
   filename: string;
   longdesc?: string;
+  alt?: string;
 }) => {
-  return (
-    // @ts-ignore
-    <Image src={`/documents/translations/pauljadam-modern-web-a11y-demos/img/${filename}`} {...props} />
-  );
+  return <Image src={`/documents/translations/pauljadam-modern-web-a11y-demos/img${filename}`} {...props} alt={alt} />;
 };

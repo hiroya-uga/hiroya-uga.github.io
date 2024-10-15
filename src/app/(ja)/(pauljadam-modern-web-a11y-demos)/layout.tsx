@@ -72,7 +72,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
                   {originalPath}
                 </a>
               </p>
-              <p>
+              <p className="text-xs sm:text-sm">
                 {/*
                  * SPA遷移を考慮していない画面をリフレッシュさせる必要があるため、a要素を用いる
                  * /documents/translations/pauljadam-modern-web-a11y-demos/buttons/

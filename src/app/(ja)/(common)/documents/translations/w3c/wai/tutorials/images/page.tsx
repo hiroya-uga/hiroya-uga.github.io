@@ -3,6 +3,7 @@ import { SimpleDescriptionList } from '@/components/List';
 import { LinkToOriginal } from '@/components/specific/documents/translations/LinkToOriginal';
 import { WEB_SPEC_TRANSLATIONS_NOTE } from '@/components/specific/documents/translations/constants';
 import { RelatedResourceBox } from '@/components/specific/documents/translations/w3c/wai';
+import { PageTitle } from '@/components/structures/PageTitle';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -10,7 +11,7 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <>
-      <h1 className="mb-2">日本語訳：Images Tutorial</h1>
+      <PageTitle title="日本語訳：Images Tutorial" />
 
       <div className="mb-14 rounded-md bg-slate-300 p-3">
         <div className="mb-2 text-sm leading-normal sm:mb-4 sm:text-base sm:leading-relaxed">
@@ -138,7 +139,7 @@ export default function Page() {
         を参照してください。
       </p>
 
-      <h2>
+      <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">
         <span className="target" id="why-is-this-important">
           どうして代替テキストは重要なの？
         </span>

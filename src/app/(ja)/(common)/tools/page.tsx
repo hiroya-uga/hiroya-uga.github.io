@@ -45,7 +45,7 @@ export default function Page() {
         ]}
       />
 
-      <h2>Playground</h2>
+      <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">Playground</h2>
 
       <SimpleDescriptionList
         list={[

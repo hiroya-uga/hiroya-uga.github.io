@@ -484,7 +484,7 @@ export const AccessibleNameAndDescriptionComputation = ({
   return (
     <div className="grid-cols-2 md:grid">
       <div className="mb-12 md:mb-0 md:pr-14">
-        <h2>フラグ</h2>
+        <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">フラグ</h2>
 
         <div className="mb-12">
           <ul>
@@ -631,7 +631,7 @@ export const AccessibleNameAndDescriptionComputation = ({
       </div>
 
       <div>
-        <h2>
+        <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">
           結果のレンダリングとHTML
           <sup>
             <a href={`#${anchorLinkId}`}>※</a>

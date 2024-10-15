@@ -20,7 +20,7 @@ export default function Page() {
       </h1>
 
       <figure>
-        <SampleImage filename="accessiblenameimg-360bridge.jpg" alt="Pennybacker Bridge" width="800" height="533" />
+        <SampleImage filename="/accessiblenameimg-360bridge.jpg" alt="Pennybacker Bridge" width={800} height={533} />
         <figcaption>
           図1 - テキサス州オースティンで「360
           Bridge」として知られているペニーバッカー橋は、オースティン湖に掛かるスルーアーチタイプの橋で、Loop
