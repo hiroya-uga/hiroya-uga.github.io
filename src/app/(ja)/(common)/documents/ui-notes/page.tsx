@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
+import clsx from 'clsx';
 
 export const metadata = getMetadata({
   title: 'UI Notes',
@@ -44,34 +45,58 @@ export default async function ArticlesPage() {
         <p>{metadata.description}</p>
       </PageTitle>
 
-      <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
-        {articles.map(({ id, title, publishedAt, dev }) => (
-          <li key={id} className="flex">
-            <Link
-              href={`/documents/ui-notes/${id}`}
-              className="group relative grid grid-rows-[auto_1fr] overflow-hidden rounded border border-solid border-gray-600 leading-normal no-underline"
-            >
-              <span className="relative">
-                <Image
-                  src={`/documents/ui-notes/ogimages/${id}.jpg`}
-                  width={1200}
-                  height={630}
-                  alt=""
-                  className="aspect-video object-cover"
-                />
-                <span className="absolute bottom-0 right-0 block rounded-tl bg-black/70 px-2 text-right text-sm text-white">
-                  {publishedAt}
+      <ul className="grid gap-2 md:grid-cols-3">
+        {articles.map(({ id, title, publishedAt, dev }) => {
+          const shouldShowKeywords = dev.length !== 0;
+
+          return (
+            <li key={id}>
+              <Link
+                href={`/documents/ui-notes/${id}`}
+                className={clsx([
+                  'group grid grid-cols-[100px_1fr] grid-rows-[1fr_auto] gap-x-4 no-underline text-inherit rounded-lg leading-normal transition-[grid-template-columns]',
+                  'sm:grid-cols-[160px_1fr]',
+                  'md:grid-cols-1 md:gap-2',
+                  shouldShowKeywords ? 'md:grid-rows-[auto_auto_auto]' : 'md:grid-rows-[auto_auto]',
+                ])}
+              >
+                <span
+                  className={clsx([
+                    'overflow-hidden block row-start-1 row-end-3 col-start-1 col-end-2',
+                    'md:row-end-2',
+                  ])}
+                >
+                  <Image
+                    src={`/documents/ui-notes/ogimages/${id}.jpg`}
+                    width={1200}
+                    height={630}
+                    alt=""
+                    className="aspect-square md:aspect-video object-cover rounded-lg"
+                  />
                 </span>
-              </span>
-              <span className="relative block bg-white px-3 pb-6 pt-4">
-                <span className="group-hover:underline">{title}</span>
-              </span>
-              <span className="block bg-white px-3 pb-2">
-                {dev.length !== 0 && <span className="block text-right text-xs">{dev.join(', ')}</span>}
-              </span>
-            </Link>
-          </li>
-        ))}
+                <span
+                  className={clsx([
+                    'row-start-1 row-end-2 col-start-2 col-end-3 block palt font-bold',
+                    'md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3',
+                  ])}
+                >
+                  <span className="text-sm block">{publishedAt}</span>
+                  <span className="group-hover:underline">{title}</span>
+                </span>
+                {shouldShowKeywords && (
+                  <span
+                    className={clsx([
+                      'block text-right text-xs',
+                      'md:col-start-1 md:col-end-2 md:row-start-3 md:row-end-4',
+                    ])}
+                  >
+                    {dev.join(', ')}
+                  </span>
+                )}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
