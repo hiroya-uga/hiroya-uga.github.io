@@ -8,6 +8,7 @@
   "plugins": ["@typescript-eslint", "no-relative-import-paths", "tailwindcss"],
   "rules": {
     "react/no-unescaped-entities": "off",
+    "react-hooks/exhaustive-deps": "error",
     "no-unused-vars": [
       "warn",
       {

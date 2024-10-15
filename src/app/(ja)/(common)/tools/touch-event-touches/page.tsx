@@ -7,12 +7,6 @@ export const metadata = getMetadata({
   title: 'TouchEvent.touches Playground',
   description:
     'タッチ操作のテストができます。デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかを確認しましょう。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'TouchEvent.touches Playground',
-    description:
-      'タッチ操作のテストができます。デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかを確認しましょう。',
-  },
 });
 
 export default function Page() {

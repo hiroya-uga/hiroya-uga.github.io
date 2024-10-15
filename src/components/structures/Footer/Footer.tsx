@@ -1,6 +1,5 @@
 'use client';
 
-
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,7 +17,7 @@ const Anchor = ({ href, className, children }: { href: string; className: string
     setShouldLinkComponent(
       ![/fantasized-specs/, /pauljadam-modern-web-a11y-demos/].some((regexp) => regexp.test(pathname)),
     );
-  }, []);
+  }, [pathname]);
 
   if (shouldLinkComponent) {
     // Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう

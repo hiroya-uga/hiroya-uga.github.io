@@ -5,11 +5,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: "aria-*属性を利用したアコーディオンの実装例 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "aria-*属性を利用したアコーディオンの実装例 - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
 });
 
 export default function Page() {
@@ -19,7 +14,7 @@ export default function Page() {
       {/* <!-- script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script --> */}
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></link>
 
-      <h1>{metadata.pageTitle}</h1>
+      <h1>{metadata.title}</h1>
 
       <DocumentScript />
 

@@ -7,11 +7,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: '日本語訳まとめ',
   description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
-  twitter: {
-    card: 'summary_large_image',
-    title: '日本語訳まとめ',
-    description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
-  },
 });
 
 export default function Page() {

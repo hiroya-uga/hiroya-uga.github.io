@@ -8,11 +8,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: 'Accessible Name and Description Computation Playground',
   description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Accessible Name and Description Computation Playground',
-    description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-  },
 });
 
 export default function Page() {

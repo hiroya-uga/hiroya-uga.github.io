@@ -5,11 +5,6 @@ import { getMetadata } from '@/utils/seo';
 export const metadata = getMetadata({
   title: "img要素のアクセシブルネームの計算 - PaulJAdam's Modern Web Accessibility Demos",
   description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  twitter: {
-    card: 'summary_large_image',
-    title: "img要素のアクセシブルネームの計算 - PaulJAdam's Modern Web Accessibility Demos",
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
 });
 
 export default function Page() {
