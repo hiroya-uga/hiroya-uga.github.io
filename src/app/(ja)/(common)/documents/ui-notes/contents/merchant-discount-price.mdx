@@ -43,11 +43,11 @@ dev: ['TailwindCSS','s要素','del要素']
 
 上記の例をブラウザがどう解釈しているのかを確認してみる。
 
-![](/documents/ui-practices/merchant/discount-price/accessibility-tree--chrome.png)
+![](/documents/ui-notes/merchant/discount-price/accessibility-tree--chrome.png)
 
 Google Chromeは「ラーメン」の部分を`deletion`ロールとして解釈している。
 
-![](/documents/ui-practices/merchant/discount-price/accessibility-tree--fx.png)
+![](/documents/ui-notes/merchant/discount-price/accessibility-tree--fx.png)
 
 Firefoxも同様だ。一方で、支援技術側のサポート状況は次のようになっている。
 
@@ -69,7 +69,7 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://www.amazon.co.jp/](https://www.amazon.co.jp/)
 
-![](/documents/ui-practices/merchant/discount-price/amazon.jpg)
+![](/documents/ui-notes/merchant/discount-price/amazon.jpg)
 
 参考価格に打ち消し線が入った見た目になっているが、参考にしていた価格としては現在も正しい情報と解釈できるので、`s`要素を採用する妥当性は低く感じる。
 
@@ -99,14 +99,14 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://www.rakuten.co.jp/](https://www.rakuten.co.jp/)
 
-![](/documents/ui-practices/merchant/discount-price/rakuten.jpg)
+![](/documents/ui-notes/merchant/discount-price/rakuten.jpg)
 
-![](/documents/ui-practices/merchant/discount-price/rakuten-02.jpg)
+![](/documents/ui-notes/merchant/discount-price/rakuten-02.jpg)
 
 最終的な金額のみの表示か、「商品価格＋送料−獲得予定ポイント」の表で価格が掲載されている。
 セール価格の場合も同様で、通常価格や参考価格が書かれるパターンは見当たらなかった。
 
-![](/documents/ui-practices/merchant/discount-price/rakuten-03.jpg)
+![](/documents/ui-notes/merchant/discount-price/rakuten-03.jpg)
 
 商品詳細画面には通常価格があるが、打ち消し線の表現はされていない。
 
@@ -141,11 +141,11 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://shopping.yahoo.co.jp/](https://shopping.yahoo.co.jp/)
 
-![](/documents/ui-practices/merchant/discount-price/yahoo.jpg)
+![](/documents/ui-notes/merchant/discount-price/yahoo.jpg)
 
 商品一覧画面では通常価格は書かれておらず、セール表示のみ。
 
-![](/documents/ui-practices/merchant/discount-price/yahoo-02.jpg)
+![](/documents/ui-notes/merchant/discount-price/yahoo-02.jpg)
 
 商品詳細画面ではメーカー希望小売価格が表示されており、打ち消し線が表示されている。
 セマンティクスは以下の通りで、`text-decoration`が用いられていた。
@@ -158,11 +158,11 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://zozo.jp/](https://zozo.jp/)
 
-![](/documents/ui-practices/merchant/discount-price/zozo.jpg)
+![](/documents/ui-notes/merchant/discount-price/zozo.jpg)
 
 商品一覧画面では通常価格は書かれておらず、セール表示のみ。
 
-![](/documents/ui-practices/merchant/discount-price/zozo-02.jpg)
+![](/documents/ui-notes/merchant/discount-price/zozo-02.jpg)
 
 商品詳細画面ではメーカー希望小売価格が表示されており、打ち消し線が表示されている。
 `div`要素と`span`のみでマークアップされおり、`text-decoration`が用いられていた。

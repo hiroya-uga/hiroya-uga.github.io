@@ -8,26 +8,17 @@ import { Metadata } from '@/types/seo';
 import { PageTitle } from '@/components/structures/PageTitle';
 
 export const metadata: Metadata = {
-  title: 'UI Practices',
+  title: 'UI Notes',
   description: 'Web上に登場するUIに関するメモ書き。',
   twitter: {
     card: 'summary_large_image',
-    title: 'UI Practices',
+    title: 'UI Notes',
     description: 'Web上に登場するUIに関するメモ書き。',
   },
 };
 
 export async function getArticles() {
-  const articlesDir = path.join(
-    process.cwd(),
-    'src',
-    'app',
-    '(ja)',
-    '(common)',
-    'documents',
-    'ui-practices',
-    'contents',
-  );
+  const articlesDir = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'ui-notes', 'contents');
   const filenames = fs.readdirSync(articlesDir);
 
   const articles = filenames.map((filename) => {
@@ -60,12 +51,12 @@ export default async function ArticlesPage() {
         {articles.map(({ id, title, publishedAt, dev }) => (
           <li key={id} className="flex">
             <Link
-              href={`/documents/ui-practices/${id}`}
+              href={`/documents/ui-notes/${id}`}
               className="group relative grid grid-rows-[auto_1fr] overflow-hidden rounded border border-solid border-gray-600 leading-normal no-underline"
             >
               <span className="relative">
                 <Image
-                  src={`/documents/ui-practices/ogimages/${id}.jpg`}
+                  src={`/documents/ui-notes/ogimages/${id}.jpg`}
                   width={1200}
                   height={630}
                   alt=""

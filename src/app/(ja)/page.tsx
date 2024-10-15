@@ -95,8 +95,8 @@ export default function Home() {
                 },
                 {
                   emoji: '🥋',
-                  href: '/documents/ui-practices',
-                  title: 'UI Practices',
+                  href: '/documents/ui-notes',
+                  title: 'UI Notes',
                   description: 'Web上に登場するUIに関するメモ書き。',
                 },
                 {
