@@ -12,7 +12,7 @@ export const SiteName = () => {
         </span>
       </p> */}
 
-      <p className="mb-4 text-[0.78125rem] lg:fixed lg:left-0 lg:top-0 lg:mb-0 lg:h-full lg:overflow-auto">
+      <p className="mb-4 bg-white py-1 text-[0.78125rem] lg:fixed lg:left-0 lg:top-0 lg:mb-0 lg:h-full lg:overflow-auto lg:bg-transparent lg:py-0">
         <span className="block overflow-auto bg-white lg:box-content lg:h-[29.2929vh] lg:min-h-[18.5rem] lg:w-8 lg:min-w-8 lg:overflow-visible lg:pb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"

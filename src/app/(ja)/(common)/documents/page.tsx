@@ -30,7 +30,7 @@ export default function Page() {
                 <Link href="/documents/ui-practices/">UI Practices</Link>
               </>
             ),
-            description: 'Web上に登場するUIに関して考察してみたメモ書き。',
+            description: 'Web上に登場するUIに関するメモ書き。',
           },
           {
             key: `日本語訳まとめ`,

@@ -82,9 +82,9 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="altbgimg-complexImageExample.png"
-          width="400"
-          height="414"
+          filename="/altbgimg-complexImageExample.png"
+          width={400}
+          height={414}
           alt="Webブラウジングに影響を与える障害"
         />
         <span className="clipped">
@@ -99,9 +99,9 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="altbgimg-complexImageExample.png"
-          width="400"
-          height="414"
+          filename="/altbgimg-complexImageExample.png"
+          width={400}
+          height={414}
           alt="Webブラウジングに影響を与える障害"
           aria-describedby="clipped-aria-desc"
         />
@@ -117,9 +117,9 @@ export default function Page() {
 
       <p>
         <SampleImage
-          filename="altbgimg-complexImageExample.png"
-          width="400"
-          height="414"
+          filename="/altbgimg-complexImageExample.png"
+          width={400}
+          height={414}
           alt="Webブラウジングに影響を与える障害"
           longdesc="#clipped-longdesc"
         />

@@ -26,10 +26,10 @@ export default function Home() {
 
   return (
     <>
-      <header className="px-4 py-12 sm:py-16">
+      <header className="px-4 pb-12 pt-10 lg:pb-[3.75rem] lg:pt-14">
         <div className="mx-auto max-w-content">
-          <div className="items-center text-center md:mb-2 md:flex">
-            <h1 className="mb-3 text-2xl font-bold leading-none md:mb-0">{metadata.title}</h1>
+          <div className="items-center text-center lg:mb-2 lg:flex">
+            <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl lg:mb-0">{metadata.title}</h1>
             <p className="text-xs">
               <span className="hidden px-2 md:inline">-</span>
               <span>
@@ -46,7 +46,7 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="mb-16 px-[16px] sm:mb-28">
+        <div className="mb-8 px-[16px] sm:mb-28">
           <div className="mx-auto max-w-content">
             <p className="mb-20 text-center text-sm sm:mb-28">
               <span>ようこそ {SITE_NAME} へ。</span>
@@ -56,15 +56,15 @@ export default function Home() {
                 番目の訪問者かもしれません。
               </span>
             </p>
+          </div>
+        </div>
 
-            <h2 className="mb-4 text-2xl">The power of the web</h2>
+        <div className="mb-8 bg-white px-[16px] py-8 sm:mb-28 sm:pb-11 sm:pt-7">
+          <div className="mx-auto max-w-content">
+            <h2 className="mb-4 mt-0 text-xl font-bold sm:text-2xl">The power of the web</h2>
 
-            <blockquote
-              cite="https://www.w3.org/mission/accessibility/"
-              lang="en"
-              className="mb-20 text-center sm:mb-24"
-            >
-              <p className="mb-2 text-xs sm:text-base">
+            <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className="lg:text-center">
+              <p className="mb-2 text-xs sm:my-6 sm:text-base">
                 “
                 <a href="https://www.w3.org/mission/accessibility/">
                   The power of the Web is in its universality. Access by everyone regardless of disability is an
@@ -73,12 +73,16 @@ export default function Home() {
                 ”
               </p>
 
-              <footer className="text-center text-2xs sm:text-sm">
+              <footer className="text-right text-2xs sm:text-sm lg:text-center">
                 <p>—Tim Berners-Lee, W3C Director and inventor of the World Wide Web</p>
               </footer>
             </blockquote>
+          </div>
+        </div>
 
-            <h2 className="mb-4 text-2xl">Pick up</h2>
+        <div className="mb-16 px-[16px] sm:mb-28">
+          <div className="mx-auto max-w-content">
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -93,7 +97,7 @@ export default function Home() {
                   emoji: '🥋',
                   href: '/documents/ui-practices',
                   title: 'UI Practices',
-                  description: 'Web上に登場するUIに関して考察してみたメモ書き。',
+                  description: 'Web上に登場するUIに関するメモ書き。',
                 },
                 {
                   emoji: '📝',
@@ -125,16 +129,20 @@ export default function Home() {
                 return (
                   <li key={href}>
                     <p className="mb-1">
-                      <Link href={href} className="flex flex-col-reverse no-underline" aria-describedby={id}>
-                        <span className="inline-block leading-normal">
+                      <Link
+                        href={href}
+                        className="group flex flex-col-reverse rounded-md no-underline"
+                        aria-describedby={id}
+                      >
+                        <span className="inline-block leading-normal group-hover:underline">
                           {title}
                           {/* {item.isWip && <b>（WIP）</b>} */}
                         </span>
                         <span
-                          className="mb-3 grid aspect-[1.618_/_1] place-content-center rounded-md bg-gray-200 font-emoji text-5xl leading-none"
+                          className="mb-3 grid aspect-[1.618_/_1] place-content-center overflow-hidden rounded-md bg-gray-200 font-emoji text-5xl leading-none"
                           aria-hidden="true"
                         >
-                          {emoji}
+                          <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
                         </span>
                       </Link>
                     </p>
@@ -152,7 +160,7 @@ export default function Home() {
 
         <div className="mb-20 bg-slate-200 px-[16px] py-11 pb-12 sm:mb-28">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-4 text-2xl">カテゴリー</h2>
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl">カテゴリー</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -169,15 +177,15 @@ export default function Home() {
               ].map(({ emoji, href, title }) => {
                 return (
                   <li key={href}>
-                    <a href={href} className="block no-underline">
+                    <Link href={href} className="group block rounded-md no-underline">
                       <span
-                        className="mb-2 grid aspect-[1.618_/_1] place-content-center rounded-md bg-gray-50 font-emoji text-5xl leading-none"
+                        className="mb-2 grid aspect-[1.618_/_1] place-content-center overflow-hidden rounded-md bg-gray-50 font-emoji text-5xl leading-none"
                         aria-hidden="true"
                       >
-                        {emoji}
+                        <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
                       </span>
-                      <span className="font-bold">→ {title}</span>
-                    </a>
+                      <span className="font-bold group-hover:underline">→ {title}</span>
+                    </Link>
                   </li>
                 );
               })}
@@ -187,7 +195,7 @@ export default function Home() {
 
         <div className="px-[16px]">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-7 text-2xl">外部メディア</h2>
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl">外部メディア</h2>
 
             <table className="mb-2">
               <tbody>
@@ -214,7 +222,7 @@ export default function Home() {
               <a href="/documents/media/">外部メディアリンク一覧</a>
             </p>
 
-            <h2 className="mb-2 text-2xl">Bookmarks</h2>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl">Bookmarks</h2>
 
             <p className="mb-4">外部サイトへのリンク集です。</p>
 
@@ -280,7 +288,9 @@ export default function Home() {
             />
 
             <div className="mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-28 sm:grid sm:gap-x-12 sm:pt-28">
-              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-2xl">PROFILE</h2>
+              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl">
+                PROFILE
+              </h2>
 
               <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-[22.5rem] items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
                 <span className="grow whitespace-nowrap text-center text-xl leading-tight">

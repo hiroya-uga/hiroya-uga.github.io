@@ -352,7 +352,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
       <div className="md:grid md:grid-cols-2 md:gap-8">
         <div>
           <div className="md:sticky md:top-8">
-            <h2 className="md:mt-0">
+            <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">
               <label htmlFor={id}>本文</label>
             </h2>
             {!isSegmenterSupported && (
@@ -425,7 +425,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
         <div className="text-sm">
           <div className="text-sm sm:grid sm:grid-cols-[60%_40%] md:block lg:text-base">
             <div className="mt-16 sm:mb-0 sm:pr-14">
-              <h2 className="mt-0">結果</h2>
+              <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">結果</h2>
               <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 md:grid-cols-[auto_auto]">
                 <p className="col-span-full grid grid-cols-subgrid">
                   <label className="grow" htmlFor={`${id}-文字数`}>
@@ -485,7 +485,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             </div>
 
             <div className="mt-16">
-              <h2 className="mt-0">設定</h2>
+              <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">設定</h2>
               <p className="mb-4 text-right">
                 <label>
                   文字サイズ
@@ -546,7 +546,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
         </div>
 
         <div className="mt-16 sm:mt-24 md:col-span-2 md:mt-0">
-          <h2 className="mt-0">原稿用紙イメージ</h2>
+          <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">原稿用紙イメージ</h2>
 
           <div id="原稿用紙イメージ">
             {getSegmentedCharacters(value).map((container, containerIndex) => {

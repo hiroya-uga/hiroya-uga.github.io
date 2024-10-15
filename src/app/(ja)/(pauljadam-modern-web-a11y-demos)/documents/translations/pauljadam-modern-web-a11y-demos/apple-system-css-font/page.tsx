@@ -19,10 +19,10 @@ export default function Page() {
       <h1>{metadata.title}</h1>
 
       <SampleImage
-        filename="apple-system-css-font-IMG_0371.png"
+        filename="/apple-system-css-font-IMG_0371.png"
         alt="iOSのアクセシビリティ項目「さらに大きな文字」の設定画面のスクリーンショット"
-        width="300"
-        height="534"
+        width={300}
+        height={534}
       />
       <div className="body">
         <h2>Body</h2>

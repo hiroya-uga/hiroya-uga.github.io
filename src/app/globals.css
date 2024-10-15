@@ -43,7 +43,7 @@
 
 :focus-visible {
   outline: 2px solid #000;
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 
 html,
@@ -54,7 +54,7 @@ body {
 body {
   line-height: 1.875;
   color: #333;
-  background: #f2f2f2;
+  background: #f7f7f7;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
 

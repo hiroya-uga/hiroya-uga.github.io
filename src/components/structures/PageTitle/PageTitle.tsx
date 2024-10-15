@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 export const PageTitle = ({
   title,
   previous,
@@ -7,21 +9,23 @@ export const PageTitle = ({
   previous?: string;
   children?: React.ReactNode;
 }) => {
-  if (previous) {
-    return (
-      <div className="mb-12">
-        <h1 className="leading-none">
-          <span className="text-sm">{previous}</span>
-          <strong className="block font-normal leading-relaxed">{title}</strong>
-        </h1>
-        {children}
-      </div>
-    );
-  }
-
   return (
-    <div className="mb-12">
-      <h1>{title}</h1>
+    <div className="mb-14 sm:mb-20">
+      <h1
+        className={clsx([
+          previous ? 'leading-none' : 'text-3xl font-bold leading-relaxed sm:text-[2.625rem]',
+          '[&:not(:last-child)]:mb-4',
+        ])}
+      >
+        {previous ? (
+          <>
+            <span className="text-sm">{previous}</span>
+            <strong className="block text-3xl font-bold leading-relaxed sm:text-[2.625rem]">{title}</strong>
+          </>
+        ) : (
+          title
+        )}
+      </h1>
       {children}
     </div>
   );

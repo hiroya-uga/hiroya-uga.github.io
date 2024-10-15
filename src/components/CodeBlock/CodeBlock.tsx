@@ -25,7 +25,7 @@ export const CodeBlock = ({ code, className, language }: Props) => {
 
   return (
     <code
-      className={`hljs whitespace-pre rounded ${className ?? ''}`}
+      className={`hljs whitespace-pre-wrap rounded ${className ?? ''}`}
       dangerouslySetInnerHTML={{
         __html,
       }}

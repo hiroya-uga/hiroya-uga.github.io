@@ -9,11 +9,11 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 export const metadata: Metadata = {
   title: 'UI Practices',
-  description: 'Web上に登場するUIに関して考察してみたメモ書き。',
+  description: 'Web上に登場するUIに関するメモ書き。',
   twitter: {
     card: 'summary_large_image',
     title: 'UI Practices',
-    description: 'Web上に登場するUIに関して考察してみたメモ書き。',
+    description: 'Web上に登場するUIに関するメモ書き。',
   },
 };
 
