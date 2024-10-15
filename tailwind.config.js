@@ -21,12 +21,30 @@ module.exports = {
       maxWidth: {
         dialog: '48rem',
         content: '60rem',
+        structure: '90rem',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      transitionDuration: {
+        DEFAULT: '300ms',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    ({ addUtilities }) => {
+      addUtilities({
+        '.transition-bg': {
+          transition: '300ms background-color ease-out',
+        },
+        palt: {
+          'font-feature-settings': 'palt',
+        },
+      });
+    },
+  ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 };

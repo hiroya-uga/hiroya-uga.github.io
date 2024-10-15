@@ -53,9 +53,9 @@ export const Footer = () => {
   const isTop = pathname === '/';
 
   return (
-    <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'relative'])}>
+    <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'relative mx-auto w-full max-w-structure lg:px-[16px]'])}>
       {isTop || (
-        <nav className="bg-gray-200 px-[16px] py-4 text-sm lg:min-h-[3.75rem] lg:bg-transparent lg:pl-[32px] lg:pr-[calc(13.5rem_+_32px)]">
+        <nav className="bg-gray-200 px-[16px] py-4 text-sm lg:min-h-[3.75rem] lg:bg-transparent lg:pl-[16px] lg:pr-[calc(13.5rem_+_32px)]">
           <ol className="flex flex-wrap gap-y-1 leading-snug">{<ListItem />}</ol>
         </nav>
       )}
@@ -63,13 +63,13 @@ export const Footer = () => {
       <footer>
         {!isTop && (
           <div className="px-[16px] lg:px-[32px]">
-            <div className="mx-auto py-8 text-center lg:absolute lg:right-[32px] lg:top-0 lg:py-4">
+            <div className="mx-auto py-4 text-center lg:absolute lg:right-[32px] lg:top-0 lg:pt-1">
               {/* m-0 for bootstrap pages */}
-              <ul className="m-0 flex flex-wrap items-center justify-center gap-4 lg:justify-end lg:gap-6">
+              <ul className="m-0 flex flex-wrap items-center justify-center gap-4 lg:justify-end lg:gap-2">
                 {SNS_LINKS.map(({ href, alt, ...props }) => {
                   return (
                     <li key={href}>
-                      <a href={href} className="block rounded">
+                      <a href={href} className="group block rounded-lg p-3 transition-bg hover:bg-gray-200">
                         <Image {...props} width={32} height={32} alt={alt} className="size-7 lg:size-7" />
                       </a>
                     </li>

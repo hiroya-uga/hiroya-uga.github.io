@@ -2,7 +2,8 @@ export const SEO: Record<string, string> = {
   '/': 'Home',
   '/documents': '資料集',
   '/documents/ui-practices': 'UI Practices',
-  '/documents/ui-practices/merchant-discount-price': '割引などの金額変更で打ち消し線を表現するためのマークアップ',
+  '/documents/ui-practices/merchant-discount-price':
+    '【HTML】割引などの金額変更で打ち消し線を表現するためのマークアップ',
   '/documents/translations': '日本語訳まとめ',
   '/documents/translations/w3c/wai/tutorials/images': '日本語訳：Images Tutorial',
   '/documents/translations/pauljadam-modern-web-a11y-demos': "日本語訳：PaulJAdam's Modern Web Accessibility Demos",

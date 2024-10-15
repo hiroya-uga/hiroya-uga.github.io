@@ -50,7 +50,7 @@ export const Header = () => {
       <SiteName />
 
       <div className="px-4 py-8 sm:py-16 sm:pl-10">
-        <div className="relative mx-auto max-w-content">
+        <div className="relative mx-auto max-w-structure">
           <p className="relative -left-4 -top-2">
             <Anchor />
           </p>

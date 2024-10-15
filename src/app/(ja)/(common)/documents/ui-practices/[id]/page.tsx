@@ -97,7 +97,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     <div>
       <JsonLd {...frontmatter} pathname={`/documents/ui-practices/${id}`} />
 
-      <h1 className="mb-4">{title}</h1>
+      <h1 className="palt mb-4 text-3xl font-bold leading-relaxed">{title}</h1>
 
       <div className="mb-7 flex flex-wrap items-center justify-between gap-x-4 text-sm">
         <p className="flex flex-wrap gap-4">
@@ -111,7 +111,7 @@ export default async function Post({ params }: { params: { id: string } }) {
             <p className="leading-none">前提技術：</p>
             <ul className="flex flex-wrap items-center gap-2">
               {dev?.map((item) => (
-                <li key={item} className="rounded bg-white p-2 leading-none">
+                <li key={item} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
                   {item}
                 </li>
               ))}
