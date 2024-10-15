@@ -24,15 +24,6 @@ export default function Page() {
       <SimpleDescriptionList
         list={[
           {
-            key: `UI Notes`,
-            title: (
-              <>
-                <Link href="/documents/ui-notes/">UI Notes</Link>
-              </>
-            ),
-            description: 'Web上に登場するUIに関するメモ書き。',
-          },
-          {
             key: `日本語訳まとめ`,
             title: (
               <>
@@ -42,10 +33,19 @@ export default function Page() {
             description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
           },
           {
-            key: `外部メディアリンク一覧`,
+            key: `UI Notes`,
             title: (
               <>
-                <Link href="/documents/media/">外部メディアリンク集</Link>
+                <Link href="/documents/ui-notes/">UI Notes</Link>
+              </>
+            ),
+            description: 'Web上に登場するUIに関するメモ書き。',
+          },
+          {
+            key: `Media`,
+            title: (
+              <>
+                <Link href="/documents/media/">Media</Link>
               </>
             ),
             description: '社内ブログや動画コンテンツへの参加、寄稿などのリンクをまとめています。',

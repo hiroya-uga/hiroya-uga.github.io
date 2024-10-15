@@ -101,7 +101,7 @@ export const Footer = () => {
                   return (
                     <li key={href}>
                       <a href={href} className="group block rounded-lg p-3 transition-bg hover:bg-gray-200">
-                        <Image {...props} width={32} height={32} alt={alt} className="size-7 lg:size-7" />
+                        <Image {...props} width={28} height={28} alt={alt} className="size-7" />
                       </a>
                     </li>
                   );
