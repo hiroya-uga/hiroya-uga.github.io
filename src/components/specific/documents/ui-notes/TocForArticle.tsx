@@ -4,7 +4,7 @@ import { Toc } from '@/components/specific/documents/Toc';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import styles from '@/components/specific/documents/ui-practices/TocForArticle.module.css';
+import styles from '@/components/specific/documents/ui-notes/TocForArticle.module.css';
 
 export const TocForArticle = () => {
   const [loaded, setLoaded] = useState(false);

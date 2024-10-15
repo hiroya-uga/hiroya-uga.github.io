@@ -6,13 +6,13 @@ import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { SpecBlockQuote } from '@/components/SpecBlockQuote';
 import { ExampleBox } from '@/components/Box';
-import { TocForArticle } from '@/components/specific/documents/ui-practices/TocForArticle';
-import { MainVisual } from '@/components/specific/documents/ui-practices/MainVisual';
+import { TocForArticle } from '@/components/specific/documents/ui-notes/TocForArticle';
+import { MainVisual } from '@/components/specific/documents/ui-notes/MainVisual';
 import { marked } from 'marked';
 import { JsonLd } from '@/components/Meta';
 import { Metadata } from '@/types/seo';
 import matter from 'gray-matter';
-import { getArticles } from '@/app/(ja)/(common)/documents/ui-practices/page';
+import { getArticles } from '@/app/(ja)/(common)/documents/ui-notes/page';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -23,7 +23,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     '(ja)',
     '(common)',
     'documents',
-    'ui-practices',
+    'ui-notes',
     'contents',
   );
 
@@ -95,7 +95,7 @@ export default async function Post({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <JsonLd {...frontmatter} pathname={`/documents/ui-practices/${id}`} />
+      <JsonLd {...frontmatter} pathname={`/documents/ui-notes/${id}`} />
 
       <h1 className="palt mb-4 text-3xl font-bold leading-relaxed">{title}</h1>
 
@@ -161,7 +161,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     '(ja)',
     '(common)',
     'documents',
-    'ui-practices',
+    'ui-notes',
     'contents',
   );
   const filePath = path.join(postsDirectory, `${id}.mdx`);
@@ -193,7 +193,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       images: [
         {
-          url: `/documents/ui-practices/ogimages/${id}.jpg`,
+          url: `/documents/ui-notes/ogimages/${id}.jpg`,
           width: 1200,
           height: 630,
         },
