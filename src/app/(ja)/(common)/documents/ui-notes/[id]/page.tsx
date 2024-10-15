@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { marked } from 'marked';
 import matter from 'gray-matter';
+import { Metadata } from 'next/types';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 
 import { SpecBlockQuote } from '@/components/SpecBlockQuote';
@@ -13,7 +14,6 @@ import { MainVisual } from '@/components/specific/documents/ui-notes/MainVisual'
 import { JsonLd } from '@/components/Meta';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/ui-notes/page';
-import { Metadata } from 'next/types';
 import { SITE_NAME } from '@/constants/meta';
 
 export default async function Post({ params }: { params: { id: string } }) {
