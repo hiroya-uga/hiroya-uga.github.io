@@ -14,7 +14,7 @@ import { MainVisual } from '@/components/specific/documents/notes/MainVisual';
 import { JsonLd } from '@/components/Meta';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/page';
-import { SITE_NAME } from '@/constants/meta';
+import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -173,6 +173,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       card: 'summary_large_image',
       title,
       description,
+    },
+    alternates: {
+      canonical: `${URL_ORIGIN}/documents/notes/${id}`,
     },
     openGraph: {
       images: [
