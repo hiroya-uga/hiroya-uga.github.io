@@ -4,10 +4,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'Media',
-  description: '社内ブログや動画コンテンツへの参加、寄稿などのリンクをまとめています。',
-});
+export const metadata = getMetadata('/documents/media');
 
 export default function Page() {
   const id = useId();

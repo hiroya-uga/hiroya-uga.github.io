@@ -23,8 +23,4 @@ export default function Page() {
   );
 }
 
-export const metadata = getMetadata({
-  title:
-    'WAI-ARIAのrole="alertdialog"属性を使った詳細メッセージダイアログ - PaulJAdam\'s Modern Web Accessibility Demos',
-  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-});
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/detail-message-dialog');

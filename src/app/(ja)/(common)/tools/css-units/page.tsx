@@ -4,10 +4,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'CSS Units Playground',
-  description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
-});
+export const metadata = getMetadata('/tools/css-units');
 
 export default function Page() {
   const id = useId();

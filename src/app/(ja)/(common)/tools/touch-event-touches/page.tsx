@@ -3,11 +3,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'TouchEvent.touches Playground',
-  description:
-    'タッチ操作のテストができます。デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかを確認しましょう。',
-});
+export const metadata = getMetadata('/tools/touch-event-touches');
 
 export default function Page() {
   return (

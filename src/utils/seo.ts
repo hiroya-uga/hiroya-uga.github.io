@@ -1,19 +1,25 @@
 import { Metadata as MetadataOrigin } from 'next';
-import { SITE_NAME } from '@/constants/meta';
+import { URL_ORIGIN, SITE_NAME } from '@/constants/meta';
+import { SEO } from '@/constants/seo';
 
 export type Metadata = MetadataOrigin & {
-  title: string;
-};
-
-export const getMetadata = ({
-  title,
-  description,
-}: {
+  pageTitle: string;
   title: string;
   description: string;
-}): Metadata & {
-  pageTitle: string;
-} => {
+};
+
+export const getMetadata = (pathname: string): Metadata => {
+  const { title, description } = (() => {
+    if (pathname in SEO) {
+      return SEO[pathname];
+    }
+
+    return {
+      title: '',
+      description: '',
+    };
+  })();
+
   const titleValue = (() => {
     if (title === SITE_NAME) {
       return SITE_NAME;
@@ -26,6 +32,9 @@ export const getMetadata = ({
     pageTitle: title,
     title: titleValue,
     description,
+    alternates: {
+      canonical: `${URL_ORIGIN}${pathname}`,
+    },
     twitter: {
       card: 'summary_large_image',
       title: titleValue,

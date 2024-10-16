@@ -4,10 +4,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'ツール集',
-  description: '作ったものをまとめている階層です。',
-});
+export const metadata = getMetadata('/tools');
 
 export default function Page() {
   return (

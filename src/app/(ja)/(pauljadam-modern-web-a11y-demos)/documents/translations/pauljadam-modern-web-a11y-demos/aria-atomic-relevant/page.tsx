@@ -2,10 +2,7 @@ import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/doc
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: "aria-liveリージョン内のaria-atomicとaria-relevant - PaulJAdam's Modern Web Accessibility Demos",
-  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-});
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/aria-atomic-relevant');
 
 export default function Page() {
   return (

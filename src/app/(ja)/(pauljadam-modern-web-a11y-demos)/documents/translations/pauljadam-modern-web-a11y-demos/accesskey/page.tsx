@@ -7,10 +7,7 @@ import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/paul
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: "アクセスキーのアクセシビリティDEMO - PaulJAdam's Modern Web Accessibility Demos",
-  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-});
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/accesskey');
 
 export default function Page() {
   return (
