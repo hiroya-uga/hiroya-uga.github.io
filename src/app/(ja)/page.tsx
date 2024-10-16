@@ -85,7 +85,7 @@ export default function Home() {
                 },
                 {
                   emoji: '🥋',
-                  href: '/documents/ui-notes',
+                  href: '/documents/notes',
                 },
                 {
                   emoji: '📝',

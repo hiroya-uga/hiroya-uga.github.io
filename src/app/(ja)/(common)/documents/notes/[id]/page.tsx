@@ -9,25 +9,16 @@ import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 
 import { SpecBlockQuote } from '@/components/SpecBlockQuote';
 import { ExampleBox } from '@/components/Box';
-import { TocForArticle } from '@/components/specific/documents/ui-notes/TocForArticle';
-import { MainVisual } from '@/components/specific/documents/ui-notes/MainVisual';
+import { TocForArticle } from '@/components/specific/documents/notes/TocForArticle';
+import { MainVisual } from '@/components/specific/documents/notes/MainVisual';
 import { JsonLd } from '@/components/Meta';
 
-import { getArticles } from '@/app/(ja)/(common)/documents/ui-notes/page';
+import { getArticles } from '@/app/(ja)/(common)/documents/notes/page';
 import { SITE_NAME } from '@/constants/meta';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;
-  const postsDirectory = path.join(
-    process.cwd(),
-    'src',
-    'app',
-    '(ja)',
-    '(common)',
-    'documents',
-    'ui-notes',
-    'contents',
-  );
+  const postsDirectory = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'notes', 'contents');
 
   const filePath = path.join(postsDirectory, `${id}.mdx`);
   const fileContents = (() => {
@@ -97,7 +88,7 @@ export default async function Post({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <JsonLd {...frontmatter} pathname={`/documents/ui-notes/${id}`} />
+      <JsonLd {...frontmatter} pathname={`/documents/notes/${id}`} />
 
       <h1 className="palt mb-4 text-3xl font-bold leading-relaxed">{title}</h1>
 
@@ -156,16 +147,7 @@ export const generateStaticParams = async () => {
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { id } = params;
-  const postsDirectory = path.join(
-    process.cwd(),
-    'src',
-    'app',
-    '(ja)',
-    '(common)',
-    'documents',
-    'ui-notes',
-    'contents',
-  );
+  const postsDirectory = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'notes', 'contents');
   const filePath = path.join(postsDirectory, `${id}.mdx`);
 
   const fileContents = (() => {
@@ -195,7 +177,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       images: [
         {
-          url: `/documents/ui-notes/ogimages/${id}.jpg`,
+          url: `/documents/notes/ogimages/${id}.jpg`,
           width: 1200,
           height: 630,
         },
