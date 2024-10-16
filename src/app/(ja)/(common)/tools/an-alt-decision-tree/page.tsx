@@ -3,11 +3,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'An alt Decision Treeに基づく代替テキスト２択チャート',
-  description:
-    'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
-});
+export const metadata = getMetadata('/tools/an-alt-decision-tree');
 
 export default function Page() {
   return (

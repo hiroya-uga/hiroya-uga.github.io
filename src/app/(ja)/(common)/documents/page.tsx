@@ -4,10 +4,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: '資料集',
-  description: 'ドキュメント系をまとめた階層です。',
-});
+export const metadata = getMetadata('/documents');
 
 export default function Page() {
   return (

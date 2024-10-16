@@ -5,15 +5,12 @@ import Link from 'next/link';
 import matter from 'gray-matter';
 import Image from 'next/image';
 
+import clsx from 'clsx';
 import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
-import clsx from 'clsx';
 
-export const metadata = getMetadata({
-  title: 'UI Notes',
-  description: 'Web上に登場するUIに関するメモ書き。',
-});
+export const metadata = getMetadata('/documents/ui-notes');
 
 export async function getArticles() {
   const articlesDir = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'ui-notes', 'contents');
@@ -54,7 +51,7 @@ export default async function ArticlesPage() {
               <Link
                 href={`/documents/ui-notes/${id}`}
                 className={clsx([
-                  'group grid grid-cols-[100px_1fr] grid-rows-[1fr_auto] gap-x-4 no-underline text-inherit rounded-lg leading-normal transition-[grid-template-columns]',
+                  'group grid grid-cols-[100px_1fr] grid-rows-[1fr_auto] gap-x-4 rounded-lg leading-normal text-inherit no-underline transition-[grid-template-columns]',
                   'sm:grid-cols-[160px_1fr]',
                   'md:grid-cols-1 md:gap-2',
                   shouldShowKeywords ? 'md:grid-rows-[auto_auto_auto]' : 'md:grid-rows-[auto_auto]',
@@ -62,7 +59,7 @@ export default async function ArticlesPage() {
               >
                 <span
                   className={clsx([
-                    'overflow-hidden block row-start-1 row-end-3 col-start-1 col-end-2',
+                    'col-start-1 col-end-2 row-start-1 row-end-3 block overflow-hidden',
                     'md:row-end-2',
                   ])}
                 >
@@ -71,16 +68,16 @@ export default async function ArticlesPage() {
                     width={1200}
                     height={630}
                     alt=""
-                    className="aspect-square md:aspect-video object-cover rounded-lg"
+                    className="aspect-square rounded-lg object-cover md:aspect-video"
                   />
                 </span>
                 <span
                   className={clsx([
-                    'row-start-1 row-end-2 col-start-2 col-end-3 block palt font-bold',
+                    'palt col-start-2 col-end-3 row-start-1 row-end-2 block font-bold',
                     'md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3',
                   ])}
                 >
-                  <span className="text-sm block">{publishedAt}</span>
+                  <span className="block text-sm">{publishedAt}</span>
                   <span className="group-hover:underline">{title}</span>
                 </span>
                 {shouldShowKeywords && (

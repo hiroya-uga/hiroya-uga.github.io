@@ -2,10 +2,7 @@ import { SampleImage } from '@/components/specific/documents/pauljadam-modern-we
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: "HTML5のfigure要素とfigcaption要素 - PaulJAdam's Modern Web Accessibility Demos",
-  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-});
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/figure-figcaption');
 
 export default function Page() {
   return (

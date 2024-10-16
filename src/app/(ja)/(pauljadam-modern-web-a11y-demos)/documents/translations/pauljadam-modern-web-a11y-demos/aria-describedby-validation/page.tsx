@@ -1,15 +1,11 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-describedby-validation/DocumentScript';
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-describedby-validation/page.css';
 
-
-
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title:
-    "WAI-ARIAのaria-describedby属性、aria-required属性、aria-invalid属性、jQueryのfocus()メソッドを使用したシンプルなフォームバリデータ - PaulJAdam's Modern Web Accessibility Demos",
-  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-});
+export const metadata = getMetadata(
+  '/documents/translations/pauljadam-modern-web-a11y-demos/aria-describedby-validation',
+);
 
 export default function Page() {
   return (

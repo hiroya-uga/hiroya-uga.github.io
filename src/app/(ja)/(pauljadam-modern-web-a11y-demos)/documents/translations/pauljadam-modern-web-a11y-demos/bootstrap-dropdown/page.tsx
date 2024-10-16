@@ -3,10 +3,7 @@ import { getMetadata } from '@/utils/seo';
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/DocumentScript';
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/page.css';
 
-export const metadata = getMetadata({
-  title: "Bootstrapのドロップダウン - PaulJAdam's Modern Web Accessibility Demos",
-  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-});
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown');
 
 export default function Page() {
   return (

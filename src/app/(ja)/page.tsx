@@ -12,10 +12,7 @@ import { Button } from '@/components/Button/Button';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: SITE_NAME,
-  description: 'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。',
-});
+export const metadata = getMetadata('/');
 
 export default function Home() {
   const captionId = useId();
@@ -85,42 +82,30 @@ export default function Home() {
                 {
                   emoji: '🌳',
                   href: '/tools/an-alt-decision-tree',
-                  title: '代替テキスト２択チャート',
-                  description:
-                    'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
                 },
                 {
                   emoji: '🥋',
                   href: '/documents/ui-notes',
-                  title: 'UI Notes',
-                  description: 'Web上に登場するUIに関するメモ書き。',
                 },
                 {
                   emoji: '📝',
                   href: '/documents/translations/pauljadam-modern-web-a11y-demos',
-                  title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
-                  description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
                 },
                 {
                   emoji: '📛',
-                  href: '/tools/accessible-name-and-description-computation/',
-                  title: 'Accessible Name and Description Computation Playground',
-                  description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+                  href: '/tools/accessible-name-and-description-computation',
                 },
                 {
                   emoji: '👆',
                   href: '/tools/touch-event-touches',
-                  title: 'TouchEvent.touches Playground',
-                  description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
                 },
                 {
                   emoji: '📏',
-                  href: '/tools/css-units/',
-                  title: 'CSS Units Playground',
-                  description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
+                  href: '/tools/css-units',
                 },
-              ].map(({ emoji, href, title, description }) => {
-                const id = description && href;
+              ].map(({ emoji, href }) => {
+                const { pageTitle, description } = getMetadata(href);
+                const id = String(description) && href;
 
                 return (
                   <li key={href}>
@@ -131,7 +116,7 @@ export default function Home() {
                         aria-describedby={id}
                       >
                         <span className="inline-block leading-normal group-hover:underline">
-                          {title}
+                          {pageTitle}
                           {/* {item.isWip && <b>（WIP）</b>} */}
                         </span>
                         <span
@@ -163,14 +148,14 @@ export default function Home() {
                 {
                   emoji: '🔧',
                   href: '/tools',
-                  title: 'ツール集',
                 },
                 {
                   emoji: '📚',
                   href: '/documents',
-                  title: '資料集',
                 },
-              ].map(({ emoji, href, title }) => {
+              ].map(({ emoji, href }) => {
+                const { pageTitle } = getMetadata(href);
+
                 return (
                   <li key={href}>
                     <Link href={href} className="group block rounded-md no-underline">
@@ -180,7 +165,7 @@ export default function Home() {
                       >
                         <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
                       </span>
-                      <span className="font-bold group-hover:underline">→ {title}</span>
+                      <span className="font-bold group-hover:underline">→ {pageTitle}</span>
                     </Link>
                   </li>
                 );

@@ -4,10 +4,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'DOM Event Playground',
-  description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
-});
+export const metadata = getMetadata('/tools/dom-events-watcher');
 
 export default function Page() {
   const id = useId();

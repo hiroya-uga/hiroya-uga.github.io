@@ -7,7 +7,6 @@ import { WEB_SPEC_TRANSLATIONS_NOTE } from '@/components/specific/documents/tran
 import { RelatedResourceBox } from '@/components/specific/documents/translations/w3c/wai';
 import { PageTitle } from '@/components/structures/PageTitle';
 
-
 export default function Page() {
   return (
     <>
@@ -236,7 +235,4 @@ export default function Page() {
   );
 }
 
-export const metadata = getMetadata({
-  title: '日本語訳：Images Tutorial',
-  description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
-});
+export const metadata = getMetadata('/documents/translations/w3c/wai/tutorials/images');

@@ -5,10 +5,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'Accessible Name and Description Computation Playground',
-  description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-});
+export const metadata = getMetadata('/tools/accessible-name-and-description-computation');
 
 export default function Page() {
   const anchorLinkId = useId();

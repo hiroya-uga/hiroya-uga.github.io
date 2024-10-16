@@ -4,10 +4,7 @@ import { DocumentHeadingLevel2 } from '@/mdx-components';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata({
-  title: 'The carousel element - Fantasized specs',
-  description: '',
-});
+export const metadata = getMetadata('/documents/fantasized-specs/html-carousel');
 
 export default function Page() {
   return (

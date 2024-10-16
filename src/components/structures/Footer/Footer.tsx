@@ -9,7 +9,7 @@ import { SNS_LINKS } from '@/constants/sns';
 import { SEO } from '@/constants/seo';
 import { SITE_NAME } from '@/constants/meta';
 
-const Anchor = ({ href, className, children }: { href: string; className: string; children: React.ReactNode }) => {
+const Anchor = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const pathname = usePathname() ?? '';
   const [shouldLinkComponent, setShouldLinkComponent] = useState(false);
 
@@ -22,14 +22,14 @@ const Anchor = ({ href, className, children }: { href: string; className: string
   if (shouldLinkComponent) {
     // Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className="text-inherit">
         {children}
       </Link>
     );
   }
 
   return (
-    <a href={href} className={className}>
+    <a href={href} className="text-inherit">
       {children}
     </a>
   );
@@ -42,17 +42,21 @@ const ListItem = () => {
 
     return segments.map((_, index) => '/' + segments.slice(0, index + 1).join('/'));
   };
-  const pathnames = ['/', ...generatePaths(pathname)];
+  const pathnames = [...generatePaths(pathname)];
 
   return (
     <>
+      <li className='after:px-2 after:content-["/"]'>
+        <Anchor href="/">HOME</Anchor>
+      </li>
+
       {pathnames.map((path, index) => {
         if (path in SEO) {
           if (index === pathnames.length - 1) {
             return (
               <li key={path}>
                 <a aria-current="page" className="text-inherit">
-                  {SEO[path]}
+                  {SEO[path].title}
                 </a>
               </li>
             );
@@ -60,9 +64,7 @@ const ListItem = () => {
 
           return (
             <li key={path} className='after:px-2 after:content-["/"]'>
-              <Anchor href={path} className="text-inherit">
-                {SEO[path]}
-              </Anchor>
+              <Anchor href={path}>{SEO[path].title}</Anchor>
             </li>
           );
         }
