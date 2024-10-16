@@ -28,7 +28,7 @@ export default function Page() {
             key: `UI Notes`,
             title: (
               <>
-                <Link href="/documents/ui-notes/">UI Notes</Link>
+                <Link href="/documents/notes/">UI Notes</Link>
               </>
             ),
             description: 'Web上に登場するUIに関するメモ書き。',

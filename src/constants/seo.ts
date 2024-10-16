@@ -9,11 +9,11 @@ export const SEO: Record<string, { title: string; description: string }> = {
     title: '資料集',
     description: 'ドキュメント系をまとめた階層です。',
   },
-  '/documents/ui-notes': {
+  '/documents/notes': {
     title: 'UI Notes',
     description: 'Web上に登場するUIに関するメモ書き。',
   },
-  '/documents/ui-notes/merchant-discount-price': {
+  '/documents/notes/merchant-discount-price': {
     title: '【HTML】割引などの金額変更で打ち消し線を表現するためのマークアップ',
     description: '',
   },

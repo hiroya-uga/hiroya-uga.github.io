@@ -10,10 +10,10 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata('/documents/ui-notes');
+export const metadata = getMetadata('/documents/notes');
 
 export async function getArticles() {
-  const articlesDir = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'ui-notes', 'contents');
+  const articlesDir = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'notes', 'contents');
   const filenames = fs.readdirSync(articlesDir);
 
   const articles = filenames.map((filename) => {
@@ -49,7 +49,7 @@ export default async function ArticlesPage() {
           return (
             <li key={id}>
               <Link
-                href={`/documents/ui-notes/${id}`}
+                href={`/documents/notes/${id}`}
                 className={clsx([
                   'group grid grid-cols-[100px_1fr] grid-rows-[1fr_auto] gap-x-4 rounded-lg leading-normal text-inherit no-underline transition-[grid-template-columns]',
                   'sm:grid-cols-[160px_1fr]',
@@ -64,7 +64,7 @@ export default async function ArticlesPage() {
                   ])}
                 >
                   <Image
-                    src={`/documents/ui-notes/ogimages/${id}.jpg`}
+                    src={`/documents/notes/ogimages/${id}.jpg`}
                     width={1200}
                     height={630}
                     alt=""
