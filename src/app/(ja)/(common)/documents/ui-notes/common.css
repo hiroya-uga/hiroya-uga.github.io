@@ -3,6 +3,13 @@
   margin-top: 4em;
   position: relative;
   padding-left: calc(0.8rem * 3 - 1rem);
+  transition: 300ms margin-left ease-out;
+}
+
+@media screen and (min-width: 1040px) {
+  #article :where(h2, h3, h4, h5, h6) {
+    margin-left: -1em;
+  }
 }
 
 #article > h2:first-child {
@@ -14,28 +21,23 @@
 }
 
 #article {
-  h1 {
-    font-size: 32px;
+  h2 {
+    font-size: 1.5rem;
     font-weight: bold;
   }
 
-  h2 {
-    font-size: 24px;
-  }
-
   h3 {
-    font-size: 18.72px;
-  }
-
-  h2,
-  h3 {
+    font-size: 1.25rem;
     font-weight: normal;
   }
 
   :where(h2, h3) code {
     color: inherit;
-    padding-inline: 4px;
+    padding-inline: 0.25rem;
     font-family: monospace;
+    color: #345071;
+    background-color: #c8cee1;
+    border-radius: 0.25rem;
   }
 
   > p {
@@ -56,7 +58,7 @@
 }
 
 :where(h2, h3) strong {
-  font-weight: normal;
+  font-weight: inherit;
 }
 
 :where(h2, h3, h4, h5, h6) a.anchor {
@@ -68,16 +70,19 @@
   overflow: hidden;
   width: 2em;
   height: 2em;
-  opacity: 0.5;
   transform: translateY(-25%);
+  margin-top: 0.125rem;
+  border-radius: 0.5rem;
+  transition: 300ms background-color ease-out;
 }
 
 :where(h2, h3, h4, h5, h6) a.anchor:where(:focus, :hover) {
-  opacity: 1;
+  background-color: #e2e8f0;
 }
 
 :where(h2, h3, h4, h5, h6) a.anchor::before {
-  content: "§";
+  content: "#";
+  font-weight: normal;
 }
 
 :where(h2, h3, h4, h5, h6) a.anchor span {
