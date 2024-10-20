@@ -13,7 +13,7 @@ export const SEO: Record<string, { title: string; description: string }> = {
     title: 'UI Notes',
     description: 'Web上に登場するUIに関するメモ書き。',
   },
-  '/documents/notes/merchant-discount-price': {
+  '/documents/notes/ui-discount-price': {
     title: '【HTML】割引などの金額変更で打ち消し線を表現するためのマークアップ',
     description: '',
   },
