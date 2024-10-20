@@ -59,7 +59,7 @@ export default function Home() {
             <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className="lg:text-center">
               <p className="mb-2 text-xs sm:my-6 sm:text-base">
                 “
-                <a href="https://www.w3.org/mission/accessibility/">
+                <a href="https://www.w3.org/mission/accessibility/#:~:text=The%20power%20of%20the%20Web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect.">
                   The power of the Web is in its universality. Access by everyone regardless of disability is an
                   essential aspect.
                 </a>
