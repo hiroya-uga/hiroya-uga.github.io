@@ -3,22 +3,34 @@ title: '【HTML】割引などの金額変更で打ち消し線を表現する�
 description: '文中の訂正や、既に事実とは異なることを表現する場合には`s`要素や`del`要素が用意されていますが、ECサイトなどの商品説明で割引を表すために元の金額に打ち消し線（取り消し線）を描く表現がしたいとき、どのようになっているのが良いかを検討します。'
 publishedAt: '2024-06-10'
 updatedAt:
-keywords: ['TailwindCSS','s要素','del要素']
+keywords: ['TailwindCSS', 's要素', 'del要素']
 ---
 
 ## Web標準から考える
 
 ブラウザCSSに打ち消し線（`text-decoration: line-through;`）が指定されている要素は`s`要素と`del`要素がある。
 
-<SpecBlockQuote cite="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-s-element" title="HTML Living Standard" ja="https://momdo.github.io/html/text-level-semantics.html#the-s-element">
-<p>The <code>s</code> element represents contents that are no longer accurate or no longer relevant.</p>
+<SpecBlockQuote
+  cite="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-s-element"
+  title="HTML Living Standard"
+  ja="https://momdo.github.io/html/text-level-semantics.html#the-s-element"
+>
+  <p>
+    The <code>s</code> element represents contents that are no longer accurate or no longer relevant.
+  </p>
 </SpecBlockQuote>
 
 いずれも文章を訂正したことを表すときに用いられる要素だが、２つの要素の大きな違いはコンテンツが文書から削除されているものであるかどうかにある。
 `s`要素は、正確ではなくなった情報や関連しなくなった情報を表すものだが、Webページの一部として必要な情報であることに変わりはない。現在はこうだが昔はこうだった、という情報を表すために必要な要素だ。
 
-<SpecBlockQuote cite="https://html.spec.whatwg.org/multipage/edits.html#the-del-element" title="HTML Living Standard" ja="https://momdo.github.io/html/edits.html#the-del-element">
-<p>The <code>del</code> element represents a removal from the document.</p>
+<SpecBlockQuote
+  cite="https://html.spec.whatwg.org/multipage/edits.html#the-del-element"
+  title="HTML Living Standard"
+  ja="https://momdo.github.io/html/edits.html#the-del-element"
+>
+  <p>
+    The <code>del</code> element represents a removal from the document.
+  </p>
 </SpecBlockQuote>
 
 一方で`del`要素は文書からコンテンツが削除されたことを表すもので、修正履歴などをマークアップする際に用いられる。主に編集に関連する画面で活躍するものだ。
@@ -38,7 +50,9 @@ keywords: ['TailwindCSS','s要素','del要素']
 `s`要素は古くから存在する要素だが、アクセシビリティ・サポーテッドかどうかを確認しておく。
 
 <ExampleBox>
-  <p>私は昨日、<s>ラーメン</s>お寿司を食べました。</p>
+  <p>
+    私は昨日、<s>ラーメン</s>お寿司を食べました。
+  </p>
 </ExampleBox>
 
 上記の例をブラウザがどう解釈しているのかを確認してみる。
@@ -51,13 +65,13 @@ Google Chromeは「ラーメン」の部分を`deletion`ロールとして解釈
 
 Firefoxも同様だ。一方で、支援技術側のサポート状況は次のようになっている。
 
-|AT|Google Chromeでの読み上げ内容|
-|---|---|
-|^Voice Over (macOS 12)|私は昨日、ラーメンお寿司を食べました。|
-|^Voice Over (iOS)|私は昨日、ラーメンお寿司を食べました。|
-|^ナレーター (Windows10)|私は昨日、ラーメンお寿司を食べました。|
-|^PC-Talker NEO (Windows10)|私は昨日、ラーメンお寿司を食べました。|
-|^NVDA (Windows10)|私は昨日、**削除マークあり**ラーメンお寿司を食べました。|
+| AT                         | Google Chromeでの読み上げ内容                            |
+| -------------------------- | -------------------------------------------------------- |
+| ^Voice Over (macOS 12)     | 私は昨日、ラーメンお寿司を食べました。                   |
+| ^Voice Over (iOS)          | 私は昨日、ラーメンお寿司を食べました。                   |
+| ^ナレーター (Windows10)    | 私は昨日、ラーメンお寿司を食べました。                   |
+| ^PC-Talker NEO (Windows10) | 私は昨日、ラーメンお寿司を食べました。                   |
+| ^NVDA (Windows10)          | 私は昨日、**削除マークあり**ラーメンお寿司を食べました。 |
 
 セマンティクスとしては`s`要素を採用することが望ましいが、スクリーンリーダを利用するユーザにとって、手元で確認できる範囲ではほとんどのケースで意味がないことがわかる。ラーメンお寿司ってなんだろう。おいしいのかな。
 
@@ -93,7 +107,6 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 ```
 
 また、打ち消し線も`text-decoration`ではなく、疑似要素によって表現されている。
-
 
 ### 楽天市場
 
@@ -136,7 +149,6 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 </tr>
 ```
 
-
 ### Yahoo!ショッピング
 
 [https://shopping.yahoo.co.jp/](https://shopping.yahoo.co.jp/)
@@ -178,10 +190,13 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 ワイヤーフレームの段階で調整ができるのであれば、素直にすべて文字列で表示するのが好みではある。こうなっていれば読み間違えることも少なく、スクリーンリーダユーザへの誤解も避けられる。また、著者がセール価格を重要だと考えるならば`strong`要素を採用できる。
 
 <ExampleBox>
-<p>
-  <span className="text-xs block mb-1">通常価格：¥3,000</span>
-  <strong className="text-red-600"><span className="block text-red-600 text-xs leading-tight mb-1">セール価格（税込）：</span><span className="block text-4xl mr-2 font-bold leading-none">¥1,980</span></strong>
-</p>
+  <p>
+    <span className="mb-1 block text-xs">通常価格：¥3,000</span>
+    <strong className="text-red-600">
+      <span className="mb-1 block text-xs leading-tight text-red-600">セール価格（税込）：</span>
+      <span className="mr-2 block text-4xl font-bold leading-none">¥1,980</span>
+    </strong>
+  </p>
 </ExampleBox>
 
 ```jsx
@@ -198,12 +213,15 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 もし元の価格に打ち消し線を引きたい場合は、`s`要素を用いずにCSSのみで表現するのが妥当だろう。打ち消し線が引かれていても「元の金額」は正確でなくなった情報**ではない**ためだ。
 
 <ExampleBox className="mt-4">
-<p>
-  <span className="text-xs block">通常価格：<span className="text-sm line-through">¥3,000</span></span>
-  <strong>
-    <span className="sr-only">セール価格</span><span className="text-3xl mr-2 font-bold text-red-600 leading-none">¥1,980</span>
-  </strong>
-</p>
+  <p>
+    <span className="block text-xs">
+      通常価格：<span className="text-sm line-through">¥3,000</span>
+    </span>
+    <strong>
+      <span className="sr-only">セール価格</span>
+      <span className="mr-2 text-3xl font-bold leading-none text-red-600">¥1,980</span>
+    </strong>
+  </p>
 </ExampleBox>
 
 ```jsx
@@ -221,17 +239,22 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 もっとシンプルに「現在の金額」「元の金額」だけの表示で、且つ元の金額を打ち消し線だけで表現したい場合は、スクリーンリーダ用の文字列を設置するとよいかもしれない。
 
 <ExampleBox className="mt-4">
-<p>
-  <s className="text-sm block"><span className="sr-only">価格</span>¥3,000</s>
-  <strong>
-    <span className="sr-only">セール価格</span><span className="text-3xl mr-2 font-bold text-red-600 leading-none">¥1,980</span>
-  </strong>
-</p>
+  <p>
+    <s className="block text-sm">
+      <span className="sr-only">価格</span>¥3,000
+    </s>
+    <strong>
+      <span className="sr-only">セール価格</span>
+      <span className="mr-2 text-3xl font-bold leading-none text-red-600">¥1,980</span>
+    </strong>
+  </p>
 </ExampleBox>
 
 ```jsx
 <p>
-  <s><span class="sr-only">価格</span>¥3,000</s>
+  <s>
+    <span class="sr-only">価格</span>¥3,000
+  </s>
   <strong>
     <span class="sr-only">セール価格</span>¥1,980
   </strong>

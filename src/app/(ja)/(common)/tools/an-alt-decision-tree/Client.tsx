@@ -1,6 +1,5 @@
 'use client';
 
-
 import React, { useCallback, useEffect, useState } from 'react';
 
 import clsx from 'clsx';
@@ -111,7 +110,7 @@ export const AnAltDecisionTreeContent = () => {
           <li>
             <button
               type="button"
-              className="min-w-28 rounded border border-solid border-black  bg-white p-4"
+              className="min-w-28 rounded border border-solid border-black bg-white p-4"
               onClick={() => {
                 setPageState({
                   index,

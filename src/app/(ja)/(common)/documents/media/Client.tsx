@@ -6,8 +6,6 @@ import { Details } from '@/components/Box';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
-
-
 const CheckBoxes = <T extends string>({
   nameSet,
   stateSet,

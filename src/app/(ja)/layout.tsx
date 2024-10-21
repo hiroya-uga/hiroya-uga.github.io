@@ -4,7 +4,6 @@ import '@/app/(ja)/common.css';
 import { Inter } from 'next/font/google';
 import GoogleAnalytics from '@/lib/gtag';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export default function JaRootLayout({ children }: { children: React.ReactNode }) {

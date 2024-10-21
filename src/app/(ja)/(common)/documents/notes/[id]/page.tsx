@@ -55,6 +55,13 @@ export default async function Post({ params }: { params: { id: string } }) {
 
       return <td>{children}</td>;
     },
+    li: ({ children }) => {
+      return (
+        <li className="relative pl-4 before:absolute before:left-1 before:top-[0.8125rem] before:h-1 before:w-1 before:rounded-full before:bg-black">
+          {children}
+        </li>
+      );
+    },
   });
 
   if (!fileContents) {
@@ -73,6 +80,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     publishedAt: string;
     updatedAt?: string;
     keywords?: string[];
+    dependencies?: string[];
   }>({
     source: fileContents,
     components,
@@ -84,7 +92,7 @@ export default async function Post({ params }: { params: { id: string } }) {
     },
   });
 
-  const { title, description, publishedAt, updatedAt, keywords } = frontmatter;
+  const { title, description, publishedAt, updatedAt, keywords, dependencies } = frontmatter;
 
   return (
     <div>
@@ -97,20 +105,36 @@ export default async function Post({ params }: { params: { id: string } }) {
           <span>公開日：{publishedAt}</span>
           {updatedAt && publishedAt !== updatedAt && <span>最終更新：{updatedAt}</span>}
         </p>
-        {keywords?.length === 0 ? (
-          <></>
-        ) : (
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="leading-none">キーワード：</p>
-            <ul className="flex flex-wrap items-center gap-2">
-              {keywords?.map((keyword) => (
-                <li key={keyword} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
-                  {keyword}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="flex flex-wrap gap-x-4 gap-y-2">
+          {keywords?.length === 0 ? (
+            <></>
+          ) : (
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="leading-none">キーワード：</p>
+              <ul className="flex flex-wrap items-center gap-2">
+                {keywords?.map((keyword) => (
+                  <li key={keyword} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
+                    {keyword}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {dependencies?.length === 0 ? (
+            <></>
+          ) : (
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="leading-none">採用技術：</p>
+              <ul className="flex flex-wrap items-center gap-2">
+                {dependencies?.map((keyword) => (
+                  <li key={keyword} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
+                    {keyword}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="mb-7 bg-slate-300">

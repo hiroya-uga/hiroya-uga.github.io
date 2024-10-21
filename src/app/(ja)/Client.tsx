@@ -265,7 +265,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
         <p
           className={clsx([
-            'absolute bottom-0 right-0 z-10 min-h-[50px] min-w-[50px] translate-y-full text-white focus-within:translate-y-0 group-focus-within:translate-y-0  group-hover:translate-y-0',
+            'absolute bottom-0 right-0 z-10 min-h-[50px] min-w-[50px] translate-y-full text-white focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
             'transition-[opacity_visibility_transform]',
             isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
             isFirstRender && isLoading ? 'invisible' : 'visible',
