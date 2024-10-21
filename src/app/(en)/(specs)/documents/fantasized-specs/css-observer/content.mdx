@@ -154,7 +154,6 @@ A value of `none` means that no property will transition. Otherwise, a list of p
 </dd>
 </dl>
 
-
 ### 2.2. The `observed-wrapper` property
 
 The element with `view-*` in observe-type indicates the direction in which the intersection will be monitored.<br/>
@@ -180,7 +179,11 @@ By default, `observed-wrapper: all` is specified for `document.scrollingElement`
 
 <tr>
   <th>Applies to:</th>
-  <td>block containers [\[CSS2\]](https://drafts.csswg.org/css-overflow/#biblio-css2), flex containers [\[CSS3-FLEXBOX\]](https://drafts.csswg.org/css-overflow/#biblio-css3-flexbox), and grid containers [\[CSS3-GRID-LAYOUT\]](https://drafts.csswg.org/css-overflow/#biblio-css3-grid-layout)</td>
+  <td>
+    block containers [\[CSS2\]](https://drafts.csswg.org/css-overflow/#biblio-css2), flex containers
+    [\[CSS3-FLEXBOX\]](https://drafts.csswg.org/css-overflow/#biblio-css3-flexbox), and grid containers
+    [\[CSS3-GRID-LAYOUT\]](https://drafts.csswg.org/css-overflow/#biblio-css3-grid-layout)
+  </td>
 </tr>
 
 <tr>
@@ -205,8 +208,6 @@ By default, `observed-wrapper: all` is specified for `document.scrollingElement`
 </tbody>
 </table>
 </div>
-
-
 
 <dl>
 <dt><dfn>none</dfn></dt>
@@ -235,19 +236,22 @@ By default, `observed-wrapper: all` is specified for `document.scrollingElement`
 <dt>
   <dfn>vertical</dfn>
 </dt>
-<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the vertical direction.</dd>
+<dd>
+  The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the vertical direction.
+</dd>
 
 <dt>
   <dfn>horizontal</dfn>
 </dt>
-<dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the horizontal direction.</dd>
+<dd>
+  The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on the horizontal direction.
+</dd>
 
 <dt>
   <dfn>all</dfn>
 </dt>
 <dd>The user agent monitors elements with `observe-type` of `view-*` to see if they intersect on all direction.</dd>
 </dl>
-
 
 ### 2.3. The `observe-disconect` property
 

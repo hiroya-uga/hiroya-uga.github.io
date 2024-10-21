@@ -1,4 +1,3 @@
-
 import React, { Children, HTMLAttributes, ReactNode } from 'react';
 
 import type { MDXComponents } from 'mdx/types';

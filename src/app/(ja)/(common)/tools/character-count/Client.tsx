@@ -63,7 +63,7 @@ const Character = ({ value }: { value: string }) => {
 
   if (HALF_CHARACTERS_REGEXP.test(special)) {
     return (
-      <span className={clsx(['grid  grid-cols-2', isVerticalRl ? 'vertical-rl' : 'rotate-90'])}>
+      <span className={clsx(['grid grid-cols-2', isVerticalRl ? 'vertical-rl' : 'rotate-90'])}>
         <span>{output}</span>
         <span className="col-start-2 col-end-3">{special}</span>
       </span>

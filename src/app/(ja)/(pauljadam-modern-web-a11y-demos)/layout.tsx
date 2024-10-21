@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { Footer } from '@/components/structures/Footer';
 import { SiteName } from '@/components/structures/Header/SiteName';
 
-
 const CsunmobileNavigation = ({ fileName }: { fileName: string }) => {
   const linkList = [
     ['../csunmobile-form-bad', 'Form Bad'],

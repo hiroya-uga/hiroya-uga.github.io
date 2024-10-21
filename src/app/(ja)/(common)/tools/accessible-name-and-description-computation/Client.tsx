@@ -6,7 +6,6 @@ import { NoteBox } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Switch } from '@/components/Form';
 
-
 import 'highlight.js/styles/github.css';
 
 type SwitchItemProps = Pick<
