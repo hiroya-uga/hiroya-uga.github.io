@@ -3,7 +3,8 @@ title: '【HTML】割引などの金額変更で打ち消し線を表現する�
 description: '文中の訂正や、既に事実とは異なることを表現する場合には`s`要素や`del`要素が用意されていますが、ECサイトなどの商品説明で割引を表すために元の金額に打ち消し線（取り消し線）を描く表現がしたいとき、どのようになっているのが良いかを検討します。'
 publishedAt: '2024-06-10'
 updatedAt:
-keywords: ['TailwindCSS', 's要素', 'del要素']
+keywords: ['s要素', 'del要素']
+dependencies: ['TailwindCSS']
 ---
 
 ## Web標準から考える
@@ -15,9 +16,7 @@ keywords: ['TailwindCSS', 's要素', 'del要素']
   title="HTML Living Standard"
   ja="https://momdo.github.io/html/text-level-semantics.html#the-s-element"
 >
-  <p>
-    The <code>s</code> element represents contents that are no longer accurate or no longer relevant.
-  </p>
+  The <code>s</code> element represents contents that are no longer accurate or no longer relevant.
 </SpecBlockQuote>
 
 いずれも文章を訂正したことを表すときに用いられる要素だが、２つの要素の大きな違いはコンテンツが文書から削除されているものであるかどうかにある。
@@ -28,9 +27,7 @@ keywords: ['TailwindCSS', 's要素', 'del要素']
   title="HTML Living Standard"
   ja="https://momdo.github.io/html/edits.html#the-del-element"
 >
-  <p>
-    The <code>del</code> element represents a removal from the document.
-  </p>
+  The <code>del</code> element represents a removal from the document.
 </SpecBlockQuote>
 
 一方で`del`要素は文書からコンテンツが削除されたことを表すもので、修正履歴などをマークアップする際に用いられる。主に編集に関連する画面で活躍するものだ。
@@ -40,7 +37,8 @@ keywords: ['TailwindCSS', 's要素', 'del要素']
 <SpecBlockQuote cite="https://www.w3.org/TR/wai-aria-1.2/#deletion" title="Accessible Rich Internet Applications (WAI-ARIA) 1.2" ja="https://momdo.github.io/wai-aria-1.2/#deletion">
 <p className='mb-4'>A deletion contains content that is marked as removed or content that is being suggested for removal. See related insertion.</p>
 
-<p>Deletions are typically used to either mark differences between two versions of content or to designate content suggested for removal in scenarios where multiple people are revising content.</p>
+Deletions are typically used to either mark differences between two versions of content or to designate content suggested for removal in scenarios where multiple people are revising content.
+
 </SpecBlockQuote>
 
 変更前の価格に打ち消し線を引きたい場合は、`s`要素を採用するのが妥当だろう。
