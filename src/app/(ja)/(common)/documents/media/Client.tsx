@@ -347,7 +347,9 @@ export const MediaContent = ({ id }: { id: string }) => {
                       </a>
                     </p>
 
-                    <p className="mt-1 overflow-hidden text-ellipsis text-xs leading-snug text-gray-600">{href}</p>
+                    <p className="mt-1 overflow-hidden text-ellipsis text-xs leading-snug text-gray-600 sm:break-all">
+                      {href.replace(/#.*/, '')}
+                    </p>
 
                     {tags && tags.length && (
                       <ul className="mt-2 flex flex-wrap gap-2 text-xs">

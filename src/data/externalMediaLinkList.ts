@@ -13,6 +13,14 @@ const list: {
   tags?: Tags;
 }[] = [
   {
+    type: 'magazine',
+    category: 'WebDev',
+    date: '2025-05-16',
+    title: 'Software Design 2025年6月号 第1特集 これからのエンジニアの必須科目 ITアクセシビリティ入門 第4章',
+    href: 'https://gihyo.jp/magazine/SD/archive/2025/202506#:~:text=%E7%AC%AC4%E7%AB%A0%EF%BC%9AWeb%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%96%E3%83%AB%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95',
+    tags: ['HTML', 'CSS', 'Accessibility'],
+  },
+  {
     type: 'podcast',
     category: 'WebDev',
     date: '2024-07-25',
