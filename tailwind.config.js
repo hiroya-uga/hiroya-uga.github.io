@@ -11,6 +11,11 @@ module.exports = {
       },
       colors: {
         alert: '#c10000',
+        required: '#fff',
+      },
+      backgroundColor: {
+        alert: '#c10000',
+        required: '#b20000',
       },
       fontFamily: {
         emoji:

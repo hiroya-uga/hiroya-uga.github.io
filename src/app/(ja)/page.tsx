@@ -8,7 +8,7 @@ import { SITE_NAME } from '@/constants/meta';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 
 import { SNS_LINKS } from '@/constants/sns';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Clickable';
 
 import { getMetadata } from '@/utils/seo';
 
