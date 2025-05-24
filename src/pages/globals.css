@@ -1,3 +1,8 @@
+:root {
+  --required-color: #fff;
+  --required-background: #b20000;
+}
+
 * {
   margin: 0;
   padding: 0;
