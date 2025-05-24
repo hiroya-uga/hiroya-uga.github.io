@@ -8,6 +8,7 @@ import {
   StartingSection,
   isWeekday,
   DateSection,
+  TimeSection,
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Components';
 import { Radio, TextField } from '@/components/Form';
 import { Tab } from '@/components/Tab';
@@ -125,6 +126,10 @@ const createComment = ({ result, type }: { result: Result; type: Every }) => {
   ].filter(Boolean);
 };
 
+const onbeforeunload = (e: BeforeUnloadEvent) => {
+  e.preventDefault();
+};
+
 export const SlackReminderCommandGenerator = () => {
   const [type, setType] = useState<Every>('毎日・毎週');
   const [who, setWho] = useState('');
@@ -143,7 +148,23 @@ export const SlackReminderCommandGenerator = () => {
     day: string;
   }>({ type: 'fixed', nth: 'first', day: '1' });
 
-  const [result, setResult] = useState<Result>({});
+  const [result, setResult] = useState<Result>({
+    who: 'me',
+    message: 'ここにメッセージ',
+    every: 'every',
+    day: 'day',
+    time: '09:00',
+  });
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', onbeforeunload);
+    return () => {
+      window.removeEventListener('beforeunload', onbeforeunload);
+      if (copyButtonSettimeoutId) {
+        clearTimeout(copyButtonSettimeoutId);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -274,9 +295,9 @@ export const SlackReminderCommandGenerator = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-5xl rounded-lg bg-white p-4 py-10 shadow-md sm:px-12">
+      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-4 py-10 shadow-md sm:px-12 sm:py-14">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8">
+          <div className="mb-12">
             <TextField
               label="宛先"
               placeholder="me, #channel, @user"
@@ -285,7 +306,7 @@ export const SlackReminderCommandGenerator = () => {
             />
           </div>
 
-          <div className="mb-8">
+          <div className="mb-12">
             <TextField
               label="本文"
               placeholder="@group-name チケットの確認をお願いします！"
@@ -296,22 +317,20 @@ export const SlackReminderCommandGenerator = () => {
             />
           </div>
 
-          <div className="mb-12">
-            <TextField type="time" label="通知時刻" value={time} onInput={(e) => setTime(e.currentTarget.value)} />
-          </div>
-
           <Tab.Wrapper defaultCurrentKey={type} onChange={(key) => setType(key as Every)}>
             <Tab.Panel tabKey="毎日・毎週">
               <DaysSection values={days} dispatch={setDays} />
+              <TimeSection value={time} dispatch={setTime} />
               <StartingSection value={starting} dispatch={setStarting} />
             </Tab.Panel>
             <Tab.Panel tabKey="隔週">
               <DaySection value={day} dispatch={setDay} />
+              <TimeSection value={time} dispatch={setTime} />
               <StartingSection value={starting} dispatch={setStarting} />
             </Tab.Panel>
 
             <Tab.Panel tabKey="毎月">
-              <fieldset className="mb-8">
+              <fieldset className="mb-10">
                 <legend className="mb-2 text-sm font-bold leading-snug">パターン</legend>
                 <ul className="flex flex-wrap gap-x-4 gap-y-2">
                   <li>
@@ -365,7 +384,7 @@ export const SlackReminderCommandGenerator = () => {
               {monthState.type === 'fixed' && (
                 <>
                   <p className="mb-1 text-sm font-bold leading-snug">毎月</p>
-                  <p className="mb-8 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-none outline-2 has-[:focus-visible]:outline-black">
+                  <p className="mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-none outline-2 has-[:focus-visible]:outline-black">
                     <input
                       type="number"
                       min={1}
@@ -389,7 +408,7 @@ export const SlackReminderCommandGenerator = () => {
 
               {monthState.type === 'nth' && (
                 <>
-                  <fieldset className="mb-8">
+                  <fieldset className="mb-10">
                     <legend className="mb-2 text-sm font-bold leading-snug">序数</legend>
                     <ul className="flex flex-wrap gap-x-4 gap-y-2">
                       {['first', 'second', 'third', 'fourth', 'last'].map((nth, index) => (
@@ -416,16 +435,19 @@ export const SlackReminderCommandGenerator = () => {
                 </>
               )}
 
+              <TimeSection value={time} dispatch={setTime} />
               <StartingSection value={starting} dispatch={setStarting} />
             </Tab.Panel>
 
             <Tab.Panel tabKey="毎年">
               <DateSection values={date} dispatch={setDate} />
               <StartingSection value={starting} dispatch={setStarting} />
+              <TimeSection value={time} dispatch={setTime} />
             </Tab.Panel>
 
             <Tab.Panel tabKey="繰り返しなし">
               <FullDateSection value={fullDate} dispatch={setFullDate} />
+              <TimeSection value={time} dispatch={setTime} />
               <NoteBox title="手書きの際、こんな相対表現も使えます">
                 <dl>
                   <div className="sm:flex sm:gap-2">
@@ -456,7 +478,7 @@ export const SlackReminderCommandGenerator = () => {
         <h2 className="mb-1 font-bold">出力結果：</h2>
         <p className="whitespace-pre-wrap">{createComment({ result, type })}</p>
       </div>
-      <div className="sticky bottom-0 z-10 pb-4">
+      <div className="pb-4 sm:sticky sm:bottom-0 sm:z-10">
         <div className="shadow-lg sm:grid sm:grid-cols-[1fr_auto]">
           <p
             className="whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-gray-300 sm:rounded-l-lg sm:rounded-r-none"

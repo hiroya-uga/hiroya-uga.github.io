@@ -3,3 +3,4 @@ export * from './DaysSection';
 export * from './DateSection';
 export * from './FullDateSection';
 export * from './StartingSection';
+export * from './TimeSection';
