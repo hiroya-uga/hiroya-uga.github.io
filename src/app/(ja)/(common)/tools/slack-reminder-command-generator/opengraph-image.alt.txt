@@ -1,0 +1,1 @@
+uga.dev Slack reminder command generator Slackのリマインダーコマンドを生成するためのツールです。リマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。

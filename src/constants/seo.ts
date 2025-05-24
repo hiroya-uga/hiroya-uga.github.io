@@ -320,6 +320,11 @@ export const SEO: Record<string, { title: string; description: string }> = {
     title: 'DOM Event Playground',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
+  '/tools/slack-reminder-command-generator': {
+    title: 'Slack reminder command generator',
+    description:
+      'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
+  },
   '/tools/touch-event-touches': {
     title: 'TouchEvent.touches Playground',
     description:
