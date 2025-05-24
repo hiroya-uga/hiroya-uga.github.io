@@ -51,7 +51,7 @@ const TextareaComponent = (
           className="invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border border-gray-300 p-2"
           ref={dummyTextareaRef}
         >
-          {props.value.replace(/\n$/g, '\n　')}
+          {props.value.replace(/\n$/g, '\n　') || '　'}
         </span>
         <textarea
           {...props}
@@ -122,7 +122,7 @@ const TextFieldComponent = (
             {...props}
             id={id}
             aria-describedby={descriptionId}
-            className="w-full rounded-md border border-gray-300 bg-white p-2"
+            className="w-full appearance-none rounded-md border border-gray-300 bg-white p-2 text-left"
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}
           />
