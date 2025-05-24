@@ -13,7 +13,7 @@ export const DaySection = ({ value, dispatch }: DayProps) => {
   const days = useMemo(() => ['月', '火', '水', '木', '金', '土', '日'], []);
 
   return (
-    <fieldset className="mb-8">
+    <fieldset className="mb-10">
       <legend className="mb-2 text-sm font-bold leading-snug">曜日</legend>
       <ul className="flex flex-wrap gap-x-4 gap-y-2">
         {days.map((dayName, index) => {

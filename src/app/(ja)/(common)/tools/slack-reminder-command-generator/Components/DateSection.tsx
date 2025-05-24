@@ -12,7 +12,7 @@ type DateProps = {
 export const DateSection = ({ values, dispatch, label = '日付' }: DateProps) => {
   const id = useId();
   return (
-    <fieldset className="mb-8">
+    <fieldset className="mb-10">
       <legend className="text-sm font-bold leading-snug">{label}</legend>
 
       <div className="grid w-fit grid-cols-2 gap-2 pt-2">
