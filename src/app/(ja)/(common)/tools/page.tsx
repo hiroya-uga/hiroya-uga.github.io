@@ -16,6 +16,16 @@ export default function Page() {
       <SimpleDescriptionList
         list={[
           {
+            key: `Slack reminder command generator`,
+            title: (
+              <>
+                <Link href="/tools/slack-reminder-command-generator">Slack reminder command generator</Link>
+              </>
+            ),
+            description:
+              'Slackのリマインダーコマンドを生成するためのツールです。リマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
+          },
+          {
             key: `代替テキスト２択チャート`,
             title: (
               <>

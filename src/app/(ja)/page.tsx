@@ -92,8 +92,8 @@ export default function Home() {
                   href: '/documents/translations/pauljadam-modern-web-a11y-demos',
                 },
                 {
-                  emoji: '📛',
-                  href: '/tools/accessible-name-and-description-computation',
+                  emoji: '🔔',
+                  href: '/tools/slack-reminder-command-generator',
                 },
                 {
                   emoji: '👆',
