@@ -1,6 +1,7 @@
 'use client';
 
 import { forwardRef, Ref, useEffect, useId, useRef, useState } from 'react';
+import Image from 'next/image';
 import { Required } from '@/components/Badge/Required';
 
 type Props = {
@@ -97,7 +98,7 @@ const TextFieldComponent = (
           className="ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed text-gray-600"
         >
           <p className="grid place-items-center pt-[0.1875rem]">
-            <img src="/common/images/icons/information.svg" alt="info" className="size-4" />
+            <Image src="/common/images/icons/information.svg" alt="info" className="size-4" />
           </p>
           <div>
             {description.split('\n').map((line) => {

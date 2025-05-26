@@ -1,18 +1,6 @@
 {
   "name": "hiroya-uga.github.io",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build && next-sitemap",
-    "start": "next start",
-    "lint": "next lint",
-    "eslint": "eslint .",
-    "eslint-fix": "eslint --fix .",
-    "prettier": "prettier --check .",
-    "prettier-fix": "prettier --write .",
-    "fix": "eslint --fix . && prettier --write ."
-  },
   "dependencies": {
     "@types/node": "20.4.8",
     "@types/react": "18.2.18",
@@ -52,5 +40,17 @@
     "prettier-eslint-cli": "^7.1.0",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.3.3"
+  },
+  "private": true,
+  "scripts": {
+    "build": "next build && next-sitemap",
+    "dev": "next dev",
+    "eslint": "eslint .",
+    "eslint-fix": "eslint --fix .",
+    "fix": "eslint --fix . && prettier --write .",
+    "lint": "next lint",
+    "prettier": "prettier --check .",
+    "prettier-fix": "prettier --write .",
+    "start": "next start"
   }
 }
