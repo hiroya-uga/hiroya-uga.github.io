@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   FullDateSection,
   DaySection,
@@ -129,8 +130,12 @@ const createComment = ({ result, type }: { result: Result; type: Every }) => {
 const onbeforeunload = (e: BeforeUnloadEvent) => {
   e.preventDefault();
 };
-
+const onchange = () => {
+  window.addEventListener('beforeunload', onbeforeunload);
+};
 export const SlackReminderCommandGenerator = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
   const [type, setType] = useState<Every>('毎日・毎週');
   const [who, setWho] = useState('');
   const [message, setMessage] = useState('');
@@ -157,8 +162,11 @@ export const SlackReminderCommandGenerator = () => {
   });
 
   useEffect(() => {
-    window.addEventListener('beforeunload', onbeforeunload);
+    const form = ref.current;
+
+    form?.addEventListener('change', onchange);
     return () => {
+      form?.removeEventListener('change', onchange);
       window.removeEventListener('beforeunload', onbeforeunload);
       if (copyButtonSettimeoutId) {
         clearTimeout(copyButtonSettimeoutId);
@@ -295,7 +303,7 @@ export const SlackReminderCommandGenerator = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-4 py-10 shadow-md sm:px-12 sm:py-14">
+      <div className="mx-auto max-w-5xl rounded-2xl bg-white p-4 py-10 shadow-md sm:px-12 sm:py-14" ref={ref}>
         <div className="mx-auto max-w-2xl">
           <div className="mb-12">
             <TextField
@@ -542,8 +550,8 @@ export const SlackReminderCommandGenerator = () => {
                 }, 2000);
               }}
             >
-              <img src="/common/images/icons/copy.svg" alt="" className="size-4" />
-              <span className="leading-4" aria-live="assertive">
+              <Image src="/common/images/icons/copy.svg" alt="" className="size-4" />
+              <span className="leading-4" aria-live="assertive" title="出力結果をコピー">
                 Copy
               </span>
             </button>
