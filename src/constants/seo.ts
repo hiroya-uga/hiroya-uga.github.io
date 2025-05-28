@@ -321,7 +321,7 @@ export const SEO: Record<string, { title: string; description: string }> = {
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
   '/tools/slack-reminder-command-generator': {
-    title: 'Slack reminder command generator',
+    title: 'Slack reminder command generator - Slackのリマインダーコマンド作成ツール',
     description:
       'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
   },
