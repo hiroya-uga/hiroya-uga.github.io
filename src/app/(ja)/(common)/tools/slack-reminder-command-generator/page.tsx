@@ -9,7 +9,7 @@ export const metadata = getMetadata('/tools/slack-reminder-command-generator');
 export default function Page() {
   return (
     <>
-      <PageTitle title={metadata.pageTitle}>
+      <PageTitle title={metadata.pageTitle} following={metadata.following}>
         {metadata.description.split('\n').map((description) => {
           return <p key={description}>{description}</p>;
         })}

@@ -1,6 +1,9 @@
 import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/meta';
 
-export const SEO: Record<string, { title: string; description: string }> = {
+export const SEO: Record<
+  string,
+  { title: string; description: string; beforeSubTitle?: string; afterSubTitle?: string }
+> = {
   '/': {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
@@ -299,7 +302,8 @@ export const SEO: Record<string, { title: string; description: string }> = {
     description: '作ったものをまとめている階層です。',
   },
   '/tools/an-alt-decision-tree': {
-    title: 'An alt Decision Treeに基づく代替テキスト２択チャート',
+    beforeSubTitle: 'An alt Decision Treeに基づく',
+    title: '代替テキスト２択チャート',
     description:
       'An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。',
   },
@@ -321,7 +325,8 @@ export const SEO: Record<string, { title: string; description: string }> = {
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
   '/tools/slack-reminder-command-generator': {
-    title: 'Slack reminder command generator - Slackのリマインダーコマンド作成ツール',
+    title: 'Slack reminder command generator',
+    afterSubTitle: 'Slackのリマインダーコマンド作成ツール',
     description:
       'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
   },
