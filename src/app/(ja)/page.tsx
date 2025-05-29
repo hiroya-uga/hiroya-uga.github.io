@@ -176,7 +176,9 @@ export default function Home() {
 
         <div className="px-[var(--content-padding-inline)]">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-4 text-xl font-bold sm:text-2xl">Media</h2>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl">Media</h2>
+
+            <p className="mb-4">{getMetadata('/documents/media').description}</p>
 
             <table className="mb-2">
               <tbody>
@@ -200,7 +202,7 @@ export default function Home() {
             </table>
 
             <p className="mb-12 text-right sm:mb-28">
-              <Button href="/documents/media/">Media一覧を見る</Button>
+              <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
             </p>
 
             <h2 className="mb-2 text-xl font-bold sm:text-2xl">Bookmarks</h2>
