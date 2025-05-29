@@ -279,8 +279,8 @@ export const SEO: Record<string, { title: string; description: string }> = {
   // ['web-speech-api', false],
   // ['youtubeHTML5embed', false],
   '/documents/media': {
-    title: 'Media',
-    description: '社内ブログや動画コンテンツへの参加、寄稿などのリンクをまとめています。',
+    title: '外部メディアリンク一覧',
+    description: '執筆・関与したブログ記事や動画コンテンツ、寄稿などへのリンクをまとめています。',
   },
   '/documents/fantasized-specs': {
     title: 'Fantasized specs',
