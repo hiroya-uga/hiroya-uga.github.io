@@ -550,7 +550,7 @@ export const SlackReminderCommandGenerator = () => {
                 }, 2000);
               }}
             >
-              <Image src="/common/images/icons/copy.svg" alt="" className="size-4" />
+              <Image src="/common/images/icons/copy.svg" alt="" className="size-4" width={16} height={16} />
               <span className="leading-4" aria-live="assertive" title="出力結果をコピー">
                 Copy
               </span>

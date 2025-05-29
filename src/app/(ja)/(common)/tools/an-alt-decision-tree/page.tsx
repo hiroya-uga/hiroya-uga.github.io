@@ -8,7 +8,7 @@ export const metadata = getMetadata('/tools/an-alt-decision-tree');
 export default function Page() {
   return (
     <>
-      <PageTitle title="代替テキスト２択チャート" previous="An alt Decision Treeに基づく">
+      <PageTitle title={metadata.pageTitle} previous={metadata.previous}>
         <p>
           <code>img</code>要素の<code>alt</code>属性は省略せず、適切な値を設定する必要があります。
         </p>
