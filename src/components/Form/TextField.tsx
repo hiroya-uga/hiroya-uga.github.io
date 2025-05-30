@@ -1,6 +1,15 @@
 'use client';
 
-import { forwardRef, Ref, useEffect, useId, useRef, useState } from 'react';
+import {
+  forwardRef,
+  InputHTMLAttributes,
+  Ref,
+  TextareaHTMLAttributes,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 import Image from 'next/image';
 import { Required } from '@/components/Badge/Required';
 
@@ -17,12 +26,13 @@ type Props = {
   | {
       multiline: true;
       autoResize?: boolean;
-      onInput?: React.FormEventHandler<HTMLTextAreaElement>;
+      onInput?: TextareaHTMLAttributes<HTMLTextAreaElement>['onInput'];
     }
   | {
       multiline?: false;
-      type?: string;
-      onInput?: React.FormEventHandler<HTMLInputElement>;
+      type?: InputHTMLAttributes<HTMLInputElement>['type'];
+      onInput?: InputHTMLAttributes<HTMLInputElement>['onInput'];
+      autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
     }
 );
 

@@ -311,6 +311,7 @@ export const SlackReminderCommandGenerator = () => {
               placeholder="me, #channel, @user"
               value={who}
               onInput={(e) => setWho(e.currentTarget.value)}
+              autoComplete="off"
             />
           </div>
 
