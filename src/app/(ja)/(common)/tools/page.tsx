@@ -11,6 +11,7 @@ export default function Page() {
     <>
       <PageTitle title={metadata.pageTitle}>
         <p>{metadata.description}</p>
+        <p>入力された値は当サイト側で計測・収集しておりません。</p>
       </PageTitle>
 
       <SimpleDescriptionList

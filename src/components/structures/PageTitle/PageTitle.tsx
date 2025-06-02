@@ -4,12 +4,14 @@ export const PageTitle = ({
   title,
   previous,
   following,
+  description,
   children,
 }: {
   title: string;
   previous?: string;
   following?: string;
   children?: React.ReactNode;
+  description?: string;
 }) => {
   const hasSubtitle = Boolean(previous || following);
   return (
@@ -38,6 +40,9 @@ export const PageTitle = ({
           title
         )}
       </h1>
+      {description?.split('\n').map((description) => {
+        return <p key={description}>{description}</p>;
+      })}
       {children}
     </div>
   );

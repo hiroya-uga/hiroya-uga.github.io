@@ -288,7 +288,7 @@ export default function Home() {
                   </span>
                 </span>
                 <span className="w-40">
-                  <Image width={160} height={160} src="/profile.png" alt="" />
+                  <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" />
                 </span>
               </p>
 
@@ -298,7 +298,7 @@ export default function Home() {
                   <p className="sm:palt inline-block">
                     「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
                   </p>
-                  <p>アイコンは昔の上司がスマホで描いて送ってくれた似顔絵。</p>
+                  <p>アイコンは昔の上司がスマホで描いて送ってくれた私の似顔絵。</p>
                 </div>
               </div>
             </div>
