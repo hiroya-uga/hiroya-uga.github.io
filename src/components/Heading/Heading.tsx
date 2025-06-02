@@ -12,7 +12,7 @@ export const Heading = ({ level = 2, children, keepUseMarginTop = false }: Props
       return (
         <h2
           className={clsx([
-            'mb-[0.5625lh] text-xl font-bold leading-snug sm:text-2xl',
+            'mb-paragraph text-xl font-bold leading-snug sm:text-2xl',
             keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : '[&:not(:first-child)]:mt-[2.5lh]',
           ])}
         >

@@ -24,7 +24,7 @@ export default function Home() {
           <div className="items-center text-center lg:mb-2 lg:flex">
             <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl lg:mb-0">{metadata.pageTitle}</h1>
             <p className="text-xs">
-              <span className="hidden px-2 md:inline">-</span>
+              <span className="hidden px-2 lg:inline">-</span>
               <span>
                 Web標準とアクセシビリティの話が好きな、
                 <span className="inline-block">大器晩成型のフロントエンドエンジニアの物置。</span>
@@ -180,7 +180,7 @@ export default function Home() {
 
             <p className="mb-4">{getMetadata('/documents/media').description}</p>
 
-            <table className="mb-2">
+            <table className="mb-4 sm:mb-2">
               <tbody>
                 {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
                   return (
