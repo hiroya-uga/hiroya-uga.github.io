@@ -17,10 +17,10 @@ export default function Page() {
         <p>メモ書きや、ちょっとしたツールなどが置いてあります。</p>
       </PageTitle>
 
-      <Heading level={2}>当サイトのご利用について</Heading>
+      <Heading level={2}>ご利用にあたって</Heading>
 
       <p>ご利用いただく際の留意事項や当サイトの方針を以下にまとめております。</p>
-      <p className="mb-6">
+      <p className="mb-paragraph">
         不明な点がございましたら
         <TextLink href="/contact">お問い合わせ</TextLink>よりご連絡ください。
       </p>
@@ -40,7 +40,7 @@ export default function Page() {
 
       <div className="mt-14 sm:mt-16 sm:grid sm:grid-cols-[33%,_1fr] sm:items-start sm:gap-6">
         <div className="sm:sticky sm:top-6">
-          <Heading level={2}>サイト管理者について</Heading>
+          <Heading level={2}>管理人について</Heading>
 
           <p className="mx-auto mb-4 flex max-w-[22.5rem] flex-row-reverse items-center gap-4 leading-none sm:grid sm:place-items-center sm:gap-x-6">
             <span className="w-40">
@@ -78,7 +78,7 @@ export default function Page() {
                 answer: '本名',
               },
               { title: '性別', answer: '' },
-              { title: '誕生日', answer: '早生まれって割とうれしいことのほうが多い気がしてますけれど、気のせい？' },
+              { title: '誕生日', answer: '早生まれって割とうれしいことのほうが多い気がしてますけれど、気のせい？👀' },
               { title: '星座', answer: '' },
               { title: '血液型', answer: '' },
               { title: '前世', answer: '' },
@@ -114,7 +114,7 @@ export default function Page() {
                 title: '好きな言葉',
                 answer: (
                   <>
-                    <figure className="mb-2 w-fit">
+                    <figure className="mb-1 w-fit">
                       <blockquote cite="https://naruto-official.com/comics/01_92">
                         <p>
                           自分を信じない奴なんかに<span className="inline-block">努力する価値はない!!!</span>
@@ -198,7 +198,7 @@ export default function Page() {
               { title: '生まれ変わったら', answer: '' },
               {
                 title: '世界平和に必要なのは',
-                answer: 'あれこれ考えてしまって軽率にこういう質問が答えられなくなってしまった自分が悲しい',
+                answer: 'あれこれ考えてしまって軽率にこういう質問が答えられなくなってしまった自分が悲しい🕸️',
               },
               {
                 title: '兎に角主張したい事',

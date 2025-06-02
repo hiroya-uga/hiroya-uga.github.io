@@ -115,37 +115,52 @@ export const Footer = () => {
           <div
             className={clsx(
               isTop && 'max-w-content',
-              'mx-auto border-t border-t-gray-400 pb-10 pt-3 text-center sm:pb-12',
+              'mx-auto border-t border-t-gray-400 py-10 text-center',
+              'sm:flex sm:flex-wrap sm:justify-center sm:gap-6 sm:pb-12 sm:pt-6',
             )}
           >
-            <ul className="mb-4 flex flex-wrap justify-end text-xs">
+            <ul className="mb-4 space-y-2 text-sm sm:mb-0 sm:flex sm:grow sm:flex-wrap sm:justify-start sm:gap-y-2 sm:space-y-0 sm:text-xs">
               <li>
                 <a href="/about" className="text-inherit">
-                  当サイトについて
+                  当サイトおよび管理人について
                 </a>
               </li>
-              <li className="before:mx-2 before:content-['|']">
+              <li className="sm:before:mx-2.5 sm:before:content-['|']">
                 <a href="/privacy-policy" className="text-inherit">
                   プライバシーポリシー
                 </a>
               </li>
-              <li className="before:mx-2 before:content-['|']">
+              <li className="sm:before:mx-2.5 sm:before:content-['|']">
                 <a href="/disclaimer" className="text-inherit">
                   免責事項
                 </a>
               </li>
-              <li className="before:mx-2 before:content-['|']">
+              <li className="sm:before:mx-2.5 sm:before:content-['|']">
                 <a href="/contact" className="text-inherit">
                   お問い合わせ
+                </a>
+              </li>
+              <li className="sm:before:mx-2.5 sm:before:content-['|']">
+                <a
+                  href="https://github.com/hiroya-uga/hiroya-uga.github.io/issues"
+                  className="text-inherit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  フィードバック{' '}
+                  <Image
+                    src="/common/images/icons/new-window-black.svg"
+                    alt="新しいタブで開く"
+                    className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
+                    width={16}
+                    height={16}
+                  />
                 </a>
               </li>
             </ul>
             <p className="text-xs">
               {/* text-[100%] for bootstrap pages */}
-              <small className="text-[100%]">&copy; {SITE_NAME}</small> -{' '}
-              <a href="https://github.com/hiroya-uga/hiroya-uga.github.io" className="text-inherit">
-                Repository
-              </a>
+              <small className="text-[100%]">&copy; {SITE_NAME}</small>
             </p>
           </div>
         </div>

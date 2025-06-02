@@ -42,12 +42,12 @@ export default function Page() {
 
       <Heading level={2}>アクセス解析</Heading>
 
-      <p className="mb-6">
+      <p className="mb-paragraph">
         当サイトでは、ウェブサイトの利用状況の分析および改善を目的として、Google, Inc.が提供するGoogle
         Analyticsを利用しています。Google
         Analyticsは、クッキー（Cookie）を使用して、ユーザーの閲覧情報を匿名で収集します。これにより、ユーザーの個人を特定する情報（氏名、住所、電話番号など）は収集されません。
       </p>
-      <p className="mb-6">
+      <p className="mb-paragraph">
         収集されたデータは、Googleのサーバーに送信され、ウェブサイトの利用状況（アクセス数、閲覧ページ、滞在時間など）を分析するために使用されます。このデータは、Googleのプライバシーポリシーに基づいて管理されます。Google
         Analyticsの詳細およびGoogleのプライバシーポリシーについては、以下のリンクをご覧ください。
       </p>
@@ -67,16 +67,14 @@ export default function Page() {
         ]}
       />
 
-      <p className="my-6">
+      <p className="my-paragraph">
         ユーザーは、ブラウザの設定でクッキーの使用を無効にすることで、Google
         Analyticsによるデータ収集を拒否することができます。ただし、その場合、ウェブサイトの一部の機能が制限される可能性があります。
       </p>
 
-      <p className="mb-8">
-        当サイトの利用により、Googleおよび当サイト管理者による上記のデータ処理に同意したものとみなされます。
-      </p>
+      <p>当サイトの利用により、Googleおよび当サイト管理者による上記のデータ処理に同意したものとみなされます。</p>
 
-      <p className="grid place-items-center">
+      <p className="mt-6 grid place-items-center sm:mt-8">
         <Button href="https://tools.google.com/dlpage/gaoptout" target="_blank">
           アクセス解析を拒否する
         </Button>
