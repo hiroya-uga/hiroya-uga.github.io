@@ -56,7 +56,7 @@ export default function Page() {
             <a className="Page_link__nDiOM" href="/">
               {DOMAIN_NAME}
             </a>{' '}
-            ホーム ページを開いてから、表示する情報へのリンクを探してください。
+            ホームページを開いてから、表示する情報へのリンクを探してください。
           </li>
           {historyLength !== 1 && (
             <li>

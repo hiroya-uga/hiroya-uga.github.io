@@ -1,23 +1,25 @@
 import Image from 'next/image';
-import Link, { LinkProps } from 'next/link';
+import Link from 'next/link';
 import { AnchorHTMLAttributes } from 'react';
 
-export const Button = ({
-  children,
-  ...props
-}: Omit<LinkProps, 'className'> & {
+type Props = {
+  href: string;
   children: React.ReactNode;
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target'];
-}) => {
+};
+
+export const TextLink = ({ href, children, target }: Props) => {
   return (
     <Link
-      {...props}
-      className="inline-block rounded-lg bg-slate-200 px-4 py-3 text-sm text-black no-underline transition-colors hover:bg-slate-300"
+      href={href}
+      className="mx-[0.2em] leading-[inherit]"
+      target={target}
+      rel={target === '_blank' ? 'noreferrer' : undefined}
     >
       {children}
-      {props.target === '_blank' && (
+      {target === '_blank' && (
         <Image
-          src="/common/images/icons/new-window-black.svg"
+          src="/common/images/icons/new-window.svg"
           alt="新しいタブで開く"
           className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
           width={16}

@@ -1,0 +1,93 @@
+import { Button, TextLink } from '@/components/Clickable';
+import { Heading } from '@/components/Heading';
+import { SimpleLinkList } from '@/components/List';
+import { PageTitle } from '@/components/structures/PageTitle';
+
+import { getMetadata } from '@/utils/seo';
+
+export const metadata = getMetadata('/privacy-policy');
+
+export default function Page() {
+  return (
+    <>
+      <PageTitle title={metadata.pageTitle} description={metadata.description}>
+        <p className="mt-4 text-right">制定日: 2025年06月02日</p>
+      </PageTitle>
+
+      <Heading level={2}>適用範囲</Heading>
+      <p>
+        本プライバシーポリシーは、当サイトで提供されるツールや情報（以下、コンテンツ）をご利用いただく際に適用されます。
+      </p>
+      <p>当サイトからリンクされた先のWebサイトのプライバシーポリシーについては、当サイトは一切の責任を負いかねます。</p>
+
+      <Heading level={2}>Cookieと類似技術について</Heading>
+
+      <p>
+        当サイトでは、ツールの利便性向上のために、ユーザーの入力内容や設定を
+        <TextLink href="https://ja.wikipedia.org/wiki/HTTP_cookie" target="_blank">
+          Cookie
+        </TextLink>
+        や
+        <TextLink
+          href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8"
+          target="_blank"
+        >
+          Web storage
+        </TextLink>
+        を用いてお使いのブラウザに保存することがありますが、当サイトがこれらを第三者のサーバに送信することはありません。
+      </p>
+      <p>また、ブラウザに保存された情報はお使いのブラウザの機能から削除でき、有効・無効の切り替えも行えます。</p>
+
+      <p>ただし、サーバーの仕様上、IPアドレス、ブラウザの種類、アクセス日時などが記録される場合があります。</p>
+
+      <Heading level={2}>アクセス解析</Heading>
+
+      <p className="mb-6">
+        当サイトでは、ウェブサイトの利用状況の分析および改善を目的として、Google, Inc.が提供するGoogle
+        Analyticsを利用しています。Google
+        Analyticsは、クッキー（Cookie）を使用して、ユーザーの閲覧情報を匿名で収集します。これにより、ユーザーの個人を特定する情報（氏名、住所、電話番号など）は収集されません。
+      </p>
+      <p className="mb-6">
+        収集されたデータは、Googleのサーバーに送信され、ウェブサイトの利用状況（アクセス数、閲覧ページ、滞在時間など）を分析するために使用されます。このデータは、Googleのプライバシーポリシーに基づいて管理されます。Google
+        Analyticsの詳細およびGoogleのプライバシーポリシーについては、以下のリンクをご覧ください。
+      </p>
+
+      <SimpleLinkList
+        list={[
+          {
+            title: 'Google Analyticsの利用規約',
+            href: 'https://www.google.com/analytics/terms/jp.html',
+            target: '_blank',
+          },
+          {
+            title: 'Googleのプライバシーポリシー',
+            href: 'https://policies.google.com/privacy?hl=ja',
+            target: '_blank',
+          },
+        ]}
+      />
+
+      <p className="my-6">
+        ユーザーは、ブラウザの設定でクッキーの使用を無効にすることで、Google
+        Analyticsによるデータ収集を拒否することができます。ただし、その場合、ウェブサイトの一部の機能が制限される可能性があります。
+      </p>
+
+      <p className="mb-8">
+        当サイトの利用により、Googleおよび当サイト管理者による上記のデータ処理に同意したものとみなされます。
+      </p>
+
+      <p className="grid place-items-center">
+        <Button href="https://tools.google.com/dlpage/gaoptout" target="_blank">
+          アクセス解析を拒否する
+        </Button>
+      </p>
+
+      <Heading level={2}>第三者への提供</Heading>
+
+      <p>コンテンツに入力されたデータや個人情報は、法令に基づく場合を除き第三者に提供されません。</p>
+      <p>
+        ただし、本ツールが外部APIやサービスを利用する場合、それらのサービスのプライバシーポリシーが適用される場合があります。
+      </p>
+    </>
+  );
+}

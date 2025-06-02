@@ -11,6 +11,7 @@ import {
   useState,
 } from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
 import { Required } from '@/components/Badge/Required';
 
 type Props = {
@@ -133,7 +134,10 @@ const TextFieldComponent = (
             {...props}
             id={id}
             aria-describedby={descriptionId}
-            className="w-full appearance-none rounded-md border border-gray-300 bg-white p-2 text-left"
+            className={clsx([
+              'min-h-12', // for iOS 32px + 8px padding * 2 = 48px
+              'w-full appearance-none rounded-md border border-gray-300 bg-white p-2 text-left',
+            ])}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}
           />

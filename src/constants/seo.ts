@@ -8,6 +8,18 @@ export const SEO: Record<
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
   },
+  '/about': {
+    title: `${SITE_NAME}とは？`,
+    description: '当サイトについて説明しているページです。',
+  },
+  '/disclaimer': {
+    title: '免責事項',
+    description: `このページでは${SITE_NAME}（以下「当サイト」）における免責事項についてご説明します。\n本免責事項は、必要に応じて改訂される場合があります。`,
+  },
+  '/contact': {
+    title: 'お問い合わせ',
+    description: `${SITE_NAME}に関するお問い合わせはこちらから。`,
+  },
   '/documents': {
     title: '資料集',
     description: 'ドキュメント系をまとめた階層です。',
@@ -296,6 +308,10 @@ export const SEO: Record<
   '/documents/fantasized-specs/css-observer': {
     title: 'CSS Observer Module level 1 - Fantasized specs',
     description: '',
+  },
+  '/privacy-policy': {
+    title: 'プライバシーポリシー',
+    description: `このページでは${SITE_NAME}（以下「当サイト」）における個人情報の取り扱いについてご説明します。\n本プライバシーポリシーは、必要に応じて改訂される場合があります。`,
   },
   '/tools': {
     title: 'ツール集',

@@ -113,21 +113,41 @@ export const Footer = () => {
         )}
         <div className="px-[var(--content-padding-inline)]">
           <div
-            className={clsx(isTop && 'max-w-content', 'mx-auto border-t border-t-gray-400 py-10 text-center sm:pb-12')}
+            className={clsx(
+              isTop && 'max-w-content',
+              'mx-auto border-t border-t-gray-400 pb-10 pt-3 text-center sm:pb-12',
+            )}
           >
+            <ul className="mb-4 flex flex-wrap justify-end text-xs">
+              <li>
+                <a href="/about" className="text-inherit">
+                  当サイトについて
+                </a>
+              </li>
+              <li className="before:mx-2 before:content-['|']">
+                <a href="/privacy-policy" className="text-inherit">
+                  プライバシーポリシー
+                </a>
+              </li>
+              <li className="before:mx-2 before:content-['|']">
+                <a href="/disclaimer" className="text-inherit">
+                  免責事項
+                </a>
+              </li>
+              <li className="before:mx-2 before:content-['|']">
+                <a href="/contact" className="text-inherit">
+                  お問い合わせ
+                </a>
+              </li>
+              <li className="before:mx-2 before:content-['|']">
+                <a href="https://github.com/hiroya-uga/hiroya-uga.github.io" className="text-inherit">
+                  リポジトリ
+                </a>
+              </li>
+            </ul>
             <p className="text-xs">
               {/* text-[100%] for bootstrap pages */}
-              <small className="text-[100%]">
-                &copy;{' '}
-                {isTop ? (
-                  SITE_NAME
-                ) : (
-                  <a href="/" className="text-inherit">
-                    {SITE_NAME}
-                  </a>
-                )}
-              </small>{' '}
-              - <a href="https://github.com/hiroya-uga/hiroya-uga.github.io">GitHub</a>
+              <small className="text-[100%]">&copy; {SITE_NAME}</small>
             </p>
           </div>
         </div>
