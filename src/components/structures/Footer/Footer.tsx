@@ -139,15 +139,13 @@ export const Footer = () => {
                   お問い合わせ
                 </a>
               </li>
-              <li className="before:mx-2 before:content-['|']">
-                <a href="https://github.com/hiroya-uga/hiroya-uga.github.io" className="text-inherit">
-                  リポジトリ
-                </a>
-              </li>
             </ul>
             <p className="text-xs">
               {/* text-[100%] for bootstrap pages */}
-              <small className="text-[100%]">&copy; {SITE_NAME}</small>
+              <small className="text-[100%]">&copy; {SITE_NAME}</small> -{' '}
+              <a href="https://github.com/hiroya-uga/hiroya-uga.github.io" className="text-inherit">
+                Repository
+              </a>
             </p>
           </div>
         </div>

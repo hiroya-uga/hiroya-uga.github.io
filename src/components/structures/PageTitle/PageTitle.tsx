@@ -18,8 +18,10 @@ export const PageTitle = ({
     <div className="mb-14 sm:mb-20">
       <h1
         className={clsx([
-          hasSubtitle ? 'leading-none' : 'text-3xl font-bold leading-relaxed sm:text-[2.625rem]',
-          '[&:not(:last-child)]:mb-4',
+          hasSubtitle
+            ? '[&:not(:last-child)]:mb-6'
+            : 'text-3xl font-bold leading-relaxed sm:text-[2.625rem] [&:not(:last-child)]:mb-4',
+          'leading-relaxed',
         ])}
       >
         {hasSubtitle ? (
@@ -29,9 +31,11 @@ export const PageTitle = ({
                 {previous}
               </span>
             )}
-            <strong className="block text-3xl font-bold leading-relaxed sm:text-[2.625rem]">{title}</strong>
+            <strong className="block min-h-[3.046875rem] pt-1 text-3xl font-bold leading-snug sm:text-[2.625rem]">
+              {title}
+            </strong>
             {following && (
-              <span className="text-md relative mb-6 block pl-9 font-bold before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black">
+              <span className="relative mt-3 block pl-9 font-bold leading-normal before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black sm:mt-2 sm:text-lg">
                 {following}
               </span>
             )}
