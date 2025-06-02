@@ -1,5 +1,7 @@
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
+
+import Head from 'next/head';
+
 import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
 
 import '@/pages/globals.css';

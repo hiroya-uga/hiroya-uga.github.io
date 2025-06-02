@@ -8,10 +8,6 @@ module.exports = {
   endOfLine: 'lf',
   htmlWhitespaceSensitivity: 'ignore',
 
-  importOrder: ['^(react/(.*)$)|^(react(.*)$)', '^[^@](.*)$'],
-  importOrderSeparation: true,
-  importOrderSortSpecifiers: true,
-
   overrides: [
     {
       files: ['**/*.css'],
@@ -21,5 +17,5 @@ module.exports = {
     },
   ],
 
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-organize-imports'],
 };

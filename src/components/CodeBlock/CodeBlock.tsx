@@ -2,7 +2,6 @@ import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
 import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml';
-import jsx from 'highlight.js/lib/languages/tsx';
 
 type Props = {
   className?: string;

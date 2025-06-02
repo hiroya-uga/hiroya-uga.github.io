@@ -1,5 +1,4 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/fantasized-specs');

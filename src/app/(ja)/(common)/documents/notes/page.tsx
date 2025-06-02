@@ -1,13 +1,13 @@
 // app/articles/page.js
 import fs from 'fs';
 import path from 'path';
-import Link from 'next/link';
-import matter from 'gray-matter';
-import Image from 'next/image';
 
 import clsx from 'clsx';
-import { PageTitle } from '@/components/structures/PageTitle';
+import matter from 'gray-matter';
+import Image from 'next/image';
+import Link from 'next/link';
 
+import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/notes');

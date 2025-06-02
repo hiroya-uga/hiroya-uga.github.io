@@ -1,5 +1,4 @@
 import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/figure-figcaption');

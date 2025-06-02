@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
-import { Toc } from '@/components/specific/documents/Toc';
 
+import clsx from 'clsx';
+
+import { Toc } from '@/components/specific/documents/Toc';
 import styles from '@/components/specific/documents/notes/TocForArticle.module.css';
 
 export const TocForArticle = () => {

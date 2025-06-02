@@ -1,7 +1,7 @@
 import Link from 'next/link';
+
 import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/transitions');

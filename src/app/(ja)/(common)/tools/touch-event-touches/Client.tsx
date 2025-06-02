@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
+
 import { NoteBox } from '@/components/Box';
 
 type Touches = Record<

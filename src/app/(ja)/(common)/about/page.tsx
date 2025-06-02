@@ -1,11 +1,12 @@
-import Image from 'next/image';
 import { Fragment } from 'react';
+
+import Image from 'next/image';
+
+import { TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
 import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
-import { TextLink } from '@/components/Clickable';
 
 export const metadata = getMetadata('/about');
 

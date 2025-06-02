@@ -1,7 +1,9 @@
 'use client';
 
 import React, { SetStateAction, useState } from 'react';
+
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import { Details } from '@/components/Box';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/externalMediaLinkList';

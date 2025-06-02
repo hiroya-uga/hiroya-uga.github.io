@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import { SiteName } from '@/components/structures/Header/SiteName';
 
 const Anchor = ({ className, children }: { className: string; children: React.ReactNode }) => {

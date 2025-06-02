@@ -1,17 +1,8 @@
-import { HTMLAttributes, useEffect, useId, useRef } from 'react';
-import React from 'react';
+import React, { HTMLAttributes, useEffect, useId, useRef } from 'react';
 
 import Image from 'next/image';
-import { CodeBlock } from '@/components/CodeBlock';
-import { Details } from '@/components/Box';
 
-// const Code = ({ code }: { code: string }) => {
-//   return (
-//     <pre className="hljs overflow-auto p-2 sm:p-4">
-//       <CodeBlock code={code} />
-//     </pre>
-//   );
-// };
+import { Details } from '@/components/Box';
 
 const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, 'children'> & { index?: number }) => {
   const ref = useRef<HTMLHeadingElement>(null);

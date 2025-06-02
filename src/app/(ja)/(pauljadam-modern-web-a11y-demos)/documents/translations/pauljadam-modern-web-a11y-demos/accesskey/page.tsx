@@ -3,6 +3,7 @@ import {
   AccesskeyValuesAsNumbers,
 } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/accesskey/Client';
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/accesskey/DocumentScript';
+
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/accesskey/page.css';
 
 import { getMetadata } from '@/utils/seo';

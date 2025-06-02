@@ -1,5 +1,6 @@
 import { Metadata as MetadataOrigin } from 'next';
-import { URL_ORIGIN, SITE_NAME } from '@/constants/meta';
+
+import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { SEO } from '@/constants/seo';
 
 export type Metadata = MetadataOrigin & {

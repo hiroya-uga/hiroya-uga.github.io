@@ -1,7 +1,8 @@
 import { DivWithOnClickEvent } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/altbgimg/Client';
-import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/altbgimg/page.css';
-import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
 
+import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/altbgimg/page.css';
+
+import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/altbgimg');
