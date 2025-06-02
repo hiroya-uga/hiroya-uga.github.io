@@ -1,15 +1,15 @@
 import { useId } from 'react';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Counter, LinkList, TopImage } from '@/app/(ja)/Client';
+import { Button } from '@/components/Clickable';
 import { Footer } from '@/components/structures/Footer';
 import { SITE_NAME } from '@/constants/meta';
-import { externalMediaLinkList } from '@/data/externalMediaLinkList';
-
 import { SNS_LINKS } from '@/constants/sns';
-import { Button } from '@/components/Clickable';
-
+import { externalMediaLinkList } from '@/data/externalMediaLinkList';
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/');

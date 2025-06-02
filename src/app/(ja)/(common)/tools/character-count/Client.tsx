@@ -1,10 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Switch } from '@/components/Form';
+
+import clsx from 'clsx';
 
 import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css';
+import { Switch } from '@/components/Form';
 
 const HALF_CHARACTERS_REGEXP = /\s|\d|[a-z]/;
 const VERTICAL_CHARACTERS_REGEXP = /\d|[a-zA-Zａ-ｚＡ-Ｚ]/;

@@ -1,6 +1,7 @@
 import React, { Children, HTMLAttributes, ReactNode } from 'react';
 
 import type { MDXComponents } from 'mdx/types';
+
 import { CodeBlock } from '@/components/CodeBlock';
 import { DISALLOWED_ID_CHARACTERS_REGEX } from '@/constants/regexp';
 

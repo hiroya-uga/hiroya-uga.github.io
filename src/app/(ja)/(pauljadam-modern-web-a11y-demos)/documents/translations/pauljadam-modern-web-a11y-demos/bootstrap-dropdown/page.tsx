@@ -1,6 +1,8 @@
 import Script from 'next/script';
-import { getMetadata } from '@/utils/seo';
+
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/DocumentScript';
+import { getMetadata } from '@/utils/seo';
+
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/page.css';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown');

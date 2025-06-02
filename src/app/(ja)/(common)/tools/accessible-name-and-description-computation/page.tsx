@@ -1,8 +1,8 @@
 import { useId } from 'react';
+
 import { AccessibleNameAndDescriptionComputation } from '@/app/(ja)/(common)/tools/accessible-name-and-description-computation/Client';
 import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/tools/accessible-name-and-description-computation');

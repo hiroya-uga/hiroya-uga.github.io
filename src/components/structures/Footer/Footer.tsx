@@ -1,13 +1,15 @@
 'use client';
 
+import { Fragment, useEffect, useState } from 'react';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Fragment, useEffect, useState } from 'react';
-import { SNS_LINKS } from '@/constants/sns';
-import { SEO } from '@/constants/seo';
+
 import { SITE_NAME } from '@/constants/meta';
+import { SEO } from '@/constants/seo';
+import { SNS_LINKS } from '@/constants/sns';
 
 const Anchor = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const pathname = usePathname() ?? '';

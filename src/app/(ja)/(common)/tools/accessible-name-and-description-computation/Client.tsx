@@ -1,7 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import clsx from 'clsx';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { NoteBox } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Switch } from '@/components/Form';

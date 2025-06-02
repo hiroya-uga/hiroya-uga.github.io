@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import { getMetadata } from '@/utils/seo';
+
 import { NoteBox } from '@/components/Box';
 import { SimpleDescriptionList } from '@/components/List';
 import { LinkToOriginal } from '@/components/specific/documents/translations/LinkToOriginal';
 import { WEB_SPEC_TRANSLATIONS_NOTE } from '@/components/specific/documents/translations/constants';
 import { RelatedResourceBox } from '@/components/specific/documents/translations/w3c/wai';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { getMetadata } from '@/utils/seo';
 
 export default function Page() {
   return (

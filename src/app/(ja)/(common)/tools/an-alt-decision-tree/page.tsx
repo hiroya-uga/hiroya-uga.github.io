@@ -1,6 +1,5 @@
 import { AnAltDecisionTreeContent } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/tools/an-alt-decision-tree');

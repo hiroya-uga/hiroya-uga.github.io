@@ -38,6 +38,7 @@
     "postcss": "^8.4.30",
     "prettier": "^3.3.3",
     "prettier-eslint-cli": "^7.1.0",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.3.3"
   },
@@ -45,12 +46,12 @@
   "scripts": {
     "build": "next build && next-sitemap",
     "dev": "next dev",
-    "eslint": "eslint .",
-    "eslint-fix": "eslint --fix .",
-    "fix": "eslint --fix . && prettier --write .",
-    "lint": "next lint",
-    "prettier": "prettier --check .",
-    "prettier-fix": "prettier --write .",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix .",
+    "fix": "yarn lint-fix && yarn format-fix",
+    "next-lint": "next lint",
+    "format": "prettier --check .",
+    "format-fix": "prettier --write .",
     "start": "next start"
   }
 }

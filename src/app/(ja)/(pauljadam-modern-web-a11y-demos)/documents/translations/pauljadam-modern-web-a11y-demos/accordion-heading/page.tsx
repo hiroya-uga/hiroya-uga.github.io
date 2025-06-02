@@ -1,5 +1,4 @@
 import { ButtonInH2 } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/accordion-heading/Client';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/accordion-heading');

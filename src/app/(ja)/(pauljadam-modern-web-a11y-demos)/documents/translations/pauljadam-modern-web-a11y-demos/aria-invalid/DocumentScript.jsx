@@ -1,9 +1,9 @@
 // @ts-nocheck
 'use client';
 
-import { useEffect } from 'react';
-
 import $ from 'jquery';
+
+import { useEffect } from 'react';
 
 // @ts-nocheck
 

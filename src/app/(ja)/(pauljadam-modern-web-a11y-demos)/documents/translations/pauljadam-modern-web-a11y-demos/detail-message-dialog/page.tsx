@@ -1,5 +1,7 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/detail-message-dialog/DocumentScript';
+
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/detail-message-dialog/page.css';
+
 import { getMetadata } from '@/utils/seo';
 
 export default function Page() {

@@ -1,6 +1,7 @@
+import { AnchorHTMLAttributes } from 'react';
+
 import Image from 'next/image';
 import Link, { LinkProps } from 'next/link';
-import { AnchorHTMLAttributes } from 'react';
 
 export const Button = ({
   children,

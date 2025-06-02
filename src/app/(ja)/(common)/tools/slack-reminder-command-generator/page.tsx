@@ -1,7 +1,6 @@
 import { SlackReminderCommandGenerator } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client';
 import { HelpLink } from '@/components/Clickable';
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/tools/slack-reminder-command-generator');

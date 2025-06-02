@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+
 import { URL_ORIGIN } from '@/constants/meta';
 
 export default function robots(): MetadataRoute.Robots {

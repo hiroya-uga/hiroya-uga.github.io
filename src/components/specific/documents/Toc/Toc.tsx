@@ -1,8 +1,9 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { marked } from 'marked';
+
 import { DISALLOWED_ID_CHARACTERS_REGEX } from '@/constants/regexp';
 
 const NestedList = ({ headingList, numberingOnly }: { headingList: HTMLHeadingElement[]; numberingOnly?: boolean }) => {

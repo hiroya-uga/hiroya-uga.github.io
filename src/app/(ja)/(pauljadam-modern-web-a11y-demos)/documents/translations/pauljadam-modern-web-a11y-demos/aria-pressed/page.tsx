@@ -1,4 +1,5 @@
 import { DocumentScript } from '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-pressed/DocumentScript';
+
 import '@/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-pressed/page.css';
 
 import { getMetadata } from '@/utils/seo';

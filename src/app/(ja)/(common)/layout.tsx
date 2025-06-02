@@ -1,4 +1,5 @@
 import '@/app/(ja)/(common)/common.css';
+
 import { Footer } from '@/components/structures/Footer';
 import { Header } from '@/components/structures/Header';
 

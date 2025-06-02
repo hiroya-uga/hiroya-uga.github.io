@@ -1,7 +1,6 @@
 import { TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
 import { PageTitle } from '@/components/structures/PageTitle';
-
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/contact');

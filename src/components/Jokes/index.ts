@@ -1,2 +1,2 @@
-export * from './Console';
 export * from './Comment';
+export * from './Console';

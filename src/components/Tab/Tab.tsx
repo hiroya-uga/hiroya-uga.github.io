@@ -1,7 +1,6 @@
+import { createContext, useCallback, useContext, useId, useMemo, useState } from 'react';
+
 import clsx from 'clsx';
-import { useCallback, useEffect, useId, useMemo, useState } from 'react';
-import { useContext } from 'react';
-import { createContext } from 'react';
 
 type Context = {
   readonly currentKey: string;
@@ -17,7 +16,7 @@ type Props = {
   Wrapper: {
     defaultCurrentKey?: string;
     children: React.ReactElement[];
-    onChange?: (currentKey: string) => void;
+    onChange?: (_: string) => void;
   };
   Panel: {
     tabKey: string;

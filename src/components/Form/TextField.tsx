@@ -10,8 +10,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import Image from 'next/image';
+
 import clsx from 'clsx';
+import Image from 'next/image';
+
 import { Required } from '@/components/Badge/Required';
 
 type Props = {

@@ -1,5 +1,7 @@
 import { DocumentScript } from '@/../_temp/DocumentScript';
+
 import '@/../_temp/page.css';
+
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('');

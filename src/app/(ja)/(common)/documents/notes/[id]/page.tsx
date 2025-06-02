@@ -1,20 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import remarkGfm from 'remark-gfm';
-import { compileMDX } from 'next-mdx-remote/rsc';
-import { marked } from 'marked';
-import matter from 'gray-matter';
-import { Metadata } from 'next/types';
-import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 
-import { SpecBlockQuote } from '@/components/SpecBlockQuote';
-import { ExampleBox } from '@/components/Box';
-import { TocForArticle } from '@/components/specific/documents/notes/TocForArticle';
-import { MainVisual } from '@/components/specific/documents/notes/MainVisual';
-import { JsonLd } from '@/components/Meta';
+import matter from 'gray-matter';
+import { marked } from 'marked';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import { Metadata } from 'next/types';
+import remarkGfm from 'remark-gfm';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/page';
+import { ExampleBox } from '@/components/Box';
+import { JsonLd } from '@/components/Meta';
+import { SpecBlockQuote } from '@/components/SpecBlockQuote';
+import { MainVisual } from '@/components/specific/documents/notes/MainVisual';
+import { TocForArticle } from '@/components/specific/documents/notes/TocForArticle';
 import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
+import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 
 export default async function Post({ params }: { params: { id: string } }) {
   const { id } = params;
