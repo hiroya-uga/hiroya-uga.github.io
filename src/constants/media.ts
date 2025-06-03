@@ -1,4 +1,4 @@
-export const mediaTypes = ['article', 'video', 'podcast', 'magazine'] as const;
+export const mediaTypes = ['article', 'video', 'podcast', 'book'] as const;
 export const mediaCategory = ['WebDev', 'Dev', 'RPA', 'Other'] as const;
 export const mediaTags = [
   'HTML',
