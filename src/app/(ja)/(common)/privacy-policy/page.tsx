@@ -10,7 +10,9 @@ export default function Page() {
   return (
     <>
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
-        <p className="mt-4 text-right">制定日: 2025年06月02日</p>
+        <div className="mt-2 text-right text-sm">
+          <p>制定日: 2025年06月02日</p>
+        </div>
       </PageTitle>
 
       <Heading level={2}>適用範囲</Heading>
