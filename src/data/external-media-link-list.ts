@@ -18,10 +18,10 @@ const list: {
     date: '2025-05-28',
     title: 'Web標準のキャッチアップ - GW中に行った技術キャッチアップや個人開発を発表するLT会を開催しました！',
     href: 'https://techblog.lycorp.co.jp/ja/20250528b#:~:text=1.-,Web%E6%A8%99%E6%BA%96%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%83%81%E3%82%A2%E3%83%83%E3%83%97,-Uga%20Hiroya%20(A11y',
-    tags: ['HTML', 'CSS', 'Accessibility'],
+    tags: ['EventReport', 'HTML', 'CSS', 'Accessibility'],
   },
   {
-    type: 'magazine',
+    type: 'book',
     category: 'WebDev',
     date: '2025-05-16',
     title: 'Software Design 2025年6月号 第1特集 これからのエンジニアの必須科目 ITアクセシビリティ入門 第4章',
@@ -75,6 +75,14 @@ const list: {
     title: '第11回MLCマークアップ部 開催レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/202001/22_1353.html',
     tags: ['EventReport', 'HTML'],
+  },
+  {
+    type: 'book',
+    category: 'WebDev',
+    date: '2019-12-14',
+    title: 'Form Design Patterns ―シンプルでインクルーシブなフォーム制作実践ガイド',
+    href: 'https://x.com/hiroya_UGA/status/1209397613272764416',
+    tags: ['HTML', 'CSS', 'JS/TS', 'Accessibility'],
   },
   {
     type: 'article',
@@ -163,6 +171,7 @@ const list: {
     date: '2019-3-28',
     title: '公共機関で加速するRPAの導入',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201903/28_1530.html',
+    tags: ['Tools'],
   },
   {
     type: 'article',
@@ -218,6 +227,7 @@ const list: {
     date: '2018-10-30',
     title: 'UiPathでWebページを操作するときはJavaScriptを活用しよう！その2',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201810/30_0905.html',
+    tags: ['JS/TS'],
   },
   {
     type: 'article',
@@ -225,6 +235,7 @@ const list: {
     date: '2018-10-24',
     title: 'JavaScriptのビルトインオブジェクトから日本語が返ってくる面白さ',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201810/24_1045.html',
+    tags: ['JS/TS'],
   },
   {
     type: 'article',
@@ -240,6 +251,7 @@ const list: {
     date: '2018-9-20',
     title: 'どこで読めるの？今さらきけない仕様書の在り処！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201809/20_1133.html',
+    tags: ['HTML', 'CSS', 'JS/TS'],
   },
   {
     type: 'article',
@@ -247,6 +259,7 @@ const list: {
     date: '2018-9-19',
     title: 'UiPathのInvoke Workflow Fileアクティビティを活用しよう！前編',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201809/19_1414.html',
+    tags: ['Tools'],
   },
   {
     type: 'article',
@@ -270,7 +283,7 @@ const list: {
     date: '2018-8-17',
     title: 'UiPathでWebページを操作するときはJavaScriptを活用しよう！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201808/17_1349.html',
-    tags: ['JS/TS'],
+    tags: ['Tools', 'JS/TS'],
   },
   {
     type: 'article',

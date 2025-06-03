@@ -9,7 +9,7 @@ import { Button } from '@/components/Clickable';
 import { Footer } from '@/components/structures/Footer';
 import { SITE_NAME } from '@/constants/meta';
 import { SNS_LINKS } from '@/constants/sns';
-import { externalMediaLinkList } from '@/data/externalMediaLinkList';
+import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/');

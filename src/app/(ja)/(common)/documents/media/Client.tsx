@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Details } from '@/components/Box';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
-import { externalMediaLinkList } from '@/data/externalMediaLinkList';
+import { externalMediaLinkList } from '@/data/external-media-link-list';
 
 const CheckBoxes = <T extends string>({
   nameSet,
