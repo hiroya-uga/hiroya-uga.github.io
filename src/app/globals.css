@@ -22,9 +22,7 @@
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --color-background: #f7f7f7;
   --content-padding-inline: 1rem;
   --mb-paragraph: 1rem;
 }
@@ -36,19 +34,22 @@
   }
 }
 
+@media screen and (min-width: 1024px) {
+  :root {
+    --content-padding-inline: 3rem;
+  }
+}
+
 @media screen and (min-width: 1536px) {
   :root {
     --content-padding-inline: 1.2rem;
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
   }
-}
+} */
 
 *,
 *::before,
@@ -81,7 +82,7 @@ body {
 body {
   line-height: 1.875;
   color: #333;
-  background: #f7f7f7;
+  background: var(--color-background);
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
 

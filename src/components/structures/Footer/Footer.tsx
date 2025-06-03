@@ -24,14 +24,14 @@ const Anchor = ({ href, children }: { href: string; children: React.ReactNode })
   if (shouldLinkComponent) {
     // Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう
     return (
-      <Link href={href} className="text-inherit">
+      <Link href={href} className="leading-inherit text-inherit">
         {children}
       </Link>
     );
   }
 
   return (
-    <a href={href} className="text-inherit">
+    <a href={href} className="leading-inherit text-inherit">
       {children}
     </a>
   );
@@ -57,7 +57,7 @@ const ListItem = () => {
           if (index === pathnames.length - 1) {
             return (
               <li key={path}>
-                <a aria-current="page" className="text-inherit">
+                <a aria-current="page" className="leading-inherit text-inherit">
                   {SEO[path].title}
                 </a>
               </li>
@@ -82,24 +82,25 @@ export const Footer = () => {
   const isTop = pathname === '/';
 
   return (
-    <div
-      className={clsx([
-        isTop ? 'mt-12 sm:mt-20' : 'mt-48',
-        'relative mx-auto w-full max-w-structure lg:px-[var(--content-padding-inline)]',
-      ])}
-    >
+    <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
       {isTop || (
-        <nav className="bg-gray-200 px-[var(--content-padding-inline)] py-4 text-sm lg:min-h-[3.75rem] lg:bg-transparent lg:pl-[var(--content-padding-inline)] lg:pr-[calc(13.5rem_+_calc(var(--content-padding-inline)_*_2))]">
-          <ol className="flex flex-wrap gap-y-1 leading-snug">{<ListItem />}</ol>
+        <nav
+          className="mx-auto max-w-structure bg-gray-200 px-[var(--content-padding-inline)] py-4 text-sm lg:bg-transparent lg:py-5 lg:pl-[var(--content-padding-inline)] lg:pr-[calc(13.5rem_+_calc(var(--content-padding-inline)_*_2))]"
+          aria-label="サイト内の現在位置"
+        >
+          <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
         </nav>
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer>
+      <footer className={clsx(isTop === false && 'bg-[#575757] text-white')}>
         {!isTop && (
-          <div className="px-[var(--content-padding-inline)] lg:px-[calc(var(--content-padding-inline)_*_2)]">
-            <div className="mx-auto py-4 text-center lg:absolute lg:right-[calc(var(--content-padding-inline)_*_2)] lg:top-0 lg:pt-1">
+          <div className="relative mx-auto max-w-structure bg-[var(--color-background)] px-[var(--content-padding-inline)]">
+            <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--content-padding-inline)_-_0.75rem)] lg:py-1">
               {/* m-0 for bootstrap pages */}
-              <ul className="m-0 flex flex-wrap items-center justify-center gap-4 lg:justify-end lg:gap-2">
+              <ul
+                className="m-0 flex flex-wrap items-center justify-center gap-4 lg:justify-end lg:gap-2"
+                aria-label="SNSリンク"
+              >
                 {SNS_LINKS.map(({ href, alt, ...props }) => {
                   return (
                     <li key={href}>
@@ -113,45 +114,45 @@ export const Footer = () => {
             </div>
           </div>
         )}
-        <div className="px-[var(--content-padding-inline)]">
+        <div className="mx-auto max-w-structure px-[var(--content-padding-inline)]">
           <div
             className={clsx(
-              isTop && 'max-w-content',
-              'mx-auto border-t border-t-gray-400 py-10 text-center',
-              'sm:flex sm:flex-wrap sm:justify-center sm:gap-6 sm:pb-12 sm:pt-6',
+              isTop && 'mx-auto max-w-content',
+              'flow-root border-t border-t-gray-400 py-12',
+              'md:flex md:flex-wrap md:justify-center md:gap-6 md:pb-20 md:pt-7',
             )}
           >
-            <ul className="mb-4 space-y-2 text-sm sm:mb-0 sm:flex sm:grow sm:flex-wrap sm:justify-start sm:gap-y-2 sm:space-y-0 sm:text-xs">
-              <li>
-                <a href="/about" className="text-inherit">
+            <ul className="text-xs md:flex md:grow md:flex-wrap md:justify-start md:gap-y-2">
+              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
+                <a href="/about" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   当サイトおよび管理人について
                 </a>
               </li>
-              <li className="sm:before:mx-2.5 sm:before:content-['|']">
-                <a href="/privacy-policy" className="text-inherit">
+              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
+                <a href="/privacy-policy" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   プライバシーポリシー
                 </a>
               </li>
-              <li className="sm:before:mx-2.5 sm:before:content-['|']">
-                <a href="/disclaimer" className="text-inherit">
+              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
+                <a href="/disclaimer" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   免責事項
                 </a>
               </li>
-              <li className="sm:before:mx-2.5 sm:before:content-['|']">
-                <a href="/contact" className="text-inherit">
+              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
+                <a href="/contact" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   お問い合わせ
                 </a>
               </li>
-              <li className="sm:before:mx-2.5 sm:before:content-['|']">
+              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0 md:after:hidden">
                 <a
                   href="https://github.com/hiroya-uga/hiroya-uga.github.io/issues"
-                  className="text-inherit"
+                  className={clsx(['text-inherit', isTop === false && '!outline-white'])}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   フィードバック{' '}
                   <Image
-                    src="/common/images/icons/new-window-black.svg"
+                    src={`/common/images/icons/new-window-${isTop ? 'black' : 'white'}.svg`}
                     alt="新しいタブで開く"
                     className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
                     width={16}
@@ -160,7 +161,7 @@ export const Footer = () => {
                 </a>
               </li>
             </ul>
-            <p className="text-xs">
+            <p className="relative top-[-0.0625rem] float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
               {/* text-[100%] for bootstrap pages */}
               <small className="text-[100%]">&copy; {SITE_NAME}</small>
             </p>
