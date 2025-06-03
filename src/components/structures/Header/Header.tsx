@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { SiteName } from '@/components/structures/Header/SiteName';
+import clsx from 'clsx';
+
+import styles from '@/components/structures/Header/Header.module.css';
 
 const Anchor = ({ className, children }: { className: string; children: React.ReactNode }) => {
   const pathname = usePathname() ?? '';
@@ -41,9 +44,14 @@ export const Header = () => {
       <div className="px-4 py-8 sm:pb-16 sm:pl-10 sm:pt-8 2xl:pt-16">
         <div className="relative mx-auto max-w-structure">
           <p className="relative -left-4 -top-2 2xl:left-0">
-            <Anchor className="group inline-block rounded-md px-4 py-2 no-underline lg:transition-colors lg:delay-0 lg:duration-300 lg:hover:bg-white lg:focus:bg-white">
+            <Anchor className="group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300 sm:hover:bg-white sm:focus:bg-white">
               <span className="underline">../</span>
-              <span className="ml-4 group-hover:opacity-100 group-focus:opacity-100 lg:opacity-0 lg:transition-opacity lg:delay-0 lg:duration-300">
+              <span
+                className={clsx([
+                  styles.opacity0,
+                  'ml-2.5 transition-opacity delay-0 duration-300 group-hover:opacity-100 group-focus:opacity-100',
+                ])}
+              >
                 １つ上のページへ戻る
               </span>
             </Anchor>
