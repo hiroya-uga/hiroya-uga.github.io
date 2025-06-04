@@ -173,7 +173,25 @@ export default function Page() {
               { title: '好きなブランド', answer: '' },
               { title: '愛用の香水', answer: '' },
               { title: '好きな花', answer: '' },
-              { title: '好きなゲーム', answer: '' },
+              {
+                title: '好きなゲーム',
+                answer:
+                  [
+                    'スプラ',
+                    'DEATH STRANDING',
+                    'NieR:Automata/Replicant',
+                    '龍が如く',
+                    'METAL GEAR SOLID',
+                    'UNDERTALE',
+                    'Devil May Cry',
+                    'ロックマンエグゼ２〜３',
+                    'ロックマンX6',
+                    'テイルズウィーバー',
+                    'MixMaster',
+                    'サドンアタック',
+                    'ポケモン金・銀',
+                  ].join('、') + 'などなど',
+              },
               { title: '愛車', answer: '' },
               {
                 title: '将来の夢',
