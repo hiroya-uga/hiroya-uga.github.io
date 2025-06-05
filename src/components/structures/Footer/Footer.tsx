@@ -92,7 +92,9 @@ export const Footer = () => {
         </nav>
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer className={clsx(isTop === false && 'bg-[#575757] text-white')}>
+      <footer
+        className={clsx(isTop ? 'bg-[#575757] text-white sm:bg-inherit sm:text-inherit' : 'bg-[#575757] text-white')}
+      >
         {!isTop && (
           <div className="relative mx-auto max-w-structure bg-[var(--color-background)] px-[var(--content-padding-inline)]">
             <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--content-padding-inline)_-_0.75rem)] lg:py-1">
@@ -151,13 +153,32 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                 >
                   フィードバック{' '}
-                  <Image
-                    src={`/common/images/icons/new-window-${isTop ? 'black' : 'white'}.svg`}
-                    alt="新しいタブで開く"
-                    className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
-                    width={16}
-                    height={16}
-                  />
+                  {isTop ? (
+                    <>
+                      <Image
+                        src={`/common/images/icons/new-window-white.svg`}
+                        alt="新しいタブで開く"
+                        className="mb-[0.2em] ml-[0.2em] inline-block size-[1em] sm:hidden"
+                        width={16}
+                        height={16}
+                      />
+                      <Image
+                        src={`/common/images/icons/new-window-black.svg`}
+                        alt="新しいタブで開く"
+                        className="mb-[0.2em] ml-[0.2em] hidden size-[1em] sm:inline-block"
+                        width={16}
+                        height={16}
+                      />
+                    </>
+                  ) : (
+                    <Image
+                      src={`/common/images/icons/new-window-white.svg`}
+                      alt="新しいタブで開く"
+                      className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
+                      width={16}
+                      height={16}
+                    />
+                  )}
                 </a>
               </li>
             </ul>
