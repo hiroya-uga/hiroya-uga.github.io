@@ -66,6 +66,7 @@ export default function Page() {
             「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
           </p>
           <p>アイコンは昔の上司がスマホで描いて送ってくれた私の似顔絵。</p>
+          <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
         <div className="mt-8 sm:mt-1">
           <dl className="text-sm">
@@ -120,12 +121,12 @@ export default function Page() {
                   <>
                     <figure className="mb-1 w-fit">
                       <blockquote cite="https://naruto-official.com/comics/01_92">
-                        <p>
+                        <p className=' before:content-["「"] after:content-["」"] '>
                           自分を信じない奴なんかに<span className="inline-block">努力する価値はない!!!</span>
                         </p>
                       </blockquote>
                       <figcaption className="text-xs">
-                        <cite className='not-italic before:content-["—_"]'>
+                        <cite className='pl-2 not-italic before:content-["—_"]'>
                           <a href="https://naruto-official.com/comics/01_92">NARUTO 10巻 84話「努力の天才…!!」</a>
                         </cite>
                         より
@@ -134,12 +135,12 @@ export default function Page() {
 
                     <figure className="w-fit">
                       <blockquote cite="https://www.tcc.gr.jp/copira/id/87413/">
-                        <p>
+                        <p className=' before:content-["「"] after:content-["」"] '>
                           風はすべて追い風。<span className="inline-block">わたしがどこを向くかだ。</span>
                         </p>
                       </blockquote>
                       <figcaption className="text-xs">
-                        <cite className='not-italic before:content-["—_"]'>
+                        <cite className='pl-2 not-italic before:content-["—_"]'>
                           <a href="https://www.tcc.gr.jp/copira/id/87413/">東京コピーライターズクラブ</a>
                         </cite>
                         より
