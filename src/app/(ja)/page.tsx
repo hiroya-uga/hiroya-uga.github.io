@@ -120,10 +120,12 @@ export default function Home() {
                           {/* {item.isWip && <b>（WIP）</b>} */}
                         </span>
                         <span
-                          className="mb-3 grid aspect-[1.618_/_1] place-content-center overflow-hidden rounded-md bg-gray-200 font-emoji text-5xl leading-none"
+                          className="mb-3 grid aspect-[1.618_/_1] place-content-center overflow-hidden rounded-md bg-gray-200 font-emoji text-[3.5rem] leading-none"
                           aria-hidden="true"
                         >
-                          <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
+                          <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 [backface-visibility:hidden] group-hover:scale-100">
+                            {emoji}
+                          </span>
                         </span>
                       </Link>
                     </p>
