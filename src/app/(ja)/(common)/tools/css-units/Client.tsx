@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { Switch } from '@/components/Form';
+import { NoteList } from '@/components/List';
 import clsx from 'clsx';
+
+import styles from '@/app/(ja)/(common)/tools/css-units/css-units.module.css';
 
 const ABSOLUTE = {
   px: 'ピクセル（1px = 1in/96）',
@@ -44,6 +48,7 @@ const RELATIVE = {
     </>
   ),
   rlh: 'ルート要素の行の高さ',
+  '%': '親要素の幅の1%',
 };
 
 const VIEWPORT = {
@@ -179,7 +184,8 @@ const Line = ({
       <p
         key={unit}
         className={clsx([
-          'sticky -left-2 mb-2 mt-4 pl-2 text-sm leading-snug sm:text-lg',
+          shouldShowDescriptions ? 'mt-6' : 'mt-4',
+          'sticky -left-2 z-[1] mb-2  pl-2 text-sm leading-snug sm:text-lg',
           'sm:mt-6',
           unit === 'px' && 'font-bold',
         ])}
@@ -194,9 +200,9 @@ const Line = ({
       <div
         ref={ref}
         className={clsx([
-          'pointer-events-none relative -z-10 -mt-8 mr-8 block overflow-hidden border-b border-dashed border-black bg-slate-300 pt-7',
+          'pointer-events-none relative z-0 -mt-8 mr-8 block overflow-hidden border-b border-dashed border-black pt-7 before:absolute before:inset-0 before:bg-blue-900 before:opacity-20',
           'sm:-mt-10 sm:pt-9',
-          'after:absolute after:right-0 after:top-0 after:block after:h-full after:border-r after:border-dashed after:border-black',
+          'after:absolute after:right-0 after:top-0 after:z-[2] after:block after:h-full after:border-r after:border-dashed after:border-black',
         ])}
         style={{
           width: `${value}${unit}`,
@@ -208,7 +214,7 @@ const Line = ({
         hidden={!shouldShowDescriptions}
         className={clsx(shouldShowDescriptions && 'sticky left-0')}
       >
-        <p className="w-full pr-2 pt-1 text-sm leading-snug sm:pb-4 sm:pt-2 sm:text-base">{description}</p>
+        <p className="w-full pr-2 pt-1 text-xs sm:pb-4 sm:pt-2 sm:text-base">{description}</p>
         {note && <p className="block text-xs sm:pt-1 sm:text-sm">{note}</p>}
       </div>
     </>
@@ -227,6 +233,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
   const [viewport, setViewport] = useState('');
   const [smallViewport, setSmallViewport] = useState('');
   const [largeViewport, setLargeViewport] = useState('');
+  // FIXME: setIntervalじゃなくて普通にresizeObserverとかを使ったほうがいい
   const [dynamicViewport, setDynamicViewport] = useState('');
 
   const vRef = useRef<HTMLSpanElement>(null);
@@ -278,32 +285,37 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="sticky top-2 z-10 mb-2 flex items-center justify-end gap-x-8 rounded bg-white p-4">
-        <p className="grow text-base leading-snug">サンプルは横スクロールできます。</p>
+      <div className="sticky top-2 z-10 mb-4 rounded-md border border-solid border-gray-600 bg-white p-2 shadow-sticky sm:flex sm:items-center sm:justify-between sm:gap-x-8 sm:px-4 ">
+        <p className="text-xs text-description sm:text-inherit">サンプルは横スクロールできます。</p>
         <p>
-          <button
-            type="button"
-            aria-live="assertive"
-            aria-controls={controls}
-            className="min-w-36 rounded border border-solid border-black p-2 text-sm leading-snug sm:whitespace-nowrap sm:px-4 sm:text-base"
-            onClick={() => setShouldShowDescriptions(!shouldShowDescriptions)}
-          >
-            {shouldShowDescriptions ? '説明文を隠す' : '説明文を表示する'}
-          </button>
+          <label className="flex items-center justify-between gap-2 text-sm">
+            <span>説明文を表示する</span>
+            <Switch
+              checked={shouldShowDescriptions}
+              aria-controls={controls}
+              onClick={() => setShouldShowDescriptions(!shouldShowDescriptions)}
+            />
+          </label>
         </p>
       </div>
 
-      <p className="mb-1 flex text-sm leading-snug sm:text-base">
-        <span>※</span>
-        <small>「CSS上の値 → px換算」で表示されますが、「px換算」の値は小数点四捨五入です。</small>
-      </p>
-      <p className="mb-2 flex gap-2 text-sm leading-snug sm:text-base">
-        <span>※</span>
-        <small>各種viewportの値は1秒ごとに再取得しています。</small>
-      </p>
+      <div className="mb-6">
+        <NoteList
+          list={[
+            '「CSS上の値 → px換算」で表示されますが、「px換算」の値は小数点四捨五入です。',
+            '各種viewportの値は1秒ごとに再取得しています。',
+          ]}
+        />
+      </div>
 
-      <div className="relative rounded border border-solid border-black">
-        <div className="overflow-x-auto overflow-y-hidden p-4" tabIndex={0}>
+      <div className="relative">
+        <div
+          className={clsx([
+            styles.scroll,
+            'overflow-x-auto overflow-y-hidden p-4 before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md',
+          ])}
+          tabIndex={0}
+        >
           <h2 className="sticky left-0 m-0 mb-2 text-lg font-bold sm:text-2xl">絶対値</h2>
 
           {Object.entries(ABSOLUTE).map(([unit, description]) => {
@@ -353,6 +365,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 value={value}
                 description={description}
                 shouldShowDescriptions={shouldShowDescriptions}
+                dynamicViewport={dynamicViewport} // % のため
               />
             );
           })}
@@ -403,7 +416,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
         </div>
       </div>
 
-      <div className="sticky bottom-6 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded bg-white py-2 pl-4 pr-3">
+      <div className="sticky bottom-6 z-10 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded-md border border-gray-600 bg-white py-2 pl-4 pr-3 shadow-sticky">
         <p className="min-w-[200px] grow">
           <input
             type="range"
@@ -419,7 +432,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
           />
         </p>
         <p className="w-28">
-          <label className="flex flex-wrap gap-x-2 overflow-hidden rounded border border-black pl-1 outline-offset-4 focus-within:outline focus-within:outline-2 focus-within:outline-black">
+          <label className="flex flex-wrap gap-x-2  overflow-hidden rounded border border-black pl-1 outline-offset-4 focus-within:outline focus-within:outline-2 focus-within:outline-black">
             <span id={`${id}-label`} className="block text-2xs">
               現在の値
             </span>

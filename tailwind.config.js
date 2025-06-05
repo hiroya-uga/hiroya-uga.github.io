@@ -12,10 +12,14 @@ module.exports = {
       colors: {
         alert: '#c10000',
         required: '#fff',
+        description: '#70767e',
       },
       backgroundColor: {
         alert: '#c10000',
         required: '#b20000',
+      },
+      boxShadow: {
+        sticky: '0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
       },
       fontFamily: {
         emoji:
