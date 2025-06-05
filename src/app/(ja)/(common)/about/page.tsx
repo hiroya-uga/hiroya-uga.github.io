@@ -68,7 +68,7 @@ export default function Page() {
           <p>アイコンは昔の上司がスマホで描いて送ってくれた私の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
-        <div className="mt-8 sm:mt-1">
+        <div className="mt-8 sm:mt-[0.1875rem]">
           <dl className="text-sm">
             {[
               {
@@ -264,6 +264,64 @@ export default function Page() {
           </dl>
         </div>
       </div>
+
+      <Heading level={2}>同盟</Heading>
+
+      <ul className="flex flex-wrap items-end gap-2">
+        {[
+          {
+            href: 'https://sites.google.com/view/happy-busy/',
+            alt: '時間ねぇー',
+            src: '/about/images/jikan-ne.png',
+            width: 88,
+            height: 31,
+            title: '時間のないサイト運営者リング',
+          },
+          {
+            href: 'http://osoiyo.ma-jide.com/',
+            alt: 'かくのおそい',
+            src: '/about/images/chihitsu-doumei.gif',
+            title: '遅筆同盟',
+            width: 32,
+            height: 32,
+          },
+          {
+            href: 'http://link.9no1.gozaru.jp/',
+            src: '/about/images/koushin-osoidesu-doumei.gif',
+            alt: '遅',
+            width: 32,
+            height: 32,
+            title: '更新遅いです同盟',
+          },
+          {
+            href: 'https://flanet.web.fc2.com/union/site_enjoy/',
+            alt: '令和 個人サイト楽しみ隊！',
+            src: '/about/images/reiwa-mo-kojin-site-wo-tanoshimitai-hito-no-doumei.gif',
+            width: 88,
+            height: 31,
+            title: '令和も個人サイトを楽しみたい人の同盟',
+          },
+          {
+            href: 'https://holydragoon.jp/site_love_union',
+            alt: 'サイト好き同士の会',
+            src: '/about/images/sitesuki-doushi-no-kai.png',
+            width: 40,
+            height: 40,
+          },
+        ]
+          .sort((a, b) => {
+            if (a.height < b.height) return 1;
+            if (b.height < a.height) return -1;
+            return 0;
+          })
+          .map(({ href, alt, ...imageProps }) => (
+            <li key={href}>
+              <a href={href}>
+                <Image {...imageProps} alt={alt} className="h-[revert-layer]" />
+              </a>
+            </li>
+          ))}
+      </ul>
     </>
   );
 }
