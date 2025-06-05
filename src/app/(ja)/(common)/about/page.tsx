@@ -170,10 +170,21 @@ export default function Page() {
               { title: '好きな映画', answer: '' },
               { title: '好きな本', answer: '' },
               { title: '好きなスポーツ', answer: '' },
-              { title: '好きな音楽', answer: '' },
-              { title: '好きなブランド', answer: '' },
+              {
+                title: '好きな音楽',
+                answer: (
+                  <>
+                    <p>吹奏楽とアニソンばっかり聴いていた学生時代🥁</p>
+                    <p>
+                      Fear, and Loathing in Las
+                      Vegasさんを初めて聴いてからピコリーモが好きになったりもした。ベカスはいいぞ。そんでもって今はYouTubeで流行った曲が耳に入るくらい…
+                    </p>
+                  </>
+                ),
+              },
+              { title: '好きなブランド', answer: 'Nikon、Panasonicを信じている民' },
               { title: '愛用の香水', answer: '' },
-              { title: '好きな花', answer: '' },
+              { title: '好きな花', answer: 'ひたちなかのネモフィラはすごい' },
               {
                 title: '好きなゲーム',
                 answer:
@@ -204,7 +215,7 @@ export default function Page() {
               { title: '尊敬する人', answer: '松岡修造さん' },
               { title: '今一番欲しいもの', answer: '' },
               { title: '今一番行きたいところ', answer: '' },
-              { title: '今一番やりたいこと', answer: '' },
+              { title: '今一番やりたいこと', answer: '１ヶ月くらいなにもしないをしたい' },
               { title: 'よく使う路線', answer: '' },
               { title: 'よく遊ぶところ', answer: 'いんたーねっと' },
               { title: 'カラオケでよく歌う曲', answer: '' },
@@ -227,7 +238,7 @@ export default function Page() {
                 title: '兎に角主張したい事',
                 answer: 'Webコンテンツを発信するならアクセシビリティちゃんと大事にしよう！！！',
               },
-              { title: '疑問に思っている事', answer: '' },
+              { title: '疑問に思っている事', answer: '宇宙の外側ってなにがあるんだろう' },
               { title: 'ここだけの話', answer: 'パロディーしておいてなんですが、前略プロフ、通ってないんです。' },
               {
                 title: 'Myﾘﾝｸ',
