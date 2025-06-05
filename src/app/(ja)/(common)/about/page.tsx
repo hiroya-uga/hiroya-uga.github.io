@@ -267,6 +267,8 @@ export default function Page() {
 
       <Heading level={2}>同盟</Heading>
 
+      <p className="mb-2">古き良き同盟リンク集。</p>
+
       <ul className="flex flex-wrap items-end gap-2">
         {[
           {
@@ -307,6 +309,14 @@ export default function Page() {
             src: '/about/images/sitesuki-doushi-no-kai.png',
             width: 40,
             height: 40,
+          },
+          {
+            href: 'https://onigiru.wixsite.com/onigiri',
+            alt: 'おにぎり',
+            src: '/about/images/onigiri-doumei.gif',
+            width: 32,
+            height: 32,
+            title: 'おにぎり同盟',
           },
         ]
           .sort((a, b) => {
