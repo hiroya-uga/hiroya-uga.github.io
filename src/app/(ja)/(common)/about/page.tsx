@@ -359,7 +359,7 @@ export default function Page() {
           .map(({ href, alt, ...imageProps }) => (
             <li key={href}>
               <a href={href}>
-                <Image {...imageProps} alt={alt} className="h-[revert-layer]" />
+                <Image {...imageProps} alt={alt} className="h-[revert-layer] [image-rendering:_pixelated;]" />
               </a>
             </li>
           ))}
