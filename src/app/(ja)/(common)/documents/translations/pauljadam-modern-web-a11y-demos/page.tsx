@@ -153,7 +153,14 @@ export default function Page() {
       <ul>
         {pageList.map(([path, isExist]) => {
           const text = path.replace(/^csunmobile-|^bootcamp-/, '');
-          return <li key={path}>{isExist ? <a href={`${base}/${path}`}>{text}.html</a> : `${text}.html`}</li>;
+          return (
+            <li
+              key={path}
+              className='before:content-[""] before:size-1 before:rounded-full before:bg-black  before:block flex before:mx-1 gap-1 before:mt-3.5 [&:not(:first-child)]:mt-1'
+            >
+              {isExist ? <a href={`${base}/${path}`}>{text}.html</a> : `${text}.html`}
+            </li>
+          );
         })}
       </ul>
     </>

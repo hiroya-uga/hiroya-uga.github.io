@@ -265,7 +265,7 @@ export default function Page() {
         </div>
       </div>
 
-      <Heading level={2}>同盟</Heading>
+      <Heading level={2}>同盟・主張バナー</Heading>
 
       <p className="mb-2">古き良き同盟リンク集。</p>
 
