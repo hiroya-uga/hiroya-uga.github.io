@@ -62,11 +62,11 @@ export const SEO: Record<
     title: 'img要素のアクセシブルネームの計算',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile-accordion-bad': {
+  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-bad': {
     title: 'アコーディオンのアクセシビリティ失敗例',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile-accordion-aria': {
+  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-aria': {
     title: 'aria-*属性を利用したアコーディオンの実装例',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
@@ -183,7 +183,7 @@ export const SEO: Record<
   // ['bootcamp-contact-after-html5', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/css-content-new-window': {
     title:
-      '新しいウィンドウへのリンクであることを伝えるための、BootstrapのCSSとFont Awesome Icons、JavaScriptによるtitle属性付与n Web Accessibility Demos',
+      '新しいウィンドウへのリンクであることを伝えるために、BootstrapのCSS ContentとFont Awesome Icons、JavaScriptによるtitle属性の付与',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
   // ['css-line-through-del-ins-accessibility', false],

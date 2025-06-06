@@ -7,7 +7,7 @@ export type SimpleLnkListProps = {
   list: {
     title: React.ReactNode;
     description?: React.ReactNode;
-    href: string;
+    href: string | undefined;
     lang?: string;
     hrefLang?: string;
     target?: AnchorHTMLAttributes<HTMLAnchorElement>['target'];
@@ -18,26 +18,38 @@ export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
     <ul>
       {list.map(({ title, href, description, lang, hrefLang, target }) => {
         return (
-          <li key={href} className="flex pl-2 [&:not(:last-child)]:mb-2 sm:[&:not(:last-child)]:mb-1">
-            <span className="min-w-2 max-w-2 px-px pt-[0.8rem]">
+          <li
+            key={href}
+            className="flex pl-1 sm:pl-2 [&:not(:last-child)]:mb-6 sm:[&:not(:last-child)]:mb-6 text-sm sm:text-base"
+          >
+            <span className="min-w-1.5 max-w-1.5 sm:max-w-2 sm:min-w-2 px-px pt-3 ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" className="w-full">
                 <circle cx="50" cy="50" r="50" fill="#333" />
               </svg>
             </span>
-            <span className="pl-3">
-              <Link href={href} lang={lang} hrefLang={hrefLang} className="palt" target={target}>
-                {title}
-                {target === '_blank' && (
-                  <Image
-                    src="/common/images/icons/new-window.svg"
-                    alt="新しいタブで開く"
-                    className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
-                    width={16}
-                    height={16}
-                  />
-                )}
-              </Link>
-              {description && <span className="block text-sm sm:text-base sm:leading-relaxed">{description}</span>}
+            <span className="pl-1.5 sm:pl-2.5">
+              {typeof href === 'undefined' ? (
+                <span className="palt">{title}</span>
+              ) : (
+                <Link href={href} lang={lang} hrefLang={hrefLang} className="palt" target={target}>
+                  {title}
+                  {target === '_blank' && (
+                    <Image
+                      src="/common/images/icons/new-window.svg"
+                      alt="新しいタブで開く"
+                      className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
+                      width={16}
+                      height={16}
+                    />
+                  )}
+                </Link>
+              )}
+
+              {description && (
+                <span className="mt-2 sm:mt-1 block text-sm sm:text-base sm:leading-relaxed text-description">
+                  {description}
+                </span>
+              )}
             </span>
           </li>
         );
