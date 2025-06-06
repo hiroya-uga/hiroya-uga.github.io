@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "next-sitemap.config.js",
     "src/app/(en)/(specs)/documents/fantasized-specs/**/*.mdx",
-    "src/app/(ja)/(pauljadam-modern-web-a11y-demos)/documents/translations/pauljadam-modern-web-a11y-demos/aria-invalid/DocumentScript.jsx"
+    "src/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-invalid/DocumentScript.jsx"
   ],
   "exclude": ["node_modules", "DocumentScript.tsx"]
 }

@@ -12,7 +12,7 @@ module.exports = {
       colors: {
         alert: '#c10000',
         required: '#fff',
-        description: '#70767e',
+        description: '#6b7179',
       },
       backgroundColor: {
         alert: '#c10000',

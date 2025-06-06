@@ -1,3 +1,4 @@
+import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
@@ -6,8 +7,8 @@ const pageList = [
   ['abbr', true],
   ['accesskey', true],
   ['accessiblenameimg', true],
-  ['csunmobile-accordion-bad', true],
-  ['csunmobile-accordion-aria', true],
+  ['csunmobile/accordion-bad', true],
+  ['csunmobile/accordion-aria', true],
   ['accordion-heading', true],
   ['accounting-tables', true],
   ['alerttimer', true],
@@ -63,9 +64,9 @@ const pageList = [
   ['fake-button', true],
   ['focus-after-page-load', false],
   ['figure-figcaption', true],
-  ['csunmobile-form-bad', false],
-  ['csunmobile-form-aria', false],
-  ['csunmobile-form-html5', false],
+  ['csunmobile/form-bad', false],
+  ['csunmobile/form-aria', false],
+  ['csunmobile/form-html5', false],
   ['form-errors-top', false],
   ['fieldsetlegend', false],
   ['focusvisible', false],
@@ -150,19 +151,18 @@ export default function Page() {
         </p>
       </PageTitle>
 
-      <ul>
-        {pageList.map(([path, isExist]) => {
-          const text = path.replace(/^csunmobile-|^bootcamp-/, '');
-          return (
-            <li
-              key={path}
-              className='before:content-[""] before:size-1 before:rounded-full before:bg-black  before:block flex before:mx-1 gap-1 before:mt-3.5 [&:not(:first-child)]:mt-1'
-            >
-              {isExist ? <a href={`${base}/${path}`}>{text}.html</a> : `${text}.html`}
-            </li>
-          );
+      <SimpleLinkList
+        list={pageList.map(([path, isExist]) => {
+          const text = path.replace(/^csunmobile\/|^bootcamp-/, '');
+          const href = `${base}/${path}`;
+
+          return {
+            title: getMetadata(href).pageTitle || '準備中',
+            href: isExist ? href : undefined,
+            description: `${text}.html`,
+          };
         })}
-      </ul>
+      />
     </>
   );
 }
