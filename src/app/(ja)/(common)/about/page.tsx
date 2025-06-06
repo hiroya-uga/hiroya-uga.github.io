@@ -65,7 +65,7 @@ export default function Page() {
           <p className="sm:palt inline-block">
             「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
           </p>
-          <p>アイコンは昔の上司がスマホで描いて送ってくれた私の似顔絵。</p>
+          <p>アイコンは昔の上司がスマホで描いて送ってくれた管理人の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
         <div className="mt-8 sm:mt-[0.1875rem]">

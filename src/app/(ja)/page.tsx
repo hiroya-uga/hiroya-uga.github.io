@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Counter, LinkList, TopImage } from '@/app/(ja)/Client';
-import { Button } from '@/components/Clickable';
+import { Button, TextLink } from '@/components/Clickable';
 import { Footer } from '@/components/structures/Footer';
 import { SITE_NAME } from '@/constants/meta';
 import { SNS_LINKS } from '@/constants/sns';
@@ -300,7 +300,9 @@ export default function Home() {
                   <p className="sm:palt inline-block">
                     「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
                   </p>
-                  <p>アイコンは昔の上司がスマホで描いて送ってくれた私の似顔絵。</p>
+                  <p>
+                    詳しくは<TextLink href="/about">当サイトおよび管理人について</TextLink>をご覧ください。
+                  </p>
                 </div>
               </div>
             </div>
