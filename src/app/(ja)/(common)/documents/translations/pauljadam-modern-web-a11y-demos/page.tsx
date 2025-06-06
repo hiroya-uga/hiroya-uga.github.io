@@ -137,12 +137,14 @@ const pageList = [
   ['youtubeHTML5embed', false],
 ] as const;
 
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos');
+
 export default function Page() {
   const base = '/documents/translations/pauljadam-modern-web-a11y-demos';
 
   return (
     <>
-      <PageTitle title="日本語訳：PaulJAdam's Modern Web Accessibility Demos">
+      <PageTitle previous={metadata.previous} title={metadata.pageTitle} description={metadata.description}>
         <p className="mb-4">
           原文：<a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a>
         </p>
@@ -157,5 +159,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos');
