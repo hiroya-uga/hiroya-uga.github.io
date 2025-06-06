@@ -8,34 +8,36 @@ import { RelatedResourceBox } from '@/components/specific/documents/translations
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
+export const metadata = getMetadata('/documents/translations/w3c/wai/tutorials/images');
+
 export default function Page() {
   return (
     <>
-      <PageTitle title="日本語訳：Images Tutorial" />
+      <PageTitle previous={metadata.previous} title={metadata.pageTitle} description={metadata.description}>
+        <div className="mt-2 rounded-md bg-slate-300 p-3">
+          <div className="mb-2 text-sm leading-normal sm:mb-4 sm:text-base sm:leading-relaxed">
+            <LinkToOriginal
+              origins={[
+                {
+                  title: 'Images Tutorial | Web Accessibility Initiative (WAI) | W3C',
+                  href: 'https://www.w3.org/WAI/tutorials/images/',
+                  lang: 'en',
+                  hrefLang: 'en',
+                },
+              ]}
+            />
+          </div>
 
-      <div className="mb-14 rounded-md bg-slate-300 p-3">
-        <div className="mb-2 text-sm leading-normal sm:mb-4 sm:text-base sm:leading-relaxed">
-          <LinkToOriginal
-            origins={[
-              {
-                title: 'Images Tutorial | Web Accessibility Initiative (WAI) | W3C',
-                href: 'https://www.w3.org/WAI/tutorials/images/',
-                lang: 'en',
-                hrefLang: 'en',
-              },
-            ]}
-          />
+          <div className="text-xs leading-normal sm:text-sm">
+            <p className="flex gap-1">
+              <span>※</span>
+              <small>
+                <WEB_SPEC_TRANSLATIONS_NOTE />
+              </small>
+            </p>
+          </div>
         </div>
-
-        <div className="text-xs leading-normal sm:text-sm">
-          <p className="flex gap-1">
-            <span>※</span>
-            <small>
-              <WEB_SPEC_TRANSLATIONS_NOTE />
-            </small>
-          </p>
-        </div>
-      </div>
+      </PageTitle>
 
       <p>画像には、画像が表す情報や機能を説明する代替テキストが必要です。</p>
       <p className="mb-12">
@@ -235,5 +237,3 @@ export default function Page() {
     </>
   );
 }
-
-export const metadata = getMetadata('/documents/translations/w3c/wai/tutorials/images');

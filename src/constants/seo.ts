@@ -37,11 +37,13 @@ export const SEO: Record<
     description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
   },
   '/documents/translations/w3c/wai/tutorials/images': {
-    title: '日本語訳：Images Tutorial',
+    beforeSubTitle: '日本語訳：',
+    title: 'Images Tutorial',
     description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
   },
   '/documents/translations/pauljadam-modern-web-a11y-demos': {
-    title: "日本語訳：PaulJAdam's Modern Web Accessibility Demos",
+    beforeSubTitle: '日本語訳：',
+    title: "PaulJAdam's Modern Web Accessibility Demos",
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
   '/documents/translations/pauljadam-modern-web-a11y-demos/a11y-gone-wrong': {
