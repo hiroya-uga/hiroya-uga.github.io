@@ -4,7 +4,7 @@ import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
-export const metadata = getMetadata('/documents/transitions');
+export const metadata = getMetadata('/documents/translations');
 
 export default function Page() {
   return (
