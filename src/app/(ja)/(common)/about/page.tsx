@@ -318,6 +318,38 @@ export default function Page() {
             height: 32,
             title: 'おにぎり同盟',
           },
+          {
+            href: 'https://asteroid19.netlify.app/emoji/',
+            alt: '絵文字',
+            src: '/about/images/emoji-doumei.png',
+            width: 88,
+            height: 31,
+            title: '絵文字同盟',
+          },
+          {
+            href: 'http://haruka.saiin.net/~pyry/scrolling/',
+            alt: 'スクロールし隊！',
+            src: '/about/images/scroll-shitai.gif',
+            width: 32,
+            height: 32,
+            title: 'スクロールし隊！',
+          },
+          {
+            href: 'http://www.nextftp.com/12345',
+            alt: 'タグうち',
+            src: '/about/images/tag-uchi.gif',
+            width: 32,
+            height: 32,
+            title: 'このHPはタグ打ちっ',
+          },
+          {
+            href: 'http://pureless.fc2web.com/u/ossan/',
+            alt: '記号BA-90同盟',
+            src: '/about/images/kigou-ba-90-doumei.gif',
+            width: 32,
+            height: 32,
+            title: '記号BA-90同盟',
+          },
         ]
           .sort((a, b) => {
             if (a.height < b.height) return 1;
