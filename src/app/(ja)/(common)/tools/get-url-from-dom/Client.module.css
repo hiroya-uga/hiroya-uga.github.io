@@ -1,0 +1,17 @@
+.result {
+  table {
+    border-collapse: collapse;
+    background: #fff;
+  }
+
+  td,
+  th {
+    border: 1px solid #ccc;
+    padding: 0.25em 0.75em;
+  }
+
+  url-item:hover {
+    font-weight: bold;
+    cursor: default;
+  }
+}
