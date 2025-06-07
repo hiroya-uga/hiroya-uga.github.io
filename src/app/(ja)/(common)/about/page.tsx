@@ -77,8 +77,7 @@ export default function Page() {
               },
               {
                 title: 'HNの由来',
-                answer:
-                  '本名。自己紹介でUGAはUltra Great Awesomeの略ってネタを使ってたけれど、GitHub CopilotくんはUltra Good Accessibilityの略だと思ったらしい。おもろいけど名乗るには重すぎる。',
+                answer: '本名。',
               },
               { title: '性別', answer: '' },
               { title: '誕生日', answer: '早生まれって割とうれしいことのほうが多い気がしてますけれど、気のせい？👀' },
