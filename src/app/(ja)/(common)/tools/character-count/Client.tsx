@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css';
 import { Switch } from '@/components/Form';
+import { Heading } from '@/components/Heading';
 
 const HALF_CHARACTERS_REGEXP = /\s|\d|[a-z]/;
 const VERTICAL_CHARACTERS_REGEXP = /\d|[a-zA-Zａ-ｚＡ-Ｚ]/;
@@ -353,9 +354,9 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
       <div className="md:grid md:grid-cols-2 md:gap-8">
         <div>
           <div className="md:sticky md:top-8">
-            <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">
+            <Heading level={2}>
               <label htmlFor={id}>本文</label>
-            </h2>
+            </Heading>
             {!isSegmenterSupported && (
               <p className="mb-3 text-2xs font-bold leading-relaxed text-alert">
                 <strong className="flex">
@@ -425,8 +426,8 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
 
         <div className="text-sm">
           <div className="text-sm sm:grid sm:grid-cols-[60%_40%] md:block lg:text-base">
-            <div className="mt-16 sm:mb-0 sm:pr-14">
-              <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">結果</h2>
+            <div className="mt-16 sm:mt-0 sm:pr-14">
+              <Heading level={2}>結果</Heading>
               <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 md:grid-cols-[auto_auto]">
                 <p className="col-span-full grid grid-cols-subgrid">
                   <label className="grow" htmlFor={`${id}-文字数`}>
@@ -486,7 +487,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             </div>
 
             <div className="mt-16">
-              <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">設定</h2>
+              <Heading level={2}>設定</Heading>
               <p className="mb-4 text-right">
                 <label>
                   文字サイズ
@@ -546,8 +547,8 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
           </div>
         </div>
 
-        <div className="mt-16 sm:mt-24 md:col-span-2 md:mt-0">
-          <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">原稿用紙イメージ</h2>
+        <div className="mt-16 sm:mt-24 md:col-span-2">
+          <Heading level={2}>原稿用紙イメージ</Heading>
 
           <div id="原稿用紙イメージ">
             {getSegmentedCharacters(value).map((container, containerIndex) => {

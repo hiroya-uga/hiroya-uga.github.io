@@ -9,9 +9,8 @@ export const metadata = getMetadata('/tools');
 export default function Page() {
   return (
     <>
-      <PageTitle title={metadata.pageTitle}>
+      <PageTitle title={metadata.pageTitle} shouldShowPrivacyPolicyMessage>
         <p>{metadata.description}</p>
-        <p>入力された値は当サイト側で計測・収集しておりません。</p>
       </PageTitle>
 
       <SimpleDescriptionList
@@ -25,6 +24,15 @@ export default function Page() {
             ),
             description:
               'Slackのリマインダーコマンドを生成するためのツールです。リマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
+          },
+          {
+            key: `WebページからURLを抽出できるツール`,
+            title: (
+              <>
+                <Link href="/tools/get-url-from-dom">WebページからURLを抽出できるツール</Link>
+              </>
+            ),
+            description: getMetadata('/tools/get-url-from-dom').description,
           },
           {
             key: `代替テキスト２択チャート`,

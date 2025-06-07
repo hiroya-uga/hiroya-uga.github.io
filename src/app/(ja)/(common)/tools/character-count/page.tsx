@@ -11,16 +11,7 @@ export default function Page() {
 
   return (
     <>
-      <PageTitle title={metadata.pageTitle}>
-        {metadata.description.split('\n').map((description) => {
-          return <p key={description}>{description}</p>;
-        })}
-
-        <p>
-          <small>※ 入力された値はブラウザに記録されますが、収集されたり外部に送信されることはありません。</small>
-        </p>
-      </PageTitle>
-
+      <PageTitle title={metadata.pageTitle} description={metadata.description} shouldShowPrivacyPolicyMessage />
       <CharacterCountContent id={id} />
     </>
   );
