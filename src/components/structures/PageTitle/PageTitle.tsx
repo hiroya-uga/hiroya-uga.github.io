@@ -1,3 +1,4 @@
+import { TextLink } from '@/components/Clickable';
 import clsx from 'clsx';
 
 export const PageTitle = ({
@@ -6,6 +7,7 @@ export const PageTitle = ({
   following,
   description,
   children,
+  shouldShowPrivacyPolicyMessage = false,
   shouldShowNonAccessibleMessage = false,
 }: {
   title: string;
@@ -13,6 +15,7 @@ export const PageTitle = ({
   following?: string;
   children?: React.ReactNode;
   description?: string;
+  shouldShowPrivacyPolicyMessage?: boolean;
   shouldShowNonAccessibleMessage?: boolean;
 }) => {
   const hasSubtitle = Boolean(previous || following);
@@ -60,6 +63,16 @@ export const PageTitle = ({
           return <p key={description}>{description}</p>;
         })}
         {children}
+
+        {shouldShowPrivacyPolicyMessage && (
+          <p className="flex gap-1 text-sm">
+            <span>※</span>
+            <small>
+              入力された値は収集されたり外部に送信されることはありません。詳しくは
+              <TextLink href="/privacy-policy">プライバシーポリシー</TextLink>をご覧ください。
+            </small>
+          </p>
+        )}
       </div>
     </div>
   );
