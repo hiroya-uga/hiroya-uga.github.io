@@ -21,8 +21,8 @@ export const PageTitle = ({
       <h1
         className={clsx([
           hasSubtitle
-            ? '[&:not(:last-child)]:mb-6'
-            : 'text-3xl font-bold leading-relaxed sm:text-[2.625rem] [&:not(:last-child)]:mb-4',
+            ? '[&:not(:last-child)]:mb-2.5'
+            : 'text-3xl font-bold leading-relaxed sm:text-[2.625rem] [&:not(:last-child)]:mb-1.5 sm:[&:not(:last-child)]:mb-2.5',
           'leading-relaxed',
         ])}
       >
@@ -55,10 +55,12 @@ export const PageTitle = ({
         </p>
       )}
 
-      {description?.split('\n').map((description) => {
-        return <p key={description}>{description}</p>;
-      })}
-      {children}
+      <div className="text-sm sm:text-base">
+        {description?.split('\n').map((description) => {
+          return <p key={description}>{description}</p>;
+        })}
+        {children}
+      </div>
     </div>
   );
 };
