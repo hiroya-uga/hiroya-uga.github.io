@@ -110,7 +110,7 @@ const Title = ({ title, keyword }: { title: string; keyword: string }) => {
     ).result;
 
   const { result } = indexSet.reduce(
-    (previous, { word, start, end }, index) => {
+    (previous, { start, end }, index) => {
       const { result, readIndex } = previous;
       const currentMatched = title.slice(start, end);
 
@@ -344,7 +344,7 @@ export const MediaContent = ({ id }: { id: string }) => {
                   </td>
                   <td className="col-start-1 col-end-3 block pb-6 text-sm leading-[inherit] sm:table-cell sm:pb-8 sm:text-base">
                     <p>
-                      <a href={href} className="break-all">
+                      <a href={href} className="break-all visited:text-[#515a9c]">
                         <Title title={title} keyword={keyword} />
                       </a>
                     </p>

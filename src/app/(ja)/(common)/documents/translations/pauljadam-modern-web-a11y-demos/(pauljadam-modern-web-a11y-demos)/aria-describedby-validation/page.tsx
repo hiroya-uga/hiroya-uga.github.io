@@ -1,6 +1,6 @@
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-describedby-validation/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-describedby-validation/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-describedby-validation/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -10,7 +10,7 @@ export const metadata = getMetadata(
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>
         WAI-ARIAのaria-describedby属性、aria-required属性、aria-invalid属性、
         <a href="http://api.jquery.com/focus/">jQueryのfocus()</a>を使用したシンプルなフォームバリデータ
@@ -50,6 +50,6 @@ export default function Page() {
           <input type="submit" name="button" id="button" value="Submit" />
         </p>
       </form>
-    </>
+    </div>
   );
 }

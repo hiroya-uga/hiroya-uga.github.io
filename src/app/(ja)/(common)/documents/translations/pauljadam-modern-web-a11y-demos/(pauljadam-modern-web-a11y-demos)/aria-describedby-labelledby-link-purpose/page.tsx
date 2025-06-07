@@ -1,4 +1,4 @@
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-describedby-labelledby-link-purpose/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-describedby-labelledby-link-purpose/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -8,7 +8,7 @@ export const metadata = getMetadata(
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>
         機械的に関連づけるための<code>aria-Labelledby</code>属性 VS <code>aria-describedby</code>
         属性
@@ -140,6 +140,6 @@ export default function Page() {
           </li>
         </ul>
       </div>
-    </>
+    </div>
   );
 }

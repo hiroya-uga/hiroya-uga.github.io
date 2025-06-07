@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
-import { SimpleLinkList } from '@/components/List';
+import { DiscList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
@@ -26,15 +26,15 @@ export default function Page() {
         <TextLink href="/contact">お問い合わせ</TextLink>よりご連絡ください。
       </p>
 
-      <SimpleLinkList
+      <DiscList
         list={[
           {
-            title: 'プライバシーポリシー',
-            href: '/privacy-policy',
+            key: 'プライバシーポリシー',
+            value: <TextLink href="/privacy-policy">プライバシーポリシー</TextLink>,
           },
           {
-            title: '免責事項',
-            href: '/disclaimer',
+            key: '免責事項',
+            value: <TextLink href="/disclaimer">免責事項</TextLink>,
           },
         ]}
       />
@@ -269,7 +269,7 @@ export default function Page() {
 
       <p className="mb-2">古き良き同盟リンク集。</p>
 
-      <ul className="flex flex-wrap items-end gap-2">
+      <ul className="flex flex-wrap items-end gap-x-3 gap-y-4 sm:gap-y-3">
         {[
           {
             href: 'https://sites.google.com/view/happy-busy/',

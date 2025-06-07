@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
 
 import '@/pages/globals.css';
+import Link from 'next/link';
 
 export default function Page() {
   const [browserName, setBrowserName] = useState('');
@@ -55,9 +56,9 @@ export default function Page() {
             アドレス バーにページ アドレスを入力した場合は、ページ アドレスが正しく入力したかどうかを確認してください。
           </li>
           <li>
-            <a className="Page_link__nDiOM" href="/">
+            <Link className="Page_link__nDiOM" href="/">
               {DOMAIN_NAME}
-            </a>{' '}
+            </Link>{' '}
             ホームページを開いてから、表示する情報へのリンクを探してください。
           </li>
           {historyLength !== 1 && (

@@ -1,6 +1,5 @@
-import '@/app/(ja)/(common)/documents/notes/common.css';
-import 'highlight.js/styles/a11y-dark.css';
+import styles from '@/app/(ja)/(common)/documents/notes/layout.module.css';
 
 export default function uiPracticesLayout({ children }: { children: React.ReactNode }) {
-  return <article>{children}</article>;
+  return <article id={styles.article}>{children}</article>;
 }

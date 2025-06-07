@@ -1,4 +1,4 @@
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-labelledby/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-labelledby/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -6,7 +6,7 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>{metadata.pageTitle}</h1>
       <h2>問題</h2>
       <fieldset>
@@ -62,6 +62,6 @@ export default function Page() {
           X
         </button>
       </div>
-    </>
+    </div>
   );
 }

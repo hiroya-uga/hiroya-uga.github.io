@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google';
 
 import { Comment } from '@/components/Jokes';
 import GoogleAnalytics from '@/lib/gtag';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,9 @@ export default function JaRootLayout({ children }: { children: React.ReactNode }
         <Comment />
 
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-        <GoogleAnalytics />
+        <Suspense>
+          <GoogleAnalytics />
+        </Suspense>
       </head>
       <body className={inter.className} id="top">
         {children}

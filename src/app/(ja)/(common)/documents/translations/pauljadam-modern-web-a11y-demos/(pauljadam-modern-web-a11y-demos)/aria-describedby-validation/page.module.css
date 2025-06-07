@@ -1,0 +1,6 @@
+.page {
+  strong[id] {
+    font-size: 80%;
+    margin-left: 0.5em;
+  }
+}

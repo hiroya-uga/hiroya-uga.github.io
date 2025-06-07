@@ -1,6 +1,6 @@
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-menubar/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-menubar/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-menubar/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -8,13 +8,13 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>{metadata.pageTitle}</h1>
 
       <DocumentScript />
 
       <nav role="navigation">
-        <div id="nav-menu" role="menubar">
+        <div id={styles['nav-menu']} role="menubar">
           <a
             href="#"
             id="clothes-menuitem"
@@ -25,7 +25,7 @@ export default function Page() {
           >
             ファイル
           </a>
-          <div id="clothes-menu" role="menu" aria-hidden="true" className="visually-hidden">
+          <div id="clothes-menu" role="menu" aria-hidden="true" className={styles['visually-hidden']}>
             <a href="#" role="menuitem">
               新しいファイル
             </a>
@@ -50,7 +50,7 @@ export default function Page() {
           >
             編集
           </a>
-          <div id="outdoors-menu" role="menu" aria-hidden="true" className="visually-hidden">
+          <div id="outdoors-menu" role="menu" aria-hidden="true" className={styles['visually-hidden']}>
             <a href="#" role="menuitem">
               元に戻す
             </a>
@@ -78,7 +78,7 @@ export default function Page() {
           >
             選択
           </a>
-          <div id="shoes-menu" role="menu" aria-hidden="true" className="visually-hidden">
+          <div id="shoes-menu" role="menu" aria-hidden="true" className={styles['visually-hidden']}>
             <a href="#" role="menuitem">
               全て選択
             </a>
@@ -95,6 +95,6 @@ export default function Page() {
       <p>
         <a href="http://www.w3.org/WAI/PF/aria-practices/#menu">ARIA Menu Authoring Practices 1.1</a>
       </p>
-    </>
+    </div>
   );
 }

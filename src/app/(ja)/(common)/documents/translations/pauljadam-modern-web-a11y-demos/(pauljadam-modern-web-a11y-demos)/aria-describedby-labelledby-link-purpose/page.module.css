@@ -1,0 +1,6 @@
+.page {
+  ul,
+  li {
+    list-style: none;
+  }
+}

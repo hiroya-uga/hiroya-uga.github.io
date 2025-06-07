@@ -1,0 +1,13 @@
+.page {
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  ul li {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+  }
+  input:focus {
+    outline: 2px solid black;
+  }
+}

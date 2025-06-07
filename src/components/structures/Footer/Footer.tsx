@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -10,32 +10,6 @@ import { usePathname } from 'next/navigation';
 import { SITE_NAME } from '@/constants/meta';
 import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
-
-const Anchor = ({ href, children }: { href: string; children: React.ReactNode }) => {
-  const pathname = usePathname() ?? '';
-  const [shouldLinkComponent, setShouldLinkComponent] = useState(false);
-
-  useEffect(() => {
-    setShouldLinkComponent(
-      ![/fantasized-specs/, /pauljadam-modern-web-a11y-demos/].some((regexp) => regexp.test(pathname)),
-    );
-  }, [pathname]);
-
-  if (shouldLinkComponent) {
-    // Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう
-    return (
-      <Link href={href} className="leading-inherit text-inherit">
-        {children}
-      </Link>
-    );
-  }
-
-  return (
-    <a href={href} className="leading-inherit text-inherit">
-      {children}
-    </a>
-  );
-};
 
 const ListItem = () => {
   const pathname = usePathname() ?? '';
@@ -49,7 +23,9 @@ const ListItem = () => {
   return (
     <>
       <li className='after:px-2 after:content-["/"]'>
-        <Anchor href="/">HOME</Anchor>
+        <Link href="/" className="leading-inherit text-inherit">
+          HOME
+        </Link>
       </li>
 
       {pathnames.map((path, index) => {
@@ -66,7 +42,9 @@ const ListItem = () => {
 
           return (
             <li key={path} className='after:px-2 after:content-["/"]'>
-              <Anchor href={path}>{SEO[path].title}</Anchor>
+              <Link href={path} className="leading-inherit text-inherit">
+                {SEO[path].title}
+              </Link>
             </li>
           );
         }
@@ -126,24 +104,24 @@ export const Footer = () => {
           >
             <ul className="text-xs md:flex md:grow md:flex-wrap md:justify-start md:gap-y-2">
               <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <a href="/about" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
+                <Link href="/about" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   当サイトおよび管理人について
-                </a>
+                </Link>
               </li>
               <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <a href="/privacy-policy" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
+                <Link href="/privacy-policy" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   プライバシーポリシー
-                </a>
+                </Link>
               </li>
               <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <a href="/disclaimer" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
+                <Link href="/disclaimer" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   免責事項
-                </a>
+                </Link>
               </li>
               <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <a href="/contact" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
+                <Link href="/contact" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
                   お問い合わせ
-                </a>
+                </Link>
               </li>
               <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0 md:after:hidden">
                 <a

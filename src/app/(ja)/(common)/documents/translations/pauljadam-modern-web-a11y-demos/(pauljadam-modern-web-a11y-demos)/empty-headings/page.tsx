@@ -1,4 +1,4 @@
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/empty-headings/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/empty-headings/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -16,12 +16,12 @@ export default function Page() {
       <h5></h5>
       <h6></h6>
       <h1>からっぽの見出しレベル1から6の見出し要素（CSSあり）</h1>
-      <h1 className="styled"></h1>
-      <h2 className="styled"></h2>
-      <h3 className="styled"></h3>
-      <h4 className="styled"></h4>
-      <h5 className="styled"></h5>
-      <h6 className="styled"></h6>
+      <h1 className={styles.styled}></h1>
+      <h2 className={styles.styled}></h2>
+      <h3 className={styles.styled}></h3>
+      <h4 className={styles.styled}></h4>
+      <h5 className={styles.styled}></h5>
+      <h6 className={styles.styled}></h6>
     </>
   );
 }

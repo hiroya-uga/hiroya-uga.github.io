@@ -1,0 +1,9 @@
+.page {
+  [role="button"] {
+    padding: 3px;
+    border: 1px solid #ccc;
+  }
+  [role="button"][aria-pressed="true"] {
+    border: 2px solid #000;
+  }
+}

@@ -1,17 +1,19 @@
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/csunmobile/accordion-bad/DocumentScript';
 import { getMetadata } from '@/utils/seo';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/csunmobile/accordion-bad/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/csunmobile/accordion-bad/page.module.css';
+
+export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-bad');
 
 export default function Page() {
   return (
-    <>
-      <h1>アコーディオンのアクセシビリティ失敗例</h1>
+    <div className={styles.page}>
+      <h1>{metadata.pageTitle}</h1>
 
       <DocumentScript />
 
       <a
-        id="shipping-toggle"
+        id={styles['shipping-toggle']}
         style={{
           cursor: 'pointer',
           fontWeight: 'bold',
@@ -21,7 +23,7 @@ export default function Page() {
       >
         アコーディオンフック <i className="fa fa-plus-square"></i>
       </a>
-      <div id="shipping-panel" style={{ display: 'none' }}>
+      <div id={styles['shipping-panel']} style={{ display: 'none' }}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -38,8 +40,6 @@ export default function Page() {
           consequat.
         </p>
       </div>
-    </>
+    </div>
   );
 }
-
-export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-bad');

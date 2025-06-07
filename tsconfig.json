@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,7 +24,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
@@ -32,5 +38,8 @@
     "src/app/(en)/(specs)/documents/fantasized-specs/**/*.mdx",
     "src/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-invalid/DocumentScript.jsx"
   ],
-  "exclude": ["node_modules", "DocumentScript.tsx"]
+  "exclude": [
+    "node_modules",
+    "DocumentScript.tsx"
+  ]
 }

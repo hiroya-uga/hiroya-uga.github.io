@@ -1,6 +1,6 @@
 import { DivWithOnClickEvent } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/altbgimg/Client';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/altbgimg/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/altbgimg/page.module.css';
 
 import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
 import { getMetadata } from '@/utils/seo';
@@ -9,7 +9,7 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>{metadata.pageTitle}</h1>
 
       <h2>背景画像</h2>
@@ -18,8 +18,8 @@ export default function Page() {
         CSSで視覚的に隠された説明文を持つ<code>div</code>要素
       </h3>
 
-      <div className="bg-img"></div>
-      <div className="clipped">
+      <div className={styles['bg-img']}></div>
+      <div className={styles.clipped}>
         Webブラウジングに影響を与える障害には、320万人の視覚障害者、390万人の聴覚障害者、790万人の認知・精神障害、および980万人の歩行障害者が含まれます。
       </div>
 
@@ -28,8 +28,8 @@ export default function Page() {
         属性で「視覚的に隠された説明文をコンテンツに持つ<code>div[aria-hidden="true"]</code>」を参照する
       </h3>
 
-      <div className="bg-img" role="img" aria-labelledby="bg-img-desc"></div>
-      <div id="bg-img-desc" className="clipped" aria-hidden="true">
+      <div className={styles['bg-img']} role="img" aria-labelledby="bg-img-desc"></div>
+      <div id="bg-img-desc" className={styles.clipped} aria-hidden="true">
         Webブラウジングに影響を与える障害には、320万人の視覚障害者、390万人の聴覚障害者、790万人の認知・精神障害、および980万人の歩行障害者が含まれます。
       </div>
 
@@ -45,7 +45,7 @@ export default function Page() {
         <code>text-indent:-9999px;</code>)
       </h3>
 
-      <div className="linked-bg-img">
+      <div className={styles['linked-bg-img']}>
         {' '}
         <a href="http://www.deque.com" hrefLang="en-US">
           Webブラウジングに影響を与える障害には、320万人の視覚障害者、390万人の聴覚障害者、790万人の認知・精神障害、および980万人の歩行障害者が含まれます。
@@ -56,7 +56,7 @@ export default function Page() {
         <code>aria-label</code>属性経由での代替テキストを持つ<code>a</code>要素
       </h3>
 
-      <div className="linked-bg-img">
+      <div className={styles['linked-bg-img']}>
         <a
           href="http://www.deque.com"
           hrefLang="en-US"
@@ -80,7 +80,7 @@ export default function Page() {
           height={414}
           alt="Webブラウジングに影響を与える障害"
         />
-        <span className="clipped">
+        <span className={styles.clipped}>
           Webブラウジングに影響を与える障害には、320万人の視覚障害者、390万人の聴覚障害者、790万人の認知・精神障害、および980万人の歩行障害者が含まれます。
         </span>
       </p>
@@ -98,7 +98,7 @@ export default function Page() {
           alt="Webブラウジングに影響を与える障害"
           aria-describedby="clipped-aria-desc"
         />
-        <span className="clipped" id="clipped-aria-desc">
+        <span className={styles.clipped} id="clipped-aria-desc">
           Webブラウジングに影響を与える障害には、320万人の視覚障害者、390万人の聴覚障害者、790万人の認知・精神障害、および980万人の歩行障害者が含まれます。
         </span>
       </p>
@@ -116,10 +116,10 @@ export default function Page() {
           alt="Webブラウジングに影響を与える障害"
           longdesc="#clipped-longdesc"
         />
-        <span className="clipped" id="clipped-longdesc">
+        <span className={styles.clipped} id="clipped-longdesc">
           Webブラウジングに影響を与える障害には、320万人の視覚障害者、390万人の聴覚障害者、790万人の認知・精神障害、および980万人の歩行障害者が含まれます。
         </span>
       </p>
-    </>
+    </div>
   );
 }

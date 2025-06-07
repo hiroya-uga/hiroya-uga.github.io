@@ -1,5 +1,10 @@
+import specStyles from '@/app/(en)/(specs)/layout.module.css';
+import noteStyles from '@/app/(ja)/(common)/documents/notes/layout.module.css';
+import type { JSX } from 'react';
+
 import React, { Children, HTMLAttributes, ReactNode } from 'react';
 
+import clsx from 'clsx';
 import type { MDXComponents } from 'mdx/types';
 
 import { CodeBlock } from '@/components/CodeBlock';
@@ -18,6 +23,10 @@ const DynamicTagComponent: React.FC<DynamicTagProps> = ({ tagName, children, ...
   return React.createElement(tagName, props, children);
 };
 
+interface HasChildrenReactElement extends React.ReactElement {
+  children?: ReactNode;
+}
+
 const headingLevel = (tagName: TagName) => {
   const Heading = ({ children }: Props) => {
     const getId = (reactNode: ReactNode) => {
@@ -26,7 +35,7 @@ const headingLevel = (tagName: TagName) => {
       Children.forEach(reactNode, (child) => {
         if (typeof child === 'string') {
           value += child;
-        } else if (React.isValidElement(child)) {
+        } else if (React.isValidElement<HasChildrenReactElement>(child)) {
           value += getId(child.props.children);
         }
       });
@@ -37,7 +46,12 @@ const headingLevel = (tagName: TagName) => {
     return (
       <DynamicTagComponent tagName={tagName} id={id}>
         <strong>{children}</strong>
-        <a href={`#${id}`} className="anchor">
+        <a
+          href={`#${id}`}
+          className={clsx(specStyles.anchor, noteStyles.anchor)}
+          aria-label="Anchor link"
+          title="ページ内リンク"
+        >
           <span>Anchor Link</span>
         </a>
       </DynamicTagComponent>
@@ -63,7 +77,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         Children.forEach(codeBlock, (child) => {
           if (typeof child === 'string') {
             codes += child;
-          } else if (React.isValidElement(child)) {
+          } else if (React.isValidElement<HasChildrenReactElement>(child)) {
             codes += getCode(child.props.children);
           }
         });

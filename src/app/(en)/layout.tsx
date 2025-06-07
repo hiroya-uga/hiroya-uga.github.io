@@ -3,6 +3,7 @@
 import { Inter } from 'next/font/google';
 
 import GoogleAnalytics from '@/lib/gtag';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,7 +12,9 @@ export default function EnRootLayout({ children }: { children: React.ReactNode }
     <html lang="en">
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-        <GoogleAnalytics />
+        <Suspense>
+          <GoogleAnalytics />
+        </Suspense>
       </head>
       <body className={inter.className} id="top">
         {children}

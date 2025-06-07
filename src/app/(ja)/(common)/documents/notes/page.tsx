@@ -1,49 +1,14 @@
 // app/articles/page.js
-import fs from 'fs';
-import path from 'path';
 
 import clsx from 'clsx';
-import matter from 'gray-matter';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/notes');
-
-export async function getArticles() {
-  const articlesDir = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'notes', 'contents');
-  const filenames = fs.readdirSync(articlesDir);
-
-  const articles = filenames
-    .map((filename) => {
-      const filePath = path.join(articlesDir, filename);
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const { data } = matter(fileContents);
-
-      return {
-        id: filename.replace(/\.mdx$/, ''),
-        title: '',
-        publishedAt: '',
-        keywords: [],
-        dependencies: [],
-        ...data,
-      };
-    })
-    .sort((a, b) => {
-      if (a.publishedAt < b.publishedAt) {
-        return 1;
-      }
-      if (a.publishedAt > b.publishedAt) {
-        return -1;
-      }
-
-      return 0;
-    });
-
-  return articles;
-}
 
 export default async function ArticlesPage() {
   const articles = await getArticles();

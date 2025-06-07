@@ -1,0 +1,10 @@
+.page {
+  fieldset {
+    line-height: 2;
+  }
+
+  input {
+    line-height: 1.4;
+    margin: 0 0.5em;
+  }
+}

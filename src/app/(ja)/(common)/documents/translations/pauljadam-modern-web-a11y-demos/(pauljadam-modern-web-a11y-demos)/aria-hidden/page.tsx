@@ -1,7 +1,7 @@
 import { Tab } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-hidden/Client';
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-hidden/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-hidden/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-hidden/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -9,7 +9,7 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>{metadata.pageTitle}</h1>
 
       <DocumentScript />
@@ -38,11 +38,10 @@ export default function Page() {
         </a>
       </p>
 
-      <h2>隠し文字を持つタブ</h2>
-
-      <p>
-        <small>※ 動作はしません</small>
-      </p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
 
       <div role="tablist">
         <span role="tab" aria-selected="false">
@@ -50,7 +49,7 @@ export default function Page() {
         </span>
         <span role="tab" aria-selected="true">
           <a href="#">
-            <span className="hidden" aria-hidden="true">
+            <span className={styles.hidden} aria-hidden="true">
               選択された
             </span>
             タブ2
@@ -60,12 +59,12 @@ export default function Page() {
           <a href="#">タブ3</a>
         </span>
       </div>
-      <div role="tablist" style={{ margin: '0 0 100px' }}>
+      <div>
         <a aria-selected="false" role="tab" href="#">
           タブ1
         </a>
         <a aria-selected="true" role="tab" href="#">
-          <span className="hidden" aria-hidden="true">
+          <span className={styles.hidden} aria-hidden="true">
             選択された
           </span>
           タブ2
@@ -75,7 +74,10 @@ export default function Page() {
         </a>
       </div>
 
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
       <Tab />
-    </>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Toc } from '@/components/specific/documents/Toc';
-
+import styles from '@/app/(en)/(specs)/layout.module.css';
 import { DescriptionTable } from './NoParseContent';
 
 ## Abstract
@@ -24,7 +24,7 @@ By standardizing the concept and interface of carousel widget as an element, we 
 
 <DescriptionTable />
 
-The <code className="element">carousel</code> element represents a carousel widget that can combine multiple pieces of content into a compact display.
+The <code className={styles.element}>carousel</code> element represents a carousel widget that can combine multiple pieces of content into a compact display.
 
 The <dfn><code>current</code></dfn> attribute represent initial current position. If the `current` attribute is present, user agents must [parse it as an integer](https://www.w3.org/TR/html52/infrastructure.html#parse-token-as-an-integer), in order to determine the attribute’s value. The default value is 1.
 
@@ -42,13 +42,13 @@ If the attribute is present, or if scripting is disabled for the media element, 
 
 Even when the attribute is absent, however, user agents may provide controls to use of the carousel (e.g., swipe, keyboard interface), but such features should not interfere with the page’s normal rendering. The user agent may implement this simply by [exposing a user interface to the user](https://www.w3.org/TR/html52/semantics-embedded-content.html#exposing-a-user-interface) as if the `controls` attribute was present.
 
-If the user agent exposes a user interface to the user by displaying controls over the <code className="element">carousel</code> element, then the user agent should suppress any user interaction events while the user agent is interacting with this interface. (For example, if the user clicks on a carousel's pager control, `mousedown` events and so forth would not simultaneously be fired at elements on the page.)
+If the user agent exposes a user interface to the user by displaying controls over the <code className={styles.element}>carousel</code> element, then the user agent should suppress any user interaction events while the user agent is interacting with this interface. (For example, if the user clicks on a carousel's pager control, `mousedown` events and so forth would not simultaneously be fired at elements on the page.)
 
 Where possible (specifically, for toggling slide, and for toggling autoplay), user interface features exposed by the user agent must be implemented in terms of the DOM API described above, so that, e.g., all the same events fire.
 
 The `controls` IDL attribute must reflect the content attribute of the same name.
 
-The <dfn>`direction`</dfn> attribute controls the swipe direction of the <code className="element">carousel</code>. It is an [enumerated attribute](https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes) with the following keywords .
+The <dfn>`direction`</dfn> attribute controls the swipe direction of the <code className={styles.element}>carousel</code>. It is an [enumerated attribute](https://www.w3.org/TR/html52/infrastructure.html#enumerated-attributes) with the following keywords .
 
 - `left` - Slide left (right is next content)
 - `right` - Slide right (left is next content)
@@ -71,15 +71,15 @@ The missing value default is the `slide` state.
 
 Also, the `title` attribute has special semantics on this element.
 
-<div className="note">
+<div className={styles.note}>
 
-If possible, the <code className="element">carousel</code> needs a label (accessible name) by `title` attribute or `aria-label` attribute etc. If omitted, assistive technology is expected to simply speak this element as a "carousel".
+If possible, the <code className={styles.element}>carousel</code> needs a label (accessible name) by `title` attribute or `aria-label` attribute etc. If omitted, assistive technology is expected to simply speak this element as a "carousel".
 
 </div>
 
 All child elements of the `carousel` element are interpreted as <dfn>[`slides`](#3-1-2-the-%3Ccode%3E::slide%3C/code%3E-pseudo-element)</dfn>. Browsers that do not support this element will simply looks like lined up the [flow contents](https://www.w3.org/TR/html52/dom.html#flow-content-2) of the child elements.
 
-<div className="example">
+<div className={styles.example}>
 
 Adjustment of the number of display uses CSS.
 
@@ -103,7 +103,7 @@ For example, the following example shows the carousel element being used to show
 
 </div>
 
-<div className="example">
+<div className={styles.example}>
 
 The following example shows the carousel element being used to show 1 to 3 slide of 5 slide at once.
 
@@ -130,21 +130,21 @@ This carousel has a controller displayed, it slide to the right, animation type 
 
 #### 3.1.2. The `::slide` pseudo-element
 
-The <dfn><code className="selector">::slide</code></dfn> pseudo-element is produced based on the <code className="element">carousel</code> element's child elements.
+The <dfn><code className={styles.selector}>::slide</code></dfn> pseudo-element is produced based on the <code className={styles.element}>carousel</code> element's child elements.
 
 The semantics of each slide inherit the semantics of the underlying <a href="https://www.w3.org/TR/html52/dom.html#flow-content-2">flow content</a>.
 
-However, user agents are not actually interpreted the <code className="selector">::slide</code> pseudo-element itself. The accessibility and semantics information that the <code className="element">carousel</code> element exposed to the accessibility API causes such interpretation.
+However, user agents are not actually interpreted the <code className={styles.selector}>::slide</code> pseudo-element itself. The accessibility and semantics information that the <code className={styles.element}>carousel</code> element exposed to the accessibility API causes such interpretation.
 
-<div className="example">
+<div className={styles.example}>
 
 This pseudo-element selector can be used to style carousel slides.
 
 For example, the `width` property of the pseudo-element represents the width of one slide of the carousel.
 
-If the width is 33.3333%, the <code className="element">carousel</code> element is expected to be drawn in 3 columns. If it is 70%, it is expected that one slide will be drawn in the center and 15% of the previous and next slides of the same width will be drawn on the left and right.
+If the width is 33.3333%, the <code className={styles.element}>carousel</code> element is expected to be drawn in 3 columns. If it is 70%, it is expected that one slide will be drawn in the center and 15% of the previous and next slides of the same width will be drawn on the left and right.
 
-In addition, if the <code className="element">carousel</code> element has not `loop` attribute, it is expected that the previous slide when the slide is not advancing and the next slide when the slide is advanced to end are not drawn.
+In addition, if the <code className={styles.element}>carousel</code> element has not `loop` attribute, it is expected that the previous slide when the slide is not advancing and the next slide when the slide is advanced to end are not drawn.
 
 ```css
 carousel::slide {
@@ -152,7 +152,7 @@ carousel::slide {
 }
 ```
 
-In addition, the slide animation of the <code className="element">carousel</code> element uses [CSS Transitions](https://www.w3.org/TR/css-transitions/). The author is able to adjust slide animation by overriding the relevant properties.
+In addition, the slide animation of the <code className={styles.element}>carousel</code> element uses [CSS Transitions](https://www.w3.org/TR/css-transitions/). The author is able to adjust slide animation by overriding the relevant properties.
 
 ```css
 carousel::slide {
@@ -165,9 +165,9 @@ However, if you override the `transition-property` value specified by the user a
 
 </div>
 
-<div className="example">
+<div className={styles.example}>
 
-In browsers that support the <code className="element">carousel</code> elements, selectors such as <code className="selector">carousel > div</code> and <code className="selector"> carousel > \* </code> do not target slides in the <code className="element">carousel</code> elements.
+In browsers that support the <code className={styles.element}>carousel</code> elements, selectors such as <code className={styles.selector}>carousel > div</code> and <code className={styles.selector}> carousel > \* </code> do not target slides in the <code className={styles.element}>carousel</code> elements.
 
 ```css
 carousel::slide {
@@ -184,7 +184,7 @@ carousel > * {
 }
 ```
 
-Note that CSS selectors for elements in slides do not need to use the <code className="selector">::slide</code> pseudo-element. It is more constructive not to use pseudo-element selectors.
+Note that CSS selectors for elements in slides do not need to use the <code className={styles.selector}>::slide</code> pseudo-element. It is more constructive not to use pseudo-element selectors.
 
 ```html
 <style>
@@ -221,7 +221,7 @@ Note that CSS selectors for elements in slides do not need to use the <code clas
 - `::dots-wrapper`
 - `::pagers-wrapper`
 
-<div className="example">
+<div className={styles.example}>
 
 Styling such as vertical center and horizontal center is often attempted. There is a pseudo-element that plays the role of wrapper for that, but it can also be ignored by `display: contents;`.
 

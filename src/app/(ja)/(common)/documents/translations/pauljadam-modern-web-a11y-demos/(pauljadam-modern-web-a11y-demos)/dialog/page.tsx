@@ -1,14 +1,14 @@
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/dialog/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/dialog/page.css';
-
 import { getMetadata } from '@/utils/seo';
+
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/dialog/page.module.css';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/dialog');
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>{metadata.pageTitle}</h1>
 
       <DocumentScript />
@@ -21,6 +21,6 @@ export default function Page() {
       </p>
       <h2>WAI-ARIA role=dialog</h2>
       <button id="trigger-modal">モーダルダイアログを開く</button>
-    </>
+    </div>
   );
 }

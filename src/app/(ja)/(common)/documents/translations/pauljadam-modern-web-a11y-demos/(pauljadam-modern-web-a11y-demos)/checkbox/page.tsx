@@ -1,12 +1,12 @@
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/checkbox/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/checkbox/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/checkbox/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <DocumentScript />
 
       <h1>WAI-ARIAを利用したものと純粋なチェックボックスの比較</h1>
@@ -25,16 +25,16 @@ export default function Page() {
 
       <h2>非アクセシブルなマウス専用のチェックボックス</h2>
 
-      <span id="spancheckbox" className="unchecked">
+      <span id="spancheckbox" className={styles.unchecked}>
         同意する場合はチェックを入れてください。
       </span>
 
       <h2>ARIA Checkbox</h2>
 
-      <span className="unchecked" role="checkbox" aria-checked="false" tabIndex={0}>
+      <span className={styles.unchecked} role="checkbox" aria-checked="false" tabIndex={0}>
         同意する場合はチェックを入れてください。
       </span>
-    </>
+    </div>
   );
 }
 

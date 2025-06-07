@@ -18,63 +18,63 @@ export const Counter = () => {
 const photoDataList = [
   {
     src: '/main-keishoan.webp',
-    caption: 'Engakuji Keishoan',
+    caption: '円覚寺 桂昌庵',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'https://www.instagram.com/p/Cm9kBgZPF25/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2022.06.21',
   },
   {
     src: '/main-kamiisonotorii.webp',
-    caption: 'Kamiiso No Torii',
+    caption: '神磯の鳥居',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'https://www.instagram.com/p/CXIGmx_Bob3/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2021.12.06',
   },
   {
     src: '/main-yamanakako.webp',
-    caption: 'Yamanakako Hananomiyako Flower Park',
+    caption: '山中湖 花の都公園',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'https://www.instagram.com/p/CE9XGAEHfS9/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2020.08.22',
   },
   {
     src: '/main-minokakeiwa.webp',
-    caption: 'Minokakeiwa Minamiizu',
+    caption: '南伊豆 蓑掛岩',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'https://www.instagram.com/p/CE6INpCn9LC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2020.08.16',
   },
   {
     src: '/main-shinjuku.webp',
-    caption: 'JR Shinjuku Station Koshu Kaido Gate',
+    caption: 'JR新宿駅 甲州街道改札',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'https://www.instagram.com/p/CE6Deb7nUx7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2020.07.23',
   },
   {
     src: '/main-akihabara.webp',
-    caption: 'JR Akihabara Station',
+    caption: 'JR秋葉原駅',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     href: 'hhttps://www.instagram.com/p/CCzs-IZnC7m/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2020.07.18',
   },
   {
     src: '/main-ushinshiro.webp',
-    caption: 'Mizume Sakura in Ushinshiro',
+    caption: '牛代 みずめ桜',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
     href: 'https://www.instagram.com/p/B-616CxH8FE/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2020.04.05',
   },
   {
     src: '/main-sumidaaquarium.webp',
-    caption: 'Sumida Aquarium',
+    caption: 'すみだ水族館',
     spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
     href: 'https://www.instagram.com/p/B65DejRnF0i/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2020.01.03',
   },
   {
     src: '/main-c97.webp',
-    caption: 'Comic Market 97 Day4',
+    caption: 'コミックマーケット97 Day4',
     spec: 'iPhone XS Max',
     href: 'https://www.instagram.com/p/B6u8koWnH_-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2019.12.31',
@@ -88,21 +88,21 @@ const photoDataList = [
   },
   {
     src: '/main-nact.webp',
-    caption: 'The National Art Center Tokyo',
+    caption: '国立新美術館',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
     href: 'https://www.instagram.com/p/B6LKGmvHqff/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2019.12.17',
   },
   {
     src: '/main-escalator.webp',
-    caption: 'LINKSQUARE SHINJUKU',
+    caption: 'リンクスクエア新宿',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
     href: 'https://www.instagram.com/p/B4d9_CPn9M7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2019.11.01',
   },
   {
     src: '/main-fujimibashi.webp',
-    caption: 'Fujimi Bashi',
+    caption: '富士見橋（東京都）',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + Nikon D7200',
     href: 'https://www.instagram.com/p/B3n_xUcn86N/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     date: '2019.10.13',
@@ -124,7 +124,7 @@ const Spec = ({ spec }: { spec: string }) => {
     return (
       <>
         {lens}
-        <span className="block md:inline"> + {other}</span>
+        <span className="inline-block"> + {other}</span>
       </>
     );
   }
@@ -211,7 +211,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   }, [isFirstRender, updateImage]);
 
   const transitionClassName = [
-    'transition-[opacity_visibility] duration-300',
+    'transition-[opacity,visibility] duration-300',
     isLoading ? 'opacity-0' : 'opacity-100',
     isLoading ? 'invisible' : 'visible',
   ];
@@ -238,26 +238,26 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
           </div>
 
           <figcaption className="text-2xs text-white sm:text-sm">
-            <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse flex-wrap items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
+            <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
               <span className="w-40 text-right sm:w-56">
                 <a
                   href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
-                  className="z-10 inline-block cursor-pointer bg-white px-2 py-1 leading-tight text-black no-underline focus-visible:outline-[white]"
+                  className="z-10 inline-block cursor-pointer rounded-full bg-white px-3 py-1 leading-tight text-black no-underline transition-bg hover:bg-gray-200 focus-visible:outline-[white]"
                 >
-                  See this photo on Instagram!
+                  Instagramで見る
                 </a>
               </span>
               <span className={clsx(['grow leading-tight', ...transitionClassName])}>
-                {photoData?.caption && `${photoData?.caption}, `}
-                <span className="block sm:inline">{photoData?.date}</span>
+                <Spec spec={photoData?.spec ?? 'loading...'} />
               </span>
             </span>
             <span
-              className="absolute bottom-0 right-0 flex min-h-[50px] w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[60px] leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+              className="palt absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[48px] text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0 sm:min-h-12 sm:text-sm"
               id={captionId}
             >
               <span className={clsx(...transitionClassName)}>
-                <Spec spec={photoData?.spec ?? 'loading...'} />
+                {photoData?.caption && `${photoData?.caption}`}
+                <span className="ml-1 inline-block text-2xs sm:text-xs"> at {photoData?.date}</span>
               </span>
             </span>
           </figcaption>
@@ -265,24 +265,26 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
         <p
           className={clsx([
-            'absolute bottom-0 right-0 z-10 min-h-[50px] min-w-[50px] translate-y-full text-white focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
-            'transition-[opacity_visibility_transform]',
+            'absolute bottom-0 right-2 z-10 size-8 translate-y-full  focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0 sm:h-12 sm:py-2',
+            'transition-[opacity,visibility,transform]',
             isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
             isFirstRender && isLoading ? 'invisible' : 'visible',
           ])}
         >
           <button
             type="button"
-            className="absolute right-[8px] top-[8px] size-[calc(100%_-_16px)] rounded-[50%] bg-white focus-visible:outline-[white]"
+            className="group/reload absolute inset-0 size-full   p-1 focus-visible:outline-none sm:top-2 sm:size-8 sm:p-0"
             onClick={() => updateImage()}
           >
-            <Image
-              src="/icon-reload.svg"
-              width={48}
-              height={48}
-              alt="ランダムに切り替える"
-              className="block size-full opacity-80"
-            />
+            <span className="block rounded-full bg-white outline-offset-2 group-focus-visible/reload:outline-2 group-focus-visible/reload:outline-[white] group-focus-visible/reload:[outline-style:solid;]">
+              <Image
+                src="/icon-reload.svg"
+                width={48}
+                height={48}
+                alt="ランダムに切り替える"
+                className="block size-full rounded-full border border-white  bg-white opacity-80 transition-opacity group-hover/reload:opacity-65"
+              />
+            </span>
           </button>
         </p>
       </div>

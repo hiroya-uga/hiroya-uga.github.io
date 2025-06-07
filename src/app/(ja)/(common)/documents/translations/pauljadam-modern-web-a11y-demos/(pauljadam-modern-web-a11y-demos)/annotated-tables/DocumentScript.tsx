@@ -3,9 +3,32 @@
 
 import { useEffect } from 'react';
 
-import $ from 'jquery';
+import jQuery from 'jquery';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/annotated-tables/page.module.css';
+
 
 export const DocumentScript = () => {
+  const $ = (argument) => {
+    if (typeof argument === 'string') {
+      const newSelector = argument.split(/\s/).map((selector) => {
+        if (selector.startsWith('.')) {
+          return `.${styles[selector.slice(1)]}`;
+        }
+        if (selector.startsWith('#')) {
+          console.log(selector.slice(1));
+
+          return `#${styles[selector.slice(1)]}`;
+        }
+
+        return selector;
+      }).join(' ');
+      return jQuery(newSelector);
+    }
+
+    return jQuery(argument);
+  };
+
+
   useEffect(() => {
     var key = -1;
     var resized = function () {
@@ -14,7 +37,7 @@ export const DocumentScript = () => {
         el.remove();
       });
 
-      [].forEach.call(document.querySelectorAll('.ttbtn'), function (el: HTMLElement) {
+      [].forEach.call(document.querySelectorAll(`.${styles.ttbtn}`), function (el: HTMLElement) {
         el.addEventListener('click', function () {
           if (el.getAttribute('aria-expanded') == 'true') {
             (el.nextElementSibling as HTMLElement).style.visibility = 'hidden';
@@ -72,28 +95,28 @@ export const DocumentScript = () => {
       $('.net-income-info').connections();
 
       $('.heading-info button').on('mouseover focus', function (e) {
-        $('.heading-info').addClass('hovered');
+        $('.heading-info').addClass(styles.hovered);
       });
       $('.heading-info button').on('mouseout blur', function (e) {
-        $('.heading-info').removeClass('hovered');
+        $('.heading-info').removeClass(styles.hovered);
       });
       $('.service-revenue-info button').on('mouseover focus', function (e) {
-        $('.service-revenue-info').addClass('hovered');
+        $('.service-revenue-info').addClass(styles.hovered);
       });
       $('.service-revenue-info button').on('mouseout blur', function (e) {
-        $('.service-revenue-info').removeClass('hovered');
+        $('.service-revenue-info').removeClass(styles.hovered);
       });
       $('.rent-expense-info button').on('mouseover focus', function (e) {
-        $('.rent-expense-info').addClass('hovered');
+        $('.rent-expense-info').addClass(styles.hovered);
       });
       $('.rent-expense-info button').on('mouseout blur', function (e) {
-        $('.rent-expense-info').removeClass('hovered');
+        $('.rent-expense-info').removeClass(styles.hovered);
       });
       $('.net-income-info button').on('mouseover focus', function (e) {
-        $('.net-income-info').addClass('hovered');
+        $('.net-income-info').addClass(styles.hovered);
       });
       $('.net-income-info button').on('mouseout blur', function (e) {
-        $('.net-income-info').removeClass('hovered');
+        $('.net-income-info').removeClass(styles.hovered);
       });
 
       $('#hide-show').on('click', function (e) {
@@ -115,28 +138,28 @@ export const DocumentScript = () => {
       $("td:contains('Clos. 4')").css('color', '#767676').attr('tabindex', '0');
 
       $("td:contains('Clos. 2')").on('mouseover focus', function (e) {
-        $("td:contains('Clos. 2')").addClass('clos2hovered');
+        $("td:contains('Clos. 2')").addClass(styles.clos2hovered);
       });
       $("td:contains('Clos. 2')").on('mouseout blur', function (e) {
-        $("td:contains('Clos. 2')").removeClass('clos2hovered');
+        $("td:contains('Clos. 2')").removeClass(styles.clos2hovered);
       });
       $("td:contains('Clos. 1')").on('mouseover focus', function (e) {
-        $("td:contains('Clos. 1')").addClass('clos1hovered');
+        $("td:contains('Clos. 1')").addClass(styles.clos1hovered);
       });
       $("td:contains('Clos. 1')").on('mouseout blur', function (e) {
-        $("td:contains('Clos. 1')").removeClass('clos1hovered');
+        $("td:contains('Clos. 1')").removeClass(styles.clos1hovered);
       });
       $("td:contains('Clos. 3')").on('mouseover focus', function (e) {
-        $("td:contains('Clos. 3')").addClass('clos3hovered');
+        $("td:contains('Clos. 3')").addClass(styles.clos3hovered);
       });
       $("td:contains('Clos. 3')").on('mouseout blur', function (e) {
-        $("td:contains('Clos. 3')").removeClass('clos3hovered');
+        $("td:contains('Clos. 3')").removeClass(styles.clos3hovered);
       });
       $("td:contains('Clos. 4')").on('mouseover focus', function (e) {
-        $("td:contains('Clos. 4')").addClass('clos4hovered');
+        $("td:contains('Clos. 4')").addClass(styles.clos4hovered);
       });
       $("td:contains('Clos. 4')").on('mouseout blur', function (e) {
-        $("td:contains('Clos. 4')").removeClass('clos4hovered');
+        $("td:contains('Clos. 4')").removeClass(styles.clos4hovered);
       });
     };
     var handler = function () {
@@ -161,6 +184,11 @@ export const DocumentScript = () => {
 
     return () => {
       console.log('remove');
+
+      [].forEach.call(document.querySelectorAll('connection'), function (el) {
+        // @ts-ignore
+        el.remove();
+      });
 
       window.removeEventListener('resize', handler, option);
       window.removeEventListener('resize', handler, option);

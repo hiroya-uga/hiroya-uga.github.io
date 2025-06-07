@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 
 import $ from 'jquery';
 
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/detail-message-dialog/page.module.css';
+
+
 export const DocumentScript = () => {
   useEffect(() => {
     $(function (e) {
@@ -14,7 +17,7 @@ export const DocumentScript = () => {
         $('a').attr('tabindex', '-1');
         $('a').attr('style', 'cursor:default;');
         $('button').attr('disabled', 'true');
-        var modalOverlay = $('<div>').attr({ id: 'modalOverlay' });
+        var modalOverlay = $('<div>').attr({ id: styles.modalOverlay });
         $(modalOverlay).appendTo('body');
         var dialog = $('<div>').attr({
           role: 'alertdialog',
@@ -25,7 +28,7 @@ export const DocumentScript = () => {
           .html(
             '<h1 id="alertHeading">警告！番地が一致していません</h1><div id="alertText"><p>入力された住所の郵便番号が正しくないようです。</p><p>入力された値： 東京都hoge区1-2-3</p></div><button id="yes">はい、正しい値です</button><button>修正する</button>',
           )
-          .appendTo('#modalOverlay');
+          .appendTo(`#${styles.modalOverlay}`);
         $('#yes').trigger('focus');
 
         $('[role=alertdialog] button').on('click', function (e) {
@@ -46,7 +49,7 @@ export const DocumentScript = () => {
         $('a').attr('tabindex', '-1');
         $('a').attr('style', 'cursor:default;');
         $('button').attr('disabled', 'true');
-        var modalOverlay = $('<div>').attr({ id: 'modalOverlay' });
+        var modalOverlay = $('<div>').attr({ id: styles.modalOverlay });
         $(modalOverlay).appendTo('body');
         var dialog = $('<div>').attr({
           role: 'alertdialog',
@@ -57,7 +60,7 @@ export const DocumentScript = () => {
           .html(
             '<h1 id="alertHeading">警告！番地が一致していません</h1><div id="alertText" tabindex="0" role="document"><p>入力された住所の郵便番号が正しくないようです。</p><p>入力された値： 東京都hoge区1-2-3</p></div><button id="yes">正しい値です</button><button>修正する</button>',
           )
-          .appendTo('#modalOverlay');
+          .appendTo(`#${styles.modalOverlay}`);
         $('#alertText').trigger('focus');
 
         $('[role=alertdialog] button').on('click', function (e) {

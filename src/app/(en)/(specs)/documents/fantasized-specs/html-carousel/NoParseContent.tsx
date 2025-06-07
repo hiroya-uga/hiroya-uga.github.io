@@ -1,6 +1,8 @@
+import styles from '@/app/(en)/(specs)/layout.module.css';
+
 export const DescriptionTable = () => {
   return (
-    <div className="element">
+    <div className={styles.element}>
       <dl>
         <dt>
           <a href="https://www.w3.org/TR/html52/dom.html#categories">Categories</a>:
@@ -103,50 +105,50 @@ export const DescriptionTable = () => {
         <dt>
           <a href="https://www.w3.org/TR/html52/dom.html#dom-interface">DOM interface</a>:
         </dt>
-        <dd className="interface">
+        <dd className={styles.interface}>
           <pre>
-            <code className="idl">
-              <span className="keyword">interface</span> <span className="name">HTMLCarouselElement</span> :{' '}
-              <a href="https://www.w3.org/TR/html52/dom.html#htmlelement">HTMLElement</a> &#x7b;
+            <code className={styles.idl}>
+              <span className={styles.keyword}>interface</span> <span className={styles.name}>HTMLCarouselElement</span>{' '}
+              : <a href="https://www.w3.org/TR/html52/dom.html#htmlelement">HTMLElement</a> &#x7b;
               <br />
-              <span className="keyword">attribute</span>{' '}
+              <span className={styles.keyword}>attribute</span>{' '}
               <a href="">
-                <span className="keyword">boolean</span>
+                <span className={styles.keyword}>boolean</span>
               </a>{' '}
               autoplay;
               <br />
-              <span className="keyword">attribute</span>{' '}
+              <span className={styles.keyword}>attribute</span>{' '}
               <a href="">
-                <span className="keyword">boolean</span>
+                <span className={styles.keyword}>boolean</span>
               </a>{' '}
               controls;
               <br />
-              <span className="keyword">attribute</span>{' '}
+              <span className={styles.keyword}>attribute</span>{' '}
               <a href="">
-                <span className="keyword">unsigned long</span>
+                <span className={styles.keyword}>unsigned long</span>
               </a>{' '}
               current;
               <br />
-              <span className="keyword">attribute</span>{' '}
+              <span className={styles.keyword}>attribute</span>{' '}
               <a href="">
-                <span className="keyword">DOMString</span>
+                <span className={styles.keyword}>DOMString</span>
               </a>{' '}
               direction;
               <br />
-              <span className="keyword">attribute</span>{' '}
+              <span className={styles.keyword}>attribute</span>{' '}
               <a href="">
-                <span className="keyword">boolean</span>
+                <span className={styles.keyword}>boolean</span>
               </a>{' '}
               loop;
               <br />
-              <span className="keyword">attribute</span>{' '}
+              <span className={styles.keyword}>attribute</span>{' '}
               <a href="">
-                <span className="keyword">DOMString</span>
+                <span className={styles.keyword}>DOMString</span>
               </a>{' '}
               type;
               <br />
-              <span className="keyword">void</span> play();
-              <span className="keyword">void</span> pause(); &#x7d;;
+              <span className={styles.keyword}>void</span> play();
+              <span className={styles.keyword}>void</span> pause(); &#x7d;;
             </code>
           </pre>
         </dd>

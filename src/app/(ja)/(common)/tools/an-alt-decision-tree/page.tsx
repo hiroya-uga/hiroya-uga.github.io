@@ -1,6 +1,7 @@
 import { AnAltDecisionTreeContent } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
+import { Suspense } from 'react';
 
 export const metadata = getMetadata('/tools/an-alt-decision-tree');
 
@@ -27,7 +28,9 @@ export default function Page() {
       </PageTitle>
 
       <section className="mx-auto max-w-3xl rounded-xl bg-white px-4 pb-6 pt-10 sm:px-6">
-        <AnAltDecisionTreeContent />
+        <Suspense>
+          <AnAltDecisionTreeContent />
+        </Suspense>
       </section>
     </>
   );
