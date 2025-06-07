@@ -42,6 +42,8 @@ type Props = {
 const TextareaComponent = (
   {
     descriptionId,
+    multiline: _,
+    autoResize,
     ...props
   }: Omit<Props, 'label' | 'description'> & {
     autoResize: boolean;
@@ -58,7 +60,7 @@ const TextareaComponent = (
     setTextareaHeight(dummyTextareaRef.current?.clientHeight ? `${dummyTextareaRef.current?.clientHeight}px` : '0px');
   }, [props.value]);
 
-  if (props.autoResize) {
+  if (autoResize) {
     return (
       <span className="relative block">
         <span
