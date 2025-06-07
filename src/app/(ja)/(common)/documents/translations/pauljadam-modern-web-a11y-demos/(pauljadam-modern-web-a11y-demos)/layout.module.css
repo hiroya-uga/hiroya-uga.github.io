@@ -19,23 +19,17 @@
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) h2 {
   display: block;
   font-size: 1.5em;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin: 0.83em 0;
   font-weight: bold;
-  unicode-bidi: isolate;
+  line-height: 2rem;
 }
 
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) h3 {
   display: block;
-  font-size: 1.17em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  font-size: 1.125rem;
+  margin: 1em 0;
   font-weight: bold;
-  unicode-bidi: isolate;
+  line-height: 1.75rem;
 }
 
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) :is(p, figure) {
