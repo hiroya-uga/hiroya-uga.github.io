@@ -62,7 +62,13 @@ export const SEO: Record<
     title: 'img要素のアクセシブルネームの計算',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
+  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile': {
+    beforeSubTitle: '日本語訳：',
+    title: 'モバイルアクセシビリティテスト＆開発ワークショップ',
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
   '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-bad': {
+    beforeSubTitle: '日本語訳：',
     title: 'アコーディオンのアクセシビリティ失敗例',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
@@ -175,7 +181,7 @@ export const SEO: Record<
   },
   // ['canvas', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/checkbox': {
-    title: 'アクセシブル施策の失敗例',
+    title: 'WAI-ARIAを利用したものと純粋なチェックボックスの比較',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
   // ['bootcamp-contact-before', false],
@@ -183,7 +189,7 @@ export const SEO: Record<
   // ['bootcamp-contact-after-html5', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/css-content-new-window': {
     title:
-      '新しいウィンドウへのリンクであることを伝えるために、BootstrapのCSS ContentとFont Awesome Icons、JavaScriptによるtitle属性の付与',
+      '新しいウィンドウを開くリンクのための、BootstrapのCSS ContentとFont Awesome Icons、JavaScriptによるtitle属性の付与',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
   // ['css-line-through-del-ins-accessibility', false],

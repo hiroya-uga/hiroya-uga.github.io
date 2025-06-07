@@ -1,0 +1,21 @@
+.page {
+  .visually-hidden {
+    clip: rect(0 0 0 0);
+    position: absolute;
+  }
+  /*[aria-hidden=true] {display:none;}
+[aria-hidden=false] {display:inherit !important;}
+*/
+  [role="menu"] a {
+    float: left;
+    clear: both;
+  }
+  [role="menu"] {
+    position: absolute;
+    background-color: white;
+  }
+
+  #nav-menu > [role="menuitem"] {
+    margin: 0 0.5em 0 0;
+  }
+}

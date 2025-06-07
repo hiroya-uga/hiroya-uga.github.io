@@ -1,4 +1,4 @@
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/accounting-tables/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/accounting-tables/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -6,7 +6,7 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>{metadata.pageTitle}</h1>
 
       <h2>
@@ -47,7 +47,7 @@ export default function Page() {
           </tr>
           <tr>
             <th scope="row">水道光熱費</th>
-            <td className="underline">100</td>
+            <td className={styles.underline}>100</td>
             <td></td>
           </tr>
           <tr>
@@ -55,13 +55,13 @@ export default function Page() {
               全費用
             </th>
             <td></td>
-            <td className="underline">500</td>
+            <td className={styles.underline}>500</td>
           </tr>
           <tr>
             <th scope="row">当期純利益</th>
             <td></td>
             <td></td>
-            <td className="double-underline">$ 1,400</td>
+            <td className={styles['double-underline']}>$ 1,400</td>
           </tr>
         </tbody>
       </table>
@@ -107,7 +107,7 @@ export default function Page() {
           </tr>
           <tr>
             <th scope="row">水道光熱費</th>
-            <td className="underline">100</td>
+            <td className={styles.underline}>100</td>
             <td></td>
           </tr>
           <tr>
@@ -115,13 +115,13 @@ export default function Page() {
               全費用
             </th>
             <td></td>
-            <td className="underline">500</td>
+            <td className={styles.underline}>500</td>
           </tr>
           <tr>
             <th scope="row">当期純利益</th>
             <td></td>
             <td></td>
-            <td className="double-underline">$ 1,400</td>
+            <td className={styles['double-underline']}>$ 1,400</td>
           </tr>
         </tbody>
       </table>
@@ -182,7 +182,7 @@ export default function Page() {
             <th scope="row" style={{ paddingLeft: '20px' }}>
               水道光熱費
             </th>
-            <td className="underline">100</td>
+            <td className={styles.underline}>100</td>
             <td></td>
           </tr>
           <tr>
@@ -190,12 +190,12 @@ export default function Page() {
               全費用
             </th>
             <td></td>
-            <td className="underline">500</td>
+            <td className={styles.underline}>500</td>
           </tr>
           <tr>
             <th scope="row">当期純利益</th>
             <td></td>
-            <td className="double-underline">$ 1,400</td>
+            <td className={styles['double-underline']}>$ 1,400</td>
           </tr>
         </tbody>
       </table>
@@ -224,6 +224,6 @@ export default function Page() {
           VoiceOverよりも優れています。
         </small>
       </p>
-    </>
+    </div>
   );
 }

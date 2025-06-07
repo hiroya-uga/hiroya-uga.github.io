@@ -6,6 +6,10 @@
   transition: 300ms margin-left ease-out;
 }
 
+#article :where(h2, h3, h4, h5, h6):first-child {
+  margin-top: 0;
+}
+
 @media screen and (min-width: 1040px) {
   #article :where(h2, h3, h4, h5, h6) {
     margin-left: -1em;
@@ -55,39 +59,39 @@
   blockquote > p:last-child {
     margin-bottom: 0;
   }
-}
 
-:where(h2, h3) strong {
-  font-weight: inherit;
-}
+  :where(h2, h3) strong {
+    font-weight: inherit;
+  }
 
-:where(h2, h3, h4, h5, h6) a.anchor {
-  font-size: 80%;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: -0.75em;
-  overflow: hidden;
-  width: 2em;
-  height: 2em;
-  transform: translateY(-25%);
-  margin-top: 0.125rem;
-  border-radius: 0.5rem;
-  transition: 300ms background-color ease-out;
-}
+  :where(h2, h3, h4, h5, h6) a.anchor {
+    font-size: 80%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: -0.75em;
+    overflow: hidden;
+    width: 2em;
+    height: 2em;
+    transform: translateY(-25%);
+    margin-top: 0.125rem;
+    border-radius: 0.5rem;
+    transition: 300ms background-color ease-out;
+  }
 
-:where(h2, h3, h4, h5, h6) a.anchor:where(:focus, :hover) {
-  background-color: #e2e8f0;
-}
+  :where(h2, h3, h4, h5, h6) a.anchor:where(:focus, :hover) {
+    background-color: #e2e8f0;
+  }
 
-:where(h2, h3, h4, h5, h6) a.anchor::before {
-  content: "#";
-  font-weight: normal;
-}
+  :where(h2, h3, h4, h5, h6) a.anchor::before {
+    content: "#";
+    font-weight: normal;
+  }
 
-:where(h2, h3, h4, h5, h6) a.anchor span {
-  position: absolute;
-  clip: rect(0 0 0 0);
+  :where(h2, h3, h4, h5, h6) a.anchor span {
+    position: absolute;
+    clip: rect(0 0 0 0);
+  }
 }
 
 #article table {

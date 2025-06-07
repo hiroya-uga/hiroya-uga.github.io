@@ -1,6 +1,7 @@
 import { Heading } from '@/components/Heading';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
+import Link from 'next/link';
 
 export const metadata = getMetadata('/disclaimer');
 
@@ -23,7 +24,7 @@ export default function Page() {
       <p>また、当サイトではサイト管理者が自分で利用するため・趣味・練習などの目的で作ったWebツールを提供しています。</p>
       <p>
         それらのツールを利用する際に入力された情報は、皆様が入力したデータは収集、計測、保存したり、第三者に提供することはありません。ただし、サーバーの仕様上、アクセスログなどに一部情報（IPアドレスなど）が記録される場合があります。詳しくは
-        <a href="/privacy-policy">プライバシーポリシー</a>をご覧ください。
+        <Link href="/privacy-policy">プライバシーポリシー</Link>をご覧ください。
       </p>
 
       <Heading level={2}>動作の保証について</Heading>

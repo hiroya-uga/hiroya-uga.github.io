@@ -3,6 +3,7 @@ import React, { HTMLAttributes, useEffect, useId, useRef } from 'react';
 import Image from 'next/image';
 
 import { Details } from '@/components/Box';
+import Link from 'next/link';
 
 const Heading = ({ children, index }: Pick<HTMLAttributes<HTMLHeadingElement>, 'children'> & { index?: number }) => {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -446,7 +447,7 @@ export const AnAltDecisionTreeException = () => {
           どのような代替テキストを設定すればいいか不明な場合は、
           <span className="inline-block">
             詳しくは
-            <a href="/documents/translations/w3c/wai/tutorials/images/">Image Tutorial の日本語訳</a>
+            <Link href="/documents/translations/w3c/wai/tutorials/images/">Image Tutorial の日本語訳</Link>
             を参照してください。
           </span>
         </p>

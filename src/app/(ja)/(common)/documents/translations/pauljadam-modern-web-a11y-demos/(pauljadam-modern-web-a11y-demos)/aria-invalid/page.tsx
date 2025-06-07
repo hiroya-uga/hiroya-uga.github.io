@@ -1,7 +1,7 @@
 import { SelfLink } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-invalid/Client';
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-invalid/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-invalid/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-invalid/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -9,7 +9,7 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <h1>
         <code>aria-invalid="true"</code>の実装例
       </h1>
@@ -155,6 +155,6 @@ export default function Page() {
           魚（サーモン）
         </label>
       </fieldset>
-    </>
+    </div>
   );
 }

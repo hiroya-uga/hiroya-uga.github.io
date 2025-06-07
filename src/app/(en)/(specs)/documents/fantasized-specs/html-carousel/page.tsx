@@ -14,7 +14,7 @@ export default function Page() {
 
       <dl>
         <dt>This version:</dt>
-        <dd>
+        <dd className="break-all">
           <a href={`${URL_ORIGIN}/documents/fantasized-specs/html-carousel`}>
             {URL_ORIGIN}/documents/fantasized-specs/html-carousel
           </a>

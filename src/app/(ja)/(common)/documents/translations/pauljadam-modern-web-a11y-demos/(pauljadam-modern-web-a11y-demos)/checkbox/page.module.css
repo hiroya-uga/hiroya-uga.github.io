@@ -1,0 +1,43 @@
+.page {
+  *:focus {
+    outline: 3px solid #27b;
+  }
+
+  #modalOverlay {
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+  }
+  [role="alertdialog"] {
+    position: relative;
+    width: 80%;
+    margin-left: -40%;
+    height: 400px;
+    margin-top: -200px;
+    padding: 5px;
+    border: thin #000 solid;
+    background-color: #fff;
+  }
+
+  label {
+    cursor: pointer;
+  }
+  .unchecked {
+    background-image: url("/documents/translations/pauljadam-modern-web-a11y-demos/img/checkbox-uncheckedBox.png");
+  }
+  .checked {
+    background-image: url("/documents/translations/pauljadam-modern-web-a11y-demos/img/checkbox-checkedBox.png");
+  }
+  .unchecked,
+  .checked {
+    font-size: 16px;
+    margin-right: 15px;
+    background-repeat: no-repeat;
+    line-height: 18px;
+    padding-left: 25px;
+    cursor: pointer;
+    display: inline-block;
+  }
+}

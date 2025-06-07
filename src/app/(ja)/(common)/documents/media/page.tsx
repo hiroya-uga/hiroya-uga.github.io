@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { Suspense, useId } from 'react';
 
 import { MediaContent } from '@/app/(ja)/(common)/documents/media/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
@@ -15,7 +15,9 @@ export default function Page() {
         <p>{metadata.description}</p>
       </PageTitle>
 
-      <MediaContent id={id} />
+      <Suspense>
+        <MediaContent id={id} />
+      </Suspense>
     </>
   );
 }

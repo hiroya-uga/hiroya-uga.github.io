@@ -56,20 +56,27 @@ export default function Home() {
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 mt-0 text-xl font-bold sm:text-2xl">The power of the web</h2>
 
-            <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className="lg:text-center">
-              <p className="mb-2 text-xs sm:my-6 sm:text-base">
-                “
-                <a href="https://www.w3.org/mission/accessibility/#:~:text=The%20power%20of%20the%20Web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect.">
-                  The power of the Web is in its universality. Access by everyone regardless of disability is an
-                  essential aspect.
-                </a>
-                ”
-              </p>
-
-              <footer className="text-right text-2xs sm:text-sm lg:text-center">
-                <p>—Tim Berners-Lee, W3C Director and inventor of the World Wide Web</p>
-              </footer>
-            </blockquote>
+            <figure>
+              <blockquote
+                cite="https://www.w3.org/mission/accessibility/"
+                lang="en"
+                className="mb-2 text-xs sm:my-6 sm:text-base lg:text-center"
+              >
+                <p>
+                  “
+                  <a href="https://www.w3.org/mission/accessibility/#:~:text=The%20power%20of%20the%20Web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect.">
+                    The power of the Web is in its universality. Access by everyone regardless of disability is an
+                    essential aspect.
+                  </a>
+                  ”
+                </p>
+              </blockquote>
+              <figcaption className="text-right text-2xs sm:text-sm lg:pr-2 lg:text-center">
+                <p>
+                  — <cite>Tim Berners-Lee</cite>, W3C Director and inventor of the World Wide Web
+                </p>
+              </figcaption>
+            </figure>
           </div>
         </div>
 
@@ -203,7 +210,7 @@ export default function Home() {
               </tbody>
             </table>
 
-            <p className="mb-12 text-right sm:mb-28">
+            <p className="mb-12 grid place-items-end sm:mb-28">
               <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
             </p>
 

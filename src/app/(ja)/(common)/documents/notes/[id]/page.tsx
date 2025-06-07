@@ -7,7 +7,7 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import { Metadata } from 'next/types';
 import remarkGfm from 'remark-gfm';
 
-import { getArticles } from '@/app/(ja)/(common)/documents/notes/page';
+import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
 import { ExampleBox } from '@/components/Box';
 import { JsonLd } from '@/components/Meta';
 import { SpecBlockQuote } from '@/components/SpecBlockQuote';
@@ -16,8 +16,8 @@ import { TocForArticle } from '@/components/specific/documents/notes/TocForArtic
 import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 
-export default async function Post({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function Post({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const postsDirectory = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'notes', 'contents');
 
   const filePath = path.join(postsDirectory, `${id}.mdx`);
@@ -169,8 +169,8 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const { id } = params;
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
   const postsDirectory = path.join(process.cwd(), 'src', 'app', '(ja)', '(common)', 'documents', 'notes', 'contents');
   const filePath = path.join(postsDirectory, `${id}.mdx`);
 

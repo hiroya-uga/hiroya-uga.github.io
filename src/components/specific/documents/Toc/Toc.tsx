@@ -1,5 +1,6 @@
 'use client';
 
+import styles from '@/app/(en)/(specs)/layout.module.css';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { marked } from 'marked';
@@ -72,9 +73,9 @@ export const Toc = ({
 
   return (
     <>
-      <h2>{title}</h2>
+      <h2 className="!p-0 !text-base">{title}</h2>
 
-      <div id="toc">
+      <div id={styles.toc}>
         <NestedList headingList={headingList} numberingOnly={numberingOnly} />
       </div>
     </>

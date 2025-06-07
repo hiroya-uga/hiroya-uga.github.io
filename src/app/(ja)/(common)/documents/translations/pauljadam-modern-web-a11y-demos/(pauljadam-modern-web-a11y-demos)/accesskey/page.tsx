@@ -4,7 +4,7 @@ import {
 } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/accesskey/Client';
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/accesskey/DocumentScript';
 
-import '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/accesskey/page.css';
+import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/accesskey/page.module.css';
 
 import { getMetadata } from '@/utils/seo';
 
@@ -12,7 +12,7 @@ export const metadata = getMetadata('/documents/translations/pauljadam-modern-we
 
 export default function Page() {
   return (
-    <>
+    <div className={styles.page}>
       <DocumentScript />
       <h1>{metadata.pageTitle}</h1>
       <h2>数値キーのアクセスキー</h2>
@@ -100,6 +100,6 @@ export default function Page() {
       <a href="https://www.apple.com/voiceover/info/guide/_1131.html" lang="en-US">
         Tell VoiceOver to ignore the next key combination you press with VO-Tab
       </a>
-    </>
+    </div>
   );
 }

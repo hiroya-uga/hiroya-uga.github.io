@@ -1,4 +1,5 @@
 import { SITE_NAME, SITE_SUBTITLE } from '@/constants/meta';
+import Link from 'next/link';
 
 export const SiteName = () => {
   return (
@@ -21,9 +22,9 @@ export const SiteName = () => {
           >
             <text x="58%" y="50%" textAnchor="middle" className="translate-y-[4px] 2xl:hidden">
               {/* bootstrapを読み込んでいる画面だとunderlineがつかない */}
-              <a href="/" className="underline">
+              <Link href="/" className="underline">
                 {SITE_NAME}
-              </a>
+              </Link>
               <tspan> - {SITE_SUBTITLE}</tspan>
             </text>
 
@@ -39,9 +40,9 @@ export const SiteName = () => {
               className="border border-red-500 2xl:!block"
               transform="rotate(-90)"
             >
-              <a href="/" className="underline">
+              <Link href="/" className="underline">
                 {SITE_NAME}
-              </a>
+              </Link>
               <tspan> - {SITE_SUBTITLE}</tspan>
             </text>
           </svg>

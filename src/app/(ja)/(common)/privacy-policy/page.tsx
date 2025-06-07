@@ -1,6 +1,6 @@
 import { Button, TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
-import { SimpleLinkList } from '@/components/List';
+import { DiscList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
@@ -53,17 +53,23 @@ export default function Page() {
         Analyticsの詳細およびGoogleのプライバシーポリシーについては、以下のリンクをご覧ください。
       </p>
 
-      <SimpleLinkList
+      <DiscList
         list={[
           {
-            title: 'Google Analyticsの利用規約',
-            href: 'https://www.google.com/analytics/terms/jp.html',
-            target: '_blank',
+            key: 'Google Analyticsの利用規約',
+            value: (
+              <TextLink href="https://www.google.com/analytics/terms/jp.html" target="_blank">
+                Google Analyticsの利用規約
+              </TextLink>
+            ),
           },
           {
-            title: 'Googleのプライバシーポリシー',
-            href: 'https://policies.google.com/privacy?hl=ja',
-            target: '_blank',
+            key: 'Googleのプライバシーポリシー',
+            value: (
+              <TextLink href="https://policies.google.com/privacy?hl=ja" target="_blank">
+                Googleのプライバシーポリシー
+              </TextLink>
+            ),
           },
         ]}
       />
