@@ -77,7 +77,8 @@ export default function Page() {
               },
               {
                 title: 'HNの由来',
-                answer: '本名',
+                answer:
+                  '本名。自己紹介でUGAはUltra Great Awesomeの略ってネタを使ってたけれど、GitHub CopilotくんはUltra Good Accessibilityの略だと思ったらしい。おもろいけど名乗るには重すぎる。',
               },
               { title: '性別', answer: '' },
               { title: '誕生日', answer: '早生まれって割とうれしいことのほうが多い気がしてますけれど、気のせい？👀' },
@@ -184,7 +185,7 @@ export default function Page() {
               },
               { title: '好きなブランド', answer: 'Nikon、Panasonicを信じている民' },
               { title: '愛用の香水', answer: '' },
-              { title: '好きな花', answer: 'ひたちなかのネモフィラはすごい' },
+              { title: '好きな花', answer: 'ひたちなかのネモフィラはすごい！' },
               {
                 title: '好きなゲーム',
                 answer:
@@ -203,6 +204,17 @@ export default function Page() {
                     'サドンアタック',
                     'ポケモン金・銀',
                   ].join('、') + 'などなど',
+              },
+              {
+                // オリジナル質問
+                title: '好きな要素',
+                answer: 'b要素。',
+              },
+              {
+                // オリジナル質問
+                title: '嫌いなWeb広告',
+                answer:
+                  '閉じるボタンのクリック範囲が狭すぎるやつとか、touchendとかpointerupイベントでクリックしたことにされるやつ🤬',
               },
               { title: '愛車', answer: '' },
               {
@@ -236,9 +248,9 @@ export default function Page() {
               },
               {
                 title: '兎に角主張したい事',
-                answer: 'Webコンテンツを発信するならアクセシビリティちゃんと大事にしよう！！！',
+                answer: 'Webコンテンツを発信するならアクセシビリティちゃんと大事にしようよ！！！！！！',
               },
-              { title: '疑問に思っている事', answer: '宇宙の外側ってなにがあるんだろう' },
+              { title: '疑問に思っている事', answer: '' },
               { title: 'ここだけの話', answer: 'パロディーしておいてなんですが、前略プロフ、通ってないんです。' },
               {
                 title: 'Myﾘﾝｸ',
