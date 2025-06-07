@@ -325,6 +325,10 @@ export const SEO: Record<
     title: 'ツール集',
     description: '作ったものをまとめている階層です。',
   },
+  '/tools/accessible-name-and-description-computation': {
+    title: 'Accessible Name and Description Computation Playground',
+    description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
+  },
   '/tools/an-alt-decision-tree': {
     beforeSubTitle: 'An alt Decision Treeに基づく',
     title: '代替テキスト２択チャート',
@@ -336,10 +340,6 @@ export const SEO: Record<
     description:
       '文章の文字数をカウントするツールです。\n本文に文字数をチェックしたいテキストを入力してください。原稿用紙換算、段落数も確認できます。',
   },
-  '/tools/accessible-name-and-description-computation': {
-    title: 'Accessible Name and Description Computation Playground',
-    description: 'アクセシブルな名前および説明がどう計算されるかをテストするためのページです。',
-  },
   '/tools/css-units': {
     title: 'CSS Units Playground',
     description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
@@ -347,6 +347,11 @@ export const SEO: Record<
   '/tools/dom-events-watcher': {
     title: 'DOM Event Playground',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
+  },
+  '/tools/get-url-from-dom': {
+    title: 'WebページからURLを抽出できるツール',
+    description:
+      'リンク先一覧の調査や、画像のURL一覧を作ったりするタスクがある人のためのツールです。\nURLを抽出したいページの内容（DOM）をコピー＆ペーストしてください。\nSlackやエクセルなどのアプリケーションの内容からも抽出できます。',
   },
   '/tools/slack-reminder-command-generator': {
     title: 'Slack reminder command generator',
