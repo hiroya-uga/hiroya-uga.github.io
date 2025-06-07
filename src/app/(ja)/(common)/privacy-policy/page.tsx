@@ -11,11 +11,13 @@ export default function Page() {
     <>
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <div className="mt-2 text-right text-sm">
+          <p>改定日: 2025年06月08日</p>
           <p>制定日: 2025年06月02日</p>
         </div>
       </PageTitle>
 
       <Heading level={2}>適用範囲</Heading>
+
       <p>
         本プライバシーポリシーは、当サイトで提供されるツールや情報（以下、コンテンツ）をご利用いただく際に適用されます。
       </p>
@@ -24,7 +26,7 @@ export default function Page() {
       <Heading level={2}>Cookieと類似技術について</Heading>
 
       <p>
-        当サイトでは、ツールの利便性向上のために、ユーザーの入力内容や設定を
+        当サイトでは、コンテンツの利便性向上のために、ユーザーの入力内容や設定を
         <TextLink href="https://ja.wikipedia.org/wiki/HTTP_cookie" target="_blank">
           Cookie
         </TextLink>
@@ -35,18 +37,16 @@ export default function Page() {
         >
           Web storage
         </TextLink>
-        を用いてお使いのブラウザに保存することがありますが、当サイトがこれらを第三者のサーバに送信することはありません。
+        を用いてお使いのブラウザに保存することがあります。
       </p>
       <p>また、ブラウザに保存された情報はお使いのブラウザの機能から削除でき、有効・無効の切り替えも行えます。</p>
-
-      <p>ただし、サーバーの仕様上、IPアドレス、ブラウザの種類、アクセス日時などが記録される場合があります。</p>
 
       <Heading level={2}>アクセス解析</Heading>
 
       <p className="mb-paragraph">
         当サイトでは、ウェブサイトの利用状況の分析および改善を目的として、Google, Inc.が提供するGoogle
         Analyticsを利用しています。Google
-        Analyticsは、クッキー（Cookie）を使用して、ユーザーの閲覧情報を匿名で収集します。これにより、ユーザーの個人を特定する情報（氏名、住所、電話番号など）は収集されません。
+        Analyticsは、クッキー（Cookie）を使用して、ユーザーので得た利用状況等はで収集します。これにより、ユーザーの個人を特定する情報（氏名、住所、電話番号など）は収集されません。
       </p>
       <p className="mb-paragraph">
         収集されたデータは、Googleのサーバーに送信され、ウェブサイトの利用状況（アクセス数、閲覧ページ、滞在時間など）を分析するために使用されます。このデータは、Googleのプライバシーポリシーに基づいて管理されます。Google
@@ -89,9 +89,22 @@ export default function Page() {
 
       <Heading level={2}>第三者への提供</Heading>
 
-      <p>コンテンツに入力されたデータや個人情報は、法令に基づく場合を除き第三者に提供されません。</p>
+      <p className="mb-paragraph">当サイトのコンテンツに入力されたデータや個人情報は、収集されることはありません。</p>
       <p>
-        ただし、本ツールが外部APIやサービスを利用する場合、それらのサービスのプライバシーポリシーが適用される場合があります。
+        ただし、当サイトのコンテンツが外部APIやサービスを利用する場合、それらのサービスのプライバシーポリシーが適用される場合があります。
+      </p>
+      <p>
+        当サイトのサーバーは第三者（
+        <TextLink
+          href="https://docs.github.com/ja/pages/getting-started-with-github-pages/creating-a-github-pages-site"
+          target="_blank"
+        >
+          GitHub Pages
+        </TextLink>
+        ）に委託されており、IPアドレス、ブラウザ情報、アクセス日時などが記録される場合があります。これらのデータはサーバー提供者のプライバシーポリシーに基づいて管理されます。
+      </p>
+      <p>
+        アクセス解析で得た利用状況含め、法令に基づく場合を除き、ユーザーの同意なし第三者に提供することはありません。
       </p>
     </>
   );
