@@ -9,10 +9,10 @@ import styles from '@/components/structures/Header/Header.module.css';
 
 export const Header = () => {
   return (
-    <header>
+    <header className="mb-[var(--header-margin-bottom)]">
       <SiteName />
 
-      <div className="px-4 py-8 sm:pb-16 sm:pl-10 sm:pt-8 2xl:pt-16">
+      <div className="mt-8 px-4  sm:pl-10 sm:pt-8 2xl:pt-16">
         <div className="relative mx-auto max-w-structure">
           <p className="relative -left-4 -top-2 2xl:left-0">
             <Link

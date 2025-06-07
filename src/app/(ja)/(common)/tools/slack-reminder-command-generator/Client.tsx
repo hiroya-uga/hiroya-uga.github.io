@@ -490,7 +490,7 @@ export const SlackReminderCommandGenerator = () => {
         <p className="whitespace-pre-wrap">{createComment({ result, type })}</p>
       </div>
       <div className="pb-4 sm:sticky sm:bottom-0 sm:z-10">
-        <div className="shadow-lg sm:grid sm:grid-cols-[1fr_auto]">
+        <div className="sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white sm:shadow-sticky">
           <p
             className="whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-gray-300 sm:rounded-l-lg sm:rounded-r-none"
             onClick={(e) => {
@@ -554,7 +554,7 @@ export const SlackReminderCommandGenerator = () => {
               }}
             >
               <Image src="/common/images/icons/copy.svg" alt="" className="size-4" width={16} height={16} />
-              <span className="leading-4" aria-live="assertive" title="出力結果をコピー">
+              <span className="font-bold leading-4" aria-live="assertive" title="出力結果をコピー">
                 Copy
               </span>
             </button>

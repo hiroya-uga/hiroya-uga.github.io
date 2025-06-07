@@ -6,12 +6,14 @@ export const PageTitle = ({
   following,
   description,
   children,
+  shouldShowNonAccessibleMessage = false,
 }: {
   title: string;
   previous?: string;
   following?: string;
   children?: React.ReactNode;
   description?: string;
+  shouldShowNonAccessibleMessage?: boolean;
 }) => {
   const hasSubtitle = Boolean(previous || following);
   return (
@@ -44,6 +46,15 @@ export const PageTitle = ({
           title
         )}
       </h1>
+
+      {shouldShowNonAccessibleMessage && (
+        <p className="mb-paragraph">
+          <strong className="text-alert">
+            ※このページは動作確認用ページです。 一部アクセシビリティに配慮していないコンテンツが含まれます。
+          </strong>
+        </p>
+      )}
+
       {description?.split('\n').map((description) => {
         return <p key={description}>{description}</p>;
       })}

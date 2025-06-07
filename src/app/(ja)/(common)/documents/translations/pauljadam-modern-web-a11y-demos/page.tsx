@@ -146,7 +146,7 @@ export default function Page() {
   return (
     <>
       <PageTitle previous={metadata.previous} title={metadata.pageTitle} description={metadata.description}>
-        <p className="mb-4">
+        <p>
           原文：<a href="http://www.pauljadam.com/demos/">PaulJAdam's Modern Web Accessibility Demos</a>
         </p>
       </PageTitle>

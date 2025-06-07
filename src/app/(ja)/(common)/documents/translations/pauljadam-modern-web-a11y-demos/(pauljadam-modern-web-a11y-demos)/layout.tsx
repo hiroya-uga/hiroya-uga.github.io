@@ -70,13 +70,27 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
 
   return (
     <>
-      <p className="mb-1 text-xs">
-        原文：
-        <a href={originalPath} hrefLang="en" className="break-all">
-          {originalPath}
-        </a>
-      </p>
-      <p className="mb-2 flex flex-wrap sm:mb-4">
+      <div className="sm:pb- mb-4  mt-[calc(-1_*_var(--header-margin-bottom))] border-b  border-dashed  border-gray-400 pb-6 sm:mb-7 sm:pb-9">
+        <div className=" rounded-md bg-white p-2 text-2xs leading-snug sm:p-4 sm:text-xs">
+          <p className="mb-2 font-bold sm:mb-1.5">
+            原文：
+            <a href={originalPath} hrefLang="en" className="inline-block break-all">
+              {originalPath}
+            </a>
+          </p>
+          <p>
+            <strong className="flex font-normal leading-[inherit] text-alert sm:font-bold">
+              <span>※</span>
+              <span>
+                このページは動作確認用ページです。
+                <span className="inline-block">一部アクセシビリティに配慮していないコンテンツが含まれます。</span>
+              </span>
+            </strong>
+          </p>
+        </div>
+      </div>
+
+      <p className="mb-3.5 flex flex-wrap gap-y-2 text-sm sm:mb-4 sm:text-base">
         <span className='after:mx-2 after:content-["|"]'>
           <Link href="/documents/translations/pauljadam-modern-web-a11y-demos">
             <Image
