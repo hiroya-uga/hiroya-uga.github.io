@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { Counter, LinkList, TopImage } from '@/app/(ja)/Client';
 import { Button, TextLink } from '@/components/Clickable';
+import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
 import { SITE_NAME } from '@/constants/meta';
 import { SNS_LINKS } from '@/constants/sns';
@@ -150,7 +151,7 @@ export default function Home() {
 
         <div className="mb-20 bg-slate-200 px-[var(--content-padding-inline)] py-11 pb-12 sm:mb-28">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-4 text-xl font-bold sm:text-2xl">Category</h2>
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl ">Category</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -185,7 +186,7 @@ export default function Home() {
 
         <div className="px-[var(--content-padding-inline)]">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-2 text-xl font-bold sm:text-2xl">Media</h2>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl ">Media</h2>
 
             <p className="mb-4">{getMetadata('/documents/media').description}</p>
 
@@ -214,7 +215,7 @@ export default function Home() {
               <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
             </p>
 
-            <h2 className="mb-2 text-xl font-bold sm:text-2xl">Bookmarks</h2>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl ">Bookmarks</h2>
 
             <p className="mb-4">外部サイトへのリンク集です。</p>
 
@@ -279,9 +280,9 @@ export default function Home() {
               ]}
             />
 
-            <div className="mb-10 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-28 sm:grid sm:gap-x-12 sm:pt-28">
-              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl">
-                PROFILE
+            <div className="mb-2 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-20 sm:grid sm:gap-x-12 sm:pt-20">
+              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl ">
+                Profile
               </h2>
 
               <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-[22.5rem] items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
@@ -301,7 +302,7 @@ export default function Home() {
                 </span>
               </p>
 
-              <div className="col-start-1 col-end-2 row-start-2 row-end-3 sm:mb-6">
+              <div className="col-start-1 col-end-2 row-start-2 row-end-3 sm:mb-paragraph">
                 <div className="sm:max-w-xl sm:pr-4">
                   <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
                   <p className="sm:palt inline-block">
@@ -325,6 +326,14 @@ export default function Home() {
                 );
               })}
             </ul>
+
+            <div className="mb-10 mt-12 border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-20 sm:grid sm:gap-x-12 sm:pt-20">
+              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl">
+                Doumei banners
+              </h2>
+
+              <Doumei />
+            </div>
           </div>
         </div>
       </main>
