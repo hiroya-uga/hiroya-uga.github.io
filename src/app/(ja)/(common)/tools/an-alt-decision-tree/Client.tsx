@@ -5,11 +5,9 @@ import { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import {
-  AnAltDecisionTreeAnswer,
-  AnAltDecisionTreeException,
-  AnAltDecisionTreeQuestion,
-} from '@/components/specific/tools/an-alt-decision-tree';
+import { AnAltDecisionTreeAnswer } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeAnswer';
+import { AnAltDecisionTreeException } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeException';
+import { AnAltDecisionTreeQuestion } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeQuestion';
 
 import 'highlight.js/styles/github-dark.css';
 
