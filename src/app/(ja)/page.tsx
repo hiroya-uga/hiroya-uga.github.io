@@ -211,7 +211,7 @@ export default function Home() {
               </tbody>
             </table>
 
-            <p className="mb-12 grid place-items-center sm:place-items-end sm:mb-28">
+            <p className="mb-12 grid place-items-center sm:mb-28 sm:place-items-end">
               <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
             </p>
 

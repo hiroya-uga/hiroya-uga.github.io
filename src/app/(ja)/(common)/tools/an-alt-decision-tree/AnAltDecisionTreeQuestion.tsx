@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { AnAltDecisionTreeHeading as Heading } from './AnAltDecisionTreeHeading';
+import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
 
 // const SampleCodeWrapper = ({
 //   title = 'サンプルコード',

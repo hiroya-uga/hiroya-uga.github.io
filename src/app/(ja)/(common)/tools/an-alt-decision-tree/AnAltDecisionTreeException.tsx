@@ -1,6 +1,6 @@
+import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AnAltDecisionTreeHeading as Heading } from './AnAltDecisionTreeHeading';
 
 export const AnAltDecisionTreeException = () => {
   return (
