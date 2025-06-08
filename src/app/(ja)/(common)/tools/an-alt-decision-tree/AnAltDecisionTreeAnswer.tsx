@@ -1,6 +1,6 @@
+import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
 import { Details } from '@/components/Box';
 import { useId } from 'react';
-import { AnAltDecisionTreeHeading as Heading } from './AnAltDecisionTreeHeading';
 
 const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
   const id = useId();
