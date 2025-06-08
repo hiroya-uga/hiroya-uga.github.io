@@ -4,8 +4,8 @@
 
 import {
   GetUrlFromDomFilterType,
-  targetListFilter,
-} from '@/app/(ja)/(common)/tools/get-url-from-dom/target-list-filter';
+  formatTargetList,
+} from '@/app/(ja)/(common)/tools/get-url-from-dom/format-target-list';
 import { Radio } from '@/components/Form';
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -68,50 +68,89 @@ export const GetUrlFromDOMContent = () => {
       if (targetList.length === 0) {
         setTargetLength(0);
         return;
+      } else {
+        targetList.forEach((elm, index) => {
+          const indexAttributeName = 'data-___GET-URL-FROM-DOM-INDEX___';
+          elm.removeAttribute(indexAttributeName);
+          elm.setAttribute(indexAttributeName, String(index));
+        });
       }
 
       const fragment = document.createDocumentFragment();
-      let targets = targetListFilter({ targetList, filterType });
-      const make = (callback: (_: string) => void) => {
+      let targets = formatTargetList({ targetList, filterType });
+      const make = (callback: (_: { url: string; index: number }) => void) => {
         for (const url of targets) {
           callback(url);
         }
       };
 
       if (sortType === 'sort' || sortType === 'reverse') {
-        targets.sort();
-      }
+        targets.sort((a, b) => a.url.localeCompare(b.url));
 
-      if (sortType === 'reverse') {
-        targets = targets.reverse();
+        if (sortType === 'reverse') {
+          targets = targets.reverse();
+        }
       }
 
       switch (duplicateType) {
         case 'highlight':
-          targets = targets.map((url, _, self) => {
-            if (self.indexOf(url) !== self.lastIndexOf(url)) {
+          targets = targets.map(({ url, index }, _, self) => {
+            if (self.findIndex((item) => item.url === url) !== self.findLastIndex((item) => item.url === url)) {
               url = `${HIGH_LIGHT}${url}`;
             }
 
-            return url;
+            return { url, index };
           });
 
           break;
 
         case 'diff': // 重複のみ
-          targets = targets.filter((url, _, self) => self.indexOf(url) !== self.lastIndexOf(url));
+          targets = targets.filter(
+            ({ url }, _, self) =>
+              self.findIndex((item) => item.url === url) !== self.findLastIndex((item) => item.url === url),
+          );
 
           break;
 
-        case 'diff-filter': // 重複を重複なしで
-          targets = [...new Set(targets.filter((url, _, self) => self.indexOf(url) !== self.lastIndexOf(url)))];
+        case 'diff-filter': {
+          // 重複を重複なしで
+          const entries = targets
+            .filter(
+              ({ url }, _, self) =>
+                self.findIndex((item) => item.url === url) !== self.findLastIndex((item) => item.url === url),
+            )
+            .reverse()
+            .map(({ url, index }) => {
+              return [url, index];
+            });
+          const diffItems = Object.fromEntries(entries);
+
+          targets = Object.entries(diffItems).map(([url, index]) => {
+            return { url, index: Number(index) };
+          });
 
           break;
+        }
 
-        case 'filter': // 重複なし
-          targets = [...new Set(targets)];
+        case 'filter': {
+          // 重複を削除する
+          // 重複を重複なしで
+          const diffItems: Record<string, number> = {};
+
+          targets.forEach(({ url, index }) => {
+            if (diffItems[url]) {
+              return;
+            }
+
+            diffItems[url] = index;
+          });
+
+          targets = Object.entries(diffItems).map(([url, index]) => {
+            return { url, index: Number(index) };
+          });
 
           break;
+        }
 
         default:
           break;
@@ -119,11 +158,11 @@ export const GetUrlFromDOMContent = () => {
 
       switch (formatType) {
         case 'md-list':
-          make((url) => {
+          make(({ url, index }) => {
             const span = document.createElement('span');
             const br = document.createElement('br');
 
-            span.insertAdjacentHTML('afterbegin', `- <url-item>${url}</url-item>`);
+            span.insertAdjacentHTML('afterbegin', `- <url-item data-index="${index}"><span>${url}</span></url-item>`);
             fragment.append(span);
             fragment.append(br);
           });
@@ -133,14 +172,14 @@ export const GetUrlFromDOMContent = () => {
         case 'table':
           const table = document.createElement('table');
 
-          make((url) => {
+          make(({ url, index }) => {
             const tr = document.createElement('tr');
 
             tr.insertAdjacentHTML(
               'beforeend',
               `
           <tr>
-            <td><url-item>${url}</url-item></td>
+            <td><url-item data-index="${index}"><span>${url}</span></url-item></td>
           </tr>
         `,
             );
@@ -153,11 +192,12 @@ export const GetUrlFromDOMContent = () => {
           break;
 
         default:
-          make((url) => {
+          make(({ url, index }) => {
             const urlItem = document.createElement('url-item');
             const br = document.createElement('br');
 
-            urlItem.textContent = url;
+            urlItem.setAttribute('data-index', String(index));
+            urlItem.insertAdjacentHTML('afterbegin', `<span>${url}</span>`);
             fragment.append(urlItem);
             fragment.append(br);
           });
@@ -186,17 +226,22 @@ export const GetUrlFromDOMContent = () => {
           const parentElement = editAreaContainerRef.current.parentElement;
           const edit = editAreaRef.current;
 
-          const onMouseleave = () => {
-            for (const elm of edit.querySelectorAll('.___RELATED___NODE___')) {
-              elm.classList.remove('___RELATED___NODE___');
-            }
-          };
-          const getOnMouseEnter = (targets: NodeListOf<HTMLElement>) => () => {
-            for (const elm of targets) {
-              elm.classList.add('___RELATED___NODE___');
+          const onPointerEnter = (e: Event) => {
+            if (e.currentTarget instanceof HTMLElement === false) {
+              return;
             }
 
-            const rect = targets[0].getBoundingClientRect();
+            const target = edit.querySelector<HTMLElement>(
+              `[data-___get-url-from-dom-index___="${e.currentTarget.dataset.index}"]`,
+            );
+
+            if (target === null) {
+              return;
+            }
+
+            target.classList.add('___RELATED___NODE___');
+
+            const rect = target.getBoundingClientRect();
             const parentRect = parentElement.getBoundingClientRect();
             const { scrollTop, scrollLeft } = parentElement;
 
@@ -205,15 +250,23 @@ export const GetUrlFromDOMContent = () => {
 
             parentElement.scroll(left, top);
           };
-
+          const onPointerleave = () => {
+            for (const elm of edit.querySelectorAll('.___RELATED___NODE___')) {
+              elm.classList.remove('___RELATED___NODE___');
+            }
+          };
           for (const urlItem of fragment.querySelectorAll('url-item')) {
-            const { textContent } = urlItem;
-            const targets = edit.querySelectorAll<HTMLElement>(
-              [`[style*="${textContent}"]`, `[href="${textContent}"]`, `[src="${textContent}"`].join(', '),
-            );
+            urlItem.addEventListener('pointerenter', onPointerEnter);
+            urlItem.addEventListener('pointerleave', onPointerleave);
 
-            urlItem.addEventListener('pointerenter', getOnMouseEnter(targets));
-            urlItem.addEventListener('pointerleave', onMouseleave);
+            urlItem.addEventListener('contextmenu', (e) => e.preventDefault());
+            urlItem.firstElementChild?.addEventListener('contextmenu', (e) => {
+              e.stopPropagation();
+            });
+            urlItem.addEventListener('touchstart', (e) => e.preventDefault());
+            urlItem.firstElementChild?.addEventListener('touchstart', (e) => {
+              e.stopPropagation();
+            });
           }
         }
       }
@@ -237,7 +290,7 @@ export const GetUrlFromDOMContent = () => {
 
         style.replaceSync(`
           :host {
-            --editor-height: 33vh;
+            --editor-height: 30dvh;
           }
 
           :where(.___RELATED___NODE___) {
@@ -256,7 +309,7 @@ export const GetUrlFromDOMContent = () => {
 
           @media (min-width: 768px) {
             :host {
-              --editor-height: 80vh;
+              --editor-height: 80dvh;
             }
           }
         `);
@@ -319,10 +372,10 @@ export const GetUrlFromDOMContent = () => {
   }, [duplicateType, exportResult, filterType, formatType, sortType]);
 
   return (
-    <div className="border border-slate-400 sm:grid md:h-[80vh] md:grid-cols-3">
+    <div className="border border-slate-400 sm:grid md:h-[80dvh] md:grid-cols-3">
       <div
         className={clsx([
-          "relative h-[33vh] overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
+          "relative h-[30dvh] overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
           isEdited ? 'before:hidden' : 'before:grid',
           'md:h-auto',
         ])}
@@ -332,7 +385,7 @@ export const GetUrlFromDOMContent = () => {
         </p>
         <div ref={editAreaContainerRef}></div>
       </div>
-      <div className="h-[33vh] space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 md:h-auto md:border-x md:border-y-0">
+      <div className="h-[30dvh] space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 md:h-auto md:border-x md:border-y-0">
         <fieldset>
           <legend className="text-sm font-bold">フィルタ</legend>
           <ul className="space-y-2 p-2">
@@ -440,10 +493,10 @@ export const GetUrlFromDOMContent = () => {
           </ul>
         </fieldset>
       </div>
-      <div className="min-h-[33vh] overflow-auto">
-        <h2 className="sticky left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">Result:</h2>
+      <div className="min-h-[30dvh] overflow-auto">
+        <h2 className="sticky  left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">Result:</h2>
         <div
-          className=" text-nowrap p-4 leading-normal"
+          className=" mb-paragraph text-nowrap p-4 pb-0 leading-normal"
           onClick={(e) => {
             if (window.getSelection && document.createRange && e.currentTarget.firstElementChild) {
               const range = document.createRange();
@@ -460,10 +513,10 @@ export const GetUrlFromDOMContent = () => {
           {targetLength === 0 && <p>対象がありませんでした。</p>}
         </div>
         {targetLength !== 0 && (
-          <p className="sticky bottom-4 px-4 left-0 mt-paragraph rounded-full  pointer-events-none grid place-items-center">
+          <p className="pointer-events-none sticky bottom-4 left-0 grid  place-items-center rounded-full px-4">
             <button
               type="button"
-              className="w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm pointer-events-auto shadow-sticky"
+              className="pointer-events-auto w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm shadow-sticky"
               onClick={() => {
                 const targets = resultRef.current?.querySelectorAll('url-item') ?? [];
 
@@ -489,7 +542,7 @@ export const GetUrlFromDOMContent = () => {
                 }
               }}
             >
-              <span className="grid w-fit mx-auto grid-cols-[auto_1rem] gap-1 place-items-center">
+              <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-1">
                 <span>{targetLength}個のURLをすべて開く</span>
                 <span>
                   <Image

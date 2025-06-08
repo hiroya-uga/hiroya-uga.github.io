@@ -2,7 +2,7 @@ type FilterType = 'all' | 'a' | 'img' | 'href' | 'src' | 'style' | 'no-style';
 
 export type GetUrlFromDomFilterType = FilterType;
 
-export const targetListFilter = ({ targetList, filterType }: { targetList: HTMLElement[]; filterType: FilterType }) =>
+export const formatTargetList = ({ targetList, filterType }: { targetList: HTMLElement[]; filterType: FilterType }) =>
   targetList
     .filter((element) => {
       switch (filterType) {
@@ -35,15 +35,15 @@ export const targetListFilter = ({ targetList, filterType }: { targetList: HTMLE
           return true;
       }
     })
-    .map((element) => {
+    .map((element, index) => {
       const style = element.style.backgroundImage || element.style.background;
-      const pathList: string[] = [];
+      const pathList: { url: string; index: number }[] = [];
 
       switch (filterType) {
         case 'a':
         case 'href':
           if (element instanceof HTMLAnchorElement && element.href) {
-            pathList.push(element.href);
+            pathList.push({ url: element.href, index });
           }
 
           break;
@@ -51,25 +51,25 @@ export const targetListFilter = ({ targetList, filterType }: { targetList: HTMLE
         case 'img':
         case 'src':
           if (element instanceof HTMLImageElement && element.src) {
-            pathList.push(element.src);
+            pathList.push({ url: element.src, index });
           }
 
           break;
 
         case 'no-style':
           if (element instanceof HTMLAnchorElement && element.href) {
-            pathList.push(element.href);
+            pathList.push({ url: element.href, index });
           }
 
           if (element instanceof HTMLImageElement && element.src) {
-            pathList.push(element.src);
+            pathList.push({ url: element.src, index });
           }
 
           break;
 
         case 'style':
           style.replace(/url\(['"]?(.*?)['"]?\)/g, (_, p1) => {
-            pathList.push(p1);
+            pathList.push({ url: p1, index });
             return ''; // replaceの使い方間違ってる
           });
 
@@ -77,13 +77,13 @@ export const targetListFilter = ({ targetList, filterType }: { targetList: HTMLE
 
         default:
           if (element instanceof HTMLAnchorElement && element.href) {
-            pathList.push(element.href);
+            pathList.push({ url: element.href, index });
           }
           if (element instanceof HTMLImageElement && element.src) {
-            pathList.push(element.src);
+            pathList.push({ url: element.src, index });
           }
           style.replace(/url\(['"]?(.*?)['"]?\)/g, (_, p1) => {
-            pathList.push(p1);
+            pathList.push({ url: p1, index });
             return ''; // replaceの使い方間違ってる
           });
 
