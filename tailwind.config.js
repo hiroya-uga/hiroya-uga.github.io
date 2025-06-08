@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       screens: {
         '2xl': '1536px',
+        'pointer-fine': { raw: '(pointer: fine)' },
+        'pointer-coarse': { raw: '(pointer: coarse)' },
+        'pointer-none': { raw: '(pointer: none)' },
       },
       fontSize: {
         '2xs': '0.625rem',
