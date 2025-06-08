@@ -16,27 +16,36 @@ export default function Page() {
       <ol className="list-decimal space-y-2 pl-7">
         <li>URLを抽出したいページやアプリケーションを開く</li>
         <li>
-          マウスドラッグや
-          <kbd>
-            <kbd>Ctrl</kbd>+<kbd>A</kbd>
-          </kbd>
-          を押下するなどで、抽出したい範囲を選択する
+          <span className="pointer-fine:inline hidden">
+            マウスドラッグや
+            <kbd>
+              <kbd>Ctrl</kbd>+<kbd>A</kbd>
+            </kbd>
+            を押下するなどで、
+          </span>
+          抽出したい範囲を選択する
         </li>
         <li>
-          <kbd>
-            <kbd>Ctrl</kbd>+<kbd>C</kbd>
-          </kbd>
-          を押下してコピーする
+          <span className="pointer-fine:inline hidden">
+            <kbd>
+              <kbd>Ctrl</kbd>+<kbd>C</kbd>
+            </kbd>
+            を押下して
+          </span>
+          コピーする
         </li>
         <li>
           本ツールの
           <b>入力エリア</b>をクリックする
         </li>
         <li>
-          <kbd>
-            <kbd>Ctrl</kbd>+<kbd>V</kbd>
-          </kbd>
-          を押下して貼り付ける
+          <span className="pointer-fine:inline hidden">
+            <kbd>
+              <kbd>Ctrl</kbd>+<kbd>V</kbd>
+            </kbd>
+            を押下して
+          </span>
+          貼り付ける
         </li>
         <li>
           <b>Result</b>からURLをコピーする

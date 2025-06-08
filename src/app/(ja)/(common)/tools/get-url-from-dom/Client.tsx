@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(common)/tools/get-url-from-dom/Client.module.css';
+import Image from 'next/image';
 
 type FilterType = GetUrlFromDomFilterType;
 type SortType = 'none' | 'sort' | 'reverse';
@@ -457,41 +458,52 @@ export const GetUrlFromDOMContent = () => {
         >
           <div className={clsx([styles.result, 'text-sm'])} ref={resultRef}></div>
           {targetLength === 0 && <p>対象がありませんでした。</p>}
-          {targetLength !== 0 && (
-            <p className="sticky bottom-4 left-0 mt-paragraph rounded-full shadow-sticky">
-              <button
-                type="button"
-                className="w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm"
-                onClick={() => {
-                  const targets = resultRef.current?.querySelectorAll('url-item') ?? [];
-
-                  if (
-                    5 < targets.length &&
-                    !confirm(`${targets.length}枚も同時に開こうとしています。本当に開きますか？`)
-                  ) {
-                    return;
-                  }
-
-                  for (const { textContent } of targets) {
-                    const url = textContent?.trim() ?? '';
-                    try {
-                      new URL(url);
-                    } catch {
-                      console.error('開けませんでした：' + url);
-                    }
-
-                    if (!window.open(url)) {
-                      window.alert('ポップアップブロックが作動しているようです');
-                      throw new Error('ポップアップブロックが作動しているようです');
-                    }
-                  }
-                }}
-              >
-                {targetLength}個のURLをすべて開く
-              </button>
-            </p>
-          )}
         </div>
+        {targetLength !== 0 && (
+          <p className="sticky bottom-4 px-4 left-0 mt-paragraph rounded-full  pointer-events-none grid place-items-center">
+            <button
+              type="button"
+              className="w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm pointer-events-auto shadow-sticky"
+              onClick={() => {
+                const targets = resultRef.current?.querySelectorAll('url-item') ?? [];
+
+                if (
+                  5 < targets.length &&
+                  !confirm(`${targets.length}枚も同時に開こうとしています。本当に開きますか？`)
+                ) {
+                  return;
+                }
+
+                for (const { textContent } of targets) {
+                  const url = textContent?.trim() ?? '';
+                  try {
+                    new URL(url);
+                  } catch {
+                    console.error('開けませんでした：' + url);
+                  }
+
+                  if (!window.open(url)) {
+                    window.alert('ポップアップブロックが作動しているようです');
+                    throw new Error('ポップアップブロックが作動しているようです');
+                  }
+                }
+              }}
+            >
+              <span className="grid w-fit mx-auto grid-cols-[auto_1rem] gap-1 place-items-center">
+                <span>{targetLength}個のURLをすべて開く</span>
+                <span>
+                  <Image
+                    src="/common/images/icons/new-window-black.svg"
+                    alt=""
+                    width={16}
+                    height={16}
+                    className="block"
+                  />
+                </span>
+              </span>
+            </button>
+          </p>
+        )}
       </div>
     </div>
   );
