@@ -1,20 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { SITE_NAME } from '@/constants/meta';
 
 export const Comment = () => {
-  const [wrote, setWrote] = useState(false);
-
-  useEffect(() => {
-    setWrote(true);
-  }, [wrote]);
-
-  if (wrote) {
-    return null;
-  }
-
   return (
     <noscript
       dangerouslySetInnerHTML={{
