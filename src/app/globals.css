@@ -26,6 +26,7 @@
   --color-background: #f7f7f7;
   /* TailWindCSS */
   --mb-paragraph: 1rem;
+  --bg-scroll-hint: white;
   /* Component */
   --content-padding-inline: 1rem;
   --header-margin-bottom: 2rem;

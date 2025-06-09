@@ -14,12 +14,11 @@ export default function JaRootLayout({ children }: { children: React.ReactNode }
   return (
     <html lang="ja">
       <head>
-        <Comment />
-
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <Suspense>
           <GoogleAnalytics />
         </Suspense>
+        <Comment />
       </head>
       <body className={inter.className} id="top">
         {children}

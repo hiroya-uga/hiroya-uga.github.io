@@ -6,8 +6,6 @@ import { Switch } from '@/components/Form';
 import { NoteList } from '@/components/List';
 import clsx from 'clsx';
 
-import styles from '@/app/(ja)/(common)/tools/css-units/css-units.module.css';
-
 const ABSOLUTE = {
   px: 'ピクセル（1px = 1in/96）',
   pt: 'ポイント（1pt = 1in/72）',
@@ -310,10 +308,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
       <div className="relative">
         <div
-          className={clsx([
-            styles.scroll,
-            'overflow-x-auto overflow-y-hidden p-4 before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md',
-          ])}
+          className="scroll-hint-x overflow-x-auto overflow-y-hidden p-4 before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md"
           tabIndex={0}
         >
           <h2 className="sticky left-0 m-0 mb-2 text-lg font-bold sm:text-2xl">絶対値</h2>
