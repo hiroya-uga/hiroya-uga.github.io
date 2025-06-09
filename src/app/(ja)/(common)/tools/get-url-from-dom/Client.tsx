@@ -322,7 +322,9 @@ export const GetUrlFromDOMContent = () => {
         const _editArea = document.createElement('edit-area');
         _editArea.contentEditable = 'true';
         _editArea.style.padding = '0.5rem';
-        _editArea.style.minHeight = 'calc(var(--editor-height) - 4.5rem)';
+        _editArea.style.width = 'max-content';
+        _editArea.style.minWidth = 'calc(100% - 1rem)';
+        _editArea.style.minHeight = 'calc(var(--editor-height) - 5.5rem)';
         _editArea.setAttribute('aria-label', 'ここに貼り付けてください');
 
         return _editArea;
@@ -375,17 +377,35 @@ export const GetUrlFromDOMContent = () => {
     <div className="border border-slate-400 sm:grid md:h-[80dvh] md:grid-cols-3">
       <div
         className={clsx([
-          "relative h-[30dvh] overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
+          "relative h-[30dvh] scroll-hint-y overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください'] before:rounded-md",
           isEdited ? 'before:hidden' : 'before:grid',
           'md:h-auto',
         ])}
       >
-        <p className="sticky -left-0 top-3.5 z-10 -ml-4 mb-0.5 mt-4 w-fit bg-white px-2 text-sm font-bold">
-          入力エリア
-        </p>
+        <div className="sticky -left-2 -mx-2 top-0 z-10 mb-0.5 bg-white/90 p-4 text-sm  flex justify-between font-bold">
+          <p>入力エリア</p>
+          <p>
+            <button
+              type="button"
+              className="rounded-full border border-black bg-white px-2.5 py-1.5 text-xs shadow-sticky"
+              onClick={() => {
+                if (editAreaRef.current) {
+                  editAreaRef.current.textContent = '';
+                }
+              }}
+            >
+              <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center leading-none gap-0.5">
+                <span className="pt-px">クリア</span>
+                <span>
+                  <Image src="/common/images/icons/trash-can.svg" alt="" width={16} height={16} className="size-3" />
+                </span>
+              </span>
+            </button>
+          </p>
+        </div>
         <div ref={editAreaContainerRef}></div>
       </div>
-      <div className="h-[30dvh] space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 md:h-auto md:border-x md:border-y-0">
+      <div className="h-[30dvh] scroll-hint-y space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 md:h-auto md:border-x md:border-y-0">
         <fieldset>
           <legend className="text-sm font-bold">フィルタ</legend>
           <ul className="space-y-2 p-2">
@@ -493,8 +513,10 @@ export const GetUrlFromDOMContent = () => {
           </ul>
         </fieldset>
       </div>
-      <div className="min-h-[30dvh] overflow-auto">
-        <h2 className="sticky  left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">Result:</h2>
+      <div className="min-h-[30dvh] scroll-hint-y overflow-auto">
+        <h2 className="sticky  left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">
+          Result:<span aria-live="polite">{isEdited && ` ${targetLength}件のURL`}</span>
+        </h2>
         <div
           className=" mb-paragraph text-nowrap p-4 pb-0 leading-normal"
           onClick={(e) => {
@@ -510,7 +532,7 @@ export const GetUrlFromDOMContent = () => {
           }}
         >
           <div className={clsx([styles.result, 'text-sm'])} ref={resultRef}></div>
-          {targetLength === 0 && <p>対象がありませんでした。</p>}
+          <p aria-live="polite">{isEdited && targetLength === 0 && '対象がありませんでした。'}</p>
         </div>
         {targetLength !== 0 && (
           <p className="pointer-events-none sticky bottom-4 left-0 grid  place-items-center rounded-full px-4">
@@ -543,7 +565,7 @@ export const GetUrlFromDOMContent = () => {
               }}
             >
               <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-1">
-                <span>{targetLength}個のURLをすべて開く</span>
+                <span>{`${targetLength}個のURLをすべて開く`}</span>
                 <span>
                   <Image
                     src="/common/images/icons/new-window-black.svg"

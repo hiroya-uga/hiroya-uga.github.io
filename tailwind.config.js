@@ -62,6 +62,38 @@ module.exports = {
         palt: {
           'font-feature-settings': 'palt',
         },
+        '.scroll-hint-x': {
+          background: `
+            linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 70%) 100% 0,
+            linear-gradient(to left, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 30%),
+            radial-gradient(farthest-side at 100% 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0,
+            radial-gradient(farthest-side at 0 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 0;
+          `,
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: 'var(--bg-scroll-hint)',
+          backgroundSize: `
+            40px 100%,
+            40px 100%,
+            14px 120%,
+            14px 120%`,
+          backgroundAttachment: 'local, local, scroll, scroll',
+        },
+        '.scroll-hint-y': {
+          background: `
+            linear-gradient(to top, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 30%) ,
+            linear-gradient(to top, var(--bg-scroll-hint), rgba(255, 255, 255, 0) 70%) 0 100%,
+            radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+            radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+          `,
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: 'var(--bg-scroll-hint)',
+          backgroundSize: `
+            100% 60px,
+            100% 60px,
+            100% 14px,
+            100% 14px`,
+          backgroundAttachment: 'local, local, scroll, scroll',
+        },
       });
     },
   ],
