@@ -383,7 +383,13 @@ export const GetUrlFromDOMContent = () => {
         ])}
       >
         <div className="sticky -left-2 -mx-2 top-0 z-10 mb-0.5 bg-white/90 p-4 text-sm  flex justify-between font-bold">
-          <p>入力エリア</p>
+          <p
+            onClick={() => {
+              editAreaRef.current?.focus();
+            }}
+          >
+            入力エリア
+          </p>
           <p>
             <button
               type="button"
