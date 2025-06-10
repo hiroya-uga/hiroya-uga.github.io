@@ -1,4 +1,4 @@
-import { GetUrlFromDOMContent } from '@/app/(ja)/(common)/tools/get-url-from-dom/Client';
+import { GetUrlFromDOMContent } from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client';
 import { Heading } from '@/components/Heading';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
