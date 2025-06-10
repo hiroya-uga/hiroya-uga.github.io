@@ -1,10 +1,15 @@
-'use client';
-
 import '@/app/(ja)/common.css';
+
+import '@/app/globals.css';
+
+import { Metadata } from 'next';
+
+import { URL_ORIGIN } from '@/constants/meta';
+import 'highlight.js/styles/a11y-dark.css';
 
 import { Inter } from 'next/font/google';
 
-import { Comment } from '@/components/Jokes';
+import { Comment, Console } from '@/components/Jokes';
 import GoogleAnalytics from '@/lib/gtag';
 import { Suspense } from 'react';
 
@@ -18,6 +23,7 @@ export default function JaRootLayout({ children }: { children: React.ReactNode }
         <Suspense>
           <GoogleAnalytics />
         </Suspense>
+        <Console />
         <Comment />
       </head>
       <body className={inter.className} id="top">
@@ -26,3 +32,7 @@ export default function JaRootLayout({ children }: { children: React.ReactNode }
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  metadataBase: new URL(URL_ORIGIN),
+};
