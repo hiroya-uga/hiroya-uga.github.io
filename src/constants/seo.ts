@@ -337,8 +337,7 @@ export const SEO: Record<
   },
   '/tools/character-count': {
     title: '文字数カウント',
-    description:
-      '文章の文字数をカウントするツールです。\n本文に文字数をチェックしたいテキストを入力してください。原稿用紙換算、段落数も確認できます。',
+    description: '文章の文字数をカウントするツールです。原稿用紙換算、段落数も確認できます。',
   },
   '/tools/css-units': {
     title: 'CSS Units Playground',

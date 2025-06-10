@@ -11,7 +11,9 @@ export default function Page() {
 
   return (
     <>
-      <PageTitle title={metadata.pageTitle} description={metadata.description} shouldShowPrivacyPolicyMessage />
+      <PageTitle title={metadata.pageTitle} description={metadata.description} shouldShowPrivacyPolicyMessage>
+        <p>本文に文字数をチェックしたいテキストを入力してください。</p>
+      </PageTitle>
       <CharacterCountContent id={id} />
     </>
   );
