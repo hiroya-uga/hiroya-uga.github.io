@@ -5,12 +5,12 @@
 import {
   GetUrlFromDomFilterType,
   formatTargetList,
-} from '@/app/(ja)/(common)/tools/get-url-from-dom/format-target-list';
+} from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/format-target-list';
 import { Radio } from '@/components/Form';
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import styles from '@/app/(ja)/(common)/tools/get-url-from-dom/Client.module.css';
+import styles from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client.module.css';
 import Image from 'next/image';
 
 type FilterType = GetUrlFromDomFilterType;
