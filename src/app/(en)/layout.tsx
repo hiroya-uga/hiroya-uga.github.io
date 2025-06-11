@@ -10,7 +10,7 @@ import 'highlight.js/styles/github.css';
 import { Inter } from 'next/font/google';
 
 import { Comment, Console } from '@/components/Jokes';
-import GoogleAnalytics from '@/lib/gtag';
+import { Analytics } from '@/components/specific/Analytics';
 import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,7 +21,7 @@ export default function EnRootLayout({ children }: { children: React.ReactNode }
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <Suspense>
-          <GoogleAnalytics />
+          <Analytics />
         </Suspense>
         <Console />
         <Comment />
