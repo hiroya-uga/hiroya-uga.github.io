@@ -9,8 +9,6 @@ import { AnAltDecisionTreeAnswer } from '@/app/(ja)/(common)/tools/an-alt-decisi
 import { AnAltDecisionTreeException } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeException';
 import { AnAltDecisionTreeQuestion } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeQuestion';
 
-import 'highlight.js/styles/github-dark.css';
-
 import styles from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client.module.css';
 
 const formatIndex = (value: string | number | undefined | null) => {

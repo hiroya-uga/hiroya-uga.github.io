@@ -5,7 +5,7 @@ import '@/app/globals.css';
 import { Metadata } from 'next';
 
 import { URL_ORIGIN } from '@/constants/meta';
-import 'highlight.js/styles/a11y-dark.css';
+import 'highlight.js/styles/github.css';
 
 import { Inter } from 'next/font/google';
 
