@@ -14,44 +14,17 @@ export default function Page() {
       </PageTitle>
 
       <SimpleDescriptionList
-        list={[
-          {
-            key: `日本語訳まとめ`,
-            title: (
-              <>
-                <Link href="/documents/translations/">日本語訳まとめ</Link>
-              </>
-            ),
-            description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
-          },
-          {
-            key: `UI Notes`,
-            title: (
-              <>
-                <Link href="/documents/notes/">UI Notes</Link>
-              </>
-            ),
-            description: 'Web上に登場するUIに関するメモ書き。',
-          },
-          {
-            key: `Media`,
-            title: (
-              <>
-                <Link href="/documents/media/">Media</Link>
-              </>
-            ),
-            description: '社内ブログや動画コンテンツへの参加、寄稿などのリンクをまとめています。',
-          },
-          {
-            key: `Fantasized Web Standards and Specifications`,
-            title: (
-              <>
-                <Link href="/documents/fantasized-specs/">Fantasized Web Standards and Specifications</Link>
-              </>
-            ),
-            description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
-          },
-        ]}
+        list={['/documents/translations', '/documents/notes', '/documents/media', '/documents/fantasized-specs']
+          .map((pathname) => {
+            const data = getMetadata(pathname);
+
+            return {
+              key: data.pageTitle,
+              title: <Link href={pathname}>{data.pageTitle}</Link>,
+              description: data.description.replace(/\n/g, ''),
+            };
+          })
+          .sort((a, b) => a.key.localeCompare(b.key))}
       />
     </>
   );

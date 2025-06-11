@@ -308,7 +308,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
       <div className="relative">
         <div
-          className="scroll-hint-x overflow-x-auto overflow-y-hidden p-4 before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md"
+          className="overflow-x-auto overflow-y-hidden p-4 scroll-hint-x before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md"
           tabIndex={0}
         >
           <h2 className="sticky left-0 m-0 mb-2 text-lg font-bold sm:text-2xl">絶対値</h2>

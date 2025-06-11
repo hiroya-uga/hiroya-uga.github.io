@@ -377,12 +377,12 @@ export const GetUrlFromDOMContent = () => {
     <div className="border border-slate-400 sm:grid md:h-[80dvh] md:grid-cols-3">
       <div
         className={clsx([
-          "relative h-[30dvh] scroll-hint-y overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください'] before:rounded-md",
+          "relative h-[30dvh] overflow-auto bg-white p-2 pt-0 scroll-hint-y before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:rounded-md before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
           isEdited ? 'before:hidden' : 'before:grid',
           'md:h-auto',
         ])}
       >
-        <div className="sticky -left-2 -mx-2 top-0 z-10 mb-0.5 bg-white/90 p-4 text-sm  flex justify-between font-bold">
+        <div className="sticky -left-2 top-0 z-10 -mx-2 mb-0.5 flex justify-between bg-white/90  p-4 text-sm font-bold">
           <p
             onClick={() => {
               editAreaRef.current?.focus();
@@ -400,7 +400,7 @@ export const GetUrlFromDOMContent = () => {
                 }
               }}
             >
-              <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center leading-none gap-0.5">
+              <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-0.5 leading-none">
                 <span className="pt-px">クリア</span>
                 <span>
                   <Image src="/common/images/icons/trash-can.svg" alt="" width={16} height={16} className="size-3" />
@@ -411,7 +411,7 @@ export const GetUrlFromDOMContent = () => {
         </div>
         <div ref={editAreaContainerRef}></div>
       </div>
-      <div className="h-[30dvh] scroll-hint-y space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 md:h-auto md:border-x md:border-y-0">
+      <div className="h-[30dvh] space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 scroll-hint-y md:h-auto md:border-x md:border-y-0">
         <fieldset>
           <legend className="text-sm font-bold">フィルタ</legend>
           <ul className="space-y-2 p-2">
@@ -519,7 +519,7 @@ export const GetUrlFromDOMContent = () => {
           </ul>
         </fieldset>
       </div>
-      <div className="min-h-[30dvh] scroll-hint-y overflow-auto">
+      <div className="min-h-[30dvh] overflow-auto scroll-hint-y">
         <h2 className="sticky  left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">
           Result:<span aria-live="polite">{isEdited && ` ${targetLength}件のURL`}</span>
         </h2>
