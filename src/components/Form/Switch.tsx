@@ -31,7 +31,7 @@ export const Switch = ({ dispatch, ...props }: Props) => {
         type="checkbox"
         role="switch"
         checked={props.checked ?? isChecked}
-        className="absolute inset-0 size-full appearance-none"
+        className="absolute inset-0 size-full appearance-none rounded-full"
         onChange={(e) => {
           if (props.onChange) {
             props.onChange(e);
