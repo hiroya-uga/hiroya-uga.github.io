@@ -9,9 +9,7 @@ export const metadata = getMetadata('/documents');
 export default function Page() {
   return (
     <>
-      <PageTitle title={metadata.pageTitle}>
-        <p>{metadata.description}</p>
-      </PageTitle>
+      <PageTitle title={metadata.pageTitle} description={metadata.description} />
 
       <SimpleDescriptionList
         list={['/documents/translations', '/documents/notes', '/documents/media', '/documents/fantasized-specs']
