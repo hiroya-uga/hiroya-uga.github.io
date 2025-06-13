@@ -70,13 +70,13 @@
 }
 
 ::selection {
-  background-color: #000;
+  background-color: #316ac5;
   color: #fff;
   fill: #fff;
 }
 
 ::-moz-selection {
-  background-color: #000;
+  background-color: #316ac5;
   color: #fff;
   fill: #fff;
 }
