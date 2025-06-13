@@ -1,0 +1,20 @@
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  --navigation-width: 360px;
+
+  details li {
+    list-style: none;
+    counter-increment: index;
+  }
+
+  details button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  details button::before {
+    content: counter(index);
+  }
+}

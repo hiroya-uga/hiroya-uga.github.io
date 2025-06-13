@@ -56,6 +56,12 @@ module.exports = {
   plugins: [
     ({ addUtilities }) => {
       addUtilities({
+        '.transition-fade': {
+          transitionProperty: 'opacity, visibility',
+          transitionDuration: '300ms',
+          transitionTimingFunction: 'ease-out',
+          display: 'block',
+        },
         '.transition-bg': {
           transition: '300ms background-color ease-out',
         },

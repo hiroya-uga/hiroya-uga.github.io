@@ -19,6 +19,7 @@ export default function Page() {
           '/tools/get-url-from-dom',
           '/tools/an-alt-decision-tree',
           '/tools/character-count',
+          '/tools/table-dev-supporter',
         ]
           .map((pathname) => {
             const data = getMetadata(pathname);

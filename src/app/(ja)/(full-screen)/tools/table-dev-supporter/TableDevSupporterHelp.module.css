@@ -1,0 +1,27 @@
+table.sampleTable {
+  border-collapse: collapse;
+  border: 1px solid #333;
+  font-size: 0.75rem;
+}
+table.sampleTable caption {
+  text-align: center;
+  font-weight: bold;
+}
+table.sampleTable thead {
+  background-color: #e0e0e0;
+}
+table.sampleTable tbody {
+  background-color: #ffffff;
+}
+table.sampleTable th,
+table.sampleTable td {
+  border: 1px solid #333;
+  padding: 0.5rem;
+  text-align: center;
+}
+table.sampleTable th {
+  font-weight: bold;
+}
+table.sampleTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
