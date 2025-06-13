@@ -1,10 +1,12 @@
 'use client';
 
 import { TableDevSupporterHelp } from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/TableDevSupporterHelp';
+import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { setSelectionRange } from '@/utils/set-selection-range';
 import clsx from 'clsx';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -17,25 +19,11 @@ export const TableDevSupporterContent = () => {
   const editorContainerRef = useRef<HTMLDivElement | null>(null);
   const editorRef = useRef<HTMLElement | null>(null);
 
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const [toastMessage, setToastMessage] = useState('');
 
-  const setTimeoutId = useRef(-1);
   const copy = useCallback((value: string) => {
     navigator.clipboard.writeText(value);
-    const dialog = dialogRef.current;
-
-    if (dialog === null) {
-      return;
-    }
-
-    dialog.textContent = 'コピーしました';
-    dialog.open = true;
-
-    clearTimeout(setTimeoutId.current);
-    setTimeoutId.current = window.setTimeout(() => {
-      dialog.textContent = '';
-      dialog.open = false;
-    }, 1000);
+    setToastMessage('コピーしました');
   }, []);
 
   useEffect(() => {
@@ -104,6 +92,7 @@ export const TableDevSupporterContent = () => {
         shadow.append(editor);
         editor.addEventListener('click', (e) => {
           if (e.target instanceof HTMLTableCellElement) {
+            e.preventDefault();
             copy(e.target.innerText.trim()); // trimした値をコピー
             setSelectionRange(e.target);
           }
@@ -152,6 +141,7 @@ export const TableDevSupporterContent = () => {
 
           case 'adjustBreak':
             return value
+              .replace(/><caption/g, '>\n<caption')
               .replace(/><col/g, '>\n<col')
               .replace(/><thead/g, '>\n<thead')
               .replace(/><tbody/g, '>\n<tbody')
@@ -159,7 +149,7 @@ export const TableDevSupporterContent = () => {
               .replace(/><tr/g, '>\n<tr')
               .replace(/><th/g, '>\n<th')
               .replace(/><td/g, '>\n<td')
-              .replace(/<\/td><\/tr>/g, '</td>\n</tr>')
+              .replace(/><\/tr/g, '>\n</tr')
               .replace(/><\/col>/g, '>\n</col>')
               .replace(/><\/colgroup>/g, '>\n</colgroup>')
               .replace(/><\/thead>/g, '>\n</thead>')
@@ -290,16 +280,26 @@ export const TableDevSupporterContent = () => {
               update({ type: 'adjustBreak' });
               update({ type: 'removeAttributes' });
               update({ type: 'removeElementsFromTableCells' });
+              setToastMessage('フォーマットしました');
             }}
           >
-            テーブルを整形
+            <span className="grid grid-cols-[1rem_auto] items-center justify-center gap-1 pr-2">
+              <Image
+                src="/common/images/icons/write.svg"
+                alt=""
+                width={16}
+                height={16}
+                className=" inline-block size-4"
+              />
+              テーブルをフォーマット
+            </span>
           </button>
 
-          <details className="group mb-6 open:mb-10">
-            <summary className="palt  rounded-md px-1 py-2.5 text-xs before:mr-2 before:inline-block before:size-0 before:border-x-[0.35rem] before:border-t-8 before:border-x-transparent before:border-t-white before:transition-transform after:hidden hover:before:translate-y-0.5 before:group-open:rotate-180 group-open:hover:before:translate-y-0">
-              「テーブルを整形」で行われる処理を手動で実行する
+          <details className="group my-6  rounded-md border border-[#777] open:mb-2.5">
+            <summary className="palt rounded-md p-2.5  text-xs transition-[background-color] before:mr-2 before:inline-block before:size-0 before:border-x-[0.35rem] before:border-t-8 before:border-x-transparent before:border-t-white before:transition-transform after:hidden hover:bg-[#444] group-open:bg-transparent  before:group-open:rotate-180 group-open:hover:before:-translate-y-0.5">
+              「テーブルをフォーマット」の自動処理を手動で実行する
             </summary>
-            <ol className="space-y-2.5 pl-4 pt-2.5">
+            <ol className="space-y-2.5 px-2.5 pb-2.5">
               <li>
                 <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeIndent' })}>
                   インデント削除
@@ -374,6 +374,35 @@ export const TableDevSupporterContent = () => {
                 >
                   <Link href={href} target={target} className="text-inherit">
                     {title}
+                    {target === '_blank' && (
+                      <svg
+                        role="img"
+                        aria-label="新しいタブで開く"
+                        version="1.1"
+                        id="_x32_"
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 512 512"
+                        className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
+                      >
+                        <g>
+                          <path
+                            d="M96,0v416h416V0H96z M472,376H136V40h336V376z"
+                            style={{ fill: 'rgb(156, 156, 156)' }}
+                          ></path>
+                          <polygon
+                            points="40,472 40,296 40,136 40,96 0,96 0,512 416,512 416,472 376,472 	"
+                            style={{ fill: 'rgb(156, 156, 156)' }}
+                          ></polygon>
+                          <polygon
+                            points="232.812,312.829 350.671,194.969 350.671,279.766 390.671,279.766 390.671,126.688 237.594,126.688
+		237.594,166.688 322.39,166.688 204.531,284.547 	"
+                            style={{ fill: 'rgb(156, 156, 156)' }}
+                          ></polygon>
+                        </g>
+                      </svg>
+                    )}
                   </Link>
                 </li>
               );
@@ -382,11 +411,7 @@ export const TableDevSupporterContent = () => {
         </div>
       </nav>
 
-      <dialog
-        ref={dialogRef}
-        aria-live="assertive"
-        className="invisible rounded-md px-4 py-2 opacity-0 shadow-sticky transition-fade open:visible open:opacity-100"
-      />
+      <Toast message={toastMessage} setMessage={setToastMessage} />
     </>
   );
 };
