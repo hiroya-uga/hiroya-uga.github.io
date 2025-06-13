@@ -161,7 +161,7 @@ export const TableDevSupporterHelp = () => {
                 }
               }}
             >
-              <caption className="bg-white/80 mb-2">サンプルの表</caption>
+              <caption className="mb-2 bg-white/80">サンプルの表</caption>
               <thead>
                 <tr>
                   <th scope="column">ID</th>

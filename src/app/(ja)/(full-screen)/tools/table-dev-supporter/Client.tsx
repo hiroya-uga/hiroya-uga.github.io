@@ -365,7 +365,7 @@ export const TableDevSupporterContent = () => {
         <div className="p-2.5">
           <TableDevSupporterHelp />
 
-          <ul className="border- mt-10 space-y-2 border-t border-[#9c9c9c] border-dashed pb-5 pt-10 text-sm text-[#9c9c9c] sm:space-y-1 sm:text-xs">
+          <ul className="border- mt-10 space-y-2 border-t border-dashed border-[#9c9c9c] pb-5 pt-10 text-sm text-[#9c9c9c] sm:space-y-1 sm:text-xs">
             {FOOTER_LINK_LIST.map(({ href, title, target }) => {
               return (
                 <li
