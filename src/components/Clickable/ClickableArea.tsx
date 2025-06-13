@@ -17,7 +17,6 @@ export const ClickableArea = ({ as, children, className, defaultClickable }: Pro
   const targetRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const onClick = useCallback((e: React.MouseEvent<HTMLSpanElement | HTMLDivElement>) => {
     e.preventDefault();
-    targetRef.current?.focus();
     targetRef.current?.click();
   }, []);
 

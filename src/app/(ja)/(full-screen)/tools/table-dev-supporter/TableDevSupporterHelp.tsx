@@ -155,8 +155,9 @@ export const TableDevSupporterHelp = () => {
 
             <table
               className={styles.sampleTable}
-              onClick={(e) => {
+              onPointerDown={(e) => {
                 if (e.currentTarget instanceof HTMLTableElement) {
+                  e.preventDefault();
                   setSelectionRange(e.currentTarget);
                 }
               }}
@@ -185,12 +186,16 @@ export const TableDevSupporterHelp = () => {
                 <tr>
                   <th scope="row">３</th>
                   <td>鈴木　次郎</td>
-                  <td>いくら</td>
+                  <td>
+                    <span>いくら</span>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">４</th>
                   <td>田中　美咲</td>
-                  <td>まぐろ</td>
+                  <td>
+                    <div>まぐろ</div>
+                  </td>
                 </tr>
               </tbody>
             </table>

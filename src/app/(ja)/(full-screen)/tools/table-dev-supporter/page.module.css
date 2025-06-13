@@ -2,7 +2,7 @@
   min-height: 100vh;
   min-height: 100dvh;
 
-  --navigation-width: 360px;
+  --navigation-width: 380px;
 
   details li {
     list-style: none;
