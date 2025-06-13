@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
 import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
@@ -103,62 +104,53 @@ export const Footer = () => {
             )}
           >
             <ul className="text-xs md:flex md:grow md:flex-wrap md:justify-start md:gap-y-2">
-              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <Link href="/about" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
-                  当サイトおよび管理人について
-                </Link>
-              </li>
-              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <Link href="/privacy-policy" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
-                  プライバシーポリシー
-                </Link>
-              </li>
-              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <Link href="/disclaimer" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
-                  免責事項
-                </Link>
-              </li>
-              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0">
-                <Link href="/contact" className={clsx(['text-inherit', isTop === false && '!outline-white'])}>
-                  お問い合わせ
-                </Link>
-              </li>
-              <li className="float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0 md:after:hidden">
-                <a
-                  href="https://github.com/hiroya-uga/hiroya-uga.github.io/issues"
-                  className={clsx(['text-inherit', isTop === false && '!outline-white'])}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  フィードバック{' '}
-                  {isTop ? (
-                    <>
-                      <Image
-                        src={`/common/images/icons/new-window-white.svg`}
-                        alt="新しいタブで開く"
-                        className="mb-[0.2em] ml-[0.2em] inline-block size-[1em] sm:hidden"
-                        width={16}
-                        height={16}
-                      />
-                      <Image
-                        src={`/common/images/icons/new-window-black.svg`}
-                        alt="新しいタブで開く"
-                        className="mb-[0.2em] ml-[0.2em] hidden size-[1em] sm:inline-block"
-                        width={16}
-                        height={16}
-                      />
-                    </>
-                  ) : (
-                    <Image
-                      src={`/common/images/icons/new-window-white.svg`}
-                      alt="新しいタブで開く"
-                      className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
-                      width={16}
-                      height={16}
-                    />
-                  )}
-                </a>
-              </li>
+              {FOOTER_LINK_LIST.map(({ href, title, target }, index) => {
+                const className = clsx([
+                  "float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0",
+                  index === FOOTER_LINK_LIST.length - 1 && 'md:after:hidden',
+                ]);
+
+                return (
+                  <li key={href} className={className}>
+                    <Link
+                      href={href}
+                      className={clsx(['text-inherit', isTop === false && '!outline-white'])}
+                      target={target}
+                      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+                    >
+                      {title}{' '}
+                      {target === '_blank' ? (
+                        isTop ? (
+                          <>
+                            <Image
+                              src={`/common/images/icons/new-window-white.svg`}
+                              alt="新しいタブで開く"
+                              className="mb-[0.2em] ml-[0.2em] inline-block size-[1em] sm:hidden"
+                              width={16}
+                              height={16}
+                            />
+                            <Image
+                              src={`/common/images/icons/new-window-black.svg`}
+                              alt="新しいタブで開く"
+                              className="mb-[0.2em] ml-[0.2em] hidden size-[1em] sm:inline-block"
+                              width={16}
+                              height={16}
+                            />
+                          </>
+                        ) : (
+                          <Image
+                            src={`/common/images/icons/new-window-white.svg`}
+                            alt="新しいタブで開く"
+                            className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
+                            width={16}
+                            height={16}
+                          />
+                        )
+                      ) : null}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
             <p className="relative top-[-0.0625rem] float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
               {/* text-[100%] for bootstrap pages */}
