@@ -38,6 +38,9 @@ module.exports = {
         content: '60rem',
         structure: '90rem',
       },
+      padding: {
+        paragraph: 'var(--mb-paragraph)',
+      },
       margin: {
         paragraph: 'var(--mb-paragraph)',
       },

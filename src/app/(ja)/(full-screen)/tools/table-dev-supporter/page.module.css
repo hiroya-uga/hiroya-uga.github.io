@@ -18,3 +18,6 @@
     content: counter(index);
   }
 }
+body:has(.page) {
+  overflow: hidden;
+}

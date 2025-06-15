@@ -1,4 +1,4 @@
-import { TextLink } from '@/components/Clickable';
+import { PrivacyPolicyMessage } from '@/constants/message';
 import clsx from 'clsx';
 
 export const PageTitle = ({
@@ -68,8 +68,7 @@ export const PageTitle = ({
           <p className="flex gap-1 text-sm">
             <span>※</span>
             <small>
-              入力された値は収集されたり外部に送信されることはありません。詳しくは
-              <TextLink href="/privacy-policy">プライバシーポリシー</TextLink>をご覧ください。
+              <PrivacyPolicyMessage />
             </small>
           </p>
         )}

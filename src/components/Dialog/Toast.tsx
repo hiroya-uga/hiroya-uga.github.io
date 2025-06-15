@@ -13,7 +13,7 @@ type Props = {
 
 export const Toast = ({ message, setMessage, duration = 1000 }: Props) => {
   const [portal, setPortal] = useState<HTMLDivElement | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const ref = useRef<HTMLParagraphElement>(null);
   const setTimeoutId = useRef(-1);
 
   useEffect(() => {
@@ -27,30 +27,30 @@ export const Toast = ({ message, setMessage, duration = 1000 }: Props) => {
   }, []);
 
   useEffect(() => {
-    const dialog = dialogRef.current;
+    const toast = ref.current;
 
-    if (dialog === null) {
+    if (toast === null) {
       return;
     }
 
     if (message === '') {
-      dialog.open = false;
+      toast.hidden = true;
       return;
     }
 
-    dialog.textContent = message;
-    dialog.open = true;
+    toast.textContent = message;
+    toast.hidden = false;
 
     clearTimeout(setTimeoutId.current);
     setTimeoutId.current = window.setTimeout(() => {
-      dialog.open = false;
+      toast.hidden = true;
     }, duration);
   }, [duration, message]);
 
   useEffect(() => {
-    const dialog = dialogRef.current;
+    const toast = ref.current;
 
-    if (dialog === null || portal === null) {
+    if (toast === null || portal === null) {
       return;
     }
 
@@ -58,19 +58,19 @@ export const Toast = ({ message, setMessage, duration = 1000 }: Props) => {
       for (const mutation of mutations) {
         if (
           mutation.type === 'attributes' &&
-          mutation.target instanceof HTMLDialogElement &&
-          mutation.target.open === false
+          mutation.target instanceof HTMLParagraphElement &&
+          mutation.target.hidden === true
         ) {
           setTimeoutId.current = window.setTimeout(() => {
-            dialog.textContent = '';
+            toast.textContent = '';
             setMessage('');
           }, TRANSITION_DURATION);
         }
       }
     });
-    mutationObserver.observe(dialog, {
+    mutationObserver.observe(toast, {
       attributes: true,
-      attributeFilter: ['open'],
+      attributeFilter: ['hidden'],
     });
 
     return () => {
@@ -84,12 +84,10 @@ export const Toast = ({ message, setMessage, duration = 1000 }: Props) => {
   }
 
   return createPortal(
-    <dialog
-      ref={dialogRef}
-      role="alert"
-      aria-label="通知"
-      aria-live="assertive"
-      className="pointer-events-none fixed inset-x-0 top-4 mx-auto block w-fit rounded-md px-4 py-2 opacity-0 shadow-sticky transition-fade open:pointer-events-auto open:opacity-100"
+    <p
+      ref={ref}
+      className="fixed inset-x-0 top-4 z-50 mx-auto block w-fit rounded-md bg-white px-4 py-2 opacity-100 shadow-sticky transition-fade [&[hidden]]:pointer-events-none [&[hidden]]:opacity-0"
+      hidden
     />,
     portal,
   );
