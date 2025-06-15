@@ -4,7 +4,7 @@ export const DiscList = ({ list }: { list: (string | { value: React.ReactNode; k
   }
 
   return (
-    <ul className="pl-1.5 sm:pl-2.5">
+    <ul className="space-y-1 pl-1.5 sm:pl-2.5">
       {list.map((item) => {
         const key = typeof item === 'string' ? item : item.key;
         const value = typeof item === 'string' ? item : item.value;
@@ -12,7 +12,7 @@ export const DiscList = ({ list }: { list: (string | { value: React.ReactNode; k
         return (
           <li
             key={key}
-            className=" flex gap-x-1 text-sm before:mt-[0.6875rem] before:inline-block before:size-1 before:shrink-0 before:rounded-full before:bg-black before:content-[''] sm:gap-x-2  sm:text-base sm:before:mt-3 sm:before:size-[0.3125rem] sm:[&:not(:last-child)]:mb-1"
+            className=" flex  gap-x-2  before:mt-3 before:inline-block before:size-[0.3125rem] before:shrink-0 before:rounded-full   before:bg-black before:content-['']"
           >
             <span className="grow">{value}</span>
           </li>

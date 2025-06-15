@@ -1,8 +1,8 @@
-export const setSelectionRange = (target: HTMLElement) => {
+export const setSelectionRange = (targetNode: Node) => {
   const range = document.createRange();
   const selection = window.getSelection();
 
-  range.selectNodeContents(target);
+  range.selectNodeContents(targetNode);
   selection?.removeAllRanges();
   selection?.addRange(range);
 

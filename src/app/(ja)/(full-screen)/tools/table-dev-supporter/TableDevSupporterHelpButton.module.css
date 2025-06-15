@@ -1,7 +1,6 @@
 table.sampleTable {
   border-collapse: collapse;
   border: 1px solid #333;
-  font-size: 0.75rem;
 }
 table.sampleTable caption {
   text-align: center;

@@ -1,6 +1,6 @@
 'use client';
 
-import { TableDevSupporterHelp } from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/TableDevSupporterHelp';
+import { TableDevSupporterHelpButton } from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/TableDevSupporterHelpButton';
 import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
@@ -12,19 +12,45 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 const buttonStyles =
   'w-full block text-sm text-left text-white bg-[#666] relative py-2.5 px-3 border border-[#676767] rounded-md hover:bg-[#555] transition-[background-color]';
+const dummyElement = 'document' in globalThis ? document.createElement('div') : null;
 
 export const TableDevSupporterContent = () => {
   const [source, setSource] = useState('');
   const [isViewSrc, setIsViewSrc] = useState(false);
+  const [isCopyMode, setIsCopyMode] = useState(false);
   const editorContainerRef = useRef<HTMLDivElement | null>(null);
   const editorRef = useRef<HTMLElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [toastMessage, setToastMessage] = useState('');
 
-  const copy = useCallback((value: string) => {
+  const copy = useCallback((value: string, message: string = '') => {
     navigator.clipboard.writeText(value);
-    setToastMessage('コピーしました');
+    setToastMessage(message || 'コピーしました');
   }, []);
+  const editorClickHandler = useCallback(
+    (e: MouseEvent) => {
+      if (e.target instanceof HTMLElement) {
+        const value = e.target.textContent?.trim() ?? '';
+
+        if (value === '') {
+          return;
+        }
+
+        e.preventDefault();
+        const message = (() => {
+          if (value.length < 10) {
+            return `「${value}」をコピーしました`;
+          }
+
+          return `「${value.slice(0, 10)}...」をコピーしました`;
+        })();
+        copy(value, message); // trimした値をコピー
+        setSelectionRange(e.target);
+      }
+    },
+    [copy],
+  );
 
   useEffect(() => {
     const editorContainer = editorContainerRef.current;
@@ -43,16 +69,15 @@ export const TableDevSupporterContent = () => {
         style.textContent = `
           app-editor {
             display: block;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
+            width: fit-content;
+            min-width: 100%;
+            height: fit-content;
+            min-height: 100%;
             padding: 1rem;
             box-sizing: border-box;
-            font-size: 1rem;
-            color: #fff;
-            position: absolute;
             inset: 0;
             font-size: 1rem;
+            color: #333;
             contain: paint;
             border-radius: 8px;
 
@@ -78,25 +103,12 @@ export const TableDevSupporterContent = () => {
             padding: 2px 8px;
             border: 1px solid #ccc;
           }
-
-          @media screen and (min-width: 640px) {
-            app-editor {
-              font-size: 0.875rem;
-            }
-          }
         `;
 
         editor.setAttribute('contenteditable', 'true');
         editor.setAttribute('aria-label', 'DOM');
         shadow.append(style);
         shadow.append(editor);
-        editor.addEventListener('click', (e) => {
-          if (e.target instanceof HTMLTableCellElement) {
-            e.preventDefault();
-            copy(e.target.innerText.trim()); // trimした値をコピー
-            setSelectionRange(e.target);
-          }
-        });
         editorRef.current = editor;
 
         return editor;
@@ -125,12 +137,14 @@ export const TableDevSupporterContent = () => {
   }, [copy]);
 
   const update = useCallback(
-    ({ type }: { type: string }) => {
+    (tasks: string | string[]) => {
       const editor = editorRef.current;
-      if (!editor) {
+      if (!editor || !dummyElement) {
         return;
       }
 
+      let textContent = source;
+      const types = Array.isArray(tasks) ? tasks : [tasks];
       const edit = ({ value, type }: { value: string; type: string }) => {
         switch (type) {
           case 'removeIndent':
@@ -157,14 +171,8 @@ export const TableDevSupporterContent = () => {
               .replace(/><\/tfoot>/g, '>\n</tfoot>')
               .replace(/><\/table>/g, '>\n</table>');
 
-          case 'removeElementsFromTableCells':
-            for (const node of editor.querySelectorAll('td, th')) {
-              node.innerHTML = (node.textContent ?? '').trim();
-            }
-
-            return editor.innerHTML;
           case 'removeAttributes':
-            for (const node of editor.querySelectorAll('*')) {
+            for (const node of dummyElement.querySelectorAll('*')) {
               for (const { name } of [...node.attributes]) {
                 if (name === 'rowspan' || name === 'colspan') {
                   continue;
@@ -173,7 +181,13 @@ export const TableDevSupporterContent = () => {
                 node.removeAttribute(name);
               }
             }
-            return editor.innerHTML;
+            return dummyElement.innerHTML;
+          case 'removeElementsFromTableCells':
+            for (const node of dummyElement.querySelectorAll('td, th')) {
+              node.innerHTML = (node.textContent ?? '').trim();
+            }
+
+            return dummyElement.innerHTML;
           case 'numberAdjust':
             return value
               .replace(/０/g, '0')
@@ -189,8 +203,8 @@ export const TableDevSupporterContent = () => {
           case 'spaceAdjust':
             return value.replace(/　/g, ' ');
           case 'onlySemantics':
-            while (editor.querySelector('div, span')) {
-              for (const elm of editor.querySelectorAll('div, span')) {
+            while (dummyElement.querySelector('div, span')) {
+              for (const elm of dummyElement.querySelectorAll('div, span')) {
                 const f = document.createDocumentFragment();
 
                 for (const node of [...elm.childNodes]) {
@@ -201,22 +215,28 @@ export const TableDevSupporterContent = () => {
               }
             }
 
-            return editor.innerHTML;
+            return dummyElement.innerHTML;
           case 'addBreakAllTags':
             return value.replace(/></g, '>\n<');
 
           case 'removeAllTags':
             // 開始タグがあれば実施する
-            if (/<(?!\!)/.test(editor.innerHTML)) {
-              editor.innerHTML = value.trim();
+            if (/<(?!\!)/.test(dummyElement.innerHTML)) {
+              dummyElement.innerHTML = value.trim();
             }
 
-            return editor.innerText;
+            return dummyElement.innerText;
           case 'removeAdjacentBlankLine':
             return value.replace(/^\s+$/gm, '').replace(/([\n|\r])[\n|\r]{2}/g, (m, p1) => p1);
 
           case 'removeBlankLine':
             return value.replace(/^\s+$/gm, '').replace(/([\n|\r])[\n|\r]/g, (m, p1) => p1);
+          case 'removeAllImageTags':
+            dummyElement.querySelectorAll('img, svg').forEach((elm) => elm.remove());
+            return dummyElement.innerHTML;
+
+          case 'removeAll':
+            return '';
 
           default:
           // console.log(0);
@@ -225,11 +245,18 @@ export const TableDevSupporterContent = () => {
         return value;
       };
 
-      let textContent = source;
-      textContent = edit({ value: source, type });
+      dummyElement.textContent = '';
+      dummyElement.insertAdjacentHTML('beforeend', textContent);
+
+      for (const type of types) {
+        textContent = edit({ value: textContent, type });
+        dummyElement.textContent = '';
+        dummyElement.insertAdjacentHTML('beforeend', textContent);
+      }
 
       setSource(textContent);
-      editor.innerHTML = textContent;
+      editor.textContent = '';
+      editor.insertAdjacentHTML('beforeend', dummyElement.innerHTML);
     },
     [source],
   );
@@ -238,48 +265,111 @@ export const TableDevSupporterContent = () => {
     <>
       <div
         className={clsx([
-          "absolute left-0 top-0 h-2/5 w-full after:absolute after:bottom-[calc(100%_+_1px)] after:right-0 after:w-[calc(6ic_+_1.25rem)] after:bg-alert after:p-2.5 after:text-center after:text-[0.75rem] after:leading-[0.75rem] after:text-white after:transition-colors after:duration-200 after:ease-out after:content-['読み取り専用'] sm:relative sm:size-auto sm:h-auto sm:after:py-[0.4375rem]",
-          ,
-          isViewSrc ? 'block' : 'hidden',
+          'after:w-[calc(6ic_+_1.25rem)]after:p-2.5 absolute left-0 top-0 grid h-2/5  w-full after:absolute after:bottom-[calc(100%_+_1px)] after:right-0  after:w-[calc(8ic_+_1.25rem)] after:p-2.5 after:text-center after:text-[0.75rem]  after:leading-[0.75rem]  after:text-white after:transition-colors  after:duration-200 after:ease-out sm:relative sm:size-auto sm:h-auto sm:after:py-[0.4375rem]',
+          isCopyMode ? "after:bg-alert after:content-['読み取り専用']" : 'after:bg-black ',
+          isCopyMode === false && isViewSrc && " after:content-['HTMLを編集中']",
+          isCopyMode === false && isViewSrc === false && " after:content-['DOMを編集中']",
         ])}
       >
         <div
-          className="absolute size-full overflow-auto whitespace-pre-wrap p-4 font-mono text-sm !shadow-none !outline-offset-[-5px] focus-visible:![outline:2px_solid_#999]"
-          role="textbox"
+          className={clsx(['absolute size-full overflow-auto bg-[#969696]', isViewSrc && 'hidden'])}
+          ref={editorContainerRef}
+        />
+        <textarea
+          ref={textareaRef}
+          className={clsx([
+            'absolute size-full resize-none overflow-auto whitespace-pre-wrap bg-[#272822] p-4 font-mono text-[#cfcfc2] !shadow-none !outline-offset-[-5px] focus-visible:![outline:2px_solid_#999] sm:text-sm',
+            isViewSrc ? 'block' : 'hidden',
+          ])}
           aria-label="HTMLソース"
-          aria-readonly="true"
-          tabIndex={0}
-          onClick={(e) => void setSelectionRange(e.currentTarget)}
-        >
-          {source}
-        </div>
+          value={source}
+          readOnly={isCopyMode}
+          onClick={
+            isCopyMode
+              ? (e) => {
+                  e.preventDefault();
+                  if (e.currentTarget.value.trim() === '') {
+                    return;
+                  }
+                  copy(e.currentTarget.value ?? '', 'ソースをコピーしました');
+                  setSelectionRange(e.currentTarget);
+                }
+              : undefined
+          }
+          onChange={(e) => {
+            setSource(e.target.value);
+          }}
+        />
       </div>
-      <div
-        className={clsx([
-          "absolute left-0 top-0 h-2/5 w-full after:absolute after:bottom-[calc(100%_+_1px)] after:right-0 after:w-[calc(6ic_+_1.25rem)] after:bg-[#ccc] after:p-2.5 after:text-center after:text-[0.75rem] after:leading-[0.75rem] after:text-[#333] after:transition-colors  after:duration-200 after:ease-out after:content-['編集中'] sm:relative sm:size-auto sm:h-auto sm:after:py-[0.4375rem]",
-          isViewSrc && 'hidden',
-        ])}
-        ref={editorContainerRef}
-      ></div>
 
-      <nav className="absolute bottom-0 left-0 h-3/5 w-full overflow-auto border-y border-black bg-[#333] pb-2.5 text-[#eee] sm:fixed sm:left-auto sm:right-0 sm:top-0 sm:z-[1] sm:h-full sm:max-h-screen sm:w-[var(--navigation-width)] sm:border-0 sm:border-l">
-        <p className="sticky top-0 z-10 border-b border-black bg-[#333]">
-          <label className="flex items-center justify-between gap-2 px-2.5 py-3 text-sm">
-            ソースを確認する
-            <Switch checked={isViewSrc} onChange={() => setIsViewSrc(!isViewSrc)} />
-          </label>
-        </p>
+      <nav className="absolute bottom-0 left-0 z-10 h-3/5 w-full overflow-y-scroll border-y border-black bg-[#333] pb-2.5 text-[#eee] sm:fixed sm:left-auto sm:right-0 sm:top-0 sm:h-full sm:max-h-screen sm:w-[var(--navigation-width)] sm:border-0 sm:border-l">
+        <div className="sticky -top-px z-10 border-b border-black bg-[#333] px-2.5 text-xs ">
+          <p className="border-b border-dashed border-[#777]">
+            <label className="flex items-center justify-between gap-2 py-3 ">
+              <span>HTMLを表示する</span>
+              <Switch
+                checked={isViewSrc}
+                onChange={() => {
+                  const editor = editorRef.current;
+                  const textarea = textareaRef.current;
+
+                  if (!editor || !textarea) {
+                    return;
+                  }
+
+                  if (isViewSrc) {
+                    editor.textContent = '';
+                    editor.insertAdjacentHTML(
+                      'beforeend',
+                      textarea.value.replace(/<\/script>/g, '</noscript>').replace(/<script(\s.*?)>/g, '<noscript$1>'),
+                    );
+                  } else {
+                    setSource(editor.innerHTML);
+                  }
+
+                  setIsViewSrc(!isViewSrc);
+                }}
+              />
+            </label>
+          </p>
+          <p>
+            <label className="flex items-center justify-between gap-2 py-3 ">
+              <span>クリックで値コピーを有効にする</span>
+              <Switch
+                checked={isCopyMode}
+                onChange={() => {
+                  const editor = editorRef.current;
+                  if (!editor) {
+                    return;
+                  }
+
+                  if (isCopyMode) {
+                    editor.setAttribute('contentEditable', '');
+                    editor.removeEventListener('click', editorClickHandler);
+                  } else {
+                    editor.removeAttribute('contentEditable');
+                    editor.addEventListener('click', editorClickHandler);
+                  }
+
+                  setIsCopyMode(!isCopyMode);
+                }}
+              />
+            </label>
+          </p>
+        </div>
 
         <div className="p-2.5">
           <button
             type="button"
             className="  align-center  relative  my-2.5  block w-full rounded-md border border-[#05355c]  bg-[#044f8d]  px-3 py-2.5 text-sm font-bold text-white transition-[background-color] hover:bg-[#033c6e]"
             onClick={() => {
-              update({ type: 'removeIndent' });
-              update({ type: 'removeBreak' });
-              update({ type: 'adjustBreak' });
-              update({ type: 'removeAttributes' });
-              update({ type: 'removeElementsFromTableCells' });
+              update([
+                'removeIndent',
+                'removeBreak',
+                'adjustBreak',
+                'removeAttributes',
+                'removeElementsFromTableCells',
+              ]);
               setToastMessage('フォーマットしました');
             }}
           >
@@ -291,80 +381,105 @@ export const TableDevSupporterContent = () => {
                 height={16}
                 className=" inline-block size-4"
               />
-              テーブルをフォーマット
+              フォーマットする
             </span>
           </button>
 
-          <details className="group my-6  rounded-md border border-[#777] open:mb-2.5">
+          <details className="group mb-6 mt-2.5  rounded-md border border-[#777] open:mb-2.5">
             <summary className="palt rounded-md p-2.5  text-xs transition-[background-color] before:mr-2 before:inline-block before:size-0 before:border-x-[0.35rem] before:border-t-8 before:border-x-transparent before:border-t-white before:transition-transform after:hidden hover:bg-[#444] group-open:bg-transparent  before:group-open:rotate-180 group-open:hover:before:-translate-y-0.5">
-              「テーブルをフォーマット」の自動処理を手動で実行する
+              「フォーマットする」の自動処理を手動で実行する
             </summary>
             <ol className="space-y-2.5 px-2.5 pb-2.5">
-              <li>
-                <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeIndent' })}>
-                  インデント削除
-                </button>
-              </li>
-              <li>
-                <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeBreak' })}>
-                  改行全削除
-                </button>
-              </li>
-              <li>
-                <button type="button" className={buttonStyles} onClick={() => update({ type: 'adjustBreak' })}>
-                  テーブル系タグ同士の改行挿入
-                </button>
-              </li>
-              <li>
-                <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeAttributes' })}>
-                  属性値を削除する
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  className={buttonStyles}
-                  onClick={() => update({ type: 'removeElementsFromTableCells' })}
-                >
-                  テーブルセルの中をテキストノードだけにする
-                </button>
-              </li>
+              {[
+                ['removeIndent', 'インデントを削除'],
+                ['removeBreak', '改行をすべて削除'],
+                ['adjustBreak', 'テーブル系タグ同士に改行を挿入'],
+                ['removeAttributes', '属性値を削除'],
+                ['removeElementsFromTableCells', 'テーブルセルの中のテキストノード以外を削除'],
+              ].map(([task, label]) => {
+                return (
+                  <li key={task}>
+                    <button
+                      type="button"
+                      className={buttonStyles}
+                      onClick={() => {
+                        update(task);
+                        setToastMessage(`${label}しました`);
+                      }}
+                    >
+                      {label}
+                    </button>
+                  </li>
+                );
+              })}
             </ol>
           </details>
 
-          <section className="my-2.5 space-y-2.5 rounded-md border border-[#777] p-2.5">
-            <h2 className="text-[0.75rem]">その他の文字列置換</h2>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'numberAdjust' })}>
-              全角数字をすべて半角に変換
-            </button>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'spaceAdjust' })}>
-              全角スペースをすべて半角に変換
-            </button>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'addBreakAllTags' })}>
-              タグ同士の全改行
-            </button>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeAdjacentBlankLine' })}>
-              連続する空白行の削除
-            </button>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeBlankLine' })}>
-              空白行の全削除
-            </button>
-          </section>
+          <div className="my-2.5 rounded-md border border-[#777] p-2.5">
+            <fieldset>
+              <legend className="mb-2.5 text-[0.75rem]">その他の文字列置換</legend>
+              <ul className="space-y-2.5">
+                {[
+                  ['numberAdjust', 'すべての全角数字を半角に変換'],
+                  ['spaceAdjust', 'すべての全角スペースを半角に変換'],
+                  ['addBreakAllTags', 'すべてのタグ同士を改行'],
+                  ['removeAdjacentBlankLine', '連続する空白行を削除'],
+                  ['removeBlankLine', 'すべての空白行を削除'],
+                ].map(([task, label]) => {
+                  return (
+                    <li key={task}>
+                      <button
+                        type="button"
+                        className={buttonStyles}
+                        onClick={() => {
+                          update(task);
+                          setToastMessage(`${label}しました`);
+                        }}
+                      >
+                        {label}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </fieldset>
+          </div>
 
-          <section className="my-2.5 space-y-2.5 rounded-md border border-[#777] p-2.5">
-            <h2 className="text-[0.75rem]">その他のDOM操作</h2>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'onlySemantics' })}>
-              divタグ、spanタグの全削除
-            </button>
-            <button type="button" className={buttonStyles} onClick={() => update({ type: 'removeAllTags' })}>
-              タグの全削除
-            </button>
-          </section>
+          <div className="my-2.5 space-y-2.5 rounded-md border border-[#777] p-2.5">
+            <fieldset>
+              <legend className="mb-2.5 text-[0.75rem]">その他のDOM操作</legend>
+              <ul className="space-y-2.5">
+                {[
+                  ['onlySemantics', 'すべてのdivタグ、spanタグを削除'],
+                  ['removeAllImageTags', 'すべてのimgタグ、svg要素を削除'],
+                  ['removeAllTags', 'すべてのタグを削除'],
+                  ['removeAll', '値をクリア'],
+                ].map(([task, label]) => {
+                  return (
+                    <li key={task}>
+                      <button
+                        type="button"
+                        className={buttonStyles}
+                        onClick={() => {
+                          update(task);
+                          setToastMessage(`${label}しました`);
+                        }}
+                      >
+                        {label}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </fieldset>
+          </div>
         </div>
 
-        <div className="p-2.5">
-          <TableDevSupporterHelp />
+        <p className="sticky bottom-0 mt-6 px-2.5 shadow-sticky">
+          <TableDevSupporterHelpButton />
+        </p>
 
+        <div className="px-2.5 pb-2.5">
           <ul className="border- mt-10 space-y-2 border-t border-dashed border-[#9c9c9c] pb-5 pt-10 text-sm text-[#9c9c9c] sm:space-y-1 sm:text-xs">
             {FOOTER_LINK_LIST.map(({ href, title, target }) => {
               return (
