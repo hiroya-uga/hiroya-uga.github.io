@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
 import { getMetadata } from '@/utils/seo';
 
 export const metadata = getMetadata('/documents/translations');
@@ -10,30 +11,16 @@ export default function Page() {
   return (
     <>
       <PageTitle title={metadata.pageTitle} description={metadata.description} />
-
       <SimpleDescriptionList
-        list={[
-          {
-            key: `Images Tutorial`,
-            title: (
-              <>
-                <Link href="/documents/translations/w3c/wai/tutorials/images/">Images Tutorial</Link>
-              </>
-            ),
-            description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
-          },
-          {
-            key: `PaulJAdam's Modern Web Accessibility Demos`,
-            title: (
-              <>
-                <Link href="/documents/translations/pauljadam-modern-web-a11y-demos/">
-                  PaulJAdam's Modern Web Accessibility Demos
-                </Link>
-              </>
-            ),
-            description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-          },
-        ]}
+        list={TRANSLATION_DOCUMENTS_LINK_LIST.map(({ pathname }) => {
+          const { pageTitle, description } = getMetadata(pathname);
+
+          return {
+            key: pageTitle,
+            title: <Link href={pathname}>{pageTitle}</Link>,
+            description: description.replace(/\n/g, ''),
+          };
+        }).sort((a, b) => a.key.localeCompare(b.key))}
       />
     </>
   );

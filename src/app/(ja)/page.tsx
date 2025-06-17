@@ -8,6 +8,7 @@ import { Counter, LinkList, TopImage } from '@/app/(ja)/Client';
 import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
+import { TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
@@ -18,36 +19,8 @@ export const metadata = getMetadata('/');
 export default function Home() {
   const captionId = useId();
   const pickUpList = useMemo(() => {
-    return [
-      {
-        emoji: '🌳',
-        href: '/tools/an-alt-decision-tree',
-      },
-      // {
-      //   emoji: '🥋',
-      //   href: '/documents/notes',
-      // },
-      {
-        emoji: '📝',
-        href: '/documents/translations/pauljadam-modern-web-a11y-demos',
-      },
-      {
-        emoji: '🔔',
-        href: '/tools/slack-reminder-command-generator',
-      },
-      {
-        emoji: '👆',
-        href: '/tools/touch-event-touches',
-      },
-      {
-        emoji: '🪮',
-        href: '/tools/markup-dev-supporter',
-      },
-      {
-        emoji: '📏',
-        href: '/tools/css-units',
-      },
-    ]
+    return [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST]
+      .filter(({ emoji }) => Boolean(emoji))
       .sort(() => Math.random() - 0.5)
       .slice(0, 3);
   }, []);
@@ -120,15 +93,15 @@ export default function Home() {
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
-              {pickUpList.map(({ emoji, href }) => {
-                const { pageTitle, description } = getMetadata(href);
-                const id = String(description) && href;
+              {pickUpList.map(({ emoji, pathname }) => {
+                const { pageTitle, description } = getMetadata(pathname);
+                const id = String(description) && pathname;
 
                 return (
-                  <li key={href}>
+                  <li key={pathname}>
                     <p className="mb-1">
                       <Link
-                        href={href}
+                        href={pathname}
                         className="group flex flex-col-reverse rounded-md no-underline"
                         aria-describedby={id}
                       >
