@@ -18,7 +18,7 @@ import { Required } from '@/components/Badge/Required';
 
 type Props = {
   label: string;
-  value: string;
+  value?: string;
   description?: string;
   placeholder?: string;
   required?: boolean;
@@ -29,6 +29,7 @@ type Props = {
   | {
       multiline: true;
       autoResize?: boolean;
+      noResize?: boolean;
       onInput?: TextareaHTMLAttributes<HTMLTextAreaElement>['onInput'];
     }
   | {
@@ -44,9 +45,11 @@ const TextareaComponent = (
     descriptionId,
     multiline: _,
     autoResize,
+    noResize,
     ...props
   }: Omit<Props, 'label' | 'description'> & {
     autoResize: boolean;
+    noResize: boolean;
     onInput?: React.FormEventHandler<HTMLTextAreaElement>;
     id: string;
     descriptionId?: string;
@@ -67,7 +70,7 @@ const TextareaComponent = (
           className="invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border border-gray-300 p-2"
           ref={dummyTextareaRef}
         >
-          {props.value.replace(/\n$/g, '\n　') || '　'}
+          {props.value?.replace(/\n$/g, '\n　') || '　'}
         </span>
         <textarea
           {...props}
@@ -84,7 +87,7 @@ const TextareaComponent = (
     <textarea
       {...props}
       aria-describedby={descriptionId}
-      className="box-content w-full resize-y rounded-md border border-gray-300 p-2"
+      className={clsx(['w-full rounded-md border border-gray-300 p-2', noResize === true ? 'resize-none' : 'resize-y'])}
       ref={ref}
     />
   );
@@ -129,6 +132,7 @@ const TextFieldComponent = (
             {...props}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             autoResize={props.autoResize ?? false}
+            noResize={props.noResize ?? false}
             id={id}
             descriptionId={descriptionId}
             ref={ref as Ref<HTMLTextAreaElement>}
