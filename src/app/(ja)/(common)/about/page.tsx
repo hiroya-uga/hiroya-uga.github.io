@@ -111,7 +111,7 @@ export default function Page() {
               { title: '口癖', answer: '' },
               { title: '性格', answer: '' },
               { title: '嗜好品', answer: '' },
-              { title: '自慢なこと', answer: '' },
+              { title: '自慢なこと', answer: 'ちょっとお高級なカラトリーとか食器を集めているぞ！' },
               { title: '持っている資格', answer: '' },
               { title: '使っている携帯電話', answer: '' },
               { title: '好きな男性のタイプ', answer: '' },
@@ -214,7 +214,7 @@ export default function Page() {
                 // オリジナル質問
                 title: '嫌いなWeb広告',
                 answer:
-                  '閉じるボタンのクリック範囲が狭すぎるやつとか、touchendとかpointerupイベントでクリックしたことにされるやつ🤬',
+                  '画面を埋め尽くしてきたり、閉じるボタンのクリック範囲が狭すぎたり、touchendとかpointerupイベントでクリックしたことにされるやつ🤬',
               },
               { title: '愛車', answer: '' },
               {
