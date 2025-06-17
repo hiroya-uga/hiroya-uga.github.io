@@ -358,9 +358,10 @@ export const SEO: Record<
     description:
       'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
   },
-  '/tools/table-dev-supporter': {
-    title: 'テーブル実装サポーター',
-    description: 'オフィスツールなどで作成された表をHTMLとして実装する人のための支援ツールです。',
+  '/tools/markup-dev-supporter': {
+    title: 'HTMLでtable実装するときとかに役立つツール',
+    description:
+      'オフィスツールなどで作成された表をHTMLとして実装する人のための支援ツールです。\n業務上公開前の情報を外部に送信できないケースにおいて、指示書にある表を整形されたHTMLにフォーマットして実装しやすくすることを主な用途に想定しています。',
   },
   '/tools/touch-event-touches': {
     title: 'TouchEvent.touches Playground',

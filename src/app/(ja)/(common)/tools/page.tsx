@@ -18,7 +18,7 @@ const tools: Array<[string, TargetUser]> = [
   ['/tools/character-count', []],
   ['/tools/slack-reminder-command-generator', []],
   ['/tools/get-url-from-dom', ['director', 'planner']],
-  ['/tools/table-dev-supporter', ['developer']],
+  ['/tools/markup-dev-supporter', ['developer']],
 ];
 
 export default function Page() {

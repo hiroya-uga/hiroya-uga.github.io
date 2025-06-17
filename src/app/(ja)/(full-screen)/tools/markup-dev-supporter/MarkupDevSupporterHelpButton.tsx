@@ -4,14 +4,14 @@ import { getMetadata } from '@/utils/seo';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import styles from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/TableDevSupporterHelpButton.module.css';
+import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton.module.css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { PrivacyPolicyMessage } from '@/constants/message';
 import { setSelectionRange } from '@/utils/set-selection-range';
 import clsx from 'clsx';
 import { createPortal } from 'react-dom';
 
-export const TableDevSupporterHelpButton = () => {
+export const MarkupDevSupporterHelpButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [portal, setPortal] = useState<HTMLDivElement | null>(null);
   const ref = useRef<HTMLDialogElement | null>(null);
@@ -154,15 +154,11 @@ export const TableDevSupporterHelpButton = () => {
               </div>
 
               <div className="overflow-auto p-4 pb-8 sm:p-8">
-                {getMetadata('/tools/table-dev-supporter')
+                {getMetadata('/tools/markup-dev-supporter')
                   .description?.split('\n')
                   .map((description) => {
                     return <p key={description}>{description}</p>;
                   })}
-
-                <p>
-                  業務上公開前の情報を外部に送信できないケースにおいて、指示書にある表を整形されたHTMLにフォーマットして実装しやすくすることを主な用途に想定しています。
-                </p>
                 <p className="mb-paragraph mt-2 flex gap-1 text-sm">
                   <span>※</span>
                   <small>
