@@ -1,17 +1,17 @@
-import { TableDevSupporterContent } from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/Client';
+import { TableDevSupporterContent } from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/Client';
 import { getMetadata } from '@/utils/seo';
 
-import styles from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/page.module.css';
+import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/page.module.css';
 import { SITE_NAME } from '@/constants/meta';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-export const metadata = getMetadata('/tools/table-dev-supporter');
+export const metadata = getMetadata('/tools/markup-dev-supporter');
 
 export default function Page() {
   return (
     <div className={clsx([styles.page, 'grid grid-cols-1 grid-rows-[auto,1fr,auto] bg-[#222] text-white '])}>
-      <header className="flex items-center border-b border-black bg-[#333] leading-none text-[#9c9c9c] sm:gap-1 sm:px-2 sm:pr-[var(--navigation-width)] sm:pt-[0.0625rem] sm:text-xs">
+      <header className="flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c] sm:gap-1 sm:px-2 sm:pr-[var(--navigation-width)] sm:pt-[0.0625rem]">
         <p>
           <Link href="../" className="grid size-8 place-items-center rounded-full sm:size-6">
             <svg
@@ -37,7 +37,7 @@ export default function Page() {
             </svg>
           </Link>
         </p>
-        <h1 className="sm:pt-px">テーブル実装サポーター</h1>
+        <h1 className="sm:pt-px">{metadata.pageTitle}</h1>
       </header>
       <main className="relative grid sm:pr-[var(--navigation-width)]">
         <TableDevSupporterContent />

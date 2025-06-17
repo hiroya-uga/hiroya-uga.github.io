@@ -1,6 +1,6 @@
 'use client';
 
-import { TableDevSupporterHelpButton } from '@/app/(ja)/(full-screen)/tools/table-dev-supporter/TableDevSupporterHelpButton';
+import { MarkupDevSupporterHelpButton } from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton';
 import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
@@ -476,7 +476,7 @@ export const TableDevSupporterContent = () => {
         </div>
 
         <p className="sticky bottom-0 mt-6 px-2.5 shadow-sticky">
-          <TableDevSupporterHelpButton />
+          <MarkupDevSupporterHelpButton />
         </p>
 
         <div className="px-2.5 pb-2.5">
