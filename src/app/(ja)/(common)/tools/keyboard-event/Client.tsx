@@ -122,7 +122,7 @@ export const KeyboardEventContent = () => {
     <div className={styles.root}>
       <p
         className={clsx([
-          'relative mb-6 before:absolute before:inset-0 before:grid before:size-full before:place-items-center before:rounded-lg before:bg-gray-200 before:shadow-sticky before:content-["何かキーを押してください"] before:transition-fade sm:mb-14',
+          'relative mb-6 before:pointer-events-none before:absolute before:inset-0 before:grid before:size-full before:place-items-center before:rounded-lg before:bg-gray-200 before:shadow-sticky before:content-["何かキーを押してください"] before:transition-fade sm:mb-14',
           lastKey !== '' && 'before:opacity-0',
         ])}
       >
@@ -132,7 +132,8 @@ export const KeyboardEventContent = () => {
             lastKey === '' ? 'invisible opacity-0' : 'visible',
           ])}
         >
-          あなたが押したキーは<kbd className="mx-auto block w-fit whitespace-pre text-3xl">{lastKey || ' '}</kbd>です。
+          あなたが最後に押したキーは<kbd className="mx-auto block w-fit whitespace-pre text-3xl">{lastKey || ' '}</kbd>
+          です。
         </span>
         <svg
           viewBox="0 0 1032 292"
@@ -140,34 +141,40 @@ export const KeyboardEventContent = () => {
           role="img"
           className={clsx(lastKey === '' && 'invisible')}
         >
-          {keys.map(({ key, x, y, width, height, label }, index) => (
-            <g key={index}>
-              <rect
-                x={x}
-                y={y}
-                width={width || 40}
-                height={height || 40}
-                rx="5"
-                fill={pressedKeys.includes(key) ? 'black' : '#f0f0f0'}
-                stroke="black"
-              />
-              <text
-                x={x + (width || 40) / 2}
-                y={y + (height || 40) / 2 + 5}
-                textAnchor="middle"
-                fontSize={12}
-                fill={pressedKeys.includes(key) ? 'white' : '#333'}
-              >
-                {label}
-              </text>
-            </g>
-          ))}
+          {keys.map(({ key, x, y, width, height, label }, index) => {
+            const isPressed = pressedKeys.includes(key);
+            const className = clsx('transition-colors');
+            return (
+              <g key={index}>
+                <rect
+                  x={x}
+                  y={y}
+                  width={width || 40}
+                  height={height || 40}
+                  rx="5"
+                  fill={isPressed ? '#a0a0a0' : '#f0f0f0'}
+                  stroke="black"
+                  className={className}
+                />
+                <text
+                  x={x + (width || 40) / 2}
+                  y={y + (height || 40) / 2 + 5}
+                  textAnchor="middle"
+                  fontSize={12}
+                  fill={isPressed ? '#141414' : '#333'}
+                  className={className}
+                >
+                  {label}
+                </text>
+              </g>
+            );
+          })}
         </svg>
       </p>
 
       <div className="mb-6 flex flex-wrap gap-3 sm:gap-10">
         <div className="grow">
-          <TextField label="キー入力確認用" multiline noResize />
+          <TextField label="テスト用テキストフィールド" multiline noResize />
         </div>
         <div>
           <fieldset>
