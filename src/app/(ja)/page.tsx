@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useMemo } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -17,6 +17,36 @@ export const metadata = getMetadata('/');
 
 export default function Home() {
   const captionId = useId();
+  const pickUpList = useMemo(() => {
+    return [
+      {
+        emoji: '🌳',
+        href: '/tools/an-alt-decision-tree',
+      },
+      // {
+      //   emoji: '🥋',
+      //   href: '/documents/notes',
+      // },
+      {
+        emoji: '📝',
+        href: '/documents/translations/pauljadam-modern-web-a11y-demos',
+      },
+      {
+        emoji: '🔔',
+        href: '/tools/slack-reminder-command-generator',
+      },
+      {
+        emoji: '👆',
+        href: '/tools/touch-event-touches',
+      },
+      {
+        emoji: '📏',
+        href: '/tools/css-units',
+      },
+    ]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+  }, []);
 
   return (
     <>
@@ -86,32 +116,7 @@ export default function Home() {
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
-              {[
-                {
-                  emoji: '🌳',
-                  href: '/tools/an-alt-decision-tree',
-                },
-                {
-                  emoji: '🥋',
-                  href: '/documents/notes',
-                },
-                {
-                  emoji: '📝',
-                  href: '/documents/translations/pauljadam-modern-web-a11y-demos',
-                },
-                {
-                  emoji: '🔔',
-                  href: '/tools/slack-reminder-command-generator',
-                },
-                {
-                  emoji: '👆',
-                  href: '/tools/touch-event-touches',
-                },
-                {
-                  emoji: '📏',
-                  href: '/tools/css-units',
-                },
-              ].map(({ emoji, href }) => {
+              {pickUpList.map(({ emoji, href }) => {
                 const { pageTitle, description } = getMetadata(href);
                 const id = String(description) && href;
 
