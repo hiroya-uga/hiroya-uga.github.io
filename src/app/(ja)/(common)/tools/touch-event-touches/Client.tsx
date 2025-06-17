@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { NoteBox } from '@/components/Box';
+import { LoadingIcon } from '@/components/Icons';
 
 type Touches = Record<
   string,
@@ -176,78 +177,103 @@ export const TouchEventTouchesContent = () => {
   }, [isRunning, loop, touchDataSet]);
 
   return (
-    <>
-      <div
+    <div
+      className="relative rounded-md bg-white p-6"
+      aria-busy={typeof isTouchDevice === 'undefined' ? 'true' : undefined}
+    >
+      <p
         className={clsx([
-          isRunning ? 'sticky bottom-4' : 'relative',
-          'z-20',
-          'before:touch-none] before:fixed before:left-0 before:top-0 before:-z-10 before:size-full before:bg-[rgba(255,255,255,.9)] before:transition-[visibility,opacity]',
-          !isRunning && 'before:invisible before:opacity-0',
+          'absolute inset-0 m-auto grid place-items-center p-6 text-center transition-[visibility,opacity]',
+          typeof isTouchDevice !== 'undefined' && 'invisible opacity-0',
         ])}
       >
-        <div
-          className={clsx([
-            'rounded p-2 py-3 sm:p-6',
-            'flex flex-wrap items-center justify-center gap-2 transition-[background-color,visibility,opacity]',
-            isTouchDevice !== true && 'invisible opacity-0',
-            isRunning ? 'bg-[rgba(255,255,255,.9)]' : 'bg-[rgba(255,255,255,.9)]',
-          ])}
-        >
-          <p
-            className={clsx([
-              'grow transition-[visibility,opacity] sm:text-left',
-              isRunning !== true && 'invisible opacity-0',
-            ])}
-          >
-            認識している指の本数：
-            <span aria-live="polite" aria-atomic="true">
-              {Object.keys(touchDataSet).length}本
-            </span>
-          </p>
-
-          <p>
-            <button
-              aria-live="assertive"
-              ref={startButtonRef}
-              className={clsx([
-                'relative z-20 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
-                isRunning && 'touch-none',
-              ])}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsRunning(!isRunning);
-              }}
-              onTouchStart={(e) => e.stopPropagation()}
-            >
-              {isRunning ? 'Stop' : 'Start'}
-            </button>
-          </p>
-        </div>
-
-        <div
-          aria-live="assertive"
-          aria-busy={typeof isTouchDevice === 'undefined'}
-          className={clsx(['mx-2 mt-2 transition-[visibility,opacity] sm:mx-6', isRunning || 'invisible opacity-0'])}
-        >
-          <NoteBox headingLevel={2} logLevel="warn">
-            <p>このページは現在、Stopボタン以外のタッチ操作が無効になっています。</p>
-          </NoteBox>
-        </div>
-
-        <div className={clsx([isRunning && 'touch-none] fixed left-0 top-0 z-10 size-full'])} ref={ref}>
-          <TouchPoints dataSets={touchDataSet} />
-        </div>
-      </div>
-
+        <LoadingIcon />
+      </p>
       <p
         role="alert"
         className={clsx([
-          'pb-8 text-center transition-[visibility,opacity]',
+          'absolute inset-0 m-auto grid place-items-center p-6 text-center transition-[visibility,opacity]',
           isTouchDevice !== false && 'invisible opacity-0',
         ])}
       >
-        残念ながら、お使いのデバイスは タッチ操作をサポート<strong>していない</strong>ようです。
+        <span>
+          残念ながら、お使いのデバイスは
+          <span className="inline-block">
+            タッチ操作をサポート<strong>していない</strong>ようです。
+          </span>
+        </span>
       </p>
-    </>
+
+      <div
+        className={clsx([
+          ' transition-[background-color,visibility,opacity]',
+          isTouchDevice !== true && 'invisible opacity-0',
+        ])}
+      >
+        <p>Startボタンを押した後に画面をタッチすると指の座標が表示されます。</p>
+        <p className="mb-8">テストを終了する場合はページを再読み込みするか、Stopボタンを押してください。</p>
+
+        <div
+          className={clsx([
+            isRunning ? 'sticky bottom-4' : 'relative',
+            'z-20',
+            'before:touch-none] before:fixed before:left-0 before:top-0 before:-z-10 before:size-full before:bg-[rgba(255,255,255,.9)] before:transition-[visibility,opacity]',
+            !isRunning && 'before:invisible before:opacity-0',
+          ])}
+        >
+          <div
+            className={clsx([
+              'rounded p-2 py-3 sm:p-6',
+              'flex flex-wrap items-center justify-center gap-2 ',
+              isRunning ? 'bg-[rgba(255,255,255,.9)]' : 'bg-[rgba(255,255,255,.9)]',
+            ])}
+          >
+            <p
+              className={clsx([
+                'grow transition-[visibility,opacity] sm:text-left',
+                isRunning !== true && 'invisible opacity-0',
+              ])}
+            >
+              認識している指の本数：
+              <span aria-live="polite" aria-atomic="true">
+                {Object.keys(touchDataSet).length}本
+              </span>
+            </p>
+
+            <p>
+              <button
+                aria-live="assertive"
+                ref={startButtonRef}
+                className={clsx([
+                  'relative z-20 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
+                  isRunning && 'touch-none',
+                ])}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsRunning(!isRunning);
+                }}
+                onTouchStart={(e) => e.stopPropagation()}
+              >
+                {isRunning ? 'Stop' : 'Start'}
+              </button>
+            </p>
+          </div>
+
+          <div
+            aria-live="assertive"
+            aria-busy={typeof isTouchDevice === 'undefined'}
+            className={clsx(['mx-2 mt-2 transition-[visibility,opacity] sm:mx-6', isRunning || 'invisible opacity-0'])}
+          >
+            <NoteBox headingLevel={2} logLevel="warn">
+              <p>このページは現在、Stopボタン以外のタッチ操作が無効になっています。</p>
+            </NoteBox>
+          </div>
+
+          <div className={clsx([isRunning && 'touch-none] fixed left-0 top-0 z-10 size-full'])} ref={ref}>
+            <TouchPoints dataSets={touchDataSet} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
