@@ -352,6 +352,10 @@ export const SEO: Record<
     description:
       'リンク先一覧の調査や、画像のURL一覧を作ったりするタスクがある人のためのツールです。\nURLを抽出したいページの内容（DOM）をコピー＆ペーストしてください。\nSlackやエクセルなどのアプリケーションの内容からも抽出できます。',
   },
+  '/tools/keyboard-event': {
+    title: 'KeyboardEvent Playground',
+    description: 'キーボード操作のテストができます。キーボードのキー名やキーコード、修飾キーの状態を確認しましょう。',
+  },
   '/tools/slack-reminder-command-generator': {
     title: 'Slack reminder command generator',
     afterSubTitle: 'Slackのリマインダーコマンド作成ツール',

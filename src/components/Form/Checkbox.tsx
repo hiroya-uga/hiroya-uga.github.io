@@ -4,7 +4,8 @@ import { useId } from 'react';
 
 type Props = {
   label: string;
-  checked: boolean;
+  checked?: boolean;
+  defaultChecked?: boolean;
   onChange: React.FormEventHandler<HTMLInputElement>;
 };
 

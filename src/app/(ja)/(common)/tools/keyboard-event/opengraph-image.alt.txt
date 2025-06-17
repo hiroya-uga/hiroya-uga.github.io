@@ -1,0 +1,1 @@
+uga.dev KeyboardEvent Playground キーボード操作のテストができます。キーボードのキー名やキーコード、修飾キーの状態を確認しましょう。

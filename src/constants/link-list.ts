@@ -74,4 +74,9 @@ export const TOOLS_LINK_LIST: ToolPage = [
   { type: 'playground', emoji: '📏', pathname: '/tools/css-units' },
   { type: 'playground', emoji: '', pathname: '/tools/dom-events-watcher' },
   { type: 'playground', emoji: '', pathname: '/tools/touch-event-touches' },
+  {
+    type: 'playground',
+    emoji: '⌨',
+    pathname: '/tools/keyboard-event',
+  },
 ];
