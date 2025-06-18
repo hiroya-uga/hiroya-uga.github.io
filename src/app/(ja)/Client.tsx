@@ -8,33 +8,56 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
+const length = 6;
+const getRandomIndexArray = () => {
+  const digits = Array.from({ length }, (_, i) => i);
+  // Fisher-Yatesシャッフル
+  for (let i = digits.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [digits[i], digits[j]] = [digits[j], digits[i]];
+  }
+  return digits;
+};
+
 export const Counter = () => {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let i = 0;
     let loop = 0;
-    const length = 6;
-    const getValue = () => String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0);
+    let indexArray = getRandomIndexArray();
+
+    const getValue = () => {
+      const value = [...String(Math.floor(Math.random() * (Number('1'.padEnd(length + 1, '0')) - 0 + 1)) + 0)];
+
+      if (loop !== 1) {
+        value[indexArray[0]] = indexArray[0] % 2 ? '縺' : '繝';
+        value[indexArray[1]] = indexArray[1] % 2 ? '繧' : '縲';
+        value[indexArray[2]] = indexArray[2] % 2 ? 'ｳ?' : 'ｶﾞ';
+        value[indexArray[3]] = indexArray[3] % 2 ? '�' : '%';
+      }
+
+      return value.join('');
+    };
     const target = ref.current;
 
     if (target) {
       let prev = ''.padStart(length, '0');
-      let value = getValue().padStart(length, '0').replace(/^0/, '1');
+      let next = getValue().padStart(length, '0').replaceAll('0', '1');
+      let value = [...prev];
       const setIntervalId = setInterval(() => {
         if (i < length) {
-          target.textContent = prev.slice(0, length - i - 1) + value.slice(length - i - 1);
+          value[indexArray[i]] = next[indexArray[i]];
+          target.textContent = value.join('');
           i++;
         } else {
           if (loop < 2) {
-            prev = value;
-            value = getValue().padStart(length, '0');
+            prev = next;
+            indexArray = getRandomIndexArray();
+            next = getValue().padStart(length, '0');
 
-            if (loop !== 1) {
-              value = value.replace(/^0/, '1');
-            }
-
-            target.textContent = prev.slice(0, length - 1) + value[length - 1];
+            value[indexArray[0]] = next[indexArray[0]];
+            target.textContent = value.join('');
             i = 1;
             loop++;
             return;
@@ -48,7 +71,7 @@ export const Counter = () => {
 
   return (
     <span className="mx-1 font-mono" ref={ref}>
-      000000
+      {''.padStart(length, '0')}
     </span>
   );
 };
