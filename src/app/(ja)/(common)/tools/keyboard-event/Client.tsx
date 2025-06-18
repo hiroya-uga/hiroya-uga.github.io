@@ -1,6 +1,7 @@
 'use client';
 
 import { Checkbox, TextField } from '@/components/Form';
+import { throttle } from 'lodash';
 import { memo, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(common)/tools/keyboard-event/Client.module.css';
@@ -24,19 +25,12 @@ type Log = {
 
 const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: string }) => {
   return (
-    <p
-      className={clsx([
-        'relative mb-6 before:pointer-events-none before:absolute before:inset-0 before:grid before:size-full before:place-items-center before:rounded-lg before:bg-gray-200 before:shadow-sticky before:content-["何かキーを押してください"] before:transition-fade sm:mb-14',
-        lastKey !== '' && 'before:opacity-0',
-      ])}
-    >
-      <span
-        className={clsx([
-          'mx-auto mb-4 block w-fit transition-fade sm:mb-14',
-          lastKey === '' ? 'invisible opacity-0' : 'visible',
-        ])}
-      >
-        あなたが最後に押したキーは<kbd className="mx-auto block w-fit whitespace-pre text-3xl">{lastKey || ' '}</kbd>
+    <p className={clsx(['relative mb-6 sm:mb-14', lastKey !== '' && 'before:opacity-0'])}>
+      <span className="mx-auto mb-4 block w-fit transition-fade sm:mb-14">
+        あなたが最後に押したキーは
+        <kbd className="mx-auto min-w-[6rem] text-center my-2 block w-fit whitespace-pre text-3xl">
+          {lastKey === ' ' ? 'Space' : lastKey || ' '}
+        </kbd>
         です。
       </span>
       <span translate="no">
@@ -99,7 +93,7 @@ const Form = ({
           <legend className="mb-2 block w-fit text-sm font-bold leading-snug">Options</legend>
           <ul className="space-y-2.5">
             {Object.entries(checkboxStatusRef.current).map(([key]) => (
-              <li key={key}>
+              <li key={key} translate="no">
                 <Checkbox
                   label={key}
                   defaultChecked={true}
@@ -139,23 +133,23 @@ const Log = ({ inputLog }: { inputLog: Log[] }) => {
         <thead className="bg-[#00000022]">
           <tr>
             <th>
-              type <span className="block text-xs font-normal">イベント名</span>
+              <span translate="no">type</span> <span className="block text-xs font-normal">イベント名</span>
             </th>
             <th>
-              key <span className="block text-xs font-normal ">キー名</span>
+              <span translate="no">key</span> <span className="block text-xs font-normal ">キー名</span>
             </th>
             <th>
-              code <span className="block text-xs font-normal ">キーコード</span>
+              <span translate="no">code</span> <span className="block text-xs font-normal ">キーコード</span>
             </th>
-            <th>altKey</th>
-            <th>ctrlKey</th>
-            <th>shiftKey</th>
-            <th>metaKey</th>
+            <th translate="no">altKey</th>
+            <th translate="no">ctrlKey</th>
+            <th translate="no">shiftKey</th>
+            <th translate="no">metaKey</th>
             <th>
-              Is Composing <span className="block text-xs font-normal ">IMEが使用中</span>
+              <span translate="no">isComposing</span> <span className="block text-xs font-normal ">IMEが使用中</span>
             </th>
             <th>
-              Repeat <span className="block text-xs font-normal ">長押し中</span>
+              <span translate="no">repeat</span> <span className="block text-xs font-normal ">長押し中</span>
             </th>
             <th>Timestamp</th>
           </tr>
@@ -194,7 +188,15 @@ const MemoLog = memo(Log);
 export const KeyboardEventContent = () => {
   const [lastKey, setLastKey] = useState('');
   const [pressedKeys, setPressedKeys] = useState<string[]>([]);
+  const tempLogs = useRef<Log[]>([]);
   const [inputLog, setInputLog] = useState<Log[]>([]);
+
+  const throttledUpdateLogs = throttle(() => {
+    const additionalLogs = tempLogs.current;
+    setInputLog((previous) => [...additionalLogs, ...previous].slice(0, 100));
+    tempLogs.current = [];
+  }, 1000 / 120);
+
   const checkboxStatusRef = useRef({
     onkeydown: true,
     onkeypress: true,
@@ -205,23 +207,21 @@ export const KeyboardEventContent = () => {
   const updateInputLog = useCallback((e: KeyboardEvent) => {
     const timestamp = new Date().toISOString();
 
-    setInputLog((previous) =>
-      [
-        {
-          type: e.type,
-          key: e.key,
-          code: e.code,
-          altKey: e.altKey,
-          ctrlKey: e.ctrlKey,
-          shiftKey: e.shiftKey,
-          metaKey: e.metaKey,
-          isComposing: e.isComposing,
-          repeat: e.repeat,
-          timestamp,
-        },
-        ...previous,
-      ].slice(0, 100),
-    );
+    tempLogs.current.unshift({
+      type: e.type,
+      key: e.key,
+      code: e.code,
+      altKey: e.altKey,
+      ctrlKey: e.ctrlKey,
+      shiftKey: e.shiftKey,
+      metaKey: e.metaKey,
+      isComposing: e.isComposing,
+      repeat: e.repeat,
+      timestamp,
+    });
+
+    tempLogs.current = tempLogs.current;
+    throttledUpdateLogs();
   }, []);
 
   const onkeydown = useCallback(
