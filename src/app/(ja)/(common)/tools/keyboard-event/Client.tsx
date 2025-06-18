@@ -26,9 +26,14 @@ type Log = {
 const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: string }) => {
   return (
     <p className={clsx(['relative mb-6 sm:mb-14', lastKey !== '' && 'before:opacity-0'])}>
-      <span className="mx-auto mb-4 block w-fit transition-fade sm:mb-14">
+      <span
+        className={clsx([
+          'mx-auto mb-4 block w-fit transition-transform duration-700 sm:mb-14',
+          lastKey === '' && 'translate-y-full',
+        ])}
+      >
         あなたが最後に押したキーは
-        <kbd className="mx-auto min-w-[6rem] text-center my-2 block w-fit whitespace-pre text-3xl">
+        <kbd className="mx-auto my-2 block w-fit min-w-24 whitespace-pre text-center text-3xl">
           {lastKey === ' ' ? 'Space' : lastKey || ' '}
         </kbd>
         です。
@@ -38,7 +43,7 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
           viewBox="0 0 1032 292"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
-          className={clsx(lastKey === '' && 'invisible')}
+          className={clsx('duration-700 transition-fade', lastKey === '' && 'invisible opacity-0')}
         >
           {keys.map(({ key, x, y, width, height, label }, index) => {
             const isPressed = pressedKeys.includes(key);
@@ -204,25 +209,28 @@ export const KeyboardEventContent = () => {
   });
   const isScrollIgnoredRef = useRef(false);
 
-  const updateInputLog = useCallback((e: KeyboardEvent) => {
-    const timestamp = new Date().toISOString();
+  const updateInputLog = useCallback(
+    (e: KeyboardEvent) => {
+      const timestamp = new Date().toISOString();
 
-    tempLogs.current.unshift({
-      type: e.type,
-      key: e.key,
-      code: e.code,
-      altKey: e.altKey,
-      ctrlKey: e.ctrlKey,
-      shiftKey: e.shiftKey,
-      metaKey: e.metaKey,
-      isComposing: e.isComposing,
-      repeat: e.repeat,
-      timestamp,
-    });
+      tempLogs.current.unshift({
+        type: e.type,
+        key: e.key,
+        code: e.code,
+        altKey: e.altKey,
+        ctrlKey: e.ctrlKey,
+        shiftKey: e.shiftKey,
+        metaKey: e.metaKey,
+        isComposing: e.isComposing,
+        repeat: e.repeat,
+        timestamp,
+      });
 
-    tempLogs.current = tempLogs.current;
-    throttledUpdateLogs();
-  }, []);
+      tempLogs.current = tempLogs.current;
+      throttledUpdateLogs();
+    },
+    [throttledUpdateLogs],
+  );
 
   const onkeydown = useCallback(
     (e: KeyboardEvent) => {
