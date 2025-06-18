@@ -13,19 +13,36 @@ export const Counter = () => {
 
   useEffect(() => {
     let i = 0;
-    const value = String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0).padStart(6, '0');
+    let loop = 0;
+    const length = 6;
+    const getValue = () => String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0);
     const target = ref.current;
 
     if (target) {
+      let prev = ''.padStart(length, '0');
+      let value = getValue().padStart(length, '0').replace(/^0/, '1');
       const setIntervalId = setInterval(() => {
-        if (i < value.length) {
-          target.textContent = value.slice(0, i + 1).padStart(6, '0');
+        if (i < length) {
+          target.textContent = prev.slice(0, length - i - 1) + value.slice(length - i - 1);
           i++;
         } else {
+          if (loop < 2) {
+            prev = value;
+            value = getValue().padStart(length, '0');
+
+            if (loop !== 1) {
+              value = value.replace(/^0/, '1');
+            }
+
+            target.textContent = prev.slice(0, length - 1) + value[length - 1];
+            i = 1;
+            loop++;
+            return;
+          }
+
           clearInterval(setIntervalId);
         }
       }, 60);
-      target.textContent = value;
     }
   }, []);
 
