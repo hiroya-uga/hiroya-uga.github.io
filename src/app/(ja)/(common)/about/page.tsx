@@ -50,7 +50,9 @@ export default function Page() {
             </span>
 
             <span className="grow whitespace-nowrap text-center text-xl leading-tight">
-              <span className="tracking-widest">宇賀景哉</span>
+              <span className="tracking-widest" translate="no">
+                宇賀景哉
+              </span>
               <span
                 className="palt block text-xs"
                 style={{
