@@ -136,7 +136,7 @@ export default function Home() {
                           {title}
                         </a>
 
-                        <p className="overflow-hidden text-ellipsis text-xs text-gray-600">{new URL(href).hostname}</p>
+                        <p className="break-all text-xs text-gray-600">{new URL(href).hostname}</p>
                       </td>
                     </tr>
                   );
