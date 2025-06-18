@@ -1,16 +1,37 @@
 'use client';
+import { TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { getMetadata } from '@/utils/seo';
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const Counter = () => {
-  const count = useMemo(() => String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0), []);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    let i = 0;
+    const value = String(Math.floor(Math.random() * (1000000 - 0 + 1)) + 0).padStart(6, '0');
+    const target = ref.current;
+
+    if (target) {
+      const setIntervalId = setInterval(() => {
+        if (i < value.length) {
+          target.textContent = value.slice(0, i + 1).padStart(6, '0');
+          i++;
+        } else {
+          clearInterval(setIntervalId);
+        }
+      }, 60);
+      target.textContent = value;
+    }
+  }, []);
 
   return (
-    <span className="mx-1 font-mono" suppressHydrationWarning>
-      {count.padStart(6, '0')}
+    <span className="mx-1 font-mono" ref={ref}>
+      000000
     </span>
   );
 };
@@ -344,6 +365,65 @@ export const LinkList = ({
                 </span>
               )}
             </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const pickUpListAll = [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST];
+
+export const PickUpList = () => {
+  const [pickUpList, setPickUpList] = useState<typeof pickUpListAll>([]);
+
+  useEffect(() => {
+    setPickUpList(() => {
+      return pickUpListAll
+        .filter(({ emoji }) => Boolean(emoji))
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3);
+    });
+  }, []);
+
+  return (
+    <ul
+      className={clsx([
+        'grid gap-4 transition-opacity sm:grid-cols-3 md:gap-8',
+        pickUpList.length === 0 && 'min-h-72 opacity-0',
+      ])}
+    >
+      {pickUpList.map(({ emoji, pathname }) => {
+        const { pageTitle, description } = getMetadata(pathname);
+        const id = String(description) && pathname;
+
+        return (
+          <li key={pathname}>
+            <p className="mb-1">
+              <Link
+                href={pathname}
+                className="group flex flex-col-reverse rounded-md no-underline"
+                aria-describedby={id}
+              >
+                <span className="inline-block leading-normal group-hover:underline">
+                  {pageTitle}
+                  {/* {item.isWip && <b>（WIP）</b>} */}
+                </span>
+                <span
+                  className="mb-3 grid place-content-center overflow-hidden rounded-md bg-gray-200 p-10 font-emoji text-[3.5rem] leading-none sm:aspect-[1.618_/_1] sm:p-0"
+                  aria-hidden="true"
+                >
+                  <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 [backface-visibility:hidden] group-hover:scale-100">
+                    {emoji}
+                  </span>
+                </span>
+              </Link>
+            </p>
+            {description && (
+              <p className="text-xs" id={id}>
+                {description}
+              </p>
+            )}
           </li>
         );
       })}

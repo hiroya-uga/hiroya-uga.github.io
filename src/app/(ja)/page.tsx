@@ -1,14 +1,14 @@
-import { useId, useMemo } from 'react';
+import { useId } from 'react';
 
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Counter, LinkList, TopImage } from '@/app/(ja)/Client';
+import { Counter, LinkList, PickUpList, TopImage } from '@/app/(ja)/Client';
 import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
-import { TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
+
 import { SITE_NAME } from '@/constants/meta';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
@@ -18,12 +18,6 @@ export const metadata = getMetadata('/');
 
 export default function Home() {
   const captionId = useId();
-  const pickUpList = useMemo(() => {
-    return [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST]
-      .filter(({ emoji }) => Boolean(emoji))
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-  }, []);
 
   return (
     <>
@@ -92,42 +86,7 @@ export default function Home() {
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
-            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
-              {pickUpList.map(({ emoji, pathname }) => {
-                const { pageTitle, description } = getMetadata(pathname);
-                const id = String(description) && pathname;
-
-                return (
-                  <li key={pathname}>
-                    <p className="mb-1">
-                      <Link
-                        href={pathname}
-                        className="group flex flex-col-reverse rounded-md no-underline"
-                        aria-describedby={id}
-                      >
-                        <span className="inline-block leading-normal group-hover:underline">
-                          {pageTitle}
-                          {/* {item.isWip && <b>（WIP）</b>} */}
-                        </span>
-                        <span
-                          className="mb-3 grid aspect-[1.618_/_1] place-content-center overflow-hidden rounded-md bg-gray-200 font-emoji text-[3.5rem] leading-none"
-                          aria-hidden="true"
-                        >
-                          <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 [backface-visibility:hidden] group-hover:scale-100">
-                            {emoji}
-                          </span>
-                        </span>
-                      </Link>
-                    </p>
-                    {description && (
-                      <p className="text-xs" id={id}>
-                        {description}
-                      </p>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <PickUpList />
           </div>
         </div>
 

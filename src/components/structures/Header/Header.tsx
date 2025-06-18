@@ -19,7 +19,9 @@ export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-conten
               href="../"
               className="group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300 sm:hover:bg-white sm:focus:bg-white"
             >
-              <span className="underline">../</span>
+              <span className="underline" translate="no">
+                ../
+              </span>
               <span
                 className={clsx([
                   styles.opacity0,
