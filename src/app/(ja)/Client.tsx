@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SITE_NAME } from '@/constants/meta';
 import { getMetadata } from '@/utils/seo';
+import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -65,6 +66,19 @@ export const WelcomeMessage = () => {
   const message2Ref = useRef<HTMLSpanElement>(null);
   const message3Ref = useRef<HTMLSpanElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
+  const [status, setIsFirstRender] = useState<'loading' | 'ready' | 'already'>('loading');
+
+  useEffect(() => {
+    const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
+
+    if (isViewed) {
+      setIsFirstRender('already');
+    } else {
+      setIsFirstRender('ready');
+    }
+
+    setSessionStorage('welcome-message-viewed', 'true');
+  }, []);
 
   // その他の文字
   useEffect(() => {
@@ -72,7 +86,7 @@ export const WelcomeMessage = () => {
     const message2 = message2Ref.current;
     const message3 = message3Ref.current;
 
-    if (!message1 || !message2 || !message3) {
+    if (!message1 || !message2 || !message3 || status !== 'ready') {
       return;
     }
 
@@ -116,10 +130,14 @@ export const WelcomeMessage = () => {
     return () => {
       clearTimeout(setTimeoutId);
     };
-  }, []);
+  }, [status]);
 
   // counter
   useEffect(() => {
+    if (status === 'loading') {
+      return;
+    }
+
     let i = 0;
     let loop = 0;
     let indexArray = getRandomIndexArray(COUNTER_LENGTH);
@@ -144,46 +162,49 @@ export const WelcomeMessage = () => {
 
     let setIntervalId = -1;
 
-    setTimeout(() => {
-      let prev = ''.padStart(COUNTER_LENGTH, '0');
-      let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
-      let value = [...prev];
-      setIntervalId = window.setInterval(() => {
-        if (i < COUNTER_LENGTH) {
-          value[indexArray[i]] = next[indexArray[i]];
-          target.textContent = value.join('');
-          i++;
-        } else {
-          if (loop < 2) {
-            prev = next;
-            indexArray = getRandomIndexArray(COUNTER_LENGTH);
-            next = getValue().padStart(COUNTER_LENGTH, '0');
-
-            value[indexArray[0]] = next[indexArray[0]];
+    setTimeout(
+      () => {
+        let prev = ''.padStart(COUNTER_LENGTH, '0');
+        let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
+        let value = [...prev];
+        setIntervalId = window.setInterval(() => {
+          if (i < COUNTER_LENGTH) {
+            value[indexArray[i]] = next[indexArray[i]];
             target.textContent = value.join('');
-            i = 1;
-            loop++;
-            return;
-          }
+            i++;
+          } else {
+            if (loop < 2) {
+              prev = next;
+              indexArray = getRandomIndexArray(COUNTER_LENGTH);
+              next = getValue().padStart(COUNTER_LENGTH, '0');
 
-          clearInterval(setIntervalId);
-        }
-      }, 60);
-    }, 1000);
+              value[indexArray[0]] = next[indexArray[0]];
+              target.textContent = value.join('');
+              i = 1;
+              loop++;
+              return;
+            }
+
+            clearInterval(setIntervalId);
+          }
+        }, 60);
+      },
+      status === 'already' ? 0 : 1000,
+    );
 
     return () => {
       clearInterval(setIntervalId);
     };
-  }, []);
+  }, [status]);
 
   return (
-    <p className="text-center text-sm">
+    <p className={clsx(['text-center text-sm transition-opacity', status === 'loading' ? 'opacity-0' : 'opacity-100'])}>
       <span ref={message1Ref} aria-hidden="true">
-        {message[0].mapping.map(([c]) => c)}
+        {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
       </span>
       <span className="block sm:inline">
         <span ref={message2Ref} aria-hidden="true">
-          {message[1].mapping.map(([c]) => c).join('')}
+          {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
         </span>
         <span className="sr-only select-none">{`${message[0].mapping.map(([_, c]) => c).join('')}${message[1].mapping.map(([_, c]) => c).join('')}`}</span>
         <span className="mx-1 font-mono" ref={counterRef}>
@@ -191,7 +212,7 @@ export const WelcomeMessage = () => {
         </span>
         <span className="sr-only select-none">{message[2].mapping.map(([_, c]) => c).join('')}</span>
         <span ref={message3Ref} aria-hidden="true">
-          {message[2].mapping.map(([c]) => c)}
+          {message[2].mapping.map(([a, b]) => (status === 'already' ? b : a))}
         </span>
       </span>
     </p>
