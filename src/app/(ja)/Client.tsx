@@ -3,13 +3,57 @@ import { TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/li
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { SITE_NAME } from '@/constants/meta';
 import { getMetadata } from '@/utils/seo';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const length = 6;
-const getRandomIndexArray = () => {
+const COUNTER_LENGTH = 6;
+const message = [
+  {
+    before: '繧医≧縺薙◎ uga.dev 縺ｸ縲�',
+    mapping: [
+      ['繧', 'よ'],
+      ['医≧', 'う'],
+      ['縺', 'こ'],
+      ['薙◎', 'そ'],
+      [` ${SITE_NAME} `, ` ${SITE_NAME} `],
+      ['縺ｸ', 'へ'],
+      ['縲�', '。'],
+    ],
+  },
+  {
+    before: '縺ゅ↑縺溘�',
+    mapping: [
+      ['縺', 'あ'],
+      ['ゅ', 'な'],
+      ['↑', 'た'],
+      ['溘�', 'は'],
+    ],
+  },
+  {
+    before: '逡ｪ逶ｮ縺ｮ險ｪ蝠剰�°繧ゅ＠繧後∪縺帙ｓ縲�',
+    mapping: [
+      ['逡ｪ', '番'],
+      ['逶ｮ', '目'],
+      ['縺ｮ剰', 'の'],
+      ['險ｪ°', '訪'],
+      ['蝠�', '問'],
+      ['繧ゅ', '者'],
+      ['＠繧', 'か'],
+      ['後', 'も'],
+      ['∪', 'し'],
+      ['縺', 'れ'],
+      ['帙', 'ま'],
+      ['ｓ', 'せ'],
+      ['縲', 'ん'],
+      ['�', '。'],
+    ],
+  },
+];
+
+const getRandomIndexArray = (length: number) => {
   const digits = Array.from({ length }, (_, i) => i);
   // Fisher-Yatesシャッフル
   for (let i = digits.length - 1; i > 0; i--) {
@@ -19,16 +63,72 @@ const getRandomIndexArray = () => {
   return digits;
 };
 
-export const Counter = () => {
-  const ref = useRef<HTMLSpanElement>(null);
+export const WelcomeMessage = () => {
+  const message1Ref = useRef<HTMLSpanElement>(null);
+  const message2Ref = useRef<HTMLSpanElement>(null);
+  const message3Ref = useRef<HTMLSpanElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
+  // その他の文字
+  useEffect(() => {
+    const message1 = message1Ref.current;
+    const message2 = message2Ref.current;
+    const message3 = message3Ref.current;
+
+    if (!message1 || !message2 || !message3) {
+      return;
+    }
+
+    const nodeList = [message1, message2, message3];
+    const characterList = message.map((item, index) => {
+      return item.mapping.map((_, index2) => ({ messageIndex: index, wordIndex: index2, done: false }));
+    });
+    const flatCharacterList = characterList.flat();
+    const mapping = getRandomIndexArray(flatCharacterList.length);
+
+    let index = 0;
+    let setTimeoutId = -1;
+    const updateCharacter = () => {
+      const { messageIndex, wordIndex } = flatCharacterList[mapping[index]];
+
+      characterList[messageIndex][wordIndex].done = true;
+
+      nodeList.forEach((node, i) => {
+        node.textContent = characterList[i]
+          .map((item) => {
+            if (item.done) {
+              return message[i].mapping[item.wordIndex][1];
+            }
+            return message[i].mapping[item.wordIndex][0];
+          })
+          .join('');
+      });
+
+      index++;
+
+      if (index < flatCharacterList.length) {
+        setTimeoutId = window.setTimeout(updateCharacter, Math.random() * 100 + 30);
+        return;
+      }
+
+      clearTimeout(setTimeoutId);
+    };
+
+    updateCharacter();
+
+    return () => {
+      clearTimeout(setTimeoutId);
+    };
+  }, []);
+
+  // counter
   useEffect(() => {
     let i = 0;
     let loop = 0;
-    let indexArray = getRandomIndexArray();
+    let indexArray = getRandomIndexArray(COUNTER_LENGTH);
 
     const getValue = () => {
-      const value = [...String(Math.floor(Math.random() * (Number('1'.padEnd(length + 1, '0')) - 0 + 1)) + 0)];
+      const value = [...String(Math.floor(Math.random() * (Number('1'.padEnd(COUNTER_LENGTH + 1, '0')) - 0 + 1)) + 0)];
 
       if (loop !== 1) {
         value[indexArray[0]] = indexArray[0] % 2 ? '縺' : '繝';
@@ -39,40 +139,53 @@ export const Counter = () => {
 
       return value.join('');
     };
-    const target = ref.current;
+    const target = counterRef.current;
 
-    if (target) {
-      let prev = ''.padStart(length, '0');
-      let next = getValue().padStart(length, '0').replaceAll('0', '1');
-      let value = [...prev];
-      const setIntervalId = setInterval(() => {
-        if (i < length) {
-          value[indexArray[i]] = next[indexArray[i]];
-          target.textContent = value.join('');
-          i++;
-        } else {
-          if (loop < 2) {
-            prev = next;
-            indexArray = getRandomIndexArray();
-            next = getValue().padStart(length, '0');
-
-            value[indexArray[0]] = next[indexArray[0]];
-            target.textContent = value.join('');
-            i = 1;
-            loop++;
-            return;
-          }
-
-          clearInterval(setIntervalId);
-        }
-      }, 60);
+    if (!target) {
+      return;
     }
+
+    let prev = ''.padStart(COUNTER_LENGTH, '0');
+    let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
+    let value = [...prev];
+    const setIntervalId = setInterval(() => {
+      if (i < COUNTER_LENGTH) {
+        value[indexArray[i]] = next[indexArray[i]];
+        target.textContent = value.join('');
+        i++;
+      } else {
+        if (loop < 2) {
+          prev = next;
+          indexArray = getRandomIndexArray(COUNTER_LENGTH);
+          next = getValue().padStart(COUNTER_LENGTH, '0');
+
+          value[indexArray[0]] = next[indexArray[0]];
+          target.textContent = value.join('');
+          i = 1;
+          loop++;
+          return;
+        }
+
+        clearInterval(setIntervalId);
+      }
+    }, 60);
+
+    return () => {
+      clearInterval(setIntervalId);
+    };
   }, []);
 
   return (
-    <span className="mx-1 font-mono" ref={ref}>
-      {''.padStart(length, '0')}
-    </span>
+    <p className="text-center text-sm">
+      <span ref={message1Ref}>{message[0].before}</span>
+      <span className="block sm:inline">
+        <span ref={message2Ref}>{message[1].before}</span>
+        <span className="mx-1 font-mono" ref={counterRef}>
+          {''.padStart(COUNTER_LENGTH, '0')}
+        </span>
+        <span ref={message3Ref}>{message[2].before}</span>
+      </span>
+    </p>
   );
 };
 
