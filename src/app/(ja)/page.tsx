@@ -4,12 +4,11 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Counter, LinkList, PickUpList, TopImage } from '@/app/(ja)/Client';
+import { LinkList, PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/Client';
 import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
 
-import { SITE_NAME } from '@/constants/meta';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { getMetadata } from '@/utils/seo';
@@ -41,16 +40,9 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="mb-8 px-[var(--content-padding-inline)] sm:mb-28">
-          <div className="mx-auto max-w-content">
-            <p className="mb-20 text-center text-sm sm:mb-28">
-              <span>ようこそ {SITE_NAME} へ。</span>
-              <span className="block sm:inline">
-                あなたは
-                <Counter />
-                番目の訪問者かもしれません。
-              </span>
-            </p>
+        <div className="px-[var(--content-padding-inline)] pb-20 sm:pb-28">
+          <div className="mx-auto max-w-content ">
+            <WelcomeMessage />
           </div>
         </div>
 
