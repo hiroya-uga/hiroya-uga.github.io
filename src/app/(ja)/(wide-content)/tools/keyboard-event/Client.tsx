@@ -4,24 +4,20 @@ import { Checkbox, TextField } from '@/components/Form';
 import { throttle } from 'lodash';
 import { memo, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
-import styles from '@/app/(ja)/(common)/tools/keyboard-event/Client.module.css';
-import { keyboardSvgData } from '@/app/(ja)/(common)/tools/keyboard-event/constants';
+import styles from '@/app/(ja)/(wide-content)/tools/keyboard-event/Client.module.css';
+import { keyboardSvgData } from '@/app/(ja)/(wide-content)/tools/keyboard-event/constants';
 import clsx from 'clsx';
 
 const keys = keyboardSvgData;
 
 type Log = {
   type: string;
-  key: string;
-  code: string;
-  altKey: boolean;
-  ctrlKey: boolean;
-  shiftKey: boolean;
-  metaKey: boolean;
-  isComposing: boolean;
-  repeat: boolean;
+  getModifierState: ReturnType<KeyboardEvent['getModifierState']>;
   timestamp: string;
-};
+} & Pick<
+  KeyboardEvent,
+  'key' | 'code' | 'location' | 'ctrlKey' | 'shiftKey' | 'altKey' | 'metaKey' | 'repeat' | 'isComposing'
+>;
 
 const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: string }) => {
   return (
@@ -29,7 +25,7 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
       <span
         className={clsx([
           'mx-auto mb-4 block w-fit transition-transform duration-700 sm:mb-14',
-          lastKey === '' && 'translate-y-full',
+          lastKey === '' && 'translate-y-[17vw] sm:translate-y-full',
         ])}
       >
         あなたが最後に押したキーは
@@ -97,11 +93,11 @@ const Form = ({
         <fieldset>
           <legend className="mb-2 block w-fit text-sm font-bold leading-snug">Options</legend>
           <ul className="space-y-2.5">
-            {Object.entries(checkboxStatusRef.current).map(([key]) => (
+            {Object.entries(checkboxStatusRef.current).map(([key, value]) => (
               <li key={key} translate="no">
                 <Checkbox
-                  label={key}
-                  defaultChecked={true}
+                  label={key === 'onkeypress' ? 'onkeypress (legacy)' : key}
+                  defaultChecked={value}
                   onChange={(e) => {
                     const isChecked = e.currentTarget.checked;
 
@@ -138,23 +134,70 @@ const Log = ({ inputLog }: { inputLog: Log[] }) => {
         <thead className="bg-[#00000022]">
           <tr>
             <th>
-              <span translate="no">type</span> <span className="block text-xs font-normal">イベント名</span>
+              <a href="https://www.w3.org/TR/uievents/#events-keyboard-types" translate="no" hrefLang="en">
+                type
+              </a>{' '}
+              <span className="block text-xs font-normal">イベント名</span>
             </th>
             <th>
-              <span translate="no">key</span> <span className="block text-xs font-normal ">キー名</span>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-key" translate="no" hrefLang="en">
+                key
+              </a>{' '}
+              <span className="block text-xs font-normal ">キー名</span>
             </th>
             <th>
-              <span translate="no">code</span> <span className="block text-xs font-normal ">キーコード</span>
-            </th>
-            <th translate="no">altKey</th>
-            <th translate="no">ctrlKey</th>
-            <th translate="no">shiftKey</th>
-            <th translate="no">metaKey</th>
-            <th>
-              <span translate="no">isComposing</span> <span className="block text-xs font-normal ">IMEが使用中</span>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-code" translate="no" hrefLang="en">
+                code
+              </a>{' '}
+              <span className="block text-xs font-normal ">キーコード</span>
             </th>
             <th>
-              <span translate="no">repeat</span> <span className="block text-xs font-normal ">長押し中</span>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-location" translate="no" hrefLang="en">
+                location
+              </a>{' '}
+              <span className="block text-xs font-normal ">キーの種別</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-ctrlkey" translate="no" hrefLang="en">
+                ctrlKey
+              </a>
+              <span className="block text-xs font-normal ">を押下中</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-shiftkey" translate="no" hrefLang="en">
+                shiftKey
+              </a>
+              <span className="block text-xs font-normal ">を押下中</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-altkey" translate="no" hrefLang="en">
+                altKey
+              </a>
+              <span className="block text-xs font-normal ">を押下中</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-metakey" translate="no" hrefLang="en">
+                metaKey
+              </a>
+              <span className="block text-xs font-normal ">を押下中</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-repeat" translate="no" hrefLang="en">
+                repeat
+              </a>{' '}
+              <span className="block text-xs font-normal ">長押し中</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-iscomposing" translate="no" hrefLang="en">
+                isComposing
+              </a>{' '}
+              <span className="block text-xs font-normal ">IMEが使用中</span>
+            </th>
+            <th>
+              <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-getmodifierstate" translate="no" hrefLang="en">
+                getModifierState(key)
+              </a>{' '}
+              <span className="block text-xs font-normal ">押下またはロック中の修飾キーか</span>
             </th>
             <th>Timestamp</th>
           </tr>
@@ -171,14 +214,18 @@ const Log = ({ inputLog }: { inputLog: Log[] }) => {
               <td>
                 <code>{log.code}</code>
               </td>
-              <td className={log.altKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.altKey ? 'true' : 'false'}</td>
+              <td>{log.location}</td>
               <td className={log.ctrlKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.ctrlKey ? 'true' : 'false'}</td>
               <td className={log.shiftKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.shiftKey ? 'true' : 'false'}</td>
+              <td className={log.altKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.altKey ? 'true' : 'false'}</td>
               <td className={log.metaKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.metaKey ? 'true' : 'false'}</td>
+              <td className={log.repeat ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.repeat ? 'true' : 'false'}</td>
               <td className={log.isComposing ? 'text-[#005f82]' : 'text-[#7b4f00]'}>
                 {log.isComposing ? 'true' : 'false'}
               </td>
-              <td className={log.repeat ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.repeat ? 'true' : 'false'}</td>
+              <td className={log.getModifierState ? 'text-[#005f82]' : 'text-[#7b4f00]'}>
+                {log.getModifierState ? 'true' : 'false'}
+              </td>
               <td className="text-xs leading-none">{log.timestamp}</td>
             </tr>
           ))}
@@ -204,8 +251,8 @@ export const KeyboardEventContent = () => {
 
   const checkboxStatusRef = useRef({
     onkeydown: true,
-    onkeypress: true,
     onkeyup: true,
+    onkeypress: false,
   });
   const isScrollIgnoredRef = useRef(false);
 
@@ -217,12 +264,14 @@ export const KeyboardEventContent = () => {
         type: e.type,
         key: e.key,
         code: e.code,
-        altKey: e.altKey,
+        location: e.location,
         ctrlKey: e.ctrlKey,
         shiftKey: e.shiftKey,
+        altKey: e.altKey,
         metaKey: e.metaKey,
-        isComposing: e.isComposing,
         repeat: e.repeat,
+        isComposing: e.isComposing,
+        getModifierState: e.getModifierState(e.key),
         timestamp,
       });
 
@@ -286,24 +335,26 @@ export const KeyboardEventContent = () => {
 
   useEffect(() => {
     window.addEventListener('keydown', onkeydown);
-    window.addEventListener('keypress', onkeypress);
     window.addEventListener('keyup', onkeyup);
+    window.addEventListener('keypress', onkeypress);
 
     return () => {
       window.removeEventListener('keydown', onkeydown);
-      window.removeEventListener('keypress', onkeypress);
       window.removeEventListener('keyup', onkeyup);
+      window.removeEventListener('keypress', onkeypress);
     };
   }, [onkeydown, onkeypress, onkeyup]);
 
   return (
     <div className={styles.root}>
-      <MemoLastKey {...{ pressedKeys, lastKey }} />
-      <MemoForm {...{ checkboxStatusRef, isScrollIgnoredRef }} />
+      <div className="mx-auto max-w-content">
+        <MemoLastKey {...{ pressedKeys, lastKey }} />
+        <MemoForm {...{ checkboxStatusRef, isScrollIgnoredRef }} />
+      </div>
+
       <h2 className="mb-2 text-sm font-bold">
         イベントログ<span className="text-xs">（最大100件）</span>
       </h2>
-
       <MemoLog {...{ inputLog }} />
     </div>
   );

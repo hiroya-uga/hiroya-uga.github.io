@@ -1,4 +1,4 @@
-import { KeyboardEventContent } from '@/app/(ja)/(common)/tools/keyboard-event/Client';
+import { KeyboardEventContent } from '@/app/(ja)/(wide-content)/tools/keyboard-event/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
 
