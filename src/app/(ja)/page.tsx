@@ -220,7 +220,9 @@ export default function Home() {
 
               <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-[22.5rem] items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
                 <span className="grow whitespace-nowrap text-center text-xl leading-tight">
-                  <span className="tracking-widest">宇賀景哉</span>
+                  <span className="tracking-widest" translate="no">
+                    宇賀景哉
+                  </span>
                   <span
                     className="palt block text-xs"
                     style={{
