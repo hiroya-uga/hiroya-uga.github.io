@@ -363,13 +363,7 @@ export const TableDevSupporterContent = () => {
             type="button"
             className="  align-center  relative  my-2.5  block w-full rounded-md border border-[#05355c]  bg-[#044f8d]  px-3 py-2.5 text-sm font-bold text-white transition-[background-color] hover:bg-[#033c6e]"
             onClick={() => {
-              update([
-                'removeIndent',
-                'removeBreak',
-                'adjustBreak',
-                'removeAttributes',
-                'removeElementsFromTableCells',
-              ]);
+              update(['removeIndent', 'removeBreak', 'adjustBreak', 'removeAttributes']);
               setToastMessage('フォーマットしました');
             }}
           >
@@ -395,7 +389,6 @@ export const TableDevSupporterContent = () => {
                 ['removeBreak', '改行をすべて削除'],
                 ['adjustBreak', 'テーブル系タグ同士に改行を挿入'],
                 ['removeAttributes', '属性値を削除'],
-                ['removeElementsFromTableCells', 'テーブルセルの中のテキストノード以外を削除'],
               ].map(([task, label]) => {
                 return (
                   <li key={task}>
@@ -450,6 +443,7 @@ export const TableDevSupporterContent = () => {
               <legend className="mb-2.5 text-[0.75rem]">その他のDOM操作</legend>
               <ul className="space-y-2.5">
                 {[
+                  ['removeElementsFromTableCells', 'テーブルセルの中のテキストノード以外を削除'],
                   ['onlySemantics', 'すべてのdivタグ、spanタグを削除'],
                   ['removeAllImageTags', 'すべてのimgタグ、svg要素を削除'],
                   ['removeAllTags', 'すべてのタグを削除'],
