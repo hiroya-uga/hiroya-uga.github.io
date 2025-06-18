@@ -12,7 +12,6 @@ import Link from 'next/link';
 const COUNTER_LENGTH = 6;
 const message = [
   {
-    before: '繧医≧縺薙◎ uga.dev 縺ｸ縲�',
     mapping: [
       ['繧', 'よ'],
       ['医≧', 'う'],
@@ -24,7 +23,6 @@ const message = [
     ],
   },
   {
-    before: '縺ゅ↑縺溘�',
     mapping: [
       ['縺', 'あ'],
       ['ゅ', 'な'],
@@ -33,7 +31,6 @@ const message = [
     ],
   },
   {
-    before: '逡ｪ逶ｮ縺ｮ險ｪ蝠剰�°繧ゅ＠繧後∪縺帙ｓ縲�',
     mapping: [
       ['逡ｪ', '番'],
       ['逶ｮ', '目'],
@@ -181,13 +178,21 @@ export const WelcomeMessage = () => {
 
   return (
     <p className="text-center text-sm">
-      <span ref={message1Ref}>{message[0].before}</span>
+      <span ref={message1Ref} aria-hidden="true">
+        {message[0].mapping.map(([c]) => c)}
+      </span>
       <span className="block sm:inline">
-        <span ref={message2Ref}>{message[1].before}</span>
+        <span ref={message2Ref} aria-hidden="true">
+          {message[1].mapping.map(([c]) => c).join('')}
+        </span>
+        <span className="sr-only select-none">{`${message[0].mapping.map(([_, c]) => c).join('')}${message[1].mapping.map(([_, c]) => c).join('')}`}</span>
         <span className="mx-1 font-mono" ref={counterRef}>
           {''.padStart(COUNTER_LENGTH, '0')}
         </span>
-        <span ref={message3Ref}>{message[2].before}</span>
+        <span className="sr-only select-none">{message[2].mapping.map(([_, c]) => c).join('')}</span>
+        <span ref={message3Ref} aria-hidden="true">
+          {message[2].mapping.map(([c]) => c)}
+        </span>
       </span>
     </p>
   );
