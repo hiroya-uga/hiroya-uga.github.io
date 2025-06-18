@@ -145,30 +145,34 @@ export const WelcomeMessage = () => {
       return;
     }
 
-    let prev = ''.padStart(COUNTER_LENGTH, '0');
-    let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
-    let value = [...prev];
-    const setIntervalId = setInterval(() => {
-      if (i < COUNTER_LENGTH) {
-        value[indexArray[i]] = next[indexArray[i]];
-        target.textContent = value.join('');
-        i++;
-      } else {
-        if (loop < 2) {
-          prev = next;
-          indexArray = getRandomIndexArray(COUNTER_LENGTH);
-          next = getValue().padStart(COUNTER_LENGTH, '0');
+    let setIntervalId = -1;
 
-          value[indexArray[0]] = next[indexArray[0]];
+    setTimeout(() => {
+      let prev = ''.padStart(COUNTER_LENGTH, '0');
+      let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
+      let value = [...prev];
+      setIntervalId = window.setInterval(() => {
+        if (i < COUNTER_LENGTH) {
+          value[indexArray[i]] = next[indexArray[i]];
           target.textContent = value.join('');
-          i = 1;
-          loop++;
-          return;
-        }
+          i++;
+        } else {
+          if (loop < 2) {
+            prev = next;
+            indexArray = getRandomIndexArray(COUNTER_LENGTH);
+            next = getValue().padStart(COUNTER_LENGTH, '0');
 
-        clearInterval(setIntervalId);
-      }
-    }, 60);
+            value[indexArray[0]] = next[indexArray[0]];
+            target.textContent = value.join('');
+            i = 1;
+            loop++;
+            return;
+          }
+
+          clearInterval(setIntervalId);
+        }
+      }, 60);
+    }, 1000);
 
     return () => {
       clearInterval(setIntervalId);
