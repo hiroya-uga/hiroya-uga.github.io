@@ -80,6 +80,7 @@ export const TableDevSupporterContent = () => {
             color: #333;
             contain: paint;
             border-radius: 8px;
+            caret-color: #000; /* for iOS */
 
             :focus {
               outline: none;
@@ -278,7 +279,7 @@ export const TableDevSupporterContent = () => {
         <textarea
           ref={textareaRef}
           className={clsx([
-            'absolute size-full resize-none overflow-auto whitespace-pre-wrap bg-[#272822] p-4 font-mono text-[#cfcfc2] !shadow-none !outline-offset-[-5px] focus-visible:![outline:2px_solid_#999] sm:text-sm',
+            'absolute size-full resize-none overflow-auto whitespace-pre-wrap bg-[#272822] p-4 font-mono text-[#cfcfc2] caret-[#cfcfc2] !shadow-none !outline-offset-[-5px] focus-visible:![outline:2px_solid_#999] sm:text-sm',
             isViewSrc ? 'block' : 'hidden',
           ])}
           aria-label="HTMLソース"
