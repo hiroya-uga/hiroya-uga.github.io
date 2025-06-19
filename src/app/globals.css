@@ -102,6 +102,7 @@ mark {
 a {
   color: #005a9c;
   text-decoration: underline;
+  word-break: break-word;
 }
 
 a:where(:hover) {
