@@ -125,7 +125,9 @@ export const WelcomeMessage = () => {
       clearTimeout(setTimeoutId);
     };
 
-    updateCharacter();
+    setTimeout(() => {
+      updateCharacter();
+    }, 1000);
 
     return () => {
       clearTimeout(setTimeoutId);
