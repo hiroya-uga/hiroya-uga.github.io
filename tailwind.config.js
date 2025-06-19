@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        w500: '500px',
         '2xl': '1536px',
         'pointer-fine': { raw: '(pointer: fine)' },
         'pointer-coarse': { raw: '(pointer: coarse)' },

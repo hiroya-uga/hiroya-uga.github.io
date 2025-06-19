@@ -13,14 +13,14 @@ export const SiteName = () => {
         </span>
       </p> */}
 
-      <p className="mb-4 bg-white py-1 text-[0.78125rem] lg:mb-0 2xl:fixed 2xl:left-0 2xl:top-0 2xl:mb-0 2xl:h-full 2xl:overflow-auto 2xl:bg-transparent 2xl:py-0">
+      <p className="mb-4 bg-white py-1 text-[12.5px] lg:mb-0 2xl:fixed 2xl:left-0 2xl:top-0 2xl:mb-0 2xl:h-full 2xl:overflow-auto 2xl:bg-transparent 2xl:py-0 w500:text-[0.78125rem]">
         <span className="block overflow-auto bg-white 2xl:box-content 2xl:h-[29.2929vh] 2xl:min-h-[18.5rem] 2xl:w-8 2xl:min-w-8 2xl:overflow-visible 2xl:pb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             role="none"
-            className="ml-auto h-[1.465rem] w-[18.5rem] min-w-[18.5rem] 2xl:h-[18.5rem] 2xl:min-h-[18.5rem] 2xl:w-8 2xl:min-w-8"
+            className="ml-auto h-[1.465rem] max-h-full w-[240px] max-w-full 2xl:h-[18.5rem] 2xl:min-h-[18.5rem] 2xl:w-8 2xl:min-w-8 w500:w-60"
           >
-            <text x="58%" y="50%" textAnchor="middle" className="translate-y-[4px] 2xl:hidden">
+            <text x="0" y="50%" textAnchor="start" className="translate-y-[4px] 2xl:hidden">
               {/* bootstrapを読み込んでいる画面だとunderlineがつかない */}
               <Link href="/" className="underline">
                 {SITE_NAME}
