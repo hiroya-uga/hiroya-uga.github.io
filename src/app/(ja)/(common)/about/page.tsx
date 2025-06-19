@@ -44,7 +44,7 @@ export default function Page() {
         <div className="sm:sticky sm:top-6">
           <Heading level={2}>管理人について</Heading>
 
-          <p className="mx-auto mb-4 flex max-w-[22.5rem] flex-row-reverse items-center gap-4 leading-none sm:grid sm:place-items-center sm:gap-x-6">
+          <p className="mx-auto mb-4 flex max-w-360px flex-row-reverse items-center gap-4 leading-none sm:grid sm:place-items-center sm:gap-x-6">
             <span className="w-40">
               <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" />
             </span>
@@ -71,7 +71,7 @@ export default function Page() {
           <p>アイコンは昔の上司がスマホで描いて送ってくれた管理人の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
-        <div className="mt-8 sm:mt-[0.1875rem]">
+        <div className="mt-8 sm:mt-3px">
           <dl className="text-sm">
             {[
               {

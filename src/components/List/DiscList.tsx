@@ -12,7 +12,7 @@ export const DiscList = ({ list }: { list: (string | { value: React.ReactNode; k
         return (
           <li
             key={key}
-            className=" flex  gap-x-2  before:mt-3 before:inline-block before:size-[0.3125rem] before:shrink-0 before:rounded-full   before:bg-black before:content-['']"
+            className=" flex  gap-x-2  before:mt-3 before:inline-block before:size-5px before:shrink-0 before:rounded-full   before:bg-black before:content-['']"
           >
             <span className="grow">{value}</span>
           </li>

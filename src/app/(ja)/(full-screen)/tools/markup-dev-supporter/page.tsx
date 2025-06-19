@@ -11,7 +11,7 @@ export const metadata = getMetadata('/tools/markup-dev-supporter');
 export default function Page() {
   return (
     <div className={clsx([styles.page, 'grid grid-cols-1 grid-rows-[auto,1fr,auto] bg-[#222] text-white '])}>
-      <header className="flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c] sm:gap-1 sm:px-2 sm:pr-[var(--navigation-width)] sm:pt-[0.0625rem]">
+      <header className="flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c] sm:gap-1 sm:px-2 sm:pr-[var(--navigation-width)] sm:pt-1px">
         <p>
           <Link href="../" className="grid size-8 place-items-center rounded-full sm:size-6">
             <svg

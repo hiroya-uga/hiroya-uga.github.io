@@ -3,6 +3,11 @@ module.exports = {
   content: ['./src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      spacing: Object.fromEntries(
+        Array.from({ length: 401 }, (_, i) => {
+          return [`${i}px`, `${i / 16}rem`];
+        }),
+      ),
       screens: {
         w500: '500px',
         '2xl': '1536px',

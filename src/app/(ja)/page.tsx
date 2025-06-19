@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="px-4 pb-12 pt-10 lg:pb-[3.75rem] lg:pt-14">
+      <header className="px-4 pb-12 pt-10 lg:pb-60px lg:pt-14">
         <div className="mx-auto max-w-content">
           <div className="items-center text-center lg:mb-2 lg:flex">
             <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl lg:mb-0">{metadata.pageTitle}</h1>
@@ -218,7 +218,7 @@ export default function Home() {
                 Profile
               </h2>
 
-              <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-[22.5rem] items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
+              <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-360px items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
                 <span className="grow whitespace-nowrap text-center text-xl leading-tight">
                   <span className="tracking-widest" translate="no">
                     宇賀景哉
