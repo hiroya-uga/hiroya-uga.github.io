@@ -264,7 +264,7 @@ export const TouchEventTouchesContent = () => {
             aria-busy={typeof isTouchDevice === 'undefined'}
             className={clsx(['mx-2 mt-2 transition-[visibility,opacity] sm:mx-6', isRunning || 'invisible opacity-0'])}
           >
-            <NoteBox headingLevel={2} logLevel="warn">
+            <NoteBox headingLevel={2} type="warn">
               <p>このページは現在、Stopボタン以外のタッチ操作が無効になっています。</p>
             </NoteBox>
           </div>

@@ -2,9 +2,14 @@ import { ReactNode, type JSX } from 'react';
 
 import clsx from 'clsx';
 
-type LogLevel = 'note' | 'warn' | 'error';
+type Props = {
+  title?: string;
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
+  type?: 'note' | 'warn' | 'error';
+  children: ReactNode;
+};
 
-const getTitle = (level: LogLevel) => {
+const getTitle = (level: NonNullable<Props['type']>) => {
   switch (level) {
     case 'error':
       return 'Error';
@@ -15,44 +20,34 @@ const getTitle = (level: LogLevel) => {
   }
 };
 
-export const NoteBox = ({
-  title,
-  headingLevel = 3,
-  logLevel = 'note',
-  children,
-}: {
-  title?: string;
-  headingLevel?: 2 | 3 | 4 | 5 | 6;
-  logLevel?: LogLevel;
-  children: ReactNode;
-}) => {
+export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Props) => {
   const TagName = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 
   return (
-    <aside
+    <section
       className={clsx([
         'rounded-md border border-gray-400 p-4',
-        logLevel === 'note' && 'bg-green-50',
-        logLevel === 'warn' && 'bg-yellow-50',
-        logLevel === 'error' && 'bg-red-50',
+        type === 'note' && 'bg-green-50',
+        type === 'warn' && 'bg-yellow-50',
+        type === 'error' && 'bg-red-50',
       ])}
     >
       <TagName
         className={clsx([
           'mb-2 mt-0 text-lg font-bold leading-relaxed',
-          logLevel === 'note' && 'text-green-800',
-          logLevel === 'warn' && 'text-yellow-800',
-          logLevel === 'error' && 'text-red-800',
+          type === 'note' && 'text-green-800',
+          type === 'warn' && 'text-yellow-800',
+          type === 'error' && 'text-red-800',
         ])}
       >
         <span className="pr-2 font-emoji">
-          {logLevel === 'note' && '💡'}
-          {logLevel === 'warn' && '⚠️'}
-          {logLevel === 'error' && '🚨'}
+          {type === 'note' && '💡'}
+          {type === 'warn' && '⚠️'}
+          {type === 'error' && '🚨'}
         </span>
-        {title ?? getTitle(logLevel)}
+        {title ?? getTitle(type)}
       </TagName>
       {children}
-    </aside>
+    </section>
   );
 };
