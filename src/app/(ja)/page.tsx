@@ -233,7 +233,7 @@ export default function Home() {
                   </span>
                 </span>
                 <span className="w-40">
-                  <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" />
+                  <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" />
                 </span>
               </p>
 
