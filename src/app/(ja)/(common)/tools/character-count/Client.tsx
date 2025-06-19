@@ -583,7 +583,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               aria-hidden={true}
                               className={clsx([
                                 'col-start-11 col-end-12 row-start-6 row-end-7 text-center',
-                                'vertical-rl pl-[0.1875rem] text-justify text-[orange]',
+                                'vertical-rl pl-3px text-justify text-[orange]',
                               ])}
                             >
                               【
@@ -592,7 +592,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               aria-hidden={true}
                               className={clsx([
                                 'col-start-11 col-end-12 row-start-[15] row-end-[17] text-center',
-                                'vertical-rl pl-[0.1875rem] text-justify text-[orange]',
+                                'vertical-rl pl-3px text-justify text-[orange]',
                               ])}
                             >
                               】

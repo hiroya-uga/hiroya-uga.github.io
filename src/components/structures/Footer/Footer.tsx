@@ -152,7 +152,7 @@ export const Footer = () => {
                 );
               })}
             </ul>
-            <p className="relative top-[-0.0625rem] float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
+            <p className="relative -top-1px float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
               {/* text-[100%] for bootstrap pages */}
               <small className="text-[100%]">&copy; {SITE_NAME}</small>
             </p>

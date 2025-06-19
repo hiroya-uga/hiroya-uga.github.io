@@ -525,7 +525,7 @@ export const SlackReminderCommandGenerator = () => {
             <span className="text-red-300">at {result.time || '9:00'}</span>
             <span className="text-purple-300">{result.starting && ` starting ${result.starting}`}</span>
           </p>
-          <p className="grid rounded-b-lg bg-slate-200 text-xs sm:w-[5.5625rem] sm:rounded-l-none sm:rounded-r-lg">
+          <p className="grid rounded-b-lg bg-slate-200 text-xs sm:w-89px sm:rounded-l-none sm:rounded-r-lg">
             <button
               type="button"
               className="grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors hover:bg-slate-300"
