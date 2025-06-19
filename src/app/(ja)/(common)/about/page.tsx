@@ -46,7 +46,7 @@ export default function Page() {
 
           <p className="mx-auto mb-4 flex max-w-[22.5rem] flex-row-reverse items-center gap-4 leading-none sm:grid sm:place-items-center sm:gap-x-6">
             <span className="w-40">
-              <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" />
+              <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" />
             </span>
 
             <span className="grow whitespace-nowrap text-center text-xl leading-tight">
