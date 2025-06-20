@@ -352,6 +352,12 @@ export const SEO: Record<
     description:
       'リンク先一覧の調査や、画像のURL一覧を作ったりするタスクがある人のためのツールです。\nURLを抽出したいページの内容（DOM）をコピー＆ペーストしてください。\nSlackやエクセルなどのアプリケーションの内容からも抽出できます。',
   },
+  '/tools/kaprekar-number': {
+    title: 'Kaprekar Number Playground',
+    afterSubTitle: 'カプレカ数（カプレカルーチン）に至るまでの計算テスト',
+    description:
+      'カプレカ数のテストができます。\nある整数を大きい順と小さい順に並べ替えてから、大きい数から小さい数を引いたとき、その結果が元の整数と同じになる値をカプレカ数といいます。入力した数字が特定の値を繰り返すようになる様子を確認してみましょう。',
+  },
   '/tools/keyboard-event': {
     title: 'KeyboardEvent Playground',
     description: 'キーボード操作のテストができます。キーボードのキー名やキーコード、修飾キーの状態を確認しましょう。',

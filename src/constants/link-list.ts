@@ -79,4 +79,9 @@ export const TOOLS_LINK_LIST: ToolPage = [
     emoji: '⌨',
     pathname: '/tools/keyboard-event',
   },
+  {
+    type: 'playground',
+    emoji: '♾️',
+    pathname: '/tools/kaprekar-number',
+  },
 ];
