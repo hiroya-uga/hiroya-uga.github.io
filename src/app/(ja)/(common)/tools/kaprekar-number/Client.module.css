@@ -75,7 +75,7 @@
 
 [role="alert"]:not(:empty) + .result p {
   display: block !important;
-  opacity: 1;
+  opacity: 1 !important;
 
   @starting-style {
     opacity: 0;
