@@ -29,7 +29,7 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
         ])}
       >
         あなたが最後に押したキーは
-        <kbd className="mx-auto my-2 block w-fit min-w-24 whitespace-pre break-all text-center text-3xl">
+        <kbd className="mx-auto my-2 block w-fit min-w-24 whitespace-pre-wrap break-all text-center text-3xl">
           {lastKey === ' ' ? 'Space' : lastKey || ' '}
         </kbd>
         です。
