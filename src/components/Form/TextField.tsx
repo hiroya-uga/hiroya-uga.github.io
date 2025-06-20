@@ -36,6 +36,7 @@ type Props = {
   | {
       multiline?: false;
       type?: InputHTMLAttributes<HTMLInputElement>['type'];
+      inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
       onInput?: InputHTMLAttributes<HTMLInputElement>['onInput'];
       onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
       autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];

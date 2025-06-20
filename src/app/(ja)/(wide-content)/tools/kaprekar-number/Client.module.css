@@ -81,3 +81,23 @@
     opacity: 0;
   }
 }
+
+.inputWrapper {
+  position: relative;
+}
+.inputWrapper::after {
+  content: "";
+  bottom: -1px;
+  left: 50%;
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  transform: translateX(-50%);
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #575757 calc(50% - 30rem),
+    #575757 calc(50% + 30rem),
+    transparent 100%
+  );
+}

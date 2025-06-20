@@ -1,4 +1,4 @@
-import { KaprekarNumberContent } from '@/app/(ja)/(common)/tools/kaprekar-number/Client';
+import { KaprekarNumberContent } from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client';
 import { NoteBox } from '@/components/Box';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/seo';
