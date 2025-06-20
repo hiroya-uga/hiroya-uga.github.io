@@ -113,7 +113,7 @@ export default function Page() {
               { title: '口癖', answer: '' },
               { title: '性格', answer: '' },
               { title: '嗜好品', answer: '' },
-              { title: '自慢なこと', answer: 'ちょっとお高級なカラトリーとか食器を集めているぞ！' },
+              { title: '自慢なこと', answer: 'ちょっとお高級なカトラリーとか食器を集めているぞ！' },
               { title: '持っている資格', answer: '' },
               { title: '使っている携帯電話', answer: '' },
               { title: '好きな男性のタイプ', answer: '' },
