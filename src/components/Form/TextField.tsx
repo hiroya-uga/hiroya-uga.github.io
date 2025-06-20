@@ -22,7 +22,7 @@ type Props = {
   description?: string;
   placeholder?: string;
   required?: boolean;
-  readonly?: boolean;
+  readOnly?: boolean;
   min?: number;
   max?: number;
 } & (
@@ -31,11 +31,13 @@ type Props = {
       autoResize?: boolean;
       noResize?: boolean;
       onInput?: TextareaHTMLAttributes<HTMLTextAreaElement>['onInput'];
+      onBlur?: TextareaHTMLAttributes<HTMLTextAreaElement>['onBlur'];
     }
   | {
       multiline?: false;
       type?: InputHTMLAttributes<HTMLInputElement>['type'];
       onInput?: InputHTMLAttributes<HTMLInputElement>['onInput'];
+      onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
       autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
     }
 );
@@ -51,6 +53,7 @@ const TextareaComponent = (
     autoResize: boolean;
     noResize: boolean;
     onInput?: React.FormEventHandler<HTMLTextAreaElement>;
+    onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
     id: string;
     descriptionId?: string;
   },
@@ -116,7 +119,13 @@ const TextFieldComponent = (
           className="ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed text-description"
         >
           <p className="grid place-items-center pt-3px">
-            <Image src="/common/images/icons/information.svg" alt="info" className="size-4" width={16} height={16} />
+            <Image
+              src="/common/images/icons/information-description.svg"
+              alt="info"
+              className="size-4"
+              width={16}
+              height={16}
+            />
           </p>
           <div>
             {description.split('\n').map((line) => {

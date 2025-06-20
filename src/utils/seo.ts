@@ -12,7 +12,12 @@ export type Metadata = MetadataOrigin & {
 };
 
 export const getMetadata = (pathname: string): Metadata => {
-  const { title, beforeSubTitle, afterSubTitle, description } = (() => {
+  const {
+    title: pageTitle,
+    beforeSubTitle,
+    afterSubTitle,
+    description,
+  } = (() => {
     if (pathname in SEO) {
       return SEO[pathname];
     }
@@ -26,15 +31,15 @@ export const getMetadata = (pathname: string): Metadata => {
   })();
 
   const titleValue = (() => {
-    if (title === SITE_NAME) {
+    if (pageTitle === SITE_NAME) {
       return SITE_NAME;
     }
 
-    return `${beforeSubTitle ? beforeSubTitle : ''}${title}${afterSubTitle ? ` - ${afterSubTitle}` : ''} | ${SITE_NAME}`;
+    return `${beforeSubTitle ? beforeSubTitle : ''}${pageTitle}${afterSubTitle ? ` - ${afterSubTitle}` : ''} | ${SITE_NAME}`;
   })();
 
   return {
-    pageTitle: title,
+    pageTitle,
     previous: beforeSubTitle,
     following: afterSubTitle,
     title: titleValue,
