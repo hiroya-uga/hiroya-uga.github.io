@@ -38,7 +38,7 @@ export default function Home() {
       </header>
 
       <main>
-        <div className="mx-auto mb-4 max-w-content">
+        <div className="@container mx-auto mb-4 max-w-content">
           <TopImage captionId={captionId} />
         </div>
 

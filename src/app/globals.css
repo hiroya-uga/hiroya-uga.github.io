@@ -14,6 +14,8 @@
   --breakpoint-pointer-coarse: (pointer: coarse);
   --breakpoint-pointer-none: (pointer: none);
 
+  --container-content: 60rem;
+
   --text-*: initial;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -29,9 +31,9 @@
   --leading-inherit: inherit;
 
   --width-dialog: 48rem;
-  --width-content: 48rem;
+  --width-content: var(--container-content);
   --max-width-dialog: 48rem;
-  --max-width-content: 60rem;
+  --max-width-content: var(--container-content);
   --max-width-structure: 90rem;
   --text-2xs: 0.625rem;
 
