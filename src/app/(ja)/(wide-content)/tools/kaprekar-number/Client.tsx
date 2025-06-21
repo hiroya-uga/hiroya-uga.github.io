@@ -28,10 +28,11 @@ const calculateKaprekar = (inputNumber: number | bigint) => {
 export const KaprekarNumberContent = () => {
   const differenceClassName = useId();
 
-  const containerRef = useRef<HTMLFormElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<HTMLSpanElement>(null);
+  const [digitsLength, setDigitsLength] = useState(0);
   const [maxTimes, setMaxTimes] = useState(100);
   const [isRunning, setIsRunning] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -53,12 +54,16 @@ export const KaprekarNumberContent = () => {
         return;
       }
 
-      if (options?.abort) {
+      const showErrorMessage = (message: string) => {
         container?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         clearInterval(intervalId.current);
         setIsRunning(false);
+        setErrorMessage(message);
+      };
+
+      if (options?.abort) {
         result.insertAdjacentHTML('beforeend', '<p class="text-[#ffa7a7] text-base">処理を中断します。</p>');
-        setErrorMessage('エラー：中断ボタンが押されました。');
+        showErrorMessage('エラー：中断ボタンが押されました。');
         return;
       }
 
@@ -71,17 +76,17 @@ export const KaprekarNumberContent = () => {
       })();
 
       if (input.value.trim() === '' || inputNumber === null) {
-        setErrorMessage('エラー：有効な数値を入力してください。');
+        showErrorMessage('エラー：有効な数値を入力してください。');
         return;
       }
 
       if (inputNumber < 0) {
-        setErrorMessage('エラー：10以上の数値を入力してください。');
+        showErrorMessage('エラー：10以上の数値を入力してください。');
         return;
       }
 
       if (10 < inputNumber && new Set(input.value).size < 2) {
-        setErrorMessage('エラー：ゾロ目以外の数値を入力してください。');
+        showErrorMessage('エラー：ゾロ目以外の数値を入力してください。');
         return;
       }
 
@@ -93,13 +98,6 @@ export const KaprekarNumberContent = () => {
       setIsRunning(true);
       result.textContent = '';
       currentNumberRef.current = inputNumber;
-
-      const showErrorMessage = (message: string) => {
-        result.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        clearInterval(intervalId.current);
-        setIsRunning(false);
-        setResultMessage(message);
-      };
 
       let i = 0;
       const calculate = () => {
@@ -174,8 +172,6 @@ export const KaprekarNumberContent = () => {
   return (
     <>
       <form
-        ref={containerRef}
-        className="grid min-h-[90dvh] grid-rows-[1fr_auto_auto] rounded-lg bg-[#303030] px-6 pb-16 pt-2 text-[#f1f1f1] sm:pt-4"
         onSubmit={
           isRunning
             ? (e) => {
@@ -189,90 +185,95 @@ export const KaprekarNumberContent = () => {
               }
         }
       >
-        <div>
-          <div className="mb-6">
-            <p className={styles.inputWrapper}>
-              <label className="text-sm text-[#bebebe]">
-                <span className="mx-auto mb-2 block max-w-content">
-                  0以上の好きな整数を半角数字で入力してください。
-                </span>
-                <input
-                  ref={inputRef}
-                  className="-mx-6 block w-[calc(100%+3rem)] rounded-lg bg-transparent px-[8px] py-4 text-center text-[min(10vw,50px)] text-[#f1f1f1] caret-[#f1f1f1] placeholder:text-[#575757]"
-                  placeholder="168"
-                  inputMode="numeric"
-                  onInput={(e) => {
-                    e.currentTarget.value = e.currentTarget.value
-                      .replace(/[０-９ー]/g, (c) => {
-                        return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
-                      })
-                      .replace(/^0+|[^0-9-]/g, '');
-                  }}
-                  onFocus={() => {
-                    containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
-                />
-              </label>
-            </p>
-          </div>
+        <div
+          ref={containerRef}
+          className="grid min-h-[90dvh] grid-rows-[1fr_auto_auto] rounded-lg bg-[#303030] px-6 pb-16 pt-2 text-[#f1f1f1] sm:pt-4"
+        >
+          <div>
+            <div className="mb-6">
+              <p className={styles.inputWrapper}>
+                <label className="text-sm text-[#bebebe]">
+                  <span className="mx-auto mb-2 block max-w-content">
+                    0以上の好きな整数を半角数字で入力してください。
+                  </span>
+                  <input
+                    ref={inputRef}
+                    className="-mx-6 block w-[calc(100%+3rem)] rounded-lg bg-transparent px-[8px] py-4 text-center text-[min(10vw,50px)] text-[#f1f1f1] caret-[#f1f1f1] placeholder:text-[#575757]"
+                    placeholder="168"
+                    inputMode="numeric"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value
+                        .replace(/[０-９ー]/g, (c) => {
+                          return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
+                        })
+                        .replace(/^0+|[^0-9-]/g, '');
+                      setDigitsLength(e.currentTarget.value.length);
+                    }}
+                    onFocus={() => {
+                      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
+                  />
+                </label>
+              </p>
+            </div>
 
-          <p
-            role="alert"
-            className=" mx-auto min-h-lh max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
-          >
-            {errorMessage}
-          </p>
-
-          <div className="mx-auto mb-14 mt-6 max-w-content rounded-lg bg-white p-6 text-[#333]">
-            <TextField
-              label="最大試行回数"
-              inputMode="numeric"
-              value={String(maxTimes)}
-              onInput={(e) => {
-                const value = e.currentTarget.value
-                  .replace(/[０-９ー]/g, (c) => {
-                    return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
-                  })
-                  .replace(/^0+|[^0-9-]/g, '');
-
-                setMaxTimes(Number(value) || 1);
-              }}
-              onBlur={(e) => setMaxTimes(Number(e.currentTarget.value) || 100)}
-              readOnly={isRunning}
-              description="途中式が画面に出力されるため、膨大な試行回数を設定すると、ブラウザがフリーズする可能性があります。"
-            />
-          </div>
-
-          <div className="mx-auto w-fit after:block after:h-px after:w-0 md:after:transition-[width] lg:after:w-240">
-            <div ref={resultRef} className={clsx([styles.result, 'mt-[0.25em] space-y-[0.25em] font-mono'])} />
-
-            <p role="alert" className="min-h-lh text-[#ffa7a7] transition-opacity empty:opacity-0">
-              {resultMessage}
-            </p>
-          </div>
-
-          <p className={clsx(['mt-6 transition-fade', isOver === false && 'invisible opacity-0'])}>
-            <RunButton
-              type={isOver === false ? 'button' : 'submit'}
-              onClick={(e) => {
-                e.preventDefault();
-                const input = inputRef.current;
-
-                if (!input) {
-                  return;
-                }
-
-                input.value = String(currentNumberRef.current);
-                startCalculation();
-              }}
-              afterIcon="/common/images/icons/reload.svg"
+            <p
+              role="alert"
+              className=" mx-auto min-h-lh max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
             >
-              <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
-            </RunButton>
-          </p>
+              {errorMessage}
+            </p>
+
+            <div className="mx-auto w-fit after:block after:h-px after:w-0 md:after:transition-[width] lg:after:w-240">
+              <div ref={resultRef} className={clsx([styles.result, 'mt-[0.25em] space-y-[0.25em] font-mono'])} />
+
+              <p role="alert" className="min-h-lh text-[#ffa7a7] transition-opacity empty:opacity-0">
+                {resultMessage}
+              </p>
+            </div>
+
+            <p className={clsx(['mt-6 transition-fade', isOver === false && 'invisible opacity-0'])}>
+              <RunButton
+                type={isOver === false ? 'button' : 'submit'}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const input = inputRef.current;
+
+                  if (!input) {
+                    return;
+                  }
+
+                  input.value = String(currentNumberRef.current);
+                  startCalculation();
+                }}
+                afterIcon="/common/images/icons/reload.svg"
+              >
+                <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
+              </RunButton>
+            </p>
+          </div>
+        </div>
+        <div className="mx-auto mb-14 mt-6 max-w-content p-6 text-[#333]">
+          <TextField
+            label="最大試行回数"
+            inputMode="numeric"
+            value={String(maxTimes)}
+            onInput={(e) => {
+              const value = e.currentTarget.value
+                .replace(/[０-９ー]/g, (c) => {
+                  return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
+                })
+                .replace(/^0+|[^0-9-]/g, '');
+
+              setMaxTimes(Number(value) || 1);
+            }}
+            onBlur={(e) => setMaxTimes(Number(e.currentTarget.value) || 100)}
+            readOnly={isRunning}
+            description="途中式が画面に出力されるため、膨大な試行回数を設定すると、ブラウザがフリーズする可能性があります。"
+          />
         </div>
 
-        <div className="pointer-events-none sticky bottom-2 mt-6 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
+        <div className="pointer-events-none z-10 sticky bottom-2 mt-6 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
           <p className="col-start-2 transition-opacity">
             <RunButton
               type="submit"
@@ -292,13 +293,19 @@ export const KaprekarNumberContent = () => {
               {isRunning ? '中断する' : '計算する'}
             </RunButton>
           </p>
-          <p className="mt-2 text-right text-xs">
-            試行回数：
-            <span ref={countRef} className="mx-1 font-mono">
-              0
-            </span>
-            回
-          </p>
+          <div className="mt-2 bg-(--color-background)/80 w-fit ml-auto mr-4 leading-tight pointer-events-auto text-right text-xs rounded px-2 py-1">
+            <p>
+              試行回数：
+              <span ref={countRef} className="mx-1 font-mono">
+                0
+              </span>
+              回
+            </p>
+            <p>
+              入力桁数：
+              <span className="mx-1 font-mono">{digitsLength}</span>桁
+            </p>
+          </div>
         </div>
       </form>
     </>
