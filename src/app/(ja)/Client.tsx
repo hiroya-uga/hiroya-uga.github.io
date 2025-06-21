@@ -424,7 +424,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
   return (
     <>
-      <div className="group relative overflow-hidden" tabIndex={0}>
+      <div className="group relative overflow-hidden rounded-lg" tabIndex={0}>
         <figure aria-live="polite" className={clsx(['min-h relative bg-white'])}>
           <div className={clsx(['aspect-3/2', ...transitionClassName])}>
             {photoData &&
