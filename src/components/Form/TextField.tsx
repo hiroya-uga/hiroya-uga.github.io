@@ -12,9 +12,9 @@ import {
 } from 'react';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 
 import { Required } from '@/components/Badge/Required';
+import { DescriptionIcon } from '@/components/Icons/DescriptionIcon';
 
 type Props = {
   label: string;
@@ -71,7 +71,7 @@ const TextareaComponent = (
     return (
       <span className="relative block">
         <span
-          className="invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border border-gray-300 p-2"
+          className="invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border border-textfield p-2"
           ref={dummyTextareaRef}
         >
           {props.value?.replace(/\n$/g, '\n　') || '　'}
@@ -79,7 +79,7 @@ const TextareaComponent = (
         <textarea
           {...props}
           aria-describedby={descriptionId}
-          className="min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border border-gray-300 p-2"
+          className="min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border border-textfield p-2"
           style={{ height: textareaHeight }}
           ref={ref}
         />
@@ -91,7 +91,10 @@ const TextareaComponent = (
     <textarea
       {...props}
       aria-describedby={descriptionId}
-      className={clsx(['w-full rounded-md border border-gray-300 p-2', noResize === true ? 'resize-none' : 'resize-y'])}
+      className={clsx([
+        'w-full rounded-md border border-textfield p-2',
+        noResize === true ? 'resize-none' : 'resize-y',
+      ])}
       ref={ref}
     />
   );
@@ -117,16 +120,10 @@ const TextFieldComponent = (
       {description && (
         <div
           id={descriptionId}
-          className="ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed text-description"
+          className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed"
         >
-          <p className="grid place-items-center pt-3px">
-            <Image
-              src="/common/images/icons/information-description.svg"
-              alt="info"
-              className="size-4"
-              width={16}
-              height={16}
-            />
+          <p className="relative mt-0.5 grid size-4 place-items-center pt-3px">
+            <DescriptionIcon alt="" />
           </p>
           <div>
             {description.split('\n').map((line) => {
@@ -154,7 +151,7 @@ const TextFieldComponent = (
             aria-describedby={descriptionId}
             className={clsx([
               'min-h-12', // for iOS 32px + 8px padding * 2 = 48px
-              'w-full appearance-none rounded-md border border-gray-300 bg-white p-2 text-left',
+              'w-full appearance-none rounded-md border border-textfield bg-textfield p-2 text-left text',
             ])}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}

@@ -42,13 +42,13 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="px-(--content-padding-inline) pb-20 sm:pb-28">
-          <div className="mx-auto max-w-content ">
+        <div className="px-content-inline pb-20 sm:pb-28">
+          <div className="mx-auto max-w-content">
             <WelcomeMessage />
           </div>
         </div>
 
-        <div className="mb-8 bg-white px-(--content-padding-inline) py-8 sm:mb-28 sm:pb-11 sm:pt-7">
+        <div className="mb-8 bg-section-primary px-content-inline py-8 sm:mb-28 sm:pb-11 sm:pt-7">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 mt-0 text-xl font-bold sm:text-2xl">The power of the web</h2>
 
@@ -76,7 +76,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-16 px-(--content-padding-inline) sm:mb-28">
+        <div className="mb-16 px-content-inline sm:mb-28">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
@@ -84,9 +84,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-20 bg-slate-200 px-(--content-padding-inline) py-11 pb-12 sm:mb-28">
+        <div className="mb-20 bg-section-secondary px-content-inline py-11 pb-12 sm:mb-28">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-4 text-xl font-bold sm:text-2xl ">Category</h2>
+            <h2 className="mb-4 text-xl font-bold sm:text-2xl">Category</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
               {[
@@ -105,7 +105,7 @@ export default function Home() {
                   <li key={href}>
                     <Link href={href} className="group block rounded-md no-underline">
                       <span
-                        className="mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md bg-gray-50 font-emoji text-5xl leading-none"
+                        className="mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md bg-card-secondary font-emoji text-5xl leading-none"
                         aria-hidden="true"
                       >
                         <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
@@ -119,9 +119,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="px-(--content-padding-inline)">
+        <div className="px-content-inline">
           <div className="mx-auto max-w-content">
-            <h2 className="mb-2 text-xl font-bold sm:text-2xl ">Media</h2>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl">Media</h2>
 
             <p className="mb-4">{getMetadata('/documents/media').description}</p>
 
@@ -138,7 +138,7 @@ export default function Home() {
                           {title}
                         </a>
 
-                        <p className="break-all text-xs text-gray-600">{new URL(href).hostname}</p>
+                        <p className="break-all text-xs text-secondary">{new URL(href).hostname}</p>
                       </td>
                     </tr>
                   );
@@ -150,7 +150,7 @@ export default function Home() {
               <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
             </p>
 
-            <h2 className="mb-2 text-xl font-bold sm:text-2xl ">Bookmarks</h2>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl">Bookmarks</h2>
 
             <p className="mb-4">外部サイトへのリンク集です。</p>
 
@@ -216,7 +216,7 @@ export default function Home() {
             />
 
             <div className="mb-2 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12 sm:mb-0 sm:mt-20 sm:grid sm:gap-x-12 sm:pt-20">
-              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl ">
+              <h2 className="col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold sm:text-2xl">
                 Profile
               </h2>
 

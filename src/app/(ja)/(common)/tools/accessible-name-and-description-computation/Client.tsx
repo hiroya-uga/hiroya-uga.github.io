@@ -232,10 +232,7 @@ export const AccessibleNameAndDescriptionComputation = ({
     isUsingEmoji,
   ]);
 
-  const className = [
-    'inline-block w-fit py-[2px] px-[4px] rounded font-emoji',
-    isUsingEmoji && 'min-w-10 text-center',
-  ];
+  const className = ['inline-block w-fit py-[2px] px-[4px] rounded font-emoji', isUsingEmoji && 'min-w-10 text-center'];
   const labelsClassName = [...className, 'border-2 border-[#5071a8] bg-[#5071a822]'];
   const descriptionsClassName = [...className, 'border-2 border-[#606060] bg-[#60606022]'];
 
@@ -449,10 +446,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             </p>
           )}
           {isUsingAriaDescribedbyB && (
-            <p
-              id={describedByBId}
-              className={clsx([...descriptionsClassName, 'border-dotted', 'not-first:ml-2'])}
-            >
+            <p id={describedByBId} className={clsx([...descriptionsClassName, 'border-dotted', 'not-first:ml-2'])}>
               {isUsingEmoji ? '🥬' : '説明文B'}
             </p>
           )}
@@ -468,10 +462,7 @@ export const AccessibleNameAndDescriptionComputation = ({
           </span>
         )}
         {isUsingAriaDescribedbyB && (
-          <span
-            id={describedByBId}
-            className={clsx([...descriptionsClassName, 'border-dotted', 'not-first:ml-2'])}
-          >
+          <span id={describedByBId} className={clsx([...descriptionsClassName, 'border-dotted', 'not-first:ml-2'])}>
             {isUsingEmoji ? '🥬' : '説明文B'}
           </span>
         )}

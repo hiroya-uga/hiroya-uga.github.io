@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function EnRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <Suspense>

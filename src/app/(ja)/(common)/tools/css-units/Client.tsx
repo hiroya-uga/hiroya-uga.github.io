@@ -283,8 +283,8 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="sticky top-2 z-10 mb-4 rounded-md border border-solid border-gray-600 bg-white p-2 shadow-sticky sm:flex sm:items-center sm:justify-between sm:gap-x-8 sm:px-4 ">
-        <p className="text-xs text-description sm:text-inherit">サンプルは横スクロールできます。</p>
+      <div className="sticky top-2 z-10 mb-4 rounded-md border border-solid border-gray-600 bg-white p-2 shadow-sticky sm:flex sm:items-center sm:justify-between sm:gap-x-8 sm:px-4">
+        <p className="text-xs text-secondary sm:text-inherit">サンプルは横スクロールできます。</p>
         <p>
           <label className="flex items-center justify-between gap-2 text-sm">
             <span>説明文を表示する</span>

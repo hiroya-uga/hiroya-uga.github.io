@@ -425,7 +425,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   return (
     <>
       <div className="group relative overflow-hidden @content:rounded-lg" tabIndex={0}>
-        <figure aria-live="polite" className={clsx(['min-h relative bg-white'])}>
+        <figure aria-live="polite" className="min-h relative bg-loading">
           <div className={clsx(['aspect-3/2', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (
@@ -524,7 +524,7 @@ export const LinkList = ({
               <a
                 href={href}
                 {...prop}
-                className="last:rounded-r focus:relative focus:z-10 sm:grid sm:grow sm:content-center sm:rounded-l sm:bg-white sm:p-2 sm:pl-3"
+                className="last:rounded-r focus:relative focus:z-10 sm:grid sm:grow sm:content-center sm:rounded-l sm:bg-banner sm:p-2 sm:pl-3"
               >
                 {title}
               </a>{' '}
@@ -595,7 +595,7 @@ export const PickUpList = () => {
                   {/* {item.isWip && <b>（WIP）</b>} */}
                 </span>
                 <span
-                  className="mb-3 grid place-content-center overflow-hidden rounded-md bg-gray-200 p-10 font-emoji text-[3.5rem] leading-none sm:aspect-[1.618/1] sm:p-0"
+                  className="mb-3 grid place-content-center overflow-hidden rounded-md bg-card p-10 font-emoji text-[3.5rem] leading-none sm:aspect-[1.618/1] sm:p-0"
                   aria-hidden="true"
                 >
                   <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 backface-hidden group-hover:scale-100">

@@ -143,61 +143,61 @@ const Log = ({ inputLog }: { inputLog: Log[] }) => {
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-key" translate="no" hrefLang="en">
                 key
               </a>{' '}
-              <span className="block text-xs font-normal ">キー名</span>
+              <span className="block text-xs font-normal">キー名</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-code" translate="no" hrefLang="en">
                 code
               </a>{' '}
-              <span className="block text-xs font-normal ">キーコード</span>
+              <span className="block text-xs font-normal">キーコード</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-location" translate="no" hrefLang="en">
                 location
               </a>{' '}
-              <span className="block text-xs font-normal ">キーの種別</span>
+              <span className="block text-xs font-normal">キーの種別</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-ctrlkey" translate="no" hrefLang="en">
                 ctrlKey
               </a>
-              <span className="block text-xs font-normal ">を押下中</span>
+              <span className="block text-xs font-normal">を押下中</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-shiftkey" translate="no" hrefLang="en">
                 shiftKey
               </a>
-              <span className="block text-xs font-normal ">を押下中</span>
+              <span className="block text-xs font-normal">を押下中</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-altkey" translate="no" hrefLang="en">
                 altKey
               </a>
-              <span className="block text-xs font-normal ">を押下中</span>
+              <span className="block text-xs font-normal">を押下中</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-metakey" translate="no" hrefLang="en">
                 metaKey
               </a>
-              <span className="block text-xs font-normal ">を押下中</span>
+              <span className="block text-xs font-normal">を押下中</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-repeat" translate="no" hrefLang="en">
                 repeat
               </a>{' '}
-              <span className="block text-xs font-normal ">長押し中</span>
+              <span className="block text-xs font-normal">長押し中</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-iscomposing" translate="no" hrefLang="en">
                 isComposing
               </a>{' '}
-              <span className="block text-xs font-normal ">IMEが使用中</span>
+              <span className="block text-xs font-normal">IMEが使用中</span>
             </th>
             <th>
               <a href="https://www.w3.org/TR/uievents/#dom-keyboardevent-getmodifierstate" translate="no" hrefLang="en">
                 getModifierState(key)
               </a>{' '}
-              <span className="block text-xs font-normal ">押下またはロック中の修飾キーか</span>
+              <span className="block text-xs font-normal">押下またはロック中の修飾キーか</span>
             </th>
             <th>Timestamp</th>
           </tr>
