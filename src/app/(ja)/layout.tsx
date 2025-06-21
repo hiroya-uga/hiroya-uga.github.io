@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function JaRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" data-theme="light">
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <Suspense>

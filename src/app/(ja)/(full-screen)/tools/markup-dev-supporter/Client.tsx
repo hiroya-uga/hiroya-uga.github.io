@@ -304,9 +304,9 @@ export const TableDevSupporterContent = () => {
       </div>
 
       <nav className="absolute bottom-0 left-0 z-10 h-[70%] w-full overflow-y-scroll border-y border-black bg-[#333] pb-2.5 text-[#eee] sm:fixed sm:left-auto sm:right-0 sm:top-0 sm:h-full sm:max-h-screen sm:w-(--navigation-width) sm:border-0 sm:border-l">
-        <div className="sticky -top-px z-10 border-b border-black bg-[#333] px-2.5 text-xs ">
+        <div className="sticky -top-px z-10 border-b border-black bg-[#333] px-2.5 text-xs">
           <p className="border-b border-dashed border-[#777]">
-            <label className="flex items-center justify-between gap-2 py-3 ">
+            <label className="flex items-center justify-between gap-2 py-3">
               <span>HTMLを表示する</span>
               <Switch
                 checked={isViewSrc}
@@ -334,7 +334,7 @@ export const TableDevSupporterContent = () => {
             </label>
           </p>
           <p>
-            <label className="flex items-center justify-between gap-2 py-3 ">
+            <label className="flex items-center justify-between gap-2 py-3">
               <span>クリックで値コピーを有効にする</span>
               <Switch
                 checked={isCopyMode}

@@ -3,6 +3,78 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+@layer base {
+  :root {
+    /* Common */
+    --v-color-text: #333;
+    --v-color-text-secondary: #50545a;
+    --v-color-text-link: #005a9c;
+    --v-color-text-alert: #c10000;
+    --v-color-text-description: #6b7179;
+    --v-color-background: #f7f7f7;
+    --v-color-background-alert: #c10000;
+    --v-color-background-banner: #fff;
+    --v-color-background-loading: #fff;
+    --v-color-background-card: #e5e8eb;
+    --v-color-background-card-secondary: #f9fafb;
+    --v-color-background-required: #b20000;
+    --v-color-background-scroll-hint: white;
+    --v-color-background-section-primary: #fff;
+    --v-color-background-section-secondary: #e2e8f0;
+    --v-color-background-textfield: #fff;
+    --v-color-border-textfield: #d1d5dc;
+    --v-width-dialog: 48rem;
+    --v-width-content: 60rem;
+    --v-width-structure: 90rem;
+    --v-spacing-content-inline: 1rem;
+    --v-spacing-paragraph: 1rem;
+
+    /* TailWindCSS */
+    /* Component */
+    --v-header-margin-bottom: 2rem;
+  }
+
+  [data-theme="dark"]:root {
+    --v-color-text: #bebebe;
+    --v-color-text-secondary: #c5bdb2;
+    --v-color-text-link: #edc56c;
+    --v-color-text-alert: #c10000;
+    --v-color-text-description: #6b7179;
+    --v-color-background: #272727;
+    --v-color-background-alert: #c10000;
+    --v-color-background-banner: #333;
+    --v-color-background-loading: #333;
+    --v-color-background-card: #4b4845;
+    --v-color-background-card-secondary: #3b3939;
+    --v-color-background-required: #b20000;
+    --v-color-background-scroll-hint: white;
+    --v-color-background-section-primary: #111;
+    --v-color-background-section-secondary: #1c1c1c;
+    --v-color-background-textfield: #3d3c3a;
+    --v-color-border-textfield: #111;
+  }
+
+  @media screen and (min-width: 640px) {
+    :root {
+      --v-spacing-content-inline: 1.5rem;
+      --v-spacing-paragraph: 1.5rem;
+      --v-header-margin-bottom: 4rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    :root {
+      --v-spacing-content-inline: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    :root {
+      --v-spacing-content-inline: 1.2rem;
+    }
+  }
+}
+
 @theme {
   --breakpoint-w500: 500px;
   --breakpoint-sm: 640px;
@@ -14,7 +86,7 @@
   --breakpoint-pointer-coarse: (pointer: coarse);
   --breakpoint-pointer-none: (pointer: none);
 
-  --container-content: 60rem;
+  --container-content: 60rem; /* 960px */
 
   --text-*: initial;
   --text-xs: 0.75rem;
@@ -30,21 +102,29 @@
 
   --leading-inherit: inherit;
 
-  --width-dialog: 48rem;
-  --width-content: var(--container-content);
-  --max-width-dialog: 48rem;
-  --max-width-content: var(--container-content);
-  --max-width-structure: 90rem;
+  --width-dialog: var(--v-width-dialog);
+  --width-content: var(--v-width-content);
+  --max-width-dialog: var(--v-width-dialog);
+  --max-width-content: var(--v-width-content);
+  --max-width-structure: var(--v-width-structure);
   --text-2xs: 0.625rem;
 
-  --spacing-paragraph: var(--mb-paragraph);
+  --spacing-paragraph: var(--v-spacing-paragraph);
+  --spacing-content-inline: var(--v-spacing-content-inline);
 
-  --color-link: #005a9c;
-  --color-alert: #c10000;
-  --color-required: #fff;
-  --color-description: #6b7179;
-  --background-color-alert: #c10000;
-  --background-color-required: #b20000;
+  --color-text: var(--v-color-text);
+  --color-link: var(--v-color-text-link);
+  --color-alert: var(--v-color-text-alert);
+  --color-description: var(--v-color-text-description);
+  --background-color-alert: var(--v-color-background-alert);
+  --background-color-required: var(--v-color-background-required);
+  --background-color-textfield: var(--v-color-background-textfield);
+  --background-color-section-primary: var(--v-color-background-section-primary);
+  --background-color-section-secondary: var(--v-color-background-section-secondary);
+  --background-color-card: var(--v-color-background-card);
+  --background-color-card-secondary: var(--v-color-background-card-secondary);
+  --background-color-banner: var(--v-color-background-banner);
+  --border-color-textfield: var(--v-color-border-textfield);
 
   --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   --font-emoji:
@@ -52,8 +132,8 @@
     segoe ui symbol !important;
   --font-mono: Consolas, Monaco, monospace;
 
-  --transition-fade: opacity, visibility;
-  --transition-bg: background-color;
+  --transition-property-fade: opacity, visibility;
+  --transition-property-bg: background-color;
   --default-transition-duration: 300ms;
 }
 
@@ -73,12 +153,12 @@
 @utility scroll-hint-x {
   background:
     transparent,
-    linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 70%) 100% 0,
-    linear-gradient(to left, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 30%),
+    linear-gradient(to right, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 70%) 100% 0,
+    linear-gradient(to left, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
     radial-gradient(farthest-side at 100% 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0,
     radial-gradient(farthest-side at 0 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 0;
   background-repeat: no-repeat;
-  background-color: var(--bg-scroll-hint);
+  background-color: var(--v-color-background-scroll-hint);
   background-size:
     40px 100%,
     40px 100%,
@@ -90,12 +170,12 @@
 @utility scroll-hint-y {
   background:
     transparent,
-    linear-gradient(to top, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 30%),
-    linear-gradient(to top, var(--bg-scroll-hint), rgba(255, 255, 255, 0) 70%) 0 100%,
+    linear-gradient(to top, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
+    linear-gradient(to top, var(--v-color-background-scroll-hint), rgba(255, 255, 255, 0) 70%) 0 100%,
     radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
     radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
   background-repeat: no-repeat;
-  background-color: var(--bg-scroll-hint);
+  background-color: var(--v-color-background-scroll-hint);
   background-size:
     100% 60px,
     100% 60px,
@@ -109,42 +189,6 @@
 }
 
 @layer base {
-  :root {
-    /* Common */
-    --color-background: #f7f7f7;
-    /* TailWindCSS */
-    --mb-paragraph: 1rem;
-    --bg-scroll-hint: white;
-    /* Component */
-    --content-padding-inline: 1rem;
-    --header-margin-bottom: 2rem;
-  }
-
-  @media screen and (min-width: 640px) {
-    :root {
-      --content-padding-inline: 1.5rem;
-      --mb-paragraph: 1.5rem;
-      --header-margin-bottom: 4rem;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    :root {
-      --content-padding-inline: 3rem;
-    }
-  }
-
-  @media screen and (min-width: 1536px) {
-    :root {
-      --content-padding-inline: 1.2rem;
-    }
-  }
-
-  /* @media (prefers-color-scheme: dark) {
-  :root {
-  }
-} */
-
   *,
   *::before,
   *::after {
@@ -176,8 +220,8 @@
 
   body {
     line-height: 1.875;
-    color: #333;
-    background: var(--color-background);
+    color: var(--v-color-text);
+    background: var(--v-color-background);
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     text-spacing-trim: trim-start;
   }
@@ -188,7 +232,7 @@
   }
 
   a {
-    color: var(--color-link);
+    color: var(--v-color-text-link);
     text-decoration: underline;
     word-break: break-word;
   }

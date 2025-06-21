@@ -349,7 +349,7 @@ export const MediaContent = ({ id }: { id: string }) => {
                       </a>
                     </p>
 
-                    <p className="mt-1 overflow-hidden text-ellipsis text-xs leading-snug text-gray-600 sm:break-all">
+                    <p className="mt-1 overflow-hidden text-ellipsis text-xs leading-snug text-secondary sm:break-all">
                       {href.replace(/#.*/, '')}
                     </p>
 

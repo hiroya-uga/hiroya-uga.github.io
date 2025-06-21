@@ -217,19 +217,21 @@ export const KaprekarNumberContent = () => {
               </p>
             </div>
 
-            <p
-              role="alert"
-              className=" mx-auto min-h-lh max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
-            >
-              {errorMessage}
-            </p>
-
-            <div className="mx-auto w-fit after:block after:h-px after:w-0 md:after:transition-[width] lg:after:w-240">
-              <div ref={resultRef} className={clsx([styles.result, 'mt-[0.25em] space-y-[0.25em] font-mono'])} />
-
-              <p role="alert" className="min-h-lh text-[#ffa7a7] transition-opacity empty:opacity-0">
-                {resultMessage}
+            <div className="@container">
+              <p
+                role="alert"
+                className="min-h-lh w-fit mx-auto @content:w-full max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
+              >
+                {errorMessage}
               </p>
+
+              <div className="w-fit mx-auto @content:after:w-content after:h-1 after:block">
+                <div ref={resultRef} className={clsx([styles.result, 'mt-[0.25em] space-y-[0.25em] font-mono'])} />
+
+                <p role="alert" className="min-h-lh text-[#ffa7a7] transition-opacity empty:opacity-0">
+                  {resultMessage}
+                </p>
+              </div>
             </div>
 
             <p className={clsx(['mt-6 transition-fade', isOver === false && 'invisible opacity-0'])}>
@@ -253,7 +255,7 @@ export const KaprekarNumberContent = () => {
             </p>
           </div>
         </div>
-        <div className="mx-auto mb-14 mt-6 max-w-content p-6 text-[#333]">
+        <div className="mx-auto mb-14 mt-6 max-w-content p-6 text-text">
           <TextField
             label="最大試行回数"
             inputMode="numeric"
@@ -265,7 +267,7 @@ export const KaprekarNumberContent = () => {
                 })
                 .replace(/^0+|[^0-9-]/g, '');
 
-              setMaxTimes(Number(value) || 1);
+              setMaxTimes(Number(value));
             }}
             onBlur={(e) => setMaxTimes(Number(e.currentTarget.value) || 100)}
             readOnly={isRunning}
