@@ -15,14 +15,14 @@ export const DateSection = ({ values, dispatch, label = '日付' }: DateProps) =
       <legend className="text-sm font-bold leading-snug">{label}</legend>
 
       <div className="grid w-fit grid-cols-2 gap-2 pt-2">
-        <p className="flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-none outline-2 has-[:focus-visible]:outline-black">
+        <p className="flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-hidden outline-2 has-focus-visible:outline-black">
           <input
             type="number"
             min={1}
             max={12}
             id={`${id}-month`}
             value={values[0]}
-            className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-none"
+            className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-hidden"
             onInput={(e) => {
               const newDate = [...values];
               newDate[0] = e.currentTarget.value;
@@ -33,14 +33,14 @@ export const DateSection = ({ values, dispatch, label = '日付' }: DateProps) =
             月
           </label>
         </p>
-        <p className="flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-none outline-2 has-[:focus-visible]:outline-black">
+        <p className="flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-hidden outline-2 has-focus-visible:outline-black">
           <input
             type="number"
             min={1}
             max={31}
             id={`${id}-day`}
             value={values[1]}
-            className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-none"
+            className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-hidden"
             onInput={(e) => {
               const newDate = [...values];
               newDate[1] = e.currentTarget.value;

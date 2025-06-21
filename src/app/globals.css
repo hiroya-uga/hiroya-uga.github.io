@@ -1,12 +1,60 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "./spacing.css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --breakpoint-w500: 500px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-pointer-fine: (pointer: fine);
+  --breakpoint-pointer-coarse: (pointer: coarse);
+  --breakpoint-pointer-none: (pointer: none);
+
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  --leading-inherit: inherit;
+
+  --width-dialog: 48rem;
+  --width-content: 48rem;
+  --max-width-dialog: 48rem;
+  --max-width-content: 60rem;
+  --max-width-structure: 90rem;
+  --text-2xs: 0.625rem;
+
+  --spacing-paragraph: var(--mb-paragraph);
+
+  --color-alert: #c10000;
+  --color-required: #fff;
+  --color-description: #6b7179;
+  --background-color-alert: #c10000;
+  --background-color-required: #b20000;
+
+  --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --font-emoji:
+    apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
+    segoe ui symbol !important;
+  --font-mono: Consolas, Monaco, monospace;
+
+  --transition-fade: opacity, visibility;
+  --transition-bg: background-color;
+  --default-transition-duration: 300ms;
+}
 
 @layer utilities {
-  .palt {
-    font-feature-settings: "palt";
-  }
-
   /* href=#hogehoge の行き先 */
   .target[id]:not([id^=":"]) {
     display: block;
@@ -15,163 +63,204 @@
   }
 }
 
-@layer components {
-  .vertical-rl {
-    writing-mode: vertical-rl;
-  }
+@utility palt {
+  font-feature-settings: "palt";
 }
 
-:root {
-  /* Common */
-  --color-background: #f7f7f7;
-  /* TailWindCSS */
-  --mb-paragraph: 1rem;
-  --bg-scroll-hint: white;
-  /* Component */
-  --content-padding-inline: 1rem;
-  --header-margin-bottom: 2rem;
+@utility scroll-hint-x {
+  background:
+    transparent,
+    linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 70%) 100% 0,
+    linear-gradient(to left, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 30%),
+    radial-gradient(farthest-side at 100% 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0,
+    radial-gradient(farthest-side at 0 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 0;
+  background-repeat: no-repeat;
+  background-color: var(--bg-scroll-hint);
+  background-size:
+    40px 100%,
+    40px 100%,
+    14px 120%,
+    14px 120%;
+  background-attachment: local, local, scroll, scroll;
 }
 
-@media screen and (min-width: 640px) {
+@utility scroll-hint-y {
+  background:
+    transparent,
+    linear-gradient(to top, rgba(255, 255, 255, 0), var(--bg-scroll-hint) 30%),
+    linear-gradient(to top, var(--bg-scroll-hint), rgba(255, 255, 255, 0) 70%) 0 100%,
+    radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: var(--bg-scroll-hint);
+  background-size:
+    100% 60px,
+    100% 60px,
+    100% 14px,
+    100% 14px;
+  background-attachment: local, local, scroll, scroll;
+}
+
+@utility vertical-rl {
+  writing-mode: vertical-rl;
+}
+
+@layer base {
   :root {
-    --content-padding-inline: 1.5rem;
-    --mb-paragraph: 1.5rem;
-    --header-margin-bottom: 4rem;
+    /* Common */
+    --color-background: #f7f7f7;
+    /* TailWindCSS */
+    --mb-paragraph: 1rem;
+    --bg-scroll-hint: white;
+    /* Component */
+    --content-padding-inline: 1rem;
+    --header-margin-bottom: 2rem;
   }
-}
 
-@media screen and (min-width: 1024px) {
-  :root {
-    --content-padding-inline: 3rem;
+  @media screen and (min-width: 640px) {
+    :root {
+      --content-padding-inline: 1.5rem;
+      --mb-paragraph: 1.5rem;
+      --header-margin-bottom: 4rem;
+    }
   }
-}
 
-@media screen and (min-width: 1536px) {
-  :root {
-    --content-padding-inline: 1.2rem;
+  @media screen and (min-width: 1024px) {
+    :root {
+      --content-padding-inline: 3rem;
+    }
   }
-}
 
-/* @media (prefers-color-scheme: dark) {
+  @media screen and (min-width: 1536px) {
+    :root {
+      --content-padding-inline: 1.2rem;
+    }
+  }
+
+  /* @media (prefers-color-scheme: dark) {
   :root {
   }
 } */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 2px #fff;
-}
+  :focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #fff;
+  }
 
-::selection {
-  background-color: #316ac5;
-  color: #fff;
-  fill: #fff;
-}
+  ::selection {
+    background-color: #316ac5;
+    color: #fff;
+    fill: #fff;
+  }
 
-::-moz-selection {
-  background-color: #316ac5;
-  color: #fff;
-  fill: #fff;
-}
+  ::-moz-selection {
+    background-color: #316ac5;
+    color: #fff;
+    fill: #fff;
+  }
 
-html,
-body {
-  scroll-behavior: smooth;
-}
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
 
-body {
-  line-height: 1.875;
-  color: #333;
-  background: var(--color-background);
-  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-  text-spacing-trim: trim-start;
-}
+  body {
+    line-height: 1.875;
+    color: #333;
+    background: var(--color-background);
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    text-spacing-trim: trim-start;
+  }
 
-mark {
-  background-color: mark;
-  color: marktext;
-}
+  mark {
+    background-color: mark;
+    color: marktext;
+  }
 
-a {
-  color: #005a9c;
-  text-decoration: underline;
-  word-break: break-word;
-}
+  a {
+    color: #005a9c;
+    text-decoration: underline;
+    word-break: break-word;
+  }
 
-a:where(:hover) {
-  color: inherit;
-}
+  a:where(:hover) {
+    color: inherit;
+  }
 
-a:not([href]) {
-  color: inherit;
-  text-decoration: none;
-}
+  a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+  }
 
-strong {
-  font-weight: bold;
-}
+  strong {
+    font-weight: bold;
+  }
 
-small {
-  font-size: inherit;
-}
+  small {
+    font-size: inherit;
+  }
 
-th,
-td {
-  vertical-align: baseline;
-}
+  code,
+  kbd {
+    font-family: var(--font-mono);
+  }
 
-input {
-  font-size: 1rem;
-}
+  th,
+  td {
+    vertical-align: baseline;
+  }
 
-button,
-[type="button"],
-summary {
-  cursor: default;
-}
+  input {
+    font-size: 1rem;
+  }
 
-summary {
-  display: block;
-  list-style: none;
-  position: relative;
-}
+  button,
+  [type="button"],
+  summary {
+    cursor: default;
+  }
 
-summary::-webkit-details-marker {
-  display: none;
-}
+  summary {
+    display: block;
+    list-style: none;
+    position: relative;
+  }
 
-summary::after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 1.5rem;
-  margin: auto 0;
-  content: "";
-  display: block;
-  background: #333;
-  height: calc(1rem / 2 * tan(60deg));
-  width: 1rem;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transition: 0.2s transform ease-out;
-}
+  summary::-webkit-details-marker {
+    display: none;
+  }
 
-[open] summary::after {
-  transform: rotateX(180deg);
-}
+  summary::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.5rem;
+    margin: auto 0;
+    content: "";
+    display: block;
+    background: #333;
+    height: calc(1rem / 2 * tan(60deg));
+    width: 1rem;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transition: 0.2s transform ease-out;
+  }
 
-video {
-  display: block;
-  margin: 0 auto;
-}
+  [open] summary::after {
+    transform: rotateX(180deg);
+  }
 
-@layer base {
+  video {
+    display: block;
+    margin: 0 auto;
+  }
+
   input[type="range"]::-webkit-slider-thumb {
     width: 24px;
     height: 24px;

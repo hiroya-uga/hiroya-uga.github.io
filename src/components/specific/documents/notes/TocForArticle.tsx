@@ -10,7 +10,7 @@ import styles from '@/components/specific/documents/notes/TocForArticle.module.c
 export const TocForArticle = () => {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className={clsx([!loaded && 'invisible opacity-0', 'transition-[opacity_visibility] md:sticky md:top-4'])}>
+    <div className={clsx([!loaded && 'invisible opacity-0', 'transition-fade md:sticky md:top-4'])}>
       <div className={clsx('rounded border border-gray-500 bg-white p-4', styles.toc)}>
         <Toc title="目次" setLoaded={setLoaded} />
       </div>

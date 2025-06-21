@@ -527,7 +527,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               {value.map((item, index) => {
                 if (typeof item === 'string') {
                   return (
-                    <p key={item} className="col-[1_/_4] my-1 grid bg-gray-300 px-2 text-right text-xs sm:col-[1_/_5]">
+                    <p key={item} className="col-[1/4] my-1 grid bg-gray-300 px-2 text-right text-xs sm:col-[1/5]">
                       ↓ until {item}
                     </p>
                   );
@@ -545,20 +545,20 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 return (
                   <p
                     key={index}
-                    className="keep-all col-[1_/_4] my-1 grid grid-cols-subgrid grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1_/_2] before:pr-3 before:font-mono before:content-[counter(log)] sm:col-[1_/_5] sm:grid-cols-subgrid sm:before:text-right"
+                    className="keep-all col-[1/4] my-1 grid grid-cols-subgrid grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1/2] before:pr-3 before:font-mono before:content-[counter(log)] sm:col-[1/5] sm:grid-cols-subgrid sm:before:text-right"
                     style={{
                       counterIncrement: 'log',
                     }}
                   >
-                    <span className="col-[2_/_3] row-[1_/_2] pr-3 text-center leading-[inherit] sm:col-[2_/_3] sm:row-[1_/_2]">
+                    <span className="col-[2/3] row-[1/2] pr-3 text-center leading-[inherit] sm:col-[2/3] sm:row-[1/2]">
                       <code className="block sm:inline">{tagName}</code>
                     </span>
-                    <span className="col-[3_/_4] row-[1_/_2] sm:col-[3_/_4] sm:row-[1_/_2]">
+                    <span className="col-[3/4] row-[1/2] sm:col-[3/4] sm:row-[1/2]">
                       {name}
                       {times && ` x ${times}`}
                     </span>
                     {options && (
-                      <span className="col-[2_/_4] row-[2_/_3] leading-[inherit] text-orange-800 sm:col-[4_/_5] sm:row-[1_/_2] sm:pl-4">
+                      <span className="col-[2/4] row-[2/3] leading-[inherit] text-orange-800 sm:col-[4/5] sm:row-[1/2] sm:pl-4">
                         {options}
                       </span>
                     )}

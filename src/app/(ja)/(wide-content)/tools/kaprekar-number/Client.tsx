@@ -218,7 +218,7 @@ export const KaprekarNumberContent = () => {
 
           <p
             role="alert"
-            className=" mx-auto min-h-[1lh] max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
+            className=" mx-auto min-h-lh max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
           >
             {errorMessage}
           </p>
@@ -243,10 +243,10 @@ export const KaprekarNumberContent = () => {
             />
           </div>
 
-          <div className="mx-auto w-fit after:block after:h-px after:w-0 md:after:transition-[width] lg:after:w-[60rem]">
+          <div className="mx-auto w-fit after:block after:h-px after:w-0 md:after:transition-[width] lg:after:w-240">
             <div ref={resultRef} className={clsx([styles.result, 'mt-[0.25em] space-y-[0.25em] font-mono'])} />
 
-            <p role="alert" className="min-h-[1lh] text-[#ffa7a7] transition-opacity empty:opacity-0">
+            <p role="alert" className="min-h-lh text-[#ffa7a7] transition-opacity empty:opacity-0">
               {resultMessage}
             </p>
           </div>

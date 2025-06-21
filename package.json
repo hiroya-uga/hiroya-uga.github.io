@@ -27,6 +27,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.3",
+    "@tailwindcss/postcss": "^4.1.10",
     "@types/gtag.js": "^0.0.20",
     "@types/jquery": "^3.5.19",
     "@types/lodash": "^4.17.18",
@@ -43,8 +44,8 @@
     "prettier": "^3.3.3",
     "prettier-eslint-cli": "^8.0.1",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "3.4.17"
+    "prettier-plugin-tailwindcss": "^0.6.13",
+    "tailwindcss": "^4.1.10"
   },
   "private": true,
   "scripts": {

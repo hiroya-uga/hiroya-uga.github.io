@@ -19,7 +19,7 @@ export const Switch = ({ dispatch, ...props }: Props) => {
         'relative block h-8 w-16 cursor-default rounded-full border',
         'transition-[opacity_border-color_background-color]',
         'before:absolute before:left-px before:top-px',
-        'before:aspect-square before:h-[calc(100%_-_2px)] before:bg-white',
+        'before:aspect-square before:h-[calc(100%-2px)] before:bg-white',
         'before:rounded-[50%] before:transition-transform',
         isChecked && 'before:translate-x-8',
         isChecked ? 'border-green-400 bg-green-400' : 'border-gray-400 bg-gray-400',

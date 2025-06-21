@@ -411,7 +411,7 @@ export const GetUrlFromDOMContent = () => {
         </div>
         <div ref={editAreaContainerRef}></div>
       </div>
-      <div className="h-[30dvh] space-y-paragraph overflow-auto border-y border-slate-400 bg-[#f1f1f1] p-4 scroll-hint-y md:h-auto md:border-x md:border-y-0">
+      <div className="h-[30dvh] space-y-paragraph overflow-auto border-y border-slate-400 p-4 scroll-hint-y md:h-auto md:border-x md:border-y-0">
         <fieldset>
           <legend className="text-sm font-bold">フィルタ</legend>
           <ul className="space-y-2 p-2">

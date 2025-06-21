@@ -21,7 +21,7 @@ export const NoteList = ({ list }: { list: (string | { value: React.ReactNode; k
         const value = typeof item === 'string' ? item : item.value;
 
         return (
-          <li key={key} className="palt flex gap-x-1 text-xs leading-relaxed sm:text-sm sm:[&:not(:last-child)]:mb-1">
+          <li key={key} className="palt flex gap-x-1 text-xs leading-relaxed sm:text-sm sm:not-last:mb-1">
             <span>※</span>
             <small>{value}</small>
           </li>

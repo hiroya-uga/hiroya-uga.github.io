@@ -12,7 +12,7 @@ export const SimpleDescriptionList = ({
         const key = typeof title === 'string' ? title : item.key;
 
         return (
-          <div key={key} className="clear-left [&:not(:last-child)]:mb-6 sm:[&:not(:last-child)]:mb-3">
+          <div key={key} className="clear-left not-last:mb-6 sm:not-last:mb-3">
             <dt className="mb-1 flex pl-2 font-bold sm:mb-0">
               <span className="min-w-2 max-w-2 px-px pt-[0.55rem] sm:pt-[0.7rem]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" className="w-full">

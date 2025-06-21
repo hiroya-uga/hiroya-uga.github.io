@@ -7,7 +7,7 @@ type StartingProps = {
 
 export const StartingSection = ({ value, dispatch }: StartingProps) => {
   return (
-    <div className="[&:not(:last-child)]:mb-10">
+    <div className="not-last:mb-10">
       <TextField
         type="date"
         label="開始日"

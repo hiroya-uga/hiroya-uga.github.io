@@ -79,7 +79,7 @@ const TextareaComponent = (
         <textarea
           {...props}
           aria-describedby={descriptionId}
-          className="min-h-[calc(1.75lh_+_1rem)] w-full resize-none overflow-hidden rounded-md border border-gray-300 p-2"
+          className="min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border border-gray-300 p-2"
           style={{ height: textareaHeight }}
           ref={ref}
         />

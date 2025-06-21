@@ -64,7 +64,7 @@ export const Footer = () => {
     <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
       {isTop || (
         <nav
-          className="mx-auto max-w-structure bg-gray-200 px-[var(--content-padding-inline)] py-4 text-sm lg:bg-transparent lg:py-5 lg:pl-[var(--content-padding-inline)] lg:pr-[calc(13.5rem_+_calc(var(--content-padding-inline)_*_2))]"
+          className="mx-auto max-w-structure bg-gray-200 px-(--content-padding-inline) py-4 text-sm lg:bg-transparent lg:py-5 lg:pl-(--content-padding-inline) lg:pr-[calc(13.5rem+calc(var(--content-padding-inline)*2))]"
           aria-label="サイト内の現在位置"
         >
           <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
@@ -75,8 +75,8 @@ export const Footer = () => {
         className={clsx(isTop ? 'bg-[#575757] text-white sm:bg-inherit sm:text-inherit' : 'bg-[#575757] text-white')}
       >
         {!isTop && (
-          <div className="relative mx-auto max-w-structure bg-[var(--color-background)] px-[var(--content-padding-inline)]">
-            <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--content-padding-inline)_-_0.75rem)] lg:py-1">
+          <div className="relative mx-auto max-w-structure bg-(--color-background) px-(--content-padding-inline)">
+            <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--content-padding-inline)-0.75rem)] lg:py-1">
               {/* m-0 for bootstrap pages */}
               <ul
                 className="m-0 flex flex-wrap items-center justify-center gap-4 lg:justify-end lg:gap-2"
@@ -95,7 +95,7 @@ export const Footer = () => {
             </div>
           </div>
         )}
-        <div className="mx-auto max-w-structure px-[var(--content-padding-inline)]">
+        <div className="mx-auto max-w-structure px-(--content-padding-inline)">
           <div
             className={clsx(
               isTop && 'mx-auto max-w-content',
@@ -114,7 +114,7 @@ export const Footer = () => {
                   <li key={href} className={className}>
                     <Link
                       href={href}
-                      className={clsx(['text-inherit', isTop === false && '!outline-white'])}
+                      className={clsx(['text-inherit', isTop === false && 'outline-white!'])}
                       target={target}
                       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
                     >

@@ -23,7 +23,9 @@ export default function Home() {
       <header className="px-4 pb-12 pt-10 lg:pb-60px lg:pt-14">
         <div className="mx-auto max-w-content">
           <div className="items-center text-center lg:mb-2 lg:flex">
-            <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl lg:mb-0">{metadata.pageTitle}</h1>
+            <h1 className="mb-3 text-xl font-bold sm:leading-8 leading-none sm:text-2xl lg:mb-0">
+              {metadata.pageTitle}
+            </h1>
             <p className="text-xs">
               <span className="hidden px-2 lg:inline">-</span>
               <span>
@@ -40,13 +42,13 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="px-[var(--content-padding-inline)] pb-20 sm:pb-28">
+        <div className="px-(--content-padding-inline) pb-20 sm:pb-28">
           <div className="mx-auto max-w-content ">
             <WelcomeMessage />
           </div>
         </div>
 
-        <div className="mb-8 bg-white px-[var(--content-padding-inline)] py-8 sm:mb-28 sm:pb-11 sm:pt-7">
+        <div className="mb-8 bg-white px-(--content-padding-inline) py-8 sm:mb-28 sm:pb-11 sm:pt-7">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 mt-0 text-xl font-bold sm:text-2xl">The power of the web</h2>
 
@@ -74,7 +76,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-16 px-[var(--content-padding-inline)] sm:mb-28">
+        <div className="mb-16 px-(--content-padding-inline) sm:mb-28">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
@@ -82,7 +84,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-20 bg-slate-200 px-[var(--content-padding-inline)] py-11 pb-12 sm:mb-28">
+        <div className="mb-20 bg-slate-200 px-(--content-padding-inline) py-11 pb-12 sm:mb-28">
           <div className="mx-auto max-w-content">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl ">Category</h2>
 
@@ -103,7 +105,7 @@ export default function Home() {
                   <li key={href}>
                     <Link href={href} className="group block rounded-md no-underline">
                       <span
-                        className="mb-2 grid aspect-[1.618_/_1] place-content-center overflow-hidden rounded-md bg-gray-50 font-emoji text-5xl leading-none"
+                        className="mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md bg-gray-50 font-emoji text-5xl leading-none"
                         aria-hidden="true"
                       >
                         <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
@@ -117,7 +119,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="px-[var(--content-padding-inline)]">
+        <div className="px-(--content-padding-inline)">
           <div className="mx-auto max-w-content">
             <h2 className="mb-2 text-xl font-bold sm:text-2xl ">Media</h2>
 
@@ -127,7 +129,7 @@ export default function Home() {
               <tbody>
                 {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
                   return (
-                    <tr key={href} className="leading-6 sm:leading-7">
+                    <tr key={href} className="leading-6">
                       <td className="pr-2 font-mono text-xs leading-[inherit] sm:pr-8 sm:text-sm">
                         <span className="inline-block">{date}</span>
                       </td>
@@ -218,9 +220,9 @@ export default function Home() {
                 Profile
               </h2>
 
-              <p className="mx-auto mb-8 flex aspect-[8_/_5] max-w-360px items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
+              <p className="mx-auto mb-8 flex aspect-8/5 max-w-360px items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:leading-inherit sm:gap-x-6">
                 <span className="grow whitespace-nowrap text-center text-xl leading-tight">
-                  <span className="tracking-widest" translate="no">
+                  <span className="tracking-widest block leading-6" translate="no">
                     宇賀景哉
                   </span>
                   <span
@@ -250,7 +252,7 @@ export default function Home() {
               </div>
             </div>
 
-            <ul className="flex flex-wrap items-center justify-center gap-4 sm:-m-2 sm:justify-start sm:gap-2">
+            <ul className="flex flex-wrap items-center justify-center gap-4 sm:-m-2 sm:justify-start sm:gap-2 dark:invert">
               {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
