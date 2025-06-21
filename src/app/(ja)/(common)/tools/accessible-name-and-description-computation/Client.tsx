@@ -59,7 +59,7 @@ const OutputTextfield = ({
 
       if (isUsingWrapLabel) {
         return (
-          <label className="block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3 [&:not(:first-child)]:mt-2">
+          <label className="block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3 not-first:mt-2">
             <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
             <input {...inputProps} className={className} />
           </label>
@@ -234,7 +234,7 @@ export const AccessibleNameAndDescriptionComputation = ({
 
   const className = [
     'inline-block w-fit py-[2px] px-[4px] rounded font-emoji',
-    isUsingEmoji && 'min-w-[2.5rem] text-center',
+    isUsingEmoji && 'min-w-10 text-center',
   ];
   const labelsClassName = [...className, 'border-2 border-[#5071a8] bg-[#5071a822]'];
   const descriptionsClassName = [...className, 'border-2 border-[#606060] bg-[#60606022]'];
@@ -451,7 +451,7 @@ export const AccessibleNameAndDescriptionComputation = ({
           {isUsingAriaDescribedbyB && (
             <p
               id={describedByBId}
-              className={clsx([...descriptionsClassName, 'border-dotted', '[&:not(:first-child)]:ml-2'])}
+              className={clsx([...descriptionsClassName, 'border-dotted', 'not-first:ml-2'])}
             >
               {isUsingEmoji ? '🥬' : '説明文B'}
             </p>
@@ -470,7 +470,7 @@ export const AccessibleNameAndDescriptionComputation = ({
         {isUsingAriaDescribedbyB && (
           <span
             id={describedByBId}
-            className={clsx([...descriptionsClassName, 'border-dotted', '[&:not(:first-child)]:ml-2'])}
+            className={clsx([...descriptionsClassName, 'border-dotted', 'not-first:ml-2'])}
           >
             {isUsingEmoji ? '🥬' : '説明文B'}
           </span>

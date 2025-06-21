@@ -73,7 +73,7 @@ export const Toc = ({
 
   return (
     <>
-      <h2 className="!p-0 !text-base">{title}</h2>
+      <h2 className="p-0! m-0! text-base!">{title}</h2>
 
       <div id={styles.toc}>
         <NestedList headingList={headingList} numberingOnly={numberingOnly} />

@@ -40,17 +40,17 @@ export default function Page() {
         ]}
       />
 
-      <div className="mt-14 sm:mt-16 sm:grid sm:grid-cols-[33%,_1fr] sm:items-start sm:gap-6">
+      <div className="mt-14 sm:mt-16 sm:grid sm:grid-cols-[33%_1fr] sm:items-start sm:gap-6">
         <div className="sm:sticky sm:top-6">
           <Heading level={2}>管理人について</Heading>
 
-          <p className="mx-auto mb-4 flex max-w-360px flex-row-reverse items-center gap-4 leading-none sm:grid sm:place-items-center sm:gap-x-6">
+          <p className="mx-auto mb-4 flex max-w-360px flex-row-reverse items-center gap-4 sm:grid sm:place-items-center sm:gap-x-6">
             <span className="w-40">
               <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" />
             </span>
 
-            <span className="grow whitespace-nowrap text-center text-xl leading-tight">
-              <span className="tracking-widest" translate="no">
+            <span className="grow whitespace-nowrap text-center text-xl">
+              <span className="tracking-widest block leading-6" translate="no">
                 宇賀景哉
               </span>
               <span

@@ -183,7 +183,7 @@ const Line = ({
         key={unit}
         className={clsx([
           shouldShowDescriptions ? 'mt-6' : 'mt-4',
-          'sticky -left-2 z-[1] mb-2  pl-2 text-sm leading-snug sm:text-lg',
+          'sticky -left-2 z-1 mb-2  pl-2 text-sm leading-snug sm:text-lg',
           'sm:mt-6',
           unit === 'px' && 'font-bold',
         ])}
@@ -200,7 +200,7 @@ const Line = ({
         className={clsx([
           'pointer-events-none relative z-0 -mt-8 mr-8 block overflow-hidden border-b border-dashed border-black pt-7 before:absolute before:inset-0 before:bg-blue-900 before:opacity-20',
           'sm:-mt-10 sm:pt-9',
-          'after:absolute after:right-0 after:top-0 after:z-[2] after:block after:h-full after:border-r after:border-dashed after:border-black',
+          'after:absolute after:right-0 after:top-0 after:z-2 after:block after:h-full after:border-r after:border-dashed after:border-black',
         ])}
         style={{
           width: `${value}${unit}`,
@@ -438,7 +438,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 min={0}
                 max={200}
                 value={value}
-                className="block w-full pr-2 text-right outline-none"
+                className="block w-full pr-2 text-right outline-hidden"
                 onChange={({ currentTarget }) => {
                   const currentValue = Number(currentTarget.value);
 

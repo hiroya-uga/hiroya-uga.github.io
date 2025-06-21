@@ -10,8 +10,8 @@ export const metadata = getMetadata('/tools/markup-dev-supporter');
 
 export default function Page() {
   return (
-    <div className={clsx([styles.page, 'grid grid-cols-1 grid-rows-[auto,1fr,auto] bg-[#222] text-white '])}>
-      <header className="flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c] sm:gap-1 sm:px-2 sm:pr-[var(--navigation-width)] sm:pt-1px">
+    <div className={clsx([styles.page, 'grid grid-cols-1 grid-rows-[auto_1fr_auto] bg-[#222] text-white '])}>
+      <header className="flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c] sm:gap-1 sm:px-2 sm:pr-(--navigation-width) sm:pt-1px">
         <p>
           <Link href="../" className="grid size-8 place-items-center rounded-full sm:size-6">
             <svg
@@ -39,10 +39,10 @@ export default function Page() {
         </p>
         <h1 className="sm:pt-px">{metadata.pageTitle}</h1>
       </header>
-      <main className="relative grid sm:pr-[var(--navigation-width)]">
+      <main className="relative grid sm:pr-(--navigation-width)">
         <TableDevSupporterContent />
       </main>
-      <footer className="border-t border-black bg-[#333] px-2 pb-px text-center text-xs text-[#9c9c9c] sm:pr-[calc(var(--navigation-width)_+_0.75rem)] sm:text-right">
+      <footer className="border-t border-black bg-[#333] px-2 pb-px text-center text-xs text-[#9c9c9c] sm:pr-[calc(var(--navigation-width)+0.75rem)] sm:text-right">
         <p>
           <small className="text-[100%]">
             &copy;{' '}

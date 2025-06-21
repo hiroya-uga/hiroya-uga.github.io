@@ -403,8 +403,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   setValue(currentValue);
                 }}
                 className={clsx([
-                  'relative z-20 mr-4 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
-                  'transition-[opacity_visibility]',
+                  'relative z-20 mr-4 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2 transition-fade',
                   isAutoCount && 'invisible opacity-0',
                 ])}
               >
@@ -554,11 +553,11 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             {getSegmentedCharacters(value).map((container, containerIndex) => {
               return (
                 <React.Fragment key={containerIndex}>
-                  <h3 className="mb-4 text-lg [&:not(:first-child)]:mt-8">{`${containerIndex + 1}件`}</h3>
+                  <h3 className="mb-4 text-lg not-first:mt-8">{`${containerIndex + 1}件`}</h3>
 
                   <div className="sm:pl-2">
                     <p
-                      className="mx-auto w-min max-w-full overflow-auto text-2xs sm:text-base [&:not(:last-child)]:mb-24"
+                      className="mx-auto w-min max-w-full overflow-auto text-2xs sm:text-base not-last:mb-24"
                       key={containerIndex}
                       tabIndex={0}
                       aria-label={container.flatMap((array) => array).join('')}
@@ -572,8 +571,8 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                       >
                         <span
                           className={clsx([
-                            'grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,_1fr)] gap-x-1 leading-none',
-                            'before:row-start-1 before:row-end-[21] before:border-l before:border-l-[orange]',
+                            'grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,1fr)] gap-x-1 leading-none',
+                            'before:row-start-1 before:row-end-21 before:border-l before:border-l-[orange]',
                             'before:col-start-11 before:col-end-12',
                           ])}
                           key={containerIndex}
@@ -591,7 +590,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                             <span
                               aria-hidden={true}
                               className={clsx([
-                                'col-start-11 col-end-12 row-start-[15] row-end-[17] text-center',
+                                'col-start-11 col-end-12 row-start-15 row-end-17 text-center',
                                 'vertical-rl pl-3px text-justify text-[orange]',
                               ])}
                             >

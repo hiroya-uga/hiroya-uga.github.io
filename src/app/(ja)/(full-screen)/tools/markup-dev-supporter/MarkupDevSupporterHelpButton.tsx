@@ -70,7 +70,7 @@ export const MarkupDevSupporterHelpButton = () => {
           setIsOpen(!isOpen);
         }}
       >
-        <span className="mx-auto grid w-fit grid-cols-[auto,1fr] place-items-center gap-1">
+        <span className="mx-auto grid w-fit grid-cols-[auto_1fr] place-items-center gap-1">
           <svg
             version="1.1"
             id="_x32_"
@@ -120,7 +120,7 @@ export const MarkupDevSupporterHelpButton = () => {
         createPortal(
           <dialog
             ref={ref}
-            className="invisible fixed inset-0 z-[2] m-auto block max-h-[80vh] min-h-80 w-dialog max-w-[90%] items-center justify-center rounded-lg bg-[#ddd] text-[#333] opacity-0 shadow-lg transition-[opacity,visibility] ease-out backdrop:bg-[#00000077] open:visible open:opacity-100 sm:max-w-[80vw]"
+            className="invisible fixed inset-0 z-2 m-auto block max-h-[80vh] min-h-80 w-dialog max-w-[90%] items-center justify-center rounded-lg bg-[#ddd] text-[#333] opacity-0 shadow-lg transition-[opacity,visibility] ease-out backdrop:bg-[#00000077] open:visible open:opacity-100 sm:max-w-[80vw]"
             onClick={() => {
               const dialog = ref.current;
               if (!dialog) {

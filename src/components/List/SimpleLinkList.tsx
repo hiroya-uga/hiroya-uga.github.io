@@ -20,7 +20,7 @@ export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
         return (
           <li
             key={`${href}${index}`}
-            className="flex pl-1 text-sm sm:pl-2 sm:text-base [&:not(:last-child)]:mb-6 sm:[&:not(:last-child)]:mb-6"
+            className="flex pl-1 text-sm sm:pl-2 sm:text-base not-last:mb-6 sm:not-last:mb-6"
           >
             <span className="min-w-1.5 max-w-1.5 px-px pt-3 sm:min-w-2 sm:max-w-2 ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" className="w-full">

@@ -1,3 +1,14 @@
+body:has(#pauljadam-modern-web-a11y-demos-content) {
+  line-height: 1.875;
+  color: #333;
+  background: var(--color-background);
+  font-family: "Inter", "Inter Fallback";
+  text-spacing-trim: trim-start;
+}
+body:has(#pauljadam-modern-web-a11y-demos-content) *:not(#pauljadam-modern-web-a11y-demos-content *) {
+  all: revert-layer;
+}
+
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) h1 {
   font-size: 1.875rem;
   font-weight: 700;

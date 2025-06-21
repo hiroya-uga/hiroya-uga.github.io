@@ -426,7 +426,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
     <>
       <div className="group relative overflow-hidden" tabIndex={0}>
         <figure aria-live="polite" className={clsx(['min-h relative bg-white'])}>
-          <div className={clsx(['aspect-[3_/_2]', ...transitionClassName])}>
+          <div className={clsx(['aspect-3/2', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (
                 <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
@@ -479,7 +479,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="group/reload absolute inset-0 size-full   p-1 focus-visible:outline-none sm:top-2 sm:size-8 sm:p-0"
+            className="group/reload absolute inset-0 size-full   p-1 focus-visible:outline-hidden sm:top-2 sm:size-8 sm:p-0"
             onClick={() => updateImage()}
           >
             <span className="block rounded-full bg-white outline-offset-2 group-focus-visible/reload:outline-2 group-focus-visible/reload:outline-[white] group-focus-visible/reload:[outline-style:solid;]">
@@ -516,7 +516,7 @@ export const LinkList = ({
             key={href}
             className={clsx([
               index !== length - 1 && 'pb-3 sm:pb-0',
-              'list-disc sm:grid sm:min-h-[calc(1em_+_1em_*_2_*_1.5)]',
+              'list-disc sm:grid sm:min-h-[calc(1em+1em*2*1.5)]',
               'break-all',
             ])}
           >
@@ -532,7 +532,7 @@ export const LinkList = ({
                 <span className="transition-colors before:content-['\['] after:content-['\]'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden sm:hover:bg-gray-100">
                   <a
                     href={japanese}
-                    className="transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 [&:not(.clicked)]:transform-none"
+                    className="transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 [&:not(.clicked)]:rotate-none [&:not(.clicked)]:translate-none"
                     onKeyDown={({ currentTarget, key }) => {
                       if (key === 'Enter') {
                         currentTarget.classList.add('clicked');
@@ -595,10 +595,10 @@ export const PickUpList = () => {
                   {/* {item.isWip && <b>（WIP）</b>} */}
                 </span>
                 <span
-                  className="mb-3 grid place-content-center overflow-hidden rounded-md bg-gray-200 p-10 font-emoji text-[3.5rem] leading-none sm:aspect-[1.618_/_1] sm:p-0"
+                  className="mb-3 grid place-content-center overflow-hidden rounded-md bg-gray-200 p-10 font-emoji text-[3.5rem] leading-none sm:aspect-[1.618/1] sm:p-0"
                   aria-hidden="true"
                 >
-                  <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 [backface-visibility:hidden] group-hover:scale-100">
+                  <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 backface-hidden group-hover:scale-100">
                     {emoji}
                   </span>
                 </span>

@@ -4,6 +4,7 @@
   position: relative;
   padding-left: calc(0.8rem * 3 - 1rem);
   transition: 300ms margin-left ease-out;
+  margin-bottom: var(--spacing-paragraph);
 }
 
 #article :where(h2, h3, h4, h5, h6):first-child {

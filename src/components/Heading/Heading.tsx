@@ -13,7 +13,7 @@ export const Heading = ({ level = 2, children, keepUseMarginTop = false }: Props
         <h2
           className={clsx([
             'mb-paragraph text-xl font-bold leading-snug sm:text-2xl',
-            keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : '[&:not(:first-child)]:mt-[2.5lh]',
+            keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
           ])}
         >
           {children}
@@ -24,7 +24,7 @@ export const Heading = ({ level = 2, children, keepUseMarginTop = false }: Props
         <h3
           className={clsx([
             'mb-paragraph text-lg font-bold leading-snug sm:text-xl',
-            keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : '[&:not(:first-child)]:mt-[2.5lh]',
+            keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
           ])}
         >
           {children}

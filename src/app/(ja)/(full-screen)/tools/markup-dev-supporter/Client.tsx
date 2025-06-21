@@ -266,7 +266,7 @@ export const TableDevSupporterContent = () => {
     <>
       <div
         className={clsx([
-          'after:w-[calc(6ic_+_1.25rem)]after:p-2.5 absolute left-0 top-0 grid h-[30%]  w-full after:absolute after:bottom-[calc(100%_+_1px)] after:right-0  after:w-[calc(8ic_+_1.25rem)] after:p-2.5 after:text-center after:text-[0.75rem]  after:leading-[0.75rem]  after:text-white after:transition-colors  after:duration-200 after:ease-out sm:relative sm:size-auto sm:h-auto sm:after:py-7px',
+          'after:w-[calc(6ic_+_1.25rem)]after:p-2.5 absolute left-0 top-0 grid h-[30%]  w-full after:absolute after:bottom-[calc(100%+1px)] after:right-0  after:w-[calc(8ic+1.25rem)] after:p-2.5 after:text-center after:text-[0.75rem]  after:leading-3  after:text-white after:transition-colors  after:duration-200 after:ease-out sm:relative sm:size-auto sm:h-auto sm:after:py-7px',
           isCopyMode ? "after:bg-alert after:content-['読み取り専用']" : 'after:bg-black ',
           isCopyMode === false && isViewSrc && " after:content-['HTMLを編集中']",
           isCopyMode === false && isViewSrc === false && " after:content-['DOMを編集中']",
@@ -279,7 +279,7 @@ export const TableDevSupporterContent = () => {
         <textarea
           ref={textareaRef}
           className={clsx([
-            'absolute size-full resize-none overflow-auto whitespace-pre-wrap bg-[#272822] p-4 font-mono text-[#cfcfc2] caret-[#cfcfc2] !shadow-none !outline-offset-[-5px] focus-visible:![outline:2px_solid_#999] sm:text-sm',
+            'absolute size-full resize-none overflow-auto whitespace-pre-wrap bg-[#272822] p-4 font-mono text-[#cfcfc2] caret-[#cfcfc2] shadow-none! outline-offset-[-5px]! focus-visible:[outline:2px_solid_#999]! sm:text-sm',
             isViewSrc ? 'block' : 'hidden',
           ])}
           aria-label="HTMLソース"
@@ -303,7 +303,7 @@ export const TableDevSupporterContent = () => {
         />
       </div>
 
-      <nav className="absolute bottom-0 left-0 z-10 h-[70%] w-full overflow-y-scroll border-y border-black bg-[#333] pb-2.5 text-[#eee] sm:fixed sm:left-auto sm:right-0 sm:top-0 sm:h-full sm:max-h-screen sm:w-[var(--navigation-width)] sm:border-0 sm:border-l">
+      <nav className="absolute bottom-0 left-0 z-10 h-[70%] w-full overflow-y-scroll border-y border-black bg-[#333] pb-2.5 text-[#eee] sm:fixed sm:left-auto sm:right-0 sm:top-0 sm:h-full sm:max-h-screen sm:w-(--navigation-width) sm:border-0 sm:border-l">
         <div className="sticky -top-px z-10 border-b border-black bg-[#333] px-2.5 text-xs ">
           <p className="border-b border-dashed border-[#777]">
             <label className="flex items-center justify-between gap-2 py-3 ">
@@ -381,7 +381,7 @@ export const TableDevSupporterContent = () => {
           </button>
 
           <details className="group mb-6 mt-2.5  rounded-md border border-[#777] open:mb-2.5">
-            <summary className="palt rounded-md p-2.5  text-xs transition-[background-color] before:mr-2 before:inline-block before:size-0 before:border-x-[0.35rem] before:border-t-8 before:border-x-transparent before:border-t-white before:transition-transform after:hidden hover:bg-[#444] group-open:bg-transparent  before:group-open:rotate-180 group-open:hover:before:-translate-y-0.5">
+            <summary className="palt rounded-md p-2.5  text-xs transition-[background-color] before:mr-2 before:inline-block before:size-0 before:border-x-[0.35rem] before:border-t-8 before:border-x-transparent before:border-t-white before:transition-transform after:hidden hover:bg-[#444] group-open:bg-transparent!  before:group-open:rotate-180 group-open:hover:before:-translate-y-0.5">
               「フォーマットする」の自動処理を手動で実行する
             </summary>
             <ol className="space-y-2.5 px-2.5 pb-2.5">

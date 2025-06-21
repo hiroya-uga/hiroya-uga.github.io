@@ -61,7 +61,7 @@ export default function Page() {
                 <dd
                   className={clsx([
                     'grow text-sm',
-                    jobRoles.length !== 0 && 'grid  grid-rows-[1fr,auto] gap-4 pb-2 sm:pb-0 lg:gap-6',
+                    jobRoles.length !== 0 && 'grid  grid-rows-[1fr_auto] gap-4 pb-2 sm:pb-0 lg:gap-6',
                   ])}
                 >
                   <div className="grow">

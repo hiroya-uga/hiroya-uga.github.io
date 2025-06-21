@@ -92,7 +92,7 @@ export const Tab = {
                   <button
                     type="button"
                     className={clsx([
-                      'relative min-w-28 rounded-t-lg border border-gray-300 px-2 py-0.5 focus-visible:[outline-offset:-2px] [&:not(:first-child)]:border-l-0',
+                      'relative min-w-28 rounded-t-lg border border-gray-300 px-2 py-0.5 focus-visible:-outline-offset-2 not-first:border-l-0',
                       isSelected ? 'z-10 border-b-white bg-white font-bold' : 'border-b-gray-300 bg-gray-100',
                     ])}
                     key={tabKey}

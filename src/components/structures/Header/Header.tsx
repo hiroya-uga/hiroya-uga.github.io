@@ -5,11 +5,9 @@ import Link from 'next/link';
 import { SiteName } from '@/components/structures/Header/SiteName';
 import clsx from 'clsx';
 
-import styles from '@/components/structures/Header/Header.module.css';
-
 export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' }) => {
   return (
-    <header className="mb-[var(--header-margin-bottom)]">
+    <header className="mb-(--header-margin-bottom)">
       <SiteName />
 
       <div className="mt-8 px-4  sm:pl-10 sm:pt-8 2xl:pt-16">
@@ -24,7 +22,7 @@ export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-conten
               </span>
               <span
                 className={clsx([
-                  styles.opacity0,
+                  'pointer-fine:opacity-0',
                   'ml-2.5 transition-opacity delay-0 duration-300 group-hover:opacity-100 group-focus:opacity-100',
                 ])}
               >

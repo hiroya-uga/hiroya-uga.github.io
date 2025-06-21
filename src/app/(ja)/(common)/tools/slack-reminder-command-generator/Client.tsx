@@ -395,14 +395,14 @@ export const SlackReminderCommandGenerator = () => {
               {monthState.type === 'fixed' && (
                 <>
                   <p className="mb-1 text-sm font-bold leading-snug">毎月</p>
-                  <p className="mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-none outline-2 has-[:focus-visible]:outline-black">
+                  <p className="mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-hidden outline-2 has-focus-visible:outline-black">
                     <input
                       type="number"
                       min={1}
                       max={31}
                       id={'month-day'}
                       value={monthState.day}
-                      className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-none"
+                      className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-hidden"
                       onInput={(e) => {
                         setMonthState({
                           ...monthState,
