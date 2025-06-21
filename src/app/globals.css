@@ -37,6 +37,7 @@
 
   --spacing-paragraph: var(--mb-paragraph);
 
+  --color-link: #005a9c;
   --color-alert: #c10000;
   --color-required: #fff;
   --color-description: #6b7179;
@@ -185,13 +186,9 @@
   }
 
   a {
-    color: #005a9c;
+    color: var(--color-link);
     text-decoration: underline;
     word-break: break-word;
-  }
-
-  a:where(:hover) {
-    color: inherit;
   }
 
   a:not([href]) {

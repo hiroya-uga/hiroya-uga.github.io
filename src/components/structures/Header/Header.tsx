@@ -15,7 +15,7 @@ export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-conten
           <p className={clsx(['relative -left-4 -top-2', layout === 'common' && ' 2xl:left-0'])}>
             <Link
               href="../"
-              className="group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300 sm:hover:bg-white sm:focus:bg-white"
+              className="group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300 sm:hover:bg-white sm:focus:bg-white hover:text-link"
             >
               <span className="underline" translate="no">
                 ../
