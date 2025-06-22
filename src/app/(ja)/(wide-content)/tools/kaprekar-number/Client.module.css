@@ -73,7 +73,7 @@
   font-size: 0.625rem;
 }
 
-[role="alert"]:not(:empty) + .result p {
+[role="alert"]:not(:empty) + div .result p {
   display: block !important;
   opacity: 1 !important;
 
