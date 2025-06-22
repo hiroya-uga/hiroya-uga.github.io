@@ -1,0 +1,35 @@
+.table {
+  width: 100%;
+}
+
+.table tbody th::after {
+  content: "：";
+}
+
+.table tbody th {
+  font-weight: normal;
+  text-align: left;
+}
+
+.table tbody th + td {
+  font-family: var(--font-mono);
+  padding-inline: 1rem;
+}
+
+.table tbody td:last-child {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  .table,
+  .table * {
+    display: block;
+  }
+  .table tbody th {
+    font-weight: bold;
+  }
+  .table tbody td:last-child {
+    padding-right: 0;
+  }
+}
