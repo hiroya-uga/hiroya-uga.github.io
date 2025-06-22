@@ -233,29 +233,9 @@ export const KaprekarNumberContent = () => {
                 </p>
               </div>
             </div>
-
-            <p className={clsx(['mt-6 transition-fade', isOver === false && 'invisible opacity-0'])}>
-              <RunButton
-                type={isOver === false ? 'button' : 'submit'}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const input = inputRef.current;
-
-                  if (!input) {
-                    return;
-                  }
-
-                  input.value = String(currentNumberRef.current);
-                  startCalculation();
-                }}
-                afterIcon="/common/images/icons/reload.svg"
-              >
-                <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
-              </RunButton>
-            </p>
           </div>
         </div>
-        <div className="mx-auto mb-14 mt-6 max-w-content p-6 text-text">
+        <div className="mx-auto mt-22 mb-6 max-w-content text-text">
           <TextField
             label="最大試行回数"
             inputMode="numeric"
@@ -275,27 +255,48 @@ export const KaprekarNumberContent = () => {
           />
         </div>
 
-        <div className="pointer-events-none z-10 sticky bottom-2 mt-6 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
-          <p className="col-start-2 transition-opacity">
-            <RunButton
-              type="submit"
-              onClick={
-                isRunning
-                  ? (e) => {
-                      e.preventDefault();
-                      startCalculation({ abort: true });
-                    }
-                  : (e) => {
-                      e.preventDefault();
-                      startCalculation();
-                    }
-              }
-              aria-live="polite"
-            >
-              {isRunning ? '中断する' : '計算する'}
-            </RunButton>
-          </p>
-          <div className="mt-2 bg-(--color-background)/80 w-fit ml-auto mr-4 leading-tight pointer-events-auto text-right text-xs rounded px-2 py-1">
+        <div className="pointer-events-none z-10 sticky bottom-2 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
+          <div className="col-start-2">
+            <p className={clsx(['transition-fade', isOver === false && 'invisible opacity-0'])}>
+              <RunButton
+                type={isOver === false ? 'button' : 'submit'}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const input = inputRef.current;
+
+                  if (!input) {
+                    return;
+                  }
+
+                  input.value = String(currentNumberRef.current);
+                  startCalculation();
+                }}
+                afterIcon="/common/images/icons/reload.svg"
+              >
+                <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
+              </RunButton>
+            </p>
+            <p className="mt-6">
+              <RunButton
+                type="submit"
+                onClick={
+                  isRunning
+                    ? (e) => {
+                        e.preventDefault();
+                        startCalculation({ abort: true });
+                      }
+                    : (e) => {
+                        e.preventDefault();
+                        startCalculation();
+                      }
+                }
+                aria-live="polite"
+              >
+                {isRunning ? '中断する' : '計算する'}
+              </RunButton>
+            </p>
+          </div>
+          <div className="mt-2 bg-(--v-color-background)/80 w-fit ml-auto mr-4 leading-tight pointer-events-auto text-right text-xs rounded px-2 py-1">
             <p>
               試行回数：
               <span ref={countRef} className="mx-1 font-mono">
