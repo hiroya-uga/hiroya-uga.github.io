@@ -9,8 +9,6 @@ import clsx from 'clsx';
 const calculateKaprekar = (inputNumber: number | bigint) => {
   const numberString = String(inputNumber);
 
-  console.log(numberString);
-
   const minValue = [...numberString].sort().join('');
   const maxValue = [...minValue].reverse().join('');
   const minNumber = BigInt(parseInt(minValue, 10));
@@ -32,6 +30,7 @@ export const KaprekarNumberContent = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<HTMLSpanElement>(null);
+  const [tryValue, setTryValue] = useState('');
   const [digitsLength, setDigitsLength] = useState(0);
   const [maxTimes, setMaxTimes] = useState(100);
   const [isRunning, setIsRunning] = useState(false);
@@ -69,13 +68,13 @@ export const KaprekarNumberContent = () => {
 
       const inputNumber = (() => {
         try {
-          return BigInt(input.value.trim());
+          return BigInt(tryValue.trim());
         } catch {
           return null;
         }
       })();
 
-      if (input.value.trim() === '' || inputNumber === null) {
+      if (tryValue.trim() === '' || inputNumber === null) {
         showErrorMessage('エラー：有効な数値を入力してください。');
         return;
       }
@@ -85,7 +84,7 @@ export const KaprekarNumberContent = () => {
         return;
       }
 
-      if (10 < inputNumber && new Set(input.value).size < 2) {
+      if (10 < inputNumber && new Set(tryValue).size < 2) {
         showErrorMessage('エラー：ゾロ目以外の数値を入力してください。');
         return;
       }
@@ -166,7 +165,7 @@ export const KaprekarNumberContent = () => {
       intervalId.current = window.setInterval(calculate, 40);
       calculate();
     },
-    [set, differenceClassName, maxTimes],
+    [set, differenceClassName, tryValue, maxTimes],
   );
 
   return (
@@ -201,12 +200,14 @@ export const KaprekarNumberContent = () => {
                     className="-mx-6 block w-[calc(100%+3rem)] rounded-lg bg-transparent px-[8px] py-4 text-center text-[min(10vw,50px)] text-[#f1f1f1] caret-[#f1f1f1] placeholder:text-[#575757]"
                     placeholder="168"
                     inputMode="numeric"
+                    value={tryValue}
                     onInput={(e) => {
                       e.currentTarget.value = e.currentTarget.value
                         .replace(/[０-９ー]/g, (c) => {
                           return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
                         })
                         .replace(/^0+|[^0-9-]/g, '');
+                      setTryValue(e.currentTarget.value);
                       setDigitsLength(e.currentTarget.value.length);
                     }}
                     onFocus={() => {
@@ -226,7 +227,10 @@ export const KaprekarNumberContent = () => {
               </p>
 
               <div className="w-fit mx-auto @content:after:w-content after:h-1 after:block">
-                <div ref={resultRef} className={clsx([styles.result, 'mt-[0.25em] space-y-[0.25em] font-mono'])} />
+                <div
+                  ref={resultRef}
+                  className={clsx([styles.result, 'mt-[0.25em] space-y-3 font-mono leading-snug'])}
+                />
 
                 <p role="alert" className="min-h-lh text-[#ffa7a7] transition-opacity empty:opacity-0">
                   {resultMessage}
@@ -259,16 +263,13 @@ export const KaprekarNumberContent = () => {
           <div className="col-start-2">
             <p className={clsx(['transition-fade', isOver === false && 'invisible opacity-0'])}>
               <RunButton
-                type={isOver === false ? 'button' : 'submit'}
+                type={'button'}
                 onClick={(e) => {
                   e.preventDefault();
-                  const input = inputRef.current;
+                  const value = String(currentNumberRef.current);
 
-                  if (!input) {
-                    return;
-                  }
-
-                  input.value = String(currentNumberRef.current);
+                  setTryValue(value);
+                  setDigitsLength(value.length);
                   startCalculation();
                 }}
                 afterIcon="/common/images/icons/reload.svg"
@@ -276,7 +277,7 @@ export const KaprekarNumberContent = () => {
                 <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
               </RunButton>
             </p>
-            <p className="mt-6">
+            <p className="mt-2 sm:mt-6">
               <RunButton
                 type="submit"
                 onClick={
