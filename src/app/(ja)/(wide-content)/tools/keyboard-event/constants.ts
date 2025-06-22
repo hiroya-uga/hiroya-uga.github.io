@@ -16,7 +16,7 @@ export const keyboardSvgData = [
   { key: 'ScrollLock', label: 'ScrLk', x: 715 - 9, y: 10 - 9, width: 40 },
   { key: 'Pause', label: 'Pause', x: 760 - 9, y: 10 - 9, width: 40 },
 
-  { key: 'IntlYen', label: '半/全', x: 10 - 9, y: 60 - 9, width: 40 },
+  { key: 'Backquote', label: '半/全', x: 10 - 9, y: 60 - 9, width: 40 },
   { key: 'Digit1', label: '1', x: 60 - 9, y: 60 - 9, width: 40 },
   { key: 'Digit2', label: '2', x: 110 - 9, y: 60 - 9, width: 40 },
   { key: 'Digit3', label: '3', x: 160 - 9, y: 60 - 9, width: 40 },
