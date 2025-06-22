@@ -332,18 +332,23 @@ export const KeyboardEventContent = () => {
     },
     [updateInputLog],
   );
+  const onblur = useCallback(() => {
+    setPressedKeys([]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keydown', onkeydown);
     window.addEventListener('keyup', onkeyup);
     window.addEventListener('keypress', onkeypress);
+    window.addEventListener('blur', onblur);
 
     return () => {
       window.removeEventListener('keydown', onkeydown);
       window.removeEventListener('keyup', onkeyup);
       window.removeEventListener('keypress', onkeypress);
+      window.removeEventListener('blur', onblur);
     };
-  }, [onkeydown, onkeypress, onkeyup]);
+  }, [onkeydown, onkeypress, onkeyup, onblur]);
 
   return (
     <div className={styles.root}>
