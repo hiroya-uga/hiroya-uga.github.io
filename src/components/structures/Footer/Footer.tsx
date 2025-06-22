@@ -75,7 +75,7 @@ export const Footer = () => {
         className={clsx(isTop ? 'bg-[#575757] text-white sm:bg-inherit sm:text-inherit' : 'bg-[#575757] text-white')}
       >
         {!isTop && (
-          <div className="relative mx-auto max-w-structure bg-(--color-background) px-content-inline">
+          <div className="relative mx-auto max-w-structure bg-(--v-color-background) px-content-inline">
             <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--v-spacing-content-inline)-0.75rem)] lg:py-1">
               {/* m-0 for bootstrap pages */}
               <ul

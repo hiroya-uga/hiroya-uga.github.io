@@ -1,7 +1,7 @@
 body:has(#pauljadam-modern-web-a11y-demos-content) {
   line-height: 1.875;
   color: #333;
-  background: var(--color-background);
+  background: var(--v-color-background);
   font-family: "Inter", "Inter Fallback";
   text-spacing-trim: trim-start;
 }
