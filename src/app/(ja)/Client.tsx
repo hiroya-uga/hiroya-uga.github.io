@@ -472,7 +472,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         <p
           className={clsx([
             'absolute bottom-0 right-2 z-10 size-8 translate-y-full  focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0 sm:h-12 sm:py-2',
-            'transition-[opacity,visibility,transform]',
+            'transition-[opacity,visibility,translate]',
             isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
             isFirstRender && isLoading ? 'invisible' : 'visible',
           ])}
