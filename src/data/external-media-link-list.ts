@@ -520,7 +520,7 @@ const list: {
     date: '2016-10-31',
     title: '社内風景：わたしの一番！Vol.28「古着」-株式会社ミツエーリンクス-',
     href: 'https://www.youtube.com/watch?v=Bbmr5eXzI30&list=PL0mikTMx0abPzYPPCpunHzFZahjpurjB8',
-    tags: [],
+    tags: ['Other'],
   },
   {
     type: 'article',

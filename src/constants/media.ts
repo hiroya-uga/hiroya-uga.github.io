@@ -11,4 +11,5 @@ export const mediaTags = [
   'Browser',
   'Tools',
   'EventReport',
+  'Other',
 ] as const;
