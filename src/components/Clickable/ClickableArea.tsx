@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import styles from '@/components/Clickable/ClickableArea.module.css';
 
 type Props = {
-  as: 'span' | 'div';
+  as: 'span' | 'div' | 'li';
   children: React.ReactNode;
   className?: string;
   defaultClickable: string;
@@ -15,8 +15,20 @@ type Props = {
 export const ClickableArea = ({ as, children, className, defaultClickable }: Props) => {
   const ref = useRef<HTMLElement>(null);
   const targetRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
-  const onClick = useCallback((e: React.MouseEvent<HTMLSpanElement | HTMLDivElement>) => {
+  const onClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+
+    if (targetRef.current instanceof HTMLAnchorElement) {
+      if (e.metaKey || e.shiftKey) {
+        window.open(targetRef.current.href, '_blank');
+        return;
+      }
+
+      window.location.href = targetRef.current.href;
+
+      return;
+    }
+
     targetRef.current?.click();
   }, []);
 
@@ -33,7 +45,7 @@ export const ClickableArea = ({ as, children, className, defaultClickable }: Pro
     return () => {
       target.style.removeProperty('outline');
     };
-  }, [defaultClickable]);
+  }, [defaultClickable, children]);
 
   const TagName = as;
 

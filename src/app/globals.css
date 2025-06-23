@@ -115,6 +115,7 @@
   --color-text: var(--v-color-text);
   --color-link: var(--v-color-text-link);
   --color-alert: var(--v-color-text-alert);
+  --color-secondary: var(--v-color-text-secondary);
   --color-description: var(--v-color-text-description);
   --background-color-alert: var(--v-color-background-alert);
   --background-color-required: var(--v-color-background-required);
