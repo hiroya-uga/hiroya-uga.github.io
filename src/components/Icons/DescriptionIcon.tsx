@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { uniqueId } from 'lodash';
+import { useEffect, useState } from 'react';
 
 let isRenderingCount = 0;
+const id = uniqueId('description-icon-');
 
 export const DescriptionIcon = ({ alt }: { alt: string }) => {
-  const id = useId();
   const [shouldRenderSymbol, setShouldRenderSymbol] = useState(false);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const SvgSymbol = ({ id }: { id: string }) => {
       <symbol id={id} viewBox="0 0 512 512" x="0px" y="0px">
         <style>
           {`
-            .st0{fill:var(--v-color-text-secondary)}
+            .st0{fill:var(--v-fill)}
           `}
         </style>
         <g>

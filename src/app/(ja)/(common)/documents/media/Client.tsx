@@ -1,13 +1,16 @@
 'use client';
 
-import React, { SetStateAction, useState } from 'react';
+import React, { SetStateAction, useId, useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Details } from '@/components/Box';
 import { ClearButton } from '@/components/Clickable';
+import { ClickableArea } from '@/components/Clickable/ClickableArea';
+import { ArticleIcon, BookIcon, HeadphoneIcon, PlayIcon } from '@/components/Icons';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
+import { createId } from '@/utils/create-id';
 
 const CheckBoxes = <T extends string>({
   nameSet,
@@ -174,7 +177,8 @@ const resetStatus = <T extends Record<string, boolean>>(status: T) => {
   return Object.fromEntries(Object.keys(status).map((key) => [key, false])) as T;
 };
 
-export const MediaContent = ({ id }: { id: string }) => {
+export const MediaContent = () => {
+  const id = useId();
   const idForKeywords = `${id}text`;
   const idForFilterTitle = `${id}filterTitle`;
 
@@ -330,45 +334,68 @@ export const MediaContent = ({ id }: { id: string }) => {
           </p>
         </div>
 
-        <table className="mb-2 block sm:table">
-          <tbody className="block sm:table-row-group">
-            {result.map(({ date, category, title, href, tags }) => {
-              return (
-                <tr key={href} className="grid grid-cols-[auto_1fr] leading-6 sm:table-row sm:leading-7">
-                  <td className="col-start-1 col-end-2 block font-mono text-xs leading-[inherit] sm:table-cell sm:text-sm">
-                    <span className="inline-block">{date}</span>
-                  </td>
-                  <td className="col-start-2 col-end-3 block pl-4 font-mono text-xs uppercase leading-[inherit] sm:table-cell sm:px-8 sm:text-center">
-                    <span className="inline-block">{category}</span>
-                  </td>
-                  <td className="col-start-1 col-end-3 block pb-6 text-sm leading-[inherit] sm:table-cell sm:pb-8 sm:text-base">
-                    <p>
-                      <a href={href} className="break-all visited:text-[#515a9c]">
-                        <Title title={title} keyword={keyword} />
-                      </a>
-                    </p>
+        <ul className="mb-2 sm:space-y-4 space-y-6">
+          {result.map(({ type, date, category, title, href, tags }) => {
+            const defaultClickable = createId(id, href);
+            return (
+              <ClickableArea
+                key={href}
+                as="li"
+                defaultClickable={defaultClickable}
+                className="grid grid-cols-[auto_1fr] sm:grid-cols-[6.25rem_auto_1fr] leading-6 sm:leading-7 p-2 sm:p-4 rounded-lg hover:bg-white transition-[background-color,box-shadow] hover:shadow"
+              >
+                <p className="col-start-1 col-end-2 content-center">
+                  <span className="relative  sm:w-full sm:bg-card sm:h-auto rounded-lg grid place-items-center sm:aspect-[4/3]">
+                    <span className="block relative size-4 sm:size-8 [--v-fill:var(--v-color-text-link)]">
+                      {(() => {
+                        switch (type) {
+                          case 'video':
+                            return <PlayIcon alt={type} />;
+                          case 'podcast':
+                            return <HeadphoneIcon alt={type} />;
+                          case 'article':
+                            return <ArticleIcon alt={type} />;
+                          case 'book':
+                            return <BookIcon alt={type} />;
+                        }
+                      })()}
+                    </span>
+                  </span>
+                </p>
+                <p className="col-start-2 col-end-3  pl-2 font-mono text-xs uppercase leading-[inherit] sm:px-4 sm:content-center sm:text-center">
+                  {category}
+                </p>
+                <div className="col-start-1 col-end-3 sm:col-start-3 sm:col-end-4 text-sm leading-[inherit] sm:text-base">
+                  <p>
+                    <a href={href} id={defaultClickable} className="break-all visited:[--v-color-text-link:#515a9c]">
+                      <Title title={title} keyword={keyword} />
+                    </a>
+                  </p>
 
-                    <p className="mt-1 overflow-hidden text-ellipsis text-xs leading-snug text-secondary sm:break-all">
+                  <p className="mt-1 flex gap-2 text-xs align-center leading-snug">
+                    <span>{date}</span>
+
+                    <span className="overflow-hidden text-ellipsis text-secondary sm:break-all">
                       {href.replace(/#.*/, '')}
-                    </p>
+                    </span>
+                  </p>
 
-                    {tags && tags.length && (
-                      <ul className="mt-2 flex flex-wrap gap-2 text-xs">
-                        {tags.map((tag) => {
-                          return (
-                            <li key={tag}>
-                              <span className="bg-slate-200 p-1">{tag}</span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                  {tags && tags.length && (
+                    <ul className="mt-2 flex flex-wrap gap-2">
+                      {tags.map((tag) => {
+                        return (
+                          <li key={tag}>
+                            <span className="bg-slate-200 p-1">{tag}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
+              </ClickableArea>
+            );
+          })}
+        </ul>
       </section>
     </>
   );
