@@ -5,6 +5,7 @@ import React, { SetStateAction, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Details } from '@/components/Box';
+import { ClearButton } from '@/components/Clickable';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 
@@ -265,9 +266,7 @@ export const MediaContent = ({ id }: { id: string }) => {
           <div className="p-6 pb-8 sm:p-8 sm:pb-9 sm:pt-7">
             <div className="mb-6 flex flex-row-reverse sm:mb-10">
               <p className="relative bottom-2 left-2 min-w-36 text-right">
-                <button
-                  type="reset"
-                  className="rounded bg-slate-200 px-3 py-2 sm:transition-colors sm:duration-200 sm:hover:bg-slate-300"
+                <ClearButton
                   onClick={() => {
                     setTypesStatus(resetStatus<typeof typesStatus>(typesStatus));
                     setTagsStatus(resetStatus<typeof tagsStatus>(tagsStatus));
@@ -275,7 +274,7 @@ export const MediaContent = ({ id }: { id: string }) => {
                   }}
                 >
                   すべてクリア
-                </button>
+                </ClearButton>
               </p>
               <fieldset className="grow">
                 <legend className="mb-3 font-bold">Types</legend>

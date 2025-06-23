@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client.module.css';
+import { ClearButton } from '@/components/Clickable';
 import Image from 'next/image';
 
 type FilterType = GetUrlFromDomFilterType;
@@ -390,23 +391,15 @@ export const GetUrlFromDOMContent = () => {
           >
             入力エリア
           </p>
-          <p>
-            <button
-              type="button"
-              className="rounded-full border border-black bg-white px-2.5 py-1.5 text-xs shadow-sticky"
+          <p className="shadow-sticky rounded-full">
+            <ClearButton
+              size="small"
               onClick={() => {
                 if (editAreaRef.current) {
                   editAreaRef.current.textContent = '';
                 }
               }}
-            >
-              <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-0.5 leading-none">
-                <span className="pt-px">クリア</span>
-                <span>
-                  <Image src="/common/images/icons/trash-can.svg" alt="" width={16} height={16} className="size-3" />
-                </span>
-              </span>
-            </button>
+            />
           </p>
         </div>
         <div ref={editAreaContainerRef}></div>
