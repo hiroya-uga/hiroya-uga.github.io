@@ -4,6 +4,7 @@ import { useCallback, useId, useMemo, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client.module.css';
 import { TextField } from '@/components/Form';
+import { formatStringToNumericString } from '@/utils/formatter';
 import clsx from 'clsx';
 
 const calculateKaprekar = (inputNumber: number | bigint) => {
@@ -202,11 +203,7 @@ export const KaprekarNumberContent = () => {
                     inputMode="numeric"
                     value={tryValue}
                     onInput={(e) => {
-                      e.currentTarget.value = e.currentTarget.value
-                        .replace(/[０-９ー]/g, (c) => {
-                          return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
-                        })
-                        .replace(/^0+|[^0-9-]/g, '');
+                      e.currentTarget.value = formatStringToNumericString(e.currentTarget.value);
                       setTryValue(e.currentTarget.value);
                       setDigitsLength(e.currentTarget.value.length);
                     }}
