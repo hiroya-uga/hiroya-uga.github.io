@@ -1,5 +1,6 @@
 import { AnchorHTMLAttributes } from 'react';
 
+import { SvgIcon } from '@/components/Icons';
 import Image from 'next/image';
 import Link, { LinkProps } from 'next/link';
 
@@ -21,13 +22,9 @@ export const Button = ({
       <span className="mx-auto grid w-fit grid-cols-[auto_0.875rem] place-items-center gap-1.5">
         <span>{children}</span>
         {isNewTab ? (
-          <Image
-            src="/common/images/icons/new-window-black.svg"
-            alt="新しいタブで開く"
-            className="inline-block size-[1em]"
-            width={16}
-            height={16}
-          />
+          <span className="[--v-fill:black] relative inline-block size-[1em]">
+            <SvgIcon name="new-tab" alt="新しいタブで開く" />
+          </span>
         ) : (
           <Image
             src="/common/images/icons/arrow2-right-black.svg"

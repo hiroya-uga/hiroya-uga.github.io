@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client.module.css';
 import { ClearButton } from '@/components/Clickable';
-import Image from 'next/image';
+import { SvgIcon } from '@/components/Icons';
 
 type FilterType = GetUrlFromDomFilterType;
 type SortType = 'none' | 'sort' | 'reverse';
@@ -565,14 +565,8 @@ export const GetUrlFromDOMContent = () => {
             >
               <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-1">
                 <span>{`${targetLength}個のURLをすべて開く`}</span>
-                <span>
-                  <Image
-                    src="/common/images/icons/new-window-black.svg"
-                    alt=""
-                    width={16}
-                    height={16}
-                    className="block"
-                  />
+                <span className="relative block size-4">
+                  <SvgIcon name="new-tab" alt="" />
                 </span>
               </span>
             </button>

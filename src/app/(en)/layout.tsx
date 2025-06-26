@@ -11,7 +11,7 @@ import { Inter } from 'next/font/google';
 
 import { Comment, Console } from '@/components/Jokes';
 import { Analytics } from '@/components/specific/Analytics';
-import { DIALOG_PORTAL_ID } from '@/constants/id';
+import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -30,6 +30,7 @@ export default function EnRootLayout({ children }: { children: React.ReactNode }
       <body className={inter.className} id="top">
         {children}
         <div id={DIALOG_PORTAL_ID} />
+        <div id={SVG_PORTAL_ID} hidden />
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { SvgIcon } from '@/components/Icons';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
 import { SEO } from '@/constants/seo';
@@ -72,7 +73,10 @@ export const Footer = () => {
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer
-        className={clsx(isTop ? 'bg-[#575757] text-white sm:bg-inherit sm:text-inherit' : 'bg-[#575757] text-white')}
+        className={clsx([
+          '[--v-fill:white] bg-[#575757] text-white',
+          isTop && ' sm:bg-inherit sm:text-inherit sm:[--v-fill:var(--text-color)]',
+        ])}
       >
         {!isTop && (
           <div className="relative mx-auto max-w-structure bg-(--v-color-background) px-content-inline">
@@ -120,32 +124,9 @@ export const Footer = () => {
                     >
                       {title}{' '}
                       {target === '_blank' ? (
-                        isTop ? (
-                          <>
-                            <Image
-                              src={`/common/images/icons/new-window-white.svg`}
-                              alt="新しいタブで開く"
-                              className="mb-[0.2em] ml-[0.2em] inline-block size-[1em] sm:hidden"
-                              width={16}
-                              height={16}
-                            />
-                            <Image
-                              src={`/common/images/icons/new-window-black.svg`}
-                              alt="新しいタブで開く"
-                              className="mb-[0.2em] ml-[0.2em] hidden size-[1em] sm:inline-block"
-                              width={16}
-                              height={16}
-                            />
-                          </>
-                        ) : (
-                          <Image
-                            src={`/common/images/icons/new-window-white.svg`}
-                            alt="新しいタブで開く"
-                            className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
-                            width={16}
-                            height={16}
-                          />
-                        )
+                        <span className="ml-[0.2em] mb-1px align-middle relative inline-block size-[1em]">
+                          <SvgIcon name="new-tab" alt="新しいタブで開く" />
+                        </span>
                       ) : null}
                     </Link>
                   </li>

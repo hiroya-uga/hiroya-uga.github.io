@@ -7,7 +7,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Details } from '@/components/Box';
 import { ClearButton } from '@/components/Clickable';
 import { ClickableArea } from '@/components/Clickable/ClickableArea';
-import { ArticleIcon, BookIcon, HeadphoneIcon, PlayIcon } from '@/components/Icons';
+import { SvgIcon } from '@/components/Icons';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { createId } from '@/utils/create-id';
@@ -350,13 +350,11 @@ export const MediaContent = () => {
                       {(() => {
                         switch (type) {
                           case 'video':
-                            return <PlayIcon alt={type} />;
+                            return <SvgIcon name="play" alt={type} />;
                           case 'podcast':
-                            return <HeadphoneIcon alt={type} />;
-                          case 'article':
-                            return <ArticleIcon alt={type} />;
-                          case 'book':
-                            return <BookIcon alt={type} />;
+                            return <SvgIcon name="headphone" alt={type} />;
+                          default:
+                            return <SvgIcon name={type} alt={type} />;
                         }
                       })()}
                     </span>

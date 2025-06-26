@@ -14,7 +14,7 @@ import {
 import clsx from 'clsx';
 
 import { Required } from '@/components/Badge/Required';
-import { DescriptionIcon } from '@/components/Icons/DescriptionIcon';
+import { SvgIcon } from '@/components/Icons/SvgIcon/SvgIcon';
 
 type Props = {
   label: string;
@@ -123,7 +123,7 @@ const TextFieldComponent = (
           className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed"
         >
           <p className="relative mt-0.5 grid size-4 place-items-center pt-3px [--v-fill:var(--v-color-text-secondary)]">
-            <DescriptionIcon alt="" />
+            <SvgIcon name="description" alt="" />
           </p>
           <div>
             {description.split('\n').map((line) => {
