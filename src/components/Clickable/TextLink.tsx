@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes } from 'react';
 
-import Image from 'next/image';
+import { SvgIcon } from '@/components/Icons';
 import Link from 'next/link';
 
 type Props = {
@@ -19,13 +19,9 @@ export const TextLink = ({ href, children, target }: Props) => {
     >
       {children}
       {target === '_blank' && (
-        <Image
-          src="/common/images/icons/new-window.svg"
-          alt="新しいタブで開く"
-          className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"
-          width={16}
-          height={16}
-        />
+        <span className="ml-[0.2em] mb-4px align-middle [--v-fill:var(--color-link)] relative inline-block size-[1em]">
+          <SvgIcon name="new-tab" alt="新しいタブで開く" />
+        </span>
       )}
     </Link>
   );

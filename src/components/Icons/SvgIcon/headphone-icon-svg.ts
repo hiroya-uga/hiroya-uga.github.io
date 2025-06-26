@@ -1,62 +1,23 @@
-'use client';
-
-import { uniqueId } from 'lodash';
-import { useEffect, useState } from 'react';
-
-let isRenderingCount = 0;
-const id = uniqueId('headphone-icon-');
-
-export const HeadphoneIcon = ({ alt }: { alt: string }) => {
-  const [shouldRenderSymbol, setShouldRenderSymbol] = useState(false);
-
-  useEffect(() => {
-    isRenderingCount++;
-
-    if (isRenderingCount === 1) {
-      setShouldRenderSymbol(true);
-    }
-
-    return () => {
-      isRenderingCount--;
-      if (isRenderingCount === 0) {
-        setShouldRenderSymbol(false);
-      }
-    };
-  }, []);
-
-  return (
-    <>
-      <svg className="absolute inset-0 block size-full" aria-label={alt}>
-        <use href={`#${id}`} />
-      </svg>
-      {shouldRenderSymbol && <SvgSymbol id={id} />}
-    </>
-  );
-};
-
-const SvgSymbol = ({ id }: { id: string }) => {
-  return (
-    <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-      <symbol id={id} viewBox="0 0 512 512" x="0px" y="0px">
+export const getSvg = (id: string) => `
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="${id}" viewBox="0 0 512 512" x="0px" y="0px">
         <style>
-          {`
-            .st0{fill:var(--v-fill)}
-          `}
+          .${id} {fill:var(--v-fill, var(--color-text))}
         </style>
         <g>
           <path
-            className="st0"
+            class="${id}"
             d="M175.898,335.919c-3.812-25.66-27.679-43.357-53.33-39.546c-25.659,3.778-43.374,27.671-39.57,53.322
 		l18.12,122.236c3.804,25.65,27.671,43.365,53.33,39.554c25.651-3.795,43.357-27.662,39.562-53.33L175.898,335.919z"
           ></path>
           <path
-            className="st0"
+            class="${id}"
             d="M389.438,296.373c-25.651-3.811-49.518,13.886-53.33,39.546l-18.121,122.236
 		c-3.786,25.667,13.911,49.535,39.571,53.33c25.65,3.812,49.518-13.903,53.33-39.554l18.12-122.236
 		C432.811,324.044,415.088,300.151,389.438,296.373z"
           ></path>
           <path
-            className="st0"
+            class="${id}"
             d="M506.813,166.683l-11.106-21.231c-22.6-43.187-56.364-79.478-97.625-105.07
 		C356.864,14.799,307.997-0.009,256.003,0C204-0.009,155.132,14.799,113.914,40.382c-41.26,25.592-75.025,61.883-97.616,105.07
 		L5.192,166.683c-4.301,8.224-1.14,18.391,7.099,22.701l7.649,3.99c-7.952,24.315-12.322,50.262-12.322,77.247
@@ -72,5 +33,4 @@ const SvgSymbol = ({ id }: { id: string }) => {
         </g>
       </symbol>
     </svg>
-  );
-};
+`;

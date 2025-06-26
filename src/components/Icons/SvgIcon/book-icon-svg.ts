@@ -1,52 +1,13 @@
-'use client';
-
-import { uniqueId } from 'lodash';
-import { useEffect, useState } from 'react';
-
-let isRenderingCount = 0;
-const id = uniqueId('book-icon-');
-
-export const BookIcon = ({ alt }: { alt: string }) => {
-  const [shouldRenderSymbol, setShouldRenderSymbol] = useState(false);
-
-  useEffect(() => {
-    isRenderingCount++;
-
-    if (isRenderingCount === 1) {
-      setShouldRenderSymbol(true);
-    }
-
-    return () => {
-      isRenderingCount--;
-      if (isRenderingCount === 0) {
-        setShouldRenderSymbol(false);
-      }
-    };
-  }, []);
-
-  return (
-    <>
-      <svg className="absolute inset-0 block size-full" aria-label={alt}>
-        <use href={`#${id}`} />
-      </svg>
-      {shouldRenderSymbol && <SvgSymbol id={id} />}
-    </>
-  );
-};
-
-const SvgSymbol = ({ id }: { id: string }) => {
-  return (
-    <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-      <symbol id={id} viewBox="0 0 512 512" x="0px" y="0px">
+export const getSvg = (id: string) => `
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="${id}" viewBox="0 0 512 512" x="0px" y="0px">
         <style>
-          {`
-            .st0{fill:var(--v-fill)}
-          `}
+          .${id} {fill:var(--v-fill, var(--color-text))}
         </style>
 
         <g>
           <path
-            className="st0"
+            class="${id}"
             d="M452.219,106.188V71.031c0-2.219-0.906-4.391-2.484-5.969c-1.578-1.563-3.734-2.469-5.969-2.469
 		c0,0-44.172,0-69.578,0c-3.906,0-8.25,0.5-13.078,1.375c-8.422,1.531-18.297,4.281-28.797,8.156
 		c-15.75,5.828-32.859,14.125-48.031,24.781c-7.563,5.344-14.656,11.25-20.813,17.797c-2.688,2.859-5.172,5.859-7.469,8.953
@@ -76,5 +37,4 @@ const SvgSymbol = ({ id }: { id: string }) => {
         </g>
       </symbol>
     </svg>
-  );
-};
+`;
