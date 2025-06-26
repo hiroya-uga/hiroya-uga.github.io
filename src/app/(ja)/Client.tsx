@@ -4,6 +4,7 @@ import { TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/li
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SITE_NAME } from '@/constants/meta';
+import { arrayShuffle } from '@/utils/array-shuffle';
 import { getMetadata } from '@/utils/seo';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
@@ -53,12 +54,7 @@ const message = [
 
 const getRandomIndexArray = (length: number) => {
   const digits = Array.from({ length }, (_, i) => i);
-  // Fisher-Yatesシャッフル
-  for (let i = digits.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [digits[i], digits[j]] = [digits[j], digits[i]];
-  }
-  return digits;
+  return arrayShuffle(digits);
 };
 
 export const WelcomeMessage = () => {
