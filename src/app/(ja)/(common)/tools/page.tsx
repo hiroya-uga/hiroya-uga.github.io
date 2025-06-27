@@ -61,7 +61,7 @@ export default function Page() {
                 <dd
                   className={clsx([
                     'grow text-sm',
-                    jobRoles.length !== 0 && 'grid  grid-rows-[1fr_auto] gap-4 pb-2 sm:pb-0 lg:gap-6',
+                    jobRoles.length !== 0 && 'grid grid-rows-[1fr_auto] gap-4 pb-2 sm:pb-0 lg:gap-6',
                   ])}
                 >
                   <div className="grow">
@@ -79,7 +79,7 @@ export default function Page() {
                   </div>
 
                   {jobRoles.length !== 0 && (
-                    <ul className="flex flex-wrap items-center gap-1 text-2xs font-bold lg:-mx-2 lg:-mb-2">
+                    <ul className="text-2xs flex flex-wrap items-center gap-1 font-bold lg:-mx-2 lg:-mb-2">
                       {jobRoles.map((role) => {
                         return (
                           <li key={role} className="rounded bg-[#eee] px-2 py-0.5">

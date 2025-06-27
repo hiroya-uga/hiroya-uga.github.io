@@ -44,13 +44,13 @@ export default function Page() {
         <div className="sm:sticky sm:top-6">
           <Heading level={2}>管理人について</Heading>
 
-          <p className="mx-auto mb-4 flex max-w-360px flex-row-reverse items-center gap-4 sm:grid sm:place-items-center sm:gap-x-6">
+          <p className="max-w-360px mx-auto mb-4 flex flex-row-reverse items-center gap-4 sm:grid sm:place-items-center sm:gap-x-6">
             <span className="w-40">
               <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" />
             </span>
 
             <span className="grow whitespace-nowrap text-center text-xl">
-              <span className="tracking-widest block leading-6" translate="no">
+              <span className="block leading-6 tracking-widest" translate="no">
                 宇賀景哉
               </span>
               <span
@@ -71,7 +71,7 @@ export default function Page() {
           <p>アイコンは昔の上司がスマホで描いて送ってくれた管理人の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
-        <div className="mt-8 sm:mt-3px">
+        <div className="sm:mt-3px mt-8">
           <dl className="text-sm">
             {[
               {
@@ -124,7 +124,7 @@ export default function Page() {
                   <>
                     <figure className="mb-1 w-fit">
                       <blockquote cite="https://naruto-official.com/comics/01_92">
-                        <p className=' before:content-["「"] after:content-["」"] '>
+                        <p className='before:content-["「"] after:content-["」"]'>
                           自分を信じない奴なんかに<span className="inline-block">努力する価値はない!!!</span>
                         </p>
                       </blockquote>
@@ -138,7 +138,7 @@ export default function Page() {
 
                     <figure className="w-fit">
                       <blockquote cite="https://www.tcc.gr.jp/copira/id/87413/">
-                        <p className=' before:content-["「"] after:content-["」"] '>
+                        <p className='before:content-["「"] after:content-["」"]'>
                           風はすべて追い風。<span className="inline-block">わたしがどこを向くかだ。</span>
                         </p>
                       </blockquote>

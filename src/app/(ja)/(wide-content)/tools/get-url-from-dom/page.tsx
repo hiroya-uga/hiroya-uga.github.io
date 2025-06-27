@@ -16,7 +16,7 @@ export default function Page() {
       <ol className="list-decimal space-y-2 pl-7">
         <li>URLを抽出したいページやアプリケーションを開く</li>
         <li>
-          <span className="hidden pointer-fine:inline">
+          <span className="pointer-fine:inline hidden">
             マウスドラッグや
             <kbd>
               <kbd>Ctrl</kbd>+<kbd>A</kbd>
@@ -26,7 +26,7 @@ export default function Page() {
           抽出したい範囲を選択する
         </li>
         <li>
-          <span className="hidden pointer-fine:inline">
+          <span className="pointer-fine:inline hidden">
             <kbd>
               <kbd>Ctrl</kbd>+<kbd>C</kbd>
             </kbd>
@@ -39,7 +39,7 @@ export default function Page() {
           <b>入力エリア</b>をクリックする
         </li>
         <li>
-          <span className="hidden pointer-fine:inline">
+          <span className="pointer-fine:inline hidden">
             <kbd>
               <kbd>Ctrl</kbd>+<kbd>V</kbd>
             </kbd>

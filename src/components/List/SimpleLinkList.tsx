@@ -18,7 +18,7 @@ export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
     <ul>
       {list.map(({ title, href, description, lang, hrefLang, target }, index) => {
         return (
-          <li key={`${href}${index}`} className="flex pl-1 text-sm sm:pl-2 sm:text-base not-last:mb-6 sm:not-last:mb-6">
+          <li key={`${href}${index}`} className="not-last:mb-6 sm:not-last:mb-6 flex pl-1 text-sm sm:pl-2 sm:text-base">
             <span className="min-w-1.5 max-w-1.5 px-px pt-3 sm:min-w-2 sm:max-w-2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" className="w-full">
                 <circle cx="50" cy="50" r="50" fill="var(--color-text)" />
@@ -43,7 +43,7 @@ export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
               )}
 
               {description && (
-                <span className="mt-2 block text-sm text-secondary sm:mt-1 sm:text-base sm:leading-relaxed">
+                <span className="text-secondary mt-2 block text-sm sm:mt-1 sm:text-base sm:leading-relaxed">
                   {description}
                 </span>
               )}

@@ -71,7 +71,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
   return (
     <>
       <div className="mb-4 mt-[calc(-1*var(--v-header-margin-bottom))] border-b border-dashed border-gray-400 pb-6 sm:mb-7 sm:pb-9">
-        <div className=" rounded-md bg-white p-2 text-2xs leading-snug sm:p-4 sm:text-xs">
+        <div className="text-2xs rounded-md bg-white p-2 leading-snug sm:p-4 sm:text-xs">
           <p className="mb-2 font-bold sm:mb-1.5">
             原文：
             <a href={originalPath} hrefLang="en" className="inline-block break-all">
@@ -79,7 +79,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
             </a>
           </p>
           <p>
-            <strong className="flex font-normal leading-[inherit] text-alert sm:font-bold">
+            <strong className="text-alert flex font-normal leading-[inherit] sm:font-bold">
               <span>※</span>
               <span>
                 このページは動作確認用ページです。

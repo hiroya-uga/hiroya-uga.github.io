@@ -17,5 +17,7 @@ module.exports = {
     },
   ],
 
-  plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-organize-imports'],
+  plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-tailwindcss'],
+  tailwindStylesheet: './src/app/global.css',
+  tailwindFunctions: ['clsx'],
 };

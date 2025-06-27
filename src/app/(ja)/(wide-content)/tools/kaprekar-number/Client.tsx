@@ -193,7 +193,7 @@ export const KaprekarNumberContent = () => {
             <div className="mb-6">
               <p className={styles.inputWrapper}>
                 <label className="text-sm text-[#bebebe]">
-                  <span className="mx-auto mb-2 block max-w-content">
+                  <span className="max-w-content mx-auto mb-2 block">
                     0以上の好きな整数を半角数字で入力してください。
                   </span>
                   <input
@@ -218,12 +218,12 @@ export const KaprekarNumberContent = () => {
             <div className="@container">
               <p
                 role="alert"
-                className="min-h-lh w-fit mx-auto @content:w-full max-w-content text-[#ffa7a7] transition-opacity empty:opacity-0"
+                className="min-h-lh @content:w-full max-w-content mx-auto w-fit text-[#ffa7a7] transition-opacity empty:opacity-0"
               >
                 {errorMessage}
               </p>
 
-              <div className="w-fit mx-auto @content:after:w-content after:h-1 after:block">
+              <div className="@content:after:w-content mx-auto w-fit after:block after:h-1">
                 <div
                   ref={resultRef}
                   className={clsx([styles.result, 'mt-[0.25em] space-y-3 font-mono leading-snug'])}
@@ -236,7 +236,7 @@ export const KaprekarNumberContent = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto mt-22 mb-6 max-w-content text-text">
+        <div className="mt-22 max-w-content text-text mx-auto mb-6">
           <TextField
             label="最大試行回数"
             inputMode="numeric"
@@ -256,7 +256,7 @@ export const KaprekarNumberContent = () => {
           />
         </div>
 
-        <div className="pointer-events-none z-10 sticky bottom-2 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
+        <div className="pointer-events-none sticky bottom-2 z-10 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
           <div className="col-start-2">
             <p className={clsx(['transition-fade', isOver === false && 'invisible opacity-0'])}>
               <RunButton
@@ -294,7 +294,7 @@ export const KaprekarNumberContent = () => {
               </RunButton>
             </p>
           </div>
-          <div className="mt-2 bg-(--v-color-background)/80 w-fit ml-auto mr-4 leading-tight pointer-events-auto text-right text-xs rounded px-2 py-1">
+          <div className="bg-(--v-color-background)/80 pointer-events-auto ml-auto mr-4 mt-2 w-fit rounded px-2 py-1 text-right text-xs leading-tight">
             <p>
               試行回数：
               <span ref={countRef} className="mx-1 font-mono">

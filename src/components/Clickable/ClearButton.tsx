@@ -10,8 +10,8 @@ export const ClearButton = ({ size = 'medium', children = 'クリア', onClick }
       type="button"
       className={clsx([
         'rounded-full border border-black bg-[#f1f1f1] transition-[background-color,border-color,box-shadow] hover:border-[#777] hover:bg-white hover:shadow-lg active:border-[#555] active:bg-[#e1e1e1] active:shadow-none disabled:opacity-50',
-        size === 'small' && 'text-xs px-2.5 py-1.5',
-        size === 'medium' && 'text-sm px-3 py-2',
+        size === 'small' && 'px-2.5 py-1.5 text-xs',
+        size === 'medium' && 'px-3 py-2 text-sm',
       ])}
       onClick={onClick}
     >

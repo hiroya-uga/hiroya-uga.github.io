@@ -19,7 +19,7 @@ export const Details = ({
 
   return (
     <details
-      className="group rounded-lg first:last:border first:last:border-slate-400 not-first:border-t not-first:border-solid not-first:border-t-gray-200"
+      className="not-first:border-t not-first:border-solid not-first:border-t-gray-200 group rounded-lg first:last:border first:last:border-slate-400"
       open={isOpen}
       id={id}
       // @ts-ignore

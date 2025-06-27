@@ -57,7 +57,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
     },
     li: ({ children }) => {
       return (
-        <li className="relative pl-4 before:absolute before:left-1 before:top-13px before:size-1 before:rounded-full before:bg-black">
+        <li className="before:top-13px relative pl-4 before:absolute before:left-1 before:size-1 before:rounded-full before:bg-black">
           {children}
         </li>
       );

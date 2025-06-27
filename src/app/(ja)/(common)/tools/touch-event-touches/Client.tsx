@@ -35,35 +35,35 @@ const TouchPoints = ({ dataSets }: { dataSets: Touches }) => {
         return (
           <div
             key={touchId}
-            className="pointer-events-none fixed left-0 top-0 z-20 ml-[-1.75cm] mt-[-1.75cm] block size-[3.5cm] select-none border border-solid border-red-600 p-1 text-2xs"
+            className="text-2xs pointer-events-none fixed left-0 top-0 z-20 ml-[-1.75cm] mt-[-1.75cm] block size-[3.5cm] select-none border border-solid border-red-600 p-1"
             style={{
               transform: `translate(${x}px, ${y}px)`,
             }}
           >
-            <div className="absolute bottom-full left-0 whitespace-nowrap pb-1 text-2xs leading-none">
+            <div className="text-2xs absolute bottom-full left-0 whitespace-nowrap pb-1 leading-none">
               <div>Y: {y}</div>
               <div>X: {x}</div>
             </div>
 
-            <div className="absolute bottom-full left-0 whitespace-nowrap pb-1 text-2xs leading-none">
+            <div className="text-2xs absolute bottom-full left-0 whitespace-nowrap pb-1 leading-none">
               <div>Y: {y}</div>
               <div>X: {x}</div>
             </div>
 
             <div className="absolute -left-[2.4rem] top-0 rotate-90">
-              <div className="absolute bottom-full left-0 whitespace-nowrap text-2xs leading-none">
+              <div className="text-2xs absolute bottom-full left-0 whitespace-nowrap leading-none">
                 <div>Y: {y}</div>
                 <div>X: {x}</div>
               </div>
             </div>
 
-            <div className="absolute left-0 top-full whitespace-nowrap pt-1 text-2xs leading-none">
+            <div className="text-2xs absolute left-0 top-full whitespace-nowrap pt-1 leading-none">
               <div>Y: {y}</div>
               <div>X: {x}</div>
             </div>
 
             <div className="absolute -right-[2.4rem] bottom-0 -rotate-90">
-              <div className="absolute bottom-full left-0 whitespace-nowrap text-2xs leading-none">
+              <div className="text-2xs absolute bottom-full left-0 whitespace-nowrap leading-none">
                 <div>Y: {y}</div>
                 <div>X: {x}</div>
               </div>
@@ -73,9 +73,9 @@ const TouchPoints = ({ dataSets }: { dataSets: Touches }) => {
               <div className="absolute bottom-full left-0 whitespace-nowrap">ID: {touchId}</div>
             </div>
 
-            <div className="absolute left-1 top-1 text-2xs leading-none">force: {forceValue}</div>
+            <div className="text-2xs absolute left-1 top-1 leading-none">force: {forceValue}</div>
 
-            <div className="absolute bottom-1 right-1 text-2xs leading-none">force: {forceValue}</div>
+            <div className="text-2xs absolute bottom-1 right-1 leading-none">force: {forceValue}</div>
 
             <div className="absolute left-full top-[0.85rem] rotate-90">
               <div className="absolute -left-[0.85rem] bottom-full whitespace-nowrap">ID: {touchId}</div>
@@ -206,7 +206,7 @@ export const TouchEventTouchesContent = () => {
 
       <div
         className={clsx([
-          ' transition-[background-color,visibility,opacity]',
+          'transition-[background-color,visibility,opacity]',
           isTouchDevice !== true && 'invisible opacity-0',
         ])}
       >
@@ -224,7 +224,7 @@ export const TouchEventTouchesContent = () => {
           <div
             className={clsx([
               'rounded p-2 py-3 sm:p-6',
-              'flex flex-wrap items-center justify-center gap-2 ',
+              'flex flex-wrap items-center justify-center gap-2',
               isRunning ? 'bg-[rgba(255,255,255,.9)]' : 'bg-[rgba(255,255,255,.9)]',
             ])}
           >

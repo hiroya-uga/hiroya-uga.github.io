@@ -43,7 +43,7 @@ export const SvgIcon = ({ name, alt }: { name: Name; alt: string }) => {
     <svg
       role="img"
       aria-label={alt}
-      className={clsx(['transition-opacity absolute inset-0 block size-full', isReady === false && 'opacity-0'])}
+      className={clsx(['absolute inset-0 block size-full transition-opacity', isReady === false && 'opacity-0'])}
     >
       <use href={`#${svgId}`} />
     </svg>
