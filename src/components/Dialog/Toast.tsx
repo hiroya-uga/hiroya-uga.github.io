@@ -11,7 +11,7 @@ type Props = {
   duration?: number;
 };
 
-export const Toast = ({ message, setMessage, duration = 1000 }: Props) => {
+export const Toast = ({ message, setMessage, duration = 3000 }: Props) => {
   const [portal, setPortal] = useState<HTMLDivElement | null>(null);
   const ref = useRef<HTMLParagraphElement>(null);
   const setTimeoutId = useRef(-1);
@@ -86,7 +86,7 @@ export const Toast = ({ message, setMessage, duration = 1000 }: Props) => {
   return createPortal(
     <p
       ref={ref}
-      className="fixed inset-x-0 top-4 z-50 mx-auto w-fit rounded-md bg-white px-4 py-2 opacity-100 shadow-sticky transition-fade [&[hidden]]:pointer-events-none [&[hidden]]:opacity-0 no-hidden"
+      className="fixed right-0 max-w-[95%] top-4 pr-6 z-50 mx-auto w-fit rounded bg-white px-4 py-2 shadow-sticky transition-[right] duration-800 [&[hidden]]:pointer-events-none [&[hidden]]:right-[-100%] no-hidden"
       hidden
     />,
     portal,

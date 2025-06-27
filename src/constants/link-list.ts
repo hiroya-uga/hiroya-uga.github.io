@@ -85,3 +85,5 @@ export const TOOLS_LINK_LIST: ToolPage = [
     pathname: '/tools/kaprekar-number',
   },
 ];
+
+export const GAMES_LINK_LIST: LinkListItem[] = [{ emoji: '🔢', pathname: '/games/sudoku' }];

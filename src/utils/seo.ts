@@ -11,7 +11,7 @@ export type Metadata = MetadataOrigin & {
   description: string;
 };
 
-export const getMetadata = (pathname: string): Metadata => {
+export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
   const {
     title: pageTitle,
     beforeSubTitle,
