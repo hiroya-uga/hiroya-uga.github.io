@@ -40,7 +40,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Pr
           type === 'error' && 'text-red-800',
         ])}
       >
-        <span className="pr-2 font-emoji">
+        <span className="font-emoji pr-2">
           {type === 'note' && '💡'}
           {type === 'warn' && '⚠️'}
           {type === 'error' && '🚨'}

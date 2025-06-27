@@ -59,7 +59,7 @@ const OutputTextfield = ({
 
       if (isUsingWrapLabel) {
         return (
-          <label className="block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3 not-first:mt-2">
+          <label className="not-first:mt-2 block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3">
             <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
             <input {...inputProps} className={className} />
           </label>
@@ -685,7 +685,7 @@ export const AccessibleNameAndDescriptionComputation = ({
         <div className="mb-2 rounded-md border border-gray-300 bg-white">
           <p
             id={textboxDescId}
-            className="mb-2 border-b border-dashed border-b-gray-400 px-4 pb-1 pt-2 text-2xs text-black"
+            className="text-2xs mb-2 border-b border-dashed border-b-gray-400 px-4 pb-1 pt-2 text-black"
           >
             Hint：全選択ショートカットキーまたはマウスクリックでHTML断片を全選択できます。
           </p>

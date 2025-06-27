@@ -65,7 +65,7 @@ export const Footer = () => {
     <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
       {isTop || (
         <nav
-          className="mx-auto max-w-structure bg-gray-200 px-content-inline py-4 text-sm lg:bg-transparent lg:py-5 lg:pl-(--v-spacing-content-inline) lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
+          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) mx-auto bg-gray-200 py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
           aria-label="サイト内の現在位置"
         >
           <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
@@ -74,12 +74,12 @@ export const Footer = () => {
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer
         className={clsx([
-          '[--v-fill:white] bg-[#575757] text-white',
-          isTop && ' sm:bg-inherit sm:text-inherit sm:[--v-fill:var(--text-color)]',
+          'bg-[#575757] text-white [--v-fill:white]',
+          isTop && 'sm:bg-inherit sm:text-inherit sm:[--v-fill:var(--text-color)]',
         ])}
       >
         {!isTop && (
-          <div className="relative mx-auto max-w-structure bg-(--v-color-background) px-content-inline">
+          <div className="max-w-structure bg-(--v-color-background) px-content-inline relative mx-auto">
             <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--v-spacing-content-inline)-0.75rem)] lg:py-1">
               {/* m-0 for bootstrap pages */}
               <ul
@@ -89,7 +89,7 @@ export const Footer = () => {
                 {SNS_LINKS.map(({ href, alt, ...props }) => {
                   return (
                     <li key={href}>
-                      <a href={href} className="group block rounded-lg p-3 transition-bg hover:bg-gray-200">
+                      <a href={href} className="transition-bg group block rounded-lg p-3 hover:bg-gray-200">
                         <Image {...props} width={28} height={28} alt={alt} className="size-7" />
                       </a>
                     </li>
@@ -99,10 +99,10 @@ export const Footer = () => {
             </div>
           </div>
         )}
-        <div className="mx-auto max-w-structure px-content-inline">
+        <div className="max-w-structure px-content-inline mx-auto">
           <div
             className={clsx(
-              isTop && 'mx-auto max-w-content',
+              isTop && 'max-w-content mx-auto',
               'flow-root border-t border-t-gray-400 py-12',
               'md:flex md:flex-wrap md:justify-center md:gap-6 md:pb-20 md:pt-7',
             )}
@@ -124,7 +124,7 @@ export const Footer = () => {
                     >
                       {title}{' '}
                       {target === '_blank' ? (
-                        <span className="ml-[0.2em] mb-1px align-middle relative inline-block size-[1em]">
+                        <span className="mb-1px relative ml-[0.2em] inline-block size-[1em] align-middle">
                           <SvgIcon name="new-tab" alt="新しいタブで開く" />
                         </span>
                       ) : null}
@@ -133,7 +133,7 @@ export const Footer = () => {
                 );
               })}
             </ul>
-            <p className="relative -top-1px float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
+            <p className="-top-1px relative float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
               {/* text-[100%] for bootstrap pages */}
               <small className="text-[100%]">&copy; {SITE_NAME}</small>
             </p>

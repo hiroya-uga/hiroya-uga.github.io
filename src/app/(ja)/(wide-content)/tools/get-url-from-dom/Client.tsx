@@ -378,12 +378,12 @@ export const GetUrlFromDOMContent = () => {
     <div className="border border-slate-400 sm:grid md:h-[80dvh] md:grid-cols-3">
       <div
         className={clsx([
-          "relative h-[30dvh] overflow-auto bg-white p-2 pt-0 scroll-hint-y before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:rounded-md before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
+          "scroll-hint-y relative h-[30dvh] overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:rounded-md before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
           isEdited ? 'before:hidden' : 'before:grid',
           'md:h-auto',
         ])}
       >
-        <div className="sticky -left-2 top-0 z-10 -mx-2 mb-0.5 flex justify-between bg-white/90  p-4 text-sm font-bold">
+        <div className="sticky -left-2 top-0 z-10 -mx-2 mb-0.5 flex justify-between bg-white/90 p-4 text-sm font-bold">
           <p
             onClick={() => {
               editAreaRef.current?.focus();
@@ -404,7 +404,7 @@ export const GetUrlFromDOMContent = () => {
         </div>
         <div ref={editAreaContainerRef}></div>
       </div>
-      <div className="h-[30dvh] space-y-paragraph overflow-auto border-y border-slate-400 p-4 scroll-hint-y md:h-auto md:border-x md:border-y-0">
+      <div className="space-y-paragraph scroll-hint-y h-[30dvh] overflow-auto border-y border-slate-400 p-4 md:h-auto md:border-x md:border-y-0">
         <fieldset>
           <legend className="text-sm font-bold">フィルタ</legend>
           <ul className="space-y-2 p-2">
@@ -512,12 +512,12 @@ export const GetUrlFromDOMContent = () => {
           </ul>
         </fieldset>
       </div>
-      <div className="min-h-[30dvh] overflow-auto scroll-hint-y">
-        <h2 className="sticky  left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">
+      <div className="scroll-hint-y min-h-[30dvh] overflow-auto">
+        <h2 className="sticky left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">
           Result:<span aria-live="polite">{isEdited && ` ${targetLength}件のURL`}</span>
         </h2>
         <div
-          className=" mb-paragraph text-nowrap p-4 pb-0 leading-normal"
+          className="mb-paragraph text-nowrap p-4 pb-0 leading-normal"
           onClick={(e) => {
             if (window.getSelection && document.createRange && e.currentTarget.firstElementChild) {
               const range = document.createRange();
@@ -534,10 +534,10 @@ export const GetUrlFromDOMContent = () => {
           <p aria-live="polite">{isEdited && targetLength === 0 && '対象がありませんでした。'}</p>
         </div>
         {targetLength !== 0 && (
-          <p className="pointer-events-none sticky bottom-4 left-0 grid  place-items-center rounded-full px-4">
+          <p className="pointer-events-none sticky bottom-4 left-0 grid place-items-center rounded-full px-4">
             <button
               type="button"
-              className="pointer-events-auto w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm shadow-sticky"
+              className="shadow-sticky pointer-events-auto w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm"
               onClick={() => {
                 const targets = resultRef.current?.querySelectorAll('url-item') ?? [];
 

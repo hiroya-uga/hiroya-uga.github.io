@@ -20,10 +20,10 @@ export default function Home() {
 
   return (
     <>
-      <header className="px-4 pb-12 pt-10 lg:pb-60px lg:pt-14">
-        <div className="mx-auto max-w-content">
+      <header className="lg:pb-60px px-4 pb-12 pt-10 lg:pt-14">
+        <div className="max-w-content mx-auto">
           <div className="items-center text-center lg:mb-2 lg:flex">
-            <h1 className="mb-3 text-xl font-bold sm:leading-8 leading-none sm:text-2xl lg:mb-0">
+            <h1 className="mb-3 text-xl font-bold leading-none sm:text-2xl sm:leading-8 lg:mb-0">
               {metadata.pageTitle}
             </h1>
             <p className="text-xs">
@@ -38,18 +38,18 @@ export default function Home() {
       </header>
 
       <main>
-        <div className="@container mx-auto mb-4 max-w-content">
+        <div className="@container max-w-content mx-auto mb-4">
           <TopImage captionId={captionId} />
         </div>
 
         <div className="px-content-inline pb-20 sm:pb-28">
-          <div className="mx-auto max-w-content">
+          <div className="max-w-content mx-auto">
             <WelcomeMessage />
           </div>
         </div>
 
-        <div className="mb-8 bg-section-primary px-content-inline py-8 sm:mb-28 sm:pb-11 sm:pt-7">
-          <div className="mx-auto max-w-content">
+        <div className="bg-section-primary px-content-inline mb-8 py-8 sm:mb-28 sm:pb-11 sm:pt-7">
+          <div className="max-w-content mx-auto">
             <h2 className="mb-4 mt-0 text-xl font-bold sm:text-2xl">The power of the web</h2>
 
             <figure>
@@ -67,7 +67,7 @@ export default function Home() {
                   ”
                 </p>
               </blockquote>
-              <figcaption className="text-right text-2xs sm:text-sm lg:pr-2 lg:text-center">
+              <figcaption className="text-2xs text-right sm:text-sm lg:pr-2 lg:text-center">
                 <p>
                   — <cite>Tim Berners-Lee</cite>, W3C Director and inventor of the World Wide Web
                 </p>
@@ -76,16 +76,16 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-16 px-content-inline sm:mb-28">
-          <div className="mx-auto max-w-content">
+        <div className="px-content-inline mb-16 sm:mb-28">
+          <div className="max-w-content mx-auto">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Pick up</h2>
 
             <PickUpList />
           </div>
         </div>
 
-        <div className="mb-20 bg-section-secondary px-content-inline py-11 pb-12 sm:mb-28">
-          <div className="mx-auto max-w-content">
+        <div className="bg-section-secondary px-content-inline mb-20 py-11 pb-12 sm:mb-28">
+          <div className="max-w-content mx-auto">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Category</h2>
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
@@ -109,7 +109,7 @@ export default function Home() {
                   <li key={href}>
                     <Link href={href} className="group block rounded-md no-underline">
                       <span
-                        className="mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md bg-card-secondary font-emoji text-5xl leading-none"
+                        className="bg-card-secondary font-emoji mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md text-5xl leading-none"
                         aria-hidden="true"
                       >
                         <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         <div className="px-content-inline">
-          <div className="mx-auto max-w-content">
+          <div className="max-w-content mx-auto">
             <h2 className="mb-2 text-xl font-bold sm:text-2xl">Media</h2>
 
             <p className="mb-4">{getMetadata('/documents/media').description}</p>
@@ -142,7 +142,7 @@ export default function Home() {
                           {title}
                         </a>
 
-                        <p className="break-all text-xs text-secondary">{new URL(href).hostname}</p>
+                        <p className="text-secondary break-all text-xs">{new URL(href).hostname}</p>
                       </td>
                     </tr>
                   );
@@ -224,9 +224,9 @@ export default function Home() {
                 Profile
               </h2>
 
-              <p className="mx-auto mb-8 flex aspect-8/5 max-w-360px items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:leading-inherit sm:gap-x-6">
+              <p className="aspect-8/5 max-w-360px sm:leading-inherit mx-auto mb-8 flex items-center gap-4 pr-4 leading-none sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-3 sm:m-0 sm:aspect-auto sm:gap-x-6">
                 <span className="grow whitespace-nowrap text-center text-xl leading-tight">
-                  <span className="tracking-widest block leading-6" translate="no">
+                  <span className="block leading-6 tracking-widest" translate="no">
                     宇賀景哉
                   </span>
                   <span
@@ -243,7 +243,7 @@ export default function Home() {
                 </span>
               </p>
 
-              <div className="col-start-1 col-end-2 row-start-2 row-end-3 sm:mb-paragraph">
+              <div className="sm:mb-paragraph col-start-1 col-end-2 row-start-2 row-end-3">
                 <div className="sm:max-w-xl sm:pr-4">
                   <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
                   <p className="sm:palt inline-block">

@@ -86,7 +86,7 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Props) => {
   return createPortal(
     <p
       ref={ref}
-      className="fixed right-0 max-w-[95%] top-4 pr-6 z-50 mx-auto w-fit rounded bg-white px-4 py-2 shadow-sticky transition-[right] duration-800 [&[hidden]]:pointer-events-none [&[hidden]]:right-[-100%] no-hidden"
+      className="shadow-sticky duration-800 no-hidden fixed right-0 top-4 z-50 mx-auto w-fit max-w-[95%] rounded bg-white px-4 py-2 pr-6 transition-[right] [&[hidden]]:pointer-events-none [&[hidden]]:right-[-100%]"
       hidden
     />,
     portal,

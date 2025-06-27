@@ -7,7 +7,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
       <Header />
 
       <main className="px-content-inline lg:pl-10">
-        <div className="mx-auto max-w-content">{children}</div>
+        <div className="max-w-content mx-auto">{children}</div>
       </main>
 
       <Footer />

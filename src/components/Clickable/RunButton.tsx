@@ -11,7 +11,7 @@ export const RunButton = ({ children, afterIcon, ...props }: Props) => {
   return (
     <button
       className={clsx([
-        'pointer-events-auto mx-auto block w-full max-w-260px rounded-md border border-solid border-black bg-[#f1f1f1] py-2 text-black transition-[background-color,border-color,box-shadow] hover:border-[#777] hover:bg-white hover:shadow-lg active:border-[#555] active:bg-[#e1e1e1] active:shadow-none disabled:opacity-50',
+        'max-w-260px pointer-events-auto mx-auto block w-full rounded-md border border-solid border-black bg-[#f1f1f1] py-2 text-black transition-[background-color,border-color,box-shadow] hover:border-[#777] hover:bg-white hover:shadow-lg active:border-[#555] active:bg-[#e1e1e1] active:shadow-none disabled:opacity-50',
         afterIcon ? 'pl-5 pr-4' : 'px-8',
       ])}
       {...props}

@@ -22,7 +22,7 @@ export const Button = ({
       <span className="mx-auto grid w-fit grid-cols-[auto_0.875rem] place-items-center gap-1.5">
         <span>{children}</span>
         {isNewTab ? (
-          <span className="[--v-fill:black] relative inline-block size-[1em]">
+          <span className="relative inline-block size-[1em] [--v-fill:black]">
             <SvgIcon name="new-tab" alt="新しいタブで開く" />
           </span>
         ) : (

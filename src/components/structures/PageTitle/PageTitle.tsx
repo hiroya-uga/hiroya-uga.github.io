@@ -25,7 +25,7 @@ export const PageTitle = ({
         className={clsx([
           hasSubtitle
             ? 'not-last:mb-2.5'
-            : 'text-3xl font-bold leading-relaxed sm:text-[2.625rem] not-last:mb-3 sm:not-last:mb-2.5',
+            : 'not-last:mb-3 sm:not-last:mb-2.5 text-3xl font-bold leading-relaxed sm:text-[2.625rem]',
           'leading-relaxed',
         ])}
       >

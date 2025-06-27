@@ -39,7 +39,7 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
           viewBox="0 0 1032 292"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
-          className={clsx('duration-700 transition-fade', lastKey === '' && 'invisible opacity-0')}
+          className={clsx('transition-fade duration-700', lastKey === '' && 'invisible opacity-0')}
         >
           {keys.map(({ key, x, y, width, height, label }, index) => {
             const isPressed = pressedKeys.includes(key);
@@ -129,7 +129,7 @@ const MemoForm = memo(Form);
 
 const Log = ({ inputLog }: { inputLog: Log[] }) => {
   return (
-    <div className="overflow-x-auto rounded-lg p-4 scroll-hint-x">
+    <div className="scroll-hint-x overflow-x-auto rounded-lg p-4">
       <table className="min-w-full text-sm">
         <thead className="bg-[#00000022]">
           <tr>
@@ -352,7 +352,7 @@ export const KeyboardEventContent = () => {
 
   return (
     <div className={styles.root}>
-      <div className="mx-auto max-w-content">
+      <div className="max-w-content mx-auto">
         <MemoLastKey {...{ pressedKeys, lastKey }} />
         <MemoForm {...{ checkboxStatusRef, isScrollIgnoredRef }} />
       </div>

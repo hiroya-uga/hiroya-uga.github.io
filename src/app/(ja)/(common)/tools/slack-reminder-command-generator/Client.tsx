@@ -395,14 +395,14 @@ export const SlackReminderCommandGenerator = () => {
               {monthState.type === 'fixed' && (
                 <>
                   <p className="mb-1 text-sm font-bold leading-snug">毎月</p>
-                  <p className="mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-hidden outline-2 has-focus-visible:outline-black">
+                  <p className="outline-hidden has-focus-visible:outline-black mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-2">
                     <input
                       type="number"
                       min={1}
                       max={31}
                       id={'month-day'}
                       value={monthState.day}
-                      className="box-content w-[2ch] px-0.5 py-1 text-center focus-visible:outline-hidden"
+                      className="focus-visible:outline-hidden box-content w-[2ch] px-0.5 py-1 text-center"
                       onInput={(e) => {
                         setMonthState({
                           ...monthState,
@@ -490,7 +490,7 @@ export const SlackReminderCommandGenerator = () => {
         <p className="whitespace-pre-wrap">{createComment({ result, type })}</p>
       </div>
       <div className="pb-4 sm:sticky sm:bottom-0 sm:z-10">
-        <div className="sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white sm:shadow-sticky">
+        <div className="sm:shadow-sticky sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white">
           <p
             className="whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-gray-300 sm:rounded-l-lg sm:rounded-r-none"
             onClick={(e) => {
@@ -525,7 +525,7 @@ export const SlackReminderCommandGenerator = () => {
             <span className="text-red-300">at {result.time || '9:00'}</span>
             <span className="text-purple-300">{result.starting && ` starting ${result.starting}`}</span>
           </p>
-          <p className="grid rounded-b-lg bg-slate-200 text-xs sm:w-89px sm:rounded-l-none sm:rounded-r-lg">
+          <p className="sm:w-89px grid rounded-b-lg bg-slate-200 text-xs sm:rounded-l-none sm:rounded-r-lg">
             <button
               type="button"
               className="grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors hover:bg-slate-300"

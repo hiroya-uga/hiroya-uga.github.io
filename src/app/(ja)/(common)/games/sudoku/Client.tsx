@@ -233,7 +233,7 @@ export const SudokuClient = () => {
 
   if (isReady === false) {
     return (
-      <p className="aspect-video grid place-items-center">
+      <p className="grid aspect-video place-items-center">
         <LoadingIcon />
       </p>
     );
@@ -241,9 +241,9 @@ export const SudokuClient = () => {
 
   return (
     <>
-      <div className="@w800px:grid grid-cols-[auto_var(--spacing-260PX)] gap-4 @w800px:gap-8 transition-opacity transition-discrete starting:opacity-0 @w800px:items-start">
+      <div className="@w800px:grid @w800px:gap-8 transition-discrete starting:opacity-0 @w800px:items-start grid-cols-[auto_var(--spacing-260PX)] gap-4 transition-opacity">
         <div
-          className="table table-fixed w-full leading-none mx-auto border-collapse border-4 border-black group"
+          className="group mx-auto table w-full table-fixed border-collapse border-4 border-black leading-none"
           ref={(div) => {
             if (div === null) {
               inputMapRef.current = [];
@@ -278,7 +278,7 @@ export const SudokuClient = () => {
                   <div
                     key={`${rowIndex}-${colIndex}`}
                     className={clsx([
-                      'table-cell border  border-black transition-[background-color] @w800px:size-[min(5vw,4rem)]',
+                      '@w800px:size-[min(5vw,4rem)] table-cell border border-black transition-[background-color]',
                       rowIndex % 3 === 0 && 'border-t-4',
                       colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
                       type === 'input' && state === 'invalid' && 'bg-red-200',
@@ -294,9 +294,9 @@ export const SudokuClient = () => {
                         return currentInput[0] === rowIndex && currentInput[1] === colIndex ? 0 : -1;
                       })()}
                       className={clsx([
-                        'text-[clamp(16px,5rem,20px)] w-full aspect-square text-center relative focus:rounded-lg focus:z-[1] transition-[color] w500:text-[max(4vw,1rem)] @w800px:text-[min(4vw,3rem)]',
+                        'w500:text-[max(4vw,1rem)] @w800px:text-[min(4vw,3rem)] relative aspect-square w-full text-center text-[clamp(16px,5rem,20px)] transition-[color] focus:z-[1] focus:rounded-lg',
                         Number.isNaN(value) && 'text-transparent',
-                        type === 'hint' && 'font-bold cursor-default',
+                        type === 'hint' && 'cursor-default font-bold',
                         type !== 'hint' && 'font-mono',
 
                         shouldShowHints && duplicated && 'text-red-700',
@@ -473,8 +473,8 @@ export const SudokuClient = () => {
           ))}
         </div>
 
-        <div className="mt-8 @w800px:mt-0 @w800:flex @w800:flex-col w-full">
-          <ul className="grid grid-cols-1 @w500:grid-cols-2 @w700:grid-cols-4 gap-4 @w800:grid-cols-1">
+        <div className="@w800px:mt-0 @w800:flex @w800:flex-col mt-8 w-full">
+          <ul className="@w500:grid-cols-2 @w700:grid-cols-4 @w800:grid-cols-1 grid grid-cols-1 gap-4">
             <li>
               <RunButton
                 disabled={gameState !== 'playing' && gameState !== 'clear'}
@@ -546,8 +546,8 @@ export const SudokuClient = () => {
                     message: '問題を再生成します。よろしいですか？',
                     children: (
                       <p>
-                        <label className="block border border-gray-400 rounded-lg px-2 pt-1">
-                          <span className="text-sm block">{`非表示の割合：${levelRef.current}%`}</span>
+                        <label className="block rounded-lg border border-gray-400 px-2 pt-1">
+                          <span className="block text-sm">{`非表示の割合：${levelRef.current}%`}</span>
                           <span>
                             <input
                               type="range"
@@ -593,9 +593,9 @@ export const SudokuClient = () => {
             </li>
           </ul>
 
-          <div className="mt-5 pt-5 border-t border-t-gray-600 border-dashed space-y-4">
+          <div className="mt-5 space-y-4 border-t border-dashed border-t-gray-600 pt-5">
             <p>
-              <label className="flex-wrap flex items-center justify-between gap-2 border border-gray-400 rounded-lg px-2 py-3">
+              <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
                 <span className="grow text-sm">ハイライト表示</span>
                 <span>
                   <Switch
@@ -614,7 +614,7 @@ export const SudokuClient = () => {
               </label>
             </p>
             <p>
-              <label className="flex-wrap flex items-center justify-between gap-2 border border-gray-400 rounded-lg px-2 py-3">
+              <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
                 <span className="grow text-sm">重複ヒント表示</span>
                 <span>
                   <Switch
@@ -633,7 +633,7 @@ export const SudokuClient = () => {
               </label>
             </p>
             <p>
-              <label className="flex-wrap flex items-center justify-between gap-2 border border-gray-400 rounded-lg px-2 py-3">
+              <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
                 <span className="grow text-sm">正解割合を表示</span>
                 <span>
                   <Switch
@@ -655,12 +655,12 @@ export const SudokuClient = () => {
 
           <p
             className={clsx([
-              'grow sticky bottom-0 font-bold mt-5 py-2 px-9px flex items-center justify-between gap-2 bg-[var(--v-color-background)] @w800px:py-0 @w800px:pr-0 @w800px:pt-5 transition-fade starting:opacity-0 @w800px:block  transition-discrete border-t border-t-gray-600 border-dashed',
-              shouldShowCorrectRatio === false && 'opacity-0 invisible',
+              'px-9px @w800px:py-0 @w800px:pr-0 @w800px:pt-5 transition-fade starting:opacity-0 @w800px:block transition-discrete sticky bottom-0 mt-5 flex grow items-center justify-between gap-2 border-t border-dashed border-t-gray-600 bg-[var(--v-color-background)] py-2 font-bold',
+              shouldShowCorrectRatio === false && 'invisible opacity-0',
             ])}
           >
             <span className="block text-sm">正解率</span>
-            <span className="text-right text-2xl block leading-[1.75] @w800px:text-[min(80px,6vw)]" aria-hidden="true">
+            <span className="@w800px:text-[min(80px,6vw)] block text-right text-2xl leading-[1.75]" aria-hidden="true">
               {correctRatio}
               <span className="@w800px:text-[0.5em]">%</span>
             </span>

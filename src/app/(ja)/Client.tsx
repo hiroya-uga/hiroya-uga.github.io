@@ -420,8 +420,8 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
   return (
     <>
-      <div className="group relative overflow-hidden @content:rounded-lg" tabIndex={0}>
-        <figure aria-live="polite" className="min-h relative bg-loading">
+      <div className="@content:rounded-lg group relative overflow-hidden" tabIndex={0}>
+        <figure aria-live="polite" className="min-h bg-loading relative">
           <div className={clsx(['aspect-3/2', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (
@@ -444,7 +444,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               <span className="w-40 text-right sm:w-56">
                 <a
                   href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
-                  className="z-10 inline-block cursor-pointer rounded-full bg-white px-3 py-1 leading-tight text-black no-underline transition-bg hover:bg-gray-200 focus-visible:outline-[white]"
+                  className="transition-bg z-10 inline-block cursor-pointer rounded-full bg-white px-3 py-1 leading-tight text-black no-underline hover:bg-gray-200 focus-visible:outline-[white]"
                 >
                   Instagramで見る
                 </a>
@@ -459,7 +459,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
             >
               <span className={clsx(...transitionClassName)}>
                 {photoData?.caption && `${photoData?.caption}`}
-                <span className="ml-1 inline-block text-2xs sm:text-xs"> at {photoData?.date}</span>
+                <span className="text-2xs ml-1 inline-block sm:text-xs"> at {photoData?.date}</span>
               </span>
             </span>
           </figcaption>
@@ -467,7 +467,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
         <p
           className={clsx([
-            'absolute bottom-0 right-2 z-10 size-8 translate-y-full  focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0 sm:h-12 sm:py-2',
+            'absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0 sm:h-12 sm:py-2',
             'transition-[opacity,visibility,translate]',
             isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
             isFirstRender && isLoading ? 'invisible' : 'visible',
@@ -475,7 +475,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="group/reload absolute inset-0 size-full   p-1 focus-visible:outline-hidden sm:top-2 sm:size-8 sm:p-0"
+            className="group/reload focus-visible:outline-hidden absolute inset-0 size-full p-1 sm:top-2 sm:size-8 sm:p-0"
             onClick={() => updateImage()}
           >
             <span className="block rounded-full bg-white outline-offset-2 group-focus-visible/reload:outline-2 group-focus-visible/reload:outline-[white] group-focus-visible/reload:[outline-style:solid;]">
@@ -484,7 +484,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
                 width={48}
                 height={48}
                 alt="ランダムに切り替える"
-                className="block size-full rounded-full border border-white  bg-white opacity-80 transition-opacity group-hover/reload:opacity-65"
+                className="block size-full rounded-full border border-white bg-white opacity-80 transition-opacity group-hover/reload:opacity-65"
               />
             </span>
           </button>
@@ -520,7 +520,7 @@ export const LinkList = ({
               <a
                 href={href}
                 {...prop}
-                className="last:rounded-r focus:relative focus:z-10 sm:grid sm:grow sm:content-center sm:rounded-l sm:bg-banner sm:p-2 sm:pl-3"
+                className="sm:bg-banner last:rounded-r focus:relative focus:z-10 sm:grid sm:grow sm:content-center sm:rounded-l sm:p-2 sm:pl-3"
               >
                 {title}
               </a>{' '}
@@ -528,7 +528,7 @@ export const LinkList = ({
                 <span className="transition-colors before:content-['\['] after:content-['\]'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden sm:hover:bg-gray-100">
                   <a
                     href={japanese}
-                    className="transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 [&:not(.clicked)]:rotate-none [&:not(.clicked)]:translate-none"
+                    className="[&:not(.clicked)]:rotate-none [&:not(.clicked)]:translate-none transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2"
                     onKeyDown={({ currentTarget, key }) => {
                       if (key === 'Enter') {
                         currentTarget.classList.add('clicked');
@@ -591,10 +591,10 @@ export const PickUpList = () => {
                   {/* {item.isWip && <b>（WIP）</b>} */}
                 </span>
                 <span
-                  className="mb-3 grid place-content-center overflow-hidden rounded-md bg-card p-10 font-emoji text-[3.5rem] leading-none sm:aspect-[1.618/1] sm:p-0"
+                  className="bg-card font-emoji mb-3 grid place-content-center overflow-hidden rounded-md p-10 text-[3.5rem] leading-none sm:aspect-[1.618/1] sm:p-0"
                   aria-hidden="true"
                 >
-                  <span className="rotate-[0.1deg] scale-[0.85] transition-transform duration-300 backface-hidden group-hover:scale-100">
+                  <span className="backface-hidden rotate-[0.1deg] scale-[0.85] transition-transform duration-300 group-hover:scale-100">
                     {emoji}
                   </span>
                 </span>

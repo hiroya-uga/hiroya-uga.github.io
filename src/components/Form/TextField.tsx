@@ -71,7 +71,7 @@ const TextareaComponent = (
     return (
       <span className="relative block">
         <span
-          className="invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border border-textfield p-2"
+          className="border-textfield invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border p-2"
           ref={dummyTextareaRef}
         >
           {props.value?.replace(/\n$/g, '\n　') || '　'}
@@ -79,7 +79,7 @@ const TextareaComponent = (
         <textarea
           {...props}
           aria-describedby={descriptionId}
-          className="min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border border-textfield p-2"
+          className="border-textfield min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border p-2"
           style={{ height: textareaHeight }}
           ref={ref}
         />
@@ -92,7 +92,7 @@ const TextareaComponent = (
       {...props}
       aria-describedby={descriptionId}
       className={clsx([
-        'w-full rounded-md border border-textfield p-2',
+        'border-textfield w-full rounded-md border p-2',
         noResize === true ? 'resize-none' : 'resize-y',
       ])}
       ref={ref}
@@ -122,7 +122,7 @@ const TextFieldComponent = (
           id={descriptionId}
           className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed"
         >
-          <p className="relative mt-0.5 grid size-4 place-items-center pt-3px [--v-fill:var(--v-color-text-secondary)]">
+          <p className="pt-3px relative mt-0.5 grid size-4 place-items-center [--v-fill:var(--v-color-text-secondary)]">
             <SvgIcon name="description" alt="" />
           </p>
           <div>
@@ -151,7 +151,7 @@ const TextFieldComponent = (
             aria-describedby={descriptionId}
             className={clsx([
               'min-h-12', // for iOS 32px + 8px padding * 2 = 48px
-              'w-full appearance-none rounded-md border border-textfield bg-textfield p-2 text-left text',
+              'border-textfield bg-textfield text w-full appearance-none rounded-md border p-2 text-left',
             ])}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}

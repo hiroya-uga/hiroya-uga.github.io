@@ -334,7 +334,7 @@ export const MediaContent = () => {
           </p>
         </div>
 
-        <ul className="mb-2 sm:space-y-4 space-y-6">
+        <ul className="mb-2 space-y-6 sm:space-y-4">
           {result.map(({ type, date, category, title, href, tags }) => {
             const defaultClickable = createId(id, href);
             return (
@@ -342,11 +342,11 @@ export const MediaContent = () => {
                 key={href}
                 as="li"
                 defaultClickable={defaultClickable}
-                className="grid grid-cols-[auto_1fr] sm:grid-cols-[6.25rem_auto_1fr] leading-6 sm:leading-7 p-2 sm:p-4 rounded-lg hover:bg-white transition-[background-color,box-shadow] hover:shadow"
+                className="grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] hover:bg-white hover:shadow sm:grid-cols-[6.25rem_auto_1fr] sm:p-4 sm:leading-7"
               >
                 <p className="col-start-1 col-end-2 content-center">
-                  <span className="relative  sm:w-full sm:bg-card sm:h-auto rounded-lg grid place-items-center sm:aspect-[4/3]">
-                    <span className="block relative size-4 sm:size-8 [--v-fill:var(--v-color-text-link)]">
+                  <span className="sm:bg-card relative grid place-items-center rounded-lg sm:aspect-[4/3] sm:h-auto sm:w-full">
+                    <span className="relative block size-4 [--v-fill:var(--v-color-text-link)] sm:size-8">
                       {(() => {
                         switch (type) {
                           case 'video':
@@ -360,20 +360,20 @@ export const MediaContent = () => {
                     </span>
                   </span>
                 </p>
-                <p className="col-start-2 col-end-3  pl-2 font-mono text-xs uppercase leading-[inherit] sm:px-4 sm:content-center sm:text-center">
+                <p className="col-start-2 col-end-3 pl-2 font-mono text-xs uppercase leading-[inherit] sm:content-center sm:px-4 sm:text-center">
                   {category}
                 </p>
-                <div className="col-start-1 col-end-3 sm:col-start-3 sm:col-end-4 text-sm leading-[inherit] sm:text-base">
+                <div className="col-start-1 col-end-3 text-sm leading-[inherit] sm:col-start-3 sm:col-end-4 sm:text-base">
                   <p>
                     <a href={href} id={defaultClickable} className="break-all visited:[--v-color-text-link:#515a9c]">
                       <Title title={title} keyword={keyword} />
                     </a>
                   </p>
 
-                  <p className="mt-1 flex gap-2 text-xs align-center leading-snug">
+                  <p className="align-center mt-1 flex gap-2 text-xs leading-snug">
                     <span>{date}</span>
 
-                    <span className="overflow-hidden text-ellipsis text-secondary sm:break-all">
+                    <span className="text-secondary overflow-hidden text-ellipsis sm:break-all">
                       {href.replace(/#.*/, '')}
                     </span>
                   </p>

@@ -183,7 +183,7 @@ const Line = ({
         key={unit}
         className={clsx([
           shouldShowDescriptions ? 'mt-6' : 'mt-4',
-          'sticky -left-2 z-1 mb-2  pl-2 text-sm leading-snug sm:text-lg',
+          'z-1 sticky -left-2 mb-2 pl-2 text-sm leading-snug sm:text-lg',
           'sm:mt-6',
           unit === 'px' && 'font-bold',
         ])}
@@ -200,7 +200,7 @@ const Line = ({
         className={clsx([
           'pointer-events-none relative z-0 -mt-8 mr-8 block overflow-hidden border-b border-dashed border-black pt-7 before:absolute before:inset-0 before:bg-blue-900 before:opacity-20',
           'sm:-mt-10 sm:pt-9',
-          'after:absolute after:right-0 after:top-0 after:z-2 after:block after:h-full after:border-r after:border-dashed after:border-black',
+          'after:z-2 after:absolute after:right-0 after:top-0 after:block after:h-full after:border-r after:border-dashed after:border-black',
         ])}
         style={{
           width: `${value}${unit}`,
@@ -283,8 +283,8 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="sticky top-2 z-10 mb-4 rounded-md border border-solid border-gray-600 bg-white p-2 shadow-sticky sm:flex sm:items-center sm:justify-between sm:gap-x-8 sm:px-4">
-        <p className="text-xs text-secondary sm:text-inherit">サンプルは横スクロールできます。</p>
+      <div className="shadow-sticky sticky top-2 z-10 mb-4 rounded-md border border-solid border-gray-600 bg-white p-2 sm:flex sm:items-center sm:justify-between sm:gap-x-8 sm:px-4">
+        <p className="text-secondary text-xs sm:text-inherit">サンプルは横スクロールできます。</p>
         <p>
           <label className="flex items-center justify-between gap-2 text-sm">
             <span>説明文を表示する</span>
@@ -308,7 +308,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
       <div className="relative">
         <div
-          className="overflow-x-auto overflow-y-hidden p-4 scroll-hint-x before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md"
+          className="scroll-hint-x overflow-x-auto overflow-y-hidden p-4 before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md"
           tabIndex={0}
         >
           <h2 className="sticky left-0 m-0 mb-2 text-lg font-bold sm:text-2xl">絶対値</h2>
@@ -411,7 +411,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
         </div>
       </div>
 
-      <div className="sticky bottom-6 z-10 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded-md border border-gray-600 bg-white py-2 pl-4 pr-3 shadow-sticky">
+      <div className="shadow-sticky sticky bottom-6 z-10 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded-md border border-gray-600 bg-white py-2 pl-4 pr-3">
         <p className="min-w-[200px] grow">
           <input
             type="range"
@@ -427,8 +427,8 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
           />
         </p>
         <p className="w-28">
-          <label className="flex flex-wrap gap-x-2  overflow-hidden rounded border border-black pl-1 outline-offset-4 focus-within:outline focus-within:outline-2 focus-within:outline-black">
-            <span id={`${id}-label`} className="block text-2xs">
+          <label className="flex flex-wrap gap-x-2 overflow-hidden rounded border border-black pl-1 outline-offset-4 focus-within:outline focus-within:outline-2 focus-within:outline-black">
+            <span id={`${id}-label`} className="text-2xs block">
               現在の値
             </span>
 
@@ -438,7 +438,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 min={0}
                 max={200}
                 value={value}
-                className="block w-full pr-2 text-right outline-hidden"
+                className="outline-hidden block w-full pr-2 text-right"
                 onChange={({ currentTarget }) => {
                   const currentValue = Number(currentTarget.value);
 
