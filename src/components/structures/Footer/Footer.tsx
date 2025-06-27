@@ -65,7 +65,7 @@ export const Footer = () => {
     <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
       {isTop || (
         <nav
-          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) mx-auto bg-gray-200 py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
+          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) mx-auto bg-breadcrumb py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
           aria-label="サイト内の現在位置"
         >
           <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
@@ -74,7 +74,7 @@ export const Footer = () => {
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer
         className={clsx([
-          'bg-[#575757] text-white [--v-fill:white]',
+          'bg-footer text-white [--v-fill:white]',
           isTop && 'sm:bg-inherit sm:text-inherit sm:[--v-fill:var(--text-color)]',
         ])}
       >
@@ -102,8 +102,8 @@ export const Footer = () => {
         <div className="max-w-structure px-content-inline mx-auto">
           <div
             className={clsx(
-              isTop && 'max-w-content mx-auto',
-              'flow-root border-t border-t-gray-400 py-12',
+              isTop && 'max-w-content mx-auto border-t border-t-gray-400',
+              'flow-root py-12',
               'md:flex md:flex-wrap md:justify-center md:gap-6 md:pb-20 md:pt-7',
             )}
           >

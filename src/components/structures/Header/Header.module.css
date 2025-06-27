@@ -1,0 +1,9 @@
+.root {
+  --v-color-text: #333;
+  --v-color-background-header: #fff;
+}
+
+[data-theme="dark"]:root .root {
+  --v-color-text: #fff;
+  --v-color-background-header: #5c5858;
+}

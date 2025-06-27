@@ -22,8 +22,11 @@
     --v-color-background-section-primary: #fff;
     --v-color-background-section-secondary: #e2e8f0;
     --v-color-background-textfield: #fff;
+    /* FIXME: ガワ系のglobalじゃないものは移動させる */
+    --v-color-background-breadcrumb: #ebe6e7;
     --v-color-background-table: #fff;
     --v-color-border-textfield: #d1d5dc;
+    --v-color-background-footer: #575757;
     --v-width-dialog: 48rem;
     --v-width-content: 60rem;
     --v-width-structure: 90rem;
@@ -39,10 +42,10 @@
     --v-color-text: #bebebe;
     --v-color-text-secondary: #c5bdb2;
     --v-color-text-link: #edc56c;
-    --v-color-text-alert: #c10000;
+    --v-color-text-alert: #fc4f4b;
     --v-color-text-description: #6b7179;
     --v-color-background: #272727;
-    --v-color-background-alert: #c10000;
+    --v-color-background-alert: #fc4f4b;
     --v-color-background-banner: #333;
     --v-color-background-loading: #333;
     --v-color-background-card: #4b4845;
@@ -52,7 +55,9 @@
     --v-color-background-section-primary: #111;
     --v-color-background-section-secondary: #1c1c1c;
     --v-color-background-textfield: #3d3c3a;
+    --v-color-background-breadcrumb: #3d3c3a;
     --v-color-background-table: #3d3c3a;
+    --v-color-background-footer: #5c5858;
     --v-color-border-textfield: #111;
   }
 
@@ -133,7 +138,10 @@
   --background-color-card: var(--v-color-background-card);
   --background-color-card-secondary: var(--v-color-background-card-secondary);
   --background-color-banner: var(--v-color-background-banner);
+  --background-color-breadcrumb: var(--v-color-background-breadcrumb);
   --background-color-table: var(--v-color-background-table);
+  --background-color-header: var(--v-color-background-header);
+  --background-color-footer: var(--v-color-background-footer);
   --border-color-textfield: var(--v-color-border-textfield);
 
   --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
