@@ -299,7 +299,7 @@ export const SudokuClient = () => {
                         type === 'hint' && 'cursor-default font-bold',
                         type !== 'hint' && 'font-mono',
 
-                        shouldShowHints && duplicated && 'text-red-700',
+                        shouldShowHints && duplicated && 'text-alert',
 
                         shouldHighLight && isHoverCurrent && 'bg-cyan-800/15',
                         shouldHighLight && isHoverCurrent === false && isHoverRowOrColumn && 'bg-cyan-800/10',
