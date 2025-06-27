@@ -634,7 +634,7 @@ export const SudokuClient = () => {
             </p>
             <p>
               <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
-                <span className="grow text-sm">正解割合を表示</span>
+                <span className="grow text-sm">進捗率を表示</span>
                 <span>
                   <Switch
                     checked={shouldShowCorrectRatio}
@@ -659,7 +659,7 @@ export const SudokuClient = () => {
               shouldShowCorrectRatio === false && 'invisible opacity-0',
             ])}
           >
-            <span className="block text-sm">正解率</span>
+            <span className="block text-sm">進捗率</span>
             <span className="@w800px:text-[min(80px,6vw)] block text-right text-2xl leading-[1.75]" aria-hidden="true">
               {correctRatio}
               <span className="@w800px:text-[0.5em]">%</span>
