@@ -1,0 +1,45 @@
+@layer components {
+  .root {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid #00000022;
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: var(--background-color-table);
+    }
+
+    th,
+    td {
+      padding: 0.5rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      font-weight: bold;
+      text-align: left;
+    }
+
+    th:first-child {
+      border-right: 2px solid #00000022;
+    }
+
+    thead {
+      background-color: #00000011;
+    }
+
+    tbody :where(th, td) {
+      border: 1px solid #00000022;
+      border-width: 1px 0;
+    }
+
+    tbody tr:first-child :where(th, td) {
+      border-top: 2px solid #00000022;
+    }
+
+    tbody th {
+      background-color: #00000011;
+    }
+  }
+}
