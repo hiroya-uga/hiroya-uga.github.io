@@ -1,4 +1,4 @@
-type Key = 'welcome-message-viewed';
+type Key = keyof Value;
 type Value = {
   'welcome-message-viewed': 'true';
 };

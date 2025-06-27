@@ -1,5 +1,5 @@
 'use client';
-import { TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
+import { GAMES_LINK_LIST, TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -553,7 +553,7 @@ export const LinkList = ({
   );
 };
 
-const pickUpListAll = [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST];
+const pickUpListAll = [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST, ...GAMES_LINK_LIST];
 
 export const PickUpList = () => {
   const [pickUpList, setPickUpList] = useState<typeof pickUpListAll>([]);

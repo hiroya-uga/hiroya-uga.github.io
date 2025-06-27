@@ -1,8 +1,9 @@
 import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/meta';
+import { Metadata } from 'next';
 
 export const SEO: Record<
   string,
-  { title: string; description: string; beforeSubTitle?: string; afterSubTitle?: string }
+  { title: string; description: string; beforeSubTitle?: string; afterSubTitle?: string } & Pick<Metadata, 'robots'>
 > = {
   '/': {
     title: SITE_NAME,
@@ -316,6 +317,15 @@ export const SEO: Record<
   '/documents/fantasized-specs/css-observer': {
     title: 'CSS Observer Module level 1 - Fantasized specs',
     description: '',
+  },
+  '/games': {
+    title: 'ゲーム置き場',
+    description: `ちょっとしたゲームが置かれています。暇つぶしにどうぞ🥁`,
+  },
+  '/games/sudoku': {
+    title: '無限数独（ナンプレ）',
+    afterSubTitle: 'Infinity Sudoku',
+    description: `ランダムに生成された数独がひたすら解けます。\n数独とは、9行9列、9つの3×3のブロックいずれも、1から9までの数字が1つずつ入るように数字を入れていくパズルです。`,
   },
   '/privacy-policy': {
     title: 'プライバシーポリシー',
