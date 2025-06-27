@@ -4,9 +4,10 @@ type Props = {
   children: React.ReactNode;
   level?: 2 | 3 | 4 | 5 | 6;
   keepUseMarginTop?: boolean;
+  id?: string;
 };
 
-export const Heading = ({ level = 2, children, keepUseMarginTop = false }: Props) => {
+export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Props) => {
   switch (level) {
     case 2:
       return (
@@ -15,9 +16,8 @@ export const Heading = ({ level = 2, children, keepUseMarginTop = false }: Props
             'mb-paragraph text-xl font-bold leading-snug sm:text-2xl',
             keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
           ])}
-        >
-          {children}
-        </h2>
+          {...props}
+        />
       );
     case 3:
       return (
@@ -26,9 +26,8 @@ export const Heading = ({ level = 2, children, keepUseMarginTop = false }: Props
             'mb-paragraph text-lg font-bold leading-snug sm:text-xl',
             keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
           ])}
-        >
-          {children}
-        </h3>
+          {...props}
+        />
       );
 
     default:
