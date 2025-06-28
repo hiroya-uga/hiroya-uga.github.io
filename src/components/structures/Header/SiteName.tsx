@@ -18,7 +18,7 @@ export const SiteName = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             role="none"
-            className="2xl:h-296px 2xl:min-h-296px w500:w-60 ml-auto h-[1.465rem] max-h-full w-[240px] max-w-full 2xl:w-8 2xl:min-w-8 [fill:var(--v-color-text)]"
+            className="2xl:h-296px 2xl:min-h-296px w500:w-60 ml-auto h-[1.465rem] max-h-full w-[240px] max-w-full [fill:var(--v-color-text)] 2xl:w-8 2xl:min-w-8"
           >
             <text x="0" y="50%" textAnchor="start" className="translate-y-[4px] 2xl:hidden">
               {/* bootstrapを読み込んでいる画面だとunderlineがつかない */}

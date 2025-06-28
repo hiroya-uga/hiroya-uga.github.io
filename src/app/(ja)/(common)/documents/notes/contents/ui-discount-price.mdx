@@ -48,9 +48,7 @@ Deletions are typically used to either mark differences between two versions of 
 `s`要素は古くから存在する要素だが、アクセシビリティ・サポーテッドかどうかを確認しておく。
 
 <ExampleBox>
-  <p>
-    私は昨日、<s>ラーメン</s>お寿司を食べました。
-  </p>
+  私は昨日、<s>ラーメン</s>お寿司を食べました。
 </ExampleBox>
 
 上記の例をブラウザがどう解釈しているのかを確認してみる。
@@ -190,8 +188,8 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 <ExampleBox>
   <p>
     <span className="mb-1 block text-xs">通常価格：¥3,000</span>
-    <strong className="text-red-600">
-      <span className="mb-1 block text-xs leading-tight text-red-600">セール価格（税込）：</span>
+    <strong className="text-alert">
+      <span className="text-alert mb-1 block text-xs leading-tight">セール価格（税込）：</span>
       <span className="mr-2 block text-4xl font-bold leading-none">¥1,980</span>
     </strong>
   </p>
@@ -217,7 +215,7 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
     </span>
     <strong>
       <span className="sr-only">セール価格</span>
-      <span className="mr-2 text-3xl font-bold leading-none text-red-600">¥1,980</span>
+      <span className="text-alert mr-2 text-3xl font-bold leading-none">¥1,980</span>
     </strong>
   </p>
 </ExampleBox>
@@ -243,7 +241,7 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
     </s>
     <strong>
       <span className="sr-only">セール価格</span>
-      <span className="mr-2 text-3xl font-bold leading-none text-red-600">¥1,980</span>
+      <span className="text-alert mr-2 text-3xl font-bold leading-none">¥1,980</span>
     </strong>
   </p>
 </ExampleBox>

@@ -98,7 +98,7 @@
 #article table {
   clear: both;
   border-collapse: collapse;
-  background: #fff;
+  background: var(--background-color-table);
 }
 
 #article th,
@@ -114,7 +114,7 @@
 
 #article th {
   text-align: left;
-  background-color: #ecedf3;
+  background-color: var(--background-color-table-header);
 }
 #article thead th {
   text-align: center;
@@ -128,4 +128,10 @@
 
 #article p:has(img:first-child:last-child) {
   margin-block: 2em;
+}
+
+[data-theme="dark"]:root {
+  #article pre:has(code) {
+    filter: invert(1);
+  }
 }

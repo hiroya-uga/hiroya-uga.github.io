@@ -7,7 +7,7 @@ type Props = BlockquoteHTMLAttributes<HTMLQuoteElement> & {
 
 export const SpecBlockQuote = ({ cite, title, ja, children }: Props) => {
   return (
-    <div className="relative rounded-md bg-white pl-2 pt-3" data-id="blockquote">
+    <div className="bg-banner relative rounded-md pl-2 pt-3" data-id="blockquote">
       <div aria-hidden="true" className="-mb-8 select-none font-mono text-8xl leading-none opacity-10">
         “
       </div>
