@@ -2,7 +2,7 @@
   .root {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid #00000022;
+    border: 1px solid var(--border-color-table);
 
     table {
       border-collapse: collapse;
@@ -22,24 +22,24 @@
     }
 
     th:first-child {
-      border-right: 2px solid #00000022;
+      border-right: 2px solid var(--border-color-table);
     }
 
     thead {
-      background-color: #00000011;
+      background-color: var(--background-color-table-header);
     }
 
     tbody :where(th, td) {
-      border: 1px solid #00000022;
+      border: 1px solid var(--border-color-table);
       border-width: 1px 0;
     }
 
     tbody tr:first-child :where(th, td) {
-      border-top: 2px solid #00000022;
+      border-top: 2px solid var(--border-color-table);
     }
 
     tbody th {
-      background-color: #00000011;
+      background-color: var(--background-color-table-header);
     }
   }
 }

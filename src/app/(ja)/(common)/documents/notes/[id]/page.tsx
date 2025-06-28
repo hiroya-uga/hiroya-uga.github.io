@@ -113,7 +113,10 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
               <p className="leading-none">キーワード：</p>
               <ul className="flex flex-wrap items-center gap-2">
                 {keywords?.map((keyword) => (
-                  <li key={keyword} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
+                  <li
+                    key={keyword}
+                    className="rounded border border-solid border-gray-300 bg-white p-2 leading-none text-[#333] dark:bg-[#ccc]"
+                  >
                     {keyword}
                   </li>
                 ))}
@@ -127,7 +130,10 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
               <p className="leading-none">採用技術：</p>
               <ul className="flex flex-wrap items-center gap-2">
                 {dependencies?.map((keyword) => (
-                  <li key={keyword} className="rounded border border-solid border-gray-300 bg-white p-2 leading-none">
+                  <li
+                    key={keyword}
+                    className="rounded border border-solid border-gray-300 bg-white p-2 leading-none text-[#333] dark:bg-[#ccc]"
+                  >
                     {keyword}
                   </li>
                 ))}

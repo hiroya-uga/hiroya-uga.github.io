@@ -528,7 +528,7 @@ export const LinkList = ({
                 <span className="transition-colors before:content-['\['] after:content-['\]'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden sm:hover:bg-gray-100">
                   <a
                     href={japanese}
-                    className="[&:not(.clicked)]:rotate-none [&:not(.clicked)]:translate-none transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2"
+                    className="[&:not(.clicked)]:rotate-none [&:not(.clicked)]:translate-none transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 sm:dark:bg-[#2a3544]"
                     onKeyDown={({ currentTarget, key }) => {
                       if (key === 'Enter') {
                         currentTarget.classList.add('clicked');

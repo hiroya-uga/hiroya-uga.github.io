@@ -65,7 +65,7 @@ export const Footer = () => {
     <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
       {isTop || (
         <nav
-          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) mx-auto bg-breadcrumb py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
+          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) bg-breadcrumb mx-auto py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
           aria-label="サイト内の現在位置"
         >
           <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
