@@ -79,7 +79,7 @@ const TextareaComponent = (
         <textarea
           {...props}
           aria-describedby={descriptionId}
-          className="border-textfield min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border p-2"
+          className="border-textfield bg-textfield min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border p-2"
           style={{ height: textareaHeight }}
           ref={ref}
         />
@@ -92,7 +92,7 @@ const TextareaComponent = (
       {...props}
       aria-describedby={descriptionId}
       className={clsx([
-        'border-textfield w-full rounded-md border p-2',
+        'border-textfield bg-textfield w-full rounded-md border p-2',
         noResize === true ? 'resize-none' : 'resize-y',
       ])}
       ref={ref}
@@ -122,7 +122,7 @@ const TextFieldComponent = (
           id={descriptionId}
           className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed"
         >
-          <p className="pt-3px relative mt-0.5 grid size-4 place-items-center [--v-fill:var(--v-color-text-secondary)]">
+          <p className="pt-3px relative mt-3px grid size-4 place-items-center [--v-fill:var(--v-color-text-secondary)]">
             <SvgIcon name="description" alt="" />
           </p>
           <div>
