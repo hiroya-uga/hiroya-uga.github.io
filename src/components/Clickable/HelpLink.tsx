@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { SvgIcon } from '@/components/Icons';
 
 type Props = {
   href: string;
@@ -8,7 +8,9 @@ type Props = {
 export const HelpLink = ({ href, children }: Props) => {
   return (
     <a href={href} className="grid w-fit grid-cols-[1rem_auto] gap-1 text-base leading-[1.875]">
-      <Image src="/common/images/icons/question.svg" alt="" className="mt-7px size-4" width={16} height={16} />
+      <span className="block mt-7px size-4 relative [--v-fill:var(--color-link)]">
+        <SvgIcon name="question" alt="" />
+      </span>
       <span>{children}</span>
     </a>
   );

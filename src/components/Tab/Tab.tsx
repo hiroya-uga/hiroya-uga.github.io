@@ -2,6 +2,8 @@ import { createContext, useCallback, useContext, useId, useMemo, useState } from
 
 import clsx from 'clsx';
 
+import styles from '@/components/Tab/Tab.module.css';
+
 type Context = {
   readonly currentKey: string;
   readonly id: string;
@@ -79,8 +81,8 @@ export const Tab = {
 
     return (
       <TabContext.Provider value={{ currentKey, id }}>
-        <div className="bg-white">
-          <div className="border-b border-gray-300">
+        <div className={clsx(styles.root, 'bg-[var(--v-tab)]')}>
+          <div className="border-b border-[var(--v-tab-border)]">
             <div
               role="tablist"
               className="relative top-px flex overflow-x-auto overflow-y-hidden whitespace-nowrap px-4"
@@ -92,8 +94,10 @@ export const Tab = {
                   <button
                     type="button"
                     className={clsx([
-                      'not-first:border-l-0 relative min-w-28 rounded-t-lg border border-gray-300 px-2 py-0.5 focus-visible:-outline-offset-2',
-                      isSelected ? 'z-10 border-b-white bg-white font-bold' : 'border-b-gray-300 bg-gray-100',
+                      'not-first:border-l-0 relative min-w-28 rounded-t-lg border border-[var(--v-tab-border)] dark:[--outline-color:#fff] [--outline-offset:-2px] px-2 py-0.5 focus-visible:-outline-offset-2',
+                      isSelected
+                        ? 'z-10 border-b-[var(--v-tab)] bg-[var(--v-tab)] font-bold'
+                        : 'border-b-[var(--v-tab-border)] bg-[var(--v-tab-inactive)]',
                     ])}
                     key={tabKey}
                     id={`${id}-tab-${tabKey}`}

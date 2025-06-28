@@ -13,6 +13,8 @@ import { SITE_NAME } from '@/constants/meta';
 import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
 
+import styles from '@/components/structures/Footer/Footer.module.css';
+
 const ListItem = () => {
   const pathname = usePathname() ?? '';
   const generatePaths = (path: string) => {
@@ -62,10 +64,10 @@ export const Footer = () => {
   const isTop = pathname === '/';
 
   return (
-    <div className={clsx([isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
+    <div className={clsx([styles.root, isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
       {isTop || (
         <nav
-          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) bg-breadcrumb mx-auto py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
+          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) mx-auto py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
           aria-label="サイト内の現在位置"
         >
           <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
@@ -74,7 +76,7 @@ export const Footer = () => {
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer
         className={clsx([
-          'bg-footer text-white [--v-fill:white]',
+          'bg-(--v-color-background-footer) text-(--v-color-text-footer) [--v-fill:var(--v-color-text-footer)]',
           isTop && 'sm:bg-inherit sm:text-inherit sm:[--v-fill:var(--text-color)]',
         ])}
       >

@@ -22,13 +22,10 @@
     --v-color-background-section-primary: #fff;
     --v-color-background-section-secondary: #e2e8f0;
     --v-color-background-textfield: #fff;
-    /* FIXME: ガワ系のglobalじゃないものは移動させる */
-    --v-color-background-breadcrumb: #ebe6e7;
     --v-color-background-table: #fff;
     --v-color-background-table-header: #00000011;
     --v-color-border-textfield: #d1d5dc;
     --v-color-border-table: #00000022;
-    --v-color-background-footer: #575757;
     --v-width-dialog: 48rem;
     --v-width-content: 60rem;
     --v-width-structure: 90rem;
@@ -57,10 +54,8 @@
     --v-color-background-section-primary: #111;
     --v-color-background-section-secondary: #1c1c1c;
     --v-color-background-textfield: #3d3c3a;
-    --v-color-background-breadcrumb: #3d3c3a;
     --v-color-background-table: #3d3c3a;
     --v-color-background-table-header: #00000011;
-    --v-color-background-footer: #5c5858;
     --v-color-border-table: #00000022;
     --v-color-border-textfield: #111;
   }
@@ -142,11 +137,9 @@
   --background-color-card: var(--v-color-background-card);
   --background-color-card-secondary: var(--v-color-background-card-secondary);
   --background-color-banner: var(--v-color-background-banner);
-  --background-color-breadcrumb: var(--v-color-background-breadcrumb);
   --background-color-table: var(--v-color-background-table);
   --background-color-table-header: var(--v-color-background-table-header);
   --background-color-header: var(--v-color-background-header);
-  --background-color-footer: var(--v-color-background-footer);
   --border-color-textfield: var(--v-color-border-textfield);
   --border-color-table: var(--v-color-border-table);
 
@@ -227,8 +220,8 @@
   }
 
   :focus-visible {
-    outline: 2px solid #000;
-    outline-offset: 2px;
+    outline: 2px solid var(--outline-color, #000);
+    outline-offset: var(--outline-offset, 2px);
     box-shadow: 0 0 0 2px #fff;
   }
 
