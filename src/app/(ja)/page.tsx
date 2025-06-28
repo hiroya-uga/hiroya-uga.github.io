@@ -4,11 +4,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { LinkList, PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/Client';
+import { PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/Client';
 import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
 
+import { LinkListForTop } from '@/app/(ja)/parts/LinkListForTop';
 import { SvgIcon } from '@/components/Icons';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
@@ -120,7 +121,7 @@ export default function Home() {
                           className="@w640:bg-card-secondary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none"
                           aria-hidden="true"
                         >
-                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative absolute right-0 top-1.5 text-[200px] leading-none opacity-30 blur-[4px]">
+                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative @w640:top-0 absolute right-0 top-1.5 text-[200px] leading-none opacity-30 blur-[4px]">
                             {emoji}
                           </span>
                         </span>
@@ -174,7 +175,7 @@ export default function Home() {
 
             <p className="mb-4">外部サイトへのリンク集です。</p>
 
-            <LinkList
+            <LinkListForTop
               list={[
                 {
                   href: 'https://html.spec.whatwg.org/multipage/',

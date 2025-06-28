@@ -494,65 +494,6 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   );
 };
 
-export const LinkList = ({
-  list,
-}: {
-  list: {
-    href: string;
-    title: string;
-    hrefLang?: string;
-    japanese?: string;
-  }[];
-}) => {
-  return (
-    <ul className="mb-2 pl-4 leading-normal sm:grid sm:grid-cols-2 sm:gap-x-[30px] sm:gap-y-[24px] sm:pl-0 sm:text-sm md:grid-cols-3">
-      {list.map(({ title, href, japanese, ...prop }, index, { length }) => {
-        return (
-          <li
-            key={href}
-            className={clsx([
-              index !== length - 1 && 'pb-3 sm:pb-0',
-              'list-disc sm:grid sm:min-h-[calc(1em+1em*2*1.5)]',
-              'break-all',
-            ])}
-          >
-            <div className="sm:flex sm:min-h-[60px]">
-              <a
-                href={href}
-                {...prop}
-                className="sm:bg-banner last:rounded-r focus:relative focus:z-10 sm:grid sm:grow sm:content-center sm:rounded-l sm:p-2 sm:pl-3"
-              >
-                {title}
-              </a>{' '}
-              {japanese && (
-                <span className="transition-colors before:content-['\['] after:content-['\]'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden sm:hover:bg-gray-100">
-                  <a
-                    href={japanese}
-                    className="[&:not(.clicked)]:rotate-none [&:not(.clicked)]:translate-none transition-transform sm:flex sm:grow sm:translate-x-2 sm:translate-y-1 sm:rotate-6 sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 sm:dark:bg-[#2a3544]"
-                    onKeyDown={({ currentTarget, key }) => {
-                      if (key === 'Enter') {
-                        currentTarget.classList.add('clicked');
-                      }
-                    }}
-                    onMouseDown={({ currentTarget }) => {
-                      currentTarget.classList.add('clicked');
-                    }}
-                    onBlur={({ currentTarget }) => {
-                      currentTarget.classList.remove('clicked');
-                    }}
-                  >
-                    日本語訳
-                  </a>
-                </span>
-              )}
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
-
 const pickUpListAll = [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST, ...GAMES_LINK_LIST];
 
 export const PickUpList = () => {
