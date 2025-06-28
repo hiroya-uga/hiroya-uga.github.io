@@ -112,6 +112,8 @@
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
   --text-8xl: 6rem;
   --leading-inherit: inherit;
 
@@ -257,6 +259,7 @@
 
   a {
     color: var(--v-color-text-link);
+    --v-fill: var(--v-color-text-link);
     text-decoration: underline;
     word-break: break-word;
   }

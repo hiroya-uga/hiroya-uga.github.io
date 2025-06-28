@@ -4,7 +4,16 @@ import { SVG_ID_PREFIX, SVG_PORTAL_ID } from '@/constants/id';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
-type Name = 'article' | 'arrow-right' | 'book' | 'description' | 'headphone' | 'play' | 'new-tab' | 'question';
+type Name =
+  | 'article'
+  | 'arrow-right'
+  | 'arrow2-right'
+  | 'book'
+  | 'description'
+  | 'headphone'
+  | 'play'
+  | 'new-tab'
+  | 'question';
 const map = new Map<Name, boolean>();
 
 export const SvgIcon = ({ name, alt }: { name: Name; alt: string }) => {

@@ -76,8 +76,8 @@ export const Footer = () => {
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer
         className={clsx([
-          'bg-(--v-color-background-footer) text-(--v-color-text-footer) [--v-fill:var(--v-color-text-footer)]',
-          isTop && 'sm:bg-inherit sm:text-inherit sm:[--v-fill:var(--text-color)]',
+          'bg-(--v-color-background-footer) text-(--v-color-text-footer)',
+          isTop && 'sm:bg-inherit sm:text-inherit',
         ])}
       >
         {!isTop && (
@@ -120,7 +120,10 @@ export const Footer = () => {
                   <li key={href} className={className}>
                     <Link
                       href={href}
-                      className={clsx(['text-inherit', isTop === false && 'outline-white!'])}
+                      className={clsx([
+                        'text-inherit [--v-fill:var(--v-color-text-footer)]',
+                        isTop ? 'sm:[--v-fill:var(--text-color)]' : 'outline-white!',
+                      ])}
                       target={target}
                       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
                     >

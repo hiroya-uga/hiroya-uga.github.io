@@ -1,4 +1,5 @@
 import { SvgIcon } from '@/components/Icons';
+import Link from 'next/link';
 
 type Props = {
   href: string;
@@ -7,11 +8,11 @@ type Props = {
 
 export const HelpLink = ({ href, children }: Props) => {
   return (
-    <a href={href} className="grid w-fit grid-cols-[1rem_auto] gap-1 text-base leading-[1.875]">
-      <span className="block mt-7px size-4 relative [--v-fill:var(--color-link)]">
+    <Link href={href} className="grid w-fit grid-cols-[1rem_auto] gap-1 text-base leading-[1.875]">
+      <span className="mt-7px relative block size-4">
         <SvgIcon name="question" alt="" />
       </span>
       <span>{children}</span>
-    </a>
+    </Link>
   );
 };

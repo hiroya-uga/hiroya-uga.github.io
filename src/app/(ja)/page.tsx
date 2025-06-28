@@ -9,6 +9,7 @@ import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
 
+import { SvgIcon } from '@/components/Icons';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { getMetadata } from '@/utils/seo';
@@ -88,38 +89,53 @@ export default function Home() {
           <div className="max-w-content mx-auto">
             <h2 className="mb-4 text-xl font-bold sm:text-2xl">Category</h2>
 
-            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
-              {[
-                {
-                  emoji: '🔧',
-                  href: '/tools',
-                },
-                {
-                  emoji: '📚',
-                  href: '/documents',
-                },
-                {
-                  emoji: '🎮',
-                  href: '/games',
-                },
-              ].map(({ emoji, href }) => {
-                const { pageTitle } = getMetadata(href);
+            <div className="@container">
+              <ul className="@w640:grid @w640:grid-cols-3 @w640:gap-8">
+                {[
+                  {
+                    emoji: '🔧',
+                    href: '/tools',
+                  },
+                  {
+                    emoji: '📚',
+                    href: '/documents',
+                  },
+                  {
+                    emoji: '🎮',
+                    href: '/games',
+                  },
+                ].map(({ emoji, href }) => {
+                  const { pageTitle } = getMetadata(href);
 
-                return (
-                  <li key={href}>
-                    <Link href={href} className="group block rounded-md no-underline">
-                      <span
-                        className="bg-card-secondary font-emoji mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md text-5xl leading-none"
-                        aria-hidden="true"
+                  return (
+                    <li
+                      key={href}
+                      className="not-last:border-b not-last:border-b-(--v-color-background-section-secondary) @w640:border-0! group border-solid"
+                    >
+                      <Link
+                        href={href}
+                        className="@w640:p-0 @w640:rounded-md bg-banner @w640:bg-transparent group relative block overflow-hidden px-4 py-10 no-underline group-first:rounded-t-lg group-last:rounded-b-lg"
                       >
-                        <span className="transition-transform duration-300 group-hover:scale-[1.15]">{emoji}</span>
-                      </span>
-                      <span className="font-bold group-hover:underline">→ {pageTitle}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+                        <span
+                          className="@w640:bg-card-secondary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none"
+                          aria-hidden="true"
+                        >
+                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative absolute right-0 top-0 text-[200px] leading-none opacity-30 blur-[3px]">
+                            {emoji}
+                          </span>
+                        </span>
+                        <span className="font-bold group-hover:underline">
+                          <span className="mb-3px @w640:size-3 @w640:mb-5px @w640:ml-1 relative mr-1.5 inline-block size-4 align-middle">
+                            <SvgIcon name="arrow2-right" alt="" />
+                          </span>
+                          {pageTitle}
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
 

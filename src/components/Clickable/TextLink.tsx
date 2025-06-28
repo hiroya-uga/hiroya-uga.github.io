@@ -19,7 +19,7 @@ export const TextLink = ({ href, children, target }: Props) => {
     >
       {children}
       {target === '_blank' && (
-        <span className="mb-4px relative ml-[0.2em] inline-block size-[1em] align-middle [--v-fill:var(--color-link)]">
+        <span className="mb-4px relative ml-[0.2em] inline-block size-[1em] align-middle">
           <SvgIcon name="new-tab" alt="新しいタブで開く" />
         </span>
       )}
