@@ -120,7 +120,7 @@ export default function Home() {
                           className="@w640:bg-card-secondary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none"
                           aria-hidden="true"
                         >
-                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative absolute right-0 top-0 text-[200px] leading-none opacity-30 blur-[3px]">
+                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative absolute right-0 top-1.5 text-[200px] leading-none opacity-30 blur-[4px]">
                             {emoji}
                           </span>
                         </span>
