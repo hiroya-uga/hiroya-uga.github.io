@@ -66,7 +66,7 @@ export default function Page() {
 
       <Table>
         <colgroup>
-          <col className="w-[11rem]" />
+          <col />
           <col />
         </colgroup>
         <thead>
