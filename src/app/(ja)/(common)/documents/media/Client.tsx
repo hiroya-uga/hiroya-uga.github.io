@@ -342,11 +342,11 @@ export const MediaContent = () => {
                 key={href}
                 as="li"
                 defaultClickable={defaultClickable}
-                className="grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] hover:bg-white hover:shadow sm:grid-cols-[6.25rem_auto_1fr] sm:p-4 sm:leading-7"
+                className="grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:bg-white hover:shadow sm:grid-cols-[6.25rem_auto_1fr] sm:p-4 sm:leading-7"
               >
                 <p className="col-start-1 col-end-2 content-center">
                   <span className="sm:bg-card relative grid place-items-center rounded-lg sm:aspect-[4/3] sm:h-auto sm:w-full">
-                    <span className="relative block size-4 [--v-fill:var(--v-color-text-link)] sm:size-8">
+                    <span className="relative block size-4 sm:size-8">
                       {(() => {
                         switch (type) {
                           case 'video':

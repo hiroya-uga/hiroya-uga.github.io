@@ -94,7 +94,7 @@ export const Tab = {
                   <button
                     type="button"
                     className={clsx([
-                      'not-first:border-l-0 relative min-w-28 rounded-t-lg border border-[var(--v-tab-border)] dark:[--outline-color:#fff] [--outline-offset:-2px] px-2 py-0.5 focus-visible:-outline-offset-2',
+                      'not-first:border-l-0 relative min-w-28 rounded-t-lg border border-[var(--v-tab-border)] px-2 py-0.5 [--outline-offset:-2px] focus-visible:-outline-offset-2 dark:[--outline-color:#fff]',
                       isSelected
                         ? 'z-10 border-b-[var(--v-tab)] bg-[var(--v-tab)] font-bold'
                         : 'border-b-[var(--v-tab-border)] bg-[var(--v-tab-inactive)]',

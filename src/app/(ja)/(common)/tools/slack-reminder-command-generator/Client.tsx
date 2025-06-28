@@ -305,7 +305,7 @@ export const SlackReminderCommandGenerator = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-5xl rounded-2xl bg-banner p-4 py-10 shadow-md sm:px-12 sm:py-14" ref={ref}>
+      <div className="bg-banner mx-auto max-w-5xl rounded-2xl p-4 py-10 shadow-md sm:px-12 sm:py-14" ref={ref}>
         <div className="mx-auto max-w-2xl">
           <div className="mb-12">
             <TextField
@@ -489,10 +489,10 @@ export const SlackReminderCommandGenerator = () => {
         <h2 className="mb-1 font-bold">出力結果：</h2>
         <p className="whitespace-pre-wrap">{createComment({ result, type })}</p>
       </div>
-      <div className="pb-4 sm:sticky sm:bottom-0 sm:z-10 ">
-        <div className="sm:shadow-sticky sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white dark:border-slate-500 border border-transparent bg-gray-800">
+      <div className="pb-4 sm:sticky sm:bottom-0 sm:z-10">
+        <div className="sm:shadow-sticky border border-transparent bg-gray-800 sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white dark:border-slate-500">
           <p
-            className="whitespace-pre-wrap rounded-t-lg p-4 font-mono text-xs bg-gray-800 text-gray-300 sm:rounded-l-lg sm:rounded-r-none"
+            className="whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-gray-300 sm:rounded-l-lg sm:rounded-r-none"
             onClick={(e) => {
               window.getSelection()?.removeAllRanges();
               const range = document.createRange();
@@ -554,7 +554,7 @@ export const SlackReminderCommandGenerator = () => {
               }}
             >
               <Image src="/common/images/icons/copy.svg" alt="" className="size-4" width={16} height={16} />
-              <span className="font-bold text-[#333] leading-4" aria-live="assertive" title="出力結果をコピー">
+              <span className="font-bold leading-4 text-[#333]" aria-live="assertive" title="出力結果をコピー">
                 Copy
               </span>
             </button>

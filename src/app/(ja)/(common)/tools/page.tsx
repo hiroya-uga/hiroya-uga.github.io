@@ -50,7 +50,7 @@ export default function Page() {
                   <dt>
                     <Link href={pathname} id={linkAreaId} className="font-bold no-underline group-hover:underline">
                       {pageTitle}
-                      <span className="@w640:relative @w640:mb-1 @w640:ml-4 @w640:align-middle @w640:inline-block @w640:size-3 @w640:group-hover:transform-none absolute inset-y-0 right-3 my-auto block size-4 transition-transform duration-300 [--v-fill:var(--color-link)] group-hover:translate-x-1">
+                      <span className="@w640:relative @w640:mb-1 @w640:ml-4 @w640:align-middle @w640:inline-block @w640:size-3 @w640:group-hover:transform-none absolute inset-y-0 right-3 my-auto block size-4 transition-transform duration-300 group-hover:translate-x-1">
                         <SvgIcon name="arrow-right" alt="" />
                       </span>
                     </Link>
