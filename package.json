@@ -34,6 +34,7 @@
     "@types/mdx": "^2.0.5",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "autoprefixer": "^10.4.16",
+    "canvas": "^3.1.2",
     "clsx": "^2.0.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-no-relative-import-paths": "^1.5.2",
@@ -57,6 +58,7 @@
     "next-lint": "next lint",
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
+    "type-check": "tsc --noEmit",
     "start": "next start"
   }
 }

@@ -7,9 +7,11 @@ import clsx from 'clsx';
 
 import styles from '@/components/structures/Header/Header.module.css';
 
-export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' }) => {
+export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
   return (
-    <header className={clsx(styles.root, 'mb-(--v-header-margin-bottom) text-text')}>
+    <header
+      className={clsx([styles.root, layout !== 'article-content' && 'mb-(--v-header-margin-bottom)', 'text-text'])}
+    >
       <SiteName />
 
       <div className="mt-8 px-4 sm:pl-10 sm:pt-8 2xl:pt-16">

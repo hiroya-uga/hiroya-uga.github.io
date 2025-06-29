@@ -15,7 +15,7 @@ import { SNS_LINKS } from '@/constants/sns';
 
 import styles from '@/components/structures/Footer/Footer.module.css';
 
-const ListItem = () => {
+const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname() ?? '';
   const generatePaths = (path: string) => {
     const segments = path.replace(/^\/|\/$/g, '').split('/');
@@ -55,11 +55,32 @@ const ListItem = () => {
 
         return <Fragment key={path} />;
       })}
+
+      {additionalBreadcrumbs?.map(({ title, href }) => (
+        <li key={href} className='after:px-2 after:content-["/"]'>
+          <Link href={href} className="leading-inherit text-inherit">
+            {title}
+          </Link>
+        </li>
+      ))}
+
+      {currentPageTitle && (
+        <li>
+          <a aria-current="page" className="leading-inherit text-inherit">
+            {currentPageTitle}
+          </a>
+        </li>
+      )}
     </>
   );
 };
 
-export const Footer = () => {
+type Props = {
+  additionalBreadcrumbs?: { title: string; href: string }[];
+  currentPageTitle?: string;
+};
+
+export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname();
   const isTop = pathname === '/';
 
@@ -70,7 +91,9 @@ export const Footer = () => {
           className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) mx-auto py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
           aria-label="サイト内の現在位置"
         >
-          <ol className="flex flex-wrap gap-y-0.5 leading-normal">{<ListItem />}</ol>
+          <ol className="flex flex-wrap gap-y-0.5 leading-normal">
+            {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
+          </ol>
         </nav>
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 type Name =
   | 'article'
+  | 'arrow-left'
   | 'arrow-right'
   | 'arrow2-right'
   | 'book'
