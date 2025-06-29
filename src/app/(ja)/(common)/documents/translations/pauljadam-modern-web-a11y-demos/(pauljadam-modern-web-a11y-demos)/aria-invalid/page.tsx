@@ -139,18 +139,22 @@ export default function Page() {
       <fieldset data-role="controlgroup">
         <legend>お食事を選択してください*</legend>
         <label>
+          {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
           <input type="radio" name="meal" defaultValue="野菜" id="meal_0" aria-required="true" aria-invalid="true" />
           野菜
         </label>
         <label>
+          {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
           <input type="radio" name="meal" defaultValue="牛肉" id="meal_1" aria-required="true" aria-invalid="true" />
           牛肉
         </label>
         <label>
+          {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
           <input type="radio" name="meal" defaultValue="鶏肉" id="meal_2" aria-required="true" aria-invalid="true" />
           鶏肉
         </label>
         <label>
+          {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
           <input type="radio" name="meal" defaultValue="魚" id="meal_3" aria-required="true" aria-invalid="true" />
           魚（サーモン）
         </label>

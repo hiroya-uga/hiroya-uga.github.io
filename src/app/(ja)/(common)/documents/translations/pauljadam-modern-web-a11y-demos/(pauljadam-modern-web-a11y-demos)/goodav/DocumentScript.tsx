@@ -24,7 +24,7 @@ export const DocumentScript = () => {
         true,
       );
 
-      $('#play-pause').on('click', function (e) {
+      $('#play-pause').on('click', function (_) {
         if (!$('#demo-video')[0].paused) {
           $('#demo-video')[0].pause();
           $('#play-pause').html('再生');
@@ -33,7 +33,7 @@ export const DocumentScript = () => {
           $('#play-pause').html('停止');
         }
       });
-      $('#captions').on('click', function (e) {
+      $('#captions').on('click', function (_) {
         if ($('#demo-video')[0].textTracks[0].mode == 'showing') {
           $('#captions').html('Enable Captions');
           $('#demo-video')[0].textTracks[0].mode = 'hidden';

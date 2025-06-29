@@ -30,10 +30,10 @@ export const DocumentScript = () => {
           .appendTo('body');
         $('#username').trigger('focus');
 
-        $('#lastElement').on('focusin', function (e) {
+        $('#lastElement').on('focusin', function (_) {
           $('#username').trigger('focus');
         });
-        $('#firstElement').on('focusin', function (e) {
+        $('#firstElement').on('focusin', function (_) {
           $('#lastButton').trigger('focus');
         });
 
@@ -46,7 +46,7 @@ export const DocumentScript = () => {
           }
         });
 
-        $('[role=dialog] button').on('click', function (e) {
+        $('[role=dialog] button').on('click', function (_) {
           $('main').attr('aria-hidden', 'false');
           $(modalOverlay).remove();
           $(dialog).remove();
