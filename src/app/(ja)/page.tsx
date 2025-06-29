@@ -105,6 +105,10 @@ export default function Home() {
                     emoji: '🎮',
                     href: '/games',
                   },
+                  {
+                    emoji: '✍️',
+                    href: '/articles',
+                  },
                 ].map(({ emoji, href }) => {
                   const { pageTitle } = getMetadata(href);
 

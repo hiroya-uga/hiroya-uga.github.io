@@ -10,7 +10,7 @@
     --v-color-text-secondary: #50545a;
     --v-color-text-link: #005a9c;
     --v-color-text-alert: #c10000;
-    --v-color-text-description: #6b7179;
+    --v-color-text-description: #50545a;
     --v-color-background: #f7f7f7;
     --v-color-background-alert: #c10000;
     --v-color-background-banner: #fff;
@@ -26,9 +26,6 @@
     --v-color-background-table-header: #00000011;
     --v-color-border-textfield: #d1d5dc;
     --v-color-border-table: #00000022;
-    --v-width-dialog: 48rem;
-    --v-width-content: 60rem;
-    --v-width-structure: 90rem;
     --v-spacing-content-inline: 1rem;
     --v-spacing-paragraph: 1rem;
 
@@ -42,7 +39,7 @@
     --v-color-text-secondary: #c5bdb2;
     --v-color-text-link: #edc56c;
     --v-color-text-alert: #fc4f4b;
-    --v-color-text-description: #6b7179;
+    --v-color-text-description: #aeb4c1;
     --v-color-background: #272727;
     --v-color-background-alert: #fc4f4b;
     --v-color-background-banner: #333;
@@ -117,11 +114,10 @@
   --text-8xl: 6rem;
   --leading-inherit: inherit;
 
-  --width-dialog: var(--v-width-dialog);
-  --width-content: var(--v-width-content);
-  --max-width-dialog: var(--v-width-dialog);
-  --max-width-content: var(--v-width-content);
-  --max-width-structure: var(--v-width-structure);
+  --max-width-dialog: min(48rem, 90%);
+  --max-width-article: min(40rem, 85%);
+  --max-width-content: 60rem;
+  --max-width-structure: 90rem;
 
   --spacing-paragraph: var(--v-spacing-paragraph);
   --spacing-content-inline: var(--v-spacing-content-inline);
@@ -139,6 +135,7 @@
   --background-color-card: var(--v-color-background-card);
   --background-color-card-secondary: var(--v-color-background-card-secondary);
   --background-color-banner: var(--v-color-background-banner);
+  --background-color-banner-hover: var(--v-color-background-banner-hover);
   --background-color-table: var(--v-color-background-table);
   --background-color-table-header: var(--v-color-background-table-header);
   --background-color-header: var(--v-color-background-header);
