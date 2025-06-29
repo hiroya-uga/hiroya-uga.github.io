@@ -94,32 +94,32 @@ export const DocumentScript = () => {
       // @ts-ignore
       $('.net-income-info').connections();
 
-      $('.heading-info button').on('mouseover focus', function (e) {
+      $('.heading-info button').on('mouseover focus', function (_) {
         $('.heading-info').addClass(styles.hovered);
       });
-      $('.heading-info button').on('mouseout blur', function (e) {
+      $('.heading-info button').on('mouseout blur', function (_) {
         $('.heading-info').removeClass(styles.hovered);
       });
-      $('.service-revenue-info button').on('mouseover focus', function (e) {
+      $('.service-revenue-info button').on('mouseover focus', function (_) {
         $('.service-revenue-info').addClass(styles.hovered);
       });
-      $('.service-revenue-info button').on('mouseout blur', function (e) {
+      $('.service-revenue-info button').on('mouseout blur', function (_) {
         $('.service-revenue-info').removeClass(styles.hovered);
       });
-      $('.rent-expense-info button').on('mouseover focus', function (e) {
+      $('.rent-expense-info button').on('mouseover focus', function (_) {
         $('.rent-expense-info').addClass(styles.hovered);
       });
-      $('.rent-expense-info button').on('mouseout blur', function (e) {
+      $('.rent-expense-info button').on('mouseout blur', function (_) {
         $('.rent-expense-info').removeClass(styles.hovered);
       });
-      $('.net-income-info button').on('mouseover focus', function (e) {
+      $('.net-income-info button').on('mouseover focus', function (_) {
         $('.net-income-info').addClass(styles.hovered);
       });
-      $('.net-income-info button').on('mouseout blur', function (e) {
+      $('.net-income-info button').on('mouseout blur', function (_) {
         $('.net-income-info').removeClass(styles.hovered);
       });
 
-      $('#hide-show').on('click', function (e) {
+      $('#hide-show').on('click', function (_) {
         $('.info-cell').toggleClass('info-cell-hidden');
         if ($(this).text() == '隠す') {
           $(this).text('表示する');
@@ -137,28 +137,28 @@ export const DocumentScript = () => {
       $("td:contains('Clos. 3')").css('color', 'blue').attr('tabindex', '0');
       $("td:contains('Clos. 4')").css('color', '#767676').attr('tabindex', '0');
 
-      $("td:contains('Clos. 2')").on('mouseover focus', function (e) {
+      $("td:contains('Clos. 2')").on('mouseover focus', function (_) {
         $("td:contains('Clos. 2')").addClass(styles.clos2hovered);
       });
-      $("td:contains('Clos. 2')").on('mouseout blur', function (e) {
+      $("td:contains('Clos. 2')").on('mouseout blur', function (_) {
         $("td:contains('Clos. 2')").removeClass(styles.clos2hovered);
       });
-      $("td:contains('Clos. 1')").on('mouseover focus', function (e) {
+      $("td:contains('Clos. 1')").on('mouseover focus', function (_) {
         $("td:contains('Clos. 1')").addClass(styles.clos1hovered);
       });
-      $("td:contains('Clos. 1')").on('mouseout blur', function (e) {
+      $("td:contains('Clos. 1')").on('mouseout blur', function (_) {
         $("td:contains('Clos. 1')").removeClass(styles.clos1hovered);
       });
-      $("td:contains('Clos. 3')").on('mouseover focus', function (e) {
+      $("td:contains('Clos. 3')").on('mouseover focus', function (_) {
         $("td:contains('Clos. 3')").addClass(styles.clos3hovered);
       });
-      $("td:contains('Clos. 3')").on('mouseout blur', function (e) {
+      $("td:contains('Clos. 3')").on('mouseout blur', function (_) {
         $("td:contains('Clos. 3')").removeClass(styles.clos3hovered);
       });
-      $("td:contains('Clos. 4')").on('mouseover focus', function (e) {
+      $("td:contains('Clos. 4')").on('mouseover focus', function (_) {
         $("td:contains('Clos. 4')").addClass(styles.clos4hovered);
       });
-      $("td:contains('Clos. 4')").on('mouseout blur', function (e) {
+      $("td:contains('Clos. 4')").on('mouseout blur', function (_) {
         $("td:contains('Clos. 4')").removeClass(styles.clos4hovered);
       });
     };

@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 export const DocumentScript = () => {
   useEffect(() => {
-    $(function (e) {
+    $(function (_) {
       var allLinks = document.getElementsByTagName('a');
       for (var i = 0; i < allLinks.length; i++) {
         var thisElement = allLinks[i];

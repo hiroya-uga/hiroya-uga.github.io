@@ -10,8 +10,8 @@ import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-
 
 export const DocumentScript = () => {
   useEffect(() => {
-    $(function (e) {
-      $(`#${styles["shipping-toggle"]}`).on('click', function (e) {
+    $(function (_) {
+      $(`#${styles["shipping-toggle"]}`).on('click', function (_) {
         $(`#${styles["shipping-panel"]}`).stop(true, false).slideToggle('500');
         $(this).find('i').toggleClass('fa-plus-square fa-minus-square');
       });

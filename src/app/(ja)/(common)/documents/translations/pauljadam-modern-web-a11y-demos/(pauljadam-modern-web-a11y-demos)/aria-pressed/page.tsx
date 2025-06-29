@@ -18,6 +18,7 @@ export default function Page() {
         (a[role=button])
       </p>
       <p>
+        {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
         <a href="#" aria-pressed="true">
           表示
         </a>

@@ -10,7 +10,7 @@ import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-
 
 export const DocumentScript = () => {
   useEffect(() => {
-    $(function (e) {
+    $(function (_) {
       $('[role=checkbox]').on('click', function () {
         var checked = $(this).attr('aria-checked');
         if (checked == 'true') {

@@ -10,7 +10,7 @@ import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-
 
 export const DocumentScript = () => {
   useEffect(() => {
-    $(function (e) {
+    $(function (_) {
       $('#trigger').on('click', function () {
         $('main, [role=navigation]').attr('aria-hidden', 'true');
         $('body').attr('style', 'background-color:gray;');
@@ -31,7 +31,7 @@ export const DocumentScript = () => {
           .appendTo(`#${styles.modalOverlay}`);
         $('#yes').trigger('focus');
 
-        $('[role=alertdialog] button').on('click', function (e) {
+        $('[role=alertdialog] button').on('click', function (_) {
           $('main, [role=navigation]').attr('aria-hidden', 'false');
           $('body, a').removeAttr('style');
           $('a').removeAttr('tabindex');
@@ -63,7 +63,7 @@ export const DocumentScript = () => {
           .appendTo(`#${styles.modalOverlay}`);
         $('#alertText').trigger('focus');
 
-        $('[role=alertdialog] button').on('click', function (e) {
+        $('[role=alertdialog] button').on('click', function (_) {
           $('main, [role=navigation]').attr('aria-hidden', 'false');
           $('body, a').removeAttr('style');
           $('a').removeAttr('tabindex');
