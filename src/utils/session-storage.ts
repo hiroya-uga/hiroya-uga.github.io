@@ -1,6 +1,7 @@
 type Key = keyof Value;
 type Value = {
   'welcome-message-viewed': 'true';
+  'reading-message-viewed': 'true';
 };
 
 export const setSessionStorage = <T extends Key>(key: T, value: Value[T]) => {

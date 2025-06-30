@@ -1,5 +1,4 @@
-import { ArticleLength } from '@/components/structures/ArticleMain/ArticleMainClient';
-import { formattedDateString } from '@/utils/formatter';
+import { ArticleInformation } from '@/components/structures/ArticleMain/ArticleMainClient';
 
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
 import clsx from 'clsx';
@@ -21,9 +20,7 @@ export const ArticleMain = async ({ post }: Props) => {
       >
         <div className="max-w-content mx-auto text-center">
           <h1 className="@w640:text-5xl text-2xl">{post.meta.title}</h1>
-          <p className="@w640:text-sm text-description text-xs">
-            <time>{formattedDateString(new Date(post.meta.publishedAt))}</time> - <ArticleLength />
-          </p>
+          <ArticleInformation date={post.meta.publishedAt} />
         </div>
       </div>
       <div className="px-content-inline @w1024:pl-10">
