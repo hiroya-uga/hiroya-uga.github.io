@@ -267,8 +267,8 @@ export const MediaContent = () => {
             </h2>
           }
         >
-          <div className="p-6 pb-8 sm:p-8 sm:pb-9 sm:pt-7">
-            <div className="mb-6 flex flex-row-reverse sm:mb-10">
+          <div className="@w640:p-8 @w640:pb-9 @w640:pt-7 p-6 pb-8">
+            <div className="@w640:mb-10 mb-6 flex flex-row-reverse">
               <p className="relative bottom-2 left-2 min-w-36 text-right">
                 <ClearButton
                   onClick={() => {
@@ -288,14 +288,14 @@ export const MediaContent = () => {
               </fieldset>
             </div>
 
-            <fieldset className="mb-6 sm:mb-10">
+            <fieldset className="@w640:mb-10 mb-6">
               <legend className="mb-3 font-bold">Categories</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
                 <CheckBoxes nameSet={mediaCategory} stateSet={categoriesStatus} dispatch={setCategoriesStatus} />
               </ul>
             </fieldset>
 
-            <fieldset className="mb-6 sm:mb-10">
+            <fieldset className="@w640:mb-10 mb-6">
               <legend className="mb-3 font-bold">Tags</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
                 <CheckBoxes nameSet={mediaTags} stateSet={tagsStatus} dispatch={setTagsStatus} />
@@ -334,7 +334,7 @@ export const MediaContent = () => {
           </p>
         </div>
 
-        <ul className="mb-2 space-y-6 sm:space-y-4">
+        <ul className="@w640:space-y-4 mb-2 space-y-6">
           {result.map(({ type, date, category, title, href, tags }) => {
             const defaultClickable = createId(id, href);
             return (
@@ -342,11 +342,11 @@ export const MediaContent = () => {
                 key={href}
                 as="li"
                 defaultClickable={defaultClickable}
-                className="grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:bg-white hover:shadow sm:grid-cols-[6.25rem_auto_1fr] sm:p-4 sm:leading-7"
+                className="hover:bg-banner @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:shadow"
               >
                 <p className="col-start-1 col-end-2 content-center">
-                  <span className="sm:bg-card relative grid place-items-center rounded-lg sm:aspect-[4/3] sm:h-auto sm:w-full">
-                    <span className="relative block size-4 sm:size-8">
+                  <span className="@w640:bg-card @w640:aspect-[4/3] @w640:h-auto @w640:w-full relative grid place-items-center rounded-lg">
+                    <span className="@w640:size-8 relative block size-4">
                       {(() => {
                         switch (type) {
                           case 'video':
@@ -360,10 +360,10 @@ export const MediaContent = () => {
                     </span>
                   </span>
                 </p>
-                <p className="col-start-2 col-end-3 pl-2 font-mono text-xs uppercase leading-[inherit] sm:content-center sm:px-4 sm:text-center">
+                <p className="@w640:content-center @w640:px-4 @w640:text-center col-start-2 col-end-3 pl-2 font-mono text-xs uppercase leading-[inherit]">
                   {category}
                 </p>
-                <div className="col-start-1 col-end-3 text-sm leading-[inherit] sm:col-start-3 sm:col-end-4 sm:text-base">
+                <div className="@w640:col-start-3 @w640:col-end-4 @w640:text-base col-start-1 col-end-3 text-sm leading-[inherit]">
                   <p>
                     <a href={href} id={defaultClickable} className="break-all visited:[--v-color-text-link:#515a9c]">
                       <Title title={title} keyword={keyword} />
@@ -373,7 +373,7 @@ export const MediaContent = () => {
                   <p className="align-center mt-1 flex gap-2 text-xs leading-snug">
                     <span>{date}</span>
 
-                    <span className="text-secondary overflow-hidden text-ellipsis sm:break-all">
+                    <span className="text-secondary @w640:break-all overflow-hidden text-ellipsis">
                       {href.replace(/#.*/, '')}
                     </span>
                   </p>
@@ -383,7 +383,7 @@ export const MediaContent = () => {
                       {tags.map((tag) => {
                         return (
                           <li key={tag}>
-                            <span className="bg-slate-200 p-1">{tag}</span>
+                            <span className="bg-slate-200 p-1 text-sm dark:bg-gray-700">{tag}</span>
                           </li>
                         );
                       })}

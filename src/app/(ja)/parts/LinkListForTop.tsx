@@ -31,7 +31,7 @@ export const LinkListForTop = ({
                 {title}
               </a>{' '}
               {japanese && (
-                <span className="transition-colors before:content-['\\['] after:content-['\\]'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden">
+                <span className="transition-colors before:content-['['] after:content-[']'] sm:flex sm:shrink-0 sm:before:hidden sm:after:hidden">
                   <a
                     href={japanese}
                     className="transition-transform sm:flex sm:grow sm:items-center sm:rounded-r sm:border-l sm:border-dotted sm:border-l-gray-400 sm:bg-slate-200 sm:px-2 sm:hover:translate-x-2 sm:hover:translate-y-1 sm:hover:rotate-6 sm:dark:bg-[#2a3544]"

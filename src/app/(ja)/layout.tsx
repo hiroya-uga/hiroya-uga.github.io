@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function JaRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" data-theme="light">
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <Suspense>
@@ -26,6 +26,14 @@ export default function JaRootLayout({ children }: { children: React.ReactNode }
         </Suspense>
         <Console />
         <Comment />
+        <script>
+          {`
+            try {
+              const theme = localStorage.getItem('theme') || 'light';
+              document.documentElement.setAttribute('data-theme', theme);
+            } catch {}
+          `}
+        </script>
       </head>
       <body className={inter.className} id="top">
         {children}
