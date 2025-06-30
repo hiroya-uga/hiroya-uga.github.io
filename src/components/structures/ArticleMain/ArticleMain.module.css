@@ -1,7 +1,7 @@
 .h1 {
   background: #fff;
-  background-image: radial-gradient(farthest-side at 50% 100%, #eaeaea, #fff);
-  background-position: center bottom;
+  background-image: radial-gradient(farthest-side at 50% 0%, #eaeaea, #fff);
+  background-position: center top;
   background-size: 120% 40%;
   background-repeat: no-repeat;
 }
@@ -10,4 +10,5 @@
   background-color: #101417;
   background-image: radial-gradient(farthest-side at 50% 100%, #1f262b, #171c20, #101417);
   background-size: 200% 50%;
+  background-position: center bottom;
 }
