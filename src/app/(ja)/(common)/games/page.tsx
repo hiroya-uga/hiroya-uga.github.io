@@ -5,7 +5,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { SvgIcon } from '@/components/Icons';
 import { GAMES_LINK_LIST } from '@/constants/link-list';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';
 import { useId } from 'react';
 

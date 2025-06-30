@@ -2,7 +2,7 @@ import { ArticleList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import { getArticles } from '@/utils/get-articles';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import path from 'path';
 
 const getPath = (category: string, year: string) => {

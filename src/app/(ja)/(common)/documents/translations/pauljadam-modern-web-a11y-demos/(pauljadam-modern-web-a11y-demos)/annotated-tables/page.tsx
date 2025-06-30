@@ -2,7 +2,7 @@ import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/paulj
 
 import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/annotated-tables/page.module.css';
 
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/annotated-tables');

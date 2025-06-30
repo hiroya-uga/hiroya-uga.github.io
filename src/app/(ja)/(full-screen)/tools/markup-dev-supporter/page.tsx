@@ -1,5 +1,5 @@
 import { TableDevSupporterContent } from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/Client';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/page.module.css';
 import { SITE_NAME } from '@/constants/meta';

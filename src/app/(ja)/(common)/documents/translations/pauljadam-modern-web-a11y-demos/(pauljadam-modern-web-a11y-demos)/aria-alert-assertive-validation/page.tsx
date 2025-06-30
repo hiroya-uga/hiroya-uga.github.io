@@ -1,5 +1,5 @@
 import { DocumentScript } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-alert-assertive-validation/DocumentScript';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata(
   '/documents/translations/pauljadam-modern-web-a11y-demos/aria-alert-assertive-validation',

@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import { DOMEventWatcherContent } from '@/app/(ja)/(common)/tools/dom-events-watcher/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/dom-events-watcher');
 
