@@ -13,7 +13,7 @@ import { LinkListForTop } from '@/app/(ja)/parts/LinkListForTop';
 import { SvgIcon } from '@/components/Icons';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/');
 

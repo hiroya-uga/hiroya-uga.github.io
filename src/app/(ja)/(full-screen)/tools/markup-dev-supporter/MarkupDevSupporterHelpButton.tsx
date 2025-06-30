@@ -1,6 +1,6 @@
 'use client';
 import { DiscList } from '@/components/List';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 

@@ -1,7 +1,7 @@
 import Mdx from '@/app/(en)/(specs)/documents/fantasized-specs/html-carousel/content.mdx';
 import { GITHUB_PROFILE, GITHUB_REPOSITORY, URL_ORIGIN } from '@/constants/meta';
 import { DocumentHeadingLevel2 } from '@/mdx-components';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/documents/fantasized-specs/html-carousel');
 

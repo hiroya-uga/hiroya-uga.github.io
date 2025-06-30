@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SITE_NAME } from '@/constants/meta';
 import { arrayShuffle } from '@/utils/array-shuffle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
 import Image from 'next/image';

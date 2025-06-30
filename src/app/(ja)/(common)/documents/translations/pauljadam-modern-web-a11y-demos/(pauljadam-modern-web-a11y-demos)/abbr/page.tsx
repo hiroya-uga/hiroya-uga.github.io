@@ -1,4 +1,4 @@
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export default function Page() {
   return (

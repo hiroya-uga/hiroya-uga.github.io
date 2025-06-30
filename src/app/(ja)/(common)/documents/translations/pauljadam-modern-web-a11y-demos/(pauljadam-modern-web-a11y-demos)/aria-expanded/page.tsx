@@ -3,7 +3,7 @@ import {
   DocumentScriptB,
   DocumentScriptC,
 } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/aria-expanded/DocumentScript';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/aria-expanded');
 

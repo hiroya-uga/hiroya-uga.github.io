@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DOCUMENTS_LINK_LIST } from '@/constants/link-list';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/documents');
 

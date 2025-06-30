@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/documents/notes');
 

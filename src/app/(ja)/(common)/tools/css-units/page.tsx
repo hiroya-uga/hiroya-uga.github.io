@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import { CSSUnitsContent } from '@/app/(ja)/(common)/tools/css-units/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/css-units');
 

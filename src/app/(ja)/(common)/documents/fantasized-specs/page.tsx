@@ -1,5 +1,5 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 
 export const metadata = getMetadata('/documents/fantasized-specs');

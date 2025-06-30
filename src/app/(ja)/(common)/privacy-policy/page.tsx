@@ -2,7 +2,7 @@ import { Button, TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
 import { DiscList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/privacy-policy');
 

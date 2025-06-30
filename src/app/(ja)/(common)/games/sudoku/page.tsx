@@ -3,7 +3,7 @@ import { Heading } from '@/components/Heading';
 import { DiscList, NoteList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Table } from '@/components/Table';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 
 export const metadata = getMetadata('/games/sudoku');

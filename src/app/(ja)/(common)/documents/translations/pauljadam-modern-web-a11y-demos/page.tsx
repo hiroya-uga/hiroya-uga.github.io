@@ -1,6 +1,6 @@
 import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 const pageList = [
   ['a11y-gone-wrong', true],

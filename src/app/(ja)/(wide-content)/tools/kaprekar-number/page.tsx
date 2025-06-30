@@ -1,7 +1,7 @@
 import { KaprekarNumberContent } from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client';
 import { NoteBox } from '@/components/Box';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getMetadata } from '@/utils/seo';
+import { getMetadata } from '@/utils/get-metadata';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/page.module.css';
 
