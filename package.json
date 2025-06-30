@@ -51,7 +51,7 @@
   "private": true,
   "scripts": {
     "build": "next build && next-sitemap",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "fix": "yarn lint-fix && yarn format-fix",
