@@ -239,12 +239,55 @@
   html,
   body {
     scroll-behavior: smooth;
+    background: var(--v-color-background);
+  }
+
+  html[data-cookie-consent] body {
+    transition: filter 0.3s ease-out;
+  }
+
+  html[data-cookie-consent="waiting"] body {
+    filter: blur(5px);
+  }
+
+  html[data-cookie-consent] body::before {
+    content: "";
+    transition:
+      opacity 0.5s ease-out,
+      filter 0.5s ease-out;
+  }
+
+  html[data-cookie-consent] body::before {
+    position: absolute;
+    top: 0;
+    z-index: 10000;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: color-dodge;
+    pointer-events: none;
+    filter: blur(20px);
+    opacity: 1;
+    background: radial-gradient(circle at 0% 0%, rgb(134 131 255 / 90%), rgb(255 255 255) 60%);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  html[data-theme="dark"][data-cookie-consent] body::before {
+    background-image: radial-gradient(circle at 0% 0%, rgb(200 123 20), rgb(0 0 0) 100%);
+  }
+
+  html:not([data-cookie-consent="waiting"]) body::before {
+    opacity: 0;
+    transition:
+      opacity 0.5s ease-in,
+      filter 0.5s ease-in;
+    transition-delay: 0.5s, 0.5s;
   }
 
   body {
     line-height: 1.875;
     color: var(--v-color-text);
-    background: var(--v-color-background);
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     text-spacing-trim: trim-start;
   }

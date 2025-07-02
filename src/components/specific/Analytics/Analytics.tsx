@@ -17,13 +17,7 @@ export const Analytics = () => {
       return;
     }
 
-    const url = pathname + searchParams.toString();
-
-    ReactGA.initialize(GA_MEASUREMENT_ID);
-    ReactGA.send({
-      hitType: 'pageview',
-      page: url,
-    });
+    ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
   }, [pathname, searchParams]);
 
   return null;
