@@ -1,39 +1,10 @@
-import '@/app/(ja)/common.css';
-
-import '@/app/globals.css';
-
 import { Metadata } from 'next';
 
+import { DefaultRootLayout } from '@/components/structures/DefaultRootLayout';
 import { URL_ORIGIN } from '@/constants/meta';
-import 'highlight.js/styles/github.css';
-
-import { Inter } from 'next/font/google';
-
-import { Comment, Console } from '@/components/Jokes';
-import { Analytics } from '@/components/specific/Analytics';
-import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
-import { Suspense } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function EnRootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" data-theme="light">
-      <head>
-        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-        <Suspense>
-          <Analytics />
-        </Suspense>
-        <Console />
-        <Comment />
-      </head>
-      <body className={inter.className} id="top">
-        {children}
-        <div id={DIALOG_PORTAL_ID} />
-        <div id={SVG_PORTAL_ID} hidden />
-      </body>
-    </html>
-  );
+  return <DefaultRootLayout lang="en">{children}</DefaultRootLayout>;
 }
 
 export const metadata: Metadata = {

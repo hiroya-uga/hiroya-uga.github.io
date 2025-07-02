@@ -1,0 +1,44 @@
+.root {
+  display: block;
+  align-content: center;
+  opacity: 0;
+  visibility: hidden;
+  margin: auto;
+  width: 100%;
+  height: fit-content;
+  max-width: 90dvw;
+  max-height: 90dvh;
+
+  @media screen and (min-width: 640px) {
+    max-width: 70dvw;
+    max-height: 80dvh;
+  }
+
+  @media screen and (orientation: landscape) {
+    max-width: 90dvw;
+    max-height: 90dvh;
+  }
+
+  @media screen and (min-width: 640px) and (min-height: 640px) and (orientation: landscape) {
+    width: 90%;
+    height: 90%;
+    max-width: 1024px;
+    max-height: 768px;
+    aspect-ratio: 1024 / 768;
+  }
+}
+
+.root[open] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.root::backdrop {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}

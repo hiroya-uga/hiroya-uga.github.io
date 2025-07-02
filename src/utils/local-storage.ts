@@ -6,6 +6,7 @@ type Value = {
     shouldHighLight?: boolean;
     level?: number;
   };
+  'cookie-consent': 'accepted' | 'rejected';
 };
 
 export const setLocalStorage = <T extends Key>(key: T, value: Value[T]) => {
