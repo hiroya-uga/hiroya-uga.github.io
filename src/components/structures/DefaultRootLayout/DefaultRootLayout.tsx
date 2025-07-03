@@ -8,6 +8,7 @@ import { Inter } from 'next/font/google';
 import { CookieConsentDialog } from '@/components/Dialog';
 import { Comment, Console } from '@/components/Jokes';
 import { Analytics } from '@/components/specific/Analytics';
+import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { Suspense } from 'react';
 
@@ -23,6 +24,7 @@ export const DefaultRootLayout = ({ lang, children }: { lang: string; children: 
         </Suspense>
         <Console />
         <Comment />
+        <LoadWebComponents />
         <script>
           {`
             try {

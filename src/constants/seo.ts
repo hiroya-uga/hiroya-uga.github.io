@@ -17,10 +17,6 @@ export const SEO: Record<
     title: '記事一覧',
     description: '技術メモや日記などをまとめています。',
   },
-  '/articles/tech-blog': {
-    title: '技術ブログ',
-    description: '技術メモや日記などをまとめています。',
-  },
   '/disclaimer': {
     title: '免責事項',
     description: `このページでは${SITE_NAME}（以下「当サイト」）における免責事項についてご説明します。\n本免責事項は、必要に応じて改訂される場合があります。`,

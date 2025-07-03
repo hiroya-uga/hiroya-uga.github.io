@@ -9,3 +9,7 @@
   background-position: center bottom;
   background-repeat: no-repeat;
 }
+
+.root lazy-image {
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+}
