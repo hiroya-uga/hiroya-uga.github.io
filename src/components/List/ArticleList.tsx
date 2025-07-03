@@ -21,7 +21,11 @@ export const ArticleList = ({ list }: Props) => {
                 {resolveCategoryName(article.pathname.split('/')[2])}
               </span>
               <Link href={article.pathname} className="@w640:text-lg @w640:table-cell block w-fit">
-                {article.title}
+                {article.title.split('\n').map((line, index) => (
+                  <span key={index} className="underline last:inline-block">
+                    {line}
+                  </span>
+                ))}
               </Link>
             </li>
           );

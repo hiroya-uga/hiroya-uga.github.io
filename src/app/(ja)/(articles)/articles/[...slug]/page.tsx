@@ -173,9 +173,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   </span>
                   <span className="block text-xs">前の記事：</span>
                   <span className="text-link block text-sm">
-                    {blogs[previous].title.split('\n').map((string) => (
-                      <span key={string} className="underline last:inline-block">
-                        {string}
+                    {blogs[previous].title.split('\n').map((line, index) => (
+                      <span key={index} className="underline last:inline-block">
+                        {line}
                       </span>
                     ))}
                   </span>
@@ -193,9 +193,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   </span>
                   <span className="block text-xs">次の記事：</span>
                   <span className="text-link block text-sm">
-                    {blogs[next].title.split('\n').map((string) => (
-                      <span key={string} className="underline last:inline-block">
-                        {string}
+                    {blogs[next].title.split('\n').map((line, index) => (
+                      <span key={index} className="underline last:inline-block">
+                        {line}
                       </span>
                     ))}
                   </span>
