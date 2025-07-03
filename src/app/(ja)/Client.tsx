@@ -200,7 +200,7 @@ export const WelcomeMessage = () => {
       <span ref={message1Ref} aria-hidden="true">
         {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
       </span>
-      <span className="block sm:inline">
+      <span className="@w640:inline block">
         <span ref={message2Ref} aria-hidden="true">
           {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
         </span>
@@ -439,9 +439,9 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               ))}
           </div>
 
-          <figcaption className="text-2xs text-white sm:text-sm">
+          <figcaption className="text-2xs @w640:text-sm text-white">
             <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
-              <span className="w-40 text-right sm:w-56">
+              <span className="@w640:w-56 w-40 text-right">
                 <a
                   href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
                   className="transition-bg z-10 inline-block cursor-pointer rounded-full bg-white px-3 py-1 leading-tight text-black no-underline hover:bg-gray-200 focus-visible:outline-[white]"
@@ -454,12 +454,12 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               </span>
             </span>
             <span
-              className="palt absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[48px] text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0 sm:min-h-12 sm:text-sm"
+              className="palt @w640:min-h-12 @w640:text-sm absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[48px] text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
               id={captionId}
             >
               <span className={clsx(...transitionClassName)}>
                 {photoData?.caption && `${photoData?.caption}`}
-                <span className="text-2xs ml-1 inline-block sm:text-xs"> at {photoData?.date}</span>
+                <span className="text-2xs @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
               </span>
             </span>
           </figcaption>
@@ -467,7 +467,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
         <p
           className={clsx([
-            'absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0 sm:h-12 sm:py-2',
+            '@w640:h-12 @w640:py-2 absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
             'transition-[opacity,visibility,translate]',
             isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
             isFirstRender && isLoading ? 'invisible' : 'visible',
@@ -475,7 +475,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="group/reload focus-visible:outline-hidden absolute inset-0 size-full p-1 sm:top-2 sm:size-8 sm:p-0"
+            className="group/reload focus-visible:outline-hidden @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full p-1"
             onClick={() => updateImage()}
           >
             <span className="block rounded-full bg-white outline-offset-2 group-focus-visible/reload:outline-2 group-focus-visible/reload:outline-[white] group-focus-visible/reload:[outline-style:solid;]">
@@ -511,7 +511,7 @@ export const PickUpList = () => {
   return (
     <ul
       className={clsx([
-        'grid gap-4 transition-opacity sm:grid-cols-3 md:gap-8',
+        '@w640:grid-cols-3 @w768:gap-8 grid gap-4 transition-opacity',
         pickUpList.length === 0 && 'min-h-72 opacity-0',
       ])}
     >
@@ -532,7 +532,7 @@ export const PickUpList = () => {
                   {/* {item.isWip && <b>（WIP）</b>} */}
                 </span>
                 <span
-                  className="bg-card font-emoji mb-3 grid place-content-center overflow-hidden rounded-md p-10 text-[3.5rem] leading-none sm:aspect-[1.618/1] sm:p-0"
+                  className="bg-card font-emoji @w640:aspect-[1.618/1] @w640:p-0 mb-3 grid place-content-center overflow-hidden rounded-md p-10 text-[3.5rem] leading-none"
                   aria-hidden="true"
                 >
                   <span className="backface-hidden rotate-[0.1deg] scale-[0.85] transition-transform duration-300 group-hover:scale-100">

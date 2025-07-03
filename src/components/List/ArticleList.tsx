@@ -14,19 +14,18 @@ export const ArticleList = ({ list }: Props) => {
         {list.map((article) => {
           return (
             <li key={article.pathname} className="@w640:table-row leading-36px gap-2">
-              <time className="text-description @w640:mr-0 @w640:table-cell mr-3 text-sm">
+              <time
+                dateTime={article.publishedAt}
+                className="text-description @w640:mr-0 @w640:table-cell mr-3 text-sm"
+              >
                 {formattedDateString(new Date(article.publishedAt))}
               </time>
               <span className="@w640:table-cell @w640:px-4 text-sm">
                 {resolveCategoryName(article.pathname.split('/')[2])}
               </span>
-              <Link href={article.pathname} className="@w640:text-lg @w640:table-cell block w-fit">
-                {article.title.split('\n').map((line, index) => (
-                  <span key={index} className="underline last:inline-block">
-                    {line}
-                  </span>
-                ))}
-              </Link>
+              <span className="@w640:text-lg @w640:table-cell block w-fit">
+                <Link href={article.pathname}>{article.title.replaceAll('\n', '')}</Link>
+              </span>
             </li>
           );
         })}

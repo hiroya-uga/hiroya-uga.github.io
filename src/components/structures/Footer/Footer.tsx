@@ -85,89 +85,90 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const isTop = pathname === '/';
 
   return (
-    <div className={clsx([styles.root, isTop ? 'mt-12 sm:mt-20' : 'mt-48', 'w-full'])}>
+    <>
       {isTop || (
-        <nav
-          className="max-w-structure px-content-inline lg:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) mx-auto py-4 text-sm lg:bg-transparent lg:py-5 lg:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))]"
-          aria-label="サイト内の現在位置"
-        >
-          <ol className="flex flex-wrap gap-y-0.5 leading-normal">
-            {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
-          </ol>
+        <nav className={clsx(['@container mt-48', styles.breadcrumb])} aria-label="サイト内の現在位置">
+          <div className="max-w-structure px-content-inline @w1024:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))] mx-auto py-4 text-sm">
+            <ol className="flex flex-wrap gap-y-0.5 leading-normal">
+              {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
+            </ol>
+          </div>
         </nav>
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer
-        className={clsx([
-          'bg-(--v-color-background-footer) text-(--v-color-text-footer)',
-          isTop && 'sm:bg-inherit sm:text-inherit',
-        ])}
-      >
-        {!isTop && (
-          <div className="max-w-structure bg-(--v-color-background) px-content-inline relative mx-auto">
-            <div className="mx-auto py-4 text-center lg:absolute lg:bottom-full lg:right-[calc(var(--v-spacing-content-inline)-0.75rem)] lg:py-1">
-              {/* m-0 for bootstrap pages */}
-              <ul
-                className="m-0 flex flex-wrap items-center justify-center gap-4 lg:justify-end lg:gap-2 dark:invert"
-                aria-label="SNSリンク"
-              >
-                {SNS_LINKS.map(({ href, alt, ...props }) => {
+      <footer className={clsx(['@container', styles.footer])}>
+        <div
+          className={clsx([
+            'bg-(--v-color-background-footer) text-(--v-color-text-footer)',
+            isTop && '@w640:bg-inherit @w640:text-inherit',
+          ])}
+        >
+          {!isTop && (
+            <div className="max-w-structure bg-(--v-color-background) px-content-inline relative mx-auto">
+              <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--v-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
+                {/* m-0 for bootstrap pages */}
+                <ul
+                  className="@w1024:justify-end @w1024:gap-2 m-0 flex flex-wrap items-center justify-center gap-4 dark:invert"
+                  aria-label="SNSリンク"
+                >
+                  {SNS_LINKS.map(({ href, alt, ...props }) => {
+                    return (
+                      <li key={href}>
+                        <a href={href} className="transition-bg group block rounded-lg p-3 hover:bg-gray-200">
+                          <Image {...props} width={28} height={28} alt={alt} className="size-7" />
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
+          <div className="max-w-structure px-content-inline mx-auto">
+            <div
+              className={clsx(
+                isTop && 'max-w-content mx-auto border-t border-t-gray-400',
+                'flow-root py-12',
+                '@w768:flex @w768:flex-wrap @w768:justify-center @w768:gap-6 @w768:pb-20 @w768:pt-7',
+              )}
+            >
+              <ul className="@w768:flex @w768:grow @w768:flex-wrap @w768:justify-start @w768:gap-y-2 text-xs">
+                {FOOTER_LINK_LIST.map(({ href, title, target }, index) => {
+                  const className = clsx([
+                    "@w768:float-none @w768:p-0 float-left py-1 after:mx-2.5 after:content-['|']",
+                    index === FOOTER_LINK_LIST.length - 1 && '@w768:after:hidden',
+                  ]);
+
                   return (
-                    <li key={href}>
-                      <a href={href} className="transition-bg group block rounded-lg p-3 hover:bg-gray-200">
-                        <Image {...props} width={28} height={28} alt={alt} className="size-7" />
-                      </a>
+                    <li key={href} className={className}>
+                      <Link
+                        href={href}
+                        className={clsx([
+                          'text-inherit [--v-fill:var(--v-color-text-footer)]',
+                          isTop ? '@w640:[--v-fill:var(--text-color)]' : 'outline-white!',
+                        ])}
+                        target={target}
+                        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+                      >
+                        {title}{' '}
+                        {target === '_blank' ? (
+                          <span className="mb-1px relative ml-[0.2em] inline-block size-[1em] align-middle">
+                            <SvgIcon name="new-tab" alt="新しいタブで開く" />
+                          </span>
+                        ) : null}
+                      </Link>
                     </li>
                   );
                 })}
               </ul>
+              <p className="-top-1px @w768:float-none @w768:h-auto relative float-left grid h-[1.90625rem] place-items-center text-center text-xs">
+                {/* text-[100%] for bootstrap pages */}
+                <small className="text-[100%]">&copy; {SITE_NAME}</small>
+              </p>
             </div>
-          </div>
-        )}
-        <div className="max-w-structure px-content-inline mx-auto">
-          <div
-            className={clsx(
-              isTop && 'max-w-content mx-auto border-t border-t-gray-400',
-              'flow-root py-12',
-              'md:flex md:flex-wrap md:justify-center md:gap-6 md:pb-20 md:pt-7',
-            )}
-          >
-            <ul className="text-xs md:flex md:grow md:flex-wrap md:justify-start md:gap-y-2">
-              {FOOTER_LINK_LIST.map(({ href, title, target }, index) => {
-                const className = clsx([
-                  "float-left py-1 after:mx-2.5 after:content-['|'] md:float-none md:p-0",
-                  index === FOOTER_LINK_LIST.length - 1 && 'md:after:hidden',
-                ]);
-
-                return (
-                  <li key={href} className={className}>
-                    <Link
-                      href={href}
-                      className={clsx([
-                        'text-inherit [--v-fill:var(--v-color-text-footer)]',
-                        isTop ? 'sm:[--v-fill:var(--text-color)]' : 'outline-white!',
-                      ])}
-                      target={target}
-                      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-                    >
-                      {title}{' '}
-                      {target === '_blank' ? (
-                        <span className="mb-1px relative ml-[0.2em] inline-block size-[1em] align-middle">
-                          <SvgIcon name="new-tab" alt="新しいタブで開く" />
-                        </span>
-                      ) : null}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <p className="-top-1px relative float-left grid h-[1.90625rem] place-items-center text-center text-xs md:float-none md:h-auto">
-              {/* text-[100%] for bootstrap pages */}
-              <small className="text-[100%]">&copy; {SITE_NAME}</small>
-            </p>
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
