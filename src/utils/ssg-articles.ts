@@ -1,4 +1,4 @@
-'use server';
+// ビルド時にしか呼ばれない関数群。クライアントサイドで実行される関数と同じファイルに置くとビルドが転ける。。
 
 import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import fs from 'fs';
