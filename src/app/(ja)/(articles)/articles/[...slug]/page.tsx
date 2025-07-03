@@ -109,7 +109,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <>
         <main className="px-content-inline lg:pl-10">
           <div className="max-w-content mx-auto">
-            <PageTitle title={pageTitle} description={description} />
+            <PageTitle title={pageTitle} description={description}>
+              <p>※ 仮設ページです。</p>
+            </PageTitle>
             <ArticleList list={blogs} />
           </div>
         </main>
@@ -127,7 +129,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <>
         <main className="px-content-inline lg:pl-10">
           <div className="max-w-content mx-auto">
-            <PageTitle title={pageTitle} description={description} />
+            <PageTitle title={pageTitle} description={description}>
+              <p>※ 仮設ページです。</p>
+            </PageTitle>
             <ArticleList list={blogs} />
           </div>
         </main>

@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <>
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
-        <p>不定期更新。カテゴリ別トップはまだありません🍵</p>
+        <p>不定期更新＆工事中。まったりUI調整しています🍵</p>
       </PageTitle>
       <ArticleList list={blogs} />
     </>
