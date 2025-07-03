@@ -72,7 +72,7 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
         status === 'loading' ? 'opacity-0' : '',
       ])}
     >
-      <time>{formattedDateString(date ? new Date(date) : new Date())}</time> -
+      <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time> -
       <span ref={ref} className="min-h-[1lh]" />
     </p>
   );
