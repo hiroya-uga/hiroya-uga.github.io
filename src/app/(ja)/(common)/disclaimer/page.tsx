@@ -11,12 +11,14 @@ export default function Page() {
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <p>当サイトからリンクされた外部サイトや第三者が提供するコンテンツについては、本免責事項は適用されません。</p>
         <div className="mt-2 text-right text-sm">
-          <p>改定日: 2025年06月08日</p>
+          <p>改定日: 2025年07月03日</p>
           <p>制定日: 2025年06月02日</p>
         </div>
       </PageTitle>
 
       <Heading level={2}>情報の取り扱いについて</Heading>
+
+      <p>当サイトに掲載されている情報は特別な記載がない限り、すべて組織を代表するものではなく、個人の見解です。</p>
 
       <p className="mb-paragraph">
         当サイトに掲載内容はできる限り正確になるよう努めていますが、必ずしも正確性や安全性を保証するものではありません。
