@@ -72,14 +72,17 @@ const getPath = (category: string, year?: string) => {
 const getPageMeta = {
   categoryTop: (category: string) => {
     const categoryName = resolveCategoryName(category);
+    const pageTitle = `${categoryName}一覧`;
     return {
-      pageTitle: `${categoryName}一覧`,
+      title: `${pageTitle} | ${SITE_NAME}`,
+      pageTitle,
       description: `${categoryName}一覧です`,
     };
   },
   yearTop: (category: string, year: string) => {
     const categoryName = resolveCategoryName(category);
     return {
+      title: `${year}年の${categoryName}記事一覧 | ${SITE_NAME}`,
       pageTitle: `${year}年の${categoryName}一覧`,
       description: `${year}年の${categoryName}一覧です`,
     };
@@ -234,12 +237,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
   const { slug } = await params;
-  const categoryName = resolveCategoryName(slug[0]);
 
   if (slug.length === 1) {
-    const { pageTitle, description } = getPageMeta.categoryTop(categoryName);
+    const { title, pageTitle, description } = getPageMeta.categoryTop(slug[0]);
     const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
-    const title = `${pageTitle} | ${SITE_NAME}`;
 
     return {
       title,
@@ -264,9 +265,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   if (slug.length === 2) {
-    const { pageTitle, description } = getPageMeta.yearTop(slug[0], slug[1]);
+    const { title, pageTitle, description } = getPageMeta.yearTop(slug[0], slug[1]);
     const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
-    const title = `${slug[1]}年の${categoryName}記事一覧 | ${SITE_NAME}`;
 
     return {
       title,
@@ -296,6 +296,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const [category, year, fileName] = slug;
   const canonical = `https://${DOMAIN_NAME}/articles/${category}/${year}/${fileName}`;
+  const categoryName = resolveCategoryName(category);
   const ogImage = await generateOgpImage(['articles', ...slug], post.meta.title, categoryName);
 
   const description = '本文：' + (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…';
