@@ -34,5 +34,5 @@ export const Console = () => {
     );
   }, []);
 
-  return <></>;
+  return null;
 };
