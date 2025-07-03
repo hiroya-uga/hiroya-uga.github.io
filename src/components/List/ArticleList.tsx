@@ -1,4 +1,4 @@
-import { resolveCategoryName } from '@/utils/article';
+import { resolveCategoryName } from '@/utils/articles';
 import { formattedDateString } from '@/utils/formatter';
 import { ArticleFrontMatter } from '@/utils/ssg-articles';
 import Link from 'next/link';

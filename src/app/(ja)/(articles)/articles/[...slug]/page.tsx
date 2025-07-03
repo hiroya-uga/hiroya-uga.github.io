@@ -7,7 +7,7 @@ import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import { DOMAIN_NAME, SITE_AUTHOR, SITE_NAME } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
 import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
-import { resolveCategoryName } from '@/utils/article';
+import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
 import { Metadata } from 'next';
 import Link from 'next/link';
