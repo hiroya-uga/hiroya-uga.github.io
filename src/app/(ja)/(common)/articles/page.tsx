@@ -1,7 +1,7 @@
 import { ArticleList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getAllArticles } from '@/utils/get-articles';
 import { getMetadata } from '@/utils/get-metadata';
+import { getAllArticles } from '@/utils/ssg-articles';
 
 export const metadata = getMetadata('/articles');
 

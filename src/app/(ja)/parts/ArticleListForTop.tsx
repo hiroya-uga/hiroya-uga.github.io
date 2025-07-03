@@ -1,6 +1,6 @@
 import { resolveCategoryName } from '@/utils/article';
 import { formattedDateString } from '@/utils/formatter';
-import { getAllArticles } from '@/utils/get-articles';
+import { getAllArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 
 export const ArticleListForTop = async () => {

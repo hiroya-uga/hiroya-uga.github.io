@@ -8,7 +8,7 @@ import { DOMAIN_NAME, SITE_AUTHOR, SITE_NAME } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
 import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/article';
-import { getArticles } from '@/utils/get-articles';
+import { getArticles } from '@/utils/ssg-articles';
 import { Metadata } from 'next';
 import Link from 'next/link';
 

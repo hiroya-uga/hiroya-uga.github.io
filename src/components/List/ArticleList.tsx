@@ -1,6 +1,6 @@
 import { resolveCategoryName } from '@/utils/article';
 import { formattedDateString } from '@/utils/formatter';
-import { ArticleFrontMatter } from '@/utils/get-articles';
+import { ArticleFrontMatter } from '@/utils/ssg-articles';
 import Link from 'next/link';
 
 type Props = {
