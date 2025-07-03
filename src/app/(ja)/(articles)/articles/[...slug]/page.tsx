@@ -1,3 +1,4 @@
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { SvgIcon } from '@/components/Icons';
 import { ArticleList } from '@/components/List';
 import { ArticleMain } from '@/components/structures/ArticleMain';
@@ -159,6 +160,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const pathname = `/articles/${slug.join('/')}`;
   const index = blogs.findIndex((blog) => blog.pathname === pathname);
   const canonical = `https://${DOMAIN_NAME}${pathname}`;
+  const categoryName = resolveCategoryName(category);
 
   const previous = index + 1;
   const next = index - 1;
@@ -168,6 +170,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <main>
         <ArticleMain post={post} />
         <div className="mx-content-inline @container not-empty:mt-30 text-center">
+          <p className="mb-12">
+            <TweetLink
+              message={`${categoryName}「${post.meta.title}」`}
+              className="not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto block w-fit rounded-lg border border-solid bg-black px-4 text-white no-underline transition-[opacity,visibility,box-shadow] hover:underline hover:shadow-lg"
+            />
+          </p>
           <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">
             {blogs[previous] && (
               <li>
