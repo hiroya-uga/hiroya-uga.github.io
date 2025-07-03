@@ -11,7 +11,7 @@ export default function Page() {
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <p>当サイトからリンクされた外部サイトや第三者が提供するコンテンツについては、本免責事項は適用されません。</p>
         <div className="mt-2 text-right text-sm">
-          <p>改定日: 2025年07月03日</p>
+          <p>改定日: 2025年07月04日</p>
           <p>制定日: 2025年06月02日</p>
         </div>
       </PageTitle>
@@ -23,7 +23,9 @@ export default function Page() {
       <p className="mb-paragraph">
         当サイトに掲載内容はできる限り正確になるよう努めていますが、必ずしも正確性や安全性を保証するものではありません。
       </p>
-      <p>また、当サイトではサイト管理者が自分で利用するため・趣味・練習などの目的で作ったWebツールを提供しています。</p>
+      <p>
+        また、当サイトではサイト管理者が自分で利用するため・趣味・学習・練習などの目的でWebコンテンツを提供しています。
+      </p>
       <p>
         それらを利用する際に入力される情報の取り扱い等については<Link href="/privacy-policy">プライバシーポリシー</Link>
         をご覧ください。
