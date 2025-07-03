@@ -5,10 +5,6 @@ export const LazyImageLoad = () => {
       this.attachShadow({ mode: 'open' });
     }
 
-    static get observedAttributes() {
-      return ['src', 'width', 'height'];
-    }
-
     get alt() {
       return this.getAttribute('alt') ?? '';
     }
@@ -59,8 +55,7 @@ export const LazyImageLoad = () => {
         img.height = height;
         style.replaceSync(
           `
-          :host,
-          :host img {
+          :host {
             display: block;
             transition: 0.3s opacity ease-out;
 
@@ -76,6 +71,7 @@ export const LazyImageLoad = () => {
           :host(lazy-image[loading]),
           :host(lazy-image[loading]) img {
             opacity: 0;
+            visibility: hidden;
           }
           `,
         );
@@ -85,6 +81,7 @@ export const LazyImageLoad = () => {
         'load',
         (e) => {
           if (e.currentTarget instanceof HTMLImageElement) {
+            console.log(e.currentTarget.clientHeight);
             this.loading = false;
           }
         },

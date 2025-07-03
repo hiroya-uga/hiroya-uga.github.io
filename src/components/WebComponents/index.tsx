@@ -4,7 +4,7 @@ import { useLayoutEffect } from 'react';
 
 export const LoadWebComponents = () => {
   useLayoutEffect(() => {
-    if (customElements.get('lazy-image') === undefined) {
+    if (typeof customElements.get('lazy-image') === 'undefined') {
       LazyImageLoad();
     }
   }, []);
