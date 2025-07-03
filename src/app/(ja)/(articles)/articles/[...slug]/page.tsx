@@ -72,9 +72,9 @@ const getPath = (category: string, year?: string) => {
 const getPageMeta = {
   categoryTop: (category: string) => {
     const categoryName = resolveCategoryName(category);
-    const pageTitle = `${categoryName}一覧`;
+    const pageTitle = categoryName;
     return {
-      title: `${pageTitle} | ${SITE_NAME}`,
+      title: `${pageTitle} | 記事一覧 | ${SITE_NAME}`,
       pageTitle,
       description: `${categoryName}一覧です`,
     };
@@ -82,8 +82,8 @@ const getPageMeta = {
   yearTop: (category: string, year: string) => {
     const categoryName = resolveCategoryName(category);
     return {
-      title: `${year}年の${categoryName}記事一覧 | ${SITE_NAME}`,
-      pageTitle: `${year}年の${categoryName}一覧`,
+      title: `${year}年の${categoryName} | 記事一覧 | ${SITE_NAME}`,
+      pageTitle: `${year}年の${categoryName}`,
       description: `${year}年の${categoryName}一覧です`,
     };
   },
@@ -302,7 +302,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = '本文：' + (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…';
 
   return {
-    title: `${post.meta.title.replace(/\n/g, '')} | ${SITE_NAME}`,
+    title: `${post.meta.title.replace(/\n/g, '')} | ${categoryName} | ${SITE_NAME}`,
     description,
     openGraph: {
       title: post.meta.title.replace(/\n/g, ''),
