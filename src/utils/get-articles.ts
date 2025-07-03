@@ -1,3 +1,6 @@
+'use server';
+
+import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
@@ -52,3 +55,28 @@ export async function getArticles(articlesDir: string) {
 
   return articles;
 }
+
+const getArticlePath = (category: string, year: string) => {
+  return path.join(
+    process.cwd(),
+    'src',
+    'app',
+    '(ja)',
+    '(articles)',
+    'articles',
+    '[...slug]',
+    'markdown',
+    category,
+    year,
+  );
+};
+
+const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
+  .flatMap(([category, years]) => {
+    return years.flatMap((year) => {
+      return getArticles(getArticlePath(category, year));
+    });
+  })
+  .flat();
+
+export const getAllArticles = async () => (await Promise.all(articlePromises)).flat();

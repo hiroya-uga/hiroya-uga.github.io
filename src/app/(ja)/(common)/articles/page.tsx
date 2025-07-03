@@ -1,6 +1,6 @@
 import { ArticleList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { getAllArticles } from '@/utils/article';
+import { getAllArticles } from '@/utils/get-articles';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/articles');
