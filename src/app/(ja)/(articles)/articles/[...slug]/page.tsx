@@ -213,7 +213,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </main>
       <Footer
-        additionalBreadcrumbs={[{ href: `/articles/${category}/${year}`, title: year }]}
+        additionalBreadcrumbs={[
+          { href: `/articles/${slug[0]}`, title: resolveCategoryName(slug[0]) },
+          { href: `/articles/${category}/${year}`, title: year },
+        ]}
         currentPageTitle={post.meta.title}
       />
       <Script type="application/ld+json" id="json-ld">
