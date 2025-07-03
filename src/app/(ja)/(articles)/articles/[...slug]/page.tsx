@@ -49,8 +49,8 @@ export function generateStaticParams() {
   return params;
 }
 
-const getPath = (category: string, year: string) => {
-  return path.join(
+const getPath = (category: string, year?: string) => {
+  const result = path.join(
     process.cwd(),
     'src',
     'app',
@@ -60,8 +60,30 @@ const getPath = (category: string, year: string) => {
     '[...slug]',
     'markdown',
     category,
-    year,
   );
+
+  if (year) {
+    return path.join(result, year);
+  }
+
+  return result;
+};
+
+const getPageMeta = {
+  categoryTop: (category: string) => {
+    const categoryName = resolveCategoryName(category);
+    return {
+      pageTitle: `${categoryName}一覧`,
+      description: `${categoryName}一覧です`,
+    };
+  },
+  yearTop: (category: string, year: string) => {
+    const categoryName = resolveCategoryName(category);
+    return {
+      pageTitle: `${year}年の${categoryName}一覧`,
+      description: `${year}年の${categoryName}一覧です`,
+    };
+  },
 };
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string[] }> }) {
@@ -70,43 +92,47 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const year = slug[1];
 
   if (slug.length === 1) {
-    const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST).flatMap(([categoryName, years]) => {
-      return years.flatMap((yearValue) => {
-        return getArticles(getPath(categoryName, yearValue));
+    const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
+      .filter((item) => category === item[0])
+      .flatMap(([categoryName, years]) => {
+        return years.flatMap((yearValue) => {
+          return getArticles(getPath(categoryName, yearValue));
+        });
       });
-    });
     const blogs = (await Promise.all(articlePromises)).flat();
-    const categoryName = resolveCategoryName(slug[0]);
+    const { pageTitle, description } = getPageMeta.categoryTop(slug[0]);
 
     return (
       <>
         <main className="px-content-inline lg:pl-10">
           <div className="max-w-content mx-auto">
-            <PageTitle title={categoryName} description={`${categoryName}記事一覧です。`} />
+            <PageTitle title={pageTitle} description={description} />
             <ArticleList list={blogs} />
           </div>
         </main>
 
-        <Footer currentPageTitle={slug[1]} />
+        <Footer currentPageTitle={resolveCategoryName(slug[0])} />
       </>
     );
   }
 
   if (slug.length === 2) {
     const blogs = await getArticles(getPath(category, year));
-    const categoryName = resolveCategoryName(slug[0]);
+    const { pageTitle, description } = getPageMeta.yearTop(slug[0], year);
 
     return (
       <>
         <main className="px-content-inline lg:pl-10">
           <div className="max-w-content mx-auto">
-            <PageTitle title={`${year}年の${categoryName}`} description={`${year}年の${categoryName}記事一覧です。`} />
-
+            <PageTitle title={pageTitle} description={description} />
             <ArticleList list={blogs} />
           </div>
         </main>
 
-        <Footer currentPageTitle={slug[1]} />
+        <Footer
+          additionalBreadcrumbs={[{ href: `/articles/${slug[0]}`, title: resolveCategoryName(slug[0]) }]}
+          currentPageTitle={slug[1]}
+        />
       </>
     );
   }
@@ -127,14 +153,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const index = blogs.findIndex((blog) => blog.pathname === pathname);
   const canonical = `https://${DOMAIN_NAME}${pathname}`;
 
-  const previous = index - 1;
-  const next = index + 1;
+  const previous = index + 1;
+  const next = index - 1;
 
   return (
     <>
       <main>
         <ArticleMain post={post} />
-        <div className="mx-content-inline @container not-empty:mt-20 text-center">
+        <div className="mx-content-inline @container not-empty:mt-30 text-center">
           <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 mx-auto grid justify-center gap-4">
             {blogs[previous] && (
               <li>
@@ -175,7 +201,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',
-          headline: post.meta.title,
+          headline: post.meta.title.replace(/\n/g, ''),
           image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${year}/${slug[slug.length - 1]}.png`,
           datePublished: new Date(post.meta.publishedAt).toISOString(),
           author: {
@@ -199,14 +225,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const categoryName = resolveCategoryName(slug[0]);
 
   if (slug.length === 1) {
-    const ogImage = await generateOgpImage(['articles', ...slug], `${categoryName} 一覧`);
+    const { pageTitle, description } = getPageMeta.categoryTop(categoryName);
+    const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
+    const title = `${pageTitle} | ${SITE_NAME}`;
 
     return {
-      title: `${categoryName} 一覧 | ${SITE_NAME}`,
-      description: `${categoryName}記事一覧です。`,
+      title,
+      description,
       openGraph: {
-        title: categoryName,
-        description: `${categoryName}記事一覧です。`,
+        title,
+        description,
         type: 'website',
         url: `https://${DOMAIN_NAME}/articles/tech-blog/2025`,
         images: [
@@ -224,14 +252,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   if (slug.length === 2) {
-    const ogImage = await generateOgpImage(['articles', ...slug], `${slug[1]}年の${categoryName}`);
+    const { pageTitle, description } = getPageMeta.yearTop(slug[0], slug[1]);
+    const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
+    const title = `${slug[1]}年の${categoryName}記事一覧 | ${SITE_NAME}`;
 
     return {
-      title: `${slug[1]}年の${categoryName} | ${SITE_NAME}`,
-      description: `${slug[1]}年の${categoryName}記事一覧です。`,
+      title,
+      description,
       openGraph: {
-        title: `${slug[1]}年の${categoryName}`,
-        description: `${slug[1]}年の${categoryName}記事一覧です。`,
+        title,
+        description,
         type: 'website',
         url: `https://${DOMAIN_NAME}/articles/tech-blog/2025`,
         images: [
@@ -259,10 +289,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = '本文：' + (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…';
 
   return {
-    title: `${post.meta.title} | ${SITE_NAME}`,
+    title: `${post.meta.title.replace(/\n/g, '')} | ${SITE_NAME}`,
     description,
     openGraph: {
-      title: post.meta.title,
+      title: post.meta.title.replace(/\n/g, ''),
       description,
       type: 'article',
       url: `https://${DOMAIN_NAME}/articles/${category}/${year}/${fileName}`,

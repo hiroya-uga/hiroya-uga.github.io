@@ -11,7 +11,7 @@ const getReadingTime = (length: number) => {
 };
 
 type ArticleInformationProps = {
-  date: string;
+  date?: string;
 };
 
 export const ArticleInformation = ({ date }: ArticleInformationProps) => {
@@ -68,11 +68,11 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
   return (
     <p
       className={clsx([
-        '@w640:text-sm text-description text-xs transition-opacity delay-300 duration-700',
+        '@w640:text-sm text-description @w640:mt-6 mt-3 text-xs transition-opacity delay-300 duration-700',
         status === 'loading' ? 'opacity-0' : '',
       ])}
     >
-      <time>{formattedDateString(new Date(date))}</time> -
+      <time>{formattedDateString(date ? new Date(date) : new Date())}</time> -
       <span ref={ref} className="min-h-[1lh]" />
     </p>
   );

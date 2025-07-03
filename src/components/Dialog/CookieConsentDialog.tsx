@@ -15,7 +15,6 @@ const initGA = () => {
   const searchParams = new URLSearchParams(window.location.search);
   ReactGA.initialize(GA_MEASUREMENT_ID);
   ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
-  console.log('accept');
 };
 
 export function CookieConsentDialog() {
