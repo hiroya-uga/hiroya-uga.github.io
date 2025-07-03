@@ -161,7 +161,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <main>
         <ArticleMain post={post} />
         <div className="mx-content-inline @container not-empty:mt-30 text-center">
-          <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 mx-auto grid justify-center gap-4">
+          <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">
             {blogs[previous] && (
               <li>
                 <Link
@@ -172,7 +172,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     <SvgIcon name="arrow-left" alt="" />
                   </span>
                   <span className="block text-xs">前の記事：</span>
-                  <span className="text-link block text-sm underline">{blogs[previous].title}</span>
+                  <span className="text-link block text-sm">
+                    {blogs[previous].title.split('\n').map((string) => (
+                      <span key={string} className="underline last:inline-block">
+                        {string}
+                      </span>
+                    ))}
+                  </span>
                 </Link>
               </li>
             )}
@@ -186,7 +192,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     <SvgIcon name="arrow-right" alt="" />
                   </span>
                   <span className="block text-xs">次の記事：</span>
-                  <span className="text-link block text-sm underline">{blogs[next].title}</span>
+                  <span className="text-link block text-sm">
+                    {blogs[next].title.split('\n').map((string) => (
+                      <span key={string} className="underline last:inline-block">
+                        {string}
+                      </span>
+                    ))}
+                  </span>
                 </Link>
               </li>
             )}

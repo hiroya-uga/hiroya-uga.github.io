@@ -24,7 +24,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <h1 className="@w640:text-5xl text-2xl">
             {post.meta.title?.split('\n').map((title, index) => {
               return (
-                <span key={index} className="inline-block">
+                <span key={index} className="last:inline-block">
                   {title}
                 </span>
               );
