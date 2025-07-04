@@ -20,7 +20,7 @@ export const ArticleList = ({ list }: Props) => {
               >
                 {formattedDateString(new Date(article.publishedAt))}
               </time>
-              <span className="@w640:table-cell @w640:px-4 text-sm">
+              <span className="@w640:table-cell @w640:px-4 text-center text-sm">
                 {resolveCategoryName(article.pathname.split('/')[2])}
               </span>
               <span className="@w640:text-lg @w640:table-cell block w-fit">

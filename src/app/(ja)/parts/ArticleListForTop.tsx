@@ -25,7 +25,7 @@ export const ArticleListForTop = async () => {
                 >
                   {formattedDateString(new Date(article.publishedAt))}
                 </time>
-                <span className="@w500:col-start-2 font-mono text-sm">
+                <span className="@w500:col-start-2 text-center font-mono text-sm">
                   {resolveCategoryName(article.pathname.split('/')[2])}
                 </span>
                 <span className="@w500:col-start-3 block w-full truncate">
