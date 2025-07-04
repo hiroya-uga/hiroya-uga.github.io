@@ -81,7 +81,6 @@ export const LazyImageLoad = () => {
         'load',
         (e) => {
           if (e.currentTarget instanceof HTMLImageElement) {
-            console.log(e.currentTarget.clientHeight);
             this.loading = false;
           }
         },
