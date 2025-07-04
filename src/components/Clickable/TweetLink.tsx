@@ -13,7 +13,7 @@ export const TweetLink = (props: Props) => {
 
   useEffect(() => {
     const message = encodeURIComponent(
-      `👏 ${(props.message || document.title.split('|')[0].trim()) + '\n'}${location.href}`,
+      `👏${(props.message || document.title.split('|')[0].trim()) + '\n'}${location.href}`,
     );
     const hashtags = encodeURIComponent((props.hashtags ?? ['ugadev']).join(','));
 

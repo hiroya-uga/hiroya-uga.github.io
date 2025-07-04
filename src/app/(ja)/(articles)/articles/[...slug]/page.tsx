@@ -172,7 +172,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="mx-content-inline @container not-empty:mt-30 text-center">
           <p className="mb-12">
             <TweetLink
-              message={`${categoryName}「${post.meta.title}」`}
+              message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
               className="not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto block w-fit rounded-lg border border-solid bg-black px-4 text-white no-underline transition-[opacity,visibility,box-shadow] hover:underline hover:shadow-lg"
             />
           </p>
