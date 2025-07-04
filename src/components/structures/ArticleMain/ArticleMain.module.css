@@ -13,3 +13,15 @@
 .root lazy-image {
   outline: 1px solid rgba(0, 0, 0, 0.5);
 }
+
+.root [class*="associate"] {
+  display: block;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color-textfield);
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+
+  small {
+    display: block;
+  }
+}

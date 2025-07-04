@@ -73,4 +73,83 @@ const imageOverrideExtension: TokenizerAndRendererExtension = {
   },
 };
 
-export const customMarkdownSyntaxes = [customBlockExtension, imageOverrideExtension];
+/** brを避けたいので、2スペース改行 + テキスト を 1 トークンとして扱う */
+type BreakSpanToken = Token & {
+  type: 'breakSpan';
+  raw: string;
+  text: string; // 改行の次行（包む対象）
+};
+
+const breakSpanExtension: TokenizerAndRendererExtension = {
+  name: 'breakSpan',
+  level: 'inline',
+
+  start(src) {
+    return src.indexOf('  \n');
+  },
+
+  tokenizer(src) {
+    const rule = /^ {2}\n([^\n]+)/; // 必要なら複数行対応で [\s\S]+? などに拡張
+    const match = rule.exec(src);
+    if (!match) return;
+
+    const [, following] = match;
+    const token: BreakSpanToken = {
+      type: 'breakSpan',
+      raw: match[0],
+      text: following,
+    };
+    return token;
+  },
+
+  renderer(token) {
+    const t = token as BreakSpanToken;
+    const htmlInside = marked.parseInline(t.text);
+    return `<span class="block">${htmlInside}</span>`;
+  },
+};
+
+type CustomLinkToken = Token & {
+  type: 'link';
+  raw: string;
+  href: string;
+  text?: string;
+  title?: string | null;
+};
+
+/**
+ * amzn.to（Amazon アソシエイト短縮 URL）を検出して、
+ * 開示文＋リンクタグを生成する。
+ */
+const amazonAssociateLinkExtension: TokenizerAndRendererExtension = {
+  name: 'link', // 既存の link トークンをフック
+  level: 'inline',
+
+  /** tokenizer はデフォルトのまま使うので不要 */
+
+  renderer(token) {
+    const t = token as CustomLinkToken;
+
+    try {
+      const url = new URL(t.href, URL_ORIGIN);
+
+      // 対象は amzn.to ドメインのみ（必要なら amazon.co.jp 等を追加）
+      if (url.hostname === 'amzn.to') {
+        const notice = '※ 当サイトはAmazonアソシエイト・プログラムの参加者であり、適格販売により収入を得ています。';
+        return `<span class="associate"><small>${notice}</small>\n<a href="${t.href}">Amazonリンク: ${t.text ?? t.href}</a><span>`;
+      }
+    } catch {
+      /* URL 解析失敗時はスルーして既定のレンダラーへ */
+    }
+
+    // false を返すと既定のレンダラーにフォールバック
+    return false as any;
+  },
+};
+
+export const customMarkdownSyntaxes = [
+  customBlockExtension,
+  imageOverrideExtension,
+  breakSpanExtension,
+  amazonAssociateLinkExtension,
+];
