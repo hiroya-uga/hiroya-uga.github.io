@@ -2,6 +2,7 @@
 title: "アマレットリキュール\n「Disaronno」"
 ogImage: '/articles/blog/2025/07-04-disaronno.webp?w=1200&h=630'
 publishedAt: '2025-07-04'
+tags: [お酒, 商品紹介]
 ---
 
 昔はお酒にとっても弱かったのですが、最近はそんなにべろべろになるほど弱くなくなったように感じます。大人になったのでしょうか。
