@@ -173,6 +173,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <p className="mb-paragraph">
             <TweetLink
               message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
+              hashtags={['ugadev', ...(post.meta.tags ?? [])]}
               className="not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto block w-fit rounded-lg border border-solid bg-black px-4 text-white no-underline transition-[opacity,visibility,box-shadow] hover:underline hover:shadow-lg"
             />
           </p>
@@ -314,7 +315,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const categoryName = resolveCategoryName(category);
   const ogImage = post.meta.ogImage || (await generateOgpImage(['articles', ...slug], post.meta.title, categoryName));
 
-  const description = '本文：' + (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…';
+  const description =
+    `【${categoryName}】` +
+    (post.meta.description ?? (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…') +
+    ' ' +
+    (post.meta.tags ?? []).map((tag: string) => `#${tag}`).join(', ');
 
   return {
     title: `${post.meta.title.replace(/\n/g, '')} | ${categoryName} | ${SITE_NAME}`,

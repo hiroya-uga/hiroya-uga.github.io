@@ -26,7 +26,7 @@
     --v-color-background-table-header: #00000011;
     --v-color-border-textfield: #d1d5dc;
     --v-color-border-table: #00000022;
-    --v-spacing-content-inline: 1rem;
+    --v-spacing-content-inline: min(1rem, 48px);
     --v-spacing-paragraph: 1rem;
 
     /* TailWindCSS */
@@ -63,7 +63,7 @@
 
   @media screen and (min-width: 640px) {
     :root {
-      --v-spacing-content-inline: 1.5rem;
+      --v-spacing-content-inline: min(1.5rem, 48px);
       --v-spacing-paragraph: 1.5rem;
       --v-header-margin-bottom: 4rem;
     }
@@ -71,13 +71,13 @@
 
   @media screen and (min-width: 1024px) {
     :root {
-      --v-spacing-content-inline: 3rem;
+      --v-spacing-content-inline: min(3rem, 48px);
     }
   }
 
   @media screen and (min-width: 1536px) {
     :root {
-      --v-spacing-content-inline: 1.2rem;
+      --v-spacing-content-inline: min(1.2rem, 48px);
     }
   }
 }
