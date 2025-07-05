@@ -47,7 +47,7 @@ const DEFAULT_PADDLE_WIDTH = 160;
 const DEFAULT_PADDLE_HEIGHT = 20;
 const DEFAULT_PADDLE_POSITION_Y = 30;
 const DEFAULT_BALL_RADIUS = 12;
-const DEFAULT_BALL_SPEED = 6;
+const DEFAULT_BALL_SPEED = 4;
 const DEFAULT_BALL_ACCELERATION = 0;
 
 export const SimpleBlockBreaker = ({ width, height }: { width: number; height: number }) => {
@@ -80,8 +80,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     radius: DEFAULT_BALL_RADIUS,
     speedX: DEFAULT_BALL_SPEED,
     speedY: DEFAULT_BALL_SPEED * -1,
-    defaultSpeedX: DEFAULT_BALL_SPEED,
-    defaultSpeedY: DEFAULT_BALL_SPEED * -1,
+    defaultSpeed: DEFAULT_BALL_SPEED,
     acceleration: DEFAULT_BALL_ACCELERATION,
     mode: {
       passThrough: false,
@@ -110,8 +109,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     paddle.current.x = width / 2 - paddle.current.width / 2;
     ball.current.x = width / 2;
     ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
-    ball.current.speedX = ball.current.defaultSpeedX;
-    ball.current.speedY = ball.current.defaultSpeedY;
+    ball.current.speedX = DEFAULT_BALL_SPEED;
+    ball.current.speedY = DEFAULT_BALL_SPEED * -1;
     initBlocks();
     setRunning(true);
   }, [height, initBlocks, width]);
@@ -314,9 +313,18 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       });
     };
 
-    const update = () => {
-      ball.current.x += ball.current.speedX;
-      ball.current.y += ball.current.speedY;
+    let lastTimestamp = performance.now();
+    const update = (timestamp: number) => {
+      // 経過時間（秒）を算出
+      const delta = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      // 速度（px/秒）
+      const SPEED = ball.current.defaultSpeed * 60;
+
+      // ボールの位置更新 ― fps に依存しない
+      ball.current.x += ball.current.speedX * SPEED * delta;
+      ball.current.y += ball.current.speedY * SPEED * delta;
 
       collision();
 
@@ -343,11 +351,11 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       }
     };
 
-    const loop = () => {
+    const loop = (timestamp: number) => {
       draw();
 
       if (running) {
-        update();
+        update(timestamp);
       }
 
       requestRef.current = requestAnimationFrame(loop);
@@ -517,8 +525,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 onChange={(e) => {
                   const newSize = parseInt(e.target.value, 10);
                   if (ball.current) {
-                    ball.current.defaultSpeedX = newSize;
-                    ball.current.defaultSpeedX = newSize * -1;
+                    ball.current.defaultSpeed = newSize;
                   }
                   e.currentTarget.nextElementSibling!.textContent = newSize.toString();
                 }}
