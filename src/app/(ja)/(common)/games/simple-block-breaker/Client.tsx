@@ -271,8 +271,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       ) {
         ball.current.speedY *= -1;
         // tweak angle based on where hit
-        const hitPos = (ball.current.x - paddle.current.x) / paddle.current.width - 0.5;
-        ball.current.speedX = ball.current.radius * hitPos;
+        // const hitPos = (ball.current.x - paddle.current.x) / paddle.current.width - 0.5;
+        // ball.current.speedX = ball.current.radius * hitPos;
       }
 
       // Blocks
