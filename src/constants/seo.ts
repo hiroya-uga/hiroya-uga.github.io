@@ -326,6 +326,11 @@ export const SEO: Record<
     title: 'ゲーム置き場',
     description: `ちょっとしたゲームが置かれています。暇つぶしにどうぞ🥁`,
   },
+  '/games/simple-block-breaker': {
+    title: 'ただのブロック崩し。',
+    afterSubTitle: 'Simple Block Breaker',
+    description: `本当になんの変哲もない、ただのブロック崩しです。\n設定で難易度を自由に変更できます。`,
+  },
   '/games/sudoku': {
     title: '無限数独（ナンプレ）',
     afterSubTitle: 'Infinity Sudoku',
