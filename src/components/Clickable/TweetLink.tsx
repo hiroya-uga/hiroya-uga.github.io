@@ -12,8 +12,13 @@ export const TweetLink = (props: Props) => {
   const [twitterShareUrl, setTwitterShareUrl] = useState('');
 
   useEffect(() => {
+    const url = new URL(location.href);
+    url.searchParams.set('utm_source', 'twitter');
+    url.searchParams.set('utm_medium', 'social');
+    url.searchParams.set('utm_campaign', 'share');
+
     const message = encodeURIComponent(
-      `👏${(props.message || document.title.split('|')[0].trim()) + '\n'}${location.href}`,
+      `👏${(props.message || document.title.split('|')[0].trim()) + '\n'}${url.toString()}`,
     );
     const hashtags = encodeURIComponent(['ugadev', ...(props.hashtags ?? [])].join(','));
 
