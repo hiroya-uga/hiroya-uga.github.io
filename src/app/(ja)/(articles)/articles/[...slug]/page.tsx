@@ -173,8 +173,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <p className="mb-paragraph">
             <TweetLink
               message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
-              hashtags={['ugadev', ...(post.meta.tags ?? [])]}
-              className="not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto block w-fit rounded-lg border border-solid bg-black px-4 text-white no-underline transition-[opacity,visibility,box-shadow] hover:underline hover:shadow-lg"
+              hashtags={post.meta.tags}
             />
           </p>
           <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">

@@ -27,6 +27,7 @@
     --v-color-border-textfield: #d1d5dc;
     --v-color-border-table: #00000022;
     --v-spacing-content-inline: min(1rem, 48px);
+    --v-spacing-share-buttons: 6rem;
     --v-spacing-paragraph: 1rem;
 
     /* TailWindCSS */
@@ -64,6 +65,7 @@
   @media screen and (min-width: 640px) {
     :root {
       --v-spacing-content-inline: min(1.5rem, 48px);
+      --v-spacing-share-buttons: 8rem;
       --v-spacing-paragraph: 1.5rem;
       --v-header-margin-bottom: 4rem;
     }
@@ -119,6 +121,7 @@
   --max-width-content: 60rem;
   --max-width-structure: 90rem;
 
+  --spacing-share-buttons: var(--v-spacing-share-buttons);
   --spacing-paragraph: var(--v-spacing-paragraph);
   --spacing-content-inline: var(--v-spacing-content-inline);
 

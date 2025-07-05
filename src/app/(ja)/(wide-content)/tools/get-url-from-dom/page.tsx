@@ -1,4 +1,5 @@
 import { GetUrlFromDOMContent } from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client';
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { Heading } from '@/components/Heading';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/get-metadata';
@@ -51,6 +52,10 @@ export default function Page() {
           <b>Result</b>からURLをコピーする
         </li>
       </ol>
+
+      <p className="mt-share-buttons mx-auto grid justify-end">
+        <TweetLink />
+      </p>
     </>
   );
 }

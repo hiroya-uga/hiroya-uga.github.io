@@ -1,4 +1,5 @@
 import { AnAltDecisionTreeContent } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client';
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/get-metadata';
 import { Suspense } from 'react';
@@ -32,6 +33,10 @@ export default function Page() {
           <AnAltDecisionTreeContent />
         </Suspense>
       </section>
+
+      <p className="mt-share-buttons mx-auto grid max-w-3xl justify-end">
+        <TweetLink hashtags={['代替テキスト']} />
+      </p>
     </>
   );
 }

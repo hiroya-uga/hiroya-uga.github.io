@@ -1,5 +1,6 @@
 import { SlackReminderCommandGenerator } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client';
 import { HelpLink } from '@/components/Clickable';
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/get-metadata';
 
@@ -22,6 +23,9 @@ export default function Page() {
         </p>
       </PageTitle>
       <SlackReminderCommandGenerator />
+      <p className="mt-share-buttons mx-auto grid justify-end">
+        <TweetLink hashtags={['SlackBot']} />
+      </p>
     </>
   );
 }

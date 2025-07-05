@@ -1,3 +1,4 @@
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { SimpleLinkList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/get-metadata';
@@ -166,6 +167,9 @@ export default function Page() {
           };
         })}
       />
+      <p className="mt-share-buttons mx-auto grid justify-end">
+        <TweetLink />
+      </p>
     </>
   );
 }
