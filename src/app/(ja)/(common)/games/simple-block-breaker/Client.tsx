@@ -543,7 +543,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={0}
                 step={0.01}
                 defaultValue={DEFAULT_BALL_ACCELERATION}
-                max={1}
+                max={0.15}
                 className="col-start-2 row-start-1"
                 onChange={(e) => {
                   const newSize = Number(e.target.value);
