@@ -18,7 +18,7 @@ export const TweetLink = (props: Props) => {
     url.searchParams.set('utm_campaign', 'share');
 
     const message = encodeURIComponent(
-      `👏${(props.message || document.title.split('|')[0].trim()) + '\n'}${url.toString()}`,
+      `👏${(props.message || ` ${document.title.split('|')[0].trim()}`) + '\n'}${url.toString()}`,
     );
     const hashtags = encodeURIComponent(['ugadev', ...(props.hashtags ?? [])].join(','));
 
