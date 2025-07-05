@@ -1,4 +1,5 @@
 import { SudokuClient } from '@/app/(ja)/(common)/games/sudoku/Client';
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { Heading } from '@/components/Heading';
 import { DiscList, NoteList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
@@ -106,6 +107,10 @@ export default function Page() {
           </tr>
         </tbody>
       </Table>
+
+      <p className="mt-share-buttons mx-auto grid justify-end">
+        <TweetLink hashtags={['数独']} />
+      </p>
     </>
   );
 }

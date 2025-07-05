@@ -490,7 +490,7 @@ export const SlackReminderCommandGenerator = () => {
         <p className="whitespace-pre-wrap">{createComment({ result, type })}</p>
       </div>
       <div className="pb-4 sm:sticky sm:bottom-0 sm:z-10">
-        <div className="sm:shadow-sticky border border-transparent bg-gray-800 sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white dark:border-slate-500">
+        <div className="sm:shadow-sticky border border-transparent sm:grid sm:grid-cols-[1fr_auto] sm:rounded-lg sm:bg-white dark:border-slate-500">
           <p
             className="whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-gray-300 sm:rounded-l-lg sm:rounded-r-none"
             onClick={(e) => {
