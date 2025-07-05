@@ -86,4 +86,7 @@ export const TOOLS_LINK_LIST: ToolPage = [
   },
 ];
 
-export const GAMES_LINK_LIST: LinkListItem[] = [{ emoji: '🔢', pathname: '/games/sudoku' }];
+export const GAMES_LINK_LIST: LinkListItem[] = [
+  { emoji: '🔢', pathname: '/games/sudoku' },
+  { emoji: '🏓', pathname: '/games/simple-block-breaker' },
+];
