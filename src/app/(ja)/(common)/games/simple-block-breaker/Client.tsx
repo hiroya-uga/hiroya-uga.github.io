@@ -38,20 +38,21 @@ const getBlockSetting = ({
 };
 
 const DEFAULT_BLOCK_SETTING = {
-  rows: 10,
-  cols: 10,
+  rows: 8,
+  cols: 4,
   gap: 8,
-  blockHeight: 20,
+  blockHeight: 60,
 };
-const DEFAULT_PADDLE_WIDTH = 160;
+const DEFAULT_PADDLE_WIDTH = 360;
 const DEFAULT_PADDLE_HEIGHT = 20;
 const DEFAULT_PADDLE_POSITION_Y = 30;
-const DEFAULT_BALL_RADIUS = 12;
+const DEFAULT_BALL_RADIUS = 16;
 const DEFAULT_BALL_SPEED = 4;
 const DEFAULT_BALL_ACCELERATION = 0;
 
 export const SimpleBlockBreaker = ({ width, height }: { width: number; height: number }) => {
   const id = useId();
+  const [isReady, setIsReady] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -114,6 +115,40 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     initBlocks();
     setRunning(true);
   }, [height, initBlocks, width]);
+
+  const updateConfigTextValue = useCallback((e: React.ChangeEvent<HTMLInputElement>, value: string) => {
+    if (e.currentTarget.nextElementSibling?.firstElementChild instanceof HTMLInputElement === false) {
+      return;
+    }
+    e.currentTarget.nextElementSibling.firstElementChild.value = value;
+  }, []);
+
+  const onChangeInputForRange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    const numberValue = Number(value);
+    const rangeInput = e.currentTarget.parentElement?.previousElementSibling;
+
+    if (rangeInput instanceof HTMLInputElement === false || value === '' || Number.isNaN(numberValue)) {
+      return;
+    }
+
+    const min = Number(rangeInput.min);
+    const max = Number(rangeInput.max);
+    const newValue = Math.max(min, Math.min(max, numberValue));
+
+    rangeInput.value = newValue.toString();
+    rangeInput.dispatchEvent(new Event('change', { bubbles: true }));
+  }, []);
+
+  const onBlurInputForRange = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
+    const rangeInput = e.currentTarget.parentElement?.previousElementSibling;
+
+    if (rangeInput instanceof HTMLInputElement === false) {
+      return;
+    }
+
+    e.currentTarget.value = rangeInput.value;
+  }, []);
 
   // マウス操作
   useEffect(() => {
@@ -271,8 +306,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       ) {
         ball.current.speedY *= -1;
         // tweak angle based on where hit
-        const hitPos = (ball.current.x - paddle.current.x) / paddle.current.width - 0.5;
-        ball.current.speedX = ball.current.radius * hitPos;
+        // const hitPos = (ball.current.x - paddle.current.x) / paddle.current.width - 0.5;
+        // ball.current.speedX = ball.current.radius * hitPos;
       }
 
       // Blocks
@@ -370,17 +405,19 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
 
   useEffect(() => {
     initBlocks();
+    setIsReady(true);
   }, [initBlocks]);
 
   return (
     <>
-      <div className="touch-pan-y">
+      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10dvh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto">
         <canvas
           ref={canvasRef}
           width={width}
           height={height}
           className={clsx([
-            'pointer-coarse:border-b-[4rem] mx-auto size-auto max-h-[80dvh] max-w-[90%] border-2 border-[#a4a4a4]',
+            'starting:opacity-0 mx-auto size-auto max-h-[80dvh] max-w-[90%] border-2 border-[#a4a4a4] transition-opacity',
+            isReady ? 'opacity-100' : 'opacity-0',
             cursorHidden && 'cursor-none',
           ])}
           onMouseMove={() => {
@@ -391,27 +428,29 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
             }, 800);
           }}
         />
-        <p className="mt-48PX sticky bottom-2 mb-12 border-b border-solid border-[#a4a4a4] pb-12">
-          <button
-            type="button"
-            ref={startButton}
-            onClick={() => {
-              if (running) return;
-              canvasRef.current?.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
-              reset();
-            }}
-            className={clsx([
-              'mx-auto grid aspect-square w-[5.5rem] place-items-center rounded-full bg-blue-600 px-4 py-2 text-white hover:bg-blue-700',
-              running && 'invisible',
-            ])}
-          >
-            {blocks.current.every((b) => b.broken === false) ? 'Start' : 'Restart'}
-          </button>
-        </p>
       </div>
+      <p
+        className={clsx([
+          'mt-48PX sticky bottom-2 mb-12 border-b border-solid border-[#a4a4a4] pb-12',
+          running && 'invisible',
+        ])}
+      >
+        <button
+          type="button"
+          ref={startButton}
+          onClick={() => {
+            if (running) return;
+            canvasRef.current?.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+            reset();
+          }}
+          className="mx-auto grid aspect-square w-[5.5rem] place-items-center rounded-full bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+        >
+          {blocks.current.every((b) => b.broken === false) ? 'Start' : 'Restart'}
+        </button>
+      </p>
 
-      <div className="@container">
-        <fieldset className="max-w-article @w640:pl-0 mx-auto pl-4">
+      <div className="@container px-2">
+        <fieldset className="@w640:pl-0 mx-auto max-w-[40rem] pl-4">
           <legend className="mb-3 text-sm font-bold">設定</legend>
           <div
             className={clsx([
@@ -430,8 +469,12 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               const inputKey = `${id}-${key}`;
               return (
                 <p key={key} className="col-start-1 col-end-4 grid grid-cols-subgrid">
-                  <label htmlFor={inputKey} className="col-start-1 row-start-1">
-                    {`${label}:`}
+                  <label
+                    htmlFor={inputKey}
+                    id={`${inputKey}-label`}
+                    className="col-start-1 row-start-1 content-center pr-2"
+                  >
+                    {`${label}`}
                   </label>
                   <input
                     disabled={running}
@@ -450,20 +493,33 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                           [key]: newSize,
                         });
                       }
-                      e.currentTarget.nextElementSibling!.textContent = newSize.toString();
+                      updateConfigTextValue(e, newSize.toString());
 
                       // 反映処理
                       initBlocks();
                     }}
                   />
-                  <span className="col-start-3 row-start-1 content-center">{DEFAULT_BLOCK_SETTING[key]}</span>
+                  <span className="col-start-3 row-start-1 content-center">
+                    <input
+                      inputMode="decimal"
+                      aria-labelledby={`${inputKey}-label`}
+                      defaultValue={DEFAULT_BLOCK_SETTING[key]}
+                      className="w-12 rounded bg-[#404653] px-1 text-base"
+                      onChange={onChangeInputForRange}
+                      onBlur={onBlurInputForRange}
+                    />
+                  </span>
                 </p>
               );
             })}
 
             <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
-              <label className="col-start-1 row-start-1" htmlFor={`${id}-paddle-width`}>
-                バーの幅：
+              <label
+                htmlFor={`${id}-paddle-width`}
+                id={`${id}-paddle-width-label`}
+                className="col-start-1 row-start-1 content-center pr-2"
+              >
+                バーの幅
               </label>
               <input
                 disabled={running}
@@ -472,21 +528,34 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_PADDLE_WIDTH}
                 max={1000}
-                className="col-start-2 row-start-1"
+                className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
                   const newSize = parseInt(e.target.value, 10);
                   if (paddle.current) {
                     paddle.current.width = newSize;
                   }
-                  e.currentTarget.nextElementSibling!.textContent = newSize.toString();
+                  updateConfigTextValue(e, newSize.toString());
                 }}
               />
-              <span className="col-start-3 row-start-1 content-center">{DEFAULT_PADDLE_WIDTH}</span>
+              <span className="col-start-3 row-start-1 content-center">
+                <input
+                  inputMode="decimal"
+                  aria-labelledby={`${id}-paddle-width-label`}
+                  defaultValue={DEFAULT_PADDLE_WIDTH}
+                  className="w-12 rounded bg-[#404653] px-1 text-base"
+                  onChange={onChangeInputForRange}
+                  onBlur={onBlurInputForRange}
+                />
+              </span>
             </p>
 
             <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
-              <label className="col-start-1 row-start-1" htmlFor={`${id}-ball-radius`}>
-                ボールのサイズ：
+              <label
+                htmlFor={`${id}-ball-radius`}
+                id={`${id}-ball-radius-label`}
+                className="col-start-1 row-start-1 content-center pr-2"
+              >
+                ボールのサイズ
               </label>
               <input
                 disabled={running}
@@ -495,24 +564,37 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_BALL_RADIUS}
                 max={100}
-                className="col-start-2 row-start-1"
+                className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
                   const newSize = parseInt(e.target.value, 10);
                   if (ball.current) {
                     ball.current.radius = newSize;
                   }
-                  e.currentTarget.nextElementSibling!.textContent = newSize.toString();
+                  updateConfigTextValue(e, newSize.toString());
 
                   // 反映処理
                   ball.current.x = width / 2;
                   ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
                 }}
               />
-              <span className="col-start-3 row-start-1 content-center">{DEFAULT_BALL_SPEED}</span>
+              <span className="col-start-3 row-start-1 content-center">
+                <input
+                  inputMode="decimal"
+                  aria-labelledby={`${id}-ball-radius-label`}
+                  defaultValue={DEFAULT_BALL_SPEED}
+                  className="w-12 rounded bg-[#404653] px-1 text-base"
+                  onChange={onChangeInputForRange}
+                  onBlur={onBlurInputForRange}
+                />
+              </span>
             </p>
             <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
-              <label className="col-start-1 row-start-1" htmlFor={`${id}-ball-speed`}>
-                ボールの速さ：
+              <label
+                htmlFor={`${id}-ball-speed`}
+                id={`${id}-ball-speed-label`}
+                className="col-start-1 row-start-1 content-center pr-2"
+              >
+                ボールの速さ
               </label>
               <input
                 disabled={running}
@@ -521,20 +603,33 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_BALL_SPEED}
                 max={10}
-                className="col-start-2 row-start-1"
+                className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
                   const newSize = parseInt(e.target.value, 10);
                   if (ball.current) {
                     ball.current.defaultSpeed = newSize;
                   }
-                  e.currentTarget.nextElementSibling!.textContent = newSize.toString();
+                  updateConfigTextValue(e, newSize.toString());
                 }}
               />
-              <span className="col-start-3 row-start-1">{DEFAULT_BALL_SPEED}</span>
+              <span className="col-start-3 row-start-1 content-center">
+                <input
+                  inputMode="decimal"
+                  aria-labelledby={`${id}-ball-speed-label`}
+                  defaultValue={DEFAULT_BALL_SPEED}
+                  className="w-12 rounded bg-[#404653] px-1 text-base"
+                  onChange={onChangeInputForRange}
+                  onBlur={onBlurInputForRange}
+                />
+              </span>
             </p>
             <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
-              <label className="col-start-1 row-start-1" htmlFor={`${id}-ball-acceleration`}>
-                ブロックを消すごとに増える速度：
+              <label
+                htmlFor={`${id}-ball-acceleration`}
+                id={`${id}-ball-acceleration-label`}
+                className="col-start-1 row-start-1 content-center pr-2"
+              >
+                ブロックを消すごとに増える速度
               </label>
               <input
                 disabled={running}
@@ -543,8 +638,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={0}
                 step={0.01}
                 defaultValue={DEFAULT_BALL_ACCELERATION}
-                max={1}
-                className="col-start-2 row-start-1"
+                max={0.15}
+                className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
                   const newSize = Number(e.target.value);
                   if (ball.current) {
@@ -564,15 +659,39 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                     return value;
                   })();
 
-                  e.currentTarget.nextElementSibling!.textContent = textContent;
+                  updateConfigTextValue(e, textContent);
                 }}
               />
-              <span className="col-start-3 row-start-1">{DEFAULT_BALL_ACCELERATION.toString().padEnd(4, '.00')}</span>
+              <span className="col-start-3 row-start-1 content-center">
+                <input
+                  inputMode="decimal"
+                  aria-labelledby={`${id}-ball-acceleration-label`}
+                  defaultValue={DEFAULT_BALL_ACCELERATION.toString().padEnd(4, '.00')}
+                  className="w-12 rounded bg-[#404653] px-1 text-base"
+                  onChange={onChangeInputForRange}
+                  onBlur={(e) => {
+                    onBlurInputForRange(e);
+                    const newValue = e.currentTarget.value;
+
+                    if (newValue === undefined) {
+                      return;
+                    }
+
+                    if (newValue.length === 1) {
+                      e.currentTarget.value = newValue.padEnd(4, '.00');
+                    } else if (newValue.length === 3) {
+                      e.currentTarget.value = newValue.padEnd(4, '0');
+                    } else {
+                      e.currentTarget.value = newValue;
+                    }
+                  }}
+                />
+              </span>
             </p>
 
             <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
-              <label className="col-start-1 row-start-1" htmlFor={`${id}-ball-path-through`}>
-                ボールが貫通：
+              <label htmlFor={`${id}-ball-path-through`} className="col-start-1 row-start-1 content-center pr-2">
+                ボールが貫通
               </label>
               <span className="col-start-2 col-end-4">
                 <Switch
