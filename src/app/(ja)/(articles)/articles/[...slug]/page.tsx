@@ -17,7 +17,7 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import path from 'path';
 
-const filePath = path.join(process.cwd(), 'src', 'app', '(ja)', '(articles)', 'articles', '[...slug]', 'markdown');
+const filePath = path.join(process.cwd(), 'src', 'markdown', 'articles');
 
 export function generateStaticParams() {
   const fileList = Object.entries(ARTICLE_PATH_PATTERN_LIST)
@@ -51,17 +51,7 @@ export function generateStaticParams() {
 }
 
 const getPath = (category: string, year?: string) => {
-  const result = path.join(
-    process.cwd(),
-    'src',
-    'app',
-    '(ja)',
-    '(articles)',
-    'articles',
-    '[...slug]',
-    'markdown',
-    category,
-  );
+  const result = path.join(process.cwd(), 'src', 'markdown', 'articles', category);
 
   if (year) {
     return path.join(result, year);
