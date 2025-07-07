@@ -79,4 +79,14 @@ const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
   })
   .flat();
 
-export const getAllArticles = async () => (await Promise.all(articlePromises)).flat();
+export const getAllArticles = async () =>
+  (await Promise.all(articlePromises)).flat().sort((a, b) => {
+    if (a.publishedAt < b.publishedAt) {
+      return 1;
+    }
+
+    if (a.publishedAt > b.publishedAt) {
+      return -1;
+    }
+    return 0;
+  });
