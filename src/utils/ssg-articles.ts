@@ -30,16 +30,7 @@ export async function getArticles(articlesDir: string) {
       return {
         ...data,
         pathname:
-          articlesDir
-            .replace(process.cwd(), '')
-            .replace('/src/app', '')
-            .split('/')
-            .filter((part) => {
-              return part !== 'markdown' && part.startsWith('(') === false && part.startsWith('[') === false;
-            })
-            .join('/') +
-          '/' +
-          filename.replace('.md', ''),
+          articlesDir.replace(process.cwd(), '').replace('/src/markdown', '') + '/' + filename.replace('.md', ''),
       } as ArticleFrontMatter;
     })
     .sort((a, b) => {
@@ -57,18 +48,7 @@ export async function getArticles(articlesDir: string) {
 }
 
 const getArticlePath = (category: string, year: string) => {
-  return path.join(
-    process.cwd(),
-    'src',
-    'app',
-    '(ja)',
-    '(articles)',
-    'articles',
-    '[...slug]',
-    'markdown',
-    category,
-    year,
-  );
+  return path.join(process.cwd(), 'src', 'markdown', 'articles', category, year);
 };
 
 const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
