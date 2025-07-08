@@ -46,7 +46,7 @@ export async function generateOgpImage(slug: string[], title: string, categoryNa
   const lines = (() => {
     let i = 0;
 
-    return [...title.trim()]
+    return [...title.replaceAll('\n', '').trim()]
       .map((char) => {
         if (i === 12) {
           i = 0;
