@@ -46,13 +46,8 @@ type CustomImageToken = Token & {
 };
 
 const imageOverrideExtension: TokenizerAndRendererExtension = {
-  /** Marked が生成する image トークンを捕まえる */
   name: 'image',
   level: 'inline',
-
-  /**
-   * tokenizer は既存のものをそのまま使うので不要
-   */
 
   renderer(token) {
     const t = token as CustomImageToken;
@@ -77,7 +72,7 @@ const imageOverrideExtension: TokenizerAndRendererExtension = {
 type BreakSpanToken = Token & {
   type: 'breakSpan';
   raw: string;
-  text: string; // 改行の次行（包む対象）
+  text: string;
 };
 
 const breakSpanExtension: TokenizerAndRendererExtension = {
@@ -89,7 +84,7 @@ const breakSpanExtension: TokenizerAndRendererExtension = {
   },
 
   tokenizer(src) {
-    const rule = /^ {2}\n([^\n]+)/; // 必要なら複数行対応で [\s\S]+? などに拡張
+    const rule = /^ {2}\n([^\n]+)/;
     const match = rule.exec(src);
     if (!match) return;
 
@@ -117,15 +112,9 @@ type CustomLinkToken = Token & {
   title?: string | null;
 };
 
-/**
- * amzn.to（Amazon アソシエイト短縮 URL）を検出して、
- * 開示文＋リンクタグを生成する。
- */
 const amazonAssociateLinkExtension: TokenizerAndRendererExtension = {
-  name: 'link', // 既存の link トークンをフック
+  name: 'link',
   level: 'inline',
-
-  /** tokenizer はデフォルトのまま使うので不要 */
 
   renderer(token) {
     const t = token as CustomLinkToken;
@@ -133,18 +122,94 @@ const amazonAssociateLinkExtension: TokenizerAndRendererExtension = {
     try {
       const url = new URL(t.href, URL_ORIGIN);
 
-      // 対象は amzn.to ドメインのみ（必要なら amazon.co.jp 等を追加）
       if (url.hostname === 'amzn.to') {
         const notice = '※ 当サイトはAmazonアソシエイト・プログラムの参加者であり、適格販売により収入を得ています。';
         return `<span class="associate"><small>${notice}</small>\n<a href="${t.href}">Amazonリンク: ${t.text ?? t.href}</a><span>`;
       }
     } catch {
-      /* URL 解析失敗時はスルーして既定のレンダラーへ */
+      // URL 解析失敗時はスルーして既定のレンダラーに流す
     }
 
-    // false を返すと既定のレンダラーにフォールバック
-    return false as any;
+    return false;
   },
+};
+
+type FootnoteRefToken = Token & {
+  type: 'footnoteRef';
+  raw: string;
+  identifier: string;
+};
+
+type FootnoteDefToken = Token & {
+  type: 'footnoteDef';
+  raw: string;
+  identifier: string;
+  text: string;
+};
+
+const footnoteDefs: Record<string, string> = {};
+
+const footnoteRefExtension: TokenizerAndRendererExtension = {
+  name: 'footnoteRef',
+  level: 'inline',
+  start(src) {
+    return src.match(/\[\^[^\]]+\]/)?.index;
+  },
+  tokenizer(src) {
+    const rule = /^\[\^([^\]]+)\]/;
+    const match = rule.exec(src);
+    if (!match) return;
+
+    const [, identifier] = match;
+
+    const token: FootnoteRefToken = {
+      type: 'footnoteRef',
+      raw: match[0],
+      identifier,
+    };
+
+    return token;
+  },
+  renderer(token) {
+    const t = token as FootnoteRefToken;
+    return `<sup id="ref-${t.identifier}" class="font-mono inline-block"><a href="#note-${t.identifier}" aria-describedby="#note-${t.identifier}">[${t.identifier}]</a></sup>`;
+  },
+};
+
+const footnoteDefExtension: TokenizerAndRendererExtension = {
+  name: 'footnoteDef',
+  level: 'block',
+  start(src) {
+    return src.match(/^\[\^.+\]:/)?.index;
+  },
+  tokenizer(src) {
+    const rule = /^\[\^([^\]]+)\]:\s+(.+?)(?:\n{2,}|\n*$)/;
+    const match = rule.exec(src);
+    if (!match) return;
+
+    const [, identifier, text] = match;
+
+    footnoteDefs[identifier] = text;
+
+    const token: FootnoteDefToken = {
+      type: 'footnoteDef',
+      raw: match[0],
+      identifier,
+      text,
+    };
+
+    return token;
+  },
+  renderer() {
+    // 脚注そのものは描画しない
+    return '';
+  },
+};
+
+export const getFootnotes = (): [string, { html: string | Promise<string> }][] => {
+  return Object.entries(footnoteDefs).map(([id, text]) => {
+    return [id, { html: marked.parseInline(text) }];
+  });
 };
 
 export const customMarkdownSyntaxes = [
@@ -152,4 +217,6 @@ export const customMarkdownSyntaxes = [
   imageOverrideExtension,
   breakSpanExtension,
   amazonAssociateLinkExtension,
+  footnoteRefExtension,
+  footnoteDefExtension,
 ];

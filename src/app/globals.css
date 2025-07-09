@@ -117,7 +117,7 @@
   --leading-inherit: inherit;
 
   --max-width-dialog: min(48rem, 90%);
-  --max-width-article: min(40rem, 85%);
+  --max-width-article: min(40rem, 90%);
   --max-width-content: 60rem;
   --max-width-structure: 90rem;
 
@@ -244,6 +244,7 @@
   html,
   body {
     scroll-behavior: smooth;
+    scroll-padding-top: 1rem;
     background: var(--v-color-background);
   }
 
