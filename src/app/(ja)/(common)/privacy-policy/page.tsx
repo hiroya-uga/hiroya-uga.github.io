@@ -11,7 +11,7 @@ export default function Page() {
     <>
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <div className="mt-2 text-right text-sm">
-          <p>改定日: 2025年06月08日</p>
+          <p>改定日: 2025年07月10日</p>
           <p>制定日: 2025年06月02日</p>
         </div>
       </PageTitle>
@@ -79,8 +79,6 @@ export default function Page() {
         Analyticsによるデータ収集を拒否することができます。ただし、その場合、ウェブサイトの一部の機能が制限される可能性があります。
       </p>
 
-      <p>当サイトの利用により、Googleおよび当サイト管理者による上記のデータ処理に同意したものとみなされます。</p>
-
       <p className="mt-6 grid place-items-center sm:mt-8">
         <Button href="https://tools.google.com/dlpage/gaoptout" target="_blank">
           アクセス解析を拒否する
@@ -95,11 +93,8 @@ export default function Page() {
       </p>
       <p>
         当サイトのサーバーは第三者（
-        <TextLink
-          href="https://docs.github.com/ja/pages/getting-started-with-github-pages/creating-a-github-pages-site"
-          target="_blank"
-        >
-          GitHub Pages
+        <TextLink href="https://vercel.com" target="_blank">
+          Vercel
         </TextLink>
         ）に委託されており、IPアドレス、ブラウザ情報、アクセス日時などが記録される場合があります。これらのデータはサーバー提供者のプライバシーポリシーに基づいて管理されます。
       </p>
