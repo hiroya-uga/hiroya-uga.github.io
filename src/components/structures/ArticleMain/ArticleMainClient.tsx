@@ -1,5 +1,6 @@
 'use client';
 
+import { ARTICLE_MAIN_ID } from '@/constants/id';
 import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
@@ -32,7 +33,7 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
 
   useEffect(() => {
     const span = ref.current;
-    const article = span?.closest('article')?.lastElementChild;
+    const article = span?.closest('article')?.querySelector(`#${ARTICLE_MAIN_ID}`);
     if (status === 'loading' || span === null || article instanceof HTMLElement === false) {
       return;
     }

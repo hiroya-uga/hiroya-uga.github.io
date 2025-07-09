@@ -1,6 +1,8 @@
 import { ArticleInformation } from '@/components/structures/ArticleMain/ArticleMainClient';
 
+import { Heading } from '@/components/Heading';
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
+import { ARTICLE_MAIN_ID } from '@/constants/id';
 import clsx from 'clsx';
 
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
       publishedAt?: string;
     };
     content: string | Promise<string>;
+    footnotes: [string, { html: string | Promise<string> }][];
   };
 };
 
@@ -56,9 +59,27 @@ export const ArticleMain = async ({ post }: Props) => {
       </div>
       <div className="px-content-inline @w1024:pl-10">
         <div
-          className="space-y-paragraph max-w-article mx-auto"
+          id={ARTICLE_MAIN_ID}
+          className={clsx(styles.article, 'space-y-paragraph max-w-article mx-auto')}
           dangerouslySetInnerHTML={{ __html: await post.content }}
         />
+        <div role="note" className="max-w-article mx-auto mt-20 empty:hidden">
+          {0 < post.footnotes.length && (
+            <>
+              <Heading level={2}>脚注</Heading>
+              <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
+                {post.footnotes.map(async ([id, { html }]) => (
+                  <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
+                    <span className="font-mono">
+                      <a href={`#ref-${id}`}>{`[${id}^]`}</a>:
+                    </span>
+                    <span dangerouslySetInnerHTML={{ __html: await html }} />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
       </div>
     </article>
   );
