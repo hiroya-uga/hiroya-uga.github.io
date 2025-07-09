@@ -171,7 +171,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <li>
                 <Link
                   href={blogs[previous].pathname}
-                  className="hover:bg-banner relative block rounded-lg border border-[#00000022] p-3 px-8 text-inherit no-underline transition-[box-shadow,background-color] hover:shadow-lg dark:border-[#ffffff44]"
+                  className="hover:bg-banner relative block rounded-lg border border-[#00000022] p-3 pl-10 pr-6 text-inherit no-underline transition-[box-shadow,background-color] hover:shadow-lg dark:border-[#ffffff44]"
                 >
                   <span className="absolute inset-y-0 left-3 my-auto block size-4">
                     <SvgIcon name="arrow-left" alt="" />
@@ -191,7 +191,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <li className="@w640:col-start-2">
                 <Link
                   href={blogs[next].pathname}
-                  className="hover:bg-banner relative block rounded-lg border border-[#00000022] p-3 px-8 text-inherit no-underline transition-[box-shadow,background-color] hover:shadow-lg dark:border-[#ffffff44]"
+                  className="hover:bg-banner relative block rounded-lg border border-[#00000022] p-3 pl-6 pr-10 text-inherit no-underline transition-[box-shadow,background-color] hover:shadow-lg dark:border-[#ffffff44]"
                 >
                   <span className="absolute inset-y-0 right-3 my-auto block size-4">
                     <SvgIcon name="arrow-right" alt="" />
