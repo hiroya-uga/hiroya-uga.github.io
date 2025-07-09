@@ -162,6 +162,7 @@
   --container-w700: 43.75rem;
   --container-w640: 40rem;
   --container-w500: 31.25rem;
+  --container-w400: 25rem;
 }
 
 @layer utilities {

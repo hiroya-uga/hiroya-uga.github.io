@@ -18,23 +18,26 @@ export const ArticleMain = async ({ post }: Props) => {
   const hasTags = Array.isArray(post.meta.tags) && 0 < post.meta.tags.length;
 
   return (
-    <article className={clsx([styles.root, '@container'])}>
+    <article className={styles.root}>
       <div className={clsx(styles.h1, 'px-content-inline @w1024:pl-10 @w640:mb-14 @w640:mt-8 mb-8 mt-4')}>
         <div
           className={clsx([
-            'max-w-content mx-auto text-center',
+            'mx-auto text-center',
             hasTags === true && '@w640:pt-20 pt-12',
             hasTags === false && '@w640:py-20 py-12',
           ])}
         >
-          <h1 className="@w640:text-5xl text-2xl">
-            {post.meta.title?.split('\n').map((title, index) => {
-              return (
-                <span key={index} className="last:inline-block">
-                  {title}
-                </span>
-              );
-            })}
+          <h1 className="@w640:text-4xl @w800:text-5xl text-2xl">
+            <span className="sr-only">{post.meta.title?.replaceAll('\n', '')}</span>
+            <span aria-hidden="true">
+              {post.meta.title?.split('\n').map((title, index) => {
+                return (
+                  <span key={index} className="@w400:inline-block">
+                    {title}
+                  </span>
+                );
+              })}
+            </span>
           </h1>
           <ArticleInformation date={post.meta.publishedAt} />
         </div>
