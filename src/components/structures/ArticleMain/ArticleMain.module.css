@@ -10,27 +10,18 @@
   background-repeat: no-repeat;
 }
 
-@keyframes sup-highlight {
+@keyframes target-highlight {
   0% {
-    scale: 1.05;
+    color: inherit;
+    background-color: transparent;
   }
   50% {
-    scale: 1.5;
+    color: var(--color-mark);
+    background-color: var(--background-color-mark);
   }
   100% {
-    scale: 1;
-  }
-}
-
-@keyframes note-highlight {
-  0% {
-    scale: 1;
-  }
-  50% {
-    scale: 1.05;
-  }
-  100% {
-    scale: 1;
+    color: inherit;
+    background-color: transparent;
   }
 }
 
@@ -49,11 +40,9 @@
     display: block;
   }
 
-  sup:target {
-    animation: sup-highlight 1s ease 0.3s;
-  }
-  li:target {
-    animation: note-highlight 1s ease 0.3s;
+  :target,
+  :target * {
+    animation: target-highlight 1s ease 0.3s;
   }
 }
 
