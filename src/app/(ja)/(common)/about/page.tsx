@@ -216,7 +216,7 @@ export default function Page() {
                 // オリジナル質問
                 title: '嫌いなWeb広告',
                 answer:
-                  '画面を埋め尽くしてきたり、閉じるボタンのクリック範囲が狭すぎたり、touchendとかpointerupイベントでクリックしたことにされるやつ🤬',
+                  '画面を埋め尽くしてきたり、閉じるボタンのクリック範囲が狭すぎたり、pointerdownとかpointerupイベントでクリックしたことにされるやつ🤬',
               },
               { title: '愛車', answer: '' },
               {
