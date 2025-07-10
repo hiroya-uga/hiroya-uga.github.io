@@ -215,7 +215,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           { href: `/articles/${slug[0]}`, title: resolveCategoryName(slug[0]) },
           { href: `/articles/${category}/${year}`, title: year },
         ]}
-        currentPageTitle={post.meta.title}
+        currentPageTitle={post.meta.title.replaceAll('\n', '')}
       />
       <Script type="application/ld+json" id="json-ld">
         {JSON.stringify({
