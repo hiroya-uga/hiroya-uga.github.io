@@ -2,19 +2,12 @@
 
 import { useEffect } from 'react';
 
-let wrote = false;
-
 export const Console = () => {
   useEffect(() => {
-    if (wrote) {
-      return;
-    }
-
     //  _     _  ______ _______   ______  _______ _    _
     //  |     | |  ____ |_____|   |     \\ |______  \\  /
     //  |_____| |_____| |     | . |_____/ |______   \\/
 
-    wrote = true;
     console.log(
       `%c
 =====================================================
