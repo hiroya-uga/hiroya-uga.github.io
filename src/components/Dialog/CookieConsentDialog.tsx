@@ -71,12 +71,12 @@ export function CookieConsentDialog() {
               </span>
             </h2>
             <div className="mb-paragraph text-sm">
-              <p>当サイトは、管理人が個人の趣味として制作・公開している二次創作を扱ったサイトです。</p>
+              <p>当サイトは「うぇぶ⭐︎ひょーじゅん！」の二次創作を扱う非公式ファンサイトです。</p>
               <ul className="mb-4">
                 {[
                   '当サイトの画像および内容などの無断転載、加工使用、再配布、直リンクなどは禁止です。',
                   '表示がおかしい場合はIE6.0以上、800×600以上の環境でご覧ください。',
-                  'この先、BGMが自動再生されます。音量にご注意ください。',
+                  'この先、BGMが自動再生されます。不要な方はBGMオフのリンクからご入場ください。',
                 ].map((item) => (
                   <li key={item} className="flex">
                     <span aria-hidden="true">・</span>
