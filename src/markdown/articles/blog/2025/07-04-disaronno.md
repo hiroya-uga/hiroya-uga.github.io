@@ -1,6 +1,6 @@
 ---
 title: "アマレットリキュール\n「Disaronno」"
-ogImage: '/articles/blog/2025/07-04-disaronno.webp?w=1200&h=630'
+ogImage: '/articles/blog/2025/07-04-disaronno.jpg'
 publishedAt: '2025-07-04'
 tags: [お酒, 商品紹介]
 ---

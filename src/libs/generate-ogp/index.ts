@@ -1,6 +1,7 @@
 import { createCanvas, loadImage, registerFont } from 'canvas';
 import fs from 'fs';
 import path from 'path';
+// import sharp from 'sharp';
 
 registerFont(path.join(process.cwd(), 'src', 'libs', 'generate-ogp', 'LINESeedJP_OTF_Bd.otf'), {
   family: 'LINE Seed JP',
@@ -29,25 +30,55 @@ const drawRoundedRect = (
 };
 
 const timestamp = new Date().getTime();
+const screen = loadImage(path.join(process.cwd(), 'src', 'libs', 'generate-ogp', 'opengraph-image-screen.png'));
+const background = loadImage(path.join(process.cwd(), 'src', 'libs', 'generate-ogp', 'opengraph-image-template.jpg'));
 
-export async function generateOgpImage(slug: string[], title: string, categoryName?: string): Promise<string> {
+export async function generateOgpImage(
+  slug: string[],
+  title: string,
+  categoryName?: string,
+  baseImage?: string,
+): Promise<string> {
   const width = 1200;
   const height = 630;
 
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
-  const background = await loadImage(
-    path.join(process.cwd(), 'src', 'libs', 'generate-ogp', 'opengraph-image-template.jpg'),
-  );
-  ctx.drawImage(background, 0, 0, width, height);
+  if (baseImage) {
+    const filepath = path.join(process.cwd(), 'public', baseImage);
+    // const isSvg = filepath.endsWith('.svg');
+    // const pngPath = filepath.replace('.svg', '.png');
+
+    // if (isSvg) {
+    //   await sharp(filepath).png().toFile(pngPath);
+    // }
+
+    // const src = isSvg ? pngPath : filepath;
+    const src = filepath;
+
+    ctx.drawImage(await loadImage(src), 0, 0, width, height);
+    ctx.drawImage(await screen, 0, 0, width, height);
+
+    // if (isSvg) {
+    //   fs.rmSync(pngPath, { force: true });
+    // }
+  } else {
+    ctx.drawImage(await background, 0, 0, width, height);
+  }
 
   const x = 54;
   const lines = (() => {
     let i = 0;
+    const isOver4rows = 3 < title.split('\n').length;
+    const titleString = isOver4rows ? title.replaceAll('\n', '') : title;
 
-    return [...title.replaceAll('\n', '').trim()]
+    return [...titleString.trim()]
       .map((char) => {
+        if (char === '\n') {
+          i = 0;
+          return '\n';
+        }
         if (i === 12) {
           i = 0;
           return `${char}\n`;
