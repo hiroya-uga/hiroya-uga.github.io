@@ -10,6 +10,7 @@ type Name =
   | 'arrow-right'
   | 'arrow2-right'
   | 'book'
+  | 'cross'
   | 'description'
   | 'headphone'
   | 'play'
