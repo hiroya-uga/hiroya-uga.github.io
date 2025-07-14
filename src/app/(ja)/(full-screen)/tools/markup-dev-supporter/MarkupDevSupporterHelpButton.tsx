@@ -1,10 +1,10 @@
 'use client';
 import { DiscList } from '@/components/List';
 import { getMetadata } from '@/utils/get-metadata';
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton.module.css';
+import { SvgIcon } from '@/components/Icons';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { PrivacyPolicyMessage } from '@/constants/message';
 import { setSelectionRange } from '@/utils/set-selection-range';
@@ -137,7 +137,7 @@ export const MarkupDevSupporterHelpButton = () => {
                 <p>
                   <button
                     type="button"
-                    className="rounded-full p-2.5"
+                    className="hover:bg-banner rounded-full p-2.5 transition-[background-color]"
                     onClick={() => {
                       const dialog = ref.current;
                       if (!dialog) {
@@ -148,7 +148,9 @@ export const MarkupDevSupporterHelpButton = () => {
                       setIsOpen(false);
                     }}
                   >
-                    <Image src="/common/images/icons/cross.svg" alt="閉じる" width={12} height={12} />
+                    <span className="relative block size-3">
+                      <SvgIcon name="cross" alt="閉じる" />
+                    </span>
                   </button>
                 </p>
               </div>
