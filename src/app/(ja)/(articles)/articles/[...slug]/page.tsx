@@ -302,7 +302,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const [category, year, fileName] = slug;
   const canonical = `https://${DOMAIN_NAME}/articles/${category}/${year}/${fileName}`;
   const categoryName = resolveCategoryName(category);
-  const ogImage = post.meta.ogImage || (await generateOgpImage(['articles', ...slug], post.meta.title, categoryName));
+  const ogImage = await generateOgpImage(['articles', ...slug], post.meta.title, categoryName, post.meta.ogImage);
 
   const description =
     `【${categoryName}】` +
