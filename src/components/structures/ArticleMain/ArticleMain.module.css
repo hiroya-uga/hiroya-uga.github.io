@@ -35,6 +35,7 @@
     border: 1px solid var(--border-color-textfield);
     border-radius: 0.5rem;
     font-size: 0.75rem;
+    background-color: var(--background-color-banner);
   }
   [class*="associate"] small {
     display: block;
