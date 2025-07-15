@@ -70,17 +70,42 @@ export async function generateOgpImage(
   const x = 54;
   const lines = (() => {
     let i = 0;
+    let currentBreakIndex = -1;
+    /* 12.5 を許容 */
+    const MAX_ROW_LENGTH = 13;
     const isOver4rows = 3 < title.split('\n').length;
-    const titleString = isOver4rows ? title.replaceAll('\n', '') : title;
+    const titleString = (isOver4rows ? title.replaceAll('\n', '') : title).trim();
+    const getLength = (value: string[]) => {
+      return value.reduce((acc, char) => {
+        if (/[0-9a-zA-Z]/.test(char)) {
+          return acc + 0.5;
+        }
+        return acc + 1;
+      }, 0);
+    };
 
-    return [...titleString.trim()]
-      .map((char) => {
+    return [...titleString]
+      .map((char, index, self) => {
         if (char === '\n') {
+          const after = self.slice(index + 1);
+          const nextBreakIndex = after.findIndex((c) => c === '\n');
+          const previousTextLength = getLength(self.slice(currentBreakIndex + 1, index));
+
+          currentBreakIndex = index;
+
+          if (nextBreakIndex === -1) {
+            // 12.5 を許容
+            if (previousTextLength + getLength(after) < MAX_ROW_LENGTH) {
+              return '';
+            }
+          }
+
           i = 0;
           return '\n';
         }
-        if (i === 12) {
+        if (i === MAX_ROW_LENGTH - 1 || i === MAX_ROW_LENGTH - 0.5) {
           i = 0;
+          currentBreakIndex = index;
           return `${char}\n`;
         }
         if (/[0-9a-zA-Z]/.test(char)) {
