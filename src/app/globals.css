@@ -33,6 +33,10 @@
     /* TailWindCSS */
     /* Component */
     --v-header-margin-bottom: 2rem;
+
+    /* 整頓中 */
+    --v-color-box: #fff;
+    --v-color-border: #e5e8eb;
   }
 
   [data-theme="dark"]:root {
@@ -56,6 +60,10 @@
     --v-color-background-table-header: #00000011;
     --v-color-border-table: #00000022;
     --v-color-border-textfield: #111;
+
+    /* 整頓中 */
+    --v-color-box: #4b4845;
+    --v-color-border: #3b3939;
   }
 
   .no-hidden {
@@ -146,6 +154,10 @@
   --background-color-header: var(--v-color-background-header);
   --border-color-textfield: var(--v-color-border-textfield);
   --border-color-table: var(--v-color-border-table);
+
+  /* 整頓中 */
+  --border-color-blockquote: var(--v-color-border);
+  --background-color-blockquote: var(--v-color-box);
 
   --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   --font-emoji:
