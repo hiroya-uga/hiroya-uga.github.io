@@ -26,9 +26,20 @@
 }
 
 .root {
-  lazy-image {
-    outline: 1px solid rgba(0, 0, 0, 0.5);
+  :target,
+  :target * {
+    animation: target-highlight 1s ease 0.3s;
   }
+}
+
+.article {
+  lazy-image {
+    /* outline: 1px solid rgba(0, 0, 0, 0.5); */
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
   [class*="associate"] {
     display: block;
     padding: 0.5rem;
@@ -41,14 +52,7 @@
     display: block;
   }
 
-  :target,
-  :target * {
-    animation: target-highlight 1s ease 0.3s;
-  }
-}
-
-.article ul {
-  li {
+  ul li {
     position: relative;
     padding-left: 1.25rem;
   }
@@ -66,5 +70,39 @@
 
   sup {
     letter-spacing: 1px;
+  }
+
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  [class~="blockquote"] {
+    font-size: 0.875rem;
+    padding: 0.5rem min(0.75rem, 24px) 1rem;
+    border-left: min(0.625rem, 24px) solid var(--border-color-blockquote);
+    background: var(--background-color-blockquote);
+  }
+
+  [class~="blockquote"] > [aria-hidden="true"] {
+    margin-bottom: -3rem;
+    user-select: none;
+    font-family: serif;
+    font-size: 6rem;
+    line-height: 1;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  [class~="blockquote__content"] {
+    font-style: italic;
+    padding: 0.25rem min(0.75rem, 24px) 0;
+  }
+
+  [class~="blockquote__caption"] {
+    margin-top: 2rem;
+    text-align: right;
+    font-size: 0.75rem;
+    padding-left: 2rem;
   }
 }

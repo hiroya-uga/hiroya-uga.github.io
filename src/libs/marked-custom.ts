@@ -1,6 +1,8 @@
 import { URL_ORIGIN } from '@/constants/meta';
 import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
+let currentFilePath = '';
+
 type CustomBlockToken = Token & {
   type: 'customBlock';
   raw: string;
@@ -45,7 +47,7 @@ type CustomImageToken = Token & {
   title?: string | null;
 };
 
-const imageOverrideExtension: TokenizerAndRendererExtension = {
+const overrideImageExtension: TokenizerAndRendererExtension = {
   name: 'image',
   level: 'inline',
 
@@ -147,7 +149,7 @@ type FootnoteDefToken = Token & {
   text: string;
 };
 
-const footnoteDefs: Record<string, string> = {};
+const footnoteDefs = new Map<string, Record<string, string>>();
 
 const footnoteRefExtension: TokenizerAndRendererExtension = {
   name: 'footnoteRef',
@@ -172,7 +174,7 @@ const footnoteRefExtension: TokenizerAndRendererExtension = {
   },
   renderer(token) {
     const t = token as FootnoteRefToken;
-    return `<sup id="ref-${t.identifier}" class="font-mono inline-block"><a href="#note-${t.identifier}" aria-describedby="#note-${t.identifier}">[${t.identifier}]</a></sup>`;
+    return `<sup id="ref-${t.identifier}" class="font-mono inline-block"><a href="#note-${t.identifier}" aria-describedby="note-${t.identifier}">[${t.identifier}]</a></sup>`;
   },
 };
 
@@ -189,7 +191,7 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
 
     const [, identifier, text] = match;
 
-    footnoteDefs[identifier] = text;
+    footnoteDefs.set(currentFilePath, { [identifier]: text });
 
     const token: FootnoteDefToken = {
       type: 'footnoteDef',
@@ -206,17 +208,81 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
   },
 };
 
-export const getFootnotes = (): [string, { html: string | Promise<string> }][] => {
-  return Object.entries(footnoteDefs).map(([id, text]) => {
+export const getFootnotes = (filePath: string): [string, { html: string | Promise<string> }][] => {
+  return Object.entries(footnoteDefs.get(filePath) ?? []).map(([id, text]) => {
     return [id, { html: marked.parseInline(text) }];
   });
 };
 
+type CodeToken = Token & {
+  type: 'code';
+  raw: string;
+  text: string;
+  lang?: string;
+};
+
+const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
+  name: 'code',
+  level: 'block',
+
+  renderer(token) {
+    const t = token as CodeToken;
+
+    if (t.lang === 'japanize') {
+      return `<div class="flex text-sm gap-1">
+      <p class="shrink-0 font-bold">日本語訳：</p>
+      <p>${t.text}</p>
+      </div>`;
+    }
+
+    const langAttr = t.lang ? ` data-lang="${t.lang}"` : '';
+    const escaped = t.text.replace(
+      /[&<>"']/g,
+      (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
+    );
+    return `<pre><code${langAttr}>${escaped}</code></pre>`;
+  },
+};
+
+type BlockquoteToken = Token & {
+  type: 'blockquote';
+  raw: string;
+  tokens: Token[];
+};
+
+const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
+  name: 'blockquote',
+  level: 'block',
+
+  renderer(token) {
+    const t = token as BlockquoteToken;
+
+    const hasCiteMatches = t.text.match(/\n引用：/);
+
+    if (hasCiteMatches) {
+      const [text, cite] = t.text.split(/\n引用：/);
+      const inner = marked.parse(text);
+      const caption = marked.parse(`引用：${cite}`);
+      return `<figure class="blockquote"><div aria-hidden="true">“</div><blockquote class="blockquote__content">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
+    }
+
+    const inner = marked.parser(t.tokens);
+    return `<blockquote class="blockquote"><div aria-hidden="true">“</div><div class="blockquote__content">${inner}</div></blockquote>`;
+  },
+};
+
 export const customMarkdownSyntaxes = [
   customBlockExtension,
-  imageOverrideExtension,
+  overrideImageExtension,
   breakSpanExtension,
   amazonAssociateLinkExtension,
   footnoteRefExtension,
   footnoteDefExtension,
+  overrideCodeBlockExtension,
+  overrideBlockquoteExtension,
 ];
+
+export const markedParse = (filePath: string, content: string) => {
+  currentFilePath = filePath;
+  return marked.parse(content);
+};

@@ -1,10 +1,11 @@
 'use client';
 
+import { SvgIcon } from '@/components/Icons';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
 import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const getReadingTime = (length: number) => {
   const charsPerMinute = 350; // 1分あたりの平均文字数
@@ -76,5 +77,107 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
       <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time> -
       <span ref={ref} className="min-h-[1lh]" />
     </p>
+  );
+};
+
+const NOTE_SELECTOR = 'a[href^="#note-"]';
+
+export const ArticleFootNoteActivator = () => {
+  const ref = useRef<HTMLDialogElement>(null);
+  const [index, setIndex] = useState('');
+  const [content, setContent] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const close = useCallback(() => {
+    document.querySelectorAll(NOTE_SELECTOR).forEach((node) => {
+      node.setAttribute('aria-expanded', 'false');
+    });
+
+    const dialog = ref.current;
+
+    if (dialog === null) {
+      return;
+    }
+    dialog.close();
+    setIsOpen(false);
+  }, []);
+
+  useEffect(() => {
+    const dialog = ref.current;
+    if (dialog === null) {
+      return;
+    }
+
+    const onClick = (e: MouseEvent) => {
+      e.preventDefault();
+      const target = e.currentTarget as HTMLAnchorElement;
+      const id = target.getAttribute('href')?.replace('#note-', '');
+
+      if (id === undefined) {
+        return;
+      }
+      const note = document.getElementById(`note-${id}`);
+      if (note === null) {
+        return;
+      }
+      setIndex(id);
+      setContent(note.innerHTML);
+      document.querySelectorAll(NOTE_SELECTOR).forEach((node) => {
+        node.setAttribute('aria-expanded', 'false');
+      });
+      target.setAttribute('aria-expanded', 'true');
+      setIsOpen(true);
+
+      setTimeout(() => {
+        dialog.show();
+      }, 10);
+    };
+
+    const onkeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && dialog.open) {
+        close();
+      }
+    };
+    window.addEventListener('keydown', onkeydown);
+    document.querySelectorAll<HTMLAnchorElement>(NOTE_SELECTOR).forEach((node) => {
+      node.setAttribute('role', 'button');
+      node.setAttribute('aria-haspopup', 'dialog');
+      node.setAttribute('aria-expanded', 'false');
+      node.addEventListener('click', onClick);
+    });
+
+    return () => {
+      window.removeEventListener('keydown', onkeydown);
+      document.querySelectorAll<HTMLAnchorElement>(NOTE_SELECTOR).forEach((node) => {
+        node.removeAttribute('role');
+        node.removeAttribute('aria-haspopup');
+        node.removeAttribute('aria-expanded');
+        node.removeEventListener('click', onClick);
+      });
+    };
+  }, [close]);
+
+  return (
+    <dialog
+      ref={ref}
+      className={clsx([
+        'bg-(--background-color-banner)/80 fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse p-4 transition-[translate,visibility]',
+        isOpen ? 'translate-y-0' : 'translate-y-full',
+      ])}
+      inert={isOpen === false}
+      aria-label={`脚注番号${index}`}
+    >
+      <div>
+        <button
+          onClick={() => void close()}
+          className="hover:border-(--color-text) rounded-full border border-solid border-transparent p-3 transition-[border-color]"
+        >
+          <span className="relative block size-3">
+            <SvgIcon name="cross" alt={`脚注番号${index}を閉じる`} />
+          </span>
+        </button>
+      </div>
+      <div className="grow content-center" dangerouslySetInnerHTML={{ __html: content }} />
+    </dialog>
   );
 };
