@@ -3,6 +3,7 @@ import { SvgIcon } from '@/components/Icons';
 import { ArticleList } from '@/components/List';
 import { ArticleMain } from '@/components/structures/ArticleMain';
 import { Footer } from '@/components/structures/Footer';
+import { Header } from '@/components/structures/Header';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import { DOMAIN_NAME, SITE_AUTHOR, SITE_NAME } from '@/constants/meta';
@@ -98,6 +99,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
     return (
       <>
+        <Header />
+
         <main className="@container px-content-inline lg:pl-10">
           <div className="max-w-content mx-auto">
             <PageTitle title={pageTitle} description={description}>
@@ -118,6 +121,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
     return (
       <>
+        <Header />
+
         <main className="@container px-content-inline lg:pl-10">
           <div className="max-w-content mx-auto">
             <PageTitle title={pageTitle} description={description}>
@@ -157,6 +162,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
+      <Header layout="article-content" />
       <main className="@container">
         <ArticleMain post={post} />
         <div className="mx-content-inline @container not-empty:mt-30 text-center">
