@@ -1,5 +1,5 @@
-export const DOMAIN_NAME = 'uga.dev';
-export const URL_ORIGIN = `https://${DOMAIN_NAME}`;
+export const DOMAIN_NAME = process.env.DOMAIN || 'uga.dev';
+export const URL_ORIGIN = process.env.URL_ORIGIN || `https://${DOMAIN_NAME}`;
 export const SITE_NAME = 'uga.dev';
 export const SITE_AUTHOR = 'Hiroya Uga';
 export const SITE_SUBTITLE = "A Front-end Engineer's shed";
