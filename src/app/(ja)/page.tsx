@@ -125,7 +125,11 @@ export default function Home() {
                         className="@w640:p-0 @w640:rounded-md bg-banner @w640:bg-transparent group relative block overflow-hidden px-4 py-10 no-underline group-first:rounded-t-lg group-last:rounded-b-lg"
                       >
                         <span
-                          className="@w640:bg-card-secondary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none"
+                          className={clsx([
+                            '@w640:bg-card-secondary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none',
+                            // safari bug fix: https://iwb.jp/safari-css-display-grid-place-items-center-bug
+                            '@w640:w-full',
+                          ])}
                           aria-hidden="true"
                         >
                           <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative @w640:top-0 absolute right-0 top-1.5 text-[200px] leading-none opacity-30 blur-[4px]">
