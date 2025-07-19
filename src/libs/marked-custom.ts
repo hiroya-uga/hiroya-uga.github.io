@@ -191,7 +191,8 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
 
     const [, identifier, text] = match;
 
-    footnoteDefs.set(currentFilePath, { [identifier]: text });
+    const footnotes = footnoteDefs.get(currentFilePath) ?? {};
+    footnoteDefs.set(currentFilePath, { ...footnotes, [identifier]: text });
 
     const token: FootnoteDefToken = {
       type: 'footnoteDef',
