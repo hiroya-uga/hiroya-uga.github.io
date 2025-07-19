@@ -14,6 +14,7 @@
     --v-color-background: #f7f7f7;
     --v-color-background-alert: #c10000;
     --v-color-background-banner: #fff;
+    --v-color-background-banner-hover: #e5e8eb;
     --v-color-background-loading: #fff;
     --v-color-background-card: #e5e8eb;
     --v-color-background-card-secondary: #f9fafb;
@@ -49,6 +50,7 @@
     --v-color-background: #272727;
     --v-color-background-alert: #fc4f4b;
     --v-color-background-banner: #333;
+    --v-color-background-banner-hover: #4b4845;
     --v-color-background-loading: #333;
     --v-color-background-card: #4b4845;
     --v-color-background-card-secondary: #3b3939;

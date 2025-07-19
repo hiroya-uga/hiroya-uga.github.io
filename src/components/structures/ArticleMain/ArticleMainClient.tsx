@@ -2,15 +2,17 @@
 
 import hljs from 'highlight.js/lib/core';
 
+import { Toast } from '@/components/Dialog';
 import { SvgIcon } from '@/components/Icons';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
+import { copy } from '@/utils/copy';
 import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
 import css from 'highlight.js/lib/languages/css';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 const getReadingTime = (length: number) => {
   const charsPerMinute = 350; // 1分あたりの平均文字数
@@ -189,7 +191,7 @@ export const ArticleFootNoteActivator = () => {
 
 export const ArticleCodeHighlightActivator = () => {
   useEffect(() => {
-    const highlight = document.querySelectorAll('pre code[data-lang]');
+    const highlight = document.querySelectorAll('pre code[data-language]');
     if (highlight.length === 0) {
       return;
     }
@@ -201,7 +203,7 @@ export const ArticleCodeHighlightActivator = () => {
 
     highlight.forEach((node) => {
       const code = node.textContent || '';
-      const language = node.getAttribute('data-lang') || 'html';
+      const language = node.getAttribute('data-language') || 'html';
       const __html = hljs.highlight(code, { language }).value;
 
       node.classList.add(`language-${language}`);
@@ -209,5 +211,81 @@ export const ArticleCodeHighlightActivator = () => {
     });
   }, []);
 
-  return null;
+  const svgId = useId();
+  const [toastMessage, setToastMessage] = useState('');
+  const copyCode = useCallback((e: MouseEvent) => {
+    if (e.currentTarget instanceof HTMLButtonElement === false) {
+      return;
+    }
+
+    const title = e.currentTarget.previousElementSibling?.textContent ?? '';
+    const code = e.currentTarget.parentElement?.nextElementSibling?.textContent ?? '';
+
+    if (code.trim() === '') {
+      return;
+    }
+
+    copy(code);
+    setToastMessage(`${title}をコピーしました。`);
+  }, []);
+
+  useEffect(() => {
+    const codeBlockCaption = document.querySelectorAll('.codeblock__caption:not(:has(.codeblock__caption__copy))');
+    if (codeBlockCaption.length === 0) {
+      return;
+    }
+
+    codeBlockCaption.forEach((node) => {
+      const title = node.textContent?.trim() || '';
+
+      node.insertAdjacentHTML(
+        'beforeend',
+        `
+        <button class="codeblock__caption__copy" title="${title}のコードをコピー">
+          <svg role="img">
+            <use href="#${svgId}" />
+          </svg>
+        </button>
+      `,
+      );
+
+      if (node.lastElementChild instanceof HTMLButtonElement) {
+        node.lastElementChild.addEventListener('click', copyCode);
+      }
+    });
+  }, [copyCode, svgId]);
+
+  return (
+    <>
+      <Toast message={toastMessage} setMessage={setToastMessage} />
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
+        <symbol id={svgId} x="0px" y="0px" viewBox="0 0 512 512">
+          <style type="text/css">{`.${svgId}{fill:var(--color-text);}`}</style>
+          <g>
+            <rect x="115.774" y="335.487" className={svgId} width="194.387" height="18.588"></rect>
+            <rect x="115.774" y="260.208" className={svgId} width="194.387" height="18.527"></rect>
+            <rect x="115.774" y="184.862" className={svgId} width="194.387" height="18.588"></rect>
+            <rect x="218.582" y="109.576" className={svgId} width="91.58" height="18.588"></rect>
+            <path
+              className={svgId}
+              d="M385.112,396.188V39.614c0-2.294-0.197-4.603-0.592-6.768C381.3,14.19,365.006,0,345.438,0H184.686
+		c-11.561,0-22.598,4.603-30.741,12.747L53.637,112.986c-8.151,8.22-12.747,19.249-12.747,30.818v252.384
+		c0,21.802,17.806,39.607,39.683,39.607h264.864C367.308,435.795,385.112,417.99,385.112,396.188z M170.634,27.529v89.074
+		c0,9.662-3.745,13.399-13.339,13.399H68.222L170.634,27.529z M63.163,396.188V149.775h106.02c3.486,0,6.768-0.85,9.655-2.362
+		c4.079-2.036,7.361-5.324,9.328-9.328c1.519-2.894,2.302-6.115,2.302-9.526V22.272h154.97c7.156,0,13.331,4.33,15.959,10.574
+		c0.92,2.104,1.376,4.337,1.376,6.768v356.574c0,9.518-7.748,17.342-17.335,17.342H80.574
+		C70.98,413.53,63.163,405.706,63.163,396.188z"
+            ></path>
+            <path
+              className={svgId}
+              d="M431.488,76.205h-26.732l1.375,22.272h25.356c9.594,0,17.349,7.748,17.349,17.342v356.573
+		c0,9.519-7.755,17.342-17.349,17.342H166.562c-7.163,0-13.339-4.406-15.968-10.581c-0.85-2.097-1.374-4.33-1.374-6.761V456.89
+		h-22.272v15.503c0,2.294,0.198,4.589,0.593,6.761c3.22,18.588,19.515,32.846,39.022,32.846h264.926
+		c21.877,0,39.622-17.805,39.622-39.607V115.82C471.11,93.943,453.365,76.205,431.488,76.205z"
+            ></path>
+          </g>
+        </symbol>
+      </svg>
+    </>
+  );
 };
