@@ -109,7 +109,7 @@ export async function generateOgpImage(
           return `${char}\n`;
         }
         if (/[0-9a-zA-Z]/.test(char)) {
-          i += 0.5;
+          i += 0.25; // 調整中
           return char;
         }
 
@@ -122,7 +122,17 @@ export async function generateOgpImage(
   })();
 
   if (categoryName) {
-    let y = lines.length === 1 ? 200 : 160;
+    let y = (() => {
+      if (lines.length === 1) {
+        return 200;
+      }
+      if (lines.length === 2) {
+        return 160;
+      }
+
+      // max 3row
+      return 100;
+    })();
 
     // 座布団用パディング
     const paddingX = 16;
@@ -159,7 +169,20 @@ export async function generateOgpImage(
       y += 1.875 * 60;
     }
   } else {
-    let y = lines.length === 1 ? 280 : 240;
+    // TODO
+    let y = (() => {
+      if (lines.length === 1) {
+        return 280;
+      }
+      if (lines.length === 2) {
+        return 240;
+      }
+      if (lines.length === 3) {
+        return 200;
+      }
+
+      return 160;
+    })();
 
     ctx.font = 'bold 60px "LINE Seed JP"';
     ctx.fillStyle = '#333';
