@@ -1,4 +1,8 @@
-import { ArticleFootNoteActivator, ArticleInformation } from '@/components/structures/ArticleMain/ArticleMainClient';
+import {
+  ArticleCodeHighlightActivator,
+  ArticleFootNoteActivator,
+  ArticleInformation,
+} from '@/components/structures/ArticleMain/ArticleMainClient';
 
 import { Heading } from '@/components/Heading';
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
@@ -85,6 +89,7 @@ export const ArticleMain = async ({ post }: Props) => {
         </div>
       </article>
       <ArticleFootNoteActivator />
+      <ArticleCodeHighlightActivator />
     </>
   );
 };

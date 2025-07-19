@@ -240,7 +240,7 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       /[&<>"']/g,
       (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
     );
-    return `<pre><code${langAttr}>${escaped}</code></pre>`;
+    return `<pre><code${langAttr} class="hljs">${escaped}</code></pre>`;
   },
 };
 
@@ -263,11 +263,64 @@ const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
       const [text, cite] = t.text.split(/\n引用：/);
       const inner = marked.parse(text);
       const caption = marked.parse(`引用：${cite}`);
-      return `<figure class="blockquote"><div aria-hidden="true">“</div><blockquote class="blockquote__content">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
+      return `<figure class="blockquote"><div aria-hidden="true">“</div><blockquote class="blockquote__content space-y-paragraph">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
     }
 
     const inner = marked.parser(t.tokens);
-    return `<blockquote class="blockquote"><div aria-hidden="true">“</div><div class="blockquote__content">${inner}</div></blockquote>`;
+    return `<blockquote class="blockquote"><div aria-hidden="true">“</div><div class="blockquote__content space-y-paragraph">${inner}</div></blockquote>`;
+  },
+};
+
+type TableToken = Token & {
+  type: 'table';
+  raw: string;
+  header: Token[][];
+  rows: Token[][][];
+  align: ('center' | 'left' | 'right' | null)[];
+};
+
+const overrideTableExtension: TokenizerAndRendererExtension = {
+  name: 'table',
+  level: 'block',
+
+  renderer(token) {
+    const t = token as TableToken;
+
+    const extractText = (token: Token[] | Token): string => {
+      const first = Array.isArray(token) ? token[0] : token;
+      if ('text' in first && typeof first.text === 'string') {
+        return first.text;
+      }
+      return '';
+    };
+
+    const headerHtml = `<tr>${t.header
+      .map((cell, j) => {
+        const align = t.align[j] ? ` class="${t.align[j]}"` : '';
+        const text = extractText(cell);
+        const content = marked.parse(text);
+        return `<th${align} scope="col">${content}</th>`;
+      })
+      .join('')}</tr>`;
+
+    const bodyHtml = t.rows
+      .map((row) => {
+        return (
+          '<tr>' +
+          row
+            .map((cell, j) => {
+              const align = t.align[j] ? ` class="${t.align[j]}"` : '';
+              const text = extractText(cell);
+              const content = marked.parse(text);
+              return `<td${align}>${content}</td>`;
+            })
+            .join('') +
+          '</tr>'
+        );
+      })
+      .join('');
+
+    return `<div class="table-container scroll-hint-x"><table><thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody></table></div>`;
   },
 };
 
@@ -280,6 +333,7 @@ export const customMarkdownSyntaxes = [
   footnoteDefExtension,
   overrideCodeBlockExtension,
   overrideBlockquoteExtension,
+  overrideTableExtension,
 ];
 
 export const markedParse = (filePath: string, content: string) => {
