@@ -1,10 +1,15 @@
 'use client';
 
+import hljs from 'highlight.js/lib/core';
+
 import { SvgIcon } from '@/components/Icons';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
 import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
+import css from 'highlight.js/lib/languages/css';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const getReadingTime = (length: number) => {
@@ -180,4 +185,29 @@ export const ArticleFootNoteActivator = () => {
       <div className="grow content-center" dangerouslySetInnerHTML={{ __html: content }} />
     </dialog>
   );
+};
+
+export const ArticleCodeHighlightActivator = () => {
+  useEffect(() => {
+    const highlight = document.querySelectorAll('pre code[data-lang]');
+    if (highlight.length === 0) {
+      return;
+    }
+
+    hljs.registerLanguage('jsx', typescript);
+    hljs.registerLanguage('html', xml);
+    hljs.registerLanguage('css', css);
+    hljs.registerLanguage('javascript', typescript);
+
+    highlight.forEach((node) => {
+      const code = node.textContent || '';
+      const language = node.getAttribute('data-lang') || 'html';
+      const __html = hljs.highlight(code, { language }).value;
+
+      node.classList.add(`language-${language}`);
+      node.innerHTML = __html;
+    });
+  }, []);
+
+  return null;
 };
