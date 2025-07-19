@@ -236,12 +236,12 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       </div>`;
     }
 
-    const langAttr = t.lang ? ` data-lang="${t.lang}"` : '';
+    const [lang, title] = (t.lang || 'plain:サンプルコード').split(':');
     const escaped = t.text.replace(
       /[&<>"']/g,
       (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
     );
-    return `<pre><code${langAttr} class="hljs">${escaped}</code></pre>`;
+    return `<figure class="codeblock"><figcaption class="codeblock__caption"><span>${title ?? lang}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
   },
 };
 

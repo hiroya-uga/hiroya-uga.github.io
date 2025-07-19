@@ -5,6 +5,7 @@ import { TweetLink } from '@/components/Clickable/TweetLink';
 import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
+import { copy } from '@/utils/copy';
 import { setSelectionRange } from '@/utils/set-selection-range';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -25,8 +26,8 @@ export const TableDevSupporterContent = () => {
 
   const [toastMessage, setToastMessage] = useState('');
 
-  const copy = useCallback((value: string, message: string = '') => {
-    navigator.clipboard.writeText(value);
+  const copyValue = useCallback((value: string, message: string = '') => {
+    copy(value);
     setToastMessage(message || 'コピーしました');
   }, []);
   const editorClickHandler = useCallback(
@@ -46,11 +47,11 @@ export const TableDevSupporterContent = () => {
 
           return `「${value.slice(0, 10)}...」をコピーしました`;
         })();
-        copy(value, message); // trimした値をコピー
+        copyValue(value, message); // trimした値をコピー
         setSelectionRange(e.target);
       }
     },
-    [copy],
+    [copyValue],
   );
 
   useEffect(() => {
@@ -136,7 +137,7 @@ export const TableDevSupporterContent = () => {
     return () => {
       mutationObserver.disconnect();
     };
-  }, [copy]);
+  }, [copyValue]);
 
   const update = useCallback(
     (tasks: string | string[]) => {
@@ -293,7 +294,7 @@ export const TableDevSupporterContent = () => {
                   if (e.currentTarget.value.trim() === '') {
                     return;
                   }
-                  copy(e.currentTarget.value ?? '', 'ソースをコピーしました');
+                  copyValue(e.currentTarget.value ?? '', 'ソースをコピーしました');
                   setSelectionRange(e.currentTarget);
                 }
               : undefined
