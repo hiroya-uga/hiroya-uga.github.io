@@ -13,7 +13,7 @@ export default async function Page() {
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <p>不定期更新＆工事中。まったりUI調整しています🍵</p>
       </PageTitle>
-      <ArticleList list={blogs} />
+      <ArticleList type="thumbnail" list={blogs} />
     </>
   );
 }
