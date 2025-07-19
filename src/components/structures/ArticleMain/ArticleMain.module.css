@@ -33,6 +33,24 @@
 }
 
 .article {
+  h2 {
+    /* mb-paragraph text-xl font-bold leading-snug sm:text-2xl not-first:mt-[2.5lh]  */
+    margin-bottom: 1em;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.375;
+  }
+
+  h2:not(:first-child) {
+    margin-top: calc(2.5 * 1lh);
+  }
+
+  @media (min-width: 640px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
   lazy-image {
     /* outline: 1px solid rgba(0, 0, 0, 0.5); */
     overflow: hidden;
@@ -50,6 +68,10 @@
   }
   [class*="associate"] small {
     display: block;
+  }
+
+  [class~="hljs"] {
+    border-radius: 0.5rem;
   }
 
   ul li {
@@ -104,5 +126,35 @@
     text-align: right;
     font-size: 0.75rem;
     padding-left: 2rem;
+    padding-right: min(0.75rem, 24px);
+  }
+}
+
+.article [class~="table-container"] {
+  overflow-x: auto;
+  font-size: 0.875rem;
+
+  table {
+    /* 引用内に入ったテーブルの最大幅 = 582 */
+    width: max(582px, 100%);
+    border-collapse: collapse;
+    overflow-wrap: break-word;
+  }
+
+  thead {
+    background-color: var(--background-color-table-header);
+  }
+
+  th,
+  td {
+    border: 1px solid var(--background-table-border);
+    padding: 0.75rem;
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+  th {
+    font-weight: bold;
+    vertical-align: middle;
   }
 }
