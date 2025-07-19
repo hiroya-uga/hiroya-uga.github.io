@@ -11,4 +11,7 @@ export const formattedDateString = (date: Date) =>
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-  }).format(date);
+  })
+    .format(date)
+    .replace('/', '年')
+    .replace('/', '月') + '日';
