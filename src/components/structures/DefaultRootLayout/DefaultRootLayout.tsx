@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
 import '@/app/(ja)/common.css';
 import '@/app/globals.css';
-import 'highlight.js/styles/github.css';
 
 import { Inter } from 'next/font/google';
 

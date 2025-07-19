@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./spacing.css";
+@import "./highlightjs.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -20,6 +21,7 @@
     --v-color-background-card-secondary: #f9fafb;
     --v-color-background-required: #b20000;
     --v-color-background-scroll-hint: white;
+    --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.2);
     --v-color-background-section-primary: #fff;
     --v-color-background-section-secondary: #e2e8f0;
     --v-color-background-textfield: #fff;
@@ -55,7 +57,8 @@
     --v-color-background-card: #4b4845;
     --v-color-background-card-secondary: #3b3939;
     --v-color-background-required: #b20000;
-    --v-color-background-scroll-hint: white;
+    --v-color-background-scroll-hint: #4b4845;
+    --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.4);
     --v-color-background-section-primary: #111;
     --v-color-background-section-secondary: #1c1c1c;
     --v-color-background-textfield: #3d3c3a;
@@ -203,8 +206,8 @@
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 70%),
     linear-gradient(to left, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
-    radial-gradient(farthest-side at 100% 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
-    radial-gradient(farthest-side at 0 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    radial-gradient(farthest-side at 100% 40%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 0 40%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0));
   background-position:
     100% 0,
     0 0,
@@ -225,8 +228,8 @@
   background-image:
     linear-gradient(to top, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
     linear-gradient(to top, var(--v-color-background-scroll-hint), rgba(255, 255, 255, 0) 70%),
-    radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
-    radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    radial-gradient(farthest-side at 50% 0, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 50% 100%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0));
   background-position:
     0 0,
     0 100%,
@@ -416,11 +419,5 @@
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-}
-
-@layer components {
-  /* stylelint-disable-next-line */
-  .hljs {
   }
 }
