@@ -37,6 +37,7 @@
     /* 整頓中 */
     --v-color-box: #fff;
     --v-color-border: #e5e8eb;
+    --v-color-table-header: #fff;
   }
 
   [data-theme="dark"]:root {
@@ -64,6 +65,7 @@
     /* 整頓中 */
     --v-color-box: #4b4845;
     --v-color-border: #3b3939;
+    --v-color-table-header: #4b4845;
   }
 
   .no-hidden {
@@ -151,13 +153,15 @@
   --background-color-banner-hover: var(--v-color-background-banner-hover);
   --background-color-table: var(--v-color-background-table);
   --background-color-table-header: var(--v-color-background-table-header);
-  --background-color-header: var(--v-color-background-header);
+  --background-color-header: var(--v-color-table-header);
   --border-color-textfield: var(--v-color-border-textfield);
   --border-color-table: var(--v-color-border-table);
 
   /* 整頓中 */
   --border-color-blockquote: var(--v-color-border);
   --background-color-blockquote: var(--v-color-box);
+  --background-table-border: var(--v-color-border);
+  --background-table-header: var(--v-color-box);
 
   --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   --font-emoji:
@@ -193,12 +197,17 @@
 }
 
 @utility scroll-hint-x {
-  background:
-    transparent,
-    linear-gradient(to right, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 70%) 100% 0,
+  background: transparent;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 70%),
     linear-gradient(to left, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
-    radial-gradient(farthest-side at 100% 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0,
-    radial-gradient(farthest-side at 0 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 0;
+    radial-gradient(farthest-side at 100% 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 0 40%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  background-position:
+    100% 0,
+    0 0,
+    100% 0,
+    0 0;
   background-repeat: no-repeat;
   background-color: var(--v-color-background-scroll-hint);
   background-size:
@@ -210,12 +219,17 @@
 }
 
 @utility scroll-hint-y {
-  background:
-    transparent,
+  background: transparent;
+  background-image:
     linear-gradient(to top, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
-    linear-gradient(to top, var(--v-color-background-scroll-hint), rgba(255, 255, 255, 0) 70%) 0 100%,
+    linear-gradient(to top, var(--v-color-background-scroll-hint), rgba(255, 255, 255, 0) 70%),
     radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
-    radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+    radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  background-position:
+    0 0,
+    0 100%,
+    0 0,
+    0 100%;
   background-repeat: no-repeat;
   background-color: var(--v-color-background-scroll-hint);
   background-size:
