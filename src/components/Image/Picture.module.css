@@ -1,0 +1,8 @@
+.root {
+  transition: 0.3s opacity ease-out;
+}
+
+.root[data-image-status="loading"] {
+  transition: none;
+  opacity: 0;
+}

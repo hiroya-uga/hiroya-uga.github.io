@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 
 import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
 
@@ -29,7 +29,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 //     <div className="flex text-left flex-wrap sm:flex-nowrap gap-4">
 //       <div className="sm:max-w-[150px]">
 //         <div className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
-//           <Image
+//           <Picture
 //             src="/tools/an-alt-decision-tree/sushi.jpg"
 //             width={120}
 //             height={93}
@@ -51,7 +51,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 //   return (
 //     <div className="flex items-center justify-center mb-8">
 //       <p className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
-//         <Image
+//         <Picture
 //           src="/tools/an-alt-decision-tree/shrimp.png"
 //           width={100}
 //           height={80}
@@ -89,7 +89,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 //               alert('サンプルのため画面遷移はしません');
 //             }}
 //           >
-//             <Image
+//             <Picture
 //               className="w-full"
 //               {...{
 //                 src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
@@ -120,7 +120,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 //               alert('サンプルのため画面遷移はしません');
 //             }}
 //           >
-//             <Image
+//             <Picture
 //               className="w-full"
 //               {...{
 //                 src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',
@@ -172,7 +172,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 const Shrimp = () => {
   return (
     <div className="my-8 sm:my-10">
-      <Image
+      <Picture
         src="/tools/an-alt-decision-tree/shrimp.png"
         width={200}
         height={217}
@@ -246,7 +246,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                   'border inline-block',
                 ])}
               >
-                <Image
+                <Picture
                   src="/tools/an-alt-decision-tree/icon-home.png"
                   width={90}
                   height={90}
@@ -291,7 +291,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                     'border inline-block',
                   ])}
                 >
-                  <Image
+                  <Picture
                     src="/tools/an-alt-decision-tree/graph.png"
                     width={300}
                     height={300}
@@ -311,7 +311,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                     'border inline-block',
                   ])}
                 >
-                  <Image
+                  <Picture
                     src="/tools/an-alt-decision-tree/icon-phone.png"
                     width={30}
                     height={30}
@@ -360,7 +360,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
                       'border inline-block',
                     ])}
                   >
-                    <Image
+                    <Picture
                       src="/tools/an-alt-decision-tree/icon-home.png"
                       width={30}
                       height={30}
@@ -409,7 +409,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 // </p>`}
 //           >
 //             <p className="block w-fit mx-auto border border-slate-400 no-underline rounded overflow-hidden text-inherit">
-//               <Image
+//               <Picture
 //                 className="w-full"
 //                 {...{
 //                   src: '/tools/an-alt-decision-tree/fooddelivery-banner.png',

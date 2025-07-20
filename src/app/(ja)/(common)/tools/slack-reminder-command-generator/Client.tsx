@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 
 import {
   DateSection,
@@ -553,7 +553,7 @@ export const SlackReminderCommandGenerator = () => {
                 }, 2000);
               }}
             >
-              <Image src="/common/images/icons/copy.svg" alt="" className="size-4" width={16} height={16} />
+              <Picture src="/common/images/icons/copy.svg" alt="" className="size-4" width={16} height={16} />
               <span className="font-bold leading-4 text-[#333]" aria-live="assertive" title="出力結果をコピー">
                 Copy
               </span>

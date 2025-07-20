@@ -1,7 +1,7 @@
 import { useId } from 'react';
 
+import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/Client';
@@ -276,7 +276,7 @@ export default function Home() {
                   </span>
                 </span>
                 <span className="w-40">
-                  <Image
+                  <Picture
                     width={160}
                     height={160}
                     src="/profile.png"
@@ -305,7 +305,7 @@ export default function Home() {
                 return (
                   <li key={href}>
                     <a href={href} className="@w640:p-3 block rounded-lg p-2 transition-colors hover:bg-gray-300">
-                      <Image {...props} width={32} height={32} alt={alt} className="@w640:size-7 size-8" />
+                      <Picture {...props} width={32} height={32} alt={alt} className="@w640:size-7 size-8" />
                     </a>
                   </li>
                 );

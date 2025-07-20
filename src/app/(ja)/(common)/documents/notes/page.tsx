@@ -1,7 +1,7 @@
 // app/articles/page.js
 
+import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
@@ -40,7 +40,7 @@ export default async function ArticlesPage() {
                     'md:row-end-2',
                   ])}
                 >
-                  <Image
+                  <Picture
                     src={`/documents/notes/ogimages/${id}.jpg`}
                     width={1200}
                     height={630}

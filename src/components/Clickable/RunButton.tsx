@@ -1,5 +1,5 @@
+import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { ButtonHTMLAttributes } from 'react';
 
 type Props = {
@@ -20,7 +20,7 @@ export const RunButton = ({ children, afterIcon, ...props }: Props) => {
         <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-1">
           <span>{children}</span>
           <span>
-            <Image width={16} height={16} alt="" src={afterIcon} />
+            <Picture width={16} height={16} alt="" src={afterIcon} />
           </span>
         </span>
       ) : (

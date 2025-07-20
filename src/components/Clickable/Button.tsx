@@ -1,7 +1,7 @@
 import { AnchorHTMLAttributes } from 'react';
 
 import { SvgIcon } from '@/components/Icons';
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 import Link, { LinkProps } from 'next/link';
 
 export const Button = ({
@@ -26,7 +26,7 @@ export const Button = ({
             <SvgIcon name="new-tab" alt="新しいタブで開く" />
           </span>
         ) : (
-          <Image
+          <Picture
             src="/common/images/icons/arrow2-right-black.svg"
             alt=""
             className="inline-block size-[1em] transition-transform group-hover/button:translate-x-1"

@@ -2,8 +2,8 @@
 
 import { Fragment } from 'react';
 
+import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -115,7 +115,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
                     return (
                       <li key={href}>
                         <a href={href} className="transition-bg group block rounded-lg p-3 hover:bg-gray-200">
-                          <Image {...props} width={28} height={28} alt={alt} className="size-7" />
+                          <Picture {...props} width={28} height={28} alt={alt} className="size-7" />
                         </a>
                       </li>
                     );

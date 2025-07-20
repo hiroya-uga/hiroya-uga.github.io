@@ -2,7 +2,7 @@
 
 import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/layout.module.css';
 
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
@@ -93,7 +93,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
       <p className="mb-3.5 flex flex-wrap gap-y-2 text-sm sm:mb-4 sm:text-base">
         <span className='after:mx-2 after:content-["|"]'>
           <Link href="/documents/translations/pauljadam-modern-web-a11y-demos">
-            <Image
+            <Picture
               src="/common/images/icons/arrow-left.svg"
               width={16}
               height={16}

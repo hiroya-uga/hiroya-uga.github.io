@@ -4,11 +4,11 @@ import { MarkupDevSupporterHelpButton } from '@/app/(ja)/(full-screen)/tools/mar
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
+import { Picture } from '@/components/Image';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { copy } from '@/utils/copy';
 import { setSelectionRange } from '@/utils/set-selection-range';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -371,7 +371,7 @@ export const TableDevSupporterContent = () => {
             }}
           >
             <span className="grid grid-cols-[1rem_auto] items-center justify-center gap-1 pr-2">
-              <Image
+              <Picture
                 src="/common/images/icons/write.svg"
                 alt=""
                 width={16}

@@ -1,5 +1,5 @@
+import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { ReactNode } from 'react';
 
 type Props = { size?: 'small' | 'medium'; children?: ReactNode; onClick: () => void };
@@ -18,7 +18,7 @@ export const ClearButton = ({ size = 'medium', children = 'クリア', onClick }
       <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-0.5 leading-none">
         <span className="pt-px">{children}</span>
         <span>
-          <Image src="/common/images/icons/trash-can.svg" alt="" width={16} height={16} className="size-3" />
+          <Picture src="/common/images/icons/trash-can.svg" alt="" width={16} height={16} className="size-3" />
         </span>
       </span>
     </button>
