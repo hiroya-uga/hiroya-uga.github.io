@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 
 import { TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
@@ -46,7 +46,7 @@ export default function Page() {
 
           <p className="max-w-360px mx-auto mb-4 flex flex-row-reverse items-center gap-4 sm:grid sm:place-items-center sm:gap-x-6">
             <span className="w-40">
-              <Image width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" priority />
+              <Picture width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" priority />
             </span>
 
             <span className="grow whitespace-nowrap text-center text-xl">

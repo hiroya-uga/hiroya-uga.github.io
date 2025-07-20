@@ -3,12 +3,12 @@ import { GAMES_LINK_LIST, TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } fro
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { Picture } from '@/components/Image';
 import { SITE_NAME } from '@/constants/meta';
 import { arrayShuffle } from '@/utils/array-shuffle';
 import { getMetadata } from '@/utils/get-metadata';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const COUNTER_LENGTH = 6;
@@ -427,7 +427,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               ('error' in photoData ? (
                 <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
               ) : (
-                <Image
+                <Picture
                   width={960}
                   height={640}
                   src={photoData.src}
@@ -479,7 +479,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
             onClick={() => updateImage()}
           >
             <span className="block rounded-full bg-white outline-offset-2 group-focus-visible/reload:outline-2 group-focus-visible/reload:outline-[white] group-focus-visible/reload:[outline-style:solid;]">
-              <Image
+              <Picture
                 src="/icon-reload.svg"
                 width={48}
                 height={48}

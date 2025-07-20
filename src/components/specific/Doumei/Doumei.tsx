@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 
 export const Doumei = () => {
   return (
@@ -95,7 +95,7 @@ export const Doumei = () => {
           .map(({ href, alt, ...imageProps }) => (
             <li key={href}>
               <a href={href}>
-                <Image {...imageProps} alt={alt} className="h-[revert-layer] [image-rendering:pixelated]" />
+                <Picture {...imageProps} alt={alt} className="h-[revert-layer] [image-rendering:pixelated]" />
               </a>
             </li>
           ))}

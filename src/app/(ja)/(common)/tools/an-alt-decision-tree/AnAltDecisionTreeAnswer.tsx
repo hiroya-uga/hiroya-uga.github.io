@@ -254,7 +254,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
                     <p className="text-xs">棒グラフ左Y軸（単位：人）、折れ線グラフ右側Y軸（単位：%）</p>
                   </figcaption>
 
-                  <Image
+                  <Picture
                     src="/tools/an-alt-decision-tree/graph.png"
                     width={300}
                     height={300}

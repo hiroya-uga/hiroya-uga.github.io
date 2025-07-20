@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes } from 'react';
 
-import Image from 'next/image';
+import { Picture } from '@/components/Image';
 import Link from 'next/link';
 
 export type SimpleLnkListProps = {
@@ -31,7 +31,7 @@ export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
                 <Link href={href} lang={lang} hrefLang={hrefLang} className="palt" target={target}>
                   {title}
                   {target === '_blank' && (
-                    <Image
+                    <Picture
                       src="/common/images/icons/new-window.svg"
                       alt="新しいタブで開く"
                       className="mb-[0.2em] ml-[0.2em] inline-block size-[1em]"

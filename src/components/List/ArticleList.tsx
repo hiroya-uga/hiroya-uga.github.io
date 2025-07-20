@@ -1,10 +1,11 @@
 'use client';
 
+import { LoadingIcon } from '@/components/Icons';
+import { Picture } from '@/components/Image';
 import { useHiddenUntilFound } from '@/hooks/use-hidden-until-found';
 import { resolveCategoryName } from '@/utils/articles';
 import { formattedDateString } from '@/utils/formatter';
 import { ArticleFrontMatter } from '@/utils/ssg-articles';
-import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
@@ -52,14 +53,18 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                 href={article.pathname}
                 className="bg-banner group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:_0_0_2px_1px_rgba(0,_0,_0,_0.1)]"
               >
-                <div className="overflow-hidden">
-                  <Image
+                <div className="relative z-0 overflow-hidden">
+                  <Picture
                     src={`/generated-ogp${article.pathname}.png`}
                     alt={article.title.replaceAll('\n', '')}
                     width={1200}
                     height={630}
                     className="mb-2 block rounded-t-md transition-[scale] group-hover:scale-105"
+                    priority
                   />
+                  <span className="starting:opacity-0 delay-600 absolute inset-0 -z-10 m-auto grid place-items-center transition-opacity">
+                    <LoadingIcon alt="" />
+                  </span>
                 </div>
 
                 <div className="grid grid-rows-[1fr_auto]">
