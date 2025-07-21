@@ -151,7 +151,7 @@ const TextFieldComponent = (
             aria-describedby={descriptionId}
             className={clsx([
               'min-h-12', // for iOS 32px + 8px padding * 2 = 48px
-              'border-textfield bg-textfield text w-full appearance-none rounded-md border p-2 text-left',
+              'border-primary text-textfield bg-textfield text w-full appearance-none rounded-md border p-2 text-left',
             ])}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}

@@ -7,28 +7,26 @@
 @layer base {
   :root {
     /* Common */
-    --v-color-text: #333;
-    --v-color-text-secondary: #50545a;
-    --v-color-text-link: #005a9c;
-    --v-color-text-alert: #c10000;
-    --v-color-text-description: #50545a;
+    --v-color-text: #333; /* deprecated */
+    --v-color-text-secondary: #50545a; /* deprecated */
+    --v-color-text-link: #005a9c; /* deprecated */
+    --v-color-text-alert: #c10000; /* deprecated */
+    --v-color-text-description: #50545a; /* deprecated */
     --v-color-background: #f7f7f7;
     --v-color-background-alert: #c10000;
-    --v-color-background-banner: #fff;
-    --v-color-background-banner-hover: #e5e8eb;
-    --v-color-background-loading: #fff;
+    --v-color-background-banner: #fff; /* deprecated */
+    --v-color-background-banner-hover: #e5e8eb; /* deprecated */
+    --v-color-background-loading: #fff; /* deprecated */
     --v-color-background-card: #e5e8eb;
     --v-color-background-card-secondary: #f9fafb;
-    --v-color-background-required: #b20000;
     --v-color-background-scroll-hint: white;
     --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.2);
-    --v-color-background-section-primary: #fff;
+    --v-color-background-section-primary: #fff; /* deprecated */
     --v-color-background-section-secondary: #e2e8f0;
-    --v-color-background-textfield: #fff;
-    --v-color-background-table: #fff;
+    --v-color-background-table: #fff; /* deprecated */
     --v-color-background-table-header: #00000011;
     --v-color-border-textfield: #d1d5dc;
-    --v-color-border-table: #00000022;
+    --v-color-border-table: #00000022; /* deprecated */
     --v-spacing-content-inline: min(1rem, 48px);
     --v-spacing-share-buttons: 6rem;
     --v-spacing-paragraph: 1rem;
@@ -44,33 +42,67 @@
   }
 
   [data-theme="dark"]:root {
-    --v-color-text: #bebebe;
-    --v-color-text-secondary: #c5bdb2;
-    --v-color-text-link: #edc56c;
-    --v-color-text-alert: #fc4f4b;
-    --v-color-text-description: #aeb4c1;
-    --v-color-background: #272727;
+    --v-color-text: #bebebe; /* deprecated */
+    --v-color-text-secondary: #c5bdb2; /* deprecated */
+    --v-color-text-link: #edc56c; /* deprecated */
+    --v-color-text-alert: #fc4f4b; /* deprecated */
+    --v-color-text-description: #aeb4c1; /* deprecated */
+    --v-color-background: #272727; /* deprecated */
     --v-color-background-alert: #fc4f4b;
-    --v-color-background-banner: #333;
-    --v-color-background-banner-hover: #4b4845;
-    --v-color-background-loading: #333;
+    --v-color-background-banner: #333; /* deprecated */
+    --v-color-background-banner-hover: #4b4845; /* deprecated */
+    --v-color-background-loading: #333; /* deprecated */
     --v-color-background-card: #4b4845;
     --v-color-background-card-secondary: #3b3939;
-    --v-color-background-required: #b20000;
     --v-color-background-scroll-hint: #4b4845;
     --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.4);
     --v-color-background-section-primary: #111;
     --v-color-background-section-secondary: #1c1c1c;
-    --v-color-background-textfield: #3d3c3a;
     --v-color-background-table: #3d3c3a;
     --v-color-background-table-header: #00000011;
-    --v-color-border-table: #00000022;
+    --v-color-border-table: #00000022; /* deprecated */
     --v-color-border-textfield: #111;
 
     /* 整頓中 */
     --v-color-box: #4b4845;
     --v-color-border: #3b3939;
     --v-color-table-header: #4b4845;
+  }
+
+  /* new */
+  :root {
+    --v-color-text-primary: #333;
+    --v-color-text-secondary: #585858;
+    --v-color-text-subtle: transparent; /* #50545a; */
+    --v-color-text-link: #004d86;
+    --v-color-text-alert: #9c0000;
+    --v-color-text-required: #fffcfc;
+    --v-color-text-textfield: #333;
+    /* Background */
+    --v-color-background-primary: #f7f7f7;
+    --v-color-background-secondary: #fff;
+    --v-color-background-secondary-hover: #e5e8eb;
+    --v-color-background-required: #b20000;
+    --v-color-background-textfield: #fff;
+    /* Border */
+    --v-color-border-primary: #00000033;
+  }
+  [data-theme="dark"]:root {
+    --v-color-text-primary: #dadada;
+    --v-color-text-secondary: #c9c1b6;
+    --v-color-text-subtle: transparent; /* #b1cdd7; */
+    --v-color-text-link: #edc56c;
+    --v-color-text-alert: #ffadab;
+    --v-color-text-required: #e6e6e6;
+    --v-color-text-textfield: #cfcfcf;
+    /* Background */
+    --v-color-background-primary: #272727;
+    --v-color-background-secondary: #333;
+    --v-color-background-secondary-hover: #4b4845;
+    --v-color-background-required: #990300;
+    --v-color-background-textfield: #3d3c3a;
+    /* Border */
+    --v-color-border-primary: #000000dd;
   }
 
   .no-hidden {
@@ -140,7 +172,7 @@
   --spacing-paragraph: var(--v-spacing-paragraph);
   --spacing-content-inline: var(--v-spacing-content-inline);
 
-  --color-text: var(--v-color-text);
+  --color-text: var(--v-color-text-primary); /* Fixme */
   --color-link: var(--v-color-text-link);
   --color-mark: #000;
   --color-alert: var(--v-color-text-alert);
@@ -148,14 +180,11 @@
   --color-description: var(--v-color-text-description);
   --background-color-alert: var(--v-color-background-alert);
   --background-color-mark: #ff0;
-  --background-color-required: var(--v-color-background-required);
   --background-color-textfield: var(--v-color-background-textfield);
   --background-color-section-primary: var(--v-color-background-section-primary);
   --background-color-section-secondary: var(--v-color-background-section-secondary);
   --background-color-card: var(--v-color-background-card);
   --background-color-card-secondary: var(--v-color-background-card-secondary);
-  --background-color-banner: var(--v-color-background-banner);
-  --background-color-banner-hover: var(--v-color-background-banner-hover);
   --background-color-table: var(--v-color-background-table);
   --background-color-table-header: var(--v-color-background-table-header);
   --background-color-header: var(--v-color-table-header);
@@ -186,6 +215,16 @@
   --container-w640: 40rem;
   --container-w500: 31.25rem;
   --container-w400: 25rem;
+
+  /* new */
+  --color-textfield: var(--v-color-text-textfield);
+
+  --background-color-primary: var(--v-color-background-primary);
+  --background-color-secondary: var(--v-color-background-secondary);
+  --background-color-panel-primary: var(--v-color-background-secondary);
+  --background-color-panel-primary-hover: var(--v-color-background-secondary-hover);
+
+  --border-color-primary: var(--v-color-border-primary);
 }
 
 @layer utilities {
