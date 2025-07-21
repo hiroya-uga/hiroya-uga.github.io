@@ -8,29 +8,18 @@ type Props = {
 };
 
 export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Props) => {
-  switch (level) {
-    case 2:
-      return (
-        <h2
-          className={clsx([
-            'mb-paragraph text-xl font-bold leading-snug sm:text-2xl',
-            keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
-          ])}
-          {...props}
-        />
-      );
-    case 3:
-      return (
-        <h3
-          className={clsx([
-            'mb-paragraph text-lg font-bold leading-snug sm:text-xl',
-            keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
-          ])}
-          {...props}
-        />
-      );
+  const TagName = `h${level}` as 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-    default:
-      return <></>;
-  }
+  return (
+    <TagName
+      className={clsx([
+        'mb-paragraph font-bold leading-snug',
+        keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
+        level === 2 && 'text-xl sm:text-2xl',
+        level === 3 && 'text-lg sm:text-xl',
+        level === 4 && 'text-base sm:text-lg',
+      ])}
+      {...props}
+    />
+  );
 };
