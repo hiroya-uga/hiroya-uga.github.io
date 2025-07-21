@@ -2,7 +2,7 @@
   .root {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid var(--border-color-table);
+    border: 1px solid var(--border-color-primary);
 
     table {
       border-collapse: collapse;
@@ -16,13 +16,21 @@
       text-align: left;
     }
 
+    :where(th, td):not(:first-child) {
+      border-left: 1px solid var(--border-color-primary);
+    }
+
+    table:has(tbody th) thead th:nth-of-type(2) {
+      border-left-width: 2px;
+    }
+
     th {
       font-weight: bold;
       text-align: left;
     }
 
-    th:first-child {
-      border-right: 2px solid var(--border-color-table);
+    tbody th:first-child {
+      border-right: 2px solid var(--border-color-primary);
     }
 
     thead {
@@ -30,12 +38,12 @@
     }
 
     tbody :where(th, td) {
-      border: 1px solid var(--border-color-table);
+      border: 1px solid var(--border-color-primary);
       border-width: 1px 0;
     }
 
     tbody tr:first-child :where(th, td) {
-      border-top: 2px solid var(--border-color-table);
+      border-top: 2px solid var(--border-color-primary);
     }
 
     tbody th {
