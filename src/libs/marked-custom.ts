@@ -9,7 +9,13 @@ type CustomBlockToken = Token & {
   text: string;
   blockType: string;
 };
-
+const customBlockTitle: Record<string, string> = {
+  note: '注釈',
+  alert: '警告',
+  warn: '注意点',
+  tip: 'ヒント',
+  info: '情報',
+};
 const customBlockExtension: TokenizerAndRendererExtension = {
   name: 'customBlock',
   level: 'block',
@@ -35,7 +41,10 @@ const customBlockExtension: TokenizerAndRendererExtension = {
   renderer(token) {
     const t = token as CustomBlockToken;
     const html = marked.parse(t.text);
-    return `<div data-type="${t.blockType}">${html}</div>`;
+    return `<section class="custom-block" data-type="${t.blockType}" aria-label="${customBlockTitle[t.blockType]}">
+      <p class="custom-block__title mb-paragraph" aria-hidden="true">${customBlockTitle[t.blockType]}</p>
+      <div class="custom-block__content space-y-paragraph">${html}</div>
+    </section>`;
   },
 };
 

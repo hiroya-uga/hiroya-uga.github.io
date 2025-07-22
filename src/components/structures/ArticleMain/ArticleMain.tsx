@@ -36,16 +36,24 @@ export const ArticleMain = async ({ post }: Props) => {
             ])}
           >
             <h1 className="@w640:text-4xl @w800:text-5xl text-2xl">
-              <span className="sr-only">{post.meta.title?.replaceAll('\n', '')}</span>
-              <span aria-hidden="true">
-                {post.meta.title?.split('\n').map((title, index) => {
-                  return (
-                    <span key={index} className="@w400:inline-block">
-                      {title}
-                    </span>
-                  );
-                })}
-              </span>
+              {post.meta.title?.split('\n').map((title, index) => {
+                return (
+                  <span key={index} className="@w400:inline-block">
+                    {/* {title.split('`').map((part, partIndex) => {
+                      if (part === '') {
+                        return null;
+                      }
+
+                      if (partIndex % 2 === 0) {
+                        return <span key={partIndex}>{part}</span>;
+                      }
+                      return <code key={partIndex}>{part}</code>;
+                    })}
+                     */}
+                    {title}
+                  </span>
+                );
+              })}
             </h1>
             <ArticleInformation date={post.meta.publishedAt} />
           </div>
