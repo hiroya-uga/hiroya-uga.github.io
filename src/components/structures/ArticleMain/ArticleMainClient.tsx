@@ -216,7 +216,7 @@ export const ArticleCodeHighlightActivator = () => {
     });
   }, []);
 
-  const svgId = useId();
+  const svgId = `copy-${useId().replace(/[^a-z0-9]/g, '-')}`;
   const [toastMessage, setToastMessage] = useState('');
   const copyCode = useCallback((e: MouseEvent) => {
     if (e.currentTarget instanceof HTMLButtonElement === false) {
