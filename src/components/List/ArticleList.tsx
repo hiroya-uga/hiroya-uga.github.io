@@ -59,7 +59,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                     alt={article.title.replaceAll('\n', '')}
                     width={1200}
                     height={630}
-                    className="mb-2 block rounded-t-md transition-[scale] group-hover:scale-105"
+                    className="mb-2 block rounded-t-md transition-[opacity,scale] group-hover:scale-105"
                     priority
                   />
                   <span className="starting:opacity-0 delay-600 absolute inset-0 -z-10 m-auto grid place-items-center transition-opacity">
