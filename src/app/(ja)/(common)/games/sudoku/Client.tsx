@@ -546,7 +546,7 @@ export const SudokuClient = () => {
                     message: '問題を再生成します。よろしいですか？',
                     children: (
                       <p>
-                        <label className="block rounded-lg border border-gray-400 px-2 pt-1">
+                        <label className="border-secondary block rounded-lg border px-2 pt-1">
                           <span className="block text-sm">{`非表示の割合：${levelRef.current}%`}</span>
                           <span>
                             <input
@@ -595,7 +595,7 @@ export const SudokuClient = () => {
 
           <div className="mt-5 space-y-4 border-t border-dashed border-t-gray-600 pt-5">
             <p>
-              <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
+              <label className="border-secondary flex flex-wrap items-center justify-between gap-2 rounded-lg border px-2 py-3">
                 <span className="grow text-sm">ハイライト表示</span>
                 <span>
                   <Switch
@@ -614,7 +614,7 @@ export const SudokuClient = () => {
               </label>
             </p>
             <p>
-              <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
+              <label className="border-secondary flex flex-wrap items-center justify-between gap-2 rounded-lg border px-2 py-3">
                 <span className="grow text-sm">重複ヒント表示</span>
                 <span>
                   <Switch
@@ -633,7 +633,7 @@ export const SudokuClient = () => {
               </label>
             </p>
             <p>
-              <label className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-400 px-2 py-3">
+              <label className="border-secondary flex flex-wrap items-center justify-between gap-2 rounded-lg border px-2 py-3">
                 <span className="grow text-sm">進捗率を表示</span>
                 <span>
                   <Switch

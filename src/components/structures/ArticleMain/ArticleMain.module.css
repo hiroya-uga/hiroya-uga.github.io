@@ -64,7 +64,7 @@
     border: 1px solid var(--border-color-textfield);
     border-radius: 0.5rem;
     font-size: 0.75rem;
-    background-color: var(--background-color-banner);
+    background-color: var(--background-color-primary);
   }
   [class*="associate"] small {
     display: block;
@@ -83,7 +83,7 @@
     width: 0.275rem;
     height: 0.275rem;
     border-radius: 50%;
-    background-color: var(--color-text);
+    background-color: var(--color-primary);
   }
 
   sup {
@@ -100,7 +100,8 @@
   }
 
   [class~="codeblock"] {
-    background: var(--background-color-banner);
+    border: 1px solid var(--border-color-primary);
+    border-radius: 0.5rem;
   }
 
   [class~="codeblock__caption"] {
@@ -120,12 +121,12 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: var(--background-color-banner);
+    background: var(--background-color-panel-primary);
     transition: background-color 0.3s ease-out;
   }
 
   [class~="codeblock__caption__copy"]:hover {
-    background-color: var(--background-color-banner-hover);
+    background-color: var(--background-color-panel-primary-hover);
   }
 
   [class~="codeblock__caption__copy"] svg {
@@ -186,7 +187,7 @@
 
   th,
   td {
-    border: 1px solid var(--background-table-border);
+    border: 1px solid var(--border-color-primary);
     padding: 0.75rem;
     text-align: left;
     vertical-align: baseline;

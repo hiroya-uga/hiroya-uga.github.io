@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { Picture } from '@/components/Image';
-
 import {
   DateSection,
   DaySection,
@@ -15,6 +13,7 @@ import {
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Components';
 import { NoteBox } from '@/components/Box';
 import { Radio, TextField } from '@/components/Form';
+import { SvgIcon } from '@/components/Icons';
 import { Tab } from '@/components/Tab';
 
 const today = new Date();
@@ -305,7 +304,7 @@ export const SlackReminderCommandGenerator = () => {
 
   return (
     <>
-      <div className="bg-banner mx-auto max-w-5xl rounded-2xl p-4 py-10 shadow-md sm:px-12 sm:py-14" ref={ref}>
+      <div className="bg-secondary mx-auto max-w-5xl rounded-2xl p-4 py-10 shadow-md sm:px-12 sm:py-14" ref={ref}>
         <div className="mx-auto max-w-2xl">
           <div className="mb-12">
             <TextField
@@ -525,10 +524,10 @@ export const SlackReminderCommandGenerator = () => {
             <span className="text-red-300">at {result.time || '9:00'}</span>
             <span className="text-purple-300">{result.starting && ` starting ${result.starting}`}</span>
           </p>
-          <p className="sm:w-89px grid rounded-b-lg bg-slate-200 text-xs sm:rounded-l-none sm:rounded-r-lg">
+          <p className="sm:w-89px bg-tertiary grid rounded-b-lg text-xs sm:rounded-l-none sm:rounded-r-lg">
             <button
               type="button"
-              className="grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors hover:bg-slate-300"
+              className="hover:bg-(--v-color-background-tertiary-hover) bg-(--v-color-background-tertiary) grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors"
               onClick={(e) => {
                 const label = e.currentTarget.lastElementChild;
                 const value = e.currentTarget.parentElement?.previousElementSibling?.textContent?.trim();
@@ -553,8 +552,10 @@ export const SlackReminderCommandGenerator = () => {
                 }, 2000);
               }}
             >
-              <Picture src="/common/images/icons/copy.svg" alt="" className="size-4" width={16} height={16} />
-              <span className="font-bold leading-4 text-[#333]" aria-live="assertive" title="出力結果をコピー">
+              <span className="relative block size-4">
+                <SvgIcon name="copy" alt="" />
+              </span>
+              <span className="font-bold leading-4" aria-live="assertive" title="出力結果をコピー">
                 Copy
               </span>
             </button>

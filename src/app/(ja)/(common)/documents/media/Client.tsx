@@ -342,7 +342,7 @@ export const MediaContent = () => {
                 key={href}
                 as="li"
                 defaultClickable={defaultClickable}
-                className="hover:bg-banner @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:shadow"
+                className="hover:bg-secondary @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:shadow"
               >
                 <p className="col-start-1 col-end-2 content-center">
                   <span className="@w640:bg-card @w640:aspect-[4/3] @w640:h-auto @w640:w-full relative grid place-items-center rounded-lg">
@@ -383,7 +383,7 @@ export const MediaContent = () => {
                       {tags.map((tag) => {
                         return (
                           <li key={tag}>
-                            <span className="bg-slate-200 p-1 text-sm dark:bg-gray-700">{tag}</span>
+                            <span className="bg-tertiary p-1 text-sm dark:bg-gray-700">{tag}</span>
                           </li>
                         );
                       })}

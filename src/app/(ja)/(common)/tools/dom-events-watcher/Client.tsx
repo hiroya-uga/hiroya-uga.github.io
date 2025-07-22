@@ -374,7 +374,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         <div className="relative lg:min-w-[375px] lg:max-w-[375px]">
           <form
             ref={ref}
-            className="max-h-[30vh] overflow-y-scroll border border-solid border-gray-400 p-4 pb-8 lg:absolute lg:left-0 lg:top-0 lg:h-full lg:max-h-none"
+            className="border-secondary max-h-[30vh] overflow-y-scroll border border-solid p-4 pb-8 lg:absolute lg:left-0 lg:top-0 lg:h-full lg:max-h-none"
             tabIndex={0}
             id="container"
             role="group"
@@ -386,7 +386,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 <strong>ここに入力された値はどこにも送信されません。</strong>
               </p>
 
-              <p className="mb-8 touch-none border border-solid border-gray-400 p-8 text-center">
+              <p className="border-secondary mb-8 touch-none border border-solid p-8 text-center">
                 タッチイベントを無視するp要素
               </p>
 

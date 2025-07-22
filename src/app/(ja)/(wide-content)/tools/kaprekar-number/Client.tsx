@@ -236,7 +236,7 @@ export const KaprekarNumberContent = () => {
             </div>
           </div>
         </div>
-        <div className="mt-22 max-w-content text-text mx-auto mb-6">
+        <div className="mt-22 max-w-content text-primary mx-auto mb-6">
           <TextField
             label="最大試行回数"
             inputMode="numeric"

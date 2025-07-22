@@ -89,7 +89,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-section-secondary px-content-inline @w640:mb-28 mb-20 py-11 pb-12">
+        <div className="bg-tertiary px-content-inline @w640:mb-28 mb-20 py-11 pb-12">
           <div className="max-w-content mx-auto">
             <h2 className="@w640:text-2xl mb-4 text-xl font-bold">Category</h2>
 
@@ -118,11 +118,11 @@ export default function Home() {
                   return (
                     <li
                       key={href}
-                      className="not-last:border-b not-last:border-b-(--v-color-background-section-secondary) @w640:border-0! group border-solid"
+                      className="not-last:border-b not-last:border-b-(--background-color-tertiary) @w640:border-0! group border-solid"
                     >
                       <Link
                         href={href}
-                        className="@w640:p-0 @w640:rounded-md bg-banner @w640:bg-transparent group relative block overflow-hidden px-4 py-10 no-underline group-first:rounded-t-lg group-last:rounded-b-lg"
+                        className="@w640:p-0 @w640:rounded-md bg-secondary @w640:bg-transparent group relative block overflow-hidden px-4 py-10 no-underline group-first:rounded-t-lg group-last:rounded-b-lg"
                       >
                         <span
                           className={clsx([
@@ -256,7 +256,7 @@ export default function Home() {
               ]}
             />
 
-            <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed border-t-gray-400 pt-12">
+            <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed pt-12">
               <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold">
                 Profile
               </h2>
@@ -312,7 +312,7 @@ export default function Home() {
               })}
             </ul>
 
-            <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 mb-10 mt-12 border-t border-dashed border-t-gray-400 pt-12">
+            <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-10 mt-12 border-t border-dashed pt-12">
               <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold">
                 Doumei banners
               </h2>

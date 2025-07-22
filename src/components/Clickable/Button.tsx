@@ -1,7 +1,6 @@
 import { AnchorHTMLAttributes } from 'react';
 
 import { SvgIcon } from '@/components/Icons';
-import { Picture } from '@/components/Image';
 import Link, { LinkProps } from 'next/link';
 
 export const Button = ({
@@ -16,23 +15,19 @@ export const Button = ({
   return (
     <Link
       {...props}
-      className="group/button block w-full max-w-80 rounded-full bg-slate-200 py-3 pl-7 pr-5 align-middle text-sm text-black no-underline transition-colors hover:bg-slate-300"
+      className="group/button bg-(--v-color-background-tertiary) hover:bg-(--v-color-background-tertiary-hover) text-tertiary block w-full max-w-80 rounded-full py-3 pl-7 pr-5 align-middle text-sm no-underline transition-colors"
       rel={isNewTab ? 'noopener noreferrer' : undefined}
     >
-      <span className="mx-auto grid w-fit grid-cols-[auto_0.875rem] place-items-center gap-1.5">
+      <span className="mx-auto grid w-fit grid-cols-[auto_0.875rem] place-items-center gap-1.5 [--v-fill:var(--color-tertiary)]">
         <span>{children}</span>
         {isNewTab ? (
-          <span className="relative inline-block size-[1em] [--v-fill:black]">
+          <span className="relative inline-block size-[1em]">
             <SvgIcon name="new-tab" alt="新しいタブで開く" />
           </span>
         ) : (
-          <Picture
-            src="/common/images/icons/arrow2-right-black.svg"
-            alt=""
-            className="inline-block size-[1em] transition-transform group-hover/button:translate-x-1"
-            width={16}
-            height={16}
-          />
+          <span className="relative inline-block size-[1em] transition-transform group-hover/button:translate-x-1">
+            <SvgIcon name="arrow2-right" alt="新しいタブで開く" />
+          </span>
         )}
       </span>
     </Link>

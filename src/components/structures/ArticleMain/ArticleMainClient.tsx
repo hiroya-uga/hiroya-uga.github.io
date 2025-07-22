@@ -77,7 +77,7 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
   return (
     <p
       className={clsx([
-        '@w640:text-sm text-description @w640:mt-6 mt-3 text-xs transition-opacity delay-300 duration-700',
+        '@w640:text-sm text-secondary @w640:mt-6 mt-3 text-xs transition-opacity delay-300 duration-700',
         status === 'loading' ? 'opacity-0' : '',
       ])}
     >
@@ -168,7 +168,7 @@ export const ArticleFootNoteActivator = () => {
     <dialog
       ref={ref}
       className={clsx([
-        'bg-(--background-color-banner)/80 fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse p-4 transition-[translate,visibility]',
+        'bg-(--background-color-primary)/80 fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse p-4 transition-[translate,visibility]',
         isOpen ? 'translate-y-0' : 'translate-y-full',
       ])}
       inert={isOpen === false}

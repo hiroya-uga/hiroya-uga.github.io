@@ -137,7 +137,7 @@ export const MarkupDevSupporterHelpButton = () => {
                 <p>
                   <button
                     type="button"
-                    className="hover:bg-banner rounded-full p-2.5 transition-[background-color]"
+                    className="hover:bg-secondary rounded-full p-2.5 transition-[background-color]"
                     onClick={() => {
                       const dialog = ref.current;
                       if (!dialog) {

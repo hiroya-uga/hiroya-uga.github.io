@@ -44,7 +44,7 @@ export default function Page() {
                 <ClickableArea
                   key={key}
                   as="div"
-                  className="bg-banner @w640:p-4 @w640:lg:gap-4 @w640:lg:p-6 group relative flex flex-col items-start gap-2 rounded-lg px-3 py-2 pr-12 shadow-md transition-shadow duration-300 hover:shadow-lg"
+                  className="bg-secondary @w640:p-4 @w640:lg:gap-4 @w640:lg:p-6 group relative flex flex-col items-start gap-2 rounded-lg px-3 py-2 pr-12 shadow-md transition-shadow duration-300 hover:shadow-lg"
                   defaultClickable={linkAreaId}
                 >
                   <dt>

@@ -127,7 +127,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
           <div className="max-w-structure px-content-inline mx-auto">
             <div
               className={clsx(
-                isTop && 'max-w-content mx-auto border-t border-t-gray-400',
+                isTop && 'max-w-content border-t-secondary mx-auto border-t',
                 'flow-root py-12',
                 '@w768:flex @w768:flex-wrap @w768:justify-center @w768:gap-6 @w768:pb-20 @w768:pt-7',
               )}

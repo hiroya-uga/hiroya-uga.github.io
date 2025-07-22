@@ -432,7 +432,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-文字数`}>
                     文字数
                   </label>
-                  <output id={`${id}-文字数`} className="border border-gray-400 bg-white px-2 text-base">
+                  <output id={`${id}-文字数`} className="border-secondary border bg-white px-2 text-base">
                     {countCharacters({ value, isHalfWidthCount })}
                   </output>
                 </p>
@@ -442,7 +442,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </label>
                   <output
                     id={`${id}-文字数（空白文字を除く）`}
-                    className="border border-gray-400 bg-white px-2 text-base"
+                    className="border-secondary border bg-white px-2 text-base"
                   >
                     {countCharacters({ value, isIgnoreWhitespace: true, isHalfWidthCount })}
                   </output>
@@ -451,7 +451,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-行数`}>
                     行数
                   </label>
-                  <output id={`${id}-行数`} className="border border-gray-400 bg-white px-2 text-base">
+                  <output id={`${id}-行数`} className="border-secondary border bg-white px-2 text-base">
                     {countLines({ value })}
                   </output>
                 </p>
@@ -459,7 +459,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-行数（空行を除く）`}>
                     行数（空行を除く）
                   </label>
-                  <output id={`${id}-行数（空行を除く）`} className="border border-gray-400 bg-white px-2 text-base">
+                  <output id={`${id}-行数（空行を除く）`} className="border-secondary border bg-white px-2 text-base">
                     {countLines({ value, isIgnoreEmptyLines: true })}
                   </output>
                 </p>
@@ -469,7 +469,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </span>
                   <output
                     id={`${id}-原稿用紙換算（400文字）`}
-                    className="border border-gray-400 bg-white px-2 text-base"
+                    className="border-secondary border bg-white px-2 text-base"
                   >
                     {countPages}枚
                   </output>
@@ -478,7 +478,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-バイト数（UTF`}>
                     バイト数（UTF-8）
                   </label>
-                  <output id={`${id}-バイト数（UTF`} className="border border-gray-400 bg-white px-2 text-base">
+                  <output id={`${id}-バイト数（UTF`} className="border-secondary border bg-white px-2 text-base">
                     {countBytes({ value })}
                   </output>
                 </p>
@@ -493,7 +493,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <input
                     type="number"
                     value={fontSize}
-                    className="mx-2 w-12 border border-gray-400 px-2 text-right"
+                    className="border-secondary mx-2 w-12 border px-2 text-right"
                     onChange={({ currentTarget }) => {
                       const currentValue = currentTarget.value;
 

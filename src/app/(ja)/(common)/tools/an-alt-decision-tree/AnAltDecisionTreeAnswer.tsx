@@ -221,7 +221,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
           />
 
           {/* <div className="mb-14 sm:mb-40">
-            <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">単純なグラフィックまたは写真の場合</h3>
+            <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">単純なグラフィックまたは写真の場合</h3>
 
             <div className="py-2 px-3">
               <SampleCodeWrapper code={`<img alt="海老のお寿司">`}>
@@ -242,7 +242,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
           </div>
 
           <div className="mb-14 sm:mb-40">
-            <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">グラフまたは複雑な情報の場合</h3>
+            <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">グラフまたは複雑な情報の場合</h3>
 
             <div className="py-2 px-3">
               <SampleCodeWrapper
@@ -276,7 +276,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
           </div>
 
           <div className="mb-14 sm:mb-40">
-            <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+            <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
               側に同じ内容のテキストが書かれている場合
             </h3>
 

@@ -57,7 +57,7 @@ export function CookieConsentDialog() {
         aria-labelledby={id}
         className={clsx(
           styles.root,
-          'starting:opacity-0 text-text scroll-hint-y transition-fade inset-0 m-auto size-[80%] rounded-lg p-4 shadow-lg duration-500',
+          'starting:opacity-0 text-primary scroll-hint-y transition-fade inset-0 m-auto size-[80%] rounded-lg p-4 shadow-lg duration-500',
         )}
       >
         <div className="@container grid place-items-center pb-4 pt-8 text-sm">
@@ -86,7 +86,7 @@ export function CookieConsentDialog() {
               </ul>
               <div className="mb-1">
                 <p className="min-w-200px cursor- grid aspect-[200/40] w-fit border border-solid border-black dark:border-white">
-                  <span className="content-end border border-solid border-transparent bg-slate-200 px-1 py-1.5 text-right font-mono text-xs leading-none dark:border-black dark:bg-gray-300 dark:text-black">
+                  <span className="bg-tertiary content-end border border-solid border-transparent px-1 py-1.5 text-right font-mono text-xs leading-none dark:border-black dark:bg-gray-300 dark:text-black">
                     <span>{SITE_NAME}</span>
                   </span>
                 </p>

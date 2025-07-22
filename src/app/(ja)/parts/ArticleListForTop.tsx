@@ -21,7 +21,7 @@ export const ArticleListForTop = async () => {
               >
                 <time
                   dateTime={article.publishedAt}
-                  className="text-description @w500:col-start-1 @w500:mr-0 mr-3 font-mono text-sm"
+                  className="text-secondary @w500:col-start-1 @w500:mr-0 mr-3 font-mono text-sm"
                 >
                   {formattedDateString(new Date(article.publishedAt))}
                 </time>
