@@ -376,6 +376,10 @@
     text-spacing-trim: trim-start;
   }
 
+  hr {
+    border-color: var(--v-color-border-secondary);
+  }
+
   mark {
     background-color: mark;
     color: marktext;
