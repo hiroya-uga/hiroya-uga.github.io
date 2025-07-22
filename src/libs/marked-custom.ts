@@ -237,10 +237,25 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
     }
 
     const [lang, title] = (t.lang || 'plain:サンプルコード').split(':');
-    const escaped = t.text.replace(
-      /[&<>"']/g,
-      (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
-    );
+    const escaped = (() => {
+      const sanitized = t.text.replace(
+        /[&<>"']/g,
+        (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
+      );
+
+      if (lang === 'diff') {
+        return sanitized.replace(/^\+(.*)|^-(.*)/gm, (_, add, remove) => {
+          if (add) {
+            return `<ins>+${add}</ins>`;
+          }
+
+          return `<del>-${remove}</del>`;
+        });
+      }
+
+      return sanitized;
+    })();
+
     return `<figure class="codeblock"><figcaption class="codeblock__caption"><span>${title ?? lang}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
   },
 };
@@ -264,11 +279,11 @@ const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
       const [text, cite] = t.text.split(/\n引用：/);
       const inner = marked.parse(text);
       const caption = marked.parse(`引用：${cite}`);
-      return `<figure class="blockquote"><div aria-hidden="true">“</div><blockquote class="blockquote__content space-y-paragraph">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
+      return `<figure class="blockquote"><div aria-hidden="true">“</div><blockquote class="blockquote__content space-y-3">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
     }
 
     const inner = marked.parser(t.tokens);
-    return `<blockquote class="blockquote"><div aria-hidden="true">“</div><div class="blockquote__content space-y-paragraph">${inner}</div></blockquote>`;
+    return `<blockquote class="blockquote"><div aria-hidden="true">“</div><div class="blockquote__content space-y-3">${inner}</div></blockquote>`;
   },
 };
 
