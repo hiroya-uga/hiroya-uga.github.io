@@ -102,11 +102,40 @@
   [class~="codeblock"] {
     border: 1px solid var(--border-color-primary);
     border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  [class~="codeblock"] [data-language="diff"] {
+    display: grid;
+    padding: 0;
+  }
+
+  [class~="codeblock"] [data-language="diff"] :where(ins, del) {
+    padding: 0 1em;
+    display: block;
+    white-space: nowrap;
+  }
+
+  [class~="codeblock"] [data-language="diff"] del:first-child {
+    padding-top: 0.5em;
+  }
+
+  [class~="codeblock"] [data-language="diff"] ins:last-child {
+    padding-bottom: 0.5em;
+  }
+
+  [class~="codeblock"] ins {
+    background: var(--background-color-tag-success);
+  }
+
+  [class~="codeblock"] del {
+    background: var(--background-color-tag-error);
   }
 
   [class~="codeblock__caption"] {
     padding: 0 0 0 min(0.5rem, 16px);
     font-size: 0.75rem;
+    background: var(--background-color-secondary);
     border-bottom: 1px solid var(--border-color-blockquote);
     display: grid;
     grid-template-columns: 1fr 2rem;
@@ -144,6 +173,10 @@
     padding: 0.5rem min(0.75rem, 24px) 1rem;
     border-left: min(0.625rem, 24px) solid var(--border-color-blockquote);
     background: var(--background-color-blockquote);
+  }
+
+  [class~="blockquote"]:not(:has([class~="blockquote__caption"])) {
+    padding-bottom: 1.5rem;
   }
 
   [class~="blockquote"] > [aria-hidden="true"] {

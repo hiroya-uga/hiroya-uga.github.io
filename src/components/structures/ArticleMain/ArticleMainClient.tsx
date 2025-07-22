@@ -204,6 +204,11 @@ export const ArticleCodeHighlightActivator = () => {
     highlight.forEach((node) => {
       const code = node.textContent || '';
       const language = node.getAttribute('data-language') || 'html';
+
+      if (['jsx', 'html', 'css', 'javascript'].includes(language) === false) {
+        return;
+      }
+
       const __html = hljs.highlight(code, { language }).value;
 
       node.classList.add(`language-${language}`);
