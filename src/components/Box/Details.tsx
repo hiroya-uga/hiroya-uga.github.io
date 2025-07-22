@@ -26,7 +26,7 @@ export const Details = ({
       name={name}
     >
       <summary
-        className="text-secondary-900 relative flex cursor-pointer list-none items-center justify-between bg-slate-100 after:hidden focus:z-10 group-first:rounded-t-lg group-last:rounded-b-lg group-first:group-last:bg-slate-200 group-first:group-last:py-3 group-first:group-last:text-base group-last:group-open:rounded-none group-first:group-last:group-open:rounded-t-lg sm:text-lg group-first:group-last:sm:transition-colors group-first:group-last:sm:duration-200 group-first:group-last:sm:hover:bg-slate-300"
+        className="text-secondary-900 group-first:group-last:bg-tertiary relative flex cursor-pointer list-none items-center justify-between bg-slate-100 after:hidden focus:z-10 group-first:rounded-t-lg group-last:rounded-b-lg group-first:group-last:py-3 group-first:group-last:text-base group-last:group-open:rounded-none group-first:group-last:group-open:rounded-t-lg sm:text-lg group-first:group-last:sm:transition-colors group-first:group-last:sm:duration-200 group-first:group-last:sm:hover:bg-slate-300"
         role="button"
         aria-expanded={isOpen ? 'true' : 'false'}
         aria-controls={id}

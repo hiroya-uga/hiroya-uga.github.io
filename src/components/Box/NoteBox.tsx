@@ -26,7 +26,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Pr
   return (
     <section
       className={clsx([
-        'rounded-md border border-gray-400 p-4',
+        'border-secondary rounded-md border p-4',
         type === 'note' && 'bg-green-50',
         type === 'warn' && 'bg-yellow-50',
         type === 'error' && 'bg-red-50',

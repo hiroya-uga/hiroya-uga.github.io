@@ -10,7 +10,7 @@ import styles from '@/components/structures/Header/Header.module.css';
 export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
   return (
     <header
-      className={clsx([styles.root, layout !== 'article-content' && 'mb-(--v-header-margin-bottom)', 'text-text'])}
+      className={clsx([styles.root, layout !== 'article-content' && 'mb-(--v-header-margin-bottom)', 'text-primary'])}
     >
       <SiteName />
 
@@ -19,7 +19,7 @@ export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-conten
           <p className={clsx(['relative -left-4 -top-2', layout === 'common' && '2xl:left-0'])}>
             <Link
               href="../"
-              className="hover:text-link sm:hover:bg-banner sm:focus:bg-banner group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300"
+              className="hover:text-link sm:hover:bg-secondary sm:focus:bg-secondary group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300"
             >
               <span className="underline" translate="no">
                 ../

@@ -1,13 +1,13 @@
 @layer components {
   .root {
     border-radius: var(--radius-lg);
-    overflow: hidden;
+    overflow: auto;
     border: 1px solid var(--border-color-primary);
 
     table {
       border-collapse: collapse;
       width: 100%;
-      background: var(--background-color-table);
+      background: transparent;
     }
 
     th,

@@ -6,7 +6,7 @@ type Props = {
 
 export const Table = (props: Props) => {
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} scroll-hint-x`}>
       <table {...props} />
     </div>
   );

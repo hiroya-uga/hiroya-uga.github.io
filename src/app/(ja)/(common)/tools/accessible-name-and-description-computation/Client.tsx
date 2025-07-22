@@ -18,7 +18,7 @@ type SwitchItemProps = Pick<
 
 const SwitchItem = ({ emoji, code, label, ...props }: SwitchItemProps) => {
   return (
-    <li className="mb-2 border-b border-b-gray-300 pb-2 first:border-t first:border-t-gray-300 first:pt-2">
+    <li className="border-secondary mb-2 border-b pb-2 first:border-t first:pt-2">
       <label className="wd-fit flex min-h-[45px] items-center">
         <span className={clsx(props.disabled && 'opacity-50', 'grow transition-opacity')}>
           {emoji && (
@@ -55,7 +55,7 @@ const OutputTextfield = ({
 }: OutputTextfieldProps) => {
   const Content = useCallback(
     (inputProps: typeof props) => {
-      const className = clsx(['mt-2 block w-full rounded border border-gray-400 bg-white px-2 py-3']);
+      const className = clsx(['border-secondary mt-2 block w-full rounded border bg-white px-2 py-3']);
 
       if (isUsingWrapLabel) {
         return (
@@ -384,21 +384,21 @@ export const AccessibleNameAndDescriptionComputation = ({
       const getBackgroundColor = (level: (typeof errors)[0][0]) => {
         switch (level) {
           case 'error':
-            return 'bg-[#fcc]';
+            return 'bg-tag-error';
 
           case 'warn':
-            return 'bg-[#ffc]';
+            return 'bg-tag-warn';
 
           default:
-            return 'bg-[#cfc]';
+            return 'bg-tag-success';
         }
       };
 
       return (
-        <li key={message} className="my-2 rounded-md bg-white p-2 text-sm">
+        <li key={message} className="bg-secondary my-2 rounded-md p-2 text-sm">
           <span
             className={clsx([
-              'mr-2 inline-block min-w-16 px-2 text-center text-sm font-bold uppercase',
+              'text-tertiary mr-2 inline-block min-w-16 px-2 text-center text-sm font-bold uppercase',
               getBackgroundColor(level),
             ])}
           >
@@ -631,7 +631,7 @@ export const AccessibleNameAndDescriptionComputation = ({
           <ul aria-label="見つかった問題">{getErrorMessage()}</ul>
         </div>
 
-        <div className="mb-6 rounded-md border border-gray-300 p-5">
+        <div className="border-secondary mb-6 rounded-md border p-5">
           <div ref={outputRef}>
             <Output
               isUsingWrapLabelAll={isUsingWrapLabelAll}
@@ -682,10 +682,10 @@ export const AccessibleNameAndDescriptionComputation = ({
           </div>
         </div>
 
-        <div className="mb-2 rounded-md border border-gray-300 bg-white">
+        <div className="border-secondary bg-secondary mb-2 rounded-md border">
           <p
             id={textboxDescId}
-            className="text-2xs mb-2 border-b border-dashed border-b-gray-400 px-4 pb-1 pt-2 text-black"
+            className="text-2xs border-secondary text-tertiary mb-2 border-b border-dashed px-4 pb-1 pt-2"
           >
             Hint：全選択ショートカットキーまたはマウスクリックでHTML断片を全選択できます。
           </p>

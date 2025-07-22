@@ -117,7 +117,7 @@ export default function Page() {
           const isW3C = href.startsWith('https://www.w3.org');
 
           return (
-            <div key={href} className="group -mx-3 w-full rounded p-3 focus-within:bg-slate-200">
+            <div key={href} className="focus-within:bg-tertiary group -mx-3 w-full rounded p-3">
               <dt className="mb-1 font-bold sm:text-lg">
                 <a href={href} hrefLang={isW3C ? 'en' : undefined}>
                   {title}

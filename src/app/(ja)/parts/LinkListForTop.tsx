@@ -26,7 +26,7 @@ export const LinkListForTop = ({
               <a
                 href={href}
                 {...prop}
-                className="@w640:bg-banner @w640:grid @w640:grow @w640:content-center @w640:rounded-l @w640:p-2 @w640:pl-3 last:rounded-r focus:relative focus:z-10"
+                className="@w640:bg-secondary @w640:grid @w640:grow @w640:content-center @w640:rounded-l @w640:p-2 @w640:pl-3 last:rounded-r focus:relative focus:z-10"
               >
                 {title}
               </a>{' '}
@@ -34,7 +34,7 @@ export const LinkListForTop = ({
                 <span className="@w640:flex @w640:shrink-0 @w640:before:hidden @w640:after:hidden transition-colors before:content-['['] after:content-[']']">
                   <a
                     href={japanese}
-                    className="@w640:flex @w640:grow @w640:items-center @w640:rounded-r @w640:border-l @w640:border-dotted @w640:border-l-gray-400 @w640:bg-slate-200 @w640:px-2 @w640:hover:translate-x-2 @w640:hover:translate-y-1 @w640:hover:rotate-6 @w640:dark:bg-[#2a3544] transition-transform"
+                    className="@w640:flex @w640:grow @w640:items-center @w640:rounded-r @w640:border-l @w640:border-dotted @w640:border-l-secondary @w640:bg-(--v-color-background-tertiary) @w640:hover:bg-(--v-color-background-tertiary-hover) @w640:px-2 @w640:hover:translate-x-2 @w640:hover:translate-y-1 @w640:hover:rotate-6 transition-transform"
                   >
                     日本語訳
                   </a>

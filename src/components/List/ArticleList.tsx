@@ -25,7 +25,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
               <li key={article.pathname} className="@w640:table-row leading-36px gap-2">
                 <time
                   dateTime={article.publishedAt}
-                  className="text-description @w640:pr-4 @w640:table-cell pr-3 text-sm"
+                  className="text-secondary @w640:pr-4 @w640:table-cell pr-3 text-sm"
                 >
                   {formattedDateString(new Date(article.publishedAt))}
                 </time>
@@ -51,7 +51,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
             <li key={article.pathname} className="grid gap-2">
               <Link
                 href={article.pathname}
-                className="bg-banner group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:_0_0_2px_1px_rgba(0,_0,_0,_0.1)]"
+                className="bg-secondary group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:_0_0_2px_1px_rgba(0,_0,_0,_0.1)]"
               >
                 <div className="relative z-0 overflow-hidden">
                   <Picture
@@ -73,10 +73,10 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                   </div>
 
                   <div className="flex items-center justify-between pl-3 pr-2">
-                    <time dateTime={article.publishedAt} className="text-text @w640:mr-0 mr-3 text-sm">
+                    <time dateTime={article.publishedAt} className="text-primary @w640:mr-0 mr-3 text-sm">
                       {formattedDateString(new Date(article.publishedAt))}
                     </time>
-                    <div className="text-text pt-1.25 ml-2 inline-block content-center border border-solid p-1 text-center text-sm leading-none">
+                    <div className="text-primary pt-1.25 ml-2 inline-block content-center border border-solid p-1 text-center text-sm leading-none">
                       {resolveCategoryName(article.pathname.split('/')[2])}
                     </div>
                   </div>

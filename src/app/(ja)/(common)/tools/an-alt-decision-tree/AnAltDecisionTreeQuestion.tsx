@@ -393,7 +393,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //   return (
 //     <>
 //       <div className="mb-14 sm:mb-40">
-//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
 //           側に同じ内容のテキストが書かれている場合
 //         </h3>
 //         <div className="py-2 px-3">
@@ -440,7 +440,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //       </div>
 
 //       <div className="mb-14 sm:mb-40">
-//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
 //           雰囲気づくりや、見た目のためにだけ置かれている場合
 //         </h3>
 //         <div className="py-2 px-3">
@@ -449,7 +449,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //       </div>
 
 //       <div className="mb-14 sm:mb-40">
-//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
 //           アイコンなど、特定の機能を説明する役割がある場合
 //         </h3>
 //         <div className="py-2 px-3">
@@ -476,7 +476,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //       </div>
 
 //       <div className="mb-14 sm:mb-40">
-//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-slate-200">ロゴや文字画像などの場合</h3>
+//         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">ロゴや文字画像などの場合</h3>
 //         <div className="py-2 px-3">
 //           <p className="mb-6">
 //             <code>alt</code>属性に画像に書かれているテキストを含めてください。

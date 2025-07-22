@@ -513,7 +513,7 @@ export const GetUrlFromDOMContent = () => {
         </fieldset>
       </div>
       <div className="scroll-hint-y min-h-[30dvh] overflow-auto">
-        <h2 className="sticky left-0 top-0 border-b border-slate-300 bg-slate-200 px-4 py-2">
+        <h2 className="bg-tertiary sticky left-0 top-0 border-b border-slate-300 px-4 py-2">
           Result:<span aria-live="polite">{isEdited && ` ${targetLength}件のURL`}</span>
         </h2>
         <div

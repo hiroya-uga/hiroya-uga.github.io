@@ -52,7 +52,7 @@ export const ArticleMain = async ({ post }: Props) => {
           {hasTags && (
             <div className="@w640:mt-13.5 mt-5 flex flex-wrap justify-end pb-1 text-right text-xs">
               {/* <p>この記事のテーマ：</p> */}
-              <ul className="text-description flex flex-wrap justify-end gap-2">
+              <ul className="text-secondary flex flex-wrap justify-end gap-2">
                 {post.meta.tags.map((tag: string) => (
                   <li key={tag}>
                     <span>#{tag}</span>
@@ -68,6 +68,7 @@ export const ArticleMain = async ({ post }: Props) => {
             id={ARTICLE_MAIN_ID}
             className={clsx(styles.article, 'space-y-paragraph max-w-article mx-auto')}
             dangerouslySetInnerHTML={{ __html: await post.content }}
+            suppressHydrationWarning
           />
           <div role="note" className="max-w-article mx-auto mt-20 empty:hidden">
             {0 < post.footnotes.length && (

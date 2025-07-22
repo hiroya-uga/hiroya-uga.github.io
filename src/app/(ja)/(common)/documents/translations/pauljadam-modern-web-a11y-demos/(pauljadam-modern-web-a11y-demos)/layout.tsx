@@ -70,7 +70,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
 
   return (
     <>
-      <div className="mb-4 mt-[calc(-1*var(--v-header-margin-bottom))] border-b border-dashed border-gray-400 pb-6 sm:mb-7 sm:pb-9">
+      <div className="border-secondary mb-4 mt-[calc(-1*var(--v-header-margin-bottom))] border-b border-dashed pb-6 sm:mb-7 sm:pb-9">
         <div className="text-2xs rounded-md bg-white p-2 leading-snug sm:p-4 sm:text-xs">
           <p className="mb-2 font-bold sm:mb-1.5">
             原文：

@@ -22,7 +22,7 @@ export const Switch = ({ dispatch, ...props }: Props) => {
         'before:aspect-square before:h-[calc(100%-2px)] before:bg-white',
         'before:rounded-[50%] before:transition-transform',
         isChecked && 'before:translate-x-8',
-        isChecked ? 'border-green-400 bg-green-400' : 'border-gray-400 bg-gray-400',
+        isChecked ? 'border-green-400 bg-green-400' : 'border-secondary bg-gray-400',
         props.disabled && 'opacity-40',
       ])}
     >
