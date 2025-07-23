@@ -3,13 +3,13 @@
     padding: 0.1428em 0.2857em;
     font-size: 0.875em;
     color: #27476b;
-    background-color: #d6ddf5;
+    background-color: #d6ddf5cc;
     border-radius: 4px;
   }
 
-  [data-theme="dark"]:where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
+  [data-theme="dark"] :where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
     color: #f2eeee;
-    background-color: #5e3c3c;
+    background-color: #6d4444cc;
   }
 
   :where(li, th, td, figcaption, caption, p, span, a, dd, label, strong) > kbd {
