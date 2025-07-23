@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
 
-import '@/pages/globals.css';
+import '@/pages/404.css';
 import Link from 'next/link';
 
 export default function Page() {
