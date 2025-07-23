@@ -210,7 +210,7 @@ export default function Page() {
               {
                 // オリジナル質問
                 title: '好きな要素',
-                answer: 'b要素。',
+                answer: 'b要素、fieldset要素とlegend要素。',
               },
               {
                 // オリジナル質問
