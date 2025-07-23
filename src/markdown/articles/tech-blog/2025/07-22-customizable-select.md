@@ -6,7 +6,7 @@ tags: [HTML, CSS, フォーム, Web標準]
 
 7月22日、かねてより議論が進められていた`select`要素をカスタマイズ可能にする仕様が、HTML Living Standardにマージされました[^1]。
 
-たとえば以下のようなマークアップが今後は有効になります。
+たとえば以下のようなマークアップもWeb標準に則ったものとなります。
 
 ```html
 <select>
@@ -21,25 +21,20 @@ tags: [HTML, CSS, フォーム, Web標準]
 </select>
 ```
 
-[^1]: Define customizable &lt;select&gt; [#10548](https://github.com/whatwg/html/pull/10548)
+[^1]: [Define customizable &lt;select&gt; #10548](https://github.com/whatwg/html/pull/10548) - whatwg/html
 
 ## 自由にスタイリングできるようになったプルダウン
 
 従来の`<select>`要素はスタイリングの自由度が極めて低いもので、見た目にこだわるならARIAとJavaScriptの力を借りて一から作るしかありませんでした。
 Webデザインをされる方も、ドロップボックスのプルダウン（ドロップダウンのピッカー）の中身はよほどのことがない限りデザインしてはいけないと言われてきた方が多いのではないでしょうか。
 
-今回の仕様改善でその制限もおしまいです[^2]。単純なテキスト以外にも多くのフレージングコンテンツが設置できるようになり[^3]、JavaScriptを使わずとも簡単にこのような表現ができるようになりました。
+どのくらい先になるかはわかりませんが、今回の仕様改善でその制限も終わりを迎えます[^2]。単純なテキスト以外にも多くのフレージングコンテンツが設置できるようになり[^3]、JavaScriptを使わずとも簡単にこのような表現ができるようになりました。
 
-[^2]: 対象ブラウザによっては動作しないため、実機検証は必ず行なってください（参考：[Can I use...](https://caniuse.com/?search=selectedcontent)）。
+[^2]: 現状ではほとんどのブラウザで動作しないため、採用を検討する段階になっても実機検証は必ず行うことを推奨します（参考：[Can I use...](https://caniuse.com/?search=selectedcontent)）。
 
 [^3]: [option element inner content elements](https://html.spec.whatwg.org/multipage/dom.html#option-element-inner-content-elements)
 
-<p class="codepen" data-height="500" data-default-tab="html,result" data-slug-hash="vENGJxe" data-pen-title="Customizable Select Example" data-user="hiroya_uga" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/hiroya_uga/pen/vENGJxe">
-  Customizable Select Example</a> by Hiroya UGA  🍣 (<a href="https://codepen.io/hiroya_uga">@hiroya_uga</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://public.codepenassets.com/embed/index.js"></script>
+<iframe height="500" style="width: 100%;"  title="Customizable Select Example" src="https://codepen.io/hiroya_uga/embed/vENGJxe?default-tab=html%2Cresult" loading="lazy"></iframe>
 
 :::warn
 `select`要素およびプルダウンをカスタムするには、`appearance: base-select;`をあらかじめ指定する必要があります。
