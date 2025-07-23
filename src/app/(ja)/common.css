@@ -2,9 +2,14 @@
   :where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
     padding: 0.1428em 0.2857em;
     font-size: 0.875em;
-    color: #345071;
-    background-color: #c8cee1;
+    color: #27476b;
+    background-color: #d6ddf5;
     border-radius: 4px;
+  }
+
+  [data-theme="dark"]:where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
+    color: #f2eeee;
+    background-color: #5e3c3c;
   }
 
   :where(li, th, td, figcaption, caption, p, span, a, dd, label, strong) > kbd {
