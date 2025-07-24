@@ -7,6 +7,7 @@ import { resolveCategoryName } from '@/utils/articles';
 import { formattedDateString } from '@/utils/formatter';
 import { ArticleFrontMatter } from '@/utils/ssg-articles';
 import Link from 'next/link';
+import { useId } from 'react';
 
 type Props = {
   type?: 'simple' | 'thumbnail';
@@ -15,6 +16,7 @@ type Props = {
 
 export const ArticleList = ({ type = 'simple', list }: Props) => {
   const untilFound = useHiddenUntilFound();
+  const prefix = useId();
 
   if (type === 'simple') {
     return (
@@ -47,16 +49,20 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
     <div className="@container">
       <ul className="@w400:grid-cols-2 @w800:grid-cols-3 grid gap-4">
         {list.map((article) => {
+          const titleId = `${prefix}-${article.pathname}-title`;
+          const infoId = `${prefix}-${article.pathname}-info`;
+
           return (
             <li key={article.pathname} className="grid gap-2">
               <Link
                 href={article.pathname}
                 className="bg-secondary group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:_0_0_2px_1px_rgba(0,_0,_0,_0.1)]"
+                aria-labelledby={`${titleId} ${infoId}`}
               >
                 <div className="relative z-0 overflow-hidden">
                   <Picture
                     src={`/generated-ogp${article.pathname}.png`}
-                    alt={article.title.replaceAll('\n', '')}
+                    alt=""
                     width={1200}
                     height={630}
                     className="mb-2 block rounded-t-md transition-[opacity,scale] group-hover:scale-105"
@@ -69,10 +75,12 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
 
                 <div className="grid grid-rows-[1fr_auto]">
                   <div className="px-3 group-hover:underline" {...untilFound}>
-                    <div className="pb-1">{article.title.replaceAll('\n', '')}</div>
+                    <div className="pb-1" id={titleId}>
+                      {article.title.replaceAll('\n', '')}
+                    </div>
                   </div>
 
-                  <div className="flex items-center justify-between pl-3 pr-2">
+                  <div className="flex items-center justify-between pl-3 pr-2" id={infoId}>
                     <time dateTime={article.publishedAt} className="text-primary @w640:mr-0 mr-3 text-sm">
                       {formattedDateString(new Date(article.publishedAt))}
                     </time>
