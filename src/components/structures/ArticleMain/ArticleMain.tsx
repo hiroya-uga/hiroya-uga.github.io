@@ -35,7 +35,12 @@ export const ArticleMain = async ({ post }: Props) => {
               hasTags === false && '@w640:py-20 py-12',
             ])}
           >
-            <h1 className="@w640:text-4xl @w800:text-5xl text-2xl">
+            <h1
+              className={clsx([
+                '@w640:text-4xl @w800:text-5xl text-2xl',
+                post.meta.title?.endsWith('。') && '@w800:pl-[0.5em]',
+              ])}
+            >
               {post.meta.title?.split('\n').map((title, index) => {
                 return (
                   <span key={index} className="@w400:inline-block">
