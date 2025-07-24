@@ -12,11 +12,11 @@ tags: [HTML, CSS, フォーム, Web標準]
 <select>
   <option>
     <span class="emoji">🍣</span>
-    <span class="label">Item 1</span>
+    <span class="label">おすし</span>
   </option>
   <option>
     <span class="emoji">🍜</span>
-    <span class="label">Item 2</span>
+    <span class="label">らあめん</span>
   </option>
 </select>
 ```
@@ -111,12 +111,13 @@ select,
 
 ### 新規要素の追加
 
-[`selectedcontent`](https://html.spec.whatwg.org/multipage/form-elements.html#the-selectedcontent-element)要素が新たに追加されました。
+[`selectedcontent`](https://html.spec.whatwg.org/multipage/form-elements.html#the-selectedcontent-element)要素が新たに追加されました。この要素は、選択中の`option`要素の中身を表示するポータルのように振る舞います。
+
 今回の更新で`select`要素のコンテンツモデルも変更になり、ドロップボックスの場合[^4]は最初の子要素に`button`要素を設置できるようになりました。
 
 [^4]: ドロップボックスとは、`multiple`属性を持っておらず`size`属性の値が1または未定義の`select`要素を指す。
 
-`selectedcontent`要素は、`select`要素の最初の子要素である`button`要素の中にだけ設置できます。
+`selectedcontent`要素は、`select`要素の最初の子要素である`button`要素の中にだけ設置できます。  
 
 ```html:selectedcontent要素の設置例
 <select>
@@ -126,20 +127,20 @@ select,
 
   <option>
     <span class="emoji">🍣</span>
-    <span class="label">Item 1</span>
+    <span class="label">おすし</span>
   </option>
   <option>
     <span class="emoji">🍜</span>
-    <span class="label">Item 2</span>
+    <span class="label">らあめん</span>
   </option>
 </select>
 ```
 
-選択中の`option`要素の中身が表示されるポータルのような役割を担います。  
-現段階ではコンテンツモデルは[Nothing](https://html.spec.whatwg.org/multipage/dom.html#concept-content-nothing)のため、直接なにかコンテンツを書くのではなく、スタイリングのために使うことになるでしょう。
+現段階ではコンテンツモデルが[Nothing](https://html.spec.whatwg.org/multipage/dom.html#concept-content-nothing)のため、直接なにかコンテンツを書くのではなく、スタイリングのために使うことになるでしょう。
 
-```css
-selectedcontent .label {
+```css:selectedcontent要素を使ったCSSの例
+/* プルダウンにある絵文字をドロップボックス本体側では表示しない */
+selectedcontent .emoji {
   display: hidden;
 }
 ```
@@ -156,7 +157,7 @@ selectedcontent .label {
 | -------------------------------------------------------------------------------- | ---------------------------------------- |
 | [`select::picker(select)`](https://drafts.csswg.org/css-forms/#picker-pseudo)    | プルダウンの選択肢を表示するポップアップ |
 | [`option::checkmark`](https://drafts.csswg.org/css-forms/#selectordef-checkmark) | 選択済みを表すチェックマーク             |
-| [`select::picker-icon`](https://drafts.csswg.org/css-forms/#picker-icon)         | ピッカーの存在を表すアイコン             |
+| [`select::picker-icon`](https://drafts.csswg.org/css-forms/#picker-icon)         | プルダウンの存在を表すアイコン            |
 
 これらの登場により、プルダウンであることを示すアイコンや選択済みであることを示すチェックマークを`content`プロパティで置き換えたり、プルダウンをフェードインさせたりできるようになりました。
 
