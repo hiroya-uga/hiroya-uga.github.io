@@ -103,7 +103,11 @@ export async function generateOgpImage(
           i = 0;
           return '\n';
         }
-        if (i === MAX_ROW_LENGTH - 1 || i === MAX_ROW_LENGTH - 0.5) {
+        if (
+          (i === MAX_ROW_LENGTH - 1 || i === MAX_ROW_LENGTH - 0.5) &&
+          // 改行しようとしているが、次が句読点なら改行しない
+          ['。', '、'].includes(self[index + 1]) === false
+        ) {
           i = 0;
           currentBreakIndex = index;
           return `${char}\n`;
