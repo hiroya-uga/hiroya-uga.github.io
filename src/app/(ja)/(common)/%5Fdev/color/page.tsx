@@ -12,19 +12,20 @@ export const metadata: Metadata = {
   },
 };
 
+const textColors = [
+  'text-primary',
+  'text-secondary',
+  'text-high-contrast',
+  'text-high-contrast-reverse',
+  'text-link',
+  'text-alert',
+];
+
 const TextColor = () => {
   return (
     <>
       <ul className="mb-8 grid grid-cols-4 gap-4">
-        {[
-          // new
-          'text-primary',
-          'text-secondary',
-          'text-tertiary',
-          'text-quaternary',
-          'text-link',
-          'text-alert',
-        ].map((color) => (
+        {textColors.map((color) => (
           <li key={color}>
             <div className="size-100PX" style={{ background: `var(${color.replace('text', '--color')})` }}></div>
             <div className={`text-sm ${color}`}>{`.${color}`}</div>
@@ -35,27 +36,19 @@ const TextColor = () => {
       <Table>
         <thead>
           <tr>
-            <th>CSS Variable</th>
-            <th>Color</th>
-            <th>Example1</th>
-            <th>Example2</th>
+            <th>className</th>
+            <th>Example</th>
           </tr>
         </thead>
         <tbody>
-          {[
-            // new
-            '--v-color-text-primary',
-            '--v-color-text-secondary',
-            '--v-color-text-tertiary',
-            '--v-color-text-quaternary',
-            '--v-color-text-link',
-            '--v-color-text-alert',
-          ].map((color) => (
-            <tr key={color}>
-              <th>{color}</th>
-              <td style={{ color: `var(${color})` }}>Example</td>
-              <td style={{ color: `var(${color})` }}>Example</td>
-              <td style={{ color: `var(${color})` }}>Example</td>
+          {textColors.map((className) => (
+            <tr key={className}>
+              <th>{className}</th>
+              <td className={className}>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque totam asperiores ad pariatur alias sint
+                velit blanditiis voluptates porro placeat sapiente iste, cum harum commodi aut! Voluptatem perferendis
+                suscipit nostrum.
+              </td>
             </tr>
           ))}
         </tbody>
@@ -72,8 +65,8 @@ export default function Page() {
         {Object.entries({
           '--v-color-text-primary': 'ベーステキスト',
           '--v-color-text-secondary': 'サブテキスト',
-          '--v-color-text-tertiary': 'ハイコントラストベーステキスト',
-          '--v-color-text-quaternary': '逆ハイコントラストベーステキスト',
+          '--v-color-text-high-contrast': 'ハイコントラストベーステキスト',
+          '--v-color-text-high-contrast-reverse': '逆ハイコントラストベーステキスト',
           '--v-color-text-error': 'エラーテキスト',
           '--v-color-text-link': 'リンクテキスト',
           '--v-color-background-primary': '背景色1',
@@ -116,7 +109,7 @@ export default function Page() {
       <div className="px-4">
         <ul className="transition-bg border-primary rounded-lg border p-4">
           {['bg-tag-success', 'bg-tag-warn', 'bg-tag-error'].map((key) => (
-            <li key={key} className={`${key} text-tertiary text-sm`}>
+            <li key={key} className={`${key} text-high-contrast text-sm`}>
               {key}
             </li>
           ))}

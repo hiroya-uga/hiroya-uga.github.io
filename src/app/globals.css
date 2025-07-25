@@ -58,8 +58,8 @@
     --v-color-accent: #f6535d;
     --v-color-text-primary: #333;
     --v-color-text-secondary: #585858;
-    --v-color-text-tertiary: #000;
-    --v-color-text-quaternary: #fff;
+    --v-color-text-high-contrast: #000;
+    --v-color-text-high-contrast-reverse: #fff;
     --v-color-text-link: #004d86;
     --v-color-text-alert: #9c0000;
     --v-color-text-required: #fffcfc;
@@ -83,8 +83,8 @@
     --v-color-accent: #f48287;
     --v-color-text-primary: #dadada;
     --v-color-text-secondary: #c9c1b6;
-    --v-color-text-tertiary: #fff;
-    --v-color-text-quaternary: #000;
+    --v-color-text-high-contrast: #fff;
+    --v-color-text-high-contrast-reverse: #000;
     --v-color-text-link: #edc56c;
     --v-color-text-alert: #ffadab;
     --v-color-text-required: #e6e6e6;
@@ -214,8 +214,8 @@
   /* new */
   --color-primary: var(--v-color-text-primary);
   --color-secondary: var(--v-color-text-secondary);
-  --color-tertiary: var(--v-color-text-tertiary);
-  --color-quaternary: var(--v-color-text-quaternary);
+  --color-high-contrast: var(--v-color-text-high-contrast);
+  --color-high-contrast-reverse: var(--v-color-text-high-contrast-reverse);
   --color-link: var(--v-color-text-link);
   --color-alert: var(--v-color-text-alert);
   --color-textfield: var(--v-color-text-textfield);
