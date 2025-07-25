@@ -398,7 +398,7 @@ export const AccessibleNameAndDescriptionComputation = ({
         <li key={message} className="bg-secondary my-2 rounded-md p-2 text-sm">
           <span
             className={clsx([
-              'text-tertiary mr-2 inline-block min-w-16 px-2 text-center text-sm font-bold uppercase',
+              'text-high-contrast mr-2 inline-block min-w-16 px-2 text-center text-sm font-bold uppercase',
               getBackgroundColor(level),
             ])}
           >
@@ -685,7 +685,7 @@ export const AccessibleNameAndDescriptionComputation = ({
         <div className="border-secondary bg-secondary mb-2 rounded-md border">
           <p
             id={textboxDescId}
-            className="text-2xs border-secondary text-tertiary mb-2 border-b border-dashed px-4 pb-1 pt-2"
+            className="text-2xs border-secondary text-high-contrast mb-2 border-b border-dashed px-4 pb-1 pt-2"
           >
             Hint：全選択ショートカットキーまたはマウスクリックでHTML断片を全選択できます。
           </p>
