@@ -334,10 +334,11 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
           '<tr>' +
           row
             .map((cell, j) => {
-              const align = t.align[j] ? ` class="${t.align[j]}"` : '';
+              const align = t.align[j] ? ` class="is-${t.align[j]}"` : '';
               const text = extractText(cell);
-              const content = marked.parse(text);
-              return `<td${align}>${content}</td>`;
+              const tagName = text.trim().startsWith('^') ? 'th' : 'td';
+              const content = marked.parse(tagName === 'th' ? text.slice(1) : text);
+              return `<${tagName}${align}>${content}</${tagName}>`;
             })
             .join('') +
           '</tr>'
