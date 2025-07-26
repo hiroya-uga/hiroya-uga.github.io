@@ -262,6 +262,10 @@
     text-align: left;
   }
 
+  :where(th, td)[class~="is-center"] {
+    text-align: center;
+  }
+
   :where(th, td):not(:first-child) {
     border-left: 1px solid var(--border-color-primary);
   }

@@ -83,10 +83,12 @@ export const ArticleMain = async ({ post }: Props) => {
             dangerouslySetInnerHTML={{ __html: await post.content }}
             suppressHydrationWarning
           />
-          <div role="note" className="max-w-article mx-auto mt-20 empty:hidden">
+          <div role="note" className="max-w-article mx-auto empty:hidden">
             {0 < post.footnotes.length && (
               <>
-                <Heading level={2}>脚注</Heading>
+                <Heading level={2} keepUseMarginTop>
+                  脚注
+                </Heading>
                 <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
                   {post.footnotes.map(async ([id, { html }]) => (
                     <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
