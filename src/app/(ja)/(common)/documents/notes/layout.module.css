@@ -98,7 +98,7 @@
 #article table {
   clear: both;
   border-collapse: collapse;
-  background: var(--background-color-table);
+  background: white;
 }
 
 #article th,

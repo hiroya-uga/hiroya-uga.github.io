@@ -24,7 +24,7 @@ const textColors = [
 const TextColor = () => {
   return (
     <>
-      <ul className="mb-8 grid grid-cols-4 gap-4">
+      <ul className="@w640:grid-cols-4 @w400:grid-cols-2 @w500:grid-cols-3 mb-8 grid gap-4">
         {textColors.map((color) => (
           <li key={color}>
             <div className="size-100PX" style={{ background: `var(${color.replace('text', '--color')})` }}></div>
@@ -75,6 +75,8 @@ export default function Page() {
           '--v-color-background-success': '背景色：成功',
           '--v-color-background-warn': '背景色：警告',
           '--v-color-background-error': '背景色：エラー',
+          '--v-color-border-primary': 'ボーダー色：プライマリー',
+          '--v-color-border-secondary': 'ボーダー色：セカンダリー',
           '--v-color-accent': 'アクセント',
         }).map(([color, description]) => (
           <div key={color} className="grid grid-cols-[100px_auto] gap-4">
@@ -105,12 +107,12 @@ export default function Page() {
           </div>
         </div>
       ))}
-      <Heading level={2}>Tags</Heading>
+      <Heading level={2}>Status</Heading>
       <div className="px-4">
-        <ul className="transition-bg border-primary rounded-lg border p-4">
-          {['bg-tag-success', 'bg-tag-warn', 'bg-tag-error'].map((key) => (
-            <li key={key} className={`${key} text-high-contrast text-sm`}>
-              {key}
+        <ul className="transition-bg border-primary space-y-4">
+          {['bg-success', 'bg-warn', 'bg-error'].map((className) => (
+            <li key={className} className={`${className} text-high-contrast rounded-lg p-3 text-sm`}>
+              {`.${className}`}
             </li>
           ))}
         </ul>
@@ -122,14 +124,9 @@ export default function Page() {
             <Heading level={3}>{key}</Heading>
 
             <div className={`${className} transition-bg border-primary rounded-lg border p-4`}>
-              {[
-                // new
-                '--v-color-text-primary',
-                '--v-color-text-link',
-                '--v-color-text-alert',
-              ].map((color) => (
-                <div key={color} className="text-sm" style={{ color: `var(${color})` }}>
-                  {color}
+              {textColors.map((className) => (
+                <div key={className} className={`text-sm ${className}`}>
+                  {className}
                 </div>
               ))}
             </div>
@@ -149,9 +146,7 @@ export default function Page() {
           '--v-color-background-scroll-hint-shadow',
           '--v-color-background-section-primary',
           '--v-color-background-textfield',
-          '--v-color-background-table',
           '--v-color-background-table-header',
-          '--v-color-border-textfield',
         ].map((color) => (
           <div key={color}>
             <span className="size-100PX block" style={{ background: `var(${color})` }}></span>

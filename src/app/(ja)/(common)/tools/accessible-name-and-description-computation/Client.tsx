@@ -384,13 +384,13 @@ export const AccessibleNameAndDescriptionComputation = ({
       const getBackgroundColor = (level: (typeof errors)[0][0]) => {
         switch (level) {
           case 'error':
-            return 'bg-tag-error';
+            return 'bg-error';
 
           case 'warn':
-            return 'bg-tag-warn';
+            return 'bg-warn';
 
           default:
-            return 'bg-tag-success';
+            return 'bg-success';
         }
       };
 
