@@ -145,11 +145,11 @@
   }
 
   [class~="codeblock"] ins {
-    background: var(--background-color-tag-success);
+    background: var(--background-color-success);
   }
 
   [class~="codeblock"] del {
-    background: var(--background-color-tag-error);
+    background: var(--background-color-error);
   }
 
   [class~="codeblock__caption"] {
@@ -229,7 +229,7 @@
 
   [class~="custom-block"][data-type="warn"] {
     border-radius: 0.5rem;
-    background: var(--background-color-tag-warn);
+    background: var(--background-color-warn);
   }
 
   [class~="custom-block__title"] {
