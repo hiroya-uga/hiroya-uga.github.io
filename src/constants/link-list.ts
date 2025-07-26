@@ -84,6 +84,11 @@ export const TOOLS_LINK_LIST: ToolPage = [
     emoji: '♾️',
     pathname: '/tools/kaprekar-number',
   },
+  {
+    type: 'playground',
+    emoji: '文',
+    pathname: '/tools/render-text-in-react',
+  },
 ];
 
 export const GAMES_LINK_LIST: LinkListItem[] = [

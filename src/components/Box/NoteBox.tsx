@@ -26,7 +26,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Pr
   return (
     <section
       className={clsx([
-        'border-secondary rounded-md border p-4',
+        'border-secondary rounded-md border px-2.5 pb-8 pt-5',
         type === 'note' && 'bg-green-50',
         type === 'warn' && 'bg-yellow-50',
         type === 'error' && 'bg-red-50',
@@ -47,7 +47,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Pr
         </span>
         {title ?? getTitle(type)}
       </TagName>
-      {children}
+      <div className="px-6.5">{children}</div>
     </section>
   );
 };
