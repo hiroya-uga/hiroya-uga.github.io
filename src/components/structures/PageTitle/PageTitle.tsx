@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 export const PageTitle = ({
   title,
+  pageTitle,
   previous,
   following,
   description,
@@ -10,7 +11,8 @@ export const PageTitle = ({
   shouldShowPrivacyPolicyMessage = false,
   shouldShowNonAccessibleMessage = false,
 }: {
-  title: string;
+  title?: string;
+  pageTitle?: string;
   previous?: string;
   following?: string;
   children?: React.ReactNode;
@@ -46,7 +48,7 @@ export const PageTitle = ({
             )}
           </>
         ) : (
-          title
+          (pageTitle ?? title)
         )}
       </h1>
 

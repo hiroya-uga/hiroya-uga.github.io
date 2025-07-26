@@ -381,6 +381,11 @@ export const SEO: Record<
     title: 'KeyboardEvent Playground',
     description: 'キーボード操作のテストができます。キーボードのキー名やキーコード、修飾キーの状態を確認しましょう。',
   },
+  '/tools/render-text-in-react': {
+    title: 'Render Text in React Playground',
+    description:
+      'Reactでテキストを出力する際の書き方の違いが、どのような読み上げの違いが生じさせるか確認してみましょう。',
+  },
   '/tools/slack-reminder-command-generator': {
     title: 'Slack reminder command generator',
     afterSubTitle: 'Slackのリマインダーコマンド作成ツール',
