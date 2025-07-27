@@ -168,7 +168,7 @@ export const ArticleFootNoteActivator = () => {
     <dialog
       ref={ref}
       className={clsx([
-        'bg-(--background-color-primary)/80 fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse p-4 transition-[translate,visibility]',
+        'bg-(--background-color-primary)/90 border-t-primary fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse border-t p-4 transition-[translate,visibility]',
         isOpen ? 'translate-y-0' : 'translate-y-full',
       ])}
       inert={isOpen === false}

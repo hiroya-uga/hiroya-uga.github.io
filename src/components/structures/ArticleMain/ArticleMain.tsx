@@ -93,7 +93,7 @@ export const ArticleMain = async ({ post }: Props) => {
                   {post.footnotes.map(async ([id, { html }]) => (
                     <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
                       <span className="font-mono">
-                        <a href={`#ref-${id}`}>{`[${id}^]`}</a>:
+                        <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
                       </span>
                       <span dangerouslySetInnerHTML={{ __html: await html }} />
                     </li>
