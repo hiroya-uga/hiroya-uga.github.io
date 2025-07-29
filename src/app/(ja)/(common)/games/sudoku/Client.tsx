@@ -655,7 +655,7 @@ export const SudokuClient = () => {
 
           <p
             className={clsx([
-              'px-9px @w800px:py-0 @w800px:pr-0 @w800px:pt-5 transition-fade starting:opacity-0 @w800px:block transition-discrete sticky bottom-0 mt-5 flex grow items-center justify-between gap-2 border-t border-dashed border-t-gray-600 bg-[var(--v-color-background)] py-2 font-bold',
+              'px-9px @w800px:py-0 @w800px:pr-0 @w800px:pt-5 transition-fade starting:opacity-0 @w800px:block transition-discrete sticky bottom-0 mt-5 flex grow items-center justify-between gap-2 border-t border-dashed border-t-gray-600 bg-[var(--background-color-primary)] py-2 font-bold',
               shouldShowCorrectRatio === false && 'invisible opacity-0',
             ])}
           >

@@ -104,7 +104,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
           ])}
         >
           {!isTop && (
-            <div className="max-w-structure bg-(--v-color-background) px-content-inline relative mx-auto">
+            <div className="max-w-structure bg-(--background-color-primary) px-content-inline relative mx-auto">
               <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--v-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
                 {/* m-0 for bootstrap pages */}
                 <ul
