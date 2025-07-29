@@ -421,7 +421,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   return (
     <>
       <div className="@content:rounded-lg group relative overflow-hidden" tabIndex={0}>
-        <figure aria-live="polite" className="min-h bg-loading relative">
+        <figure aria-live="polite" className="min-h bg-primary relative">
           <div className={clsx(['aspect-3/2', ...transitionClassName])}>
             {photoData &&
               ('error' in photoData ? (

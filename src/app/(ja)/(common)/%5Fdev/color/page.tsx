@@ -138,13 +138,10 @@ export default function Page() {
         {[
           // 既存
           '--v-color-background-alert',
-          '--v-color-background-loading',
           '--v-color-background-card',
-          '--v-color-background-card-secondary',
           '--v-color-background-required',
           '--v-color-background-scroll-hint',
           '--v-color-background-scroll-hint-shadow',
-          '--v-color-background-section-primary',
           '--v-color-background-textfield',
           '--v-color-background-table-header',
         ].map((color) => (

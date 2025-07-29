@@ -294,7 +294,7 @@ export const KaprekarNumberContent = () => {
               </RunButton>
             </p>
           </div>
-          <div className="bg-(--v-color-background)/80 pointer-events-auto ml-auto mr-4 mt-2 w-fit rounded px-2 py-1 text-right text-xs leading-tight">
+          <div className="bg-(--background-color-primary)/80 pointer-events-auto ml-auto mr-4 mt-2 w-fit rounded px-2 py-1 text-right text-xs leading-tight">
             <p>
               試行回数：
               <span ref={countRef} className="mx-1 font-mono">

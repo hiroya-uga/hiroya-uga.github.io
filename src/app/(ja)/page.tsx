@@ -53,7 +53,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-section-primary px-content-inline @w640:mb-28 @w640:pb-11 @w640:pt-7 mb-8 py-8">
+        <div className="bg-secondary px-content-inline @w640:mb-28 @w640:pb-11 @w640:pt-7 mb-8 py-8">
           <div className="max-w-content mx-auto">
             <h2 className="@w640:text-2xl mb-4 mt-0 text-xl font-bold">The power of the web</h2>
 
@@ -126,7 +126,7 @@ export default function Home() {
                       >
                         <span
                           className={clsx([
-                            '@w640:bg-card-secondary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none',
+                            '@w640:bg-primary @w640:font-emoji @w640:mb-2 @w640:grid @w640:aspect-[1.618/1] @w640:place-items-center @w640:overflow-hidden @w640:rounded-md @w640:leading-none',
                             // safari bug fix: https://iwb.jp/safari-css-display-grid-place-items-center-bug
                             '@w640:w-full',
                           ])}
