@@ -269,7 +269,7 @@ export const KaprekarNumberContent = () => {
                   setDigitsLength(value.length);
                   startCalculation();
                 }}
-                afterIcon="/common/images/icons/reload.svg"
+                afterIcon="reload"
               >
                 <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
               </RunButton>

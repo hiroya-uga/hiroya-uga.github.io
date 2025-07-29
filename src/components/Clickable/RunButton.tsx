@@ -1,27 +1,45 @@
-import { Picture } from '@/components/Image';
+import { SvgIcon } from '@/components/Icons';
 import clsx from 'clsx';
 import { ButtonHTMLAttributes } from 'react';
 
 type Props = {
   children?: React.ReactNode;
-  afterIcon?: string;
+  beforeIcon?: Parameters<typeof SvgIcon>[0]['name'];
+  afterIcon?: Parameters<typeof SvgIcon>[0]['name'];
 } & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick' | 'disabled'>;
 
-export const RunButton = ({ children, afterIcon, ...props }: Props) => {
+export const RunButton = ({ children, beforeIcon, afterIcon, ...props }: Props) => {
   return (
     <button
       className={clsx([
-        'max-w-260px pointer-events-auto mx-auto block w-full rounded-md border border-solid border-black bg-[#f1f1f1] py-2 text-black transition-[background-color,border-color,box-shadow] hover:border-[#777] hover:bg-white hover:shadow-lg active:border-[#555] active:bg-[#e1e1e1] active:shadow-none disabled:opacity-50',
-        afterIcon ? 'pl-5 pr-4' : 'px-8',
+        'max-w-260px bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto block w-full rounded-lg border border-solid py-2 transition-[background-color,border-color,box-shadow] hover:shadow-lg active:shadow-none disabled:opacity-50',
+        beforeIcon && !afterIcon && 'pl-3.5 pr-4',
+        afterIcon && !beforeIcon && 'pl-4 pr-3.5',
+        !beforeIcon && !afterIcon && 'px-8',
+        beforeIcon && afterIcon && 'px-4',
       ])}
       {...props}
     >
-      {afterIcon ? (
-        <span className="mx-auto grid w-fit grid-cols-[auto_1rem] place-items-center gap-1">
+      {beforeIcon || afterIcon ? (
+        <span
+          className={clsx([
+            'mx-auto grid w-fit place-items-center gap-2',
+            afterIcon && beforeIcon && 'grid-cols-[1rem_auto_1rem]',
+            afterIcon && !beforeIcon && 'grid-cols-[auto_1rem]',
+            !afterIcon && beforeIcon && 'grid-cols-[1rem_auto]',
+          ])}
+        >
+          {beforeIcon && (
+            <span className="relative size-4">
+              <SvgIcon alt="" name={beforeIcon} />
+            </span>
+          )}
           <span>{children}</span>
-          <span>
-            <Picture width={16} height={16} alt="" src={afterIcon} />
-          </span>
+          {afterIcon && (
+            <span className="relative size-4">
+              <SvgIcon alt="" name={afterIcon} />
+            </span>
+          )}
         </span>
       ) : (
         children
