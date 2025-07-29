@@ -62,72 +62,70 @@ export const RenderTextInReactPlaygroundContent = () => {
 
   return (
     <>
-      <Heading level={2}>Playground</Heading>
-      <div className="px-4">
-        <ul className="mb-paragraph space-y-2 px-2">
-          <li>
-            <Radio
-              label="テンプレートリテラルを使わない"
-              name="mode"
-              checked={shouldUseTemplateLiteral === false}
-              onChange={() => setShouldUseTemplateLiteral(false)}
-            />
-          </li>
-          <li>
-            <Radio
-              label="テンプレートリテラルを使う"
-              name="mode"
-              checked={shouldUseTemplateLiteral}
-              onChange={() => setShouldUseTemplateLiteral(true)}
-            />
-          </li>
-        </ul>
+      <Heading level={2}>出力方法</Heading>
+      <ul className="mb-paragraph space-y-2 px-2">
+        <li>
+          <Radio
+            label="テンプレートリテラルを使わない"
+            name="mode"
+            checked={shouldUseTemplateLiteral === false}
+            onChange={() => setShouldUseTemplateLiteral(false)}
+          />
+        </li>
+        <li>
+          <Radio
+            label="テンプレートリテラルを使う"
+            name="mode"
+            checked={shouldUseTemplateLiteral}
+            onChange={() => setShouldUseTemplateLiteral(true)}
+          />
+        </li>
+      </ul>
 
-        <Heading
-          level={3}
-        >{`${shouldUseTemplateLiteral ? 'テンプレートリテラルを使った' : 'テンプレートリテラルを使わない'}動作サンプル`}</Heading>
+      <NoteBox>
+        <p>
+          JSX（TSX）でテキストをレンダリングする際、1つの<code>string</code>
+          に結合せずにレンダリングした場合、テキストノードは分断された状態でレンダリングされます。
+        </p>
 
-        <Example shouldUseTemplateLiteral={shouldUseTemplateLiteral} />
-
-        <Heading level={3}>コードイメージ</Heading>
-        <pre className="border-primary mb-paragraph grid overflow-auto rounded-lg border">
-          <CodeBlock code={code} language="javascript" wrap="nowrap" />
-        </pre>
-
-        <NoteBox>
-          <p>
-            JSX（TSX）でテキストをレンダリングする際、1つの<code>string</code>
-            に結合せずにレンダリングした場合、テキストノードは分断された状態でレンダリングされます。
-          </p>
-
-          <div className="@w640:grid-cols-2 mt-paragraph grid gap-4">
-            <div>
-              <p className="mb-2 font-bold">テンプレートリテラルを使わない場合：</p>
-              <pre className="border-primary grid overflow-auto rounded-lg border">
-                <CodeBlock
-                  code={`<p aria-live="assertive">
+        <div className="@w640:grid-cols-2 mt-paragraph grid gap-4">
+          <div>
+            <p className="mb-2 font-bold">テンプレートリテラルを使わない場合：</p>
+            <pre className="border-primary grid overflow-auto rounded-lg border">
+              <CodeBlock
+                code={`<p aria-live="assertive">
   Clicked
   <!-- -->
   0
   <!-- -->
   times
 </p>`}
-                />
-              </pre>
-            </div>
-            <div className="grid grid-rows-[auto_1fr]">
-              <p className="mb-2 font-bold">テンプレートリテラルを使う場合：</p>
-              <pre className="border-primary grid overflow-auto rounded-lg border">
-                <CodeBlock
-                  code={`<p aria-live="assertive">
+              />
+            </pre>
+          </div>
+          <div className="grid grid-rows-[auto_1fr]">
+            <p className="mb-2 font-bold">テンプレートリテラルを使う場合：</p>
+            <pre className="border-primary grid overflow-auto rounded-lg border">
+              <CodeBlock
+                code={`<p aria-live="assertive">
   Clicked 0 times
 </p>`}
-                />
-              </pre>
-            </div>
+              />
+            </pre>
           </div>
-        </NoteBox>
-      </div>
+        </div>
+      </NoteBox>
+
+      <Heading
+        level={2}
+      >{`${shouldUseTemplateLiteral ? 'テンプレートリテラルを使った' : 'テンプレートリテラルを使わない'}動作サンプル`}</Heading>
+
+      <Example shouldUseTemplateLiteral={shouldUseTemplateLiteral} />
+
+      <Heading level={2}>コードイメージ</Heading>
+      <pre className="border-primary mb-paragraph grid overflow-auto rounded-lg border">
+        <CodeBlock code={code} language="javascript" wrap="nowrap" />
+      </pre>
     </>
   );
 };
