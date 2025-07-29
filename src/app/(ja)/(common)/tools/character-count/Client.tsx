@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css';
+import { RunButton } from '@/components/Clickable';
 import { Switch } from '@/components/Form';
 import { Heading } from '@/components/Heading';
 
@@ -371,7 +372,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             <p className="mb-3">
               <textarea
                 id={id}
-                className="h-[max(5lh,23vh)] min-h-[108px] w-full resize-y border border-gray-600 px-4 py-2"
+                className="border-secondary bg-secondary h-[max(5lh,23vh)] min-h-[108px] w-full resize-y border px-4 py-2"
                 style={{
                   fontSize: Boolean(fontSize) ? `${fontSize}px` : DEFAULT_FONT_SIZE,
                 }}
@@ -396,30 +397,30 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                 }}
               />
             </p>
-            <p className="text-right">
-              <button
-                type="button"
-                onClick={() => {
-                  setValue(currentValue);
-                }}
-                className={clsx([
-                  'transition-fade relative z-20 mr-4 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
-                  isAutoCount && 'invisible opacity-0',
-                ])}
-              >
-                文字数を数える
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setCurrentValue('');
-                  setValue('');
-                }}
-                className="relative z-20 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2"
-              >
-                リセット
-              </button>
-            </p>
+            <ul className="flex justify-end gap-4">
+              <li className={clsx(['transition-fade relative z-20', isAutoCount && 'invisible opacity-0'])}>
+                <RunButton
+                  type="button"
+                  onClick={() => {
+                    setValue(currentValue);
+                  }}
+                >
+                  文字数を数える
+                </RunButton>
+              </li>
+              <li className="relative z-20">
+                <RunButton
+                  type="button"
+                  onClick={() => {
+                    setCurrentValue('');
+                    setValue('');
+                  }}
+                  afterIcon="reload"
+                >
+                  リセット
+                </RunButton>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -432,7 +433,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-文字数`}>
                     文字数
                   </label>
-                  <output id={`${id}-文字数`} className="border-secondary border bg-white px-2 text-base">
+                  <output id={`${id}-文字数`} className="border-secondary bg-secondary border px-2 text-base">
                     {countCharacters({ value, isHalfWidthCount })}
                   </output>
                 </p>
@@ -442,7 +443,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </label>
                   <output
                     id={`${id}-文字数（空白文字を除く）`}
-                    className="border-secondary border bg-white px-2 text-base"
+                    className="border-secondary bg-secondary border px-2 text-base"
                   >
                     {countCharacters({ value, isIgnoreWhitespace: true, isHalfWidthCount })}
                   </output>
@@ -451,7 +452,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-行数`}>
                     行数
                   </label>
-                  <output id={`${id}-行数`} className="border-secondary border bg-white px-2 text-base">
+                  <output id={`${id}-行数`} className="border-secondary bg-secondary border px-2 text-base">
                     {countLines({ value })}
                   </output>
                 </p>
@@ -459,7 +460,10 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-行数（空行を除く）`}>
                     行数（空行を除く）
                   </label>
-                  <output id={`${id}-行数（空行を除く）`} className="border-secondary border bg-white px-2 text-base">
+                  <output
+                    id={`${id}-行数（空行を除く）`}
+                    className="border-secondary bg-secondary border px-2 text-base"
+                  >
                     {countLines({ value, isIgnoreEmptyLines: true })}
                   </output>
                 </p>
@@ -469,7 +473,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </span>
                   <output
                     id={`${id}-原稿用紙換算（400文字）`}
-                    className="border-secondary border bg-white px-2 text-base"
+                    className="border-secondary bg-secondary border px-2 text-base"
                   >
                     {countPages}枚
                   </output>
@@ -478,7 +482,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-バイト数（UTF`}>
                     バイト数（UTF-8）
                   </label>
-                  <output id={`${id}-バイト数（UTF`} className="border-secondary border bg-white px-2 text-base">
+                  <output id={`${id}-バイト数（UTF`} className="border-secondary bg-secondary border px-2 text-base">
                     {countBytes({ value })}
                   </output>
                 </p>
@@ -563,7 +567,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                       aria-label={container.flatMap((array) => array).join('')}
                     >
                       <span
-                        className="relative mx-auto block w-fit bg-white pr-1 text-center before:absolute before:left-0 before:top-0 before:w-full before:border-t before:border-solid before:border-t-[orange]"
+                        className="bg-secondary relative mx-auto block w-fit pr-1 text-center before:absolute before:left-0 before:top-0 before:w-full before:border-t before:border-solid before:border-t-[orange] dark:before:border-t-[orange]/80"
                         style={{
                           borderRight: '1px solid orange',
                           borderBottom: '1px solid orange',
@@ -572,7 +576,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                         <span
                           className={clsx([
                             'grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,1fr)] gap-x-1 leading-none',
-                            'before:row-end-21 before:row-start-1 before:border-l before:border-l-[orange]',
+                            'before:row-end-21 before:row-start-1 before:border-l before:border-l-[orange] dark:before:border-l-[orange]/80',
                             'before:col-start-11 before:col-end-12',
                           ])}
                           key={containerIndex}
@@ -582,7 +586,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               aria-hidden={true}
                               className={clsx([
                                 'col-start-11 col-end-12 row-start-6 row-end-7 text-center',
-                                'vertical-rl pl-3px text-justify text-[orange]',
+                                'vertical-rl pl-3px text-justify text-[orange] dark:text-[orange]/80',
                               ])}
                             >
                               【
@@ -591,7 +595,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               aria-hidden={true}
                               className={clsx([
                                 'row-start-15 row-end-17 col-start-11 col-end-12 text-center',
-                                'vertical-rl pl-3px text-justify text-[orange]',
+                                'vertical-rl pl-3px text-justify text-[orange] dark:text-[orange]/80',
                               ])}
                             >
                               】

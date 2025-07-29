@@ -15,6 +15,7 @@ type Name =
   | 'description'
   | 'headphone'
   | 'play'
+  | 'reload'
   | 'new-tab'
   | 'question';
 const map = new Map<Name, boolean>();

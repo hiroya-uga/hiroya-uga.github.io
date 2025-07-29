@@ -10,6 +10,7 @@ import { AnAltDecisionTreeException } from '@/app/(ja)/(common)/tools/an-alt-dec
 import { AnAltDecisionTreeQuestion } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeQuestion';
 
 import styles from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client.module.css';
+import { RunButton } from '@/components/Clickable';
 
 const formatIndex = (value: string | number | undefined | null) => {
   const index = typeof value !== 'number' ? Number(value) : value;
@@ -27,10 +28,9 @@ const formatIndex = (value: string | number | undefined | null) => {
 
 const ResetButton = ({ setPageState }: { setPageState: (_: { index: number; isCurrent: boolean }) => void }) => {
   return (
-    <p className="mt-12 text-right">
-      <button
+    <p className="mt-28 text-right">
+      <RunButton
         type="button"
-        className="bg-slate-100 px-2 py-1"
         onClick={() => {
           setPageState({
             index: 0,
@@ -39,7 +39,7 @@ const ResetButton = ({ setPageState }: { setPageState: (_: { index: number; isCu
         }}
       >
         やり直す
-      </button>
+      </RunButton>
     </p>
   );
 };
@@ -105,57 +105,53 @@ export const AnAltDecisionTreeContent = () => {
       <div className={clsx([`${styles.slide}`, index === 0 && 'pb-4'])}>
         <AnAltDecisionTreeQuestion index={index} />
 
-        <ul className="mt-12 flex flex-wrap justify-center gap-4 border-t border-t-slate-200 pt-10">
-          <li>
-            <button
-              type="button"
-              className="min-w-28 rounded border border-solid border-black bg-white p-4"
-              onClick={() => {
-                setPageState({
-                  index,
-                  isCurrent: true,
-                });
-              }}
-            >
-              はい
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="min-w-28 rounded border border-solid border-black bg-white p-4"
-              onClick={() => {
-                setPageState({
-                  index: index + 1,
-                  isCurrent: false,
-                });
-              }}
-            >
-              いいえ
-            </button>
-          </li>
-        </ul>
+        <div className="border-primary mt-12 border-t pt-10">
+          <ul className="@w640:grid-cols-[minmax(7rem,1fr)_minmax(7rem,1fr)] mx-auto grid w-fit justify-center gap-4">
+            <li>
+              <RunButton
+                type="button"
+                onClick={() => {
+                  setPageState({
+                    index,
+                    isCurrent: true,
+                  });
+                }}
+              >
+                はい
+              </RunButton>
+            </li>
+            <li>
+              <RunButton
+                type="button"
+                onClick={() => {
+                  setPageState({
+                    index: index + 1,
+                    isCurrent: false,
+                  });
+                }}
+              >
+                いいえ
+              </RunButton>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {index !== 0 && (
-        <p className="mt-10">
-          <button
+        <p className="mr-auto mt-10 w-fit">
+          <RunButton
             type="button"
-            className="bg-slate-100 px-2 py-1"
             onClick={() => {
               router.back();
             }}
+            beforeIcon="arrow-left"
           >
             戻る
-          </button>
+          </RunButton>
         </p>
       )}
     </>
   );
 
-  return (
-    <>
-      <Container />
-    </>
-  );
+  return <Container />;
 };
