@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { NoteBox } from '@/components/Box';
+import { RunButton } from '@/components/Clickable';
 import { LoadingIcon } from '@/components/Icons';
 
 type Touches = Record<
@@ -178,7 +179,7 @@ export const TouchEventTouchesContent = () => {
 
   return (
     <div
-      className="relative rounded-md bg-white p-6"
+      className="bg-secondary relative rounded-md p-6"
       aria-busy={typeof isTouchDevice === 'undefined' ? 'true' : undefined}
     >
       <p
@@ -217,15 +218,14 @@ export const TouchEventTouchesContent = () => {
           className={clsx([
             isRunning ? 'sticky bottom-4' : 'relative',
             'z-20',
-            'before:touch-none] before:fixed before:left-0 before:top-0 before:-z-10 before:size-full before:bg-[rgba(255,255,255,.9)] before:transition-[visibility,opacity]',
+            'before:touch-none] before:bg-secondary/90 before:fixed before:left-0 before:top-0 before:-z-10 before:size-full before:transition-[visibility,opacity]',
             !isRunning && 'before:invisible before:opacity-0',
           ])}
         >
           <div
             className={clsx([
               'rounded p-2 py-3 sm:p-6',
-              'flex flex-wrap items-center justify-center gap-2',
-              isRunning ? 'bg-[rgba(255,255,255,.9)]' : 'bg-[rgba(255,255,255,.9)]',
+              'bg-secondary/90 flex flex-wrap items-center justify-center gap-2',
             ])}
           >
             <p
@@ -240,14 +240,10 @@ export const TouchEventTouchesContent = () => {
               </span>
             </p>
 
-            <p>
-              <button
+            <p className={clsx(['relative z-20', isRunning && 'touch-none'])}>
+              <RunButton
                 aria-live="assertive"
                 ref={startButtonRef}
-                className={clsx([
-                  'relative z-20 rounded border border-black bg-[rgba(255,255,255,.6)] px-8 py-2',
-                  isRunning && 'touch-none',
-                ])}
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsRunning(!isRunning);
@@ -255,7 +251,7 @@ export const TouchEventTouchesContent = () => {
                 onTouchStart={(e) => e.stopPropagation()}
               >
                 {isRunning ? 'Stop' : 'Start'}
-              </button>
+              </RunButton>
             </p>
           </div>
 
@@ -269,7 +265,7 @@ export const TouchEventTouchesContent = () => {
             </NoteBox>
           </div>
 
-          <div className={clsx([isRunning && 'touch-none] fixed left-0 top-0 z-10 size-full'])} ref={ref}>
+          <div className={clsx([isRunning && 'fixed left-0 top-0 z-10 size-full touch-none'])} ref={ref}>
             <TouchPoints dataSets={touchDataSet} />
           </div>
         </div>

@@ -19,14 +19,14 @@ export const Details = ({
 
   return (
     <details
-      className="not-first:border-t not-first:border-solid not-first:border-t-gray-200 group rounded-lg first:last:border first:last:border-slate-400"
+      className="not-first:border-t not-first:border-solid not-first:border-t-secondary first:last:border-secondary group rounded-lg first:last:border"
       open={isOpen}
       id={id}
       // @ts-ignore
       name={name}
     >
       <summary
-        className="text-secondary-900 group-first:group-last:bg-tertiary relative flex cursor-pointer list-none items-center justify-between bg-slate-100 after:hidden focus:z-10 group-first:rounded-t-lg group-last:rounded-b-lg group-first:group-last:py-3 group-first:group-last:text-base group-last:group-open:rounded-none group-first:group-last:group-open:rounded-t-lg sm:text-lg group-first:group-last:sm:transition-colors group-first:group-last:sm:duration-200 group-first:group-last:sm:hover:bg-slate-300"
+        className="bg-primary hover:bg-primary-hover @w640:text-lg relative flex cursor-pointer list-none items-center justify-between text-base transition-colors duration-200 after:hidden focus:z-10 group-first:rounded-t-lg group-last:rounded-b-lg group-first:group-last:py-3 group-open:rounded-t-lg group-last:group-open:rounded-none"
         role="button"
         aria-expanded={isOpen ? 'true' : 'false'}
         aria-controls={id}
@@ -54,7 +54,7 @@ export const Details = ({
         </div>
       </summary>
 
-      <div className="overflow-hidden bg-white group-last:rounded-b-lg">{children}</div>
+      <div className="bg-secondary overflow-hidden group-last:rounded-b-lg">{children}</div>
     </details>
   );
 };

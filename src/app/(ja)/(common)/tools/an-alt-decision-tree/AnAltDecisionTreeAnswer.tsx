@@ -6,11 +6,11 @@ const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
   const id = useId();
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
+    <div className="border-secondary rounded-lg border shadow-sm">
       {list.map(([title, content]) => {
         return (
           <Details name="if" key={title} summary={title} id={id}>
-            <div className="border-t border-t-gray-100 px-4 py-6 text-sm sm:pb-16 sm:text-base">{content}</div>
+            <div className="border-secondary border-t px-4 py-6 text-sm sm:pb-16 sm:text-base">{content}</div>
           </Details>
         );
       })}
