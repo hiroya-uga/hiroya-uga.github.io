@@ -21,7 +21,7 @@ export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
           <li key={`${href}${index}`} className="not-last:mb-6 sm:not-last:mb-6 flex pl-1 text-sm sm:pl-2 sm:text-base">
             <span className="min-w-1.5 max-w-1.5 px-px pt-3 sm:min-w-2 sm:max-w-2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true" className="w-full">
-                <circle cx="50" cy="50" r="50" fill="var(--color-text)" />
+                <circle cx="50" cy="50" r="50" fill="var(--v-fill, var(--color-primary))" />
               </svg>
             </span>
             <span className="pl-1.5 sm:pl-2.5">

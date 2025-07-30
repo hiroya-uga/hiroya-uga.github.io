@@ -9,3 +9,43 @@
 .root table th {
   padding-bottom: 0.375rem;
 }
+
+.root {
+  rect {
+    fill: #f0f0f0;
+  }
+  text {
+    fill: #333;
+  }
+  rect.isPressed {
+    fill: #a0a0a0;
+  }
+  text.isPressed {
+    fill: #141414;
+  }
+}
+
+[data-theme="dark"] .root {
+  rect {
+    fill: #777;
+  }
+  text {
+    fill: #fff;
+  }
+  rect.isPressed {
+    fill: #333;
+  }
+  text.isPressed {
+    fill: #fff;
+  }
+}
+
+.root {
+  --v-true: #005f82;
+  --v-false: #7b4f00;
+}
+
+[data-theme="dark"] .root {
+  --v-true: #b6ebff;
+  --v-false: #ffdfa5;
+}

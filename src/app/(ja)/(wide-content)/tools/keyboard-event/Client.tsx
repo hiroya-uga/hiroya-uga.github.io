@@ -43,7 +43,7 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
         >
           {keys.map(({ key, x, y, width, height, label }, index) => {
             const isPressed = pressedKeys.includes(key);
-            const className = clsx(isPressed || 'transition-colors');
+            const className = clsx(isPressed ? styles.isPressed : 'transition-colors');
             return (
               <g key={index}>
                 <rect
@@ -52,7 +52,6 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
                   width={width || 40}
                   height={height || 40}
                   rx="5"
-                  fill={isPressed ? '#a0a0a0' : '#f0f0f0'}
                   stroke="black"
                   className={className}
                 />
@@ -61,7 +60,6 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
                   y={y + (height || 40) / 2 + 5}
                   textAnchor="middle"
                   fontSize={12}
-                  fill={isPressed ? '#141414' : '#333'}
                   className={className}
                 >
                   {label}
@@ -215,15 +213,17 @@ const Log = ({ inputLog }: { inputLog: Log[] }) => {
                 <code>{log.code}</code>
               </td>
               <td>{log.location}</td>
-              <td className={log.ctrlKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.ctrlKey ? 'true' : 'false'}</td>
-              <td className={log.shiftKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.shiftKey ? 'true' : 'false'}</td>
-              <td className={log.altKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.altKey ? 'true' : 'false'}</td>
-              <td className={log.metaKey ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.metaKey ? 'true' : 'false'}</td>
-              <td className={log.repeat ? 'text-[#005f82]' : 'text-[#7b4f00]'}>{log.repeat ? 'true' : 'false'}</td>
-              <td className={log.isComposing ? 'text-[#005f82]' : 'text-[#7b4f00]'}>
+              <td className={log.ctrlKey ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.ctrlKey ? 'true' : 'false'}</td>
+              <td className={log.shiftKey ? 'text-(--v-true)' : 'text-(--v-false)'}>
+                {log.shiftKey ? 'true' : 'false'}
+              </td>
+              <td className={log.altKey ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.altKey ? 'true' : 'false'}</td>
+              <td className={log.metaKey ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.metaKey ? 'true' : 'false'}</td>
+              <td className={log.repeat ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.repeat ? 'true' : 'false'}</td>
+              <td className={log.isComposing ? 'text-(--v-true)' : 'text-(--v-false)'}>
                 {log.isComposing ? 'true' : 'false'}
               </td>
-              <td className={log.getModifierState ? 'text-[#005f82]' : 'text-[#7b4f00]'}>
+              <td className={log.getModifierState ? 'text-(--v-true)' : 'text-(--v-false)'}>
                 {log.getModifierState ? 'true' : 'false'}
               </td>
               <td className="text-xs leading-none">{log.timestamp}</td>

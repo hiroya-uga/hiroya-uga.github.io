@@ -27,16 +27,16 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Pr
     <section
       className={clsx([
         'border-secondary rounded-md border px-2.5 pb-8 pt-5',
-        type === 'note' && 'bg-green-50',
-        type === 'warn' && 'bg-yellow-50',
+        type === 'note' && 'bg-green-50 dark:bg-[#004b20]',
+        type === 'warn' && 'bg-yellow-50 dark:bg-[#4a4401]',
         type === 'error' && 'bg-red-50',
       ])}
     >
       <TagName
         className={clsx([
           'mb-2 mt-0 text-lg font-bold leading-relaxed',
-          type === 'note' && 'text-green-800',
-          type === 'warn' && 'text-yellow-800',
+          type === 'note' && 'text-green-800 dark:text-white',
+          type === 'warn' && 'text-yellow-800 dark:text-white',
           type === 'error' && 'text-red-800',
         ])}
       >

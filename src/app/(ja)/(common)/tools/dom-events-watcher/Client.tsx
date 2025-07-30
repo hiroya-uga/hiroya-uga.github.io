@@ -56,141 +56,150 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   const requiredInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoSrc, setVideoSrc] = useState<{ src?: string }>({});
-  const [timestamp, setTimestamp] = useState(getNow());
+  const timestampRef = useRef(getNow());
   const [eventNames, setEventNames] = useState<string[]>([]);
-  const [value, setValue] = useState<[[string, string, string], ...([string, string] | string)[]]>([
-    ['', '', timestamp],
-  ]);
+  const logRef = useRef<[[string, string, string], ...([string, string] | string)[]]>([['', '', timestampRef.current]]);
+  const [log, setLog] = useState<typeof logRef.current>(logRef.current);
 
-  const handler = useCallback(
-    (e: Event) => {
-      clearInterval(key);
-      key = window.setInterval(() => {
-        setTimestamp(getNow());
-      }, 1000);
+  const handler = useCallback((e: Event) => {
+    clearInterval(key);
+    key = window.setInterval(() => {
+      timestampRef.current = getNow();
+    }, 1000);
 
-      if (!e.target) {
-        return;
-      }
-
-      const isUsingPreventDefault = e.type === 'drop' || e.type === 'submit';
-      const tagName = (() => {
-        if (!(e.target instanceof HTMLElement)) {
-          return String(Object.getPrototypeOf(e.target));
-        }
-
-        return e.target.tagName.toLocaleLowerCase();
-      })();
-      const eventName = (() => {
-        const typeAttribute = 'type' in e.target ? e.target.type : null;
-        const key = 'key' in e ? e.key : null;
-        const data = 'data' in e ? e.data : null;
-        const mediaProps =
-          e.target instanceof HTMLMediaElement
-            ? {
-                // controls: e.target.controls,
-                volume: `${Math.round(e.target.volume * 10000) / 100}%`,
-                muted: e.target.muted,
-                // paused: e.target.paused,
-                currentTime: `${Math.round(e.target.currentTime * 100) / 100}s`,
-                loop: e.target.loop,
-                playbackRate: e.target.playbackRate,
-              }
-            : {};
-        const commonOptions = {
-          typeAttribute,
-          key,
-          data,
-          ...mediaProps,
-          'preventDefault()': isUsingPreventDefault ? 'called' : '',
-        };
-        const mergeOptions = (options: Record<string, unknown> = {}) => {
-          const entries = Object.entries({
-            ...commonOptions,
-            ...options,
-          }).filter(([_, state]) => {
-            return state;
-          });
-
-          if (entries.length === 0) {
-            return '';
-          }
-
-          const optionValues = Object.fromEntries(entries);
-
-          return JSON.stringify(optionValues, null, '  ');
-        };
-
-        if (e instanceof KeyboardEvent) {
-          const { altKey, ctrlKey, metaKey, shiftKey } = e;
-          const options = mergeOptions({
-            altKey,
-            ctrlKey,
-            metaKey,
-            shiftKey,
-          });
-
-          return `${e.type}__options__(${options})`;
-        }
-
-        const options = mergeOptions();
-
-        if (options) {
-          return `${e.type}__options__(${options})`;
-        }
-
-        return e.type;
-      })();
-
-      if (isUsingPreventDefault) {
-        e.preventDefault();
-      }
-
-      const rest = value
-        .slice(1)
-        .map((item) => {
-          if (typeof item === 'string') {
-            return item.replace('@@@', ' x ');
-          }
-
-          return [...item];
-        })
-        .slice(0, 299) as [string, string][];
-
-      if (value[0][0] === tagName && value[0][1].startsWith(eventName)) {
-        const [first] = value;
-        const [_, countString] = first[1].split('@@@');
-        const count = Number(countString);
-
-        if (Number.isNaN(count)) {
-          setValue([[tagName, `${eventName}@@@2`, timestamp], ...rest]);
-
-          return;
-        }
-
-        setValue([[tagName, `${eventName}@@@${count + 1}`, timestamp], ...rest]);
-
-        return;
-      }
-
-      const result = [[value[0][0], value[0][1]], ...rest] as ([string, string] | string)[];
-
-      if (timestamp === value[0][2]) {
-        setValue([[tagName, eventName, timestamp], ...result]);
-
-        return;
-      }
-
-      setValue([[tagName, eventName, timestamp], timestamp, ...result]);
-    },
-    [timestamp, value],
-  );
-
-  useEffect(() => {
-    if (!ref.current) {
+    if (!e.target) {
       return;
     }
 
+    const isUsingPreventDefault = e.type === 'drop' || e.type === 'submit';
+    const tagName = (() => {
+      if (!(e.target instanceof HTMLElement)) {
+        return String(Object.getPrototypeOf(e.target));
+      }
+
+      return e.target.tagName.toLocaleLowerCase();
+    })();
+    const eventName = (() => {
+      const typeAttribute = 'type' in e.target ? e.target.type : null;
+      const key = 'key' in e ? e.key : null;
+      const data = 'data' in e ? e.data : null;
+      const mediaProps =
+        e.target instanceof HTMLMediaElement
+          ? {
+              // controls: e.target.controls,
+              volume: `${Math.round(e.target.volume * 10000) / 100}%`,
+              muted: e.target.muted,
+              // paused: e.target.paused,
+              currentTime: `${Math.round(e.target.currentTime * 100) / 100}s`,
+              loop: e.target.loop,
+              playbackRate: e.target.playbackRate,
+            }
+          : {};
+      const commonOptions = {
+        typeAttribute,
+        key,
+        data,
+        ...mediaProps,
+        'preventDefault()': isUsingPreventDefault ? 'called' : '',
+      };
+      const mergeOptions = (options: Record<string, unknown> = {}) => {
+        const entries = Object.entries({
+          ...commonOptions,
+          ...options,
+        }).filter(([_, state]) => {
+          return state;
+        });
+
+        if (entries.length === 0) {
+          return '';
+        }
+
+        const optionValues = Object.fromEntries(entries);
+
+        return JSON.stringify(optionValues, null, '  ');
+      };
+
+      if (e instanceof KeyboardEvent) {
+        const { altKey, ctrlKey, metaKey, shiftKey } = e;
+        const options = mergeOptions({
+          altKey,
+          ctrlKey,
+          metaKey,
+          shiftKey,
+        });
+
+        return `${e.type}__options__(${options})`;
+      }
+
+      const options = mergeOptions();
+
+      if (options) {
+        return `${e.type}__options__(${options})`;
+      }
+
+      return e.type;
+    })();
+
+    if (isUsingPreventDefault) {
+      e.preventDefault();
+    }
+
+    const maxIndex = (() => {
+      let i = 0;
+
+      for (let j = 0; j < logRef.current.length; j++) {
+        if (typeof logRef.current[j] !== 'string') {
+          i++;
+
+          if (i === 300) {
+            return j;
+          }
+        }
+      }
+
+      return -1;
+    })();
+
+    if (maxIndex >= 0) {
+      logRef.current = logRef.current.slice(0, maxIndex) as typeof logRef.current;
+    }
+
+    const rest = logRef.current.slice(1).map((item) => {
+      if (typeof item === 'string') {
+        return item.replace('@@@', ' x ');
+      }
+
+      return [...item];
+    }) as [string, string][];
+
+    if (logRef.current[0][0] === tagName && logRef.current[0][1].startsWith(eventName)) {
+      const [first] = logRef.current;
+      const [_, countString] = first[1].split('@@@');
+      const count = Number(countString);
+
+      if (Number.isNaN(count)) {
+        logRef.current = [[tagName, `${eventName}@@@2`, timestampRef.current], ...rest];
+
+        return;
+      }
+
+      logRef.current = [[tagName, `${eventName}@@@${count + 1}`, timestampRef.current], ...rest];
+
+      return;
+    }
+
+    const result = [[logRef.current[0][0], logRef.current[0][1]], ...rest] as ([string, string] | string)[];
+
+    if (timestampRef.current === logRef.current[0][2]) {
+      logRef.current = [[tagName, eventName, timestampRef.current], ...result];
+
+      return;
+    }
+
+    logRef.current = [[tagName, eventName, timestampRef.current], timestampRef.current, ...result];
+  }, []);
+
+  useEffect(() => {
     const events = [
       ...new Set([
         'afterscriptexecute', // Non-standard
@@ -268,20 +277,25 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
       ]),
     ];
 
-    const target = ref.current;
-
     setEventNames([...events]);
+  }, []);
 
-    events.forEach((eventName) => {
-      target?.addEventListener(eventName, handler);
+  useEffect(() => {
+    const target = ref.current;
+    if (!target) {
+      return;
+    }
+
+    eventNames.forEach((eventName) => {
+      target.addEventListener(eventName, handler);
     });
 
     return () => {
-      events.forEach((eventName) => {
-        target?.removeEventListener(eventName, handler);
+      eventNames.forEach((eventName) => {
+        target.removeEventListener(eventName, handler);
       });
     };
-  }, [handler, timestamp, value]);
+  }, [eventNames, handler]);
 
   useEffect(() => {
     const targets = [inputRef.current, requiredInputRef.current];
@@ -324,6 +338,15 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
       });
     };
   }, [eventNames, handler]);
+
+  useEffect(() => {
+    const update = () => {
+      setLog(logRef.current);
+      requestAnimationFrame(update);
+    };
+
+    update();
+  }, []);
 
   return (
     <>
@@ -524,7 +547,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 counterReset: 'log',
               }}
             >
-              {value.map((item, index) => {
+              {log.map((item, index) => {
                 if (typeof item === 'string') {
                   return (
                     <p key={item} className="col-[1/4] my-1 grid bg-gray-300 px-2 text-right text-xs sm:col-[1/5]">

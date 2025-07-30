@@ -1,16 +1,17 @@
 import { SvgIcon } from '@/components/Icons';
 import clsx from 'clsx';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, forwardRef, Ref } from 'react';
 
 type Props = {
   children?: React.ReactNode;
   beforeIcon?: Parameters<typeof SvgIcon>[0]['name'];
   afterIcon?: Parameters<typeof SvgIcon>[0]['name'];
-} & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick' | 'disabled'>;
+} & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick' | 'disabled' | 'onTouchStart'>;
 
-export const RunButton = ({ children, beforeIcon, afterIcon, ...props }: Props) => {
+const RunButtonComponent = ({ children, beforeIcon, afterIcon, ...props }: Props, ref: Ref<HTMLButtonElement>) => {
   return (
     <button
+      ref={ref}
       className={clsx([
         'max-w-260px bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto block w-full rounded-lg border border-solid py-2 transition-[background-color,border-color,box-shadow] hover:shadow-lg active:shadow-none disabled:opacity-50',
         beforeIcon && !afterIcon && 'pl-3.5 pr-4',
@@ -47,3 +48,5 @@ export const RunButton = ({ children, beforeIcon, afterIcon, ...props }: Props) 
     </button>
   );
 };
+
+export const RunButton = forwardRef(RunButtonComponent);

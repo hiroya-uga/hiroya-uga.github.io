@@ -20,6 +20,11 @@
     border-radius: 4px;
   }
 
+  [data-theme="dark"] :where(li, th, td, figcaption, caption, p, span, a, dd, label) > kbd {
+    color: #fff;
+    background-color: #777777cc;
+  }
+
   body {
     line-height: 1.875;
   }
