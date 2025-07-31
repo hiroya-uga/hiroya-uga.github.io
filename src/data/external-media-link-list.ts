@@ -14,11 +14,19 @@ const list: {
 }[] = [
   {
     type: 'article',
+    category: 'Dev',
+    date: '2025-07-31',
+    title: 'Tech-Verse 2025に参加してきました！ ',
+    href: 'https://techblog.demae-can.co.jp/entry/20250731/1753950899',
+    tags: ['Accessibility', 'EventReport'],
+  },
+  {
+    type: 'article',
     category: 'WebDev',
     date: '2025-05-28',
     title: 'GW中に行った技術キャッチアップや個人開発を発表するLT会を開催しました！',
     href: 'https://techblog.lycorp.co.jp/ja/20250528b#:~:text=1.-,Web%E6%A8%99%E6%BA%96%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%83%81%E3%82%A2%E3%83%83%E3%83%97,-Uga%20Hiroya%20(A11y',
-    tags: ['EventReport', 'HTML', 'CSS', 'Accessibility'],
+    tags: ['Accessibility', 'EventReport', 'HTML', 'CSS'],
   },
   {
     type: 'book',
