@@ -97,12 +97,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer className={clsx(['@container', styles.footer])}>
-        <div
-          className={clsx([
-            'bg-(--v-color-background-footer) text-(--v-color-text-footer)',
-            isTop && '@w640:bg-inherit @w640:text-inherit',
-          ])}
-        >
+        <div className={clsx([isTop || 'bg-(--v-color-background-footer) text-(--v-color-text-footer)'])}>
           {!isTop && (
             <div className="max-w-structure bg-(--background-color-primary) px-content-inline relative mx-auto">
               <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--v-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
