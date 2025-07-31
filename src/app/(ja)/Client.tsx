@@ -196,7 +196,15 @@ export const WelcomeMessage = () => {
   }, [status]);
 
   return (
-    <p className={clsx(['text-center text-sm transition-opacity', status === 'loading' ? 'opacity-0' : 'opacity-100'])}>
+    <p
+      className={clsx([
+        // 14 * 1.875 = 26.25px
+        // 26 * 3 = 78px (3lh)
+        // 78px + 1px = 79px (for iOS Safari)
+        'leading-26px min-h-79px text-center text-sm transition-opacity',
+        status === 'loading' ? 'opacity-0' : 'opacity-100',
+      ])}
+    >
       <span ref={message1Ref} aria-hidden="true">
         {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
       </span>

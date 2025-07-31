@@ -47,7 +47,7 @@ export default function Home() {
           <TopImage captionId={captionId} />
         </div>
 
-        <div className="px-content-inline @w640:pb-28 pb-20">
+        <div className="px-content-inline @w640:pb-16 pb-8">
           <div className="max-w-content mx-auto">
             <WelcomeMessage />
           </div>
