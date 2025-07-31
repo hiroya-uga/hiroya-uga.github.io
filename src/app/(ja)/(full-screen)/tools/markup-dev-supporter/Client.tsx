@@ -177,6 +177,29 @@ export const TableDevSupporterContent = () => {
           case 'removeAttributes':
             for (const node of dummyElement.querySelectorAll('*')) {
               for (const { name } of [...node.attributes]) {
+                if (['rowspan', 'colspan', 'href', 'src', 'alt'].includes(name)) {
+                  continue;
+                }
+
+                if (node.tagName === 'A' || node.tagName === 'AREA') {
+                  if (name === 'target' || name === 'rel') {
+                    continue;
+                  }
+                }
+
+                if (node.tagName === 'IMG') {
+                  if (['width', 'height'].includes(name)) {
+                    continue;
+                  }
+                }
+
+                node.removeAttribute(name);
+              }
+            }
+            return dummyElement.innerHTML;
+          case 'removeAllAttributes':
+            for (const node of dummyElement.querySelectorAll('*')) {
+              for (const { name } of [...node.attributes]) {
                 if (name === 'rowspan' || name === 'colspan') {
                   continue;
                 }
@@ -236,6 +259,9 @@ export const TableDevSupporterContent = () => {
             return value.replace(/^\s+$/gm, '').replace(/([\n|\r])[\n|\r]/g, (m, p1) => p1);
           case 'removeAllImageTags':
             dummyElement.querySelectorAll('img, svg').forEach((elm) => elm.remove());
+            return dummyElement.innerHTML;
+          case 'removeAllBrTags':
+            dummyElement.querySelectorAll('br').forEach((elm) => elm.remove());
             return dummyElement.innerHTML;
 
           case 'removeAll':
@@ -391,7 +417,10 @@ export const TableDevSupporterContent = () => {
                 ['removeIndent', 'インデントを削除'],
                 ['removeBreak', '改行をすべて削除'],
                 ['adjustBreak', 'テーブル系タグ同士に改行を挿入'],
-                ['removeAttributes', '属性値を削除'],
+                [
+                  'removeAttributes',
+                  '主要な属性（rowspan, colspan, href, srcおよびimg要素のwidth, height, altおよびa要素のtarget, rel）以外を削除',
+                ],
               ].map(([task, label]) => {
                 return (
                   <li key={task}>
@@ -421,6 +450,7 @@ export const TableDevSupporterContent = () => {
                   ['addBreakAllTags', 'すべてのタグ同士を改行'],
                   ['removeAdjacentBlankLine', '連続する空白行を削除'],
                   ['removeBlankLine', 'すべての空白行を削除'],
+                  ['removeAllAttributes', 'rowspan/colspan以外の属性値を削除'],
                 ].map(([task, label]) => {
                   return (
                     <li key={task}>
@@ -449,6 +479,7 @@ export const TableDevSupporterContent = () => {
                   ['removeElementsFromTableCells', 'テーブルセルの中のテキストノード以外を削除'],
                   ['onlySemantics', 'すべてのdivタグ、spanタグを削除'],
                   ['removeAllImageTags', 'すべてのimgタグ、svg要素を削除'],
+                  ['removeAllBrTags', 'すべてのbrタグを削除'],
                   ['removeAllTags', 'すべてのタグを削除'],
                   ['removeAll', '値をクリア'],
                 ].map(([task, label]) => {
