@@ -47,7 +47,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
 
   return (
     <div className="@container">
-      <ul className="@w400:grid-cols-2 @w800:grid-cols-3 grid gap-4">
+      <ul className="@w400:grid-cols-2 @w800:grid-cols-3 grid gap-x-4 gap-y-8">
         {list.map((article) => {
           const titleId = `${prefix}-${article.pathname}-title`;
           const infoId = `${prefix}-${article.pathname}-info`;

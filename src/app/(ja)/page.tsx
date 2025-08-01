@@ -171,7 +171,7 @@ export default function Home() {
                 {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
                   return (
                     <tr key={href} className="leading-6">
-                      <td className="@w640:pr-8 @w640:text-sm pr-2 font-mono text-xs leading-[inherit]">
+                      <td className="@w640:pr-4 @w640:text-sm pr-2 font-mono text-xs leading-[inherit]">
                         <span className="inline-block">{date}</span>
                       </td>
                       <td
