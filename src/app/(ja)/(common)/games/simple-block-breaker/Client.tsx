@@ -3,6 +3,7 @@
 import { RunButton } from '@/components/Clickable';
 import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
+import { dispatchChangeEvent } from '@/utils/dispatch-event';
 import clsx from 'clsx';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
@@ -54,6 +55,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   const id = useId();
   const [isReady, setIsReady] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const startButton = useRef<HTMLButtonElement>(null);
@@ -135,9 +137,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     const min = Number(rangeInput.min);
     const max = Number(rangeInput.max);
     const newValue = Math.max(min, Math.min(max, numberValue));
-
-    rangeInput.value = newValue.toString();
-    rangeInput.dispatchEvent(new Event('change', { bubbles: true }));
+    dispatchChangeEvent({ target: rangeInput, value: newValue.toString() });
   }, []);
 
   const onBlurInputForRange = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
@@ -371,6 +371,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
           startButton.current?.focus();
         });
         setToastMessage('ゲームオーバーですわ😫');
+        setStatusMessage('ゲームオーバーですわ😫');
         return;
       }
 
@@ -382,6 +383,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
           startButton.current?.focus();
         });
         setToastMessage('おめでとうございます!!🎉🎉🎉');
+        setStatusMessage('おめでとうございます!!🎉🎉🎉');
         return;
       }
     };
@@ -432,20 +434,23 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       <p
         className={clsx([
           'mt-48PX sticky bottom-2 mb-12 border-b border-solid border-[#a4a4a4] pb-12',
-          running && 'invisible',
+          running && 'pointer-events-none opacity-0',
         ])}
       >
         <button
           type="button"
           ref={startButton}
+          tabIndex={running ? -1 : undefined}
           onClick={() => {
             if (running) return;
+            setStatusMessage('');
             canvasRef.current?.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
             reset();
           }}
           className="mx-auto grid aspect-square w-[5.5rem] place-items-center rounded-full bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
-          {blocks.current.every((b) => b.broken === false) ? 'Start' : 'Restart'}
+          <span className="sr-only">{statusMessage}</span>
+          {running ? 'Playing now' : blocks.current.every((b) => b.broken === false) ? 'Start' : 'Restart'}
         </button>
       </p>
 
