@@ -510,7 +510,7 @@ export const PickUpList = () => {
   useEffect(() => {
     setPickUpList(() => {
       return pickUpListAll
-        .filter(({ emoji }) => Boolean(emoji))
+        .filter(({ emoji, noPickup }) => Boolean(emoji) && noPickup !== true)
         .sort(() => Math.random() - 0.5)
         .slice(0, 3);
     });

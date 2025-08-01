@@ -11,6 +11,7 @@ export const FOOTER_LINK_LIST = [
 type LinkListItem = {
   emoji: string;
   pathname: string;
+  noPickup?: boolean;
 };
 
 export const DOCUMENTS_LINK_LIST: LinkListItem[] = [
@@ -88,6 +89,7 @@ export const TOOLS_LINK_LIST: ToolPage = [
     type: 'playground',
     emoji: '文',
     pathname: '/tools/render-text-in-react',
+    noPickup: true,
   },
 ];
 
