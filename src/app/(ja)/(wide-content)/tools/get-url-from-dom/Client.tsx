@@ -378,12 +378,12 @@ export const GetUrlFromDOMContent = () => {
     <div className="border border-slate-400 sm:grid md:h-[80dvh] md:grid-cols-3">
       <div
         className={clsx([
-          "scroll-hint-y relative h-[30dvh] overflow-auto bg-white p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:rounded-md before:bg-[pink] before:text-sm before:content-['ここに貼り付けてください']",
+          "scroll-hint-y bg-secondary relative h-[30dvh] overflow-auto p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:rounded-md before:bg-[pink] before:text-sm before:text-[#333] before:content-['ここに貼り付けてください']",
           isEdited ? 'before:hidden' : 'before:grid',
           'md:h-auto',
         ])}
       >
-        <div className="sticky -left-2 top-0 z-10 -mx-2 mb-0.5 flex justify-between bg-white/90 p-4 text-sm font-bold">
+        <div className="bg-secondary/90 sticky -left-2 top-0 z-10 -mx-2 mb-0.5 flex justify-between p-4 text-sm font-bold">
           <p
             onClick={() => {
               editAreaRef.current?.focus();
@@ -537,7 +537,7 @@ export const GetUrlFromDOMContent = () => {
           <p className="pointer-events-none sticky bottom-4 left-0 grid place-items-center rounded-full px-4">
             <button
               type="button"
-              className="shadow-sticky pointer-events-auto w-full max-w-80 rounded-full border border-black bg-white px-4 py-2 text-sm"
+              className="shadow-sticky bg-secondary pointer-events-auto w-full max-w-80 rounded-full border border-black px-4 py-2 text-sm"
               onClick={() => {
                 const targets = resultRef.current?.querySelectorAll('url-item') ?? [];
 

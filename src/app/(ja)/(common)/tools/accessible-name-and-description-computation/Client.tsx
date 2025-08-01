@@ -55,7 +55,7 @@ const OutputTextfield = ({
 }: OutputTextfieldProps) => {
   const Content = useCallback(
     (inputProps: typeof props) => {
-      const className = clsx(['border-secondary mt-2 block w-full rounded border bg-white px-2 py-3']);
+      const className = clsx(['border-secondary bg-secondary mt-2 block w-full rounded border px-2 py-3']);
 
       if (isUsingWrapLabel) {
         return (

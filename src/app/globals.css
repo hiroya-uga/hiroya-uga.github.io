@@ -475,4 +475,8 @@
   dialog {
     color: inherit;
   }
+
+  dialog::backdrop {
+    background: #00000077;
+  }
 }

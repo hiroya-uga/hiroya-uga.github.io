@@ -1,7 +1,7 @@
 .result {
   table {
     border-collapse: collapse;
-    background: #fff;
+    background: var(--background-color-secondary);
   }
 
   td,
