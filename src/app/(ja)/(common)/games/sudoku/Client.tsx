@@ -281,8 +281,8 @@ export const SudokuClient = () => {
                       '@w800px:size-[min(5vw,4rem)] table-cell border border-black transition-[background-color]',
                       rowIndex % 3 === 0 && 'border-t-4',
                       colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
-                      type === 'input' && state === 'invalid' && 'bg-red-200',
-                      type === 'input' && state === 'valid' && 'bg-green-200',
+                      type === 'input' && state === 'invalid' && 'bg-error text-high-contrast',
+                      type === 'input' && state === 'valid' && 'bg-success text-high-contrast',
                     ])}
                   >
                     <input
