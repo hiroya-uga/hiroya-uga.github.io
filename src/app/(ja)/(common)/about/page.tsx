@@ -271,8 +271,8 @@ export default function Page() {
               .filter(({ answer }) => Boolean(answer))
               .map(({ title, answer }) => (
                 <Fragment key={title}>
-                  <dt className="mb-1 bg-slate-500 px-1.5 text-white">{title}</dt>
-                  <dd className="mb-6">{answer}</dd>
+                  <dt className="bg-tertiary text-high-contrast mb-1 px-1.5">{title}</dt>
+                  <dd className="mb-6 pl-1.5">{answer}</dd>
                 </Fragment>
               ))}
           </dl>

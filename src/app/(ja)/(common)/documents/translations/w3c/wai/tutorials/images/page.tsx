@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       <PageTitle previous={metadata.previous} title={metadata.pageTitle} description={metadata.description}>
-        <div className="mt-2 rounded-md bg-slate-300 p-3">
+        <div className="bg-tertiary mt-2 rounded-md p-3">
           <div className="mb-2 text-sm leading-normal sm:mb-4 sm:text-base sm:leading-relaxed">
             <LinkToOriginal
               origins={[

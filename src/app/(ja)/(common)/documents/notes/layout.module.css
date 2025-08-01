@@ -97,27 +97,55 @@
 
 #article table {
   clear: both;
-  border-collapse: collapse;
-  background: white;
+  margin-block: 1em;
 }
 
-#article th,
-#article td {
-  padding: 4px 10px;
-  vertical-align: top;
-  border: 1px solid #777;
-}
+#article {
+  table {
+    /* width: max(582px, 100%); */
+    border-collapse: collapse;
+    overflow-wrap: break-word;
+  }
 
-#article td:has(img:first-child:last-child) {
-  padding: 0;
-}
+  th,
+  td {
+    padding: 0.5rem 1rem;
+    text-align: left;
+  }
 
-#article th {
-  text-align: left;
-  background-color: var(--background-color-table-header);
-}
-#article thead th {
-  text-align: center;
+  :where(th, td):not(:first-child) {
+    border-left: 1px solid var(--border-color-primary);
+  }
+
+  table:has(tbody th) thead th:nth-of-type(2) {
+    border-left-width: 2px;
+  }
+
+  th {
+    font-weight: bold;
+    text-align: left;
+  }
+
+  tbody th:first-child {
+    border-right: 2px solid var(--border-color-primary);
+  }
+
+  thead {
+    background-color: var(--background-color-table-header);
+  }
+
+  tbody :where(th, td) {
+    border: 1px solid var(--border-color-primary);
+    border-width: 1px 0;
+  }
+
+  tbody tr:first-child :where(th, td) {
+    border-top: 2px solid var(--border-color-primary);
+  }
+
+  tbody th {
+    background-color: var(--background-color-table-header);
+  }
 }
 
 #article p img {

@@ -8,6 +8,7 @@ type Name =
   | 'article'
   | 'arrow-left'
   | 'arrow-right'
+  | 'arrow2-left'
   | 'arrow2-right'
   | 'book'
   | 'copy'

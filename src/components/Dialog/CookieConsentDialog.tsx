@@ -5,7 +5,7 @@ import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import ReactGA from 'react-ga4';
 
-import { TextLink } from '@/components/Clickable';
+import { RunButton, TextLink } from '@/components/Clickable';
 import styles from '@/components/Dialog/CookieConsentDialog.module.css';
 import { SITE_NAME } from '@/constants/meta';
 import clsx from 'clsx';
@@ -55,16 +55,14 @@ export function CookieConsentDialog() {
       <dialog
         ref={dialogRef}
         aria-labelledby={id}
-        className={clsx(
-          styles.root,
-          'starting:opacity-0 text-primary scroll-hint-y transition-fade inset-0 m-auto size-[80%] rounded-lg p-4 shadow-lg duration-500',
-        )}
+        className={clsx(styles.root, 'starting:opacity-0 text-primary transition-fade inset-0 m-auto duration-500')}
       >
-        <div className="@container grid place-items-center pb-4 pt-8 text-sm">
-          <div className="w-full max-w-[min(40rem,88%)]">
+        <div className="@container scroll-hint-y m-auto grid place-items-center overflow-auto rounded-lg px-4 pb-8 pt-6 text-sm shadow-lg">
+          <div className="@w640:pt-2 w-full max-w-[min(40rem,88%)]">
             <h2
+              tabIndex={-1} // for Safari
               id={id}
-              className="mb-paragraph pb-paragraph border-b border-dashed border-[#585858]/50 dark:border-[#c2c2c2]/50"
+              className="mb-paragraph pb-paragraph border-b border-dashed border-[#585858]/50 shadow-none outline-none dark:border-[#c2c2c2]/50"
             >
               <span className="@w640:mx-0 mx-auto block w-fit text-lg text-[#585858] dark:text-[#c2c2c2]">
                 † YOUR COOKIE PREFERENCES †
@@ -98,7 +96,13 @@ export function CookieConsentDialog() {
             </div>
 
             <p>
-              なお、ここまでの内容はすべて<strong>嘘</strong>です。
+              なお、ここまでの内容はすべて
+              <strong>
+                <ruby>
+                  嘘<rt>うそ</rt>
+                </ruby>
+              </strong>
+              です。
             </p>
             <p>当サイトでは Google社が提供するアクセス解析ツール「Google Analytics」を利用しています。</p>
             <p>Cookieの利用に同意していただける場合はEnterからご入場ください。</p>
@@ -142,12 +146,7 @@ export function CookieConsentDialog() {
           {/* 目の錯覚分 + 5rem */}
           <div className="@w640:mt-0 mt-8 w-full max-w-[min(45rem,88%)]">
             <p className="@w640:justify-end grid justify-center">
-              <button
-                onClick={() => closeDialog('rejected')}
-                className="transition-bg rounded border border-solid border-gray-300 px-4 py-1 text-sm hover:bg-gray-300 dark:hover:bg-gray-700"
-              >
-                同意せずに閲覧する
-              </button>
+              <RunButton onClick={() => closeDialog('rejected')}>同意せずに閲覧する</RunButton>
             </p>
           </div>
         </div>

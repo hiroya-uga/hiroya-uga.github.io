@@ -1,12 +1,23 @@
 body:has(#pauljadam-modern-web-a11y-demos-content) {
   line-height: 1.875;
-  color: #333;
+  color: var(--color-primary);
   background: var(--background-color-primary);
   font-family: "Inter", "Inter Fallback";
   text-spacing-trim: trim-start;
 }
 body:has(#pauljadam-modern-web-a11y-demos-content) *:not(#pauljadam-modern-web-a11y-demos-content *) {
   all: revert-layer;
+  fill: var(--v-fill, var(--color-primary));
+}
+
+body:has(#pauljadam-modern-web-a11y-demos-content) #pauljadam-modern-web-a11y-demos-content {
+  all: revert-layer;
+  color: var(--color-primary);
+}
+
+body:has(#pauljadam-modern-web-a11y-demos-content) #pauljadam-modern-web-a11y-demos-content a {
+  color: var(--color-link);
+  text-decoration: underline;
 }
 
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) h1 {
@@ -65,6 +76,7 @@ body:has(#pauljadam-modern-web-a11y-demos-content) *:not(#pauljadam-modern-web-a
   background: #e2e2e2;
   padding: 0.125em 0.4375em;
   border-radius: 4px;
+  color: #333;
 }
 
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) button:hover {
@@ -106,6 +118,7 @@ body:has(#pauljadam-modern-web-a11y-demos-content) *:not(#pauljadam-modern-web-a
   border-spacing: 2px;
   border-color: gray;
   border: 1px solid gray;
+  color: #000;
 }
 
 :where(#pauljadam-modern-web-a11y-demos-content, [role="dialog"], [role="alertdialog"]) :is(th, td) {

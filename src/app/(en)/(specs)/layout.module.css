@@ -116,17 +116,16 @@
 
     page-break-inside: avoid;
   }
-  code {
-    font-family: inherit;
-    font-size: inherit;
-    color: #c73500;
-  }
 
   code.element::before {
     content: "<";
   }
   code.element::after {
     content: ">";
+  }
+
+  > p {
+    margin: 1em 0;
   }
 
   pre {
@@ -183,20 +182,18 @@
     padding-left: 40px;
   }
 
-  ul {
+  > ul {
     margin: 20px 0;
+    padding-left: 1.5em;
   }
 
-  main li {
+  > ul li {
     margin: 4px 0;
-  }
-
-  main p {
-    margin: 1rem 0;
+    list-style-type: disc;
   }
 
   #toc {
-    margin: 30px 0 80px;
+    margin: 1rem 0 80px;
   }
   #toc ul {
     font-weight: bold;
@@ -265,7 +262,7 @@
   .interface,
   .example,
   .note {
-    margin-top: 10px;
+    margin-top: 1rem;
     padding: 0.5em 1em;
     border-left: 8px solid;
   }
@@ -282,9 +279,7 @@
     content: "Example " counter(example);
   }
   .example pre {
-    background: #fcfadc;
     margin: 10px 0;
-    padding: 10px;
   }
   .element:not(code) {
     background: #f4f4fa;
@@ -388,5 +383,66 @@
   }
   [class~="hljs-comment"] {
     color: #596d80;
+  }
+}
+:root:not([data-theme="dark"]) .layout {
+  code {
+    font-family: inherit;
+    font-size: inherit;
+    color: #c73500;
+  }
+}
+
+[data-theme="dark"] .layout {
+  color: var(--color-primary);
+
+  h1,
+  h2,
+  h3,
+  a,
+  dt > dfn {
+    color: var(--color-link);
+  }
+
+  .element:not(code) {
+    background: var(--background-color-secondary);
+    border-left-color: var(--color-accent);
+  }
+  .note,
+  .example {
+    border-block-width: 1px;
+    border-right-width: 1px;
+    background: transparent;
+  }
+
+  :where(.note, .example)::before {
+    margin-top: 0;
+  }
+
+  .note::before {
+    color: #52e052;
+  }
+  .example::before {
+    color: #e0cb52;
+  }
+
+  .element:not(code) dl .interface {
+    filter: invert(1);
+  }
+
+  .propdef table {
+    background: transparent;
+    border-color: #8ccbf2;
+    border-block-width: 1px;
+    border-right-width: 1px;
+  }
+
+  .propdef table tr:first-child th,
+  .propdef table tr:first-child td {
+    padding-top: 0.5em;
+  }
+  .propdef table tr:last-child th,
+  .propdef table tr:last-child td {
+    padding-bottom: 0.5em;
   }
 }

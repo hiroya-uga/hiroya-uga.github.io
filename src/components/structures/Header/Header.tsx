@@ -6,13 +6,22 @@ import { SiteName } from '@/components/structures/Header/SiteName';
 import clsx from 'clsx';
 
 import styles from '@/components/structures/Header/Header.module.css';
+import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 
 export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
   return (
     <header
-      className={clsx([styles.root, layout !== 'article-content' && 'mb-(--v-header-margin-bottom)', 'text-primary'])}
+      className={clsx([
+        styles.root,
+        layout !== 'article-content' && '@container mb-(--v-header-margin-bottom)',
+        'text-primary',
+      ])}
     >
       <SiteName />
+
+      <p className="@w1520:pt-2 ml-auto w-fit pr-2">
+        <ThemeSwitch />
+      </p>
 
       <div className="mt-8 px-4 sm:pl-10 sm:pt-8 2xl:pt-16">
         <div className="max-w-structure relative mx-auto">

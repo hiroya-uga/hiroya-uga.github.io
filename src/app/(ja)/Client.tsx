@@ -483,10 +483,10 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         >
           <button
             type="button"
-            className="group/reload focus-visible:outline-hidden @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full p-1"
+            className="group/reload @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full rounded-full p-1"
             onClick={() => updateImage()}
           >
-            <span className="block rounded-full bg-white outline-offset-2 group-focus-visible/reload:outline-2 group-focus-visible/reload:outline-[white] group-focus-visible/reload:[outline-style:solid;]">
+            <span className="block rounded-full bg-white outline-offset-2">
               <Picture
                 src="/icon-reload.svg"
                 width={48}

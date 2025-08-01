@@ -34,7 +34,7 @@ export const PageTitle = ({
         {hasSubtitle ? (
           <>
             {previous && (
-              <span className="relative -left-3 block w-fit rounded-2xl bg-white px-3 py-1 text-sm font-bold text-[#666]">
+              <span className="bg-secondary border-secondary relative -left-3 block w-fit rounded-2xl border px-3 py-1 text-sm font-bold text-[#666] dark:text-[#cacaca]">
                 {previous}
               </span>
             )}

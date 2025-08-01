@@ -7,6 +7,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Details } from '@/components/Box';
 import { ClearButton } from '@/components/Clickable';
 import { ClickableArea } from '@/components/Clickable/ClickableArea';
+import { TextField } from '@/components/Form';
 import { SvgIcon } from '@/components/Icons';
 import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
@@ -302,25 +303,17 @@ export const MediaContent = () => {
               </ul>
             </fieldset>
 
-            <p className="flex pr-2">
-              <label htmlFor={idForKeywords} className="mr-2 font-bold">
-                <span className="block py-2 pr-2">Keywords</span>
-              </label>
-              <span className="grow">
-                <input
-                  id={idForKeywords}
-                  className="w-full rounded border border-slate-400 p-2"
-                  value={keyword}
-                  onChange={({ currentTarget }) => {
-                    setKeyword(currentTarget.value);
+            <TextField
+              label="Keywords"
+              value={keyword}
+              onInput={({ currentTarget }) => {
+                setKeyword(currentTarget.value);
 
-                    router.replace(`${pathname ?? window.location.pathname}?query=${currentTarget.value}`, {
-                      scroll: false,
-                    });
-                  }}
-                />
-              </span>
-            </p>
+                router.replace(`${pathname ?? window.location.pathname}?query=${currentTarget.value}`, {
+                  scroll: false,
+                });
+              }}
+            />
           </div>
         </Details>
       </nav>

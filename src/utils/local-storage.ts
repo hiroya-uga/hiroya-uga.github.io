@@ -7,7 +7,9 @@ type Value = {
     level?: number;
   };
   'cookie-consent': 'accepted' | 'rejected';
+  theme: 'dark' | 'light';
 };
+export type LocalStorageItems = Value;
 
 export const setLocalStorage = <T extends Key>(key: T, value: Value[T]) => {
   try {
