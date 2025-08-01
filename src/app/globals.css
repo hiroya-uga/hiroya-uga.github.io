@@ -11,8 +11,7 @@
     --v-color-background: #f7f7f7;
     --v-color-background-alert: #c10000;
     --v-color-background-card: #e5e8eb;
-    --v-color-background-scroll-hint: white;
-    --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.2);
+
     --v-color-background-table: #fff; /* deprecated */
     --v-color-background-table-header: #00000011;
     --v-spacing-content-inline: min(1rem, 48px);
@@ -34,8 +33,6 @@
     --v-color-background: #333; /* deprecated */
     --v-color-background-alert: #fc4f4b;
     --v-color-background-card: #4b4845;
-    --v-color-background-scroll-hint: #4b4845;
-    --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.4);
     --v-color-background-table: #3d3c3a;
     --v-color-background-table-header: #00000011;
 
@@ -56,6 +53,7 @@
     --v-color-text-alert: #9c0000;
     --v-color-text-required: #fffcfc;
     --v-color-text-textfield: #333;
+
     /* Background */
     --v-color-background-primary: #f7f7f7;
     --v-color-background-secondary: #fff;
@@ -67,6 +65,9 @@
     --v-color-background-success: #cfc;
     --v-color-background-warn: #ffc;
     --v-color-background-error: #fcc;
+    --v-color-background-scroll-hint: white;
+    --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.2);
+
     /* Border */
     --v-color-border-primary: #00000033;
     --v-color-border-secondary: #666;
@@ -84,6 +85,7 @@
     --v-color-background-success: #1d521d;
     --v-color-background-warn: #5b5b00;
     --v-color-background-error: #6b2d2d;
+
     /* Background */
     --v-color-background-primary: #272727;
     --v-color-background-secondary: #333;
@@ -92,6 +94,9 @@
     --v-color-background-tertiary-hover: #3e3e3e;
     --v-color-background-required: #990300;
     --v-color-background-textfield: #3d3c3a;
+    --v-color-background-scroll-hint: #272727;
+    --v-color-background-scroll-hint-shadow: rgba(237, 197, 108, 0.4);
+
     /* Border */
     --v-color-border-primary: #ffffff33;
     --v-color-border-secondary: #999;
@@ -191,6 +196,7 @@
   --transition-property-bg: background-color;
   --default-transition-duration: 300ms;
 
+  --container-w1520: 95rem;
   --container-w1024: 64rem;
   --container-w800px: 800px;
   --container-w800: 50rem;
@@ -283,6 +289,12 @@
   writing-mode: vertical-rl;
 }
 
+@utility focus-ring {
+  outline: 2px solid var(--v-outline-color, #000);
+  outline-offset: var(--v-outline-offset, 2px);
+  box-shadow: 0 0 0 2px #fff;
+}
+
 @layer base {
   *,
   *::before,
@@ -291,8 +303,8 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--outline-color, #000);
-    outline-offset: var(--outline-offset, 2px);
+    outline: 2px solid var(--v-outline-color, #000);
+    outline-offset: var(--v-outline-offset, 2px);
     box-shadow: 0 0 0 2px #fff;
   }
 

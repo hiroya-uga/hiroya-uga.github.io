@@ -12,6 +12,7 @@ import { Footer } from '@/components/structures/Footer';
 import { ArticleListForTop } from '@/app/(ja)/parts/ArticleListForTop';
 import { LinkListForTop } from '@/app/(ja)/parts/LinkListForTop';
 import { SvgIcon } from '@/components/Icons';
+import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { getMetadata } from '@/utils/get-metadata';
@@ -24,7 +25,7 @@ export default function Home() {
   return (
     <>
       <header className="@container">
-        <div className="@w1024:pb-60px @w1024:pt-14 px-4 pb-12 pt-10">
+        <div className="@w1024:pb-60px @w1024:pt-14 px-4 pb-12 pt-20">
           <div className="max-w-content mx-auto">
             <div className="@w1024:mb-2 @w1024:flex items-center text-center">
               <h1 className="@w640:text-2xl @w640:leading-8 @w1024:mb-0 mb-3 text-xl font-bold leading-none">
@@ -40,6 +41,10 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <p className="absolute right-2 top-2">
+          <ThemeSwitch />
+        </p>
       </header>
 
       <main className="@container">

@@ -1,5 +1,4 @@
 import { resolveCategoryName } from '@/utils/articles';
-import { formattedDateString } from '@/utils/formatter';
 import { getAllArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 
@@ -20,7 +19,7 @@ export const ArticleListForTop = async () => {
                 key={article.pathname}
               >
                 <time dateTime={article.publishedAt} className="@w500:col-start-1 @w500:mr-0 mr-3 font-mono text-sm">
-                  {formattedDateString(new Date(article.publishedAt))}
+                  {article.publishedAt.replace(/-/g, '/')}
                 </time>
                 <span className="@w500:col-start-2 text-center font-mono text-sm">
                   {resolveCategoryName(article.pathname.split('/')[2])}

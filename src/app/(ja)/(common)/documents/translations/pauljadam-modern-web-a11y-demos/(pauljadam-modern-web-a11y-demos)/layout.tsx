@@ -1,8 +1,8 @@
 'use client';
 
 import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/layout.module.css';
+import { SvgIcon } from '@/components/Icons';
 
-import { Picture } from '@/components/Image';
 import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
@@ -71,7 +71,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
   return (
     <>
       <div className="border-secondary mb-4 mt-[calc(-1*var(--v-header-margin-bottom))] border-b border-dashed pb-6 sm:mb-7 sm:pb-9">
-        <div className="text-2xs rounded-md bg-white p-2 leading-snug sm:p-4 sm:text-xs">
+        <div className="text-2xs bg-secondary rounded-md p-2 leading-snug sm:p-4 sm:text-xs">
           <p className="mb-2 font-bold sm:mb-1.5">
             原文：
             <a href={originalPath} hrefLang="en" className="inline-block break-all">
@@ -93,13 +93,9 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
       <p className="mb-3.5 flex flex-wrap gap-y-2 text-sm sm:mb-4 sm:text-base">
         <span className='after:mx-2 after:content-["|"]'>
           <Link href="/documents/translations/pauljadam-modern-web-a11y-demos">
-            <Picture
-              src="/common/images/icons/arrow-left.svg"
-              width={16}
-              height={16}
-              alt=""
-              className="mb-1 mr-1 inline-block size-3"
-            />
+            <span className="relative mr-1 mt-1 inline-block size-3">
+              <SvgIcon name="arrow2-left" alt="" />
+            </span>
             <span>DEMO一覧に戻る</span>
           </Link>
         </span>
