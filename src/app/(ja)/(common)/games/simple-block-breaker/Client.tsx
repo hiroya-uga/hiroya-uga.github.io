@@ -5,6 +5,7 @@ import { Toast } from '@/components/Dialog';
 import { Switch } from '@/components/Form';
 import { dispatchChangeEvent } from '@/utils/dispatch-event';
 import clsx from 'clsx';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 type Block = {
@@ -53,6 +54,7 @@ const DEFAULT_BALL_ACCELERATION = 0;
 
 export const SimpleBlockBreaker = ({ width, height }: { width: number; height: number }) => {
   const id = useId();
+  const searchParams = useSearchParams();
   const [isReady, setIsReady] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
@@ -148,6 +150,16 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     }
 
     e.currentTarget.value = rangeInput.value;
+  }, []);
+
+  const updateQueryParams = useCallback(({ key, value }: { key: string; value: string }) => {
+    const url = new URL(window.location.href);
+    if (value === 'false') {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
+    window.history.replaceState({}, '', url.toString());
   }, []);
 
   // マウス操作
@@ -406,9 +418,48 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   }, [width, height, initBlocks, reset, running]);
 
   useEffect(() => {
+    [
+      [blockSettingRef.current, ''],
+      [paddle.current, 'paddle-'],
+      [
+        {
+          radius: ball.current.radius,
+          speed: ball.current.defaultSpeed,
+          acceleration: ball.current.acceleration,
+        },
+        'ball-',
+      ],
+    ].forEach(([config, prefix]) => {
+      Object.entries(config).forEach((item) => {
+        const [key, defaultValue] = item as [keyof typeof config, number];
+        const queryKey = `${prefix}${key}`;
+        const queryValue = searchParams?.get(queryKey);
+
+        if (typeof queryValue === 'string') {
+          const value = Number(queryValue) || defaultValue;
+          const input = document.getElementById(`${id}-${queryKey}`) as HTMLInputElement | null;
+          if (input) {
+            dispatchChangeEvent({
+              target: input,
+              value: value.toString(),
+            });
+          }
+        }
+      });
+    });
+
+    const isPassThrough = searchParams?.get('ball-pass-through') === 'true';
+    const passThroughInput = document.getElementById(`${id}-ball-path-through`) as HTMLInputElement | null;
+    if (passThroughInput) {
+      dispatchChangeEvent({
+        target: passThroughInput,
+        checked: isPassThrough,
+      });
+    }
+
     initBlocks();
     setIsReady(true);
-  }, [initBlocks]);
+  }, [id, initBlocks, searchParams]);
 
   return (
     <>
@@ -455,8 +506,11 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       </p>
 
       <div className="@container px-2">
-        <fieldset className="@w640:pl-0 mx-auto max-w-[40rem] pl-4">
+        <fieldset className="@w640:pl-0 relative mx-auto max-w-[40rem] pl-4">
           <legend className="mb-3 text-sm font-bold">設定</legend>
+
+          <p className="absolute right-0 top-0"></p>
+
           <div
             className={clsx([
               'grid grid-cols-[auto_1fr_auto] grid-rows-1 gap-2 px-2 pr-3 font-mono text-sm transition-opacity',
@@ -498,6 +552,10 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                           [key]: newSize,
                         });
                       }
+                      updateQueryParams({
+                        key,
+                        value: newSize.toString(),
+                      });
                       updateConfigTextValue(e, newSize.toString());
 
                       // 反映処理
@@ -539,6 +597,11 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   if (paddle.current) {
                     paddle.current.width = newSize;
                   }
+
+                  updateQueryParams({
+                    key: 'paddle-width',
+                    value: newSize.toString(),
+                  });
                   updateConfigTextValue(e, newSize.toString());
                 }}
               />
@@ -575,6 +638,10 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   if (ball.current) {
                     ball.current.radius = newSize;
                   }
+                  updateQueryParams({
+                    key: 'ball-radius',
+                    value: newSize.toString(),
+                  });
                   updateConfigTextValue(e, newSize.toString());
 
                   // 反映処理
@@ -614,6 +681,10 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   if (ball.current) {
                     ball.current.defaultSpeed = newSize;
                   }
+                  updateQueryParams({
+                    key: 'ball-speed',
+                    value: newSize.toString(),
+                  });
                   updateConfigTextValue(e, newSize.toString());
                 }}
               />
@@ -664,6 +735,10 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                     return value;
                   })();
 
+                  updateQueryParams({
+                    key: 'ball-acceleration',
+                    value: newSize.toString(),
+                  });
                   updateConfigTextValue(e, textContent);
                 }}
               />
@@ -703,6 +778,12 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   disabled={running}
                   id={`${id}-ball-path-through`}
                   onChange={(e) => {
+                    console.log(e);
+
+                    updateQueryParams({
+                      key: 'ball-pass-through',
+                      value: e.target.checked ? 'true' : 'false',
+                    });
                     ball.current.mode.passThrough = e.target.checked;
                   }}
                 />
@@ -711,14 +792,27 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
           </div>
         </fieldset>
 
-        <p className={clsx(['transition-fade mb-6 mt-20', running || 'invisible opacity-0'])}>
+        <p className={clsx(['transition-fade mb-4 mt-10'])}>
+          <RunButton
+            disabled={running || searchParams?.size === 0}
+            onClick={() => {
+              // 雑実装
+              const url = new URL(window.location.href);
+              window.history.replaceState({}, '', url.pathname);
+              window.location.reload();
+            }}
+          >
+            設定をリセット
+          </RunButton>
+        </p>
+        <p className={clsx(['transition-fade mb-6', running || 'invisible opacity-0'])}>
           <RunButton
             onClick={() => {
               reset();
               setRunning(false);
             }}
           >
-            Reset
+            強制終了
           </RunButton>
         </p>
       </div>
