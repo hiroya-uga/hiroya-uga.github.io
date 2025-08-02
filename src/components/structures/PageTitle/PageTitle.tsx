@@ -39,7 +39,7 @@ export const PageTitle = ({
               </span>
             )}
             <strong className="block min-h-[3.046875rem] pt-1 text-3xl font-bold leading-snug sm:text-[2.625rem]">
-              {title}
+              {pageTitle ?? title}
             </strong>
             {following && (
               <span className="relative mt-3 block pl-9 font-bold leading-normal before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black sm:mt-2 sm:text-lg">
