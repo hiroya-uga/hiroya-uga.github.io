@@ -4,6 +4,7 @@ import { SimpleBlockBreaker } from '@/app/(ja)/(common)/games/simple-block-break
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { Fps } from '@/components/Meta';
 import { getMetadata } from '@/utils/get-metadata';
+import { Suspense } from 'react';
 
 export const metadata = getMetadata('/games/simple-block-breaker');
 
@@ -16,7 +17,9 @@ export default function BlockBreakerPage() {
           FPS: <Fps />
         </p>
         <div className="mx-auto pb-8 landscape:w-[80%]">
-          <SimpleBlockBreaker width={960} height={1280} />
+          <Suspense>
+            <SimpleBlockBreaker width={960} height={1280} />
+          </Suspense>
         </div>
       </div>
       <p className="mt-share-buttons mx-auto grid justify-end">

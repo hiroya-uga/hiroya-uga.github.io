@@ -5,7 +5,12 @@ const events = {
 
 type EventName = keyof typeof events;
 
-const update = (eventName: EventName, target: HTMLInputElement, value: string) => {
+const update = (eventName: EventName, target: HTMLInputElement, value?: string, checked?: boolean) => {
+  if (typeof checked === 'boolean' && target.checked !== checked) {
+    target.click();
+    return;
+  }
+
   if (target.value === value) {
     return;
   }
@@ -25,10 +30,26 @@ const update = (eventName: EventName, target: HTMLInputElement, value: string) =
   target.dispatchEvent(event);
 };
 
-export const dispatchInputEvent = ({ target, value }: { target: HTMLInputElement; value: string }) => {
-  update('input', target, value);
+export const dispatchInputEvent = ({
+  target,
+  value,
+  checked,
+}: {
+  target: HTMLInputElement;
+  value: string;
+  checked?: boolean;
+}) => {
+  update('input', target, value, checked);
 };
 
-export const dispatchChangeEvent = ({ target, value }: { target: HTMLInputElement; value: string }) => {
-  update('change', target, value);
+export const dispatchChangeEvent = ({
+  target,
+  value,
+  checked,
+}: {
+  target: HTMLInputElement;
+  value?: string;
+  checked?: boolean;
+}) => {
+  update('change', target, value, checked);
 };

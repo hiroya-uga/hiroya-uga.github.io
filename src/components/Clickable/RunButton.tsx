@@ -13,7 +13,7 @@ const RunButtonComponent = ({ children, beforeIcon, afterIcon, ...props }: Props
     <button
       ref={ref}
       className={clsx([
-        'max-w-260px bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto block w-full rounded-lg border border-solid py-2 transition-[background-color,border-color,box-shadow] hover:shadow-lg active:shadow-none disabled:opacity-50',
+        'max-w-260px bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto block w-full rounded-lg border border-solid py-2 transition-[background-color,border-color,box-shadow,opacity] hover:shadow-lg active:shadow-none disabled:opacity-50',
         beforeIcon && !afterIcon && 'pl-3.5 pr-4',
         afterIcon && !beforeIcon && 'pl-4 pr-3.5',
         !beforeIcon && !afterIcon && 'px-8',
