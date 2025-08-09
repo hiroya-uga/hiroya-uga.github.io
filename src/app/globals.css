@@ -205,6 +205,7 @@
   --container-w640: 40rem;
   --container-w500: 31.25rem;
   --container-w400: 25rem;
+  --container-w350: 21.875rem;
 
   /* new */
   --color-primary: var(--v-color-text-primary);

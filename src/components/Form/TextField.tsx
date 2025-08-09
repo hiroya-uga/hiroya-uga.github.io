@@ -23,8 +23,11 @@ type Props = {
   placeholder?: string;
   required?: boolean;
   readOnly?: boolean;
+  disabled?: boolean;
   min?: number;
   max?: number;
+  align?: 'left' | 'center' | 'right';
+  defaultValue?: string;
 } & (
   | {
       multiline: true;
@@ -49,6 +52,7 @@ const TextareaComponent = (
     multiline: _,
     autoResize,
     noResize,
+    align,
     ...props
   }: Omit<Props, 'label' | 'description'> & {
     autoResize: boolean;
@@ -79,7 +83,11 @@ const TextareaComponent = (
         <textarea
           {...props}
           aria-describedby={descriptionId}
-          className="border-textfield bg-textfield min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border p-2"
+          className={clsx([
+            'border-textfield bg-textfield min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border p-2',
+            align === 'right' && 'text-right',
+            align === 'center' && 'text-center',
+          ])}
           style={{ height: textareaHeight }}
           ref={ref}
         />
@@ -94,6 +102,8 @@ const TextareaComponent = (
       className={clsx([
         'border-textfield bg-textfield w-full rounded-md border p-2',
         noResize === true ? 'resize-none' : 'resize-y',
+        align === 'right' && 'text-right',
+        align === 'center' && 'text-center',
       ])}
       ref={ref}
     />
@@ -102,11 +112,17 @@ const TextareaComponent = (
 
 const Textarea = forwardRef(TextareaComponent);
 const TextFieldComponent = (
-  { label, description, ...props }: Props,
+  { label, description, align = 'left', disabled, ...props }: Props,
   ref: Ref<HTMLTextAreaElement | HTMLInputElement>,
 ) => {
   const id = useId();
   const descriptionId = description ? `${id}-description` : undefined;
+  const disabledState = disabled
+    ? {
+        'aria-disabled': true,
+        readOnly: true,
+      }
+    : {};
 
   return (
     <>
@@ -137,21 +153,26 @@ const TextFieldComponent = (
         {props.multiline ? (
           <Textarea
             {...props}
+            {...disabledState}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             autoResize={props.autoResize ?? false}
             noResize={props.noResize ?? false}
             id={id}
             descriptionId={descriptionId}
+            align={align}
             ref={ref as Ref<HTMLTextAreaElement>}
           />
         ) : (
           <input
             {...props}
+            {...disabledState}
             id={id}
             aria-describedby={descriptionId}
             className={clsx([
               'min-h-12', // for iOS 32px + 8px padding * 2 = 48px
               'border-primary text-textfield bg-textfield text w-full appearance-none rounded-md border p-2 text-left',
+              align === 'right' && 'text-right',
+              align === 'center' && 'text-center',
             ])}
             placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}
