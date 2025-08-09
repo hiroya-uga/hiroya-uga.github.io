@@ -4,7 +4,14 @@ export const ARTICLE_PATH_PATTERN_LIST = {
   'tech-blog': ['2025'],
 };
 
+export type ArticleCategory = keyof typeof ARTICLE_PATH_PATTERN_LIST;
+
 export const ARTICLE_CATEGORY_MAPPING = {
   blog: 'Blog',
   'tech-blog': 'Tech Blog',
+} as const;
+
+export const ARTICLE_CATEGORY_DESCRIPTION_MAPPING = {
+  blog: '日常の出来事や趣味についてのブログ記事です。',
+  'tech-blog': 'Web開発に関するブログです。',
 } as const;
