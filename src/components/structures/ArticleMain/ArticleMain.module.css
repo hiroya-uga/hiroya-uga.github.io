@@ -227,6 +227,11 @@
     border: 1px solid var(--border-color-primary);
   }
 
+  [class~="custom-block"][data-type="memo"] {
+    border-radius: 0.5rem;
+    background: var(--background-color-secondary);
+  }
+
   [class~="custom-block"][data-type="warn"] {
     border-radius: 0.5rem;
     background: var(--background-color-warn);
