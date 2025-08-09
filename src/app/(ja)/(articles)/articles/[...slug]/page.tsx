@@ -1,4 +1,4 @@
-import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
+import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
 import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
 import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
@@ -14,7 +14,8 @@ const filePath = path.join(process.cwd(), 'src', 'markdown', 'articles');
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
-  const [category, year, fileName] = slug;
+  const [categoryName, year, fileName] = slug;
+  const category = categoryName as ArticleCategory;
 
   if (slug.length === 1) {
     return <CategoryPage category={category} />;

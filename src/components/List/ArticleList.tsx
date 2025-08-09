@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useId } from 'react';
 
 type Props = {
-  type?: 'simple' | 'thumbnail';
+  type?: 'simple' | 'thumbnail' | 'og-thumbnail';
   list: ArticleFrontMatter[];
 };
 
@@ -47,10 +47,11 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
 
   return (
     <div className="@container">
-      <ul className="@w400:grid-cols-2 @w800:grid-cols-3 grid gap-x-4 gap-y-8">
+      <ul className="@w400:grid-cols-2 @w800:grid-cols-3 @w1280:grid-cols-4 grid gap-x-4 gap-y-8">
         {list.map((article) => {
           const titleId = `${prefix}-${article.pathname}-title`;
           const infoId = `${prefix}-${article.pathname}-info`;
+          const generatedOgp = `/generated-ogp${article.pathname}.png`;
 
           return (
             <li key={article.pathname} className="grid gap-2">
@@ -61,7 +62,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
               >
                 <div className="relative z-0 overflow-hidden">
                   <Picture
-                    src={`/generated-ogp${article.pathname}.png`}
+                    src={type === 'thumbnail' ? (article.ogImage ?? generatedOgp) : generatedOgp}
                     alt=""
                     width={1200}
                     height={630}
@@ -74,8 +75,8 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                 </div>
 
                 <div className="grid grid-rows-[1fr_auto]">
-                  <div className="px-3 group-hover:underline" {...untilFound}>
-                    <div className="pb-1" id={titleId}>
+                  <div className="px-3 group-hover:underline" {...(type === 'thumbnail' ? {} : untilFound)}>
+                    <div className="pb-1 leading-snug" id={titleId}>
                       {article.title.replaceAll('\n', '')}
                     </div>
                   </div>
