@@ -91,6 +91,11 @@ export const TOOLS_LINK_LIST: ToolPage = [
     pathname: '/tools/render-text-in-react',
     noPickup: true,
   },
+  {
+    type: 'playground',
+    emoji: '📈',
+    pathname: '/tools/sort-visualizer',
+  },
 ];
 
 export const GAMES_LINK_LIST: LinkListItem[] = [

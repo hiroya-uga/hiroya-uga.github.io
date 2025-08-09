@@ -397,6 +397,11 @@ export const SEO: Record<
     description:
       'オフィスツールなどで作成された表をHTMLとして実装する人のための支援ツールです。\n業務上公開前の情報を外部に送信できないケースにおいて、指示書にある表を整形されたHTMLにフォーマットして実装しやすくすることを主な用途に想定しています。',
   },
+  '/tools/sort-visualizer': {
+    title: 'Sort Playground',
+    afterSubTitle: 'ソートアルゴリズムの動作を可視化するためのツール（Sort Visualizer）',
+    description: 'さまざまなソート手法を試して、どのようにデータが並べ替えられるかを観察しましょう。',
+  },
   '/tools/touch-event-touches': {
     title: 'TouchEvent.touches Playground',
     description:
