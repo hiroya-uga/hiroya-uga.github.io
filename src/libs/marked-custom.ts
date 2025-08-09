@@ -15,6 +15,7 @@ const customBlockTitle: Record<string, string> = {
   warn: '注意点',
   tip: 'ヒント',
   info: '情報',
+  memo: 'Memo',
 };
 const customBlockExtension: TokenizerAndRendererExtension = {
   name: 'customBlock',
