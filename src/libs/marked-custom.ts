@@ -254,16 +254,20 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       );
 
       if (lang === 'diff') {
-        return sanitized.replace(/^\+(.*)|^-(.*)/gm, (_, add, remove) => {
-          if (add) {
-            return `<ins>+${add}</ins>`;
+        return sanitized.replace(/^(.*)/gm, (_, row) => {
+          if (row.startsWith('+ ')) {
+            return `<ins>${row}</ins>`;
           }
 
-          return `<del>-${remove}</del>`;
+          if (row.startsWith('- ')) {
+            return `<del>${row}</del>`;
+          }
+
+          return `<span>  ${row}</span>`;
         });
       }
 
-      return sanitized;
+      return sanitized.replace(/^\$ (.*)/gm, (_, row) => `<span class="of-command">${row}</span>`);
     })();
 
     return `<figure class="codeblock"><figcaption class="codeblock__caption"><span>${title ?? lang}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
