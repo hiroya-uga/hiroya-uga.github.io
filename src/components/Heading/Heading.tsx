@@ -14,10 +14,10 @@ export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Props
     <TagName
       className={clsx([
         'mb-paragraph font-bold leading-snug',
-        keepUseMarginTop === true ? 'sm:mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
-        level === 2 && 'text-xl sm:text-2xl',
-        level === 3 && 'text-lg sm:text-xl',
-        level === 4 && 'text-base sm:text-lg',
+        keepUseMarginTop === true ? 'mt-[2.5lh]' : 'not-first:mt-[2.5lh]',
+        level === 2 && '@w640:text-2xl text-xl',
+        level === 3 && '@w640:text-xl text-lg',
+        level === 4 && '@w640:text-lg text-base',
       ])}
       {...props}
     />
