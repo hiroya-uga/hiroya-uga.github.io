@@ -68,6 +68,7 @@ export async function generateOgpImage(
   }
 
   const x = 54;
+  const halfCharRegExp = /[0-9a-zA-Z`]/;
   const lines = (() => {
     let i = 0;
     let currentBreakIndex = -1;
@@ -77,7 +78,7 @@ export async function generateOgpImage(
     const titleString = (isOver4rows ? title.replaceAll('\n', '') : title).trim();
     const getLength = (value: string[]) => {
       return value.reduce((acc, char) => {
-        if (/[0-9a-zA-Z]/.test(char)) {
+        if (halfCharRegExp.test(char)) {
           return acc + 0.5;
         }
         return acc + 1;
@@ -112,8 +113,8 @@ export async function generateOgpImage(
           currentBreakIndex = index;
           return `${char}\n`;
         }
-        if (/[0-9a-zA-Z]/.test(char)) {
-          i += 0.25; // 調整中
+        if (halfCharRegExp.test(char)) {
+          i += 0.5; // 調整中
           return char;
         }
 

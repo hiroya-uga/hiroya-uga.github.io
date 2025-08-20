@@ -37,7 +37,8 @@ export const ArticleMain = async ({ post }: Props) => {
           >
             <h1
               className={clsx([
-                '@w640:text-4xl @w800:text-5xl text-2xl',
+                styles.title,
+                '@w640:text-4xl @w800:text-5xl wrap-anywhere text-2xl',
                 post.meta.title?.endsWith('。') && '@w800:pl-[0.5em]',
               ])}
             >
