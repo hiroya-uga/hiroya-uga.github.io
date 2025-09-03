@@ -1,5 +1,3 @@
-'use client';
-
 import { SITE_NAME } from '@/constants/meta';
 
 export const Comment = () => {
