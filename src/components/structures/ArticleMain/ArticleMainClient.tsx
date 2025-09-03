@@ -294,3 +294,44 @@ export const ArticleCodeHighlightActivator = () => {
     </>
   );
 };
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
+export const ArticleYoutubeManager = () => {
+  useEffect(() => {
+    const instances: YT.Player[] = [];
+
+    window.onYouTubeIframeAPIReady = () => {
+      const players = document.querySelectorAll<HTMLIFrameElement>('.youtube iframe');
+
+      for (const player of players) {
+        const instance = new window.YT.Player(player, {
+          events: {
+            onStateChange: (event) => {
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                for (const instance of instances) {
+                  if (event.target !== instance) {
+                    instance.pauseVideo();
+                  }
+                }
+              }
+            },
+          },
+        });
+
+        player.dataset.jsApi = 'ready';
+        instances.push(instance);
+      }
+    };
+
+    return () => {
+      instances.forEach((instance) => {
+        instance.destroy();
+      });
+    };
+  });
+  return null;
+};

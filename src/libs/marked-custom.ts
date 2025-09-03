@@ -1,3 +1,4 @@
+import { LOADING_ICON_HTML } from '@/components/Icons';
 import { URL_ORIGIN } from '@/constants/meta';
 import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
@@ -70,7 +71,7 @@ const overrideImageExtension: TokenizerAndRendererExtension = {
     const height = query?.get('h');
 
     if (width && height) {
-      return `<lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" loading><span style="aspect-ratio: ${width} / ${height}; display: block;" aria-hidden="true"></span></lazy-image>`;
+      return `<span class="relative block"><span class="absolute grid place-items-center inset-0 animate-fade-in-spinner">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" class="relative" loading><span style="aspect-ratio: ${width} / ${height}; display: block;" aria-hidden="true"></span></lazy-image></span>`;
     }
 
     return `<img src="${src}" alt="${t.text}" loading="lazy" />`;
@@ -133,6 +134,10 @@ const amazonAssociateLinkExtension: TokenizerAndRendererExtension = {
 
     try {
       const url = new URL(t.href, URL_ORIGIN);
+
+      if (url.hostname === 'youtu.be' && url.search.startsWith('?enablejsapi=1')) {
+        return `<span class="youtube"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe src="https://www.youtube.com/embed${url.pathname}${url.search}" title="YouTube video player"allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-js-api="loading"></iframe></span>`;
+      }
 
       if (url.hostname === 'amzn.to') {
         const notice = '※ 当サイトはAmazonアソシエイト・プログラムの参加者であり、適格販売により収入を得ています。';

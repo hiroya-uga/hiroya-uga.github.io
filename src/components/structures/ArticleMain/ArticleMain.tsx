@@ -2,6 +2,7 @@ import {
   ArticleCodeHighlightActivator,
   ArticleFootNoteActivator,
   ArticleInformation,
+  ArticleYoutubeManager,
 } from '@/components/structures/ArticleMain/ArticleMainClient';
 
 import { Heading } from '@/components/Heading';
@@ -107,6 +108,7 @@ export const ArticleMain = async ({ post }: Props) => {
       </article>
       <ArticleFootNoteActivator />
       <ArticleCodeHighlightActivator />
+      <ArticleYoutubeManager />
     </>
   );
 };

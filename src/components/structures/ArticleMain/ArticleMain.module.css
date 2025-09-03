@@ -117,6 +117,29 @@
     border: 0;
   }
 
+  [class~="youtube"] {
+    aspect-ratio: 16 / 9;
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  [class~="youtube"] iframe {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    transition:
+      0.3s opacity ease-out,
+      0.3s visibility ease-out;
+  }
+
+  [class~="youtube"] iframe[data-js-api="loading"] {
+    opacity: 0;
+    visibility: hidden;
+  }
+
   [class~="hljs"] {
     border-radius: 0 0 0.5rem 0.5rem;
   }
