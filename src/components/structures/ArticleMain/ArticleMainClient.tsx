@@ -264,7 +264,7 @@ export const ArticleCodeHighlightActivator = () => {
     <>
       <Toast message={toastMessage} setMessage={setToastMessage} />
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-        <symbol id={svgId} x="0px" y="0px" viewBox="0 0 512 512">
+        <symbol id={svgId} viewBox="0 0 512 512">
           <style>{`.${svgId} {fill:var(--v-fill, var(--color-primary))}`}</style>
           <g>
             <rect x="115.774" y="335.487" className={svgId} width="194.387" height="18.588"></rect>
@@ -293,4 +293,45 @@ export const ArticleCodeHighlightActivator = () => {
       </svg>
     </>
   );
+};
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
+export const ArticleYoutubeManager = () => {
+  useEffect(() => {
+    const instances: YT.Player[] = [];
+
+    window.onYouTubeIframeAPIReady = () => {
+      const players = document.querySelectorAll<HTMLIFrameElement>('.youtube iframe');
+
+      for (const player of players) {
+        const instance = new window.YT.Player(player, {
+          events: {
+            onStateChange: (event) => {
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                for (const instance of instances) {
+                  if (event.target !== instance) {
+                    instance.pauseVideo();
+                  }
+                }
+              }
+            },
+          },
+        });
+
+        player.dataset.jsApi = 'ready';
+        instances.push(instance);
+      }
+    };
+
+    return () => {
+      instances.forEach((instance) => {
+        instance.destroy();
+      });
+    };
+  });
+  return null;
 };
