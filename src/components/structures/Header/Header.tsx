@@ -10,22 +10,21 @@ import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 
 export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
   return (
-    <header
-      className={clsx([
-        styles.root,
-        layout !== 'article-content' && '@container mb-(--v-header-margin-bottom)',
-        'text-primary',
-      ])}
-    >
+    <header className={clsx([styles.root, '@container text-primary'])}>
       <SiteName />
 
-      <p className="@w1520:pt-2 ml-auto w-fit pr-2">
+      <p className="@w1520:fixed @w1520:top-2 @w1520:right-2 @w1520:z-50 ml-auto w-fit pr-2 pt-2">
         <ThemeSwitch />
       </p>
 
-      <div className="mt-8 px-4 sm:pl-10 sm:pt-8 2xl:pt-16">
+      <div
+        className={clsx([
+          'mt-8 px-4 sm:pl-10 sm:pt-8 2xl:pt-16',
+          layout !== 'article-content' && 'mb-(--v-header-margin-bottom)',
+        ])}
+      >
         <div className="max-w-structure relative mx-auto">
-          <p className={clsx(['relative -left-4 -top-2', layout === 'common' && '2xl:left-0'])}>
+          <p className={clsx(['relative -left-4 -top-2', layout === 'common' && '@w1520:left-0'])}>
             <Link
               href="../"
               className="hover:text-link sm:hover:bg-secondary sm:focus:bg-secondary group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300"
