@@ -28,7 +28,7 @@ export const SiteName = () => {
         </span>
       </p> */}
 
-      <p className="@w500:text-[0.78125rem] @w1520:fixed @w1520:left-0 @w1520:top-0 @w1520:mb-0 @w1520:overflow-auto @w1520:bg-transparent @w1520:py-0 mb-2 bg-[var(--v-color-background-header)] py-1 text-[12.5px]">
+      <p className="@w500:text-[0.78125rem] @w1520:fixed @w1520:left-0 @w1520:top-0 @w1520:overflow-auto @w1520:bg-transparent @w1520:py-0 bg-[var(--v-color-background-header)] py-1 text-[12.5px]">
         <span className="@w1520:min-h-296px @w1520:box-content @w1520:h-[29.2929vh] @w1520:w-8 @w1520:min-w-8 @w1520:overflow-visible @w1520:pb-4 block overflow-auto bg-[var(--v-color-background-header)]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
