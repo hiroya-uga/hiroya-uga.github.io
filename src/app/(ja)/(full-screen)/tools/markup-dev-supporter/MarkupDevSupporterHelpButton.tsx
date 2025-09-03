@@ -73,7 +73,6 @@ export const MarkupDevSupporterHelpButton = () => {
         <span className="mx-auto grid w-fit grid-cols-[auto_1fr] place-items-center gap-1">
           <svg
             version="1.1"
-            id="_x32_"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"

@@ -18,12 +18,12 @@ export const DefaultRootLayout = ({ lang, children }: { lang: string; children: 
     <html lang={lang} data-cookie-consent="waiting" data-theme="light" suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+        <Comment />
         <Suspense>
           <Analytics />
+          <Console />
+          <LoadWebComponents />
         </Suspense>
-        <Console />
-        <Comment />
-        <LoadWebComponents />
         <script>
           {`
             try {

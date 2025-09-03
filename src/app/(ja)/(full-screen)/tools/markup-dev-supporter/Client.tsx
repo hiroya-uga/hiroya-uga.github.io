@@ -522,7 +522,6 @@ export const TableDevSupporterContent = () => {
                         role="img"
                         aria-label="新しいタブで開く"
                         version="1.1"
-                        id="_x32_"
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
                         y="0px"
