@@ -228,6 +228,18 @@
 
   --border-color-primary: var(--v-color-border-primary);
   --border-color-secondary: var(--v-color-border-secondary);
+
+  /* 0.5秒待っても表示されない時にフェードイン */
+  --animate-fade-in-spinner: fade-in-spinner 0.3s ease-out 0.5s forwards;
+
+  @keyframes fade-in-spinner {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 @layer utilities {
@@ -237,6 +249,10 @@
     margin-top: -30px;
     padding-top: 30px;
   }
+}
+
+@utility animate-fade-in-spinner {
+  opacity: 0;
 }
 
 @utility palt {
