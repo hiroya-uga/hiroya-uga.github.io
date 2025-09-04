@@ -21,10 +21,10 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
   if (type === 'simple') {
     return (
       <div className="@container">
-        <ul className="@w640:table space-y-3">
+        <ul className="@w640:table @w640:space-y-0 space-y-3">
           {list.map((article) => {
             return (
-              <li key={article.pathname} className="@w640:table-row leading-36px gap-2">
+              <li key={article.pathname} className="@w640:table-row @w640:leading-[1.875rem] group gap-2">
                 <time
                   dateTime={article.publishedAt}
                   className="text-secondary @w640:pr-4 @w640:table-cell pr-3 text-sm"
@@ -35,7 +35,12 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                   {resolveCategoryName(article.pathname.split('/')[2])}
                 </span> */}
                 <span className="@w640:text-lg @w640:table-cell block w-fit">
-                  <Link href={article.pathname}>{article.title.replaceAll('\n', '')}</Link>
+                  <span className="block">
+                    <Link href={article.pathname}>{article.title.replaceAll('\n', '')}</Link>
+                  </span>
+                  <span className="text-secondary @w640:pt-1 block py-1.5 pb-4 text-xs group-last:pb-0">
+                    {article.tags?.map?.((tag: string) => `#${tag}`).join(' ')}
+                  </span>
                 </span>
               </li>
             );
@@ -74,11 +79,18 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                   </span>
                 </div>
 
-                <div className="grid grid-rows-[1fr_auto]">
-                  <div className="px-3 group-hover:underline" {...(type === 'thumbnail' ? {} : untilFound)}>
+                <div className="grid grid-rows-[1fr_auto_auto]">
+                  <div
+                    className="content-center px-3 group-hover:underline"
+                    {...(type === 'thumbnail' ? {} : untilFound)}
+                  >
                     <div className="pb-1 leading-snug" id={titleId}>
                       {article.title.replaceAll('\n', '')}
                     </div>
+                  </div>
+
+                  <div className="text-secondary px-3 text-xs">
+                    {article.tags?.map?.((tag: string) => `#${tag}`).join(' ')}
                   </div>
 
                   <div className="flex items-center justify-between pl-3 pr-2" id={infoId}>
