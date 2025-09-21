@@ -62,19 +62,85 @@ export const WelcomeMessage = () => {
   const message2Ref = useRef<HTMLSpanElement>(null);
   const message3Ref = useRef<HTMLSpanElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
-  const [status, setIsFirstRender] = useState<'loading' | 'ready' | 'already'>('loading');
+  const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
+  const isInitialized = useRef(false);
 
-  useEffect(() => {
-    const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
+  const shuffleCounter = useCallback((isAlready = false) => {
+    let i = 0;
+    let loop = 0;
+    let indexArray = getRandomIndexArray(COUNTER_LENGTH);
 
-    if (isViewed) {
-      setIsFirstRender('already');
-    } else {
-      setIsFirstRender('ready');
+    const getValue = () => {
+      const value = [...String(Math.floor(Math.random() * (Number('1'.padEnd(COUNTER_LENGTH + 1, '0')) - 0 + 1)) + 0)];
+
+      if (loop !== 1) {
+        value[indexArray[0]] = indexArray[0] % 2 ? '縺' : '繝';
+        value[indexArray[1]] = indexArray[1] % 2 ? '繧' : '縲';
+        value[indexArray[2]] = indexArray[2] % 2 ? 'ｳ?' : 'ｶﾞ';
+        value[indexArray[3]] = indexArray[3] % 2 ? '�' : '%';
+      }
+
+      return value.join('');
+    };
+
+    const counterTarget = counterRef.current;
+    if (!counterTarget) {
+      return;
     }
 
-    setSessionStorage('welcome-message-viewed', 'true');
+    let setIntervalId = -1;
+
+    setTimeout(
+      () => {
+        let prev = ''.padStart(COUNTER_LENGTH, '0');
+        let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
+        let value = [...prev];
+        setIntervalId = window.setInterval(() => {
+          if (i < COUNTER_LENGTH) {
+            value[indexArray[i]] = next[indexArray[i]];
+            counterTarget.textContent = value.join('');
+            i++;
+          } else {
+            if (loop < 2) {
+              prev = next;
+              indexArray = getRandomIndexArray(COUNTER_LENGTH);
+              next = getValue().padStart(COUNTER_LENGTH, '0');
+
+              value[indexArray[0]] = next[indexArray[0]];
+              counterTarget.textContent = value.join('');
+              i = 1;
+              loop++;
+              return;
+            }
+
+            clearInterval(setIntervalId);
+          }
+        }, 60);
+      },
+      isAlready ? 0 : 1000,
+    );
+
+    return () => {
+      clearInterval(setIntervalId);
+    };
   }, []);
+
+  useEffect(() => {
+    if (isInitialized.current) return;
+    isInitialized.current = true;
+
+    const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
+
+    shuffleCounter(isViewed);
+
+    if (isViewed) {
+      setStatus('already');
+      return;
+    }
+
+    setStatus('ready');
+    setSessionStorage('welcome-message-viewed', 'true');
+  }, [shuffleCounter]);
 
   // その他の文字
   useEffect(() => {
@@ -127,71 +193,6 @@ export const WelcomeMessage = () => {
 
     return () => {
       clearTimeout(setTimeoutId);
-    };
-  }, [status]);
-
-  // counter
-  useEffect(() => {
-    if (status === 'loading') {
-      return;
-    }
-
-    let i = 0;
-    let loop = 0;
-    let indexArray = getRandomIndexArray(COUNTER_LENGTH);
-
-    const getValue = () => {
-      const value = [...String(Math.floor(Math.random() * (Number('1'.padEnd(COUNTER_LENGTH + 1, '0')) - 0 + 1)) + 0)];
-
-      if (loop !== 1) {
-        value[indexArray[0]] = indexArray[0] % 2 ? '縺' : '繝';
-        value[indexArray[1]] = indexArray[1] % 2 ? '繧' : '縲';
-        value[indexArray[2]] = indexArray[2] % 2 ? 'ｳ?' : 'ｶﾞ';
-        value[indexArray[3]] = indexArray[3] % 2 ? '�' : '%';
-      }
-
-      return value.join('');
-    };
-    const target = counterRef.current;
-
-    if (!target) {
-      return;
-    }
-
-    let setIntervalId = -1;
-
-    setTimeout(
-      () => {
-        let prev = ''.padStart(COUNTER_LENGTH, '0');
-        let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
-        let value = [...prev];
-        setIntervalId = window.setInterval(() => {
-          if (i < COUNTER_LENGTH) {
-            value[indexArray[i]] = next[indexArray[i]];
-            target.textContent = value.join('');
-            i++;
-          } else {
-            if (loop < 2) {
-              prev = next;
-              indexArray = getRandomIndexArray(COUNTER_LENGTH);
-              next = getValue().padStart(COUNTER_LENGTH, '0');
-
-              value[indexArray[0]] = next[indexArray[0]];
-              target.textContent = value.join('');
-              i = 1;
-              loop++;
-              return;
-            }
-
-            clearInterval(setIntervalId);
-          }
-        }, 60);
-      },
-      status === 'already' ? 0 : 1000,
-    );
-
-    return () => {
-      clearInterval(setIntervalId);
     };
   }, [status]);
 
