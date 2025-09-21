@@ -334,10 +334,8 @@ export const ArticleYoutubeManager = () => {
     isInitialized.current = true;
 
     const instances: YT.Player[] = [];
-
-    window.onYouTubeIframeAPIReady = () => {
+    const init = () => {
       const players = document.querySelectorAll<HTMLIFrameElement>('.youtube iframe');
-
       for (const player of players) {
         // 既に初期化されている場合はスキップ
         if (player.dataset.jsApi === 'ready') {
@@ -363,11 +361,17 @@ export const ArticleYoutubeManager = () => {
       }
     };
 
+    if (window.YT) {
+      window.onYouTubeIframeAPIReady();
+    } else {
+      window.onYouTubeIframeAPIReady = init;
+    }
+
     return () => {
       instances.forEach((instance) => {
         instance.destroy();
       });
     };
-  });
+  }, []);
   return null;
 };

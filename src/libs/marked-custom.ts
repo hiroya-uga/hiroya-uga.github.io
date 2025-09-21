@@ -22,7 +22,8 @@ const customBlockExtension: TokenizerAndRendererExtension = {
   name: 'customBlock',
   level: 'block',
   start(src) {
-    return src.match(/^:::/)?.index;
+    const match = /^:::/.exec(src);
+    return match?.index;
   },
   tokenizer(src) {
     const rule = /^:::([\w-]+)\n([\s\S]+?)\n:::/;
@@ -42,7 +43,7 @@ const customBlockExtension: TokenizerAndRendererExtension = {
   },
   renderer(token) {
     const t = token as CustomBlockToken;
-    const html = marked.parse(t.text);
+    const html = marked.parse(t.text, { async: false });
     return `<section class="custom-block" data-type="${t.blockType}" aria-label="${customBlockTitle[t.blockType]}">
       <p class="custom-block__title mb-paragraph" aria-hidden="true">${customBlockTitle[t.blockType]}</p>
       <div class="custom-block__content space-y-paragraph">${html}</div>
@@ -112,7 +113,7 @@ const breakSpanExtension: TokenizerAndRendererExtension = {
 
   renderer(token) {
     const t = token as BreakSpanToken;
-    const htmlInside = marked.parseInline(t.text);
+    const htmlInside = marked.parseInline(t.text, { async: false });
     return `<span class="block">${htmlInside}</span>`;
   },
 };
@@ -125,7 +126,7 @@ type CustomLinkToken = Token & {
   title?: string | null;
 };
 
-const amazonAssociateLinkExtension: TokenizerAndRendererExtension = {
+const linkExtension: TokenizerAndRendererExtension = {
   name: 'link',
   level: 'inline',
 
@@ -171,7 +172,8 @@ const footnoteRefExtension: TokenizerAndRendererExtension = {
   name: 'footnoteRef',
   level: 'inline',
   start(src) {
-    return src.match(/\[\^[^\]]+\]/)?.index;
+    const match = /\[\^[^\]]+\]/.exec(src);
+    return match?.index;
   },
   tokenizer(src) {
     const rule = /^\[\^([^\]]+)\]/;
@@ -198,7 +200,8 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
   name: 'footnoteDef',
   level: 'block',
   start(src) {
-    return src.match(/^\[\^.+\]:/)?.index;
+    const match = /^\[\^.+\]:/.exec(src);
+    return match?.index;
   },
   tokenizer(src) {
     const rule = /^\[\^([^\]]+)\]:\s+(.+?)(?:\n{2,}|\n*$)/;
@@ -227,7 +230,7 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
 
 export const getFootnotes = (filePath: string): [string, { html: string | Promise<string> }][] => {
   return Object.entries(footnoteDefs.get(filePath) ?? []).map(([id, text]) => {
-    return [id, { html: marked.parseInline(text) }];
+    return [id, { html: marked.parseInline(text, { async: false }) }];
   });
 };
 
@@ -365,7 +368,7 @@ export const customMarkdownSyntaxes = [
   customBlockExtension,
   overrideImageExtension,
   breakSpanExtension,
-  amazonAssociateLinkExtension,
+  linkExtension,
   footnoteRefExtension,
   footnoteDefExtension,
   overrideCodeBlockExtension,
