@@ -25,31 +25,20 @@ type ArticleInformationProps = {
 
 export const ArticleInformation = ({ date }: ArticleInformationProps) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const [status, setIsFirstRender] = useState<'loading' | 'ready' | 'already'>('loading');
+  const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
+  const isInitialized = useRef(false);
 
-  useEffect(() => {
-    const isViewed = getSessionStorage('reading-message-viewed') === 'true';
-
-    if (isViewed) {
-      setIsFirstRender('already');
-    } else {
-      setIsFirstRender('ready');
-    }
-
-    setSessionStorage('reading-message-viewed', 'true');
-  }, []);
-
-  useEffect(() => {
+  const showInformation = useCallback((isAlready = false) => {
     const span = ref.current;
     const article = span?.closest('article')?.querySelector(`#${ARTICLE_MAIN_ID}`);
-    if (status === 'loading' || span === null || article instanceof HTMLElement === false) {
+    if (span === null || article instanceof HTMLElement === false) {
       return;
     }
 
     span.textContent = '';
     const length = article.textContent?.trim().length || 0;
 
-    if (status === 'already') {
+    if (isAlready) {
       span.textContent = `文字数：${length}文字／所要時間：${getReadingTime(length)}分`;
       return;
     }
@@ -73,7 +62,25 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
     return () => {
       clearInterval(setIntervalId);
     };
-  }, [status]);
+  }, []);
+
+  useEffect(() => {
+    if (isInitialized.current) return;
+    isInitialized.current = true;
+
+    const isViewed = getSessionStorage('reading-message-viewed') === 'true';
+
+    showInformation(isViewed);
+
+    if (isViewed) {
+      setStatus('already');
+      return;
+    }
+
+    setStatus('ready');
+    setSessionStorage('reading-message-viewed', 'true');
+  }, [showInformation]);
+
   return (
     <p
       className={clsx([
@@ -176,7 +183,7 @@ export const ArticleFootNoteActivator = () => {
     >
       <div>
         <button
-          onClick={() => void close()}
+          onClick={() => close()}
           className="hover:border-(--color-text) rounded-full border border-solid border-transparent p-3 transition-[border-color]"
         >
           <span className="relative block size-3">
@@ -190,7 +197,12 @@ export const ArticleFootNoteActivator = () => {
 };
 
 export const ArticleCodeHighlightActivator = () => {
+  const isInitialized = useRef(false);
+
   useEffect(() => {
+    if (isInitialized.current) return;
+    isInitialized.current = true;
+
     const highlight = document.querySelectorAll('pre code[data-language]');
     if (highlight.length === 0) {
       return;
@@ -202,6 +214,11 @@ export const ArticleCodeHighlightActivator = () => {
     hljs.registerLanguage('javascript', typescript);
 
     highlight.forEach((node) => {
+      // 既にハイライトされている場合はスキップ
+      if (node.classList.contains('hljs')) {
+        return;
+      }
+
       const code = node.textContent || '';
       const language = node.getAttribute('data-language') || 'html';
 
@@ -258,6 +275,15 @@ export const ArticleCodeHighlightActivator = () => {
         node.lastElementChild.addEventListener('click', copyCode);
       }
     });
+
+    // クリーンアップ関数を追加
+    return () => {
+      codeBlockCaption.forEach((node) => {
+        if (node.lastElementChild instanceof HTMLButtonElement) {
+          node.lastElementChild.removeEventListener('click', copyCode);
+        }
+      });
+    };
   }, [copyCode, svgId]);
 
   return (
@@ -301,13 +327,23 @@ declare global {
 }
 
 export const ArticleYoutubeManager = () => {
+  const isInitialized = useRef(false);
+
   useEffect(() => {
+    if (isInitialized.current) return;
+    isInitialized.current = true;
+
     const instances: YT.Player[] = [];
 
     window.onYouTubeIframeAPIReady = () => {
       const players = document.querySelectorAll<HTMLIFrameElement>('.youtube iframe');
 
       for (const player of players) {
+        // 既に初期化されている場合はスキップ
+        if (player.dataset.jsApi === 'ready') {
+          continue;
+        }
+
         const instance = new window.YT.Player(player, {
           events: {
             onStateChange: (event) => {
