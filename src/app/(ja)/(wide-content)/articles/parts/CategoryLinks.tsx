@@ -10,7 +10,7 @@ export const CategoryLinks = ({ currentCategory, currentYear }: Props) => {
   return (
     <div className="flex flex-wrap gap-y-2">
       <p>
-        <b>フィルタ：</b>
+        <b>カテゴリ：</b>
       </p>
       <ul className="flex flex-wrap gap-2">
         {Object.entries(ARTICLE_CATEGORY_MAPPING).map(([category, label]) => (

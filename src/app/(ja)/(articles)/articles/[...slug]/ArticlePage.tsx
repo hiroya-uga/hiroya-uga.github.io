@@ -3,7 +3,7 @@ import { SvgIcon } from '@/components/Icons';
 import { ArticleMain } from '@/components/structures/ArticleMain';
 import { Footer } from '@/components/structures/Footer';
 import { Header } from '@/components/structures/Header';
-import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
+import { ARTICLE_PATH_PATTERN_LIST, ArticleCategoryLabel } from '@/constants/articles';
 import { DOMAIN_NAME, SITE_AUTHOR, URL_ORIGIN } from '@/constants/meta';
 import { getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
@@ -19,10 +19,11 @@ import { useMemo } from 'react';
 type Props = { slug: string[]; category: string; year: string; fileName: string; filePath: string };
 type NavigationProps = {
   article: { pathname: string; title: string };
+  categoryName: ArticleCategoryLabel;
   direction: 'previous' | 'next';
 };
 
-const Navigation = ({ article, direction }: NavigationProps) => {
+const Navigation = ({ article, categoryName, direction }: NavigationProps) => {
   const isPrevious = direction === 'previous';
 
   return (
@@ -36,13 +37,16 @@ const Navigation = ({ article, direction }: NavigationProps) => {
       <span className={clsx(['absolute inset-y-0 my-auto block size-4', isPrevious ? 'left-3' : 'right-3'])}>
         <SvgIcon name={isPrevious ? 'arrow-left' : 'arrow-right'} alt="" />
       </span>
-      <span className="block text-xs">{isPrevious ? '前の記事：' : '次の記事：'}</span>
+      <span className="block text-xs">{isPrevious ? `前の${categoryName}記事：` : `次の${categoryName}記事：`}</span>
       <span className="text-link block text-sm">
-        {article.title.split('\n').map((line, index) => (
-          <span key={index} className="underline last:inline-block">
-            {line}
-          </span>
-        ))}
+        {article.title.split('\n').map((line, index) => {
+          const key = `${line}-${index}`;
+          return (
+            <span key={key} className="underline last:inline-block">
+              {line}
+            </span>
+          );
+        })}
       </span>
     </Link>
   );
@@ -123,12 +127,12 @@ export const ArticlePage = async ({ slug, category, year, fileName, filePath }: 
           <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">
             {previousArticle && (
               <li>
-                <Navigation article={previousArticle} direction="previous" />
+                <Navigation article={previousArticle} categoryName={categoryName} direction="previous" />
               </li>
             )}
             {nextArticle && (
               <li className="@w640:col-start-2">
-                <Navigation article={nextArticle} direction="next" />
+                <Navigation article={nextArticle} categoryName={categoryName} direction="next" />
               </li>
             )}
           </ul>
