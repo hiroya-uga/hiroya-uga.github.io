@@ -1,6 +1,10 @@
-import { ARTICLE_CATEGORY_DESCRIPTION_MAPPING, ARTICLE_CATEGORY_MAPPING } from '@/constants/articles';
+import {
+  ARTICLE_CATEGORY_DESCRIPTION_MAPPING,
+  ARTICLE_CATEGORY_MAPPING,
+  ArticleCategoryLabel,
+} from '@/constants/articles';
 
-export const resolveCategoryName = (value: string) => {
+export const resolveCategoryName = (value: string): ArticleCategoryLabel => {
   if (value.startsWith('https://')) {
     return 'EXTERNAL';
   }
