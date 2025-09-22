@@ -42,7 +42,7 @@ export default function Home() {
           </div>
         </div>
 
-        <p className="@w640:fixed absolute right-2 top-2 z-50 w-fit">
+        <p className="@w640:fixed @w640:pt-2 @w640:pr-2 absolute right-2 top-2 z-50 w-fit">
           <ThemeSwitch />
         </p>
       </header>
