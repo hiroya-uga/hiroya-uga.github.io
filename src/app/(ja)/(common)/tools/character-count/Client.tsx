@@ -106,10 +106,11 @@ let cache = '';
 export const CharacterCountContent = ({ id }: { id: string }) => {
   const [currentValue, setCurrentValue] = useState('');
   const [value, setValue] = useState(currentValue);
+  const [stringLength, setStringLength] = useState(0);
 
   const [isFirstView, setIsFirstView] = useState(true);
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
-  const [isAutoCount, setIsAutoCount] = useState(false);
+  const [isAutoCount, setIsAutoCount] = useState(true);
   const [isHalfWidthCount, setIsHalfWidthCount] = useState(false);
   const [isStrict, setIsStrict] = useState(true);
 
@@ -151,6 +152,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
         setIsAutoCount(saveData.isAutoCount);
         setIsHalfWidthCount(saveData.isHalfWidthCount ?? false);
         setIsStrict(saveData.isStrict ?? false);
+        setStringLength((cache ?? '').length);
       }
     } catch {}
   }, [isFirstView]);
@@ -372,7 +374,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             <p className="mb-3">
               <textarea
                 id={id}
-                className="border-secondary bg-secondary h-[max(5lh,23vh)] min-h-[108px] w-full resize-y border px-4 py-2"
+                className="border-secondary bg-secondary h-[max(5lh,23vh)] min-h-[108px] w-full resize-y rounded-md border px-4 py-2"
                 style={{
                   fontSize: Boolean(fontSize) ? `${fontSize}px` : DEFAULT_FONT_SIZE,
                 }}
@@ -391,23 +393,14 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
 
                   if (isAutoCount) {
                     setValue(currentTarget.value);
+                    setStringLength(currentTarget.value.length);
                   }
 
                   setCurrentValue(currentTarget.value);
                 }}
               />
             </p>
-            <ul className="flex justify-end gap-4">
-              <li className={clsx(['transition-fade relative z-20', isAutoCount && 'invisible opacity-0'])}>
-                <RunButton
-                  type="button"
-                  onClick={() => {
-                    setValue(currentValue);
-                  }}
-                >
-                  文字数を数える
-                </RunButton>
-              </li>
+            <ul className="flex justify-between gap-4">
               <li className="relative z-20">
                 <RunButton
                   type="button"
@@ -418,6 +411,16 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   afterIcon="reload"
                 >
                   リセット
+                </RunButton>
+              </li>
+              <li className={clsx(['transition-fade relative z-20', isAutoCount && 'invisible opacity-0'])}>
+                <RunButton
+                  type="button"
+                  onClick={() => {
+                    setValue(currentValue);
+                  }}
+                >
+                  文字数を数える
                 </RunButton>
               </li>
             </ul>
@@ -433,7 +436,10 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-文字数`}>
                     文字数
                   </label>
-                  <output id={`${id}-文字数`} className="border-secondary bg-secondary border px-2 text-base">
+                  <output
+                    id={`${id}-文字数`}
+                    className="border-secondary bg-secondary rounded-md border px-2 text-base"
+                  >
                     {countCharacters({ value, isHalfWidthCount })}
                   </output>
                 </p>
@@ -443,7 +449,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </label>
                   <output
                     id={`${id}-文字数（空白文字を除く）`}
-                    className="border-secondary bg-secondary border px-2 text-base"
+                    className="border-secondary bg-secondary rounded-md border px-2 text-base"
                   >
                     {countCharacters({ value, isIgnoreWhitespace: true, isHalfWidthCount })}
                   </output>
@@ -452,7 +458,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <label className="grow" htmlFor={`${id}-行数`}>
                     行数
                   </label>
-                  <output id={`${id}-行数`} className="border-secondary bg-secondary border px-2 text-base">
+                  <output id={`${id}-行数`} className="border-secondary bg-secondary rounded-md border px-2 text-base">
                     {countLines({ value })}
                   </output>
                 </p>
@@ -462,7 +468,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </label>
                   <output
                     id={`${id}-行数（空行を除く）`}
-                    className="border-secondary bg-secondary border px-2 text-base"
+                    className="border-secondary bg-secondary rounded-md border px-2 text-base"
                   >
                     {countLines({ value, isIgnoreEmptyLines: true })}
                   </output>
@@ -473,16 +479,31 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </span>
                   <output
                     id={`${id}-原稿用紙換算（400文字）`}
-                    className="border-secondary bg-secondary border px-2 text-base"
+                    className="border-secondary bg-secondary rounded-md border px-2 text-base"
                   >
                     {countPages}枚
                   </output>
                 </p>
+                <hr className="col-span-full py-2" />
                 <p className="col-span-full grid grid-cols-subgrid">
-                  <label className="grow" htmlFor={`${id}-バイト数（UTF`}>
+                  <label className="grow" htmlFor={`${id}-length`}>
+                    length (String.length)
+                  </label>
+                  <output
+                    id={`${id}-length`}
+                    className="border-secondary bg-secondary rounded-md border px-2 text-base"
+                  >
+                    {stringLength}
+                  </output>
+                </p>
+                <p className="col-span-full grid grid-cols-subgrid">
+                  <label className="grow" htmlFor={`${id}-バイト数（UTF-8)`}>
                     バイト数（UTF-8）
                   </label>
-                  <output id={`${id}-バイト数（UTF`} className="border-secondary bg-secondary border px-2 text-base">
+                  <output
+                    id={`${id}-バイト数（UTF-8）`}
+                    className="border-secondary bg-secondary rounded-md border px-2 text-base"
+                  >
                     {countBytes({ value })}
                   </output>
                 </p>
@@ -497,7 +518,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <input
                     type="number"
                     value={fontSize}
-                    className="border-secondary mx-2 w-12 border px-2 text-right"
+                    className="border-secondary mx-2 w-12 rounded-md border px-2 text-right"
                     onChange={({ currentTarget }) => {
                       const currentValue = currentTarget.value;
 
