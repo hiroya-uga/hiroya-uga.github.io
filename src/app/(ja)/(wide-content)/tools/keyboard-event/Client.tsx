@@ -2,7 +2,7 @@
 
 import { Checkbox, TextField } from '@/components/Form';
 import { throttle } from 'lodash';
-import { memo, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { forwardRef, memo, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/keyboard-event/Client.module.css';
 import { keyboardSvgData } from '@/app/(ja)/(wide-content)/tools/keyboard-event/constants';
@@ -19,7 +19,15 @@ type Log = {
   'key' | 'code' | 'location' | 'ctrlKey' | 'shiftKey' | 'altKey' | 'metaKey' | 'repeat' | 'isComposing'
 >;
 
-const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: string }) => {
+const LastKey = ({
+  pressedKeys,
+  lastKey,
+  textFieldRef,
+}: {
+  pressedKeys: string[];
+  lastKey: string;
+  textFieldRef: RefObject<HTMLTextAreaElement>;
+}) => {
   return (
     <p className={clsx(['relative mb-6 sm:mb-14', lastKey !== '' && 'before:opacity-0'])}>
       <span
@@ -29,7 +37,13 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
         ])}
       >
         あなたが最後に押したキーは
-        <kbd className="mx-auto my-2 block w-fit min-w-24 whitespace-pre-wrap break-all text-center text-3xl">
+        <kbd
+          className="mx-auto my-2 block w-fit min-w-24 whitespace-pre-wrap break-all text-center text-3xl"
+          onPointerDown={(e) => {
+            e.preventDefault();
+            textFieldRef.current?.focus();
+          }}
+        >
           {lastKey === ' ' ? 'Space' : lastKey || ' '}
         </kbd>
         です。
@@ -75,17 +89,20 @@ const LastKey = ({ pressedKeys, lastKey }: { pressedKeys: string[]; lastKey: str
 
 const MemoLastKey = memo(LastKey);
 
-const Form = ({
-  checkboxStatusRef,
-  isScrollIgnoredRef,
-}: {
-  checkboxStatusRef: RefObject<Record<string, boolean>>;
-  isScrollIgnoredRef: RefObject<boolean>;
-}) => {
+const Form = (
+  {
+    checkboxStatusRef,
+    isScrollIgnoredRef,
+  }: {
+    checkboxStatusRef: RefObject<Record<string, boolean>>;
+    isScrollIgnoredRef: RefObject<boolean>;
+  },
+  ref: RefObject<HTMLTextAreaElement>,
+) => {
   return (
     <div className="mb-6 flex flex-wrap gap-3 sm:gap-10">
       <div className="grow">
-        <TextField label="テスト用テキストフィールド" multiline noResize />
+        <TextField label="テスト用テキストフィールド" multiline noResize ref={ref} />
       </div>
       <div>
         <fieldset>
@@ -123,7 +140,7 @@ const Form = ({
   );
 };
 
-const MemoForm = memo(Form);
+const MemoForm = memo(forwardRef(Form));
 
 const Log = ({ inputLog }: { inputLog: Log[] }) => {
   return (
@@ -243,6 +260,8 @@ export const KeyboardEventContent = () => {
   const tempLogs = useRef<Log[]>([]);
   const [inputLog, setInputLog] = useState<Log[]>([]);
 
+  const textFieldRef = useRef<HTMLTextAreaElement>(null);
+
   const throttledUpdateLogs = throttle(() => {
     const additionalLogs = tempLogs.current;
     setInputLog((previous) => [...additionalLogs, ...previous].slice(0, 100));
@@ -353,8 +372,8 @@ export const KeyboardEventContent = () => {
   return (
     <div className={styles.root}>
       <div className="max-w-content mx-auto">
-        <MemoLastKey {...{ pressedKeys, lastKey }} />
-        <MemoForm {...{ checkboxStatusRef, isScrollIgnoredRef }} />
+        <MemoLastKey {...{ pressedKeys, lastKey, textFieldRef }} />
+        <MemoForm {...{ checkboxStatusRef, isScrollIgnoredRef }} ref={textFieldRef} />
       </div>
 
       <h2 className="mb-2 text-sm font-bold">
