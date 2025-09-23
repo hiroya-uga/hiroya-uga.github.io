@@ -203,7 +203,8 @@ export const ArticleCodeHighlightActivator = () => {
     if (isInitialized.current) return;
     isInitialized.current = true;
 
-    const highlight = document.querySelectorAll('pre code[data-language]');
+    const highlight = document.querySelectorAll<HTMLElement>('pre code[data-language]');
+    console.log(highlight.length);
     if (highlight.length === 0) {
       return;
     }
@@ -215,7 +216,7 @@ export const ArticleCodeHighlightActivator = () => {
 
     highlight.forEach((node) => {
       // 既にハイライトされている場合はスキップ
-      if (node.classList.contains('hljs')) {
+      if (node.dataset.highlighted === 'true') {
         return;
       }
 
@@ -229,6 +230,7 @@ export const ArticleCodeHighlightActivator = () => {
       const __html = hljs.highlight(code, { language }).value;
 
       node.classList.add(`language-${language}`);
+      node.dataset.highlighted = 'true';
       node.innerHTML = __html;
     });
   }, []);
