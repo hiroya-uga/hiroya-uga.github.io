@@ -123,6 +123,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
             <div
               className={clsx(
                 isTop && 'max-w-content border-t-secondary mx-auto border-t',
+                // Articleページのゲージ分を含む padding-bottom が必要
                 'flow-root py-12',
                 '@w768:flex @w768:flex-wrap @w768:justify-center @w768:gap-6 @w768:pb-20 @w768:pt-7',
               )}

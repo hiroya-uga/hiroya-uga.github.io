@@ -34,6 +34,33 @@
   }
 }
 
+@keyframes rotateAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.root::before {
+  content: "";
+  display: block;
+  position: fixed;
+  background: var(--color-accent);
+  height: 0.5rem;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  z-index: 1000;
+
+  animation-name: rotateAnimation;
+  animation-timing-function: linear;
+  animation-duration: 1ms; /* Firefox では、アニメーションを適用するために必要 */
+  animation-direction: alternate;
+  animation-timeline: scroll(block nearest);
+}
+
 .article {
   h2,
   h3,
