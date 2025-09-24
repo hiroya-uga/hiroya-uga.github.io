@@ -256,22 +256,25 @@
   [class~="blockquote"] {
     font-size: 0.875rem;
     padding: 0.5rem min(0.75rem, 24px) 1rem;
-    border-left: min(0.625rem, 24px) solid var(--border-color-blockquote);
-    background: var(--background-color-blockquote);
+    border-left: min(0.625rem, 24px) solid var(--color-low-contrast-reverse);
+    color: var(--color-low-contrast);
+    background: var(--background-color-secondary);
   }
 
   [class~="blockquote"]:not(:has([class~="blockquote__caption"])) {
     padding-bottom: 1.5rem;
   }
 
-  [class~="blockquote"] > [aria-hidden="true"] {
+  [class~="blockquote"]::before {
+    content: "“";
+    color: var(--color-low-contrast-reverse);
     margin-bottom: -3rem;
     user-select: none;
     font-family: serif;
     font-size: 6rem;
     line-height: 1;
-    opacity: 0.1;
     pointer-events: none;
+    display: block;
   }
 
   [class~="blockquote__content"] {
@@ -284,7 +287,7 @@
     text-align: right;
     font-size: 0.75rem;
     padding-left: 2rem;
-    padding-right: min(0.75rem, 24px);
+    padding-right: min(0.5rem, 24px);
   }
 
   [class~="custom-block"] {
