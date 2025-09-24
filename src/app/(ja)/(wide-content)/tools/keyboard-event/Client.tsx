@@ -2,7 +2,7 @@
 
 import { Checkbox, TextField } from '@/components/Form';
 import { throttle } from 'lodash';
-import { forwardRef, memo, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { forwardRef, memo, Ref, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/keyboard-event/Client.module.css';
 import { keyboardSvgData } from '@/app/(ja)/(wide-content)/tools/keyboard-event/constants';
@@ -97,7 +97,7 @@ const Form = (
     checkboxStatusRef: RefObject<Record<string, boolean>>;
     isScrollIgnoredRef: RefObject<boolean>;
   },
-  ref: RefObject<HTMLTextAreaElement>,
+  ref: Ref<HTMLTextAreaElement>,
 ) => {
   return (
     <div className="mb-6 flex flex-wrap gap-3 sm:gap-10">
