@@ -26,7 +26,7 @@ const LastKey = ({
 }: {
   pressedKeys: string[];
   lastKey: string;
-  textFieldRef: RefObject<HTMLTextAreaElement>;
+  textFieldRef: RefObject<HTMLTextAreaElement | null>;
 }) => {
   return (
     <p className={clsx(['relative mb-6 sm:mb-14', lastKey !== '' && 'before:opacity-0'])}>
@@ -294,7 +294,6 @@ export const KeyboardEventContent = () => {
         timestamp,
       });
 
-      tempLogs.current = tempLogs.current;
       throttledUpdateLogs();
     },
     [throttledUpdateLogs],
