@@ -484,7 +484,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                     {countPages}枚
                   </output>
                 </p>
-                <hr className="col-span-full py-2" />
+                <hr className="col-span-full mt-2 pb-2" />
                 <p className="col-span-full grid grid-cols-subgrid">
                   <label className="grow" htmlFor={`${id}-length`}>
                     length (String.length)
