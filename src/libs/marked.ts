@@ -1,5 +1,5 @@
 import '@/libs/marked-custom';
-import { customMarkdownSyntaxes, getFootnotes, markedParse } from '@/libs/marked-custom';
+import { customMarkdownSyntaxes, getFootnotes, getTOC, markedParse } from '@/libs/marked-custom';
 import fs from 'fs';
 import matter from 'gray-matter';
 import { marked } from 'marked';
@@ -19,6 +19,7 @@ export function getPostBySlug(filePath: string, slug: string) {
 
   return {
     meta: data,
+    toc: getTOC(fullPath),
     content: markedParse(fullPath, content),
     footnotes: getFootnotes(fullPath),
   };

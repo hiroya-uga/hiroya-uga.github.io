@@ -17,6 +17,7 @@ type Props = {
       title?: string;
       publishedAt?: string;
     };
+    toc: string;
     content: string | Promise<string>;
     footnotes: [string, { html: string | Promise<string> }][];
   };
@@ -77,17 +78,41 @@ export const ArticleMain = async ({ post }: Props) => {
         )}
       </div>
 
-      <div className="px-content-inline @w1024:pl-10">
+      <div
+        className={clsx([
+          'px-content-inline @w1024:pl-10',
+          '@w1280:grid @w1280:grid-cols-[1fr_var(--width-article)_1fr] @w1280:grid-rows-[auto_auto]',
+        ])}
+      >
+        {post.toc && (
+          <div className={clsx([styles.toc, '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-10'])}>
+            <nav
+              className={clsx([
+                'mb-paragraph max-w-article border-accent mx-auto border-l-2 px-4 py-2 text-sm',
+                '@w1280:sticky @w1280:top-12',
+              ])}
+            >
+              <h2>目次</h2>
+              <div dangerouslySetInnerHTML={{ __html: post.toc }} />
+            </nav>
+          </div>
+        )}
         <div
           id={ARTICLE_MAIN_ID}
-          className={clsx(styles.article, 'space-y-paragraph max-w-article mx-auto')}
+          className={clsx(
+            styles.article,
+            'space-y-paragraph max-w-article mx-auto',
+            '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2 @w1280:max-w-full',
+          )}
           dangerouslySetInnerHTML={{ __html: await post.content }}
-          suppressHydrationWarning
         />
         <ArticleFootNoteActivator />
         <ArticleCodeHighlightActivator />
         <ArticleYoutubeManager />
-        <div role="note" className="max-w-article mx-auto empty:hidden">
+        <div
+          role="note"
+          className="max-w-article @w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-2 mx-auto empty:hidden"
+        >
           {0 < post.footnotes.length && (
             <>
               <Heading level={2} keepUseMarginTop>
