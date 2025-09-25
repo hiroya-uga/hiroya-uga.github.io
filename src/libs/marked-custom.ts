@@ -137,8 +137,14 @@ const linkExtension: TokenizerAndRendererExtension = {
       const url = new URL(t.href, URL_ORIGIN);
 
       if (url.hostname === 'youtu.be') {
+        const title = t.text === t.href || t.text === '' ? 'YouTube video player' : t.text;
         url.searchParams.append('enablejsapi', '1');
-        return `<span class="youtube"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe src="https://www.youtube.com/embed${url.pathname}${url.search}" title="YouTube video player"allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-js-api="loading"></iframe></span>`;
+        return `<span class="youtube"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe src="https://www.youtube.com/embed${url.pathname}${url.search}" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-js-api="loading"></iframe></span>`;
+      }
+
+      if (url.hostname === 'codepen.io') {
+        const id = url.pathname.split('/').pop();
+        return `<span class="codepen"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe title="${t.text ?? t.href}" src="https://codepen.io/hiroya_uga/embed/${id}?default-tab=html%2Cresult" loading="lazy" data-loading="true" onload="this.removeAttribute('data-loading');this.removeAttribute('onload')"></iframe></span>`;
       }
 
       if (url.hostname === 'amzn.to') {
@@ -381,7 +387,7 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
   },
 };
 
-export const getTOC = (filePath: string): string => {
+export const getTOC = (filePath: string, isExistFootnotes: boolean): string => {
   const headings = headingDefs.get(filePath) ?? [];
 
   if (headings.length === 0) return '';
@@ -418,6 +424,10 @@ export const getTOC = (filePath: string): string => {
 
   // 残りのulを閉じる
   while (levelStack.length > 0) {
+    if (levelStack.length === 1 && isExistFootnotes) {
+      // 最後のulを閉じる前に脚注へのリンクを追加
+      html += `<li><a href="#footnotes">脚注</a>`;
+    }
     html += '</ul>';
     levelStack.pop();
   }

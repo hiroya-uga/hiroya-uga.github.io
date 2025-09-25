@@ -19,8 +19,8 @@ export function getPostBySlug(filePath: string, slug: string) {
   // 先にcontentをmarkedParseしなければならない
   const parsedContent = markedParse(fullPath, content);
 
-  const toc = getTOC(fullPath);
   const footnotes = getFootnotes(fullPath);
+  const toc = getTOC(fullPath, footnotes.length !== 0);
 
   return {
     meta: data,

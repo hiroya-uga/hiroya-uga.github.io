@@ -34,7 +34,7 @@ Webデザインをされる方も、ドロップボックスのプルダウン�
 
 [^3]: [option element inner content elements](https://html.spec.whatwg.org/multipage/dom.html#option-element-inner-content-elements)
 
-<iframe height="500" style="width: 100%;"  title="Customizable Select Example" src="https://codepen.io/hiroya_uga/embed/vENGJxe?default-tab=html%2Cresult" loading="lazy"></iframe>
+[Code Pen: Customizable Select Example](https://codepen.io/hiroya_uga/pen/vENGJxe)
 
 :::warn
 `select`要素およびプルダウンをカスタムするには、`appearance: base-select;`をあらかじめ指定する必要があります。
@@ -117,7 +117,7 @@ select,
 
 [^4]: ドロップボックスとは、`multiple`属性を持っておらず`size`属性の値が1または未定義の`select`要素を指す。
 
-`selectedcontent`要素は、`select`要素の最初の子要素である`button`要素の中にだけ設置できます。  
+`selectedcontent`要素は、`select`要素の最初の子要素である`button`要素の中にだけ設置できます。
 
 ```html:selectedcontent要素の設置例
 <select>
@@ -157,7 +157,7 @@ selectedcontent .emoji {
 | -------------------------------------------------------------------------------- | ---------------------------------------- |
 | [`select::picker(select)`](https://drafts.csswg.org/css-forms/#picker-pseudo)    | プルダウンの選択肢を表示するポップアップ |
 | [`option::checkmark`](https://drafts.csswg.org/css-forms/#selectordef-checkmark) | 選択済みを表すチェックマーク             |
-| [`select::picker-icon`](https://drafts.csswg.org/css-forms/#picker-icon)         | プルダウンの存在を表すアイコン            |
+| [`select::picker-icon`](https://drafts.csswg.org/css-forms/#picker-icon)         | プルダウンの存在を表すアイコン           |
 
 これらの登場により、プルダウンであることを示すアイコンや選択済みであることを示すチェックマークを`content`プロパティで置き換えたり、プルダウンをフェードインさせたりできるようになりました。
 
