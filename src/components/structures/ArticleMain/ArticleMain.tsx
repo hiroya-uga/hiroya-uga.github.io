@@ -78,58 +78,57 @@ export const ArticleMain = async ({ post }: Props) => {
         )}
       </div>
 
-      <div
-        className={clsx([
-          'px-content-inline @w1024:pl-10',
-          '@w1280:grid @w1280:grid-cols-[1fr_var(--width-article)_1fr] @w1280:grid-rows-[auto_auto]',
-        ])}
-      >
-        {post.toc && (
-          <div className={clsx([styles.toc, '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-10'])}>
-            <nav
+      <div className="px-content-inline @w1024:pl-10">
+        <div
+          className={clsx([
+            'max-w-article @w1280:max-w-none mx-auto',
+            '@w1280:grid @w1280:grid-cols-[1fr_var(--width-article)_1fr] @w1280:grid-rows-[auto_auto]',
+          ])}
+        >
+          {post.toc && (
+            <div
               className={clsx([
-                'mb-paragraph max-w-article border-accent mx-auto border-l-2 px-4 py-2 text-sm',
-                '@w1280:sticky @w1280:top-12',
+                styles.toc,
+                '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-14 @w640:mb-14 mb-8',
               ])}
             >
-              <h2>目次</h2>
-              <div dangerouslySetInnerHTML={{ __html: post.toc }} />
-            </nav>
+              <nav className={clsx(['border-accent border-l-2 px-4 py-2 text-sm', '@w1280:sticky @w1280:top-12'])}>
+                <h2>目次</h2>
+                <div dangerouslySetInnerHTML={{ __html: post.toc }} />
+              </nav>
+            </div>
+          )}
+          <div
+            id={ARTICLE_MAIN_ID}
+            className={clsx(
+              styles.article,
+              'space-y-paragraph',
+              '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
+            )}
+            dangerouslySetInnerHTML={{ __html: await post.content }}
+          />
+          <ArticleFootNoteActivator />
+          <ArticleCodeHighlightActivator />
+          <ArticleYoutubeManager />
+          <div role="note" className="@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-2 empty:hidden">
+            {0 < post.footnotes.length && (
+              <>
+                <Heading level={2} keepUseMarginTop>
+                  脚注
+                </Heading>
+                <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
+                  {post.footnotes.map(async ([id, { html }]) => (
+                    <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
+                      <span className="whitespace-nowrap font-mono">
+                        <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
+                      </span>
+                      <span dangerouslySetInnerHTML={{ __html: await html }} />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
-        )}
-        <div
-          id={ARTICLE_MAIN_ID}
-          className={clsx(
-            styles.article,
-            'space-y-paragraph max-w-article mx-auto',
-            '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2 @w1280:max-w-full',
-          )}
-          dangerouslySetInnerHTML={{ __html: await post.content }}
-        />
-        <ArticleFootNoteActivator />
-        <ArticleCodeHighlightActivator />
-        <ArticleYoutubeManager />
-        <div
-          role="note"
-          className="max-w-article @w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-2 mx-auto empty:hidden"
-        >
-          {0 < post.footnotes.length && (
-            <>
-              <Heading level={2} keepUseMarginTop>
-                脚注
-              </Heading>
-              <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
-                {post.footnotes.map(async ([id, { html }]) => (
-                  <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
-                    <span className="whitespace-nowrap font-mono">
-                      <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
-                    </span>
-                    <span dangerouslySetInnerHTML={{ __html: await html }} />
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
         </div>
       </div>
     </article>
