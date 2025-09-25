@@ -67,12 +67,23 @@
 }
 
 .toc {
-  ul {
+  ul ul {
     padding-left: 1rem;
   }
 
   :where(ul, li):not(:first-child) {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus {
+    color: var(--color-link);
+    text-decoration: underline;
   }
 }
 
@@ -166,8 +177,7 @@
     border: 0;
   }
 
-  [class~="youtube"] {
-    aspect-ratio: 16 / 9;
+  :where([class~="youtube"], [class~="codepen"]) {
     position: relative;
     display: grid;
     place-items: center;
@@ -175,7 +185,7 @@
     background-color: var(--background-color-secondary);
   }
 
-  [class~="youtube"] iframe {
+  :where([class~="youtube"], [class~="codepen"]) iframe {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
@@ -187,9 +197,17 @@
       0.3s visibility ease-out;
   }
 
-  [class~="youtube"] iframe[data-js-api="loading"] {
+  :where([class~="youtube"] iframe[data-js-api="loading"], [class~="codepen"] iframe[data-loading="true"]) {
     opacity: 0;
     visibility: hidden;
+  }
+
+  [class~="youtube"] {
+    aspect-ratio: 16 / 9;
+  }
+
+  [class~="codepen"] {
+    aspect-ratio: 4 / 3;
   }
 
   [class~="hljs"] {

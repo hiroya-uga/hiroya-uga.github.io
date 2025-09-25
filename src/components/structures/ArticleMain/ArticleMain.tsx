@@ -96,12 +96,12 @@ export const ArticleMain = async ({ post }: Props) => {
             >
               <nav
                 className={clsx([
-                  'border-accent bg-secondary rounded-r-md border-l-2 pb-5 pl-5 pr-4 pt-3 text-sm',
-                  '@w1280:sticky @w1280:top-12',
+                  'border-accent bg-secondary rounded-r-md border-l-2 pb-7 pl-5 pr-4 pt-4 text-sm',
+                  '@w1280:sticky @w1280:top-18',
                 ])}
               >
                 <h2 className="font-bold">目次</h2>
-                <div className="mt-2" dangerouslySetInnerHTML={{ __html: post.toc }} />
+                <div className="mt-4" dangerouslySetInnerHTML={{ __html: post.toc }} />
               </nav>
             </div>
           )}
@@ -120,7 +120,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <div role="note" className="@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-2 empty:hidden">
             {0 < post.footnotes.length && (
               <>
-                <Heading level={2} keepUseMarginTop>
+                <Heading level={2} id="footnotes" keepUseMarginTop>
                   脚注
                 </Heading>
                 <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
