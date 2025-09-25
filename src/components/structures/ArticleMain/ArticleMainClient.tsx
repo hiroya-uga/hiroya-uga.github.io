@@ -36,7 +36,7 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
     }
 
     span.textContent = '';
-    const length = article.textContent?.trim().length || 0;
+    const length = article.textContent?.replace(/\n/g, '').trim().length || 0;
 
     if (isAlready) {
       span.textContent = `文字数：${length}文字／所要時間：${getReadingTime(length)}分`;

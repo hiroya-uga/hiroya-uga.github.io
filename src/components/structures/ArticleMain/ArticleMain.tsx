@@ -96,12 +96,12 @@ export const ArticleMain = async ({ post }: Props) => {
             >
               <nav
                 className={clsx([
-                  'border-accent bg-secondary rounded-r-md border-l-2 pb-7 pl-5 pr-4 pt-4 text-sm',
-                  '@w1280:sticky @w1280:top-18',
+                  'border-accent bg-secondary rounded-r-md border-l-2 px-5 pb-6 pt-4 text-sm',
+                  '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:shadow-sticky @w1280:max-h-[calc(80vh_-_4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
                 ])}
               >
                 <h2 className="font-bold">目次</h2>
-                <div className="mt-4" dangerouslySetInnerHTML={{ __html: post.toc }} />
+                <div className="@w1280:pl-0 mt-4 pl-4" dangerouslySetInnerHTML={{ __html: post.toc }} />
               </nav>
             </div>
           )}

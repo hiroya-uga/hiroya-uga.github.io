@@ -53,7 +53,6 @@
     --v-color-background-success: #cfc;
     --v-color-background-warn: #ffc;
     --v-color-background-error: #fcc;
-    --v-color-background-scroll-hint: white;
     --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.2);
 
     /* Border */
@@ -100,7 +99,6 @@
     --v-color-background-tertiary-hover: #3e3e3e;
     --v-color-background-required: #990300;
     --v-color-background-textfield: #3d3c3a;
-    --v-color-background-scroll-hint: #272727;
     --v-color-background-scroll-hint-shadow: rgba(237, 197, 108, 0.4);
 
     /* Border */
@@ -277,8 +275,8 @@
 @utility scroll-hint-x {
   background: transparent;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 70%),
-    linear-gradient(to left, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
+    linear-gradient(to right, rgba(255, 255, 255, 0), var(--background-color-secondary) 70%),
+    linear-gradient(to left, rgba(255, 255, 255, 0), var(--background-color-secondary) 30%),
     radial-gradient(farthest-side at 100% 40%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0)),
     radial-gradient(farthest-side at 0 40%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0));
   background-position:
@@ -287,7 +285,7 @@
     100% 0,
     0 0;
   background-repeat: no-repeat;
-  background-color: var(--v-color-background-scroll-hint);
+  background-color: var(--background-color-secondary);
   background-size:
     40px 100%,
     40px 100%,
@@ -299,8 +297,8 @@
 @utility scroll-hint-y {
   background: transparent;
   background-image:
-    linear-gradient(to top, rgba(255, 255, 255, 0), var(--v-color-background-scroll-hint) 30%),
-    linear-gradient(to top, var(--v-color-background-scroll-hint), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to top, rgba(255, 255, 255, 0), var(--background-color-secondary) 30%),
+    linear-gradient(to top, var(--background-color-secondary), rgba(255, 255, 255, 0) 70%),
     radial-gradient(farthest-side at 50% 0, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0)),
     radial-gradient(farthest-side at 50% 100%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0));
   background-position:
@@ -309,7 +307,7 @@
     0 0,
     0 100%;
   background-repeat: no-repeat;
-  background-color: var(--v-color-background-scroll-hint);
+  background-color: var(--background-color-secondary);
   background-size:
     100% 60px,
     100% 60px,
