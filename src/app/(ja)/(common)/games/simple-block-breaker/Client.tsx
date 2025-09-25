@@ -778,8 +778,6 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   disabled={running}
                   id={`${id}-ball-path-through`}
                   onChange={(e) => {
-                    console.log(e);
-
                     updateQueryParams({
                       key: 'ball-pass-through',
                       value: e.target.checked ? 'true' : 'false',
