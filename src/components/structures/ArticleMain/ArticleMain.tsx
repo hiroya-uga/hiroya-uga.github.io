@@ -28,7 +28,7 @@ export const ArticleMain = async ({ post }: Props) => {
 
   return (
     <article className={styles.root}>
-      <div className={clsx(styles.h1, 'px-content-inline @w1024:pl-10 @w640:mb-14 @w640:mt-8 mb-8 mt-4')}>
+      <div className={clsx(styles.hero, 'px-content-inline @w1024:pl-10 @w640:mb-14 @w640:mt-8 mb-8 mt-4')}>
         <div
           className={clsx([
             'mx-auto text-center',
@@ -38,14 +38,16 @@ export const ArticleMain = async ({ post }: Props) => {
         >
           <h1
             className={clsx([
-              styles.title,
-              '@w640:text-4xl @w800:text-5xl wrap-anywhere text-2xl',
+              styles.h1,
+              'wrap-anywhere @w640:text-4xl @w800:text-5xl text-2xl',
               post.meta.title?.endsWith('。') && '@w800:pl-[0.5em]',
             ])}
           >
             {post.meta.title?.split('\n').map((title, index) => {
+              const key = `${title}-${index}`;
+
               return (
-                <span key={index} className="@w400:inline-block">
+                <span key={key} className="@w400:inline-block">
                   {/* {title.split('`').map((part, partIndex) => {
                       if (part === '') {
                         return null;

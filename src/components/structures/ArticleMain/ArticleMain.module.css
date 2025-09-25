@@ -1,15 +1,20 @@
-.h1 {
+.hero {
   background: #fff;
   overflow-wrap: anywhere;
   word-break: break-word;
 }
 
-[data-theme="dark"]:root .h1 {
+[data-theme="dark"]:root .hero {
   background-color: #101417;
   background-image: radial-gradient(farthest-side at 50% 100%, #1f262b, #171c20, #101417);
   background-size: 200% 50%;
   background-position: center bottom;
   background-repeat: no-repeat;
+}
+
+.h1 {
+  /* for removing the gap between inline-block elements on Safari */
+  text-rendering: optimizeSpeed;
 }
 
 @keyframes target-highlight {
