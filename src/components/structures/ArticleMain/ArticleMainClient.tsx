@@ -325,6 +325,11 @@ export const ArticleCodeHighlightActivator = () => {
 declare global {
   interface Window {
     onYouTubeIframeAPIReady: () => void;
+    twttr?: {
+      widgets: {
+        load: (_: Element) => void;
+      };
+    };
   }
 }
 
@@ -375,5 +380,25 @@ export const ArticleYoutubeManager = () => {
       });
     };
   }, []);
+  return null;
+};
+
+export const ArticleTwitterActivator = () => {
+  const id = useId();
+
+  useEffect(() => {
+    if (document.getElementById(id) === null) {
+      const script = document.createElement('script');
+      script.id = id;
+      script.src = 'https://platform.twitter.com/widgets.js';
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      document.querySelectorAll('.twitter-tweet').forEach((container) => {
+        window.twttr?.widgets.load(container);
+      });
+    }
+  }, [id]);
+
   return null;
 };

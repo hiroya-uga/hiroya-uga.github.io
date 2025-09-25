@@ -118,6 +118,45 @@ const breakSpanExtension: TokenizerAndRendererExtension = {
   },
 };
 
+type TalkingToken = Token & {
+  type: 'talking';
+  raw: string;
+  text: string;
+};
+
+const talkingExtension: TokenizerAndRendererExtension = {
+  name: 'talking',
+  level: 'block',
+
+  start(src) {
+    // 行の先頭から——で始まる行を検索
+    const match = /^——/.exec(src);
+    return match?.index;
+  },
+
+  tokenizer(src) {
+    // 行の先頭が——で始まり、その後に何らかのテキストが続く行
+    const rule = /^——(.+)(?:\n|$)/;
+    const match = rule.exec(src);
+    if (!match) return;
+
+    const [fullMatch, text] = match;
+
+    const token: TalkingToken = {
+      type: 'talking',
+      raw: fullMatch,
+      text: text.trim(),
+    };
+
+    return token;
+  },
+
+  renderer(token) {
+    const t = token as TalkingToken;
+    return `<p class="talking"><span>——</span><span>${t.text}</span></p>`;
+  },
+};
+
 type CustomLinkToken = Token & {
   type: 'link';
   raw: string;
@@ -445,6 +484,7 @@ export const customMarkdownSyntaxes = [
   customBlockExtension,
   overrideImageExtension,
   breakSpanExtension,
+  talkingExtension,
   linkExtension,
   footnoteRefExtension,
   footnoteDefExtension,
