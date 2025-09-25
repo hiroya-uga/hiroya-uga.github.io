@@ -66,8 +66,8 @@
     padding-left: 1rem;
   }
 
-  :where(h2, ul, li):not(:last-child) {
-    margin-bottom: 0.5rem;
+  :where(ul, li):not(:first-child) {
+    margin-top: 0.5rem;
   }
 }
 
@@ -89,6 +89,8 @@
   }
   h3 {
     font-size: 1.125rem;
+    padding-left: 0.75rem;
+    border-left: 0.175rem solid var(--color-accent);
   }
   h4 {
     font-size: 1rem;
