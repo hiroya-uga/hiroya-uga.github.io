@@ -204,7 +204,7 @@ export const ArticleCodeHighlightActivator = () => {
     isInitialized.current = true;
 
     const highlight = document.querySelectorAll<HTMLElement>('pre code[data-language]');
-    console.log(highlight.length);
+
     if (highlight.length === 0) {
       return;
     }
