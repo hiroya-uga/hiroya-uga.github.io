@@ -300,8 +300,8 @@ const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
 
     if (hasCiteMatches) {
       const [text, cite] = t.text.split(/\n引用：/);
-      const inner = marked.parse(text);
-      const caption = marked.parse(`引用：${cite}`);
+      const inner = marked.parse(text, { async: false });
+      const caption = marked.parse(`引用：${cite}`, { async: false });
       return `<figure class="blockquote"><blockquote class="blockquote__content space-y-3">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
     }
 
@@ -337,7 +337,7 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
       .map((cell, j) => {
         const align = t.align[j] ? ` class="${t.align[j]}"` : '';
         const text = extractText(cell);
-        const content = marked.parse(text);
+        const content = marked.parse(text, { async: false });
         return `<th${align} scope="col">${content}</th>`;
       })
       .join('')}</tr>`;
@@ -351,7 +351,7 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
               const align = t.align[j] ? ` class="is-${t.align[j]}"` : '';
               const text = extractText(cell);
               const tagName = text.trim().startsWith('^') ? 'th' : 'td';
-              const content = marked.parse(tagName === 'th' ? text.slice(1) : text);
+              const content = marked.parse(tagName === 'th' ? text.slice(1) : text, { async: false });
               return `<${tagName}${align}>${content}</${tagName}>`;
             })
             .join('') +
@@ -364,6 +364,72 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
   },
 };
 
+type HeadingData = {
+  id: string;
+  text: string;
+  level: number;
+};
+
+const headingDefs = new Map<string, HeadingData[]>();
+const overrideHeadingExtension: TokenizerAndRendererExtension = {
+  name: 'heading',
+  level: 'block',
+
+  renderer(token) {
+    const t = token as Token & { type: 'heading'; depth: number; text: string };
+    const id = `heading-${t.text.replace(/[:.]|\n/g, '-')}`;
+
+    const headings = headingDefs.get(currentFilePath) ?? [];
+    headings.push({ id, text: t.text, level: t.depth });
+    headingDefs.set(currentFilePath, headings);
+
+    return `<h${t.depth} id="${id}">${t.text}</h${t.depth}>`;
+  },
+};
+
+export const getTOC = (filePath: string): string => {
+  const headings = headingDefs.get(filePath) ?? [];
+  if (headings.length === 0) return '';
+
+  let html = '';
+  let currentLevel = 1;
+  const levelStack: number[] = [];
+
+  for (const heading of headings) {
+    const linkHtml = heading.text;
+
+    if (heading.level > currentLevel) {
+      // より深いレベル：新しいulを開始
+      const diff = heading.level - currentLevel;
+      for (let i = 0; i < diff; i++) {
+        html += '<ul>';
+        levelStack.push(heading.level - diff + i + 1);
+      }
+      html += `<li><a href="#${heading.id}">${linkHtml}</a>`;
+      currentLevel = heading.level;
+    } else if (heading.level === currentLevel) {
+      // 同じレベル：liを追加
+      html += `<li><a href="#${heading.id}">${linkHtml}</a>`;
+    } else {
+      // より浅いレベル：ulを閉じる
+      while (levelStack.length > 0 && levelStack[levelStack.length - 1] > heading.level) {
+        html += '</ul>';
+        levelStack.pop();
+      }
+      html += `<li><a href="#${heading.id}">${linkHtml}</a>`;
+      currentLevel = heading.level;
+    }
+  }
+
+  // 残りのulを閉じる
+  while (levelStack.length > 0) {
+    html += '</ul>';
+    levelStack.pop();
+  }
+
+  return html;
+};
+
 export const customMarkdownSyntaxes = [
   customBlockExtension,
   overrideImageExtension,
@@ -374,9 +440,12 @@ export const customMarkdownSyntaxes = [
   overrideCodeBlockExtension,
   overrideBlockquoteExtension,
   overrideTableExtension,
+  overrideHeadingExtension,
 ];
 
 export const markedParse = (filePath: string, content: string) => {
   currentFilePath = filePath;
+  // 既存の見出しデータをクリア
+  headingDefs.delete(filePath);
   return marked.parse(content);
 };

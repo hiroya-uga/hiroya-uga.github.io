@@ -61,6 +61,18 @@
   animation-timeline: scroll(block nearest);
 }
 
+.toc {
+  margin-bottom: 5rem;
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  :where(h2, ul, li):not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
 .article {
   h2,
   h3,
