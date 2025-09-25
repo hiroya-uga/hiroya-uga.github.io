@@ -228,12 +228,6 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
   },
 };
 
-export const getFootnotes = (filePath: string): [string, { html: string | Promise<string> }][] => {
-  return Object.entries(footnoteDefs.get(filePath) ?? []).map(([id, text]) => {
-    return [id, { html: marked.parseInline(text, { async: false }) }];
-  });
-};
-
 type CodeToken = Token & {
   type: 'code';
   raw: string;
@@ -389,6 +383,7 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
 
 export const getTOC = (filePath: string): string => {
   const headings = headingDefs.get(filePath) ?? [];
+
   if (headings.length === 0) return '';
 
   let html = '';
@@ -428,6 +423,12 @@ export const getTOC = (filePath: string): string => {
   }
 
   return html;
+};
+
+export const getFootnotes = (filePath: string): [string, { html: string | Promise<string> }][] => {
+  return Object.entries(footnoteDefs.get(filePath) ?? []).map(([id, text]) => {
+    return [id, { html: marked.parseInline(text, { async: false }) }];
+  });
 };
 
 export const customMarkdownSyntaxes = [

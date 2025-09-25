@@ -16,11 +16,18 @@ export function getPostBySlug(filePath: string, slug: string) {
   if (!fs.existsSync(fullPath)) return null;
   const file = fs.readFileSync(fullPath, 'utf-8');
   const { data, content } = matter(file);
+  // 先にcontentをmarkedParseしなければならない
+  const parsedContent = markedParse(fullPath, content);
+
+  const toc = getTOC(fullPath);
+  const footnotes = getFootnotes(fullPath);
+
+  console.log(getTOC(fullPath));
 
   return {
     meta: data,
-    toc: getTOC(fullPath),
-    content: markedParse(fullPath, content),
-    footnotes: getFootnotes(fullPath),
+    toc,
+    content: parsedContent,
+    footnotes,
   };
 }
