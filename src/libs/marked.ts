@@ -22,8 +22,6 @@ export function getPostBySlug(filePath: string, slug: string) {
   const toc = getTOC(fullPath);
   const footnotes = getFootnotes(fullPath);
 
-  console.log(getTOC(fullPath));
-
   return {
     meta: data,
     toc,

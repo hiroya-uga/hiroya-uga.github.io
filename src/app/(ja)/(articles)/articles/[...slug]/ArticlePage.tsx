@@ -112,8 +112,6 @@ export const ArticlePage = async ({ slug, category, year, fileName, filePath }: 
   const previousArticle = blogs[currentIndex + 1];
   const nextArticle = blogs[currentIndex - 1];
 
-  console.log(post);
-
   return (
     <>
       <Header layout="article-content" />
