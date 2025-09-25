@@ -94,9 +94,14 @@ export const ArticleMain = async ({ post }: Props) => {
                 '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-14 @w640:mb-14 mb-8',
               ])}
             >
-              <nav className={clsx(['border-accent border-l-2 px-4 py-2 text-sm', '@w1280:sticky @w1280:top-12'])}>
-                <h2>目次</h2>
-                <div dangerouslySetInnerHTML={{ __html: post.toc }} />
+              <nav
+                className={clsx([
+                  'border-accent bg-secondary rounded-r-md border-l-2 pb-5 pl-5 pr-4 pt-3 text-sm',
+                  '@w1280:sticky @w1280:top-12',
+                ])}
+              >
+                <h2 className="font-bold">目次</h2>
+                <div className="mt-2" dangerouslySetInnerHTML={{ __html: post.toc }} />
               </nav>
             </div>
           )}
