@@ -2,6 +2,7 @@ import {
   ArticleCodeHighlightActivator,
   ArticleFootNoteActivator,
   ArticleInformation,
+  ArticleTwitterActivator,
   ArticleYoutubeManager,
 } from '@/components/structures/ArticleMain/ArticleMainClient';
 
@@ -28,7 +29,7 @@ export const ArticleMain = async ({ post }: Props) => {
 
   return (
     <article className={styles.root}>
-      <div className={clsx(styles.hero, 'px-content-inline @w1024:pl-10 @w640:mb-14 @w640:mt-8 mb-8 mt-4')}>
+      <div className={clsx(styles.hero, '@w640:px-content-inline @w1024:pl-10 @w640:mb-14 @w640:mt-8 mb-8 mt-4 px-2')}>
         <div
           className={clsx([
             'mx-auto text-center',
@@ -117,6 +118,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <ArticleFootNoteActivator />
           <ArticleCodeHighlightActivator />
           <ArticleYoutubeManager />
+          <ArticleTwitterActivator />
           <div role="note" className="@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-2 empty:hidden">
             {0 < post.footnotes.length && (
               <>

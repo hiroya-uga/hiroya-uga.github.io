@@ -177,6 +177,14 @@
     border: 0;
   }
 
+  [class~="talking"] {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    font-weight: bold;
+    gap: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
   :where([class~="youtube"], [class~="codepen"]) {
     position: relative;
     display: grid;
@@ -208,6 +216,23 @@
 
   [class~="codepen"] {
     aspect-ratio: 4 / 3;
+  }
+
+  [class~="twitter-tweet"] {
+    margin: var(--spacing-paragraph) auto !important;
+
+    iframe {
+      max-width: 100%;
+    }
+  }
+
+  [class="twitter-tweet"],
+  [class~="blockquote"] {
+    font-size: 0.875rem;
+    padding: 0.5rem min(0.75rem, 24px) 1rem;
+    border-left: min(0.625rem, 24px) solid var(--color-low-contrast-reverse);
+    color: var(--color-low-contrast);
+    background: var(--background-color-secondary);
   }
 
   [class~="hljs"] {
@@ -286,14 +311,6 @@
     @starting-style {
       opacity: 0;
     }
-  }
-
-  [class~="blockquote"] {
-    font-size: 0.875rem;
-    padding: 0.5rem min(0.75rem, 24px) 1rem;
-    border-left: min(0.625rem, 24px) solid var(--color-low-contrast-reverse);
-    color: var(--color-low-contrast);
-    background: var(--background-color-secondary);
   }
 
   [class~="blockquote"]:not(:has([class~="blockquote__caption"])) {
