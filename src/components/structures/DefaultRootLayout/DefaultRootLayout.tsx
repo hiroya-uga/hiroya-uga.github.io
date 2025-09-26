@@ -41,6 +41,10 @@ export const DefaultRootLayout = ({ lang, children }: { lang: string; children: 
 
               if (state !== 'waiting') {
                 document.documentElement.removeAttribute('data-cookie-consent');
+              } else {
+                if (window.location.search.includes('utm_medium=social')) {
+                  document.documentElement.setAttribute('data-cookie-consent', 'waiting-from-sns');
+                }
               }
             } catch {}
           `.replace(/\n|\s{2}/g, '')}
@@ -48,7 +52,9 @@ export const DefaultRootLayout = ({ lang, children }: { lang: string; children: 
       </head>
       <body className={inter.className} id="top">
         {children}
-        <CookieConsentDialog />
+        <Suspense>
+          <CookieConsentDialog />
+        </Suspense>
         <div id={DIALOG_PORTAL_ID} />
         <div id={SVG_PORTAL_ID} hidden />
       </body>
