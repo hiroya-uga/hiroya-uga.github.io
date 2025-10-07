@@ -174,8 +174,11 @@
   --spacing-paragraph: var(--v-spacing-paragraph);
   --spacing-content-inline: var(--v-spacing-content-inline);
 
+  --margin-heading-top: 3lh;
+
   --color-mark: #000;
   --color-accent: var(--v-color-accent);
+  --leading-base: 1.875;
 
   --background-color-alert: var(--v-color-background-alert);
   --background-color-mark: #ff0;
@@ -205,6 +208,7 @@
   --container-w640: 40rem;
   --container-w500: 31.25rem;
   --container-w400: 25rem;
+  --container-w360: 22.5rem;
   --container-w350: 21.875rem;
 
   /* new */
@@ -402,7 +406,7 @@
   }
 
   body {
-    line-height: 1.875;
+    line-height: var(--leading-base);
     color: var(--v-color-text-primary);
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     text-spacing-trim: trim-start;
@@ -511,5 +515,10 @@
 
   dialog::backdrop {
     background: #00000077;
+  }
+
+  .block-table,
+  .block-table :where(thead, tbody, tfoot, tr, th, td) {
+    display: block;
   }
 }

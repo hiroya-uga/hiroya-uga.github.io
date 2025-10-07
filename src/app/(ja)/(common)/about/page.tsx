@@ -2,12 +2,15 @@ import { Fragment } from 'react';
 
 import { Picture } from '@/components/Image';
 
+import { PERSONAL_HISTORY } from '@/app/(ja)/(common)/about/constants';
 import { TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
 import { DiscList } from '@/components/List';
 import { Doumei } from '@/components/specific/Doumei';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/get-metadata';
+import clsx from 'clsx';
+import Link from 'next/link';
 
 export const metadata = getMetadata('/about');
 
@@ -40,39 +43,36 @@ export default function Page() {
         ]}
       />
 
-      <div className="mt-14 sm:mt-16 sm:grid sm:grid-cols-[33%_1fr] sm:items-start sm:gap-6">
-        <div className="sm:sticky sm:top-6">
-          <Heading level={2}>管理人について</Heading>
+      <div className="@w640:grid @w640:grid-cols-[33%_1fr] @w640:items-start @w640:gap-6">
+        <div className="@w640:sticky @w640:top-0">
+          <Heading level={2} keepUseMarginTop>
+            管理人について
+          </Heading>
 
-          <p className="max-w-360px mx-auto mb-4 flex flex-row-reverse items-center gap-4 sm:grid sm:place-items-center sm:gap-x-6">
-            <span className="w-40">
-              <Picture width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" priority />
-            </span>
+          <div className="@container mb-4">
+            <p className="max-w-360px @w360:grid-cols-2 @w360:gap-x-6 @w360:pr-4 mx-auto grid place-items-center items-center gap-4">
+              <span className="@w360:col-start-2 w-40">
+                <Picture width={160} height={160} src="/profile.png" alt="似顔絵アイコン" className="w-full" priority />
+              </span>
 
-            <span className="grow whitespace-nowrap text-center text-xl">
-              <span className="block leading-6 tracking-widest" translate="no">
-                宇賀景哉
+              <span className="@w360:col-start-1 @w360:row-start-1 grow whitespace-nowrap text-center text-xl">
+                <span className="block leading-6 tracking-widest" translate="no">
+                  宇賀景哉
+                </span>
+                <span className="palt block text-xs [letter-spacing:0.1375rem]">Hiroya UGA</span>
               </span>
-              <span
-                className="palt block text-xs"
-                style={{
-                  letterSpacing: '0.1375rem',
-                }}
-              >
-                Hiroya UGA
-              </span>
-            </span>
-          </p>
+            </p>
+          </div>
 
           <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
-          <p className="sm:palt inline-block">
+          <p className="@w640:palt inline-block">
             「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
           </p>
           <p>アイコンは昔の上司がスマホで描いて送ってくれた管理人の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
-        <div className="sm:mt-3px mt-8">
-          <dl className="text-sm">
+        <div className="@w640:mt-(--margin-heading-top) @w640:text-2xl @w640:font-bold mt-8 text-xl leading-snug">
+          <dl className="leading-base text-sm font-normal">
             {[
               {
                 title: 'HN',
@@ -272,10 +272,67 @@ export default function Page() {
               .map(({ title, answer }) => (
                 <Fragment key={title}>
                   <dt className="bg-tertiary text-high-contrast mb-1 px-1.5">{title}</dt>
-                  <dd className="mb-6 pl-1.5">{answer}</dd>
+                  <dd className="not-last:mb-6 pl-1.5">{answer}</dd>
                 </Fragment>
               ))}
           </dl>
+        </div>
+      </div>
+
+      <Heading level={3}>これまでのあらすじ</Heading>
+
+      <div className="@w640:pl-0.5 pl-2">
+        <p className="mb-paragraph text-sm">
+          <Link href="/documents/media/">外部メディアリンク一覧はこちら</Link>をご覧ください。
+        </p>
+
+        <div className="@w640:after:w-1px @w640:after:border-primary @w640:after:absolute @w640:after:left-4 @w640:after:top-0 @w640:after:h-full @w640:after:border-l relative">
+          <table className="@w640:text-base block-table text-sm">
+            <tbody className="@w640:grid @w640:grid-cols-[auto_1fr]">
+              {PERSONAL_HISTORY.map(({ data, description }) => {
+                return (
+                  <tr key={data} className="@w640:grid @w640:grid-cols-subgrid @w640:col-span-2 group">
+                    <th
+                      className={clsx([
+                        'text-secondary bg-primary @w640:font-normal @w640:pb-8 @w640:group-last:pb-0 @w640:text-sm @w640:pt-0.5 @w640:static pb-2 pt-4 text-left align-top font-bold',
+                        'after:h-1px after:border-secondary @w640:after:hidden sticky top-0 after:absolute after:bottom-2 after:left-0 after:top-4 after:my-auto after:w-full after:border-t',
+                        '@w640:col-start-1',
+                      ])}
+                    >
+                      <span className="bg-primary @w640:sticky @w640:top-2 relative z-10 block w-fit pr-2">{data}</span>
+                    </th>
+                    <td className="@w640:pt-7 @w640:col-start-2 pb-8 pt-0.5 align-top group-last:pb-0">
+                      <ul className="@w640:pl-2.5 space-y-1 pl-1.5">
+                        {description.map((item) => {
+                          const key = typeof item === 'string' ? item : item.key;
+                          const value = typeof item === 'string' ? item : item.value;
+
+                          return (
+                            <li
+                              key={key}
+                              className={clsx([
+                                typeof item === 'string'
+                                  ? "before:size-5px flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:bg-[var(--color-primary)] before:content-['']"
+                                  : 'not-first:mt-4 -ml-0.5',
+                              ])}
+                            >
+                              <div
+                                className={clsx(
+                                  typeof item === 'string' ? 'grow' : '@w640:ml-auto @w640:max-w-full @w640:w-2/3',
+                                )}
+                              >
+                                {value}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
 
