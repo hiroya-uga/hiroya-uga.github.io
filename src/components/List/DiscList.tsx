@@ -14,7 +14,7 @@ export const DiscList = ({ list }: { list: (string | { value: React.ReactNode; k
             key={key}
             className="before:size-5px flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:bg-[var(--color-primary)] before:content-['']"
           >
-            <span className="grow">{value}</span>
+            <div className="grow">{value}</div>
           </li>
         );
       })}

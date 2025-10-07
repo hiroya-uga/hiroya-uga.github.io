@@ -97,7 +97,7 @@
   }
 
   :where(h2, h3, h4):not(:first-child) {
-    margin-top: 2.5lh;
+    margin-top: var(--margin-heading-top);
   }
 
   h2 {
