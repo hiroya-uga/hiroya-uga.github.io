@@ -94,7 +94,7 @@ export const Doumei = () => {
           })
           .map(({ href, alt, ...imageProps }) => (
             <li key={href}>
-              <a href={href}>
+              <a href={href} className="block">
                 <Picture {...imageProps} alt={alt} className="h-[revert-layer] [image-rendering:pixelated]" />
               </a>
             </li>
