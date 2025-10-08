@@ -10,12 +10,16 @@ type Props = React.ComponentProps<typeof Image> & {
 };
 
 const PictureComponent = (props: Props, ref: React.Ref<HTMLImageElement>) => {
+  const { priority, loading, ...restProps } = props;
+
   return (
     <Image
-      {...props}
+      {...restProps}
       ref={ref}
       className={`${styles.root} ${props.className || ''}`.trim()}
       alt={props.alt}
+      priority={priority ?? false}
+      loading={priority ? undefined : (loading ?? 'lazy')}
       data-image-status="loading"
       onLoad={(e) => {
         e.currentTarget.removeAttribute('data-image-status');
