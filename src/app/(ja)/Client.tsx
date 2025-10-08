@@ -428,78 +428,76 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   ];
 
   return (
-    <>
-      <div className="@content:rounded-lg group relative overflow-hidden" tabIndex={0}>
-        <figure aria-live="polite" className="min-h bg-primary relative">
-          <div className={clsx(['aspect-3/2', ...transitionClassName])}>
-            {photoData &&
-              ('error' in photoData ? (
-                <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
-              ) : (
-                <Picture
-                  width={960}
-                  height={640}
-                  src={photoData.src}
-                  alt={`${photoData.caption} ${photoData.date}`}
-                  className="block size-full object-cover"
-                  aria-describedby={captionId}
-                  priority
-                />
-              ))}
-          </div>
-
-          <figcaption className="text-2xs @w640:text-sm text-white">
-            <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
-              <span className="@w640:w-56 w-40 text-right">
-                <a
-                  href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
-                  className="transition-bg z-10 inline-block cursor-pointer rounded-full bg-white px-3 py-1 leading-tight text-black no-underline hover:bg-gray-200 focus-visible:outline-[white]"
-                >
-                  Instagramで見る
-                </a>
-              </span>
-              <span className={clsx(['grow leading-tight', ...transitionClassName])}>
-                <Spec spec={photoData?.spec ?? 'loading...'} />
-              </span>
-            </span>
-            <span
-              className="palt @w640:min-h-12 @w640:text-sm absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[48px] text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
-              id={captionId}
-            >
-              <span className={clsx(...transitionClassName)}>
-                {photoData?.caption && `${photoData?.caption}`}
-                <span className="text-2xs @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
-              </span>
-            </span>
-          </figcaption>
-        </figure>
-
-        <p
-          className={clsx([
-            '@w640:h-12 @w640:py-2 absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
-            'transition-[opacity,visibility,translate]',
-            isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
-            isFirstRender && isLoading ? 'invisible' : 'visible',
-          ])}
-        >
-          <button
-            type="button"
-            className="group/reload @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full rounded-full p-1"
-            onClick={() => updateImage()}
-          >
-            <span className="block rounded-full bg-white outline-offset-2">
+    <div className="@content:rounded-lg group relative overflow-hidden">
+      <figure aria-live="polite" className="min-h bg-primary relative">
+        <div className={clsx(['aspect-3/2', ...transitionClassName])}>
+          {photoData &&
+            ('error' in photoData ? (
+              <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
+            ) : (
               <Picture
-                src="/icon-reload.svg"
-                width={48}
-                height={48}
-                alt="ランダムに切り替える"
-                className="block size-full rounded-full border border-white bg-white opacity-80 transition-opacity group-hover/reload:opacity-65"
+                width={960}
+                height={640}
+                src={photoData.src}
+                alt={`${photoData.caption} ${photoData.date}`}
+                className="block size-full object-cover"
+                aria-describedby={captionId}
+                priority
               />
+            ))}
+        </div>
+
+        <figcaption className="text-2xs @w640:text-sm text-white">
+          <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
+            <span className="@w640:w-56 w-40 text-right">
+              <a
+                href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
+                className="transition-bg bg-secondary text-primary z-10 inline-block cursor-pointer rounded-full border border-[#00000080] px-3 py-1 leading-tight no-underline hover:bg-gray-200"
+              >
+                Instagramで見る
+              </a>
             </span>
-          </button>
-        </p>
-      </div>
-    </>
+            <span className={clsx(['grow leading-tight', ...transitionClassName])}>
+              <Spec spec={photoData?.spec ?? 'loading...'} />
+            </span>
+          </span>
+          <span
+            className="palt @w640:min-h-12 @w640:text-sm absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[48px] text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+            id={captionId}
+          >
+            <span className={clsx(...transitionClassName)}>
+              {photoData?.caption && `${photoData?.caption}`}
+              <span className="text-2xs @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
+            </span>
+          </span>
+        </figcaption>
+      </figure>
+
+      <p
+        className={clsx([
+          '@w640:h-12 @w640:py-2 absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
+          'transition-[opacity,visibility,translate]',
+          isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
+          isFirstRender && isLoading ? 'invisible' : 'visible',
+        ])}
+      >
+        <button
+          type="button"
+          className="group/reload @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full rounded-full border border-[#00000080] p-1"
+          onClick={() => updateImage()}
+        >
+          <span className="block rounded-full bg-white outline-offset-2">
+            <Picture
+              src="/icon-reload.svg"
+              width={48}
+              height={48}
+              alt="ランダムに切り替える"
+              className="block size-full rounded-full border border-white bg-white opacity-80 transition-opacity group-hover/reload:opacity-65"
+            />
+          </span>
+        </button>
+      </p>
+    </div>
   );
 };
 

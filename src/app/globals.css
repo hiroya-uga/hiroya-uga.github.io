@@ -325,7 +325,7 @@
 }
 
 @utility focus-ring {
-  outline: 2px solid var(--v-outline-color, #000);
+  outline: 2px solid var(--v-color-text-link, #fff);
   outline-offset: var(--v-outline-offset, 2px);
   box-shadow: 0 0 0 2px #fff;
 }
@@ -338,9 +338,9 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--v-outline-color, #000);
+    outline: 2px solid var(--v-color-text-link, #fff);
     outline-offset: var(--v-outline-offset, 2px);
-    box-shadow: 0 0 0 2px #fff;
+    box-shadow: 0 0 0 2px var(--v-color-background-secondary);
   }
 
   ::selection {

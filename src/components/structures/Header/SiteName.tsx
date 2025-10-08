@@ -9,7 +9,6 @@ export const SiteName = () => {
       className="focus-visible:focus-ring underline"
       style={
         {
-          '--v-outline-color': 'var(--v-color-text-high-contrast)',
           '--v-outline-offset': '0',
         } as React.CSSProperties
       }
