@@ -442,6 +442,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
                 alt={`${photoData.caption} ${photoData.date}`}
                 className="block size-full object-cover"
                 aria-describedby={captionId}
+                fetchPriority="high"
                 priority
               />
             ))}
