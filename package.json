@@ -26,6 +26,7 @@
   "devDependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@next/bundle-analyzer": "^15.5.4",
     "@next/mdx": "^15.3.3",
     "@tailwindcss/postcss": "^4.1.10",
     "@types/gtag.js": "^0.0.20",
@@ -52,6 +53,7 @@
   "private": true,
   "scripts": {
     "build": "next build && next-sitemap",
+    "build:analyze": "ANALYZE=true next build && next-sitemap",
     "dev": "next dev -p 3001",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",

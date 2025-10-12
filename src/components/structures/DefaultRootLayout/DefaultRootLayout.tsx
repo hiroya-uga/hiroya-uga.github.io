@@ -11,13 +11,21 @@ import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { Suspense } from 'react';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+});
 
 export const DefaultRootLayout = ({ lang, children }: { lang: string; children: React.ReactNode }) => {
   return (
     <html lang={lang} data-cookie-consent="waiting" data-theme="light" suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <Comment />
         <Suspense>
           <Analytics />
