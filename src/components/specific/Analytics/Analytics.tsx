@@ -6,6 +6,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 import ReactGA from 'react-ga4';
 
+import { useReportWebVitals } from 'next/web-vitals';
+
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? '';
 
 export const Analytics = () => {
@@ -19,6 +21,12 @@ export const Analytics = () => {
 
     ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
   }, [pathname, searchParams]);
+
+  useReportWebVitals((metric) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Web Vitals:', metric);
+    }
+  });
 
   return null;
 };
