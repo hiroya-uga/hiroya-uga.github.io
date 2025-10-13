@@ -313,7 +313,7 @@ export default function Page() {
                               className={clsx([
                                 typeof item === 'string'
                                   ? "before:size-5px flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:bg-[var(--color-primary)] before:content-['']"
-                                  : 'not-first:mt-4 -ml-0.5',
+                                  : 'not-first:mt-3 -ml-0.5',
                               ])}
                             >
                               <div
