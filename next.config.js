@@ -1,4 +1,7 @@
 const withMDX = require('@next/mdx')();
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const branchName = ''; // process.env.BRANCH_NAME !== 'main' ? "/" + process.env.BRANCH_NAME : "";
 
@@ -17,7 +20,12 @@ const nextConfig = {
 
   // TODO: 環境載せ替え終わったら調整
   output: 'export',
-  images: { unoptimized: true },
+  images: {
+    unoptimized: true,
+    // formats: ['image/webp', 'image/avif'],
+    // deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
 };
 
-module.exports = withMDX(nextConfig);
+module.exports = withBundleAnalyzer(withMDX(nextConfig));
