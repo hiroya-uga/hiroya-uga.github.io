@@ -5,10 +5,9 @@ import {
   InputHTMLAttributes,
   Ref,
   TextareaHTMLAttributes,
-  useEffect,
   useId,
   useRef,
-  useState,
+  useSyncExternalStore,
 } from 'react';
 
 import clsx from 'clsx';
@@ -65,11 +64,11 @@ const TextareaComponent = (
   ref: Ref<HTMLTextAreaElement>,
 ) => {
   const dummyTextareaRef = useRef<HTMLDivElement>(null);
-  const [textareaHeight, setTextareaHeight] = useState('0px');
-
-  useEffect(() => {
-    setTextareaHeight(dummyTextareaRef.current?.clientHeight ? `${dummyTextareaRef.current?.clientHeight}px` : '0px');
-  }, [props.value]);
+  const textareaHeight = useSyncExternalStore(
+    () => () => {},
+    () => (dummyTextareaRef.current?.clientHeight ? `${dummyTextareaRef.current?.clientHeight}px` : '0px'),
+    () => '0px',
+  );
 
   if (autoResize) {
     return (
@@ -78,7 +77,7 @@ const TextareaComponent = (
           className="border-textfield invisible absolute block w-full resize-none whitespace-pre-wrap rounded-md border p-2"
           ref={dummyTextareaRef}
         >
-          {props.value?.replace(/\n$/g, '\n　') || '　'}
+          {props.value?.replaceAll(/\n$/g, '\n　') || '　'}
         </span>
         <textarea
           {...props}

@@ -26,10 +26,11 @@ export const formatTargetList = ({ targetList, filterType }: { targetList: HTMLE
             element.getAttribute('src') !== null
           );
 
-        case 'style':
+        case 'style': {
           const style = element.style.backgroundImage || element.style.background;
 
           return /url\(['"]?(.*?)['"]?\)/.test(style);
+        }
 
         default:
           return true;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Details } from '@/components/Box';
 
@@ -50,20 +50,116 @@ const mediaElementEvents = [
   ]),
 ];
 
+let cachedEventNames: string[] | null = null;
+
+const getEventNames = () => {
+  if (!globalThis.window) {
+    return [];
+  }
+
+  if (cachedEventNames) {
+    return cachedEventNames;
+  }
+
+  cachedEventNames = [
+    ...new Set([
+      'afterscriptexecute', // Non-standard
+      'animationcancel',
+      'animationend',
+      'animationiteration',
+      'animationstart',
+      'auxclick',
+      'beforematch', // Experimental
+      'beforescriptexecute', // Non-standard
+      'beforexrselect', // Experimental
+      'blur',
+      'click',
+      'compositionend',
+      'compositionstart',
+      'compositionupdate',
+      'contentvisibilityautostatechange', // Experimental
+      'contextmenu',
+      'copy',
+      'cut',
+      'dblclick',
+      // "DOMActivate",// 非推奨
+      // 'DOMMouseScroll', // Non-standard & 非推奨
+      'focus',
+      'focusin',
+      'focusout',
+      'fullscreenchange',
+      'fullscreenerror',
+      'gesturechange', // Non-standard
+      'gestureend', // Non-standard
+      'gesturestart', // Non-standard
+      'gotpointercapture',
+      'keydown',
+      // "keypress",// 非推奨
+      'keyup',
+      'lostpointercapture',
+      'mousedown',
+      'mouseenter',
+      'mouseleave',
+      'mousemove',
+      'mouseout',
+      'mouseover',
+      'mouseup',
+      // 'mousewheel', // Non-standard & 非推奨
+      // 'MozMousePixelScroll', // Non-standard & 非推奨
+      'paste',
+      'pointercancel',
+      'pointerdown',
+      'pointerenter',
+      'pointerleave',
+      'pointermove',
+      'pointerout',
+      'pointerover',
+      'pointerrawupdate', // Experimental
+      'pointerup',
+      'scroll',
+      'scrollend',
+      'securitypolicyviolation',
+      'touchcancel',
+      'touchend',
+      'touchmove',
+      'touchstart',
+      'transitioncancel',
+      'transitionend',
+      'transitionrun',
+      'transitionstart',
+      'webkitmouseforcechanged', // Non-standard
+      'webkitmouseforcedown', // Non-standard
+      'webkitmouseforceup', // Non-standard
+      'webkitmouseforcewillbegin', // Non-standard
+      'wheel',
+      ...Object.keys(globalThis.window)
+        .filter((propName) => propName.startsWith('on'))
+        .map((eventName) => eventName.slice(2)),
+    ]),
+  ];
+
+  return cachedEventNames;
+};
+
+const emptyEventNames: string[] = [];
+
 export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   const ref = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const requiredInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoSrc, setVideoSrc] = useState<{ src?: string }>({});
   const timestampRef = useRef(getNow());
-  const [eventNames, setEventNames] = useState<string[]>([]);
-  const logRef = useRef<[[string, string, string], ...([string, string] | string)[]]>([['', '', timestampRef.current]]);
-  const [log, setLog] = useState<typeof logRef.current>(logRef.current);
+  const eventNames = useSyncExternalStore(
+    () => () => {},
+    getEventNames,
+    () => emptyEventNames,
+  );
+  const logRef = useRef<[[string, string, string], ...([string, string] | string)[]]>([['', '', getNow()]]);
+  const [log, setLog] = useState<typeof logRef.current>([['', '', getNow()]]);
 
   const handler = useCallback((e: Event) => {
     clearInterval(key);
-    key = window.setInterval(() => {
+    key = globalThis.window.setInterval(() => {
       timestampRef.current = getNow();
     }, 1000);
 
@@ -200,87 +296,6 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   }, []);
 
   useEffect(() => {
-    const events = [
-      ...new Set([
-        'afterscriptexecute', // Non-standard
-        'animationcancel',
-        'animationend',
-        'animationiteration',
-        'animationstart',
-        'auxclick',
-        'beforematch', // Experimental
-        'beforescriptexecute', // Non-standard
-        'beforexrselect', // Experimental
-        'blur',
-        'click',
-        'compositionend',
-        'compositionstart',
-        'compositionupdate',
-        'contentvisibilityautostatechange', // Experimental
-        'contextmenu',
-        'copy',
-        'cut',
-        'dblclick',
-        // "DOMActivate",// 非推奨
-        // 'DOMMouseScroll', // Non-standard & 非推奨
-        'focus',
-        'focusin',
-        'focusout',
-        'fullscreenchange',
-        'fullscreenerror',
-        'gesturechange', // Non-standard
-        'gestureend', // Non-standard
-        'gesturestart', // Non-standard
-        'gotpointercapture',
-        'keydown',
-        // "keypress",// 非推奨
-        'keyup',
-        'lostpointercapture',
-        'mousedown',
-        'mouseenter',
-        'mouseleave',
-        'mousemove',
-        'mouseout',
-        'mouseover',
-        'mouseup',
-        // 'mousewheel', // Non-standard & 非推奨
-        // 'MozMousePixelScroll', // Non-standard & 非推奨
-        'paste',
-        'pointercancel',
-        'pointerdown',
-        'pointerenter',
-        'pointerleave',
-        'pointermove',
-        'pointerout',
-        'pointerover',
-        'pointerrawupdate', // Experimental
-        'pointerup',
-        'scroll',
-        'scrollend',
-        'securitypolicyviolation',
-        'touchcancel',
-        'touchend',
-        'touchmove',
-        'touchstart',
-        'transitioncancel',
-        'transitionend',
-        'transitionrun',
-        'transitionstart',
-        'webkitmouseforcechanged', // Non-standard
-        'webkitmouseforcedown', // Non-standard
-        'webkitmouseforceup', // Non-standard
-        'webkitmouseforcewillbegin', // Non-standard
-        'wheel',
-        ...Object.keys(window)
-          .filter((propName) => propName.startsWith('on'))
-          .map((eventName) => eventName.slice(2)),
-      ]),
-    ];
-
-    setEventNames([...events]);
-  }, []);
-
-  useEffect(() => {
     const target = ref.current;
     if (!target) {
       return;
@@ -329,8 +344,6 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
     mediaElementEvents.forEach((eventName) => {
       target.addEventListener(eventName, handler);
     });
-
-    setVideoSrc({ src: '/tools/dom-events-watcher/sample.mp4' });
 
     return () => {
       mediaElementEvents.forEach((eventName) => {
@@ -502,7 +515,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               <p className="mb-2">
                 <video
                   ref={videoRef}
-                  {...videoSrc}
+                  src="/tools/dom-events-watcher/sample.mp4"
                   controls
                   muted
                   className="aspect-video h-auto w-96 max-w-full"
@@ -537,7 +550,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
 
           <div
-            className="h-[30vh] overflow-y-scroll bg-gray-200 py-2 sm:h-[50vh]"
+            className="bg-tertiary h-[30vh] overflow-y-scroll py-2 sm:h-[50vh]"
             tabIndex={0}
             aria-labelledby={`${id}-log-title`}
           >
@@ -550,7 +563,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               {log.map((item, index) => {
                 if (typeof item === 'string') {
                   return (
-                    <p key={item} className="col-[1/4] my-1 grid bg-gray-300 px-2 text-right text-xs sm:col-[1/5]">
+                    <p key={item} className="bg-secondary col-[1/4] my-1 grid px-2 text-right text-xs sm:col-[1/5]">
                       ↓ until {item}
                     </p>
                   );
@@ -581,7 +594,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                       {times && ` x ${times}`}
                     </span>
                     {options && (
-                      <span className="col-[2/4] row-[2/3] leading-[inherit] text-orange-800 sm:col-[4/5] sm:row-[1/2] sm:pl-4">
+                      <span className="text-alert col-[2/4] row-[2/3] leading-[inherit] sm:col-[4/5] sm:row-[1/2] sm:pl-4">
                         {options}
                       </span>
                     )}

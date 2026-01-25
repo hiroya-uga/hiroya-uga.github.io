@@ -24,7 +24,6 @@ export async function getArticles(articlesDir: string) {
       const { data } = matter(fileContents);
 
       if ('title' in data === false || 'publishedAt' in data === false) {
-        console.error({ data });
         throw new Error(`Invalid front matter in file: ${filename}`);
       }
 

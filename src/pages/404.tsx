@@ -1,40 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 import Head from 'next/head';
 
 import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
 
 import '@/pages/404.css';
+import clsx from 'clsx';
 import Link from 'next/link';
 
-export default function Page() {
-  const [browserName, setBrowserName] = useState('');
-  const [historyLength, setHistoryLength] = useState(0);
-
-  useEffect(() => {
+const getBrowserName = () => {
+  if (typeof navigator !== 'undefined') {
     const { userAgent } = navigator;
 
-    if (userAgent.indexOf('Chrome') != -1) {
-      if (userAgent.indexOf('Edg') != -1) {
-        return setBrowserName('Microsoft Edge');
+    if (userAgent.includes('Chrome')) {
+      if (userAgent.includes('Edg')) {
+        return 'Microsoft Edge';
       }
-      return setBrowserName('Google Chrome');
-    } else if (userAgent.indexOf('Firefox') != -1) {
-      return setBrowserName('Mozilla Firefox');
-    } else if (userAgent.indexOf('Safari') != -1) {
-      return setBrowserName('Apple Safari');
-    } else if (userAgent.indexOf('Edge') != -1) {
-      return setBrowserName('Microsoft Edge');
-    } else if (userAgent.indexOf('MSIE') != -1 || userAgent.indexOf('Trident') != -1) {
-      return setBrowserName('Microsoft Internet Explorer');
+      return 'Google Chrome';
     }
+    if (userAgent.includes('Firefox')) {
+      return 'Mozilla Firefox';
+    }
+    if (userAgent.includes('Safari')) {
+      return 'Apple Safari';
+    }
+    if (userAgent.includes('Edge')) {
+      return 'Microsoft Edge';
+    }
+    if (userAgent.includes('MSIE') || userAgent.includes('Trident')) {
+      return 'Microsoft Internet Explorer';
+    }
+  }
 
-    return setBrowserName('Unknown Browser');
-  }, []);
+  return 'Unknown Browser';
+};
 
-  useEffect(() => {
-    setHistoryLength(history.length);
-  }, []);
+export default function Page() {
+  const browserName = useSyncExternalStore(
+    () => () => {},
+    () => getBrowserName(),
+    () => '',
+  );
+  const historyLength = useSyncExternalStore(
+    () => () => {},
+    () => history.length,
+    () => 0,
+  );
 
   return (
     <>
@@ -78,7 +89,9 @@ export default function Page() {
 
       <footer>
         <p>HTTP 404 - ファイル未検出</p>
-        <p>{browserName}</p>
+        <p className={clsx([browserName ? 'opacity-1' : 'opacity-0', 'transition-opacity duration-300'])}>
+          {browserName}
+        </p>
       </footer>
     </>
   );

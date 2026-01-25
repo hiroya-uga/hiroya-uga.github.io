@@ -41,7 +41,7 @@ export default function Page() {
       <div id={styles.gnw}>
         <h3>Bootstrap glyphicon-new-window</h3>
         <p>
-          <a href="https://google.com" target="_blank">
+          <a href="https://google.com" target="_blank" rel="noreferrer">
             Google
           </a>
         </p>
@@ -49,7 +49,7 @@ export default function Page() {
           <a href="https://apple.com">Apple</a>
         </p>
         <p>
-          <a href="https://yahoo.com" target="_blank">
+          <a href="https://yahoo.com" target="_blank" rel="noreferrer">
             Yahoo
           </a>
         </p>
@@ -57,7 +57,7 @@ export default function Page() {
       <div id={styles.gmw}>
         <h3>Bootstrap glyphicon-modal-window</h3>
         <p>
-          <a href="https://google.com" target="_blank">
+          <a href="https://google.com" target="_blank" rel="noreferrer">
             Google
           </a>
         </p>
@@ -65,7 +65,7 @@ export default function Page() {
           <a href="https://apple.com">Apple</a>
         </p>
         <p>
-          <a href="https://yahoo.com" target="_blank">
+          <a href="https://yahoo.com" target="_blank" rel="noreferrer">
             Yahoo
           </a>
         </p>
@@ -73,7 +73,7 @@ export default function Page() {
       <div id={styles.fels}>
         <h3>Font Awesome fa-external-link-square</h3>
         <p>
-          <a href="https://google.com" target="_blank">
+          <a href="https://google.com" target="_blank" rel="noreferrer">
             Google
           </a>
         </p>
@@ -81,7 +81,7 @@ export default function Page() {
           <a href="https://apple.com">Apple</a>
         </p>
         <p>
-          <a href="https://yahoo.com" target="_blank">
+          <a href="https://yahoo.com" target="_blank" rel="noreferrer">
             Yahoo
           </a>
         </p>
@@ -89,7 +89,7 @@ export default function Page() {
       <div id={styles.fel}>
         <h3>Font Awesome fa-external-link</h3>
         <p>
-          <a href="https://google.com" target="_blank">
+          <a href="https://google.com" target="_blank" rel="noreferrer">
             Google
           </a>
         </p>
@@ -97,7 +97,7 @@ export default function Page() {
           <a href="https://apple.com">Apple</a>
         </p>
         <p>
-          <a href="https://yahoo.com" target="_blank">
+          <a href="https://yahoo.com" target="_blank" rel="noreferrer">
             Yahoo
           </a>
         </p>

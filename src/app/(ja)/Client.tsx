@@ -1,7 +1,12 @@
 'use client';
-import { GAMES_LINK_LIST, TOOLS_LINK_LIST, TRANSLATION_DOCUMENTS_LINK_LIST } from '@/constants/link-list';
+import {
+  EmojiLinkListItem,
+  GAMES_LINK_LIST,
+  TOOLS_LINK_LIST,
+  TRANSLATION_DOCUMENTS_LINK_LIST,
+} from '@/constants/link-list';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Picture } from '@/components/Image';
 import { SITE_NAME } from '@/constants/meta';
@@ -12,6 +17,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 
 const COUNTER_LENGTH = 6;
+const { window } = globalThis;
 const message = [
   {
     mapping: [
@@ -94,7 +100,7 @@ export const WelcomeMessage = () => {
       () => {
         let prev = ''.padStart(COUNTER_LENGTH, '0');
         let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
-        let value = [...prev];
+        const value = [...prev];
         setIntervalId = window.setInterval(() => {
           if (i < COUNTER_LENGTH) {
             value[indexArray[i]] = next[indexArray[i]];
@@ -375,6 +381,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
       return;
     }
 
+    setIsFirstRender(false);
     setIndex(index + 1);
     setIsLoading(true);
 
@@ -414,18 +421,15 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
     }, 350);
   }, [generateRandomArray, index, indexList, isLoading]);
 
-  useEffect(() => {
-    if (isFirstRender) {
-      updateImage();
-      setIsFirstRender(false);
-    }
-  }, [isFirstRender, updateImage]);
-
   const transitionClassName = [
     'transition-[opacity,visibility] duration-300',
     isLoading ? 'opacity-0' : 'opacity-100',
     isLoading ? 'invisible' : 'visible',
   ];
+
+  if (isFirstRender) {
+    updateImage();
+  }
 
   return (
     <div
@@ -506,19 +510,38 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
   );
 };
 
-const pickUpListAll = [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST, ...GAMES_LINK_LIST];
+const pickUpList = {
+  origin: [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST, ...GAMES_LINK_LIST],
+  cache: null as EmojiLinkListItem[] | null,
+};
+
+const emptyPickUpList = [] as const;
+
+const getPickUpList = () => {
+  if (globalThis.window === undefined) {
+    return emptyPickUpList;
+  }
+
+  // 既にキャッシュがあれば返す
+  if (pickUpList.cache) {
+    return pickUpList.cache;
+  }
+
+  // 初回のみ計算
+  pickUpList.cache = pickUpList.origin
+    .filter(({ emoji, noPickup }) => Boolean(emoji) && noPickup !== true)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+
+  return pickUpList.cache;
+};
 
 export const PickUpList = () => {
-  const [pickUpList, setPickUpList] = useState<typeof pickUpListAll>([]);
-
-  useEffect(() => {
-    setPickUpList(() => {
-      return pickUpListAll
-        .filter(({ emoji, noPickup }) => Boolean(emoji) && noPickup !== true)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 3);
-    });
-  }, []);
+  const pickUpList = useSyncExternalStore(
+    () => () => {},
+    () => getPickUpList(),
+    () => emptyPickUpList,
+  );
 
   return (
     <ul

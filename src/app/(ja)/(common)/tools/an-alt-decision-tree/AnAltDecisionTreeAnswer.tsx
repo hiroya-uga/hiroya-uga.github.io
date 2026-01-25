@@ -17,91 +17,90 @@ const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
     </div>
   );
 };
+const Decorative = () => {
+  return (
+    <>
+      <p className="mb-2">
+        <code>alt</code>属性に空の値を指定します。
+      </p>
+      <p>
+        詳しくは
+        <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
+          「装飾目的の画像」（外部サイト）
+        </a>
+        を参照してください
+      </p>
+    </>
+  );
+};
+const Functional = () => {
+  return (
+    <>
+      <p className="mb-2">
+        リンクや実行されたアクションの目的を伝えるために、<code>alt</code>属性を使用します。
+      </p>
+
+      <p>
+        詳しくは
+        <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
+          「機能を持つ画像」（外部サイト）
+        </a>
+        を参照してください。
+      </p>
+    </>
+  );
+};
+const Textual = () => {
+  return (
+    <>
+      <p className="mb-2">
+        <code>alt</code>属性に画像に書かれているテキストを含めます。
+      </p>
+
+      <p>
+        詳しくは
+        <a href="https://www.w3.org/WAI/tutorials/images/textual/#styled-text-decorative-effect" hrefLang="en">
+          「文字画像」（外部サイト）
+        </a>
+        を参照してください。
+      </p>
+    </>
+  );
+};
+const Informative = () => {
+  return (
+    <>
+      <p className="mb-2">
+        意味が伝わるように<code>alt</code>属性に値を設定します。
+      </p>
+
+      <p>
+        詳しくは
+        <a href="https://www.w3.org/WAI/tutorials/images/informative" hrefLang="en">
+          「意味のある画像」（外部サイト）
+        </a>
+        を参照してください。
+      </p>
+    </>
+  );
+};
+const Complex = () => {
+  return (
+    <>
+      <p className="mb-2">「画像に含まれている情報」をWebページ内の別の箇所にも含めます。</p>
+
+      <p>
+        詳しくは
+        <a href="https://www.w3.org/WAI/tutorials/images/complex" hrefLang="en">
+          「複雑な画像」（外部サイト）
+        </a>
+        を参照してください。
+      </p>
+    </>
+  );
+};
 
 export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
-  const Decorative = () => {
-    return (
-      <>
-        <p className="mb-2">
-          <code>alt</code>属性に空の値を指定します。
-        </p>
-        <p>
-          詳しくは
-          <a href="https://www.w3.org/WAI/tutorials/images/decorative/" hrefLang="en">
-            「装飾目的の画像」（外部サイト）
-          </a>
-          を参照してください
-        </p>
-      </>
-    );
-  };
-  const Functional = () => {
-    return (
-      <>
-        <p className="mb-2">
-          リンクや実行されたアクションの目的を伝えるために、<code>alt</code>属性を使用します。
-        </p>
-
-        <p>
-          詳しくは
-          <a href="https://www.w3.org/WAI/tutorials/images/functional/" hrefLang="en">
-            「機能を持つ画像」（外部サイト）
-          </a>
-          を参照してください。
-        </p>
-      </>
-    );
-  };
-  const Textual = () => {
-    return (
-      <>
-        <p className="mb-2">
-          <code>alt</code>属性に画像に書かれているテキストを含めます。
-        </p>
-
-        <p>
-          詳しくは
-          <a href="https://www.w3.org/WAI/tutorials/images/textual/#styled-text-decorative-effect" hrefLang="en">
-            「文字画像」（外部サイト）
-          </a>
-          を参照してください。
-        </p>
-      </>
-    );
-  };
-  const Informative = () => {
-    return (
-      <>
-        <p className="mb-2">
-          意味が伝わるように<code>alt</code>属性に値を設定します。
-        </p>
-
-        <p>
-          詳しくは
-          <a href="https://www.w3.org/WAI/tutorials/images/informative" hrefLang="en">
-            「意味のある画像」（外部サイト）
-          </a>
-          を参照してください。
-        </p>
-      </>
-    );
-  };
-  const Complex = () => {
-    return (
-      <>
-        <p className="mb-2">「画像に含まれている情報」をWebページ内の別の箇所にも含めます。</p>
-
-        <p>
-          詳しくは
-          <a href="https://www.w3.org/WAI/tutorials/images/complex" hrefLang="en">
-            「複雑な画像」（外部サイト）
-          </a>
-          を参照してください。
-        </p>
-      </>
-    );
-  };
-
   switch (index) {
     case 0:
       return (
@@ -109,30 +108,10 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
           <Heading>文字が含まれている画像</Heading>
           <Accordion
             list={[
-              [
-                '側に同じ内容のテキストが書かれている場合',
-                <>
-                  <Decorative />
-                </>,
-              ],
-              [
-                '雰囲気づくりや、見た目のためにだけ置かれている場合',
-                <>
-                  <Decorative />
-                </>,
-              ],
-              [
-                'アイコンなど、特定の機能を説明する役割がある場合',
-                <>
-                  <Functional />
-                </>,
-              ],
-              [
-                '画像内のテキストが画像の中以外に存在しない場合',
-                <>
-                  <Textual />
-                </>,
-              ],
+              ['側に同じ内容のテキストが書かれている場合', <Decorative key="decorative" />],
+              ['雰囲気づくりや、見た目のためにだけ置かれている場合', <Decorative key="decorative" />],
+              ['アイコンなど、特定の機能を説明する役割がある場合', <Functional key="functional" />],
+              ['画像内のテキストが画像の中以外に存在しない場合', <Textual key="textual" />],
             ]}
           />
         </>
@@ -186,18 +165,8 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
 
           <Accordion
             list={[
-              [
-                '単純なグラフィックまたは写真の場合',
-                <>
-                  <Informative />
-                </>,
-              ],
-              [
-                'グラフまたは複雑な情報の場合',
-                <>
-                  <Complex />
-                </>,
-              ],
+              ['単純なグラフィックまたは写真の場合', <Informative key="informative" />],
+              ['グラフまたは複雑な情報の場合', <Complex key="complex" />],
               [
                 '側に同じ内容のテキストが書かれている場合',
                 <>

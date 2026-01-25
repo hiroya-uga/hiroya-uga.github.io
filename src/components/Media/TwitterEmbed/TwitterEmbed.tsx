@@ -18,7 +18,7 @@ export const TwitterEmbed = ({ href, nocards = false, noconversation = false, th
     if (ref.current) {
       ref.current.dataset.theme = theme ?? document.documentElement.dataset.theme ?? 'light';
     }
-    if ('twttr' in window === false) {
+    if ('twttr' in globalThis.window === false) {
       const script = document.createElement('script');
       script.src = 'https://platform.twitter.com/widgets.js';
       script.async = true;

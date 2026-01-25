@@ -59,7 +59,7 @@ const generate = () => {
           sudoku[row][col] = num;
 
           if (loop(sudoku) === false) {
-            sudoku[row][col] = NaN;
+            sudoku[row][col] = Number.NaN;
             continue;
           }
           return true;
@@ -71,7 +71,7 @@ const generate = () => {
     return true; // すべて埋まった
   };
 
-  const sudoku = Array.from({ length: 9 }, () => Array(9).fill(NaN));
+  const sudoku = Array.from({ length: 9 }, () => new Array(9).fill(Number.NaN));
   loop(sudoku);
   return sudoku;
 };
@@ -149,9 +149,11 @@ export const SudokuClient = () => {
   const [isDirty, setIsDirty] = useState(false);
 
   const [sudokuState, setSudokuState] = useState<SudokuState>(
-    Array.from({ length: 9 }, () => Array(9).fill({ value: NaN, type: 'loading', state: 'idle', answer: NaN })),
+    Array.from({ length: 9 }, () =>
+      new Array(9).fill({ value: Number.NaN, type: 'loading', state: 'idle', answer: Number.NaN }),
+    ),
   );
-  const [hoverCoords, setHoverCoords] = useState([NaN, NaN]);
+  const [hoverCoords, setHoverCoords] = useState([Number.NaN, Number.NaN]);
   const [currentInput, setCurrentInput] = useState([0, 0, 0, 0]);
   const inputMapRef = useRef<HTMLInputElement[][]>([]);
   const newGame = useCallback(() => {
@@ -167,7 +169,7 @@ export const SudokuClient = () => {
         sudoku.map((row) =>
           row.map((num) => {
             const type = Math.random() < levelValue ? 'input' : 'hint';
-            const value = type === 'input' ? NaN : num;
+            const value = type === 'input' ? Number.NaN : num;
 
             return { value, type, answer: num, state: 'idle', duplicated: false };
           }),
@@ -182,7 +184,7 @@ export const SudokuClient = () => {
       prev.map((row) =>
         row.map((cell) => {
           if (cell.type === 'input' && cell.value !== cell.answer) {
-            return { ...cell, value: NaN, state: 'invalid' };
+            return { ...cell, value: Number.NaN, state: 'invalid' };
           }
           return { ...cell, state: 'valid' };
         }),
@@ -192,30 +194,36 @@ export const SudokuClient = () => {
 
   useEffect(() => {
     if (isReady) {
-      newGame();
       return;
     }
 
     const saveData = getLocalStorage('savedata-sudoku-game');
 
-    if (typeof saveData?.shouldShowCorrectRatio !== 'undefined') {
+    if (saveData?.shouldShowCorrectRatio !== undefined) {
       setShouldShowCorrectRatio(saveData.shouldShowCorrectRatio);
     }
 
-    if (typeof saveData?.shouldShowHints !== 'undefined') {
+    if (saveData?.shouldShowHints !== undefined) {
       setShouldShowHints(saveData.shouldShowHints);
     }
 
-    if (typeof saveData?.shouldHighLight !== 'undefined') {
+    if (saveData?.shouldHighLight !== undefined) {
       setShouldHighLight(saveData.shouldHighLight);
     }
 
-    if (typeof saveData?.level !== 'undefined') {
+    if (saveData?.level !== undefined) {
       levelRef.current = saveData.level;
     }
 
     setIsReady(true);
-  }, [isReady, newGame]);
+  }, [isReady]);
+
+  useEffect(() => {
+    if (isReady) {
+      newGame();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReady]);
 
   useEffect(() => {
     if (isDirty) {
@@ -224,9 +232,9 @@ export const SudokuClient = () => {
         e.returnValue = '';
       };
 
-      window.addEventListener('beforeunload', onbeforeunload);
+      globalThis.window.addEventListener('beforeunload', onbeforeunload);
       return () => {
-        window.removeEventListener('beforeunload', onbeforeunload);
+        globalThis.window.removeEventListener('beforeunload', onbeforeunload);
       };
     }
   }, [isDirty]);
@@ -260,7 +268,7 @@ export const SudokuClient = () => {
             inputMapRef.current = result;
           }}
           onMouseLeave={() => {
-            setHoverCoords([NaN, NaN]);
+            setHoverCoords([Number.NaN, Number.NaN]);
           }}
           onInput={() => {
             setIsDirty(true);
@@ -278,7 +286,7 @@ export const SudokuClient = () => {
                   <div
                     key={`${rowIndex}-${colIndex}`}
                     className={clsx([
-                      '@w800px:size-[min(5vw,4rem)] table-cell border border-black transition-[background-color]',
+                      '@w800px:size-[min(5vw,4rem)] transition-bg table-cell border border-black',
                       rowIndex % 3 === 0 && 'border-t-4',
                       colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
                       type === 'input' && state === 'invalid' && 'bg-error text-high-contrast',
@@ -294,7 +302,7 @@ export const SudokuClient = () => {
                         return currentInput[0] === rowIndex && currentInput[1] === colIndex ? 0 : -1;
                       })()}
                       className={clsx([
-                        'w500:text-[max(4vw,1rem)] @w800px:text-[min(4vw,3rem)] relative aspect-square w-full text-center text-[clamp(16px,5rem,20px)] transition-[color] focus:z-[1] focus:rounded-lg',
+                        'w500:text-[max(4vw,1rem)] @w800px:text-[min(4vw,3rem)] focus:z-1 relative aspect-square w-full text-center text-[clamp(16px,5rem,20px)] transition-[color] focus:rounded-lg',
                         Number.isNaN(value) && 'text-transparent',
                         type === 'hint' && 'cursor-default font-bold',
                         type !== 'hint' && 'font-mono',
@@ -317,11 +325,11 @@ export const SudokuClient = () => {
                       onMouseEnter={() => {
                         setHoverCoords([rowIndex, colIndex]);
                         setCurrentInput((prev) => {
-                          if (Number.isNaN(prev[1]) || Number.isNaN(prev[1])) {
+                          if (Number.isNaN(prev[1])) {
                             return prev;
                           }
 
-                          return [NaN, NaN, prev[0], prev[1]];
+                          return [Number.NaN, Number.NaN, prev[0], prev[1]];
                         });
                       }}
                       onPointerUp={(e) => {
@@ -329,19 +337,19 @@ export const SudokuClient = () => {
                       }}
                       onFocus={() => {
                         setCurrentInput([rowIndex, colIndex]);
-                        setHoverCoords([NaN, NaN]);
+                        setHoverCoords([Number.NaN, Number.NaN]);
                       }}
                       onChange={(e) => {
                         const value = (() => {
                           if (e.nativeEvent instanceof InputEvent) {
                             const inputValue = e.nativeEvent.data ?? '';
 
-                            if (/^[0-9]$/.test(inputValue)) {
+                            if (/^\d$/.test(inputValue)) {
                               return Number(inputValue);
                             }
                           }
 
-                          return Number(formatStringToNumericString(e.target.value)) || NaN;
+                          return Number(formatStringToNumericString(e.target.value)) || Number.NaN;
                         })();
 
                         if ((1 <= value && value <= 9) || Number.isNaN(value)) {
@@ -487,7 +495,7 @@ export const SudokuClient = () => {
                         prev.map((row) =>
                           row.map((cell) => {
                             if (cell.type === 'input') {
-                              return { ...cell, value: NaN, state: 'idle' };
+                              return { ...cell, value: Number.NaN, state: 'idle' };
                             }
                             return cell;
                           }),

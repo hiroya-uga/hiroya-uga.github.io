@@ -21,13 +21,13 @@ export default function Page() {
 
         <p>
           Font Awesomeの別窓アイコン：
-          <a href="https://www.google.com" target="_blank">
+          <a href="https://www.google.com" target="_blank" rel="noreferrer">
             Google
           </a>
         </p>
         <p>
           Font Awesomeの別窓アイコンと「New」の絵文字：
-          <a href="https://www.apple.com" target="_blank" className="new">
+          <a href="https://www.apple.com" target="_blank" className="new" rel="noreferrer">
             Apple
           </a>
         </p>

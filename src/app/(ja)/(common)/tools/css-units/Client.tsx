@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Switch } from '@/components/Form';
 import { NoteList } from '@/components/List';
@@ -157,7 +157,6 @@ const Line = ({
   description,
   note,
   shouldShowDescriptions,
-  dynamicViewport,
 }: {
   value: number;
   id: string;
@@ -165,17 +164,13 @@ const Line = ({
   description: React.ReactNode;
   note?: React.ReactNode;
   shouldShowDescriptions: boolean;
-  /** dynamic viewport が更新されたのを useEffect で検知するためだけの引数 */
-  dynamicViewport?: string;
 }) => {
-  const [currentWidth, setCurrentWidth] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof ref.current?.clientWidth === 'number') {
-      setCurrentWidth(ref.current?.offsetWidth);
-    }
-  }, [value, dynamicViewport]);
+  const currentWidth = useSyncExternalStore(
+    () => () => {},
+    () => ref.current?.clientWidth ?? 0,
+    () => 0,
+  );
 
   return (
     <>
@@ -360,7 +355,6 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 value={value}
                 description={description}
                 shouldShowDescriptions={shouldShowDescriptions}
-                dynamicViewport={dynamicViewport} // % のため
               />
             );
           })}
@@ -404,7 +398,6 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 description={description}
                 note={note}
                 shouldShowDescriptions={shouldShowDescriptions}
-                dynamicViewport={dynamicViewport}
               />
             );
           })}

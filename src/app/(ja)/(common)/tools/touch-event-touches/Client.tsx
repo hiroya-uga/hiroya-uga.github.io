@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import clsx from 'clsx';
 
@@ -90,21 +90,22 @@ const TouchPoints = ({ dataSets }: { dataSets: Touches }) => {
 
 export const TouchEventTouchesContent = () => {
   const [isRunning, setIsRunning] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState<boolean | undefined>();
+  const isTouchDevice = useSyncExternalStore(
+    () => () => {},
+    () => 'ontouchstart' in globalThis.window,
+    () => null,
+  );
   const [touchDataSet, setTouchDataSet] = useState<Touches>({});
 
   const ref = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
   const requestAnimationFrameId = useRef<number>(0);
-  const loop = useCallback(() => {
-    requestAnimationFrameId.current = requestAnimationFrame(loop);
-  }, []);
 
   useEffect(() => {
-    setIsTouchDevice('ontouchstart' in window);
-  }, []);
+    const loop = () => {
+      requestAnimationFrameId.current = requestAnimationFrame(loop);
+    };
 
-  useEffect(() => {
     if (isRunning) {
       loop();
     } else if (requestAnimationFrameId.current) {
@@ -141,13 +142,13 @@ export const TouchEventTouchesContent = () => {
       update(e);
     };
     const ontouchend = (e: TouchEvent) => {
-      const idList = [...e.touches].map(({ identifier }) => identifier);
+      const idList = new Set([...e.touches].map(({ identifier }) => identifier));
       const touches = {
         ...touchDataSet,
       };
 
       for (const id of Object.keys(touches)) {
-        if (!idList.includes(Number(id))) {
+        if (!idList.has(Number(id))) {
           delete touches[id];
         }
       }
@@ -174,18 +175,19 @@ export const TouchEventTouchesContent = () => {
       container?.removeEventListener('touchmove', ontouchstartAndMove, option);
       container?.removeEventListener('touchend', ontouchend, option);
       startButton?.removeEventListener('touchend', ontouchend, option);
+
+      if (requestAnimationFrameId.current) {
+        cancelAnimationFrame(requestAnimationFrameId.current);
+      }
     };
-  }, [isRunning, loop, touchDataSet]);
+  }, [isRunning, touchDataSet]);
 
   return (
-    <div
-      className="bg-secondary relative rounded-md p-6"
-      aria-busy={typeof isTouchDevice === 'undefined' ? 'true' : undefined}
-    >
+    <div className="bg-secondary relative rounded-md p-6" aria-busy={isTouchDevice === null ? 'true' : undefined}>
       <p
         className={clsx([
           'absolute inset-0 m-auto grid place-items-center p-6 text-center transition-[visibility,opacity]',
-          typeof isTouchDevice !== 'undefined' && 'invisible opacity-0',
+          typeof isTouchDevice === 'boolean' && 'invisible opacity-0',
         ])}
       >
         <LoadingIcon />
@@ -257,7 +259,7 @@ export const TouchEventTouchesContent = () => {
 
           <div
             aria-live="assertive"
-            aria-busy={typeof isTouchDevice === 'undefined'}
+            aria-busy={isTouchDevice === undefined}
             className={clsx(['mx-2 mt-2 transition-[visibility,opacity] sm:mx-6', isRunning || 'invisible opacity-0'])}
           >
             <NoteBox headingLevel={2} type="warn">

@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '@/app/(en)/(specs)/layout.module.css';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 import { marked } from 'marked';
 
@@ -40,32 +40,62 @@ const NestedList = ({ headingList, numberingOnly }: { headingList: HTMLHeadingEl
   );
 };
 
+// サーバー側のスナップショットをキャッシュ（参照の安定性を保つ）
+const emptyHeadingList: HTMLHeadingElement[] = [];
+
+// クライアント側のスナップショットをキャッシュ
+let cachedHeadingList: HTMLHeadingElement[] | null = null;
+let cachedNumberingOnly: boolean | undefined = undefined;
+
+const getHeadingList = (numberingOnly?: boolean) => {
+  if (typeof document === 'undefined') {
+    return emptyHeadingList;
+  }
+
+  const headings = [...document.querySelectorAll<HTMLHeadingElement>(':is(h2, h3, h4, h5, h6):where(main *)')].filter(
+    ({ textContent }) => {
+      if (numberingOnly) {
+        return /^\d/.test(textContent ?? '');
+      }
+      return true;
+    },
+  );
+
+  // 同じ結果なら前回のキャッシュを返す（参照の安定性）
+  if (
+    cachedHeadingList &&
+    cachedNumberingOnly === numberingOnly &&
+    cachedHeadingList.length === headings.length &&
+    cachedHeadingList.every((h, i) => h === headings[i])
+  ) {
+    return cachedHeadingList;
+  }
+
+  cachedHeadingList = headings;
+  cachedNumberingOnly = numberingOnly;
+  return headings;
+};
+
 export const Toc = ({
   title = 'Table of Contents',
   numberingOnly,
-  setLoaded,
+  onready,
 }: {
   title?: string;
   numberingOnly?: boolean;
-  setLoaded?: Dispatch<SetStateAction<boolean>>;
+  onready?: () => void;
 }) => {
-  const [headingList, setHeadingList] = useState<HTMLHeadingElement[]>([]);
+  const headingList = useSyncExternalStore(
+    () => () => {},
+    () => getHeadingList(numberingOnly),
+    () => emptyHeadingList,
+  );
 
   useEffect(() => {
-    setHeadingList(
-      [...document.querySelectorAll<HTMLHeadingElement>(':is(h2, h3, h4, h5, h6):where(main *)')].filter(
-        ({ textContent }) => {
-          if (numberingOnly) {
-            return /^[0-9]/.test(textContent ?? '');
-          }
-
-          return true;
-        },
-      ),
-    );
-
-    setLoaded?.(true);
-  }, [numberingOnly, setLoaded]);
+    if (headingList.length > 0) {
+      onready?.();
+    }
+  }, [headingList, onready]);
 
   if (headingList.length === 0) {
     return <></>;

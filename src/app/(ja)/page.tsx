@@ -19,6 +19,13 @@ import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/');
 
+const MAIN_PAGES = [
+  { emoji: '🔧', href: '/tools' },
+  { emoji: '📚', href: '/documents' },
+  { emoji: '🎮', href: '/games' },
+  { emoji: '✍️', href: '/articles' },
+] as const;
+
 export default function Home() {
   const captionId = useId();
 
@@ -100,26 +107,8 @@ export default function Home() {
 
             <div className="@w640:grid @w640:grid-cols-3 @w640:gap-8">
               <ul className="@w640:grid @w640:grid-cols-subgrid @w640:grid-rows-subgrid @w640:col-start-1 @w640:col-end-4 @w640:mb-0 @w640:row-start-1 @w640:row-end-3 mb-4">
-                {[
-                  {
-                    emoji: '🔧',
-                    href: '/tools',
-                  },
-                  {
-                    emoji: '📚',
-                    href: '/documents',
-                  },
-                  {
-                    emoji: '🎮',
-                    href: '/games',
-                  },
-                  {
-                    emoji: '✍️',
-                    href: '/articles',
-                  },
-                ].map(({ emoji, href }) => {
+                {MAIN_PAGES.map(({ emoji, href }) => {
                   const { pageTitle } = getMetadata(href);
-
                   return (
                     <li
                       key={href}

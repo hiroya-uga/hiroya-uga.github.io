@@ -8,20 +8,20 @@ export const FOOTER_LINK_LIST = [
   { href: 'https://github.com/hiroya-uga/hiroya-uga.github.io/issues', title: 'フィードバック', target: '_blank' },
 ];
 
-type LinkListItem = {
+export type EmojiLinkListItem = {
   emoji: string;
   pathname: string;
   noPickup?: boolean;
 };
 
-export const DOCUMENTS_LINK_LIST: LinkListItem[] = [
+export const DOCUMENTS_LINK_LIST: EmojiLinkListItem[] = [
   { emoji: '', pathname: '/documents/translations' },
   { emoji: '', pathname: '/documents/notes' },
   { emoji: '', pathname: '/documents/media' },
   { emoji: '', pathname: '/documents/fantasized-specs' },
 ];
 
-export const TRANSLATION_DOCUMENTS_LINK_LIST: LinkListItem[] = [
+export const TRANSLATION_DOCUMENTS_LINK_LIST: EmojiLinkListItem[] = [
   {
     emoji: '',
     pathname: '/documents/translations/w3c/wai/tutorials/images',
@@ -32,7 +32,7 @@ export const TRANSLATION_DOCUMENTS_LINK_LIST: LinkListItem[] = [
   },
 ];
 
-type ToolPage = (LinkListItem & {
+type ToolPage = (EmojiLinkListItem & {
   type: 'default' | 'playground';
   userType?: JobRole[];
 })[];
@@ -98,7 +98,7 @@ export const TOOLS_LINK_LIST: ToolPage = [
   },
 ];
 
-export const GAMES_LINK_LIST: LinkListItem[] = [
+export const GAMES_LINK_LIST: EmojiLinkListItem[] = [
   { emoji: '🔢', pathname: '/games/sudoku' },
   { emoji: '🏓', pathname: '/games/simple-block-breaker' },
 ];

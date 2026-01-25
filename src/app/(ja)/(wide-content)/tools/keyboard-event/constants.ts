@@ -111,3 +111,9 @@ export const keyboardSvgData = [
   { key: 'Numpad0', label: '0', x: 850 - 9, y: 210 - 9, width: 90 },
   { key: 'NumpadDecimal', label: '.', x: 950 - 9, y: 210 - 9, width: 40 },
 ];
+
+export const KEYBOARD_EVENT_DEFAULT_OPTIONS = {
+  onkeydown: true,
+  onkeyup: true,
+  onkeypress: false,
+};

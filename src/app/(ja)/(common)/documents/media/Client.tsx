@@ -309,7 +309,7 @@ export const MediaContent = () => {
               onInput={({ currentTarget }) => {
                 setKeyword(currentTarget.value);
 
-                router.replace(`${pathname ?? window.location.pathname}?query=${currentTarget.value}`, {
+                router.replace(`${pathname ?? globalThis.window.location.pathname}?query=${currentTarget.value}`, {
                   scroll: false,
                 });
               }}

@@ -8,13 +8,13 @@ import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
-type Block = {
+interface Block {
   x: number;
   y: number;
   w: number;
   h: number;
   broken: boolean;
-};
+}
 
 const getBlockSetting = ({
   canvasWidth,
@@ -71,6 +71,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   const [running, setRunning] = useState(false);
   const cursorHiddenSetTimeoutId = useRef<number>(-1);
   const [cursorHidden, setCursorHidden] = useState(false);
+  const [allBlocksUnbroken, setAllBlocksUnbroken] = useState(true);
 
   // Game state refs
   const paddle = useRef({
@@ -93,7 +94,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   });
   const blocks = useRef<Block[]>([]);
 
-  const initBlocks = useCallback(() => {
+  const createBlocksArray = useCallback(() => {
     const { rows, cols, gap, blockWidth, blockHeight } = blockSettingRef.current;
     const arr: Block[] = [];
     for (let row = 0; row < rows; row++) {
@@ -107,8 +108,13 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         });
       }
     }
-    blocks.current = arr;
+    return arr;
   }, []);
+
+  const initBlocks = useCallback(() => {
+    blocks.current = createBlocksArray();
+    setAllBlocksUnbroken(true);
+  }, [createBlocksArray]);
 
   const reset = useCallback(() => {
     paddle.current.x = width / 2 - paddle.current.width / 2;
@@ -153,13 +159,13 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   }, []);
 
   const updateQueryParams = useCallback(({ key, value }: { key: string; value: string }) => {
-    const url = new URL(window.location.href);
+    const url = new URL(globalThis.window.location.href);
     if (value === 'false') {
       url.searchParams.delete(key);
     } else {
       url.searchParams.set(key, value);
     }
-    window.history.replaceState({}, '', url.toString());
+    globalThis.window.history.replaceState({}, '', url.toString());
   }, []);
 
   // マウス操作
@@ -174,8 +180,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       const x = (e.clientX - rect.left) * scaleX;
       paddle.current.x = x - paddle.current.width / 2;
     };
-    window.addEventListener('mousemove', onmousemove);
-    return () => window.removeEventListener('mousemove', onmousemove);
+    globalThis.window.addEventListener('mousemove', onmousemove);
+    return () => globalThis.window.removeEventListener('mousemove', onmousemove);
   }, []);
 
   // タッチ操作
@@ -190,8 +196,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       const x = (e.touches[0].clientX - rect.left) * scaleX;
       paddle.current.x = x - paddle.current.width / 2;
     };
-    window.addEventListener('touchmove', ontouchmove);
-    return () => window.removeEventListener('touchmove', ontouchmove);
+    globalThis.window.addEventListener('touchmove', ontouchmove);
+    return () => globalThis.window.removeEventListener('touchmove', ontouchmove);
   }, []);
 
   // キーボード操作
@@ -261,15 +267,15 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       }
     };
 
-    window.addEventListener('keydown', onkeydown);
-    window.addEventListener('keyup', onkeyup);
+    globalThis.window.addEventListener('keydown', onkeydown);
+    globalThis.window.addEventListener('keyup', onkeyup);
 
     return () => {
       direction = 'none';
       keysPressed.clear();
       cancelAnimationFrame(moveAnimationFrameId);
-      window.removeEventListener('keydown', onkeydown);
-      window.removeEventListener('keyup', onkeyup);
+      globalThis.window.removeEventListener('keydown', onkeydown);
+      globalThis.window.removeEventListener('keyup', onkeyup);
     };
   }, [width]);
 
@@ -351,6 +357,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
             ball.current.speedY *= -1;
           }
           block.broken = true;
+          setAllBlocksUnbroken(false);
           if (ball.current.speedY < 0) {
             ball.current.speedY -= ball.current.acceleration;
           } else {
@@ -396,7 +403,6 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         });
         setToastMessage('おめでとうございます!!🎉🎉🎉');
         setStatusMessage('おめでとうございます!!🎉🎉🎉');
-        return;
       }
     };
 
@@ -457,9 +463,13 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       });
     }
 
-    initBlocks();
-    setIsReady(true);
-  }, [id, initBlocks, searchParams]);
+    blocks.current = createBlocksArray();
+    // Defer state updates to avoid cascading renders warning
+    queueMicrotask(() => {
+      setIsReady(true);
+      setAllBlocksUnbroken(true);
+    });
+  }, [id, createBlocksArray, searchParams]);
 
   return (
     <>
@@ -476,7 +486,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
           onMouseMove={() => {
             setCursorHidden(false);
             clearTimeout(cursorHiddenSetTimeoutId.current);
-            cursorHiddenSetTimeoutId.current = window.setTimeout(() => {
+            cursorHiddenSetTimeoutId.current = globalThis.window.setTimeout(() => {
               setCursorHidden(true);
             }, 800);
           }}
@@ -501,12 +511,15 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
           className="mx-auto grid aspect-square w-[5.5rem] place-items-center rounded-full bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
           <span className="sr-only">{statusMessage}</span>
-          {running ? 'Playing now' : blocks.current.every((b) => b.broken === false) ? 'Start' : 'Restart'}
+          {(() => {
+            if (running) return 'Playing now';
+            return allBlocksUnbroken ? 'Start' : 'Restart';
+          })()}
         </button>
       </p>
 
       <div className="@container px-2">
-        <fieldset className="@w640:pl-0 relative mx-auto max-w-[40rem] pl-4">
+        <fieldset className="@w640:pl-0 max-w-w640 relative mx-auto pl-4">
           <legend className="mb-3 text-sm font-bold">設定</legend>
 
           <p className="absolute right-0 top-0"></p>
@@ -544,7 +557,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                     max={max}
                     className="col-start-2 row-start-1 min-h-8"
                     onChange={(e) => {
-                      const newSize = parseInt(e.target.value, 10);
+                      const newSize = Number.parseInt(e.target.value, 10);
                       if (paddle.current) {
                         blockSettingRef.current = getBlockSetting({
                           ...blockSettingRef.current,
@@ -593,7 +606,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 max={1000}
                 className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
-                  const newSize = parseInt(e.target.value, 10);
+                  const newSize = Number.parseInt(e.target.value, 10);
                   if (paddle.current) {
                     paddle.current.width = newSize;
                   }
@@ -634,7 +647,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 max={100}
                 className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
-                  const newSize = parseInt(e.target.value, 10);
+                  const newSize = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
                     ball.current.radius = newSize;
                   }
@@ -677,7 +690,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 max={10}
                 className="col-start-2 row-start-1 min-h-8"
                 onChange={(e) => {
-                  const newSize = parseInt(e.target.value, 10);
+                  const newSize = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
                     ball.current.defaultSpeed = newSize;
                   }
@@ -795,9 +808,9 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
             disabled={running || searchParams?.size === 0}
             onClick={() => {
               // 雑実装
-              const url = new URL(window.location.href);
-              window.history.replaceState({}, '', url.pathname);
-              window.location.reload();
+              const url = new URL(globalThis.window.location.href);
+              globalThis.window.history.replaceState({}, '', url.pathname);
+              globalThis.window.location.reload();
             }}
           >
             設定をリセット

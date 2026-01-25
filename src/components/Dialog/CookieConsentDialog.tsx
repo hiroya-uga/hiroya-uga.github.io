@@ -2,7 +2,7 @@
 
 import { GA_MEASUREMENT_ID } from '@/constants/id';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import ReactGA from 'react-ga4';
 
 import { RunButton, TextLink } from '@/components/Clickable';
@@ -56,15 +56,18 @@ export function CookieConsentDialog() {
   const id = useId();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const isFromSNSApp = useSearchParams()?.get('utm_medium') === 'social';
-  const [shouldShowDialog, setShouldShowDialog] = useState(true);
+  const shouldShowDialog = useSyncExternalStore(
+    () => () => () => {},
+    () => {
+      const cookieConsent = getLocalStorage('cookie-consent');
+      return cookieConsent !== 'accepted';
+    },
+    () => true,
+  );
 
   useEffect(() => {
-    const cookieConsent = getLocalStorage('cookie-consent');
-
-    if (cookieConsent === 'accepted') {
+    if (shouldShowDialog === false) {
       initGA();
-      setShouldShowDialog(false);
-
       return;
     }
 
@@ -79,7 +82,7 @@ export function CookieConsentDialog() {
         });
       }
     }
-  }, []);
+  }, [shouldShowDialog]);
 
   const closeDialog = useCallback((state: 'accepted' | 'rejected') => {
     setLocalStorage('cookie-consent', state);

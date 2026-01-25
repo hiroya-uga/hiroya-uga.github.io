@@ -2,7 +2,7 @@
 
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
 type Props = {
@@ -12,19 +12,13 @@ type Props = {
 };
 
 export const Toast = ({ message, setMessage, duration = 3000 }: Props) => {
-  const [portal, setPortal] = useState<HTMLDivElement | null>(null);
+  const portal = useSyncExternalStore(
+    () => () => {},
+    () => document.getElementById(DIALOG_PORTAL_ID),
+    () => null,
+  );
   const ref = useRef<HTMLParagraphElement>(null);
   const setTimeoutId = useRef(-1);
-
-  useEffect(() => {
-    const div = document.getElementById(DIALOG_PORTAL_ID);
-
-    if (div instanceof HTMLDivElement === false) {
-      return;
-    }
-
-    setPortal(div);
-  }, []);
 
   useEffect(() => {
     const toast = ref.current;

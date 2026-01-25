@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import clsx from 'clsx';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -44,63 +44,16 @@ const ResetButton = ({ setPageState }: { setPageState: (_: { index: number; isCu
   );
 };
 
-export const AnAltDecisionTreeContent = () => {
-  const searchParams = useSearchParams();
-  const [index, setIndex] = useState(formatIndex(searchParams?.get('q')));
-  const [isCurrent, setIsCorrect] = useState(searchParams?.get('current') === '1');
-  const pathname = usePathname();
+const Container = ({
+  index,
+  setPageState,
+}: {
+  index: number;
+  setPageState: (_: { index: number; isCurrent: boolean }) => void;
+}) => {
   const router = useRouter();
-  const setPageState = useCallback(
-    (options: { index: number; isCurrent: boolean }) => {
-      const query = new URLSearchParams();
 
-      if (options.index) {
-        query.set('q', String(options.index + 1));
-      }
-
-      if (options.isCurrent) {
-        query.set('current', '1');
-      }
-
-      router.push(`${pathname ?? window.location.pathname}?${query.toString()}`, {
-        scroll: false,
-      });
-    },
-    [pathname, router],
-  );
-
-  useEffect(() => {
-    const indexParam = formatIndex(searchParams?.get('q'));
-    const currentParam = searchParams?.get('current') === '1';
-
-    if (indexParam !== index) {
-      setIndex(indexParam);
-    }
-
-    if (currentParam !== isCurrent) {
-      setIsCorrect(currentParam);
-    }
-  }, [index, isCurrent, searchParams]);
-
-  if (3 < index) {
-    return (
-      <div className={styles.throw}>
-        <AnAltDecisionTreeException />
-        <ResetButton setPageState={setPageState} />
-      </div>
-    );
-  }
-
-  if (isCurrent) {
-    return (
-      <div className={styles.goal}>
-        <AnAltDecisionTreeAnswer index={index} />
-        <ResetButton setPageState={setPageState} />
-      </div>
-    );
-  }
-
-  const Container = () => (
+  return (
     <>
       <div className={clsx([`${styles.slide}`, index === 0 && 'pb-4'])}>
         <AnAltDecisionTreeQuestion index={index} />
@@ -152,6 +105,61 @@ export const AnAltDecisionTreeContent = () => {
       )}
     </>
   );
+};
 
-  return <Container />;
+export const AnAltDecisionTreeContent = () => {
+  const searchParams = useSearchParams();
+  const [index, setIndex] = useState(formatIndex(searchParams?.get('q')));
+  const [isCurrent, setIsCurrent] = useState(searchParams?.get('current') === '1');
+  const pathname = usePathname();
+  const router = useRouter();
+  const setPageState = useCallback(
+    (options: { index: number; isCurrent: boolean }) => {
+      const query = new URLSearchParams();
+
+      if (options.index) {
+        query.set('q', String(options.index + 1));
+      }
+
+      if (options.isCurrent) {
+        query.set('current', '1');
+      }
+
+      router.push(`${pathname ?? globalThis.window.location.pathname}?${query.toString()}`, {
+        scroll: false,
+      });
+    },
+    [pathname, router],
+  );
+
+  const indexParam = formatIndex(searchParams?.get('q'));
+  const currentParam = searchParams?.get('current') === '1';
+
+  if (indexParam !== index) {
+    setIndex(indexParam);
+  }
+
+  if (currentParam !== isCurrent) {
+    setIsCurrent(currentParam);
+  }
+
+  if (3 < index) {
+    return (
+      <div className={styles.throw}>
+        <AnAltDecisionTreeException />
+        <ResetButton setPageState={setPageState} />
+      </div>
+    );
+  }
+
+  if (isCurrent) {
+    return (
+      <div className={styles.goal}>
+        <AnAltDecisionTreeAnswer index={index} />
+        <ResetButton setPageState={setPageState} />
+      </div>
+    );
+  }
+
+  return <Container index={index} setPageState={setPageState} />;
 };

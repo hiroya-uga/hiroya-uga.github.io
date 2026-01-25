@@ -141,9 +141,6 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
-  --breakpoint-pointer-fine: (pointer: fine);
-  --breakpoint-pointer-coarse: (pointer: coarse);
-  --breakpoint-pointer-none: (pointer: none);
 
   --container-content: 60rem; /* 960px */
 
