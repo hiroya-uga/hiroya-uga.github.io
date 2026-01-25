@@ -227,7 +227,7 @@ export const TableDevSupporterContent = () => {
               .replace(/８/g, '8')
               .replace(/９/g, '9');
           case 'spaceAdjust':
-            return value.replace(/　/g, ' ');
+            return value.replaceAll('　', ' ');
           case 'onlySemantics':
             while (dummyElement.querySelector('div, span')) {
               for (const elm of dummyElement.querySelectorAll('div, span')) {
@@ -247,7 +247,7 @@ export const TableDevSupporterContent = () => {
 
           case 'removeAllTags':
             // 開始タグがあれば実施する
-            if (/<(?!\!)/.test(dummyElement.innerHTML)) {
+            if (/<(?!!)/.test(dummyElement.innerHTML)) {
               dummyElement.innerHTML = value.trim();
             }
 

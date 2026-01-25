@@ -90,7 +90,6 @@ const Character = ({ value }: { value: string }) => {
             (output === '。' || output === '、') && (special === '」' || special === '』')
               ? 'translate-x-[0.25em] translate-y-[0.25em]'
               : 'translate-x-[0.175em] translate-y-[0.5em]',
-            ,
           ])}
         >
           {special}
@@ -137,7 +136,9 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
           isStrict,
         }),
       );
-    } catch {}
+    } catch {
+      // do nothing
+    }
   }, [currentValue, fontSize, isAutoCount, isFirstView, isHalfWidthCount, value, isStrict]);
 
   useEffect(() => {
@@ -154,7 +155,9 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
         setIsStrict(saveData.isStrict ?? false);
         setStringLength((cache ?? '').length);
       }
-    } catch {}
+    } catch {
+      // do nothing
+    }
   }, [isFirstView]);
 
   const getSegmentedCharacters = useCallback(
@@ -376,7 +379,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                 id={id}
                 className="border-secondary bg-secondary h-[max(5lh,23vh)] min-h-[108px] w-full resize-y rounded-md border px-4 py-2"
                 style={{
-                  fontSize: Boolean(fontSize) ? `${fontSize}px` : DEFAULT_FONT_SIZE,
+                  fontSize: fontSize ? `${fontSize}px` : DEFAULT_FONT_SIZE,
                 }}
                 value={currentValue}
                 onKeyDown={(e) => {

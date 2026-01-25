@@ -1,7 +1,7 @@
 'use client';
 import { DiscList } from '@/components/List';
 import { getMetadata } from '@/utils/get-metadata';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton.module.css';
 import { SvgIcon } from '@/components/Icons';
@@ -13,35 +13,29 @@ import { createPortal } from 'react-dom';
 
 export const MarkupDevSupporterHelpButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [portal, setPortal] = useState<HTMLDivElement | null>(null);
+  const portal = useSyncExternalStore(
+    () => () => {},
+    () => document.getElementById(DIALOG_PORTAL_ID),
+    () => null,
+  );
   const ref = useRef<HTMLDialogElement | null>(null);
   const isReady = portal !== null;
-
-  useEffect(() => {
-    const div = document.getElementById(DIALOG_PORTAL_ID);
-
-    if (div instanceof HTMLDivElement === false) {
-      return;
-    }
-
-    setPortal(div);
-  }, []);
 
   useEffect(() => {
     const onkeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         const dialog = ref.current;
         if (dialog && dialog.open) {
-          e.preventDefault;
+          e.preventDefault();
           dialog.close();
           setIsOpen(false);
         }
       }
     };
 
-    window.addEventListener('keydown', onkeydown);
+    globalThis.window.addEventListener('keydown', onkeydown);
     return () => {
-      window.removeEventListener('keydown', onkeydown);
+      globalThis.window.removeEventListener('keydown', onkeydown);
     };
   }, []);
 
@@ -50,7 +44,7 @@ export const MarkupDevSupporterHelpButton = () => {
       <button
         type="button"
         className={clsx([
-          'w-full rounded-lg border border-[#9c9c9c] bg-[#333] py-3.5 pr-2 text-center text-[0.875rem] leading-none text-[#b2b2b2] transition-[opacity,visibility,background-color] hover:bg-[#444]',
+          'w-full rounded-lg border border-[#9c9c9c] bg-[#333] py-3.5 pr-2 text-center text-sm leading-none text-[#b2b2b2] transition-[opacity,visibility,background-color] hover:bg-[#444]',
           isReady ? 'visible opacity-100' : 'invisible opacity-0',
         ])}
         aria-haspopup="dialog"
@@ -193,7 +187,7 @@ export const MarkupDevSupporterHelpButton = () => {
                       }
                     }}
                   >
-                    <caption className="mb-2">人気寿司ネタ　ランキング</caption>
+                    <caption className="mb-2">人気寿司ネタ ランキング</caption>
                     <thead>
                       <tr>
                         <th scope="column">順位</th>

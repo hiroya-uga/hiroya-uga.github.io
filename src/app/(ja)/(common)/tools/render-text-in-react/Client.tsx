@@ -5,7 +5,7 @@ import { RunButton } from '@/components/Clickable';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Radio } from '@/components/Form';
 import { Heading } from '@/components/Heading';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const defaultCodeValue = `export const Example = () => {
   const [count, setCount] = useState(0);
@@ -41,10 +41,8 @@ const Example = ({ shouldUseTemplateLiteral }: { shouldUseTemplateLiteral: boole
 
 export const RenderTextInReactPlaygroundContent = () => {
   const [shouldUseTemplateLiteral, setShouldUseTemplateLiteral] = useState(false);
-  const [code, setCode] = useState(defaultCodeValue);
-
-  useEffect(() => {
-    setCode(`export const Example = () => {
+  const code = useMemo(() => {
+    return `export const Example = () => {
   const [count, setCount] = useState(0);
 
   function handleClick() {
@@ -57,7 +55,7 @@ export const RenderTextInReactPlaygroundContent = () => {
       <button onClick={handleClick}>Click me!</button>
     </>
   );
-};`);
+};`;
   }, [shouldUseTemplateLiteral]);
 
   return (

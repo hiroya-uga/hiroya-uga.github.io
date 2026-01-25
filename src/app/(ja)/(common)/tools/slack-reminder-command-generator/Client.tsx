@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   DateSection,
@@ -70,7 +70,7 @@ const createComment = ({ result, type }: { result: Result; type: Every }) => {
         }
 
         if (/on the \d/.test(result.date)) {
-          const value = parseInt(result.date.replace('on the ', ''));
+          const value = Number.parseInt(result.date.replace('on the ', ''));
           return `${value}日`;
         }
 
@@ -154,28 +154,7 @@ export const SlackReminderCommandGenerator = () => {
     day: string;
   }>({ type: 'fixed', nth: 'first', day: '1' });
 
-  const [result, setResult] = useState<Result>({
-    who: 'me',
-    message: 'ここにメッセージ',
-    every: 'every',
-    day: 'day',
-    time: '09:00',
-  });
-
-  useEffect(() => {
-    const form = ref.current;
-
-    form?.addEventListener('change', onchange);
-    return () => {
-      form?.removeEventListener('change', onchange);
-      window.removeEventListener('beforeunload', onbeforeunload);
-      if (copyButtonSettimeoutId) {
-        clearTimeout(copyButtonSettimeoutId);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
+  const result = useMemo<Result>(() => {
     const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const checkedDays = (() => {
       if (type === '毎日・毎週') {
@@ -208,27 +187,25 @@ export const SlackReminderCommandGenerator = () => {
 
     switch (type) {
       case '毎日・毎週':
-        setResult({
+        return {
           who: who,
           message,
           every: 'every',
           day: checkedDays,
           time,
           starting,
-        });
-        break;
+        };
       case '隔週':
-        setResult({
+        return {
           who: who,
           message,
           every: 'every other',
           day: dayList[day],
           time,
           starting,
-        });
-        break;
+        };
       case '毎月':
-        setResult({
+        return {
           who: who,
           message,
           date: (() => {
@@ -255,8 +232,7 @@ export const SlackReminderCommandGenerator = () => {
           every: 'every month',
           time,
           starting,
-        });
-        break;
+        };
       case '毎年': {
         const monthKey = [
           'January',
@@ -274,33 +250,44 @@ export const SlackReminderCommandGenerator = () => {
         ];
         const month = monthKey[Number(date[0]) - 1] ?? '[Month]';
 
-        setResult({
+        return {
           who: who,
           message,
           date: `on ${month} ${date[1] || '[Day]'}`,
           every: 'every year',
           time,
           starting,
-        });
-        break;
+        };
       }
       case '繰り返しなし': {
         const [year, month, day] = fullDate.split('-');
         const value = `${month}/${day}/${year}`;
 
-        setResult({
+        return {
           who: who,
           message,
           date: fullDate ? `on ${value}` : 'mm/dd/yyyy',
           time,
           starting,
-        });
-        break;
+        };
       }
       default:
-        setResult({ who: 'エラー' });
+        return { who: 'エラー' };
     }
   }, [who, message, time, days, day, starting, type, fullDate, date, monthState]);
+
+  useEffect(() => {
+    const form = ref.current;
+
+    form?.addEventListener('change', onchange);
+    return () => {
+      form?.removeEventListener('change', onchange);
+      globalThis.window.removeEventListener('beforeunload', onbeforeunload);
+      if (copyButtonSettimeoutId) {
+        clearTimeout(copyButtonSettimeoutId);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -493,10 +480,10 @@ export const SlackReminderCommandGenerator = () => {
           <p
             className="whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-gray-300 sm:rounded-l-lg sm:rounded-r-none"
             onClick={(e) => {
-              window.getSelection()?.removeAllRanges();
+              globalThis.window.getSelection()?.removeAllRanges();
               const range = document.createRange();
               range.selectNodeContents(e.currentTarget);
-              window.getSelection()?.addRange(range);
+              globalThis.window.getSelection()?.addRange(range);
             }}
           >
             <span className="text-blue-400">/remind</span> <span className="text-red-300">{result.who || 'me'}</span>{' '}
@@ -547,7 +534,7 @@ export const SlackReminderCommandGenerator = () => {
                   label.textContent = 'Error!';
                 }
 
-                copyButtonSettimeoutId = window.setTimeout(() => {
+                copyButtonSettimeoutId = globalThis.window.setTimeout(() => {
                   label.textContent = 'Copy';
                 }, 2000);
               }}

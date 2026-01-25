@@ -1,12 +1,16 @@
-import { Metadata } from 'next';
+'use client';
 
-import { DefaultRootLayout } from '@/components/structures/DefaultRootLayout';
-import { URL_ORIGIN } from '@/constants/meta';
+import { useEffect } from 'react';
 
-export default function EnRootLayout({ children }: { children: React.ReactNode }) {
-  return <DefaultRootLayout lang="en">{children}</DefaultRootLayout>;
+export default function EnglishLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  useEffect(() => {
+    // TODO: root layout に html 要素がないと再レンダリングが無限に起こる可能性があり暫定対応。
+    document.documentElement.lang = 'en';
+
+    return () => {
+      document.documentElement.lang = 'ja';
+    };
+  }, []);
+
+  return <>{children}</>;
 }
-
-export const metadata: Metadata = {
-  metadataBase: new URL(URL_ORIGIN),
-};

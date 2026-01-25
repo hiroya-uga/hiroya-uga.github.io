@@ -1,36 +1,20 @@
 'use client';
 
-import { getLocalStorage, LocalStorageItems, setLocalStorage } from '@/utils/local-storage';
+import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useId, useMemo, useRef, useSyncExternalStore } from 'react';
+
+const { window } = globalThis;
 
 export const ThemeSwitch = () => {
   const id = useId();
-  const [theme, setTheme] = useState<LocalStorageItems['theme'] | null>(null);
-  const styleRef = useRef<HTMLStyleElement>(null);
-  const setTimeoutIdRef = useRef(-1);
-
-  const changeTheme = useCallback((value: typeof theme) => {
-    const style = styleRef.current;
-    if (style instanceof HTMLStyleElement === false || value === null) {
-      return;
+  const styleElement = useMemo(() => {
+    if (window === undefined) {
+      return null;
     }
-    clearTimeout(setTimeoutIdRef.current);
-    document.head.appendChild(style);
-    setTimeoutIdRef.current = window.setTimeout(() => {
-      style.remove();
-    }, 300);
 
-    document.documentElement.setAttribute('data-theme', value);
-    setTheme(value);
-    setLocalStorage('theme', value);
-  }, []);
-
-  useEffect(() => {
-    const currentTheme = getLocalStorage('theme');
     const style = document.createElement('style');
 
-    styleRef.current = style;
     style.textContent = `
       * {
         transition-property: color, background-color, border-color, box-shadow, text-decoration-color, fill, stroke, filter !important;
@@ -39,16 +23,45 @@ export const ThemeSwitch = () => {
       }
     `;
 
-    if (currentTheme === null) {
-      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const value = isDarkMode ? 'dark' : 'light';
-      changeTheme(value);
+    return style;
+  }, []);
+  const setTimeoutIdRef = useRef<ReturnType<typeof setTimeout> | number>(-1);
 
-      return;
+  const theme = useSyncExternalStore(
+    (callback) => {
+      const handleStorageChange = (e: StorageEvent) => {
+        if (e.key === 'theme') {
+          callback();
+        }
+      };
+
+      globalThis.addEventListener('storage', handleStorageChange);
+
+      return () => {
+        globalThis.removeEventListener('storage', handleStorageChange);
+      };
+    },
+    () => getLocalStorage('theme') ?? 'light',
+    () => 'light',
+  );
+
+  const toggleTheme = useCallback(() => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+
+    if (styleElement instanceof HTMLStyleElement) {
+      clearTimeout(setTimeoutIdRef.current);
+      document.head.appendChild(styleElement);
+      setTimeoutIdRef.current = globalThis.setTimeout(() => {
+        styleElement.remove();
+      }, 300);
     }
 
-    setTheme(currentTheme);
-  }, [changeTheme]);
+    document.documentElement.dataset.theme = newTheme;
+    setLocalStorage('theme', newTheme);
+
+    // 同じタブ内で変更を反映させるため、storageイベントを手動で発火
+    globalThis.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
+  }, [styleElement, theme]);
 
   return (
     <>
@@ -59,9 +72,7 @@ export const ThemeSwitch = () => {
           'after:bg-secondary after:border-high-contrast after:-top-1PX after:-left-1PX after:pointer-events-none after:absolute after:size-8 after:translate-x-8 after:rounded-full after:border after:transition-[translate] after:duration-300',
           'dark:after:translate-x-0',
         ])}
-        onClick={() => {
-          changeTheme(theme === 'dark' ? 'light' : 'dark');
-        }}
+        onClick={toggleTheme}
         aria-describedby={id}
         title={theme === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える'}
       >

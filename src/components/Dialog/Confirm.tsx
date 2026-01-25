@@ -4,30 +4,26 @@ import { RunButton } from '@/components/Clickable';
 import { ConfirmData } from '@/components/Dialog/confirm-hooks';
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
 type Props = {
   confirm: ConfirmData;
   setConfirmData: (_: ConfirmData) => void;
-  duration?: number;
 };
 
 export const Confirm = ({ confirm, setConfirmData }: Props) => {
   const id = useId();
-  const [portal, setPortal] = useState<HTMLDivElement | null>(null);
+  const portal = useSyncExternalStore(
+    () => () => () => {},
+    () => {
+      const div = document.getElementById(DIALOG_PORTAL_ID);
+      return div instanceof HTMLDivElement ? div : null;
+    },
+    () => null,
+  );
   const ref = useRef<HTMLDialogElement>(null);
   const setTimeoutId = useRef(-1);
-
-  useEffect(() => {
-    const div = document.getElementById(DIALOG_PORTAL_ID);
-
-    if (div instanceof HTMLDivElement === false) {
-      return;
-    }
-
-    setPortal(div);
-  }, []);
 
   useEffect(() => {
     const dialog = ref.current;

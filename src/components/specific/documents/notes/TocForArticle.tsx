@@ -12,7 +12,7 @@ export const TocForArticle = () => {
   return (
     <div className={clsx([!loaded && 'invisible opacity-0', 'transition-fade md:sticky md:top-4'])}>
       <div className={clsx('bg-secondary rounded border border-gray-500 p-4', styles.toc)}>
-        <Toc title="目次" setLoaded={setLoaded} />
+        <Toc title="目次" onready={() => setLoaded(true)} />
       </div>
     </div>
   );

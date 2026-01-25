@@ -1,21 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Picture } from '@/components/Image';
 import clsx from 'clsx';
 
 export const MainVisual = () => {
-  const [src, setSrc] = useState('');
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    const meta = document.querySelector<HTMLMetaElement>('[property="og:image"]');
-
-    if (meta?.content) {
-      setSrc(meta.content);
-    }
-  }, []);
+  const meta =
+    typeof document === 'undefined' ? null : document.querySelector<HTMLMetaElement>('[property="og:image"]');
+  const src = meta?.content || '';
 
   return (
     <p className={clsx([loaded || 'opacity-0', 'transition-opacity', 'aspect-1200/630'])}>

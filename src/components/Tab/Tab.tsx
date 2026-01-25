@@ -55,6 +55,7 @@ export const Tab = {
             break;
           }
         }
+        // eslint-disable-next-line no-fallthrough
         case 'Home': {
           const target = currentTarget.parentElement?.firstElementChild;
           if (target instanceof HTMLElement) {
@@ -69,6 +70,7 @@ export const Tab = {
             break;
           }
         }
+        // eslint-disable-next-line no-fallthrough
         case 'End': {
           const target = currentTarget.parentElement?.lastElementChild;
           if (target instanceof HTMLElement) {

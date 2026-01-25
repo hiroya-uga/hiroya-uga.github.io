@@ -22,7 +22,6 @@ export const Details = ({
       className="not-first:border-t not-first:border-solid not-first:border-t-secondary first:last:border-secondary group overflow-hidden rounded-lg first:last:border"
       open={isOpen}
       id={id}
-      // @ts-ignore
       name={name}
     >
       <summary

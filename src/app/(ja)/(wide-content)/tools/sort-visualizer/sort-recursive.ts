@@ -1,7 +1,4 @@
-type Sort = (
-  _: number[],
-  __?: boolean,
-) => { shouldLoop: boolean; array: number[]; markers?: Record<string, number> | {} };
+type Sort = (_: number[], __?: boolean) => { shouldLoop: boolean; array: number[]; markers?: Record<string, number> };
 
 export const sortRecursive = {
   bubble: ((): Sort => {
@@ -131,7 +128,7 @@ export const sortRecursive = {
             shouldLoop: false,
             array: [...a],
             /** 実験中*/
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         }
         key = a[i];
@@ -156,7 +153,7 @@ export const sortRecursive = {
           shouldLoop: i < a.length,
           array: [...a],
           /** 実験中*/
-          markers: i < a.length ? { current: j, comparing: j + 1 } : {},
+          markers: i < a.length ? { current: j, comparing: j + 1 } : ({} as Record<string, number>),
         };
       }
     };
@@ -271,7 +268,7 @@ export const sortRecursive = {
             shouldLoop: stack.length > 0,
             array: [...a],
             /** 実験中*/
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         }
 
@@ -505,7 +502,7 @@ export const sortRecursive = {
               shouldLoop: false,
               array: [...a],
               /** 実験中*/
-              markers: {},
+              markers: {} as Record<string, number>,
             };
           }
           i = gap;
@@ -682,7 +679,7 @@ export const sortRecursive = {
   comb: ((): Sort => {
     let a: number[] = [];
     let gap = 0;
-    let shrink = 1.3;
+    const shrink = 1.3;
     let i = 0;
     let sorted = false;
     let done = false;
@@ -728,7 +725,7 @@ export const sortRecursive = {
             shouldLoop: false,
             array: [...a],
             /** 実験中*/
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         }
         i = 0;
@@ -744,7 +741,7 @@ export const sortRecursive = {
   })(),
   tim: ((): Sort => {
     let a: number[] = [];
-    let runSize = 32;
+    const runSize = 32;
     let phase: 'insertion' | 'merge' | 'prepareMerge' = 'insertion';
     let runIndex = 0;
     let i = 0,
@@ -793,7 +790,7 @@ export const sortRecursive = {
         return {
           shouldLoop: false,
           array: [...a],
-          markers: {},
+          markers: {} as Record<string, number>,
         };
       }
 
@@ -807,7 +804,7 @@ export const sortRecursive = {
           return {
             shouldLoop: true,
             array: [...a],
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         }
 
@@ -851,7 +848,7 @@ export const sortRecursive = {
         return {
           shouldLoop: true,
           array: [...a],
-          markers: {},
+          markers: {} as Record<string, number>,
         };
       }
 
@@ -860,7 +857,7 @@ export const sortRecursive = {
         const start = prepareIndex;
         const end = Math.min(start + runSize, a.length);
         if (start < a.length) {
-          let segment: number[] = [];
+          const segment: number[] = [];
           let k = start;
           while (k < end) {
             segment.push(a[k]);
@@ -871,14 +868,14 @@ export const sortRecursive = {
           return {
             shouldLoop: true,
             array: [...a],
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         } else {
           phase = 'merge';
           return {
             shouldLoop: true,
             array: [...a],
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         }
       }
@@ -892,7 +889,7 @@ export const sortRecursive = {
             return {
               shouldLoop: false,
               array: [...a],
-              markers: {},
+              markers: {} as Record<string, number>,
             };
           }
 
@@ -935,14 +932,14 @@ export const sortRecursive = {
         return {
           shouldLoop: true,
           array: display,
-          markers: {},
+          markers: {} as Record<string, number>,
         };
       }
 
       return {
         shouldLoop: false,
         array: [...a],
-        markers: {},
+        markers: {} as Record<string, number>,
       };
     };
   })(),
@@ -1120,7 +1117,7 @@ export const sortRecursive = {
     let a: number[] = [];
     let min = 0;
     let max = 0;
-    let bucketCount = 10;
+    const bucketCount = 10;
     let buckets: number[][] = [];
     let output: number[] = [];
     let phase: 'scatter' | 'gather' = 'scatter';
@@ -1373,7 +1370,7 @@ export const sortRecursive = {
             shouldLoop: false,
             array: [...a],
             /** 実験中*/
-            markers: {},
+            markers: {} as Record<string, number>,
           };
         }
         maxIndex = 0;
@@ -2018,16 +2015,18 @@ export const sortMethods = {
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
     };
-    return new Promise<number[]>(async (resolve) => {
-      const id = window.setTimeout(() => {
+    return new Promise<number[]>((resolve) => {
+      const id = globalThis.setTimeout(() => {
         resolve(result);
       }, 5000);
-      while (!isSorted(result)) {
-        shuffle(result);
-        await new Promise((r) => setTimeout(r, 0));
-      }
-      clearTimeout(id);
-      resolve(result);
+      (async () => {
+        while (!isSorted(result)) {
+          shuffle(result);
+          await new Promise((r) => setTimeout(r, 0));
+        }
+        clearTimeout(id);
+        resolve(result);
+      })();
     });
   },
 

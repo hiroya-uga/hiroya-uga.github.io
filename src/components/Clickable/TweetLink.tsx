@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 type Props = {
   className?: string;
@@ -9,21 +9,23 @@ type Props = {
 };
 
 export const TweetLink = (props: Props) => {
-  const [twitterShareUrl, setTwitterShareUrl] = useState('');
+  const twitterShareUrl = useSyncExternalStore(
+    () => () => () => {},
+    () => {
+      const url = new URL(location.href);
+      url.searchParams.set('utm_source', 'twitter');
+      url.searchParams.set('utm_medium', 'social');
+      url.searchParams.set('utm_campaign', 'share');
 
-  useEffect(() => {
-    const url = new URL(location.href);
-    url.searchParams.set('utm_source', 'twitter');
-    url.searchParams.set('utm_medium', 'social');
-    url.searchParams.set('utm_campaign', 'share');
+      const message = encodeURIComponent(
+        `👏${(props.message || ` ${document.title.split('|')[0].trim()}`) + '\n'}${url.toString()}`,
+      );
+      const hashtags = encodeURIComponent(['ugadev', ...(props.hashtags ?? [])].join(','));
 
-    const message = encodeURIComponent(
-      `👏${(props.message || ` ${document.title.split('|')[0].trim()}`) + '\n'}${url.toString()}`,
-    );
-    const hashtags = encodeURIComponent(['ugadev', ...(props.hashtags ?? [])].join(','));
-
-    setTwitterShareUrl(`https://twitter.com/intent/tweet?text=${message}&hashtags=${hashtags}`);
-  }, [props.hashtags, props.message]);
+      return `https://twitter.com/intent/tweet?text=${message}&hashtags=${hashtags}`;
+    },
+    () => '',
+  );
 
   return (
     <a

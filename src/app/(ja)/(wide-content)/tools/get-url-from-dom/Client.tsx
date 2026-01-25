@@ -170,7 +170,7 @@ export const GetUrlFromDOMContent = () => {
 
           break;
 
-        case 'table':
+        case 'table': {
           const table = document.createElement('table');
 
           make(({ url, index }) => {
@@ -191,6 +191,7 @@ export const GetUrlFromDOMContent = () => {
           fragment.append(table);
 
           break;
+        }
 
         default:
           make(({ url, index }) => {

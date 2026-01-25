@@ -9,7 +9,7 @@ export default function Page() {
         別タブで開くことを<code>aria-label</code>属性で伝えようとして失敗している
       </h2>
 
-      <a href="http://pauljadam.com" target="_blank" aria-label="新しいタブで開きます">
+      <a href="http://pauljadam.com" target="_blank" aria-label="新しいタブで開きます" rel="noreferrer">
         PaulJAdam.com
       </a>
     </>

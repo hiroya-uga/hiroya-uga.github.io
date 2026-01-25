@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { NoteBox } from '@/components/Box';
 import { CodeBlock } from '@/components/CodeBlock';
@@ -47,30 +47,26 @@ type OutputTextfieldProps = Omit<React.InputHTMLAttributes<HTMLElement>, 'classN
   isUsingWrapLabel: boolean;
 };
 
-const OutputTextfield = ({
-  isUsingParagraphForAriaDescribedby,
+const Content = ({
   isUsingEmoji,
   isUsingWrapLabel,
   ...props
-}: OutputTextfieldProps) => {
-  const Content = useCallback(
-    (inputProps: typeof props) => {
-      const className = clsx(['border-secondary bg-secondary mt-2 block w-full rounded border px-2 py-3']);
+}: Omit<OutputTextfieldProps, 'isUsingParagraphForAriaDescribedby'>) => {
+  const className = clsx(['border-secondary bg-secondary mt-2 block w-full rounded border px-2 py-3']);
 
-      if (isUsingWrapLabel) {
-        return (
-          <label className="not-first:mt-2 block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3">
-            <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
-            <input {...inputProps} className={className} />
-          </label>
-        );
-      }
+  if (isUsingWrapLabel) {
+    return (
+      <label className="not-first:mt-2 block rounded border-2 border-solid border-[#5071a8] bg-[#5071a822] p-3">
+        <span>{isUsingEmoji ? '🍊' : 'ラベルB'}</span>
+        <input {...props} className={className} />
+      </label>
+    );
+  }
 
-      return <input {...inputProps} className={className} />;
-    },
-    [isUsingEmoji, isUsingWrapLabel],
-  );
+  return <input {...props} className={className} />;
+};
 
+const OutputTextfield = ({ isUsingParagraphForAriaDescribedby, ...props }: OutputTextfieldProps) => {
   if (isUsingParagraphForAriaDescribedby) {
     return (
       <p className="mt-2">
@@ -117,16 +113,16 @@ export const AccessibleNameAndDescriptionComputation = ({
   const describedByAId = 'description-text-a';
   const describedByBId = 'description-text-b';
 
-  const [isUsingAriaLabelledbyA, setUsingAriaLabelledbyA] = useState(false);
-  const [isUsingAriaLabelledbyB, setUsingAriaLabelledbyB] = useState(false);
-  const [isUsingAriaLabel, setUsingAriaLabel] = useState(false);
-  const [isUsingLabel, setUsingLabel] = useState(true);
-  const [isUsingWrapLabel, setUsingWrapLabel] = useState(false);
-  const [isUsingWrapLabelAll, setUsingWrapLabelAll] = useState(false);
-  const [isUsingTitle, setUsingTitle] = useState(false);
-  const [isUsingAriaDescribedbyA, setUsingAriaDescribedbyA] = useState(true);
-  const [isUsingAriaDescribedbyB, setUsingAriaDescribedbyB] = useState(false);
-  const [isUsingAriaDescription, setUsingAriaDescription] = useState(false);
+  const [isUsingAriaLabelledbyA, setIsUsingAriaLabelledbyA] = useState(false);
+  const [isUsingAriaLabelledbyB, setIsUsingAriaLabelledbyB] = useState(false);
+  const [isUsingAriaLabel, setIsUsingAriaLabel] = useState(false);
+  const [isUsingLabel, setIsUsingLabel] = useState(true);
+  const [isUsingWrapLabel, setIsUsingWrapLabel] = useState(false);
+  const [isUsingWrapLabelAll, setIsUsingWrapLabelAll] = useState(false);
+  const [isUsingTitle, setIsUsingTitle] = useState(false);
+  const [isUsingAriaDescribedbyA, setIsUsingAriaDescribedbyA] = useState(true);
+  const [isUsingAriaDescribedbyB, setIsUsingAriaDescribedbyB] = useState(false);
+  const [isUsingAriaDescription, setIsUsingAriaDescription] = useState(false);
   const [shouldDisplayPlaceholder, setShouldDisplayPlaceholder] = useState(true);
   const [descriptionPositionIsBottom, setDescriptionPositionIsBottom] = useState(false);
   const [shouldWrapInParagraph, setShouldWrapInParagraph] = useState(true);
@@ -480,7 +476,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingAriaLabelledbyA}
               onChange={() => {
-                setUsingAriaLabelledbyA(!isUsingAriaLabelledbyA);
+                setIsUsingAriaLabelledbyA(!isUsingAriaLabelledbyA);
               }}
               emoji={isUsingEmoji && '🍎'}
               code="aria-labelledby"
@@ -489,7 +485,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingAriaLabelledbyB}
               onChange={() => {
-                setUsingAriaLabelledbyB(!isUsingAriaLabelledbyB);
+                setIsUsingAriaLabelledbyB(!isUsingAriaLabelledbyB);
               }}
               emoji={isUsingEmoji && '🍏'}
               code="aria-labelledby"
@@ -498,7 +494,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingAriaLabel}
               onChange={() => {
-                setUsingAriaLabel(!isUsingAriaLabel);
+                setIsUsingAriaLabel(!isUsingAriaLabel);
               }}
               emoji={isUsingEmoji && '🍐'}
               code="aria-label"
@@ -508,7 +504,7 @@ export const AccessibleNameAndDescriptionComputation = ({
               checked={isUsingLabel}
               disabled={isUsingWrapLabelAll}
               onChange={() => {
-                setUsingLabel(!isUsingLabel);
+                setIsUsingLabel(!isUsingLabel);
               }}
               emoji={isUsingEmoji && '🍋'}
               code="label"
@@ -518,7 +514,7 @@ export const AccessibleNameAndDescriptionComputation = ({
               checked={isUsingWrapLabel}
               disabled={isUsingWrapLabelAll}
               onChange={() => {
-                setUsingWrapLabel(!isUsingWrapLabel);
+                setIsUsingWrapLabel(!isUsingWrapLabel);
               }}
               emoji={isUsingEmoji && '🍊'}
               code="label"
@@ -528,7 +524,7 @@ export const AccessibleNameAndDescriptionComputation = ({
               checked={isUsingWrapLabelAll}
               disabled={isUsingLabel || isUsingWrapLabel}
               onChange={() => {
-                setUsingWrapLabelAll(!isUsingWrapLabelAll);
+                setIsUsingWrapLabelAll(!isUsingWrapLabelAll);
               }}
               emoji={isUsingEmoji && '🍊'}
               code="label"
@@ -537,7 +533,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingTitle}
               onChange={() => {
-                setUsingTitle(!isUsingTitle);
+                setIsUsingTitle(!isUsingTitle);
               }}
               emoji={isUsingEmoji && '🍓'}
               code="title"
@@ -546,7 +542,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingAriaDescription}
               onChange={() => {
-                setUsingAriaDescription(!isUsingAriaDescription);
+                setIsUsingAriaDescription(!isUsingAriaDescription);
               }}
               emoji={isUsingEmoji && '🥗'}
               code="aria-description"
@@ -555,7 +551,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingAriaDescribedbyA}
               onChange={() => {
-                setUsingAriaDescribedbyA(!isUsingAriaDescribedbyA);
+                setIsUsingAriaDescribedbyA(!isUsingAriaDescribedbyA);
               }}
               emoji={isUsingEmoji && '🍅'}
               code="aria-describedby"
@@ -564,7 +560,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             <SwitchItem
               checked={isUsingAriaDescribedbyB}
               onChange={() => {
-                setUsingAriaDescribedbyB(!isUsingAriaDescribedbyB);
+                setIsUsingAriaDescribedbyB(!isUsingAriaDescribedbyB);
               }}
               emoji={isUsingEmoji && '🥬'}
               code="aria-describedby"
