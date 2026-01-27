@@ -15,6 +15,12 @@ const nextConfig = {
 
   pageExtensions: ['tsx', 'mdx'],
 
+  poweredByHeader: false,
+
+  experimental: {
+    optimizePackageImports: ['lodash', 'react-ga4'],
+  },
+
   images: {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -32,6 +38,24 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    // 画像最適化の追加設定
+    minimumCacheTTL: 60 * 60 * 24 * 365, // 1年間のキャッシュ
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+
+  // Webpackの最適化
+  webpack: (config, { isServer }) => {
+    // 本番環境でのバンドルサイズ削減
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true, // Tree shaking
+        sideEffects: false,
+      };
+    }
+    return config;
   },
 };
 
