@@ -4,13 +4,11 @@ import { Picture } from '@/components/Image';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/Client';
+import { ArticleListForTop, LinkListForTop, PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/parts';
 import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
 
-import { ArticleListForTop } from '@/app/(ja)/parts/ArticleListForTop';
-import { LinkListForTop } from '@/app/(ja)/parts/LinkListForTop';
 import { SvgIcon } from '@/components/Icons';
 import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 import { SNS_LINKS } from '@/constants/sns';
