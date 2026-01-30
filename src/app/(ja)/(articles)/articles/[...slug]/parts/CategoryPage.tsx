@@ -1,4 +1,4 @@
-import { getArticleMarkdownFilePath, getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
+import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { ArticleList } from '@/components/List';
 import { Footer } from '@/components/structures/Footer';
@@ -8,12 +8,21 @@ import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles
 import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
+import { getArticleMarkdownFilePath } from './utils/get-article-markdown-file-path';
 
-type Props = { category: ArticleCategory; year: string };
+type Props = {
+  category: ArticleCategory;
+};
 
-export const YearPage = async ({ category, year }: Props) => {
-  const blogs = await getArticles(getArticleMarkdownFilePath(category, year));
-  const { pageTitle, description } = getArticlesPageMeta.yearTop(category, year);
+export const CategoryPage = async ({ category }: Props) => {
+  const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
+    .filter(([categoryName]) => category === categoryName)
+    .flatMap(([categoryName, years]) => {
+      return years.map((yearValue) => getArticles(getArticleMarkdownFilePath(categoryName, yearValue)));
+    });
+
+  const blogs = (await Promise.all(articlePromises)).flat();
+  const { pageTitle, description } = getArticlesPageMeta.categoryTop(category);
 
   return (
     <>
@@ -21,7 +30,7 @@ export const YearPage = async ({ category, year }: Props) => {
       <main className="@container px-content-inline lg:pl-10">
         <div className="max-w-structure mx-auto mb-8">
           <PageTitle title={pageTitle} description={description} />
-          <CategoryLinks currentCategory={category} currentYear={year} />
+          <CategoryLinks currentCategory={category} />
         </div>
         <div className="@w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
           <ArticleList type={category === 'blog' ? 'thumbnail' : 'simple'} list={blogs} />
@@ -30,21 +39,14 @@ export const YearPage = async ({ category, year }: Props) => {
             <ul className="bg-secondary px-3 py-3">
               {ARTICLE_PATH_PATTERN_LIST[category].map((year) => (
                 <li key={year}>
-                  {year === year ? (
-                    <a aria-current="page">{year}年</a>
-                  ) : (
-                    <Link href={`/articles/${category}/${year}`}>{year}年</Link>
-                  )}
+                  <Link href={`/articles/${category}/${year}`}>{year}年</Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </main>
-      <Footer
-        additionalBreadcrumbs={[{ href: `/articles/${category}`, title: resolveCategoryName(category) }]}
-        currentPageTitle={year}
-      />
+      <Footer currentPageTitle={resolveCategoryName(category)} />
     </>
   );
 };

@@ -1,99 +1,114 @@
 'use client';
 
+import { LoadingIcon } from '@/components/Icons';
 import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-const photoDataList = [
+type PhotoData = {
+  caption: string;
+  spec: string;
+  instagram: string;
+  date: string;
+} & (
+  | {
+      src: string;
+    }
+  | {
+      error: string;
+    }
+);
+
+const photoDataList: PhotoData[] = [
   {
     src: '/main-keishoan.webp',
     caption: '円覚寺 桂昌庵',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    href: 'https://www.instagram.com/p/Cm9kBgZPF25/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'Cm9kBgZPF25',
     date: '2022.06.21',
   },
   {
     src: '/main-kamiisonotorii.webp',
     caption: '神磯の鳥居',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    href: 'https://www.instagram.com/p/CXIGmx_Bob3/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'CXIGmx_Bob3',
     date: '2021.12.06',
   },
   {
     src: '/main-yamanakako.webp',
     caption: '山中湖 花の都公園',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    href: 'https://www.instagram.com/p/CE9XGAEHfS9/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'CE9XGAEHfS9',
     date: '2020.08.22',
   },
   {
     src: '/main-minokakeiwa.webp',
     caption: '南伊豆 蓑掛岩',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    href: 'https://www.instagram.com/p/CE6INpCn9LC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'CE6INpCn9LC',
     date: '2020.08.16',
   },
   {
     src: '/main-shinjuku.webp',
     caption: 'JR新宿駅 甲州街道改札',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    href: 'https://www.instagram.com/p/CE6Deb7nUx7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'CE6Deb7nUx7',
     date: '2020.07.23',
   },
   {
     src: '/main-akihabara.webp',
     caption: 'JR秋葉原駅',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    href: 'hhttps://www.instagram.com/p/CCzs-IZnC7m/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'CCzs-IZnC7m',
     date: '2020.07.18',
   },
   {
     src: '/main-ushinshiro.webp',
     caption: '牛代 みずめ桜',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
-    href: 'https://www.instagram.com/p/B-616CxH8FE/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B-616CxH8FE',
     date: '2020.04.05',
   },
   {
     src: '/main-sumidaaquarium.webp',
     caption: 'すみだ水族館',
     spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
-    href: 'https://www.instagram.com/p/B65DejRnF0i/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B65DejRnF0i',
     date: '2020.01.03',
   },
   {
     src: '/main-c97.webp',
     caption: 'コミックマーケット97 Day4',
     spec: 'iPhone XS Max',
-    href: 'https://www.instagram.com/p/B6u8koWnH_-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B6u8koWnH_-',
     date: '2019.12.31',
   },
   {
     src: '/main-venusfort.webp',
     caption: 'VenusFort',
     spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
-    href: 'https://www.instagram.com/p/B6qVD7Invry/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B6qVD7Invry',
     date: '2019.12.28',
   },
   {
     src: '/main-nact.webp',
     caption: '国立新美術館',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
-    href: 'https://www.instagram.com/p/B6LKGmvHqff/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B6LKGmvHqff',
     date: '2019.12.17',
   },
   {
     src: '/main-escalator.webp',
     caption: 'リンクスクエア新宿',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
-    href: 'https://www.instagram.com/p/B4d9_CPn9M7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B4d9_CPn9M7',
     date: '2019.11.01',
   },
   {
     src: '/main-fujimibashi.webp',
     caption: '富士見橋(東京都)',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + Nikon D7200',
-    href: 'https://www.instagram.com/p/B3n_xUcn86N/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    instagram: 'B3n_xUcn86N',
     date: '2019.10.13',
   },
 ];
@@ -118,99 +133,116 @@ const Spec = ({ spec }: { spec: string }) => {
     );
   }
 
-  return lens;
+  return <>{lens}</>;
 };
 
+const generateRandomArray = ({ length }: { length: number }) => {
+  const indexes = Array.from({ length }, (_, i) => i);
+
+  for (let i = indexes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+  }
+
+  return indexes;
+};
+
+const TRANSITION_DURATION = 350;
+
 export const TopImage = ({ captionId }: { captionId: string }) => {
-  const generateRandomArray = useCallback(() => {
-    const indexes = Array.from({ length: photoDataList.length }, (_, i) => i);
-
-    for (let i = indexes.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
-    }
-
-    return indexes;
-  }, []);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [photoData, setPhotoData] = useState<
-    | (typeof photoDataList)[number]
-    | {
-        error: string;
-        href: string;
-        caption: string;
-        spec: string;
-        date: string;
-      }
-    | null
-  >();
-  const [index, setIndex] = useState(0);
-  const [indexList, setIndexList] = useState(generateRandomArray());
+  const isImageLoadingRef = useRef(false);
+  const [shouldShowImage, setShouldShowImage] = useState(false);
+  const [photoData, setPhotoData] = useState<PhotoData | null>(null);
+  const indexListRef = useRef(generateRandomArray({ length: photoDataList.length }));
+  const currentIndexRef = useRef(0);
 
   const updateImage = useCallback(() => {
-    if (isLoading) {
+    if (isImageLoadingRef.current) {
       return;
     }
 
-    setIsFirstRender(false);
-    setIndex(index + 1);
-    setIsLoading(true);
-
-    if (typeof indexList[index + 1] === 'undefined') {
-      setIndexList(generateRandomArray());
-      setIndex(0);
+    if (photoDataList[indexListRef.current[currentIndexRef.current]] === undefined) {
+      indexListRef.current = generateRandomArray({
+        length: photoDataList.length,
+      });
+      currentIndexRef.current = 0;
     }
 
-    const currentItem = photoDataList[indexList[index]];
-    const onload = () => {
-      loadedImageCache.add(currentItem.src);
+    const currentItem = photoDataList[indexListRef.current[currentIndexRef.current]];
+    currentIndexRef.current++;
+
+    if (currentItem === null || 'src' in currentItem === false) {
+      return;
+    }
+
+    setShouldShowImage(false);
+    isImageLoadingRef.current = true;
+
+    const show = () => {
       setPhotoData(currentItem);
-      setIsLoading(false);
+      setShouldShowImage(true);
+      isImageLoadingRef.current = false;
     };
 
     setTimeout(() => {
       if (loadedImageCache.has(currentItem.src)) {
-        onload();
+        show();
         return;
       }
 
-      const image = new window.Image();
-      image.onload = onload;
+      const image = new globalThis.window.Image();
+      image.onload = () => {
+        loadedImageCache.add(currentItem.src);
+        show();
+      };
       image.onerror = () => {
         const date = new Date();
 
         setPhotoData({
           error: '404 NOT FOUND',
-          href: '',
+          instagram: '',
           caption: 'UNKNOWN',
           spec: 'NO DATA',
           date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
         });
-        setIsLoading(false);
+        setShouldShowImage(true);
       };
       image.src = currentItem.src;
-    }, 350);
-  }, [generateRandomArray, index, indexList, isLoading]);
+    }, TRANSITION_DURATION);
+  }, []);
 
-  const transitionClassName = [
-    'transition-[opacity,visibility] duration-300',
-    isLoading ? 'opacity-0' : 'opacity-100',
-    isLoading ? 'invisible' : 'visible',
-  ];
+  const transitionClassName = useMemo(
+    () => [
+      'transition-[opacity,visibility] duration-300',
+      shouldShowImage ? 'opacity-100' : 'opacity-0',
+      shouldShowImage ? 'visible' : 'invisible',
+    ],
+    [shouldShowImage],
+  );
 
-  if (isFirstRender) {
-    updateImage();
-  }
+  useEffect(() => {
+    const init = () => updateImage();
+    init();
+  }, [updateImage]);
 
   return (
     <div
       className="@content:rounded-lg group relative overflow-hidden"
       tabIndex={-1}
-      onClick={(e) => void e.currentTarget.focus()}
+      onClick={(e) => {
+        if (e.target instanceof HTMLAnchorElement || e.target instanceof HTMLButtonElement) {
+          return;
+        }
+
+        e.currentTarget.focus();
+      }}
     >
       <figure aria-live="polite" className="min-h bg-primary relative">
-        <div className={clsx(['aspect-3/2', ...transitionClassName])}>
+        <p className="absolute inset-0 z-0 grid size-full place-items-center">
+          <LoadingIcon />
+        </p>
+
+        <div className={clsx(['aspect-3/2 relative', ...transitionClassName])}>
           {photoData &&
             ('error' in photoData ? (
               <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
@@ -232,7 +264,11 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
           <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
             <span className="@w640:w-56 w-40 text-right">
               <a
-                href={photoData?.href || 'https://www.instagram.com/hiroya.uga/'}
+                href={
+                  typeof photoData?.instagram === 'string'
+                    ? `https://www.instagram.com/p/${photoData.instagram}/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`
+                    : 'https://www.instagram.com/hiroya.uga/'
+                }
                 className="transition-bg bg-secondary text-primary z-10 inline-block cursor-pointer rounded-full border border-[#00000080] px-3 py-1 leading-tight no-underline hover:bg-gray-200"
               >
                 Instagramで見る
@@ -256,16 +292,15 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
       <p
         className={clsx([
-          '@w640:h-12 @w640:py-2 absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
+          '@w640:h-12 @w640:py-2',
+          'absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
           'transition-[opacity,visibility,translate]',
-          isFirstRender && isLoading ? 'opacity-0' : 'opacity-100',
-          isFirstRender && isLoading ? 'invisible' : 'visible',
         ])}
       >
         <button
           type="button"
           className="group/reload @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full rounded-full border border-[#00000080] p-1"
-          onClick={() => updateImage()}
+          onClick={() => shouldShowImage && updateImage()}
         >
           <span className="block rounded-full bg-white outline-offset-2">
             <Picture
