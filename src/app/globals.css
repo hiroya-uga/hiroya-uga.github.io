@@ -161,7 +161,7 @@
   --text-8xl: 6rem;
   --leading-inherit: inherit;
 
-  --width-article: 40rem;
+  --width-article: 37.5rem;
   --max-width-dialog: min(48rem, 90%);
   --max-width-article: min(var(--width-article), 90%);
   --max-width-content: 60rem;

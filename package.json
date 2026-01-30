@@ -67,6 +67,7 @@
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
     "type-check": "tsc --noEmit",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "npm rebuild canvas"
   }
 }

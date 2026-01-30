@@ -57,6 +57,7 @@ export const LazyImageLoad = () => {
           `
           :host {
             display: block;
+            max-width: fit-content;
             transition: 0.3s opacity ease-out;
 
             @starting-style {
@@ -65,8 +66,9 @@ export const LazyImageLoad = () => {
           }
           :host img {
             display: block;
-            width: 100%;
+            max-width: 100%;
             height: auto;
+            margin: 0 auto;
           }
           :host(lazy-image[loading]),
           :host(lazy-image[loading]) img {

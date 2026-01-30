@@ -68,11 +68,11 @@ const overrideImageExtension: TokenizerAndRendererExtension = {
     const url = t.href ? URL.parse(t.href, URL_ORIGIN) : null;
     const src = url?.pathname;
     const query = url?.search ? new URLSearchParams(url.search) : null;
-    const width = query?.get('w');
-    const height = query?.get('h');
+    const width = (Number.parseInt(query?.get('w') ?? '', 10) ?? 2) / 2;
+    const height = (Number.parseInt(query?.get('h') ?? '', 10) ?? 2) / 2;
 
     if (width && height) {
-      return `<span class="relative block"><span class="absolute grid place-items-center inset-0 animate-fade-in-spinner rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" class="relative" loading><span style="aspect-ratio: ${width} / ${height}; display: block;" aria-hidden="true"></span></lazy-image></span>`;
+      return `<span class="relative block max-w-full mx-auto" style="width: ${width}px;"><span class="absolute grid place-items-center inset-0 animate-fade-in-spinner rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" class="relative" loading><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image></span>`;
     }
 
     return `<img src="${src}" alt="${t.text}" loading="lazy" />`;
