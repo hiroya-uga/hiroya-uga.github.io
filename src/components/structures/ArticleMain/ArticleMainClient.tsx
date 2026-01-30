@@ -37,13 +37,14 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
 
     span.textContent = '';
     const length = article.textContent?.replace(/\n/g, '').trim().length || 0;
+    const fullText = `文字数：${length}／所要時間：${getReadingTime(length)}分`;
 
     if (isAlready) {
-      span.textContent = `文字数：${length}文字／所要時間：${getReadingTime(length)}分`;
+      span.textContent = fullText;
       return;
     }
 
-    const textContent = `文字数：${length}文字／所要時間：${getReadingTime(length)}分`;
+    const textContent = fullText;
     const max = textContent.length;
     let i = 0;
     let setIntervalId = -1;
@@ -88,8 +89,8 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
         status === 'loading' ? 'opacity-0' : '',
       ])}
     >
-      <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time> -
-      <span ref={ref} className="min-h-[1lh]" />
+      <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time>{' '}
+      <span ref={ref} className="min-h-lh" />
     </p>
   );
 };
@@ -175,7 +176,7 @@ export const ArticleFootNoteActivator = () => {
     <dialog
       ref={ref}
       className={clsx([
-        'bg-(--background-color-primary)/90 border-t-primary fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse border-t p-4 transition-[translate,visibility]',
+        'bg-primary/90 border-t-primary fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse border-t p-4 transition-[translate,visibility]',
         isOpen ? 'translate-y-0' : 'translate-y-full',
       ])}
       inert={isOpen === false}

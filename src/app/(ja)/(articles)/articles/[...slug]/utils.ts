@@ -1,18 +1,6 @@
 import { SITE_NAME } from '@/constants/meta';
 import { resolveCategoryDescription, resolveCategoryName } from '@/utils/articles';
 
-import path from 'path';
-
-export const getArticleMarkdownFilePath = (category: string, year?: string) => {
-  const result = path.join(process.cwd(), 'src', 'markdown', 'articles', category);
-
-  if (year) {
-    return path.join(result, year);
-  }
-
-  return result;
-};
-
 export const getArticlesPageMeta = {
   categoryTop: (category: string) => {
     const categoryName = resolveCategoryName(category);

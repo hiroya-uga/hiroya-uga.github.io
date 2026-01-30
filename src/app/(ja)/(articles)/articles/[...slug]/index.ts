@@ -1,3 +1,3 @@
-export * from './ArticlePage';
-export * from './CategoryPage';
-export * from './YearPage';
+export * from './parts/ArticlePage';
+export * from './parts/CategoryPage';
+export * from './parts/YearPage';

@@ -1,6 +1,6 @@
 export const ARTICLE_PATH_PATTERN_LIST = {
   // category別に年数を指定する必要がある
-  blog: ['2025'],
+  blog: ['2026', '2025'],
   'tech-blog': ['2025'],
 };
 

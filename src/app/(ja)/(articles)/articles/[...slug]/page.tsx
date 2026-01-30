@@ -5,7 +5,7 @@ import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
-import { ArticlePage, CategoryPage, YearPage } from '@/app/(ja)/(articles)/articles/[...slug]/index';
+import { ArticlePage, CategoryPage, YearPage } from '@/app/(ja)/(articles)/articles/[...slug]/parts';
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { notFound } from 'next/navigation';
 import path from 'path';
@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (slug.length === 1) {
     const { title, pageTitle, description } = getArticlesPageMeta.categoryTop(slug[0]);
     const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
+    const url = `${URL_ORIGIN}/articles/${slug[0]}`;
 
     return {
       title,
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title,
         description,
         type: 'website',
-        url: `${URL_ORIGIN}/articles/tech-blog/2025`,
+        url,
         images: [
           {
             url: ogImage,
@@ -52,12 +53,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         ],
       },
       alternates: {
-        canonical: `${URL_ORIGIN}/articles/tech-blog/2025`,
+        canonical: url,
       },
     };
   }
 
   if (slug.length === 2) {
+    const url = `${URL_ORIGIN}/articles/${slug[0]}/${slug[1]}`;
     const { title, pageTitle, description } = getArticlesPageMeta.yearTop(slug[0], slug[1]);
     const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
 
@@ -68,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title,
         description,
         type: 'website',
-        url: `${URL_ORIGIN}/articles/tech-blog/2025`,
+        url,
         images: [
           {
             url: ogImage,
@@ -78,7 +80,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         ],
       },
       alternates: {
-        canonical: `${URL_ORIGIN}/articles/tech-blog/2025`,
+        canonical: url,
       },
     };
   }
@@ -88,7 +90,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return notFound();
 
   const [category, year, fileName] = slug;
-  const canonical = `${URL_ORIGIN}/articles/${category}/${year}/${fileName}`;
+  const url = `${URL_ORIGIN}/articles/${category}/${year}/${fileName}`;
   const categoryName = resolveCategoryName(category);
   const ogImage = await generateOgpImage(['articles', ...slug], post.meta.title, categoryName, post.meta.ogImage);
 
@@ -99,13 +101,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     (post.meta.tags ?? []).map((tag: string) => `#${tag}`).join(', ');
 
   return {
-    title: `${post.meta.title.replace(/\n/g, '')} | ${categoryName} | ${SITE_NAME}`,
+    title: `${post.meta.title.replaceAll('\n', '')} | ${categoryName} | ${SITE_NAME}`,
     description,
     openGraph: {
-      title: post.meta.title.replace(/\n/g, ''),
+      title: post.meta.title.replaceAll('\n', ''),
       description,
       type: 'article',
-      url: `${URL_ORIGIN}/articles/${category}/${year}/${fileName}`,
+      url,
       images: [
         {
           url: ogImage,
@@ -115,7 +117,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ],
     },
     alternates: {
-      canonical,
+      canonical: url,
     },
   };
 }
