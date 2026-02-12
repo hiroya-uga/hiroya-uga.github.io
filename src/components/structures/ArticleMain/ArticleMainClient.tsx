@@ -85,7 +85,7 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
   return (
     <p
       className={clsx([
-        '@w640:text-sm text-secondary @w640:mt-6 mt-3 text-xs transition-opacity delay-300 duration-700',
+        '@w640:text-sm text-secondary @w640:mt-4 mt-3 text-xs transition-opacity delay-300 duration-700',
         status === 'loading' ? 'opacity-0' : '',
       ])}
     >

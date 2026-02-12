@@ -27,14 +27,14 @@ export const SiteName = () => {
         </span>
       </p> */}
 
-      <p className="@w500:text-[0.78125rem] @w1520:fixed @w1520:left-0 @w1520:top-0 @w1520:overflow-auto @w1520:bg-transparent @w1520:py-0 bg-[var(--v-color-background-header)] py-1 text-[12.5px]">
-        <span className="@w1520:min-h-296px @w1520:box-content @w1520:h-[29.2929vh] @w1520:w-8 @w1520:min-w-8 @w1520:overflow-visible @w1520:pb-4 block overflow-auto bg-[var(--v-color-background-header)]">
+      <p className="@w500:text-[0.78125rem] @w1520:fixed @w1520:left-0 @w1520:top-0 @w1520:overflow-auto @w1520:bg-transparent @w1520:py-0 bg-(--v-color-background-header) @w1520:px-0 @w1520:min-h-screen overflow-auto px-4 py-1 text-[12.5px]">
+        <span className="@w1520:min-h-296px @w1520:box-content @w1520:h-[29.2929vh] @w1520:w-8 @w1520:min-w-8 @w1520:overflow-visible @w1520:pb-4 bg-(--v-color-background-header) block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             role="none"
-            className="@w1520:h-296px @w1520:min-h-296px w500:w-60 @w1520:w-8 @w1520:min-w-8 ml-auto h-[1.465rem] max-h-full w-[240px] max-w-full overflow-visible [fill:var(--v-color-text-primary)]"
+            className="@w1520:h-296px @w1520:min-h-296px w500:w-60 @w1520:w-8 @w1520:min-w-8 w-240px h-[1.465rem] max-h-full max-w-full overflow-visible [fill:var(--v-color-text-primary)]"
           >
-            <text x="0" y="50%" textAnchor="start" className="@w1520:hidden translate-y-[4px]">
+            <text x="0" y="50%" textAnchor="start" className="@w1520:hidden translate-y-4px">
               {siteName}
               <tspan> - {SITE_SUBTITLE}</tspan>
             </text>

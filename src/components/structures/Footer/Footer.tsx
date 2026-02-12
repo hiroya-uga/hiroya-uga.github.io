@@ -87,7 +87,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   return (
     <>
       {isTop || (
-        <nav className={clsx(['@container mt-48', styles.breadcrumb])} aria-label="サイト内の現在位置">
+        <nav className={clsx(['@container mt-[20vh]', styles.breadcrumb])} aria-label="サイト内の現在位置">
           <div className="max-w-structure px-content-inline @w1024:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))] mx-auto py-4 text-sm">
             <ol className="flex flex-wrap gap-y-0.5 leading-normal">
               {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
@@ -99,7 +99,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
       <footer className={clsx(['@container', styles.footer])}>
         <div className={clsx([isTop || 'bg-(--v-color-background-footer) text-(--v-color-text-footer)'])}>
           {!isTop && (
-            <div className="max-w-structure bg-(--background-color-primary) px-content-inline relative mx-auto">
+            <div className="max-w-structure bg-secondary px-content-inline relative mx-auto">
               <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--v-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
                 {/* m-0 for bootstrap pages */}
                 <ul
@@ -110,7 +110,7 @@ export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
                     return (
                       <li key={href}>
                         <a href={href} className="transition-bg group block rounded-lg p-3 hover:bg-gray-200">
-                          <Picture {...props} width={28} height={28} alt={alt} className="size-7" />
+                          <Picture {...props} alt={alt} className="size-7" />
                         </a>
                       </li>
                     );

@@ -2,7 +2,7 @@
 
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
-import { useCallback, useId, useMemo, useRef, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useSyncExternalStore } from 'react';
 
 const { window } = globalThis;
 
@@ -27,6 +27,25 @@ export const ThemeSwitch = () => {
   }, []);
   const setTimeoutIdRef = useRef<ReturnType<typeof setTimeout> | number>(-1);
 
+  const changeTheme = useCallback(
+    (newTheme: string) => {
+      if (newTheme !== 'light' && newTheme !== 'dark') return;
+      if (styleElement instanceof HTMLStyleElement) {
+        clearTimeout(setTimeoutIdRef.current);
+        document.head.appendChild(styleElement);
+        setTimeoutIdRef.current = globalThis.setTimeout(() => {
+          styleElement.remove();
+        }, 300);
+      }
+
+      document.documentElement.dataset.theme = newTheme;
+
+      // 同じタブ内で変更を反映させるため、storageイベントを手動で発火
+      globalThis.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
+    },
+    [styleElement],
+  );
+
   const theme = useSyncExternalStore(
     (callback) => {
       const handleStorageChange = (e: StorageEvent) => {
@@ -41,27 +60,13 @@ export const ThemeSwitch = () => {
         globalThis.removeEventListener('storage', handleStorageChange);
       };
     },
-    () => getLocalStorage('theme') ?? 'light',
+    () => getLocalStorage('theme') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
     () => 'light',
   );
 
-  const toggleTheme = useCallback(() => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-
-    if (styleElement instanceof HTMLStyleElement) {
-      clearTimeout(setTimeoutIdRef.current);
-      document.head.appendChild(styleElement);
-      setTimeoutIdRef.current = globalThis.setTimeout(() => {
-        styleElement.remove();
-      }, 300);
-    }
-
-    document.documentElement.dataset.theme = newTheme;
-    setLocalStorage('theme', newTheme);
-
-    // 同じタブ内で変更を反映させるため、storageイベントを手動で発火
-    globalThis.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
-  }, [styleElement, theme]);
+  useEffect(() => {
+    changeTheme(theme);
+  }, [theme, changeTheme]);
 
   return (
     <>
@@ -72,7 +77,11 @@ export const ThemeSwitch = () => {
           'after:bg-secondary after:border-high-contrast after:-top-1PX after:-left-1PX after:pointer-events-none after:absolute after:size-8 after:translate-x-8 after:rounded-full after:border after:transition-[translate] after:duration-300',
           'dark:after:translate-x-0',
         ])}
-        onClick={toggleTheme}
+        onClick={() => {
+          const newTheme = theme === 'dark' ? 'light' : 'dark';
+          changeTheme(newTheme);
+          setLocalStorage('theme', newTheme);
+        }}
         aria-describedby={id}
         title={theme === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える'}
       >

@@ -42,7 +42,7 @@ export const ArticlePage = async ({ slug, category, year, fileName, filePath }: 
       <Header layout="article-content" />
       <main className="@container">
         <ArticleMain post={post} />
-        <div className="mx-content-inline @container not-empty:mt-30 text-center">
+        <div className="mx-content-inline @container not-empty:mt-[20vh] text-center">
           <p className="mb-paragraph">
             <TweetLink
               message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
