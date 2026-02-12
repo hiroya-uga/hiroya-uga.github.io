@@ -19,12 +19,12 @@ export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-conten
 
       <div
         className={clsx([
-          'mt-8 px-4 sm:pl-10 sm:pt-8 2xl:pt-16',
+          'my-4 px-4 sm:pl-10 sm:pt-8 2xl:pt-16',
           layout !== 'article-content' && 'mb-(--v-header-margin-bottom)',
         ])}
       >
         <div className="max-w-structure relative mx-auto">
-          <p className={clsx(['relative -left-4 -top-2', layout === 'common' && '@w1520:left-0'])}>
+          <p data-class-name={clsx(['relative -left-3 -top-2', layout === 'common' && '@w1520:left-0'])}>
             <Link
               href="../"
               className="hover:text-link sm:hover:bg-secondary sm:focus:bg-secondary group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300"

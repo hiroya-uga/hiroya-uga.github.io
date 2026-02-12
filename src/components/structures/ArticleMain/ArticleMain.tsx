@@ -29,7 +29,7 @@ export const ArticleMain = async ({ post }: Props) => {
 
   return (
     <article className={styles.root}>
-      <div className={clsx(styles.hero, '@w640:px-content-inline @w1024:pl-10 @w640:mb-14 @w640:mt-8 mb-8 mt-4 px-2')}>
+      <div className={clsx(styles.hero, '@w640:px-content-inline @w1520:pl-10 @w640:mb-14 @w640:mt-8 mb-8 px-2')}>
         <div
           className={clsx([
             'mx-auto text-center',
@@ -40,7 +40,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <h1
             className={clsx([
               styles.h1,
-              'wrap-anywhere @w640:text-4xl @w800:text-5xl text-2xl',
+              'wrap-anywhere @w640:text-4xl text-2xl',
               post.meta.title?.endsWith('。') && '@w800:pl-[0.5em]',
             ])}
           >
@@ -98,10 +98,10 @@ export const ArticleMain = async ({ post }: Props) => {
               <nav
                 className={clsx([
                   'border-accent bg-secondary rounded-r-md border-l-2 px-5 pb-6 pt-4 text-sm',
-                  '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:shadow-sticky @w1280:max-h-[calc(80vh_-_4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
+                  '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
                 ])}
               >
-                <h2 className="font-bold">目次</h2>
+                <h2 className="@w800:text-lg font-bold">目次</h2>
                 <div className="@w1280:pl-0 mt-4 pl-4" dangerouslySetInnerHTML={{ __html: post.toc }} />
               </nav>
             </div>
@@ -110,7 +110,7 @@ export const ArticleMain = async ({ post }: Props) => {
             id={ARTICLE_MAIN_ID}
             className={clsx(
               styles.article,
-              'space-y-paragraph',
+              'space-y-paragraph @w640:space-y-36px @w800:text-lg',
               '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
             )}
             dangerouslySetInnerHTML={{ __html: await post.content }}

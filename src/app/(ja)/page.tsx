@@ -297,7 +297,13 @@ export default function Home() {
                 return (
                   <li key={href}>
                     <a href={href} className="@w640:p-3 block rounded-lg p-2 transition-colors hover:bg-gray-300">
-                      <Picture {...props} width={32} height={32} alt={alt} className="@w640:size-7 size-8" />
+                      <Picture
+                        {...props}
+                        width={props.width + 4}
+                        height={props.height + 4}
+                        alt={alt}
+                        className="@w640:h-7 h-8 w-auto"
+                      />
                     </a>
                   </li>
                 );
