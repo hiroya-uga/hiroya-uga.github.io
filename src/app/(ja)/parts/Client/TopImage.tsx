@@ -269,7 +269,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
                     ? `https://www.instagram.com/p/${photoData.instagram}/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`
                     : 'https://www.instagram.com/hiroya.uga/'
                 }
-                className="transition-bg bg-secondary text-primary z-10 inline-block cursor-pointer rounded-full border border-[#00000080] px-3 py-1 leading-tight no-underline hover:bg-gray-200"
+                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover z-10 inline-block cursor-pointer rounded-full border border-[#00000080] px-3 py-1 leading-tight no-underline"
               >
                 Instagramで見る
               </a>

@@ -245,6 +245,11 @@ export default function Home() {
                   hrefLang: 'en',
                   title: 'Accessibility Support',
                 },
+                {
+                  href: 'https://github.com/tc39/proposals',
+                  hrefLang: 'en',
+                  title: 'TC39/Proposals',
+                },
               ]}
             />
 
