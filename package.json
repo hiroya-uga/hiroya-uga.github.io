@@ -8,7 +8,7 @@
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.8.0",
     "jquery": "^3.7.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "marked": "^15.0.12",
     "next": "^16.1.5",
     "next-mdx-remote": "6",
