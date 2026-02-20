@@ -1,5 +1,6 @@
 'use client';
 
+import { getTheme } from '@/utils/get-theme';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
 import { useCallback, useEffect, useId, useMemo, useRef, useSyncExternalStore } from 'react';
@@ -39,9 +40,6 @@ export const ThemeSwitch = () => {
       }
 
       document.documentElement.dataset.theme = newTheme;
-
-      // 同じタブ内で変更を反映させるため、storageイベントを手動で発火
-      globalThis.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
     },
     [styleElement],
   );
@@ -60,7 +58,13 @@ export const ThemeSwitch = () => {
         globalThis.removeEventListener('storage', handleStorageChange);
       };
     },
-    () => getLocalStorage('theme') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+    () => {
+      const currentTheme = getTheme();
+      if (getLocalStorage('theme') === null) {
+        setLocalStorage('theme', currentTheme);
+      }
+      return currentTheme;
+    },
     () => 'light',
   );
 
@@ -81,6 +85,9 @@ export const ThemeSwitch = () => {
           const newTheme = theme === 'dark' ? 'light' : 'dark';
           changeTheme(newTheme);
           setLocalStorage('theme', newTheme);
+
+          // 同じタブ内で変更を反映させるため、storageイベントを手動で発火
+          globalThis.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
         }}
         aria-describedby={id}
         title={theme === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える'}

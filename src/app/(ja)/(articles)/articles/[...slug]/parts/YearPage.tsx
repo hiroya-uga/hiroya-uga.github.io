@@ -22,19 +22,19 @@ export const YearPage = async ({ category, year }: Props) => {
       <main className="@container px-content-inline lg:pl-10">
         <div className="max-w-structure mx-auto mb-8">
           <PageTitle title={pageTitle} description={description} />
-          <CategoryLinks currentCategory={category} currentYear={year} />
+          <CategoryLinks currentCategory={category} />
         </div>
         <div className="@w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
           <ArticleList type={category === 'blog' ? 'thumbnail' : 'simple'} list={blogs} />
           <div className="@w1024:w-[248px] @w1024:ml-auto">
             <h2 className="bg-tertiary px-3 py-1">過去ログ</h2>
             <ul className="bg-secondary px-3 py-3">
-              {ARTICLE_PATH_PATTERN_LIST[category].map((year) => (
-                <li key={year}>
-                  {year === year ? (
-                    <a aria-current="page">{year}年</a>
+              {ARTICLE_PATH_PATTERN_LIST[category].map((key) => (
+                <li key={key}>
+                  {key === year ? (
+                    <a aria-current="page">{key}年</a>
                   ) : (
-                    <Link href={`/articles/${category}/${year}`}>{year}年</Link>
+                    <Link href={`/articles/${category}/${key}`}>{key}年</Link>
                   )}
                 </li>
               ))}

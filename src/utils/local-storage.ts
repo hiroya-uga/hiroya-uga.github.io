@@ -21,6 +21,10 @@ export const setLocalStorage = <T extends Key>(key: T, value: Value[T]) => {
 };
 
 export const getLocalStorage = <T extends Key>(key: T): Value[T] | null => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   try {
     const value = JSON.parse(localStorage.getItem(key) ?? '{"type": "primitive"}');
 

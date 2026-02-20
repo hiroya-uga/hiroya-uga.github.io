@@ -335,15 +335,14 @@ declare global {
 }
 
 export const ArticleYoutubeManager = () => {
-  const isInitialized = useRef(false);
+  const instancesRef = useRef<YT.Player[]>([]);
 
   useEffect(() => {
-    if (isInitialized.current) return;
-    isInitialized.current = true;
-
-    const instances: YT.Player[] = [];
+    let setTimeoutId = -1;
+    const instances = instancesRef.current;
     const init = () => {
       const players = document.querySelectorAll<HTMLIFrameElement>('.youtube iframe');
+
       for (const player of players) {
         // 既に初期化されている場合はスキップ
         if (player.dataset.jsApi === 'ready') {
@@ -365,17 +364,26 @@ export const ArticleYoutubeManager = () => {
         });
 
         player.dataset.jsApi = 'ready';
-        instances.push(instance);
+        instancesRef.current.push(instance);
       }
     };
 
     if (window.YT) {
-      window.onYouTubeIframeAPIReady();
+      // SPAレンダリング時、iframeが存在しない状態で描画されるケースがある（.youtubeは存在するが、その子のiframeが存在しない）
+      setTimeoutId = window.setTimeout(init, 100);
     } else {
+      if (document.querySelector('script[src*="youtube.com/iframe_api"]') === null) {
+        const script = document.createElement('script');
+        script.src = 'https://www.youtube.com/iframe_api';
+        script.async = true;
+        document.body.appendChild(script);
+      }
+
       window.onYouTubeIframeAPIReady = init;
     }
 
     return () => {
+      clearTimeout(setTimeoutId);
       instances.forEach((instance) => {
         instance.destroy();
       });
