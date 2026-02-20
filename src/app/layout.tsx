@@ -11,6 +11,7 @@ import { Analytics } from '@/components/specific/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
+import { getTheme } from '@/utils/get-theme';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,8 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const theme = getTheme();
+
   return (
-    <html lang="ja" data-cookie-consent="waiting" data-theme="light" suppressHydrationWarning>
+    <html lang="ja" data-theme={theme} suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -49,9 +52,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             } catch {}
 
             try {
+              document.documentElement.setAttribute('data-cookie-consent', 'waiting');
+
               const state = (() => {
-                if (/Googlebot|Lighthouse/.test(navigator.userAgent)) {
-                  localStorage.setItem('cookie-consent', '{"type":"primitive","value":"rejected"}')
+                if (/googlebot|lighthouse/i.test(navigator.userAgent)) {
+                  localStorage.setItem('cookie-consent', '{"type":"primitive","value":"rejected"}');
                 }
                 return JSON.parse(localStorage.getItem('cookie-consent'))?.value || 'waiting';
               })();

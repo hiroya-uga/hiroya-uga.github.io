@@ -60,7 +60,7 @@ export function CookieConsentDialog() {
     () => () => () => {},
     () => {
       const cookieConsent = getLocalStorage('cookie-consent');
-      return cookieConsent !== 'accepted';
+      return cookieConsent === null;
     },
     () => true,
   );

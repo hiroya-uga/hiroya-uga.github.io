@@ -6,7 +6,7 @@ type Props = {
   currentYear?: string;
 };
 
-export const CategoryLinks = ({ currentCategory, currentYear }: Props) => {
+export const CategoryLinks = ({ currentCategory }: Props) => {
   return (
     <div className="flex flex-wrap gap-y-2">
       <p>
@@ -21,9 +21,7 @@ export const CategoryLinks = ({ currentCategory, currentYear }: Props) => {
               </a>
             ) : (
               <Link
-                href={
-                  typeof currentYear === 'string' ? `/articles/${category}/${currentYear}` : `/articles/${category}`
-                }
+                href={`/articles/${category}`}
                 className="bg-panel-primary hover:bg-panel-primary-hover border-primary rounded-md border px-4 py-2"
               >
                 {label}

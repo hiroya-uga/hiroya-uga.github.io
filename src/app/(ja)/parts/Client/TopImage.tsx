@@ -269,7 +269,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
                     ? `https://www.instagram.com/p/${photoData.instagram}/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`
                     : 'https://www.instagram.com/hiroya.uga/'
                 }
-                className="transition-bg bg-secondary text-primary z-10 inline-block cursor-pointer rounded-full border border-[#00000080] px-3 py-1 leading-tight no-underline hover:bg-gray-200"
+                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover border-primary z-10 inline-block cursor-pointer rounded-full border px-3 py-1 leading-tight no-underline"
               >
                 Instagramで見る
               </a>
@@ -279,7 +279,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
             </span>
           </span>
           <span
-            className="palt @w640:min-h-12 @w640:text-sm absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 pr-[48px] text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+            className="palt @w640:min-h-12 @w640:text-sm pr-48px absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
             id={captionId}
           >
             <span className={clsx(...transitionClassName)}>
@@ -299,17 +299,37 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
       >
         <button
           type="button"
-          className="group/reload @w640:top-2 @w640:size-8 @w640:p-0 absolute inset-0 size-full rounded-full border border-[#00000080] p-1"
+          className="@w640:top-2 @w640:size-8 @w640:p-0 border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg absolute inset-0 size-full rounded-full border p-1"
           onClick={() => shouldShowImage && updateImage()}
         >
-          <span className="block rounded-full bg-white outline-offset-2">
-            <Picture
-              src="/icon-reload.svg"
-              width={48}
-              height={48}
-              alt="ランダムに切り替える"
-              className="block size-full rounded-full border border-white bg-white opacity-80 transition-opacity group-hover/reload:opacity-65"
-            />
+          <span className="grid size-full place-items-center rounded-full outline-offset-2">
+            <svg
+              version="1.1"
+              role="img"
+              aria-label="ランダムに切り替える"
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              viewBox="0 0 512 512"
+              className="block size-5"
+            >
+              <g>
+                <path
+                  d="M403.925,108.102c-27.595-27.595-62.899-47.558-102.459-56.29L304.182,0L201.946,53.867l-27.306,14.454
+		l-5.066,2.654l8.076,4.331l38.16,20.542l81.029,43.602l2.277-42.859c28.265,7.546,53.438,22.53,73.623,42.638
+		c29.94,29.939,48.358,71.119,48.358,116.776c0,23.407-4.843,45.58-13.575,65.687l40.37,17.532
+		c11.076-25.463,17.242-53.637,17.242-83.219C465.212,198.306,441.727,145.904,403.925,108.102z"
+                  style={{ fill: 'var(--color-primary)' }}
+                ></path>
+                <path
+                  d="M296.256,416.151l-81.101-43.612l-2.272,42.869c-28.26-7.555-53.51-22.53-73.618-42.636
+		c-29.945-29.95-48.364-71.12-48.364-116.767c0-23.427,4.844-45.522,13.576-65.697l-40.37-17.531
+		c-11.076,25.53-17.242,53.723-17.242,83.228c0,57.679,23.407,110.157,61.21,147.893c27.595,27.594,62.899,47.548,102.453,56.202
+		l-2.716,51.9l102.169-53.878l27.455-14.454l4.988-2.643l-7.999-4.332L296.256,416.151z"
+                  style={{ fill: 'var(--color-primary)' }}
+                ></path>
+              </g>
+            </svg>
           </span>
         </button>
       </p>

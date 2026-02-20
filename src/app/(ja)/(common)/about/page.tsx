@@ -312,8 +312,9 @@ export default function Page() {
                               key={key}
                               className={clsx([
                                 typeof item === 'string'
-                                  ? "before:size-5px flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:bg-[var(--color-primary)] before:content-['']"
+                                  ? "before:size-5px before:bg-(--color-primary) flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:content-['']"
                                   : 'not-first:mt-3 -ml-0.5',
+                                'animate-fade-up',
                               ])}
                             >
                               <div
