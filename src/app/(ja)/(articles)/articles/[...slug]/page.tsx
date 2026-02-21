@@ -11,6 +11,8 @@ import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/ut
 import { objectKeys } from '@/utils/object-keys';
 import { notFound } from 'next/navigation';
 
+export const dynamicParams = false;
+
 const isArticleCategory = (category: string): category is ArticleCategory => {
   return category in ARTICLE_PATH_PATTERN_LIST;
 };
@@ -19,7 +21,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   const { slug } = await params;
   const [category, year, fileName] = slug;
 
-  if (isArticleCategory(category) === false) {
+  if (isArticleCategory(category) === false || 3 < slug.length) {
     return notFound();
   }
 
@@ -37,7 +39,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
   const { slug } = await params;
 
-  if (!(slug[0] in ARTICLE_PATH_PATTERN_LIST)) {
+  if (isArticleCategory(slug[0]) === false || 3 < slug.length) {
     return notFound();
   }
 
