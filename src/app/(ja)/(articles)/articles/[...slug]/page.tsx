@@ -6,16 +6,22 @@ import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
 import { ArticlePage, CategoryPage, YearPage } from '@/app/(ja)/(articles)/articles/[...slug]/parts';
+import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils/get-article-markdown-file-path';
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
+import { objectKeys } from '@/utils/object-keys';
 import { notFound } from 'next/navigation';
-import path from 'path';
 
-const filePath = path.join(process.cwd(), 'src', 'markdown', 'articles');
+const isArticleCategory = (category: string): category is ArticleCategory => {
+  return category in ARTICLE_PATH_PATTERN_LIST;
+};
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
-  const [categoryName, year, fileName] = slug;
-  const category = categoryName as ArticleCategory;
+  const [category, year, fileName] = slug;
+
+  if (isArticleCategory(category) === false) {
+    return notFound();
+  }
 
   if (slug.length === 1) {
     return <CategoryPage category={category} />;
@@ -25,11 +31,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
     return <YearPage category={category} year={year} />;
   }
 
-  return <ArticlePage slug={slug} category={category} year={year} fileName={fileName} filePath={filePath} />;
+  return <ArticlePage slug={slug} category={category} year={year} fileName={fileName} />;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
   const { slug } = await params;
+
+  if (!(slug[0] in ARTICLE_PATH_PATTERN_LIST)) {
+    return notFound();
+  }
 
   if (slug.length === 1) {
     const { title, pageTitle, description } = getArticlesPageMeta.categoryTop(slug[0]);
@@ -85,11 +95,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
-  const post = getPostBySlug(filePath, slug.join('/'));
-
-  if (!post) return notFound();
-
   const [category, year, fileName] = slug;
+
+  if (isArticleCategory(category) === false) {
+    return notFound();
+  }
+
+  const post = getPostBySlug(getArticleMarkdownFilePath(category, year), fileName);
+
+  if (post === null) {
+    return notFound();
+  }
+
   const url = `${URL_ORIGIN}/articles/${category}/${year}/${fileName}`;
   const categoryName = resolveCategoryName(category);
   const ogImage = await generateOgpImage(['articles', ...slug], post.meta.title, categoryName, post.meta.ogImage);
@@ -123,10 +140,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export function generateStaticParams() {
-  const fileList = Object.entries(ARTICLE_PATH_PATTERN_LIST)
-    .flatMap(([category, years]) => {
+  const fileList = objectKeys(ARTICLE_PATH_PATTERN_LIST)
+    .flatMap((category) => {
+      const years = ARTICLE_PATH_PATTERN_LIST[category];
       return years.flatMap((year) => {
-        const fileNames = getAllNoteIds(path.join(filePath, category, year));
+        const fileNames = getAllNoteIds(getArticleMarkdownFilePath(category, year));
 
         return fileNames.map((filename) => {
           const slug = [category, year, filename];

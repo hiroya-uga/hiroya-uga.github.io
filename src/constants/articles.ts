@@ -6,13 +6,13 @@ export const ARTICLE_PATH_PATTERN_LIST = {
 
 export type ArticleCategory = keyof typeof ARTICLE_PATH_PATTERN_LIST;
 
-export const ARTICLE_CATEGORY_MAPPING = {
+export const ARTICLE_CATEGORY_LABEL_MAPPING = {
   blog: 'Blog',
   'tech-blog': 'Tech Blog',
 } as const;
 
 export type ArticleCategoryLabel =
-  | (typeof ARTICLE_CATEGORY_MAPPING)[keyof typeof ARTICLE_CATEGORY_MAPPING]
+  | (typeof ARTICLE_CATEGORY_LABEL_MAPPING)[keyof typeof ARTICLE_CATEGORY_LABEL_MAPPING]
   | 'EXTERNAL'
   | 'UNKNOWN';
 

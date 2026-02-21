@@ -1,6 +1,6 @@
 import {
   ARTICLE_CATEGORY_DESCRIPTION_MAPPING,
-  ARTICLE_CATEGORY_MAPPING,
+  ARTICLE_CATEGORY_LABEL_MAPPING,
   ArticleCategoryLabel,
 } from '@/constants/articles';
 
@@ -9,8 +9,8 @@ export const resolveCategoryName = (value: string): ArticleCategoryLabel => {
     return 'EXTERNAL';
   }
   const keyword = value.includes('/') ? value.split('/')[2] : value;
-  if (keyword in ARTICLE_CATEGORY_MAPPING) {
-    return ARTICLE_CATEGORY_MAPPING[keyword as keyof typeof ARTICLE_CATEGORY_MAPPING];
+  if (keyword in ARTICLE_CATEGORY_LABEL_MAPPING) {
+    return ARTICLE_CATEGORY_LABEL_MAPPING[keyword as keyof typeof ARTICLE_CATEGORY_LABEL_MAPPING];
   }
 
   return 'UNKNOWN';
