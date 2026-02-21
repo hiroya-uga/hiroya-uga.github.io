@@ -37,5 +37,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# articles/ から yarn prebuild / predev 時に配置される画像
+public/articles/**/*.jpg
+public/articles/**/*.jpeg
+public/articles/**/*.png
+public/articles/**/*.webp
+public/articles/**/*.gif
+public/articles/**/*.avif
+
 # temporary files
 /.tmp

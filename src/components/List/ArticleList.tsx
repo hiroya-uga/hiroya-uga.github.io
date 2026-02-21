@@ -3,7 +3,7 @@
 import { LoadingIcon } from '@/components/Icons';
 import { Picture } from '@/components/Image';
 import { useHiddenUntilFound } from '@/hooks/use-hidden-until-found';
-import { resolveCategoryName } from '@/utils/articles';
+import { resolveArticleImagePath, resolveCategoryName } from '@/utils/articles';
 import { formattedDateString } from '@/utils/formatter';
 import { ArticleFrontMatter } from '@/utils/ssg-articles';
 import Link from 'next/link';
@@ -62,12 +62,20 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
             <li key={article.pathname} className="grid gap-2">
               <Link
                 href={article.pathname}
-                className="bg-secondary group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:_0_0_2px_1px_rgba(0,_0,_0,_0.1)]"
+                className="bg-secondary group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:0_0_2px_1px_rgba(0,0,0,0.1)]"
                 aria-labelledby={`${titleId} ${infoId}`}
               >
                 <div className="relative z-0 overflow-hidden">
                   <Picture
-                    src={type === 'thumbnail' ? (article.ogImage ?? generatedOgp) : generatedOgp}
+                    src={
+                      type === 'thumbnail'
+                        ? (resolveArticleImagePath({
+                            imagePath: article.ogImage,
+                            category: article.pathname.split('/')[2],
+                            year: article.pathname.split('/')[3],
+                          }) ?? generatedOgp)
+                        : generatedOgp
+                    }
                     alt=""
                     width={1200}
                     height={630}

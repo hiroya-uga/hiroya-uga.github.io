@@ -1,3 +1,4 @@
+import { resolveArticleImagePath } from '@/utils/articles';
 import { createCanvas, loadImage, registerFont } from 'canvas';
 import fs from 'fs';
 import path from 'path';
@@ -46,7 +47,6 @@ export async function generateOgpImage(
   const ctx = canvas.getContext('2d');
 
   if (baseImage) {
-    const filepath = path.join(process.cwd(), 'public', baseImage);
     // const isSvg = filepath.endsWith('.svg');
     // const pngPath = filepath.replace('.svg', '.png');
 
@@ -55,7 +55,12 @@ export async function generateOgpImage(
     // }
 
     // const src = isSvg ? pngPath : filepath;
-    const src = filepath;
+    const filePath = resolveArticleImagePath({
+      imagePath: baseImage,
+      category: slug[1],
+      year: slug[2],
+    });
+    const src = path.join(process.cwd(), 'public', filePath);
 
     ctx.drawImage(await loadImage(src), 0, 0, width, height);
     ctx.drawImage(await screen, 0, 0, width, height);

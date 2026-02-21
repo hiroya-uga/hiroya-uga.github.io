@@ -1,23 +1,28 @@
 // ビルド時にしか呼ばれない関数群。クライアントサイドで実行される関数と同じファイルに置くとビルドが転ける。。
 
+import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils/get-article-markdown-file-path';
 import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import { objectKeys } from './object-keys';
 
 export type ArticleFrontMatter = {
-  [key: string]: any;
+  [key: string]: unknown;
 } & {
   title: string;
   description: string;
+  ogImage: string;
   pathname: string;
   publishedAt: string;
+  tags?: string[];
 };
 
-export async function getArticles(articlesDir: string) {
+export async function getArticles(articlesDir: string, urlBase?: string) {
   const filenames = fs.readdirSync(articlesDir);
 
   const articles = filenames
+    .filter((filename) => filename.endsWith('.md'))
     .map((filename) => {
       const filePath = path.join(articlesDir, filename);
       const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -29,8 +34,9 @@ export async function getArticles(articlesDir: string) {
 
       return {
         ...data,
-        pathname:
-          articlesDir.replace(process.cwd(), '').replace('/src/markdown', '') + '/' + filename.replace('.md', ''),
+        pathname: urlBase
+          ? `${urlBase}/${filename.replace('.md', '')}`
+          : articlesDir.replace(process.cwd(), '') + '/' + filename.replace('.md', ''),
       } as ArticleFrontMatter;
     })
     .sort((a, b) => {
@@ -47,14 +53,11 @@ export async function getArticles(articlesDir: string) {
   return articles;
 }
 
-const getArticlePath = (category: string, year: string) => {
-  return path.join(process.cwd(), 'src', 'markdown', 'articles', category, year);
-};
-
-const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
-  .flatMap(([category, years]) => {
+const articlePromises = objectKeys(ARTICLE_PATH_PATTERN_LIST)
+  .flatMap((category) => {
+    const years = ARTICLE_PATH_PATTERN_LIST[category];
     return years.flatMap((year) => {
-      return getArticles(getArticlePath(category, year));
+      return getArticles(getArticleMarkdownFilePath(category, year));
     });
   })
   .flat();

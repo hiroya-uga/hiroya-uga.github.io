@@ -8,12 +8,19 @@ import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles
 import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { getArticleMarkdownFilePath } from './utils/get-article-markdown-file-path';
 
 type Props = { category: ArticleCategory; year: string };
 
 export const YearPage = async ({ category, year }: Props) => {
-  const blogs = await getArticles(getArticleMarkdownFilePath(category, year));
+  const notExistYear = ARTICLE_PATH_PATTERN_LIST[category].includes(year) === false;
+
+  if (notExistYear) {
+    return notFound();
+  }
+
+  const blogs = await getArticles(getArticleMarkdownFilePath(category, year), `/articles/${category}/${year}`);
   const { pageTitle, description } = getArticlesPageMeta.yearTop(category, year);
 
   return (
@@ -26,7 +33,7 @@ export const YearPage = async ({ category, year }: Props) => {
         </div>
         <div className="@w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
           <ArticleList type={category === 'blog' ? 'thumbnail' : 'simple'} list={blogs} />
-          <div className="@w1024:w-[248px] @w1024:ml-auto">
+          <div className="@w1024:w-248px @w1024:ml-auto">
             <h2 className="bg-tertiary px-3 py-1">過去ログ</h2>
             <ul className="bg-secondary px-3 py-3">
               {ARTICLE_PATH_PATTERN_LIST[category].map((key) => (
