@@ -2,7 +2,7 @@ import { TweetLink } from '@/components/Clickable/TweetLink';
 import { ArticleMain } from '@/components/structures/ArticleMain';
 import { Footer } from '@/components/structures/Footer';
 import { Header } from '@/components/structures/Header';
-import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
+import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
 import { URL_ORIGIN } from '@/constants/meta';
 import { getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
@@ -12,19 +12,19 @@ import { notFound } from 'next/navigation';
 import { getArticleMarkdownFilePath } from '../utils/get-article-markdown-file-path';
 import { ArticleJsonLD, ArticleNavigation } from './parts';
 
-type Props = { slug: string[]; category: string; year: string; fileName: string; filePath: string };
+type Props = { slug: string[]; category: ArticleCategory; year: string; fileName: string };
 
-async function getAllArticlesInCategory(category: string) {
-  const articlePromises = ARTICLE_PATH_PATTERN_LIST[category as keyof typeof ARTICLE_PATH_PATTERN_LIST].map((year) =>
-    getArticles(getArticleMarkdownFilePath(category, year)),
+async function getAllArticlesInCategory(category: ArticleCategory) {
+  const articlePromises = ARTICLE_PATH_PATTERN_LIST[category].map((year) =>
+    getArticles(getArticleMarkdownFilePath(category, year), `/articles/${category}/${year}`),
   );
   return (await Promise.all(articlePromises)).flat();
 }
 
-export const ArticlePage = async ({ slug, category, year, fileName, filePath }: Props) => {
-  const post = getPostBySlug(filePath, slug.join('/'));
+export const ArticlePage = async ({ slug, category, year, fileName }: Props) => {
+  const post = getPostBySlug(getArticleMarkdownFilePath(category, year), fileName);
 
-  if (!post || !(category in ARTICLE_PATH_PATTERN_LIST)) {
+  if (post === null) {
     return notFound();
   }
 

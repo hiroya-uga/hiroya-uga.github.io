@@ -6,6 +6,7 @@ import { Header } from '@/components/structures/Header';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
 import { resolveCategoryName } from '@/utils/articles';
+import { objectKeys } from '@/utils/object-keys';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 import { getArticleMarkdownFilePath } from './utils/get-article-markdown-file-path';
@@ -15,9 +16,10 @@ type Props = {
 };
 
 export const CategoryPage = async ({ category }: Props) => {
-  const articlePromises = Object.entries(ARTICLE_PATH_PATTERN_LIST)
-    .filter(([categoryName]) => category === categoryName)
-    .flatMap(([categoryName, years]) => {
+  const articlePromises = objectKeys(ARTICLE_PATH_PATTERN_LIST)
+    .filter((categoryName) => category === categoryName)
+    .flatMap((categoryName) => {
+      const years = ARTICLE_PATH_PATTERN_LIST[categoryName];
       return years.map((yearValue) => getArticles(getArticleMarkdownFilePath(categoryName, yearValue)));
     });
 
@@ -34,7 +36,7 @@ export const CategoryPage = async ({ category }: Props) => {
         </div>
         <div className="@w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
           <ArticleList type={category === 'blog' ? 'thumbnail' : 'simple'} list={blogs} />
-          <div className="@w1024:w-[248px] @w1024:ml-auto">
+          <div className="@w1024:w-248px @w1024:ml-auto">
             <h2 className="bg-tertiary px-3 py-1">過去ログ</h2>
             <ul className="bg-secondary px-3 py-3">
               {ARTICLE_PATH_PATTERN_LIST[category].map((year) => (

@@ -1,6 +1,6 @@
 ---
 title: 'わたくし、結婚いたしました。'
-ogImage: '/articles/blog/2025/07-24-got-married.jpg'
+ogImage: './07-24-got-married.jpg'
 publishedAt: '2025-07-25'
 tags: [日記]
 ---
@@ -8,7 +8,7 @@ tags: [日記]
 友人に結婚報告をすると、返ってきた第一声は「今日は4月1日じゃないぞ？」でした。  
 疑われてて草。
 
-![](/articles/blog/2025/07-24-got-married.webp?w=1200&h=630)
+![](./07-24-got-married.webp?w=1200&h=630)
 
 「うがちゃんの変人性を受け入れてくれる人がついに」と言われるくらいには変わり者な私ですが、なんと婚姻届を提出するに至りました。
 

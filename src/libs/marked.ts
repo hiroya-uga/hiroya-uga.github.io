@@ -6,7 +6,10 @@ import { marked } from 'marked';
 import path from 'path';
 
 export function getAllNoteIds(fullPath: string) {
-  return fs.readdirSync(fullPath).map((filename) => filename.replace(/\.md$/, ''));
+  return fs
+    .readdirSync(fullPath)
+    .filter((filename) => filename.endsWith('.md'))
+    .map((filename) => filename.replace(/\.md$/, ''));
 }
 
 marked.use({ extensions: customMarkdownSyntaxes });

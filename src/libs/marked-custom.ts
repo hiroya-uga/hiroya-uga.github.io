@@ -1,5 +1,6 @@
 import { LOADING_ICON_HTML } from '@/components/Icons';
 import { URL_ORIGIN } from '@/constants/meta';
+import { resolveArticleImagePath } from '@/utils/articles';
 import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
 let currentFilePath = '';
@@ -65,7 +66,20 @@ const overrideImageExtension: TokenizerAndRendererExtension = {
 
   renderer(token) {
     const t = token as CustomImageToken;
-    const url = t.href ? URL.parse(t.href, URL_ORIGIN) : null;
+    const href = (() => {
+      // ./filename.ext → /articles/{category}/{year}/filename.ext
+      if (t.href.startsWith('./')) {
+        const match = /\/articles\/([^/]+)\/([^/]+)\/[^/]+\.md$/.exec(currentFilePath);
+        if (match) {
+          const [, category, year] = match;
+          return resolveArticleImagePath({ imagePath: t.href, category, year });
+        }
+      }
+
+      return t.href || '';
+    })();
+
+    const url = href ? URL.parse(href, URL_ORIGIN) : null;
     const src = url?.pathname;
     const query = url?.search ? new URLSearchParams(url.search) : null;
     const width = (Number.parseInt(query?.get('w') ?? '', 10) ?? 2) / 2;
