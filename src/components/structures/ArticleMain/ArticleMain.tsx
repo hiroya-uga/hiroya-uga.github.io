@@ -26,6 +26,7 @@ type Props = {
 
 export const ArticleMain = async ({ post }: Props) => {
   const hasTags = Array.isArray(post.meta.tags) && 0 < post.meta.tags.length;
+  const hasToc = post.toc;
 
   return (
     <article className={styles.root}>
@@ -84,11 +85,12 @@ export const ArticleMain = async ({ post }: Props) => {
       <div className="px-content-inline @w1024:pl-10">
         <div
           className={clsx([
-            'max-w-article @w1280:max-w-none mx-auto',
-            '@w1280:grid @w1280:grid-cols-[1fr_var(--width-article)_1fr] @w1280:grid-rows-[auto_auto]',
+            'max-w-article mx-auto',
+            hasToc &&
+              '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[2fr_var(--width-article)_3fr] @w1280:grid-rows-[auto_auto]',
           ])}
         >
-          {post.toc && (
+          {hasToc && (
             <div
               className={clsx([
                 styles.toc,
@@ -98,7 +100,7 @@ export const ArticleMain = async ({ post }: Props) => {
               <nav
                 className={clsx([
                   'border-accent bg-secondary rounded-r-md border-l-2 px-5 pb-6 pt-4 text-sm',
-                  '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
+                  '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
                 ])}
               >
                 <h2 className="@w800:text-lg font-bold">目次</h2>
@@ -111,7 +113,7 @@ export const ArticleMain = async ({ post }: Props) => {
             className={clsx(
               styles.article,
               'space-y-paragraph @w640:space-y-36px @w800:text-lg',
-              '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
+              hasToc && '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
             )}
             dangerouslySetInnerHTML={{ __html: await post.content }}
           />
