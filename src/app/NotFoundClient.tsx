@@ -1,12 +1,11 @@
+'use client';
+
+import Link from 'next/link';
 import { useSyncExternalStore } from 'react';
 
-import Head from 'next/head';
+import { DOMAIN_NAME } from '@/constants/meta';
 
-import { DOMAIN_NAME, SITE_NAME } from '@/constants/meta';
-
-import '@/pages/404.css';
-import clsx from 'clsx';
-import Link from 'next/link';
+import styles from '@/app/not-found.module.css';
 
 const getBrowserName = () => {
   if (typeof navigator !== 'undefined') {
@@ -35,7 +34,7 @@ const getBrowserName = () => {
   return 'Unknown Browser';
 };
 
-export default function Page() {
+export function NotFoundClient() {
   const browserName = useSyncExternalStore(
     () => () => {},
     () => getBrowserName(),
@@ -48,12 +47,7 @@ export default function Page() {
   );
 
   return (
-    <>
-      <Head>
-        <title>HTTP 404 未検出 - {SITE_NAME}</title>
-        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-      </Head>
-
+    <div className={styles.notfound}>
       <main>
         <h1>
           <span>ページが見つかりません</span>
@@ -67,10 +61,7 @@ export default function Page() {
             アドレス バーにページ アドレスを入力した場合は、ページ アドレスが正しく入力したかどうかを確認してください。
           </li>
           <li>
-            <Link className="Page_link__nDiOM" href="/">
-              {DOMAIN_NAME}
-            </Link>{' '}
-            ホームページを開いてから、表示する情報へのリンクを探してください。
+            <Link href="/">{DOMAIN_NAME}</Link> ホームページを開いてから、表示する情報へのリンクを探してください。
           </li>
           {historyLength !== 1 && (
             <li>
@@ -89,10 +80,8 @@ export default function Page() {
 
       <footer>
         <p>HTTP 404 - ファイル未検出</p>
-        <p className={clsx([browserName ? 'opacity-1' : 'opacity-0', 'transition-opacity duration-300'])}>
-          {browserName}
-        </p>
+        <p style={{ opacity: browserName ? 1 : 0, transition: 'opacity 0.3s' }}>{browserName}</p>
       </footer>
-    </>
+    </div>
   );
 }
