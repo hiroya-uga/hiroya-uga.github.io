@@ -37,65 +37,56 @@ type ToolPage = (EmojiLinkListItem & {
   userType?: JobRole[];
 })[];
 
-export const TOOLS_LINK_LIST: ToolPage = [
+export const TOOLS_LINK_LIST = [
   // 追加順
-  {
-    type: 'default',
-    emoji: '🌳',
-    pathname: '/tools/an-alt-decision-tree',
-    userType: ['developer', 'director', 'planner', 'writer'],
-  },
-  {
-    type: 'default',
-    emoji: '👆',
-    pathname: '/tools/character-count',
-    userType: [],
-  },
-  {
-    type: 'default',
-    emoji: '🔔',
-    pathname: '/tools/slack-reminder-command-generator',
-    userType: [],
-  },
-  {
-    type: 'default',
-    emoji: '',
-    pathname: '/tools/get-url-from-dom',
-    userType: ['director', 'planner'],
-  },
-  {
-    type: 'default',
-    emoji: '🪮',
-    pathname: '/tools/markup-dev-supporter',
-    userType: ['developer'],
-  },
+  ...(
+    [
+      {
+        emoji: '🌳',
+        pathname: '/tools/an-alt-decision-tree',
+        userType: ['developer', 'director', 'planner', 'writer'],
+      },
+      {
+        emoji: '👆',
+        pathname: '/tools/character-count',
+        userType: [],
+      },
+      {
+        emoji: '🔔',
+        pathname: '/tools/slack-reminder-command-generator',
+        userType: [],
+      },
+      {
+        emoji: '',
+        pathname: '/tools/get-url-from-dom',
+        userType: ['director', 'planner'],
+      },
+      {
+        emoji: '🪮',
+        pathname: '/tools/markup-dev-supporter',
+        userType: ['developer'],
+      },
+      {
+        emoji: '☀️',
+        pathname: '/tools/screen-wake-lock',
+        userType: [],
+      },
+    ] as ToolPage
+  ).map((item) => ({ ...item, type: 'default' }) as const),
 
   // playground
-  { type: 'playground', emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
-  { type: 'playground', emoji: '📏', pathname: '/tools/css-units' },
-  { type: 'playground', emoji: '', pathname: '/tools/dom-events-watcher' },
-  { type: 'playground', emoji: '', pathname: '/tools/touch-event-touches' },
-  {
-    type: 'playground',
-    emoji: '⌨',
-    pathname: '/tools/keyboard-event',
-  },
-  {
-    type: 'playground',
-    emoji: '♾️',
-    pathname: '/tools/kaprekar-number',
-  },
-  {
-    type: 'playground',
-    emoji: '文',
-    pathname: '/tools/render-text-in-react',
-    noPickup: true,
-  },
-  {
-    type: 'playground',
-    emoji: '📈',
-    pathname: '/tools/sort-visualizer',
-  },
+  ...(
+    [
+      { emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
+      { emoji: '📏', pathname: '/tools/css-units' },
+      { emoji: '', pathname: '/tools/dom-events-watcher' },
+      { emoji: '', pathname: '/tools/touch-event-touches' },
+      { emoji: '⌨', pathname: '/tools/keyboard-event' },
+      { emoji: '♾️', pathname: '/tools/kaprekar-number' },
+      { emoji: '文', pathname: '/tools/render-text-in-react', noPickup: true },
+      { emoji: '📈', pathname: '/tools/sort-visualizer' },
+    ] as ToolPage
+  ).map((item) => ({ ...item, type: 'playground' }) as const),
 ];
 
 export const GAMES_LINK_LIST: EmojiLinkListItem[] = [

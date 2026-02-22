@@ -397,6 +397,11 @@ export const SEO: Record<
     description:
       'オフィスツールなどで作成された表をHTMLとして実装する人のための支援ツールです。\n業務上公開前の情報を外部に送信できないケースにおいて、指示書にある表を整形されたHTMLにフォーマットして実装しやすくすることを主な用途に想定しています。',
   },
+  '/tools/screen-wake-lock': {
+    title: 'スリープモードを防止するツール',
+    description:
+      '開いておくだけで画面のスリープ（自動消灯）を防止できるツールです。\n大容量ファイルのアップロードやダウンロード中など、しばらく画面をスリープさせたくない場合に活用できます。',
+  },
   '/tools/sort-visualizer': {
     title: 'Sort Playground',
     afterSubTitle: 'ソートアルゴリズムの動作を可視化するためのツール（Sort Visualizer）',
