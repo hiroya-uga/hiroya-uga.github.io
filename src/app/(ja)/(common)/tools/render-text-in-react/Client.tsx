@@ -7,21 +7,6 @@ import { Radio } from '@/components/Form';
 import { Heading } from '@/components/Heading';
 import { useMemo, useState } from 'react';
 
-const defaultCodeValue = `export const Example = () => {
-  const [count, setCount] = useState(0);
-
-  function handleClick() {
-    setCount(count + 1);
-  }
-
-  return (
-    <>
-      <p aria-live="assertive">Clicked {count} times</p>
-      <button onClick={handleClick}>Click me!</button>
-    </>
-  );
-}`;
-
 const Example = ({ shouldUseTemplateLiteral }: { shouldUseTemplateLiteral: boolean }) => {
   const [count, setCount] = useState(0);
 

@@ -269,20 +269,14 @@ const sortDictionary = {
 
 type SortDictionary = typeof sortDictionary;
 
-type SortNames = {
+type SortName = {
   [K in keyof SortDictionary]: keyof SortDictionary[K];
 }[keyof SortDictionary];
-
-const sortNames: SortNames[] = Object.values(sortDictionary).flatMap((category) =>
-  Object.keys(category),
-) as SortNames[];
 
 const flatSortDictionary = Object.entries(sortDictionary).flatMap(([_, group]) => Object.entries(group)) as [
   SortName,
   [string, SortDescription],
 ][];
-
-type SortName = (typeof sortNames)[number];
 
 const getRandomArray = (length = DEFAULT_LENGTH, options: { shouldBeRandom?: boolean } = {}) => {
   if (options.shouldBeRandom) {
@@ -661,7 +655,7 @@ export const SortVisualizerContent = () => {
             className={clsx([
               // ビルドで生成されないので important をつけてみる
               '@w640:[border:none]!',
-              '@w350:grid-cols-2 @w640:grid-cols-1 grid gap-4 py-4 [border-image:_linear-gradient(color-mix(in_oklab,_var(--background-color-primary)_90%,_transparent))_fill_0_/_/0_100lvi]',
+              '@w350:grid-cols-2 @w640:grid-cols-1 grid gap-4 py-4 [border-image:linear-gradient(color-mix(in_oklab,var(--background-color-primary)_90%,transparent))_fill_0//0_100lvi]',
             ])}
           >
             <p className="grow">
@@ -705,7 +699,7 @@ export const SortVisualizerContent = () => {
         <div className="@container bg-secondary border-primary grow rounded-md border p-4">
           {Object.keys(sortDictionary).map((key) => {
             const category = key as keyof SortDictionary;
-            const sortsInCategory = Object.keys(sortDictionary[category]) as SortNames[];
+            const sortsInCategory = Object.keys(sortDictionary[category]) as SortName[];
 
             return (
               <div
@@ -814,7 +808,7 @@ export const SortVisualizerContent = () => {
       )}
 
       <div className="bg-primary/90 border-b-primary @w640:items-center @w640:grid @w640:grid-cols-[1fr_auto_1fr] @w640:py-2 @w350:sticky top-0 mb-8 border-b pb-[1lh]">
-        <p role="alert" className="text-alert @w640:text-left min-h-[1lh] text-center">
+        <p role="alert" className="text-alert @w640:text-left min-h-lh text-center">
           {errorMessage}
         </p>
 

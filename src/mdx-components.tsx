@@ -16,7 +16,7 @@ type Props = Pick<HTMLAttributes<HTMLHeadingElement>, 'children'>;
 interface DynamicTagProps {
   tagName: TagName;
   children?: ReactNode;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const DynamicTagComponent: React.FC<DynamicTagProps> = ({ tagName, children, ...props }) => {

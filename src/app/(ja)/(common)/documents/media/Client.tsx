@@ -180,7 +180,6 @@ const resetStatus = <T extends Record<string, boolean>>(status: T) => {
 
 export const MediaContent = () => {
   const id = useId();
-  const idForKeywords = `${id}text`;
   const idForFilterTitle = `${id}filterTitle`;
 
   const pathname = usePathname();
@@ -338,7 +337,7 @@ export const MediaContent = () => {
                 className="hover:bg-secondary @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:shadow"
               >
                 <p className="col-start-1 col-end-2 content-center">
-                  <span className="@w640:bg-card @w640:aspect-[4/3] @w640:h-auto @w640:w-full relative grid place-items-center rounded-lg">
+                  <span className="@w640:bg-card @w640:aspect-4/3 @w640:h-auto @w640:w-full relative grid place-items-center rounded-lg">
                     <span className="@w640:size-8 relative block size-4">
                       {(() => {
                         switch (type) {
@@ -353,10 +352,10 @@ export const MediaContent = () => {
                     </span>
                   </span>
                 </p>
-                <p className="@w640:content-center @w640:px-4 @w640:text-center col-start-2 col-end-3 pl-2 font-mono text-xs uppercase leading-[inherit]">
+                <p className="@w640:content-center @w640:px-4 @w640:text-center leading-inherit col-start-2 col-end-3 pl-2 font-mono text-xs uppercase">
                   {category}
                 </p>
-                <div className="@w640:col-start-3 @w640:col-end-4 @w640:text-base col-start-1 col-end-3 text-sm leading-[inherit]">
+                <div className="@w640:col-start-3 @w640:col-end-4 @w640:text-base leading-inherit col-start-1 col-end-3 text-sm">
                   <p>
                     <a href={href} id={defaultClickable} className="break-all visited:[--v-color-text-link:#515a9c]">
                       <Title title={title} keyword={keyword} />

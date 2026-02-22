@@ -14,9 +14,10 @@ import clsx from 'clsx';
 type Props = {
   post: {
     meta: {
-      [key: string]: any;
+      [key: string]: unknown;
       title?: string;
       publishedAt?: string;
+      tags?: string[];
     };
     toc: string;
     content: string | Promise<string>;
@@ -72,7 +73,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <div className="@w640:mt-13.5 mt-5 flex flex-wrap justify-end pb-1 text-right text-xs">
             {/* <p>この記事のテーマ：</p> */}
             <ul className="text-secondary flex flex-wrap justify-end gap-2">
-              {post.meta.tags.map((tag: string) => (
+              {post.meta.tags?.map((tag: string) => (
                 <li key={tag}>
                   <span>#{tag}</span>
                 </li>
