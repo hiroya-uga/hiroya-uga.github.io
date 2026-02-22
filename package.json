@@ -11,7 +11,7 @@
     "fix": "yarn lint-fix && yarn format-fix",
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
-    "postinstall": "npm rebuild canvas",
+    "postinstall": "node scripts/rebuild-canvas.mjs",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "next-lint": "next lint",
