@@ -1,6 +1,36 @@
 {
   "name": "hiroya-uga.github.io",
   "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prebuild": "node scripts/copy-blog-images.mjs",
+    "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "predev": "node scripts/copy-blog-images.mjs",
+    "dev": "next dev -p 3001",
+    "fix": "yarn lint-fix && yarn format-fix",
+    "format": "prettier --check .",
+    "format-fix": "prettier --write .",
+    "postinstall": "npm rebuild canvas",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix .",
+    "next-lint": "next lint",
+    "prepare": "husky",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md,mdx}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "npx sort-package-json"
+    ]
+  },
   "dependencies": {
     "@types/node": "22.15.30",
     "@types/react": "19.1.6",
@@ -56,32 +86,5 @@
   },
   "engines": {
     "node": "24.13.0"
-  },
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "prebuild": "node scripts/copy-blog-images.mjs",
-    "build:analyze": "ANALYZE=true next build",
-    "dev": "next dev -p 3001",
-    "predev": "node scripts/copy-blog-images.mjs",
-    "lint": "eslint .",
-    "lint-fix": "eslint --fix .",
-    "fix": "yarn lint-fix && yarn format-fix",
-    "next-lint": "next lint",
-    "format": "prettier --check .",
-    "format-fix": "prettier --write .",
-    "type-check": "tsc --noEmit",
-    "start": "next start",
-    "postinstall": "npm rebuild canvas",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,md,mdx}": [
-      "prettier --write"
-    ]
   }
 }
