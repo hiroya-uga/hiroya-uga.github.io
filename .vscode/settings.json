@@ -4,7 +4,18 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "cSpell.words": ["Doumei", "Kaprekar", "NIKKOR", "nocards", "noconversation", "pauljadam", "Tamron", "ugadev"],
+  "cSpell.words": [
+    "Doumei",
+    "Kaprekar",
+    "multicriteria",
+    "NIKKOR",
+    "nocards",
+    "noconversation",
+    "opengraph",
+    "pauljadam",
+    "Tamron",
+    "ugadev"
+  ],
   "editor.codeLens": true,
   "typescript.referencesCodeLens.enabled": true,
   "javascript.referencesCodeLens.enabled": true
