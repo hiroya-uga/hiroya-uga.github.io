@@ -44,6 +44,8 @@
     "eslint-plugin-no-relative-import-paths": "^1.5.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "next-sitemap": "^4.2.3",
     "postcss": "^8.4.30",
     "prettier": "^3.3.3",
@@ -70,6 +72,16 @@
     "format-fix": "prettier --write .",
     "type-check": "tsc --noEmit",
     "start": "next start",
-    "postinstall": "npm rebuild canvas"
+    "postinstall": "npm rebuild canvas",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md,mdx}": [
+      "prettier --write"
+    ]
   }
 }
