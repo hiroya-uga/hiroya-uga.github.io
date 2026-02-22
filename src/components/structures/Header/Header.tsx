@@ -19,7 +19,7 @@ export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-conten
 
       <div
         className={clsx([
-          'my-4 px-4 sm:pl-10 sm:pt-8 2xl:pt-16',
+          '@w1280:pl-10 @w1520:pt-16 my-4 px-4 sm:pt-8',
           layout !== 'article-content' && 'mb-(--v-header-margin-bottom)',
         ])}
       >
