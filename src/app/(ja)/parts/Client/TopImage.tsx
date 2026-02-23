@@ -21,6 +21,13 @@ type PhotoData = {
 
 const photoDataList: PhotoData[] = [
   {
+    src: '/main-kiryucoco.webp',
+    caption: '東京ドームシティ',
+    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
+    instagram: 'DVGzOthD2Py',
+    date: '2023.09.03',
+  },
+  {
     src: '/main-tsutsujigaoka.webp',
     caption: '京王線 つつじヶ丘駅',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
