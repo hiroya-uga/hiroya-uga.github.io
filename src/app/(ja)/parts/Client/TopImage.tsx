@@ -3,7 +3,7 @@
 import { LoadingIcon } from '@/components/Icons';
 import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type PhotoData = {
   caption: string;
@@ -20,6 +20,13 @@ type PhotoData = {
 );
 
 const photoDataList: PhotoData[] = [
+  {
+    src: '/main-tsutsujigaoka.webp',
+    caption: '京王線 つつじヶ丘駅',
+    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
+    instagram: 'DVEL5h3j25D',
+    date: '2023.12.17',
+  },
   {
     src: '/main-keishoan.webp',
     caption: '円覚寺 桂昌庵',
@@ -113,8 +120,6 @@ const photoDataList: PhotoData[] = [
   },
 ];
 
-const loadedImageCache = new Set<string>();
-
 const Spec = ({ spec }: { spec: string }) => {
   if (!spec) {
     return <></>;
@@ -136,97 +141,77 @@ const Spec = ({ spec }: { spec: string }) => {
   return <>{lens}</>;
 };
 
-const generateRandomArray = ({ length }: { length: number }) => {
-  const indexes = Array.from({ length }, (_, i) => i);
+const generateRandomArray = () => {
+  const indexes = Array.from({ length: photoDataList.length }, (_, i) => i);
 
   for (let i = indexes.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
   }
 
-  return indexes;
+  return indexes.map((index) => photoDataList[index]);
 };
 
 const TRANSITION_DURATION = 350;
 
 export const TopImage = ({ captionId }: { captionId: string }) => {
-  const isImageLoadingRef = useRef(false);
   const [shouldShowImage, setShouldShowImage] = useState(false);
   const [photoData, setPhotoData] = useState<PhotoData | null>(null);
-  const indexListRef = useRef(generateRandomArray({ length: photoDataList.length }));
-  const currentIndexRef = useRef(0);
+
+  const isMountedRef = useRef(true);
+  const isImageLoadingRef = useRef(false);
+  const photoDataListRef = useRef(generateRandomArray());
+  const currentIndexRef = useRef(-1);
+  const setTimeoutId = useRef(-1);
 
   const updateImage = useCallback(() => {
     if (isImageLoadingRef.current) {
       return;
     }
 
-    if (photoDataList[indexListRef.current[currentIndexRef.current]] === undefined) {
-      indexListRef.current = generateRandomArray({
-        length: photoDataList.length,
-      });
+    isImageLoadingRef.current = true;
+    currentIndexRef.current++;
+
+    if (photoDataListRef.current.length <= currentIndexRef.current) {
+      photoDataListRef.current = generateRandomArray();
       currentIndexRef.current = 0;
     }
 
-    const currentItem = photoDataList[indexListRef.current[currentIndexRef.current]];
-    currentIndexRef.current++;
-
-    if (currentItem === null || 'src' in currentItem === false) {
-      return;
-    }
-
     setShouldShowImage(false);
-    isImageLoadingRef.current = true;
 
-    const show = () => {
-      setPhotoData(currentItem);
-      setShouldShowImage(true);
-      isImageLoadingRef.current = false;
-    };
+    setTimeoutId.current = window.setTimeout(() => {
+      const currentItem = photoDataListRef.current[currentIndexRef.current];
 
-    setTimeout(() => {
-      if (loadedImageCache.has(currentItem.src)) {
-        show();
+      if ('src' in currentItem === false) {
         return;
       }
 
-      const image = new globalThis.window.Image();
-      image.onload = () => {
-        loadedImageCache.add(currentItem.src);
-        show();
-      };
-      image.onerror = () => {
-        const date = new Date();
-
-        setPhotoData({
-          error: '404 NOT FOUND',
-          instagram: '',
-          caption: 'UNKNOWN',
-          spec: 'NO DATA',
-          date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
-        });
-        setShouldShowImage(true);
-      };
-      image.src = currentItem.src;
+      setPhotoData(currentItem);
     }, TRANSITION_DURATION);
   }, []);
 
-  const transitionClassName = useMemo(
-    () => [
-      'transition-[opacity,visibility] duration-300',
-      shouldShowImage ? 'opacity-100' : 'opacity-0',
-      shouldShowImage ? 'visible' : 'invisible',
-    ],
-    [shouldShowImage],
-  );
-
   useEffect(() => {
-    const init = () => updateImage();
-    init();
+    isMountedRef.current = true;
+    queueMicrotask(() => {
+      updateImage();
+    });
+
+    return () => {
+      isMountedRef.current = false;
+      isImageLoadingRef.current = false;
+      clearTimeout(setTimeoutId.current);
+    };
   }, [updateImage]);
+
+  const show = () => {
+    isImageLoadingRef.current = false;
+    setShouldShowImage(true);
+  };
 
   return (
     <div
+      role="group"
+      aria-label="トップ画像"
       className="@content:rounded-lg group relative overflow-hidden"
       tabIndex={-1}
       onClick={(e) => {
@@ -237,31 +222,66 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         e.currentTarget.focus();
       }}
     >
-      <figure aria-live="polite" className="min-h bg-primary relative">
-        <p className="absolute inset-0 z-0 grid size-full place-items-center">
-          <LoadingIcon />
+      <figure className="min-h bg-primary relative" aria-live="polite">
+        <p className="aspect-3/2 isolate">
+          {photoData && 'src' in photoData && (
+            <Picture
+              width={960}
+              height={640}
+              src={photoData.src}
+              alt=""
+              className={clsx([
+                'z-1 relative block size-full object-cover',
+                'starting:opacity-0 starting:invisible transition-fade duration-300',
+                shouldShowImage ? 'opacity-100' : 'opacity-0',
+                shouldShowImage ? 'visible' : 'invisible',
+              ])}
+              aria-describedby={captionId}
+              fetchPriority="high"
+              priority
+              onLoad={() => {
+                if (isMountedRef.current === false) {
+                  return;
+                }
+                show();
+              }}
+              onError={() => {
+                if (isMountedRef.current === false) {
+                  return;
+                }
+                const date = new Date();
+                setPhotoData({
+                  error: '404 NOT FOUND',
+                  instagram: '',
+                  caption: 'UNKNOWN',
+                  spec: 'NO DATA',
+                  date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
+                });
+                show();
+              }}
+            />
+          )}
+
+          {photoData && 'error' in photoData && (
+            <span
+              className={clsx([
+                'text-middle absolute grid size-full place-items-center text-center',
+                shouldShowImage ? 'text-inherit' : 'text-transparent',
+              ])}
+            >
+              {photoData.error}
+            </span>
+          )}
+
+          {(photoData === null || 'error' in photoData === false) && (
+            <span className="absolute inset-0 z-0 grid size-full place-items-center">
+              <LoadingIcon alt="" />
+            </span>
+          )}
         </p>
 
-        <div className={clsx(['aspect-3/2 relative', ...transitionClassName])}>
-          {photoData &&
-            ('error' in photoData ? (
-              <p className="text-middle absolute grid size-full place-items-center text-center">{photoData.error}</p>
-            ) : (
-              <Picture
-                width={960}
-                height={640}
-                src={photoData.src}
-                alt={`${photoData.caption} ${photoData.date}`}
-                className="block size-full object-cover"
-                aria-describedby={captionId}
-                fetchPriority="high"
-                priority
-              />
-            ))}
-        </div>
-
         <figcaption className="text-2xs @w640:text-sm text-white">
-          <span className="absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] py-2 pl-4 pr-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
+          <span className="@w640:pl-4 @w640:pr-3 absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] px-2 py-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
             <span className="@w640:w-56 w-40 text-right">
               <a
                 href={
@@ -274,16 +294,21 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
                 Instagramで見る
               </a>
             </span>
-            <span className={clsx(['grow leading-tight', ...transitionClassName])}>
+            <span
+              className={clsx([
+                'grow leading-tight transition-[color]',
+                shouldShowImage ? 'text-inherit' : 'text-transparent',
+              ])}
+            >
               <Spec spec={photoData?.spec ?? 'loading...'} />
             </span>
           </span>
           <span
-            className="palt @w640:min-h-12 @w640:text-sm pr-48px absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-4 text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+            className="palt @w640:min-h-12 @w640:text-sm pr-48px @w640:pl-4 absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-2 text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
             id={captionId}
           >
-            <span className={clsx(...transitionClassName)}>
-              {photoData?.caption && `${photoData?.caption}`}
+            <span className={clsx(['transition-[color]', shouldShowImage ? 'text-inherit' : 'text-transparent'])}>
+              {photoData?.caption}
               <span className="text-2xs @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
             </span>
           </span>
@@ -292,17 +317,17 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
 
       <p
         className={clsx([
-          '@w640:h-12 @w640:py-2',
+          '@w640:h-12 @w640:py-2 @w640:right-4',
           'absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
           'transition-[opacity,visibility,translate]',
         ])}
       >
         <button
           type="button"
-          className="@w640:top-2 @w640:size-8 @w640:p-0 border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg absolute inset-0 size-full rounded-full border p-1"
-          onClick={() => shouldShowImage && updateImage()}
+          className="@w640:top-2 @w640:size-8 @w640:p-0 size-32px absolute inset-0 rounded-full p-1"
+          onClick={updateImage}
         >
-          <span className="grid size-full place-items-center rounded-full outline-offset-2">
+          <span className="border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg grid size-full place-items-center rounded-full border outline-offset-2">
             <svg
               version="1.1"
               role="img"
@@ -311,7 +336,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
               x="0px"
               y="0px"
               viewBox="0 0 512 512"
-              className="block size-5"
+              className="@w640:size-5 block size-4"
             >
               <g>
                 <path
