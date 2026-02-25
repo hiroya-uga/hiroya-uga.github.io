@@ -250,7 +250,14 @@ export default function Home() {
                   hrefLang: 'en',
                   title: 'TC39/Proposals',
                 },
-              ]}
+              ].toSorted((a, b) => {
+                const aUrl = new URL(a.href);
+                const bUrl = new URL(b.href);
+                if (aUrl.origin === bUrl.origin) {
+                  return a.title.localeCompare(b.title);
+                }
+                return a.href.localeCompare(b.href);
+              })}
             />
 
             <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed pt-12">
