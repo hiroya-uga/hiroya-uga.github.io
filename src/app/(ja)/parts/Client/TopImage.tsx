@@ -294,36 +294,46 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
           )}
         </p>
 
-        <figcaption className="text-2xs @w640:text-sm text-white">
-          <span className="@w640:pl-4 @w640:pr-3 absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] px-2 py-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0">
-            <span className="@w640:w-56 w-40 text-right">
+        <figcaption className="text-white [--v-text-shadow:0_2px_14px_rgba(0,0,0,.9)]">
+          <span
+            className={clsx([
+              '@w640:pl-4 @w640:pr-3 @w640:pb-10 @w640:bg-transparent @w640:bg-[linear-gradient(to_bottom,rgba(0,0,0,.45),rgba(0,0,0,.2),#00000000)]',
+              'absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] px-2 py-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0',
+            ])}
+          >
+            <span>
               <a
                 href={
                   typeof photoData?.instagram === 'string'
                     ? `https://www.instagram.com/p/${photoData.instagram}/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`
                     : 'https://www.instagram.com/hiroya.uga/'
                 }
-                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover border-primary z-10 inline-block cursor-pointer rounded-full border px-3 py-1 leading-tight no-underline"
+                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover border-primary text-2xs @w640:text-sm z-10 block w-fit cursor-pointer rounded-full border px-3 py-1 leading-tight no-underline"
               >
                 Instagramで見る
               </a>
             </span>
             <span
               className={clsx([
-                'grow leading-tight transition-[color]',
-                shouldShowImage ? 'text-inherit' : 'text-transparent',
+                '@w800:text-base @w640:text-sm grow truncate text-xs leading-tight transition-[color,text-shadow]',
+                shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
               ])}
             >
-              <Spec spec={photoData?.spec ?? 'loading...'} />
+              {photoData?.caption}
+              <span className="text-2xs @w800:text-sm @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
             </span>
           </span>
           <span
-            className="palt @w640:min-h-12 @w640:text-sm pr-48px @w640:pl-4 absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center bg-[#00000080] pl-2 text-xs leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+            className="palt @w640:min-h-17 @w640:pr-64px pr-48px @w640:pl-4 @w640:bg-transparent @w640:pt-5 @w640:bg-[linear-gradient(to_top,#000000cc,#00000000)] absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center justify-end bg-[rgba(0,0,0,.45),rgba(0,0,0,.2)] pl-2 leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
             id={captionId}
           >
-            <span className={clsx(['transition-[color]', shouldShowImage ? 'text-inherit' : 'text-transparent'])}>
-              {photoData?.caption}
-              <span className="text-2xs @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
+            <span
+              className={clsx([
+                '@w800:font-thin @w800:text-base text-2xs @w640:text-sm truncate font-light transition-[color,text-shadow]',
+                shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
+              ])}
+            >
+              <Spec spec={photoData?.spec ?? 'loading...'} />
             </span>
           </span>
         </figcaption>
