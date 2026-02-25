@@ -11,7 +11,7 @@ export default function Page() {
     <>
       <PageTitle {...metadata}>
         <p className="mt-paragraph">
-          「スリープ防止を開始する」ボタンを押下し、このタブを表示させたままにしてください<sup>※</sup>。
+          「スリープ防止を開始する」ボタンを押下し、このタブをアクティブにしたままにしてください<sup>※</sup>。
         </p>
       </PageTitle>
       <KeepAwakeClient />
