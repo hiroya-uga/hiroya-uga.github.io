@@ -21,6 +21,13 @@ type PhotoData = {
 
 const photoDataList: PhotoData[] = [
   {
+    src: '/main-hyotan-onsen.webp',
+    caption: 'ひょうたん温泉 第2駐車場前',
+    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
+    instagram: 'DVLf204D0J0',
+    date: '2024.12.14',
+  },
+  {
     src: '/main-kiryucoco.webp',
     caption: '東京ドームシティ',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
