@@ -116,7 +116,12 @@ export const ArticleMain = async ({ post }: Props) => {
               'space-y-paragraph @w640:space-y-36px @w800:text-lg',
               hasToc && '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
             )}
-            dangerouslySetInnerHTML={{ __html: await post.content }}
+            dangerouslySetInnerHTML={{
+              __html: (await post.content).replaceAll(
+                '<blockquote class="twitter-tweet">',
+                '<blockquote class="twitter-tweet" data-theme="dark">',
+              ),
+            }}
           />
           <ArticleFootNoteActivator />
           <ArticleCodeHighlightActivator />

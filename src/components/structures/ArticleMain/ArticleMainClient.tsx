@@ -10,6 +10,7 @@ import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
 import css from 'highlight.js/lib/languages/css';
+import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
@@ -213,7 +214,10 @@ export const ArticleCodeHighlightActivator = () => {
     hljs.registerLanguage('jsx', typescript);
     hljs.registerLanguage('html', xml);
     hljs.registerLanguage('css', css);
-    hljs.registerLanguage('javascript', typescript);
+    hljs.registerLanguage('js', javascript);
+    hljs.registerLanguage('javascript', javascript);
+    hljs.registerLanguage('ts', typescript);
+    hljs.registerLanguage('typescript', typescript);
 
     highlight.forEach((node) => {
       // 既にハイライトされている場合はスキップ
@@ -224,7 +228,7 @@ export const ArticleCodeHighlightActivator = () => {
       const code = node.textContent || '';
       const language = node.getAttribute('data-language') || 'html';
 
-      if (['jsx', 'html', 'css', 'javascript'].includes(language) === false) {
+      if (['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript'].includes(language) === false) {
         return;
       }
 
@@ -279,7 +283,6 @@ export const ArticleCodeHighlightActivator = () => {
       }
     });
 
-    // クリーンアップ関数を追加
     return () => {
       codeBlockCaption.forEach((node) => {
         if (node.lastElementChild instanceof HTMLButtonElement) {
