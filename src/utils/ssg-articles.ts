@@ -39,16 +39,7 @@ export async function getArticles(articlesDir: string, urlBase?: string) {
           : articlesDir.replace(process.cwd(), '') + '/' + filename.replace('.md', ''),
       } as ArticleFrontMatter;
     })
-    .sort((a, b) => {
-      if (a.publishedAt < b.publishedAt) {
-        return 1;
-      }
-      if (a.publishedAt > b.publishedAt) {
-        return -1;
-      }
-
-      return 0;
-    });
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
   return articles;
 }
