@@ -297,7 +297,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
         <figcaption className="text-white [--v-text-shadow:0_2px_14px_rgba(0,0,0,.9)]">
           <span
             className={clsx([
-              '@w640:pl-4 @w640:pr-3 @w640:pb-10 @w640:bg-transparent @w640:bg-[linear-gradient(to_bottom,rgba(0,0,0,.45),rgba(0,0,0,.2),#00000000)]',
+              '@w640:pl-4 @w640:pr-3 @w640:pb-10 @w640:bg-transparent @w640:bg-[linear-gradient(to_bottom,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
               'absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] px-2 py-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0',
             ])}
           >
@@ -324,7 +324,7 @@ export const TopImage = ({ captionId }: { captionId: string }) => {
             </span>
           </span>
           <span
-            className="palt @w640:min-h-17 @w640:pr-64px pr-48px @w640:pl-4 @w640:bg-transparent @w640:pt-5 @w640:bg-[linear-gradient(to_top,#000000cc,#00000000)] absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center justify-end bg-[rgba(0,0,0,.45),rgba(0,0,0,.2)] pl-2 leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+            className="palt @w640:min-h-17 @w640:pr-64px pr-48px @w640:pl-4 @w640:bg-transparent @w640:pt-5 @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)] absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center justify-end bg-[#00000080] pl-2 leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
             id={captionId}
           >
             <span
