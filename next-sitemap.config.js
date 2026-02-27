@@ -4,5 +4,5 @@ module.exports = {
   generateRobotsTxt: true,
   sitemapSize: 7000,
   exclude: ['*/opengraph-image-*', '*/opengraph-image.jpg'],
-  outDir: '.next/server/app',
+  outDir: 'public',
 };

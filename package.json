@@ -5,6 +5,7 @@
   "scripts": {
     "prebuild": "node scripts/copy-blog-images.mjs",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "build:analyze": "ANALYZE=true next build",
     "predev": "node scripts/copy-blog-images.mjs",
     "dev": "next dev -p 3001",
