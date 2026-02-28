@@ -132,6 +132,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           url: ogImage,
           width: 1200,
           height: 630,
+          alt: `${SITE_NAME} ${categoryName} ${post.meta.title.replaceAll('\n', '')}`,
         },
       ],
     },
