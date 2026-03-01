@@ -1,13 +1,13 @@
-export const LinkListForTop = ({
-  list,
-}: {
+interface Props {
   list: {
     href: string;
     title: string;
     hrefLang?: string;
     japanese?: string;
   }[];
-}) => {
+}
+
+export const LinkListForTop = ({ list }: Props) => {
   return (
     <ul className="@w500:grid-cols-2 @w640:gap-20px @w768:grid-cols-3 @w640:text-sm @w640:leading-21px leading-18px mb-2 grid gap-4 text-xs">
       {list.map(({ title, href, japanese, ...prop }) => {
@@ -39,3 +39,5 @@ export const LinkListForTop = ({
     </ul>
   );
 };
+
+export type LinkListForTopProps = Props;
