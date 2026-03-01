@@ -4,7 +4,7 @@ import { Picture } from '@/components/Image';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { ArticleListForTop, LinkListForTop, PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/parts';
+import { ArticleListForTop, PickUpList, TopImage, WelcomeMessage } from '@/app/(ja)/parts';
 import { Button, TextLink } from '@/components/Clickable';
 import { Doumei } from '@/components/specific/Doumei';
 import { Footer } from '@/components/structures/Footer';
@@ -14,6 +14,7 @@ import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 import { SNS_LINKS } from '@/constants/sns';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { getMetadata } from '@/utils/get-metadata';
+import { BookMarkSection } from './parts/BookMarkSection';
 
 export const metadata = getMetadata('/');
 
@@ -183,82 +184,7 @@ export default function Home() {
               <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
             </p>
 
-            <h2 className="@w640:text-2xl mb-2 text-xl font-bold">Bookmarks</h2>
-
-            <p className="mb-4">外部サイトへのリンク集です。</p>
-
-            <LinkListForTop
-              list={[
-                {
-                  href: 'https://html.spec.whatwg.org/multipage/',
-                  hrefLang: 'en',
-                  title: 'HTML Living Standard',
-                  japanese: 'https://momdo.github.io/html/',
-                },
-                {
-                  href: 'https://www.w3.org/TR/wai-aria-1.2/',
-                  hrefLang: 'en',
-                  title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2',
-                  japanese: 'https://momdo.github.io/wai-aria-1.2/',
-                },
-                {
-                  href: 'https://www.w3.org/TR/html-aria/',
-                  hrefLang: 'en',
-                  title: 'ARIA in HTML',
-                  japanese: 'https://momdo.github.io/html-aria/',
-                },
-                {
-                  href: 'https://w3c.github.io/wcag/guidelines/22/',
-                  hrefLang: 'en',
-                  title: 'Web Content Accessibility Guidelines (WCAG) 2.2',
-                  japanese: 'https://waic.jp/translations/WCAG22/',
-                },
-                {
-                  href: 'https://www.w3.org/TR/wcag-3.0/',
-                  hrefLang: 'en',
-                  title: 'W3C Accessibility Guidelines (WCAG) 3.0',
-                },
-                {
-                  href: 'https://www.w3.org/TR/html-aam-1.0/',
-                  hrefLang: 'en',
-                  title: 'HTML Accessibility API Mappings 1.0',
-                },
-                {
-                  href: 'https://www.w3.org/WAI/ARIA/apg/',
-                  hrefLang: 'en',
-                  title: 'ARIA Authoring Practices Guide (APG)',
-                },
-                {
-                  href: 'https://www.w3.org/WAI/tutorials/images/decision-tree/',
-                  hrefLang: 'en',
-                  title: 'An alt Decision Tree',
-                  japanese: 'https://www.w3.org/WAI/tutorials/images/decision-tree/ja',
-                },
-                {
-                  href: 'https://www.w3.org/Provider/Style/URI.html',
-                  hrefLang: 'en',
-                  title: "Hypertext Style: Cool URIs don't change.",
-                  japanese: 'https://www.kanzaki.com/docs/Style/URI.html',
-                },
-                {
-                  href: 'https://a11ysupport.io/',
-                  hrefLang: 'en',
-                  title: 'Accessibility Support',
-                },
-                {
-                  href: 'https://github.com/tc39/proposals',
-                  hrefLang: 'en',
-                  title: 'TC39/Proposals',
-                },
-              ].toSorted((a, b) => {
-                const aUrl = new URL(a.href);
-                const bUrl = new URL(b.href);
-                if (aUrl.origin === bUrl.origin) {
-                  return a.title.localeCompare(b.title);
-                }
-                return a.href.localeCompare(b.href);
-              })}
-            />
+            <BookMarkSection />
 
             <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed pt-12">
               <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold">
