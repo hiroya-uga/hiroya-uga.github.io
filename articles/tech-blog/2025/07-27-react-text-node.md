@@ -2,6 +2,8 @@
 title: "Reactのテキストは\n記述の仕方で読み上げが\n変わってしまう件について"
 publishedAt: '2025-07-27'
 tags: [React, VoiceOver, ユーザビリティ]
+dependencies: 'React'
+proficiencyLevel: 'Intermediate'
 ---
 
 Reactで何かがクリックされた回数を変数`count`にいれて画面に表示させるような場合、次のように書かれることがほとんどでしょう[^1]。

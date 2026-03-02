@@ -2,6 +2,7 @@
 title: "フロントエンドエンジニアの基本は\nWeb標準から始まる。"
 publishedAt: '2025-07-08'
 tags: [雑記, Web標準]
+proficiencyLevel: 'Beginner'
 ---
 
 そう信じていた井の中の蛙。筆者のことです。
