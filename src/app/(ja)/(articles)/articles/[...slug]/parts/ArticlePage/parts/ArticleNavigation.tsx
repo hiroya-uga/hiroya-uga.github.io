@@ -24,16 +24,7 @@ export const ArticleNavigation = ({ article, categoryName, direction }: Props) =
         <SvgIcon name={isPrevious ? 'arrow-left' : 'arrow-right'} alt="" />
       </span>
       <span className="block text-xs">{isPrevious ? `前の${categoryName}記事：` : `次の${categoryName}記事：`}</span>
-      <span className="text-link block text-sm">
-        {article.title.split('\n').map((line, index) => {
-          const key = `${line}-${index}`;
-          return (
-            <span key={key} className="underline last:inline-block">
-              {line}
-            </span>
-          );
-        })}
-      </span>
+      <span className="text-link block text-sm">{article.title.split('\n').join('')}</span>
     </Link>
   );
 };

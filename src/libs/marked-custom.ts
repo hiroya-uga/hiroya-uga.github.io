@@ -332,7 +332,7 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       return sanitized.replace(/^\$ (.*)/gm, (_, row) => `<span class="of-command">${row}</span>`);
     })();
 
-    return `<figure class="codeblock"><figcaption class="codeblock__caption"><span class="codeblock__title${title ? '' : ' of-langName'}">${title ?? lang.toUpperCase()}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
+    return `<figure class="codeblock"><figcaption class="codeblock__caption"><span class="codeblock__title${title ? '' : ' of-langName'}">${title ?? `${lang.toUpperCase()}<span class="sr-only">サンプルコード</span>`}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
   },
 };
 

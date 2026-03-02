@@ -11,22 +11,33 @@ interface Props {
   canonical: string;
 }
 
+const parse = (value: unknown) => {
+  if (typeof value === 'string') {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.join(', ');
+  }
+  return undefined;
+};
+
 export const ArticleJsonLD = ({ post, category, year, fileName, canonical }: Props) => {
   const json = useMemo(
     () => ({
       '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
+      '@type': category === 'tech-blog' ? 'TechArticle' : 'BlogPosting',
       headline: post?.meta.title.replace(/\n/g, ''),
+      description: parse(post?.meta.description),
+      proficiencyLevel: parse(post?.meta.proficiencyLevel),
+      keywords: parse(post?.meta.tags),
+      dependencies: parse(post?.meta.dependencies),
       image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${year}/${fileName}.png`,
       datePublished: new Date(post?.meta.publishedAt).toISOString(),
       author: {
         '@type': 'Person',
         name: SITE_AUTHOR,
         url: `https://${DOMAIN_NAME}/about`,
-        logo: {
-          '@type': 'ImageObject',
-          url: `https://${DOMAIN_NAME}/profile.png`,
-        },
+        sameAs: 'https://x.com/hiroya_UGA',
       },
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
     }),

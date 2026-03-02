@@ -31,6 +31,7 @@ export const JsonLd = ({
       '@type': 'Person',
       name: 'Hiroya.UGA',
       url: URL_ORIGIN,
+      sameAs: 'https://x.com/hiroya_UGA',
     },
     publisher: {
       '@type': 'Organization',
