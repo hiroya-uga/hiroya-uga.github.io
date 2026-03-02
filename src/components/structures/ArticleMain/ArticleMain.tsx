@@ -50,7 +50,7 @@ export const ArticleMain = async ({ post }: Props) => {
               const key = `${title}-${index}`;
 
               return (
-                <span key={key} className="@w400:inline-block">
+                <span key={key} className="@w400:inline-block @w400:whitespace-pre-wrap">
                   {/* {title.split('`').map((part, partIndex) => {
                       if (part === '') {
                         return null;
