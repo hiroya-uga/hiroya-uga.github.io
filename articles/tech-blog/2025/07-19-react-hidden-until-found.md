@@ -2,6 +2,8 @@
 title: "`hidden=\"until-found\"`を\nReactでも使いたい！"
 publishedAt: '2025-07-19'
 tags: [React, Web標準]
+dependencies: 'React'
+proficiencyLevel: 'Intermediate'
 ---
 
 HTMLのグローバル属性`hidden`は`until-found`を指定することで、その中のコンテンツが見つかるまでの間だけ非表示にできます。
