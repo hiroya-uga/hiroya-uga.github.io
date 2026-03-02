@@ -33,13 +33,21 @@ export const ArticleJsonLD = ({ post, category, year, fileName, canonical }: Pro
       dependencies: parse(post?.meta.dependencies),
       image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${year}/${fileName}.png`,
       datePublished: new Date(post?.meta.publishedAt).toISOString(),
+      dateModified: parse(post?.meta.dateModified),
       author: {
         '@type': 'Person',
         name: SITE_AUTHOR,
         url: `https://${DOMAIN_NAME}/about`,
         sameAs: 'https://x.com/hiroya_UGA',
       },
+      publisher: {
+        '@type': 'Person',
+        name: SITE_AUTHOR,
+        url: `https://${DOMAIN_NAME}/about`,
+      },
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+      url: canonical,
+      inLanguage: 'ja',
     }),
     [post, category, year, fileName, canonical],
   );
