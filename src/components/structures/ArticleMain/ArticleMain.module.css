@@ -186,12 +186,16 @@
   }
 
   ol {
-    counter-reset: list-item;
+    counter-reset: ol;
   }
 
-  ol > li::before {
-    content: counter(list-item) ".";
-    padding-inline: 0.625rem;
+  ol > li {
+    counter-increment: ol;
+
+    &::before {
+      content: counter(ol) ".";
+      padding-inline: 0.625rem;
+    }
   }
 
   sup {
