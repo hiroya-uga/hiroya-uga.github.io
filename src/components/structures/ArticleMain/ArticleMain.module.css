@@ -33,6 +33,12 @@
 }
 
 .root {
+  --v-max-width: 90%;
+
+  @container (width >= 40rem) {
+    --v-max-width: 37.5rem;
+  }
+
   :target,
   :target * {
     animation: target-highlight 1s ease 0.3s;
@@ -68,7 +74,7 @@
 
 .toc {
   ul ul {
-    padding-left: 1rem;
+    padding-left: 16px;
   }
 
   :where(ul, li):not(:first-child) {
@@ -95,7 +101,16 @@
 .article {
   --v-list-gap-y: 0;
   --v-list-font-size: 0.875rem;
-  --v-spacing-y: var(--spacing-paragraph);
+  --v-spacing-y: 1.5rem;
+  --v-spacing-heading-bottom: 1.125rem;
+  --v-negative-margin-inline: -10%;
+
+  transition: 0.3s max-width ease-out;
+
+  @container (width >= 600px) {
+    --v-negative-margin-inline: 0;
+    --v-spacing-heading-bottom: 1.5rem;
+  }
 
   @container (min-width: 40rem) {
     --v-spacing-y: 2.25rem;
@@ -120,9 +135,10 @@
   h2,
   h3,
   h4 {
-    margin-bottom: var(--spacing-paragraph);
     font-weight: bold;
     line-height: 1.375;
+    margin-inline: calc(var(--v-negative-margin-inline) + var(--spacing-content-inline));
+    margin-bottom: var(--v-spacing-heading-bottom);
 
     + section {
       margin-top: 0;
@@ -153,13 +169,23 @@
     }
   }
 
+  p:has(lazy-image) {
+    margin-inline: var(--v-negative-margin-inline);
+  }
+
   lazy-image {
     /* outline: 1px solid rgba(0, 0, 0, 0.5); */
     overflow: hidden;
-    border-radius: 0.5rem;
     box-shadow:
       0 0 1px rgba(0, 0, 0, 0.2),
       0 0 12px rgba(0, 0, 0, 0.1);
+    transition: 0.3s border-radius ease-out;
+  }
+
+  @container (width >= 600px) {
+    lazy-image {
+      border-radius: 0.5rem;
+    }
   }
 
   :is(ul, ol) {

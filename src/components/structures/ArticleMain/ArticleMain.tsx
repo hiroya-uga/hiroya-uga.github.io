@@ -87,9 +87,9 @@ export const ArticleMain = async ({ post }: Props) => {
       <div className="px-content-inline @w1024:pl-10">
         <div
           className={clsx([
-            'max-w-article mx-auto',
+            'max-w-(--v-max-width) mx-auto',
             hasToc &&
-              '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[1fr_var(--width-article)_1fr] @w1280:grid-rows-[auto_auto]',
+              '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[1fr_var(--v-max-width)_1fr] @w1280:grid-rows-[auto_auto]',
           ])}
         >
           {hasToc && <ArticleTOC toc={post.toc} />}

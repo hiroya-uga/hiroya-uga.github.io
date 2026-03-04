@@ -234,7 +234,7 @@ export default function Home() {
               {SNS_LINKS.map(({ href, alt, ...props }) => {
                 return (
                   <li key={href}>
-                    <a href={href} className="@w640:p-3 block rounded-lg p-2 transition-colors hover:bg-gray-300">
+                    <a href={href} className="@w640:p-3 block rounded-lg p-2 transition-colors hover:bg-gray-200">
                       <Picture
                         {...props}
                         width={props.width + 4}

@@ -49,7 +49,7 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
               hashtags={post.meta.tags}
             />
           </p>
-          <ul className="max-w-article @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">
+          <ul className="max-w-(--v-max-width) @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">
             {previousArticle && (
               <li>
                 <ArticleNavigation article={previousArticle} categoryName={categoryName} direction="previous" />
