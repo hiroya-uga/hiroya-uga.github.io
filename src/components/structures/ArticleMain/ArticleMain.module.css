@@ -215,6 +215,9 @@
     font-size: 0.75rem;
     background-color: var(--background-color-primary);
   }
+  :is([class*="associate"], [class*="associate-list"]) small {
+    display: block;
+  }
   :is([class*="associate"], [class*="associate-list"]) ul {
     font-size: inherit;
   }
