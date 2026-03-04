@@ -205,12 +205,12 @@ export const ArticleTOC = ({ toc }: { toc: string }) => {
     >
       <nav
         className={clsx([
-          'border-accent bg-secondary rounded-r-md border-l-2 px-5 pb-6 pt-4 text-sm',
+          'border-accent bg-secondary px-20PX pt-16PX rounded-r-md border-l-2 pb-6 text-sm',
           '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
         ])}
       >
         <h2 className="@w800:text-lg font-bold">目次</h2>
-        <div className="@w1280:pl-0 mt-4 pl-4" dangerouslySetInnerHTML={{ __html: toc }} />
+        <div className="@w1280:pl-0 pl-16PX mt-4" dangerouslySetInnerHTML={{ __html: toc }} />
       </nav>
     </div>
   );
