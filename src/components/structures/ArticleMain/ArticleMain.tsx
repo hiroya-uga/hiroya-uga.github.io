@@ -2,6 +2,7 @@ import {
   ArticleCodeHighlightActivator,
   ArticleFootNoteActivator,
   ArticleInformation,
+  ArticleTOC,
   ArticleTwitterActivator,
   ArticleYoutubeManager,
 } from '@/components/structures/ArticleMain/ArticleMainClient';
@@ -88,32 +89,15 @@ export const ArticleMain = async ({ post }: Props) => {
           className={clsx([
             'max-w-article mx-auto',
             hasToc &&
-              '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[2fr_var(--width-article)_3fr] @w1280:grid-rows-[auto_auto]',
+              '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[1fr_var(--width-article)_1fr] @w1280:grid-rows-[auto_auto]',
           ])}
         >
-          {hasToc && (
-            <div
-              className={clsx([
-                styles.toc,
-                '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-14 @w640:mb-14 mb-8',
-              ])}
-            >
-              <nav
-                className={clsx([
-                  'border-accent bg-secondary rounded-r-md border-l-2 px-5 pb-6 pt-4 text-sm',
-                  '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
-                ])}
-              >
-                <h2 className="@w800:text-lg font-bold">目次</h2>
-                <div className="@w1280:pl-0 mt-4 pl-4" dangerouslySetInnerHTML={{ __html: post.toc }} />
-              </nav>
-            </div>
-          )}
+          {hasToc && <ArticleTOC toc={post.toc} />}
           <div
             id={ARTICLE_MAIN_ID}
             className={clsx(
               styles.article,
-              'space-y-paragraph @w640:space-y-36px @w800:text-lg',
+              '@w800:text-lg',
               hasToc && '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
             )}
             dangerouslySetInnerHTML={{

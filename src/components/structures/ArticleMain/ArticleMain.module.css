@@ -85,15 +85,36 @@
     color: var(--color-link);
     text-decoration: underline;
   }
+
+  a[aria-current="location"] {
+    color: var(--color-link);
+    font-weight: bold;
+  }
 }
 
 .article {
   --v-list-gap-y: 0;
   --v-list-font-size: 0.875rem;
+  --v-spacing-y: var(--spacing-paragraph);
+
+  @container (min-width: 40rem) {
+    --v-spacing-y: 2.25rem;
+  }
 
   @container (min-width: 50rem) {
     --v-list-gap-y: 0.25rem;
     --v-list-font-size: 1rem;
+  }
+
+  > :not(:last-child):not(section),
+  :where(section > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(var(--v-spacing-y) * var(--tw-space-y-reverse));
+    margin-bottom: calc(var(--v-spacing-y) * calc(1 - var(--tw-space-y-reverse)));
+  }
+
+  section {
+    margin-top: var(--margin-heading-top);
   }
 
   h2,
@@ -102,10 +123,10 @@
     margin-bottom: var(--spacing-paragraph);
     font-weight: bold;
     line-height: 1.375;
-  }
 
-  :where(h2, h3, h4):not(:first-child) {
-    margin-top: var(--margin-heading-top);
+    + section {
+      margin-top: 0;
+    }
   }
 
   h2 {
@@ -141,18 +162,6 @@
       0 0 12px rgba(0, 0, 0, 0.1);
   }
 
-  [class*="associate"] {
-    display: block;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color-textfield);
-    border-radius: 0.5rem;
-    font-size: 0.75rem;
-    background-color: var(--background-color-primary);
-  }
-  [class*="associate"] small {
-    display: block;
-  }
-
   :is(ul, ol) {
     font-size: var(--v-list-font-size);
   }
@@ -177,7 +186,7 @@
       content: "";
       position: absolute;
       left: 0.5rem;
-      top: 0.8125rem;
+      top: 0.8125em;
       width: 0.275rem;
       height: 0.275rem;
       border-radius: 50%;
@@ -196,6 +205,18 @@
       content: counter(ol) ".";
       padding-inline: 0.625rem;
     }
+  }
+
+  :where([class*="associate"], [class*="associate-list"]) {
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color-textfield);
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    background-color: var(--background-color-primary);
+  }
+  :is([class*="associate"], [class*="associate-list"]) ul {
+    font-size: inherit;
   }
 
   sup {

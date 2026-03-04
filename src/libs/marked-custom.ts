@@ -202,7 +202,7 @@ const linkExtension: TokenizerAndRendererExtension = {
 
       if (url.hostname === 'amzn.to') {
         const notice = '※ 当サイトはAmazonアソシエイト・プログラムの参加者であり、適格販売により収入を得ています。';
-        return `<span class="associate"><small>${notice}</small>\n<a href="${t.href}">Amazonリンク: ${t.text ?? t.href}</a><span>`;
+        return `<span class="associate"><small>${notice}</small>\n<a href="${t.href}">Amazonリンク: ${t.text ?? t.href}</a></span>`;
       }
     } catch {
       // URL 解析失敗時はスルーして既定のレンダラーに流す
@@ -423,6 +423,17 @@ type HeadingData = {
   level: number;
 };
 
+const createHeadingSlug = (text: string): string => {
+  return text
+    .normalize('NFKC')
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\u3040-\u30ff\u3400-\u9fff\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+};
+
 const headingDefs = new Map<string, HeadingData[]>();
 const overrideHeadingExtension: TokenizerAndRendererExtension = {
   name: 'heading',
@@ -430,13 +441,75 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
 
   renderer(token) {
     const t = token as Token & { type: 'heading'; depth: number; text: string };
-    const id = `heading-${t.text.replace(/[:.]|\n/g, '-')}`;
-
     const headings = headingDefs.get(currentFilePath) ?? [];
+
+    const baseSlug = createHeadingSlug(t.text) || `section-${headings.length + 1}`;
+    let id = `heading-${baseSlug}`;
+    let suffix = 2;
+
+    while (headings.some((heading) => heading.id === id)) {
+      id = `heading-${baseSlug}-${suffix}`;
+      suffix += 1;
+    }
+
     headings.push({ id, text: t.text, level: t.depth });
     headingDefs.set(currentFilePath, headings);
 
     return `<h${t.depth} id="${id}">${t.text}</h${t.depth}>`;
+  },
+};
+
+type ListToken = Token & {
+  type: 'list';
+  raw: string;
+  ordered: boolean;
+  start: number | '';
+  loose: boolean;
+  items: Array<{
+    type: 'list_item';
+    raw: string;
+    task: boolean;
+    checked?: boolean;
+    loose: boolean;
+    text: string;
+    tokens: Token[];
+  }>;
+};
+
+const overrideListExtension: TokenizerAndRendererExtension = {
+  name: 'list',
+  level: 'block',
+
+  renderer(token) {
+    const t = token as ListToken;
+    const body = t.items
+      .map((item) => {
+        const content = marked.parse(item.text, { async: false });
+        return `<li>${content}</li>`;
+      })
+      .join('\n');
+
+    // 全てのli要素に<span class="associate">が含まれているかチェック
+    const allAssociate = t.items.every((item) => {
+      const html = marked.parse(item.text, { async: false }) as string;
+      return html.includes('<span class="associate">');
+    });
+
+    if (allAssociate && t.items.length > 0) {
+      // Amazonアソシエイトリンクのリストの場合
+      const notice = '※ 当サイトはAmazonアソシエイト・プログラムの参加者であり、適格販売により収入を得ています。';
+      // <li><p><span class="associate"><small>...</small>\n<a>...</a></span></p></li>
+      // から <li><a>...</a></li> を抽出
+      const cleanedBody = body
+        .replace(/<span class="associate"><small>.*?<\/small>\s*\n?/g, '')
+        .replace(/<\/span>/g, '')
+        .replace(/<p>\s*<\/p>/g, '');
+      return `<div class="associate-list">\n<p><small>${notice}</small></p>\n<ul>\n${cleanedBody}\n</ul>\n</div>`;
+    }
+
+    const tag = t.ordered ? 'ol' : 'ul';
+    const startAttr = t.ordered && t.start !== 1 && t.start !== '' ? ` start="${t.start}"` : '';
+    return `<${tag}${startAttr}>\n${body}\n</${tag}>`;
   },
 };
 
@@ -506,6 +579,7 @@ export const customMarkdownSyntaxes = [
   overrideBlockquoteExtension,
   overrideTableExtension,
   overrideHeadingExtension,
+  overrideListExtension,
 ];
 
 export const markedParse = (filePath: string, content: string) => {

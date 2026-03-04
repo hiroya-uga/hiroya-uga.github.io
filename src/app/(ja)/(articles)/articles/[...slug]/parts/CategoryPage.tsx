@@ -35,7 +35,7 @@ export const CategoryPage = async ({ category }: Props) => {
           <CategoryLinks currentCategory={category} />
         </div>
         <div className="@w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
-          <ArticleList type={category === 'blog' ? 'thumbnail' : 'simple'} list={blogs} />
+          <ArticleList type={category === 'tech-blog' ? 'simple' : 'thumbnail'} list={blogs} />
           <div className="@w1024:w-248px @w1024:ml-auto">
             <h2 className="bg-tertiary px-3 py-1">過去ログ</h2>
             <ul className="bg-secondary px-3 py-3">

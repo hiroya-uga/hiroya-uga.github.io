@@ -15,6 +15,8 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
+import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
+
 const getReadingTime = (length: number) => {
   const charsPerMinute = 350; // 1分あたりの平均文字数
   return Math.ceil(length / charsPerMinute) || 1;
@@ -93,6 +95,124 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
       <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time>{' '}
       <span ref={ref} className="min-h-lh" />
     </p>
+  );
+};
+
+/**
+ * Table of Contents highlight logic
+ * Based on MDN/fred:
+ * https://github.com/mdn/fred/blob/712e1619fff60510e1b73e1447fa512bd8af192d/hooks/toc-highlight.js
+ */
+const useTocHighlight = () => {
+  const cleanupRef = useRef(() => {});
+  const highlight = useCallback((container: HTMLDivElement | null) => {
+    cleanupRef.current();
+
+    const anchors = container?.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+
+    if (anchors === undefined || anchors.length === 0) {
+      return;
+    }
+
+    const anchorsBySections = new Map<HTMLElement, HTMLAnchorElement>();
+
+    for (const anchor of anchors) {
+      const href = anchor.getAttribute('href');
+
+      if (href === null) {
+        continue;
+      }
+
+      const id = decodeURIComponent(href).slice(1);
+      const heading = document.getElementById(id);
+      const section = heading?.closest('section');
+
+      if (section instanceof HTMLElement && section.tagName === 'SECTION') {
+        anchorsBySections.set(section, anchor);
+      }
+    }
+
+    const intersectTimesByAnchor = new WeakMap<HTMLAnchorElement, number>();
+    const sections = [...anchorsBySections.keys()];
+    const neverDisplayedSections = new Set<HTMLElement>(sections);
+    const observer = new IntersectionObserver((entries) => {
+      for (const { target, isIntersecting } of entries) {
+        if (target instanceof HTMLElement === false || target.tagName !== 'SECTION') {
+          continue;
+        }
+
+        if (neverDisplayedSections.has(target)) {
+          if (isIntersecting === false) {
+            // 実際に intersect するまでは intersectTimes を増減させない
+            continue;
+          }
+
+          neverDisplayedSections.delete(target);
+        }
+
+        const anchor = anchorsBySections.get(target);
+
+        if (anchor === undefined) {
+          continue;
+        }
+
+        const prevIntersectTimes = intersectTimesByAnchor.get(anchor) ?? 0;
+        const intersectTimes = isIntersecting ? prevIntersectTimes + 1 : prevIntersectTimes - 1;
+        const isCurrent = 0 < intersectTimes;
+
+        if (isCurrent) {
+          anchor.ariaCurrent = 'location';
+        } else {
+          anchor.removeAttribute('aria-current');
+        }
+
+        intersectTimesByAnchor.set(anchor, intersectTimes);
+      }
+    });
+
+    for (const section of anchorsBySections.keys()) {
+      observer.observe(section);
+    }
+
+    cleanupRef.current = () => {
+      observer.disconnect();
+    };
+  }, []);
+  const cleanup = useCallback(() => cleanupRef.current(), []);
+
+  return { highlight, cleanup };
+};
+
+export const ArticleTOC = ({ toc }: { toc: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { highlight, cleanup } = useTocHighlight();
+
+  useEffect(() => {
+    highlight(ref.current);
+
+    return () => {
+      cleanup();
+    };
+  }, [highlight, cleanup]);
+
+  return (
+    <div
+      ref={ref}
+      className={clsx([
+        styles.toc,
+        '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-14 @w640:mb-14 mb-8 ml-auto',
+      ])}
+    >
+      <nav
+        className={clsx([
+          'border-accent bg-secondary rounded-r-md border-l-2 px-5 pb-6 pt-4 text-sm',
+          '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
+        ])}
+      >
+        <h2 className="@w800:text-lg font-bold">目次</h2>
+        <div className="@w1280:pl-0 mt-4 pl-4" dangerouslySetInnerHTML={{ __html: toc }} />
+      </nav>
+    </div>
   );
 };
 
@@ -178,7 +298,8 @@ export const ArticleFootNoteActivator = () => {
       ref={ref}
       className={clsx([
         'bg-primary/90 border-t-primary fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse border-t p-4 transition-[translate,visibility]',
-        isOpen ? 'translate-y-0' : 'translate-y-full',
+        // 150%くらいにしないとTwitterのWebViewでチラ見えする。
+        isOpen ? 'translate-y-0' : 'translate-y-[150%]',
       ])}
       inert={isOpen === false}
       aria-label={`脚注番号${index}`}
