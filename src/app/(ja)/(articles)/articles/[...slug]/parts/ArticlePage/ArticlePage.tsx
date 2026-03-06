@@ -49,14 +49,14 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
               hashtags={post.meta.tags}
             />
           </p>
-          <ul className="max-w-(--v-max-width) @w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid gap-4">
+          <ul className="@w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid max-w-[min(37.5rem,90%)] gap-4">
             {previousArticle && (
-              <li>
+              <li className="@w640:flex @w640:first:last:col-span-2">
                 <ArticleNavigation article={previousArticle} categoryName={categoryName} direction="previous" />
               </li>
             )}
             {nextArticle && (
-              <li className="@w640:col-start-2">
+              <li className="@w640:col-start-2 @w640:flex @w640:first:last:col-span-2">
                 <ArticleNavigation article={nextArticle} categoryName={categoryName} direction="next" />
               </li>
             )}

@@ -11,6 +11,7 @@ import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
 import css from 'highlight.js/lib/languages/css';
 import javascript from 'highlight.js/lib/languages/javascript';
+import json from 'highlight.js/lib/languages/json';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
@@ -339,6 +340,7 @@ export const ArticleCodeHighlightActivator = () => {
     hljs.registerLanguage('javascript', javascript);
     hljs.registerLanguage('ts', typescript);
     hljs.registerLanguage('typescript', typescript);
+    hljs.registerLanguage('json', json);
 
     highlight.forEach((node) => {
       // 既にハイライトされている場合はスキップ
@@ -349,7 +351,7 @@ export const ArticleCodeHighlightActivator = () => {
       const code = node.textContent || '';
       const language = node.getAttribute('data-language') || 'html';
 
-      if (['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript'].includes(language) === false) {
+      if (['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json'].includes(language) === false) {
         return;
       }
 
