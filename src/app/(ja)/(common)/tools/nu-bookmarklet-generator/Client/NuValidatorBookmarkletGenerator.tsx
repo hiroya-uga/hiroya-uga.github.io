@@ -2,6 +2,7 @@
 
 import { NoteBox } from '@/components/Box';
 import { Checkbox, TextField } from '@/components/Form';
+import { NoteList } from '@/components/List';
 import { Tab } from '@/components/Tab';
 import { objectKeys } from '@/utils/object-keys';
 import { useState } from 'react';
@@ -89,12 +90,13 @@ export const NuValidatorBookmarkletGenerator = () => {
           <Tab.Panel tabKey="CSR用">
             <div className="mb-paragraph">
               <NoteBox title="現在レンダリングされている見たままのHTMLが送信されます。">
-                <p>
-                  <strong>元々のHTMLに含まれていない文字列を含みます。</strong>
-                </p>
-                <p>
-                  秘密情報や個人情報を含む文字列が外部に送信される可能性があるため、送信先のドメインが信頼できるものであることを確認してください。
-                </p>
+                <NoteList
+                  list={[
+                    '元々のHTMLに含まれていない文字列を含みます。',
+                    'ブラウザの拡張機能が検査結果に影響を及ぼすことがあります（シークレットブラウザ推奨）。',
+                    '秘密情報や個人情報を含む文字列が外部に送信される可能性があるため、送信先のドメインが信頼できるものであることを確認してください。',
+                  ]}
+                />
               </NoteBox>
             </div>
             <Output value={createBookmarklet(url, 'csr', options)} />
@@ -102,9 +104,11 @@ export const NuValidatorBookmarkletGenerator = () => {
           <Tab.Panel tabKey="SSR用">
             <div className="mb-paragraph">
               <NoteBox title="サーバが返すHTMLが送信されます。">
-                <p>
-                  秘密情報や個人情報を含む文字列が外部に送信される可能性があるため、送信先のドメインが信頼できるものであることを確認してください。
-                </p>
+                <NoteList
+                  list={[
+                    '秘密情報や個人情報を含む文字列が外部に送信される可能性があるため、送信先のドメインが信頼できるものであることを確認してください。',
+                  ]}
+                />
               </NoteBox>
             </div>
             <Output value={createBookmarklet(url, 'ssr', options)} />
