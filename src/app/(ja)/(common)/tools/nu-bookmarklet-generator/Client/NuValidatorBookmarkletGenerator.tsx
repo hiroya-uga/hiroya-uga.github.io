@@ -16,10 +16,10 @@ interface Options {
 }
 
 const optionsLabelMap: Record<keyof Options, string> = {
-  showsource: 'ソースを表示する',
-  showoutline: 'アウトラインを表示する',
-  showimagereport: '画像レポートを表示する',
-  level: 'エラーと警告のみ表示する',
+  showsource: 'HTMLソース',
+  showoutline: 'アウトライン',
+  showimagereport: '画像レポート',
+  level: 'エラーと警告以外を表示しない',
 };
 
 const optionsValueMap: Record<keyof Options, string> = {
@@ -58,7 +58,7 @@ export const NuValidatorBookmarkletGenerator = () => {
     <div className="bg-secondary mx-auto max-w-5xl rounded-2xl p-4 py-10 shadow-md sm:px-12 sm:py-14">
       <div className="mx-auto max-w-2xl">
         <fieldset className="mb-10">
-          <legend className="mb-2 text-sm font-bold leading-snug">Show</legend>
+          <legend className="mb-2 text-sm font-bold leading-snug">表示オプション</legend>
           <ul className="ml-2 flex flex-wrap gap-x-4 gap-y-2">
             {objectKeys(options).map((optionName, index) => {
               return (
