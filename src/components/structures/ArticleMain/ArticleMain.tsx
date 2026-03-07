@@ -18,7 +18,7 @@ type Props = {
       [key: string]: unknown;
       title?: string;
       publishedAt?: string;
-      tags?: string[];
+      topics?: string[];
     };
     toc: string;
     content: string | Promise<string>;
@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const ArticleMain = async ({ post }: Props) => {
-  const hasTags = Array.isArray(post.meta.tags) && 0 < post.meta.tags.length;
+  const hasTags = Array.isArray(post.meta.topics) && 0 < post.meta.topics.length;
   const hasToc = post.toc;
 
   return (
@@ -74,7 +74,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <div className="@w640:mt-13.5 mt-5 flex flex-wrap justify-end pb-1 text-right text-xs">
             {/* <p>この記事のテーマ：</p> */}
             <ul className="text-secondary flex flex-wrap justify-end gap-2">
-              {post.meta.tags?.map((tag: string) => (
+              {post.meta.topics?.map((tag: string) => (
                 <li key={tag}>
                   <span>#{tag}</span>
                 </li>

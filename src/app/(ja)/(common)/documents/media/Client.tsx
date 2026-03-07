@@ -9,7 +9,7 @@ import { ClearButton } from '@/components/Clickable';
 import { ClickableArea } from '@/components/Clickable/ClickableArea';
 import { TextField } from '@/components/Form';
 import { SvgIcon } from '@/components/Icons';
-import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
+import { mediaCategory, mediaTopics, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { createId } from '@/utils/create-id';
 
@@ -190,7 +190,7 @@ export const MediaContent = () => {
 
   const [typesStatus, setTypesStatus] = useState(getDefaultCheckedState(mediaTypes));
   const [categoriesStatus, setCategoriesStatus] = useState(getDefaultCheckedState(mediaCategory));
-  const [tagsStatus, setTagsStatus] = useState(getDefaultCheckedState(mediaTags));
+  const [tagsStatus, setTagsStatus] = useState(getDefaultCheckedState(mediaTopics));
   const [keyword, setKeyword] = useState(keywordQuery);
 
   const isSelectedTypes = Object.values({
@@ -220,13 +220,13 @@ export const MediaContent = () => {
 
       return categoriesStatus[category];
     })
-    .filter(({ tags }) => {
+    .filter(({ topics }) => {
       if (!isSelectedTags) {
         return true;
       }
 
-      return tags?.some((tag) => {
-        return tagsStatus[tag];
+      return topics?.some((topic) => {
+        return tagsStatus[topic];
       });
     })
     .filter((listItem) => {
@@ -239,7 +239,7 @@ export const MediaContent = () => {
         // category: listItem.category.toLowerCase(),
         // date: listItem.date.toLowerCase(),
         // href: listItem.href.toLowerCase(),
-        // tags: (listItem.tags?.join('') || '').toLowerCase(),
+        // topics:  (listItem.topics?.join('') || '').toLowerCase(),
       };
 
       const lowerKeyWords = keyword.toLowerCase().trim().split(/\s/);
@@ -249,7 +249,7 @@ export const MediaContent = () => {
         // category.includes(lowerKeyWord) ||
         // date.includes(lowerKeyWord) ||
         // href.includes(lowerKeyWord) ||
-        // tags.includes(lowerKeyWord)
+        // topics.includes(lowerKeyWord)
       });
 
       return isMatched;
@@ -298,7 +298,7 @@ export const MediaContent = () => {
             <fieldset className="@w640:mb-10 mb-6">
               <legend className="mb-3 font-bold">Tags</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
-                <CheckBoxes nameSet={mediaTags} stateSet={tagsStatus} dispatch={setTagsStatus} />
+                <CheckBoxes nameSet={mediaTopics} stateSet={tagsStatus} dispatch={setTagsStatus} />
               </ul>
             </fieldset>
 
@@ -327,7 +327,7 @@ export const MediaContent = () => {
         </div>
 
         <ul className="@w640:space-y-4 mb-2 space-y-6">
-          {result.map(({ type, date, category, title, href, tags }) => {
+          {result.map(({ type, date, category, title, href, topics }) => {
             const defaultClickable = createId(id, href);
             return (
               <ClickableArea
@@ -370,12 +370,12 @@ export const MediaContent = () => {
                     </span>
                   </p>
 
-                  {tags && tags.length && (
+                  {topics && topics.length && (
                     <ul className="mt-2 flex flex-wrap gap-2">
-                      {tags.map((tag) => {
+                      {topics.map((topic) => {
                         return (
-                          <li key={tag}>
-                            <span className="bg-tertiary p-1 text-sm dark:bg-gray-700">{tag}</span>
+                          <li key={topic}>
+                            <span className="bg-tertiary p-1 text-sm dark:bg-gray-700">{topic}</span>
                           </li>
                         );
                       })}

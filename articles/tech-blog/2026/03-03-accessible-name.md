@@ -1,7 +1,7 @@
 ---
 title: "アクセス可能な名前 vs \nアクセシブルな名前 vs \nアクセシブルネーム"
 publishedAt: '2026-03-03'
-tags: [Web標準, アクセシビリティ, HTML, 表記揺れ]
+topics: [Web標準, アクセシビリティ, HTML, 表記揺れ]
 proficiencyLevel: 'Beginner'
 ---
 

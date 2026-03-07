@@ -29,7 +29,7 @@ export const ArticleJsonLD = ({ post, category, year, fileName, canonical }: Pro
       headline: post?.meta.title.replace(/\n/g, ''),
       description: parse(post?.meta.description),
       proficiencyLevel: parse(post?.meta.proficiencyLevel),
-      keywords: parse(post?.meta.tags),
+      keywords: parse(post?.meta.topics),
       dependencies: parse(post?.meta.dependencies),
       image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${year}/${fileName}.png`,
       datePublished: new Date(post?.meta.publishedAt).toISOString(),

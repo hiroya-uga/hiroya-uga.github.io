@@ -39,7 +39,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                     <Link href={article.pathname}>{article.title.replaceAll('\n', '')}</Link>
                   </span>
                   <span className="text-secondary @w640:pt-1 block py-1.5 pb-4 text-xs group-last:pb-0">
-                    {article.tags?.map?.((tag: string) => `#${tag}`).join(' ')}
+                    {article.topics?.map?.((tag: string) => `#${tag}`).join(' ')}
                   </span>
                 </span>
               </li>
@@ -98,7 +98,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                   </div>
 
                   <div className="text-secondary px-3 text-xs">
-                    {article.tags?.map?.((tag: string) => `#${tag}`).join(' ')}
+                    {article.topics?.map?.((tag: string) => `#${tag}`).join(' ')}
                   </div>
 
                   <div className="flex items-center justify-between pl-3 pr-2" id={infoId}>

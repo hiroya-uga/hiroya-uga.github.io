@@ -46,7 +46,7 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
           <p className="mb-paragraph">
             <TweetLink
               message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
-              hashtags={post.meta.tags}
+              hashtags={post.meta.topics}
             />
           </p>
           <ul className="@w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid max-w-[min(37.5rem,90%)] gap-4">
