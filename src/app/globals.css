@@ -474,6 +474,13 @@
   th,
   td {
     vertical-align: baseline;
+
+    /** for supporting markdown */
+    > p > code,
+    > code {
+      overflow-wrap: break-word;
+      word-break: keep-all;
+    }
   }
 
   input {
