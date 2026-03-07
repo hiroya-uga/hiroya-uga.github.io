@@ -7,6 +7,7 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "build:analyze": "ANALYZE=true next build",
+    "create-ogp-alt": "node scripts/create-opengraph-image-alt-txt.mjs",
     "predev": "node scripts/copy-blog-images.mjs",
     "dev": "next dev -p 3001",
     "fix": "yarn lint-fix && yarn format-fix",

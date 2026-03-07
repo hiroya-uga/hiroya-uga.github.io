@@ -1,0 +1,1 @@
+uga.dev An alt Decision Treeに基づく代替テキスト２択チャート An alt Decision Treeを参考に作られた、画像の代替テキストと呼ばれるalt属性値を決める手助けをする２択チャートです。
