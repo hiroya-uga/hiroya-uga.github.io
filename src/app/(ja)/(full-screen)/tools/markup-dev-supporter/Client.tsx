@@ -176,7 +176,7 @@ export const TableDevSupporterContent = () => {
 
           case 'removeAttributes':
             for (const node of dummyElement.querySelectorAll('*')) {
-              for (const { name } of [...node.attributes]) {
+              for (const { name } of node.attributes) {
                 if (['rowspan', 'colspan', 'href', 'src', 'alt'].includes(name)) {
                   continue;
                 }
@@ -199,7 +199,7 @@ export const TableDevSupporterContent = () => {
             return dummyElement.innerHTML;
           case 'removeAllAttributes':
             for (const node of dummyElement.querySelectorAll('*')) {
-              for (const { name } of [...node.attributes]) {
+              for (const { name } of node.attributes) {
                 if (name === 'rowspan' || name === 'colspan') {
                   continue;
                 }
@@ -233,7 +233,7 @@ export const TableDevSupporterContent = () => {
               for (const elm of dummyElement.querySelectorAll('div, span')) {
                 const f = document.createDocumentFragment();
 
-                for (const node of [...elm.childNodes]) {
+                for (const node of elm.childNodes) {
                   f.append(node);
                 }
 

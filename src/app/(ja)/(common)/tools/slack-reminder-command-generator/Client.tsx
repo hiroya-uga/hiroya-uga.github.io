@@ -123,7 +123,7 @@ const createComment = ({ result, type }: { result: Result; type: Every }) => {
     date,
     time,
     'にリマインドします。',
-    result.starting && <span className="inline-block">{`（開始日: ${result.starting}）`}</span>,
+    result.starting && <span className="inline-block" key="開始日">{`（開始日: ${result.starting}）`}</span>,
   ].filter(Boolean);
 };
 

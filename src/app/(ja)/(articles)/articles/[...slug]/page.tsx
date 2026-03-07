@@ -6,7 +6,7 @@ import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
 import { ArticlePage, CategoryPage, YearPage } from '@/app/(ja)/(articles)/articles/[...slug]/parts';
-import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils/get-article-markdown-file-path';
+import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils';
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { objectKeys } from '@/utils/object-keys';
 import { notFound } from 'next/navigation';

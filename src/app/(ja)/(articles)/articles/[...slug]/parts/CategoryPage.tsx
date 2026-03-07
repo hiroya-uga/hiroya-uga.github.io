@@ -9,7 +9,7 @@ import { resolveCategoryName } from '@/utils/articles';
 import { objectKeys } from '@/utils/object-keys';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
-import { getArticleMarkdownFilePath } from './utils/get-article-markdown-file-path';
+import { getArticleMarkdownFilePath } from './utils';
 
 type Props = {
   category: ArticleCategory;

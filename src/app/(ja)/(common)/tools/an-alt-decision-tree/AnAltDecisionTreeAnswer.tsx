@@ -1,6 +1,6 @@
 import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
 import { Details } from '@/components/Box';
-import { useId } from 'react';
+import { Fragment, useId } from 'react';
 
 const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
   const id = useId();
@@ -169,7 +169,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
               ['グラフまたは複雑な情報の場合', <Complex key="complex" />],
               [
                 '側に同じ内容のテキストが書かれている場合',
-                <>
+                <Fragment key="redundant-text">
                   <p className="mb-2">
                     <code>alt</code>属性に空の値を指定してください。
                   </p>
@@ -184,7 +184,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
                     </a>
                     を参照してください。
                   </p>
-                </>,
+                </Fragment>,
               ],
             ]}
           />

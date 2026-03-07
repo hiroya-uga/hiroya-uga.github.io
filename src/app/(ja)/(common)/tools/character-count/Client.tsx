@@ -340,11 +340,12 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
         let chunk400 = characters.slice(i, i + 400);
 
         if (chunk400.length !== 400) {
-          chunk400 = [...chunk400, ...[...new Array(400)].map(() => SPACE)].slice(0, 400);
+          const filler = Array.from({ length: 400 }, () => SPACE);
+          chunk400 = chunk400.concat(filler).slice(0, 400);
         }
 
         for (let j = 0; j < chunk400.length; j += 20) {
-          container.push([...chunk400.slice(j, j + 20)]);
+          container.push(chunk400.slice(j, j + 20));
         }
 
         result.push(container);

@@ -9,7 +9,7 @@ import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
 
 import { notFound } from 'next/navigation';
-import { getArticleMarkdownFilePath } from '../utils/get-article-markdown-file-path';
+import { getArticleMarkdownFilePath } from '../utils';
 import { ArticleJsonLD, ArticleNavigation } from './parts';
 
 type Props = { slug: string[]; category: ArticleCategory; year: string; fileName: string };
