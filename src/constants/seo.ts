@@ -409,7 +409,6 @@ export const SEO: Record<
   },
   '/tools/touch-event-touches': {
     title: 'TouchEvent.touches Playground',
-    description:
-      'タッチ操作のテストができます。デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかを確認しましょう。',
+    description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
   },
 };
