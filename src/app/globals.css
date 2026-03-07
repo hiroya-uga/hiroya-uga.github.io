@@ -178,6 +178,8 @@
   --background-color-alert: var(--v-color-background-alert);
   --background-color-mark: #ff0;
   --background-color-textfield: var(--v-color-background-textfield);
+  --background-color-tertiary: var(--v-color-background-tertiary);
+  --background-color-tertiary-hover: var(--v-color-background-tertiary-hover);
   --background-color-card: var(--v-color-background-card);
   --background-color-table-header: var(--v-color-background-table-header);
   --background-color-header: var(--v-color-table-header);
