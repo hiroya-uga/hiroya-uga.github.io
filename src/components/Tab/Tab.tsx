@@ -96,10 +96,10 @@ export const Tab = {
                   <button
                     type="button"
                     className={clsx([
-                      'not-first:border-l-0 relative min-w-28 rounded-t-lg border border-[var(--v-tab-border)] px-2 py-0.5 focus-visible:-outline-offset-2',
+                      'not-first:border-l-0 border-(--v-tab-border) relative w-28 min-w-fit rounded-t-lg border px-2 py-0.5 focus-visible:-outline-offset-2',
                       isSelected
-                        ? 'z-10 border-b-[var(--v-tab)] bg-[var(--v-tab)] font-bold'
-                        : 'border-b-[var(--v-tab-border)] bg-[var(--v-tab-inactive)]',
+                        ? 'border-b-(--v-tab) bg-(--v-tab) z-10 font-bold'
+                        : 'border-b-(--v-tab-border) bg-(--v-tab-inactive)',
                     ])}
                     key={tabKey}
                     id={`${id}-tab-${tabKey}`}
