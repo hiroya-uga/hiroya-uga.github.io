@@ -1,0 +1,118 @@
+name: 🚀 Zenn Transfer & Deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-to-zenn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install yq
+        uses: mikefarah/yq@v4
+
+      - name: Process and Deploy Articles
+        env:
+          ZENN_REPO_TOKEN: ${{ secrets.ZENN_GITHUB_TOKEN }}
+          ZENN_REPO: 'hiroya-uga/zenn-content'
+        run: |
+          set -e
+          echo "--- 🛠 Processing Articles ---"
+          WORKSPACE="$PWD"
+          # 1. books ディレクトリも作成対象に加える
+          mkdir -p dist-zenn/{articles,books,images}
+          # 2. 空フォルダとして認識されるよう .gitkeep を作成
+          touch dist-zenn/books/.gitkeep
+
+          shopt -s nullglob globstar
+
+          extract_frontmatter() {
+            awk 'BEGIN{in_yaml=0} /^---$/{if(in_yaml==0){in_yaml=1; next}else{exit}} in_yaml{print}' "$1"
+          }
+
+          for file in articles/tech-blog/**/*.md; do
+            relative_path=${file#articles/tech-blog/}
+            year=${relative_path%%/*}
+            rest=${relative_path#*/}
+            rest=${rest%.md}
+            slug=${year}-${rest//\//-}
+
+            if [ ${#slug} -gt 50 ]; then
+              echo "❌ ERROR: slug exceeds 50 characters: $slug (${#slug} chars)"
+              exit 1
+            fi
+
+            FRONTMATTER=$(extract_frontmatter "$file")
+            [ -z "$FRONTMATTER" ] && continue
+            IS_PUBLISHED=$(printf '%s\n' "$FRONTMATTER" | yq '.zenn.published // false')
+            [ "$IS_PUBLISHED" != "true" ] && continue
+
+            echo "📦 Processing: $slug"
+
+            # 1. フロントマター整形（タイトル内の改行を削除し、canonical_url を付与）
+            BLOG_URL="https://uga.dev/articles/tech-blog/${relative_path%.md}/"
+            NEW_FRONTMATTER=$(printf '%s\n' "$FRONTMATTER" | yq eval-all "
+              . * .zenn |
+              del(.zenn) |
+              .title = (.title | sub(\"\\n\", \"\")) |
+              .canonical_url = \"$BLOG_URL\"
+            " - | sed '/^$/d')
+
+            # 2. 画像をimages/にコピー（記事ディレクトリ内の画像のみ）
+            IMAGE_DIR=$(dirname "$file")
+            # 記事と同じ階層にある画像（./image.png など）を対象にする
+            for img in "$IMAGE_DIR"/*.{png,jpg,jpeg,gif,webp,svg}; do
+              [ -f "$img" ] || continue
+              img_name=$(basename "$img")
+              # 本文中で参照されている画像名のみコピー（誤爆防止）
+              if grep -qF "(./${img_name})" "$file"; then
+                new_img_name="${slug}-${img_name}"
+                cp "$img" "$WORKSPACE/dist-zenn/images/$new_img_name"
+              fi
+            done
+
+            # 3. 本文の抽出（2つ目の --- 以降を安全に取得）
+            TMP_BODY="$WORKSPACE/dist-zenn/tmp_body_${slug}.md"
+            # awkを使用して「2回目の --- 以降」を正確に切り出す
+            awk 'BEGIN{c=0} /^---$/{c++; next} c>=2{print}' "$file" > "$TMP_BODY"
+
+            # 画像パスの置換
+            sed -i "s|](\\.\/|](/images/${slug}-|g" "$TMP_BODY"
+
+            # 4. ファイル書き出し
+            {
+              echo "---"
+              printf "%s\n" "$NEW_FRONTMATTER"
+              echo "---"
+              cat "$TMP_BODY"
+            } > "dist-zenn/articles/${slug}.md"
+
+            rm "$TMP_BODY"
+          done
+
+          # --- 🚀 デプロイ ---
+          if [ -d "dist-zenn/articles" ] && [ "$(ls -A dist-zenn/articles)" ]; then
+            echo "--- 📤 Deploying to Zenn Repo ---"
+
+            # トークン存在確認（デバッグ用）
+            if [ -z "$ZENN_REPO_TOKEN" ]; then
+              echo "❌ ERROR: ZENN_REPO_TOKEN is empty. Check your repository secrets."
+              exit 1
+            fi
+            echo "✅ Token is set (length: ${#ZENN_REPO_TOKEN})"
+
+            cd "$WORKSPACE/dist-zenn"
+            git init -b main
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .
+            if git diff-index --quiet --cached HEAD 2>/dev/null; then
+              echo "ℹ️ No changes to commit."
+            else
+              git commit -m "Deploy articles from blog via GitHub Actions"
+              git remote add origin "https://x-access-token:${ZENN_REPO_TOKEN}@github.com/${ZENN_REPO}.git"
+              git push -f origin main
+            fi
+          else
+            echo "ℹ️ No articles to deploy."
+          fi
