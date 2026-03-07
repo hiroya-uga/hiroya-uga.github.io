@@ -405,7 +405,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
       </div>
 
       <div className="shadow-sticky bg-secondary border-secondary sticky bottom-6 z-10 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded-md border py-2 pl-4 pr-3">
-        <p className="min-w-[200px] grow">
+        <p className="min-w-200px grow">
           <input
             type="range"
             value={value}

@@ -357,7 +357,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
   );
 
   return (
-    <div className={clsx(['transition-[opacity,visibility] md:mt-28', isFirstView ? 'invisible opacity-0' : ''])}>
+    <div className={clsx(['transition-fade md:mt-28', isFirstView ? 'invisible opacity-0' : ''])}>
       <div className="md:grid md:grid-cols-2 md:gap-8">
         <div>
           <div className="md:sticky md:top-8">
@@ -378,7 +378,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             <p className="mb-3">
               <textarea
                 id={id}
-                className="border-secondary bg-secondary h-[max(5lh,23vh)] min-h-[108px] w-full resize-y rounded-md border px-4 py-2"
+                className="border-secondary bg-secondary min-h-108px h-[max(5lh,23vh)] w-full resize-y rounded-md border px-4 py-2"
                 style={{
                   fontSize: fontSize ? `${fontSize}px` : DEFAULT_FONT_SIZE,
                 }}

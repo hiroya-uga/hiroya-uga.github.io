@@ -19,7 +19,7 @@ type SwitchItemProps = Pick<
 const SwitchItem = ({ emoji, code, label, ...props }: SwitchItemProps) => {
   return (
     <li className="border-secondary mb-2 border-b pb-2 first:border-t first:pt-2">
-      <label className="wd-fit flex min-h-[45px] items-center">
+      <label className="wd-fit min-h-45px flex items-center">
         <span className={clsx(props.disabled && 'opacity-50', 'grow transition-opacity')}>
           {emoji && (
             <>
