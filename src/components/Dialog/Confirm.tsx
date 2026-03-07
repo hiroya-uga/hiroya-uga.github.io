@@ -82,7 +82,10 @@ export const Confirm = ({ confirm, setConfirmData }: Props) => {
     <dialog
       ref={ref}
       aria-labelledby={id}
-      className="shadow-sticky transition-fade bg-secondary pointer-events-none invisible fixed inset-0 bottom-[15%] z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 [&[open]]:pointer-events-auto [&[open]]:visible [&[open]]:opacity-100"
+      className="shadow-sticky transition-fade bg-secondary [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 pointer-events-none invisible fixed inset-0 bottom-[15%] z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0"
+      role="alertdialog"
+      aria-modal="true"
+      closedby="none"
     >
       <h2 id={id} className="mb-3 text-center font-bold">
         {confirm.message}

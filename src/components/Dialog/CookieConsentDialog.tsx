@@ -107,6 +107,7 @@ export function CookieConsentDialog() {
         ref={dialogRef}
         aria-labelledby={id}
         className="not-open:transition-fade not-open:opacity-0 not-open:invisible bg-secondary border-t-primary @container starting:translate-y-full sticky bottom-0 left-0 block w-full border-t p-4 transition-[translate] focus-visible:shadow-none focus-visible:outline-none"
+        closedby="none"
         open
       >
         <h2 id={id} className="mb-2 font-bold">
@@ -135,6 +136,8 @@ export function CookieConsentDialog() {
       ref={dialogRef}
       aria-labelledby={id}
       className={clsx(styles.root, 'starting:opacity-0 text-primary transition-fade inset-0 m-auto duration-500')}
+      aria-modal="true"
+      closedby="none"
     >
       <div className="@container scroll-hint-y m-auto grid place-items-center overflow-auto rounded-lg px-4 pb-8 pt-6 text-sm shadow-lg">
         <div className="@w640:pt-2 w-full max-w-[min(40rem,88%)]">

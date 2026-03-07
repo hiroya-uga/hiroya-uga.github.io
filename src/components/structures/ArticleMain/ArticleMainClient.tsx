@@ -304,6 +304,7 @@ export const ArticleFootNoteActivator = () => {
       ])}
       inert={isOpen === false}
       aria-label={`脚注番号${index}`}
+      closedby="none"
     >
       <div>
         <button

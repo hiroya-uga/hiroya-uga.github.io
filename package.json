@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "@types/node": "22.15.30",
-    "@types/react": "19.1.6",
-    "@types/react-dom": "19.1.6",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.8.0",
     "jquery": "^3.7.1",
