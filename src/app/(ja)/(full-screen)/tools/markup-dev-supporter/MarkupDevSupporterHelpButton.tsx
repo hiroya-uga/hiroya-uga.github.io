@@ -113,125 +113,115 @@ export const MarkupDevSupporterHelpButton = () => {
         createPortal(
           <dialog
             ref={ref}
-            className="z-2 max-w-dialog invisible fixed inset-0 m-auto block max-h-[80vh] min-h-80 w-full items-center justify-center rounded-lg bg-[#ddd] text-[#333] opacity-0 shadow-lg transition-[opacity,visibility] ease-out open:visible open:opacity-100"
-            onClick={() => {
-              const dialog = ref.current;
-              if (!dialog) {
-                return;
-              }
-
-              dialog.close();
-              setIsOpen(false);
-            }}
+            className="z-2 max-w-dialog transition-fade invisible fixed inset-0 m-auto block max-h-[80vh] min-h-80 w-full items-center justify-center overflow-auto rounded-lg bg-[#ddd] text-[#333] opacity-0 shadow-lg ease-out open:visible open:opacity-100"
+            aria-modal="true"
+            closedby="any"
+            onClose={() => setIsOpen(false)}
           >
-            <div onClick={(e) => e.stopPropagation()}>
-              <div className="sticky top-0 flex flex-wrap items-center justify-between gap-1 border-b border-[#999] bg-[#ddd] px-4 py-2">
-                <h2 className="font-bold">使い方</h2>
-                <p>
-                  <button
-                    type="button"
-                    className="hover:bg-secondary rounded-full p-2.5 transition-[background-color]"
-                    onClick={() => {
-                      const dialog = ref.current;
-                      if (!dialog) {
-                        return;
-                      }
+            <div className="sticky top-0 flex flex-wrap items-center justify-between gap-1 border-b border-[#999] bg-[#ddd] px-4 py-2">
+              <h2 className="font-bold">使い方</h2>
+              <p>
+                <button
+                  type="button"
+                  className="hover:bg-secondary transition-bg rounded-full p-2.5"
+                  onClick={() => {
+                    const dialog = ref.current;
+                    if (!dialog) {
+                      return;
+                    }
 
-                      dialog.close();
-                      setIsOpen(false);
-                    }}
-                  >
-                    <span className="relative block size-3">
-                      <SvgIcon name="cross" alt="閉じる" />
-                    </span>
-                  </button>
-                </p>
-              </div>
+                    dialog.close();
+                    setIsOpen(false);
+                  }}
+                >
+                  <span className="relative block size-3">
+                    <SvgIcon name="cross" alt="閉じる" />
+                  </span>
+                </button>
+              </p>
+            </div>
 
-              <div className="overflow-auto p-4 pb-8 sm:p-8">
-                {getMetadata('/tools/markup-dev-supporter')
-                  .description?.split('\n')
-                  .map((description) => {
-                    return <p key={description}>{description}</p>;
-                  })}
-                <p className="mb-paragraph mt-2 flex gap-1 text-sm">
-                  <span>※</span>
-                  <small>
-                    <PrivacyPolicyMessage />
-                  </small>
-                </p>
+            <div className="overflow-auto p-4 pb-8 sm:p-8">
+              {getMetadata('/tools/markup-dev-supporter')
+                .description?.split('\n')
+                .map((description) => {
+                  return <p key={description}>{description}</p>;
+                })}
+              <p className="mb-paragraph mt-2 flex gap-1 text-sm">
+                <span>※</span>
+                <small>
+                  <PrivacyPolicyMessage />
+                </small>
+              </p>
 
-                <DiscList
-                  list={[
-                    '「フォーマット」ボタンを押すと、貼り付けた内容のHTMLが成形されます。',
-                    '「クリックで値コピーを有効にする」が有効の場合、クリックした領域のテキストがクリップボードにコピーされます。',
-                    '「HTMLを表示する」スイッチをオンにすると、HTMLソースが表示されます。',
-                    'DOM（見たまま）、HTMLの両方で編集ができます。',
-                  ]}
-                />
+              <DiscList
+                list={[
+                  '「フォーマット」ボタンを押すと、貼り付けた内容のHTMLが成形されます。',
+                  '「クリックで値コピーを有効にする」が有効の場合、クリックした領域のテキストがクリップボードにコピーされます。',
+                  '「HTMLを表示する」スイッチをオンにすると、HTMLソースが表示されます。',
+                  'DOM（見たまま）、HTMLの両方で編集ができます。',
+                ]}
+              />
 
-                <p className="mt-6 border-t border-dashed border-[#777] pt-6">
-                  以下のサンプルの表でお試しいただけます。
-                </p>
-                <p className="mb-paragraph">
-                  実際には指示書・原稿などから表をコピーして、本ツールに貼り付けてご利用ください。
-                </p>
+              <p className="mt-6 border-t border-dashed border-[#777] pt-6">以下のサンプルの表でお試しいただけます。</p>
+              <p className="mb-paragraph">
+                実際には指示書・原稿などから表をコピーして、本ツールに貼り付けてご利用ください。
+              </p>
 
-                <div className="grid place-items-center rounded-md border border-dashed border-[#777] bg-white p-4">
-                  <table
-                    className={styles.sampleTable}
-                    onPointerDown={(e) => {
-                      if (e.currentTarget instanceof HTMLTableElement) {
-                        e.preventDefault();
-                        setSelectionRange(e.currentTarget);
-                      }
-                    }}
-                  >
-                    <caption className="mb-2">人気寿司ネタ ランキング</caption>
-                    <thead>
-                      <tr>
-                        <th scope="column">順位</th>
-                        <th scope="column">寿司ネタ</th>
-                        <th scope="column">金額</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">１</th>
-                        <td data-dummy="value">
-                          <div>真鯛</div>
-                        </td>
-                        <td>１９０円</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">２</th>
-                        <td>かんぱち</td>
-                        <td>２９０円</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">３</th>
-                        <td>
-                          <span>わさびなす</span>
-                        </td>
-                        <td>１２０円</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">４</th>
-                        <td>
-                          <div>いかおくら軍艦</div>
-                        </td>
-                        <td>１２０円</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">５</th>
-                        <td>
-                          <div>つぶ貝</div>
-                        </td>
-                        <td>１４０円</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div className="grid place-items-center rounded-md border border-dashed border-[#777] bg-white p-4">
+                <table
+                  className={styles.sampleTable}
+                  onPointerDown={(e) => {
+                    if (e.currentTarget instanceof HTMLTableElement) {
+                      e.preventDefault();
+                      setSelectionRange(e.currentTarget);
+                    }
+                  }}
+                >
+                  <caption className="mb-2">人気寿司ネタ ランキング</caption>
+                  <thead>
+                    <tr>
+                      <th scope="column">順位</th>
+                      <th scope="column">寿司ネタ</th>
+                      <th scope="column">金額</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">１</th>
+                      <td data-dummy="value">
+                        <div>真鯛</div>
+                      </td>
+                      <td>１９０円</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">２</th>
+                      <td>かんぱち</td>
+                      <td>２９０円</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">３</th>
+                      <td>
+                        <span>わさびなす</span>
+                      </td>
+                      <td>１２０円</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">４</th>
+                      <td>
+                        <div>いかおくら軍艦</div>
+                      </td>
+                      <td>１２０円</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">５</th>
+                      <td>
+                        <div>つぶ貝</div>
+                      </td>
+                      <td>１４０円</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </dialog>,

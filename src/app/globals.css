@@ -377,6 +377,10 @@
     fill: #fff;
   }
 
+  :root {
+    scrollbar-gutter: stable;
+  }
+
   html,
   body {
     /* scroll-behavior: smooth; */
