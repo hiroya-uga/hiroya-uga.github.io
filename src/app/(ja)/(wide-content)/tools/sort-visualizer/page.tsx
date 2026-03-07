@@ -19,7 +19,7 @@ export default function Page() {
       </PageTitle>
       <SortVisualizerContent />
       <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink hashtags={['SlackBot']} />
+        <TweetLink />
       </p>
     </>
   );
