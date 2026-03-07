@@ -55,8 +55,8 @@ export const SvgIcon = ({ name, alt }: { name: Name; alt: string }) => {
 
   return (
     <svg
-      role="img"
-      aria-label={alt}
+      role={alt ? 'graphics-symbol' : 'presentation'}
+      aria-label={alt || undefined}
       className={clsx(['absolute inset-0 block size-full transition-opacity', isReady === false && 'opacity-0'])}
       suppressHydrationWarning
     >
