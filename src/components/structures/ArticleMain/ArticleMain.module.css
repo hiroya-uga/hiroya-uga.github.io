@@ -170,21 +170,30 @@
   }
 
   p:has(lazy-image) {
+    position: relative;
+    container-type: block-size;
     margin-inline: var(--v-negative-margin-inline);
-  }
 
-  lazy-image {
-    /* outline: 1px solid rgba(0, 0, 0, 0.5); */
-    overflow: hidden;
-    box-shadow:
-      0 0 1px rgba(0, 0, 0, 0.2),
-      0 0 12px rgba(0, 0, 0, 0.1);
-    transition: 0.3s border-radius ease-out;
-  }
-
-  @container (width >= 600px) {
+    noscript,
     lazy-image {
-      border-radius: 0.5rem;
+      /* outline: 1px solid rgba(0, 0, 0, 0.5); */
+      overflow: hidden;
+      box-shadow:
+        0 0 1px rgba(0, 0, 0, 0.2),
+        0 0 12px rgba(0, 0, 0, 0.1);
+      transition: 0.3s border-radius ease-out;
+    }
+
+    noscript {
+      position: absolute;
+      inset: 0;
+    }
+
+    @container (width >= 600px) {
+      lazy-image,
+      noscript {
+        border-radius: 0.5rem;
+      }
     }
   }
 

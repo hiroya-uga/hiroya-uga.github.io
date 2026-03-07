@@ -87,15 +87,24 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
   }, [showInformation]);
 
   return (
-    <p
-      className={clsx([
-        '@w640:text-sm text-secondary @w640:mt-4 mt-3 text-xs transition-opacity delay-300 duration-700',
-        status === 'loading' ? 'opacity-0' : '',
-      ])}
-    >
-      <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time>{' '}
-      <span ref={ref} className="min-h-lh" />
-    </p>
+    <>
+      <p className="@w640:mt-4 @w640:text-sm text-secondary mt-3 text-xs">
+        <span
+          className={clsx([
+            'starting:opacity-0 transition-fade noscript:hidden delay-300 duration-700',
+            status === 'loading' ? 'opacity-0' : '',
+          ])}
+        >
+          <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time>{' '}
+          <span ref={ref} className="min-h-lh" />
+        </span>
+        <noscript>
+          <time dateTime={date} className="block">
+            {formattedDateString(date ? new Date(date) : new Date())}
+          </time>
+        </noscript>
+      </p>
+    </>
   );
 };
 
