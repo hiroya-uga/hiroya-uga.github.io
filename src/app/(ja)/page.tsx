@@ -125,7 +125,7 @@ export default function Home() {
                           ])}
                           aria-hidden="true"
                         >
-                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative @w640:top-0 absolute right-0 top-1.5 text-[200px] leading-none opacity-30 blur-[4px]">
+                          <span className="@w640:transition-transform @w640:duration-300 @w640:group-hover:scale-[1.15] @w640:blur-none @w640:opacity-100 @w640:text-5xl @w640:relative @w640:top-0 blur-xs absolute right-0 top-1.5 text-[200px] leading-none opacity-30">
                             {emoji}
                           </span>
                         </span>
@@ -159,14 +159,11 @@ export default function Home() {
                 {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
                   return (
                     <tr key={href} className="leading-6">
-                      <td className="@w640:pr-4 @w640:text-sm pr-2 font-mono text-xs leading-[inherit]">
+                      <td className="@w640:pr-4 @w640:text-sm leading-inherit pr-2 font-mono text-xs">
                         <span className="inline-block">{date}</span>
                       </td>
                       <td
-                        className={clsx([
-                          index !== 2 && '@w640:pb-4 pb-3',
-                          '@w640:text-base text-sm leading-[inherit]',
-                        ])}
+                        className={clsx([index !== 2 && '@w640:pb-4 pb-3', '@w640:text-base leading-inherit text-sm'])}
                       >
                         <a href={href} className="break-all">
                           {title}

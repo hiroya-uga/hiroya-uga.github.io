@@ -135,7 +135,10 @@ export function CookieConsentDialog() {
     <dialog
       ref={dialogRef}
       aria-labelledby={id}
-      className={clsx(styles.root, 'starting:opacity-0 text-primary transition-fade inset-0 m-auto duration-500')}
+      className={clsx(
+        styles.root,
+        'starting:opacity-0 text-primary transition-fade inset-0 m-auto cursor-crosshair duration-500',
+      )}
       aria-modal="true"
       closedby="none"
     >
@@ -165,7 +168,7 @@ export function CookieConsentDialog() {
               ))}
             </ul>
             <div className="mb-1">
-              <p className="min-w-200px cursor- grid aspect-[200/40] w-fit border border-solid border-black dark:border-white">
+              <p className="min-w-200px aspect-200/40 grid w-fit cursor-default border border-solid border-black dark:border-white">
                 <span className="bg-tertiary content-end border border-solid border-transparent px-1 py-1.5 text-right font-mono text-xs leading-none dark:border-black dark:bg-gray-300 dark:text-black">
                   <span>{SITE_NAME}</span>
                 </span>
