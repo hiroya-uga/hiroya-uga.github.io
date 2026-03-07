@@ -71,7 +71,7 @@ const generate = () => {
     return true; // すべて埋まった
   };
 
-  const sudoku = Array.from({ length: 9 }, () => new Array(9).fill(Number.NaN));
+  const sudoku = Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => Number.NaN));
   loop(sudoku);
   return sudoku;
 };
@@ -150,7 +150,13 @@ export const SudokuClient = () => {
 
   const [sudokuState, setSudokuState] = useState<SudokuState>(
     Array.from({ length: 9 }, () =>
-      new Array(9).fill({ value: Number.NaN, type: 'loading', state: 'idle', answer: Number.NaN }),
+      Array.from({ length: 9 }, () => ({
+        value: Number.NaN,
+        type: 'loading',
+        state: 'idle',
+        duplicated: false,
+        answer: Number.NaN,
+      })),
     ),
   );
   const [hoverCoords, setHoverCoords] = useState([Number.NaN, Number.NaN]);

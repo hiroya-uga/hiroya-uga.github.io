@@ -960,7 +960,7 @@ export const sortRecursive = {
         a = [...arr];
         min = Math.min(...a);
         max = Math.max(...a);
-        count = new Array(max - min + 1).fill(0);
+        count = Array.from({ length: max - min + 1 }, () => 0);
         output = [];
         i = 0;
         j = 0;
@@ -1890,7 +1890,7 @@ export const sortMethods = {
   counting: (arr: number[]) => {
     if (arr.some((x) => x < 0)) throw new Error('Counting sort requires non-negative integers.');
     const max = Math.max(...arr);
-    const count = new Array(max + 1).fill(0);
+    const count = Array.from({ length: max + 1 }, () => 0);
     for (const num of arr) count[num]++;
     const result: number[] = [];
     for (let i = 0; i <= max; i++) {

@@ -1,0 +1,13 @@
+.next/**
+node_modules/**
+out/**
+public/**
+.cache/**
+docs/**
+next-env.d.ts
+**/*.md
+**/pauljadam-modern-web-a11y-demos/**
+*.config.js
+*.config.mjs
+.prettierrc.js
+_temp/**

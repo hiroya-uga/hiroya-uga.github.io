@@ -1,6 +1,6 @@
 // ビルド時にしか呼ばれない関数群。クライアントサイドで実行される関数と同じファイルに置くとビルドが転ける。。
 
-import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils/get-article-markdown-file-path';
+import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils';
 import { ARTICLE_PATH_PATTERN_LIST } from '@/constants/articles';
 import fs from 'fs';
 import matter from 'gray-matter';

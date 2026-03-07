@@ -51,69 +51,82 @@ export default function Page() {
             [
               '意味のある画像 - Informative Images',
               'https://www.w3.org/WAI/tutorials/images/informative/',
-              <>
-                概念や情報を表現する画像。通常は写真やイラストです。
-                <span className="sm:inline-block">
-                  代替テキストは少なくとも、画像によって示される情報の要点を伝える簡単な説明であるべきです。
-                </span>
-              </>,
+              () => (
+                <>
+                  概念や情報を表現する画像。通常は写真やイラストです。
+                  <span className="sm:inline-block">
+                    代替テキストは少なくとも、画像によって示される情報の要点を伝える簡単な説明であるべきです。
+                  </span>
+                </>
+              ),
             ],
             [
               '装飾目的の画像 - Decorative Images',
               'https://www.w3.org/WAI/tutorials/images/decorative/',
-              <>
-                ページを理解する上で重要な情報を伝えるものではなく、視覚的な装飾を追加することが画像の唯一の目的である場合は、空の代替テキスト（
-                <code>alt=""</code>） を提供してください。
-              </>,
+              () => (
+                <>
+                  ページを理解する上で重要な情報を伝えるものではなく、視覚的な装飾を追加することが画像の唯一の目的である場合は、空の代替テキスト（
+                  <code>alt=""</code>） を提供してください。
+                </>
+              ),
             ],
-
             [
               '機能を持つ画像 - Functional Images',
               'https://www.w3.org/WAI/tutorials/images/functional/',
-              <>
-                リンクまたはボタンとして使用される画像の代替テキストは、視覚的な画像ではなく、リンクまたはボタンの機能を説明する必要があります。
-                <span className="sm:inline-block">
-                  このような画像の例としては、印刷機能を表すプリンターアイコンや、フォームを送信するボタンなどがあげられます。
-                </span>
-              </>,
+              () => (
+                <>
+                  リンクまたはボタンとして使用される画像の代替テキストは、視覚的な画像ではなく、リンクまたはボタンの機能を説明する必要があります。
+                  <span className="sm:inline-block">
+                    このような画像の例としては、印刷機能を表すプリンターアイコンや、フォームを送信するボタンなどがあげられます。
+                  </span>
+                </>
+              ),
             ],
             [
               '文字画像 - Images of Text',
               'https://www.w3.org/WAI/tutorials/images/textual/',
-              <>
-                判読可能なテキストが画像内に含まれている場合がありますが、
-                <span className="sm:inline-block">ロゴ画像ではない場合は画像内テキストを避けるべきです。</span>
-                <span className="sm:inline-block">
-                  その上で文字画像を使用する場合、代替テキストには画像と同じ文言が指定する必要があります。
-                </span>
-              </>,
+              () => (
+                <>
+                  判読可能なテキストが画像内に含まれている場合がありますが、
+                  <span className="sm:inline-block">ロゴ画像ではない場合は画像内テキストを避けるべきです。</span>
+                  <span className="sm:inline-block">
+                    その上で文字画像を使用する場合、代替テキストには画像と同じ文言が指定する必要があります。
+                  </span>
+                </>
+              ),
             ],
             [
               'グラフや図などの複雑な画像 - Complex Images',
               'https://www.w3.org/WAI/tutorials/images/complex/',
-              <>
-                データや詳細な情報を伝えるために、画像で提供されるデータまたは情報と同等の完全な代替テキストを提供してください。
-              </>,
+              () => (
+                <>
+                  データや詳細な情報を伝えるために、画像で提供されるデータまたは情報と同等の完全な代替テキストを提供してください。
+                </>
+              ),
             ],
             [
               '画像のグループ - Groups of Images',
               'https://www.w3.org/WAI/tutorials/images/groups/',
-              <>
-                複数の画像で1つの情報を伝える場合、1つの画像の代替テキストでグループ全体の情報を伝える必要があります。
-              </>,
+              () => (
+                <>
+                  複数の画像で1つの情報を伝える場合、1つの画像の代替テキストでグループ全体の情報を伝える必要があります。
+                </>
+              ),
             ],
             [
               'イメージマップ - Image Maps',
               'https://www.w3.org/WAI/tutorials/images/imagemap/',
-              <>
-                複数のクリック可能な領域を含む画像の代替テキストは、リンクセットの全体的なコンテキストを提供する必要があります。
-                <span className="sm:inline-block">
-                  また、個別にクリック可能な領域には、リンクの目的やリンク先を説明する代替テキストが必要です。
-                </span>
-              </>,
+              () => (
+                <>
+                  複数のクリック可能な領域を含む画像の代替テキストは、リンクセットの全体的なコンテキストを提供する必要があります。
+                  <span className="sm:inline-block">
+                    また、個別にクリック可能な領域には、リンクの目的やリンク先を説明する代替テキストが必要です。
+                  </span>
+                </>
+              ),
             ],
           ] as const
-        ).map(([title, href, description]) => {
+        ).map(([title, href, Description]) => {
           const isW3C = href.startsWith('https://www.w3.org');
 
           return (
@@ -125,7 +138,9 @@ export default function Page() {
                 </a>
                 {isW3C && <b>※翻訳予定</b>}
               </dt>
-              <dd className="text-sm leading-relaxed sm:text-base">{description}</dd>
+              <dd className="text-sm leading-relaxed sm:text-base">
+                <Description />
+              </dd>
             </div>
           );
         })}
