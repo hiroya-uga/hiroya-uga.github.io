@@ -18,7 +18,8 @@
     "opengraph",
     "pauljadam",
     "Tamron",
-    "ugadev"
+    "ugadev",
+    "zenn"
   ],
   "editor.codeLens": true,
   "typescript.referencesCodeLens.enabled": true,
