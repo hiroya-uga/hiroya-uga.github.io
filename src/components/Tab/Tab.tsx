@@ -83,8 +83,8 @@ export const Tab = {
 
     return (
       <TabContext.Provider value={{ currentKey, id }}>
-        <div className={clsx(styles.root, 'bg-[var(--v-tab)]')}>
-          <div className="border-b border-[var(--v-tab-border)]">
+        <div className={clsx(styles.root, 'bg-(--v-tab)')}>
+          <div className="border-(--v-tab-border) border-b">
             <div
               role="tablist"
               className="relative top-px flex overflow-x-auto overflow-y-hidden whitespace-nowrap px-4"
@@ -96,10 +96,10 @@ export const Tab = {
                   <button
                     type="button"
                     className={clsx([
-                      'not-first:border-l-0 border-(--v-tab-border) relative w-28 min-w-fit rounded-t-lg border px-2 py-0.5 focus-visible:-outline-offset-2',
+                      'not-first:border-l-0 border-(--v-tab-border) relative w-28 min-w-fit rounded-t-lg border px-2 py-0.5 transition-colors focus-visible:-outline-offset-2',
                       isSelected
                         ? 'border-b-(--v-tab) bg-(--v-tab) z-10 font-bold'
-                        : 'border-b-(--v-tab-border) bg-(--v-tab-inactive)',
+                        : 'border-b-(--v-tab-border) bg-(--v-tab-inactive) hover:bg-(--v-tab-hover)',
                     ])}
                     key={tabKey}
                     id={`${id}-tab-${tabKey}`}
