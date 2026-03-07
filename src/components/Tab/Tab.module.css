@@ -1,10 +1,6 @@
 .root {
-  --v-tab: #fff;
-  --v-tab-inactive: #f6f3f4;
-  --v-tab-border: #d1d5dc;
-}
-[data-theme="dark"]:root .root {
-  --v-tab: #333;
-  --v-tab-inactive: #222;
-  --v-tab-border: #aaa;
+  --v-tab: var(--background-color-secondary);
+  --v-tab-border: var(--border-color-primary);
+  --v-tab-inactive: var(--background-color-panel-primary);
+  --v-tab-hover: var(--background-color-panel-primary-hover);
 }
