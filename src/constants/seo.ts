@@ -392,6 +392,12 @@ export const SEO: Record<
     description:
       'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
   },
+  '/tools/nu-bookmarklet-generator': {
+    title: 'Nu HTML Checker Bookmarklet Generator',
+    afterSubTitle: 'HTMLの品質をチェックするブックマークレット作成ツール',
+    description:
+      'Nu HTML CheckerへHTMLを送信するブックマークレットが作れるジェネレーターです。\nローカル環境やイントラでホスティングされているNu HTML Checkerにも対応しています。',
+  },
   '/tools/markup-dev-supporter': {
     title: 'HTMLでtable実装するときとかに役立つツール',
     description:

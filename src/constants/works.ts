@@ -8,6 +8,7 @@ export const JOB_ROLE = {
   WRITER: 'writer',
   RESEARCHER: 'researcher',
   ANALYST: 'analyst',
+  QA: 'qa',
   OTHER: 'other',
 } as const;
 type JobRoleKey = keyof typeof JOB_ROLE;
@@ -23,5 +24,6 @@ export const JOB_ROLES_JA = {
   [JOB_ROLE.WRITER]: 'ライター',
   [JOB_ROLE.RESEARCHER]: 'リサーチャー',
   [JOB_ROLE.ANALYST]: 'アナリスト',
+  [JOB_ROLE.QA]: '品質管理（QA）',
   [JOB_ROLE.OTHER]: 'その他',
 } as const;
