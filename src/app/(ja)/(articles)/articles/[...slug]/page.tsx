@@ -117,7 +117,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     `【${categoryName}】` +
     (post.meta.description ?? (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…') +
     ' ' +
-    (post.meta.tags ?? []).map((tag: string) => `#${tag}`).join(', ');
+    (post.meta.topics ?? []).map((tag: string) => `#${tag}`).join(', ');
 
   return {
     title: `${post.meta.title.replaceAll('\n', '')} | ${categoryName} | ${SITE_NAME}`,

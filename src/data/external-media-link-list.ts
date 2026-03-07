@@ -1,8 +1,8 @@
-import { mediaCategory, mediaTags, mediaTypes } from '@/constants/media';
+import { mediaCategory, mediaTopics, mediaTypes } from '@/constants/media';
 
 type Type = (typeof mediaTypes)[number];
 type Category = (typeof mediaCategory)[number];
-type Tags = (typeof mediaTags)[number][];
+type Topics = (typeof mediaTopics)[number][];
 
 const list: {
   type: Type;
@@ -10,7 +10,7 @@ const list: {
   date: string;
   title: string;
   href: string;
-  tags?: Tags;
+  topics?: Topics;
 }[] = [
   {
     type: 'article',
@@ -18,7 +18,7 @@ const list: {
     date: '2025-07-31',
     title: 'Tech-Verse 2025に参加してきました！ ',
     href: 'https://techblog.demae-can.co.jp/entry/20250731/1753950899',
-    tags: ['Accessibility', 'EventReport'],
+    topics: ['Accessibility', 'EventReport'],
   },
   {
     type: 'article',
@@ -26,7 +26,7 @@ const list: {
     date: '2025-05-28',
     title: 'GW中に行った技術キャッチアップや個人開発を発表するLT会を開催しました！',
     href: 'https://techblog.lycorp.co.jp/ja/20250528b#:~:text=1.-,Web%E6%A8%99%E6%BA%96%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%83%81%E3%82%A2%E3%83%83%E3%83%97,-Uga%20Hiroya%20(A11y',
-    tags: ['Accessibility', 'EventReport', 'HTML', 'CSS'],
+    topics: ['Accessibility', 'EventReport', 'HTML', 'CSS'],
   },
   {
     type: 'book',
@@ -34,7 +34,7 @@ const list: {
     date: '2025-05-16',
     title: 'Software Design 2025年6月号 第1特集 これからのエンジニアの必須科目 ITアクセシビリティ入門 第4章',
     href: 'https://gihyo.jp/magazine/SD/archive/2025/202506#:~:text=%E7%AC%AC4%E7%AB%A0%EF%BC%9AWeb%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%96%E3%83%AB%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95',
-    tags: ['HTML', 'CSS', 'Accessibility'],
+    topics: ['HTML', 'CSS', 'Accessibility'],
   },
   {
     type: 'podcast',
@@ -42,7 +42,7 @@ const list: {
     date: '2024-07-25',
     title: 'ep.160『HTMLの品質チェックをもっと身近に！Nu HTML Checker セルフホスティングへの道』',
     href: 'https://uit-inside.linecorp.com/episode/160',
-    tags: ['HTML', 'CSS', 'Tools'],
+    topics: ['HTML', 'CSS', 'Tools'],
   },
   {
     type: 'podcast',
@@ -50,7 +50,7 @@ const list: {
     date: '2022-07-29',
     title: 'ep.126 UIT Meetup vol.16「ちゃんとやってる？アクセシビリティ」 Aftershow',
     href: 'https://uit-inside.linecorp.com/episode/126',
-    tags: ['Accessibility', 'EventReport'],
+    topics: ['Accessibility', 'EventReport'],
   },
   {
     type: 'video',
@@ -58,7 +58,7 @@ const list: {
     date: '2022-07-01',
     title: 'UIT Meetup vol.16 『ちゃんとやってる？アクセシビリティ』',
     href: 'https://www.youtube.com/watch?v=qg8bw-iPx0U',
-    tags: ['Accessibility', 'EventReport'],
+    topics: ['Accessibility', 'EventReport'],
   },
   {
     type: 'article',
@@ -66,7 +66,7 @@ const list: {
     date: '2020-2-28',
     title: '寒いこの時期はObjectだって凍ります。',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/202002/28_1056.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -74,7 +74,7 @@ const list: {
     date: '2020-2-7',
     title: '「miniサイズ」のHTML5 Conference！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/202002/07_1753.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -82,7 +82,7 @@ const list: {
     date: '2020-1-22',
     title: '第11回MLCマークアップ部 開催レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/202001/22_1353.html',
-    tags: ['EventReport', 'HTML'],
+    topics: ['EventReport', 'HTML'],
   },
   {
     type: 'book',
@@ -90,7 +90,7 @@ const list: {
     date: '2019-12-14',
     title: 'Form Design Patterns ―シンプルでインクルーシブなフォーム制作実践ガイド',
     href: 'https://x.com/hiroya_UGA/status/1209397613272764416',
-    tags: ['HTML', 'CSS', 'JS/TS', 'Accessibility'],
+    topics: ['HTML', 'CSS', 'JS/TS', 'Accessibility'],
   },
   {
     type: 'article',
@@ -98,7 +98,7 @@ const list: {
     date: '2019-12-14',
     title: '意外と知らないvisibilityの活用方法！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201912/14_0000.html',
-    tags: ['CSS'],
+    topics: ['CSS'],
   },
   {
     type: 'article',
@@ -106,7 +106,7 @@ const list: {
     date: '2019-9-6',
     title: 'アクセシビリティの祭典 in MLC 2019 開催レポート（8月28日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201909/06_1037.html',
-    tags: ['Accessibility', 'EventReport'],
+    topics: ['Accessibility', 'EventReport'],
   },
   {
     type: 'article',
@@ -114,7 +114,7 @@ const list: {
     date: '2019-8-29',
     title: 'Vol.80「宇宙イチ！？ほんとにあった楽しい案件 ～隙を生じぬ三段構え～」（8月21日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201908/29_1200.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -122,7 +122,7 @@ const list: {
     date: '2019-7-26',
     title: 'Promise.allSettled()がStage4になりました',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201907/26_1214.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -131,7 +131,7 @@ const list: {
     title:
       'プロジェクトマネジメントを学べるボードゲーム「プロジェクト テーマパーク」をいろんな人にプレイしてもらってみた🎲🎉 #Backlogボドゲ',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201907/10_1203.html',
-    tags: ['EventReport', 'Tools'],
+    topics: ['EventReport', 'Tools'],
   },
   {
     type: 'article',
@@ -139,7 +139,7 @@ const list: {
     date: '2019-6-28',
     title: 'JavaScriptで操作するCSS TransitionとCSSOMの関係',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201906/28_1120.html',
-    tags: ['CSS', 'JS/TS'],
+    topics: ['CSS', 'JS/TS'],
   },
   {
     type: 'article',
@@ -147,7 +147,7 @@ const list: {
     date: '2019-5-29',
     title: 'W3CとWHATWGが共同でHTMLの仕様を策定するようです🤝🎉',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201905/29_1711.html',
-    tags: ['HTML'],
+    topics: ['HTML'],
   },
   {
     type: 'article',
@@ -155,7 +155,7 @@ const list: {
     date: '2019-5-24',
     title: 'ChocolateyとSetting Syncで開発環境をサクっと整える',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201905/24_1705.html',
-    tags: ['DevEnv', 'Tools'],
+    topics: ['DevEnv', 'Tools'],
   },
   {
     type: 'article',
@@ -163,7 +163,7 @@ const list: {
     date: '2019-4-26',
     title: 'Vol.76「春だ！入社おめでとう！新生活応援30分拡大スペシャル！」（4月17日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201904/26_1012.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -171,7 +171,7 @@ const list: {
     date: '2019-4-8',
     title: '遂に来る！ Chrome 75にてLazyLoadが正式に実装されるようです🎉',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201904/08_0854.html',
-    tags: ['Browser'],
+    topics: ['Browser'],
   },
   {
     type: 'article',
@@ -179,7 +179,7 @@ const list: {
     date: '2019-3-28',
     title: '公共機関で加速するRPAの導入',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201903/28_1530.html',
-    tags: ['Tools'],
+    topics: ['Tools'],
   },
   {
     type: 'article',
@@ -187,7 +187,7 @@ const list: {
     date: '2019-3-7',
     title: "CSS Working Group の Editor's Drafts に見るCSSの未来",
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201903/07_1230.html',
-    tags: ['CSS'],
+    topics: ['CSS'],
   },
   {
     type: 'article',
@@ -195,7 +195,7 @@ const list: {
     date: '2019-2-12',
     title: '第10回MLCマークアップ部お題のスクープ型ボックスをCSSマスクで再現した話の余談',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201902/12_1012.html',
-    tags: ['CSS'],
+    topics: ['CSS'],
   },
   {
     type: 'article',
@@ -203,7 +203,7 @@ const list: {
     date: '2019-2-6',
     title: 'UiPath Forward Japan 2019 参加レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201902/06_2101.html',
-    tags: ['EventReport', 'Tools'],
+    topics: ['EventReport', 'Tools'],
   },
   {
     type: 'article',
@@ -211,7 +211,7 @@ const list: {
     date: '2019-1-24',
     title: '第10回MLCマークアップ部 開催レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201901/24_1208.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -219,7 +219,7 @@ const list: {
     date: '2018-11-27',
     title: 'HTML5 Conference 2018 に参加してきました！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201811/27_1800.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -227,7 +227,7 @@ const list: {
     date: '2018-10-31',
     title: '第3回デザインスプリント 開催レポート（10月24日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201810/31_2207.html',
-    tags: ['EventReport', 'Design'],
+    topics: ['EventReport', 'Design'],
   },
   {
     type: 'article',
@@ -235,7 +235,7 @@ const list: {
     date: '2018-10-30',
     title: 'UiPathでWebページを操作するときはJavaScriptを活用しよう！その2',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201810/30_0905.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -243,7 +243,7 @@ const list: {
     date: '2018-10-24',
     title: 'JavaScriptのビルトインオブジェクトから日本語が返ってくる面白さ',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201810/24_1045.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -251,7 +251,7 @@ const list: {
     date: '2018-10-1',
     title: '今年も来るぞ！HTML5 Conference！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201810/01_1035.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -259,7 +259,7 @@ const list: {
     date: '2018-9-20',
     title: 'どこで読めるの？今さらきけない仕様書の在り処！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201809/20_1133.html',
-    tags: ['HTML', 'CSS', 'JS/TS'],
+    topics: ['HTML', 'CSS', 'JS/TS'],
   },
   {
     type: 'article',
@@ -267,7 +267,7 @@ const list: {
     date: '2018-9-19',
     title: 'UiPathのInvoke Workflow Fileアクティビティを活用しよう！前編',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201809/19_1414.html',
-    tags: ['Tools'],
+    topics: ['Tools'],
   },
   {
     type: 'article',
@@ -275,7 +275,7 @@ const list: {
     date: '2018-9-5',
     title: 'アクセシビリティの祭典 in MLC 2018 開催レポート（8月29日開催）ｚ',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201809/05_2019.html',
-    tags: ['Accessibility', 'EventReport'],
+    topics: ['Accessibility', 'EventReport'],
   },
   {
     type: 'article',
@@ -283,7 +283,7 @@ const list: {
     date: '2018-8-27',
     title: 'CSS Painting APIが勧告候補になりました。',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201808/27_1403.html',
-    tags: ['CSS'],
+    topics: ['CSS'],
   },
   {
     type: 'article',
@@ -291,7 +291,7 @@ const list: {
     date: '2018-8-17',
     title: 'UiPathでWebページを操作するときはJavaScriptを活用しよう！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/rpa/201808/17_1349.html',
-    tags: ['Tools', 'JS/TS'],
+    topics: ['Tools', 'JS/TS'],
   },
   {
     type: 'article',
@@ -299,7 +299,7 @@ const list: {
     date: '2018-8-2',
     title: 'Vol.70「ほんとにあった怖い案件 2018　～MTL第70回記念納涼スペシャル！！～」（7月25日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201808/02_1424.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -314,7 +314,7 @@ const list: {
     date: '2018-7-20',
     title: 'あのWAI-ARIAがIDL属性として実装される！？',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201807/20_1002.html',
-    tags: ['Accessibility', 'HTML'],
+    topics: ['Accessibility', 'HTML'],
   },
   {
     type: 'article',
@@ -322,7 +322,7 @@ const list: {
     date: '2018-6-28',
     title: 'CSSが効かない！？fieldset要素でも簡単にテーブルレイアウトを実現できるdisplay: contents;',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201806/28_0909.html',
-    tags: ['CSS', 'HTML'],
+    topics: ['CSS', 'HTML'],
   },
   {
     type: 'article',
@@ -337,7 +337,7 @@ const list: {
     date: '2018-5-24',
     title: 'どうして！？document.querySelectorAll(selector).addEventListener()が動かないわけ',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201805/24_0917.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -345,7 +345,7 @@ const list: {
     date: '2018-5-2',
     title: 'Vol.67「やってきた！今年も春の風物詩！」（4月25日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201805/02_1117.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -353,7 +353,7 @@ const list: {
     date: '2018-5-1',
     title: '大きい数字の計算はじめました。',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201805/01_1051.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -361,7 +361,7 @@ const list: {
     date: '2018-4-24',
     title: '思わぬところで学習スイッチが入るかもしれないJavaScriptの小ネタ5選！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201804/24_1413.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -369,7 +369,7 @@ const list: {
     date: '2018-3-28',
     title: 'Observerを使って要素を監視してみよう！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201803/28_1056.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -377,7 +377,7 @@ const list: {
     date: '2018-2-19',
     title: 'jQuery無しでイージングアニメーションを伴う機能をつくろう！その4（スムーススクロール・後編）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201802/19_1618.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -385,7 +385,7 @@ const list: {
     date: '2018-1-24',
     title: '第9回MLCマークアップ部 開催レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201801/24_1542.html',
-    tags: ['EventReport', 'HTML'],
+    topics: ['EventReport', 'HTML'],
   },
   {
     type: 'article',
@@ -393,7 +393,7 @@ const list: {
     date: '2018-1-18',
     title: 'jQuery無しでイージングアニメーションを伴う機能をつくろう！その3（スムーススクロール・前編）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201801/18_1027.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -401,7 +401,7 @@ const list: {
     date: '2017-12-20',
     title: 'jQuery無しでイージングアニメーションを伴う機能をつくろう！その2（トグル編）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201712/20_1455.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -409,7 +409,7 @@ const list: {
     date: '2017-11-29',
     title: 'jQuery無しでイージングアニメーションを伴う機能をつくろう！その1（イージングの紹介編）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201711/29_1427.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -417,7 +417,7 @@ const list: {
     date: '2017-10-19',
     title: 'Webコンテンツの推奨実装方法集「WAI-ARIA Authoring Practices 1.1」',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201710/19_1758.html',
-    tags: ['Accessibility', 'HTML'],
+    topics: ['Accessibility', 'HTML'],
   },
   {
     type: 'article',
@@ -425,7 +425,7 @@ const list: {
     date: '2017-9-13',
     title: '20行でできる！JavaScriptで作る簡単なフィルタ機能',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201709/13_1426.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -440,7 +440,7 @@ const list: {
     date: '2017-8-21',
     title: 'イベントリスナーを登録するとき注目したい3つのオプション',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201708/21_1014.html',
-    tags: ['JS/TS'],
+    topics: ['JS/TS'],
   },
   {
     type: 'article',
@@ -448,7 +448,7 @@ const list: {
     date: '2017-8-14',
     title: 'Vol.63「なんだろな　アクセシブルって　なんだろな」（8月9日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201708/14_0915.html',
-    tags: ['Accessibility', 'EventReport'],
+    topics: ['Accessibility', 'EventReport'],
   },
   {
     type: 'article',
@@ -456,7 +456,7 @@ const list: {
     date: '2017-7-26',
     title: '今すぐ使えるアクセシビリティチェックツール13選！',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201707/26_1549.html',
-    tags: ['Accessibility', 'Tools'],
+    topics: ['Accessibility', 'Tools'],
   },
   {
     type: 'article',
@@ -464,7 +464,7 @@ const list: {
     date: '2017-7-7',
     title: '第8回MLCマークアップ部 開催レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201707/07_1131.html',
-    tags: ['EventReport', 'HTML'],
+    topics: ['EventReport', 'HTML'],
   },
   {
     type: 'article',
@@ -472,7 +472,7 @@ const list: {
     date: '2017-6-23',
     title: 'レシピを見ながら楽しく実装、フォームのアクセシビリティ！その3',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201706/23_1546.html',
-    tags: ['Accessibility', 'HTML'],
+    topics: ['Accessibility', 'HTML'],
   },
   {
     type: 'article',
@@ -480,7 +480,7 @@ const list: {
     date: '2017-5-29',
     title: 'レシピを見ながら楽しく実装、フォームのアクセシビリティ！その2',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201705/29_1016.html',
-    tags: ['Accessibility', 'HTML'],
+    topics: ['Accessibility', 'HTML'],
   },
   {
     type: 'article',
@@ -488,7 +488,7 @@ const list: {
     date: '2017-5-16',
     title: 'レシピを見ながら楽しく実装、フォームのアクセシビリティ！その1',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201705/16_1912.html',
-    tags: ['Accessibility', 'HTML'],
+    topics: ['Accessibility', 'HTML'],
   },
   {
     type: 'article',
@@ -496,7 +496,7 @@ const list: {
     date: '2017-2-3',
     title: 'Safari v10.1 の新機能と仕様',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201702/03_1411.html',
-    tags: ['Browser', 'Tools'],
+    topics: ['Browser', 'Tools'],
   },
   {
     type: 'article',
@@ -504,7 +504,7 @@ const list: {
     date: '2017-1-27',
     title: '第7回MLCマークアップ部 開催レポート',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201701/27_1039.html',
-    tags: ['EventReport', 'HTML'],
+    topics: ['EventReport', 'HTML'],
   },
   {
     type: 'article',
@@ -512,7 +512,7 @@ const list: {
     date: '2016-12-22',
     title: 'picture要素やsrcset属性による画像のレスポンシブ、高解像度対応',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201612/22_1502.html',
-    tags: ['HTML'],
+    topics: ['HTML'],
   },
   {
     type: 'article',
@@ -520,7 +520,7 @@ const list: {
     date: '2016-11-24',
     title: '新たなCSS設計思想 MOCSS の登場',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201611/24_2003.html',
-    tags: ['CSS'],
+    topics: ['CSS'],
   },
   {
     type: 'video',
@@ -528,7 +528,7 @@ const list: {
     date: '2016-10-31',
     title: '社内風景：わたしの一番！Vol.28「古着」-株式会社ミツエーリンクス-',
     href: 'https://www.youtube.com/watch?v=Bbmr5eXzI30&list=PL0mikTMx0abPzYPPCpunHzFZahjpurjB8',
-    tags: ['Other'],
+    topics: ['Other'],
   },
   {
     type: 'article',
@@ -536,7 +536,7 @@ const list: {
     date: '2016-10-21',
     title: 'Vol.58（10月13日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201610/21_1918.html',
-    tags: ['EventReport', 'HTML'],
+    topics: ['EventReport', 'HTML'],
   },
   {
     type: 'article',
@@ -544,7 +544,7 @@ const list: {
     date: '2016-10-21',
     title: 'Shadow DOM と CSS Containment によって実現されたCSSのスコープの概念',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201610/21_1021.html',
-    tags: ['CSS', 'JS/TS'],
+    topics: ['CSS', 'JS/TS'],
   },
   {
     type: 'article',
@@ -552,7 +552,7 @@ const list: {
     date: '2016-7-7',
     title: 'Adobe Dreamweaver CC 2017 Beta を使ってみて',
     href: 'https://www.mitsue.co.jp/knowledge/blog/frontend/201607/07_1152.html',
-    tags: ['DevEnv', 'Tools'],
+    topics: ['DevEnv', 'Tools'],
   },
   {
     type: 'article',
@@ -560,7 +560,7 @@ const list: {
     date: '2016-6-1',
     title: 'Vol.56（5月26日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201606/01_1156.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -568,7 +568,7 @@ const list: {
     date: '2015-11-30',
     title: 'Vol.53（11月26日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201511/30_1831.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
   {
     type: 'article',
@@ -576,7 +576,7 @@ const list: {
     date: '2015-7-30',
     title: 'Vol.50（7月23日開催）',
     href: 'https://www.mitsue.co.jp/knowledge/blog/tech_lounge/201507/30_1845.html',
-    tags: ['EventReport'],
+    topics: ['EventReport'],
   },
 ];
 

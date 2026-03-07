@@ -2,7 +2,7 @@
 title: "あけましておめでとう\nございました"
 ogImage: './01-31-january.jpg'
 publishedAt: '2026-01-31'
-tags: [日記]
+topics: [日記]
 ---
 
 ![](./01-31-january.webp?w=1200&h=630)

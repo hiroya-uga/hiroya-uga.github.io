@@ -15,7 +15,7 @@ export type ArticleFrontMatter = {
   ogImage: string;
   pathname: string;
   publishedAt: string;
-  tags?: string[];
+  topics?: string[];
 };
 
 export async function getArticles(articlesDir: string, urlBase?: string) {
