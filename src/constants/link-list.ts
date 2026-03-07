@@ -59,7 +59,7 @@ export const TOOLS_LINK_LIST = [
       {
         emoji: '',
         pathname: '/tools/get-url-from-dom',
-        userType: ['director', 'planner'],
+        userType: ['director', 'planner', 'qa'],
       },
       {
         emoji: '🪮',
@@ -70,6 +70,11 @@ export const TOOLS_LINK_LIST = [
         emoji: '☀️',
         pathname: '/tools/screen-wake-lock',
         userType: [],
+      },
+      {
+        emoji: '🔖',
+        pathname: '/tools/nu-bookmarklet-generator',
+        userType: ['developer', 'qa'],
       },
     ] as ToolPage
   ).map((item) => ({ ...item, type: 'default' }) as const),

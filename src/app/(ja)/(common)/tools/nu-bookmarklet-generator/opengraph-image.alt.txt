@@ -1,0 +1,1 @@
+uga.dev Nu HTML Checker Bookmarklet Generator Nu HTML CheckerへHTMLを送信するブックマークレットが作れるジェネレーターです。ローカル環境やイントラでホスティングされているNu HTML Checkerにも対応しています。
