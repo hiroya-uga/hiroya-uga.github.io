@@ -6,7 +6,7 @@ proficiencyLevel: 'Beginner'
 
 zenn:
   emoji: '🌐'
-  published: true
+  published: false
   type: 'idea'
 ---
 
