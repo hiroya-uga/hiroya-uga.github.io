@@ -15,12 +15,11 @@ import { NoteBox } from '@/components/Box';
 import { Radio, TextField } from '@/components/Form';
 import { SvgIcon } from '@/components/Icons';
 import { Tab } from '@/components/Tab';
+import { useCopyButton } from '@/hooks/use-copy-button';
 
 const today = new Date();
 const tomorrow = new Date(today);
 tomorrow.setDate(today.getDate() + 1);
-
-let copyButtonSettimeoutId = -1;
 
 type Result = {
   who?: string;
@@ -136,6 +135,8 @@ const onchange = () => {
 };
 export const SlackReminderCommandGenerator = () => {
   const ref = useRef<HTMLDivElement>(null);
+
+  const { handleClickCopyButton } = useCopyButton();
 
   const [type, setType] = useState<Every>('毎日・毎週');
   const [who, setWho] = useState('');
@@ -283,9 +284,6 @@ export const SlackReminderCommandGenerator = () => {
     return () => {
       form?.removeEventListener('change', onchange);
       globalThis.window.removeEventListener('beforeunload', onbeforeunload);
-      if (copyButtonSettimeoutId) {
-        clearTimeout(copyButtonSettimeoutId);
-      }
     };
   }, []);
 
@@ -517,26 +515,13 @@ export const SlackReminderCommandGenerator = () => {
               className="hover:bg-(--v-color-background-tertiary-hover) bg-(--v-color-background-tertiary) grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors"
               onClick={(e) => {
                 const label = e.currentTarget.lastElementChild;
-                const value = e.currentTarget.parentElement?.previousElementSibling?.textContent?.trim();
+                const value = e.currentTarget.parentElement?.previousElementSibling?.textContent?.trim() ?? '';
 
-                if (!label) {
+                if (label instanceof HTMLElement === false) {
                   return;
                 }
 
-                clearTimeout(copyButtonSettimeoutId);
-
-                try {
-                  if (value) {
-                    navigator.clipboard.writeText(value);
-                    label.textContent = 'Copied!';
-                  }
-                } catch {
-                  label.textContent = 'Error!';
-                }
-
-                copyButtonSettimeoutId = globalThis.window.setTimeout(() => {
-                  label.textContent = 'Copy';
-                }, 2000);
+                handleClickCopyButton(value, label);
               }}
             >
               <span className="relative block size-4">
