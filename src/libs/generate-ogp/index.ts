@@ -112,7 +112,10 @@ export async function generateOgpImage(
         if (
           (i === MAX_ROW_LENGTH - 1 || i === MAX_ROW_LENGTH - 0.5) &&
           // 改行しようとしているが、次が句読点なら改行しない
-          ['。', '、'].includes(self[index + 1]) === false
+          ['。', '、'].includes(self[index + 1]) === false &&
+          // 改行しようとしているが、次がタグの値を閉じる記号なら改行しない
+          self[index] + self[index + 1] !== '">' &&
+          self[index + 1] + self[index + 2] !== '">'
         ) {
           i = 0;
           currentBreakIndex = index;
