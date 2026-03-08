@@ -46,7 +46,7 @@ https://github.com/levindixon/tengu_spinner_words
 }
 ```
 
-![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているClaude Code CLIの画面](./03-06-claude-tengu-spinner-words-02.webp?w=1500&h=610)
+![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているClaude Code CLIの画面](./03-06-claude-tengu-spinner-words-02.webp?w=1490&h=580)
 
 - `spinnerVerbs`:
   - `mode`: `"replace" | "append"`

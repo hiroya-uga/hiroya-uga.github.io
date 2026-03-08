@@ -232,9 +232,10 @@
   --border-color-secondary: var(--v-color-border-secondary);
 
   /* 0.5秒待っても表示されない時にフェードイン */
-  --animate-fade-in-spinner: fade-in-spinner 0.3s ease-out 0.5s forwards;
+  --animate-fade-in-spinner: fade-in 0.3s ease-out 0.5s forwards;
+  --animate-fade-in: fade-in 0.3s ease-out forwards;
 
-  @keyframes fade-in-spinner {
+  @keyframes fade-in {
     0% {
       opacity: 0;
     }

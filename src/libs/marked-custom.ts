@@ -86,7 +86,7 @@ const overrideImageExtension: TokenizerAndRendererExtension = {
     const height = (Number.parseInt(query?.get('h') ?? '', 10) ?? 2) / 2;
 
     if (width && height) {
-      return `<span class="relative block max-w-full mx-auto" style="width: ${width}px;"><span class="absolute grid place-items-center inset-0 animate-fade-in-spinner rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" class="relative" loading><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image></span>`;
+      return `<span class="relative block max-w-full mx-auto" style="width: ${width}px;"><span class="absolute grid place-items-center inset-0 animate-fade-in-spinner rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" class="relative noscript:invisible" loading><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image><noscript><img src="${src}" alt="${t.text}" width="${width}" height="${height}" /></noscript></span>`;
     }
 
     return `<img src="${src}" alt="${t.text}" loading="lazy" />`;
