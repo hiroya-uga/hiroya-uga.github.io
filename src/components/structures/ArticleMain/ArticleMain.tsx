@@ -18,6 +18,7 @@ type Props = {
       [key: string]: unknown;
       title?: string;
       publishedAt?: string;
+      updatedAt?: string;
       topics?: string[];
     };
     toc: string;
@@ -68,7 +69,7 @@ export const ArticleMain = async ({ post }: Props) => {
               );
             })}
           </h1>
-          <ArticleInformation date={post.meta.publishedAt} />
+          <ArticleInformation publishedAt={post.meta.publishedAt} updatedAt={post.meta.updatedAt} />
         </div>
         {hasTags && (
           <div className="@w640:mt-13.5 mt-5 flex flex-wrap justify-end pb-1 text-right text-xs">
