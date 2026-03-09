@@ -7,7 +7,6 @@ import {
   ArticleYoutubeManager,
 } from '@/components/structures/ArticleMain/ArticleMainClient';
 
-import { Heading } from '@/components/Heading';
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
 import clsx from 'clsx';
@@ -89,48 +88,49 @@ export const ArticleMain = async ({ post }: Props) => {
         <div
           className={clsx([
             'max-w-(--v-max-width) mx-auto',
-            hasToc &&
-              '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[1fr_var(--v-max-width)_1fr] @w1280:grid-rows-[auto_auto]',
+            hasToc && '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[1fr_var(--v-max-width)_1fr]',
           ])}
         >
           {hasToc && <ArticleTOC toc={post.toc} />}
           <div
             id={ARTICLE_MAIN_ID}
             className={clsx(
-              styles.article,
+              styles.container,
               '@w800:text-lg',
               hasToc && '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
             )}
-            dangerouslySetInnerHTML={{
-              __html: (await post.content).replaceAll(
-                '<blockquote class="twitter-tweet">',
-                '<blockquote class="twitter-tweet" data-theme="dark">',
-              ),
-            }}
-          />
+          >
+            <div
+              className={styles.article}
+              dangerouslySetInnerHTML={{
+                __html: (await post.content).replaceAll(
+                  '<blockquote class="twitter-tweet">',
+                  '<blockquote class="twitter-tweet" data-theme="dark">',
+                ),
+              }}
+            />
+            <section role="note" className="empty:hidden" aria-labelledby="footnotes">
+              {0 < post.footnotes.length && (
+                <>
+                  <h2 id="footnotes">脚注</h2>
+                  <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
+                    {post.footnotes.map(async ([id, { html }]) => (
+                      <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
+                        <span className="whitespace-nowrap font-mono">
+                          <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
+                        </span>
+                        <span dangerouslySetInnerHTML={{ __html: await html }} />
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </section>
+          </div>
           <ArticleFootNoteActivator />
           <ArticleCodeHighlightActivator />
           <ArticleYoutubeManager />
           <ArticleTwitterActivator />
-          <div role="note" className="@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-2 empty:hidden">
-            {0 < post.footnotes.length && (
-              <>
-                <Heading level={2} id="footnotes" keepUseMarginTop>
-                  脚注
-                </Heading>
-                <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
-                  {post.footnotes.map(async ([id, { html }]) => (
-                    <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
-                      <span className="whitespace-nowrap font-mono">
-                        <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
-                      </span>
-                      <span dangerouslySetInnerHTML={{ __html: await html }} />
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
         </div>
       </div>
     </article>
