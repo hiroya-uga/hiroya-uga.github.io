@@ -78,7 +78,13 @@ export async function generateOgpImage(
     let i = 0;
     let currentBreakIndex = -1;
     /* 12.5 を許容 */
-    const MAX_ROW_LENGTH = 13;
+    const MAX_COL_LENGTH = 13;
+    const getMaxColLength = (lineIndex: number) => {
+      if (lineIndex < 3) {
+        return MAX_COL_LENGTH;
+      }
+      return 19;
+    };
     const isOver4rows = 3 < title.split('\n').length;
     const titleString = (isOver4rows ? title.replaceAll('\n', '') : title).trim();
     const getLength = (value: string[]) => {
@@ -92,6 +98,8 @@ export async function generateOgpImage(
 
     return [...titleString]
       .map((char, index, self) => {
+        const maxColLength = getMaxColLength(index);
+
         if (char === '\n') {
           const after = self.slice(index + 1);
           const nextBreakIndex = after.findIndex((c) => c === '\n');
@@ -101,7 +109,7 @@ export async function generateOgpImage(
 
           if (nextBreakIndex === -1) {
             // 12.5 を許容
-            if (previousTextLength + getLength(after) < MAX_ROW_LENGTH) {
+            if (previousTextLength + getLength(after) < maxColLength) {
               return '';
             }
           }
@@ -110,7 +118,7 @@ export async function generateOgpImage(
           return '\n';
         }
         if (
-          (i === MAX_ROW_LENGTH - 1 || i === MAX_ROW_LENGTH - 0.5) &&
+          (i === maxColLength - 1 || i === maxColLength - 0.5) &&
           // 改行しようとしているが、次が句読点なら改行しない
           ['。', '、'].includes(self[index + 1]) === false &&
           // 改行しようとしているが、次がタグの値を閉じる記号なら改行しない
