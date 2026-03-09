@@ -53,7 +53,7 @@ const photoDataList: PhotoData[] = [
     caption: '神磯の鳥居',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CXIGmx_Bob3',
-    date: '2021.12.06',
+    date: '2021.11.06',
   },
   {
     src: '/main-yamanakako.webp',
