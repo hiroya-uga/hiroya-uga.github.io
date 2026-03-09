@@ -1,6 +1,7 @@
 ---
 title: "Claude Codeが\n考えてる時に\n出力される文字列は\nスピナーワードというらしい。"
 publishedAt: '2026-03-06'
+updatedAt: '2026-03-09'
 topics: [生成AI, 雑学]
 dependencies: 'Claude Code'
 proficiencyLevel: 'Beginner'
@@ -31,11 +32,17 @@ https://github.com/levindixon/tengu_spinner_words
 
 ちなみに冒頭登場したpondering（ポンダリング）は、「じっくり考えること」「熟考」「沈思黙考」という意味らしい。
 
-ちなみにこのスピナーワード、設定で追加や変更ができるみたいです（VS Codeの拡張機能は未対応？）。
+ちなみにこのスピナーワード、設定で追加や変更ができるみたいです。
 
 > Customize the action verbs shown in the spinner and turn duration messages. Set mode to "replace" to use only your verbs, or "append" to add them to the defaults
 >
 > 引用：[https://code.claude.com/docs/en/settings](https://code.claude.com/docs/en/settings#:~:text=true-,spinnerVerbs,-Customize%20the%20action)
+
+- `spinnerVerbs`:
+  - `mode`: `"replace" | "append"`
+    - `replace`: 既存のスピナーワードを無視して置き換える
+    - `append`: 既存のスピナーワードに追加する
+  - `verbs`: 追加したいワードの`string[]`
 
 ```json:~/.claude/settings.json またはプロジェクト内の .claude/settings.json や .claude/settings.local.json
 {
@@ -48,19 +55,28 @@ https://github.com/levindixon/tengu_spinner_words
 
 ![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているClaude Code CLIの画面](./03-06-claude-tengu-spinner-words-02.webp?w=1490&h=580)
 
-- `spinnerVerbs`:
-  - `mode`: `"replace" | "append"`
-    - `replace`: 既存のスピナーワードを無視して置き換える
-    - `append`: 既存のスピナーワードに追加する
-  - `verbs`: 追加したいワードの`string[]`
+VS CodeはVS Codeで設定外必要[^3]。
+
+[^3]: <https://github.com/anthropics/claude-code/issues/23347#issuecomment-3981444993>を参照
+
+```json:VS Codeのsettings.json
+{
+  "claudeCode.spinnerVerbs": {
+    "mode": "replace",
+    "verbs": ["審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )"]
+  }
+}
+```
+
+![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているVS Codeの拡張機能のClaude Code](./03-06-claude-tengu-spinner-words-03.webp?w=1200&h=630)
 
 ## おもしろスピナーワード
 
 ### Clauding
 
-ClaudeがClaudeしているという造語。UGAがUGAしてるならUGAINGになっちゃうね。それをいうならGarglingだって？やかましいわ🚰[^3]
+ClaudeがClaudeしているという造語。UGAがUGAしてるならUGAINGになっちゃうね。それをいうならGarglingだって？やかましいわ🚰[^4]
 
-[^3]: Gargle=うがい。この姓の方はたぶんちいさいころにしこたま言われたことでしょう😇
+[^4]: Gargle=うがい。この姓の方はたぶんちいさいころにしこたま言われたことでしょう😇
 
 ### Reticulating
 

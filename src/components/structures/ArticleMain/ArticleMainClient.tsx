@@ -24,10 +24,11 @@ const getReadingTime = (length: number) => {
 };
 
 type ArticleInformationProps = {
-  date?: string;
+  publishedAt?: string;
+  updatedAt?: string;
 };
 
-export const ArticleInformation = ({ date }: ArticleInformationProps) => {
+export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformationProps) => {
   const ref = useRef<HTMLSpanElement>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
   const isInitialized = useRef(false);
@@ -95,12 +96,23 @@ export const ArticleInformation = ({ date }: ArticleInformationProps) => {
             status === 'loading' ? 'opacity-0' : 'animate-fade-in',
           ])}
         >
-          <time dateTime={date}>{formattedDateString(date ? new Date(date) : new Date())}</time>{' '}
+          {updatedAt && (
+            <>
+              最終更新日：
+              <time dateTime={updatedAt} className="text-secondary mr-2">
+                {formattedDateString(new Date(updatedAt))}
+              </time>
+              公開日：
+            </>
+          )}
+          <time dateTime={publishedAt} className="mr-2">
+            {formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}
+          </time>
           <span ref={ref} className="min-h-lh" />
         </span>
         <noscript>
-          <time dateTime={date} className="animate-fade-in block opacity-0 [animation-delay:300ms]">
-            {formattedDateString(date ? new Date(date) : new Date())}
+          <time dateTime={publishedAt} className="animate-fade-in block opacity-0 [animation-delay:300ms]">
+            {formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}
           </time>
         </noscript>
       </p>
