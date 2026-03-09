@@ -1,7 +1,7 @@
 ---
 title: "dom-accessibility-apiで\n要素のアクセシブルな名前を取得する"
 publishedAt: '2026-03-02'
-topics: [JavaScript, npm, アクセシビリティ]
+topics: [JavaScript, npm, アクセシビリティ, Tips]
 dependencies: 'dom-accessibility-api'
 proficiencyLevel: 'Intermediate'
 ---

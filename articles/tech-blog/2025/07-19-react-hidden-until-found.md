@@ -1,7 +1,7 @@
 ---
 title: "`hidden=\"until-found\"`を\nReactでも使いたい！"
 publishedAt: '2025-07-19'
-topics: [React, Web標準]
+topics: [React, Web標準, Tips]
 dependencies: 'React'
 proficiencyLevel: 'Intermediate'
 ---
