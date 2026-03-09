@@ -416,7 +416,7 @@ export const ArticleCodeHighlightActivator = () => {
         'beforeend',
         `
         <button class="codeblock__caption__copy" title="${title}のコードをコピー">
-          <svg role="img">
+          <svg role="presentation">
             <use href="#${svgId}" />
           </svg>
         </button>
