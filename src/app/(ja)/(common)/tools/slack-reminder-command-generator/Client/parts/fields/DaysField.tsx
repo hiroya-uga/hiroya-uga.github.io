@@ -2,18 +2,18 @@
 
 import { useMemo } from 'react';
 
+import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
 import { Checkbox } from '@/components/Form';
+import { isWeekday } from '../../utils';
 
-type DaysProps = {
-  values: boolean[];
-  dispatch: React.Dispatch<React.SetStateAction<boolean[]>>;
+type DaysValue = SlackReminder.FormState['days'];
+
+type Props = {
+  values: DaysValue;
+  handleChange: (value: DaysValue) => void;
 };
 
-export const isWeekday = (values: DaysProps['values']) => {
-  return values.slice(0, 5).filter(Boolean).length === 5;
-};
-
-export const DaysSection = ({ values, dispatch }: DaysProps) => {
+export const DaysField = ({ values, handleChange }: Props) => {
   const days = useMemo(() => ['月', '火', '水', '木', '金', '土', '日'], []);
 
   return (
@@ -26,24 +26,24 @@ export const DaysSection = ({ values, dispatch }: DaysProps) => {
             checked={isWeekday(values)}
             onChange={(e) => {
               if (e.currentTarget.checked) {
-                dispatch([true, true, true, true, true, values[5], values[6]]);
+                handleChange([true, true, true, true, true, values[5], values[6]]);
                 return;
               }
 
-              dispatch([false, false, false, false, false, values[5], values[6]]);
+              handleChange([false, false, false, false, false, values[5], values[6]]);
             }}
           />
         </li>
         {days.map((dayName, index) => {
           return (
-            <li key={index}>
+            <li key={dayName}>
               <Checkbox
                 label={`${dayName}曜日`}
                 checked={values[index]}
                 onChange={(e) => {
                   const newDay = [...values];
                   newDay[index] = e.currentTarget.checked;
-                  dispatch(newDay);
+                  handleChange(newDay);
                 }}
               />
             </li>
