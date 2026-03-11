@@ -17,10 +17,6 @@ import { SvgIcon } from '@/components/Icons';
 import { Tab } from '@/components/Tab';
 import { useCopyButton } from '@/hooks/use-copy-button';
 
-const today = new Date();
-const tomorrow = new Date(today);
-tomorrow.setDate(today.getDate() + 1);
-
 type Result = {
   who?: string;
   message?: string;
@@ -136,12 +132,19 @@ const onchange = () => {
 export const SlackReminderCommandGenerator = () => {
   const ref = useRef<HTMLDivElement>(null);
 
+  const { today, tomorrow } = useMemo(() => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    return { today, tomorrow };
+  }, []);
+
   const { handleClickCopyButton } = useCopyButton();
 
   const [type, setType] = useState<Every>('毎日・毎週');
   const [who, setWho] = useState('');
   const [message, setMessage] = useState('');
-  const [time, setTime] = useState(`${today.getHours()}:00`);
+  const [time, setTime] = useState(`${today.getHours().toString().padStart(2, '0')}:00`);
   const [date, setDate] = useState([`${tomorrow.getMonth() + 1}`, `${tomorrow.getDate()}`]);
   const [fullDate, setFullDate] = useState(tomorrow.toISOString().split('T')[0]);
   const [day, setDay] = useState(0);
@@ -527,7 +530,7 @@ export const SlackReminderCommandGenerator = () => {
               <span className="relative block size-4">
                 <SvgIcon name="copy" alt="" />
               </span>
-              <span className="font-bold leading-4" aria-live="assertive" title="出力結果をコピー">
+              <span className="font-bold leading-4" aria-live="polite" title="出力結果をコピー">
                 Copy
               </span>
             </button>
