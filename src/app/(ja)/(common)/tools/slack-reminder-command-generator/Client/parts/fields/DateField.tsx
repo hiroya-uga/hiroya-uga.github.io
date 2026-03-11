@@ -1,18 +1,20 @@
 'use client';
 
+import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
 import { useId } from 'react';
 
-type DateProps = {
-  values: string[];
-  dispatch: React.Dispatch<React.SetStateAction<string[]>>;
-  label?: string;
+type DateValue = SlackReminder.FormState['date'];
+
+type Props = {
+  values: DateValue;
+  handleChange: (value: DateValue) => void;
 };
 
-export const DateSection = ({ values, dispatch, label = '日付' }: DateProps) => {
+export const DateField = ({ values, handleChange }: Props) => {
   const id = useId();
   return (
     <fieldset className="mb-10">
-      <legend className="text-sm font-bold leading-snug">{label}</legend>
+      <legend className="text-sm font-bold leading-snug">日付</legend>
 
       <div className="grid w-fit grid-cols-2 gap-2 pt-2">
         <p className="outline-hidden has-focus-visible:outline-black flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-2">
@@ -26,7 +28,7 @@ export const DateSection = ({ values, dispatch, label = '日付' }: DateProps) =
             onInput={(e) => {
               const newDate = [...values];
               newDate[0] = e.currentTarget.value;
-              dispatch(newDate);
+              handleChange(newDate);
             }}
           />
           <label htmlFor={`${id}-month`} className="pt-0.5 text-xs leading-none">
@@ -44,7 +46,7 @@ export const DateSection = ({ values, dispatch, label = '日付' }: DateProps) =
             onInput={(e) => {
               const newDate = [...values];
               newDate[1] = e.currentTarget.value;
-              dispatch(newDate);
+              handleChange(newDate);
             }}
           />
           <label htmlFor={`${id}-day`} className="pt-0.5 text-xs leading-none">
