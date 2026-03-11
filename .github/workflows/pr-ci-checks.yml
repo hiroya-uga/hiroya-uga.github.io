@@ -1,0 +1,27 @@
+name: 🔍 PR CI Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: pr-ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.13.0
+          cache: yarn
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn type-check
+      - run: yarn lint
+      - run: yarn test
