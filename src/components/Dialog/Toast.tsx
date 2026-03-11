@@ -80,7 +80,10 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Props) => {
   return createPortal(
     <p
       ref={ref}
-      className="duration-800 no-hidden bg-secondary border-l-link fixed right-0 top-4 z-50 mx-auto w-fit max-w-[95%] rounded-l border-l-8 px-4 py-2 pr-6 transition-[right] [box-shadow:1px_2px_6px_#00000099] [&[hidden]]:pointer-events-none [&[hidden]]:right-[-100%]"
+      className="no-hidden bg-secondary border-l-link [[hidden]]:pointer-events-none [[hidden]]:translate-x-full fixed right-0 top-4 z-50 mx-auto w-fit max-w-[95%] rounded-l border-l-8 px-4 py-2 pr-6 transition-transform delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
+      style={{
+        transitionDuration: `${TRANSITION_DURATION}ms`,
+      }}
       hidden
     />,
     portal,
