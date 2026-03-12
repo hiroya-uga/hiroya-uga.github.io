@@ -1,3 +1,3 @@
-export * from './PickUpList';
-export * from './TopImage';
-export * from './WelcomeMessage';
+export * from './PickUpListSection';
+export * from './TopImageSection';
+export * from './WelcomeMessageSection';

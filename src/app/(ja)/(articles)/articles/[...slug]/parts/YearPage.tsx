@@ -1,8 +1,8 @@
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { ArticleList } from '@/components/List';
-import { Footer } from '@/components/structures/Footer';
-import { Header } from '@/components/structures/Header';
+import { GlobalFooter } from '@/components/structures/GlobalFooter';
+import { GlobalHeader } from '@/components/structures/GlobalHeader';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
 import { resolveCategoryName } from '@/utils/articles';
@@ -25,7 +25,7 @@ export const YearPage = async ({ category, year }: Props) => {
 
   return (
     <>
-      <Header layout="wide-content" />
+      <GlobalHeader layout="wide-content" />
       <main className="@container px-content-inline lg:pl-10">
         <div className="max-w-structure mx-auto mb-8">
           <PageTitle title={pageTitle} description={description} />
@@ -49,7 +49,7 @@ export const YearPage = async ({ category, year }: Props) => {
           </div>
         </div>
       </main>
-      <Footer
+      <GlobalFooter
         additionalBreadcrumbs={[{ href: `/articles/${category}`, title: resolveCategoryName(category) }]}
         currentPageTitle={year}
       />

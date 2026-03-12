@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 
-import { SiteName } from '@/components/structures/Header/SiteName';
+import { SiteName } from '@/components/structures/GlobalHeader/SiteName';
 import clsx from 'clsx';
 
-import styles from '@/components/structures/Header/Header.module.css';
+import styles from '@/components/structures/GlobalHeader/GlobalHeader.module.css';
 import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 
-export const Header = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
+export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
   return (
     <header className={clsx([styles.root, '@container text-primary'])}>
       <SiteName />

@@ -53,7 +53,7 @@ const getRandomIndexArray = (length: number) => {
   return arrayShuffle(digits);
 };
 
-export const WelcomeMessage = () => {
+export const WelcomeMessageSection = () => {
   const message1Ref = useRef<HTMLSpanElement>(null);
   const message2Ref = useRef<HTMLSpanElement>(null);
   const message3Ref = useRef<HTMLSpanElement>(null);
@@ -193,31 +193,35 @@ export const WelcomeMessage = () => {
   }, [status]);
 
   return (
-    <p
-      className={clsx([
-        // 14 * 1.875 = 26.25px
-        // 26 * 3 = 78px (3lh)
-        // 78px + 1px = 79px (for iOS Safari)
-        'leading-26px min-h-79px text-center text-sm transition-opacity',
-        status === 'loading' ? 'opacity-0' : 'opacity-100',
-      ])}
-    >
-      <span ref={message1Ref} aria-hidden="true">
-        {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
-      </span>
-      <span className="@w640:inline block">
-        <span ref={message2Ref} aria-hidden="true">
-          {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
-        </span>
-        <span className="sr-only select-none">{`${message[0].mapping.map(([_, c]) => c).join('')}${message[1].mapping.map(([_, c]) => c).join('')}`}</span>
-        <span className="mx-1 font-mono" ref={counterRef}>
-          {''.padStart(COUNTER_LENGTH, '0')}
-        </span>
-        <span className="sr-only select-none">{message[2].mapping.map(([_, c]) => c).join('')}</span>
-        <span ref={message3Ref} aria-hidden="true">
-          {message[2].mapping.map(([a, b]) => (status === 'already' ? b : a))}
-        </span>
-      </span>
-    </p>
+    <div className="px-content-inline @w640:pb-16 pb-8">
+      <div className="max-w-content mx-auto">
+        <p
+          className={clsx([
+            // 14 * 1.875 = 26.25px
+            // 26 * 3 = 78px (3lh)
+            // 78px + 1px = 79px (for iOS Safari)
+            'leading-26px min-h-79px text-center text-sm transition-opacity',
+            status === 'loading' ? 'opacity-0' : 'opacity-100',
+          ])}
+        >
+          <span ref={message1Ref} aria-hidden="true">
+            {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
+          </span>
+          <span className="@w640:inline block">
+            <span ref={message2Ref} aria-hidden="true">
+              {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
+            </span>
+            <span className="sr-only select-none">{`${message[0].mapping.map(([_, c]) => c).join('')}${message[1].mapping.map(([_, c]) => c).join('')}`}</span>
+            <span className="mx-1 font-mono" ref={counterRef}>
+              {''.padStart(COUNTER_LENGTH, '0')}
+            </span>
+            <span className="sr-only select-none">{message[2].mapping.map(([_, c]) => c).join('')}</span>
+            <span ref={message3Ref} aria-hidden="true">
+              {message[2].mapping.map(([a, b]) => (status === 'already' ? b : a))}
+            </span>
+          </span>
+        </p>
+      </div>
+    </div>
   );
 };
