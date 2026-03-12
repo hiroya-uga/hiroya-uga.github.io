@@ -2,7 +2,7 @@ import {
   everyTypeName,
   type SlackReminder,
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
-import { isWeekday } from '../../../utils';
+import { isWeekday } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/utils';
 
 const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const monthList = [

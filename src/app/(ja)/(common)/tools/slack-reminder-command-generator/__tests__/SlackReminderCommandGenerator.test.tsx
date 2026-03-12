@@ -2,8 +2,8 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { SlackReminderCommandGenerator } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { SlackReminderCommandGenerator } from '../Client';
 
 describe('SlackReminderCommandGenerator', () => {
   beforeEach(() => {
