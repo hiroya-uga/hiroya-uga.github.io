@@ -89,7 +89,7 @@ export const NuValidatorBookmarkletGenerator = () => {
         <Tab.Wrapper defaultCurrentKey={type} onChange={(key) => setType(key)}>
           <Tab.Panel tabKey="CSR用">
             <div className="mb-paragraph">
-              <NoteBox title="現在レンダリングされている見たままのHTMLが送信されます。">
+              <NoteBox headingLevel={2} title="現在レンダリングされている見たままのHTMLが送信されます。">
                 <NoteList
                   list={[
                     '元々のHTMLに含まれていない文字列を含みます。',
@@ -103,7 +103,7 @@ export const NuValidatorBookmarkletGenerator = () => {
           </Tab.Panel>
           <Tab.Panel tabKey="SSR用">
             <div className="mb-paragraph">
-              <NoteBox title="サーバが返すHTMLが送信されます。">
+              <NoteBox headingLevel={2} title="サーバが返すHTMLが送信されます。">
                 <NoteList
                   list={[
                     '秘密情報や個人情報を含む文字列が外部に送信される可能性があるため、送信先のドメインが信頼できるものであることを確認してください。',
