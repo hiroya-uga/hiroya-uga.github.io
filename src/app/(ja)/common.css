@@ -9,7 +9,6 @@
 
   [data-theme="dark"] :where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
     color: #f2eeee;
-    font-family: monospace;
     background-color: #6d4444cc;
   }
 

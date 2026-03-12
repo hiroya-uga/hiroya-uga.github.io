@@ -1,8 +1,9 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { SlackReminderCommandGenerator } from '../';
+import { DIALOG_PORTAL_ID } from '@/constants/id';
+import { SlackReminderCommandGenerator } from '../Client';
 
 describe('SlackReminderCommandGenerator', () => {
   beforeEach(() => {
@@ -25,7 +26,7 @@ describe('SlackReminderCommandGenerator', () => {
   };
 
   const setCommonFields = async ({ who, message }: { who: string; message: string }) => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const whoInput = screen.getByLabelText('宛先');
     const messageInput = screen.getByLabelText('本文');
 
@@ -295,48 +296,208 @@ describe('SlackReminderCommandGenerator', () => {
     expect(previewText).toBe(`/remind ${who} "${message}" on 03/20/2026 at ${time}`);
   });
 
-  it('開始日を入力後、他タブに移動しても戻っても開始日が保持される', async () => {
-    render(<SlackReminderCommandGenerator />);
+  describe('共通', () => {
+    it('開始日を入力後、タブUIを切り替えてから元のタブに戻っても開始日が保持される', async () => {
+      render(<SlackReminderCommandGenerator />);
 
-    const user = userEvent.setup({ delay: null });
+      const user = userEvent.setup({ delay: null });
 
-    await setCommonFields({ who: '@test', message: 'テスト' });
+      await setCommonFields({ who: '@test', message: 'テスト' });
 
-    // 1. 毎日・毎週タブを選択
-    const dailyWeeklyTab = screen.getByRole('tab', { name: '毎日・毎週' });
-    await user.click(dailyWeeklyTab);
+      // 1. 毎日・毎週タブを選択
+      const dailyWeeklyTab = screen.getByRole('tab', { name: '毎日・毎週' });
+      await user.click(dailyWeeklyTab);
 
-    const dailyWeeklyPanel = screen.getByRole('tabpanel', { name: '毎日・毎週' });
-    const startingInput = within(dailyWeeklyPanel).getByLabelText('開始日');
+      const dailyWeeklyPanel = screen.getByRole('tabpanel', { name: '毎日・毎週' });
+      const startingInput = within(dailyWeeklyPanel).getByLabelText('開始日');
 
-    // 開始日を入力
-    const startingDate = '2026-05-15';
-    await user.clear(startingInput);
-    await user.type(startingInput, startingDate);
+      // 開始日を入力
+      const startingDate = '2026-05-15';
+      await user.clear(startingInput);
+      await user.type(startingInput, startingDate);
 
-    // starting が入っているか
-    expect(getPreviewText()).toContain(`starting ${startingDate}`);
+      // starting が入っているか
+      expect(getPreviewText()).toContain(`starting ${startingDate}`);
 
-    // 2. 別のタブ（例: 隔週）に移動
-    const biweeklyTab = screen.getByRole('tab', { name: '隔週' });
-    await user.click(biweeklyTab);
+      // 2. 別のタブ（例: 隔週）に移動
+      const biweeklyTab = screen.getByRole('tab', { name: '隔週' });
+      await user.click(biweeklyTab);
 
-    const startingInputAfterSwitch = within(
-      screen.getByRole('tabpanel', { name: '隔週' }),
-    ).getByLabelText<HTMLInputElement>('開始日');
-    expect(startingInputAfterSwitch.value).toBe(startingDate);
+      const startingInputAfterSwitch = within(
+        screen.getByRole('tabpanel', { name: '隔週' }),
+      ).getByLabelText<HTMLInputElement>('開始日');
+      expect(startingInputAfterSwitch.value).toBe(startingDate);
 
-    // 3. もう一度毎日・毎週に戻る
-    await user.click(dailyWeeklyTab);
+      // 3. もう一度毎日・毎週に戻る
+      await user.click(dailyWeeklyTab);
 
-    // 開始日入力欄がまだ存在し、値が保持されているか
-    const startingInputAfterBack = within(
-      screen.getByRole('tabpanel', { name: '毎日・毎週' }),
-    ).getByLabelText<HTMLInputElement>('開始日');
+      // 開始日入力欄がまだ存在し、値が保持されているか
+      const startingInputAfterBack = within(
+        screen.getByRole('tabpanel', { name: '毎日・毎週' }),
+      ).getByLabelText<HTMLInputElement>('開始日');
 
-    expect(startingInputAfterBack).toHaveValue(startingDate);
+      expect(startingInputAfterBack).toHaveValue(startingDate);
 
-    // プレビューも再確認
-    expect(getPreviewText()).toContain(`starting ${startingDate}`);
+      // プレビューも再確認
+      expect(getPreviewText()).toContain(`starting ${startingDate}`);
+    });
+
+    it('フィールドの値を変更した後に beforeunload イベントが prevented される', async () => {
+      render(<SlackReminderCommandGenerator />);
+
+      const user = userEvent.setup({ delay: null });
+
+      // 変更前は beforeunload が prevent されない
+      const eventBefore = new Event('beforeunload', { cancelable: true });
+      window.dispatchEvent(eventBefore);
+      expect(eventBefore.defaultPrevented).toBe(false);
+
+      // Markdown チェックボックスをクリックすることで change イベントが発火する
+      await user.click(screen.getByLabelText('Markdownを有効にする（実験中）'));
+
+      // 変更後は beforeunload が prevent される
+      const eventAfter = new Event('beforeunload', { cancelable: true });
+      window.dispatchEvent(eventAfter);
+      expect(eventAfter.defaultPrevented).toBe(true);
+    });
+
+    it('/remind コマンド領域をクリックすると Selection API で全体が選択される', async () => {
+      render(<SlackReminderCommandGenerator />);
+
+      const user = userEvent.setup({ delay: null });
+
+      const mockRemoveAllRanges = vi.fn();
+      const mockAddRange = vi.fn();
+      const spy = vi.spyOn(window, 'getSelection').mockReturnValue({
+        removeAllRanges: mockRemoveAllRanges,
+        addRange: mockAddRange,
+      } as unknown as Selection);
+
+      const remindSpan = screen.getByText('/remind');
+      // /remind を含む親の div 要素がクリック対象
+      await user.click(remindSpan.parentElement!);
+
+      expect(mockRemoveAllRanges).toHaveBeenCalled();
+      expect(mockAddRange).toHaveBeenCalled();
+
+      spy.mockRestore();
+    });
+
+    describe('コピーボタンとトースト', () => {
+      beforeEach(() => {
+        // Toast のポータル要素を作成
+        const portal = document.createElement('div');
+        portal.id = DIALOG_PORTAL_ID;
+        document.body.appendChild(portal);
+
+        // クリップボード API をモック
+        Object.defineProperty(navigator, 'clipboard', {
+          value: {
+            writeText: vi.fn().mockResolvedValue(undefined),
+            write: vi.fn().mockResolvedValue(undefined),
+          },
+          writable: true,
+          configurable: true,
+        });
+      });
+
+      afterEach(() => {
+        document.getElementById(DIALOG_PORTAL_ID)?.remove();
+      });
+
+      it('コピーボタンを押下するとトーストが表示される', async () => {
+        render(<SlackReminderCommandGenerator />);
+
+        const user = userEvent.setup({ delay: null });
+        const copyButton = screen.getByRole('button', { name: 'Copy' });
+
+        await user.click(copyButton);
+
+        await waitFor(() => {
+          expect(screen.getByText('コマンドテキストをコピーしました！')).toBeInTheDocument();
+        });
+      });
+    });
+
+    describe('Markdown が有効なとき', () => {
+      let writeClipboardMock: ReturnType<typeof vi.fn>;
+      let clipboardItemCtorMock: (_items: Record<string, Blob>) => void;
+
+      beforeEach(() => {
+        // Toast のポータル要素を作成
+        const portal = document.createElement('div');
+        portal.id = DIALOG_PORTAL_ID;
+        document.body.appendChild(portal);
+
+        writeClipboardMock = vi.fn().mockResolvedValue(undefined);
+        clipboardItemCtorMock = vi.fn((_items: Record<string, Blob>) => undefined);
+
+        class MockClipboardItem {
+          constructor(items: Record<string, Blob>) {
+            clipboardItemCtorMock(items);
+            return items as unknown as ClipboardItem;
+          }
+        }
+
+        vi.stubGlobal('ClipboardItem', MockClipboardItem);
+
+        Object.defineProperty(navigator, 'clipboard', {
+          value: {
+            writeText: vi.fn().mockResolvedValue(undefined),
+            write: writeClipboardMock,
+          },
+          writable: true,
+          configurable: true,
+        });
+      });
+
+      afterEach(() => {
+        document.getElementById(DIALOG_PORTAL_ID)?.remove();
+        vi.unstubAllGlobals();
+      });
+
+      it('Markdown 有効時、出力結果の説明が "[HTML Message]を" になる', async () => {
+        render(<SlackReminderCommandGenerator />);
+
+        const user = userEvent.setup({ delay: null });
+        await user.click(screen.getByLabelText('Markdownを有効にする（実験中）'));
+
+        const descriptionEl = screen.getByText(/\[HTML Message\]/);
+        expect(descriptionEl).toBeInTheDocument();
+      });
+
+      it('Markdown を含まないテキストでも出力プレビューから正しく値が拾える', async () => {
+        render(<SlackReminderCommandGenerator />);
+
+        const user = userEvent.setup({ delay: null });
+        const message = '平文のメッセージ';
+
+        // Markdown 無効（デフォルト）の状態でメッセージを入力
+        const messageInput = screen.getByLabelText('本文');
+        await user.clear(messageInput);
+        await user.type(messageInput, message);
+
+        // プレビューに入力したメッセージが含まれていること
+        expect(getPreviewText()).toContain(`"${message}"`);
+      });
+
+      it('Markdown 有効時にコピーボタンを押下すると text/html トーストが表示される', async () => {
+        render(<SlackReminderCommandGenerator />);
+
+        const user = userEvent.setup({ delay: null });
+
+        // Markdown を有効にする
+        await user.click(screen.getByLabelText('Markdownを有効にする（実験中）'));
+
+        const copyButton = screen.getByRole('button', { name: 'Copy' });
+        await user.click(copyButton);
+
+        await waitFor(() => {
+          expect(screen.getByText('text/htmlをコピーしました！')).toBeInTheDocument();
+        });
+
+        expect(clipboardItemCtorMock).toHaveBeenCalledTimes(1);
+      });
+    });
   });
 });

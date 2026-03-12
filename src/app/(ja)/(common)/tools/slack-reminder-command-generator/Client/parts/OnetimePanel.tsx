@@ -21,7 +21,7 @@ export const OnetimePanel = ({ formState, setFormState }: Props) => (
       handleChange={(fullDate) => setFormState((prev) => ({ ...prev, fullDate }))}
     />
     <TimeField value={formState.time} handleChange={(time) => setFormState((prev) => ({ ...prev, time }))} />
-    <NoteBox title="手書きの際、こんな相対表現も使えます">
+    <NoteBox headingLevel={2} title="手書きの際、こんな相対表現も使えます">
       <dl>
         <div className="@w640:flex @w640:gap-2">
           <dt>次の金曜日</dt>

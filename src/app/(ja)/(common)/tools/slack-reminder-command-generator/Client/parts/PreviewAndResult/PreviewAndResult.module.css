@@ -1,0 +1,52 @@
+.message {
+  font-family: sans-serif;
+
+  > :where(ul, ol) {
+    white-space: normal;
+  }
+
+  &:has(> p:first-child:last-child) {
+    display: inline;
+
+    p {
+      display: inline;
+    }
+  }
+
+  a {
+    color: #72baff;
+  }
+
+  blockquote {
+    border-left: 4px solid #777;
+    padding: 1em;
+    background-color: #444;
+    margin: 0.5em 0;
+  }
+
+  code {
+    color: orange;
+    background-color: #2228;
+    margin: 0 2px;
+  }
+
+  pre > code {
+    display: block;
+    border: 1px solid #888;
+    border-radius: 3px;
+    padding: 1em;
+    margin: 0.5em 0;
+  }
+
+  li {
+    list-style-position: inside !important;
+  }
+
+  ul li {
+    list-style: disc;
+  }
+
+  ol li {
+    list-style: decimal;
+  }
+}
