@@ -14,7 +14,7 @@ export const SNS_LINKS = [
     height: 26,
   },
   {
-    href: 'https://www.instagram.com/hiroya_uga',
+    href: 'https://www.instagram.com/hiroya.uga',
     src: '/common/images/instagram.svg',
     alt: 'Instagram',
     width: 28,

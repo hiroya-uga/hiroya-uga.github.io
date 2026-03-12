@@ -1,7 +1,7 @@
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { ArticleMain } from '@/components/structures/ArticleMain';
-import { Footer } from '@/components/structures/Footer';
-import { Header } from '@/components/structures/Header';
+import { GlobalFooter } from '@/components/structures/GlobalFooter';
+import { GlobalHeader } from '@/components/structures/GlobalHeader';
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
 import { URL_ORIGIN } from '@/constants/meta';
 import { getPostBySlug } from '@/libs/marked';
@@ -39,7 +39,8 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
 
   return (
     <>
-      <Header layout="article-content" />
+      <GlobalHeader layout="article-content" />
+
       <main className="@container">
         <ArticleMain post={post} />
         <div className="mx-content-inline @container not-empty:mt-[20vh] text-center">
@@ -63,7 +64,8 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
           </ul>
         </div>
       </main>
-      <Footer
+
+      <GlobalFooter
         additionalBreadcrumbs={[
           { href: `/articles/${category}`, title: resolveCategoryName(category) },
           { href: `/articles/${category}/${year}`, title: year },

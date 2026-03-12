@@ -13,7 +13,7 @@ import { SITE_NAME } from '@/constants/meta';
 import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
 
-import styles from '@/components/structures/Footer/Footer.module.css';
+import styles from '@/components/structures/GlobalFooter/GlobalFooter.module.css';
 
 const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname() ?? '';
@@ -80,7 +80,7 @@ type Props = {
   currentPageTitle?: string;
 };
 
-export const Footer = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
+export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname();
   const isTop = pathname === '/';
 
