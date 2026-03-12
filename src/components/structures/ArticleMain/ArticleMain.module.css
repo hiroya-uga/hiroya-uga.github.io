@@ -450,6 +450,7 @@
   [class~="custom-block"] {
     padding: 1rem;
     border: 1px solid var(--border-color-primary);
+    margin-bottom: var(--v-spacing-y);
   }
 
   [class~="custom-block"][data-type="memo"] {
