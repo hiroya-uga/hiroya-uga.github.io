@@ -113,9 +113,10 @@ const getTimeComment = (result: SlackReminder.Result) => {
 interface Params {
   result: SlackReminder.Result;
   type: SlackReminder.FormState['type'];
+  isEnableMarkdown: boolean;
 }
 
-export const getCommandDescriptionNodes = ({ result, type }: Params) => {
+export const getCommandDescriptionNodes = ({ result, type, isEnableMarkdown }: Params) => {
   const day = getDayComment(result, type);
   const date = getDateComment(result, type);
   const time = getTimeComment(result);
@@ -123,9 +124,12 @@ export const getCommandDescriptionNodes = ({ result, type }: Params) => {
   return [
     result.who === 'me' || Boolean(result.who) === false ? '自分' : `${result.who} `,
     '宛に',
-    '「',
-    result.message || 'ここにメッセージ',
-    '」という内容を、',
+    [
+      isEnableMarkdown
+        ? // パースしない
+          ['[HTML Message]', 'を']
+        : [`「${result.message || 'ここにメッセージ'}」という内容を、`],
+    ],
     day,
     date,
     time,

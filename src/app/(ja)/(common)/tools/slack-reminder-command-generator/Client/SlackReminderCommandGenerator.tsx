@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { TextField } from '@/components/Form';
+import { Checkbox, TextField } from '@/components/Form';
 import { Tab } from '@/components/Tab';
 
 import {
@@ -41,6 +41,7 @@ const formatTabKeyValue = (key: string): SlackReminder.Type => {
 
 export const SlackReminderCommandGenerator = () => {
   const [formState, setFormState] = useState<SlackReminder.FormState>(getInitialFormState());
+  const [isEnableMarkdown, setIsEnableMarkdown] = useState(false);
 
   const { ref } = useBeforeUnload();
 
@@ -65,6 +66,11 @@ export const SlackReminderCommandGenerator = () => {
             <TextField
               label="本文"
               placeholder="@group-name チケットの確認をお願いします！"
+              description={
+                isEnableMarkdown
+                  ? 'Markdown Syntaxのうち、リンク、太字・イタリック、取り消し線、インラインコード、ブロック引用、コードブロック、リストが使えます。リスト内の改行はスペースに変換されます。\nまた、複数行の空行は無視されるため必要に応じて出力結果を調整してください。'
+                  : undefined
+              }
               value={formState.message}
               onInput={(e) => {
                 const value = e.currentTarget.value;
@@ -73,6 +79,14 @@ export const SlackReminderCommandGenerator = () => {
               multiline
               autoResize
             />
+
+            <p className="ml-auto w-fit">
+              <Checkbox
+                label="Markdownを有効にする（実験中）"
+                checked={isEnableMarkdown}
+                onChange={() => setIsEnableMarkdown((prev) => !prev)}
+              />
+            </p>
           </div>
 
           <Tab.Wrapper
@@ -102,7 +116,7 @@ export const SlackReminderCommandGenerator = () => {
         </div>
       </div>
 
-      <PreviewAndResult formState={formState} />
+      <PreviewAndResult formState={formState} isEnableMarkdown={isEnableMarkdown} />
     </>
   );
 };
