@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseMarkdownForSlack } from '../Client/parts/PreviewAndResult/utils/parse-markdown-for-slack';
+import { parseMarkdownForSlack } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/parts/PreviewAndResult/utils/parse-markdown-for-slack';
 
 describe('parseMarkdownForSlack', () => {
   it('すべての記法を含む入力が一度に変換される', () => {

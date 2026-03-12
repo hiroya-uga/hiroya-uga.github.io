@@ -3,8 +3,8 @@
 import { useMemo } from 'react';
 
 import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
+import { isWeekday } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/utils';
 import { Checkbox } from '@/components/Form';
-import { isWeekday } from '../../utils';
 
 type DaysValue = SlackReminder.FormState['days'];
 
