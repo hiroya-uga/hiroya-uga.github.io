@@ -2,7 +2,7 @@
 title: "AI-S Micro-Nikkor \n55mm f/2.8を買った話"
 ogImage: './02-27-ai-micro-nikkor-55mm-f28s.jpg'
 publishedAt: '2026-02-27'
-topics: [日記, カメラ, レビュー]
+topics: [カメラ機材, レビュー]
 ---
 
 Nikon Z6を使い始めて数年経ちましたが、Fマウントのレンズも銘玉がたくさんあるに違いない。
