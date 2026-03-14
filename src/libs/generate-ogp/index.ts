@@ -75,11 +75,14 @@ export async function generateOgpImage(
   const x = 54;
   const halfCharRegExp = /[0-9a-zA-Z`]/;
   const lines = (() => {
+    /** 文字のカウント */
     let i = 0;
+    /** 行数のカウント */
+    let lineIndex = 1;
     let currentBreakIndex = -1;
     /* 12.5 を許容 */
     const MAX_COL_LENGTH = 13;
-    const getMaxColLength = (lineIndex: number) => {
+    const getMaxColLength = () => {
       if (lineIndex < 3) {
         return MAX_COL_LENGTH;
       }
@@ -98,7 +101,7 @@ export async function generateOgpImage(
 
     return [...titleString]
       .map((char, index, self) => {
-        const maxColLength = getMaxColLength(index);
+        const maxColLength = getMaxColLength();
 
         if (char === '\n') {
           const after = self.slice(index + 1);
@@ -115,24 +118,29 @@ export async function generateOgpImage(
           }
 
           i = 0;
+          lineIndex++;
           return '\n';
         }
+
         if (
           (i === maxColLength - 1 || i === maxColLength - 0.5) &&
-          // 改行しようとしているが、次が句読点なら改行しない
-          ['。', '、'].includes(self[index + 1]) === false &&
+          // 改行しようとしているが、次が句読点やスペースなら改行しない
+          ['。', '、', ' '].includes(self[index + 1]) === false &&
           // 改行しようとしているが、次がタグの値を閉じる記号なら改行しない
           self[index] + self[index + 1] !== '">' &&
           self[index + 1] + self[index + 2] !== '">'
         ) {
           i = 0;
           currentBreakIndex = index;
+          lineIndex++;
           return `${char}\n`;
         }
         if (halfCharRegExp.test(char)) {
           i += 0.5; // 調整中
           return char;
         }
+
+        // console.log({ i, char, maxColLength });
 
         i += 1;
         return char;
