@@ -9,8 +9,8 @@ export type ArticleCategory = keyof typeof ARTICLE_PATH_PATTERN_LIST;
 
 export const ARTICLE_CATEGORY_LABEL_MAPPING = {
   'tech-blog': 'Tech Blog',
+  blog: 'Blog',
   gunpla: 'ガンプラ制作',
-  blog: '日常',
 } as const;
 
 export type ArticleCategoryLabel =

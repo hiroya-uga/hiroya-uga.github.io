@@ -18,6 +18,16 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
 
+const getLength = (article: HTMLElement) => {
+  const temp = document.createElement('div');
+  temp.innerHTML = article.innerHTML;
+  temp.querySelectorAll('pre, code, .associate, [role="note"]').forEach((node) => {
+    node.remove();
+  });
+
+  return temp.textContent?.replace(/\n/g, '').trim().length || 0;
+};
+
 const getReadingTime = (length: number) => {
   const charsPerMinute = 350; // 1分あたりの平均文字数
   return Math.ceil(length / charsPerMinute) || 1;
@@ -41,8 +51,9 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
     }
 
     span.textContent = '';
-    const length = article.textContent?.replace(/\n/g, '').trim().length || 0;
-    const fullText = `文字数：${length}／所要時間：${getReadingTime(length)}分`;
+
+    const length = getLength(article);
+    const fullText = `文字数：約${length}／所要時間：${getReadingTime(length)}分`;
 
     if (isAlready) {
       span.textContent = fullText;
