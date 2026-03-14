@@ -40,6 +40,7 @@ const photoDataList: PhotoData[] = [
     caption: '京王線 つつじヶ丘駅',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVEL5h3j25D',
+    flickr: 'https://flic.kr/p/2s26Y3K',
     date: '2023.12.17',
   },
   {
@@ -47,6 +48,7 @@ const photoDataList: PhotoData[] = [
     caption: '円覚寺 桂昌庵',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'Cm9kBgZPF25',
+    flickr: 'https://flic.kr/p/2s1UqWi',
     date: '2022.06.21',
   },
   {
