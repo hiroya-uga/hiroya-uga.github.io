@@ -31,7 +31,7 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
   const blogs = await getAllArticlesInCategory(category);
   const pathname = `/articles/${slug.join('/')}`;
   const currentIndex = blogs.findIndex((blog) => blog.pathname === pathname);
-  const canonical = `${URL_ORIGIN}${pathname}`;
+  const canonical = `${URL_ORIGIN}${pathname}/`;
   const categoryName = resolveCategoryName(category);
 
   const previousArticle = blogs[currentIndex + 1];
