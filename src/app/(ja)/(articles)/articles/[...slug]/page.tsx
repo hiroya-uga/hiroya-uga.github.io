@@ -1,5 +1,5 @@
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
-import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
+import { SITE_AUTHOR, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
 import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
@@ -51,7 +51,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title,
       description,
+      twitter: {
+        creator: '@hiroya_UGA',
+      },
       openGraph: {
+        siteName: SITE_NAME,
         title,
         description,
         type: 'website',
@@ -78,7 +82,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title,
       description,
+      twitter: {
+        creator: '@hiroya_UGA',
+      },
       openGraph: {
+        siteName: SITE_NAME,
         title,
         description,
         type: 'website',
@@ -113,19 +121,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const categoryName = resolveCategoryName(category);
   const ogImage = await generateOgpImage(['articles', ...slug], post.meta.title, categoryName, post.meta.ogImage);
 
+  const title = `${post.meta.title.replaceAll('\n', '')} | ${categoryName} | ${SITE_NAME}`;
   const description =
-    `【${categoryName}】` +
-    (post.meta.description ?? (await post.content).replace(/<[^>]+>/g, '').slice(0, 69) + '…') +
-    ' ' +
-    (post.meta.topics ?? []).map((tag: string) => `#${tag}`).join(', ');
+    `【${categoryName}】` + (post.meta.description ?? (await post.content).replace(/<[^>]+>/g, '').slice(0, 120) + '…');
 
   return {
-    title: `${post.meta.title.replaceAll('\n', '')} | ${categoryName} | ${SITE_NAME}`,
+    title,
     description,
+    twitter: {
+      creator: '@hiroya_UGA',
+      card: 'summary_large_image',
+    },
     openGraph: {
-      title: post.meta.title.replaceAll('\n', ''),
+      siteName: SITE_NAME,
+      title,
       description,
       type: 'article',
+      locale: post.meta.locale ?? 'ja_JP',
       url,
       images: [
         {
@@ -135,6 +147,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           alt: `${SITE_NAME} ${categoryName} ${post.meta.title.replaceAll('\n', '')}`,
         },
       ],
+      authors: SITE_AUTHOR,
+      tags: post.meta.topics,
+      publishedTime: new Date(post.meta.publishedAt).toISOString(),
+      modifiedTime: post.meta.updatedAt ? new Date(post.meta.updatedAt).toISOString() : undefined,
     },
     alternates: {
       canonical: url,

@@ -48,9 +48,14 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
       canonical: `${URL_ORIGIN}${pathname}`,
     },
     twitter: {
+      creator: '@hiroya_UGA',
       card: 'summary_large_image',
       title: titleValue,
       description,
+    },
+    openGraph: {
+      siteName: SITE_NAME,
+      locale: 'ja_JP',
     },
   };
 };
