@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 interface Props {
   post: ReturnType<typeof getPostBySlug>;
   category: string;
-  year: string;
+  yearOrSubcategory: string;
   fileName: string;
   canonical: string;
 }
@@ -21,7 +21,7 @@ const parse = (value: unknown) => {
   return undefined;
 };
 
-export const ArticleJsonLD = ({ post, category, year, fileName, canonical }: Props) => {
+export const ArticleJsonLD = ({ post, category, yearOrSubcategory, fileName, canonical }: Props) => {
   const json = useMemo(
     () => ({
       '@context': 'https://schema.org',
@@ -31,7 +31,7 @@ export const ArticleJsonLD = ({ post, category, year, fileName, canonical }: Pro
       proficiencyLevel: parse(post?.meta.proficiencyLevel),
       keywords: post?.meta.topics,
       dependencies: parse(post?.meta.dependencies),
-      image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${year}/${fileName}.png`,
+      image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${yearOrSubcategory}/${fileName}.png`,
       datePublished: new Date(post?.meta.publishedAt).toISOString(),
       dateModified: post?.meta.updatedAt ? new Date(post?.meta.updatedAt).toISOString() : undefined,
       author: {
@@ -53,7 +53,7 @@ export const ArticleJsonLD = ({ post, category, year, fileName, canonical }: Pro
       url: canonical,
       inLanguage: 'ja',
     }),
-    [post, category, year, fileName, canonical],
+    [post, category, yearOrSubcategory, fileName, canonical],
   );
 
   return (

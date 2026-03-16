@@ -2,10 +2,32 @@ export const ARTICLE_PATH_PATTERN_LIST = {
   // category別に年数を指定する必要がある
   'tech-blog': ['2026', '2025'],
   blog: ['2026', '2025'],
-  gunpla: ['2026'],
+  gunpla: ['hg'],
 };
 
 export type ArticleCategory = keyof typeof ARTICLE_PATH_PATTERN_LIST;
+
+export const getSubCategoryName = (yearOrSubcategory: string) => {
+  if (/^\d{4}$/.test(yearOrSubcategory)) {
+    return `${yearOrSubcategory}年`;
+  }
+
+  switch (yearOrSubcategory) {
+    case 'hg':
+      return 'HG';
+  }
+
+  return yearOrSubcategory;
+};
+
+export const getSubCategoryListLabel = (category: ArticleCategory) => {
+  switch (category) {
+    case 'gunpla':
+      return 'シリーズ別';
+    default:
+      return '過去ログ';
+  }
+};
 
 export const ARTICLE_CATEGORY_LABEL_MAPPING = {
   'tech-blog': 'Tech Blog',

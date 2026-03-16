@@ -12,12 +12,21 @@ export const getArticlesPageMeta = {
       description: categoryDescription,
     };
   },
-  yearTop: (category: string, year: string) => {
+  yearOrSubCategoryPage: (category: string, yearOrSubcategory: string) => {
     const categoryName = resolveCategoryName(category);
     const categoryDescription = resolveCategoryDescription(category);
+
+    const title = (() => {
+      if (/\d{4}/.test(yearOrSubcategory)) {
+        return `${yearOrSubcategory}年の${categoryName}`;
+      }
+
+      return `${categoryName}の${yearOrSubcategory}`;
+    })();
+
     return {
-      title: `${year}年の${categoryName} | 記事一覧 | ${SITE_NAME}`,
-      pageTitle: `${year}年の${categoryName}一覧`,
+      title: `${title} | 記事一覧 | ${SITE_NAME}`,
+      pageTitle: `${title}一覧`,
       description: categoryDescription,
     };
   },

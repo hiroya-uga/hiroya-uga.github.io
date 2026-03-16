@@ -5,7 +5,7 @@ import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
-import { ArticlePage, CategoryPage, YearPage } from '@/app/(ja)/(articles)/articles/[...slug]/parts';
+import { ArticlePage, CategoryPage, YearOrSubCategoryPage } from '@/app/(ja)/(articles)/articles/[...slug]/parts';
 import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils';
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { objectKeys } from '@/utils/object-keys';
@@ -19,7 +19,7 @@ const isArticleCategory = (category: string): category is ArticleCategory => {
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
-  const [category, year, fileName] = slug;
+  const [category, yearOrSubcategory, fileName] = slug;
 
   if (isArticleCategory(category) === false || 3 < slug.length) {
     return notFound();
@@ -30,10 +30,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   }
 
   if (slug.length === 2) {
-    return <YearPage category={category} year={year} />;
+    return <YearOrSubCategoryPage category={category} yearOrSubcategory={yearOrSubcategory} />;
   }
 
-  return <ArticlePage slug={slug} category={category} year={year} fileName={fileName} />;
+  return <ArticlePage slug={slug} category={category} yearOrSubcategory={yearOrSubcategory} fileName={fileName} />;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (slug.length === 2) {
     const url = `${URL_ORIGIN}/articles/${slug[0]}/${slug[1]}`;
-    const { title, pageTitle, description } = getArticlesPageMeta.yearTop(slug[0], slug[1]);
+    const { title, pageTitle, description } = getArticlesPageMeta.yearOrSubCategoryPage(slug[0], slug[1]);
     const ogImage = await generateOgpImage(['articles', ...slug], pageTitle);
 
     return {
