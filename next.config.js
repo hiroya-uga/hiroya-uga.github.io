@@ -57,6 +57,16 @@ const nextConfig = {
     }
     return config;
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/articles/gunpla/2026/03-04-hg-gat-x-303/',
+        destination: '/articles/gunpla/hg/03-04-gat-x-303/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withBundleAnalyzer(withMDX(nextConfig));

@@ -2,7 +2,7 @@ import { TweetLink } from '@/components/Clickable/TweetLink';
 import { ArticleMain } from '@/components/structures/ArticleMain';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { GlobalHeader } from '@/components/structures/GlobalHeader';
-import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
+import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory, getSubCategoryName } from '@/constants/articles';
 import { URL_ORIGIN } from '@/constants/meta';
 import { getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
@@ -12,7 +12,7 @@ import { notFound } from 'next/navigation';
 import { getArticleMarkdownFilePath } from '../utils';
 import { ArticleJsonLD, ArticleNavigation } from './parts';
 
-type Props = { slug: string[]; category: ArticleCategory; year: string; fileName: string };
+type Props = { slug: string[]; category: ArticleCategory; yearOrSubcategory: string; fileName: string };
 
 async function getAllArticlesInCategory(category: ArticleCategory) {
   const articlePromises = ARTICLE_PATH_PATTERN_LIST[category].map((year) =>
@@ -21,8 +21,8 @@ async function getAllArticlesInCategory(category: ArticleCategory) {
   return (await Promise.all(articlePromises)).flat();
 }
 
-export const ArticlePage = async ({ slug, category, year, fileName }: Props) => {
-  const post = getPostBySlug(getArticleMarkdownFilePath(category, year), fileName);
+export const ArticlePage = async ({ slug, category, yearOrSubcategory, fileName }: Props) => {
+  const post = getPostBySlug(getArticleMarkdownFilePath(category, yearOrSubcategory), fileName);
 
   if (post === null) {
     return notFound();
@@ -68,11 +68,17 @@ export const ArticlePage = async ({ slug, category, year, fileName }: Props) => 
       <GlobalFooter
         additionalBreadcrumbs={[
           { href: `/articles/${category}`, title: resolveCategoryName(category) },
-          { href: `/articles/${category}/${year}`, title: year },
+          { href: `/articles/${category}/${yearOrSubcategory}`, title: getSubCategoryName(yearOrSubcategory) },
         ]}
         currentPageTitle={post.meta.title.replaceAll('\n', '')}
       />
-      <ArticleJsonLD post={post} category={category} year={year} fileName={fileName} canonical={canonical} />
+      <ArticleJsonLD
+        post={post}
+        category={category}
+        yearOrSubcategory={yearOrSubcategory}
+        fileName={fileName}
+        canonical={canonical}
+      />
     </>
   );
 };
