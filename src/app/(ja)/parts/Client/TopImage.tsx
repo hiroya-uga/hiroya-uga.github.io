@@ -4,140 +4,8 @@ import { LoadingIcon } from '@/components/Icons';
 import { Picture } from '@/components/Image';
 import clsx from 'clsx';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-
-type PhotoData = {
-  caption: string;
-  spec: string;
-  instagram: string;
-  flickr?: string;
-  date: string;
-} & (
-  | {
-      src: string;
-    }
-  | {
-      error: string;
-    }
-);
-
-const photoDataList: PhotoData[] = [
-  {
-    src: '/main-hyotan-onsen.webp',
-    caption: 'ひょうたん温泉 第2駐車場前',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'DVLf204D0J0',
-    date: '2024.12.14',
-  },
-  {
-    src: '/main-kiryucoco.webp',
-    caption: '東京ドームシティ',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'DVGzOthD2Py',
-    date: '2023.09.03',
-  },
-  {
-    src: '/main-tsutsujigaoka.webp',
-    caption: '京王線 つつじヶ丘駅',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'DVEL5h3j25D',
-    flickr: 'https://flic.kr/p/2s26Y3K',
-    date: '2023.12.17',
-  },
-  {
-    src: '/main-keishoan.webp',
-    caption: '円覚寺 桂昌庵',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'Cm9kBgZPF25',
-    flickr: 'https://flic.kr/p/2s1UqWi',
-    date: '2022.06.21',
-  },
-  {
-    src: '/main-kamiisonotorii.webp',
-    caption: '神磯の鳥居',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'CXIGmx_Bob3',
-    flickr: 'https://flic.kr/p/2s1tpC5',
-    date: '2021.11.06',
-  },
-  {
-    src: '/main-yamanakako.webp',
-    caption: '山中湖 花の都公園',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'CE9XGAEHfS9',
-    date: '2020.08.22',
-  },
-  {
-    src: '/main-minokakeiwa.webp',
-    caption: '南伊豆 蓑掛岩',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'CE6INpCn9LC',
-    date: '2020.08.16',
-  },
-  {
-    src: '/main-shinjuku.webp',
-    caption: 'JR新宿駅 甲州街道改札',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'CE6Deb7nUx7',
-    date: '2020.07.23',
-  },
-  {
-    src: '/main-akihabara.webp',
-    caption: 'JR秋葉原駅',
-    spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
-    instagram: 'CCzs-IZnC7m',
-    date: '2020.07.18',
-  },
-  {
-    src: '/main-ushinshiro.webp',
-    caption: '牛代 みずめ桜',
-    spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
-    instagram: 'B-616CxH8FE',
-    date: '2020.04.05',
-  },
-  {
-    src: '/main-sumidaaquarium.webp',
-    caption: 'すみだ水族館',
-    spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
-    instagram: 'B65DejRnF0i',
-    date: '2020.01.03',
-  },
-  {
-    src: '/main-c97.webp',
-    caption: 'コミックマーケット97 Day4',
-    spec: 'iPhone XS Max',
-    instagram: 'B6u8koWnH_-',
-    date: '2019.12.31',
-  },
-  {
-    src: '/main-venusfort.webp',
-    caption: 'VenusFort',
-    spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
-    instagram: 'B6qVD7Invry',
-    date: '2019.12.28',
-  },
-  {
-    src: '/main-nact.webp',
-    caption: '国立新美術館',
-    spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
-    instagram: 'B6LKGmvHqff',
-    date: '2019.12.17',
-  },
-  {
-    src: '/main-escalator.webp',
-    caption: 'リンクスクエア新宿',
-    spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
-    instagram: 'B4d9_CPn9M7',
-    date: '2019.11.01',
-  },
-  {
-    src: '/main-fujimibashi.webp',
-    caption: '富士見橋(東京都)',
-    spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + Nikon D7200',
-    instagram: 'B3n_xUcn86N',
-    flickr: 'https://flic.kr/p/2s1sYN9',
-    date: '2019.10.13',
-  },
-];
+import { PhotoData, photoDataList } from './constants';
+import { TopImageGalleryProps } from './TopImageGallery/TopImageGallery';
 
 const Spec = ({ spec }: { spec: string }) => {
   if (!spec) {
@@ -173,7 +41,9 @@ const generateRandomArray = () => {
 
 const TRANSITION_DURATION = 350;
 
-export const TopImageSection = () => {
+type Props = TopImageGalleryProps;
+
+export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setGalleryState }: Props) => {
   const captionId = useId();
 
   const [shouldShowImage, setShouldShowImage] = useState(false);
@@ -310,16 +180,27 @@ export const TopImageSection = () => {
               ])}
             >
               <span>
-                <a
-                  href={
-                    typeof photoData?.instagram === 'string'
-                      ? `https://www.instagram.com/p/${photoData.instagram}/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`
-                      : 'https://www.instagram.com/hiroya.uga/'
-                  }
-                  className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover border-primary text-2xs @w640:text-sm z-10 block w-fit cursor-pointer rounded-full border px-3 py-1 leading-tight no-underline"
+                <button
+                  type="button"
+                  className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs @w640:text-sm z-10 block w-fit cursor-pointer rounded-full border border-transparent px-3 py-1 leading-tight no-underline"
+                  onClick={() => {
+                    setGalleryState({ shouldShow: true, photos: photoDataListRef.current });
+
+                    queueMicrotask(() => {
+                      const galleryElement = document.getElementById(galleryId);
+
+                      galleryElement?.querySelector('h2')?.focus({
+                        preventScroll: true,
+                      });
+                      galleryElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                  }}
+                  aria-expanded={galleryState.shouldShow}
+                  aria-controls={galleryId}
+                  ref={galleryToggleButtonRef}
                 >
-                  Instagramで見る
-                </a>
+                  一覧を開く ↓
+                </button>
               </span>
               <span
                 className={clsx([

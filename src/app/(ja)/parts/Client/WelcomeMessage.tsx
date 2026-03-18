@@ -53,7 +53,7 @@ const getRandomIndexArray = (length: number) => {
   return arrayShuffle(digits);
 };
 
-export const WelcomeMessageSection = () => {
+export const WelcomeMessage = () => {
   const message1Ref = useRef<HTMLSpanElement>(null);
   const message2Ref = useRef<HTMLSpanElement>(null);
   const message3Ref = useRef<HTMLSpanElement>(null);
@@ -193,7 +193,7 @@ export const WelcomeMessageSection = () => {
   }, [status]);
 
   return (
-    <div className="px-content-inline @w640:pb-16 pb-8">
+    <div className="px-content-inline">
       <div className="max-w-content mx-auto">
         <p
           className={clsx([
