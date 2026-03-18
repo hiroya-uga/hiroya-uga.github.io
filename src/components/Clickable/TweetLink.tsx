@@ -38,7 +38,7 @@ export const TweetLink = (props: Props) => {
       {...shareButtonProps}
       className={
         props.className ??
-        'not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto flex w-fit place-items-center gap-1 rounded-lg border border-solid bg-black py-0.5 pl-4 pr-3 text-sm text-white no-underline transition-[opacity,visibility,box-shadow] hover:underline hover:shadow-lg sm:py-0 sm:text-base'
+        'not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto flex w-fit place-items-center gap-1 rounded-xl border border-solid bg-black py-0.5 pl-4 pr-3 text-sm text-white no-underline transition-[opacity,visibility,box-shadow] [corner-shape:squircle] hover:underline hover:shadow-lg sm:py-0 sm:text-base'
       }
       title="Twitter(X)でシェアする"
     >

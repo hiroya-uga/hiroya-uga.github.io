@@ -109,7 +109,10 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                   {SNS_LINKS.map(({ href, alt, ...props }) => {
                     return (
                       <li key={href}>
-                        <a href={href} className="transition-bg group block rounded-lg p-3 hover:bg-gray-200">
+                        <a
+                          href={href}
+                          className="transition-bg group block rounded-xl p-3 [corner-shape:squircle] hover:bg-gray-200"
+                        >
                           <Picture {...props} alt={alt} className="size-7" />
                         </a>
                       </li>
