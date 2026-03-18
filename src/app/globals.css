@@ -136,6 +136,7 @@
   --breakpoint-w500: 500px;
   --breakpoint-w700: 700px;
   --breakpoint-w800: 800px;
+  --breakpoint-xs: 400px;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -257,12 +258,14 @@
   }
 
   @keyframes fade-up {
-    from {
+    0% {
       opacity: 0;
-      transform: translateY(2rem);
+      transform: translateY(10vh);
     }
-    to {
+    75% {
       opacity: 1;
+    }
+    100% {
       transform: translateY(0);
     }
   }

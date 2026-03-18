@@ -3,10 +3,9 @@ import {
   CategorySection,
   ExternalMediaSection,
   Header,
+  MainVisualSection,
   PickUpListSection,
   ProfileSection,
-  TopImageSection,
-  WelcomeMessageSection,
 } from '@/app/(ja)/parts';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 
@@ -20,10 +19,9 @@ export default function Home() {
       <Header pageTitle={metadata.pageTitle} />
 
       <main className="@container">
-        <TopImageSection />
-        <WelcomeMessageSection />
+        <MainVisualSection />
 
-        <div className="bg-secondary px-content-inline @w640:mb-28 @w640:pb-11 @w640:pt-7 mb-8 py-8">
+        <div className="@w640:mt-16 bg-secondary px-content-inline @w640:mb-28 @w640:pb-11 @w640:pt-7 mb-8 mt-8 py-8">
           <div className="max-w-content mx-auto">
             <h2 className="@w640:text-2xl mb-4 mt-0 text-xl font-bold">The power of the web</h2>
 
