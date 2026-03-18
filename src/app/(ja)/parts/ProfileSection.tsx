@@ -54,7 +54,10 @@ export const ProfileSection = () => {
         {SNS_LINKS.map(({ href, alt, ...props }) => {
           return (
             <li key={href}>
-              <a href={href} className="@w640:p-3 block rounded-lg p-2 transition-colors hover:bg-gray-200">
+              <a
+                href={href}
+                className="@w640:p-3 block rounded-xl p-2 transition-colors [corner-shape:squircle] hover:bg-gray-200"
+              >
                 <Picture
                   {...props}
                   width={props.width + 4}
