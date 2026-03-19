@@ -19,9 +19,11 @@ export default function Home() {
       <Header pageTitle={metadata.pageTitle} />
 
       <main className="@container">
-        <MainVisualSection />
+        <div className="bg-primary z-1 relative">
+          <MainVisualSection />
+        </div>
 
-        <div className="@w640:mt-16 bg-secondary px-content-inline @w640:mb-28 @w640:pb-11 @w640:pt-7 mb-8 mt-8 py-8">
+        <div className="@w640:mt-16 bg-secondary px-content-inline @w640:pb-11 @w640:pt-7 sticky bottom-0 mt-8 py-8">
           <div className="max-w-content mx-auto">
             <h2 className="@w640:text-2xl mb-4 mt-0 text-xl font-bold">The power of the web</h2>
 
@@ -49,14 +51,16 @@ export default function Home() {
           </div>
         </div>
 
-        <PickUpListSection />
-        <CategorySection />
+        <div className="bg-primary z-1 @w640:pt-28 relative pt-8">
+          <PickUpListSection />
+          <CategorySection />
 
-        <div className="px-content-inline @w640:pb-20 pb-12">
-          <div className="max-w-content mx-auto">
-            <ExternalMediaSection />
-            <BookMarkSection />
-            <ProfileSection />
+          <div className="px-content-inline @w640:pb-20 pb-12">
+            <div className="max-w-content mx-auto">
+              <ExternalMediaSection />
+              <BookMarkSection />
+              <ProfileSection />
+            </div>
           </div>
         </div>
       </main>

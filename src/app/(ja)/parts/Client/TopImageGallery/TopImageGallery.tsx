@@ -6,6 +6,8 @@ import { useMemo } from 'react';
 import { PhotoData } from '../constants';
 import { getClassNameForPhotoItem, getCSSRowVariables } from './utils';
 
+import styles from './TopImageGallery.module.css';
+
 interface Props {
   galleryId: string;
   galleryToggleButtonRef: React.RefObject<HTMLButtonElement | null>;
@@ -18,14 +20,17 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
   let lineIndex = 0;
 
   const photos = useMemo(() => {
-    const filteredPhotos = galleryState.photos.filter((photoData) => 'src' in photoData);
-    const length = Math.ceil((filteredPhotos.length || 1) / 10) * 10;
-    return Array.from({ length }, (_, index) => filteredPhotos[index % filteredPhotos.length]);
+    const length = Math.ceil((galleryState.photos.length || 1) / 10) * 10;
+    return Array.from({ length }, (_, index) => galleryState.photos[index % galleryState.photos.length]);
   }, [galleryState.photos]);
+
+  if (galleryState.shouldShow === false) {
+    return null;
+  }
 
   return (
     <section id={galleryId} className="px-content-inline animation-fade-in relative">
-      <h2 className="@w640:text-2xl mb-4 text-center text-xl font-bold outline-0" tabIndex={-1}>
+      <h2 className="@w640:text-2xl mb-4 text-center text-xl font-bold shadow-none outline-0" tabIndex={-1}>
         Gallery
       </h2>
 
@@ -58,6 +63,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
               }}
               style={getCSSRowVariables(itemIndex, lineIndex)}
               className={clsx([
+                styles.item,
                 'self-stretch',
                 'animate-fade-up bg-secondary group relative overflow-hidden rounded-[8px]',
                 getClassNameForPhotoItem(itemIndex),
@@ -69,7 +75,10 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                 width={photoData.width}
                 height={photoData.height}
                 priority={false}
-                className="block h-full w-full object-cover opacity-0 transition-[scale,opacity] group-focus-within:scale-110 group-hover:scale-110 data-[state='loaded']:opacity-100"
+                className={clsx([
+                  styles.image,
+                  "block size-full object-cover opacity-0 transition-[scale,opacity] group-focus-within:scale-110 group-hover:scale-110 data-[state='loaded']:opacity-100",
+                ])}
                 id={imageId}
                 onLoad={(e) => (e.currentTarget.dataset.state = 'loaded')}
               />
@@ -115,29 +124,31 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
         })}
       </ul>
 
-      <p className="pt-80PX pointer-events-none sticky bottom-0 bg-[linear-gradient(to_top,var(--background-color-primary),rgba(255,255,255,0))] pb-4 text-center">
-        <button
-          type="button"
-          aria-expanded={true}
-          aria-controls={galleryId}
-          onClick={() => {
-            galleryToggleButtonRef.current?.focus({
-              preventScroll: true,
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            window.addEventListener(
-              'scrollend',
-              () => {
-                setGalleryState({ shouldShow: false, photos: [] });
-              },
-              { once: true },
-            );
-          }}
-          className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs @w640:text-sm pointer-events-auto z-10 ml-auto block w-fit cursor-pointer rounded-full border border-transparent px-3 py-1 leading-tight no-underline"
-        >
-          一覧を閉じる ↑
-        </button>
-      </p>
+      <div className="pt-80PX pointer-events-none sticky bottom-0 bg-[linear-gradient(to_top,var(--background-color-primary),rgba(255,255,255,0))] pb-4 text-center">
+        <p className="max-w-content mx-auto">
+          <button
+            type="button"
+            aria-expanded={true}
+            aria-controls={galleryId}
+            onClick={() => {
+              galleryToggleButtonRef.current?.focus({
+                preventScroll: true,
+              });
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.addEventListener(
+                'scrollend',
+                () => {
+                  setGalleryState({ shouldShow: false, photos: [] });
+                },
+                { once: true },
+              );
+            }}
+            className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit cursor-pointer rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline"
+          >
+            一覧を閉じる ↑
+          </button>
+        </p>
+      </div>
     </section>
   );
 };
