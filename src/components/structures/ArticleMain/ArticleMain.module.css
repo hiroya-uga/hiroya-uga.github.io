@@ -67,7 +67,7 @@
 
   animation-name: rotateAnimation;
   animation-timing-function: linear;
-  animation-duration: 1ms; /* Firefox では、アニメーションを適用するために必要 */
+  animation-duration: 1ms; /* for Firefox */
   animation-direction: alternate;
   animation-timeline: scroll(block nearest);
 }

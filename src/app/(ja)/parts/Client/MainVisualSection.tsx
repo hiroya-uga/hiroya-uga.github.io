@@ -25,14 +25,12 @@ export const MainVisualSection = () => {
 
       <WelcomeMessage />
 
-      {galleryState.shouldShow && (
-        <TopImageGallery
-          galleryId={galleryId}
-          galleryToggleButtonRef={galleryToggleButtonRef}
-          galleryState={galleryState}
-          setGalleryState={setGalleryState}
-        />
-      )}
+      <TopImageGallery
+        galleryId={galleryId}
+        galleryToggleButtonRef={galleryToggleButtonRef}
+        galleryState={galleryState}
+        setGalleryState={setGalleryState}
+      />
     </>
   );
 };

@@ -1,21 +1,24 @@
 export type PhotoData = {
   caption: string;
   spec: string;
-  instagram: string;
+  instagram?: string;
   flickr?: string;
   date: string;
-} & (
-  | {
-      src: string;
-      width: number;
-      height: number;
-    }
-  | {
-      error: string;
-    }
-);
+  src: string;
+  width: number;
+  height: number;
+};
 
 export const photoDataList: PhotoData[] = [
+  {
+    src: '/main-c96.webp',
+    caption: 'コミックマーケット96 の空',
+    spec: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
+    flickr: 'https://flic.kr/p/2s2VToA',
+    date: '2019.08.11',
+    width: 1364,
+    height: 908,
+  },
   {
     src: '/main-asakusabashi.webp',
     caption: '厩橋 隅田川',

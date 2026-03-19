@@ -47,7 +47,17 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
   const captionId = useId();
 
   const [shouldShowImage, setShouldShowImage] = useState(false);
-  const [photoData, setPhotoData] = useState<PhotoData | null>(null);
+  const [photoData, setPhotoData] = useState<
+    | PhotoData
+    | {
+        error: string;
+        instagram: '';
+        caption: string;
+        spec: string;
+        date: string;
+      }
+    | null
+  >(null);
 
   const isMountedRef = useRef(true);
   const isImageLoadingRef = useRef(false);
@@ -72,11 +82,6 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
 
     setTimeoutId.current = window.setTimeout(() => {
       const currentItem = photoDataListRef.current[currentIndexRef.current];
-
-      if ('src' in currentItem === false) {
-        return;
-      }
-
       setPhotoData(currentItem);
     }, TRANSITION_DURATION);
   }, []);
@@ -116,7 +121,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
       >
         <figure className="min-h bg-primary relative" aria-live="polite">
           <p className="aspect-3/2 isolate">
-            {photoData && 'src' in photoData && (
+            {photoData && 'error' in photoData === false && (
               <Picture
                 width={960}
                 height={640}

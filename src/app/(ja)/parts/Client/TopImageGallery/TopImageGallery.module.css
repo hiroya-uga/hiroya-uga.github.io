@@ -1,0 +1,21 @@
+@keyframes object-position {
+  from {
+    object-position: 50% 85%;
+  }
+  to {
+    object-position: 50% 50%;
+  }
+}
+
+.item {
+  view-timeline-name: --v-gallery-item;
+  view-timeline-axis: block;
+}
+
+.image {
+  animation-name: object-position;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-timeline: --v-gallery-item;
+  animation-range: entry 0% exit 100%;
+}
