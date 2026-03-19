@@ -76,11 +76,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Fragment key="charset"></Fragment>
       </head>
       <body className={inter.className} id="top">
+        <div id={DIALOG_PORTAL_ID} />
         {children}
         <Suspense>
           <CookieConsentDialog />
         </Suspense>
-        <div id={DIALOG_PORTAL_ID} />
         <div id={SVG_PORTAL_ID} hidden />
       </body>
     </html>
