@@ -384,6 +384,15 @@ html:has(.container) {
       inset: 0;
       z-index: 3;
       opacity: 0;
+
+      &::-webkit-slider-runnable-track {
+        height: 100%;
+      }
+
+      &::-webkit-slider-thumb {
+        width: 80px;
+        height: 100%;
+      }
     }
 
     &:has([class~="image-diff-viewer__slider"]:focus-visible) {
