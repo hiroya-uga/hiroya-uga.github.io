@@ -229,12 +229,6 @@ html:has(.container) {
     font-size: var(--v-list-font-size);
   }
 
-  :is(ul, ol) li {
-    &:not(:last-child) {
-      margin-bottom: var(--v-list-gap-y);
-    }
-  }
-
   li {
     :is(ul, ol) {
       margin-top: var(--v-list-gap-y);
@@ -255,18 +249,38 @@ html:has(.container) {
       border-radius: 50%;
       background-color: var(--color-primary);
     }
+
+    &:not(:last-child) {
+      margin-bottom: var(--v-list-gap-y);
+    }
   }
 
   ol {
     counter-reset: ol;
+    display: table;
   }
 
   ol > li {
+    display: table-row;
     counter-increment: ol;
 
     &::before {
+      display: table-cell;
       content: counter(ol) ".";
       padding-inline: 0.625rem;
+      grid-column: 1 / 2;
+    }
+
+    > p {
+      display: table-cell;
+      grid-column: 2 / 3;
+    }
+
+    &:not(:last-child) {
+      &::before,
+      > p {
+        padding-bottom: var(--v-list-gap-y);
+      }
     }
   }
 
