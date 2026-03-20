@@ -53,7 +53,7 @@ export const YearOrSubCategoryPage = async ({ category, yearOrSubcategory }: Pro
                   {key === yearOrSubcategory ? (
                     <a aria-current="page">{yearOrSubcategoryLabel}</a>
                   ) : (
-                    <Link href={`/articles/${category}/${key}`}>{yearOrSubcategoryLabel}</Link>
+                    <Link href={`/articles/${category}/${key}`}>{getSubCategoryName(key)}</Link>
                   )}
                 </li>
               ))}
