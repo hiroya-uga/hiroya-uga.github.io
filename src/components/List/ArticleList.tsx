@@ -68,7 +68,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
                 <div className="relative z-0 overflow-hidden">
                   <Picture
                     src={
-                      type === 'thumbnail'
+                      type === 'thumbnail' && article.ogImage
                         ? (resolveArticleImagePath({
                             imagePath: article.ogImage,
                             category: article.pathname.split('/')[2],
