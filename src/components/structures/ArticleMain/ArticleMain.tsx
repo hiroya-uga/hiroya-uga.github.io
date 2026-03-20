@@ -1,6 +1,7 @@
 import {
   ArticleCodeHighlightActivator,
   ArticleFootNoteActivator,
+  ArticleImageDiffViewerActivator,
   ArticleInformation,
   ArticleTOC,
   ArticleTwitterActivator,
@@ -127,6 +128,7 @@ export const ArticleMain = async ({ post }: Props) => {
               )}
             </section>
           </div>
+          <ArticleImageDiffViewerActivator />
           <ArticleFootNoteActivator />
           <ArticleCodeHighlightActivator />
           <ArticleYoutubeManager />

@@ -249,6 +249,54 @@ export const ArticleTOC = ({ toc }: { toc: string }) => {
   );
 };
 
+export const ArticleImageDiffViewerActivator = () => {
+  useEffect(() => {
+    const eventHandlers = new Map<
+      HTMLInputElement,
+      [(e: Event) => void, (e: KeyboardEvent) => void, (e: KeyboardEvent) => void]
+    >();
+    const targets = document.querySelectorAll<HTMLElement>('.image-diff-viewer');
+
+    targets.forEach((element) => {
+      const input = element.querySelector('input[type="range"]');
+
+      if (input instanceof HTMLInputElement) {
+        const onInput = (e: Event) => {
+          const currentValue = parseInt(input.value, 10);
+
+          element.style.setProperty('--v-value', `${100 - currentValue}%`);
+        };
+        const onKeyDown = (e: KeyboardEvent) => {
+          if (e.shiftKey) {
+            input.step = '10';
+          }
+        };
+        const onKeyUp = (e: KeyboardEvent) => {
+          if (e.key === 'Shift') {
+            input.step = '1';
+          }
+        };
+
+        eventHandlers.set(input, [onInput, onKeyDown, onKeyUp]);
+        input.addEventListener('input', onInput);
+        input.addEventListener('keydown', onKeyDown);
+        window.addEventListener('keyup', onKeyUp);
+      }
+    });
+
+    return () => {
+      eventHandlers.forEach(([onInput, onKeydown, onKeyUp], input) => {
+        input.removeEventListener('input', onInput);
+        input.removeEventListener('keydown', onKeydown);
+        window.removeEventListener('keyup', onKeyUp);
+      });
+      eventHandlers.clear();
+    };
+  }, []);
+
+  return null;
+};
+
 const NOTE_SELECTOR = 'a[href^="#note-"]';
 
 export const ArticleFootNoteActivator = () => {
