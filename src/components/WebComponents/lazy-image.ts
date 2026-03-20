@@ -57,18 +57,17 @@ export const LazyImageLoad = () => {
           `
           :host {
             display: block;
-            max-width: fit-content;
-            transition: 0.3s opacity ease-out;
-
-            @starting-style {
-              opacity: 0;
-            }
           }
           :host img {
             display: block;
             max-width: 100%;
             height: auto;
             margin: 0 auto;
+            transition: 0.3s opacity ease-out;
+
+            @starting-style {
+              opacity: 0;
+            }
           }
           :host(lazy-image[loading]),
           :host(lazy-image[loading]) img {
@@ -94,6 +93,7 @@ export const LazyImageLoad = () => {
       img.height = height;
       img.src = src;
       this.loading = true;
+      this.shadowRoot.textContent = '';
       this.shadowRoot.appendChild(img);
     }
   }

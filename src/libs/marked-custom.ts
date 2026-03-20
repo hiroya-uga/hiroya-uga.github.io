@@ -5,6 +5,47 @@ import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
 let currentFilePath = '';
 
+const getLazyLoadMarkup = (params: { href: string; alt: string }) => {
+  const href = (() => {
+    // ./filename.ext → /articles/{category}/{year}/filename.ext
+    if (params.href.startsWith('./')) {
+      const match = /\/articles\/([^/]+)\/([^/]+)\/[^/]+\.md$/.exec(currentFilePath);
+      if (match) {
+        const [, category, year] = match;
+        return resolveArticleImagePath({ imagePath: params.href, category, year });
+      }
+    }
+
+    return params.href || '';
+  })();
+
+  const url = href ? URL.parse(href, URL_ORIGIN) : null;
+  const src = url?.pathname;
+  const query = url?.search ? new URLSearchParams(url.search) : null;
+  const { width, height } = (() => {
+    const size = query?.get('size');
+
+    if (typeof size === 'string') {
+      const [w, h] = size.split('x').map((v) => Number.parseInt(v, 10) ?? 2);
+      return { width: w / 2, height: h / 2 };
+    }
+
+    return {
+      width: (Number.parseInt(query?.get('w') ?? '', 10) ?? 2) / 2,
+      height: (Number.parseInt(query?.get('h') ?? '', 10) ?? 2) / 2,
+    };
+  })();
+
+  if (src && width && height) {
+    return `<span class="relative block mx-auto"><span class="absolute grid place-items-center inset-0 rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${params.alt}" width="${width}" height="${height}" class="relative noscript:invisible" loading><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image><noscript><img src="${src}" alt="${params.alt}" width="${width}" height="${height}" /></noscript></span>`;
+  }
+
+  return `<img src="${src}" alt="${params.alt}" loading="lazy" />`;
+
+  // const titleAttr = t.title ? ` title="${t.title}"` : '';
+  // return `<img src="${src}" alt="${t.text}"${titleAttr} />`;
+};
+
 type CustomBlockToken = Token & {
   type: 'customBlock';
   raw: string;
@@ -66,44 +107,11 @@ const overrideImageExtension: TokenizerAndRendererExtension = {
 
   renderer(token) {
     const t = token as CustomImageToken;
-    const href = (() => {
-      // ./filename.ext → /articles/{category}/{year}/filename.ext
-      if (t.href.startsWith('./')) {
-        const match = /\/articles\/([^/]+)\/([^/]+)\/[^/]+\.md$/.exec(currentFilePath);
-        if (match) {
-          const [, category, year] = match;
-          return resolveArticleImagePath({ imagePath: t.href, category, year });
-        }
-      }
 
-      return t.href || '';
-    })();
-
-    const url = href ? URL.parse(href, URL_ORIGIN) : null;
-    const src = url?.pathname;
-    const query = url?.search ? new URLSearchParams(url.search) : null;
-    const { width, height } = (() => {
-      const size = query?.get('size');
-
-      if (typeof size === 'string') {
-        const [w, h] = size.split('x').map((v) => Number.parseInt(v, 10) ?? 2);
-        return { width: w / 2, height: h / 2 };
-      }
-
-      return {
-        width: (Number.parseInt(query?.get('w') ?? '', 10) ?? 2) / 2,
-        height: (Number.parseInt(query?.get('h') ?? '', 10) ?? 2) / 2,
-      };
-    })();
-
-    if (width && height) {
-      return `<span class="relative block max-w-full mx-auto" style="width: ${width}px;"><span class="absolute grid place-items-center inset-0 animate-fade-in-spinner rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${t.text}" width="${width}" height="${height}" class="relative noscript:invisible" loading><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image><noscript><img src="${src}" alt="${t.text}" width="${width}" height="${height}" /></noscript></span>`;
-    }
-
-    return `<img src="${src}" alt="${t.text}" loading="lazy" />`;
-
-    // const titleAttr = t.title ? ` title="${t.title}"` : '';
-    // return `<img src="${src}" alt="${t.text}"${titleAttr} />`;
+    return getLazyLoadMarkup({
+      href: t.href,
+      alt: t.text,
+    });
   },
 };
 
@@ -518,6 +526,45 @@ const overrideListExtension: TokenizerAndRendererExtension = {
       return `<div class="associate-list">\n<p><small>${notice}</small></p>\n<ul>\n${cleanedBody}\n</ul>\n</div>`;
     }
 
+    const isAllImages = t.items.every((item) => /^!\[.*?\]\(.*?\)$/.test(item.text.trim()));
+    const isImageViewer = isAllImages && t.items.length === 2;
+
+    if (isImageViewer) {
+      const imageData = t.items.map((item) => {
+        const match = item.text.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
+        return {
+          alt: match?.[1] ?? '',
+          url: match?.[2] ?? '',
+        };
+      });
+
+      return `<div class="image-diff-viewer" title="画像比較ビューア">
+        <p class="image-diff-viewer__item">
+          <span class="image-diff-viewer__alt" aria-hidden="true">${imageData[0].alt.replace('比較画像1：', '')}</span>
+          ${getLazyLoadMarkup({
+            href: imageData[0].url,
+            alt: imageData[0].alt,
+          })}
+        </p>
+        <p class="image-diff-viewer__item">
+          <span class="image-diff-viewer__alt" aria-hidden="true">${imageData[1].alt.replace('比較画像2：', '')}</span>
+          ${getLazyLoadMarkup({
+            href: imageData[1].url,
+            alt: imageData[1].alt,
+          })}
+        </p>
+        <p class="image-diff-viewer__controls">
+          <label>
+          <span class="sr-only">${imageData[0].alt}の表示割合（％）</span>
+          <input type="range" min="0" max="100" value="50" class="image-diff-viewer__slider">
+          <noscript>JavaScriptを有効にしてください。</noscript>
+          </label>
+
+          <span aria-hidden="true" class="image-diff-viewer__thumb">↔</span>
+        </p>
+      </div>`;
+    }
+
     const tag = t.ordered ? 'ol' : 'ul';
     const startAttr = t.ordered && t.start !== 1 && t.start !== '' ? ` start="${t.start}"` : '';
     return `<${tag}${startAttr}>\n${body}\n</${tag}>`;
@@ -595,7 +642,7 @@ export const customMarkdownSyntaxes = [
 
 export const markedParse = (filePath: string, content: string) => {
   currentFilePath = filePath;
-  // 既存の見出しデータをクリア
   headingDefs.delete(filePath);
+  footnoteDefs.delete(filePath);
   return marked.parse(content);
 };
