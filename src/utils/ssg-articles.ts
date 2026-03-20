@@ -11,11 +11,12 @@ export type ArticleFrontMatter = {
   [key: string]: unknown;
 } & {
   title: string;
-  description: string;
-  ogImage: string;
   pathname: string;
   publishedAt: string;
+  description?: string;
+  ogImage?: string;
   topics?: string[];
+  updatedAt?: string;
 };
 
 export async function getArticles(articlesDir: string, urlBase?: string) {
