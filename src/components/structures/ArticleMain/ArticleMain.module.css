@@ -138,6 +138,8 @@ html:has(.container) {
     margin-inline: calc(var(--v-negative-margin-inline) + var(--spacing-content-inline));
     margin-bottom: var(--v-spacing-heading-bottom);
 
+    transition: 0.3s margin-inline ease-out;
+
     + section {
       margin-top: 0;
     }
@@ -190,7 +192,6 @@ html:has(.container) {
       box-shadow:
         0 0 1px rgba(0, 0, 0, 0.2),
         0 0 12px rgba(0, 0, 0, 0.1);
-      transition: 0.3s border-radius ease-out;
     }
 
     noscript {
@@ -200,6 +201,10 @@ html:has(.container) {
   }
 
   @container (width >= 600px) {
+    p:has(lazy-image) {
+      transition: 0.3s margin-inline ease-out;
+    }
+
     lazy-image,
     noscript,
     [class~="image-diff-viewer"] {
@@ -211,6 +216,12 @@ html:has(.container) {
         border-radius: 1.5rem;
         corner-shape: squircle;
       }
+    }
+
+    [class~="image-diff-viewer"] {
+      transition:
+        0.3s margin-inline ease-out,
+        0.3s border-radius ease-out;
     }
   }
 
