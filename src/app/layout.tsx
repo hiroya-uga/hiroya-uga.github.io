@@ -3,7 +3,7 @@ import '@/app/globals.css';
 
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Fragment, Suspense } from 'react';
+import { Suspense } from 'react';
 
 import { CookieConsentDialog } from '@/components/Dialog';
 import { Comment, Console } from '@/components/Jokes';
@@ -73,7 +73,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           `.replaceAll(/\n|\s{2}/g, ''),
           }}
         />
-        <Fragment key="charset"></Fragment>
       </head>
       <body className={inter.className} id="top">
         <div id={DIALOG_PORTAL_ID} />
