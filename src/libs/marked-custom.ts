@@ -555,7 +555,7 @@ const overrideListExtension: TokenizerAndRendererExtension = {
         </p>
         <p class="image-diff-viewer__controls">
           <label>
-          <span class="sr-only">${imageData[0].alt}の表示割合（％）</span>
+          <span class="sr-only">比較画像1の表示割合（％）</span>
           <input type="range" min="0" max="100" value="50" class="image-diff-viewer__slider">
           <noscript>JavaScriptを有効にしてください。</noscript>
           </label>
