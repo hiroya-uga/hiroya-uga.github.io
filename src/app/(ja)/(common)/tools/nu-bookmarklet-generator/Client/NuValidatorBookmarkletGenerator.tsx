@@ -30,19 +30,34 @@ const optionsValueMap: Record<keyof Options, string> = {
   level: 'warning',
 };
 
-const createBookmarklet = (url: string, type: 'ssr' | 'csr', options: Options) => {
-  const optionsString = objectKeys(options)
-    .map((optionName) => {
-      if (options[optionName]) {
-        return `f('${optionName}','${optionsValueMap[optionName]}');`;
-      }
-    })
-    .join('');
+const createBookmarklet = (argUrl: string, type: 'ssr' | 'csr', options: Options) => {
+  try {
+    const url = new URL(argUrl);
 
-  if (type === 'ssr') {
-    return `javascript:(async()=>{let a=document,b=await fetch(location.href).then(r=>r.text()),c=a.createElement('form'),f=(d,e)=>{let b=a.createElement('textarea');b.name=d;b.value=e;c.append(b)};c.method='POST';c.action='${url}';c.enctype='multipart/form-data';c.target='_blank';${optionsString}f('content',b);a.body.append(c);c.submit();c.remove()})()`;
+    objectKeys(options).forEach((optionName) => {
+      if (options[optionName]) {
+        url.searchParams.set(optionName, optionsValueMap[optionName]);
+      } else {
+        url.searchParams.delete(optionName);
+      }
+    });
+
+    const href = url.toString();
+    const optionsString = objectKeys(options)
+      .map((optionName) => {
+        if (options[optionName]) {
+          return `f('${optionName}','${optionsValueMap[optionName]}');`;
+        }
+      })
+      .join('');
+
+    if (type === 'ssr') {
+      return `javascript:(async()=>{let a=document,b=await fetch(location.href).then(r=>r.text()),c=a.createElement('form'),f=(d,e)=>{let b=a.createElement('textarea');b.name=d;b.value=e;c.append(b)};c.method='POST';c.action='${href}';c.enctype='multipart/form-data';c.target='_blank';${optionsString}f('content',b);a.body.append(c);c.submit();c.remove()})()`;
+    }
+    return `javascript:(()=>{let a=document,b=c=>{let d='';for(c=c.firstChild;c;c=c.nextSibling)switch(c.nodeType){case 1:d+=c.outerHTML;break;case 3:d+=c.nodeValue;break;case 4:d+='<![CDATA['+c.nodeValue+']]>';break;case 8:d+='<!--'+c.nodeValue+'-->';break;case 10:d+='<!DOCTYPE '+c.name+'>\\n'}return d},c=a.createElement('form'),f=(d,e)=>{let b=a.createElement('textarea');b.name=d;b.value=e;c.append(b)};c.method='POST';c.action='${href}';c.enctype='multipart/form-data';c.target='_blank';${optionsString}f('content',b(a));a.body.append(c);c.submit();c.remove()})()`;
+  } catch {
+    return 'URLが不正です。';
   }
-  return `javascript:(()=>{let a=document,b=c=>{let d='';for(c=c.firstChild;c;c=c.nextSibling)switch(c.nodeType){case 1:d+=c.outerHTML;break;case 3:d+=c.nodeValue;break;case 4:d+='<![CDATA['+c.nodeValue+']]>';break;case 8:d+='<!--'+c.nodeValue+'-->';break;case 10:d+='<!DOCTYPE '+c.name+'>\\n'}return d},c=a.createElement('form'),f=(d,e)=>{let b=a.createElement('textarea');b.name=d;b.value=e;c.append(b)};c.method='POST';c.action='${url}';c.enctype='multipart/form-data';c.target='_blank';${optionsString}f('content',b(a));a.body.append(c);c.submit();c.remove()})()`;
 };
 
 export const NuValidatorBookmarkletGenerator = () => {
