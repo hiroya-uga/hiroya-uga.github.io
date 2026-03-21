@@ -249,48 +249,54 @@ export const ArticleTOC = ({ toc }: { toc: string }) => {
   );
 };
 
+const isSlider = (eventTarget: EventTarget | null): eventTarget is HTMLInputElement => {
+  return eventTarget instanceof HTMLInputElement && eventTarget.classList.contains('image-diff-viewer__slider');
+};
+
 export const ArticleImageDiffViewerActivator = () => {
   useEffect(() => {
-    const eventHandlers = new Map<
-      HTMLInputElement,
-      [(e: Event) => void, (e: KeyboardEvent) => void, (e: KeyboardEvent) => void]
-    >();
-    const targets = document.querySelectorAll<HTMLElement>('.image-diff-viewer');
-
-    targets.forEach((element) => {
-      const input = element.querySelector('input[type="range"]');
-
-      if (input instanceof HTMLInputElement) {
-        const onInput = (e: Event) => {
-          const currentValue = parseInt(input.value, 10);
-
-          element.style.setProperty('--v-value', `${100 - currentValue}%`);
-        };
-        const onKeyDown = (e: KeyboardEvent) => {
-          if (e.shiftKey) {
-            input.step = '10';
-          }
-        };
-        const onKeyUp = (e: KeyboardEvent) => {
-          if (e.key === 'Shift') {
-            input.step = '1';
-          }
-        };
-
-        eventHandlers.set(input, [onInput, onKeyDown, onKeyUp]);
-        input.addEventListener('input', onInput);
-        input.addEventListener('keydown', onKeyDown);
-        window.addEventListener('keyup', onKeyUp);
+    const onInput = (e: Event) => {
+      if (isSlider(e.target) === false) {
+        return;
       }
-    });
+
+      const input = e.target;
+      const element = input.closest<HTMLElement>('.image-diff-viewer');
+
+      if (element === null) {
+        return;
+      }
+
+      const currentValue = parseInt(input.value, 10);
+      element.style.setProperty('--v-value', `${100 - currentValue}%`);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (isSlider(e.target) === false) {
+        return;
+      }
+
+      if (e.key === 'Shift') {
+        e.target.step = '10';
+      }
+    };
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (isSlider(e.target) === false) {
+        return;
+      }
+
+      if (e.key === 'Shift') {
+        e.target.step = '1';
+      }
+    };
+
+    window.addEventListener('input', onInput);
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp);
 
     return () => {
-      eventHandlers.forEach(([onInput, onKeydown, onKeyUp], input) => {
-        input.removeEventListener('input', onInput);
-        input.removeEventListener('keydown', onKeydown);
-        window.removeEventListener('keyup', onKeyUp);
-      });
-      eventHandlers.clear();
+      window.removeEventListener('input', onInput);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup', onKeyUp);
     };
   }, []);
 
