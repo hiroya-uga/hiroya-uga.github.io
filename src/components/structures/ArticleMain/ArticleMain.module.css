@@ -133,28 +133,40 @@ html:has(.container) {
   h2,
   h3,
   h4 {
-    font-weight: bold;
     line-height: 1.375;
-    margin-inline: calc(var(--v-negative-margin-inline) + var(--spacing-content-inline));
     margin-bottom: var(--v-spacing-heading-bottom);
-
-    transition: 0.3s margin-inline ease-out;
 
     + section {
       margin-top: 0;
     }
   }
 
+  h2,
+  h3 {
+    margin-inline: calc(var(--v-negative-margin-inline) + var(--spacing-content-inline));
+  }
+
   h2 {
     font-size: 1.25rem;
+    font-weight: bold;
   }
   h3 {
     font-size: 1.125rem;
     padding-left: 0.75rem;
     border-left: 0.175rem solid var(--color-accent);
+    font-weight: bold;
   }
   h4 {
     font-size: 1rem;
+    padding: 0 0 0.5rem;
+    border-bottom: 1px solid var(--border-color-secondary);
+  }
+
+  @container (width >= 600px) {
+    h2,
+    h3 {
+      transition: 0.3s margin-inline ease-out;
+    }
   }
 
   @container (width >= 50rem) {

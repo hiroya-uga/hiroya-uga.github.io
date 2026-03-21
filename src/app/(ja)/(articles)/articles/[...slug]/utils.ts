@@ -1,3 +1,4 @@
+import { getSubCategoryName } from '@/constants/articles';
 import { SITE_NAME } from '@/constants/meta';
 import { resolveCategoryDescription, resolveCategoryName } from '@/utils/articles';
 
@@ -21,7 +22,7 @@ export const getArticlesPageMeta = {
         return `${yearOrSubcategory}年の${categoryName}`;
       }
 
-      return `${categoryName}の${yearOrSubcategory}`;
+      return `${getSubCategoryName(yearOrSubcategory)}の${categoryName}`;
     })();
 
     return {
