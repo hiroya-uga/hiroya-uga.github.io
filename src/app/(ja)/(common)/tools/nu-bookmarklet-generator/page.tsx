@@ -2,6 +2,7 @@ import { HelpLink } from '@/components/Clickable';
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { getMetadata } from '@/utils/get-metadata';
+import { Suspense } from 'react';
 import { NuValidatorBookmarkletGenerator } from './Client';
 
 export const metadata = getMetadata('/tools/nu-bookmarklet-generator');
@@ -20,7 +21,9 @@ export default function Page() {
         </p>
       </PageTitle>
 
-      <NuValidatorBookmarkletGenerator />
+      <Suspense>
+        <NuValidatorBookmarkletGenerator />
+      </Suspense>
       <p className="mt-share-buttons mx-auto grid justify-end">
         <TweetLink hashtags={['html', 'bookmarklet']} />
       </p>

@@ -351,7 +351,11 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       return sanitized.replace(/^\$ (.*)/gm, (_, row) => `<span class="of-command">${row}</span>`);
     })();
 
-    return `<figure class="codeblock"><figcaption class="codeblock__caption"><span class="codeblock__title${title ? '' : ' of-langName'}">${title ?? `${lang.toUpperCase()}<span class="sr-only">サンプルコード</span>`}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
+    const forSomePlatform = /^[a-zA-Z]+向け：?/.test(title);
+    const dataPlatform = forSomePlatform ? ` data-platform="${title.split(/(^[a-zA-Z]+)向け/)[1]}"` : '';
+    const resolvedTitle = forSomePlatform ? title.replace(/^[a-zA-Z]+向け：?/, '') : title;
+
+    return `<figure class="codeblock"${dataPlatform}><figcaption class="codeblock__caption"><span class="codeblock__title${resolvedTitle ? '' : ' of-langName'}">${resolvedTitle || `${lang.toUpperCase()}<span class="sr-only">のサンプルコード</span>`}</span></figcaption><pre><code data-language=${lang} class="hljs">${escaped}</code></pre></figure>`;
   },
 };
 

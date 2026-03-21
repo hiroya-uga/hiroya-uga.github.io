@@ -19,6 +19,7 @@ import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
+import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 
 const getLength = (article: HTMLElement) => {
   const temp = document.createElement('div');
@@ -480,7 +481,7 @@ export const ArticleCodeHighlightActivator = () => {
       node.insertAdjacentHTML(
         'beforeend',
         `
-        <button class="codeblock__caption__copy" title="${title}のコードをコピー!">
+        <button class="codeblock__caption__copy" title="${title}のコードをコピー">
           <svg role="presentation">
             <use href="#${svgId}" />
           </svg>
@@ -548,6 +549,131 @@ export const ArticleCodeHighlightActivator = () => {
     </>
   );
 };
+
+const resolveSwitchData = (nodeList: NodeListOf<HTMLElement>) => {
+  const platforms = new Set<string>();
+  const firstCodeBlocks = new Set<HTMLElement>();
+  let index = 0;
+
+  for (const node of nodeList) {
+    const platform = node.dataset.platform;
+
+    if (platform === undefined || platform === '') {
+      return { error: new Error('Invalid element found') };
+    }
+
+    platforms.add(platform);
+
+    if (index % 2 === 0) {
+      firstCodeBlocks.add(node);
+    }
+    index++;
+  }
+
+  return { error: null, platforms, firstCodeBlocks };
+};
+
+export const ArticleCodeBlockSwitchActivator = () => {
+  useEffect(() => {
+    const switchData = resolveSwitchData(document.querySelectorAll<HTMLElement>('[data-platform].codeblock'));
+
+    if (switchData.error) {
+      throw new Error('Invalid Markdown');
+    }
+
+    const style = document.createElement('style');
+    style.textContent = `
+      [class~="codeblock"][data-platform] {
+        display: none;
+      }
+
+      ${[...switchData.platforms]
+        .map((platform) => {
+          return `html[data-platform="${platform}"] [class~="codeblock"][data-platform="${platform}"]`;
+        })
+        .join(', ')} {
+        display: block;
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    [...switchData.firstCodeBlocks].forEach((node, index) => {
+      const div = document.createElement('div');
+      const name = `codeblock-switcher-${index}`;
+
+      div.className = 'codeblock-switcher';
+      div.setAttribute('role', 'radiogroup');
+      div.setAttribute('aria-label', '言語切替');
+      div.insertAdjacentHTML(
+        'afterbegin',
+        `
+        <ul class="codeblock-switcher__list">
+          ${[...switchData.platforms]
+            .map(
+              (platform) => `
+                <li class="codeblock-switcher__item">
+                  <label class="codeblock-switcher__label">
+                    <input type="radio" name="${name}" class="codeblock-switcher__radio" data-platform="${platform}"/>
+                      ${platform}
+                  </label>
+                </li>`,
+            )
+            .join('')}
+          </ul>
+      `,
+      );
+
+      node.before(div);
+    });
+
+    const platformFromStorage = getLocalStorage('platform');
+    const defaultPlatform = switchData.platforms.has(platformFromStorage ?? '')
+      ? platformFromStorage
+      : switchData.platforms.values().next().value;
+
+    if (defaultPlatform) {
+      document.documentElement.dataset.platform = defaultPlatform;
+      document.querySelectorAll<HTMLInputElement>('.codeblock-switcher__radio').forEach((node) => {
+        node.checked = node.dataset.platform === defaultPlatform;
+      });
+    }
+
+    const onChange = (e: Event) => {
+      if (
+        e.target instanceof HTMLInputElement === false ||
+        e.target.classList.contains('codeblock-switcher__radio') === false
+      ) {
+        return;
+      }
+
+      const platform = e.target.dataset.platform ?? '';
+
+      if (switchData.platforms.has(platform) === false) {
+        return;
+      }
+
+      document.querySelectorAll<HTMLInputElement>('.codeblock-switcher__radio').forEach((node) => {
+        node.checked = node.dataset.platform === platform;
+      });
+
+      document.documentElement.dataset.platform = platform;
+      setLocalStorage('platform', platform);
+    };
+
+    window.addEventListener('change', onChange);
+
+    return () => {
+      document.querySelectorAll('.codeblock-switcher').forEach((node) => {
+        node.remove();
+      });
+      window.removeEventListener('change', onChange);
+      style.remove();
+    };
+  }, []);
+  return null;
+};
+
 declare global {
   interface Window {
     onYouTubeIframeAPIReady: () => void;

@@ -575,6 +575,105 @@ html:has(.container) {
     }
   }
 
+  [class~="codeblock-switcher"] {
+    margin: 0;
+    isolation: isolate;
+    border-radius: 0.25rem 0.25rem 0 0;
+    overflow: hidden;
+    width: fit-content;
+    overflow: auto;
+    width: 100%;
+    background: var(--border-color-primary);
+    animation: var(--animate-fade-in);
+
+    [class~="codeblock-switcher__list"] {
+      position: relative;
+      display: flex;
+      padding: 4px;
+      text-align: center;
+
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: anchor(top);
+        left: anchor(left);
+        width: anchor-size(width);
+        height: anchor-size(height);
+        background: var(--background-color-secondary);
+        position-anchor: --selected-book; /* 🌟どのアンカーを見るか指定 */
+        transition: left 0.1s ease-out;
+        border-radius: 4px;
+        box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    [class~="codeblock-switcher__item"] {
+      list-style: none;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+      margin: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    [class~="codeblock-switcher__label"] {
+      background: transparent;
+      border: none;
+      padding: 8px;
+      line-height: 1;
+      font-size: 0.75rem;
+      color: var(--color-primary);
+      border-radius: 0.25rem;
+      display: block;
+      z-index: 1;
+      min-width: 5rem;
+
+      &:has([class~="codeblock-switcher__radio"]:focus-visible) {
+        outline: 2px solid var(--v-color-text-link, #fff);
+        outline-offset: var(--v-outline-offset, 2px);
+        box-shadow: 0 0 0 2px #fff;
+      }
+
+      &:has([class~="codeblock-switcher__radio"]:checked) {
+        font-weight: bold;
+      }
+    }
+
+    [class~="codeblock-switcher__radio"] {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      &:checked {
+        anchor-name: --selected-book;
+      }
+    }
+  }
+
+  [class~="codeblock"][data-platform] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  html:not([data-platform]) & [class~="codeblock"][data-platform] {
+    padding-top: 2.25rem; /* = 36px（switcherの高さ） */
+    opacity: 0;
+  }
+  html[data-platform] & [class~="codeblock"][data-platform] {
+    animation: var(--animate-fade-in);
+  }
+
+  html:not([data-platform]) & [class~="codeblock"][data-platform] ~ [class~="codeblock"][data-platform] {
+    display: none;
+  }
+
   [class~="blockquote"]:not(:has([class~="blockquote__caption"])) {
     padding-bottom: 1.5rem;
   }
