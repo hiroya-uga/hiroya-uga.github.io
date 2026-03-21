@@ -7,6 +7,7 @@ type Value = {
     level?: number;
   };
   'cookie-consent': 'accepted' | 'rejected';
+  platform: string;
   theme: 'dark' | 'light';
 };
 export type LocalStorageItems = Value;

@@ -5,7 +5,8 @@ import { Checkbox, TextField } from '@/components/Form';
 import { NoteList } from '@/components/List';
 import { Tab } from '@/components/Tab';
 import { objectKeys } from '@/utils/object-keys';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Output } from './Output';
 
 interface Options {
@@ -46,6 +47,8 @@ const createBookmarklet = (url: string, type: 'ssr' | 'csr', options: Options) =
 
 export const NuValidatorBookmarkletGenerator = () => {
   const [type, setType] = useState('CSR用');
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [url, setUrl] = useState('https://validator.w3.org/nu/#textarea');
   const [options, setOptions] = useState<Options>({
     showsource: true,
@@ -53,6 +56,14 @@ export const NuValidatorBookmarkletGenerator = () => {
     showimagereport: false,
     level: true,
   });
+
+  useEffect(() => {
+    const url = searchParams.get('url');
+
+    if (url) {
+      setUrl(url);
+    }
+  }, [searchParams]);
 
   return (
     <div className="bg-secondary mx-auto max-w-5xl rounded-2xl p-4 py-10 shadow-md sm:px-12 sm:py-14">
@@ -81,7 +92,12 @@ export const NuValidatorBookmarkletGenerator = () => {
             label="HTMLの送信先（バリデータのURL）"
             placeholder="https://validator.w3.org/nu/#textarea"
             value={url}
-            onInput={(e) => setUrl(e.currentTarget.value)}
+            onInput={(e) => {
+              setUrl(e.currentTarget.value);
+              router.replace(`?url=${encodeURIComponent(e.currentTarget.value)}`, {
+                scroll: false,
+              });
+            }}
             autoComplete="off"
           />
         </div>

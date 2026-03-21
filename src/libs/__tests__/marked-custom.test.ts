@@ -121,6 +121,35 @@ describe('marked-custom', () => {
       expect(html).toContain('<ins>+ added</ins>');
       expect(html).toContain('<del>- removed</del>');
     });
+
+    describe('codeBlock (platform)', () => {
+      test('macOS向けのコードブロックに data-platform が付与される', () => {
+        const html = markedParse(FILE, '```sh:macOS向け\necho hello\n```') as string;
+        expect(html).toContain('data-platform="macOS"');
+      });
+
+      test('Windows向けのコードブロックに data-platform が付与される', () => {
+        const html = markedParse(FILE, '```pwsh:Windows向け\necho hello\n```') as string;
+        expect(html).toContain('data-platform="Windows"');
+      });
+
+      test('platform タイトルから「向け」が除去される', () => {
+        const html = markedParse(FILE, '```sh:macOS向け\necho hello\n```') as string;
+        expect(html).not.toContain('macOS向け');
+      });
+
+      test('「向け：」のコロンありでも正しく処理される', () => {
+        const html = markedParse(FILE, '```sh:macOS向け：補足\necho hello\n```') as string;
+        expect(html).toContain('data-platform="macOS"');
+        expect(html).toContain('補足');
+        expect(html).not.toContain('macOS向け');
+      });
+
+      test('platform でないタイトルには data-platform が付与されない', () => {
+        const html = markedParse(FILE, '```sh:サンプル\necho hello\n```') as string;
+        expect(html).not.toContain('data-platform');
+      });
+    });
   });
 
   describe('blockquote', () => {
