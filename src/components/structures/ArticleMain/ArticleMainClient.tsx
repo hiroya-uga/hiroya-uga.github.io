@@ -9,9 +9,11 @@ import { copy } from '@/utils/copy';
 import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
+import shell from 'highlight.js/lib/languages/bash';
 import css from 'highlight.js/lib/languages/css';
 import javascript from 'highlight.js/lib/languages/javascript';
 import json from 'highlight.js/lib/languages/json';
+import powershell from 'highlight.js/lib/languages/powershell';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
@@ -238,8 +240,8 @@ export const ArticleTOC = ({ toc }: { toc: string }) => {
     >
       <nav
         className={clsx([
-          'border-accent bg-secondary px-20PX pt-16PX rounded-r-md border-l-2 pb-6 text-sm',
-          '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
+          'border-accent bg-secondary px-18PX pt-16PX rounded-r-md border-l-2 pb-6 text-sm',
+          '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:max-w-360px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
         ])}
       >
         <h2 className="@w800:text-lg font-bold">目次</h2>
@@ -428,6 +430,8 @@ export const ArticleCodeHighlightActivator = () => {
     hljs.registerLanguage('ts', typescript);
     hljs.registerLanguage('typescript', typescript);
     hljs.registerLanguage('json', json);
+    hljs.registerLanguage('sh', shell);
+    hljs.registerLanguage('pwsh', powershell);
 
     highlight.forEach((node) => {
       // 既にハイライトされている場合はスキップ
@@ -438,7 +442,10 @@ export const ArticleCodeHighlightActivator = () => {
       const code = node.textContent || '';
       const language = node.getAttribute('data-language') || 'html';
 
-      if (['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json'].includes(language) === false) {
+      if (
+        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'pwsh'].includes(language) ===
+        false
+      ) {
         return;
       }
 
@@ -452,13 +459,9 @@ export const ArticleCodeHighlightActivator = () => {
 
   const svgId = `copy-${useId().replace(/[^a-z0-9]/g, '-')}`;
   const [toastMessage, setToastMessage] = useState('');
-  const copyCode = useCallback((e: MouseEvent) => {
-    if (e.currentTarget instanceof HTMLButtonElement === false) {
-      return;
-    }
-
-    const title = e.currentTarget.previousElementSibling?.textContent ?? '';
-    const code = e.currentTarget.parentElement?.nextElementSibling?.textContent ?? '';
+  const copyCode = useCallback((button: HTMLButtonElement) => {
+    const title = button.previousElementSibling?.textContent ?? '';
+    const code = button.parentElement?.nextElementSibling?.textContent ?? '';
 
     if (code.trim() === '') {
       return;
@@ -470,9 +473,6 @@ export const ArticleCodeHighlightActivator = () => {
 
   useEffect(() => {
     const codeBlockCaption = document.querySelectorAll('.codeblock__caption:not(:has(.codeblock__caption__copy))');
-    if (codeBlockCaption.length === 0) {
-      return;
-    }
 
     codeBlockCaption.forEach((node) => {
       const title = node.textContent?.trim() || '';
@@ -480,25 +480,37 @@ export const ArticleCodeHighlightActivator = () => {
       node.insertAdjacentHTML(
         'beforeend',
         `
-        <button class="codeblock__caption__copy" title="${title}のコードをコピー">
+        <button class="codeblock__caption__copy" title="${title}のコードをコピー!">
           <svg role="presentation">
             <use href="#${svgId}" />
           </svg>
         </button>
       `,
       );
-
-      if (node.lastElementChild instanceof HTMLButtonElement) {
-        node.lastElementChild.addEventListener('click', copyCode);
-      }
     });
 
-    return () => {
-      codeBlockCaption.forEach((node) => {
-        if (node.lastElementChild instanceof HTMLButtonElement) {
-          node.lastElementChild.removeEventListener('click', copyCode);
+    const onClick = (e: MouseEvent) => {
+      if (e.target instanceof Element === false) {
+        return;
+      }
+
+      const target = (() => {
+        if (e.target instanceof HTMLButtonElement && e.target.classList.contains('codeblock__caption__copy')) {
+          return e.target;
         }
-      });
+
+        return e.target.closest<HTMLButtonElement>('.codeblock__caption__copy');
+      })();
+
+      if (target) {
+        copyCode(target);
+      }
+    };
+
+    window.addEventListener('click', onClick);
+
+    return () => {
+      window.removeEventListener('click', onClick);
     };
   }, [copyCode, svgId]);
 
