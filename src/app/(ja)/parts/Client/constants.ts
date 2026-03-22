@@ -11,8 +11,18 @@ export type PhotoData = {
 
 export const photoDataList: PhotoData[] = [
   {
+    src: '/main-motohakoneko.webp',
+    caption: '元箱根港',
+    spec: 'TAMRON AF 18-200mm F3.5-6.3 XR Di II LD Aspherical IF Macro A14NII + Nikon D7200',
+    instagram: 'B3PlCjMHCFl',
+    flickr: 'https://flic.kr/p/2s3oHrK',
+    date: '2019.09.16',
+    width: 1364,
+    height: 908,
+  },
+  {
     src: '/main-c96.webp',
-    caption: 'コミックマーケット96 の空',
+    caption: 'コミックマーケット96',
     spec: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
     flickr: 'https://flic.kr/p/2s2VToA',
     date: '2019.08.11',
@@ -133,7 +143,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-c97.webp',
-    caption: 'コミックマーケット97 Day4',
+    caption: 'コミックマーケット97',
     spec: 'iPhone XS Max',
     instagram: 'B6u8koWnH_-',
     date: '2019.12.31',

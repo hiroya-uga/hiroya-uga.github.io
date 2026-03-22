@@ -177,7 +177,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
             )}
           </p>
 
-          <figcaption className="text-white [--v-text-shadow:0_2px_14px_rgba(0,0,0,.9)]">
+          <figcaption className="text-white [--v-text-shadow:0_0_2px_rgba(0,0,0,.9)]">
             <span
               className={clsx([
                 '@w640:pl-4 @w640:pr-3 @w640:pb-10 @w640:bg-transparent @w640:bg-[linear-gradient(to_bottom,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
