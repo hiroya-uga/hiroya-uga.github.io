@@ -5,6 +5,7 @@ export type PhotoData = {
   flickr?: string;
   date: string;
   src: string;
+  alt: string;
   width: number;
   height: number;
 };
@@ -12,6 +13,7 @@ export type PhotoData = {
 export const photoDataList: PhotoData[] = [
   {
     src: '/main-motohakoneko.webp',
+    alt: '',
     caption: '元箱根港',
     spec: 'TAMRON AF 18-200mm F3.5-6.3 XR Di II LD Aspherical IF Macro A14NII + Nikon D7200',
     instagram: 'B3PlCjMHCFl',
@@ -22,6 +24,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-c96.webp',
+    alt: '',
     caption: 'コミックマーケット96',
     spec: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
     flickr: 'https://flic.kr/p/2s2VToA',
@@ -31,6 +34,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-asakusabashi.webp',
+    alt: '',
     caption: '厩橋 隅田川',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE5_tEUnEB4',
@@ -41,6 +45,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-hyotan-onsen.webp',
+    alt: '',
     caption: 'ひょうたん温泉 第2駐車場前',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVLf204D0J0',
@@ -50,6 +55,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-kiryucoco.webp',
+    alt: '',
     caption: '東京ドームシティ',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVGzOthD2Py',
@@ -59,6 +65,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-tsutsujigaoka.webp',
+    alt: '',
     caption: '京王線 つつじヶ丘駅',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVEL5h3j25D',
@@ -69,6 +76,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-keishoan.webp',
+    alt: '',
     caption: '円覚寺 桂昌庵',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'Cm9kBgZPF25',
@@ -79,6 +87,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-kamiisonotorii.webp',
+    alt: '',
     caption: '神磯の鳥居',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CXIGmx_Bob3',
@@ -89,6 +98,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-yamanakako.webp',
+    alt: '',
     caption: '山中湖 花の都公園',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE9XGAEHfS9',
@@ -98,6 +108,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-minokakeiwa.webp',
+    alt: '',
     caption: '南伊豆 蓑掛岩',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE6INpCn9LC',
@@ -107,6 +118,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-shinjuku.webp',
+    alt: '',
     caption: 'JR新宿駅 甲州街道改札',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE6Deb7nUx7',
@@ -116,6 +128,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-akihabara.webp',
+    alt: '',
     caption: 'JR秋葉原駅',
     spec: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CCzs-IZnC7m',
@@ -125,6 +138,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-ushinshiro.webp',
+    alt: '',
     caption: '牛代 みずめ桜',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
     instagram: 'B-616CxH8FE',
@@ -134,6 +148,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-sumidaaquarium.webp',
+    alt: '',
     caption: 'すみだ水族館',
     spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
     instagram: 'B65DejRnF0i',
@@ -143,6 +158,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-c97.webp',
+    alt: '',
     caption: 'コミックマーケット97',
     spec: 'iPhone XS Max',
     instagram: 'B6u8koWnH_-',
@@ -152,6 +168,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-venusfort.webp',
+    alt: '',
     caption: 'VenusFort',
     spec: '17-35mm F/2.8-4 Di OSD (A037) + FTZ + Nikon Z 6',
     instagram: 'B6qVD7Invry',
@@ -161,6 +178,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-nact.webp',
+    alt: '',
     caption: '国立新美術館',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
     instagram: 'B6LKGmvHqff',
@@ -170,6 +188,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-escalator.webp',
+    alt: '',
     caption: 'リンクスクエア新宿',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + FTZ + Nikon Z 6',
     instagram: 'B4d9_CPn9M7',
@@ -179,6 +198,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-fujimibashi.webp',
+    alt: '',
     caption: '富士見橋(東京都)',
     spec: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (A032) + Nikon D7200',
     instagram: 'B3n_xUcn86N',

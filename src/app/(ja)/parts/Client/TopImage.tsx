@@ -19,8 +19,7 @@ const Spec = ({ spec }: { spec: string }) => {
   if (lens && other) {
     return (
       <>
-        {lens}
-        <span className="inline-block"> + {other}</span>
+        {lens} <span className="inline-block"> + {other}</span>
       </>
     );
   }
@@ -126,7 +125,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 width={960}
                 height={640}
                 src={photoData.src}
-                alt=""
+                alt={photoData.alt ?? ''}
                 className={clsx([
                   'z-1 relative block size-full object-cover',
                   'starting:opacity-0 starting:invisible transition-fade duration-300',
@@ -207,23 +206,23 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                   一覧を開く ↓
                 </button>
               </span>
+            </span>
+            <span
+              className="palt @w640:min-h-20 @w640:pr-64px pr-48px @w640:pl-4 @w640:pb-2 @w640:bg-transparent @w640:gap-1 @w640:pt-5 @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)] absolute bottom-0 right-0 grid min-h-8 w-full translate-y-full grid-rows-[1fr_auto] items-end bg-[#00000080] pb-1 pl-2 pt-1 leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
+              id={captionId}
+            >
               <span
                 className={clsx([
-                  '@w800:text-base @w640:text-sm grow truncate text-xs leading-tight transition-[color,text-shadow]',
+                  '@w640:text-sm text-2xs block truncate leading-tight transition-[color,text-shadow]',
                   shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
                 ])}
               >
                 {photoData?.caption}
                 <span className="text-2xs @w800:text-sm @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
               </span>
-            </span>
-            <span
-              className="palt @w640:min-h-17 @w640:pr-64px pr-48px @w640:pl-4 @w640:bg-transparent @w640:pt-5 @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)] absolute bottom-0 right-0 flex min-h-8 w-full translate-y-full items-center justify-end bg-[#00000080] pl-2 leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
-              id={captionId}
-            >
               <span
                 className={clsx([
-                  '@w800:font-thin @w800:text-base text-2xs @w640:text-sm truncate font-light transition-[color,text-shadow]',
+                  '@w800:text-base @w800:font-thin text-2xs @w640:text-sm block truncate font-light transition-[color,text-shadow]',
                   shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
                 ])}
               >
