@@ -176,66 +176,37 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
             )}
           </p>
 
-          <figcaption className="text-white [--v-text-shadow:0_0_2px_rgba(0,0,0,.9)]">
-            <span
+          <figcaption className="text-white">
+            <p
               className={clsx([
-                '@w640:pl-4 @w640:pr-3 @w640:pb-10 @w640:bg-transparent @w640:bg-[linear-gradient(to_bottom,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
-                'absolute left-0 top-0 z-10 flex w-full -translate-y-full flex-row-reverse items-center bg-[#00000080] px-2 py-2 text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0',
+                '@w640:pl-3.5 @w640:pr-3 @w640:pt-2.5 @w640:min-h-20 @w640:leading-inherit @w640:bg-transparent @w640:bg-[linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.2),transparent)]',
+
+                'absolute left-0 top-0 z-10 grid w-full -translate-y-full grid-rows-[auto_1fr] items-start px-2 py-1',
+                'palt @w640:font-thin bg-[#00000080] font-["LINE_Seed_JP",sans-serif] leading-tight mix-blend-hard-light',
+
+                'transition-[color,text-shadow,translate]',
+                'group-focus-within:translate-y-0 group-hover:translate-y-0',
+                shouldShowImage
+                  ? '@w640:text-shadow-[0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6] text-shadow-[0_0_2px_rgba(0,0,0,.9)]'
+                  : 'text-transparent',
               ])}
-            >
-              <span>
-                <button
-                  type="button"
-                  className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs @w640:text-sm z-10 block w-fit cursor-pointer rounded-full border border-transparent px-3 py-1 leading-tight no-underline"
-                  onClick={() => {
-                    setGalleryState({ shouldShow: true, photos: photoDataListRef.current });
-
-                    queueMicrotask(() => {
-                      const galleryElement = document.getElementById(galleryId);
-
-                      galleryElement?.querySelector('h2')?.focus({
-                        preventScroll: true,
-                      });
-                      galleryElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    });
-                  }}
-                  aria-expanded={galleryState.shouldShow}
-                  aria-controls={galleryId}
-                  ref={galleryToggleButtonRef}
-                >
-                  一覧を開く ↓
-                </button>
-              </span>
-            </span>
-            <span
-              className="palt @w640:min-h-20 @w640:pr-64px pr-48px @w640:pl-4 @w640:pb-2 @w640:bg-transparent @w640:gap-1 @w640:pt-5 @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)] absolute bottom-0 right-0 grid min-h-8 w-full translate-y-full grid-rows-[1fr_auto] items-end bg-[#00000080] pb-1 pl-2 pt-1 leading-tight text-white transition-transform group-focus-within:translate-y-0 group-hover:translate-y-0"
               id={captionId}
             >
-              <span
-                className={clsx([
-                  '@w640:text-sm @w640:tracking-wider text-2xs block truncate leading-tight transition-[color,text-shadow]',
-                  shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
-                ])}
-              >
+              <span className={clsx(['@w640:text-sm', 'text-2xs block truncate leading-tight'])}>
                 {photoData?.caption}
-                <span className="text-2xs @w800:text-sm @w640:text-xs ml-1 inline-block"> at {photoData?.date}</span>
+                <span className="@w640:text-xs text-2xs ml-1 inline-block"> at {photoData?.date}</span>
               </span>
-              <span
-                className={clsx([
-                  '@w800:text-base @w800:font-thin text-2xs @w640:text-sm block truncate font-light transition-[color,text-shadow]',
-                  shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
-                ])}
-              >
+              <span className={clsx(['@w640:text-sm', 'text-2xs block truncate'])}>
                 <Spec spec={photoData?.spec ?? 'loading...'} />
               </span>
-            </span>
+            </p>
           </figcaption>
         </figure>
 
         <p
           className={clsx([
             '@w640:h-12 @w640:py-2 @w640:right-4',
-            'absolute bottom-0 right-2 z-10 size-8 translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
+            'absolute right-2 top-0 z-10 size-8 -translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
             'transition-[opacity,visibility,translate]',
           ])}
         >
@@ -273,6 +244,40 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 </g>
               </svg>
             </span>
+          </button>
+        </p>
+
+        <p
+          className={clsx([
+            '@w640:py-2 @w640:min-h-20 @w640:pr-3 @w640:pb-2 @w640:bg-transparent @w640:items-end @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
+
+            'absolute bottom-0 right-0 z-10 flex min-h-8 w-full translate-y-full items-center justify-end bg-[#00000080] py-1 pr-2',
+
+            'transition-transform',
+            'group-focus-within:translate-y-0 group-hover:translate-y-0',
+            'focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
+          ])}
+        >
+          <button
+            type="button"
+            className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs @w640:text-sm z-10 block w-fit cursor-pointer rounded-full border border-transparent px-3 py-1 leading-tight no-underline"
+            onClick={() => {
+              setGalleryState({ shouldShow: true, photos: photoDataListRef.current });
+
+              queueMicrotask(() => {
+                const galleryElement = document.getElementById(galleryId);
+
+                galleryElement?.querySelector('h2')?.focus({
+                  preventScroll: true,
+                });
+                galleryElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+            }}
+            aria-expanded={galleryState.shouldShow}
+            aria-controls={galleryId}
+            ref={galleryToggleButtonRef}
+          >
+            一覧を開く ↓
           </button>
         </p>
       </div>

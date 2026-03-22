@@ -34,6 +34,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <meta name="text-scale" content="scale" />
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@100;400&display=swap" rel="stylesheet" />
+
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />

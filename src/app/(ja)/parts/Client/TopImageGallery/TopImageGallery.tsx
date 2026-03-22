@@ -132,7 +132,10 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                   galleryToggleButtonRef.current?.focus({
                     preventScroll: true,
                   });
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  galleryToggleButtonRef.current?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'end',
+                  });
                   window.addEventListener(
                     'scrollend',
                     () => {
