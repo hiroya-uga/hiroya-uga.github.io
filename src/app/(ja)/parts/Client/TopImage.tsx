@@ -213,7 +213,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
             >
               <span
                 className={clsx([
-                  '@w640:text-sm text-2xs block truncate leading-tight transition-[color,text-shadow]',
+                  '@w640:text-sm @w640:tracking-wider text-2xs block truncate leading-tight transition-[color,text-shadow]',
                   shouldShowImage ? 'text-shadow-(--v-text-shadow) text-inherit' : 'text-transparent',
                 ])}
               >
