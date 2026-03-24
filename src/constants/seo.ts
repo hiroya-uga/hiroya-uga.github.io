@@ -398,6 +398,11 @@ export const SEO: Record<
     description:
       'Nu Html CheckerへHTMLを送信するブックマークレットが作れるジェネレーターです。\nローカル環境やイントラでホスティングされているNu Html Checkerにも対応しています。',
   },
+  '/tools/nu-installer': {
+    title: 'Nu Html Checker Installer',
+    afterSubTitle: 'HTMLの品質をチェックするツールのインストーラー',
+    description: 'Nu Html Checkerをローカルで簡単に使うためのmacOS向けインストーラスクリプトです。',
+  },
   '/tools/markup-dev-supporter': {
     title: 'HTMLでtable実装するときとかに役立つツール',
     description:
