@@ -13,7 +13,7 @@ export const Header = ({ pageTitle }: Props) => {
             <h1 className="@w640:text-2xl @w640:leading-8 @w1024:mb-0 mb-3 text-xl font-bold leading-none">
               {pageTitle}
             </h1>
-            <p className="text-xs">
+            <p className="@w1024:pl-0 pl-1.5 text-xs">
               <span className="@w1024:inline hidden px-2">-</span>
               <span>
                 Web標準とアクセシビリティの話が好きな、
