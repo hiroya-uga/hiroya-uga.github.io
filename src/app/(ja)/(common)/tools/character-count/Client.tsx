@@ -501,7 +501,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </output>
                 </p>
                 <p className="col-span-full grid grid-cols-subgrid">
-                  <label className="grow" htmlFor={`${id}-バイト数（UTF-8)`}>
+                  <label className="grow" htmlFor={`${id}-バイト数（UTF-8）`}>
                     バイト数（UTF-8）
                   </label>
                   <output
@@ -562,7 +562,6 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   </span>
                 </label>
               </p>
-
               <p className="text-right">
                 <label className="flex items-center gap-2">
                   <span className="grow">原稿用紙のルールを有効にする（実験中）</span>
@@ -585,11 +584,15 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                   <h3 className="not-first:mt-8 mb-4 text-lg">{`${containerIndex + 1}件`}</h3>
 
                   <div className="sm:pl-2">
+                    <p className="sr-only">
+                      {container
+                        .flatMap((array) => array)
+                        .join('')
+                        .trim()}
+                    </p>
                     <p
                       className="text-2xs not-last:mb-24 mx-auto w-min max-w-full overflow-auto sm:text-base"
-                      key={containerIndex}
-                      tabIndex={0}
-                      aria-label={container.flatMap((array) => array).join('')}
+                      aria-hidden="true"
                     >
                       <span
                         className="bg-secondary relative mx-auto block w-fit pr-1 text-center before:absolute before:left-0 before:top-0 before:w-full before:border-t before:border-solid before:border-t-[orange] dark:before:border-t-[orange]/80"
