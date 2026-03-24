@@ -15,6 +15,7 @@
 .h1 {
   /* for removing the gap between inline-block elements on Safari */
   text-rendering: optimizeSpeed;
+  letter-spacing: 0.02em;
 }
 
 @keyframes target-highlight {
@@ -133,6 +134,7 @@ html:has(.container) {
   h2,
   h3,
   h4 {
+    letter-spacing: 0.02em;
     line-height: 1.375;
     margin-bottom: var(--v-spacing-heading-bottom);
 

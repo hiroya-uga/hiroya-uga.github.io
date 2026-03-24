@@ -6,7 +6,7 @@ import clsx from 'clsx';
 export const ExternalMediaSection = () => {
   return (
     <>
-      <h2 className="@w640:text-2xl mb-2 text-xl font-bold">External Media</h2>
+      <h2 className="@w640:text-2xl mb-2 text-xl font-bold tracking-wide">External Media</h2>
 
       <p className="mb-4">{getMetadata('/documents/media').description}</p>
 

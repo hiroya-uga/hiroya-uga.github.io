@@ -72,7 +72,7 @@ export const CategorySection = () => {
   return (
     <div className="bg-tertiary px-content-inline @w640:mb-28 mb-20 py-11 pb-12">
       <div className="max-w-content mx-auto">
-        <h2 className="@w640:text-2xl mb-4 text-xl font-bold">Category</h2>
+        <h2 className="@w640:text-2xl mb-4 text-xl font-bold tracking-wide">Category</h2>
 
         <div className="@w640:grid @w640:grid-cols-3 @w640:gap-8">
           <ul className="@w640:grid @w640:grid-cols-subgrid @w640:grid-rows-subgrid @w640:col-start-1 @w640:col-end-4 @w640:mb-0 @w640:row-start-1 @w640:row-end-3 mb-4">

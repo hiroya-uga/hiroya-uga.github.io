@@ -3,7 +3,7 @@ import { Picture } from '@/components/Image';
 export const Doumei = () => {
   return (
     <>
-      <p className="mb-2">古き良き同盟リンク集。</p>
+      <p className="mb-3">古き良き同盟リンク集。</p>
 
       <ul className="flex flex-wrap items-end gap-x-3 gap-y-4 sm:gap-y-3">
         {[

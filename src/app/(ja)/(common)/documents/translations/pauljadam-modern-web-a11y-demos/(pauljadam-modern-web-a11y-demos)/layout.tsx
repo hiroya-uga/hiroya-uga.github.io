@@ -3,9 +3,19 @@
 import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/layout.module.css';
 import { SvgIcon } from '@/components/Icons';
 
+import { Inter } from 'next/font/google';
 import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+  adjustFontFallback: true,
+});
 
 const CsunmobileNavigation = ({ fileName }: { fileName: string }) => {
   const linkList = [
@@ -104,7 +114,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
         </a>
       </p>
 
-      <div id={styles['pauljadam-modern-web-a11y-demos-content']}>
+      <div id={styles['pauljadam-modern-web-a11y-demos-content']} className={inter.className}>
         {isCsunmobile && <CsunmobileNavigation fileName={fileName} />}
 
         {children}
