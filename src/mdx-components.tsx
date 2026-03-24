@@ -83,12 +83,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         });
         return codes;
       };
+      const language = className?.replace('language-', '') as 'html' | 'css' | 'javascript' | 'jsx' | 'sh';
 
-      return (
-        <pre>
-          <CodeBlock code={String(getCode(children))} className={className} />
-        </pre>
-      );
+      return <CodeBlock code={String(getCode(children))} className={className} language={language} />;
     },
     ...components,
   };

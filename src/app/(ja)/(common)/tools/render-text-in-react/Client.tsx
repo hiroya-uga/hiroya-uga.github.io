@@ -76,6 +76,7 @@ export const RenderTextInReactPlaygroundContent = () => {
             <p className="mb-2 font-bold">テンプレートリテラルを使わない場合：</p>
             <pre className="border-primary grid overflow-auto rounded-lg border">
               <CodeBlock
+                language="jsx"
                 code={`<p aria-live="assertive">
   Clicked
   <!-- -->
@@ -88,13 +89,13 @@ export const RenderTextInReactPlaygroundContent = () => {
           </div>
           <div className="grid grid-rows-[auto_1fr]">
             <p className="mb-2 font-bold">テンプレートリテラルを使う場合：</p>
-            <pre className="border-primary grid overflow-auto rounded-lg border">
-              <CodeBlock
-                code={`<p aria-live="assertive">
+            <CodeBlock
+              language="jsx"
+              code={`<p aria-live="assertive">
   Clicked 0 times
 </p>`}
-              />
-            </pre>
+              className="border-primary grid overflow-auto rounded-lg border"
+            />
           </div>
         </div>
       </NoteBox>
@@ -106,9 +107,12 @@ export const RenderTextInReactPlaygroundContent = () => {
       <Example shouldUseTemplateLiteral={shouldUseTemplateLiteral} />
 
       <Heading level={2}>コードイメージ</Heading>
-      <pre className="border-primary mb-paragraph grid overflow-auto rounded-lg border">
-        <CodeBlock code={code} language="javascript" wrap="nowrap" />
-      </pre>
+      <CodeBlock
+        code={code}
+        language="javascript"
+        nowrap
+        className="border-primary mb-paragraph grid overflow-auto rounded-lg border"
+      />
     </>
   );
 };
