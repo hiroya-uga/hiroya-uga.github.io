@@ -40,7 +40,7 @@ export const SiteName = () => {
             </text>
 
             <text
-              x="-750%"
+              x="-800%"
               y="6.5%"
               textAnchor="start"
               style={{
