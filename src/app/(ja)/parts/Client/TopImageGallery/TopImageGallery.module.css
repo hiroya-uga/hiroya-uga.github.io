@@ -7,6 +7,20 @@
   }
 }
 
+.root {
+  transition:
+    0.3s height ease-out,
+    0.3s visibility ease-out;
+  interpolate-size: allow-keywords;
+  overflow: clip;
+
+  &[aria-hidden="true"] {
+    height: 0;
+    visibility: hidden;
+    transition-delay: 0.3s;
+  }
+}
+
 .item {
   view-timeline-name: --v-gallery-item;
   view-timeline-axis: block;
