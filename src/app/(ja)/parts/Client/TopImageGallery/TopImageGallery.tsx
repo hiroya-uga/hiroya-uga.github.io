@@ -24,13 +24,19 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
     return Array.from({ length }, (_, index) => galleryState.photos[index % galleryState.photos.length]);
   }, [galleryState.photos]);
 
+  const shouldRenderGallery = photos.some((photo) => photo === undefined) === false;
+
   return (
-    <section id={galleryId} className="px-content-inline animation-fade-in relative" hidden={!galleryState.shouldShow}>
+    <section
+      id={galleryId}
+      className={clsx(styles.root, 'px-content-inline animation-fade-in relative')}
+      aria-hidden={galleryState.shouldShow === false ? 'true' : undefined}
+    >
       <h2 className="@w640:text-2xl mb-4 text-center text-xl font-bold shadow-none outline-0" tabIndex={-1}>
         Gallery
       </h2>
 
-      {galleryState.shouldShow && (
+      {shouldRenderGallery && (
         <>
           <ul
             className={clsx([
@@ -136,13 +142,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                     behavior: 'smooth',
                     block: 'end',
                   });
-                  window.addEventListener(
-                    'scrollend',
-                    () => {
-                      setGalleryState({ shouldShow: false, photos: [] });
-                    },
-                    { once: true },
-                  );
+                  setGalleryState((prev) => ({ ...prev, shouldShow: false }));
                 }}
                 className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit cursor-pointer rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline"
               >
