@@ -125,11 +125,11 @@
     }
   }
 
-  @media screen and (min-width: 1536px) {
+  /* @media screen and (min-width: 1536px) {
     :root {
       --v-spacing-content-inline: min(1.25rem, 20px);
     }
-  }
+  } */
 }
 
 @theme {
