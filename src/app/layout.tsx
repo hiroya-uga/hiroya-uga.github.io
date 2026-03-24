@@ -2,7 +2,6 @@ import '@/app/(ja)/common.css';
 import '@/app/globals.css';
 
 import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 
 import { CookieConsentDialog } from '@/components/Dialog';
@@ -12,15 +11,6 @@ import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
 import { getTheme } from '@/utils/get-theme';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-  variable: '--font-inter',
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-  adjustFontFallback: true,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(URL_ORIGIN),
@@ -37,7 +27,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@100;400&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@100;400;700&display=swap"
+          rel="stylesheet"
+        />
 
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
@@ -79,7 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           }}
         />
       </head>
-      <body className={inter.className} id="top">
+      <body id="top">
         <div id={DIALOG_PORTAL_ID} />
         {children}
         <Suspense>

@@ -47,7 +47,7 @@ export const PickUpListSection = () => {
   return (
     <div className="px-content-inline @w640:mb-28 mb-16">
       <div className="max-w-content mx-auto">
-        <h2 className="@w640:text-2xl mb-4 text-xl font-bold">Pick up</h2>
+        <h2 className="@w640:text-2xl mb-4 text-xl font-bold tracking-wide">Pick up</h2>
 
         <ul
           className={clsx([

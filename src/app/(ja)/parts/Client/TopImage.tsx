@@ -182,7 +182,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 '@w640:pl-3.5 @w640:pr-3 @w640:pt-2.5 @w640:min-h-20 @w640:leading-inherit @w640:bg-transparent @w640:bg-[linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.2),transparent)]',
 
                 'absolute left-0 top-0 z-10 grid w-full -translate-y-full grid-rows-[auto_1fr] items-start px-2 py-1',
-                'palt @w640:font-thin bg-[#00000080] font-["LINE_Seed_JP",sans-serif] leading-tight mix-blend-hard-light',
+                'palt @w640:font-thin bg-[#00000080] leading-tight mix-blend-hard-light',
 
                 'transition-[color,text-shadow,translate]',
                 'group-focus-within:translate-y-0 group-hover:translate-y-0',

@@ -59,15 +59,13 @@ export default function Page() {
                 <span className="block leading-6 tracking-widest" translate="no">
                   宇賀景哉
                 </span>
-                <span className="palt block text-xs [letter-spacing:0.1375rem]">Hiroya UGA</span>
+                <span className="block text-xs [letter-spacing:0.1375rem]">Hiroya UGA</span>
               </span>
             </p>
           </div>
 
           <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
-          <p className="@w640:palt inline-block">
-            「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
-          </p>
+          <p className="inline-block">「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。</p>
           <p>アイコンは昔の上司がスマホで描いて送ってくれた管理人の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>

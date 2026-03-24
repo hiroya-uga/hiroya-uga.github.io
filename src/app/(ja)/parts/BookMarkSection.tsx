@@ -93,7 +93,7 @@ const linkList = bookmarks.toSorted((a, b) => {
 export const BookMarkSection = () => {
   return (
     <>
-      <h2 className="@w640:text-2xl mb-2 text-xl font-bold">Bookmarks</h2>
+      <h2 className="@w640:text-2xl mb-2 text-xl font-bold tracking-wide">Bookmarks</h2>
 
       <p className="mb-4">外部サイトへのリンク集です。</p>
 
@@ -105,10 +105,12 @@ export const BookMarkSection = () => {
                 <a
                   href={href}
                   {...prop}
-                  className="bg-panel-primary hover:bg-panel-primary-hover border-primary transition-bg grid grow content-center rounded-l border px-3 pb-1.5 pt-2 no-underline last:rounded-r focus:relative focus:z-10"
+                  className="bg-panel-primary hover:bg-panel-primary-hover border-primary transition-bg grid grow content-center rounded-l border px-3 py-1.5 no-underline last:rounded-r focus:relative focus:z-10"
                 >
                   {title}
-                  <span className="text-secondary text-2xs inline-block no-underline">{new URL(href).hostname}</span>
+                  <span className="text-secondary text-2xs leading-18px inline-block no-underline">
+                    {new URL(href).hostname}
+                  </span>
                 </a>{' '}
                 {japanese && (
                   <span className="-left-1PX group relative flex shrink-0">

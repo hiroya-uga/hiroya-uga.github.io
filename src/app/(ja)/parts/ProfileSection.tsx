@@ -7,23 +7,16 @@ export const ProfileSection = () => {
   return (
     <>
       <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed pt-12">
-        <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold">
+        <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold tracking-wide">
           Profile
         </h2>
 
         <p className="aspect-8/5 max-w-360px @w640:leading-inherit @w640:col-start-2 @w640:col-end-3 @w640:row-start-1 @w640:row-end-3 @w640:m-0 @w640:aspect-auto @w640:gap-x-6 @w640:flex-nowrap mx-auto mb-8 flex flex-wrap items-center gap-4 pr-4 leading-none">
           <span className="grow whitespace-nowrap text-center text-xl leading-tight">
-            <span className="block leading-6 tracking-widest" translate="no">
+            <span className="block leading-6 tracking-[0.2rem]" translate="no">
               宇賀景哉
             </span>
-            <span
-              className="palt block text-xs"
-              style={{
-                letterSpacing: '0.1375rem',
-              }}
-            >
-              Hiroya UGA
-            </span>
+            <span className="palt block text-xs tracking-[0.125rem]">Hiroya UGA</span>
           </span>
           <span className="w-40">
             <Picture
@@ -38,11 +31,9 @@ export const ProfileSection = () => {
         </p>
 
         <div className="@w640:mb-paragraph col-start-1 col-end-2 row-start-2 row-end-3">
-          <div className="@w640:max-w-xl @w640:pr-4">
+          <div className="@w640:max-w-xl @w640:pr-4 text-sm">
             <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
-            <p className="@w640:palt inline-block">
-              「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。
-            </p>
+            <p>「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。</p>
             <p>
               詳しくは<TextLink href="/about">当サイトおよび管理人について</TextLink>をご覧ください。
             </p>

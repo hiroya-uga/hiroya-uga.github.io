@@ -25,7 +25,7 @@ export default function Home() {
 
         <div className="@w640:mt-16 bg-secondary px-content-inline @w640:pb-11 @w640:pt-7 sticky bottom-0 mt-8 py-8">
           <div className="max-w-content mx-auto">
-            <h2 className="@w640:text-2xl mb-4 mt-0 text-xl font-bold">The power of the web</h2>
+            <h2 className="@w640:text-2xl mb-4 mt-0 text-xl font-bold tracking-wide">The power of the web</h2>
 
             <figure>
               <blockquote
