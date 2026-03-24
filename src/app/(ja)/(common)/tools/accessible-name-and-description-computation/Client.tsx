@@ -704,9 +704,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             }}
             className="overflow-auto font-mono text-sm"
           >
-            <pre className="w-fit min-w-full p-4 pt-0">
-              <CodeBlock language="html" code={markup} />
-            </pre>
+            <CodeBlock language="html" code={markup} className="w-fit min-w-full p-4 pt-0" />
           </div>
         </div>
 
