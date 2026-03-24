@@ -678,10 +678,10 @@ export const AccessibleNameAndDescriptionComputation = ({
           </div>
         </div>
 
-        <div className="border-secondary bg-secondary mb-2 rounded-md border">
+        <div className="border-secondary bg-secondary mb-2 overflow-hidden rounded-md border">
           <p
             id={textboxDescId}
-            className="text-2xs border-secondary text-high-contrast mb-2 border-b border-dashed px-4 pb-1 pt-2"
+            className="text-2xs border-secondary text-high-contrast border-b border-dashed px-4 pb-1 pt-2"
           >
             Hint：全選択ショートカットキーまたはマウスクリックでHTML断片を全選択できます。
           </p>
@@ -704,7 +704,7 @@ export const AccessibleNameAndDescriptionComputation = ({
             }}
             className="overflow-auto font-mono text-sm"
           >
-            <CodeBlock language="html" code={markup} className="w-fit min-w-full p-4 pt-0" />
+            <CodeBlock language="html" code={markup} className="w-fit min-w-full" />
           </div>
         </div>
 

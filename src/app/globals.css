@@ -1,8 +1,15 @@
 @import "tailwindcss";
 @import "./spacing.css";
-@import "./highlightjs.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+[data-theme="dark"] {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
 
 @layer base {
   :root {
