@@ -47,7 +47,7 @@ export const TOOLS_LINK_LIST = [
         userType: ['developer', 'director', 'planner', 'writer'],
       },
       {
-        emoji: '👆',
+        emoji: '🧮',
         pathname: '/tools/character-count',
         userType: [],
       },
@@ -76,6 +76,11 @@ export const TOOLS_LINK_LIST = [
         pathname: '/tools/nu-bookmarklet-generator',
         userType: ['developer', 'qa'],
       },
+      {
+        emoji: '🛠️',
+        pathname: '/tools/nu-installer',
+        userType: ['developer', 'qa'],
+      },
     ] as ToolPage
   ).map((item) => ({ ...item, type: 'default' }) as const),
 
@@ -85,7 +90,7 @@ export const TOOLS_LINK_LIST = [
       { emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
       { emoji: '📏', pathname: '/tools/css-units' },
       { emoji: '', pathname: '/tools/dom-events-watcher' },
-      { emoji: '', pathname: '/tools/touch-event-touches' },
+      { emoji: '👆', pathname: '/tools/touch-event-touches' },
       { emoji: '⌨', pathname: '/tools/keyboard-event' },
       { emoji: '♾️', pathname: '/tools/kaprekar-number' },
       { emoji: '文', pathname: '/tools/render-text-in-react', noPickup: true },

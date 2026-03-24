@@ -14,6 +14,9 @@ export function useCopyButton({ mimeType = 'text/plain' }: Params = {}) {
   const settimeoutIdRef = useRef(-1);
 
   const write = useCallback(async (buttonLabel: HTMLElement, write: () => Promise<void>) => {
+    if (buttonLabel.textContent === 'Copied!') {
+      return;
+    }
     clearTimeout(settimeoutIdRef.current);
 
     try {
