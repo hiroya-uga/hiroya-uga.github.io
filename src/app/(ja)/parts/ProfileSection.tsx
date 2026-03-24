@@ -31,7 +31,7 @@ export const ProfileSection = () => {
         </p>
 
         <div className="@w640:mb-paragraph col-start-1 col-end-2 row-start-2 row-end-3">
-          <div className="@w640:max-w-xl @w640:pr-4 text-sm">
+          <div className="@w640:max-w-xl @w640:pr-4 @w640:text-sm">
             <p>大器晩成型のフロントエンドWeb開発者。Web標準の話が好き。</p>
             <p>「元気に楽しく、自信と情熱を持って、すべてのWebをアクセシブルに」がモットー。</p>
             <p>
