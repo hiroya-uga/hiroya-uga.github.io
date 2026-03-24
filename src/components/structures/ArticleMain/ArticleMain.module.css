@@ -501,7 +501,6 @@ html:has(.container) {
   [class~="codeblock"] {
     border: 1px solid var(--border-color-primary);
     border-radius: 0.5rem;
-    overflow: hidden;
     font-size: 0.875rem;
   }
 
@@ -535,6 +534,19 @@ html:has(.container) {
   [class~="codeblock"] [class~="of-command"]::before {
     content: "$ ";
     color: var(--color-accent);
+  }
+
+  [class~="codeblock"] pre {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    overflow: auto;
+  }
+
+  [class~="codeblock"] code {
+    padding: 1rem;
+    display: block;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
   }
 
   [class~="codeblock__caption"] {

@@ -1,7 +1,5 @@
 'use client';
 
-import hljs from 'highlight.js/lib/core';
-
 import { Toast } from '@/components/Dialog';
 import { SvgIcon } from '@/components/Icons';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
@@ -9,17 +7,11 @@ import { copy } from '@/utils/copy';
 import { formattedDateString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
-import shell from 'highlight.js/lib/languages/bash';
-import css from 'highlight.js/lib/languages/css';
-import javascript from 'highlight.js/lib/languages/javascript';
-import json from 'highlight.js/lib/languages/json';
-import powershell from 'highlight.js/lib/languages/powershell';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
+import { codeToHtml } from 'shiki';
 
 const getLength = (article: HTMLElement) => {
   const temp = document.createElement('div');
@@ -423,38 +415,40 @@ export const ArticleCodeHighlightActivator = () => {
       return;
     }
 
-    hljs.registerLanguage('jsx', typescript);
-    hljs.registerLanguage('html', xml);
-    hljs.registerLanguage('css', css);
-    hljs.registerLanguage('js', javascript);
-    hljs.registerLanguage('javascript', javascript);
-    hljs.registerLanguage('ts', typescript);
-    hljs.registerLanguage('typescript', typescript);
-    hljs.registerLanguage('json', json);
-    hljs.registerLanguage('sh', shell);
-    hljs.registerLanguage('pwsh', powershell);
-
-    highlight.forEach((node) => {
+    highlight.forEach(async (node) => {
       // 既にハイライトされている場合はスキップ
       if (node.dataset.highlighted === 'true') {
         return;
       }
 
       const code = node.textContent || '';
-      const language = node.getAttribute('data-language') || 'html';
+      const lang = node.getAttribute('data-language') || 'html';
 
       if (
-        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'pwsh'].includes(language) ===
-        false
+        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'pwsh'].includes(lang) === false
       ) {
         return;
       }
 
-      const __html = hljs.highlight(code, { language }).value;
+      const __html = await codeToHtml(code, {
+        lang,
+        themes: {
+          light: 'github-light',
+          dark: 'github-dark',
+        },
+        transformers: [
+          {
+            pre(node) {
+              delete node.properties.tabindex;
+            },
+          },
+        ],
+      });
 
-      node.classList.add(`language-${language}`);
+      node.classList.add(`language-${lang}`);
       node.dataset.highlighted = 'true';
-      node.innerHTML = __html;
+      node.parentElement?.insertAdjacentHTML('afterend', __html);
+      node.parentElement?.remove();
     });
   }, []);
 
