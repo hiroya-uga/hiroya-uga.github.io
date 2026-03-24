@@ -6,7 +6,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
     <div className="grid min-h-dvh grid-cols-1 grid-rows-[auto_1fr_auto]">
       <GlobalHeader layout="wide-content" />
 
-      <main className="@container px-content-inline lg:pl-10">
+      <main className="@container px-content-inline">
         <div className="max-w-structure mx-auto">{children}</div>
       </main>
 

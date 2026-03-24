@@ -38,7 +38,7 @@ export const YearOrSubCategoryPage = async ({ category, yearOrSubcategory }: Pro
     <>
       <GlobalHeader layout="wide-content" />
 
-      <main className="@container px-content-inline lg:pl-10">
+      <main className="@container px-content-inline">
         <div className="max-w-structure mx-auto mb-8">
           <PageTitle title={pageTitle} description={description} />
           <CategoryLinks currentCategory={category} />
