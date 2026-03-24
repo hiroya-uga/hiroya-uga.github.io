@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["node", "youtube", "gtag.js", "jquery"]
   },
   "include": [
     "next-env.d.ts",
