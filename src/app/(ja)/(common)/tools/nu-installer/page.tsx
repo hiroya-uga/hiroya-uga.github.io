@@ -7,6 +7,7 @@ const INSTALL_COMMAND = `curl -fsSL https://gist.githubusercontent.com/hiroya-ug
 
 const features = [
   { cmd: 'vnu', desc: 'localhost:8888 でサーバーが起動していなければ Nu Html Checker を起動し、ブラウザで開く' },
+  { cmd: 'vnu --version', desc: 'インストール済みの vnu.jar のバージョン（更新日）を表示する' },
   { cmd: 'vnu --update', desc: 'vnu.jar を最新バージョンに更新する' },
   { cmd: 'vnu --stop', desc: 'vnu のプロセスを停止する' },
   { cmd: 'vnu --uninstall', desc: 'vnu および関連ファイルを削除する' },
