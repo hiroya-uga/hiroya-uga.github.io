@@ -11,6 +11,15 @@
   }
 }
 
+:root:has(dialog:modal) {
+  overflow: hidden;
+}
+
+/* VT中はスクロール駆動アニメーションを止めてレイアウト再計算の連鎖を防ぐ */
+:active-view-transition * {
+  animation-timeline: auto !important;
+}
+
 @layer base {
   :root {
     --v-spacing-content-inline: min(1rem, 16px);

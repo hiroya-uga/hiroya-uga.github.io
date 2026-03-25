@@ -5,7 +5,7 @@ import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
 let currentFilePath = '';
 
-const getLazyLoadMarkup = (params: { href: string; alt: string }) => {
+const getLazyLoadMarkup = (params: { href: string; alt: string; controls: boolean }) => {
   const href = (() => {
     // ./filename.ext → /articles/{category}/{year}/filename.ext
     if (params.href.startsWith('./')) {
@@ -37,7 +37,7 @@ const getLazyLoadMarkup = (params: { href: string; alt: string }) => {
   })();
 
   if (src && width && height) {
-    return `<span class="relative block mx-auto"><span class="absolute grid place-items-center inset-0 rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${params.alt}" width="${width}" height="${height}" class="relative noscript:invisible" loading><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image><noscript><img src="${src}" alt="${params.alt}" width="${width}" height="${height}" /></noscript></span>`;
+    return `<span class="relative block mx-auto"><span class="absolute grid place-items-center inset-0 rounded-lg bg-secondary">${LOADING_ICON_HTML}</span><lazy-image src="${src}" alt="${params.alt}" width="${width}" height="${height}" class="relative noscript:invisible" loading${params.controls ? ' controls' : ''}><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></lazy-image><noscript><img src="${src}" alt="${params.alt}" width="${width}" height="${height}" /></noscript></span>`;
   }
 
   return `<img src="${src}" alt="${params.alt}" loading="lazy" />`;
@@ -111,6 +111,7 @@ const overrideImageExtension: TokenizerAndRendererExtension = {
     return getLazyLoadMarkup({
       href: t.href,
       alt: t.text,
+      controls: true,
     });
   },
 };
@@ -548,6 +549,7 @@ const overrideListExtension: TokenizerAndRendererExtension = {
           ${getLazyLoadMarkup({
             href: imageData[0].url,
             alt: imageData[0].alt,
+            controls: false,
           })}
         </p>
         <p class="image-diff-viewer__item">
@@ -555,6 +557,7 @@ const overrideListExtension: TokenizerAndRendererExtension = {
           ${getLazyLoadMarkup({
             href: imageData[1].url,
             alt: imageData[1].alt,
+            controls: false,
           })}
         </p>
         <p class="image-diff-viewer__controls">
