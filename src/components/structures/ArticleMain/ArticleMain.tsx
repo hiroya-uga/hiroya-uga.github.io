@@ -105,10 +105,13 @@ export const ArticleMain = async ({ post }: Props) => {
             <div
               className={styles.article}
               dangerouslySetInnerHTML={{
-                __html: (await post.content).replaceAll(
-                  '<blockquote class="twitter-tweet">',
-                  '<blockquote class="twitter-tweet" data-theme="dark">',
-                ),
+                __html: (await post.content)
+                  .replaceAll(
+                    '<blockquote class="twitter-tweet">',
+                    '<blockquote class="twitter-tweet" data-theme="dark">',
+                  )
+                  // script要素はArticleTwitterActivatorで動的に読み込むため、ここでは削除しておく（hydration mismatch防止）
+                  .replace(/<script\b[^>]*src="https:\/\/platform\.twitter\.com\/widgets\.js"[^>]*><\/script>/g, ''),
               }}
             />
             <section role="note" className="empty:hidden" aria-labelledby="footnotes">
