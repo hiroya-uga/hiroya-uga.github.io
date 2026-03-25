@@ -80,7 +80,8 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Props) => {
   return createPortal(
     <p
       ref={ref}
-      className="no-hidden bg-secondary border-l-link [[hidden]]:pointer-events-none [[hidden]]:translate-x-full z-toast fixed right-0 top-4 mx-auto w-fit max-w-[95%] rounded-l border-l-8 px-4 py-2 pr-6 transition-transform delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
+      // 100% + 20px は scrollbar-gutter: stable; の時にモーダルダイアログを表示するとチラチラToastが見えてしまう問題の回避
+      className="no-hidden bg-secondary border-l-link [[hidden]]:pointer-events-none [[hidden]]:translate-x-[calc(100%+20px)] z-toast fixed right-0 top-4 mx-auto w-fit max-w-[95%] rounded-l border-l-8 px-4 py-2 pr-6 transition-transform delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
       style={{
         transitionDuration: `${TRANSITION_DURATION}ms`,
       }}
