@@ -6,10 +6,10 @@ import { useCallback, useEffect, useId, useRef, useSyncExternalStore } from 'rea
 import ReactGA from 'react-ga4';
 
 import { RunButton, TextLink } from '@/components/Clickable';
-import styles from '@/components/Dialog/CookieConsentDialog.module.css';
 import { SITE_NAME } from '@/constants/meta';
 import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
+import styles from './CookieConsentDialog.module.css';
 
 const initGA = () => {
   const pathname = window.location.pathname;
