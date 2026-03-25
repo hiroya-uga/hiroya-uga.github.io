@@ -5,8 +5,8 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 
 import { CookieConsentDialog } from '@/components/Dialog';
-import { Comment, Console } from '@/components/Jokes';
-import { Analytics } from '@/components/specific/Analytics';
+import { Analytics } from '@/components/Layout/Analytics';
+import { Comment, Console } from '@/components/Layout/Jokes';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
