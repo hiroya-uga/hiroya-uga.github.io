@@ -425,7 +425,8 @@ export const ArticleCodeHighlightActivator = () => {
       const lang = node.getAttribute('data-language') || 'html';
 
       if (
-        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'pwsh'].includes(lang) === false
+        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'powershell'].includes(lang) ===
+        false
       ) {
         return;
       }
