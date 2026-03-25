@@ -56,7 +56,7 @@ winget install EclipseAdoptium.Temurin.21.JDK
 curl -L -o ~/vnu/vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
 ```
 
-```pwsh:Windows向け：vnu.jarダウンロード
+```powershell:Windows向け：vnu.jarダウンロード
 Invoke-WebRequest -Uri "https://github.com/validator/validator/releases/download/latest/vnu.jar" -OutFile "$HOME\vnu\vnu.jar"
 ```
 
@@ -66,7 +66,7 @@ Invoke-WebRequest -Uri "https://github.com/validator/validator/releases/download
 java -cp ~/vnu/vnu.jar nu.validator.servlet.Main 8888
 ```
 
-```pwsh:Windows向け：vnuの起動
+```powershell:Windows向け：vnuの起動
 Start-Process -NoNewWindow java -ArgumentList @("-cp", "$HOME\vnu\vnu.jar", "nu.validator.servlet.Main", 8888)
 ```
 
@@ -150,7 +150,7 @@ EOF
 source ~/.zshrc
 ```
 
-```pwsh:Windows向け：vnuコマンド有効化
+```powershell:Windows向け：vnuコマンド有効化
 Add-Content $PROFILE @'
 function vnu {
   $jar = "$HOME\vnu\vnu.jar"

@@ -129,7 +129,7 @@ describe('marked-custom', () => {
       });
 
       test('Windows向けのコードブロックに data-platform が付与される', () => {
-        const html = markedParse(FILE, '```pwsh:Windows向け\necho hello\n```') as string;
+        const html = markedParse(FILE, '```powershell:Windows向け\necho hello\n```') as string;
         expect(html).toContain('data-platform="Windows"');
       });
 
