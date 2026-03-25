@@ -57,7 +57,7 @@ const customBlockTitle: Record<string, string> = {
   alert: '警告',
   warn: '注意点',
   tip: 'ヒント',
-  info: '情報',
+  info: 'Information',
   memo: 'Memo',
 };
 const customBlockExtension: TokenizerAndRendererExtension = {

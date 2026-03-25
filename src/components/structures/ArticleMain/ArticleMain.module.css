@@ -721,11 +721,20 @@ html:has(.container) {
     padding: 1rem;
     border: 1px solid var(--border-color-primary);
     margin-bottom: var(--v-spacing-y);
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   [class~="custom-block"][data-type="memo"] {
     border-radius: 0.5rem;
     background: var(--background-color-secondary);
+  }
+
+  [class~="custom-block"][data-type="info"] {
+    border-radius: 0.5rem;
+    background: var(--background-color-success);
   }
 
   [class~="custom-block"][data-type="warn"] {
@@ -739,9 +748,9 @@ html:has(.container) {
     mix-blend-mode: hard-light;
   }
 
-  [class~="custom-block__content"] {
+  /* [class~="custom-block__content"] {
     padding: 0 0 0 0.5rem;
-  }
+  } */
 }
 
 .article [class~="table-container"] {

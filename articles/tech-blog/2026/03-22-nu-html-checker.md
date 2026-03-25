@@ -1,9 +1,14 @@
 ---
 title: "Nu Html Checkerを\nローカルで使う方法 \n2分でできるセットアップ"
 publishedAt: '2026-03-22'
+updatedAt: '2026-03-25'
 topics: [HTML, Web標準, WHATWG, Tips]
 proficiencyLevel: 'Beginner'
 ---
+
+:::info
+[macOS向けvnuインストーラー](/tools/nu-installer/)を公開しました（2026.03.25）。
+:::
 
 最終的なHTMLの品質チェック、していますか？
 
