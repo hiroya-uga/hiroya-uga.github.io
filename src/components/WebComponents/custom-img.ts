@@ -290,6 +290,8 @@ export const CustomImage = () => {
           :host {
             display: block;
             position: relative;
+            width: fit-content;
+            margin: 0 auto;
           }
 
           :host button {
@@ -312,8 +314,8 @@ export const CustomImage = () => {
             }
 
             svg {
-              width: 20px;
-              height: 20px;
+              width: 1.25rem;
+              height: 1.25rem;
               padding: 8px;
               border-radius: 50%;
             }
