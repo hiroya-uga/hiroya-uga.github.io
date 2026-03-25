@@ -3,12 +3,13 @@
 import { getTheme } from '@/utils/get-theme';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
-import { useCallback, useEffect, useId, useMemo, useRef, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 
 const { window } = globalThis;
+const THEME_SWITCH_DESCRIPTION_ID = 'theme-switch-description';
 
 export const ThemeSwitch = () => {
-  const id = useId();
+  const id = THEME_SWITCH_DESCRIPTION_ID;
   const styleElement = useMemo(() => {
     if (window === undefined) {
       return null;
