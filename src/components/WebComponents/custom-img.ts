@@ -1,5 +1,5 @@
-let lazyImageCounter = 0;
-const styleId = 'lazy-image-modal-styles';
+let customImageElementCounter = 0;
+const styleId = 'customされたimg要素ˆ-ˆのモーダル-styles';
 
 const injectModalStyles = () => {
   const style = document.getElementById(styleId);
@@ -7,7 +7,7 @@ const injectModalStyles = () => {
   const element = document.createElement('style');
   element.id = styleId;
   element.textContent = `
-      dialog.lazy-image-modal {
+      dialog.customされたimg要素ˆ-ˆのモーダル {
         --v-backdrop: rgba(0, 0, 0, 0.8);
 
         font-size: 0.875rem;
@@ -21,34 +21,31 @@ const injectModalStyles = () => {
         place-items: center;
         position: fixed;
         inset: 0;
+        overflow: clip auto;
         pointer-events: none;
+        overscroll-behavior: contain;
 
         &[open] {
           display: grid;
         }
-      }
 
-      dialog.lazy-image-modal::backdrop {
-        background: var(--v-backdrop);
-        backdrop-filter: blur(4px);
-        transition: 0.3s background ease-out, 0.3s backdrop-filter ease-out;
+        &::backdrop {
+          background: var(--v-backdrop);
+          backdrop-filter: blur(4px);
+          transition: 0.3s background ease-out, 0.3s backdrop-filter ease-out;
 
-        @starting-style {
-          background: rgba(0, 0, 0, 0);
-          backdrop-filter: blur(0);
+          @starting-style {
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0);
+          }
         }
       }
 
-      dialog.lazy-image-modal__content {
-        max-width: 90dvw;
-        max-height: calc(90dvh - 1lh);
-        margin: auto;
-        overflow: clip auto;
-        overscroll-behavior: contain;
+      .customされたimg要素ˆ-ˆのモーダル__content {
         pointer-events: auto;
       }
 
-      .lazy-image-modal__caption {
+      .customされたimg要素ˆ-ˆのモーダル__caption {
         position: sticky;
         bottom: 0;
         color: #fff;
@@ -56,17 +53,15 @@ const injectModalStyles = () => {
         pointer-events: auto;
         cursor: auto;
         width: fit-content;
+        mix-blend-mode: exclusion;
+        padding: 0 0 0 0.25em;
 
         @starting-style {
           opacity: 0;
         }
       }
 
-      .lazy-image-modal__caption:empty {
-        display: none;
-      }
-
-      .lazy-image-modal__button {
+      .customされたimg要素ˆ-ˆのモーダル__button {
         width: 36px;
         height: 36px;
         position: fixed;
@@ -87,23 +82,25 @@ const injectModalStyles = () => {
         }
       }
 
-      .lazy-image-modal__button svg {
+      .customされたimg要素ˆ-ˆのモーダル__button svg {
         width: 20px;
         height: 20px;
       }
 
-      .lazy-image-modal__image {
+      .customされたimg要素ˆ-ˆのモーダル__image {
         display: block;
-        max-width: 100%;
+        /* 閉じるボタン分 = 60px * 2 */
+        max-width: calc(100dvw - 120px);
+        max-height: calc(100dvh - 120px);
         width: auto;
         height: auto;
       }
 
-      [data-theme="dark"] dialog.lazy-image-modal {
+      [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
         --v-backdrop: rgba(0, 0, 0, 0.3);
       }
 
-      :root:has(dialog.lazy-image-modal:modal) {
+      :root:has(dialog.customされたimg要素ˆ-ˆのモーダル:modal) {
         cursor: zoom-out;
       }
     `;
@@ -128,17 +125,17 @@ const showModal = ({
   alt: string;
 }) => {
   const dialog = document.createElement('dialog');
-  dialog.className = 'lazy-image-modal';
+  dialog.className = 'customされたimg要素ˆ-ˆのモーダル';
   dialog.setAttribute('aria-modal', 'true');
   dialog.setAttribute('aria-labelledby', id);
   dialog.setAttribute('closedby', 'any');
 
   const content = document.createElement('div');
-  content.className = 'lazy-image-modal__content';
+  content.className = 'customされたimg要素ˆ-ˆのモーダル__content';
   dialog.appendChild(content);
 
   const originSizeImage = document.createElement('img');
-  originSizeImage.className = 'lazy-image-modal__image';
+  originSizeImage.className = 'customされたimg要素ˆ-ˆのモーダル__image';
   originSizeImage.src = src;
   originSizeImage.alt = '';
   originSizeImage.width = width;
@@ -148,7 +145,7 @@ const showModal = ({
 
   const caption = document.createElement('p');
   caption.id = id;
-  caption.className = 'lazy-image-modal__caption';
+  caption.className = 'customされたimg要素ˆ-ˆのモーダル__caption';
   caption.textContent = `図${id.split('-').slice(-1)[0]}${alt ? `: ${alt}` : ''}`;
   content.appendChild(caption);
 
@@ -196,7 +193,7 @@ const showModal = ({
 
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
-  closeButton.className = 'lazy-image-modal__button';
+  closeButton.className = 'customされたimg要素ˆ-ˆのモーダル__button';
   closeButton.insertAdjacentHTML(
     'beforeend',
     `
@@ -220,8 +217,8 @@ const showModal = ({
   });
 };
 
-export const LazyImageLoad = () => {
-  class LazyImage extends HTMLElement {
+export const CustomImage = () => {
+  class CustomImageElement extends HTMLElement {
     constructor() {
       super();
       this.attachShadow({ mode: 'open' });
@@ -334,8 +331,8 @@ export const LazyImageLoad = () => {
             }
           }
 
-          :host(lazy-image[loading]),
-          :host(lazy-image[loading]) img {
+          :host(customされたimg要素ˆ-ˆ[loading]),
+          :host(customされたimg要素ˆ-ˆ[loading]) img {
             opacity: 0;
             visibility: hidden;
           }
@@ -350,8 +347,8 @@ export const LazyImageLoad = () => {
         shadowRoot.adoptedStyleSheets = [style];
       }
 
-      const id = `lazy-image-${++lazyImageCounter}`;
-      const index = lazyImageCounter;
+      const id = `custom-img-${++customImageElementCounter}`;
+      const index = customImageElementCounter;
 
       img.alt = `${alt ? `図${index}：${alt}` : `図${index}`}`;
       img.width = width;
@@ -403,5 +400,5 @@ export const LazyImageLoad = () => {
     }
   }
 
-  customElements.define('lazy-image', LazyImage);
+  customElements.define('customされたimg要素ˆ-ˆ', CustomImageElement);
 };

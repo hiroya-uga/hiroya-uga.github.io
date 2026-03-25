@@ -32,9 +32,9 @@ describe('marked-custom', () => {
       expect(html).toContain('alt="alt"');
     });
 
-    test('?size=800x600 付き画像は <lazy-image> を返す', () => {
+    test('?size=800x600 付き画像は <customされたimg要素ˆ-ˆ> を返す', () => {
       const html = markedParse(FILE, '![alt](https://example.com/img.png?size=800x600)') as string;
-      expect(html).toContain('<lazy-image');
+      expect(html).toContain('<customされたimg要素ˆ-ˆ');
       expect(html).toContain('width="400"');
       expect(html).toContain('height="300"');
     });

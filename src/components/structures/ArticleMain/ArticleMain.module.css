@@ -192,15 +192,15 @@ html:has(.container) {
     margin-bottom: calc(var(--v-spacing-y) * calc(1 - var(--tw-space-y-reverse)));
   }
 
-  p:has(lazy-image),
+  p:has(customされたimg要素ˆ-ˆ),
   [class~="image-diff-viewer"] {
     position: relative;
     margin-inline: var(--v-negative-margin-inline);
   }
 
-  p:has(lazy-image) {
+  p:has(customされたimg要素ˆ-ˆ) {
     noscript,
-    lazy-image {
+    customされたimg要素ˆ-ˆ {
       /* outline: 1px solid rgba(0, 0, 0, 0.5); */
       overflow: hidden;
       box-shadow:
@@ -215,11 +215,11 @@ html:has(.container) {
   }
 
   @container (width >= 600px) {
-    p:has(lazy-image) {
+    p:has(customされたimg要素ˆ-ˆ) {
       transition: 0.3s margin-inline ease-out;
     }
 
-    lazy-image,
+    customされたimg要素ˆ-ˆ,
     noscript,
     [class~="image-diff-viewer"] {
       border-radius: 0.5rem;
