@@ -1,3 +1,4 @@
+import { TweetLink } from '@/components/Clickable/TweetLink';
 import { CodeBlock } from '@/components/CodeBlock';
 import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
@@ -134,16 +135,22 @@ export default function Page() {
         </p>
       </section>
 
-      <p className="mt-10 border-t border-t-slate-200 pt-20 text-center text-xs dark:border-t-slate-700">
-        <a
-          href={`https://gist.github.com/hiroya-uga/${GIST_ID}`}
-          className="underline underline-offset-2 transition-colors dark:text-[#85b4ff]"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View on Gist →
-        </a>
-      </p>
+      <div className="mt-20 border-t border-t-slate-200 pt-8 dark:border-t-slate-700">
+        <p className="mb-8 text-right text-xs">
+          <a
+            href={`https://gist.github.com/hiroya-uga/${GIST_ID}`}
+            className="underline underline-offset-2 transition-colors dark:text-[#85b4ff]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on Gist →
+          </a>
+        </p>
+
+        <p className="mt-share-buttons grid justify-end">
+          <TweetLink hashtags={['html']} />
+        </p>
+      </div>
     </div>
   );
 }
