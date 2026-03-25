@@ -4,8 +4,8 @@ import '@/app/globals.css';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import { CookieConsentDialog } from '@/components/Dialog';
 import { Analytics } from '@/components/Layout/Analytics';
+import { CookieConsentDialog } from '@/components/Layout/CookieConsentDialog';
 import { Comment, Console } from '@/components/Layout/Jokes';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
