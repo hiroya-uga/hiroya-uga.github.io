@@ -1,16 +1,16 @@
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { GlobalHeader } from '@/components/structures/GlobalHeader';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export const CommonLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="grid min-h-dvh grid-cols-1 grid-rows-[auto_1fr_auto]">
-      <GlobalHeader layout="wide-content" />
+      <GlobalHeader />
 
       <main className="@container px-content-inline">
-        <div className="max-w-structure mx-auto">{children}</div>
+        <div className="max-w-content mx-auto">{children}</div>
       </main>
 
       <GlobalFooter />
     </div>
   );
-}
+};
