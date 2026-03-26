@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes } from 'react';
+import React from 'react';
 
 import { SvgIcon } from '@/components/Icons';
 import Link from 'next/link';
@@ -6,14 +6,14 @@ import Link from 'next/link';
 type Props = {
   href: string;
   children: React.ReactNode;
-  target?: AnchorHTMLAttributes<HTMLAnchorElement>['target'];
-};
+} & Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'hrefLang' | 'target'>;
 
-export const TextLink = ({ href, children, target }: Props) => {
+export const TextLink = ({ href, children, target, ...props }: Props) => {
   return (
     <Link
+      {...props}
       href={href}
-      className="mx-[0.2em] leading-[inherit]"
+      className="leading-inherit mx-[0.2em]"
       target={target}
       rel={target === '_blank' ? 'noreferrer' : undefined}
     >
