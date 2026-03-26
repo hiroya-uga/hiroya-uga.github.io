@@ -7,8 +7,11 @@ import clsx from 'clsx';
 
 import styles from '@/components/structures/GlobalHeader/GlobalHeader.module.css';
 import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
+import { usePathname } from 'next/navigation';
 
 export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-content' | 'article-content' }) => {
+  const lang = usePathname().endsWith('/en/') ? 'en' : 'ja';
+
   return (
     <header className={clsx([styles.root, '@container text-primary'])}>
       <SiteName />
@@ -38,7 +41,7 @@ export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-
                   'ml-2.5 transition-opacity delay-0 duration-300 group-hover:opacity-100 group-focus:opacity-100',
                 ])}
               >
-                １つ上のページへ戻る
+                {lang === 'en' ? 'Go up one level' : '１つ上のページへ戻る'}
               </span>
             </Link>
           </p>

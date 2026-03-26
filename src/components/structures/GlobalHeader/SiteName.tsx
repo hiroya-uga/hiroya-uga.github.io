@@ -31,7 +31,7 @@ export const SiteName = () => {
         <span className="@w1520:min-h-296px @w1520:box-content @w1520:h-[29.2929vh] @w1520:w-8 @w1520:min-w-8 @w1520:overflow-visible @w1520:pb-4 bg-(--v-color-background-header) block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            role="none"
+            role="graphics-document"
             className="@w1520:h-296px @w1520:min-h-296px w500:w-60 @w1520:w-8 @w1520:min-w-8 w-240px h-[1.465rem] max-h-full max-w-full overflow-visible [fill:var(--v-color-text-primary)]"
           >
             <text x="0" y="50%" textAnchor="start" className="@w1520:hidden translate-y-4px">

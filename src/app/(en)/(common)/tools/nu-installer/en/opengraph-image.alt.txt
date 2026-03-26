@@ -1,0 +1,1 @@
+uga.dev Nu Html Checker Installer A macOS installer script for running Nu Html Checker locally with ease.

@@ -8,7 +8,7 @@ import ReactGA from 'react-ga4';
 import { RunButton, TextLink } from '@/components/Clickable';
 import { SITE_NAME } from '@/constants/meta';
 import clsx from 'clsx';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './CookieConsentDialog.module.css';
 
 const initGA = () => {
@@ -18,34 +18,82 @@ const initGA = () => {
   ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
 };
 
-const MajimenaNaiyou = ({ agreeLabel }: { agreeLabel: string }) => {
+type Lang = 'ja' | 'en';
+
+const i18n = {
+  ja: {
+    title: 'Cookieについて',
+    agreeLabel: '同意する',
+    disagreeLabel: '同意しない',
+    descriptions: [
+      '当サイトでは Google社が提供するアクセス解析ツール「Google Analytics」を利用しています。',
+      (agreeLabel: string) => `Cookieの利用に同意していただける場合は${agreeLabel}ボタンからご入場ください。`,
+    ] as const,
+    readMoreLabel: 'もっと詳しく',
+    moreDescriptions: [
+      '「Google Analytics」は利用状況の把握のためにCookieを使用して、利用者のウェブサイト訪問履歴などの情報を収集しています。',
+      '収集されたデータは匿名で集計されており、個人を特定する情報は含まれません。',
+      '「同意しない」を選択すると、Cookieを利用せずに当サイトが閲覧できます。',
+      '同意後もプライバシーポリシーページから再度拒否することができます。',
+      <>
+        詳細は
+        <TextLink href="https://policies.google.com/privacy?hl=ja" target="_blank">
+          Googleのプライバシーポリシー
+        </TextLink>
+        および
+        <TextLink href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank">
+          オプトアウト方法
+        </TextLink>
+        をご確認ください。
+      </>,
+    ] as const,
+  },
+  en: {
+    title: 'We use cookies',
+    agreeLabel: 'Accept',
+    disagreeLabel: 'Decline',
+    descriptions: [
+      'We use Google Analytics to understand how visitors use this site.',
+      (agreeLabel: string) => `If you agree to the use of cookies, click "${agreeLabel}" to continue using this site.`,
+    ] as const,
+    readMoreLabel: 'Learn more about cookies',
+    moreDescriptions: [
+      'Google Analytics uses cookies to collect information about how visitors use this site in order to analyze usage.',
+      'The collected data is aggregated and anonymized, and does not identify individual users.',
+      'If you choose "Decline", you can continue to browse this site without the use of cookies.',
+      'You can change your preference at any time from the privacy policy page.',
+      <>
+        For more details, please refer to{' '}
+        <TextLink href="https://policies.google.com/privacy?hl=en" target="_blank" lang="en">
+          Google's Privacy Policy
+        </TextLink>{' '}
+        and{' '}
+        <TextLink href="https://tools.google.com/dlpage/gaoptout?hl=en" target="_blank" lang="en">
+          opt-out options
+        </TextLink>
+        .
+      </>,
+    ] as const,
+  },
+} satisfies Record<Lang, unknown>;
+
+const MajimenaNaiyou = ({ lang = 'ja', agreeLabel }: { lang?: Lang; agreeLabel: string }) => {
+  const t = i18n[lang];
+
   return (
     <>
-      <p>当サイトでは Google社が提供するアクセス解析ツール「Google Analytics」を利用しています。</p>
-      <p>Cookieの利用に同意していただける場合は{agreeLabel}からご入場ください。</p>
+      <p>{t.descriptions[0]}</p>
+      <p>{t.descriptions[1](agreeLabel)}</p>
       <details className="group">
         <summary className="group-open:list-[disclosure-open]! list-item w-fit [list-style:inside_disclosure-closed] after:hidden hover:underline">
-          もっと詳しく
+          {t.readMoreLabel}
         </summary>
         <div className="pl-4 pt-4">
-          <p>
-            「Google
-            Analytics」は利用状況の把握およびサービス改善のためにCookieを使用して、利用者のウェブサイト訪問履歴などの情報を収集しています。
-          </p>
-          <p>収集されたデータは匿名で集計されており、個人を特定する情報は含まれません。</p>
-          <p>「同意しない」を選択すると、Cookieを利用せずに当サイトが閲覧できます。</p>
-          <p>同意後もプライバシーポリシーページから再度拒否することができます。</p>
-          <p className="mt-2">
-            詳細は
-            <TextLink href="https://policies.google.com/privacy?hl=ja" target="_blank">
-              Googleのプライバシーポリシー
-            </TextLink>
-            および
-            <TextLink href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank">
-              オプトアウト方法
-            </TextLink>
-            をご確認ください。
-          </p>
+          <p>{t.moreDescriptions[0]}</p>
+          <p>{t.moreDescriptions[1]}</p>
+          <p>{t.moreDescriptions[2]}</p>
+          <p>{t.moreDescriptions[3]}</p>
+          <p className="mt-2">{t.moreDescriptions[4]}</p>
         </div>
       </details>
     </>
@@ -55,7 +103,9 @@ const MajimenaNaiyou = ({ agreeLabel }: { agreeLabel: string }) => {
 export function CookieConsentDialog() {
   const id = useId();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const isInEnglish = usePathname().endsWith('/en/');
   const isFromSNSApp = useSearchParams()?.get('utm_medium') === 'social';
+
   const shouldShowDialog = useSyncExternalStore(
     () => () => () => {},
     () => {
@@ -101,7 +151,9 @@ export function CookieConsentDialog() {
     return;
   }
 
-  if (isFromSNSApp === true) {
+  if (isFromSNSApp || isInEnglish) {
+    const t = i18n[isInEnglish ? 'en' : 'ja'];
+
     return (
       <dialog
         ref={dialogRef}
@@ -111,19 +163,19 @@ export function CookieConsentDialog() {
         open
       >
         <h2 id={id} className="mb-2 font-bold">
-          Cookieについて
+          {t.title}
         </h2>
         <div className="text-xs">
-          <MajimenaNaiyou agreeLabel="同意ボタン" />
+          <MajimenaNaiyou lang={isInEnglish ? 'en' : 'ja'} agreeLabel={t.agreeLabel} />
         </div>
         <div className="@w400:mr-0 mx-auto mt-2 grid w-fit grid-cols-2 gap-4">
           <p className="">
-            <RunButton onClick={() => closeDialog('rejected')}>同意しない</RunButton>
+            <RunButton onClick={() => closeDialog('rejected')}>{t.disagreeLabel}</RunButton>
           </p>
 
           <p className="">
             <RunButton type="button" onClick={() => closeDialog('accepted')}>
-              同意する
+              {t.agreeLabel}
             </RunButton>
           </p>
         </div>

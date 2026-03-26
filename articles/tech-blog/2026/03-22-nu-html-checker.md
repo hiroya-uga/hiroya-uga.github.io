@@ -6,8 +6,6 @@ topics: [HTML, Web標準, WHATWG, Tips]
 proficiencyLevel: 'Beginner'
 ---
 
-てｓｔ
-
 :::info
 [macOS向けvnuインストーラー](/tools/nu-installer/)を公開しました（2026.03.25）。
 :::

@@ -22,7 +22,7 @@ type Name =
 const map = new Map<Name, boolean>();
 
 export const SvgIcon = ({ name, alt }: { name: Name; alt: string }) => {
-  const [isReady, setIsReady] = useState(map.get(name) ?? false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (typeof globalThis.document === 'undefined') {
@@ -58,7 +58,7 @@ export const SvgIcon = ({ name, alt }: { name: Name; alt: string }) => {
       role={alt ? 'graphics-symbol' : 'presentation'}
       aria-label={alt || undefined}
       className={clsx(['absolute inset-0 block size-full transition-opacity', isReady === false && 'opacity-0'])}
-      suppressHydrationWarning
+      // suppressHydrationWarning
     >
       <use href={`#${svgId}`} />
     </svg>

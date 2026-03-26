@@ -3,12 +3,37 @@
 import { getTheme } from '@/utils/get-theme';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 
 const { window } = globalThis;
 const THEME_SWITCH_DESCRIPTION_ID = 'theme-switch-description';
 
+type Lang = 'ja' | 'en';
+
+const i18n = {
+  ja: {
+    title: '外観の切り替え',
+    darkMode: 'ダークモード',
+    lightMode: 'ライトモード',
+    toDarkMode: 'ダークモードに切り替える',
+    toLightMode: 'ライトモードに切り替える',
+    currentThemeIs: (theme: string) =>
+      `現在のテーマは「${theme === 'dark' ? i18n.ja.darkMode : i18n.ja.lightMode}」です。`,
+  },
+  en: {
+    title: 'Toggle appearance',
+    darkMode: 'Dark mode',
+    lightMode: 'Light mode',
+    toDarkMode: 'Switch to dark mode',
+    toLightMode: 'Switch to light mode',
+    currentThemeIs: (theme: string) =>
+      `The current theme is "${theme === 'dark' ? i18n.en.darkMode : i18n.en.lightMode}".`,
+  },
+} satisfies Record<Lang, unknown>;
+
 export const ThemeSwitch = () => {
+  const lang = usePathname().endsWith('/en/') ? 'en' : 'ja';
   const id = THEME_SWITCH_DESCRIPTION_ID;
   const styleElement = useMemo(() => {
     if (window === undefined) {
@@ -73,6 +98,8 @@ export const ThemeSwitch = () => {
     changeTheme(theme);
   }, [theme, changeTheme]);
 
+  const t = i18n[lang];
+
   return (
     <>
       <button
@@ -91,11 +118,9 @@ export const ThemeSwitch = () => {
           globalThis.dispatchEvent(new StorageEvent('storage', { key: 'theme' }));
         }}
         aria-describedby={id}
-        title={theme === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える'}
+        title={theme === 'dark' ? t.toLightMode : t.toDarkMode}
       >
-        <span className="absolute inset-0 select-none overflow-hidden rounded-full text-transparent">
-          外観の切り替え
-        </span>
+        <span className="sr-only">{t.title}</span>
 
         <svg
           version="1.1"
@@ -174,7 +199,7 @@ export const ThemeSwitch = () => {
       </button>
 
       <span id={id} aria-live="assertive" className="sr-only select-none">
-        現在のテーマは「{theme === 'dark' ? 'ダークモード' : 'ライトモード'}」です。
+        {t.currentThemeIs(theme)}
       </span>
     </>
   );

@@ -5,8 +5,8 @@ import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton.module.css';
 import { SvgIcon } from '@/components/Icons';
+import { PrivacyPolicyMessage } from '@/components/specific/message';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { PrivacyPolicyMessage } from '@/constants/message';
 import { setSelectionRange } from '@/utils/set-selection-range';
 import clsx from 'clsx';
 import { createPortal } from 'react-dom';
@@ -150,7 +150,7 @@ export const MarkupDevSupporterHelpButton = () => {
               <p className="mb-paragraph mt-2 flex gap-1 text-sm">
                 <span>※</span>
                 <small>
-                  <PrivacyPolicyMessage />
+                  <PrivacyPolicyMessage lang="ja" />
                 </small>
               </p>
 

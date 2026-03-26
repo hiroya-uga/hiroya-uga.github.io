@@ -17,6 +17,8 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
     beforeSubTitle,
     afterSubTitle,
     description,
+    languages,
+    locale,
   } = (() => {
     if (pathname in SEO) {
       return SEO[pathname];
@@ -27,6 +29,7 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
       beforeSubTitle: '',
       afterSubTitle: '',
       description: '',
+      languages: undefined,
     };
   })();
 
@@ -46,6 +49,9 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
     description,
     alternates: {
       canonical: `${URL_ORIGIN}${pathname}`,
+      ...(languages && {
+        languages: Object.fromEntries(Object.entries(languages).map(([lang, path]) => [lang, `${URL_ORIGIN}${path}`])),
+      }),
     },
     twitter: {
       creator: '@hiroya_UGA',
@@ -55,7 +61,7 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
     },
     openGraph: {
       siteName: SITE_NAME,
-      locale: 'ja_JP',
+      locale: locale || 'ja_JP',
     },
   };
 };
