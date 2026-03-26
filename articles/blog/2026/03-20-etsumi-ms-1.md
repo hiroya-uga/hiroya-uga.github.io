@@ -1,7 +1,7 @@
 ---
 title: "MT-24の相棒、\nメタルスマホホルダー\nETSUMI MS-1（E-2478）"
 ogImage: './03-20-thumb.jpg'
-publishedAt: '2026-03-20'
+publishedAt: '2026-03-20T03:16:16+09:00'
 topics: [スマホアクセサリー, スマホホルダー, レビュー]
 ---
 

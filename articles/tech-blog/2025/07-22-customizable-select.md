@@ -1,6 +1,6 @@
 ---
 title: "CSSでカスタマイズ可能な\n`select`要素が誕生"
-publishedAt: '2025-07-23'
+publishedAt: '2025-07-23T03:05:38+09:00'
 topics: [HTML, CSS, フォーム, Web標準]
 proficiencyLevel: 'Intermediate'
 ---

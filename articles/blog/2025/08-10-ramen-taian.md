@@ -1,7 +1,7 @@
 ---
 title: "思い出のラーメン屋さん\n「らあめん大安」"
 ogImage: './08-10-ramen-taian.jpg'
-publishedAt: '2025-08-10'
+publishedAt: '2025-08-10T07:22:48+09:00'
 topics: [日記, ラーメン, 八王子]
 ---
 

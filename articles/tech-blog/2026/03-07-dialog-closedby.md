@@ -1,6 +1,6 @@
 ---
 title: "<dialog closedby=\"any\">\nが便利すぎる"
-publishedAt: '2026-03-07'
+publishedAt: '2026-03-07T16:45:29+09:00'
 topics: [HTML, Web標準, dialog要素, Tips]
 proficiencyLevel: 'Beginner'
 ---

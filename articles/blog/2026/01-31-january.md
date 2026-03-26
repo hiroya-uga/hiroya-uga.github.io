@@ -1,7 +1,7 @@
 ---
 title: "あけましておめでとう\nございました"
 ogImage: './01-31-january.jpg'
-publishedAt: '2026-01-31'
+publishedAt: '2026-01-31T01:57:34+09:00'
 topics: [日記]
 ---
 

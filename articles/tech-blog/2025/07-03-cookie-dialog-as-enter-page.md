@@ -1,6 +1,6 @@
 ---
 title: "いにしえのEnterページに\n思いを馳せる"
-publishedAt: '2025-07-03'
+publishedAt: '2025-07-03T22:39:02+09:00'
 topics: [実装レポート, 懐古厨]
 ---
 
