@@ -239,6 +239,11 @@ html:has(.container) {
     }
   }
 
+  customされたimg要素ˆ-ˆ {
+    margin: 0 auto;
+    background-color: var(--background-color-secondary);
+  }
+
   :is(ul, ol) {
     font-size: var(--v-list-font-size);
   }
