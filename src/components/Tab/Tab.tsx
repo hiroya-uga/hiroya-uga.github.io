@@ -34,6 +34,7 @@ export const Tab = {
         .filter((item): item is React.ReactElement<Props['Panel']> => item.type === Tab.Panel)
         .map((item) => item.props.tabKey);
     }, [children]);
+
     const [currentKey, setCurrentKey] = useState(tabKeys[0]);
     const onkeydown = useCallback((e: React.KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) {
@@ -91,6 +92,7 @@ export const Tab = {
             >
               {tabKeys.map((tabKey) => {
                 const isSelected = currentKey === tabKey;
+                const safeTabKey = tabKey.replace(/\s/g, '-');
 
                 return (
                   <button
@@ -102,7 +104,7 @@ export const Tab = {
                         : 'border-b-(--v-tab-border) bg-(--v-tab-inactive) hover:bg-(--v-tab-hover)',
                     ])}
                     key={tabKey}
-                    id={`${id}-tab-${tabKey}`}
+                    id={`${id}-tab-${safeTabKey}`}
                     tabIndex={isSelected ? 0 : -1}
                     onClick={() => {
                       setCurrentKey(tabKey);
@@ -110,7 +112,7 @@ export const Tab = {
                     }}
                     onKeyDown={onkeydown}
                     role="tab"
-                    aria-controls={`${id}-panel-${tabKey}`}
+                    aria-controls={`${id}-panel-${safeTabKey}`}
                     aria-selected={isSelected}
                   >
                     {tabKey}
@@ -126,15 +128,16 @@ export const Tab = {
   },
   Panel: ({ tabKey, children }: Props['Panel']) => {
     const { currentKey, id } = useContext(TabContext);
+    const safeTabKey = tabKey.replace(/\s/g, '-');
 
     return (
       <div
-        id={`${id}-panel-${tabKey}`}
+        id={`${id}-panel-${safeTabKey}`}
         tabIndex={0}
         className="px-4 pt-8"
         hidden={currentKey !== tabKey}
         role="tabpanel"
-        aria-labelledby={`${id}-tab-${tabKey}`}
+        aria-labelledby={`${id}-tab-${safeTabKey}`}
       >
         {children}
       </div>
