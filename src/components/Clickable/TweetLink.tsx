@@ -6,6 +6,7 @@ type Props = {
   className?: string;
   message?: string;
   hashtags?: string[];
+  lang?: 'ja' | 'en';
 };
 
 export const TweetLink = (props: Props) => {
@@ -33,6 +34,8 @@ export const TweetLink = (props: Props) => {
       }
     : {};
 
+  const lang = props.lang ?? 'ja';
+
   return (
     <a
       {...shareButtonProps}
@@ -40,9 +43,10 @@ export const TweetLink = (props: Props) => {
         props.className ??
         'not-[[href]]:opacity-0 not-[[href]]:invisible mx-auto flex w-fit place-items-center gap-1 rounded-xl border border-solid bg-black py-0.5 pl-4 pr-3 text-sm text-white no-underline transition-[opacity,visibility,box-shadow] [corner-shape:squircle] hover:underline hover:shadow-lg sm:py-0 sm:text-base'
       }
-      title="Twitter(X)でシェアする"
+      title={lang === 'ja' ? 'Twitter(X)でシェアする' : 'Share on Twitter(X)'}
     >
-      <span className="text-[1.2em]">𝕏</span>拍手する
+      <span className="text-[1.2em]">𝕏</span>
+      {lang === 'ja' ? '拍手する' : 'Share'}
     </a>
   );
 };

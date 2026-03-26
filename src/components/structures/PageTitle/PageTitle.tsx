@@ -1,4 +1,4 @@
-import { PrivacyPolicyMessage } from '@/constants/message';
+import { PrivacyPolicyMessage } from '@/components/specific/message';
 import clsx from 'clsx';
 
 export const PageTitle = ({
@@ -8,6 +8,7 @@ export const PageTitle = ({
   following,
   description,
   children,
+  lang = 'ja',
   shouldShowPrivacyPolicyMessage = false,
   shouldShowNonAccessibleMessage = false,
 }: {
@@ -17,6 +18,7 @@ export const PageTitle = ({
   following?: string;
   children?: React.ReactNode;
   description?: string;
+  lang?: 'ja' | 'en';
   shouldShowPrivacyPolicyMessage?: boolean;
   shouldShowNonAccessibleMessage?: boolean;
 }) => {
@@ -55,7 +57,9 @@ export const PageTitle = ({
       {shouldShowNonAccessibleMessage && (
         <p className="mb-paragraph">
           <strong className="text-alert">
-            ※このページは動作確認用ページです。 一部アクセシビリティに配慮していないコンテンツが含まれます。
+            {lang === 'ja'
+              ? '※このページは動作確認用ページです。 一部アクセシビリティに配慮していないコンテンツが含まれます。'
+              : '※This page is for testing purposes. Some content may not be accessible.'}
           </strong>
         </p>
       )}
@@ -68,9 +72,9 @@ export const PageTitle = ({
 
         {shouldShowPrivacyPolicyMessage && (
           <p className="flex gap-1 text-sm">
-            <span>※</span>
+            <span>{lang === 'ja' ? '※' : '*'}</span>
             <small>
-              <PrivacyPolicyMessage />
+              <PrivacyPolicyMessage lang={lang} />
             </small>
           </p>
         )}

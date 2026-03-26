@@ -1,11 +1,39 @@
 import { JobRole } from '@/constants/works';
 
 export const FOOTER_LINK_LIST = [
-  { href: '/about', title: '当サイトおよび管理人について' },
-  { href: '/privacy-policy', title: 'プライバシーポリシー' },
-  { href: '/disclaimer', title: '免責事項' },
-  { href: '/contact', title: 'お問い合わせ' },
-  { href: 'https://github.com/hiroya-uga/hiroya-uga.github.io/issues', title: 'フィードバック', target: '_blank' },
+  {
+    href: '/about',
+    label: {
+      ja: '当サイトおよび管理人について',
+      en: 'About (JP)',
+    },
+  },
+  {
+    href: '/privacy-policy',
+    label: {
+      ja: 'プライバシーポリシー',
+      en: 'Privacy Policy (JP)',
+    },
+  },
+  {
+    href: '/disclaimer',
+    label: {
+      ja: '免責事項',
+      en: 'Disclaimer (JP)',
+    },
+  },
+  {
+    href: '/contact',
+    label: {
+      ja: 'お問い合わせ',
+      en: 'Contact (JP)',
+    },
+  },
+  {
+    href: 'https://github.com/hiroya-uga/hiroya-uga.github.io/issues',
+    label: { ja: 'フィードバック', en: 'Feedback' },
+    target: '_blank',
+  },
 ];
 
 export type EmojiLinkListItem = {

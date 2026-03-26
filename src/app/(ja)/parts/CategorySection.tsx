@@ -35,6 +35,12 @@ const ArticleListForTop = async () => {
     return 0;
   });
 
+  const intl = new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
   return (
     <>
       <div className="@container">
@@ -49,7 +55,7 @@ const ArticleListForTop = async () => {
                 key={article.pathname}
               >
                 <time dateTime={article.publishedAt} className="@w500:col-start-1 @w500:mr-0 mr-3 font-mono text-sm">
-                  {article.publishedAt.replace(/-/g, '/')}
+                  {intl.format(new Date(article.publishedAt))}
                 </time>
                 <span className="@w500:col-start-2 text-center font-mono text-sm">
                   {resolveCategoryName(article.pathname)}

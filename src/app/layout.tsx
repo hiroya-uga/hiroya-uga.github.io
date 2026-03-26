@@ -45,6 +45,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           dangerouslySetInnerHTML={{
             __html: `
+            if (/\\/en(\\/|$)/.test(window.location.pathname)) {
+              document.documentElement.lang = 'en';
+            }
+
             try {
               const theme = JSON.parse(localStorage.getItem('theme'))?.value || 'light';
               document.documentElement.setAttribute('data-theme', theme);
@@ -65,6 +69,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               } else {
                 if (window.location.search.includes('utm_medium=social')) {
                   document.documentElement.setAttribute('data-cookie-consent', 'waiting-from-sns');
+                }
+                if (window.location.pathname.includes('/en/')) {
+                  document.documentElement.setAttribute('data-cookie-consent', 'waiting-in-en');
                 }
               }
             } catch {}

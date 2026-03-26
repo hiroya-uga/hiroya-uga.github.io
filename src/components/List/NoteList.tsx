@@ -1,4 +1,9 @@
-export const NoteList = ({ list }: { list: (string | { value: React.ReactNode; key: string })[] }) => {
+interface Props {
+  list: (string | { value: React.ReactNode; key: string })[];
+  symbol?: string;
+}
+
+export const NoteList = ({ list, symbol = '※' }: Props) => {
   if (list.length === 0) {
     return null;
   }
@@ -8,7 +13,7 @@ export const NoteList = ({ list }: { list: (string | { value: React.ReactNode; k
 
     return (
       <p className="palt flex gap-x-1 text-xs leading-relaxed sm:text-sm">
-        <span>※</span>
+        <span>{symbol}</span>
         <small>{value}</small>
       </p>
     );
@@ -22,7 +27,7 @@ export const NoteList = ({ list }: { list: (string | { value: React.ReactNode; k
 
         return (
           <li key={key} className="palt sm:not-last:mb-1 flex gap-x-1 text-xs leading-relaxed sm:text-sm">
-            <span>※</span>
+            <span>{symbol}</span>
             <small>{value}</small>
           </li>
         );

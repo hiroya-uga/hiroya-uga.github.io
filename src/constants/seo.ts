@@ -3,7 +3,14 @@ import { Metadata } from 'next';
 
 export const SEO: Record<
   string,
-  { title: string; description: string; beforeSubTitle?: string; afterSubTitle?: string } & Pick<Metadata, 'robots'>
+  {
+    title: string;
+    description: string;
+    beforeSubTitle?: string;
+    afterSubTitle?: string;
+    languages?: Record<string, string>;
+    locale?: 'ja_JP' | 'en_US';
+  } & Pick<Metadata, 'robots'>
 > = {
   '/': {
     title: SITE_NAME,
@@ -397,11 +404,26 @@ export const SEO: Record<
     afterSubTitle: 'HTMLの品質をチェックするブックマークレット作成ツール',
     description:
       'Nu Html CheckerへHTMLを送信するブックマークレットが作れるジェネレーターです。\nローカル環境やイントラでホスティングされているNu Html Checkerにも対応しています。',
+    languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
+  },
+  '/tools/nu-bookmarklet-generator/en': {
+    title: 'Nu Html Checker Bookmarklet Generator',
+    afterSubTitle: 'Create bookmarklets to check HTML quality',
+    description:
+      'A generator for creating bookmarklets that send HTML to Nu Html Checker.\nWorks with locally hosted and intranet-hosted Nu Html Checker instances.',
+    languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
+    locale: 'en_US',
   },
   '/tools/nu-installer': {
     title: 'Nu Html Checker Installer',
-    afterSubTitle: 'HTMLの品質をチェックするツールのインストーラー',
     description: 'Nu Html Checkerをローカルで簡単に使うためのmacOS向けインストーラスクリプトです。',
+    languages: { ja: '/tools/nu-installer', en: '/tools/nu-installer/en' },
+  },
+  '/tools/nu-installer/en': {
+    title: 'Nu Html Checker Installer',
+    description: 'A macOS installer script for running Nu Html Checker locally with ease.',
+    languages: { ja: '/tools/nu-installer', en: '/tools/nu-installer/en' },
+    locale: 'en_US',
   },
   '/tools/markup-dev-supporter': {
     title: 'HTMLでtable実装するときとかに役立つツール',

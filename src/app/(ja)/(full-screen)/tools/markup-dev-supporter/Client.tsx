@@ -509,14 +509,14 @@ export const TableDevSupporterContent = () => {
 
         <div className="px-2.5 pb-2.5">
           <ul className="border- mt-10 space-y-2 border-t border-dashed border-[#9c9c9c] pb-5 pt-10 text-sm text-[#9c9c9c] sm:space-y-1 sm:text-xs">
-            {FOOTER_LINK_LIST.map(({ href, title, target }) => {
+            {FOOTER_LINK_LIST.map(({ href, label, target }) => {
               return (
                 <li
                   key={href}
                   className="relative pl-2.5 before:absolute before:left-0 before:top-2.5 before:size-1 before:rounded-full before:bg-[#9c9c9c]"
                 >
                   <Link href={href} target={target} className="text-inherit">
-                    {title}
+                    {label.ja}
                     {target === '_blank' && (
                       <svg
                         role="img"

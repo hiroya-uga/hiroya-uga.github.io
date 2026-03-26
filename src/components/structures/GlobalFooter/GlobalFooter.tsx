@@ -14,6 +14,7 @@ import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
 
 import styles from '@/components/structures/GlobalFooter/GlobalFooter.module.css';
+import { OPEN_NEW_TAB } from '@/constants/messages';
 
 const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname() ?? '';
@@ -38,7 +39,7 @@ const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
             return (
               <li key={path}>
                 <a aria-current="page" className="leading-inherit text-inherit">
-                  {SEO[path].title}
+                  {pathname.endsWith('/en/') ? 'English version' : SEO[path].title}
                 </a>
               </li>
             );
@@ -67,7 +68,7 @@ const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
       {currentPageTitle && (
         <li>
           <a aria-current="page" className="leading-inherit text-inherit">
-            {currentPageTitle}
+            {pathname.endsWith('/en/') ? 'English version' : currentPageTitle}
           </a>
         </li>
       )}
@@ -80,14 +81,30 @@ type Props = {
   currentPageTitle?: string;
 };
 
+type Lang = 'ja' | 'en';
+
+const i18n = {
+  ja: {
+    breadcrumb: 'サイト内の現在位置',
+    snsLinks: 'SNSリンク',
+  },
+  en: {
+    breadcrumb: 'Current location within the site',
+    snsLinks: 'SNS Links',
+  },
+} satisfies Record<Lang, unknown>;
+
 export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname();
   const isTop = pathname === '/';
+  const lang = pathname.endsWith('/en/') ? 'en' : 'ja';
+
+  const t = i18n[lang];
 
   return (
     <>
       {isTop || (
-        <nav className={clsx(['@container mt-[20vh]', styles.breadcrumb])} aria-label="サイト内の現在位置">
+        <nav className={clsx(['@container mt-[20vh]', styles.breadcrumb])} aria-label={t.breadcrumb}>
           <div className="max-w-structure px-content-inline @w1024:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))] mx-auto py-4 text-sm">
             <ol className="flex flex-wrap gap-y-0.5 leading-normal">
               {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
@@ -104,7 +121,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                 {/* m-0 for bootstrap pages */}
                 <ul
                   className="@w1024:justify-end @w1024:gap-2 m-0 flex flex-wrap items-center justify-center gap-4 dark:invert"
-                  aria-label="SNSリンク"
+                  aria-label={t.snsLinks}
                 >
                   {SNS_LINKS.map(({ href, alt, ...props }) => {
                     return (
@@ -132,7 +149,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
               )}
             >
               <ul className="@w768:flex @w768:grow @w768:flex-wrap @w768:justify-start @w768:gap-y-2 text-xs">
-                {FOOTER_LINK_LIST.map(({ href, title, target }, index) => {
+                {FOOTER_LINK_LIST.map(({ href, label, target }, index) => {
                   const className = clsx([
                     "@w768:float-none @w768:p-0 float-left py-1 after:mx-2.5 after:content-['|']",
                     index === FOOTER_LINK_LIST.length - 1 && '@w768:after:hidden',
@@ -149,10 +166,10 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                         target={target}
                         rel={target === '_blank' ? 'noopener noreferrer' : undefined}
                       >
-                        {title}{' '}
+                        {label[lang]}{' '}
                         {target === '_blank' ? (
                           <span className="mb-1px relative ml-[0.2em] inline-block size-[1em] align-middle">
-                            <SvgIcon name="new-tab" alt="新しいタブで開く" />
+                            <SvgIcon name="new-tab" alt={OPEN_NEW_TAB[lang]} />
                           </span>
                         ) : null}
                       </Link>
