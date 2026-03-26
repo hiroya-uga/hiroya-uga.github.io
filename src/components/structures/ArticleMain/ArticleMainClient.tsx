@@ -48,7 +48,7 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
     span.textContent = '';
 
     const length = getLength(article);
-    const fullText = `文字数：約${length}／所要時間：${getReadingTime(length)}分`;
+    const fullText = `／ 文字数：約${length} ／ 所要時間：${getReadingTime(length)}分`;
 
     if (isAlready) {
       span.textContent = fullText;
@@ -103,23 +103,32 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
           ])}
         >
           {updatedAt && (
-            <>
+            <span className="block">
               最終更新日：
               <time dateTime={updatedAt} className="text-secondary mr-2">
                 {formattedDateString(new Date(updatedAt))}
               </time>
-              公開日：
-            </>
+            </span>
           )}
+          {publishedAt && '公開日：'}
           <time dateTime={publishedAt} className="mr-2">
             {formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}
           </time>
           <span ref={ref} className="min-h-lh" />
         </span>
         <noscript>
-          <time dateTime={publishedAt} className="animate-fade-in block opacity-0 [animation-delay:300ms]">
-            {formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}
-          </time>
+          <span className="animate-fade-in block opacity-0 [animation-delay:300ms]">
+            {updatedAt && (
+              <span className="block">
+                最終更新日：
+                <time dateTime={updatedAt} className="text-secondary mr-2">
+                  {formattedDateString(new Date(updatedAt))}
+                </time>
+              </span>
+            )}
+            {publishedAt && '公開日：'}
+            <time dateTime={publishedAt}>{formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}</time>
+          </span>
         </noscript>
       </p>
     </>
