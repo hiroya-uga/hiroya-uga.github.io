@@ -1,6 +1,6 @@
 ---
 title: "モーダルダイアログの\nスクロールロックで\nレイアウトがガタつく問題"
-publishedAt: '2026-03-09'
+publishedAt: '2026-03-09T21:48:41+09:00'
 topics: [CSS, Web標準, dialog要素, Tips]
 proficiencyLevel: 'Beginner'
 ---

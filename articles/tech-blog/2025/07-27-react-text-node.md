@@ -1,6 +1,6 @@
 ---
 title: "Reactのテキストは\n記述の仕方で読み上げが\n変わってしまう件について"
-publishedAt: '2025-07-27'
+publishedAt: '2025-07-27T03:26:54+09:00'
 topics: [React, VoiceOver, ユーザビリティ, Tips]
 dependencies: 'React'
 proficiencyLevel: 'Intermediate'

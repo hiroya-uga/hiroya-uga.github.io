@@ -1,7 +1,7 @@
 ---
 title: "スーパーなスーパー銭湯で\n出会った\n世界一美しいイカ"
 ogImage: './07-16-spa-laqua.jpg'
-publishedAt: '2025-07-16'
+publishedAt: '2025-07-16T02:33:42+09:00'
 topics: [日記]
 ---
 

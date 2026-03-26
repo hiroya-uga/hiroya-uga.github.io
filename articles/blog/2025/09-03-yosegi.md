@@ -1,7 +1,7 @@
 ---
 title: '製作手法、ヅクとムク。'
 ogImage: './09-03-yosegi.jpg'
-publishedAt: '2025-09-04'
+publishedAt: '2025-09-04T08:49:08+09:00'
 topics: [日記, 旅行, 箱根]
 ---
 

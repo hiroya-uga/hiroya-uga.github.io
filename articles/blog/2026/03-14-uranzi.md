@@ -1,7 +1,7 @@
 ---
 title: "スマホからフルサイズまで\n載せられるコンパクトな卓上三脚 \nMT-24"
 ogImage: './03-14-thumb.jpg'
-publishedAt: '2026-03-14'
+publishedAt: '2026-03-14T21:40:45+09:00'
 topics: [カメラ機材, レビュー]
 ---
 

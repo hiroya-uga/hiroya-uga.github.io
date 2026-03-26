@@ -1,7 +1,7 @@
 ---
 title: "Claude Codeが\n考えてる時に\n出力される文字列は\nスピナーワードというらしい。"
-publishedAt: '2026-03-06'
-updatedAt: '2026-03-09'
+publishedAt: '2026-03-06T11:25:04+09:00'
+updatedAt: '2026-03-09T19:59:26+09:00'
 topics: [生成AI, 雑学]
 dependencies: 'Claude Code'
 proficiencyLevel: 'Beginner'

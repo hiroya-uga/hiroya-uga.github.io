@@ -1,7 +1,7 @@
 ---
 title: 'わたくし、結婚いたしました。'
 ogImage: './07-24-got-married.jpg'
-publishedAt: '2025-07-25'
+publishedAt: '2025-07-25T03:03:49+09:00'
 topics: [日記]
 ---
 
