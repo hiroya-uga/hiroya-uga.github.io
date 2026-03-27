@@ -9,6 +9,7 @@
     "build:analyze": "ANALYZE=true next build",
     "predev": "node scripts/copy-blog-images.mjs",
     "dev": "next dev -p 3001",
+    "dev:articles": "node scripts/watch-blog-images.mjs",
     "fix": "yarn lint:fix && yarn format:fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
