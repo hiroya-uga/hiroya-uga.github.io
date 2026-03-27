@@ -1,4 +1,7 @@
-let customImageElementCounter = 0;
+const ref = {
+  customImageElementIndex: 0,
+  lastPathName: '',
+};
 const styleId = 'customされたimg要素ˆ-ˆのモーダル-styles';
 
 const injectModalStyles = () => {
@@ -22,8 +25,8 @@ const injectModalStyles = () => {
         position: fixed;
         inset: 0;
         overflow: clip auto;
-        pointer-events: none;
         overscroll-behavior: contain;
+        cursor: zoom-out;
 
         &[open] {
           display: grid;
@@ -41,18 +44,11 @@ const injectModalStyles = () => {
         }
       }
 
-      .customされたimg要素ˆ-ˆのモーダル__content {
-        pointer-events: auto;
-      }
-
       .customされたimg要素ˆ-ˆのモーダル__caption {
-        position: sticky;
-        bottom: 0;
         color: #fff;
         transition: 0.3s opacity ease-out;
-        pointer-events: auto;
         cursor: auto;
-        width: fit-content;
+        container-type: inline-size;
         mix-blend-mode: exclusion;
         padding: 0 0 0 0.25em;
 
@@ -71,7 +67,6 @@ const injectModalStyles = () => {
         display: grid;
         place-items: center;
         border-radius: 50%;
-        pointer-events: auto;
         cursor: default;
         transition: 0.3s background-color ease-out;
 
@@ -85,23 +80,20 @@ const injectModalStyles = () => {
       .customされたimg要素ˆ-ˆのモーダル__button svg {
         width: 20px;
         height: 20px;
+        pointer-events: none;
       }
 
       .customされたimg要素ˆ-ˆのモーダル__image {
         display: block;
-        /* 閉じるボタン分 = 60px * 2 */
-        max-width: calc(100dvw - 120px);
-        max-height: calc(100dvh - 120px);
         width: auto;
         height: auto;
+        margin: auto;
+        /* 閉じるボタン分 = 60px * 2 */
+        max-height: calc(100dvh - 120px);
       }
 
       [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
         --v-backdrop: rgba(0, 0, 0, 0.3);
-      }
-
-      :root:has(dialog.customされたimg要素ˆ-ˆのモーダル:modal) {
-        cursor: zoom-out;
       }
     `;
   document.head.appendChild(element);
@@ -205,12 +197,17 @@ const showModal = ({
     </svg>
   `,
   );
-  closeButton.addEventListener('click', close);
   dialog.appendChild(content);
   dialog.appendChild(closeButton);
 
   show();
 
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog || e.target === closeButton || e.target === originSizeImage) {
+      e.preventDefault();
+      close();
+    }
+  });
   dialog.addEventListener('cancel', (e) => {
     e.preventDefault();
     close();
@@ -349,8 +346,14 @@ export const CustomImage = () => {
         shadowRoot.adoptedStyleSheets = [style];
       }
 
-      const id = `custom-img-${++customImageElementCounter}`;
-      const index = customImageElementCounter;
+      if (ref.lastPathName !== window.location.pathname) {
+        ref.customImageElementIndex = 0;
+        ref.lastPathName = window.location.pathname;
+      }
+
+      const customImageElementIndex = ++ref.customImageElementIndex;
+      const id = `custom-img-${ref.customImageElementIndex}`;
+      const index = customImageElementIndex;
 
       img.alt = `${alt ? `図${index}：${alt}` : `図${index}`}`;
       img.width = width;
