@@ -1,11 +1,10 @@
 import { HelpLink } from '@/components/Clickable';
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
 import { Suspense } from 'react';
 import { NuValidatorBookmarkletGenerator } from './Client';
-
-type Lang = 'ja' | 'en';
 
 const i18n = {
   ja: {
@@ -30,7 +29,13 @@ const i18n = {
   },
 } satisfies Record<Lang, unknown>;
 
-export const ToolsNuBookmarkletGeneratorPage = ({ lang, metadata }: { lang: Lang; metadata: Metadata }) => {
+export const ToolsNuBookmarkletGeneratorPage = ({
+  lang,
+  metadata,
+}: {
+  lang: Lang;
+  metadata: Pick<Metadata, 'pageTitle' | 'following' | 'description'>;
+}) => {
   const t = i18n[lang];
 
   return (

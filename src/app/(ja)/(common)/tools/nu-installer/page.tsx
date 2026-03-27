@@ -4,5 +4,5 @@ import { getMetadata } from '@/utils/get-metadata';
 export const metadata = getMetadata('/tools/nu-installer');
 
 export default function Page() {
-  return <ToolsNuInstallerPage lang="ja" />;
+  return <ToolsNuInstallerPage pageTitle={metadata.pageTitle} lang="ja" />;
 }

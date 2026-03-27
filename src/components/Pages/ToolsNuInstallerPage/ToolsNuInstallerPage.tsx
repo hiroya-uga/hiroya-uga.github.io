@@ -1,11 +1,10 @@
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { CodeBlock } from '@/components/CodeBlock';
+import { Lang } from '@/types/lang';
 import Link from 'next/link';
 
 const INSTALL_COMMAND =
   'curl -fsSL https://github.com/hiroya-uga/vnu-installer/releases/latest/download/install.sh | zsh';
-
-type Lang = 'ja' | 'en';
 
 const i18n = {
   ja: {
@@ -95,13 +94,18 @@ const i18n = {
   },
 } satisfies Record<Lang, unknown>;
 
-export const ToolsNuInstallerPage = ({ lang }: { lang: Lang }) => {
+interface Props {
+  pageTitle: string;
+  lang: Lang;
+}
+
+export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
   const t = i18n[lang];
 
   return (
     <div className="mx-auto max-w-2xl font-['LINE_Seed_JP',sans-serif] text-slate-600 dark:text-[#a5b4cd]">
       <h1 className="mb-5 rounded-md bg-[#365d95] p-3 pt-3.5 text-center font-[sans-serif] text-[1.625rem] leading-snug tracking-tight text-[#fdfdfd]">
-        Nu Html Checker Installer <span className="block text-sm">for macOS</span>
+        {pageTitle} <span className="block text-sm">for macOS</span>
       </h1>
 
       <div className="@w640:text-center @w640:pl-1.5 @w640:text-sm mb-2">

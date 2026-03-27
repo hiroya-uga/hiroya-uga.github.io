@@ -7,6 +7,7 @@ import ReactGA from 'react-ga4';
 
 import { RunButton, TextLink } from '@/components/Clickable';
 import { SITE_NAME } from '@/constants/meta';
+import { Lang } from '@/types/lang';
 import clsx from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './CookieConsentDialog.module.css';
@@ -17,8 +18,6 @@ const initGA = () => {
   ReactGA.initialize(GA_MEASUREMENT_ID);
   ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
 };
-
-type Lang = 'ja' | 'en';
 
 const i18n = {
   ja: {
