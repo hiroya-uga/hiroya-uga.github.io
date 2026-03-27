@@ -2,8 +2,8 @@ import { TweetLink } from '@/components/Clickable/TweetLink';
 import { CodeBlock } from '@/components/CodeBlock';
 import Link from 'next/link';
 
-const GIST_ID = '0743a5e48238c053efac69c200e609ec';
-const INSTALL_COMMAND = `curl -fsSL https://gist.githubusercontent.com/hiroya-uga/${GIST_ID}/raw/install-vnu-with-java.sh | zsh`;
+const INSTALL_COMMAND =
+  'curl -fsSL https://github.com/hiroya-uga/vnu-installer/releases/latest/download/install.sh | zsh';
 
 type Lang = 'ja' | 'en';
 
@@ -40,6 +40,7 @@ const i18n = {
     commandsSection: 'コマンド一覧',
     features: [
       { cmd: 'vnu', desc: 'localhost:8888 でサーバーが起動していなければ Nu Html Checker を起動し、ブラウザで開く' },
+      { cmd: 'vnu --port PORT', desc: '指定したポート番号でサーバーを起動する（例: vnu --port 9090）' },
       { cmd: 'vnu --version', desc: 'インストール済みの vnu.jar のバージョン（更新日）を表示する' },
       { cmd: 'vnu --update', desc: 'vnu.jar を最新バージョンに更新する' },
       { cmd: 'vnu --stop', desc: 'vnu のプロセスを停止する' },
@@ -83,6 +84,7 @@ const i18n = {
         cmd: 'vnu',
         desc: 'Starts the checker on http://localhost:8888 (if not already running) and opens it in your browser',
       },
+      { cmd: 'vnu --port PORT', desc: 'Launches the checker on a specific port (e.g. vnu --port 9090)' },
       { cmd: 'vnu --version', desc: 'Shows the release date of the installed vnu.jar' },
       { cmd: 'vnu --update', desc: 'Updates vnu.jar to the latest release' },
       { cmd: 'vnu --stop', desc: 'Stops the running vnu process' },
@@ -175,12 +177,12 @@ export const ToolsNuInstallerPage = ({ lang }: { lang: Lang }) => {
       <div className="mt-20 border-t border-t-slate-200 pt-8 dark:border-t-slate-700">
         <p className="mb-8 text-right text-xs">
           <a
-            href={`https://gist.github.com/hiroya-uga/${GIST_ID}`}
+            href="https://github.com/hiroya-uga/vnu-installer"
             className="underline underline-offset-2 transition-colors dark:text-[#85b4ff]"
             target="_blank"
             rel="noopener noreferrer"
           >
-            View on Gist →
+            View on GitHub →
           </a>
         </p>
         <p className="mt-share-buttons grid justify-end">
