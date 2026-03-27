@@ -1,5 +1,6 @@
 'use client';
 
+import { Lang } from '@/types/lang';
 import { getTheme } from '@/utils/get-theme';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
@@ -8,8 +9,6 @@ import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'r
 
 const { window } = globalThis;
 const THEME_SWITCH_DESCRIPTION_ID = 'theme-switch-description';
-
-type Lang = 'ja' | 'en';
 
 const i18n = {
   ja: {

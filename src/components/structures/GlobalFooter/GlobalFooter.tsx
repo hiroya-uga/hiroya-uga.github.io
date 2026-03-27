@@ -15,6 +15,7 @@ import { SNS_LINKS } from '@/constants/sns';
 
 import styles from '@/components/structures/GlobalFooter/GlobalFooter.module.css';
 import { OPEN_NEW_TAB } from '@/constants/messages';
+import { Lang } from '@/types/lang';
 
 const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
   const pathname = usePathname() ?? '';
@@ -80,8 +81,6 @@ type Props = {
   additionalBreadcrumbs?: { title: string; href: string }[];
   currentPageTitle?: string;
 };
-
-type Lang = 'ja' | 'en';
 
 const i18n = {
   ja: {

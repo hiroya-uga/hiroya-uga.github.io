@@ -4,13 +4,12 @@ import { NoteBox } from '@/components/Box';
 import { Checkbox, TextField } from '@/components/Form';
 import { NoteList } from '@/components/List';
 import { Tab } from '@/components/Tab';
+import { Lang } from '@/types/lang';
 import { objectKeys } from '@/utils/object-keys';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Output } from './Output';
-
-type Lang = 'ja' | 'en';
 
 interface Options {
   showsource: boolean;
@@ -121,10 +120,10 @@ export const NuValidatorBookmarkletGenerator = ({ lang = 'ja' }: { lang?: Lang }
   });
 
   useEffect(() => {
-    const url = searchParams.get('url');
+    const paramsUrl = searchParams.get('url');
 
-    if (url) {
-      setUrl(url);
+    if (paramsUrl) {
+      setUrl(paramsUrl);
     }
   }, [searchParams]);
 
@@ -138,9 +137,9 @@ export const NuValidatorBookmarkletGenerator = ({ lang = 'ja' }: { lang?: Lang }
         <fieldset className="mb-10">
           <legend className="mb-2 text-sm font-bold leading-snug">{t.optionsLegend}</legend>
           <ul className="ml-2 flex flex-wrap gap-x-4 gap-y-2">
-            {objectKeys(options).map((optionName, index) => {
+            {objectKeys(options).map((optionName) => {
               return (
-                <li key={index}>
+                <li key={optionName}>
                   <Checkbox
                     label={t.optionsLabels[optionName]}
                     checked={options[optionName]}
