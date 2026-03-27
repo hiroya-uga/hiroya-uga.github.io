@@ -6,6 +6,18 @@ import Link from 'next/link';
 const INSTALL_COMMAND =
   'curl -fsSL https://github.com/hiroya-uga/vnu-installer/releases/latest/download/install.sh | zsh';
 
+const HomebrewLink = () => (
+  <a href="https://brew.sh/" className="dark:text-[#85b4ff]">
+    Homebrew
+  </a>
+);
+
+const VnuJarLink = () => (
+  <a href="https://github.com/validator/validator/releases/tag/latest" className="dark:text-[#85b4ff]">
+    vnu.jar
+  </a>
+);
+
 const i18n = {
   ja: {
     description: 'macOS に Nu Html Checker (vnu) をセットアップするスクリプトです。',
@@ -17,16 +29,11 @@ const i18n = {
     steps: [
       <>
         Javaがなければ
-        <a href="https://brew.sh/" className="dark:text-[#85b4ff]">
-          Homebrew
-        </a>
+        <HomebrewLink />
         でTemurin JDKをインストール
       </>,
       <>
-        <code>~/.vnu</code>に
-        <a href="https://github.com/validator/validator/releases/tag/latest" className="dark:text-[#85b4ff]">
-          vnu.jar
-        </a>
+        <code>~/.vnu</code>に<VnuJarLink />
         をダウンロード
       </>,
       <>
@@ -57,18 +64,10 @@ const i18n = {
     stepsSection: 'What the script does',
     steps: [
       <>
-        Installs Temurin JDK via{' '}
-        <a href="https://brew.sh/" className="dark:text-[#85b4ff]">
-          Homebrew
-        </a>{' '}
-        if you don't have Java yet
+        Installs Temurin JDK via <HomebrewLink /> if you don't have Java yet
       </>,
       <>
-        Downloads{' '}
-        <a href="https://github.com/validator/validator/releases/tag/latest" className="dark:text-[#85b4ff]">
-          vnu.jar
-        </a>{' '}
-        to <code>~/.vnu</code>
+        Downloads <VnuJarLink /> to <code>~/.vnu</code>
       </>,
       <>
         Creates the <code>~/.local/bin/vnu</code> command

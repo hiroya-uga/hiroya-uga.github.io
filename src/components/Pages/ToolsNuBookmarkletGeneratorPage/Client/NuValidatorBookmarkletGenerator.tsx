@@ -6,7 +6,6 @@ import { NoteList } from '@/components/List';
 import { Tab } from '@/components/Tab';
 import { Lang } from '@/types/lang';
 import { objectKeys } from '@/utils/object-keys';
-import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Output } from './Output';
@@ -128,65 +127,59 @@ export const NuValidatorBookmarkletGenerator = ({ lang = 'ja' }: { lang?: Lang }
   }, [searchParams]);
 
   return (
-    <div className="bg-secondary mx-auto max-w-5xl rounded-2xl px-4 pb-10 pt-2.5 shadow-md sm:pb-14">
-      <p className="sm:mb-34px mb-2 text-right text-xs">
-        {lang === 'ja' ? <Link href="./en">* View in English</Link> : <Link href="../">※ 日本語はこちら</Link>}
-      </p>
+    <div className="mx-auto max-w-2xl">
+      <fieldset className="mb-10">
+        <legend className="mb-2 text-sm font-bold leading-snug">{t.optionsLegend}</legend>
+        <ul className="ml-2 flex flex-wrap gap-x-4 gap-y-2">
+          {objectKeys(options).map((optionName) => {
+            return (
+              <li key={optionName}>
+                <Checkbox
+                  label={t.optionsLabels[optionName]}
+                  checked={options[optionName]}
+                  onChange={(e) => {
+                    setOptions({ ...options, [optionName]: e.currentTarget.checked });
+                  }}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </fieldset>
 
-      <div className="mx-auto max-w-2xl">
-        <fieldset className="mb-10">
-          <legend className="mb-2 text-sm font-bold leading-snug">{t.optionsLegend}</legend>
-          <ul className="ml-2 flex flex-wrap gap-x-4 gap-y-2">
-            {objectKeys(options).map((optionName) => {
-              return (
-                <li key={optionName}>
-                  <Checkbox
-                    label={t.optionsLabels[optionName]}
-                    checked={options[optionName]}
-                    onChange={(e) => {
-                      setOptions({ ...options, [optionName]: e.currentTarget.checked });
-                    }}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        </fieldset>
-
-        <div className="mb-12">
-          <TextField
-            label={t.urlLabel}
-            placeholder="https://validator.w3.org/nu/#textarea"
-            value={url}
-            onInput={(e) => {
-              setUrl(e.currentTarget.value);
-              router.replace(`?url=${encodeURIComponent(e.currentTarget.value)}`, {
-                scroll: false,
-              });
-            }}
-            autoComplete="off"
-          />
-        </div>
-
-        <Tab.Wrapper defaultCurrentKey={type} onChange={(key) => setType(key)}>
-          <Tab.Panel tabKey={t.tabCsr}>
-            <div className="mb-paragraph">
-              <NoteBox headingLevel={2} title={t.csrTitle}>
-                <NoteList list={t.csrNotes} symbol={lang === 'ja' ? '※' : '*'} />
-              </NoteBox>
-            </div>
-            <Output value={createBookmarklet(url, 'csr', options, t.invalidUrl)} copyLabel={t.copyLabel} />
-          </Tab.Panel>
-          <Tab.Panel tabKey={t.tabSsr}>
-            <div className="mb-paragraph">
-              <NoteBox headingLevel={2} title={t.ssrTitle}>
-                <NoteList list={t.ssrNotes} symbol={lang === 'ja' ? '※' : '*'} />
-              </NoteBox>
-            </div>
-            <Output value={createBookmarklet(url, 'ssr', options, t.invalidUrl)} copyLabel={t.copyLabel} />
-          </Tab.Panel>
-        </Tab.Wrapper>
+      <div className="mb-12">
+        <TextField
+          label={t.urlLabel}
+          placeholder="https://validator.w3.org/nu/#textarea"
+          value={url}
+          onInput={(e) => {
+            setUrl(e.currentTarget.value);
+            router.replace(`?url=${encodeURIComponent(e.currentTarget.value)}`, {
+              scroll: false,
+            });
+          }}
+          autoComplete="off"
+        />
       </div>
+
+      <Tab.Wrapper defaultCurrentKey={type} onChange={(key) => setType(key)}>
+        <Tab.Panel tabKey={t.tabCsr}>
+          <div className="mb-paragraph">
+            <NoteBox headingLevel={2} title={t.csrTitle}>
+              <NoteList list={t.csrNotes} symbol={lang === 'ja' ? '※' : '*'} />
+            </NoteBox>
+          </div>
+          <Output value={createBookmarklet(url, 'csr', options, t.invalidUrl)} copyLabel={t.copyLabel} />
+        </Tab.Panel>
+        <Tab.Panel tabKey={t.tabSsr}>
+          <div className="mb-paragraph">
+            <NoteBox headingLevel={2} title={t.ssrTitle}>
+              <NoteList list={t.ssrNotes} symbol={lang === 'ja' ? '※' : '*'} />
+            </NoteBox>
+          </div>
+          <Output value={createBookmarklet(url, 'ssr', options, t.invalidUrl)} copyLabel={t.copyLabel} />
+        </Tab.Panel>
+      </Tab.Wrapper>
     </div>
   );
 };

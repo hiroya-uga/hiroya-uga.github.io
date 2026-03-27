@@ -3,6 +3,7 @@ import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import { NuValidatorBookmarkletGenerator } from './Client';
 
@@ -51,9 +52,14 @@ export const ToolsNuBookmarkletGeneratorPage = ({
         </p>
       </PageTitle>
 
-      <Suspense>
-        <NuValidatorBookmarkletGenerator lang={lang} />
-      </Suspense>
+      <div className="bg-secondary mx-auto max-w-5xl rounded-2xl px-4 pb-10 pt-2.5 shadow-md sm:pb-14">
+        <p className="sm:mb-34px mb-2 text-right text-xs">
+          {lang === 'ja' ? <Link href="./en">* View in English</Link> : <Link href="../">※ 日本語はこちら</Link>}
+        </p>
+        <Suspense>
+          <NuValidatorBookmarkletGenerator lang={lang} />
+        </Suspense>
+      </div>
 
       <section className="mx-auto mt-12 max-w-5xl px-4">
         <h2 className="mb-4 text-lg font-bold">{t.howToUseTitle}</h2>
