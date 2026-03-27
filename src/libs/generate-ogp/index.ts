@@ -81,7 +81,7 @@ export async function generateOgpImage(
     let lineIndex = 1;
     let currentBreakIndex = -1;
     /* 12.5 を許容 */
-    const MAX_COL_LENGTH = 13;
+    const MAX_COL_LENGTH = 14;
     const getMaxColLength = () => {
       if (lineIndex < 3) {
         return MAX_COL_LENGTH;

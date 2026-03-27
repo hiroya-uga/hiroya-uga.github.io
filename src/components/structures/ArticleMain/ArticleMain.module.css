@@ -239,6 +239,11 @@ html:has(.container) {
     }
   }
 
+  a {
+    text-underline-offset: 5px;
+    /* text-decoration-thickness: 2px; */
+  }
+
   customされたimg要素ˆ-ˆ {
     margin: 0 auto;
     background-color: var(--background-color-secondary);
