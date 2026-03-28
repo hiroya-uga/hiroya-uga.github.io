@@ -3,7 +3,7 @@ import styles from './ThePowerOfTheWebSection.module.css';
 
 export const PowerOfTheWebSection = () => {
   return (
-    <div className={clsx([styles.root, 'bg-secondary @w640:pb-11 @w640:pt-7 min-h-[300vh] py-8'])}>
+    <div className={clsx([styles.root, 'bg-secondary @w640:pb-11 @w640:pt-7 min-h-[400vh] py-8'])}>
       <div className="max-w-content px-content-inline fixed inset-0 mx-auto grid size-full min-h-screen place-items-center">
         <div className={styles.content}>
           <h2 className={styles.heading}>The power of the web</h2>
