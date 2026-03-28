@@ -18,9 +18,9 @@ const injectModalStyles = () => {
         border: none;
         background: transparent;
         width: 100%;
-        height: 100%;
+        height: 100dvh;
         max-width: 100%;
-        max-height: 100%;
+        max-height: 100dvh;
         place-items: center;
         position: fixed;
         inset: 0;
@@ -77,7 +77,7 @@ const injectModalStyles = () => {
         }
       }
 
-      .customされたimg要素ˆ-ˆのモーダル__button svg {
+      .customされたimg要素ˆ-ˆのモーダル__svg {
         width: 20px;
         height: 20px;
         pointer-events: none;
@@ -189,7 +189,7 @@ const showModal = ({
   closeButton.insertAdjacentHTML(
     'beforeend',
     `
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="閉じる">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="閉じる" class="customされたimg要素ˆ-ˆのモーダル__svg">
       <line x1="6" y1="6" x2="18" y2="18" stroke="black" stroke-width="4" stroke-linecap="round"/>
       <line x1="6" y1="18" x2="18" y2="6" stroke="black" stroke-width="4" stroke-linecap="round"/>
       <line x1="6" y1="6" x2="18" y2="18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>

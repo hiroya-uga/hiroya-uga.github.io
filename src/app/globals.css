@@ -11,7 +11,7 @@
   }
 }
 
-:root:has(dialog:modal) {
+:is(html, body):has(dialog:modal) {
   overflow: hidden;
 }
 
