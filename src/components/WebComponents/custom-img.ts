@@ -50,7 +50,7 @@ const injectModalStyles = () => {
         cursor: auto;
         container-type: inline-size;
         mix-blend-mode: exclusion;
-        padding: 0 0 0 0.25em;
+        padding: .5rem min(0.25rem, 8px) 0;
 
         @starting-style {
           opacity: 0;
@@ -88,8 +88,8 @@ const injectModalStyles = () => {
         width: auto;
         height: auto;
         margin: auto;
-        /* 閉じるボタン分 = 60px * 2 */
-        max-height: calc(100dvh - 120px);
+        /* 閉じるボタンの余白分 = (60px + 10px) * 2 */
+        max-height: calc(100dvh - 140px);
       }
 
       [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
