@@ -6,7 +6,7 @@ interface Props {
 
 export const Header = ({ pageTitle }: Props) => {
   return (
-    <header className="@container">
+    <header className="@container bg-primary relative z-10">
       <div className="@w1024:pb-60px @w1024:pt-14 px-4 pb-12 pt-20">
         <div className="max-w-content mx-auto">
           <div className="@w1024:mb-2 @w1024:flex items-center text-center">
