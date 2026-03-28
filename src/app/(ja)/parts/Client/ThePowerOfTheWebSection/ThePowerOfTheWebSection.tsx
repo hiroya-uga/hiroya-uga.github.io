@@ -1,14 +1,47 @@
+'use client';
+
+import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 import styles from './ThePowerOfTheWebSection.module.css';
 
 export const PowerOfTheWebSection = () => {
+  const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
+
+  useEffect(() => {
+    const isViewed = getSessionStorage('power-section-viewed') === 'true';
+    requestAnimationFrame(() => {
+      if (isViewed) {
+        setStatus('already');
+        return;
+      }
+
+      setStatus('ready');
+      setSessionStorage('power-section-viewed', 'true');
+    });
+  }, []);
+
   return (
-    <div className={clsx([styles.root, 'bg-secondary @w640:pb-11 @w640:pt-7 min-h-[400vh] py-8'])}>
-      <div className="max-w-content px-content-inline fixed inset-0 mx-auto grid size-full min-h-screen place-items-center">
+    <div
+      className={clsx([
+        styles.root,
+        'transition-[min-height] duration-1000 ease-in-out',
+        status === 'loading' && 'invisible min-h-[50vh]',
+        status === 'already' && [styles.already, 'animate-fade-in min-h-0'],
+        status === 'ready' && [styles.ready, 'animate-fade-in min-h-[400vh]'],
+        'bg-secondary @w640:pb-24 @w640:pt-18 pb-18 pt-14',
+      ])}
+    >
+      <div
+        className={clsx([
+          status === 'ready' && 'fixed inset-0 grid size-full min-h-screen place-items-center',
+          'px-content-inline mx-auto',
+        ])}
+      >
         <div className={styles.content}>
           <h2 className={styles.heading}>The power of the web</h2>
 
-          <figure>
+          <figure className={clsx([(status === 'ready') === false && 'px-content-inline'])}>
             <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className={styles.message}>
               <p>
                 <span className={styles.quote}>“</span>
@@ -16,10 +49,8 @@ export const PowerOfTheWebSection = () => {
                   href="https://www.w3.org/mission/accessibility/#:~:text=The%20power%20of%20the%20Web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect."
                   className={styles.link}
                 >
-                  The power of the Web is in its universality.{' '}
-                  <span className="@w640:inline-block">
-                    Access by everyone regardless of disability is an essential aspect.
-                  </span>
+                  The power of the Web is in its universality. Access by everyone regardless of disability is an
+                  essential aspect.
                 </a>
                 <span className={styles.quote}>”</span>
               </p>
