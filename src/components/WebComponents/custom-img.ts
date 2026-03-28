@@ -93,7 +93,7 @@ const injectModalStyles = () => {
       }
 
       [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
-        --v-backdrop: rgba(0, 0, 0, 0.3);
+        --v-backdrop: rgba(0, 0, 0, 0.6);
       }
     `;
   document.head.appendChild(element);
