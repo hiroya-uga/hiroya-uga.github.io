@@ -476,7 +476,7 @@
     color: var(--v-color-text-link);
     --v-fill: var(--v-color-text-link);
     text-decoration: underline;
-    text-underline-offset: 1px;
+    text-underline-position: from-font;
     word-break: break-word;
   }
 
