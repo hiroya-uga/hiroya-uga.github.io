@@ -1,7 +1,9 @@
 import { SITE_NAME, SITE_SUBTITLE } from '@/constants/meta';
 import Link from 'next/link';
+import { useId } from 'react';
 
 export const SiteName = () => {
+  const id = useId();
   const siteName = (
     <Link
       href="/"
@@ -33,8 +35,9 @@ export const SiteName = () => {
             xmlns="http://www.w3.org/2000/svg"
             role="graphics-document"
             className="@w1520:h-296px @w1520:min-h-296px w500:w-60 @w1520:w-8 @w1520:min-w-8 w-240px h-[1.465rem] max-h-full max-w-full overflow-visible [fill:var(--v-color-text-primary)]"
+            aria-labelledby={id}
           >
-            <text x="0" y="50%" textAnchor="start" className="@w1520:hidden translate-y-4px">
+            <text x="0" y="50%" textAnchor="start" className="@w1520:hidden translate-y-4px" id={id}>
               {siteName}
               <tspan> - {SITE_SUBTITLE}</tspan>
             </text>
