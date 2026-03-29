@@ -44,21 +44,49 @@ const i18n = {
       </>,
     ],
     commandsSection: 'コマンド一覧',
-    features: [
-      { cmd: 'vnu', desc: 'Nu Html Checker を起動し、http://localhost:8888 をブラウザで開く' },
-      { cmd: 'vnu serve', desc: '上と同じ（明示的な形式）' },
-      { cmd: 'vnu serve --port PORT', desc: '指定したポート番号でサーバーを起動する（例: vnu serve --port 9090）' },
-      { cmd: 'vnu check <file>', desc: 'HTMLファイルを検証する' },
-      { cmd: 'vnu check --html <html>', desc: 'HTML文字列を検証する' },
+    featureGroups: [
       {
-        cmd: 'vnu check --snippet <html>',
-        desc: 'HTMLフラグメントを検証する（完全なドキュメントに自動でラップされる）',
+        label: 'サーバーの起動と停止',
+        features: [
+          { cmd: 'vnu', desc: 'vnu start のエイリアス' },
+          { cmd: 'vnu start', desc: 'Nu Html Checker を起動し、http://localhost:8888 をブラウザで開く' },
+          {
+            cmd: 'vnu start --port <PORT>',
+            desc: '指定したポートで起動し、ブラウザで開く（例: vnu start --port 9090）',
+          },
+          { cmd: 'vnu serve', desc: 'ブラウザを開かずにサーバーを起動する' },
+          {
+            cmd: 'vnu serve --port <PORT>',
+            desc: '指定したポート番号でサーバーを起動する（例: vnu serve --port 9090）',
+          },
+          { cmd: 'vnu stop', desc: '起動中の vnu プロセスを停止する' },
+        ],
       },
-      { cmd: 'vnu stop', desc: '起動中の vnu プロセスを停止する' },
-      { cmd: 'vnu update', desc: 'vnu.jar を最新バージョンにアップグレードする' },
-      { cmd: 'vnu uninstall', desc: 'vnu と関連ファイルを削除する' },
-      { cmd: 'vnu --version', desc: 'インストール済みの vnu.jar のバージョン（更新日）を表示する' },
-      { cmd: 'vnu --help', desc: 'ヘルプを表示する' },
+      {
+        label: 'HTML検証',
+        features: [
+          {
+            cmd: 'vnu check <value>',
+            desc: '自動判定：URL・<!doctype...>・<p>...</p>・ファイルパスをフラグなしで直接渡す',
+          },
+          { cmd: 'vnu check --file <file>', desc: 'HTMLファイルを検証する' },
+          { cmd: 'vnu check --url <url>', desc: 'URLを検証する' },
+          { cmd: "vnu check --html '<html>'", desc: 'HTML文字列全体を検証する' },
+          {
+            cmd: "vnu check --fragment '<p>...</p>'",
+            desc: 'HTMLフラグメントを検証する（完全なドキュメントに自動でラップ）',
+          },
+        ],
+      },
+      {
+        label: 'その他',
+        features: [
+          { cmd: 'vnu update', desc: 'vnu.jar を最新バージョンに更新する' },
+          { cmd: 'vnu uninstall', desc: 'vnu と関連ファイルを削除する' },
+          { cmd: 'vnu --version', desc: 'インストール済みの vnu.jar のバージョン（更新日）を表示する' },
+          { cmd: 'vnu --help', desc: 'ヘルプを表示する' },
+        ],
+      },
     ],
     bookmarkletNote: 'ブックマークレットの作成はこちら',
   },
@@ -84,18 +112,49 @@ const i18n = {
       </>,
     ],
     commandsSection: 'Commands',
-    features: [
-      { cmd: 'vnu', desc: 'Launches the checker at http://localhost:8888 and opens it in a browser' },
-      { cmd: 'vnu serve', desc: 'Same as above (explicit form)' },
-      { cmd: 'vnu serve --port PORT', desc: 'Launches the checker on a specific port (e.g. vnu serve --port 9090)' },
-      { cmd: 'vnu check <file>', desc: 'Validates an HTML file' },
-      { cmd: 'vnu check --html <html>', desc: 'Validates an HTML string' },
-      { cmd: 'vnu check --snippet <html>', desc: 'Validates an HTML fragment (auto-wrapped in a full document)' },
-      { cmd: 'vnu stop', desc: 'Halts the active vnu process' },
-      { cmd: 'vnu update', desc: 'Upgrades vnu.jar to the newest version' },
-      { cmd: 'vnu uninstall', desc: 'Removes vnu and associated files' },
-      { cmd: 'vnu --version', desc: 'Displays the release date of the installed vnu.jar' },
-      { cmd: 'vnu --help', desc: 'Provides usage information' },
+    featureGroups: [
+      {
+        label: 'Server',
+        features: [
+          { cmd: 'vnu', desc: 'Alias for vnu start' },
+          { cmd: 'vnu start', desc: 'Starts the checker on http://localhost:8888 and opens it in your browser' },
+          {
+            cmd: 'vnu start --port <PORT>',
+            desc: 'Starts the checker on a specific port and opens it in your browser (e.g. vnu start --port 9090)',
+          },
+          { cmd: 'vnu serve', desc: 'Starts the checker without opening the browser' },
+          {
+            cmd: 'vnu serve --port <PORT>',
+            desc: 'Starts the checker on a specific port (e.g. vnu serve --port 9090)',
+          },
+          { cmd: 'vnu stop', desc: 'Stops the running vnu process' },
+        ],
+      },
+      {
+        label: 'Validation',
+        features: [
+          {
+            cmd: 'vnu check <value>',
+            desc: 'Auto-detection: pass a URL, <!doctype...> string, <p>...</p>, or a file path directly without flags',
+          },
+          { cmd: 'vnu check --file <file>', desc: 'Validates an HTML file' },
+          { cmd: 'vnu check --url <url>', desc: 'Validates a URL' },
+          { cmd: "vnu check --html '<html>'", desc: 'Validates a full HTML string' },
+          {
+            cmd: "vnu check --fragment '<p>...</p>'",
+            desc: 'Validates an HTML fragment (auto-wrapped in a full document)',
+          },
+        ],
+      },
+      {
+        label: 'Utilities',
+        features: [
+          { cmd: 'vnu update', desc: 'Updates vnu.jar to the latest version' },
+          { cmd: 'vnu uninstall', desc: 'Removes vnu and related files' },
+          { cmd: 'vnu --version', desc: 'Shows the release date of the installed vnu.jar' },
+          { cmd: 'vnu --help', desc: 'Shows usage information' },
+        ],
+      },
     ],
     bookmarkletNote: 'Create a bookmarklet for Nu Html Checker',
   },
@@ -133,7 +192,7 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
       </p>
 
       <section className="mb-14">
-        <h2 className="mb-3 text-xs font-bold tracking-widest text-slate-500 dark:text-[#9eb4da]">
+        <h2 className="mb-3 text-sm font-bold tracking-widest text-[#4a5466] dark:text-[#9eb4da]">
           {t.installSection}
         </h2>
         <CodeBlock
@@ -147,7 +206,7 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
       </section>
 
       <section className="mb-14">
-        <h2 className="mb-3 text-xs font-bold tracking-widest text-slate-500 dark:text-[#9eb4da]">{t.stepsSection}</h2>
+        <h2 className="mb-3 text-sm font-bold tracking-widest text-[#4a5466] dark:text-[#9eb4da]">{t.stepsSection}</h2>
         <ol className="space-y-2.5 [counter-reset:step]">
           {t.steps.map((content, i) => (
             <li
@@ -161,17 +220,24 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
       </section>
 
       <section className="mb-14 mt-10 border-t border-t-slate-200 pt-10 dark:border-t-slate-700">
-        <h2 className="mb-3 text-xs font-bold tracking-widest text-slate-500 dark:text-[#9eb4da]">
+        <h2 className="mb-3 text-sm font-bold tracking-widest text-[#4a5466] dark:text-[#9eb4da]">
           {t.commandsSection}
         </h2>
-        <div className="bg-secondary mb-3 grid grid-cols-[auto_1fr] divide-y divide-slate-400 overflow-hidden rounded border border-slate-400 dark:divide-slate-600 dark:border-slate-600">
-          {t.features.map(({ cmd, desc }) => (
-            <p key={cmd} className="col-start-1 -col-end-1 grid grid-cols-subgrid items-center gap-4 px-3 py-2">
-              <span>
-                <code>{cmd}</code>
-              </span>
-              <span className="text-sm leading-relaxed">{desc}</span>
-            </p>
+        <div className="mb-3 space-y-6">
+          {t.featureGroups.map(({ label, features }) => (
+            <div key={label}>
+              <h3 className="mb-1.5 text-xs font-bold text-[#4d5460] dark:text-[#9eb4da]">{label}</h3>
+              <div className="bg-secondary grid grid-cols-[auto_1fr] divide-y divide-slate-400 overflow-hidden rounded border border-slate-400 dark:divide-slate-600 dark:border-slate-600">
+                {features.map(({ cmd, desc }) => (
+                  <p key={cmd} className="col-start-1 -col-end-1 grid grid-cols-subgrid items-center gap-4 px-3 py-2">
+                    <span>
+                      <code>{cmd}</code>
+                    </span>
+                    <span className="text-sm leading-relaxed">{desc}</span>
+                  </p>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
         <p className="mb-10">
@@ -187,7 +253,7 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
         <CodeBlock
           language="sh"
           title="Example"
-          code="vnu check --snippet '<p>Hello, world!</p>'"
+          code="vnu check --fragment '<p>Hello, world!</p>'"
           className="rounded-b-lg"
           nowrap
           copyButton

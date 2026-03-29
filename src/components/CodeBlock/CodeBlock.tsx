@@ -70,7 +70,7 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
         <figcaption className="grid grid-cols-[auto_1fr_auto] items-center gap-1.5 rounded-t-lg border-b border-slate-200 bg-slate-100 px-3 py-2.5 before:inline-block before:size-3 before:rounded-full before:bg-red-400 dark:border-slate-700 dark:bg-slate-800">
           <span className="flex items-center gap-1.5 before:inline-block before:size-3 before:rounded-full before:bg-yellow-400">
             <span
-              className="flex items-center gap-2 text-xs text-slate-400 before:inline-block before:size-3 before:rounded-full before:bg-green-400 dark:text-[#9eb4da]"
+              className="flex items-center gap-2 text-xs text-[#4a535f] before:inline-block before:size-3 before:rounded-full before:bg-green-400 dark:text-[#9eb4da]"
               id={id}
             >
               {restProps.title || language}
