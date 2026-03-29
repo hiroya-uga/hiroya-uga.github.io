@@ -47,6 +47,12 @@ const i18n = {
     features: [
       { cmd: 'vnu', desc: 'localhost:8888 でサーバーが起動していなければ Nu Html Checker を起動し、ブラウザで開く' },
       { cmd: 'vnu --port PORT', desc: '指定したポート番号でサーバーを起動する（例: vnu --port 9090）' },
+      { cmd: 'vnu check <file>', desc: 'HTMLファイルを検証する' },
+      { cmd: 'vnu check --html <html>', desc: 'HTML文字列を検証する' },
+      {
+        cmd: 'vnu check --snippet <html>',
+        desc: 'HTMLフラグメントを検証する（完全なドキュメントに自動でラップされる）',
+      },
       { cmd: 'vnu --version', desc: 'インストール済みの vnu.jar のバージョン（更新日）を表示する' },
       { cmd: 'vnu --update', desc: 'vnu.jar を最新バージョンに更新する' },
       { cmd: 'vnu --stop', desc: 'vnu のプロセスを停止する' },
@@ -83,6 +89,9 @@ const i18n = {
         desc: 'Starts the checker on http://localhost:8888 (if not already running) and opens it in your browser',
       },
       { cmd: 'vnu --port PORT', desc: 'Launches the checker on a specific port (e.g. vnu --port 9090)' },
+      { cmd: 'vnu check <file>', desc: 'Validates an HTML file' },
+      { cmd: 'vnu check --html <html>', desc: 'Validates an HTML string' },
+      { cmd: 'vnu check --snippet <html>', desc: 'Validates an HTML fragment (auto-wrapped in a full document)' },
       { cmd: 'vnu --version', desc: 'Shows the release date of the installed vnu.jar' },
       { cmd: 'vnu --update', desc: 'Updates vnu.jar to the latest release' },
       { cmd: 'vnu --stop', desc: 'Stops the running vnu process' },
@@ -166,7 +175,7 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
             </p>
           ))}
         </div>
-        <p>
+        <p className="mb-10">
           {lang === 'ja' ? '※' : '*'}{' '}
           <Link
             href={`/tools/nu-bookmarklet-generator/${lang === 'ja' ? '' : 'en'}?url=http%3A%2F%2Flocalhost%3A8888`}
@@ -175,6 +184,15 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
             {t.bookmarkletNote}
           </Link>
         </p>
+
+        <CodeBlock
+          language="sh"
+          title="Example"
+          code="vnu check --snippet '<p>Hello, world!</p>'"
+          className="rounded-b-lg"
+          nowrap
+          copyButton
+        />
       </section>
 
       <div className="mt-20 border-t border-t-slate-200 pt-8 dark:border-t-slate-700">
