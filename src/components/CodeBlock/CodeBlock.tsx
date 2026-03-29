@@ -83,6 +83,7 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
                 onClick={(e) => {
                   setToastMessage(restProps.title + 'をコピーしました！');
                   handleClickCopyButton(code, e.currentTarget);
+                  window.gtag?.('event', 'click_copy_button');
                 }}
                 aria-describedby={id}
               >
