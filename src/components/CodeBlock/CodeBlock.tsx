@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { type BundledLanguage, codeToHtml } from 'shiki';
 
 import { useCopyButton } from '@/hooks/use-copy-button';
+import { escapeHtml } from 'markdown-it/lib/common/utils.mjs';
 import { useEffect, useId, useState } from 'react';
 import { Toast } from '../Dialog';
 import styles from './CodeBlock.module.css';
@@ -58,7 +59,7 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
         className,
       ])}
       dangerouslySetInnerHTML={{
-        __html: html ? html : `<pre><code>${code}</code></pre>`,
+        __html: html ? html : `<pre><code>${escapeHtml(code)}</code></pre>`,
       }}
     />
   );
