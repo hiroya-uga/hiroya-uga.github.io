@@ -56,6 +56,15 @@
   }
 }
 
+@keyframes already-drift {
+  0% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(20%);
+  }
+}
+
 .root {
   position: relative;
   isolation: isolate;
@@ -117,6 +126,20 @@
   }
 
   &.ready {
+    &::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      height: 100dvh;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        color-mix(in srgb, var(--background-color-secondary) 80%, #fff),
+        var(--background-color-secondary) 40%
+      );
+    }
+
     .content {
       @supports (animation-timeline: --web-section) {
         animation: container-fade-in 0.6s ease-out both;
@@ -172,15 +195,23 @@
   }
 
   &.already {
-    position: sticky;
-    bottom: 0;
-
     .heading {
       color: #015a9c;
 
       [data-theme="dark"] & {
         color: #dbdbdb;
       }
+    }
+
+    view-timeline-name: --v-already;
+    view-timeline-axis: block;
+
+    .content {
+      animation-name: already-drift;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      animation-timeline: --v-already;
+      animation-range: entry 0% exit 100%;
     }
   }
 }

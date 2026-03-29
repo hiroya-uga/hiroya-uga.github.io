@@ -57,7 +57,8 @@ export const PowerOfTheWebSection = () => {
             </blockquote>
             <figcaption className={styles.caption}>
               <p>
-                — <cite>Tim Berners-Lee</cite>, W3C Director and inventor of the World Wide Web
+                — <cite>Tim Berners-Lee</cite>,{' '}
+                <span className="inline-block">W3C Director and inventor of the World Wide Web</span>
               </p>
             </figcaption>
           </figure>
