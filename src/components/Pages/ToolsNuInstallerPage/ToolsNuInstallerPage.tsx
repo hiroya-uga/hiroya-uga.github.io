@@ -62,7 +62,7 @@ const i18n = {
     bookmarkletNote: 'ブックマークレットの作成はこちら',
   },
   en: {
-    description: 'A simple one-command script to install and run Nu Html Checker (vnu) on macOS.',
+    description: 'A simple one-command script to install and run Nu Html Checker (vnu) on macOS. ',
     descriptionExtra: "Don't have Java? No problem — it'll be installed automatically (",
     descriptionExtraClose: ').',
     installSection: 'Run this in your terminal',
