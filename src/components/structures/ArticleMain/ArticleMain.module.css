@@ -127,7 +127,7 @@ html:has(.container) {
     --v-list-font-size: 1rem;
   }
 
-  section {
+  section:not(:first-child) {
     margin-top: var(--margin-heading-top);
   }
 
