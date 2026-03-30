@@ -142,8 +142,7 @@ export function NumberPairingClient() {
                           selected?.id !== btn.id && 'bg-panel-primary border-primary',
                           selected?.id === btn.id &&
                             'border-double border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-900/30',
-                          btn.cleared === false && 'hover:bg-panel-primary-hover',
-                          btn.isSum && 'bg-success',
+                          btn.cleared === false && ['hover:bg-panel-primary-hover', btn.isSum && 'bg-success'],
                         ],
                         status === 'game-over' && 'bg-alert border-alert text-high-contrast-reverse',
                         btn.cleared && 'opacity-20',
