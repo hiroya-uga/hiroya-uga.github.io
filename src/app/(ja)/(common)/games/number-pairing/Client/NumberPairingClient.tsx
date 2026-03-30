@@ -2,7 +2,7 @@
 
 import { Toast } from '@/components/Dialog';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   activeButtons,
@@ -18,8 +18,11 @@ import {
 import { ModeSelect } from './ModeSelect';
 
 export function NumberPairingClient() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const [gameMode, setGameMode] = useState<GameMode | null>(null);
   const [stage, setStage] = useState(1);
+
   // ボタン数（モード1・2 共通）
   const [currentCount, setCurrentCount] = useState(2);
   const [buttons, setButtons] = useState<Button[]>([]);
@@ -91,10 +94,10 @@ export function NumberPairingClient() {
         setToastMessage('ゲームオーバー');
       }
     } else if (gameMode === '2' && sum < 10) {
-      // 合体 → selected の位置を合体値に更新
+      // 合体 → btn（後にクリックした方）の位置を合体値に更新
       const next = buttons.map((b) => {
-        if (b.id === selected.id) return { ...b, value: sum, isSum: true };
-        if (b.id === btn.id) return { ...b, cleared: true };
+        if (b.id === btn.id) return { ...b, value: sum, isSum: true };
+        if (b.id === selected.id) return { ...b, cleared: true };
         return b;
       });
       setButtons(next);
@@ -113,7 +116,16 @@ export function NumberPairingClient() {
     );
   }
 
-  const cols = Math.ceil(Math.sqrt(buttons.length));
+  const cols = (() => {
+    const ideal = Math.ceil(Math.sqrt(buttons.length));
+    const minCols = containerRef.current?.clientWidth ?? 1 / 56;
+
+    if (minCols < ideal) {
+      return Math.floor(minCols) || 1;
+    }
+
+    return ideal;
+  })();
   const rows: Button[][] = [];
   for (let i = 0; i < buttons.length; i += cols) {
     rows.push(buttons.slice(i, i + cols));
@@ -124,7 +136,7 @@ export function NumberPairingClient() {
       <p aria-live="assertive" className="mb-7 text-center text-2xl">
         <b>{`ステージ ${stage}`}</b>
       </p>
-      <div className="mb-6 overflow-auto">
+      <div className="mb-6 overflow-auto" ref={containerRef}>
         <table className="mx-auto" role="grid">
           <tbody>
             {rows.map((row, rowIndex) => (
