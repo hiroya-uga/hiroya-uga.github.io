@@ -105,7 +105,7 @@ export const CategorySection = () => {
                         {emoji}
                       </span>
                     </span>
-                    <span className="font-bold group-hover:underline">
+                    <span className="font-bold underline decoration-transparent transition-[text-decoration-color] duration-200 group-hover:decoration-current">
                       <span className="mb-3px @w640:size-3 @w640:mb-5px @w640:ml-1 relative mr-1.5 inline-block size-4 align-middle">
                         <SvgIcon name="arrow2-right" alt="" />
                       </span>

@@ -67,7 +67,7 @@ export const PickUpListSection = () => {
                     className="group flex flex-col-reverse rounded-md no-underline"
                     aria-describedby={id}
                   >
-                    <span className="inline-block leading-normal group-hover:underline">
+                    <span className="inline-block leading-normal underline decoration-transparent transition-[text-decoration-color] duration-200 group-hover:decoration-current">
                       {pageTitle}
                       {/* {item.isWip && <b>（WIP）</b>} */}
                     </span>
