@@ -338,6 +338,10 @@ export const SEO: Record<
     afterSubTitle: 'Simple Block Breaker',
     description: `本当になんの変哲もない、ただのブロック崩しです。\n設定で難易度を自由に変更できます。`,
   },
+  '/games/number-pairing': {
+    title: '数字を組み合わせて10を作るゲーム',
+    description: `ランダムに並んだ数字のボタンを2つ選んで、合計が10になるペアを探すゲームです。`,
+  },
   '/games/sudoku': {
     title: '無限数独（ナンプレ）',
     afterSubTitle: 'Infinity Sudoku',
