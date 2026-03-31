@@ -47,7 +47,7 @@ export const PowerOfTheWebSection = () => {
                 <span className={styles.quote}>“</span>
                 <a
                   href="https://www.w3.org/mission/accessibility/#:~:text=The%20power%20of%20the%20Web%20is%20in%20its%20universality.%20Access%20by%20everyone%20regardless%20of%20disability%20is%20an%20essential%20aspect."
-                  className={styles.link}
+                  className={clsx([styles.link, 'text-balance'])}
                 >
                   The power of the Web is in its universality. Access by everyone regardless of disability is an
                   essential aspect.
@@ -64,6 +64,25 @@ export const PowerOfTheWebSection = () => {
           </figure>
         </div>
       </div>
+      {status === 'ready' && (
+        <p className="animate-fade-in pointer-events-none fixed inset-0 flex items-end justify-end px-4 py-2 text-right text-sm">
+          <a
+            href="#heading-categories"
+            className="pointer-events-auto"
+            onClick={(e) => {
+              e.preventDefault();
+              const target = document.querySelector<HTMLElement>('#heading-categories');
+              if (target) {
+                target.setAttribute('tabindex', '-1');
+                target.focus({ preventScroll: true });
+                target.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
+            ↓ Skip to Categories
+          </a>
+        </p>
+      )}
     </div>
   );
 };
