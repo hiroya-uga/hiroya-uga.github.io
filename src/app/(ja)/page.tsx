@@ -1,10 +1,10 @@
 import {
   BookMarkSection,
   CategoriesSection,
+  DiscoverSection,
   ExternalMediaSection,
   Header,
   MainVisualSection,
-  PickUpListSection,
   ProfileSection,
 } from '@/app/(ja)/parts';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
@@ -27,7 +27,7 @@ export default function Home() {
         <PowerOfTheWebSection />
 
         <div className="bg-primary z-1 @w640:pt-28 relative pt-8">
-          <PickUpListSection />
+          <DiscoverSection />
           <CategoriesSection />
 
           <div className="px-content-inline @w640:pb-20 pb-12">

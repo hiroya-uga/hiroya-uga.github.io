@@ -37,7 +37,7 @@ const getPickUpList = () => {
   return pickUpList.cache;
 };
 
-export const PickUpListSection = () => {
+export const DiscoverSection = () => {
   const pickUpList = useSyncExternalStore(
     () => () => {},
     () => getPickUpList(),
@@ -47,7 +47,10 @@ export const PickUpListSection = () => {
   return (
     <div className="px-content-inline @w640:mb-28 mb-16">
       <div className="max-w-content mx-auto">
-        <h2 className="@w640:text-2xl mb-4 text-xl font-bold tracking-wide">Pick up</h2>
+        <h2 className="mb-4 flex flex-wrap items-center gap-1.5">
+          <span className="@w640:text-2xl text-xl font-bold tracking-wide">Discover</span>
+          <span className="text-sm text-[#545454]">— Random Picks</span>
+        </h2>
 
         <ul
           className={clsx([

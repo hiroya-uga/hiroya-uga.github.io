@@ -6,7 +6,7 @@ import { SNS_LINKS } from '@/constants/sns';
 export const ProfileSection = () => {
   return (
     <>
-      <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-8 mt-12 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed pt-12">
+      <div className="@w640:mb-0 @w640:mt-21 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mt-13 mb-8 grid-cols-[1fr_auto] grid-rows-[auto_1fr] border-t border-dashed pt-12">
         <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold tracking-wide">
           Profile
         </h2>
