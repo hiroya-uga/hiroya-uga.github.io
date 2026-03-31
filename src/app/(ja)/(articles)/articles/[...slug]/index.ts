@@ -1,3 +1,3 @@
-export * from './parts/ArticlePage';
-export * from './parts/CategoryPage';
-export * from './parts/YearOrSubCategoryPage';
+export * from '../../../../../components/Pages/ArticleDetailPage';
+export * from '../../../../../components/Pages/ArticlesCategoryPage/ArticleCategoryPage';
+export * from '../../../../../components/Pages/ArticleYearOrSubCategoryPage/ArticleYearOrSubCategoryPage';

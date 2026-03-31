@@ -8,8 +8,8 @@ import { getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
 
+import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { notFound } from 'next/navigation';
-import { getArticleMarkdownFilePath } from '../utils';
 import { ArticleJsonLD, ArticleNavigation } from './parts';
 
 type Props = { slug: string[]; category: ArticleCategory; yearOrSubcategory: string; fileName: string };
@@ -21,7 +21,7 @@ async function getAllArticlesInCategory(category: ArticleCategory) {
   return (await Promise.all(articlePromises)).flat();
 }
 
-export const ArticlePage = async ({ slug, category, yearOrSubcategory, fileName }: Props) => {
+export const ArticleDetailPage = async ({ slug, category, yearOrSubcategory, fileName }: Props) => {
   const post = getPostBySlug(getArticleMarkdownFilePath(category, yearOrSubcategory), fileName);
 
   if (post === null) {

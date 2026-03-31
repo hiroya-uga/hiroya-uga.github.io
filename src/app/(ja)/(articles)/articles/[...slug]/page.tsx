@@ -5,9 +5,11 @@ import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
-import { ArticlePage, CategoryPage, YearOrSubCategoryPage } from '@/app/(ja)/(articles)/articles/[...slug]/parts';
-import { getArticleMarkdownFilePath } from '@/app/(ja)/(articles)/articles/[...slug]/parts/utils';
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
+import { ArticleDetailPage } from '@/components/Pages/ArticleDetailPage';
+import { ArticleCategoryPage } from '@/components/Pages/ArticlesCategoryPage';
+import { ArticleYearOrSubCategoryPage } from '@/components/Pages/ArticleYearOrSubCategoryPage';
+import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { objectKeys } from '@/utils/object-keys';
 import { notFound } from 'next/navigation';
 
@@ -26,14 +28,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   }
 
   if (slug.length === 1) {
-    return <CategoryPage category={category} />;
+    return <ArticleCategoryPage category={category} />;
   }
 
   if (slug.length === 2) {
-    return <YearOrSubCategoryPage category={category} yearOrSubcategory={yearOrSubcategory} />;
+    return <ArticleYearOrSubCategoryPage category={category} yearOrSubcategory={yearOrSubcategory} />;
   }
 
-  return <ArticlePage slug={slug} category={category} yearOrSubcategory={yearOrSubcategory} fileName={fileName} />;
+  return (
+    <ArticleDetailPage slug={slug} category={category} yearOrSubcategory={yearOrSubcategory} fileName={fileName} />
+  );
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
