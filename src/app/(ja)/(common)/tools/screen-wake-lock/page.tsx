@@ -2,13 +2,23 @@ import { KeepAwakeClient } from '@/app/(ja)/(common)/tools/screen-wake-lock/Clie
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { NoteList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/screen-wake-lock');
 
+const jsonLd = {
+  ...DEFAULT_JSON_LD,
+  '@type': 'WebApplication',
+  name: metadata.pageTitle,
+  description: metadata.description,
+  url: `${URL_ORIGIN}/tools/screen-wake-lock`,
+};
+
 export default function Page() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageTitle {...metadata}>
         <p className="mt-paragraph">
           「スリープ防止を開始する」ボタンを押下し、このタブをアクティブにしたままにしてください<sup>※</sup>。

@@ -8,15 +8,31 @@ import { Heading } from '@/components/Heading';
 import { DiscList } from '@/components/List';
 import { Doumei } from '@/components/specific/Doumei';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 export const metadata = getMetadata('/about');
 
+const jsonLd = {
+  ...DEFAULT_JSON_LD,
+  '@type': 'ProfilePage',
+  name: metadata.pageTitle,
+  description: metadata.description,
+  url: `${URL_ORIGIN}/about`,
+  mainEntity: {
+    ...DEFAULT_JSON_LD.author,
+    alternateName: '宇賀景哉',
+    image: `${URL_ORIGIN}/profile.png`,
+    jobTitle: 'フロントエンドエンジニア',
+  },
+};
+
 export default function Page() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageTitle title={metadata.pageTitle}>
         <p>当サイトは、Webコンテンツを作るのが好きなエンジニアのおもちゃ箱です。</p>
         <p>メモ書きや、ちょっとしたツールなどが置いてあります。</p>
