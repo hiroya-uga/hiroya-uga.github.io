@@ -1,9 +1,9 @@
 import { SITE_NAME, SITE_SUBTITLE } from '@/constants/meta';
 import Link from 'next/link';
-import { useId } from 'react';
+
+const id = 'SITE_NAME';
 
 export const SiteName = () => {
-  const id = useId();
   const siteName = (
     <Link
       href="/"
