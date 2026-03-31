@@ -1,6 +1,6 @@
 import {
   BookMarkSection,
-  CategorySection,
+  CategoriesSection,
   ExternalMediaSection,
   Header,
   MainVisualSection,
@@ -28,7 +28,7 @@ export default function Home() {
 
         <div className="bg-primary z-1 @w640:pt-28 relative pt-8">
           <PickUpListSection />
-          <CategorySection />
+          <CategoriesSection />
 
           <div className="px-content-inline @w640:pb-20 pb-12">
             <div className="max-w-content mx-auto">

@@ -1,5 +1,5 @@
 export * from './BookMarkSection';
-export * from './CategorySection';
+export * from './CategoriesSection';
 export * from './Client';
 export * from './ExternalMediaSection';
 export * from './Header';
