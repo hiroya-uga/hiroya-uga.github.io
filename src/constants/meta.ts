@@ -7,3 +7,24 @@ export const SITE_DESCRIPTION =
   'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニアの物置。';
 export const GITHUB_PROFILE = 'https://github.com/hiroya-uga';
 export const GITHUB_REPOSITORY = 'https://github.com/hiroya-uga/hiroya-uga.github.io';
+export const DEFAULT_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: URL_ORIGIN,
+  description: SITE_DESCRIPTION,
+  inLanguage: 'ja',
+  author: {
+    '@type': 'Person',
+    name: SITE_AUTHOR,
+    url: URL_ORIGIN,
+    sameAs: [
+      'https://x.com/hiroya_UGA',
+      'https://github.com/hiroya-uga',
+      'https://www.instagram.com/hiroya.uga',
+      'https://www.flickr.com/photos/hiroya-uga/',
+      'https://codepen.io/hiroya_uga/',
+      'https://www.youtube.com/@hiroya_UGA',
+    ],
+  },
+};

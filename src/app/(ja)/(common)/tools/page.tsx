@@ -6,6 +6,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { SvgIcon } from '@/components/Icons';
 import { TOOLS_LINK_LIST } from '@/constants/link-list';
+import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { JOB_ROLES_JA } from '@/constants/works';
 import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';
@@ -13,11 +14,20 @@ import { useId } from 'react';
 
 export const metadata = getMetadata('/tools');
 
+const jsonLd = {
+  ...DEFAULT_JSON_LD,
+  '@type': 'CollectionPage',
+  name: metadata.pageTitle,
+  description: metadata.description,
+  url: `${URL_ORIGIN}/tools`,
+};
+
 export default function Page() {
   const id = useId();
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageTitle title={metadata.pageTitle} description={metadata.description} shouldShowPrivacyPolicyMessage />
 
       <div className="@container">
