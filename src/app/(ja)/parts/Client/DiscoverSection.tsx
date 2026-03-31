@@ -49,7 +49,7 @@ export const DiscoverSection = () => {
       <div className="max-w-content mx-auto">
         <h2 className="mb-4 flex flex-wrap items-center gap-1.5">
           <span className="@w640:text-2xl text-xl font-bold tracking-wide">Discover</span>
-          <span className="text-sm text-[#545454]">— Random Picks</span>
+          <span className="text-sm text-[#545454] dark:text-[#b3b3b3]">— Random Picks</span>
         </h2>
 
         <ul
