@@ -1,4 +1,3 @@
-import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { ArticleList } from '@/components/List';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
@@ -16,9 +15,9 @@ import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-type Props = { category: ArticleCategory; yearOrSubcategory: string };
+type Props = { pageTitle: string; description: string; category: ArticleCategory; yearOrSubcategory: string };
 
-export const ArticleYearOrSubCategoryPage = async ({ category, yearOrSubcategory }: Props) => {
+export const ArticleYearOrSubCategoryPage = async ({ pageTitle, description, category, yearOrSubcategory }: Props) => {
   const notExistYearOrSubcategory = ARTICLE_PATH_PATTERN_LIST[category].includes(yearOrSubcategory) === false;
 
   if (notExistYearOrSubcategory) {
@@ -29,7 +28,6 @@ export const ArticleYearOrSubCategoryPage = async ({ category, yearOrSubcategory
     getArticleMarkdownFilePath(category, yearOrSubcategory),
     `/articles/${category}/${yearOrSubcategory}`,
   );
-  const { pageTitle, description } = getArticlesPageMeta.yearOrSubCategoryPage(category, yearOrSubcategory);
 
   const yearOrSubcategoryLabel = getSubCategoryName(yearOrSubcategory);
   const headingText = getSubCategoryListLabel(category);
