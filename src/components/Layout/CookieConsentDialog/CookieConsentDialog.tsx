@@ -13,6 +13,10 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './CookieConsentDialog.module.css';
 
 const initGA = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    return;
+  }
+
   const pathname = window.location.pathname;
   const searchParams = new URLSearchParams(window.location.search);
   ReactGA.initialize(GA_MEASUREMENT_ID);
