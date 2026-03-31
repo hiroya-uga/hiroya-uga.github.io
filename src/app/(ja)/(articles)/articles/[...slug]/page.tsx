@@ -157,6 +157,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         images: [
           {
             url: ogImage,
+            alt: `${SITE_NAME} ${pageTitle}`,
             width: 1200,
             height: 630,
           },
@@ -188,6 +189,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         images: [
           {
             url: ogImage,
+            alt: `${SITE_NAME} ${pageTitle}`,
             width: 1200,
             height: 630,
           },
