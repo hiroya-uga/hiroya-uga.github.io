@@ -1,13 +1,14 @@
 import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { ArticleList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
+import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
+import { generateOgpImage } from '@/libs/generate-ogp';
 import { getMetadata } from '@/utils/get-metadata';
 import { getAllArticles } from '@/utils/ssg-articles';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata = getMetadata('/articles');
-
+const metadata = getMetadata('/articles');
 const { pageTitle, description } = metadata;
 
 const jsonLd = {
@@ -15,7 +16,7 @@ const jsonLd = {
   '@type': 'Blog',
   name: pageTitle,
   description: description,
-  url: `${URL_ORIGIN}/articles`,
+  url: `${URL_ORIGIN}/articles/`,
 };
 
 export default async function Page() {
@@ -35,4 +36,34 @@ export default async function Page() {
       </div>
     </>
   );
+}
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = await generateOgpImage(['articles'], pageTitle);
+  const url = `${URL_ORIGIN}/articles/`;
+
+  return {
+    title: pageTitle,
+    description,
+    twitter: {
+      creator: '@hiroya_UGA',
+    },
+    openGraph: {
+      siteName: SITE_NAME,
+      title: pageTitle,
+      description,
+      type: 'website',
+      url,
+      images: [
+        {
+          url: ogImage,
+          alt: `${SITE_NAME} ${pageTitle}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
 }
