@@ -108,14 +108,14 @@ html:has(.container) {
   --v-list-gap-y: 0;
   --v-list-font-size: 0.875rem;
   --v-spacing-y: 1.5rem;
-  --v-spacing-heading-bottom: 1.125rem;
+  --v-spacing-heading-bottom: 1.5rem;
   --v-negative-margin-inline: calc(50% - 50dvw);
 
   transition: 0.3s max-width ease-out;
 
   @container (width >= 600px) {
     --v-negative-margin-inline: 0;
-    --v-spacing-heading-bottom: 1.5rem;
+    --v-spacing-heading-bottom: 2rem;
   }
 
   @container (min-width: 40rem) {
@@ -251,6 +251,11 @@ html:has(.container) {
   customされたimg要素ˆ-ˆ {
     margin: 0 auto;
     background-color: var(--background-color-secondary);
+  }
+
+  > p,
+  > section > p {
+    text-align: justify;
   }
 
   :is(ul, ol) {
