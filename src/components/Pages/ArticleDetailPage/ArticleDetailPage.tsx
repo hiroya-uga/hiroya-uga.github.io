@@ -3,16 +3,20 @@ import { ArticleMain } from '@/components/structures/ArticleMain';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { GlobalHeader } from '@/components/structures/GlobalHeader';
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory, getSubCategoryName } from '@/constants/articles';
-import { URL_ORIGIN } from '@/constants/meta';
-import { getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
 
+import { getPostBySlug } from '@/libs/marked';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
-import { notFound } from 'next/navigation';
-import { ArticleJsonLD, ArticleNavigation } from './parts';
+import { ArticleNavigation } from './parts';
 
-type Props = { slug: string[]; category: ArticleCategory; yearOrSubcategory: string; fileName: string };
+interface Props {
+  post: NonNullable<ReturnType<typeof getPostBySlug>>;
+  category: ArticleCategory;
+  yearOrSubcategory: string;
+  fileName: string;
+  pathname: string;
+}
 
 async function getAllArticlesInCategory(category: ArticleCategory) {
   const articlePromises = ARTICLE_PATH_PATTERN_LIST[category].map((year) =>
@@ -21,17 +25,9 @@ async function getAllArticlesInCategory(category: ArticleCategory) {
   return (await Promise.all(articlePromises)).flat();
 }
 
-export const ArticleDetailPage = async ({ slug, category, yearOrSubcategory, fileName }: Props) => {
-  const post = getPostBySlug(getArticleMarkdownFilePath(category, yearOrSubcategory), fileName);
-
-  if (post === null) {
-    return notFound();
-  }
-
+export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pathname }: Props) => {
   const blogs = await getAllArticlesInCategory(category);
-  const pathname = `/articles/${slug.join('/')}`;
   const currentIndex = blogs.findIndex((blog) => blog.pathname === pathname);
-  const canonical = `${URL_ORIGIN}${pathname}/`;
   const categoryName = resolveCategoryName(category);
 
   const previousArticle = blogs[currentIndex + 1];
@@ -71,13 +67,6 @@ export const ArticleDetailPage = async ({ slug, category, yearOrSubcategory, fil
           { href: `/articles/${category}/${yearOrSubcategory}`, title: getSubCategoryName(yearOrSubcategory) },
         ]}
         currentPageTitle={post.meta.title.replaceAll('\n', '')}
-      />
-      <ArticleJsonLD
-        post={post}
-        category={category}
-        yearOrSubcategory={yearOrSubcategory}
-        fileName={fileName}
-        canonical={canonical}
       />
     </>
   );

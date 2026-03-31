@@ -1,5 +1,5 @@
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory } from '@/constants/articles';
-import { SITE_AUTHOR, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
+import { DEFAULT_JSON_LD, DOMAIN_NAME, SITE_AUTHOR, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
 import { getAllNoteIds, getPostBySlug } from '@/libs/marked';
 import { resolveCategoryName } from '@/utils/articles';
@@ -19,6 +19,16 @@ const isArticleCategory = (category: string): category is ArticleCategory => {
   return category in ARTICLE_PATH_PATTERN_LIST;
 };
 
+const getStringValue = (value: unknown) => {
+  if (typeof value === 'string') {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.join(', ');
+  }
+  return undefined;
+};
+
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
   const [category, yearOrSubcategory, fileName] = slug;
@@ -35,8 +45,53 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
     return <ArticleYearOrSubCategoryPage category={category} yearOrSubcategory={yearOrSubcategory} />;
   }
 
+  const post = getPostBySlug(getArticleMarkdownFilePath(category, yearOrSubcategory), fileName);
+
+  if (post === null) {
+    return notFound();
+  }
+
+  const title = post?.meta.title.replace(/\n/g, '');
+  const canonical = `${URL_ORIGIN}/articles/${slug.join('/')}/`;
+  const pathname = `/articles/${slug.join('/')}`;
+  const jsonLd = {
+    ...DEFAULT_JSON_LD,
+    '@context': 'https://schema.org',
+    '@type': category === 'tech-blog' ? 'TechArticle' : 'BlogPosting',
+    name: title,
+    headline: title,
+    description: getStringValue(post?.meta.description),
+    proficiencyLevel: getStringValue(post?.meta.proficiencyLevel),
+    keywords: post?.meta.topics,
+    dependencies: getStringValue(post?.meta.dependencies),
+    image: `https://${DOMAIN_NAME}/generated-ogp/articles/${category}/${yearOrSubcategory}/${fileName}.png`,
+    datePublished: new Date(post?.meta.publishedAt).toISOString(),
+    dateModified: post?.meta.updatedAt ? new Date(post?.meta.updatedAt).toISOString() : undefined,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_AUTHOR,
+      url: `https://${DOMAIN_NAME}/about/`,
+      logo: {
+        '@type': 'ImageObject',
+        url: `https://${DOMAIN_NAME}/favicon.png`,
+      },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    url: canonical,
+    inLanguage: 'ja',
+  };
+
   return (
-    <ArticleDetailPage slug={slug} category={category} yearOrSubcategory={yearOrSubcategory} fileName={fileName} />
+    <>
+      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <ArticleDetailPage
+        post={post}
+        category={category}
+        yearOrSubcategory={yearOrSubcategory}
+        fileName={fileName}
+        pathname={pathname}
+      />
+    </>
   );
 }
 
