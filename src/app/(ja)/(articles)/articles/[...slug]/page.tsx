@@ -38,11 +38,46 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   }
 
   if (slug.length === 1) {
-    return <ArticleCategoryPage category={category} />;
+    const { pageTitle, description } = getArticlesPageMeta.categoryTop(category);
+    const url = `${URL_ORIGIN}/articles/${category}`;
+    const jsonLd = {
+      ...DEFAULT_JSON_LD,
+      '@type': 'CollectionPage',
+      name: pageTitle,
+      description,
+      url,
+    };
+
+    return (
+      <>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <ArticleCategoryPage pageTitle={pageTitle} description={description} category={category} />
+      </>
+    );
   }
 
   if (slug.length === 2) {
-    return <ArticleYearOrSubCategoryPage category={category} yearOrSubcategory={yearOrSubcategory} />;
+    const { pageTitle, description } = getArticlesPageMeta.yearOrSubCategoryPage(category, yearOrSubcategory);
+    const url = `${URL_ORIGIN}/articles/${category}/${yearOrSubcategory}`;
+    const jsonLd = {
+      ...DEFAULT_JSON_LD,
+      '@type': 'CollectionPage',
+      name: pageTitle,
+      description,
+      url,
+    };
+
+    return (
+      <>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <ArticleYearOrSubCategoryPage
+          pageTitle={pageTitle}
+          description={description}
+          category={category}
+          yearOrSubcategory={yearOrSubcategory}
+        />
+      </>
+    );
   }
 
   const post = getPostBySlug(getArticleMarkdownFilePath(category, yearOrSubcategory), fileName);

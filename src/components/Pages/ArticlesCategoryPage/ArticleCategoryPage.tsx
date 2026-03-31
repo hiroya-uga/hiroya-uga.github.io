@@ -1,4 +1,3 @@
-import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
 import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { ArticleList } from '@/components/List';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
@@ -17,10 +16,12 @@ import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 
 type Props = {
+  pageTitle: string;
+  description: string;
   category: ArticleCategory;
 };
 
-export const ArticleCategoryPage = async ({ category }: Props) => {
+export const ArticleCategoryPage = async ({ pageTitle, description, category }: Props) => {
   const articlePromises = objectKeys(ARTICLE_PATH_PATTERN_LIST)
     .filter((categoryName) => category === categoryName)
     .flatMap((categoryName) => {
@@ -29,8 +30,6 @@ export const ArticleCategoryPage = async ({ category }: Props) => {
     });
 
   const blogs = (await Promise.all(articlePromises)).flat();
-  const { pageTitle, description } = getArticlesPageMeta.categoryTop(category);
-
   const headingText = getSubCategoryListLabel(category);
 
   return (
