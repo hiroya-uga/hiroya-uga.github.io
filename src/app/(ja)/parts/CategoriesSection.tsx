@@ -78,7 +78,7 @@ export const CategoriesSection = () => {
   return (
     <div className="bg-tertiary px-content-inline @w640:mb-28 mb-20 py-11 pb-12">
       <div className="max-w-content mx-auto">
-        <h2 className="@w640:text-2xl mb-4 text-xl font-bold tracking-wide" id="heading-categories">
+        <h2 className="@w640:text-2xl mb-4 text-xl font-bold tracking-wide outline-none" id="heading-categories">
           Categories
         </h2>
 
