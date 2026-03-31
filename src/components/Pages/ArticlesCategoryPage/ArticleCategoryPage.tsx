@@ -11,16 +11,16 @@ import {
   getSubCategoryName,
 } from '@/constants/articles';
 import { resolveCategoryName } from '@/utils/articles';
+import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { objectKeys } from '@/utils/object-keys';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
-import { getArticleMarkdownFilePath } from './utils';
 
 type Props = {
   category: ArticleCategory;
 };
 
-export const CategoryPage = async ({ category }: Props) => {
+export const ArticleCategoryPage = async ({ category }: Props) => {
   const articlePromises = objectKeys(ARTICLE_PATH_PATTERN_LIST)
     .filter((categoryName) => category === categoryName)
     .flatMap((categoryName) => {

@@ -11,14 +11,14 @@ import {
   getSubCategoryName,
 } from '@/constants/articles';
 import { resolveCategoryName } from '@/utils/articles';
+import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getArticleMarkdownFilePath } from './utils';
 
 type Props = { category: ArticleCategory; yearOrSubcategory: string };
 
-export const YearOrSubCategoryPage = async ({ category, yearOrSubcategory }: Props) => {
+export const ArticleYearOrSubCategoryPage = async ({ category, yearOrSubcategory }: Props) => {
   const notExistYearOrSubcategory = ARTICLE_PATH_PATTERN_LIST[category].includes(yearOrSubcategory) === false;
 
   if (notExistYearOrSubcategory) {
