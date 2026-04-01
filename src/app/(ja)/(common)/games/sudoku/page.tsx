@@ -4,30 +4,34 @@ import { Heading } from '@/components/Heading';
 import { DiscList, NoteList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Table } from '@/components/Table';
+import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 
 export const metadata = getMetadata('/games/sudoku');
 
+const jsonLd = {
+  ...DEFAULT_JSON_LD,
+  '@type': 'Game',
+  name: metadata.pageTitle,
+  description: metadata.description,
+  url: `${URL_ORIGIN}/games/sudoku/`,
+};
+
 export default function Page() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <div className="mt-paragraph">
           <NoteList
             list={[
               {
-                key: 'ランダムで答えが生成されているため、<strong>成立している答えでも誤答判定になる</strong>場合があります。',
+                key: '1',
                 value: (
-                  <>
-                    <span>
-                      答えはあらかじめランダムで生成されているため、<strong>成立している答えでも誤答判定になる</strong>
-                      場合があります。
-                    </span>
-                    <span className="block">
-                      遊び方についてはページ下部の「<Link href="#anchor-遊び方">遊び方</Link>」をご覧ください。
-                    </span>
-                  </>
+                  <span className="block">
+                    遊び方についてはページ下部の「<Link href="#anchor-遊び方">遊び方</Link>」をご覧ください。
+                  </span>
                 ),
               },
             ]}
@@ -87,7 +91,7 @@ export default function Page() {
           </tr>
           <tr>
             <th scope="row">ギブアップ</th>
-            <td>現在の問題をやめて、回答を確認します。</td>
+            <td>現在の問題をやめて、回答例を確認します。</td>
           </tr>
           <tr>
             <th scope="row">次の問題</th>
@@ -103,7 +107,7 @@ export default function Page() {
           </tr>
           <tr>
             <th scope="row">進捗率を表示</th>
-            <td>入力されている値のうち、何％が正しい値かどうかを表示します。</td>
+            <td>入力されている値のうち、何％が成立している値の割合を表示します。</td>
           </tr>
         </tbody>
       </Table>

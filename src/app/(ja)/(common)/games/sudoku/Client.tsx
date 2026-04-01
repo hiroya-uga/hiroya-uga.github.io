@@ -15,7 +15,7 @@ type Sudoku = number[][];
 type SudokuState = {
   value: number;
   type: 'hint' | 'input' | 'loading';
-  state: 'idle' | 'valid' | 'invalid' | 'answer';
+  state: 'idle' | 'invalid' | 'answer';
   duplicated: boolean;
   answer: number;
 }[][];
@@ -186,16 +186,17 @@ export const SudokuClient = () => {
   }, []);
 
   const showAnswer = useCallback(() => {
-    setSudokuState((prev) =>
-      prev.map((row) =>
+    setSudokuState((prev) => {
+      const checked = checkDuplicate(prev);
+      return checked.map((row) =>
         row.map((cell) => {
-          if (cell.type === 'input' && cell.value !== cell.answer) {
-            return { ...cell, value: Number.NaN, state: 'invalid' };
+          if (cell.type === 'input' && (Number.isNaN(cell.value) || cell.duplicated)) {
+            return { ...cell, value: Number.NaN, state: 'invalid' as const };
           }
-          return { ...cell, state: 'valid' };
+          return { ...cell, state: 'idle' as const };
         }),
-      ),
-    );
+      );
+    });
   }, []);
 
   useEffect(() => {
@@ -296,7 +297,6 @@ export const SudokuClient = () => {
                       rowIndex % 3 === 0 && 'border-t-4',
                       colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
                       type === 'input' && state === 'invalid' && 'bg-error text-high-contrast',
-                      type === 'input' && state === 'valid' && 'bg-success text-high-contrast',
                     ])}
                   >
                     <input
@@ -327,7 +327,7 @@ export const SudokuClient = () => {
                       value={Number.isNaN(value) ? '' : value}
                       title={`${rowIndex + 1}行目${colIndex + 1}列目`}
                       aria-invalid={duplicated || state === 'invalid'}
-                      readOnly={type === 'hint' || state === 'answer' || state === 'valid'}
+                      readOnly={type === 'hint' || state === 'answer'}
                       onMouseEnter={() => {
                         setHoverCoords([rowIndex, colIndex]);
                         setCurrentInput((prev) => {
@@ -362,12 +362,15 @@ export const SudokuClient = () => {
                           setSudokuState((prev) => {
                             const newSudoku = [...prev];
                             newSudoku[rowIndex][colIndex].value = value;
+                            newSudoku[rowIndex][colIndex].state = 'idle';
 
                             const result = checkDuplicate(newSudoku);
 
                             const input = [...result].flat().filter((item) => item.type === 'input');
                             const inputLength = input.length;
-                            const correctLength = input.filter((item) => item.value === item.answer).length;
+                            const correctLength = input.filter(
+                              (item) => !Number.isNaN(item.value) && !item.duplicated,
+                            ).length;
                             const ratio = Math.floor((correctLength / inputLength) * 10000) / 100;
 
                             if (ratio === 100) {
@@ -508,9 +511,7 @@ export const SudokuClient = () => {
                         ),
                       );
                     },
-                    no: () => {
-                      return;
-                    },
+                    no: () => {},
                   });
                 }}
               >
@@ -534,19 +535,14 @@ export const SudokuClient = () => {
                         prev.map((row) =>
                           row.map((cell) => {
                             if (cell.type === 'input') {
-                              if (cell.value === cell.answer) {
-                                return { ...cell, value: cell.answer, state: 'valid' };
-                              }
-                              return { ...cell, value: cell.answer, state: 'answer' };
+                              return { ...cell, value: cell.answer, state: 'answer' as const };
                             }
                             return cell;
                           }),
                         ),
                       );
                     },
-                    no: () => {
-                      return;
-                    },
+                    no: () => {},
                   });
                 }}
               >
@@ -596,9 +592,7 @@ export const SudokuClient = () => {
                         inputMapRef.current[4][4]?.focus({ preventScroll: true });
                       });
                     },
-                    no: () => {
-                      return;
-                    },
+                    no: () => {},
                   });
                 }}
               >
