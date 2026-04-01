@@ -81,7 +81,10 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
               <button
                 className="ml-auto rounded border border-slate-400 bg-slate-200 px-2 py-1 text-xs text-slate-600 transition-colors hover:bg-slate-300 hover:text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white"
                 onClick={(e) => {
-                  setToastMessage(restProps.title + 'をコピーしました！');
+                  setToastMessage(
+                    restProps.title +
+                      (document.documentElement.lang === 'ja' ? 'をコピーしました！' : ' has been copied!'),
+                  );
                   handleClickCopyButton(code, e.currentTarget);
                   window.gtag?.('event', 'click_copy_button');
                 }}
