@@ -125,7 +125,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 width={960}
                 height={640}
                 src={photoData.src}
-                alt={photoData.alt ?? ''}
+                alt=""
                 className={clsx([
                   'z-1 relative block size-full object-cover',
                   'starting:opacity-0 starting:invisible transition-fade duration-300',
