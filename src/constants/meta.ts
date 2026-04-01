@@ -27,4 +27,4 @@ export const DEFAULT_JSON_LD = {
       'https://www.youtube.com/@hiroya_UGA',
     ],
   },
-};
+} as const;
