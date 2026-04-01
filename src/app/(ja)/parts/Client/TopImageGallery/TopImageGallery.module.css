@@ -1,9 +1,9 @@
 @keyframes object-position {
   from {
-    object-position: 50% 85%;
+    object-position: 50% 75%;
   }
   to {
-    object-position: 50% 50%;
+    object-position: 50% 40%;
   }
 }
 

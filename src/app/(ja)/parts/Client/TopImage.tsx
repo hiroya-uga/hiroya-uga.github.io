@@ -122,6 +122,53 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           e.currentTarget.focus();
         }}
       >
+        <p
+          className={clsx([
+            '@w640:pl-3.5 @w640:pr-3 @w640:pt-2.5 @w640:min-h-20 @w640:bg-transparent @w640:bg-[linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.2),transparent)]',
+
+            'absolute left-0 top-0 z-10 w-full -translate-y-full px-2 py-1',
+
+            'transition-[color,text-shadow,translate]',
+            'group-focus-within:translate-y-0 group-hover:translate-y-0',
+          ])}
+        >
+          <button
+            type="button"
+            className="@w640:top-2 @w640:size-8 @w640:p-0 size-32px ml-auto block rounded-full p-1 outline-offset-2"
+            onClick={updateImage}
+          >
+            <span className="border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg grid size-full place-items-center rounded-full border">
+              <svg
+                version="1.1"
+                role="img"
+                aria-label="ランダムに切り替える"
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                viewBox="0 0 512 512"
+                className="@w640:size-5 block size-4"
+              >
+                <g>
+                  <path
+                    d="M403.925,108.102c-27.595-27.595-62.899-47.558-102.459-56.29L304.182,0L201.946,53.867l-27.306,14.454
+		l-5.066,2.654l8.076,4.331l38.16,20.542l81.029,43.602l2.277-42.859c28.265,7.546,53.438,22.53,73.623,42.638
+		c29.94,29.939,48.358,71.119,48.358,116.776c0,23.407-4.843,45.58-13.575,65.687l40.37,17.532
+		c11.076-25.463,17.242-53.637,17.242-83.219C465.212,198.306,441.727,145.904,403.925,108.102z"
+                    style={{ fill: 'var(--color-primary)' }}
+                  ></path>
+                  <path
+                    d="M296.256,416.151l-81.101-43.612l-2.272,42.869c-28.26-7.555-53.51-22.53-73.618-42.636
+		c-29.945-29.95-48.364-71.12-48.364-116.767c0-23.427,4.844-45.522,13.576-65.697l-40.37-17.531
+		c-11.076,25.53-17.242,53.723-17.242,83.228c0,57.679,23.407,110.157,61.21,147.893c27.595,27.594,62.899,47.548,102.453,56.202
+		l-2.716,51.9l102.169-53.878l27.455-14.454l4.988-2.643l-7.999-4.332L296.256,416.151z"
+                    style={{ fill: 'var(--color-primary)' }}
+                  ></path>
+                </g>
+              </svg>
+            </span>
+          </button>
+        </p>
+
         <figure className="min-h bg-primary relative" aria-live="polite">
           <p className="aspect-3/2 isolate">
             {photoData && 'error' in photoData === false && (
@@ -180,23 +227,31 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
             )}
           </p>
 
-          <figcaption className="text-white">
+          <figcaption
+            className={clsx([
+              '@w640:py-2 @w640:min-h-20 @w640:pl-3 @w640:pb-2.5 @w640:flex @w640:bg-transparent @w640:items-end @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
+
+              'absolute bottom-0 right-0 z-10 min-h-8 w-full translate-y-full bg-[#00000080] px-2 py-1 leading-[1rem] text-white mix-blend-hard-light',
+
+              'transition-transform',
+              'group-focus-within:translate-y-0 group-hover:translate-y-0',
+              'focus-within:translate-y-0',
+            ])}
+            id={captionId}
+          >
             <p
               className={clsx([
-                '@w640:pl-3.5 @w640:pr-3 @w640:pt-2.5 @w640:min-h-20 @w640:leading-inherit @w640:bg-transparent @w640:bg-[linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.2),transparent)]',
-
-                'absolute left-0 top-0 z-10 grid w-full -translate-y-full grid-rows-[auto_1fr] items-start px-2 py-1',
-                'palt @w640:font-thin bg-[#00000080] leading-tight mix-blend-hard-light',
-
-                'transition-[color,text-shadow,translate]',
-                'group-focus-within:translate-y-0 group-hover:translate-y-0',
+                '@w640:font-thin @w640:leading-snug',
+                'transition-fade',
                 shouldShowImage
-                  ? '@w640:text-shadow-[0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6] text-shadow-[0_0_2px_rgba(0,0,0,.9)]'
-                  : 'text-transparent',
+                  ? [
+                      '@w640:text-shadow-[0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6] text-shadow-[0_0_2px_rgba(0,0,0,.9)]',
+                      'visible opacity-100',
+                    ]
+                  : ['invisible text-transparent opacity-0'],
               ])}
-              id={captionId}
             >
-              <span className={clsx(['@w640:text-sm', 'text-2xs block truncate leading-tight'])}>
+              <span className={clsx(['@w640:text-sm', 'text-2xs block truncate'])}>
                 {photoData?.caption}
                 <span className="@w640:text-xs text-2xs ml-1 inline-block"> at {photoData?.date}</span>
               </span>
@@ -206,85 +261,33 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
             </p>
           </figcaption>
         </figure>
-
-        <p
-          className={clsx([
-            '@w640:h-12 @w640:py-2 @w640:right-4',
-            'absolute right-2 top-0 z-10 size-8 -translate-y-full focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
-            'transition-[opacity,visibility,translate]',
-          ])}
-        >
-          <button
-            type="button"
-            className="@w640:top-2 @w640:size-8 @w640:p-0 size-32px absolute inset-0 rounded-full p-1"
-            onClick={updateImage}
-          >
-            <span className="border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg grid size-full place-items-center rounded-full border outline-offset-2">
-              <svg
-                version="1.1"
-                role="img"
-                aria-label="ランダムに切り替える"
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                viewBox="0 0 512 512"
-                className="@w640:size-5 block size-4"
-              >
-                <g>
-                  <path
-                    d="M403.925,108.102c-27.595-27.595-62.899-47.558-102.459-56.29L304.182,0L201.946,53.867l-27.306,14.454
-		l-5.066,2.654l8.076,4.331l38.16,20.542l81.029,43.602l2.277-42.859c28.265,7.546,53.438,22.53,73.623,42.638
-		c29.94,29.939,48.358,71.119,48.358,116.776c0,23.407-4.843,45.58-13.575,65.687l40.37,17.532
-		c11.076-25.463,17.242-53.637,17.242-83.219C465.212,198.306,441.727,145.904,403.925,108.102z"
-                    style={{ fill: 'var(--color-primary)' }}
-                  ></path>
-                  <path
-                    d="M296.256,416.151l-81.101-43.612l-2.272,42.869c-28.26-7.555-53.51-22.53-73.618-42.636
-		c-29.945-29.95-48.364-71.12-48.364-116.767c0-23.427,4.844-45.522,13.576-65.697l-40.37-17.531
-		c-11.076,25.53-17.242,53.723-17.242,83.228c0,57.679,23.407,110.157,61.21,147.893c27.595,27.594,62.899,47.548,102.453,56.202
-		l-2.716,51.9l102.169-53.878l27.455-14.454l4.988-2.643l-7.999-4.332L296.256,416.151z"
-                    style={{ fill: 'var(--color-primary)' }}
-                  ></path>
-                </g>
-              </svg>
-            </span>
-          </button>
-        </p>
-
-        <p
-          className={clsx([
-            '@w640:py-2 @w640:min-h-20 @w640:pr-3 @w640:pb-2 @w640:bg-transparent @w640:items-end @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
-
-            'absolute bottom-0 right-0 z-10 flex min-h-8 w-full translate-y-full items-center justify-end bg-[#00000080] py-1 pr-2',
-
-            'transition-transform',
-            'group-focus-within:translate-y-0 group-hover:translate-y-0',
-            'focus-within:translate-y-0 group-focus-within:translate-y-0 group-hover:translate-y-0',
-          ])}
-        >
-          <button
-            type="button"
-            className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs @w640:text-sm z-10 block w-fit cursor-pointer rounded-full border border-transparent px-3 py-1 leading-tight no-underline"
-            onClick={() => {
-              setGalleryState({ shouldShow: true, photos: photoDataListRef.current });
-
-              queueMicrotask(() => {
-                const galleryElement = document.getElementById(galleryId);
-
-                galleryElement?.querySelector('h2')?.focus({
-                  preventScroll: true,
-                });
-                galleryElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              });
-            }}
-            aria-expanded={galleryState.shouldShow}
-            aria-controls={galleryId}
-            ref={galleryToggleButtonRef}
-          >
-            一覧を開く ↓
-          </button>
-        </p>
       </div>
+      <p className="@w976:px-0 mt-2 px-2 transition-[padding-inline]">
+        <button
+          type="button"
+          className={clsx([
+            '@w640:text-sm',
+            'transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-1 leading-tight no-underline',
+          ])}
+          onClick={() => {
+            setGalleryState({ shouldShow: true, photos: photoDataListRef.current });
+
+            queueMicrotask(() => {
+              const galleryElement = document.getElementById(galleryId);
+
+              galleryElement?.querySelector('h2')?.focus({
+                preventScroll: true,
+              });
+              galleryElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+          }}
+          aria-expanded={galleryState.shouldShow}
+          aria-controls={galleryId}
+          ref={galleryToggleButtonRef}
+        >
+          Galleryを開く↓
+        </button>
+      </p>
     </div>
   );
 };

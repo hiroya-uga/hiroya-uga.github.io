@@ -37,7 +37,30 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
       </h2>
 
       {shouldRenderGallery && (
-        <>
+        <div className="flex flex-col-reverse">
+          <div className="pt-80PX z-1 pointer-events-none sticky bottom-0 bg-[linear-gradient(to_top,var(--background-color-primary),rgba(255,255,255,0))] pb-4 text-center">
+            <p className="max-w-content mx-auto">
+              <button
+                type="button"
+                aria-expanded={true}
+                aria-controls={galleryId}
+                onClick={() => {
+                  galleryToggleButtonRef.current?.focus({
+                    preventScroll: true,
+                  });
+                  galleryToggleButtonRef.current?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'end',
+                  });
+                  setGalleryState((prev) => ({ ...prev, shouldShow: false }));
+                }}
+                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline"
+              >
+                Galleryを閉じる ↑
+              </button>
+            </p>
+          </div>
+
           <ul
             className={clsx([
               'gap-16PX grid grid-cols-1',
@@ -127,30 +150,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
               );
             })}
           </ul>
-
-          <div className="pt-80PX pointer-events-none sticky bottom-0 bg-[linear-gradient(to_top,var(--background-color-primary),rgba(255,255,255,0))] pb-4 text-center">
-            <p className="max-w-content mx-auto">
-              <button
-                type="button"
-                aria-expanded={true}
-                aria-controls={galleryId}
-                onClick={() => {
-                  galleryToggleButtonRef.current?.focus({
-                    preventScroll: true,
-                  });
-                  galleryToggleButtonRef.current?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'end',
-                  });
-                  setGalleryState((prev) => ({ ...prev, shouldShow: false }));
-                }}
-                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit cursor-pointer rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline"
-              >
-                一覧を閉じる ↑
-              </button>
-            </p>
-          </div>
-        </>
+        </div>
       )}
     </section>
   );
