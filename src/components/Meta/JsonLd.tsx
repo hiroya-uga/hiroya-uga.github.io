@@ -69,7 +69,7 @@ export const JsonLdForNote = ({
       name: 'Hiroya.UGA',
       logo: {
         '@type': 'ImageObject',
-        url: `${URL_ORIGIN}/profile.png`,
+        url: `${URL_ORIGIN}/common/images/profile.png`,
       },
     },
   };
