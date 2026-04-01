@@ -170,7 +170,6 @@
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
-  --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
   --text-6xl: 3.75rem;
@@ -215,6 +214,7 @@
   --container-w1520: 95rem;
   --container-w1280: 80rem;
   --container-w1024: 64rem;
+  --container-w976: 61rem;
   --container-w800px: 800px;
   --container-w800: 50rem;
   --container-w768: 48rem;
