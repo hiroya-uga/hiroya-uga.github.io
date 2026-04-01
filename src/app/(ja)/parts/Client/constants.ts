@@ -11,6 +11,16 @@ export type PhotoData = {
 
 export const photoDataList: PhotoData[] = [
   {
+    src: '/images/main-c97-02.webp',
+    caption: '有明客船ターミナル・コミックマーケット97',
+    spec: '17-35mm F/2.8-4 Di OSD (Model A037) + Nikon Z 6',
+    instagram: 'B61oavkHFyK',
+    flickr: 'https://flic.kr/p/2s5hBax',
+    date: '2019.12.31',
+    width: 1920,
+    height: 1278,
+  },
+  {
     src: '/images/main-shimokitazawa-bike.webp',
     caption: '下北沢',
     spec: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
