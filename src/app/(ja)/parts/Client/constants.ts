@@ -11,6 +11,26 @@ export type PhotoData = {
 
 export const photoDataList: PhotoData[] = [
   {
+    src: '/images/main-shimokitazawa-bike.webp',
+    caption: '下北沢',
+    spec: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
+    instagram: 'B4IBXInHRxr',
+    flickr: 'https://flic.kr/p/2s58oZV',
+    date: '2019.10.26',
+    width: 1920,
+    height: 1280,
+  },
+  {
+    src: '/images/main-ryugu.webp',
+    caption: '龍宮窟',
+    spec: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
+    // instagram: 'B3SIj22nfKi',
+    flickr: 'https://flic.kr/p/2s37HYi',
+    date: '2019.08.12',
+    width: 1920,
+    height: 1280,
+  },
+  {
     src: '/images/main-shinjuku-big-under.webp',
     caption: '新宿大ガード',
     spec: 'SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + Nikon D7200',
