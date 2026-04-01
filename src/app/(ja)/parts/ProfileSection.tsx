@@ -22,7 +22,7 @@ export const ProfileSection = () => {
             <Picture
               width={160}
               height={160}
-              src="/profile.png"
+              src="/common/images/profile.png"
               alt="似顔絵アイコン"
               className="w-full"
               priority={false}
