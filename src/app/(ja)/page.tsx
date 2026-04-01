@@ -7,6 +7,7 @@ import {
   MainVisualSection,
   ProfileSection,
 } from '@/app/(ja)/parts';
+import { JsonLd } from '@/components/Meta';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { DEFAULT_JSON_LD } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
@@ -17,7 +18,7 @@ export const metadata = getMetadata('/');
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(DEFAULT_JSON_LD) }} />
+      <JsonLd data={DEFAULT_JSON_LD} />
       <Header pageTitle={metadata.pageTitle} />
 
       <main className="@container">

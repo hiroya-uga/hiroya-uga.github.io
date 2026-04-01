@@ -6,6 +6,7 @@ import { PERSONAL_HISTORY } from '@/app/(ja)/(common)/about/constants';
 import { TextLink } from '@/components/Clickable';
 import { Heading } from '@/components/Heading';
 import { DiscList } from '@/components/List';
+import { JsonLd } from '@/components/Meta';
 import { Doumei } from '@/components/specific/Doumei';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
@@ -32,7 +33,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <PageTitle title={metadata.pageTitle}>
         <p>当サイトは、Webコンテンツを作るのが好きなエンジニアのおもちゃ箱です。</p>
         <p>メモ書きや、ちょっとしたツールなどが置いてあります。</p>

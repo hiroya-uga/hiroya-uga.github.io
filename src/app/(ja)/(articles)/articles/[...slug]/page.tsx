@@ -6,6 +6,7 @@ import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
+import { JsonLd } from '@/components/Meta';
 import { ArticleDetailPage } from '@/components/Pages/ArticleDetailPage';
 import { ArticleCategoryPage } from '@/components/Pages/ArticlesCategoryPage';
 import { ArticleYearOrSubCategoryPage } from '@/components/Pages/ArticleYearOrSubCategoryPage';
@@ -50,7 +51,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
     return (
       <>
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <JsonLd data={jsonLd} />
         <ArticleCategoryPage pageTitle={pageTitle} description={description} category={category} />
       </>
     );
@@ -69,7 +70,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
     return (
       <>
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <JsonLd data={jsonLd} />
         <ArticleYearOrSubCategoryPage
           pageTitle={pageTitle}
           description={description}
@@ -118,7 +119,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <JsonLd data={jsonLd} />
       <ArticleDetailPage
         post={post}
         category={category}

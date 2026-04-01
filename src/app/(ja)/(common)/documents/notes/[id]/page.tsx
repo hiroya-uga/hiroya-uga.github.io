@@ -9,7 +9,7 @@ import remarkGfm from 'remark-gfm';
 
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
 import { ExampleBox } from '@/components/Box';
-import { JsonLd } from '@/components/Meta';
+import { JsonLdForNote } from '@/components/Meta';
 import { SpecBlockQuote } from '@/components/SpecBlockQuote';
 import { MainVisual } from '@/components/specific/documents/notes/MainVisual';
 import { TocForArticle } from '@/components/specific/documents/notes/TocForArticle';
@@ -96,7 +96,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
 
   return (
     <div>
-      <JsonLd {...frontmatter} pathname={`/documents/notes/${id}`} />
+      <JsonLdForNote {...frontmatter} pathname={`/documents/notes/${id}`} />
 
       <h1 className="palt mb-4 text-3xl font-bold leading-relaxed">{title}</h1>
 

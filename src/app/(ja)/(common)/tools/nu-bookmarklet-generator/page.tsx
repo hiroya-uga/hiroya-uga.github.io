@@ -1,3 +1,4 @@
+import { JsonLd } from '@/components/Meta';
 import { ToolsNuBookmarkletGeneratorPage } from '@/components/Pages/ToolsNuBookmarkletGeneratorPage';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
@@ -15,7 +16,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <ToolsNuBookmarkletGeneratorPage lang="ja" metadata={metadata} />
     </>
   );

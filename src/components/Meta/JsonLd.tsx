@@ -2,7 +2,38 @@ import { Article, WebPage, WithContext } from 'schema-dts';
 
 import { URL_ORIGIN } from '@/constants/meta';
 
-export const JsonLd = ({
+const removeNewLinesTarget = ['name', 'title', 'description'];
+
+type ObjectValue = Record<string, unknown>;
+
+const isObjectValue = (value: unknown): value is ObjectValue =>
+  typeof value === 'object' && value !== null && !Array.isArray(value);
+
+const removeNewlines = (object: ObjectValue): ObjectValue => {
+  return Object.fromEntries(
+    Object.entries(object).map(([key, value]) => {
+      if (removeNewLinesTarget.includes(key) && typeof value === 'string') {
+        return [key, value.replace(/\n/g, '').trim()];
+      }
+
+      if (isObjectValue(value)) {
+        return [key, removeNewlines(value)];
+      }
+
+      return [key, value];
+    }),
+  );
+};
+
+export const JsonLd = ({ data }: { data: Record<string, unknown> }) => {
+  const sanitized = removeNewlines(data);
+
+  return (
+    <script key="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sanitized) }} />
+  );
+};
+
+export const JsonLdForNote = ({
   title,
   description,
   publishedAt,

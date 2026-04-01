@@ -1,5 +1,6 @@
 import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { ArticleList } from '@/components/List';
+import { JsonLd } from '@/components/Meta';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
@@ -24,7 +25,7 @@ export default async function Page() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <JsonLd data={jsonLd} />
       <PageTitle title={pageTitle} description={description}>
         <p className="mb-paragraph">
           <Link href="/documents/media/">外部メディアリンク一覧はこちら</Link>をご覧ください。
