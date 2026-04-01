@@ -28,6 +28,10 @@ const Spec = ({ spec }: { spec: string }) => {
 };
 
 const generateRandomArray = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    return photoDataList;
+  }
+
   const indexes = Array.from({ length: photoDataList.length }, (_, i) => i);
 
   for (let i = indexes.length - 1; i > 0; i--) {

@@ -1,15 +1,25 @@
 export type PhotoData = {
+  src: string;
   caption: string;
   spec: string;
   instagram?: string;
   flickr?: string;
   date: string;
-  src: string;
   width: number;
   height: number;
 };
 
 export const photoDataList: PhotoData[] = [
+  {
+    src: '/images/main-shinjuku-big-under.webp',
+    caption: '新宿大ガード',
+    spec: 'SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + Nikon D7200',
+    instagram: 'B3SIj22nfKi',
+    flickr: 'https://flic.kr/p/2s4VdTf',
+    date: '2019.10.02',
+    width: 1920,
+    height: 1280,
+  },
   {
     src: '/images/main-tokyo-tower.webp',
     caption: '東京タワー',
@@ -20,7 +30,7 @@ export const photoDataList: PhotoData[] = [
     height: 1280,
   },
   {
-    src: '/image/main-motohakoneko.webp',
+    src: '/images/main-motohakoneko.webp',
     caption: '元箱根港',
     spec: 'TAMRON AF 18-200mm F3.5-6.3 XR Di II LD Aspherical IF Macro A14NII + Nikon D7200',
     instagram: 'B3PlCjMHCFl',
