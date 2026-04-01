@@ -2,6 +2,7 @@ import { SudokuClient } from '@/app/(ja)/(common)/games/sudoku/Client';
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { Heading } from '@/components/Heading';
 import { DiscList, NoteList } from '@/components/List';
+import { JsonLd } from '@/components/Meta';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Table } from '@/components/Table';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
@@ -21,7 +22,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <div className="mt-paragraph">
           <NoteList

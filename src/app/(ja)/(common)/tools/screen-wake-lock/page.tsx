@@ -1,6 +1,7 @@
 import { KeepAwakeClient } from '@/app/(ja)/(common)/tools/screen-wake-lock/Client';
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { NoteList } from '@/components/List';
+import { JsonLd } from '@/components/Meta';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
@@ -18,7 +19,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <PageTitle {...metadata}>
         <p className="mt-paragraph">
           「スリープ防止を開始する」ボタンを押下し、このタブをアクティブにしたままにしてください<sup>※</sup>。

@@ -5,6 +5,7 @@ import { SimpleDescriptionList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
 
 import { SvgIcon } from '@/components/Icons';
+import { JsonLd } from '@/components/Meta';
 import { TOOLS_LINK_LIST } from '@/constants/link-list';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { JOB_ROLES_JA } from '@/constants/works';
@@ -27,7 +28,7 @@ export default function Page() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <PageTitle title={metadata.pageTitle} description={metadata.description} shouldShowPrivacyPolicyMessage />
 
       <div className="@container">

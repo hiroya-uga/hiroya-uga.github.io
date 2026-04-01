@@ -1,6 +1,7 @@
 import { SlackReminderCommandGenerator } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client';
 import { HelpLink } from '@/components/Clickable';
 import { TweetLink } from '@/components/Clickable/TweetLink';
+import { JsonLd } from '@/components/Meta';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
@@ -18,7 +19,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <PageTitle title={metadata.pageTitle} following={metadata.following} shouldShowPrivacyPolicyMessage>
         {metadata.description.split('\n').map((description) => {
           return <p key={description}>{description}</p>;
