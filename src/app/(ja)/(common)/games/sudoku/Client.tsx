@@ -258,7 +258,7 @@ export const SudokuClient = () => {
     <>
       <div className="@w800px:grid @w800px:gap-8 transition-discrete starting:opacity-0 @w800px:items-start grid-cols-[auto_var(--spacing-260PX)] gap-4 transition-opacity">
         <div
-          className="group mx-auto table w-full table-fixed border-collapse border-4 border-black leading-none"
+          className="border-secondary group mx-auto table w-full table-fixed border-collapse border-4 leading-none"
           ref={(div) => {
             if (div === null) {
               inputMapRef.current = [];
@@ -293,7 +293,7 @@ export const SudokuClient = () => {
                   <div
                     key={`${rowIndex}-${colIndex}`}
                     className={clsx([
-                      '@w800px:size-[min(5vw,4rem)] transition-bg table-cell border border-black',
+                      '@w800px:size-[min(5vw,4rem)] transition-bg border-secondary table-cell border',
                       rowIndex % 3 === 0 && 'border-t-4',
                       colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
                       type === 'input' && state === 'invalid' && 'bg-error text-high-contrast',

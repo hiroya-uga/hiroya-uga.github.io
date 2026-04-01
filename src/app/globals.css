@@ -64,7 +64,6 @@
     --v-color-background-secondary-hover: #e5e8eb;
     --v-color-background-tertiary: #e2e8f0;
     --v-color-background-tertiary-hover: #cad5e2;
-    --v-color-background-required: #b20000;
     --v-color-background-textfield: #fff;
     --v-color-background-success: #cfc;
     --v-color-background-warn: #ffc;
@@ -113,7 +112,6 @@
     --v-color-background-secondary-hover: #4b4845;
     --v-color-background-tertiary: #464340;
     --v-color-background-tertiary-hover: #3e3e3e;
-    --v-color-background-required: #990300;
     --v-color-background-textfield: #3d3c3a;
     --v-color-background-scroll-hint-shadow: rgba(237, 197, 108, 0.4);
 
@@ -199,6 +197,7 @@
   --background-color-card: var(--v-color-background-card);
   --background-color-table-header: var(--v-color-background-table-header);
   --background-color-header: var(--v-color-table-header);
+  --background-color-required: #a32c34;
   --border-color-textfield: var(--v-color-border-secondary);
 
   --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
