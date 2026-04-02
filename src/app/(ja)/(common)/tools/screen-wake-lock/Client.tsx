@@ -126,7 +126,6 @@ export function KeepAwakeClient() {
         )}
       >
         <p
-          role="img"
           className={clsx(
             'transition-[transform_opacity_font-size] duration-300',
             isActive ? 'text-6xl' : 'rotate-20 text-5xl opacity-50',
