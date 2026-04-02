@@ -57,8 +57,7 @@ export const PowerOfTheWebSection = () => {
             </blockquote>
             <figcaption className={styles.caption}>
               <p>
-                — <cite>Tim Berners-Lee</cite>,{' '}
-                <span className="inline-block">W3C Director and inventor of the World Wide Web</span>
+                — Tim Berners-Lee, <span className="inline-block">W3C Director and inventor of the World Wide Web</span>
               </p>
             </figcaption>
           </figure>
@@ -68,7 +67,7 @@ export const PowerOfTheWebSection = () => {
         <p className="animate-fade-in pointer-events-none fixed inset-0 flex items-end justify-end px-4 py-2 text-right text-sm">
           <a
             href="#heading-categories"
-            className="pointer-events-auto"
+            className="pointer-events-auto before:content-['↓_']"
             onClick={(e) => {
               e.preventDefault();
               const target = document.querySelector<HTMLElement>('#heading-categories');
@@ -79,7 +78,7 @@ export const PowerOfTheWebSection = () => {
               }
             }}
           >
-            ↓ Skip to Categories
+            Skip to Categories
           </a>
         </p>
       )}

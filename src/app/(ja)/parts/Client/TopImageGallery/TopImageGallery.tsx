@@ -27,7 +27,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
   const shouldRenderGallery = photos.some((photo) => photo === undefined) === false;
 
   return (
-    <section
+    <div
       id={galleryId}
       className={clsx(styles.root, 'px-content-inline animation-fade-in relative')}
       aria-hidden={galleryState.shouldShow === false ? 'true' : undefined}
@@ -54,9 +54,9 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                   });
                   setGalleryState((prev) => ({ ...prev, shouldShow: false }));
                 }}
-                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline"
+                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline after:content-['↑']"
               >
-                Galleryを閉じる ↑
+                Galleryを閉じる
               </button>
             </p>
           </div>
@@ -152,7 +152,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
           </ul>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

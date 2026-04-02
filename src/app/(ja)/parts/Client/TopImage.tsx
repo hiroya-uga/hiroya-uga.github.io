@@ -267,7 +267,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           type="button"
           className={clsx([
             '@w640:text-sm',
-            'transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-1 leading-tight no-underline',
+            'transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-1 leading-tight no-underline after:content-["↓"]',
           ])}
           onClick={() => {
             setGalleryState({ shouldShow: true, photos: photoDataListRef.current });
@@ -285,7 +285,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           aria-controls={galleryId}
           ref={galleryToggleButtonRef}
         >
-          Galleryを開く↓
+          Galleryを開く
         </button>
       </p>
     </div>
