@@ -11,6 +11,12 @@ export const ExternalMediaSection = () => {
       <p className="mb-4">{getMetadata('/documents/media').description}</p>
 
       <table className="@w640:mb-2 mb-4">
+        <thead className="sr-only">
+          <tr>
+            <th scope="col">日付</th>
+            <th scope="col">記事</th>
+          </tr>
+        </thead>
         <tbody>
           {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
             return (
