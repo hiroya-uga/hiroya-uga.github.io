@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/copy-blog-images.mjs",
-    "build": "next build",
+    "build": "node scripts/copy-blog-images.mjs && next build",
     "postbuild": "next-sitemap",
     "build:analyze": "ANALYZE=true next build",
-    "predev": "node scripts/copy-blog-images.mjs",
-    "dev": "next dev -p 3001",
+    "dev": "node scripts/copy-blog-images.mjs && next dev -p 3001",
     "dev:articles": "node scripts/watch-blog-images.mjs",
     "fix": "yarn lint:fix && yarn format:fix",
     "format": "prettier --check .",
@@ -95,6 +93,7 @@
     "tailwindcss": "^4.1.10",
     "vitest": "^4.0.18"
   },
+  "packageManager": "yarn@4.13.0",
   "engines": {
     "node": ">=24.14.1"
   }
