@@ -65,6 +65,16 @@ const nextConfig = {
         destination: '/articles/gunpla/hg/03-04-gat-x-303/',
         permanent: true,
       },
+      {
+        source: '/tools/nu-installer/',
+        destination: '/tools/vnux/',
+        permanent: true,
+      },
+      {
+        source: '/tools/nu-installer/en',
+        destination: '/tools/vnux/en',
+        permanent: true,
+      },
     ];
   },
 };

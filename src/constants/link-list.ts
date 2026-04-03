@@ -106,7 +106,7 @@ export const TOOLS_LINK_LIST = [
       },
       {
         emoji: '🛠️',
-        pathname: '/tools/nu-installer',
+        pathname: '/tools/vnux',
         userType: ['developer', 'qa'],
       },
     ] as ToolPage
