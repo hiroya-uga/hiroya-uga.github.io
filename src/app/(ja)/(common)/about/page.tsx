@@ -310,11 +310,18 @@ export default function Page() {
 
         <div className="@w640:after:w-1px @w640:after:border-primary @w640:after:absolute @w640:after:left-4 @w640:after:top-0 @w640:after:h-full @w640:after:border-l relative">
           <table className="@w640:text-base block-table text-sm">
+            <thead className="sr-only">
+              <tr>
+                <th scope="col">時期</th>
+                <th scope="col">活動内容</th>
+              </tr>
+            </thead>
             <tbody className="@w640:grid @w640:grid-cols-[auto_1fr]">
               {PERSONAL_HISTORY.map(({ data, description }) => {
                 return (
                   <tr key={data} className="@w640:grid @w640:grid-cols-subgrid @w640:col-span-2 group">
                     <th
+                      scope="row"
                       className={clsx([
                         'text-secondary bg-primary @w640:font-normal @w640:pb-8 @w640:group-last:pb-0 @w640:text-sm @w640:pt-0.5 @w640:static pb-2 pt-4 text-left align-top font-bold',
                         'after:h-1px after:border-secondary @w640:after:hidden sticky top-0 after:absolute after:bottom-2 after:left-0 after:top-4 after:my-auto after:w-full after:border-t',
