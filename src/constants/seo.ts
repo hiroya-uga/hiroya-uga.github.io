@@ -418,15 +418,19 @@ export const SEO: Record<
     languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
     locale: 'en_US',
   },
-  '/tools/nu-installer': {
-    title: 'Nu Html Checker Installer',
-    description: 'Nu Html Checkerをローカルで簡単に使うためのmacOS向けインストーラスクリプトです。',
-    languages: { ja: '/tools/nu-installer', en: '/tools/nu-installer/en' },
+  '/tools/vnux': {
+    title: 'vnux',
+    afterSubTitle: 'Nu Html Checker CLI',
+    description:
+      'macOS向けNu Html Checker (vnu)のCLIラッパーです。vnuサーバーの起動・停止、HTMLフラグメントのバリデーションなどの機能を提供します。',
+    languages: { ja: '/tools/vnux', en: '/tools/vnux/en' },
   },
-  '/tools/nu-installer/en': {
-    title: 'Nu Html Checker Installer',
-    description: 'A macOS installer script for running Nu Html Checker locally with ease.',
-    languages: { ja: '/tools/nu-installer', en: '/tools/nu-installer/en' },
+  '/tools/vnux/en': {
+    title: 'vnux',
+    afterSubTitle: 'Nu Html Checker CLI',
+    description:
+      'A CLI wrapper for Nu Html Checker (vnu). Provides vnu server start/stop, HTML fragment validation, and more.',
+    languages: { ja: '/tools/vnux', en: '/tools/vnux/en' },
     locale: 'en_US',
   },
   '/tools/markup-dev-supporter': {

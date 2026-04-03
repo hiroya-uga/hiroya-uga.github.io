@@ -3,8 +3,7 @@ import { CodeBlock } from '@/components/CodeBlock';
 import { Lang } from '@/types/lang';
 import Link from 'next/link';
 
-const INSTALL_COMMAND =
-  'curl -fsSL https://github.com/hiroya-uga/vnu-installer/releases/latest/download/install.sh | zsh';
+const INSTALL_COMMAND = 'curl -fsSL https://github.com/hiroya-uga/vnux/releases/latest/download/install.sh | zsh';
 
 const HomebrewLink = () => (
   <a href="https://brew.sh/" className="dark:text-[#85b4ff]">
@@ -20,7 +19,10 @@ const VnuJarLink = () => (
 
 const i18n = {
   ja: {
-    description: 'macOS に Nu Html Checker (vnu) をセットアップするスクリプトです。',
+    descriptions: [
+      'macOS 向け Nu Html Checker (vnu) の CLI ラッパーです。',
+      'Nu Html Checkerの起動・停止、HTMLフラグメントのバリデーションなどの機能を提供します。',
+    ],
     descriptionExtra: 'Javaが未インストールの場合も自動でインストールします（',
     descriptionExtraClose: '）。',
     installSection: 'ターミナルに貼り付けて実行',
@@ -33,11 +35,11 @@ const i18n = {
         でTemurin JDKをインストール
       </>,
       <>
-        <code>~/.vnu</code>に<VnuJarLink />
+        <code>~/.vnux</code>に<VnuJarLink />
         をダウンロード
       </>,
       <>
-        <code>~/.local/bin/vnu</code> コマンドを生成
+        <code>~/.local/bin/vnux</code> コマンドを生成
       </>,
       <>
         <code>~/.zshenv</code> に PATH を追加
@@ -48,32 +50,32 @@ const i18n = {
       {
         label: 'サーバーの起動と停止',
         features: [
-          { cmd: 'vnu', desc: 'vnu start のエイリアス' },
-          { cmd: 'vnu start', desc: 'Nu Html Checker を起動し、http://localhost:8888 をブラウザで開く' },
+          { cmd: 'vnux', desc: 'vnux start のエイリアス' },
+          { cmd: 'vnux start', desc: 'Nu Html Checkerを起動し、http://localhost:8888 をブラウザで開く' },
           {
-            cmd: 'vnu start --port <PORT>',
-            desc: '指定したポートで起動し、ブラウザで開く（例: vnu start --port 9090）',
+            cmd: 'vnux start --port <PORT>',
+            desc: '指定したポートでNu Html Checkerを起動し、ブラウザで開く（例: vnux start --port 9090）',
           },
-          { cmd: 'vnu serve', desc: 'ブラウザを開かずにサーバーを起動する' },
+          { cmd: 'vnux serve', desc: 'ブラウザを開かずにNu Html Checkerを起動する' },
           {
-            cmd: 'vnu serve --port <PORT>',
-            desc: '指定したポート番号でサーバーを起動する（例: vnu serve --port 9090）',
+            cmd: 'vnux serve --port <PORT>',
+            desc: '指定したポート番号でNu Html Checkerを起動する（例: vnux serve --port 9090）',
           },
-          { cmd: 'vnu stop', desc: '起動中の vnu プロセスを停止する' },
+          { cmd: 'vnux stop', desc: '起動中のNu Html Checkerプロセスを停止する' },
         ],
       },
       {
         label: 'HTML検証',
         features: [
           {
-            cmd: 'vnu check <value>',
-            desc: '自動判定：URL・<!doctype...>・<p>...</p>・ファイルパスをフラグなしで直接渡す',
+            cmd: 'vnux check <value>',
+            desc: 'valueを自動判定して検証する',
           },
-          { cmd: 'vnu check --file <file>', desc: 'HTMLファイルを検証する' },
-          { cmd: 'vnu check --url <url>', desc: 'URLを検証する' },
-          { cmd: "vnu check --html '<html>'", desc: 'HTML文字列全体を検証する' },
+          { cmd: 'vnux check --file <file>', desc: 'HTMLファイルを検証する' },
+          { cmd: 'vnux check --url <url>', desc: 'URLを検証する' },
+          { cmd: "vnux check --html '<html>'", desc: 'HTML文字列全体を検証する' },
           {
-            cmd: "vnu check --fragment '<p>...</p>'",
+            cmd: "vnux check --fragment '<p>...</p>'",
             desc: 'HTMLフラグメントを検証する（完全なドキュメントに自動でラップ）',
           },
         ],
@@ -81,17 +83,23 @@ const i18n = {
       {
         label: 'その他',
         features: [
-          { cmd: 'vnu update', desc: 'vnu.jar を最新バージョンに更新する' },
-          { cmd: 'vnu uninstall', desc: 'vnu と関連ファイルを削除する' },
-          { cmd: 'vnu --version', desc: 'インストール済みの vnu.jar のバージョン（更新日）を表示する' },
-          { cmd: 'vnu --help', desc: 'ヘルプを表示する' },
+          { cmd: 'vnux update', desc: 'vnu.jar と vnux コマンドを最新バージョンに更新する' },
+          { cmd: 'vnux uninstall', desc: 'vnux と関連ファイルを削除する' },
+          {
+            cmd: 'vnux --version',
+            desc: 'vnux のバージョンとインストール済みの vnu.jar のバージョン（更新日）を表示する',
+          },
+          { cmd: 'vnux --help', desc: 'ヘルプを表示する' },
         ],
       },
     ],
     bookmarkletNote: 'ブックマークレットの作成はこちら',
   },
   en: {
-    description: 'A simple one-command script to install and run Nu Html Checker (vnu) on macOS. ',
+    descriptions: [
+      'A CLI wrapper for Nu Html Checker (vnu).',
+      'Provides Nu Html Checker start/stop, HTML fragment validation, and more.',
+    ],
     descriptionExtra: "Don't have Java? No problem — it'll be installed automatically (",
     descriptionExtraClose: ').',
     installSection: 'Run this in your terminal',
@@ -102,10 +110,10 @@ const i18n = {
         Installs Temurin JDK via <HomebrewLink /> if you don't have Java yet
       </>,
       <>
-        Downloads <VnuJarLink /> to <code>~/.vnu</code>
+        Downloads <VnuJarLink /> to <code>~/.vnux</code>
       </>,
       <>
-        Creates the <code>~/.local/bin/vnu</code> command
+        Creates the <code>~/.local/bin/vnux</code> command
       </>,
       <>
         Adds <code>~/.local/bin</code> to your PATH in <code>~/.zshenv</code>
@@ -116,32 +124,35 @@ const i18n = {
       {
         label: 'Server',
         features: [
-          { cmd: 'vnu', desc: 'Alias for vnu start' },
-          { cmd: 'vnu start', desc: 'Starts the checker on http://localhost:8888 and opens it in your browser' },
+          { cmd: 'vnux', desc: 'Alias for vnux start' },
           {
-            cmd: 'vnu start --port <PORT>',
-            desc: 'Starts the checker on a specific port and opens it in your browser (e.g. vnu start --port 9090)',
+            cmd: 'vnux start',
+            desc: 'Starts the Nu Html Checker on http://localhost:8888 and opens it in your browser',
           },
-          { cmd: 'vnu serve', desc: 'Starts the checker without opening the browser' },
           {
-            cmd: 'vnu serve --port <PORT>',
-            desc: 'Starts the checker on a specific port (e.g. vnu serve --port 9090)',
+            cmd: 'vnux start --port <PORT>',
+            desc: 'Starts the Nu Html Checker on a specific port and opens it in your browser (e.g. vnux start --port 9090)',
           },
-          { cmd: 'vnu stop', desc: 'Stops the running vnu process' },
+          { cmd: 'vnux serve', desc: 'Starts the Nu Html Checker without opening the browser' },
+          {
+            cmd: 'vnux serve --port <PORT>',
+            desc: 'Starts the Nu Html Checker on a specific port (e.g. vnux serve --port 9090)',
+          },
+          { cmd: 'vnux stop', desc: 'Stops the running Nu Html Checker process' },
         ],
       },
       {
         label: 'Validation',
         features: [
           {
-            cmd: 'vnu check <value>',
-            desc: 'Auto-detection: pass a URL, <!doctype...> string, <p>...</p>, or a file path directly without flags',
+            cmd: 'vnux check <value>',
+            desc: 'Auto-detects and validates the given value',
           },
-          { cmd: 'vnu check --file <file>', desc: 'Validates an HTML file' },
-          { cmd: 'vnu check --url <url>', desc: 'Validates a URL' },
-          { cmd: "vnu check --html '<html>'", desc: 'Validates a full HTML string' },
+          { cmd: 'vnux check --file <file>', desc: 'Validates an HTML file' },
+          { cmd: 'vnux check --url <url>', desc: 'Validates a URL' },
+          { cmd: "vnux check --html '<html>'", desc: 'Validates a full HTML string' },
           {
-            cmd: "vnu check --fragment '<p>...</p>'",
+            cmd: "vnux check --fragment '<p>...</p>'",
             desc: 'Validates an HTML fragment (auto-wrapped in a full document)',
           },
         ],
@@ -149,10 +160,10 @@ const i18n = {
       {
         label: 'Utilities',
         features: [
-          { cmd: 'vnu update', desc: 'Updates vnu.jar to the latest version' },
-          { cmd: 'vnu uninstall', desc: 'Removes vnu and related files' },
-          { cmd: 'vnu --version', desc: 'Shows the release date of the installed vnu.jar' },
-          { cmd: 'vnu --help', desc: 'Shows usage information' },
+          { cmd: 'vnux update', desc: 'Updates vnu.jar and the vnux command to the latest version' },
+          { cmd: 'vnux uninstall', desc: 'Removes vnux and related files' },
+          { cmd: 'vnux --version', desc: 'Shows the vnux version and the release date of the installed vnu.jar' },
+          { cmd: 'vnux --help', desc: 'Shows usage information' },
         ],
       },
     ],
@@ -162,22 +173,28 @@ const i18n = {
 
 interface Props {
   pageTitle: string;
+  following?: string;
   lang: Lang;
 }
 
-export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
+export const ToolsVnuxPage = ({ pageTitle, following, lang }: Props) => {
   const t = i18n[lang];
 
   return (
     <div className="mx-auto max-w-2xl font-['LINE_Seed_JP',sans-serif] text-slate-600 dark:text-[#a5b4cd]">
       <h1 className="mb-5 rounded-md bg-[#365d95] p-3 pt-3.5 text-center font-[sans-serif] text-[1.625rem] leading-snug tracking-tight text-[#fdfdfd]">
-        {pageTitle} <span className="block text-sm">for macOS</span>
+        {pageTitle} - {following}
+        <span className="block text-sm">for macOS</span>
       </h1>
 
       <div className="@w640:text-center @w640:pl-1.5 @w640:text-sm mb-2">
         <p>
-          {t.description}
-          <span className="@w640:block">
+          {t.descriptions.map((description) => (
+            <span key={description} className="inline-block">
+              {description}
+            </span>
+          ))}
+          <span className="@w640:block @w640:mt-2 mb-6">
             {t.descriptionExtra}
             <a href="https://adoptium.net/temurin" className="dark:text-[#85b4ff]">
               Temurin
@@ -253,7 +270,7 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
         <CodeBlock
           language="sh"
           title="Example"
-          code="vnu check --fragment '<p>Hello, world!</p>'"
+          code="vnux check --fragment '<p>Hello, world!</p>'"
           className="rounded-b-lg"
           nowrap
           copyButton
@@ -263,7 +280,7 @@ export const ToolsNuInstallerPage = ({ pageTitle, lang }: Props) => {
       <div className="mt-20 border-t border-t-slate-200 pt-8 dark:border-t-slate-700">
         <p className="mb-8 text-right text-xs">
           <a
-            href="https://github.com/hiroya-uga/vnu-installer"
+            href="https://github.com/hiroya-uga/vnux"
             className="underline underline-offset-2 transition-colors dark:text-[#85b4ff]"
             target="_blank"
             rel="noopener noreferrer"

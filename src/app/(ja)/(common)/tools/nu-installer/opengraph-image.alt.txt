@@ -1,1 +1,0 @@
-uga.dev Nu Html Checker Installer Nu Html Checkerをローカルで簡単に使うためのmacOS向けインストーラスクリプトです。
