@@ -94,14 +94,29 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
   }, [showInformation]);
 
   return (
-    <>
-      <p className="@w640:mt-4 @w640:text-sm text-secondary mt-3 text-xs">
-        <span
-          className={clsx([
-            'noscript:hidden delay-300 duration-700',
-            status === 'loading' ? 'opacity-0' : 'animate-fade-in',
-          ])}
-        >
+    <p className="@w640:mt-4 @w640:text-sm text-secondary mt-3 text-xs">
+      <span
+        className={clsx([
+          'noscript:hidden delay-300 duration-700',
+          status === 'loading' ? 'opacity-0' : 'animate-fade-in',
+        ])}
+      >
+        {updatedAt && (
+          <span className="block">
+            最終更新日：
+            <time dateTime={updatedAt} className="text-secondary mr-2">
+              {formattedDateString(new Date(updatedAt))}
+            </time>
+          </span>
+        )}
+        {publishedAt && '公開日：'}
+        <time dateTime={publishedAt} className="mr-2">
+          {formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}
+        </time>
+        <span ref={ref} className="min-h-lh" />
+      </span>
+      <noscript>
+        <span className="animate-fade-in block opacity-0 [animation-delay:300ms]">
           {updatedAt && (
             <span className="block">
               最終更新日：
@@ -111,27 +126,10 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
             </span>
           )}
           {publishedAt && '公開日：'}
-          <time dateTime={publishedAt} className="mr-2">
-            {formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}
-          </time>
-          <span ref={ref} className="min-h-lh" />
+          <time dateTime={publishedAt}>{formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}</time>
         </span>
-        <noscript>
-          <span className="animate-fade-in block opacity-0 [animation-delay:300ms]">
-            {updatedAt && (
-              <span className="block">
-                最終更新日：
-                <time dateTime={updatedAt} className="text-secondary mr-2">
-                  {formattedDateString(new Date(updatedAt))}
-                </time>
-              </span>
-            )}
-            {publishedAt && '公開日：'}
-            <time dateTime={publishedAt}>{formattedDateString(publishedAt ? new Date(publishedAt) : new Date())}</time>
-          </span>
-        </noscript>
-      </p>
-    </>
+      </noscript>
+    </p>
   );
 };
 
@@ -434,8 +432,9 @@ export const ArticleCodeHighlightActivator = () => {
       const lang = node.getAttribute('data-language') || 'html';
 
       if (
-        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'powershell'].includes(lang) ===
-        false
+        ['jsx', 'html', 'css', 'js', 'javascript', 'ts', 'typescript', 'json', 'sh', 'powershell', 'yml'].includes(
+          lang,
+        ) === false
       ) {
         return;
       }
