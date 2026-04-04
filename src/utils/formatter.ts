@@ -16,3 +16,12 @@ export const formattedDateString = (date: Date) =>
     .format(date)
     .replace('/', '年')
     .replace('/', '月') + '日';
+
+export const formattedTimeString = (date: Date) =>
+  new Intl.DateTimeFormat('ja-JP', {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Asia/Tokyo',
+  })
+    .format(date)
+    .replace(':', '時') + '分';

@@ -4,7 +4,7 @@ import { Toast } from '@/components/Dialog';
 import { SvgIcon } from '@/components/Icons';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
 import { copy } from '@/utils/copy';
-import { formattedDateString } from '@/utils/formatter';
+import { formattedDateString, formattedTimeString } from '@/utils/formatter';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
@@ -93,6 +93,14 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
     setSessionStorage('reading-message-viewed', 'true');
   }, [showInformation]);
 
+  const updateDate =
+    typeof updatedAt === 'string' && updatedAt !== ''
+      ? ({
+          shouldShowUpdate: true,
+          date: new Date(updatedAt),
+        } as const)
+      : ({ shouldShowUpdate: false } as const);
+
   return (
     <p className="@w640:mt-4 @w640:text-sm text-secondary mt-3 text-xs">
       <span
@@ -101,11 +109,11 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
           status === 'loading' ? 'opacity-0' : 'animate-fade-in',
         ])}
       >
-        {updatedAt && (
+        {updateDate.shouldShowUpdate && (
           <span className="block">
             最終更新日：
             <time dateTime={updatedAt} className="text-secondary mr-2">
-              {formattedDateString(new Date(updatedAt))}
+              {formattedDateString(updateDate.date)} {formattedTimeString(updateDate.date)}
             </time>
           </span>
         )}
@@ -121,7 +129,7 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
             <span className="block">
               最終更新日：
               <time dateTime={updatedAt} className="text-secondary mr-2">
-                {formattedDateString(new Date(updatedAt))}
+                {formattedDateString(new Date(updatedAt))} {formattedTimeString(new Date(updatedAt))}
               </time>
             </span>
           )}
