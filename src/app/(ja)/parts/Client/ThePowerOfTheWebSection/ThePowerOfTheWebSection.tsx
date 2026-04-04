@@ -1,6 +1,6 @@
 'use client';
 
-import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
+import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import styles from './ThePowerOfTheWebSection.module.css';
@@ -9,15 +9,17 @@ export const PowerOfTheWebSection = () => {
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
 
   useEffect(() => {
-    const isViewed = getSessionStorage('power-section-viewed') === 'true';
-    requestAnimationFrame(() => {
+    const today = new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+    const isViewed = getLocalStorage('power-section-viewed-date') === today;
+
+    queueMicrotask(() => {
       if (isViewed) {
         setStatus('already');
         return;
       }
 
       setStatus('ready');
-      setSessionStorage('power-section-viewed', 'true');
+      setLocalStorage('power-section-viewed-date', today);
     });
   }, []);
 

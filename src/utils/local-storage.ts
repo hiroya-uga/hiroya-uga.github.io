@@ -7,6 +7,7 @@ type Value = {
     level?: number;
   };
   'cookie-consent': 'accepted' | 'rejected';
+  'power-section-viewed-date': string;
   platform: string;
   theme: 'dark' | 'light';
 };
