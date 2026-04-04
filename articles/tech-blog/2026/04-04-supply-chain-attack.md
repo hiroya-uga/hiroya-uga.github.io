@@ -1,6 +1,7 @@
 ---
 title: "パッケージマネージャーの\nサプライチェーン攻撃対策\n（npm / Yarn / pnpm / Bun）"
 publishedAt: '2026-04-04T07:27:04+09:00'
+updatedAt: '2026-04-04T12:21:49+09:00'
 topics: [Security, JavaScript, npm, Yarn, pnpm, Bun]
 proficiencyLevel: 'Intermediate'
 ---
@@ -76,12 +77,26 @@ Yarn Classic（v1）では`--frozen-lockfile`だったが、Yarn v2以降では`
 
 パッケージのインストール時に、**サードパーティのスクリプトが自動実行されないようにする**ことも効果的です。先日のaxiosの件は、この`postinstall`スクリプトが攻撃の起点でした。
 
-- **npm / pnpm / Bun**： `.npmrc` に `ignore-scripts=true` を追加する。
-- **Yarn Berry（v2以降）**：**デフォルトで無効**
+- **npm**： `.npmrc` に `ignore-scripts=true` を追加する。
+- **pnpm（v10以降）**：**デフォルトで無効**[^4]
+- **Bun（v1.2以降）**：**デフォルトで無効**[^5]
+- **Yarn Berry（v2以降）**：**デフォルトで無効**[^6]
 
-パッケージインストール後にスクリプトを自動実行してくれる`postinstall`は便利な側面もありますが、こういうリスクがあるのは恐ろしいですね。自分の目に見えない範囲では動かないようにしておくのが良さそうです[^4]。
+[^4]: [Mitigating supply chain attacks | pnpm](https://pnpm.io/ja/supply-chain-security)
 
-[^4]: 一部のパッケージでは正常に動作しなくなる場合があるため、必要に応じて個別に許可する必要がある。
+[^5]: [Lifecycle scripts - Bun](https://bun.com/docs/pm/lifecycle)
+
+[^6]: [Settings (.yarnrc.yml) | Yarn](https://yarnpkg.com/configuration/yarnrc#:~:text=Define%20whether%20to%20run%20postinstall%20scripts%20or%20not.)
+
+> Postinstall scripts should be avoided at all cost, as they make installs slower and riskier. Many users will refuse to install dependencies that have postinstall scripts. Additionally, since the output isn't shown out of the box, using them to print a message to the user will not work as you expect.
+>
+> 引用：[Lifecycle Scripts | Yarn](https://yarnpkg.com/advanced/lifecycle-scripts)
+
+上記のようにYarnも`postinstall`スクリプトの使用を強く非推奨としています。
+
+パッケージインストール後にスクリプトを自動実行してくれる`postinstall`は便利な側面もありますが、こういうリスクがあるのは恐ろしいですね。自分の目に見えない範囲では動かないようにしておくのが良さそうです[^7]。
+
+[^7]: ほとんどの環境ではデフォルトが無効であるものの、途中で切り替えた場合は一部のパッケージが正常に動作しなくなる場合があることに注意。
 
 ## 4. アップデートツールにもエイジゲートを設定しよう
 
@@ -91,11 +106,11 @@ Yarn Classic（v1）では`--frozen-lockfile`だったが、Yarn v2以降では`
 
 ### Renovate: `minimumReleaseAge`
 
-Renovateではアップデートの性質によってエイジゲートの日数を調整できるので、通常は3日、差分が大きいもの[^5]については5日、セキュリティパッチ[^6]（`vulnerabilityAlerts`）については即時に設定しておくのが良さそうです。こうすることで、緊急度の高いセキュリティパッチは即座にPRが作成され、それ以外は指定した日数待機してからPRが作成されます。
+Renovateではアップデートの性質によってエイジゲートの日数を調整できるので、通常は3日、差分が大きいもの[^8]については5日、セキュリティパッチ[^9]（`vulnerabilityAlerts`）については即時に設定しておくのが良さそうです。こうすることで、緊急度の高いセキュリティパッチは即座にPRが作成され、それ以外は指定した日数待機してからPRが作成されます。
 
-[^5]: [セマンティックバージョニング（semver）](https://semver.org/lang/ja/)に基づいて判断される
+[^8]: [セマンティックバージョニング（semver）](https://semver.org/lang/ja/)に基づいて判断される
 
-[^6]: 緊急度の高いセキュリティパッチかどうかは[GitHub Security Alerts](https://docs.github.com/ja/code-security/concepts/security-at-scale/auditing-security-alerts)や[Open Source Vulnerabilities](https://osv.dev/)などの脆弱性データベースを参照して判別しているらしい。[CVE](https://www.ipa.go.jp/security/vuln/scap/cve.html)があるかどうかが判断基準にみえる。
+[^9]: 緊急度の高いセキュリティパッチかどうかは[GitHub Security Alerts](https://docs.github.com/ja/code-security/concepts/security-at-scale/auditing-security-alerts)や[Open Source Vulnerabilities](https://osv.dev/)などの脆弱性データベースを参照して判別しているらしい。[CVE](https://www.ipa.go.jp/security/vuln/scap/cve.html)があるかどうかが判断基準にみえる。
 
 ```json:renovate.json
 {
@@ -149,3 +164,7 @@ updates:
 …。
 
 エイジゲートでいいか…。
+
+## 謝辞
+
+[@mehm8128さん](https://x.com/mehm8128/status/2040262590094537086)より、pnpm v10以降・Bun v1.2以降はデフォルトで`postinstall`が無効化されている旨をご指摘いただき記事を修正しました。ありがとうございます!!🙏
