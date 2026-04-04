@@ -196,10 +196,12 @@
 
   &.already {
     .heading {
-      color: #015a9c;
+      color: #333;
+      text-shadow: 1px 1px 3px #0002;
 
       [data-theme="dark"] & {
-        color: #dbdbdb;
+        color: #ccc;
+        text-shadow: 2px 2px 0 #000;
       }
     }
 
