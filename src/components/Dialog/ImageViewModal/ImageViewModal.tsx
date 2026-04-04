@@ -76,7 +76,7 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
             className="transition-bg bg-panel-primary hover:bg-panel-primary-hover size-40PX grid place-items-center rounded-full"
             aria-label="閉じる"
           >
-            <span className="size-16PX relative block [--v-fill:white]">
+            <span className="size-16PX relative block">
               <SvgIcon name="cross" alt="" />
             </span>
           </button>
@@ -93,7 +93,7 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
             }}
             className="transition-bg bg-panel-primary hover:bg-panel-primary-hover size-48PX grid select-none place-items-center rounded-full"
           >
-            <span className="size-20PX relative block [--v-fill:white]">
+            <span className="size-20PX relative block">
               <SvgIcon name="arrow2-left" alt="前の画像" />
             </span>
           </button>
@@ -121,7 +121,7 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
             }}
             className="transition-bg bg-panel-primary hover:bg-panel-primary-hover size-48PX grid select-none place-items-center rounded-full"
           >
-            <span className="size-20PX relative block [--v-fill:white]">
+            <span className="size-20PX relative block">
               <SvgIcon name="arrow2-right" alt="次の画像" />
             </span>
           </button>
@@ -139,8 +139,8 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
           <p className="font-bold" aria-hidden="true">
             {photo.caption}
           </p>
-          <p className="mt-0.5 text-white/70">{photo.spec}</p>
-          <p className="mt-1 text-xs text-white/50">{photo.date}</p>
+          <p className="mt-0.5 text-[#b3b3b3]">{photo.spec}</p>
+          <p className="mt-1 text-xs text-[#989898]">{photo.date}</p>
         </div>
       </div>
     </dialog>,
