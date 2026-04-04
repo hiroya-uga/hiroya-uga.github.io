@@ -33,11 +33,11 @@
     text-shadow: 0;
     background-size: 100% 1000%;
   }
-  75% {
+  50% {
     translate: 0;
     background-size: 100% 1000%;
   }
-  90% {
+  75% {
     translate: 0;
     background-size: 100% 100%;
   }
