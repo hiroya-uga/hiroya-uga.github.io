@@ -22,15 +22,15 @@ export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-
 
       <div
         className={clsx([
-          '@w1280:pl-10 @w1520:pt-16 my-4 px-4 sm:pt-8',
+          '@w1520:pt-16 px-content-inline my-4 sm:pt-8',
           layout !== 'article-content' && 'mb-(--v-header-margin-bottom)',
         ])}
       >
         <div className="max-w-structure relative mx-auto">
-          <p data-class-name={clsx(['relative -left-3 -top-2', layout === 'common' && '@w1520:left-0'])}>
+          <p className={clsx(['-left-16PX relative -top-2', layout === 'common' && '@w1520:left-0'])}>
             <Link
               href="../"
-              className="hover:text-link sm:hover:bg-secondary sm:focus:bg-secondary group inline-block rounded-md px-4 py-2 no-underline transition-colors delay-0 duration-300"
+              className="hover:text-link sm:hover:bg-secondary sm:focus:bg-secondary px-16PX group inline-block rounded-md py-2 no-underline transition-colors delay-0 duration-300"
             >
               <span className="underline" translate="no">
                 ../
