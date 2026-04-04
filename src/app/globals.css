@@ -572,6 +572,10 @@
     z-index: var(--z-index-modeless);
   }
 
+  dialog:modal {
+    overscroll-behavior: contain;
+  }
+
   dialog::backdrop {
     background: #00000077;
   }
