@@ -1,7 +1,6 @@
 type Key = keyof Value;
 type Value = {
   'welcome-message-viewed': 'true';
-  'power-section-viewed': 'true';
   'reading-message-viewed': 'true';
 };
 
