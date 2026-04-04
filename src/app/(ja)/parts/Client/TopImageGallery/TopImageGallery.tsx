@@ -1,8 +1,11 @@
 'use client';
 
+import { ImageViewModal } from '@/components/Dialog/ImageViewModal';
+import { useImageViewModalTransition } from '@/components/Dialog/ImageViewModal/utils';
+import { SvgIcon } from '@/components/Icons';
 import { Picture } from '@/components/Image';
 import clsx from 'clsx';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { PhotoData } from '../constants';
 import { getClassNameForPhotoItem, getCSSRowVariables } from './utils';
 
@@ -18,6 +21,37 @@ interface Props {
 export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryState, setGalleryState }: Props) => {
   let itemIndex = -1;
   let lineIndex = 0;
+
+  const [modalPhotoIndex, setModalPhotoIndex] = useState<number | null>(null);
+  const { openModal, closeModal } = useImageViewModalTransition();
+
+  const freezeGalleryAnimations = () => {
+    document.querySelectorAll<HTMLImageElement>(`#${galleryId} img`).forEach((image) => {
+      const computed = getComputedStyle(image);
+      image.style.objectPosition = computed.objectPosition;
+      image.style.animationName = 'none';
+    });
+
+    document.querySelectorAll<HTMLElement>(`#${galleryId} li`).forEach((item) => {
+      const computed = getComputedStyle(item);
+      item.style.opacity = computed.opacity;
+      item.style.transform = computed.transform;
+      item.style.animationName = 'none';
+    });
+  };
+
+  const unfreezeGalleryAnimations = () => {
+    document.querySelectorAll<HTMLImageElement>(`#${galleryId} img`).forEach((image) => {
+      image.style.removeProperty('object-position');
+      image.style.removeProperty('animation-name');
+    });
+
+    document.querySelectorAll<HTMLElement>(`#${galleryId} li`).forEach((item) => {
+      item.style.removeProperty('opacity');
+      item.style.removeProperty('transform');
+      item.style.removeProperty('animation-name');
+    });
+  };
 
   const photos = useMemo(() => {
     const length = Math.ceil((galleryState.photos.length || 1) / 10) * 10;
@@ -109,7 +143,6 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                     id={imageId}
                     onLoad={(e) => (e.currentTarget.dataset.state = 'loaded')}
                   />
-
                   {shouldSNSlink && (
                     <span className="gap-16PX pb-10PX pointer-events-none absolute inset-0 flex flex-wrap items-center justify-center rounded bg-black/50 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100">
                       {typeof photoData?.instagram === 'string' && (
@@ -146,11 +179,47 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                       )}
                     </span>
                   )}
+                  <button
+                    type="button"
+                    className="bottom-8PX right-8PX size-32PX pointer-events-none absolute grid place-items-center rounded-full bg-black/60 text-white opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100"
+                    aria-label={`${photoData.caption}を拡大表示`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+
+                      const img = document.getElementById(imageId);
+
+                      if (img instanceof HTMLImageElement === false) {
+                        return;
+                      }
+
+                      img.style.scale = '1';
+                      img.style.transition = 'none';
+                      freezeGalleryAnimations();
+                      openModal({
+                        sourceImage: img,
+                        buttonElement: e.currentTarget,
+                        handleOpen: () => setModalPhotoIndex(index % galleryState.photos.length),
+                      });
+                    }}
+                  >
+                    <span className="size-16PX relative block [--v-fill:white]">
+                      <SvgIcon name="expand" alt="" />
+                    </span>
+                  </button>
                 </li>
               );
             })}
           </ul>
         </div>
+      )}
+
+      {modalPhotoIndex !== null && (
+        <ImageViewModal
+          photos={galleryState.photos}
+          currentIndex={modalPhotoIndex}
+          handleClose={() => closeModal(() => setModalPhotoIndex(null)).then(unfreezeGalleryAnimations)}
+          handleNavigate={setModalPhotoIndex}
+        />
       )}
     </div>
   );

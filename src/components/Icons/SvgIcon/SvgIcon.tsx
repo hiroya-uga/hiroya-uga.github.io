@@ -14,6 +14,7 @@ type Name =
   | 'copy'
   | 'cross'
   | 'description'
+  | 'expand'
   | 'headphone'
   | 'play'
   | 'reload'
