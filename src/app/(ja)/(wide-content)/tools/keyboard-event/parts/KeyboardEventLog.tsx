@@ -112,7 +112,7 @@ export const KeyboardEventLog = ({ inputLog }: Props) => {
               <td className={log.getModifierState ? 'text-(--v-true)' : 'text-(--v-false)'}>
                 {log.getModifierState ? 'true' : 'false'}
               </td>
-              <td className="text-xs leading-none">{log.timestamp}</td>
+              <td className="font-mono text-xs leading-none">{log.timestamp}</td>
             </tr>
           ))}
         </tbody>

@@ -3,6 +3,7 @@
 import { throttle } from 'lodash';
 import { forwardRef, memo, useCallback, useEffect, useRef, useState } from 'react';
 
+import { formattedTimeStampString } from '@/utils/formatter';
 import styles from './Client.module.css';
 import { KEYBOARD_EVENT_DEFAULT_OPTIONS } from './constants';
 import { KeyboardEventLog, KeyboardEventOptions, LastKey } from './parts';
@@ -34,7 +35,7 @@ export const KeyboardEventContent = () => {
   const isScrollIgnoredRef = useRef(false);
 
   const updateInputLog = useCallback((e: KeyboardEvent) => {
-    const timestamp = new Date().toISOString();
+    const timestamp = formattedTimeStampString(new Date());
 
     tempLogs.current.unshift({
       type: e.type,
