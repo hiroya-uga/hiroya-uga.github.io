@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.w3.org)",
+      "WebFetch(domain:html.spec.whatwg.org)",
+      "WebFetch(domain:wicg.io)",
+      "WebFetch(domain:bugs.webkit.org)",
+      "WebFetch(domain:w3c.github.io)"
+    ]
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "確認中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "議論中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "調整中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "整理中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "修正中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "開発中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "実行中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "検討中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )",
+      "相談中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )"
+    ]
+  }
+}
