@@ -56,6 +56,8 @@ export const WelcomeMessage = () => {
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
   const isInitialized = useRef(false);
 
+  const [srOnlyAccessCount, setSrOnlyAccessCount] = useState('');
+
   useEffect(() => {
     if (isInitialized.current) return;
     isInitialized.current = true;
@@ -64,7 +66,9 @@ export const WelcomeMessage = () => {
     if (counterTarget === null) return;
 
     const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
-    const { cleanup } = shuffleCounter({ counterTarget, isViewed });
+    const { finallyCount, cleanup } = shuffleCounter({ counterTarget, isViewed });
+
+    setSrOnlyAccessCount(finallyCount);
 
     if (isViewed) {
       setStatus('already');
@@ -142,14 +146,19 @@ export const WelcomeMessage = () => {
             status === 'loading' ? 'opacity-0' : 'opacity-100',
           ])}
         >
-          <span ref={message1Ref} aria-hidden="true">
-            {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
+          <span className="relative inline-block">
+            <span className="sr-only inset-0">{`ようこそ ${SITE_NAME} へ。`}</span>
+            <span ref={message1Ref} aria-hidden="true">
+              {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
+            </span>
           </span>
-          <span className="@w640:inline block">
+          <span className="@w640:inline-block relative block">
+            <span className="sr-only inset-0">{`あなたは${srOnlyAccessCount}番目の訪問者かもしれません。`}</span>
+
             <span ref={message2Ref} aria-hidden="true">
               {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
             </span>
-            <span ref={counterRef} className="mx-1 font-mono">
+            <span ref={counterRef} className="mx-1 font-mono" aria-hidden="true">
               {''.padStart(COUNTER_LENGTH, '0')}
             </span>
             <span ref={message3Ref} aria-hidden="true">

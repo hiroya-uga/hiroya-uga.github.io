@@ -11,33 +11,35 @@ interface ShuffleCounterParams {
   isViewed: boolean;
 }
 
+const getRandomAccessCount = () => [...String(Math.floor(Math.random() * (10 ** COUNTER_LENGTH + 1)))];
+
 export const shuffleCounter = ({ counterTarget, isViewed }: ShuffleCounterParams) => {
   let i = 0;
   let loop = 0;
   let indexArray = getRandomIndexArray(COUNTER_LENGTH);
+  const finallyCount = getRandomAccessCount().join('').padStart(COUNTER_LENGTH, '0');
 
   const getValue = () => {
-    const random = Math.random();
-    const value = [...String(Math.floor(random * (10 ** COUNTER_LENGTH + 1)))];
-
     if (loop !== 1) {
+      const value = getRandomAccessCount();
+
       value[indexArray[0]] = indexArray[0] % 2 ? '縺' : '繝';
       value[indexArray[1]] = indexArray[1] % 2 ? '繧' : '縲';
       value[indexArray[2]] = indexArray[2] % 2 ? 'ｳ?' : 'ｶﾞ';
       value[indexArray[3]] = indexArray[3] % 2 ? '�' : '%';
+
+      return value.join('');
     }
 
-    return value.join('');
+    return finallyCount;
   };
 
   let setIntervalId = -1;
 
   setTimeout(
     () => {
-      let prev = ''.padStart(COUNTER_LENGTH, '0');
+      const value = Array.from<string>({ length: COUNTER_LENGTH }).fill('0');
       let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
-
-      const value = [...prev];
 
       setIntervalId = globalThis.window.setInterval(() => {
         if (i < COUNTER_LENGTH) {
@@ -46,7 +48,6 @@ export const shuffleCounter = ({ counterTarget, isViewed }: ShuffleCounterParams
           i++;
         } else {
           if (loop < 2) {
-            prev = next;
             indexArray = getRandomIndexArray(COUNTER_LENGTH);
             next = getValue().padStart(COUNTER_LENGTH, '0');
 
@@ -64,5 +65,5 @@ export const shuffleCounter = ({ counterTarget, isViewed }: ShuffleCounterParams
     isViewed ? 0 : 1000,
   );
 
-  return { cleanup: () => clearInterval(setIntervalId) };
+  return { finallyCount, cleanup: () => clearInterval(setIntervalId) };
 };
