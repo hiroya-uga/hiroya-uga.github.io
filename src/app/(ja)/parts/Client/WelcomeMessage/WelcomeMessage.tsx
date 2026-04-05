@@ -1,12 +1,12 @@
 'use client';
 
 import { SITE_NAME } from '@/constants/meta';
-import { arrayShuffle } from '@/utils/array-shuffle';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { COUNTER_LENGTH } from './constants';
+import { getRandomIndexArray, shuffleCounter } from './utils';
 
-const COUNTER_LENGTH = 6;
 const { window } = globalThis;
 const message = [
   {
@@ -48,11 +48,6 @@ const message = [
   },
 ];
 
-const getRandomIndexArray = (length: number) => {
-  const digits = Array.from({ length }, (_, i) => i);
-  return arrayShuffle(digits);
-};
-
 export const WelcomeMessage = () => {
   const message1Ref = useRef<HTMLSpanElement>(null);
   const message2Ref = useRef<HTMLSpanElement>(null);
@@ -61,82 +56,25 @@ export const WelcomeMessage = () => {
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
   const isInitialized = useRef(false);
 
-  const shuffleCounter = useCallback((isAlready = false) => {
-    let i = 0;
-    let loop = 0;
-    let indexArray = getRandomIndexArray(COUNTER_LENGTH);
-
-    const getValue = () => {
-      const value = [...String(Math.floor(Math.random() * (Number('1'.padEnd(COUNTER_LENGTH + 1, '0')) - 0 + 1)) + 0)];
-
-      if (loop !== 1) {
-        value[indexArray[0]] = indexArray[0] % 2 ? '縺' : '繝';
-        value[indexArray[1]] = indexArray[1] % 2 ? '繧' : '縲';
-        value[indexArray[2]] = indexArray[2] % 2 ? 'ｳ?' : 'ｶﾞ';
-        value[indexArray[3]] = indexArray[3] % 2 ? '�' : '%';
-      }
-
-      return value.join('');
-    };
-
-    const counterTarget = counterRef.current;
-    if (!counterTarget) {
-      return;
-    }
-
-    let setIntervalId = -1;
-
-    setTimeout(
-      () => {
-        let prev = ''.padStart(COUNTER_LENGTH, '0');
-        let next = getValue().padStart(COUNTER_LENGTH, '0').replaceAll('0', '1');
-        const value = [...prev];
-        setIntervalId = window.setInterval(() => {
-          if (i < COUNTER_LENGTH) {
-            value[indexArray[i]] = next[indexArray[i]];
-            counterTarget.textContent = value.join('');
-            i++;
-          } else {
-            if (loop < 2) {
-              prev = next;
-              indexArray = getRandomIndexArray(COUNTER_LENGTH);
-              next = getValue().padStart(COUNTER_LENGTH, '0');
-
-              value[indexArray[0]] = next[indexArray[0]];
-              counterTarget.textContent = value.join('');
-              i = 1;
-              loop++;
-              return;
-            }
-
-            clearInterval(setIntervalId);
-          }
-        }, 60);
-      },
-      isAlready ? 0 : 1000,
-    );
-
-    return () => {
-      clearInterval(setIntervalId);
-    };
-  }, []);
-
   useEffect(() => {
     if (isInitialized.current) return;
     isInitialized.current = true;
 
-    const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
+    const counterTarget = counterRef.current;
+    if (counterTarget === null) return;
 
-    shuffleCounter(isViewed);
+    const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
+    const { cleanup } = shuffleCounter({ counterTarget, isViewed });
 
     if (isViewed) {
       setStatus('already');
-      return;
+      return cleanup;
     }
 
     setStatus('ready');
     setSessionStorage('welcome-message-viewed', 'true');
-  }, [shuffleCounter]);
+    return cleanup;
+  }, []);
 
   // その他の文字
   useEffect(() => {
@@ -211,11 +149,9 @@ export const WelcomeMessage = () => {
             <span ref={message2Ref} aria-hidden="true">
               {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
             </span>
-            <span className="sr-only select-none">{`${message[0].mapping.map(([_, c]) => c).join('')}${message[1].mapping.map(([_, c]) => c).join('')}`}</span>
-            <span className="mx-1 font-mono" ref={counterRef}>
+            <span ref={counterRef} className="mx-1 font-mono">
               {''.padStart(COUNTER_LENGTH, '0')}
             </span>
-            <span className="sr-only select-none">{message[2].mapping.map(([_, c]) => c).join('')}</span>
             <span ref={message3Ref} aria-hidden="true">
               {message[2].mapping.map(([a, b]) => (status === 'already' ? b : a))}
             </span>
