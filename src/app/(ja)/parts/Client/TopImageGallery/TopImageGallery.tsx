@@ -76,7 +76,6 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
             <p className="max-w-content mx-auto">
               <button
                 type="button"
-                aria-expanded={true}
                 aria-controls={galleryId}
                 onClick={() => {
                   galleryToggleButtonRef.current?.focus({
