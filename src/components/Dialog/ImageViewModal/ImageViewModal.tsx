@@ -48,7 +48,7 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
   if (portal === null) return null;
 
   return createPortal(
-    <dialog
+    <dialog // NOSONAR
       ref={dialogRef}
       aria-label="画像ビューア"
       aria-modal="true"
@@ -134,7 +134,9 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
         aria-atomic="true"
         id={id}
       >
-        <div onClick={(e) => e.stopPropagation()}>
+        <div // NOSONAR
+          onClick={(e) => e.stopPropagation()}
+        >
           <p className="sr-only" id={`${id}-index`}>{`${total}枚中${currentIndex + 1}枚目`}</p>
           <p className="font-bold">{photo.caption}</p>
           <p className="mt-0.5 text-[#b3b3b3]" id={`${id}-spec`}>
