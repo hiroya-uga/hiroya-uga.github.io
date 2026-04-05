@@ -108,7 +108,7 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
             priority
             className="h-auto max-h-[calc(100dvh-12rem)] min-h-0 max-w-full object-contain"
             style={{ viewTransitionName: IMAGE_MODAL_VIEW_TRANSITION_NAME }}
-            aria-describedby={id}
+            aria-describedby={['index', 'spec', 'data'].map((key) => `${id}-${key}`).join(' ')}
             onClick={(e) => e.stopPropagation()}
           />
         </p>
@@ -135,12 +135,14 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
         id={id}
       >
         <div onClick={(e) => e.stopPropagation()}>
-          <p className="sr-only">{`${total}枚中${currentIndex + 1}枚目`}</p>
-          <p className="font-bold" aria-hidden="true">
-            {photo.caption}
+          <p className="sr-only" id={`${id}-index`}>{`${total}枚中${currentIndex + 1}枚目`}</p>
+          <p className="font-bold">{photo.caption}</p>
+          <p className="mt-0.5 text-[#b3b3b3]" id={`${id}-spec`}>
+            {photo.spec}
           </p>
-          <p className="mt-0.5 text-[#b3b3b3]">{photo.spec}</p>
-          <p className="mt-1 text-xs text-[#989898]">{photo.date}</p>
+          <p className="mt-1 text-xs text-[#989898]" id={`${id}-date`}>
+            {photo.date}
+          </p>
         </div>
       </div>
     </dialog>,
