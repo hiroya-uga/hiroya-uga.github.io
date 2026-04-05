@@ -149,11 +149,10 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                         <a
                           href={`https://www.instagram.com/p/${photoData.instagram}/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==`}
                           className="size-60PX hover:scale-120 grid place-items-center rounded-full transition-transform"
-                          aria-describedby={imageId}
                         >
                           <Picture
                             src="/common/images/logos/instagram.svg"
-                            alt="Instagramで見る"
+                            alt={`${photoData.caption}をInstagramで見る`}
                             width={30}
                             height={30}
                             className="invert"
@@ -165,12 +164,11 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                         <a
                           href={photoData.flickr}
                           className="size-60PX hover:scale-120 grid place-items-center rounded-full transition-transform"
-                          aria-describedby={imageId}
                           hrefLang="en-us"
                         >
                           <Picture
                             src="/common/images/logos/flickr.png"
-                            alt="flickrで見る"
+                            alt={`${photoData.caption}をflickrで見る`}
                             width={48 * 2}
                             height={15 * 2}
                             className="w-48PX h-auto invert"
