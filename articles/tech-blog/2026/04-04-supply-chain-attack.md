@@ -71,7 +71,7 @@ CI環境やデプロイ時には、ロックファイルの内容を厳密に再
 | **pnpm**               | `pnpm install --frozen-lockfile` |
 | **Bun**                | `bun install --frozen-lockfile`  |
 
-Yarn Classic（v1）では`--frozen-lockfile`だったが、Yarn v2以降では`immutable`になりました。統一して…。~~`yarn ci`でええんじゃないですかね。~~
+Yarn Classic（v1）では`--frozen-lockfile`でしたが、Yarn v2以降では`immutable`になりました。統一して…。~~みんな`yarn ci`とかでええんじゃないですかね。~~
 
 ## 3. `postinstall`の無効化
 
