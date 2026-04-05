@@ -285,7 +285,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           aria-controls={galleryId}
           ref={galleryToggleButtonRef}
         >
-          Galleryを開く
+          Gallery
         </button>
       </p>
     </div>

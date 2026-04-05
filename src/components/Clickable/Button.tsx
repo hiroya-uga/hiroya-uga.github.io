@@ -26,7 +26,7 @@ export const Button = ({
           </span>
         ) : (
           <span className="relative inline-block size-[1em] transition-transform group-hover/button:translate-x-1">
-            <SvgIcon name="arrow2-right" alt="新しいタブで開く" />
+            <SvgIcon name="arrow2-right" alt="" />
           </span>
         )}
       </span>

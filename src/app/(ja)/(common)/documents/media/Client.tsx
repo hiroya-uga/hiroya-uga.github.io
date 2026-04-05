@@ -257,7 +257,7 @@ export const MediaContent = () => {
 
   return (
     <>
-      <nav aria-labelledby={idForFilterTitle} className="mb-28">
+      <section aria-labelledby={idForFilterTitle} className="mb-28">
         <Details
           defaultOpen={keywordQuery !== ''}
           id={`${id}-details`}
@@ -315,7 +315,7 @@ export const MediaContent = () => {
             />
           </div>
         </Details>
-      </nav>
+      </section>
 
       <section>
         <div className="mb-8 flex items-end leading-none">
