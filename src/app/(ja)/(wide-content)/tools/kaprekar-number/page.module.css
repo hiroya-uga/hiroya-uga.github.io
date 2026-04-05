@@ -9,6 +9,7 @@
 .table tbody th {
   font-weight: normal;
   text-align: left;
+  width: min(10rem, 160px);
 }
 
 .table tbody th + td {
@@ -18,7 +19,7 @@
 
 .table tbody td:last-child {
   text-align: right;
-  padding-right: 1rem;
+  text-wrap: nowrap;
 }
 
 @media screen and (max-width: 640px) {
@@ -28,7 +29,13 @@
   }
   .table tbody th {
     font-weight: bold;
+    width: auto;
   }
+
+  .table tbody tr {
+    margin-top: var(--spacing-paragraph);
+  }
+
   .table tbody td:last-child {
     padding-right: 0;
   }
