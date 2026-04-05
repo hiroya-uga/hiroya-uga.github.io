@@ -179,8 +179,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                   )}
                   <button
                     type="button"
-                    className="bottom-8PX right-8PX size-32PX pointer-events-none absolute grid place-items-center rounded-full bg-black/60 text-white opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100"
-                    aria-label={`${photoData.caption}を拡大表示`}
+                    className="bottom-8PX right-8PX size-32PX group/button pointer-events-none absolute grid place-items-center rounded-full bg-black/60 text-white opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100"
                     onClick={(e) => {
                       e.stopPropagation();
 
@@ -200,8 +199,8 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                       });
                     }}
                   >
-                    <span className="size-16PX relative block [--v-fill:white]">
-                      <SvgIcon name="expand" alt="" />
+                    <span className="size-16PX group-hover/button:scale-115 relative block transition-[scale] [--v-fill:white]">
+                      <SvgIcon name="expand" alt={`${photoData.caption}を拡大表示`} />
                     </span>
                   </button>
                 </li>
