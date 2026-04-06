@@ -9,7 +9,7 @@ import { TopImageGalleryProps } from './TopImageGallery/TopImageGallery';
 
 const Spec = ({ spec }: { spec: string }) => {
   if (!spec) {
-    return <></>;
+    return null;
   }
 
   const array = spec.split('+');
@@ -56,7 +56,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
         error: string;
         instagram: '';
         caption: string;
-        spec: string;
+        description: string;
         date: string;
       }
     | null
@@ -201,7 +201,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                     error: '404 NOT FOUND',
                     instagram: '',
                     caption: 'UNKNOWN',
-                    spec: 'NO DATA',
+                    description: 'NO DATA',
                     date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
                   });
                   show();
@@ -256,7 +256,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 <span className="@w640:text-xs text-2xs ml-1 inline-block"> at {photoData?.date}</span>
               </span>
               <span className={clsx(['@w640:text-sm', 'text-2xs block truncate'])}>
-                <Spec spec={photoData?.spec ?? 'loading...'} />
+                <Spec spec={photoData?.description ?? 'loading...'} />
               </span>
             </p>
           </figcaption>

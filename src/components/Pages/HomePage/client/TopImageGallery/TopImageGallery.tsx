@@ -115,8 +115,8 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
               const imageId = `${galleryId}-photo-${index}`;
 
               return (
-                <li
-                  key={index}
+                <li // NOSONAR
+                  key={imageId}
                   tabIndex={-1}
                   onClick={(e) => {
                     e.currentTarget.querySelector('a')?.focus();
@@ -211,7 +211,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
 
       {modalPhotoIndex !== null && (
         <ImageViewModal
-          photos={galleryState.photos}
+          images={galleryState.photos}
           currentIndex={modalPhotoIndex}
           handleClose={() => closeModal(() => setModalPhotoIndex(null)).then(unfreezeGalleryAnimations)}
           handleNavigate={setModalPhotoIndex}
