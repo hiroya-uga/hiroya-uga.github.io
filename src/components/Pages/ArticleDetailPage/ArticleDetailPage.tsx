@@ -8,7 +8,7 @@ import { getArticles } from '@/utils/ssg-articles';
 
 import { getPostBySlug } from '@/libs/marked';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
-import { ArticleNavigation } from './parts';
+import { ArticleNavigation } from './server';
 
 interface Props {
   post: NonNullable<ReturnType<typeof getPostBySlug>>;

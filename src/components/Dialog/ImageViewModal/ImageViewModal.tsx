@@ -1,6 +1,5 @@
 'use client';
 
-import { PhotoData } from '@/app/(ja)/parts/Client/constants';
 import { SvgIcon } from '@/components/Icons';
 import { Picture } from '@/components/Image';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
@@ -8,19 +7,28 @@ import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { IMAGE_MODAL_VIEW_TRANSITION_NAME } from './utils';
 
+export type ImageData = {
+  src: string;
+  caption: string;
+  description: string;
+  date: string;
+  width: number;
+  height: number;
+};
+
 interface Props {
-  photos: PhotoData[];
+  images: ImageData[];
   currentIndex: number;
   handleClose: () => void;
   handleNavigate: (index: number) => void;
 }
 
-export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNavigate }: Props) => {
+export const ImageViewModal = ({ images, currentIndex, handleClose, handleNavigate }: Props) => {
   const id = useId();
 
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const photo = photos[currentIndex];
-  const total = photos.length;
+  const photo = images[currentIndex];
+  const total = images.length;
 
   const portal = useSyncExternalStore(
     () => () => {},
@@ -139,8 +147,8 @@ export const ImageViewModal = ({ photos, currentIndex, handleClose, handleNaviga
         >
           <p className="sr-only" id={`${id}-index`}>{`${total}枚中${currentIndex + 1}枚目`}</p>
           <p className="font-bold">{photo.caption}</p>
-          <p className="mt-0.5 text-[#b3b3b3]" id={`${id}-spec`}>
-            {photo.spec}
+          <p className="mt-0.5 text-[#b3b3b3]" id={`${id}-description`}>
+            {photo.description}
           </p>
           <p className="mt-1 text-xs text-[#989898]" id={`${id}-date`}>
             {photo.date}
