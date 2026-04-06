@@ -5,7 +5,7 @@ import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { NuValidatorBookmarkletGenerator } from './Client';
+import { NuValidatorBookmarkletGenerator } from './client';
 
 const i18n = {
   ja: {

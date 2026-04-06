@@ -5,7 +5,7 @@ import { Picture } from '@/components/Image';
 import clsx from 'clsx';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { PhotoData, photoDataList } from './constants';
-import { TopImageGalleryProps } from './TopImageGallery/TopImageGallery';
+import { TopImageGalleryProps } from './TopImageGallery';
 
 const Spec = ({ spec }: { spec: string }) => {
   if (!spec) {
