@@ -17,7 +17,7 @@ import {
 } from './logics';
 import { ModeSelect } from './ModeSelect';
 
-export function NumberPairingClient() {
+export const NumberPairingClient = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [gameMode, setGameMode] = useState<GameMode | null>(null);
@@ -204,4 +204,4 @@ export function NumberPairingClient() {
       <Toast message={toastMessage} setMessage={setToastMessage} />
     </>
   );
-}
+};
