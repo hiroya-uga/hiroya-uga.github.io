@@ -4,7 +4,7 @@ interface Props {
   onSelect: (mode: GameMode) => void;
 }
 
-export function ModeSelect({ onSelect }: Props) {
+export const ModeSelect = ({ onSelect }: Readonly<Props>) => {
   return (
     <>
       <p className="mb-6 text-center text-lg font-bold">難易度を選んでください</p>
@@ -34,4 +34,4 @@ export function ModeSelect({ onSelect }: Props) {
       </ul>
     </>
   );
-}
+};
