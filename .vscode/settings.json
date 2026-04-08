@@ -26,6 +26,5 @@
     "zenn"
   ],
   "editor.codeLens": true,
-  "typescript.referencesCodeLens.enabled": true,
-  "javascript.referencesCodeLens.enabled": true
+  "js/ts.referencesCodeLens.enabled": true
 }
