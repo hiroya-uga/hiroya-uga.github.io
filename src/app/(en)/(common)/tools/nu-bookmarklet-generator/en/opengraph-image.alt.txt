@@ -1,1 +1,1 @@
-uga.dev Nu Html Checker Bookmarklet Generator A generator for creating bookmarklets that send HTML to Nu Html Checker.Works with locally hosted and intranet-hosted Nu Html Checker instances.
+uga.dev Nu Html Checker Bookmarklet Generator A generator for creating bookmarklets that send HTML to Nu Html Checker. Works with locally hosted and intranet-hosted Nu Html Checker instances.
