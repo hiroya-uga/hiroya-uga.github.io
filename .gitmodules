@@ -1,6 +1,3 @@
-[submodule ".claude/skills/create-commit-message"]
-	path = .claude/skills/create-commit-message
-	url = git@github.com:uga-skills/create-commit-comment.git
 [submodule ".claude/skills/review-markup"]
 	path = .claude/skills/review-markup
 	url = git@github.com:uga-skills/review-markup.git
