@@ -1,0 +1,1 @@
+uga.dev Color Contrast Checker WCAG 2. 2-compliant color contrast checker. Calculate the contrast ratio between text and background colors and verify pass/fail against AA and AAA criteria. If needed, it also suggests alternative text or background colors.

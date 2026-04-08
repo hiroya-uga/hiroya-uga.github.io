@@ -37,3 +37,20 @@ export const formattedTimeString = (date: Date) =>
   })
     .format(date)
     .replace(':', '時') + '分';
+
+export const formatHexString = (input: string) => {
+  const value = input.trim().replace(/^#/, '');
+
+  if (/^[0-9a-f]+$/i.test(value)) {
+    if (value.length === 6) {
+      return `#${value.toLowerCase()}`;
+    }
+
+    if (value.length === 3) {
+      const [r, g, b] = value.split('');
+      return `#${r}${r}${g}${g}${b}${b}`.toLowerCase();
+    }
+  }
+
+  return null;
+};
