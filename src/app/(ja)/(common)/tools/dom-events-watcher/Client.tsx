@@ -526,13 +526,13 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
             <div className="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-8 text-center">
               <p>
-                <button type="button" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2">
+                <button type="button" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2 text-black">
                   何も起こらないただのボタン
                 </button>
               </p>
 
               <p>
-                <button type="submit" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2">
+                <button type="submit" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2 text-black">
                   送信ボタン
                 </button>
               </p>
