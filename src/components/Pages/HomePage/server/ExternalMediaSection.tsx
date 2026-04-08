@@ -37,7 +37,7 @@ export const ExternalMediaSection = () => {
         </tbody>
       </table>
 
-      <p className="@w640:mt-6.5 @w640:place-items-end mt-11 grid place-items-center">
+      <p className="@w640:mt-6.5 @w640:place-items-end mt-4 grid place-items-center">
         <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
       </p>
     </>
