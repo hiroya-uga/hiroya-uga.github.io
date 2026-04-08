@@ -180,7 +180,13 @@ const toPathname = (imagePath) => {
 const createAltText = ({ previous = '', pageTitle, description }) => {
   const siteName = 'uga.dev';
   const titlePart = pageTitle === siteName ? '' : `${previous}${pageTitle}`;
-  const descriptionPart = description.replaceAll('\n', '');
+  const descriptionPart = (() => {
+    if (/^[a-zA-Z0-9\-.*/,\s]+$/.test(description)) {
+      return description.replaceAll('\n', '').replaceAll('.', '. ').replaceAll('.  ', '. ');
+    }
+
+    return description.replaceAll('\n', '');
+  })();
 
   return [siteName, titlePart, descriptionPart].filter(Boolean).join(' ').trim();
 };
