@@ -45,7 +45,7 @@ export const DiscoverSection = () => {
   );
 
   return (
-    <div className="px-content-inline @w640:py-28 py-11">
+    <div className="px-content-inline @w640:py-28 pb-14 pt-11">
       <div className="max-w-content mx-auto">
         <h2 className="mb-11 flex flex-wrap items-center gap-1.5">
           <span className="@w640:text-2xl text-xl font-bold tracking-wide">Discover</span>
