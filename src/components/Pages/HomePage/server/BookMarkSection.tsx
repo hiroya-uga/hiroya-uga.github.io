@@ -93,9 +93,9 @@ const linkList = bookmarks.toSorted((a, b) => {
 export const BookMarkSection = () => {
   return (
     <>
-      <h2 className="@w640:text-2xl mb-2 text-xl font-bold tracking-wide">Bookmarks</h2>
+      <h2 className="@w640:text-2xl @w640:mt-64px mt-11 text-xl font-bold tracking-wide">Bookmarks</h2>
 
-      <p className="mb-4">外部サイトへのリンク集です。</p>
+      <p className="mb-3.5">外部サイトへのリンク集です。</p>
 
       <ul className="@w500:grid-cols-2 @w640:gap-20px @w768:grid-cols-3 @w640:text-sm @w640:leading-21px leading-18px mb-2 grid gap-4 text-xs">
         {linkList.map(({ title, href, japanese, ...prop }) => {

@@ -267,7 +267,8 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           type="button"
           className={clsx([
             '@w640:text-sm',
-            'transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary text-2xs z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-1 leading-tight no-underline after:content-["↓"]',
+            galleryState.shouldShow && 'invisible opacity-0',
+            'bg-panel-primary text-primary hover:bg-panel-primary-hover text-2xs z-10 ml-auto block w-fit rounded-full px-3 py-1 leading-tight no-underline transition-[background-color,opacity,visibility] after:content-["↓"]',
           ])}
           onClick={() => {
             setGalleryState({ shouldShow: true, photos: photoDataListRef.current });

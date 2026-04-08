@@ -56,15 +56,6 @@
   }
 }
 
-@keyframes already-drift {
-  0% {
-    transform: translateY(-20%);
-  }
-  100% {
-    transform: translateY(20%);
-  }
-}
-
 .root {
   position: relative;
   isolation: isolate;
@@ -141,15 +132,13 @@
     }
 
     .content {
+      padding: 0 0 10vh;
+
       @supports (animation-timeline: --web-section) {
         animation: container-fade-in 0.6s ease-out both;
         animation-timeline: --web-section;
         animation-range: entry 0% exit 25%;
       }
-    }
-
-    .content {
-      padding: 0 0 10vh;
     }
 
     .heading {
@@ -203,17 +192,6 @@
         color: #ccc;
         text-shadow: 2px 2px 0 #000;
       }
-    }
-
-    view-timeline-name: --v-already;
-    view-timeline-axis: block;
-
-    .content {
-      animation-name: already-drift;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-      animation-timeline: --v-already;
-      animation-range: entry 0% exit 100%;
     }
   }
 }

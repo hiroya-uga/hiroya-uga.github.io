@@ -62,10 +62,11 @@ export const ProfileSection = () => {
         })}
       </ul>
 
-      <div className="@w640:mb-0 @w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mb-10 mt-12 border-t border-dashed pt-12">
-        <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mb-4 mt-0 text-xl font-bold">
+      <div className="@w640:mt-20 @w640:grid @w640:gap-x-12 @w640:pt-20 border-t-secondary mt-12 border-t border-dashed pt-12">
+        <h2 className="@w640:text-2xl col-start-1 col-end-2 row-start-1 row-end-2 mt-0 text-xl font-bold">
           Doumei banners
         </h2>
+        <p className="mb-3.5">古き良き同盟リンク集。</p>
 
         <Doumei />
       </div>
