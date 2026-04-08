@@ -407,11 +407,10 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
       </div>
 
       <div className="gap-6 lg:flex lg:h-min">
-        <div className="relative lg:min-w-[375px] lg:max-w-[375px]">
+        <div className="lg:min-w-375px lg:max-w-375px relative">
           <form
             ref={ref}
-            className="border-secondary max-h-[30vh] overflow-y-scroll border border-solid p-4 pb-8 lg:absolute lg:left-0 lg:top-0 lg:h-full lg:max-h-none"
-            tabIndex={0}
+            className="border-secondary max-h-[30vh] overflow-y-scroll overscroll-contain border border-solid p-4 pb-8 lg:absolute lg:left-0 lg:top-0 lg:h-full lg:max-h-none"
             id="container"
             role="group"
             aria-labelledby={`${id}-title`}
@@ -550,8 +549,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
 
           <div
-            className="bg-tertiary h-[30vh] overflow-y-scroll py-2 sm:h-[50vh]"
-            tabIndex={0}
+            className="bg-tertiary h-[30vh] overflow-y-scroll overscroll-contain py-2 sm:h-[50vh]"
             aria-labelledby={`${id}-log-title`}
           >
             <div
@@ -586,7 +584,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                       counterIncrement: 'log',
                     }}
                   >
-                    <span className="col-[2/3] row-[1/2] pr-3 text-center leading-[inherit] sm:col-[2/3] sm:row-[1/2]">
+                    <span className="leading-inherit col-[2/3] row-[1/2] pr-3 text-center sm:col-[2/3] sm:row-[1/2]">
                       <code className="block sm:inline">{tagName}</code>
                     </span>
                     <span className="col-[3/4] row-[1/2] sm:col-[3/4] sm:row-[1/2]">
@@ -594,7 +592,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                       {times && ` x ${times}`}
                     </span>
                     {options && (
-                      <span className="text-alert col-[2/4] row-[2/3] leading-[inherit] sm:col-[4/5] sm:row-[1/2] sm:pl-4">
+                      <span className="text-alert leading-inherit col-[2/4] row-[2/3] sm:col-[4/5] sm:row-[1/2] sm:pl-4">
                         {options}
                       </span>
                     )}
