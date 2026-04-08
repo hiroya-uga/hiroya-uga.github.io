@@ -80,7 +80,7 @@ export const ColorInput = ({ id, label, value, handleChange }: Readonly<Props>) 
             placeholder="#000000"
             maxLength={8} // #000000 1文字打ってから削除したい時を考慮
             spellCheck={false}
-            className="border-primary text-textfield bg-textfield min-h-10 w-full rounded-md border px-4 py-2 font-mono text-sm leading-8"
+            className="border-primary text-textfield bg-textfield min-h-10 w-full rounded-md border px-4 py-2 font-mono leading-8"
           />
         </span>
       </p>
