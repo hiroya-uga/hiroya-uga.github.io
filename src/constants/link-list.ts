@@ -109,6 +109,11 @@ export const TOOLS_LINK_LIST = [
         pathname: '/tools/vnux',
         userType: ['developer', 'qa'],
       },
+      {
+        emoji: '🎨',
+        pathname: '/tools/contrast-checker',
+        userType: ['developer', 'designer', 'qa'],
+      },
     ] as ToolPage
   ).map((item) => ({ ...item, type: 'default' }) as const),
 

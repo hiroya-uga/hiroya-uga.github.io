@@ -452,4 +452,17 @@ export const SEO: Record<
     title: 'TouchEvent.touches Playground',
     description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
   },
+  '/tools/contrast-checker': {
+    title: 'コントラストチェッカー',
+    description:
+      'WCAG 2.2準拠のカラーコントラスト確認ツールです。\n文字色と背景色のコントラスト比を計算し、AA・AAAの各基準で合否を確認できます。\n必要に応じて文字色や背景色の候補も提案します。',
+    languages: { ja: '/tools/contrast-checker', en: '/tools/contrast-checker/en' },
+  },
+  '/tools/contrast-checker/en': {
+    title: 'Color Contrast Checker',
+    description:
+      'WCAG 2.2-compliant color contrast checker.\nCalculate the contrast ratio between text and background colors and verify pass/fail against AA and AAA criteria.\nIf needed, it also suggests alternative text or background colors.',
+    languages: { ja: '/tools/contrast-checker', en: '/tools/contrast-checker/en' },
+    locale: 'en_US',
+  },
 };
