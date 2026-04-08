@@ -66,7 +66,7 @@ export default function Page() {
             管理人について
           </Heading>
 
-          <div className="@container mb-4">
+          <div className="@container mb-paragraph">
             <p className="max-w-360px @w360:grid-cols-2 @w360:gap-x-6 @w360:pr-4 mx-auto grid place-items-center items-center gap-4">
               <span className="@w360:col-start-2 w-40">
                 <Picture
@@ -93,8 +93,8 @@ export default function Page() {
           <p>アイコンは昔の上司がスマホで描いて送ってくれた管理人の似顔絵。</p>
           <p className="mt-6 text-xs">※ そういえばもう管理人って言い方もしないよね。</p>
         </div>
-        <div className="@w640:mt-(--margin-heading-top) @w640:text-2xl @w640:font-bold mt-8 text-xl leading-snug">
-          <dl className="leading-base text-sm font-normal">
+        <div className="@w640:mt-heading-top @w640:text-2xl @w640:font-bold mt-8 text-xl leading-snug">
+          <dl className="@w640:pt-1 leading-base text-sm font-normal">
             {[
               {
                 title: 'HN',
@@ -367,6 +367,7 @@ export default function Page() {
       </div>
 
       <Heading level={2}>同盟・主張バナー</Heading>
+      <p className="mb-paragraph">古き良き同盟リンク集。</p>
 
       <Doumei />
     </>

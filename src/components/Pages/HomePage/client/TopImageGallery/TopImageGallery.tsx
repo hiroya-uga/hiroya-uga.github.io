@@ -78,14 +78,26 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                 type="button"
                 aria-controls={galleryId}
                 onClick={() => {
-                  galleryToggleButtonRef.current?.focus({
-                    preventScroll: true,
-                  });
-                  galleryToggleButtonRef.current?.scrollIntoView({
+                  const button = galleryToggleButtonRef.current;
+                  button?.scrollIntoView({
                     behavior: 'smooth',
                     block: 'end',
                   });
                   setGalleryState((prev) => ({ ...prev, shouldShow: false }));
+
+                  if (button === null) {
+                    return;
+                  }
+
+                  requestAnimationFrame(() => {
+                    button.style.visibility = 'visible';
+                    requestAnimationFrame(() => {
+                      button.focus({
+                        preventScroll: true,
+                      });
+                      button.style.removeProperty('visibility');
+                    });
+                  });
                 }}
                 className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline after:content-['↑']"
               >

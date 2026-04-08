@@ -6,11 +6,11 @@ import clsx from 'clsx';
 export const ExternalMediaSection = () => {
   return (
     <>
-      <h2 className="@w640:text-2xl mb-2 text-xl font-bold tracking-wide">External Media</h2>
+      <h2 className="@w640:text-2xl text-xl font-bold tracking-wide">External Media</h2>
 
-      <p className="mb-4">{getMetadata('/documents/media').description}</p>
+      <p className="mb-11">{getMetadata('/documents/media').description}</p>
 
-      <table className="@w640:mb-2 mb-4">
+      <table>
         <thead className="sr-only">
           <tr>
             <th scope="col">日付</th>
@@ -37,7 +37,7 @@ export const ExternalMediaSection = () => {
         </tbody>
       </table>
 
-      <p className="@w640:mb-28 @w640:place-items-end mb-12 grid place-items-center">
+      <p className="@w640:mt-6.5 @w640:place-items-end mt-11 grid place-items-center">
         <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
       </p>
     </>

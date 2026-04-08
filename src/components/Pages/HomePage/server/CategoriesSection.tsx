@@ -42,24 +42,24 @@ const ArticleListForTop = async () => {
   });
 
   return (
-    <div className="@container">
-      <h3 className="@w500:mb-2 @w500:mt-3 my-2 text-lg font-bold">Latest Articles</h3>
+    <>
+      <h3 className="@w640:mt-0 mb-2 mt-11 font-bold">Latest Articles</h3>
 
-      <ul className="@w500:grid @w500:pl-4 @w500:gap-y-2 @w500:gap-x-4 @w500:leading-36px grid-cols-[auto_auto_1fr]">
+      <ul className="@w640:grid @w640:pl-3 @w640:gap-y-2 @w640:gap-x-4 @w640:leading-36px grid-cols-[auto_auto_1fr]">
         {blogs.slice(0, 3).map((article) => {
           const title = article.title.replaceAll('\n', '');
           return (
             <li
-              className="@w500:grid @w500:grid-cols-subgrid @w500:col-end-4 @w500:col-start-1 @w500:mb-0 mb-3"
+              className="@w640:grid @w640:grid-cols-subgrid @w640:col-end-4 @w640:col-start-1 @w640:mb-0 mb-3"
               key={article.pathname}
             >
-              <time dateTime={article.publishedAt} className="@w500:col-start-1 @w500:mr-0 mr-3 font-mono text-sm">
+              <time dateTime={article.publishedAt} className="@w640:col-start-1 @w640:mr-0 mr-3 font-mono text-sm">
                 {intl.format(new Date(article.publishedAt))}
               </time>
-              <span className="@w500:col-start-2 text-center font-mono text-sm">
+              <span className="@w640:col-start-2 text-center font-mono text-sm">
                 {resolveCategoryName(article.pathname)}
               </span>
-              <span className="@w500:col-start-3 grid w-full justify-start">
+              <span className="@w640:col-start-3 grid w-full justify-start">
                 <Link href={article.pathname} className="truncate">
                   {title}
                 </Link>
@@ -68,20 +68,20 @@ const ArticleListForTop = async () => {
           );
         })}
       </ul>
-    </div>
+    </>
   );
 };
 
 export const CategoriesSection = () => {
   return (
-    <div className="bg-tertiary px-content-inline @w640:mb-28 mb-20 py-11 pb-12">
+    <div className="bg-tertiary px-content-inline @w640:py-28 py-11 pb-12">
       <div className="max-w-content mx-auto">
-        <h2 className="@w640:text-2xl mb-4 text-xl font-bold tracking-wide outline-none" id="heading-categories">
+        <h2 className="@w640:text-2xl mb-11 text-xl font-bold tracking-wide outline-none" id="heading-categories">
           Categories
         </h2>
 
-        <div className="@w640:grid @w640:grid-cols-3 @w640:gap-8">
-          <ul className="@w640:grid @w640:grid-cols-subgrid @w640:grid-rows-subgrid @w640:col-start-1 @w640:col-end-4 @w640:mb-0 @w640:row-start-1 @w640:row-end-3 mb-4">
+        <div className="@w640:grid @w640:grid-cols-3 @w640:gap-x-4 @w640:gap-8">
+          <ul className="@w640:grid @w640:grid-cols-subgrid @w640:grid-rows-subgrid @w640:col-start-1 @w640:col-end-4 @w640:mb-0 @w640:row-start-1 @w640:row-end-3">
             {MAIN_PAGES.map(({ emoji, href }) => {
               const { pageTitle } = getMetadata(href);
               return (

@@ -18,11 +18,11 @@ export const HomePage = () => {
 
         <PowerOfTheWebSection />
 
-        <div className="bg-primary z-1 @w640:pt-28 relative pt-8">
+        <div className="bg-primary z-1 relative">
           <DiscoverSection />
           <CategoriesSection />
 
-          <div className="px-content-inline @w640:pb-20 pb-12">
+          <div className="px-content-inline @w640:pt-28 @w640:pb-23 pb-15 pt-11">
             <div className="max-w-content mx-auto">
               <ExternalMediaSection />
               <BookMarkSection />

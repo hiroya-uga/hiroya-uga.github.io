@@ -45,16 +45,18 @@ export const DiscoverSection = () => {
   );
 
   return (
-    <div className="px-content-inline @w640:mb-28 mb-16">
+    <div className="px-content-inline @w640:py-28 py-11">
       <div className="max-w-content mx-auto">
-        <h2 className="mb-4 flex flex-wrap items-center gap-1.5">
+        <h2 className="mb-11 flex flex-wrap items-center gap-1.5">
           <span className="@w640:text-2xl text-xl font-bold tracking-wide">Discover</span>
           <span className="text-sm text-[#545454] dark:text-[#b3b3b3]">— Random Picks</span>
         </h2>
 
         <ul
           className={clsx([
-            '@w640:grid-cols-3 @w768:gap-8 grid gap-4 transition-opacity',
+            '@w768:grid-cols-3 @w768:gap-8',
+            '@w500:gap-y-6',
+            'grid gap-y-11 transition-opacity',
             pickUpList.length === 0 && 'min-h-72 opacity-0',
           ])}
         >
@@ -63,19 +65,43 @@ export const DiscoverSection = () => {
             const id = String(description) && pathname;
 
             return (
-              <li key={pathname}>
-                <p className="mb-1">
+              <li
+                key={pathname}
+                className={clsx([
+                  '@w768:block',
+                  '@w500:grid @w500:grid-cols-[8.5rem_1fr] @w500:grid-rows-[auto_1fr] gap-x-3 gap-y-1',
+                ])}
+              >
+                <p
+                  className={clsx([
+                    '@w768:block @w768:mb-1',
+                    '@w500:grid @w500:grid-cols-subgrid @w500:grid-rows-subgrid @w500:col-start-1 @w500:-col-end-1 @w500:row-start-1 @w500:-row-end-1 @w500:mb-0',
+                    'mb-1',
+                  ])}
+                >
                   <Link
                     href={pathname}
-                    className="group flex flex-col-reverse rounded-md no-underline"
+                    className={clsx([
+                      '@w768:flex',
+                      '@w500:grid @w500:grid-cols-subgrid @w500:grid-rows-subgrid @w500:col-start-1 @w500:-col-end-1 @w500:row-start-1 @w500:-row-end-1',
+                      'group flex flex-col-reverse rounded-md no-underline',
+                    ])}
                     aria-describedby={id}
                   >
-                    <span className="inline-block leading-normal underline decoration-transparent transition-[text-decoration-color] duration-200 group-hover:decoration-current">
+                    <span
+                      className={clsx([
+                        '@w500:col-start-2 @w500:pt-0.5 @w500:col-end-3 @w500:row-start-1 @w500:row-end-2',
+                        'inline-block leading-normal underline decoration-transparent transition-[text-decoration-color] duration-200 group-hover:decoration-current',
+                      ])}
+                    >
                       {pageTitle}
-                      {/* {item.isWip && <b>（WIP）</b>} */}
                     </span>
                     <span
-                      className="bg-card font-emoji @w640:aspect-[1.618/1] @w640:p-0 mb-3 grid place-content-center overflow-hidden rounded-md p-10 text-[3.5rem] leading-none"
+                      className={clsx([
+                        '@w768:aspect-[1.618/1] @w768:p-0 @w768:mb-1.5',
+                        '@w500:col-start-1 @w500:col-end-2 @w500:row-start-1 @w500:row-end-3 @w500:mb-0 @w500:aspect-square',
+                        'bg-card font-emoji mb-2 grid place-content-center overflow-hidden rounded-md p-10 text-[3.5rem] leading-none',
+                      ])}
                       aria-hidden="true"
                     >
                       <span className="backface-hidden rotate-[0.1deg] scale-[0.85] transition-transform duration-300 group-hover:scale-100">
@@ -85,7 +111,10 @@ export const DiscoverSection = () => {
                   </Link>
                 </p>
                 {description && (
-                  <p className="text-xs" id={id}>
+                  <p
+                    className={clsx(['@w500:col-start-2 @w500:col-end-3 @w500:row-start-2 @w500:row-end-3', 'text-sm'])}
+                    id={id}
+                  >
                     {description}
                   </p>
                 )}
