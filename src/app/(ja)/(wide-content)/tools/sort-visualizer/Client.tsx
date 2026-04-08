@@ -879,9 +879,9 @@ export const SortVisualizerContent = () => {
         {isVisualizerMode ? (
           <div
             className={clsx([
-              'grid gap-8',
+              'gap-x-16PX grid gap-y-4',
               2 < activeSorts.length
-                ? '@w400:grid-cols-2 @w768:grid-cols-3 @w1024:grid-cols-4 @w640:gap-4'
+                ? '@w360:grid-cols-2 @w640:grid-cols-3 @w1024:grid-cols-4 @w640:gap-y-14 @w640:gap-x-32PX'
                 : '@w768:grid-cols-2',
             ])}
           >
@@ -892,7 +892,7 @@ export const SortVisualizerContent = () => {
 
               return (
                 <div key={sort}>
-                  <h2 className="mb-2 font-bold">{`${label} - ${sort}`}</h2>
+                  <h2 className="@w640:text-base mb-2 text-xs font-bold">{`${label} - ${sort}`}</h2>
                   {shouldShowGraph ? (
                     <div className="border-primary bg-secondary border">
                       <SortVisualizer
