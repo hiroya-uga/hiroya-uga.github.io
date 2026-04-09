@@ -1,3 +1,0 @@
-[submodule ".claude/skills/review-markup"]
-	path = .claude/skills/review-markup
-	url = git@github.com:uga-skills/review-markup.git
