@@ -1,13 +1,13 @@
 .char {
   display: grid;
   place-items: center;
-  border-left: 1px solid orange;
-  border-right: 1px solid orange;
   border-top: 1px solid orange;
+  border-right: 1px solid orange;
+  border-left: 1px solid orange;
 }
 
 [data-theme="dark"] .char {
-  border-left: 1px solid color-mix(in oklab, orange 80%, transparent);
-  border-right: 1px solid color-mix(in oklab, orange 80%, transparent);
   border-top: 1px solid color-mix(in oklab, orange 80%, transparent);
+  border-right: 1px solid color-mix(in oklab, orange 80%, transparent);
+  border-left: 1px solid color-mix(in oklab, orange 80%, transparent);
 }

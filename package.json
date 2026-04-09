@@ -13,9 +13,10 @@
     "format:fix": "prettier --write .",
     "generate-ogp-alt": "node scripts/create-opengraph-image-alt-txt.mjs",
     "postinstall": "node scripts/rebuild-canvas.mjs",
-    "lint": "yarn lint:oxlint",
-    "lint:fix": "oxlint --fix . --ignore-path .oxlintignore",
+    "lint": "yarn lint:oxlint && yarn lint:stylelint",
+    "lint:fix": "oxlint --fix . --ignore-path .oxlintignore && stylelint --fix 'src/**/*.css'",
     "lint:oxlint": "oxlint . --ignore-path .oxlintignore",
+    "lint:stylelint": "stylelint 'src/**/*.css'",
     "next-lint": "next lint",
     "prepare": "husky",
     "start": "next start",
@@ -29,7 +30,11 @@
       "oxlint --fix --ignore-path .oxlintignore",
       "prettier --write"
     ],
-    "*.{json,css,md,mdx}": [
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx}": [
       "prettier --write"
     ],
     "package.json": [
@@ -91,6 +96,9 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.13",
     "sort-package-json": "^3.6.1",
+    "stylelint": "^17.6.0",
+    "stylelint-config-recess-order": "^7.7.0",
+    "stylelint-order": "^8.1.1",
     "tailwindcss": "^4.1.10",
     "vitest": "^4.0.18"
   },

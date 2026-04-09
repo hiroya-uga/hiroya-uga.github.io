@@ -6,45 +6,45 @@
 }
 
 body:has(.notfound) {
-  background: #fff;
   font-family: sans-serif;
-  line-height: 1.3;
   font-size: calc(18.5 / 16 * 1rem);
-  color: #333;
   font-feature-settings: "palt";
+  line-height: 1.3;
+  color: #333;
+  background: #fff;
   /* letter-spacing: -0.5px; */
 }
 
 .notfound {
   * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
   }
 
   ::selection {
-    background-color: #316ac5;
     color: #fff;
+    background-color: #316ac5;
   }
 
   ::-moz-selection {
-    background-color: #316ac5;
     color: #fff;
+    background-color: #316ac5;
   }
 
   main {
-    padding: calc(21 / 16 * 1rem) calc(18 / 16 * 1rem) calc(18 / 16 * 1rem) calc(22 / 16 * 1rem);
     max-width: calc(630 / 16 * 1rem);
+    padding: calc(21 / 16 * 1rem) calc(18 / 16 * 1rem) calc(18 / 16 * 1rem) calc(22 / 16 * 1rem);
   }
 
   h1 {
-    font-weight: normal;
-    font-size: calc(24 / 16 * 1rem);
-    margin: 0 0 calc(45 / 16 * 1rem);
-    letter-spacing: 1.5px;
-    padding: 0 0 0 calc(53 / 16 * 1rem);
     position: relative;
     z-index: 0;
+    padding: 0 0 0 calc(53 / 16 * 1rem);
+    margin: 0 0 calc(45 / 16 * 1rem);
+    font-size: calc(24 / 16 * 1rem);
+    font-weight: normal;
+    letter-spacing: 1.5px;
   }
 
   :where(h1, h1 > span)::before,
@@ -72,37 +72,37 @@ body:has(.notfound) {
   }
 
   h1 > span::before {
-    z-index: 1;
-    border-left: calc(1 / 16 * 1rem) solid #7f8080;
     top: calc(2 / 16 * 1rem);
     left: calc(29 / 16 * 1rem);
+    z-index: 1;
     width: calc(9 / 16 * 1rem);
     height: calc(8 / 16 * 1rem);
     background: linear-gradient(48deg, #fff, #fff 45%, #000 60%, #fff 0, #fff);
+    border-left: calc(1 / 16 * 1rem) solid #7f8080;
   }
 
   h1 > span::after {
-    z-index: 2;
-    border-bottom: calc(1 / 16 * 1rem) solid #000;
     top: calc(10 / 16 * 1rem);
     left: calc(29 / 16 * 1rem);
+    z-index: 2;
     width: calc(8 / 16 * 1rem);
+    border-bottom: calc(1 / 16 * 1rem) solid #000;
   }
 
   h1::after {
-    left: calc(3 / 16 * 1rem);
     top: calc(12 / 16 * 1rem);
-    content: "";
+    left: calc(3 / 16 * 1rem);
+    z-index: -1;
     width: calc(33 / 16 * 1rem);
     height: calc(33 / 16 * 1rem);
+    content: "";
     background: url("/favicon.png") 0 0 / cover;
-    z-index: -1;
   }
 
   main > p:first-of-type {
     padding-bottom: calc(27 / 16 * 1rem);
-    margin-bottom: calc(37 / 16 * 1rem);
     margin-right: calc(13 / 16 * 1rem);
+    margin-bottom: calc(37 / 16 * 1rem);
     border-bottom: 3px solid #c0c0c0;
   }
 
@@ -118,19 +118,18 @@ body:has(.notfound) {
 
   main > ul > li {
     position: relative;
-    list-style: none;
     padding: 0 0 0 calc(60 / 16 * 1rem);
+    list-style: none;
   }
 
   main > ul > li::before {
-    content: "";
+    position: absolute;
+    top: calc(8 / 16 * 1rem);
+    left: calc(28 / 16 * 1rem);
+    display: block;
     width: calc(8 / 16 * 1rem);
     height: calc(8 / 16 * 1rem);
-    display: block;
-    position: absolute;
-    background: red;
-    left: calc(28 / 16 * 1rem);
-    top: calc(8 / 16 * 1rem);
+    content: "";
     background: #333;
     border-radius: 50%;
   }
@@ -150,15 +149,15 @@ body:has(.notfound) {
 
   button {
     all: unset;
-    outline: revert;
+    margin-right: -2px;
     color: #e02c25;
     text-decoration: underline;
+    outline: revert;
+    border: 2px solid transparent;
+    border-radius: 4px;
     transition:
       color 0.3s ease-out,
       border-color 0.1s ease-out;
-    border-radius: 4px;
-    border: 2px solid transparent;
-    margin-right: -2px;
   }
 
   button:hover {

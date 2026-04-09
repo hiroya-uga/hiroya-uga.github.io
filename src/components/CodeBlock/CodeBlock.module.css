@@ -1,7 +1,7 @@
 .root {
   code {
-    padding: 1rem;
     display: block;
+    padding: 1rem;
     overflow: auto;
   }
 

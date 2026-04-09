@@ -293,8 +293,8 @@
   /* href=#hogehoge の行き先 */
   .target[id]:not([id^=":"]) {
     display: block;
-    margin-top: -30px;
     padding-top: 30px;
+    margin-top: -30px;
   }
 
   .animate-fade-up {
@@ -322,46 +322,46 @@
 
 @utility scroll-hint-x {
   background: transparent;
+  background-color: var(--background-color-secondary);
   background-image:
     linear-gradient(to right, rgb(255 255 255 / 0), var(--background-color-secondary) 70%),
     linear-gradient(to left, rgb(255 255 255 / 0), var(--background-color-secondary) 30%),
     radial-gradient(farthest-side at 100% 40%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
     radial-gradient(farthest-side at 0 40%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
   background-position:
     100% 0,
     0 0,
     100% 0,
     0 0;
-  background-repeat: no-repeat;
-  background-color: var(--background-color-secondary);
   background-size:
     40px 100%,
     40px 100%,
     14px 120%,
     14px 120%;
-  background-attachment: local, local, scroll, scroll;
 }
 
 @utility scroll-hint-y {
   background: transparent;
+  background-color: var(--background-color-secondary);
   background-image:
     linear-gradient(to top, rgb(255 255 255 / 0), var(--background-color-secondary) 30%),
     linear-gradient(to top, var(--background-color-secondary), rgb(255 255 255 / 0) 70%),
     radial-gradient(farthest-side at 50% 0, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
     radial-gradient(farthest-side at 50% 100%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
   background-position:
     0 0,
     0 100%,
     0 0,
     0 100%;
-  background-repeat: no-repeat;
-  background-color: var(--background-color-secondary);
   background-size:
     100% 60px,
     100% 60px,
     100% 14px,
     100% 14px;
-  background-attachment: local, local, scroll, scroll;
 }
 
 @utility vertical-rl {
@@ -388,14 +388,14 @@
   }
 
   ::selection {
-    background-color: #316ac5;
     color: #fff;
+    background-color: #316ac5;
     fill: #fff;
   }
 
   ::-moz-selection {
-    background-color: #316ac5;
     color: #fff;
+    background-color: #316ac5;
     fill: #fff;
   }
 
@@ -428,18 +428,18 @@
   html[data-cookie-consent] body::before {
     position: absolute;
     top: 0;
-    z-index: 10000;
     left: 0;
+    z-index: 10000;
     width: 100%;
     height: 100%;
-    mix-blend-mode: color-dodge;
     pointer-events: none;
-    filter: blur(20px);
-    opacity: 1;
-    background: radial-gradient(circle at 0% 0%, rgb(134 131 255 / 90%), rgb(255 255 255) 60%);
-    background-size: 100vw 100vh;
+    background: radial-gradient(circle at 0% 0%, rgb(134 131 255 / 0.9), rgb(255 255 255) 60%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: 100vw 100vh;
+    mix-blend-mode: color-dodge;
+    opacity: 1;
+    filter: blur(20px);
   }
   html[data-theme="dark"][data-cookie-consent] body::before {
     background-image: radial-gradient(circle at 0% 0%, rgb(200 123 20), rgb(0 0 0) 100%);
@@ -454,10 +454,10 @@
   }
 
   body {
-    line-height: var(--leading-base);
-    color: var(--v-color-text-primary);
     font-family:
       "LINE Seed JP", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    line-height: var(--leading-base);
+    color: var(--v-color-text-primary);
     text-spacing-trim: trim-start;
     text-autospace: normal;
   }
@@ -467,16 +467,16 @@
   }
 
   mark {
-    background-color: mark;
     color: marktext;
+    background-color: mark;
   }
 
   a {
     color: var(--v-color-text-link);
-    --v-fill: var(--v-color-text-link);
+    word-break: break-word;
     text-decoration: underline;
     text-underline-position: from-font;
-    word-break: break-word;
+    --v-fill: var(--v-color-text-link);
   }
 
   a:not([href]) {
@@ -495,8 +495,8 @@
   code,
   kbd {
     font-family: var(--font-mono);
-    overflow-wrap: anywhere;
     word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   th,
@@ -506,8 +506,8 @@
     /** for supporting markdown */
     > p > code,
     > code {
-      overflow-wrap: break-word;
       word-break: keep-all;
+      overflow-wrap: break-word;
     }
   }
 
@@ -518,9 +518,9 @@
       &::-webkit-color-swatch-wrapper,
       &::-webkit-color-swatch {
         all: unset;
+        display: block;
         width: 100%;
         height: 100%;
-        display: block;
       }
     }
   }
@@ -528,14 +528,14 @@
   button,
   [type="button"],
   summary {
-    cursor: default;
     touch-action: manipulation;
+    cursor: default;
   }
 
   summary {
+    position: relative;
     display: block;
     list-style: none;
-    position: relative;
   }
 
   summary::-webkit-details-marker {
@@ -545,14 +545,14 @@
   summary::after {
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 1.5rem;
+    bottom: 0;
+    display: block;
+    width: 1rem;
+    height: calc(1rem / 2 * tan(60deg));
     margin: auto 0;
     content: "";
-    display: block;
     background: #333;
-    height: calc(1rem / 2 * tan(60deg));
-    width: 1rem;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     transition: transform 0.2s ease-out;
   }
@@ -573,13 +573,13 @@
 
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
     margin: 0;
+    -webkit-appearance: none;
   }
 
   dialog {
-    color: inherit;
     z-index: var(--z-index-modeless);
+    color: inherit;
   }
 
   dialog:modal {

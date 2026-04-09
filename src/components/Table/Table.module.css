@@ -1,14 +1,14 @@
 @layer components {
   .root {
-    border-radius: var(--radius-md);
     overflow: auto;
-    border: 1px solid var(--border-color-primary);
     font-size: 0.875rem;
+    border: 1px solid var(--border-color-primary);
+    border-radius: var(--radius-md);
 
     table {
       width: max(582px, 100%);
-      border-collapse: collapse;
       overflow-wrap: break-word;
+      border-collapse: collapse;
     }
 
     th,

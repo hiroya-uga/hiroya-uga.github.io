@@ -18,24 +18,24 @@
   }
 
   blockquote {
-    border-left: 4px solid #777;
     padding: 1em;
-    background-color: #444;
     margin: 0.5em 0;
+    background-color: #444;
+    border-left: 4px solid #777;
   }
 
   code {
+    margin: 0 2px;
     color: orange;
     background-color: #2228;
-    margin: 0 2px;
   }
 
   pre > code {
     display: block;
-    border: 1px solid #888;
-    border-radius: 3px;
     padding: 1em;
     margin: 0.5em 0;
+    border: 1px solid #888;
+    border-radius: 3px;
   }
 
   li {

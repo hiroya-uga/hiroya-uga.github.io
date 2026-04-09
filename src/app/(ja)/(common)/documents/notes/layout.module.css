@@ -1,10 +1,10 @@
 #article :where(h2, h3, h4, h5, h6) {
-  padding-top: 1em;
-  margin-top: 4em;
   position: relative;
+  padding-top: 1em;
   padding-left: calc(0.8rem * 3 - 1rem);
-  transition: margin-left 0.3s ease-out;
+  margin-top: 4em;
   margin-bottom: var(--spacing-paragraph);
+  transition: margin-left 0.3s ease-out;
 }
 
 #article :where(h2, h3, h4, h5, h6):first-child {
@@ -37,7 +37,6 @@
   }
 
   :where(h2, h3) code {
-    color: inherit;
     padding-inline: 0.25rem;
     font-family: monospace;
     color: #345071;
@@ -66,17 +65,17 @@
   }
 
   :where(h2, h3, h4, h5, h6) a.anchor {
-    font-size: 80%;
-    text-align: center;
     position: absolute;
     top: 50%;
     left: -0.75em;
-    overflow: hidden;
     width: 2em;
     height: 2em;
-    transform: translateY(-25%);
     margin-top: 0.125rem;
+    overflow: hidden;
+    font-size: 80%;
+    text-align: center;
     border-radius: 0.5rem;
+    transform: translateY(-25%);
     transition: background-color 0.3s ease-out;
   }
 
@@ -85,8 +84,8 @@
   }
 
   :where(h2, h3, h4, h5, h6) a.anchor::before {
-    content: "#";
     font-weight: normal;
+    content: "#";
   }
 
   :where(h2, h3, h4, h5, h6) a.anchor span {
@@ -102,9 +101,9 @@
 
 #article {
   table {
+    overflow-wrap: break-word;
     /* width: max(582px, 100%); */
     border-collapse: collapse;
-    overflow-wrap: break-word;
   }
 
   th,
@@ -149,8 +148,8 @@
 }
 
 #article p img {
-  height: auto;
   max-width: 100%;
+  height: auto;
   vertical-align: bottom;
 }
 

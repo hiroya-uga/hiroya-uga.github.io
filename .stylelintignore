@@ -1,0 +1,8 @@
+.next/**
+node_modules/**
+out/**
+public/**
+.cache/**
+docs/**
+**/pauljadam-modern-web-a11y-demos/**
+_temp/**
