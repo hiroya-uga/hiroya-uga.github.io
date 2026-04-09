@@ -328,7 +328,8 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       </div>`;
     }
 
-    const [lang, title] = (t.lang || 'plain:サンプルコード').split(':');
+    const [lang, ...rest] = (t.lang || 'plain:サンプルコード').split(':');
+    const title = rest.join('');
     const escaped = (() => {
       const sanitized = t.text.replace(
         /[&<>"']/g,
