@@ -253,8 +253,8 @@ html:has(.container) {
     background-color: var(--background-color-secondary);
   }
 
-  > p,
-  > section > p {
+  > p:not(:has(code)),
+  > section > p:not(:has(code)) {
     text-align: justify;
   }
 
