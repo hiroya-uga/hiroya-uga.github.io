@@ -3,7 +3,7 @@
   margin-top: 4em;
   position: relative;
   padding-left: calc(0.8rem * 3 - 1rem);
-  transition: 300ms margin-left ease-out;
+  transition: margin-left 0.3s ease-out;
   margin-bottom: var(--spacing-paragraph);
 }
 
@@ -77,7 +77,7 @@
     transform: translateY(-25%);
     margin-top: 0.125rem;
     border-radius: 0.5rem;
-    transition: 300ms background-color ease-out;
+    transition: background-color 0.3s ease-out;
   }
 
   :where(h2, h3, h4, h5, h6) a.anchor:where(:focus, :hover) {

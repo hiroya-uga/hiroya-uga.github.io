@@ -9,8 +9,8 @@
 
 .root {
   transition:
-    0.3s height ease-out,
-    0.3s visibility ease-out;
+    height 0.3s ease-out,
+    visibility 0.3s ease-out;
   interpolate-size: allow-keywords;
   overflow: clip;
 
