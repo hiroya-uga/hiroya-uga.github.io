@@ -72,7 +72,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
 
       {shouldRenderGallery && (
         <div className="flex flex-col-reverse">
-          <div className="pt-80PX z-1 pointer-events-none sticky bottom-0 bg-[linear-gradient(to_top,var(--background-color-primary),rgba(255,255,255,0))] pb-4 text-center">
+          <div className="pt-80PX z-1 pointer-events-none sticky bottom-0 bg-[linear-gradient(to_top,var(--background-color-primary),rgb(255_255_255/0))] pb-4 text-center">
             <p className="max-w-content mx-auto">
               <button
                 type="button"

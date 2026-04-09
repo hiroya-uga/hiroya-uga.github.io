@@ -11,7 +11,7 @@ const injectModalStyles = () => {
   element.id = styleId;
   element.textContent = `
       dialog.customされたimg要素ˆ-ˆのモーダル {
-        --v-backdrop: rgba(0, 0, 0, 0.8);
+        --v-backdrop: rgb(0 0 0 / 0.8);
 
         font-size: 0.875rem;
         padding: 1lh 0;
@@ -35,10 +35,10 @@ const injectModalStyles = () => {
         &::backdrop {
           background: var(--v-backdrop);
           backdrop-filter: blur(4px);
-          transition: 0.3s background ease-out, 0.3s backdrop-filter ease-out;
+          transition: background 0.3s ease-out, backdrop-filter 0.3s ease-out;
 
           @starting-style {
-            background: rgba(0, 0, 0, 0);
+            background: rgb(0 0 0 / 0);
             backdrop-filter: blur(0);
           }
         }
@@ -46,7 +46,7 @@ const injectModalStyles = () => {
 
       .customされたimg要素ˆ-ˆのモーダル__caption {
         color: #fff;
-        transition: 0.3s opacity ease-out;
+        transition: opacity 0.3s ease-out;
         cursor: auto;
         container-type: inline-size;
         mix-blend-mode: exclusion;
@@ -68,11 +68,11 @@ const injectModalStyles = () => {
         place-items: center;
         border-radius: 50%;
         cursor: default;
-        transition: 0.3s background-color ease-out;
+        transition: background-color 0.3s ease-out;
 
         @media (hover: hover) {
           &:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgb(255 255 255 / 0.2);
           }
         }
       }
@@ -93,7 +93,7 @@ const injectModalStyles = () => {
       }
 
       [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
-        --v-backdrop: rgba(0, 0, 0, 0.6);
+        --v-backdrop: rgb(0 0 0 / 0.6);
       }
     `;
   document.head.appendChild(element);
@@ -323,7 +323,7 @@ export const CustomImage = () => {
             max-width: 100%;
             height: auto;
             margin: 0 auto;
-            transition: 0.3s opacity ease-out;
+            transition: opacity 0.3s ease-out;
 
             @starting-style {
               opacity: 0;

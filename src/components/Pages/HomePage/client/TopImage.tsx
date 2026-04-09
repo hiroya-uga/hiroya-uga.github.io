@@ -124,7 +124,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
       >
         <p
           className={clsx([
-            '@w640:pl-3.5 @w640:pr-3 @w640:pt-2.5 @w640:min-h-20 @w640:bg-transparent @w640:bg-[linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.2),transparent)]',
+            '@w640:pl-3.5 @w640:pr-3 @w640:pt-2.5 @w640:min-h-20 @w640:bg-transparent @w640:bg-[linear-gradient(rgb(0_0_0/0.45),rgb(0_0_0/0.2),transparent)]',
 
             'absolute left-0 top-0 z-10 w-full -translate-y-full px-2 py-1',
 
@@ -229,7 +229,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
 
           <figcaption
             className={clsx([
-              '@w640:py-2 @w640:min-h-20 @w640:pl-3 @w640:pb-2.5 @w640:flex @w640:bg-transparent @w640:items-end @w640:bg-[linear-gradient(to_top,rgba(0,0,0,.45),rgba(0,0,0,.2),transparent)]',
+              '@w640:py-2 @w640:min-h-20 @w640:pl-3 @w640:pb-2.5 @w640:flex @w640:bg-transparent @w640:items-end @w640:bg-[linear-gradient(to_top,rgb(0_0_0/.45),rgb(0_0_0/.2),transparent)]',
 
               'absolute bottom-0 right-0 z-10 min-h-8 w-full translate-y-full bg-[#00000080] px-2 py-1 leading-[1rem] text-white mix-blend-hard-light',
 
@@ -245,7 +245,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 'transition-fade',
                 shouldShowImage
                   ? [
-                      '@w640:text-shadow-[0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6] text-shadow-[0_0_2px_rgba(0,0,0,.9)]',
+                      '@w640:text-shadow-[0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6] text-shadow-[0_0_2px_rgb(0_0_0/.9)]',
                       'visible opacity-100',
                     ]
                   : ['invisible text-transparent opacity-0'],
