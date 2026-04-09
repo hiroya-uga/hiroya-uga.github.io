@@ -61,6 +61,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        // /en/ は存在しないページだが Google がクロールして Search Console でエラーになっていたため追加
+        source: '/en/',
+        destination: '/',
+        permanent: true,
+      },
+      {
         source: '/articles/gunpla/2026/03-04-hg-gat-x-303/',
         destination: '/articles/gunpla/hg/03-04-gat-x-303/',
         permanent: true,
