@@ -1,6 +1,6 @@
 @layer base {
   .root {
-    transition: 0.3s opacity ease-out;
+    transition: opacity 0.3s ease-out;
   }
 
   .root[data-image-status="loading"] {

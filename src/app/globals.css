@@ -208,7 +208,7 @@
 
   --transition-property-fade: opacity, visibility;
   --transition-property-bg: background-color;
-  --default-transition-duration: 300ms;
+  --default-transition-duration: 0.3s;
 
   --container-w1520: 95rem;
   --container-w1280: 80rem;
@@ -554,7 +554,7 @@
     height: calc(1rem / 2 * tan(60deg));
     width: 1rem;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transition: 0.2s transform ease-out;
+    transition: transform 0.2s ease-out;
   }
 
   [open] summary::after {

@@ -111,7 +111,7 @@ html:has(.container) {
   --v-spacing-heading-bottom: 1.5rem;
   --v-negative-margin-inline: calc(50% - 50dvw);
 
-  transition: 0.3s max-width ease-out;
+  transition: max-width 0.3s ease-out;
 
   @container (width >= 600px) {
     --v-negative-margin-inline: 0;
@@ -167,7 +167,7 @@ html:has(.container) {
   @container (width >= 600px) {
     h2,
     h3 {
-      transition: 0.3s margin-inline ease-out;
+      transition: margin-inline 0.3s ease-out;
     }
   }
 
@@ -216,7 +216,7 @@ html:has(.container) {
 
   @container (width >= 600px) {
     p:has(customされたimg要素ˆ-ˆ) {
-      transition: 0.3s margin-inline ease-out;
+      transition: margin-inline 0.3s ease-out;
     }
 
     customされたimg要素ˆ-ˆ,
@@ -224,7 +224,7 @@ html:has(.container) {
     [class~="image-diff-viewer"] {
       border-radius: 0.5rem;
       overflow: hidden;
-      transition: 0.3s border-radius ease-out;
+      transition: border-radius 0.3s ease-out;
 
       @supports (corner-shape: squircle) {
         border-radius: 1.5rem;
@@ -234,8 +234,8 @@ html:has(.container) {
 
     [class~="image-diff-viewer"] {
       transition:
-        0.3s margin-inline ease-out,
-        0.3s border-radius ease-out;
+        margin-inline 0.3s ease-out,
+        border-radius 0.3s ease-out;
     }
   }
 
@@ -479,8 +479,8 @@ html:has(.container) {
     display: block !important;
     border-radius: 0.5rem;
     transition:
-      0.3s opacity ease-out,
-      0.3s visibility ease-out;
+      opacity 0.3s ease-out,
+      visibility 0.3s ease-out;
   }
 
   :where([class~="youtube"] iframe[data-js-api="loading"], [class~="codepen"] iframe[data-loading="true"]) {
