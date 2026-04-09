@@ -40,8 +40,8 @@
 .root::backdrop {
   background-image: repeating-linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.5) 1px,
+    rgb(255 255 255 / 0.5),
+    rgb(255 255 255 / 0.5) 1px,
     transparent 1px,
     transparent 4px
   );

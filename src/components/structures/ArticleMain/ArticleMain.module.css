@@ -201,11 +201,11 @@ html:has(.container) {
   p:has(customされたimg要素ˆ-ˆ) {
     noscript,
     customされたimg要素ˆ-ˆ {
-      /* outline: 1px solid rgba(0, 0, 0, 0.5); */
+      /* outline: 1px solid rgb(0 0 0 / 0.5); */
       overflow: hidden;
       box-shadow:
-        0 0 1px rgba(0, 0, 0, 0.2),
-        0 0 12px rgba(0, 0, 0, 0.1);
+        0 0 1px rgb(0 0 0 / 0.2),
+        0 0 12px rgb(0 0 0 / 0.1);
     }
 
     noscript {
@@ -338,8 +338,8 @@ html:has(.container) {
     position: relative;
     overflow: hidden;
     box-shadow:
-      0 0 1px rgba(0, 0, 0, 0.2),
-      0 0 12px rgba(0, 0, 0, 0.1);
+      0 0 1px rgb(0 0 0 / 0.2),
+      0 0 12px rgb(0 0 0 / 0.1);
 
     [class~="image-diff-viewer__item"] {
       isolation: isolate;
@@ -349,7 +349,7 @@ html:has(.container) {
     [class~="image-diff-viewer__alt"] {
       position: absolute;
       color: #fff;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgb(0 0 0 / 0.7);
       font-size: 0.75rem;
       padding: 0.175rem var(--spacing-content-inline);
       bottom: 0;
@@ -388,7 +388,7 @@ html:has(.container) {
       right: var(--v-value);
       width: 1px;
       height: 100%;
-      background: rgba(128, 128, 128, 0.8);
+      background: rgb(128 128 128 / 0.8);
       opacity: 0.5;
       z-index: 2;
     }
@@ -637,7 +637,7 @@ html:has(.container) {
         position-anchor: --selected-book; /* 🌟どのアンカーを見るか指定 */
         transition: left 0.1s ease-out;
         border-radius: 4px;
-        box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 3px 0px rgb(0 0 0 / 0.2);
       }
     }
 

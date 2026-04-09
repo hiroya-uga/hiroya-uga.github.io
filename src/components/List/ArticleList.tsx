@@ -62,7 +62,7 @@ export const ArticleList = ({ type = 'simple', list }: Props) => {
             <li key={article.pathname} className="grid gap-2">
               <Link
                 href={article.pathname}
-                className="bg-secondary group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:0_0_2px_1px_rgba(0,0,0,0.1)]"
+                className="bg-secondary group grid grid-rows-[auto_1fr] rounded-md pb-2 no-underline [box-shadow:0_0_2px_1px_rgb(0_0_0/0.1)]"
                 aria-labelledby={`${titleId} ${infoId}`}
               >
                 <div className="relative z-0 overflow-hidden">

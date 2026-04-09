@@ -68,7 +68,7 @@
     --v-color-background-success: #cfc;
     --v-color-background-warn: #ffc;
     --v-color-background-error: #fcc;
-    --v-color-background-scroll-hint-shadow: rgba(0, 0, 0, 0.2);
+    --v-color-background-scroll-hint-shadow: rgb(0 0 0 / 0.2);
 
     /* Border */
     --v-color-border-primary: #00000033;
@@ -113,7 +113,7 @@
     --v-color-background-tertiary: #464340;
     --v-color-background-tertiary-hover: #3e3e3e;
     --v-color-background-textfield: #3d3c3a;
-    --v-color-background-scroll-hint-shadow: rgba(237, 197, 108, 0.4);
+    --v-color-background-scroll-hint-shadow: rgb(237 197 108 / 0.4);
 
     /* Border */
     --v-color-border-primary: #ffffff33;
@@ -200,7 +200,7 @@
   --background-color-required: #a32c34;
   --border-color-textfield: var(--v-color-border-secondary);
 
-  --shadow-sticky: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-sticky: 0 2px 4px rgb(0 0 0 / 0.1), 0 1px 3px rgb(0 0 0 / 0.08);
   --font-emoji:
     apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
     segoe ui symbol !important;
@@ -323,10 +323,10 @@
 @utility scroll-hint-x {
   background: transparent;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0), var(--background-color-secondary) 70%),
-    linear-gradient(to left, rgba(255, 255, 255, 0), var(--background-color-secondary) 30%),
-    radial-gradient(farthest-side at 100% 40%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0)),
-    radial-gradient(farthest-side at 0 40%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0));
+    linear-gradient(to right, rgb(255 255 255 / 0), var(--background-color-secondary) 70%),
+    linear-gradient(to left, rgb(255 255 255 / 0), var(--background-color-secondary) 30%),
+    radial-gradient(farthest-side at 100% 40%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
+    radial-gradient(farthest-side at 0 40%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
   background-position:
     100% 0,
     0 0,
@@ -345,10 +345,10 @@
 @utility scroll-hint-y {
   background: transparent;
   background-image:
-    linear-gradient(to top, rgba(255, 255, 255, 0), var(--background-color-secondary) 30%),
-    linear-gradient(to top, var(--background-color-secondary), rgba(255, 255, 255, 0) 70%),
-    radial-gradient(farthest-side at 50% 0, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0)),
-    radial-gradient(farthest-side at 50% 100%, var(--v-color-background-scroll-hint-shadow), rgba(0, 0, 0, 0));
+    linear-gradient(to top, rgb(255 255 255 / 0), var(--background-color-secondary) 30%),
+    linear-gradient(to top, var(--background-color-secondary), rgb(255 255 255 / 0) 70%),
+    radial-gradient(farthest-side at 50% 0, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
+    radial-gradient(farthest-side at 50% 100%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
   background-position:
     0 0,
     0 100%,
