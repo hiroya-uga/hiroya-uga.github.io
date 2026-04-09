@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Switch } from '@/components/Form';
 import { NoteList } from '@/components/List';
@@ -62,91 +62,91 @@ const VIEWPORT = {
 
   vi: [
     'ルート要素のインライン方向の大きさの1%',
-    <Fragment key="vi-note">
+    <>
       ※ 横書きなら<code>vw</code>と同等、縦書きなら<code>vh</code>と同等
-    </Fragment>,
+    </>,
   ],
   svi: [
     'Small viewportのインライン方向の大きさの1%',
-    <Fragment key="svi-note">
+    <>
       ※ 横書きなら<code>svw</code>と同等、縦書きなら<code>svh</code>と同等
-    </Fragment>,
+    </>,
   ],
   lvi: [
     'Large viewportのインライン方向の大きさの1%',
-    <Fragment key="lvi-note">
+    <>
       ※ 横書きなら<code>lvw</code>と同等、縦書きなら<code>lvh</code>と同等
-    </Fragment>,
+    </>,
   ],
   dvi: [
     'Dynamic viewportのインライン方向の大きさの1%',
-    <Fragment key="dvi-note">
+    <>
       ※ 横書きなら<code>dvw</code>と同等、縦書きなら<code>dvh</code>と同等
-    </Fragment>,
+    </>,
   ],
   vb: [
     'ルート要素のブロック方向の大きさの1%',
-    <Fragment key="vb-note">
+    <>
       ※ 横書きなら<code>vh</code>と同等、縦書きなら<code>vw</code>と同等
-    </Fragment>,
+    </>,
   ],
   svb: [
     'Small viewportのブロック方向の大きさの1%',
-    <Fragment key="svb-note">
+    <>
       ※ 横書きなら<code>svh</code>と同等、縦書きなら<code>svw</code>と同等
-    </Fragment>,
+    </>,
   ],
   lvb: [
     'Large viewportのブロック方向の大きさの1%',
-    <Fragment key="lvb-note">
+    <>
       ※ 横書きなら<code>lvh</code>と同等、縦書きなら<code>lvw</code>と同等
-    </Fragment>,
+    </>,
   ],
   dvb: [
     'Dynamic viewportのブロック方向の大きさの1%',
-    <Fragment key="dvb-note">
+    <>
       ※ 横書きなら<code>dvh</code>と同等、縦書きなら<code>dvw</code>と同等
-    </Fragment>,
+    </>,
   ],
   vmin: [
-    <Fragment key="vmin-note">
+    <>
       <code>vw</code>または<code>vh</code>（小さい方の値）
-    </Fragment>,
+    </>,
   ],
   svmin: [
-    <Fragment key="svmin-note">
+    <>
       <code>svw</code>または<code>svh</code>（小さい方の値）
-    </Fragment>,
+    </>,
   ],
   lvmin: [
-    <Fragment key="lvmin-note">
+    <>
       <code>lvw</code>または<code>lvh</code>（小さい方の値）
-    </Fragment>,
+    </>,
   ],
   dvmin: [
-    <Fragment key="dvmin-note">
+    <>
       <code>dvw</code>または<code>dvh</code>（小さい方の値）
-    </Fragment>,
+    </>,
   ],
   vmax: [
-    <Fragment key="vmax-note">
+    <>
       <code>vw</code>または<code>vh</code>（大きい方の値）
-    </Fragment>,
+    </>,
   ],
   svmax: [
-    <Fragment key="svmax-note">
+    <>
       <code>svw</code>または<code>svh</code>（大きい方の値）
-    </Fragment>,
+    </>,
   ],
   lvmax: [
-    <Fragment key="lvmax-note">
+    <>
       <code>lvw</code>または<code>lvh</code>（大きい方の値）
-    </Fragment>,
+    </>,
   ],
   dvmax: [
-    <Fragment key="dvmax-note">
+    <>
       <code>dvw</code>または<code>dvh</code>（大きい方の値）
-    </Fragment>,
+    </>,
   ],
 };
 
@@ -267,12 +267,31 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
       }
     };
 
-    const key = setInterval(callback, 1000);
-
     callback();
 
+    let rafId: ReturnType<typeof requestAnimationFrame>;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(callback);
+    });
+
+    observer.observe(document.documentElement);
+    if (vRef.current) {
+      observer.observe(vRef.current);
+    }
+    if (svRef.current) {
+      observer.observe(svRef.current);
+    }
+    if (lvRef.current) {
+      observer.observe(lvRef.current);
+    }
+    if (dvRef.current) {
+      observer.observe(dvRef.current);
+    }
+
     return () => {
-      clearInterval(key);
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
     };
   }, []);
 
