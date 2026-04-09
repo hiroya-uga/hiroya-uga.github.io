@@ -3,8 +3,8 @@ table.sampleTable {
   border: 1px solid #333;
 }
 table.sampleTable caption {
-  text-align: center;
   font-weight: bold;
+  text-align: center;
 }
 table.sampleTable thead {
   background-color: #e0e0e0;
@@ -14,9 +14,9 @@ table.sampleTable tbody {
 }
 table.sampleTable th,
 table.sampleTable td {
-  border: 1px solid #333;
   padding: 0.5rem;
   text-align: center;
+  border: 1px solid #333;
 }
 table.sampleTable th {
   font-weight: bold;

@@ -8,15 +8,15 @@
 }
 
 .root {
+  overflow: clip;
   transition:
     height 0.3s ease-out,
     visibility 0.3s ease-out;
   interpolate-size: allow-keywords;
-  overflow: clip;
 
   &[aria-hidden="true"] {
-    height: 0;
     visibility: hidden;
+    height: 0;
     transition-delay: 0.3s;
   }
 }

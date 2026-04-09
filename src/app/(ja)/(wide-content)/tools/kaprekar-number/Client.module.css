@@ -35,10 +35,10 @@
 }
 
 .result:has(p:nth-child(102)) {
+  font-size: 0.875rem;
   transition:
     font-size 0.5s ease-out,
     opacity 0.5s ease-out;
-  font-size: 0.875rem;
 }
 
 .result:has(p:nth-child(102)):not(:has([role="alert"])) p {
@@ -86,13 +86,12 @@
   position: relative;
 }
 .inputWrapper::after {
-  content: "";
+  position: absolute;
   bottom: -1px;
   left: 50%;
-  position: absolute;
-  height: 1px;
   width: 100%;
-  transform: translateX(-50%);
+  height: 1px;
+  content: "";
   background-image: linear-gradient(
     to right,
     transparent 0%,
@@ -100,4 +99,5 @@
     #575757 calc(50% + 30rem),
     transparent 100%
   );
+  transform: translateX(-50%);
 }

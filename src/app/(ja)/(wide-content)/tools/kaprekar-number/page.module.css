@@ -7,14 +7,14 @@
 }
 
 .table tbody th {
+  width: min(10rem, 160px);
   font-weight: normal;
   text-align: left;
-  width: min(10rem, 160px);
 }
 
 .table tbody th + td {
-  font-family: var(--font-mono);
   padding-inline: 1rem;
+  font-family: var(--font-mono);
 }
 
 .table tbody td:last-child {
@@ -28,8 +28,8 @@
     display: block;
   }
   .table tbody th {
-    font-weight: bold;
     width: auto;
+    font-weight: bold;
   }
 
   .table tbody tr {

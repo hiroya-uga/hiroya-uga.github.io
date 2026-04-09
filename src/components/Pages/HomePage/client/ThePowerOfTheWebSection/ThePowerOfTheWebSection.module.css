@@ -1,49 +1,49 @@
 @keyframes container-fade-in {
   0% {
-    translate: 0 2.5rem;
-    scale: 1.2;
     opacity: 0;
+    scale: 1.2;
+    translate: 0 2.5rem;
   }
   25% {
-    translate: 0 2.5rem;
-    scale: 1.2;
     opacity: 0;
+    scale: 1.2;
+    translate: 0 2.5rem;
   }
   50% {
-    translate: 0 0;
-    scale: 1;
     opacity: 1;
+    scale: 1;
+    translate: 0 0;
   }
   90% {
-    translate: 0 0;
-    scale: 1;
-    filter: blur(0);
     opacity: 1;
+    filter: blur(0);
+    scale: 1;
+    translate: 0 0;
   }
   100% {
-    scale: 1;
-    filter: blur(3px);
     opacity: 0.5;
+    filter: blur(3px);
+    scale: 1;
   }
 }
 
 @keyframes heading-drift {
   0% {
-    translate: 0 -6rem;
     text-shadow: 0;
     background-size: 100% 1000%;
+    translate: 0 -6rem;
   }
   50% {
-    translate: 0;
     background-size: 100% 1000%;
+    translate: 0;
   }
   75% {
-    translate: 0;
     background-size: 100% 100%;
+    translate: 0;
   }
   100% {
-    translate: 0;
     background-size: 100% 100%;
+    translate: 0;
   }
 }
 
@@ -58,10 +58,10 @@
 
 .root {
   position: relative;
-  isolation: isolate;
-  text-align: center;
-  view-timeline-name: --web-section;
   color: #747474;
+  text-align: center;
+  isolation: isolate;
+  view-timeline-name: --web-section;
 
   [data-theme="dark"] & {
     color: #c2c2c2;
@@ -91,8 +91,8 @@
   .link,
   .link > span {
     text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--v-color-text-link) 50%, transparent);
     text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, var(--v-color-text-link) 50%, transparent);
     text-underline-offset: 0.2em;
     transition: text-decoration-color 0.3s ease-out;
 
@@ -118,12 +118,12 @@
 
   &.ready {
     &::before {
-      content: "";
       position: fixed;
       inset: 0;
-      height: 100dvh;
       z-index: -1;
+      height: 100dvh;
       pointer-events: none;
+      content: "";
       background: linear-gradient(
         to top,
         color-mix(in srgb, var(--background-color-secondary) 80%, #fff),
@@ -143,12 +143,12 @@
 
     .heading {
       font-weight: 800;
+      background-image: linear-gradient(135deg, #005fab, #0ea5e9, #fff);
+      background-clip: text;
       animation: heading-drift linear both;
       animation-timeline: --web-section;
       animation-range: entry exit;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-image: linear-gradient(135deg, #005fab, #0ea5e9, #fff);
 
       [data-theme="dark"] & {
         background-image: linear-gradient(135deg, #edc56c, #edc56c, #fff);

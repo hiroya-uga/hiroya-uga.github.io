@@ -69,14 +69,14 @@
   h4 a.anchor,
   h5 a.anchor,
   h6 a.anchor {
-    font-size: 80%;
-    text-align: center;
     position: absolute;
     top: 0.12em;
     right: 100%;
-    overflow: hidden;
     width: 2em;
     height: 2em;
+    overflow: hidden;
+    font-size: 80%;
+    text-align: center;
     opacity: 0.5;
   }
   h2 a.anchor:focus,
@@ -144,8 +144,8 @@
   }
 
   dfn {
-    font-weight: bold;
     font-style: italic;
+    font-weight: bold;
   }
 
   dt {
@@ -183,8 +183,8 @@
   }
 
   > ul {
-    margin: 20px 0;
     padding-left: 1.5em;
+    margin: 20px 0;
   }
 
   > ul li {
@@ -196,9 +196,9 @@
     margin: 1rem 0 80px;
   }
   #toc ul {
-    font-weight: bold;
-    margin: 5px 0;
     padding-left: 0;
+    margin: 5px 0;
+    font-weight: bold;
     list-style: none;
   }
   #toc > ul > li {
@@ -212,9 +212,9 @@
     margin-top: 0;
   }
   #toc a {
-    text-decoration: none;
-    color: inherit;
     display: inline-flex;
+    color: inherit;
+    text-decoration: none;
   }
   #toc a:focus span:last-child,
   #toc a:hover span:last-child {
@@ -225,14 +225,14 @@
   }
 
   .propdef {
-    overflow: auto;
     margin: 1.2em 0;
+    overflow: auto;
   }
   .propdef table {
-    background: #def;
-    border-spacing: 0;
-    border-left: 8px solid #8ccbf2;
     min-width: 400px;
+    border-spacing: 0;
+    background: #def;
+    border-left: 8px solid #8ccbf2;
 
     page-break-inside: avoid;
   }
@@ -254,45 +254,45 @@
     border-bottom: 1px solid #bbd7e9;
   }
   .propdef table th {
+    width: 156px;
     font-weight: normal;
     text-align: left;
-    width: 156px;
   }
 
   .interface,
   .example,
   .note {
-    margin-top: 1rem;
     padding: 0.5em 1em;
+    margin-top: 1rem;
     border-left: 8px solid;
   }
   .example {
+    counter-increment: example;
     background: #fcfaee;
     border-left-color: #e0cb52;
-    counter-increment: example;
   }
   .example::before {
-    text-transform: uppercase;
-    color: #827017;
     display: block;
     min-width: 7.5em;
+    color: #827017;
+    text-transform: uppercase;
     content: "Example " counter(example);
   }
   .example pre {
     margin: 10px 0;
   }
   .element:not(code) {
-    background: #f4f4fa;
-    margin: 1.2em 0;
     padding: 0.5em 1em;
+    margin: 1.2em 0;
+    background: #f4f4fa;
     border-left: 8px solid #99f;
   }
   .element:not(code) dl {
     margin: 0;
   }
   .element:not(code) dl .interface {
-    background: #def;
     margin-bottom: 10px;
+    background: #def;
     border-left-color: #8ccbf2;
   }
   .element:not(code) dl .interface pre {
@@ -321,12 +321,12 @@
     border-color: #52e052;
   }
   .note::before {
-    font-weight: bold;
-    content: "Note: ";
-    color: #178217;
-    text-transform: uppercase;
     display: block;
     margin-top: 4px;
+    font-weight: bold;
+    color: #178217;
+    text-transform: uppercase;
+    content: "Note: ";
   }
   .note > :first-child {
     margin-top: 8px;
@@ -410,9 +410,9 @@
   }
   .note,
   .example {
-    border-block-width: 1px;
-    border-right-width: 1px;
     background: transparent;
+    border-right-width: 1px;
+    border-block-width: 1px;
   }
 
   :where(.note, .example)::before {
