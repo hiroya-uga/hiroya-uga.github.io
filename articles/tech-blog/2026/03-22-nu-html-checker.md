@@ -8,7 +8,7 @@ proficiencyLevel: 'Beginner'
 
 :::info
 ~~[macOS向けvnuインストーラー](/tools/nu-installer/)を公開しました（2026.03.25）。~~  
-[macOS向けvnu cli](/tools/vnux/)を公開しました（2026.04.03）。
+[macOS向けvnu cli vnux](/tools/vnux/)を公開しました（2026.04.03）。
 :::
 
 最終的なHTMLの品質チェック、していますか？
