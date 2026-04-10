@@ -374,12 +374,12 @@ const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
   renderer(token) {
     const t = token as BlockquoteToken;
 
-    const hasCiteMatches = t.text.match(/\n引用：/);
+    const hasCiteMatches = t.text.match(/\n出典：/);
 
     if (hasCiteMatches) {
-      const [text, cite] = t.text.split(/\n引用：/);
+      const [text, cite] = t.text.split(/\n出典：/);
       const inner = marked.parse(text, { async: false });
-      const caption = marked.parse(`引用：${cite}`, { async: false });
+      const caption = marked.parse(`出典：${cite}`, { async: false });
       return `<figure class="blockquote"><blockquote class="blockquote__content space-y-3">${inner}</blockquote><figcaption class="blockquote__caption">${caption}</figcaption></figure>`;
     }
 

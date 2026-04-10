@@ -15,7 +15,7 @@ Claude Codeくんに話しかけると、思考中にいろんなキーワード
 気になったのでClaudeくんに聞いてみました。
 
 > これは Claude Codeが処理中に表示するスピナーワードのリストです。内部コードネームは「Tengu（天狗）」で、設定キーも tengu_spinner_words という名前になっています。全部で 約90語あります。
-> 引用：Claude Codeとの会話ログ
+> 出典：Claude Codeとの会話ログ
 
 どうやらリポジトリにまとまっていて、随時追加されていくらしい…👀[^1]  
 https://github.com/levindixon/tengu_spinner_words
@@ -36,7 +36,7 @@ https://github.com/levindixon/tengu_spinner_words
 
 > Customize the action verbs shown in the spinner and turn duration messages. Set mode to "replace" to use only your verbs, or "append" to add them to the defaults
 >
-> 引用：[https://code.claude.com/docs/en/settings](https://code.claude.com/docs/en/settings#:~:text=true-,spinnerVerbs,-Customize%20the%20action)
+> 出典：[https://code.claude.com/docs/en/settings](https://code.claude.com/docs/en/settings#:~:text=true-,spinnerVerbs,-Customize%20the%20action)
 
 - `spinnerVerbs`:
   - `mode`: `"replace" | "append"`

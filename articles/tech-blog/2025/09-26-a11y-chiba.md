@@ -56,7 +56,7 @@ topics: [参加レポート, アクセシビリティ]
 
 > その理解は｢君はそう思ってるんだね｣なだけ
 >
-> 引用：平尾 優典『[アクセシビリティは全員で取り組むべきか](https://docs.google.com/presentation/d/18KwuEG9mS3Pq8nWcKsZqSRvPUbJvBEG4uw0UzSC0F2A/edit?usp=sharing)』 P.23 より
+> 出典：平尾 優典『[アクセシビリティは全員で取り組むべきか](https://docs.google.com/presentation/d/18KwuEG9mS3Pq8nWcKsZqSRvPUbJvBEG4uw0UzSC0F2A/edit?usp=sharing)』 P.23 より
 
 どうやら筆者は「理解」と「共感」を混同していたようです。
 

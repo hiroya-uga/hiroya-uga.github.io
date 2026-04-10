@@ -159,8 +159,8 @@ describe('marked-custom', () => {
       expect(html).toContain('引用テキスト');
     });
 
-    test('引用：付きの引用を <figure> にレンダリングする', () => {
-      const html = markedParse(FILE, '> 本文\n> 引用：出典名') as string;
+    test('出典：付きの引用を <figure> にレンダリングする', () => {
+      const html = markedParse(FILE, '> 本文\n> 出典：出典名') as string;
       expect(html).toContain('<figure class="blockquote">');
       expect(html).toContain('<figcaption');
       expect(html).toContain('出典名');

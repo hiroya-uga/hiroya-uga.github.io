@@ -90,7 +90,7 @@ Yarn Classic（v1）では`--frozen-lockfile`でしたが、Yarn v2以降では`
 
 > Postinstall scripts should be avoided at all cost, as they make installs slower and riskier. Many users will refuse to install dependencies that have postinstall scripts. Additionally, since the output isn't shown out of the box, using them to print a message to the user will not work as you expect.
 >
-> 引用：[Lifecycle Scripts | Yarn](https://yarnpkg.com/advanced/lifecycle-scripts)
+> 出典：[Lifecycle Scripts | Yarn](https://yarnpkg.com/advanced/lifecycle-scripts)
 
 上記のようにYarnも`postinstall`スクリプトの使用を強く非推奨としています。
 
