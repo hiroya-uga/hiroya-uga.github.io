@@ -334,7 +334,7 @@ export const MediaContent = () => {
                 key={href}
                 as="li"
                 defaultClickable={defaultClickable}
-                className="hover:bg-secondary @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--v-fill:var(--v-color-text-link)] hover:shadow"
+                className="hover:bg-secondary @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--x-fill:var(--x-color-text-link)] hover:shadow"
               >
                 <p className="col-start-1 col-end-2 content-center">
                   <span className="@w640:bg-card @w640:aspect-4/3 @w640:h-auto @w640:w-full relative grid place-items-center rounded-lg">
@@ -357,7 +357,7 @@ export const MediaContent = () => {
                 </p>
                 <div className="@w640:col-start-3 @w640:col-end-4 @w640:text-base leading-inherit col-start-1 col-end-3 text-sm">
                   <p>
-                    <a href={href} id={defaultClickable} className="break-all visited:[--v-color-text-link:#515a9c]">
+                    <a href={href} id={defaultClickable} className="break-all visited:[--x-color-text-link:#515a9c]">
                       <Title title={title} keyword={keyword} />
                     </a>
                   </p>

@@ -1,8 +1,8 @@
 .root {
-  --v-color-text-primary: inherit;
-  --v-color-background-header: #fff;
+  --x-color-text-primary: inherit;
+  --x-color-background-header: #fff;
 }
 
 [data-theme="dark"]:root .root {
-  --v-color-background-header: #161313;
+  --x-color-background-header: #161313;
 }

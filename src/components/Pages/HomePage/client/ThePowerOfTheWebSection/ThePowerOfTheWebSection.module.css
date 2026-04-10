@@ -92,7 +92,7 @@
   .link > span {
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-decoration-color: color-mix(in srgb, var(--v-color-text-link) 50%, transparent);
+    text-decoration-color: color-mix(in srgb, var(--x-color-text-link) 50%, transparent);
     text-underline-offset: 0.2em;
     transition: text-decoration-color 0.3s ease-out;
 

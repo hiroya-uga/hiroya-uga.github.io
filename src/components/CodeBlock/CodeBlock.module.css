@@ -12,8 +12,8 @@
   }
 
   &:has(:focus-visible) {
-    outline: 2px solid var(--v-color-text-link, #fff);
-    outline-offset: var(--v-outline-offset, 2px);
-    box-shadow: 0 0 0 2px var(--v-color-background-secondary);
+    outline: 2px solid var(--x-color-text-link, #fff);
+    outline-offset: var(--x-outline-offset, 2px);
+    box-shadow: 0 0 0 2px var(--x-color-background-secondary);
   }
 }

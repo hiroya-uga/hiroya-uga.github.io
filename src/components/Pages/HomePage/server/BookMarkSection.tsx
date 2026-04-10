@@ -116,7 +116,7 @@ export const BookMarkSection = () => {
                   <span className="-left-1PX group relative flex shrink-0">
                     <a
                       href={japanese}
-                      className="border-primary bg-(--v-color-background-tertiary) hover:bg-(--v-color-background-tertiary-hover) transition-bg flex grow items-center rounded-r border px-2"
+                      className="border-primary bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover) transition-bg flex grow items-center rounded-r border px-2"
                       aria-label={`日本語訳：${title}`}
                     >
                       日本語訳

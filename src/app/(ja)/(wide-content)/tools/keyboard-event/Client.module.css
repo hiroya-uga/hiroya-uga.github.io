@@ -11,11 +11,11 @@
 }
 
 .root {
-  --v-true: #005f82;
-  --v-false: #7b4f00;
+  --x-true: #005f82;
+  --x-false: #7b4f00;
 }
 
 [data-theme="dark"] .root {
-  --v-true: #b6ebff;
-  --v-false: #ffdfa5;
+  --x-true: #b6ebff;
+  --x-false: #ffdfa5;
 }

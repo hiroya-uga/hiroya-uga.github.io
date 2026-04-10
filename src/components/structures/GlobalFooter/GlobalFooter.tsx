@@ -104,7 +104,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
     <>
       {isTop || (
         <nav className={clsx(['@container mt-[20vh]', styles.breadcrumb])} aria-label={t.breadcrumb}>
-          <div className="max-w-structure px-content-inline @w1024:pl-(--v-spacing-content-inline) bg-(--v-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--v-spacing-content-inline)*2))] mx-auto py-4 text-sm">
+          <div className="max-w-structure px-content-inline @w1024:pl-(--x-spacing-content-inline) bg-(--x-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--x-spacing-content-inline)*2))] mx-auto py-4 text-sm">
             <ol className="flex flex-wrap gap-y-0.5 leading-normal">
               {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
             </ol>
@@ -113,10 +113,10 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
       <footer className={clsx(['@container', styles.footer])}>
-        <div className={clsx([isTop || 'bg-(--v-color-background-footer) text-(--v-color-text-footer)'])}>
+        <div className={clsx([isTop || 'bg-(--x-color-background-footer) text-(--x-color-text-footer)'])}>
           {!isTop && (
             <div className="max-w-structure bg-secondary px-content-inline relative mx-auto">
-              <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--v-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
+              <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--x-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
                 {/* m-0 for bootstrap pages */}
                 <ul
                   className="@w1024:justify-end @w1024:gap-2 m-0 flex flex-wrap items-center justify-center gap-4 dark:invert"
@@ -159,8 +159,8 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                       <Link
                         href={href}
                         className={clsx([
-                          'text-inherit [--v-fill:var(--v-color-text-footer)]',
-                          isTop ? '@w640:[--v-fill:var(--text-color)]' : 'outline-white!',
+                          'text-inherit [--x-fill:var(--x-color-text-footer)]',
+                          isTop ? '@w640:[--x-fill:var(--text-color)]' : 'outline-white!',
                         ])}
                         target={target}
                         rel={target === '_blank' ? 'noopener noreferrer' : undefined}

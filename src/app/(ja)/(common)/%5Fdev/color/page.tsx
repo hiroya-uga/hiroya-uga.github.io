@@ -63,21 +63,21 @@ export default function Page() {
       <Heading level={2}>Color</Heading>
       <div className="@w640:grid-cols-2 @w800:grid-cols-3 grid gap-4 p-4">
         {Object.entries({
-          '--v-color-text-primary': 'ベーステキスト',
-          '--v-color-text-secondary': 'サブテキスト',
-          '--v-color-text-high-contrast': 'ハイコントラストベーステキスト',
-          '--v-color-text-high-contrast-reverse': '逆ハイコントラストベーステキスト',
-          '--v-color-text-error': 'エラーテキスト',
-          '--v-color-text-link': 'リンクテキスト',
-          '--v-color-background-primary': '背景色1',
-          '--v-color-background-secondary': '背景色2',
-          '--v-color-background-tertiary': '背景色3',
-          '--v-color-background-success': '背景色：成功',
-          '--v-color-background-warn': '背景色：警告',
-          '--v-color-background-error': '背景色：エラー',
-          '--v-color-border-primary': 'ボーダー色：プライマリー',
-          '--v-color-border-secondary': 'ボーダー色：セカンダリー',
-          '--v-color-accent': 'アクセント',
+          '--x-color-text-primary': 'ベーステキスト',
+          '--x-color-text-secondary': 'サブテキスト',
+          '--x-color-text-high-contrast': 'ハイコントラストベーステキスト',
+          '--x-color-text-high-contrast-reverse': '逆ハイコントラストベーステキスト',
+          '--x-color-text-error': 'エラーテキスト',
+          '--x-color-text-link': 'リンクテキスト',
+          '--x-color-background-primary': '背景色1',
+          '--x-color-background-secondary': '背景色2',
+          '--x-color-background-tertiary': '背景色3',
+          '--x-color-background-success': '背景色：成功',
+          '--x-color-background-warn': '背景色：警告',
+          '--x-color-background-error': '背景色：エラー',
+          '--x-color-border-primary': 'ボーダー色：プライマリー',
+          '--x-color-border-secondary': 'ボーダー色：セカンダリー',
+          '--x-color-accent': 'アクセント',
         }).map(([color, description]) => (
           <div key={color} className="grid grid-cols-[100px_auto] gap-4">
             <div className="size-100PX block border border-solid" style={{ background: `var(${color})` }}></div>
@@ -137,13 +137,13 @@ export default function Page() {
       <div className="grid grid-cols-4 gap-4">
         {[
           // 既存
-          '--v-color-background-alert',
-          '--v-color-background-card',
-          '--v-color-background-required',
-          '--v-color-background-scroll-hint',
-          '--v-color-background-scroll-hint-shadow',
-          '--v-color-background-textfield',
-          '--v-color-background-table-header',
+          '--x-color-background-alert',
+          '--x-color-background-card',
+          '--x-color-background-required',
+          '--x-color-background-scroll-hint',
+          '--x-color-background-scroll-hint-shadow',
+          '--x-color-background-textfield',
+          '--x-color-background-table-header',
         ].map((color) => (
           <div key={color}>
             <span className="size-100PX block" style={{ background: `var(${color})` }}></span>

@@ -34,10 +34,10 @@
 }
 
 .root {
-  --v-max-width: 90%;
+  --x-max-width: 90%;
 
   @container (width >= 40rem) {
-    --v-max-width: 37.5rem;
+    --x-max-width: 37.5rem;
   }
 
   :target,
@@ -105,26 +105,26 @@ html:has(.container) {
 }
 
 .container {
-  --v-list-gap-y: 0;
-  --v-list-font-size: 0.875rem;
-  --v-spacing-y: 1.5rem;
-  --v-spacing-heading-bottom: 1.5rem;
-  --v-negative-margin-inline: calc(50% - 50dvw);
+  --x-list-gap-y: 0;
+  --x-list-font-size: 0.875rem;
+  --x-spacing-y: 1.5rem;
+  --x-spacing-heading-bottom: 1.5rem;
+  --x-negative-margin-inline: calc(50% - 50dvw);
 
   transition: max-width 0.3s ease-out;
 
   @container (width >= 600px) {
-    --v-negative-margin-inline: 0;
-    --v-spacing-heading-bottom: 2rem;
+    --x-negative-margin-inline: 0;
+    --x-spacing-heading-bottom: 2rem;
   }
 
   @container (min-width: 40rem) {
-    --v-spacing-y: 2.25rem;
+    --x-spacing-y: 2.25rem;
   }
 
   @container (min-width: 50rem) {
-    --v-list-gap-y: 0.25rem;
-    --v-list-font-size: 1rem;
+    --x-list-gap-y: 0.25rem;
+    --x-list-font-size: 1rem;
   }
 
   section:not(:first-child) {
@@ -134,7 +134,7 @@ html:has(.container) {
   h2,
   h3,
   h4 {
-    margin-bottom: var(--v-spacing-heading-bottom);
+    margin-bottom: var(--x-spacing-heading-bottom);
     line-height: 1.375;
     letter-spacing: 0.02em;
 
@@ -145,7 +145,7 @@ html:has(.container) {
 
   h2,
   h3 {
-    margin-inline: calc(var(--v-negative-margin-inline) + var(--spacing-content-inline));
+    margin-inline: calc(var(--x-negative-margin-inline) + var(--spacing-content-inline));
   }
 
   h2 {
@@ -188,14 +188,14 @@ html:has(.container) {
   > :not(:last-child):not(section),
   :where(section > :not(:last-child)) {
     --tw-space-y-reverse: 0;
-    margin-top: calc(var(--v-spacing-y) * var(--tw-space-y-reverse));
-    margin-bottom: calc(var(--v-spacing-y) * calc(1 - var(--tw-space-y-reverse)));
+    margin-top: calc(var(--x-spacing-y) * var(--tw-space-y-reverse));
+    margin-bottom: calc(var(--x-spacing-y) * calc(1 - var(--tw-space-y-reverse)));
   }
 
   p:has(customされたimg要素ˆ-ˆ),
   [class~="image-diff-viewer"] {
     position: relative;
-    margin-inline: var(--v-negative-margin-inline);
+    margin-inline: var(--x-negative-margin-inline);
   }
 
   p:has(customされたimg要素ˆ-ˆ) {
@@ -259,12 +259,12 @@ html:has(.container) {
   }
 
   :is(ul, ol) {
-    font-size: var(--v-list-font-size);
+    font-size: var(--x-list-font-size);
   }
 
   li {
     :is(ul, ol) {
-      margin-top: var(--v-list-gap-y);
+      margin-top: var(--x-list-gap-y);
     }
   }
 
@@ -284,7 +284,7 @@ html:has(.container) {
     }
 
     &:not(:last-child) {
-      margin-bottom: var(--v-list-gap-y);
+      margin-bottom: var(--x-list-gap-y);
     }
   }
 
@@ -312,7 +312,7 @@ html:has(.container) {
     &:not(:last-child) {
       &::before,
       > p {
-        padding-bottom: var(--v-list-gap-y);
+        padding-bottom: var(--x-list-gap-y);
       }
     }
   }
@@ -333,7 +333,7 @@ html:has(.container) {
   }
 
   [class~="image-diff-viewer"] {
-    --v-value: 50%;
+    --x-value: 50%;
 
     position: relative;
     overflow: hidden;
@@ -365,7 +365,7 @@ html:has(.container) {
       top: 0;
       left: 0;
       z-index: 1;
-      clip-path: inset(0 var(--v-value, 50%) 0 0);
+      clip-path: inset(0 var(--x-value, 50%) 0 0);
 
       [class~="image-diff-viewer__alt"] {
         left: 0;
@@ -384,7 +384,7 @@ html:has(.container) {
     &::before {
       position: absolute;
       top: 0;
-      right: var(--v-value);
+      right: var(--x-value);
       z-index: 2;
       width: 1px;
       height: 100%;
@@ -396,7 +396,7 @@ html:has(.container) {
     [class~="image-diff-viewer__thumb"] {
       position: absolute;
       top: 50%;
-      right: var(--v-value);
+      right: var(--x-value);
       z-index: 2;
       display: grid;
       place-items: center;
@@ -430,9 +430,9 @@ html:has(.container) {
 
     &:has([class~="image-diff-viewer__slider"]:focus-visible) {
       [class~="image-diff-viewer__thumb"] {
-        outline: 2px solid var(--v-color-text-link, #fff);
-        outline-offset: var(--v-outline-offset, 2px);
-        box-shadow: 0 0 0 2px var(--v-color-background-secondary);
+        outline: 2px solid var(--x-color-text-link, #fff);
+        outline-offset: var(--x-outline-offset, 2px);
+        box-shadow: 0 0 0 2px var(--x-color-background-secondary);
       }
     }
   }
@@ -664,8 +664,8 @@ html:has(.container) {
       border-radius: 0.25rem;
 
       &:has([class~="codeblock-switcher__radio"]:focus-visible) {
-        outline: 2px solid var(--v-color-text-link, #fff);
-        outline-offset: var(--v-outline-offset, 2px);
+        outline: 2px solid var(--x-color-text-link, #fff);
+        outline-offset: var(--x-outline-offset, 2px);
         box-shadow: 0 0 0 2px #fff;
       }
 
@@ -736,7 +736,7 @@ html:has(.container) {
 
   [class~="custom-block"] {
     padding: 1rem;
-    margin-bottom: var(--v-spacing-y);
+    margin-bottom: var(--x-spacing-y);
     border: 1px solid var(--border-color-primary);
 
     &:first-child {
