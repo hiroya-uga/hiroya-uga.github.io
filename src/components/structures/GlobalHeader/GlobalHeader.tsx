@@ -23,7 +23,7 @@ export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-
       <div
         className={clsx([
           '@w1520:pt-16 px-content-inline my-4 sm:pt-8',
-          layout !== 'article-content' && 'mb-(--v-header-margin-bottom)',
+          layout !== 'article-content' && 'mb-(--x-header-margin-bottom)',
         ])}
       >
         <div className="max-w-structure relative mx-auto">

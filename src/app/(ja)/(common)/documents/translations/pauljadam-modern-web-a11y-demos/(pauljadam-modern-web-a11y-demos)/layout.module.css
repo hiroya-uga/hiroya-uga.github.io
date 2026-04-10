@@ -7,7 +7,7 @@ body:has(#pauljadam-modern-web-a11y-demos-content) {
 }
 body:has(#pauljadam-modern-web-a11y-demos-content) *:not(#pauljadam-modern-web-a11y-demos-content *) {
   all: revert-layer;
-  fill: var(--v-fill, var(--color-primary));
+  fill: var(--x-fill, var(--color-primary));
 }
 
 body:has(#pauljadam-modern-web-a11y-demos-content) #pauljadam-modern-web-a11y-demos-content {

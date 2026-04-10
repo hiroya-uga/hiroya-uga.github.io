@@ -278,7 +278,7 @@ export const ArticleImageDiffViewerActivator = () => {
       }
 
       const currentValue = parseInt(input.value, 10);
-      element.style.setProperty('--v-value', `${100 - currentValue}%`);
+      element.style.setProperty('--x-value', `${100 - currentValue}%`);
     };
     const onKeyDown = (e: KeyboardEvent) => {
       if (isSlider(e.target) === false) {
@@ -542,7 +542,7 @@ export const ArticleCodeHighlightActivator = () => {
       <Toast message={toastMessage} setMessage={setToastMessage} />
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
         <symbol id={svgId} viewBox="0 0 512 512">
-          <style>{`.${svgId} {fill:var(--v-fill, var(--color-primary))}`}</style>
+          <style>{`.${svgId} {fill:var(--x-fill, var(--color-primary))}`}</style>
           <g>
             <rect x="115.774" y="335.487" className={svgId} width="194.387" height="18.588"></rect>
             <rect x="115.774" y="260.208" className={svgId} width="194.387" height="18.527"></rect>

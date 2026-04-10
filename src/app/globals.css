@@ -22,102 +22,102 @@
 
 @layer base {
   :root {
-    --v-spacing-content-inline: min(1rem, 16px);
-    --v-spacing-share-buttons: 6rem;
-    --v-spacing-paragraph: 1rem;
+    --x-spacing-content-inline: min(1rem, 16px);
+    --x-spacing-share-buttons: 6rem;
+    --x-spacing-paragraph: 1rem;
 
     /* TailWindCSS */
     /* Component */
-    --v-header-margin-bottom: 2rem;
+    --x-header-margin-bottom: 2rem;
 
     /* ---------------------------------------------------------------------------------------------
     /* 整頓中
     /* ------------------------------------------------------------------------------------------ */
     /* Common */
-    --v-color-background-alert: #c10000;
-    --v-color-background-card: #e5e8eb;
-    --v-color-background-table: #fff; /* deprecated */
-    --v-color-background-table-header: #00000011;
+    --x-color-background-alert: #c10000;
+    --x-color-background-card: #e5e8eb;
+    --x-color-background-table: #fff; /* deprecated */
+    --x-color-background-table-header: #00000011;
 
-    --v-color-box: #fff;
-    --v-color-border: #e5e8eb;
-    --v-color-table-header: #fff;
+    --x-color-box: #fff;
+    --x-color-border: #e5e8eb;
+    --x-color-table-header: #fff;
 
     /* ---------------------------------------------------------------------------------------------
     /* NEW
     /* ------------------------------------------------------------------------------------------ */
-    --v-color-accent: #f6535d;
-    --v-color-text-primary: #333;
-    --v-color-text-secondary: #585858;
-    --v-color-text-low-contrast: #585858;
-    --v-color-text-low-contrast-reverse: #e3e3e3;
-    --v-color-text-high-contrast: #000;
-    --v-color-text-high-contrast-reverse: #fff;
-    --v-color-text-link: #004d86;
-    --v-color-text-alert: #9c0000;
-    --v-color-text-required: #fffcfc;
-    --v-color-text-textfield: #333;
+    --x-color-accent: #f6535d;
+    --x-color-text-primary: #333;
+    --x-color-text-secondary: #585858;
+    --x-color-text-low-contrast: #585858;
+    --x-color-text-low-contrast-reverse: #e3e3e3;
+    --x-color-text-high-contrast: #000;
+    --x-color-text-high-contrast-reverse: #fff;
+    --x-color-text-link: #004d86;
+    --x-color-text-alert: #9c0000;
+    --x-color-text-required: #fffcfc;
+    --x-color-text-textfield: #333;
 
     /* Background */
-    --v-color-background-primary: #f7f7f7;
-    --v-color-background-secondary: #fff;
-    --v-color-background-secondary-hover: #e5e8eb;
-    --v-color-background-tertiary: #e2e8f0;
-    --v-color-background-tertiary-hover: #cad5e2;
-    --v-color-background-textfield: #fff;
-    --v-color-background-success: #cfc;
-    --v-color-background-warn: #ffc;
-    --v-color-background-error: #fcc;
-    --v-color-background-scroll-hint-shadow: rgb(0 0 0 / 0.2);
+    --x-color-background-primary: #f7f7f7;
+    --x-color-background-secondary: #fff;
+    --x-color-background-secondary-hover: #e5e8eb;
+    --x-color-background-tertiary: #e2e8f0;
+    --x-color-background-tertiary-hover: #cad5e2;
+    --x-color-background-textfield: #fff;
+    --x-color-background-success: #cfc;
+    --x-color-background-warn: #ffc;
+    --x-color-background-error: #fcc;
+    --x-color-background-scroll-hint-shadow: rgb(0 0 0 / 0.2);
 
     /* Border */
-    --v-color-border-primary: #00000033;
-    --v-color-border-secondary: #666;
+    --x-color-border-primary: #00000033;
+    --x-color-border-secondary: #666;
   }
 
   [data-theme="dark"]:root {
     /* ---------------------------------------------------------------------------------------------
     /* 整頓中
     /* ------------------------------------------------------------------------------------------ */
-    --v-color-background-alert: #fc4f4b;
-    --v-color-background-card: #4b4845;
-    --v-color-background-table: #3d3c3a;
-    --v-color-background-table-header: #00000011;
+    --x-color-background-alert: #fc4f4b;
+    --x-color-background-card: #4b4845;
+    --x-color-background-table: #3d3c3a;
+    --x-color-background-table-header: #00000011;
 
-    --v-color-box: #4b4845;
-    --v-color-border: #3b3939;
-    --v-color-table-header: #4b4845;
+    --x-color-box: #4b4845;
+    --x-color-border: #3b3939;
+    --x-color-table-header: #4b4845;
 
     /* ---------------------------------------------------------------------------------------------
     /* NEW
     /* ------------------------------------------------------------------------------------------ */
-    --v-color-accent: #f48287;
-    --v-color-text-primary: #dbdbdb;
-    --v-color-text-secondary: #e3dace;
-    --v-color-text-low-contrast: #e3e3e3;
-    --v-color-text-low-contrast-reverse: #585858;
-    --v-color-text-high-contrast: #fff;
-    --v-color-text-high-contrast-reverse: #000;
-    --v-color-text-link: #edc56c;
-    --v-color-text-alert: #ffadab;
-    --v-color-text-required: #e6e6e6;
-    --v-color-text-textfield: #cfcfcf;
-    --v-color-background-success: #1d521d;
-    --v-color-background-warn: #5b5b00;
-    --v-color-background-error: #6b2d2d;
+    --x-color-accent: #f48287;
+    --x-color-text-primary: #dbdbdb;
+    --x-color-text-secondary: #e3dace;
+    --x-color-text-low-contrast: #e3e3e3;
+    --x-color-text-low-contrast-reverse: #585858;
+    --x-color-text-high-contrast: #fff;
+    --x-color-text-high-contrast-reverse: #000;
+    --x-color-text-link: #edc56c;
+    --x-color-text-alert: #ffadab;
+    --x-color-text-required: #e6e6e6;
+    --x-color-text-textfield: #cfcfcf;
+    --x-color-background-success: #1d521d;
+    --x-color-background-warn: #5b5b00;
+    --x-color-background-error: #6b2d2d;
 
     /* Background */
-    --v-color-background-primary: #272727;
-    --v-color-background-secondary: #333;
-    --v-color-background-secondary-hover: #4b4845;
-    --v-color-background-tertiary: #464340;
-    --v-color-background-tertiary-hover: #3e3e3e;
-    --v-color-background-textfield: #3d3c3a;
-    --v-color-background-scroll-hint-shadow: rgb(237 197 108 / 0.4);
+    --x-color-background-primary: #272727;
+    --x-color-background-secondary: #333;
+    --x-color-background-secondary-hover: #4b4845;
+    --x-color-background-tertiary: #464340;
+    --x-color-background-tertiary-hover: #3e3e3e;
+    --x-color-background-textfield: #3d3c3a;
+    --x-color-background-scroll-hint-shadow: rgb(237 197 108 / 0.4);
 
     /* Border */
-    --v-color-border-primary: #ffffff33;
-    --v-color-border-secondary: #999;
+    --x-color-border-primary: #ffffff33;
+    --x-color-border-secondary: #999;
   }
 
   .no-hidden {
@@ -126,22 +126,22 @@
 
   @media screen and (min-width: 640px) {
     :root {
-      --v-spacing-content-inline: min(1.5rem, 24px);
-      --v-spacing-share-buttons: 8rem;
-      --v-spacing-paragraph: 1.5rem;
-      --v-header-margin-bottom: 4rem;
+      --x-spacing-content-inline: min(1.5rem, 24px);
+      --x-spacing-share-buttons: 8rem;
+      --x-spacing-paragraph: 1.5rem;
+      --x-header-margin-bottom: 4rem;
     }
   }
 
   @media screen and (min-width: 1024px) {
     :root {
-      --v-spacing-content-inline: min(3rem, 48px);
+      --x-spacing-content-inline: min(3rem, 48px);
     }
   }
 
   /* @media screen and (min-width: 1536px) {
     :root {
-      --v-spacing-content-inline: min(1.25rem, 20px);
+      --x-spacing-content-inline: min(1.25rem, 20px);
     }
   } */
 }
@@ -179,26 +179,26 @@
   --max-width-content: 60rem;
   --max-width-structure: 90rem;
 
-  --spacing-share-buttons: var(--v-spacing-share-buttons);
-  --spacing-paragraph: var(--v-spacing-paragraph);
-  --spacing-content-inline: var(--v-spacing-content-inline);
+  --spacing-share-buttons: var(--x-spacing-share-buttons);
+  --spacing-paragraph: var(--x-spacing-paragraph);
+  --spacing-content-inline: var(--x-spacing-content-inline);
 
   --margin-heading-top: 3lh;
 
   --color-mark: #000;
-  --color-accent: var(--v-color-accent);
+  --color-accent: var(--x-color-accent);
   --leading-base: 1.875;
 
-  --background-color-alert: var(--v-color-background-alert);
+  --background-color-alert: var(--x-color-background-alert);
   --background-color-mark: #ff0;
-  --background-color-textfield: var(--v-color-background-textfield);
-  --background-color-tertiary: var(--v-color-background-tertiary);
-  --background-color-tertiary-hover: var(--v-color-background-tertiary-hover);
-  --background-color-card: var(--v-color-background-card);
-  --background-color-table-header: var(--v-color-background-table-header);
-  --background-color-header: var(--v-color-table-header);
+  --background-color-textfield: var(--x-color-background-textfield);
+  --background-color-tertiary: var(--x-color-background-tertiary);
+  --background-color-tertiary-hover: var(--x-color-background-tertiary-hover);
+  --background-color-card: var(--x-color-background-card);
+  --background-color-table-header: var(--x-color-background-table-header);
+  --background-color-header: var(--x-color-table-header);
   --background-color-required: #a32c34;
-  --border-color-textfield: var(--v-color-border-secondary);
+  --border-color-textfield: var(--x-color-border-secondary);
 
   --shadow-sticky: 0 2px 4px rgb(0 0 0 / 0.1), 0 1px 3px rgb(0 0 0 / 0.08);
   --font-emoji:
@@ -225,27 +225,27 @@
   --container-w350: 21.875rem;
 
   /* new */
-  --color-primary: var(--v-color-text-primary);
-  --color-secondary: var(--v-color-text-secondary);
-  --color-low-contrast: var(--v-color-text-low-contrast);
-  --color-low-contrast-reverse: var(--v-color-text-low-contrast-reverse);
-  --color-high-contrast: var(--v-color-text-high-contrast);
-  --color-high-contrast-reverse: var(--v-color-text-high-contrast-reverse);
-  --color-link: var(--v-color-text-link);
-  --color-alert: var(--v-color-text-alert);
-  --color-textfield: var(--v-color-text-textfield);
+  --color-primary: var(--x-color-text-primary);
+  --color-secondary: var(--x-color-text-secondary);
+  --color-low-contrast: var(--x-color-text-low-contrast);
+  --color-low-contrast-reverse: var(--x-color-text-low-contrast-reverse);
+  --color-high-contrast: var(--x-color-text-high-contrast);
+  --color-high-contrast-reverse: var(--x-color-text-high-contrast-reverse);
+  --color-link: var(--x-color-text-link);
+  --color-alert: var(--x-color-text-alert);
+  --color-textfield: var(--x-color-text-textfield);
 
-  --background-color-primary: var(--v-color-background-primary);
-  --background-color-secondary: var(--v-color-background-secondary);
-  --background-color-tertiary: var(--v-color-background-tertiary);
-  --background-color-panel-primary: var(--v-color-background-secondary);
-  --background-color-panel-primary-hover: var(--v-color-background-secondary-hover);
-  --background-color-success: var(--v-color-background-success);
-  --background-color-warn: var(--v-color-background-warn);
-  --background-color-error: var(--v-color-background-error);
+  --background-color-primary: var(--x-color-background-primary);
+  --background-color-secondary: var(--x-color-background-secondary);
+  --background-color-tertiary: var(--x-color-background-tertiary);
+  --background-color-panel-primary: var(--x-color-background-secondary);
+  --background-color-panel-primary-hover: var(--x-color-background-secondary-hover);
+  --background-color-success: var(--x-color-background-success);
+  --background-color-warn: var(--x-color-background-warn);
+  --background-color-error: var(--x-color-background-error);
 
-  --border-color-primary: var(--v-color-border-primary);
-  --border-color-secondary: var(--v-color-border-secondary);
+  --border-color-primary: var(--x-color-border-primary);
+  --border-color-secondary: var(--x-color-border-secondary);
 
   --z-index-toast: 100;
   --z-index-modeless: 99;
@@ -326,8 +326,8 @@
   background-image:
     linear-gradient(to right, rgb(255 255 255 / 0), var(--background-color-secondary) 70%),
     linear-gradient(to left, rgb(255 255 255 / 0), var(--background-color-secondary) 30%),
-    radial-gradient(farthest-side at 100% 40%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
-    radial-gradient(farthest-side at 0 40%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
+    radial-gradient(farthest-side at 100% 40%, var(--x-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
+    radial-gradient(farthest-side at 0 40%, var(--x-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
   background-repeat: no-repeat;
   background-attachment: local, local, scroll, scroll;
   background-position:
@@ -348,8 +348,8 @@
   background-image:
     linear-gradient(to top, rgb(255 255 255 / 0), var(--background-color-secondary) 30%),
     linear-gradient(to top, var(--background-color-secondary), rgb(255 255 255 / 0) 70%),
-    radial-gradient(farthest-side at 50% 0, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
-    radial-gradient(farthest-side at 50% 100%, var(--v-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
+    radial-gradient(farthest-side at 50% 0, var(--x-color-background-scroll-hint-shadow), rgb(0 0 0 / 0)),
+    radial-gradient(farthest-side at 50% 100%, var(--x-color-background-scroll-hint-shadow), rgb(0 0 0 / 0));
   background-repeat: no-repeat;
   background-attachment: local, local, scroll, scroll;
   background-position:
@@ -369,8 +369,8 @@
 }
 
 @utility focus-ring {
-  outline: 2px solid var(--v-color-text-link, #fff);
-  outline-offset: var(--v-outline-offset, 2px);
+  outline: 2px solid var(--x-color-text-link, #fff);
+  outline-offset: var(--x-outline-offset, 2px);
   box-shadow: 0 0 0 2px #fff;
 }
 
@@ -382,9 +382,9 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--v-color-text-link, #fff);
-    outline-offset: var(--v-outline-offset, 2px);
-    box-shadow: 0 0 0 2px var(--v-color-background-secondary);
+    outline: 2px solid var(--x-color-text-link, #fff);
+    outline-offset: var(--x-outline-offset, 2px);
+    box-shadow: 0 0 0 2px var(--x-color-background-secondary);
   }
 
   ::selection {
@@ -457,13 +457,13 @@
     font-family:
       "LINE Seed JP", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     line-height: var(--leading-base);
-    color: var(--v-color-text-primary);
+    color: var(--x-color-text-primary);
     text-spacing-trim: trim-start;
     text-autospace: normal;
   }
 
   hr {
-    border-color: var(--v-color-border-secondary);
+    border-color: var(--x-color-border-secondary);
   }
 
   mark {
@@ -472,11 +472,11 @@
   }
 
   a {
-    color: var(--v-color-text-link);
+    color: var(--x-color-text-link);
     word-break: break-word;
     text-decoration: underline;
     text-underline-position: from-font;
-    --v-fill: var(--v-color-text-link);
+    --x-fill: var(--x-color-text-link);
   }
 
   a:not([href]) {

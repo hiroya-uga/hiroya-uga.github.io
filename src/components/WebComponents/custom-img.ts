@@ -11,7 +11,7 @@ const injectModalStyles = () => {
   element.id = styleId;
   element.textContent = `
       dialog.customされたimg要素ˆ-ˆのモーダル {
-        --v-backdrop: rgb(0 0 0 / 0.8);
+        --x-backdrop: rgb(0 0 0 / 0.8);
 
         font-size: 0.875rem;
         padding: 1lh 0;
@@ -33,7 +33,7 @@ const injectModalStyles = () => {
         }
 
         &::backdrop {
-          background: var(--v-backdrop);
+          background: var(--x-backdrop);
           backdrop-filter: blur(4px);
           transition: background 0.3s ease-out, backdrop-filter 0.3s ease-out;
 
@@ -93,7 +93,7 @@ const injectModalStyles = () => {
       }
 
       [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
-        --v-backdrop: rgb(0 0 0 / 0.6);
+        --x-backdrop: rgb(0 0 0 / 0.6);
       }
     `;
   document.head.appendChild(element);
@@ -337,9 +337,9 @@ export const CustomImage = () => {
           }
 
           :focus-visible svg {
-            outline: 2px solid var(--v-color-text-link, #fff);
-            outline-offset: var(--v-outline-offset, 2px);
-            box-shadow: 0 0 0 2px var(--v-color-background-secondary);
+            outline: 2px solid var(--x-color-text-link, #fff);
+            outline-offset: var(--x-outline-offset, 2px);
+            box-shadow: 0 0 0 2px var(--x-color-background-secondary);
           }
           `,
         );

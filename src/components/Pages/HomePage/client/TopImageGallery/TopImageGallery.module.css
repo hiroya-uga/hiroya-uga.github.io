@@ -22,7 +22,7 @@
 }
 
 .item {
-  view-timeline-name: --v-gallery-item;
+  view-timeline-name: --x-gallery-item;
   view-timeline-axis: block;
 }
 
@@ -30,6 +30,6 @@
   animation-name: object-position;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-timeline: --v-gallery-item;
+  animation-timeline: --x-gallery-item;
   animation-range: entry 0% exit 100%;
 }

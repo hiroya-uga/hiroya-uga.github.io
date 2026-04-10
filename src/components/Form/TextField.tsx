@@ -137,7 +137,7 @@ const TextFieldComponent = (
           id={descriptionId}
           className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-0.5 text-xs leading-relaxed"
         >
-          <p className="mt-2px relative grid size-3.5 place-items-center [--v-fill:var(--v-color-text-secondary)]">
+          <p className="mt-2px relative grid size-3.5 place-items-center [--x-fill:var(--x-color-text-secondary)]">
             <SvgIcon name="description" alt="" />
           </p>
           <div>

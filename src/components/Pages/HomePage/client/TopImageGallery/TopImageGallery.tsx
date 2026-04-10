@@ -210,7 +210,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                       });
                     }}
                   >
-                    <span className="size-16PX group-hover/button:scale-115 relative block transition-[scale] [--v-fill:white]">
+                    <span className="size-16PX group-hover/button:scale-115 relative block transition-[scale] [--x-fill:white]">
                       <SvgIcon name="expand" alt={`${photoData.caption}を拡大表示`} />
                     </span>
                   </button>

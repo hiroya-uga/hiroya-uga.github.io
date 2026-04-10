@@ -1,17 +1,17 @@
 .breadcrumb {
-  --v-color-background-breadcrumb: #ebe6e7;
+  --x-color-background-breadcrumb: #ebe6e7;
 }
 
 .footer {
-  --v-color-text-footer: #fff;
-  --v-color-background-footer: #4d4d4d;
+  --x-color-text-footer: #fff;
+  --x-color-background-footer: #4d4d4d;
 }
 
 [data-theme="dark"]:root .breadcrumb {
-  --v-color-background-breadcrumb: #3d3c3a;
+  --x-color-background-breadcrumb: #3d3c3a;
 }
 
 [data-theme="dark"]:root .footer {
-  --v-color-text-footer: #fff;
-  --v-color-background-footer: #575757;
+  --x-color-text-footer: #fff;
+  --x-color-background-footer: #575757;
 }

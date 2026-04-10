@@ -99,17 +99,17 @@ export const KeyboardEventLog = ({ inputLog }: Props) => {
                 <code>{log.code}</code>
               </td>
               <td>{log.location}</td>
-              <td className={log.ctrlKey ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.ctrlKey ? 'true' : 'false'}</td>
-              <td className={log.shiftKey ? 'text-(--v-true)' : 'text-(--v-false)'}>
+              <td className={log.ctrlKey ? 'text-(--x-true)' : 'text-(--x-false)'}>{log.ctrlKey ? 'true' : 'false'}</td>
+              <td className={log.shiftKey ? 'text-(--x-true)' : 'text-(--x-false)'}>
                 {log.shiftKey ? 'true' : 'false'}
               </td>
-              <td className={log.altKey ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.altKey ? 'true' : 'false'}</td>
-              <td className={log.metaKey ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.metaKey ? 'true' : 'false'}</td>
-              <td className={log.repeat ? 'text-(--v-true)' : 'text-(--v-false)'}>{log.repeat ? 'true' : 'false'}</td>
-              <td className={log.isComposing ? 'text-(--v-true)' : 'text-(--v-false)'}>
+              <td className={log.altKey ? 'text-(--x-true)' : 'text-(--x-false)'}>{log.altKey ? 'true' : 'false'}</td>
+              <td className={log.metaKey ? 'text-(--x-true)' : 'text-(--x-false)'}>{log.metaKey ? 'true' : 'false'}</td>
+              <td className={log.repeat ? 'text-(--x-true)' : 'text-(--x-false)'}>{log.repeat ? 'true' : 'false'}</td>
+              <td className={log.isComposing ? 'text-(--x-true)' : 'text-(--x-false)'}>
                 {log.isComposing ? 'true' : 'false'}
               </td>
-              <td className={log.getModifierState ? 'text-(--v-true)' : 'text-(--v-false)'}>
+              <td className={log.getModifierState ? 'text-(--x-true)' : 'text-(--x-false)'}>
                 {log.getModifierState ? 'true' : 'false'}
               </td>
               <td className="font-mono text-xs leading-none">{log.timestamp}</td>

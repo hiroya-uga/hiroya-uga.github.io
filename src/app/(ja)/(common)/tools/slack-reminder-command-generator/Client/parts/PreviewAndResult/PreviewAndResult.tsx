@@ -134,7 +134,7 @@ export const PreviewAndResult = ({ formState, isEnableMarkdown }: Props) => {
           <p className="@w640:w-89px bg-tertiary @w640:rounded-l-none @w640:rounded-r-lg grid rounded-b-lg text-xs">
             <button
               type="button"
-              className="hover:bg-(--v-color-background-tertiary-hover) bg-(--v-color-background-tertiary) grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors"
+              className="hover:bg-(--x-color-background-tertiary-hover) bg-(--x-color-background-tertiary) grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors"
               onClick={(e) => {
                 const labelElement = e.currentTarget.lastElementChild;
                 const resultElement = e.currentTarget.parentElement?.previousElementSibling;
