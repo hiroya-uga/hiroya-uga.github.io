@@ -101,7 +101,7 @@ select,
 > - `object`
 > - [interactive content](https://html.spec.whatwg.org/multipage/dom.html#interactive-content-2), elements with the `tabindex` attribute specified
 >
-> 引用：[HTML Living Standard](https://html.spec.whatwg.org/multipage/dom.html#select-element-inner-content-elements) — Last Updated 22 July 2025
+> 出典：[HTML Living Standard](https://html.spec.whatwg.org/multipage/dom.html#select-element-inner-content-elements) — Last Updated 22 July 2025
 
 [^3]: [select element inner content elements](https://html.spec.whatwg.org/multipage/dom.html#select-element-inner-content-elements)
 
