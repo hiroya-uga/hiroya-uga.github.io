@@ -185,11 +185,19 @@ html:has(.container) {
 }
 
 .article {
-  > :not(:last-child):not(section),
-  :where(section > :not(:last-child)) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(var(--x-spacing-y) * var(--tw-space-y-reverse));
-    margin-bottom: calc(var(--x-spacing-y) * calc(1 - var(--tw-space-y-reverse)));
+  > :not(:first-child):not(section),
+  :where(section > :not(:first-child)) {
+    margin: var(--x-spacing-y) 0 0;
+  }
+
+  > ul:not(:first-child):not(section),
+  ul:where(section > :not(:first-child)) {
+    margin: calc(var(--x-spacing-y) * 0.85) 0 0;
+  }
+
+  > figure:not(:first-child):not(section) + p,
+  figure:where(section > :not(:first-child)) + p {
+    margin: calc(var(--x-spacing-y) * 1.25) 0 0;
   }
 
   p:has(customされたimg要素ˆ-ˆ),
@@ -274,7 +282,7 @@ html:has(.container) {
 
     &::before {
       position: absolute;
-      top: 0.8125em;
+      top: 0.75em;
       left: 0.5rem;
       width: 0.275rem;
       height: 0.275rem;
