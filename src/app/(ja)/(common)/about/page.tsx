@@ -286,6 +286,19 @@ export default function Page() {
                     <li>
                       📷 <a href="https://www.instagram.com/hiroya.uga">ｲﾝｽﾀｸﾞﾗﾑ</a>
                     </li>
+                    <li>
+                      🌅 <a href="https://www.flickr.com/photos/hiroya-uga">ﾌﾘｯｶｰ</a>
+                    </li>
+                    <li>
+                      ✒️ <a href="https://codepen.io/hiroya_uga">ｺｰﾄﾞﾍﾟﾝ</a>
+                    </li>
+                    <li>
+                      🐙 <a href="https://github.com/hiroya-uga">ｷﾞｯﾄﾊﾌﾞ</a>（
+                      <a href="https://github.com/search?q=+author%3Ahiroya-uga+-user%3Ahiroya-uga+is%3Amerged&type=pullrequests&s=created&o=desc">
+                        OSS活動はこちら
+                      </a>
+                      ）
+                    </li>
                   </ul>
                 ),
               },
