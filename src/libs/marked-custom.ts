@@ -328,13 +328,16 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       </div>`;
     }
 
-    const [lang, ...rest] = (t.lang || 'plain:サンプルコード').split(':');
-    const title = rest.join('');
-    const escaped = (() => {
-      const sanitized = t.text.replace(
+    const sanitize = (string: string) =>
+      string.replace(
         /[&<>"']/g,
         (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
       );
+
+    const [lang, ...rest] = (t.lang || 'plain:サンプルコード').split(':');
+    const title = rest.join('');
+    const escaped = (() => {
+      const sanitized = sanitize(t.text);
 
       if (lang === 'diff') {
         return sanitized.replace(/^(.*)/gm, (_, row) => {
@@ -355,7 +358,7 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
 
     const forSomePlatform = /^[a-zA-Z]+向け：?/.test(title);
     const dataPlatform = forSomePlatform ? ` data-platform="${title.split(/(^[a-zA-Z]+)向け/)[1]}"` : '';
-    const resolvedTitle = forSomePlatform ? title.replace(/^[a-zA-Z]+向け：?/, '') : title;
+    const resolvedTitle = sanitize(forSomePlatform ? title.replace(/^[a-zA-Z]+向け：?/, '') : title);
 
     return `<figure class="codeblock"${dataPlatform}><figcaption class="codeblock__caption"><span class="codeblock__title${resolvedTitle ? '' : ' of-langName'}">${resolvedTitle || `${lang.toUpperCase()}<span class="sr-only">のサンプルコード</span>`}</span></figcaption><pre><code data-language=${lang}>${escaped}</code></pre></figure>`;
   },
