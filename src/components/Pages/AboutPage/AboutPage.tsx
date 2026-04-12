@@ -339,7 +339,7 @@ export const AboutPage = () => {
                             <li key={key}>
                               <div
                                 className={clsx([
-                                  "before:size-5px before:bg-(--color-primary) flex gap-x-2 before:mt-2.5 before:inline-block before:shrink-0 before:rounded-full before:content-['']",
+                                  "before:size-4px before:bg-(--color-primary) flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:content-['']",
                                   'animate-fade-up',
                                 ])}
                               >
@@ -350,11 +350,7 @@ export const AboutPage = () => {
                                 </div>
                               </div>
 
-                              {embed && (
-                                <div className="animate-fade-up @w640:ml-auto @w640:max-w-full @w640:w-2/3 -ml-0.5 mt-3">
-                                  {embed}
-                                </div>
-                              )}
+                              {embed && <div className="animate-fade-up @w640:max-w-full -ml-0.5 mt-4">{embed}</div>}
                             </li>
                           );
                         })}
