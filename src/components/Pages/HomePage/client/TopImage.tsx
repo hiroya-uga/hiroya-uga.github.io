@@ -253,7 +253,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
             >
               <span className={clsx(['@w640:text-sm', 'text-2xs block truncate'])}>
                 {photoData?.caption}
-                <span className="@w640:text-xs text-2xs ml-1 inline-block"> at {photoData?.date}</span>
+                <span className="@w640:text-xs text-2xs ml-1 inline-block">{photoData?.date}</span>
               </span>
               <span className={clsx(['@w640:text-sm', 'text-2xs block truncate'])}>
                 <Spec spec={photoData?.description ?? 'loading...'} />
