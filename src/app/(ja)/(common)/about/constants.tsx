@@ -16,22 +16,24 @@ const Twitter = ({ href }: { href: string }) => {
 export const PERSONAL_HISTORY = [
   {
     data: `2022.04 - ${now}`,
-    description: [
+    descriptions: [
       'Webアプリケーションの開発・運用',
       'Webアクセシビリティの向上・推進',
       {
         key: 'twitter',
-        value: <Twitter href="https://x.com/hiroya_UGA/status/1918139344709407063" />,
+        description:
+          'Software Design 2025年6月号\n第1特集「これからのエンジニアの必須科目 ITアクセシビリティ入門」の第4章を執筆',
+        embed: <Twitter href="https://x.com/hiroya_UGA/status/1918139344709407063" />,
       },
     ],
   },
   {
     data: '2022.02 - 2022.03',
-    description: ['なにもしないをがんばる'],
+    descriptions: ['なにもしないをがんばる'],
   },
   {
     data: '2015.04 - 2022.02',
-    description: [
+    descriptions: [
       'Webサイトの構築・運用',
       '社内向けの技術サポート',
       '部署間交流や勉強会の企画・開催',
@@ -43,20 +45,21 @@ export const PERSONAL_HISTORY = [
       'UiPath / Python を用いたRPA開発',
       {
         key: 'twitter',
-        value: <Twitter href="https://twitter.com/hiroya_UGA/status/1209397613272764416" />,
+        description: '「Form Design Patterns」日本語版 技術レビュアー（謝辞掲載）',
+        embed: <Twitter href="https://twitter.com/hiroya_UGA/status/1209397613272764416" />,
       },
     ],
   },
   {
     data: '2014.04 - 2015.03',
-    description: ['UXに関する研究'],
+    descriptions: ['UXに関する研究'],
   },
   {
     data: '2006',
-    description: ['個人サイトを運営し始める', 'JavaScriptを触り始める'],
+    descriptions: ['個人サイトを運営し始める', 'JavaScriptを触り始める'],
   },
   {
     data: '2003',
-    description: ['HTMLに触り始める'],
+    descriptions: ['HTMLに触り始める'],
   },
-];
+] as const;

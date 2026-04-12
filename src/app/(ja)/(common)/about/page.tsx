@@ -10,6 +10,7 @@ import { JsonLd } from '@/components/Meta';
 import { Doumei } from '@/components/specific/Doumei';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
+import { convertBreakLineToElement } from '@/utils/break-line';
 import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -330,14 +331,14 @@ export default function Page() {
               </tr>
             </thead>
             <tbody className="@w640:grid @w640:grid-cols-[auto_1fr]">
-              {PERSONAL_HISTORY.map(({ data, description }) => {
+              {PERSONAL_HISTORY.map(({ data, descriptions }) => {
                 return (
                   <tr key={data} className="@w640:grid @w640:grid-cols-subgrid @w640:col-span-2 group">
                     <th
                       scope="row"
                       className={clsx([
                         'text-secondary bg-primary @w640:font-normal @w640:pb-8 @w640:group-last:pb-0 @w640:text-sm @w640:pt-0.5 @w640:static pb-2 pt-4 text-left align-top font-bold',
-                        'after:h-1px after:border-secondary @w640:after:hidden sticky top-0 after:absolute after:bottom-2 after:left-0 after:top-4 after:my-auto after:w-full after:border-t',
+                        'after:h-1px after:border-secondary @w640:after:hidden sticky top-0 z-10 after:absolute after:bottom-2 after:left-0 after:top-4 after:my-auto after:w-full after:border-t',
                         '@w640:col-start-1',
                       ])}
                     >
@@ -345,27 +346,31 @@ export default function Page() {
                     </th>
                     <td className="@w640:pt-7 @w640:col-start-2 pb-8 pt-0.5 align-top group-last:pb-0">
                       <ul className="@w640:pl-2.5 space-y-1 pl-1.5">
-                        {description.map((item) => {
+                        {descriptions.map((item) => {
                           const key = typeof item === 'string' ? item : item.key;
-                          const value = typeof item === 'string' ? item : item.value;
+                          const description = typeof item === 'string' ? item : item.description;
+                          const embed = typeof item === 'string' ? null : item.embed;
 
                           return (
-                            <li
-                              key={key}
-                              className={clsx([
-                                typeof item === 'string'
-                                  ? "before:size-5px before:bg-(--color-primary) flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:content-['']"
-                                  : 'not-first:mt-3 -ml-0.5',
-                                'animate-fade-up',
-                              ])}
-                            >
+                            <li key={key}>
                               <div
-                                className={clsx(
-                                  typeof item === 'string' ? 'grow' : '@w640:ml-auto @w640:max-w-full @w640:w-2/3',
-                                )}
+                                className={clsx([
+                                  "before:size-5px before:bg-(--color-primary) flex gap-x-2 before:mt-2.5 before:inline-block before:shrink-0 before:rounded-full before:content-['']",
+                                  'animate-fade-up',
+                                ])}
                               >
-                                {value}
+                                <div className="grow">
+                                  {convertBreakLineToElement(description, {
+                                    className: 'block',
+                                  })}
+                                </div>
                               </div>
+
+                              {embed && (
+                                <div className="animate-fade-up @w640:ml-auto @w640:max-w-full @w640:w-2/3 -ml-0.5 mt-3">
+                                  {embed}
+                                </div>
+                              )}
                             </li>
                           );
                         })}
