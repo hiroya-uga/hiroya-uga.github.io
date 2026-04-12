@@ -9,8 +9,12 @@ export const PowerOfTheWebSection = () => {
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
 
   useEffect(() => {
-    const today = new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
-    const isViewed = getLocalStorage('power-section-viewed-date') === today;
+    const currentMonth = new Date().toLocaleDateString('ja-JP', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric',
+      month: '2-digit',
+    });
+    const isViewed = getLocalStorage('power-section-viewed-date') === currentMonth;
 
     queueMicrotask(() => {
       if (isViewed) {
@@ -19,7 +23,7 @@ export const PowerOfTheWebSection = () => {
       }
 
       setStatus('ready');
-      setLocalStorage('power-section-viewed-date', today);
+      setLocalStorage('power-section-viewed-date', currentMonth);
     });
   }, []);
 
