@@ -165,6 +165,17 @@ describe('marked-custom', () => {
       expect(html).toContain('<figcaption');
       expect(html).toContain('出典名');
     });
+
+    test('出典リンクに \' - \' が1つある場合、以降を <span class="inline-block"> でラップする', () => {
+      const html = markedParse(FILE, '> 本文\n> 出典：[セクション名 - ページ名](https://example.com)') as string;
+      expect(html).toContain('<span class="inline-block">- ページ名</span>');
+    });
+
+    test('出典リンクに \' - \' が複数ある場合、それぞれ <span class="inline-block"> でラップする', () => {
+      const html = markedParse(FILE, '> 本文\n> 出典：[A - B - C](https://example.com)') as string;
+      expect(html).toContain(' <span class="inline-block">- B</span>');
+      expect(html).toContain(' <span class="inline-block">- C</span>');
+    });
   });
 
   describe('heading & TOC', () => {
