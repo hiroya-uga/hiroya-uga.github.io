@@ -741,6 +741,10 @@ html:has(.container) {
     margin-top: 2rem;
     font-size: 0.75rem;
     text-align: right;
+
+    a {
+      text-decoration-thickness: 1px;
+    }
   }
 
   [class~="custom-block"] {
