@@ -742,8 +742,14 @@ html:has(.container) {
     font-size: 0.75rem;
     text-align: right;
 
-    a {
+    a,
+    a span {
+      color: var(--x-color-text-link);
+      word-break: break-word;
+      text-decoration: underline;
       text-decoration-thickness: 1px;
+      text-underline-position: from-font;
+      --x-fill: var(--x-color-text-link);
     }
   }
 
