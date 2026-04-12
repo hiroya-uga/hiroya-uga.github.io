@@ -80,10 +80,10 @@ export default function Page() {
               </span>
 
               <span className="@w360:col-start-1 @w360:row-start-1 grow whitespace-nowrap text-center text-xl">
-                <span className="block leading-6 tracking-widest" translate="no">
+                <span className="block leading-6 tracking-[0.2rem]" translate="no">
                   宇賀景哉
                 </span>
-                <span className="block text-xs [letter-spacing:0.1375rem]">Hiroya UGA</span>
+                <span className="palt block text-xs tracking-[0.125rem]">Hiroya UGA</span>
               </span>
             </p>
           </div>
