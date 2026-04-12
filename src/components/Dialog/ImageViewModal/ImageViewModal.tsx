@@ -150,7 +150,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
           <p className="mt-0.5 text-[#b3b3b3]" id={`${id}-description`}>
             {photo.description}
           </p>
-          <p className="mt-1 text-xs text-[#989898]" id={`${id}-date`}>
+          <p className="mt-1 font-mono text-xs text-[#989898]" id={`${id}-date`}>
             {photo.date}
           </p>
         </div>

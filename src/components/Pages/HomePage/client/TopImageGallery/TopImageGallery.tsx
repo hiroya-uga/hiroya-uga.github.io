@@ -167,6 +167,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                             width={30}
                             height={30}
                             className="invert"
+                            loading="lazy"
                           />
                         </a>
                       )}
