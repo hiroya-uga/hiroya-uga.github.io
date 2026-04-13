@@ -802,6 +802,12 @@ html:has(.container) {
     border-collapse: collapse;
   }
 
+  caption {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    border-bottom: 1px solid var(--border-color-primary);
+  }
+
   th,
   td {
     padding: 0.5rem 1rem;

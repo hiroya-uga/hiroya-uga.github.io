@@ -399,6 +399,49 @@ const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
   },
 };
 
+type TableCaptionToken = Token & {
+  type: 'tableCaption';
+  raw: string;
+  caption: string;
+  tableRaw: string;
+};
+
+const tableCaptionExtension: TokenizerAndRendererExtension = {
+  name: 'tableCaption',
+  level: 'block',
+
+  start(src) {
+    const match = /^[^\n]+：\n{1,2}\|/.exec(src);
+    return match?.index;
+  },
+
+  tokenizer(src) {
+    const rule = /^([^\n]+)：\n{1,2}((?:\|[^\n]*(?:\n|$))+)/;
+    const match = rule.exec(src);
+    if (match === null) {
+      return;
+    }
+
+    const [, captionText, tableRaw] = match;
+
+    const token: TableCaptionToken = {
+      type: 'tableCaption',
+      raw: match[0],
+      caption: captionText,
+      tableRaw,
+    };
+
+    return token;
+  },
+
+  renderer(token) {
+    const t = token as TableCaptionToken;
+    const tableHtml = marked.parse(t.tableRaw, { async: false }) as string;
+    const captionHtml = marked.parseInline(t.caption, { async: false }) as string;
+    return tableHtml.replace('<table>', `<table><caption>${captionHtml}</caption>`);
+  },
+};
+
 type TableToken = Token & {
   type: 'table';
   raw: string;
@@ -654,6 +697,7 @@ export const customMarkdownSyntaxes = [
   footnoteDefExtension,
   overrideCodeBlockExtension,
   overrideBlockquoteExtension,
+  tableCaptionExtension,
   overrideTableExtension,
   overrideHeadingExtension,
   overrideListExtension,
