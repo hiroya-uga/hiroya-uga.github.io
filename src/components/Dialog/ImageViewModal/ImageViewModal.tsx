@@ -61,7 +61,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
       aria-label="画像ビューア"
       aria-modal="true"
       closedby="closerequest"
-      className="@container fixed inset-0 m-0 grid h-dvh max-h-none w-dvw max-w-none grid-rows-[auto_1fr_auto] bg-black/85 p-0 text-white backdrop:opacity-0 dark:bg-black/80"
+      className="@container fixed inset-0 m-0 grid h-dvh max-h-none w-dvw max-w-none grid-rows-[auto_1fr_auto] bg-black/85 p-0 text-white backdrop:opacity-0"
       onClick={(e) => {
         // dialog要素が全画面を覆い尽くすのでユーザは backdrop に触れないため onClick イベントハンドラを用意する。
         e.preventDefault();
@@ -73,7 +73,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
       }}
     >
       <div className="px-8PX py-12PX grid grid-cols-[1fr_auto] items-center">
-        <p aria-hidden="true" className="text-sm tabular-nums text-white/70" onClick={(e) => e.stopPropagation()}>
+        <p aria-hidden="true" className="font-mono text-sm text-white/70" onClick={(e) => e.stopPropagation()}>
           {currentIndex + 1} / {total}
         </p>
         <p>
