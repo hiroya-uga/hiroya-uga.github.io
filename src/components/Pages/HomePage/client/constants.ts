@@ -182,7 +182,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-shinjuku-south-gate.webp',
-    caption: 'JR新宿駅 甲州街道改札（新宿・東京）',
+    caption: 'ニュウマン新宿（新宿・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE6Deb7nUx7',
     date: '2020.07.23',
@@ -191,7 +191,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-akihabara.webp',
-    caption: '電柱（秋葉原・東京）',
+    caption: 'JR秋葉原駅 秋葉原電気街口（秋葉原・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CCzs-IZnC7m',
     date: '2020.07.18',
