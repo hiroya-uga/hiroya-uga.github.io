@@ -8,7 +8,7 @@ export type PhotoData = ImageData & {
 export const photoDataList: PhotoData[] = [
   {
     src: '/images/main-motor-bike-at-koenji.webp',
-    caption: '白バイ・高円寺',
+    caption: '白バイ（高円寺・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + FTZ + Nikon Z 6',
     instagram: 'B-60e3QnIK6',
     flickr: 'https://flic.kr/p/2s6Zfg3',
@@ -18,7 +18,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-enoshima.webp',
-    caption: '日の出・江ノ島',
+    caption: '日の出（江ノ島・神奈川）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + FTZ + Nikon Z 6',
     instagram: 'B7SXrIfnXLT',
     flickr: 'https://flic.kr/p/2s6oGqq',
@@ -28,7 +28,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-shinjuku-public-phones.webp',
-    caption: '公衆電話ボックス・新宿',
+    caption: '公衆電話ボックス（新宿・東京）',
     description: 'AF-S Nikkor 50mm f/1.8G + FTZ + Nikon Z 6',
     instagram: 'B9lQyJcH_lY',
     flickr: 'https://flic.kr/p/2s6CaYQ',
@@ -38,7 +38,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-c97-02.webp',
-    caption: '有明客船ターミナル・コミックマーケット97',
+    caption: '有明客船ターミナル（有明・東京）',
     description: 'Tamron 17-35mm F/2.8-4 Di OSD (Model A037) + FTZ + Nikon Z 6',
     instagram: 'B61oavkHFyK',
     flickr: 'https://flic.kr/p/2s5hBax',
@@ -48,7 +48,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-shimokitazawa-bike.webp',
-    caption: '下北沢',
+    caption: '自転車（下北沢・東京）',
     description: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
     instagram: 'B4IBXInHRxr',
     flickr: 'https://flic.kr/p/2s58oZV',
@@ -58,7 +58,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-ryugu.webp',
-    caption: '龍宮窟',
+    caption: '龍宮窟（下田・静岡）',
     description: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
     // instagram: 'B3SIj22nfKi',
     flickr: 'https://flic.kr/p/2s37HYi',
@@ -68,7 +68,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-shinjuku-big-under.webp',
-    caption: '新宿大ガード',
+    caption: '新宿大ガード（新宿・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + Nikon D7200',
     instagram: 'B3SIj22nfKi',
     flickr: 'https://flic.kr/p/2s4VdTf',
@@ -78,7 +78,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-tokyo-tower.webp',
-    caption: '東京タワー',
+    caption: '東京タワー（芝公園・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + Nikon D7200',
     flickr: 'https://flic.kr/p/2s52LVv',
     date: '2019.10.04',
@@ -87,7 +87,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-motohakoneko.webp',
-    caption: '元箱根港',
+    caption: '元箱根港（箱根・神奈川）',
     description: 'Tamron AF 18-200mm F/3.5-6.3 XR Di II LD Aspherical [IF] MACRO (Model A14) + Nikon D7200',
     instagram: 'B3PlCjMHCFl',
     flickr: 'https://flic.kr/p/2s3oHrK',
@@ -97,7 +97,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-c96.webp',
-    caption: 'コミックマーケット96',
+    caption: '東京ビッグサイト（有明・東京）',
     description: 'AF-S Nikkor 50mm f/1.8G + Nikon D7200',
     flickr: 'https://flic.kr/p/2s2VToA',
     date: '2019.08.11',
@@ -105,8 +105,8 @@ export const photoDataList: PhotoData[] = [
     height: 973,
   },
   {
-    src: '/images/main-asakusabashi.webp',
-    caption: '厩橋 隅田川',
+    src: '/images/main-umayabashi.webp',
+    caption: '厩橋（浅草橋・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE5_tEUnEB4',
     flickr: 'https://flic.kr/p/2s2LNzh',
@@ -116,7 +116,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-hyotan-onsen.webp',
-    caption: 'ひょうたん温泉 第2駐車場前',
+    caption: 'ひょうたん温泉（別府・大分）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVLf204D0J0',
     date: '2024.12.14',
@@ -125,7 +125,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-kiryucoco.webp',
-    caption: '東京ドームシティ',
+    caption: '東京ドームシティ（後楽園・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVGzOthD2Py',
     date: '2023.09.03',
@@ -134,7 +134,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-tsutsujigaoka.webp',
-    caption: '京王線 つつじヶ丘駅',
+    caption: 'つつじヶ丘駅（調布・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'DVEL5h3j25D',
     flickr: 'https://flic.kr/p/2s26Y3K',
@@ -144,7 +144,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-keishoan.webp',
-    caption: '円覚寺 桂昌庵',
+    caption: '円覚寺 桂昌庵（鎌倉・神奈川）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'Cm9kBgZPF25',
     flickr: 'https://flic.kr/p/2s1UqWi',
@@ -154,7 +154,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-kamiisonotorii.webp',
-    caption: '神磯の鳥居',
+    caption: '神磯の鳥居（大洗・茨城）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CXIGmx_Bob3',
     flickr: 'https://flic.kr/p/2s1tpC5',
@@ -164,7 +164,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-yamanakako.webp',
-    caption: '山中湖 花の都公園',
+    caption: '花の都公園（山中湖・山梨）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE9XGAEHfS9',
     date: '2020.08.22',
@@ -173,7 +173,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-minokakeiwa.webp',
-    caption: '南伊豆 蓑掛岩',
+    caption: '蓑掛岩（南伊豆・静岡）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE6INpCn9LC',
     date: '2020.08.16',
@@ -182,7 +182,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-shinjuku-south-gate.webp',
-    caption: 'JR新宿駅 甲州街道改札',
+    caption: 'JR新宿駅 甲州街道改札（新宿・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE6Deb7nUx7',
     date: '2020.07.23',
@@ -191,7 +191,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-akihabara.webp',
-    caption: 'JR秋葉原駅',
+    caption: '電柱（秋葉原・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CCzs-IZnC7m',
     date: '2020.07.18',
@@ -200,7 +200,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-ushinshiro.webp',
-    caption: '牛代 みずめ桜',
+    caption: '牛代 みずめ桜（島田・静岡）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + FTZ + Nikon Z 6',
     instagram: 'B-616CxH8FE',
     flickr: 'https://flic.kr/p/2s6NKCt',
@@ -210,7 +210,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-sumida-aquarium.webp',
-    caption: 'すみだ水族館',
+    caption: 'すみだ水族館（押上・東京）',
     description: 'Tamron 17-35mm F/2.8-4 Di OSD (Model A037) + FTZ + Nikon Z 6',
     instagram: 'B65DejRnF0i',
     date: '2020.01.03',
@@ -219,7 +219,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/main-c97.webp',
-    caption: 'コミックマーケット97',
+    caption: '東京ビッグサイト（有明・東京）',
     description: 'iPhone XS Max',
     instagram: 'B6u8koWnH_-',
     date: '2019.12.31',
@@ -228,7 +228,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-venus-fort.webp',
-    caption: 'VenusFort',
+    caption: 'ヴィーナスフォート（お台場・東京）',
     description: 'Tamron 17-35mm F/2.8-4 Di OSD (Model A037) + FTZ + Nikon Z 6',
     instagram: 'B6qVD7Invry',
     date: '2019.12.28',
@@ -237,7 +237,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-nact.webp',
-    caption: '国立新美術館',
+    caption: '国立新美術館（六本木・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + FTZ + Nikon Z 6',
     instagram: 'B6LKGmvHqff',
     date: '2019.12.17',
@@ -246,7 +246,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-link-square.webp',
-    caption: 'リンクスクエア新宿',
+    caption: 'リンクスクエア新宿（代々木・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + FTZ + Nikon Z 6',
     instagram: 'B4d9_CPn9M7',
     date: '2019.11.01',
@@ -255,7 +255,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-fujimibashi.webp',
-    caption: '富士見橋（東京都）',
+    caption: '富士見橋（豊洲・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + Nikon D7200',
     instagram: 'B3n_xUcn86N',
     flickr: 'https://flic.kr/p/2s1sYN9',
