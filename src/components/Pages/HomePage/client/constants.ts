@@ -191,7 +191,7 @@ export const photoDataList: PhotoData[] = [
   },
   {
     src: '/images/main-akihabara.webp',
-    caption: 'JR秋葉原駅 秋葉原電気街口（秋葉原・東京）',
+    caption: 'JR秋葉原駅 電気街口（秋葉原・東京）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CCzs-IZnC7m',
     date: '2020.07.18',
