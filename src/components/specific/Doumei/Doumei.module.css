@@ -1,0 +1,3 @@
+.web1_0:has(script:first-child + script:last-child) {
+  display: none;
+}
