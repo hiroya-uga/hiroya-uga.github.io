@@ -49,6 +49,9 @@ public/articles/**/*.webp
 public/articles/**/*.gif
 public/articles/**/*.avif
 
+# Claude Code
+.claude/settings.local.json
+
 # temporary files
 /.tmp
 
