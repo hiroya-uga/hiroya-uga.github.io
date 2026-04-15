@@ -1,8 +1,16 @@
 import { Picture } from '@/components/Image';
 
+import styles from './Doumei.module.css';
+
 export const Doumei = () => {
   return (
     <ul className="flex flex-wrap items-end gap-x-3 gap-y-4 sm:gap-y-3">
+      <li className={styles.web1_0}>
+        <div id="web1_0">
+          <script type="text/javascript" src="https://gebecy.github.io/web10unite/onionring-variables.js"></script>
+          <script type="text/javascript" src="https://gebecy.github.io/web10unite/onionring-widget.js"></script>
+        </div>
+      </li>
       {[
         {
           href: 'https://sites.google.com/view/happy-busy/',
