@@ -5,8 +5,16 @@ export const Doumei = () => {
     <ul className="flex flex-wrap items-end gap-x-3 gap-y-4 sm:gap-y-3">
       <li>
         <div id="web1_0">
-          <script type="text/javascript" src="https://gebecy.github.io/web10unite/onionring-variables.js"></script>
-          <script type="text/javascript" src="https://gebecy.github.io/web10unite/onionring-widget.js"></script>
+          <script
+            src="https://gebecy.github.io/web10unite/onionring-variables.js"
+            integrity="sha384-b+N6v1mscU5EshUlzgK/N5EGrzoA+V6/HDtVrw7ouwiLxXewiM0wFfMvA3b3mU1K"
+            crossOrigin="anonymous"
+          ></script>
+          <script
+            src="https://gebecy.github.io/web10unite/onionring-widget.js"
+            integrity="sha384-4yuwNPHYXejEWUlSW7ehSnXVF+ILr3/quf5h8z4SWBvPX5OdfnsFAWXo+uLEjiDD"
+            crossOrigin="anonymous"
+          ></script>
         </div>
       </li>
       {[
