@@ -40,7 +40,7 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
       <main className="@container">
         <ArticleMain post={post} />
         <div className="mx-content-inline @container not-empty:mt-[20vh] text-center">
-          <p className="mb-paragraph">
+          <p className="mb-10">
             <TweetLink
               message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
               hashtags={post.meta.topics}

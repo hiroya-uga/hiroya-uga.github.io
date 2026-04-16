@@ -16,8 +16,8 @@ export const ArticleNavigation = ({ article, categoryName, direction }: Props) =
     <Link
       href={article.pathname}
       className={clsx([
-        'hover:bg-secondary ${paddingClass} relative block grow rounded-lg border border-[#00000022] p-3 text-inherit no-underline transition-[box-shadow,background-color] hover:shadow-lg dark:border-[#ffffff44]',
-        isPrevious ? '@w640:pl-10 @w640:pr-6 px-10' : '@w640:pl-6 @w640:pr-10 px-10',
+        'hover:bg-secondary relative block grow rounded-lg border border-[#00000022] p-3 pb-3.5 text-inherit no-underline transition-[box-shadow,background-color] hover:shadow-lg dark:border-[#ffffff44]',
+        isPrevious ? 'pl-10 pr-6' : 'pl-6 pr-10',
       ])}
     >
       <span className={clsx(['absolute inset-y-0 my-auto block size-4', isPrevious ? 'left-3' : 'right-3'])}>

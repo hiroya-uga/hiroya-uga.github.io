@@ -118,7 +118,7 @@ export const ArticleMain = async ({ post }: Props) => {
               {0 < post.footnotes.length && (
                 <>
                   <h2 id="footnotes">脚注</h2>
-                  <ul className="grid grid-cols-[auto_1fr] gap-x-1 text-sm">
+                  <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
                     {post.footnotes.map(async ([id, { html }]) => (
                       <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
                         <span className="whitespace-nowrap font-mono">
