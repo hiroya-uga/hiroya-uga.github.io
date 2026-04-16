@@ -7,7 +7,7 @@ export const Doumei = () => {
         <div id="web1_0">
           <script
             src="https://gebecy.github.io/web10unite/onionring-variables.js"
-            integrity="sha384-b+N6v1mscU5EshUlzgK/N5EGrzoA+V6/HDtVrw7ouwiLxXewiM0wFfMvA3b3mU1K"
+            integrity="sha384-xncK0UxUwYP/sVifbjUeoTOjEd+qERUhoy2pXw2Y+xY2QNwnN6FAbCrx40dKfftp"
             crossOrigin="anonymous"
           ></script>
           <script
