@@ -247,18 +247,30 @@ html:has(.container) {
     }
   }
 
-  a {
-    text-decoration-thickness: 2px;
+  a,
+  a span {
+    color: var(--x-color-text-link);
+    word-break: break-word;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-position: from-font;
+    --x-fill: var(--x-color-text-link);
   }
 
   sup a {
-    text-decoration-thickness: 1px;
     text-underline-position: under;
   }
 
   customされたimg要素ˆ-ˆ {
     margin: 0 auto;
     background-color: var(--background-color-secondary);
+  }
+
+  > p,
+  > section > p {
+    a {
+      text-decoration-thickness: 2px;
+    }
   }
 
   > p:not(:has(code)),
@@ -741,16 +753,6 @@ html:has(.container) {
     margin-top: 2rem;
     font-size: 0.75rem;
     text-align: right;
-
-    a,
-    a span {
-      color: var(--x-color-text-link);
-      word-break: break-word;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-position: from-font;
-      --x-fill: var(--x-color-text-link);
-    }
   }
 
   [class~="custom-block"] {
