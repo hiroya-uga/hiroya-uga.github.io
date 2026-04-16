@@ -812,6 +812,10 @@ html:has(.container) {
   td {
     padding: 0.5rem 1rem;
     text-align: left;
+
+    &[class~="center"] {
+      text-align: center;
+    }
   }
 
   :where(th, td)[class~="is-center"] {
