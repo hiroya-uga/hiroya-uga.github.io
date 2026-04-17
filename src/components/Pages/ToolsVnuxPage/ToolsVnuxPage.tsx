@@ -21,7 +21,7 @@ const i18n = {
   ja: {
     descriptions: [
       'macOS 向け Nu Html Checker (vnu) の CLI ラッパーです。',
-      'Nu Html Checkerの起動・停止、HTMLフラグメントのバリデーションなどの機能を提供します。',
+      'Nu Html Checkerをインストールし、vnuの起動・停止、HTMLフラグメントのバリデーションなどの機能を提供します。',
     ],
     descriptionExtra: 'Javaが未インストールの場合も自動でインストールします（',
     descriptionExtraClose: '）。',
@@ -98,7 +98,7 @@ const i18n = {
   en: {
     descriptions: [
       'A CLI wrapper for Nu Html Checker (vnu).',
-      'Provides Nu Html Checker start/stop, HTML fragment validation, and more.',
+      'Installs Nu Html Checker and provides features such as starting/stopping vnu and validating HTML fragments.',
     ],
     descriptionExtra: "Don't have Java? No problem — it'll be installed automatically (",
     descriptionExtraClose: ').',
