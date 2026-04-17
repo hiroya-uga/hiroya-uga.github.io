@@ -188,13 +188,13 @@ export const ToolsVnuxPage = ({ pageTitle, following, lang }: Props) => {
       </h1>
 
       <div className="@w640:text-center @w640:pl-1.5 @w640:text-sm mb-2">
-        <p>
+        <p className="@w640:space-y-2">
           {t.descriptions.map((description) => (
-            <span key={description} className="inline-block">
+            <span key={description} className="@w640:text-balance inline-block">
               {description}
             </span>
           ))}
-          <span className="@w640:block @w640:mt-2 mb-6">
+          <span className="@w640:block mb-6">
             {t.descriptionExtra}
             <a href="https://adoptium.net/temurin" className="dark:text-[#85b4ff]">
               Temurin
