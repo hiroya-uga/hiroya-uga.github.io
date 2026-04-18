@@ -43,7 +43,7 @@ const ArticleListForTop = async () => {
 
   return (
     <>
-      <h3 className="@w640:mt-0 mb-2 mt-11 font-bold">Latest Articles</h3>
+      <h3 className="@w640:mt-3.5 mb-2 mt-11 font-bold">Latest Articles</h3>
 
       <ul className="@w640:grid @w640:pl-3 @w640:gap-y-2 @w640:gap-x-4 @w640:leading-36px grid-cols-[auto_auto_1fr]">
         {blogs.slice(0, 3).map((article) => {
