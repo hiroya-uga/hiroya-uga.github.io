@@ -181,7 +181,7 @@ export const ToolsVnuxPage = ({ pageTitle, following, lang }: Props) => {
   const t = i18n[lang];
 
   return (
-    <div className="mx-auto max-w-2xl font-['LINE_Seed_JP',sans-serif] text-slate-600 dark:text-[#a5b4cd]">
+    <div className="mx-auto max-w-2xl text-slate-600 dark:text-[#a5b4cd]">
       <h1 className="mb-5 rounded-md bg-[#365d95] p-3 pt-3.5 text-center font-[sans-serif] text-[1.625rem] leading-snug tracking-tight text-[#fdfdfd]">
         {pageTitle} - {following}
         <span className="block text-sm">for macOS</span>
