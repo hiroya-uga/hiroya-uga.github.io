@@ -43,10 +43,10 @@ const ArticleListForTop = async () => {
 
   return (
     <>
-      <h3 className="@w640:mt-3.5 mb-2 mt-11 font-bold">Latest Articles</h3>
+      <h3 className="@w640:mt-0.5 @w640:mb-1 mb-2 mt-11 font-bold">Latest Articles</h3>
 
-      <ul className="@w640:grid @w640:pl-3 @w640:gap-y-2 @w640:gap-x-4 @w640:leading-36px grid-cols-[auto_auto_1fr]">
-        {blogs.slice(0, 3).map((article) => {
+      <ul className="@w640:grid @w640:pl-3 @w640:gap-y-0.5 @w640:gap-x-4 @w640:leading-36px grid-cols-[auto_auto_1fr]">
+        {blogs.slice(0, 5).map((article) => {
           const title = article.title.replaceAll('\n', '');
           return (
             <li
@@ -56,7 +56,12 @@ const ArticleListForTop = async () => {
               <time dateTime={article.publishedAt} className="@w640:col-start-1 @w640:mr-0 mr-3 font-mono text-sm">
                 {intl.format(new Date(article.publishedAt))}
               </time>
-              <span className="@w640:col-start-2 text-center font-mono text-sm">
+              <span
+                className={clsx([
+                  '@w640:col-start-2 @w640:border-0 @w640:p-0',
+                  'text-primary pt-1.25 inline-block content-center border border-solid p-1 text-center font-mono text-sm leading-none',
+                ])}
+              >
                 {resolveCategoryName(article.pathname)}
               </span>
               <span className="@w640:col-start-3 grid w-full justify-start">
