@@ -2,7 +2,7 @@
 
 import { GA_MEASUREMENT_ID } from '@/constants/id';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
-import { useCallback, useEffect, useId, useRef, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import ReactGA from 'react-ga4';
 
 import { RunButton, TextLink } from '@/components/Clickable';
@@ -108,6 +108,9 @@ export function CookieConsentDialog() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const isInEnglish = usePathname().endsWith('/en/');
   const isFromSNSApp = useSearchParams()?.get('utm_medium') === 'social';
+  const shouldShowBanner = useRef(isInEnglish || isFromSNSApp);
+
+  const [isBannerDialogOpen, setIsBannerDialogOpen] = useState(false);
 
   const shouldShowDialog = useSyncExternalStore(
     () => () => () => {},
@@ -125,14 +128,23 @@ export function CookieConsentDialog() {
     }
 
     if (dialogRef.current) {
-      if (dialogRef.current.open === false) {
+      if (shouldShowBanner.current) {
+        const dialog = dialogRef.current;
+        const setTimeoutId = globalThis.window.setTimeout(() => {
+          setIsBannerDialogOpen(true);
+          requestAnimationFrame(() => {
+            dialog.querySelector('h2')?.focus({
+              preventScroll: true,
+            });
+          });
+        }, 10000);
+        return () => {
+          clearTimeout(setTimeoutId);
+        };
+      } else {
         // SNS経由ではない場合
         dialogRef.current.showModal();
         dialogRef.current.scroll(0, 0);
-      } else {
-        dialogRef.current.focus({
-          preventScroll: true,
-        });
       }
     }
   }, [shouldShowDialog]);
@@ -154,21 +166,24 @@ export function CookieConsentDialog() {
     return;
   }
 
-  if (isFromSNSApp || isInEnglish) {
+  if (shouldShowBanner.current) {
     const t = i18n[isInEnglish ? 'en' : 'ja'];
 
     return (
       <dialog
         ref={dialogRef}
+        role="alertdialog"
         aria-labelledby={id}
-        className="not-open:transition-fade not-open:opacity-0 not-open:invisible bg-secondary border-t-primary @container starting:translate-y-full sticky bottom-0 left-0 block w-full border-t p-4 transition-[translate] focus-visible:shadow-none focus-visible:outline-none"
+        aria-describedby={`${id}-description`}
+        aria-modal="false"
+        className="not-open:transition-fade not-open:opacity-0 not-open:invisible bg-secondary border-t-primary @container starting:translate-y-full sticky bottom-0 left-0 w-full border-t p-4 transition-[translate] duration-500 focus-visible:shadow-none focus-visible:outline-none"
         closedby="none"
-        open
+        open={isBannerDialogOpen}
       >
-        <h2 id={id} className="mb-2 font-bold">
+        <h2 id={id} className="mb-2 font-bold" tabIndex={-1}>
           {t.title}
         </h2>
-        <div className="text-xs">
+        <div className="text-xs" id={`${id}-description`}>
           <MajimenaNaiyou lang={isInEnglish ? 'en' : 'ja'} agreeLabel={t.agreeLabel} />
         </div>
         <div className="@w400:mr-0 mx-auto mt-2 grid w-fit grid-cols-2 gap-4">
@@ -189,12 +204,12 @@ export function CookieConsentDialog() {
   return (
     <dialog
       ref={dialogRef}
+      aria-modal="true"
       aria-labelledby={id}
       className={clsx(
         styles.root,
         'starting:opacity-0 text-primary transition-fade inset-0 m-auto cursor-crosshair duration-500',
       )}
-      aria-modal="true"
       closedby="none"
     >
       <div className="@container scroll-hint-y m-auto grid place-items-center overflow-auto rounded-lg px-4 pb-8 pt-6 text-sm shadow-lg">
@@ -204,7 +219,7 @@ export function CookieConsentDialog() {
             id={id}
             className="mb-paragraph pb-paragraph border-b border-dashed border-[#585858]/50 shadow-none outline-none dark:border-[#c2c2c2]/50"
           >
-            <span className="@w640:mx-0 mx-auto block w-fit text-lg text-[#585858] dark:text-[#c2c2c2]">
+            <span className="@w640:mx-0 @w640:text-lg mx-auto block w-fit text-base text-[#585858] dark:text-[#c2c2c2]">
               † YOUR COOKIE PREFERENCES †
             </span>
           </h2>
