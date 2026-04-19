@@ -1,5 +1,5 @@
 ---
-title: "IME変換中のEnterキーで\nフォームが誤送信される問題を\nESLintで検出するプラグインを作った"
+title: "IME操作中のEnterキーで\nフォームが誤送信される問題を\n検出するESLintプラグインを作った話"
 publishedAt: '2026-04-19T20:42:17+09:00'
 topics: [JavaScript, ESLint, IME, アクセシビリティ]
 proficiencyLevel: 'Intermediate'
