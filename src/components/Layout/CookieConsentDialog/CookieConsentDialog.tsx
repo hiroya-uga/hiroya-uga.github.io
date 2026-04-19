@@ -111,6 +111,7 @@ export function CookieConsentDialog() {
   const shouldShowBanner = useRef(isInEnglish || isFromSNSApp);
 
   const [isBannerDialogOpen, setIsBannerDialogOpen] = useState(false);
+  const [isAfterBannerDialogCloseRequest, setIsAfterBannerDialogCloseRequest] = useState(false);
 
   const shouldShowDialog = useSyncExternalStore(
     () => () => () => {},
@@ -151,6 +152,7 @@ export function CookieConsentDialog() {
 
   const closeDialog = useCallback((state: 'accepted' | 'rejected') => {
     setLocalStorage('cookie-consent', state);
+    setIsAfterBannerDialogCloseRequest(true);
 
     if (state === 'accepted') {
       initGA();
@@ -159,10 +161,12 @@ export function CookieConsentDialog() {
     document.documentElement.setAttribute('data-cookie-consent', state);
     dialogRef.current?.close();
     document.body.tabIndex = -1;
-    document.body.focus();
+    document.body.focus({
+      preventScroll: true,
+    });
   }, []);
 
-  if (shouldShowDialog === false) {
+  if (shouldShowDialog === false && isBannerDialogOpen === false) {
     return;
   }
 
@@ -176,7 +180,12 @@ export function CookieConsentDialog() {
         aria-labelledby={id}
         aria-describedby={`${id}-description`}
         aria-modal="false"
-        className="not-open:transition-fade not-open:opacity-0 not-open:invisible bg-secondary border-t-primary @container starting:translate-y-full sticky bottom-0 left-0 w-full border-t p-4 transition-[translate] duration-500 focus-visible:shadow-none focus-visible:outline-none"
+        className={clsx([
+          'bg-secondary border-t-primary @container bottom-0 left-0 block w-full border-t p-4 transition-[translate,opacity,visibility] duration-500',
+          isAfterBannerDialogCloseRequest ||
+            'not-open:translate-y-full not-open:invisible not-open:opacity-0 not-open:pointer-events-none sticky',
+          isAfterBannerDialogCloseRequest && 'pointer-events-none invisible fixed opacity-0',
+        ])}
         closedby="none"
         open={isBannerDialogOpen}
       >
