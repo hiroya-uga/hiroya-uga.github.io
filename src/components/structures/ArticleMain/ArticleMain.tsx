@@ -13,6 +13,18 @@ import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
 import clsx from 'clsx';
 
+const getSpeculationRules = (selector: string) =>
+  JSON.stringify({
+    prerender: [
+      {
+        where: {
+          and: [{ selector_matches: `.${selector} a[href^='/']` }, { not: { selector_matches: '[rel~=nofollow]' } }],
+        },
+        eagerness: 'moderate',
+      },
+    ],
+  });
+
 type Props = {
   post: {
     meta: {
@@ -34,6 +46,8 @@ export const ArticleMain = async ({ post }: Props) => {
 
   return (
     <article className={styles.root}>
+      <script type="speculationrules" dangerouslySetInnerHTML={{ __html: getSpeculationRules(styles.article) }} />
+
       <div className={clsx(styles.hero, '@w640:px-content-inline @w1520:pl-10 @w640:mb-14 @w640:mt-8 mb-8 px-2')}>
         <div
           className={clsx([
@@ -111,26 +125,24 @@ export const ArticleMain = async ({ post }: Props) => {
                     '<blockquote class="twitter-tweet" data-theme="dark">',
                   )
                   // script要素はArticleTwitterActivatorで動的に読み込むため、ここでは削除しておく（hydration mismatch防止）
-                  .replace(/<script\b[^>]*src="https:\/\/platform\.twitter\.com\/widgets\.js"[^>]*><\/script>/g, ''),
+                  .replaceAll(/<script\b[^>]*src="https:\/\/platform\.twitter\.com\/widgets\.js"[^>]*><\/script>/g, ''),
               }}
             />
-            <section role="note" className="empty:hidden" aria-labelledby="footnotes">
-              {0 < post.footnotes.length && (
-                <>
-                  <h2 id="footnotes">脚注</h2>
-                  <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
-                    {post.footnotes.map(async ([id, { html }]) => (
-                      <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
-                        <span className="whitespace-nowrap font-mono">
-                          <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
-                        </span>
-                        <span dangerouslySetInnerHTML={{ __html: await html }} />
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </section>
+            {0 < post.footnotes.length && (
+              <section role="note" className="empty:hidden" aria-labelledby="footnotes">
+                <h2 id="footnotes">脚注</h2>
+                <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
+                  {post.footnotes.map(async ([id, { html }]) => (
+                    <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
+                      <span className="whitespace-nowrap font-mono">
+                        <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
+                      </span>
+                      <span dangerouslySetInnerHTML={{ __html: await html }} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
           </div>
           <ArticleImageDiffViewerActivator />
           <ArticleFootNoteActivator />
