@@ -20,7 +20,7 @@ const getSpeculationRules = (selector: string) =>
         where: {
           and: [{ selector_matches: `.${selector} a[href^='/']` }, { not: { selector_matches: '[rel~=nofollow]' } }],
         },
-        eagerness: 'moderate',
+        eagerness: 'immediate',
       },
     ],
   });
