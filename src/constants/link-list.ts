@@ -60,10 +60,26 @@ export const TRANSLATION_DOCUMENTS_LINK_LIST: EmojiLinkListItem[] = [
   },
 ];
 
-type ToolPage = (EmojiLinkListItem & {
-  type: 'default' | 'playground';
-  userType?: JobRole[];
-})[];
+type ToolPage = (
+  | (EmojiLinkListItem & {
+      type: 'default' | 'playground';
+      userType?: JobRole[];
+    })
+  | (EmojiLinkListItem & {
+      type: 'oss';
+      title: string;
+      userType?: JobRole[];
+    })
+)[];
+
+export const OSS_LINK_LIST = [
+  {
+    emoji: '',
+    title: 'eslint-plugin-ime-safe-form',
+    url: 'https://www.npmjs.com/package/eslint-plugin-ime-safe-form',
+    description: 'IMEセーフなフォーム送信を強制するESLintプラグイン。',
+  },
+] as const;
 
 export const TOOLS_LINK_LIST = [
   // 追加順

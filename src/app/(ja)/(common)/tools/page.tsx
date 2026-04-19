@@ -6,7 +6,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 
 import { SvgIcon } from '@/components/Icons';
 import { JsonLd } from '@/components/Meta';
-import { TOOLS_LINK_LIST } from '@/constants/link-list';
+import { OSS_LINK_LIST, TOOLS_LINK_LIST } from '@/constants/link-list';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { JOB_ROLES_JA } from '@/constants/works';
 import { getMetadata } from '@/utils/get-metadata';
@@ -114,10 +114,22 @@ export default function Page() {
             return {
               key: data.pageTitle,
               title: <Link href={pathname}>{data.pageTitle}</Link>,
-              description: data.description.replace(/\n/g, ''),
+              description: data.description.replaceAll('\n', ''),
             };
           })
           .sort((a, b) => a.key.localeCompare(b.key))}
+      />
+
+      <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">npm packages</h2>
+
+      <SimpleDescriptionList
+        list={OSS_LINK_LIST.map(({ title, description, url }) => {
+          return {
+            key: title,
+            title: <Link href={url}>{title}</Link>,
+            description,
+          };
+        }).sort((a, b) => a.key.localeCompare(b.key))}
       />
     </>
   );
