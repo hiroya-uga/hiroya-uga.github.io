@@ -13,6 +13,7 @@ import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';
 
 import { PERSONAL_HISTORY } from './constants';
+import { HistoryDate } from './server';
 
 const metadata = getMetadata('/about');
 
@@ -347,7 +348,7 @@ export const AboutPage = () => {
                           ])}
                         >
                           <span className="bg-primary @w640:py-0.5 @w640:pr-0 @w640:top-2 relative z-10 block w-fit pr-2">
-                            {data}
+                            <HistoryDate data={data} />
                           </span>
                         </th>
                       )}
@@ -355,11 +356,11 @@ export const AboutPage = () => {
                         <th
                           scope="row"
                           className={clsx([
-                            '@w640:mt-7 @w640:text-sm @w640:font-normal @w640:text-right @w640:pl-0 @w640:pt-3px',
+                            '@w640:mt-4 @w640:p-0 @w640:text-sm @w640:font-normal @w640:text-right @w640:pl-0 @w640:pt-3px',
                             'text-secondary bg-primary animate-fade-up mt-6 pb-2.5 pl-2.5 text-left',
                           ])}
                         >
-                          <time>{date}</time>
+                          <time dateTime={date.replace('.', '-')}>{date}</time>
                         </th>
                       )}
                       <td
@@ -368,10 +369,9 @@ export const AboutPage = () => {
                           '@w640:pl-0',
 
                           'animate-fade-up relative pr-2',
-                          ,
                           isPeriod && '@w640:mt-10',
                           hasDate && [
-                            '@w640:mt-7 @w640:pl-12px @w640:flex @w640:before:border-t @w640:before:w-3 @w640:before:top-15px @w640:before:absolute @w640:relative @w640:before:right-full @w640:before:pointer-events-none @w640:before:translate-x-8px @w640:before:border-t-primary',
+                            '@w640:mt-4 @w640:pl-12px @w640:flex @w640:before:border-t @w640:before:w-3 @w640:before:top-15px @w640:before:absolute @w640:relative @w640:before:right-full @w640:before:pointer-events-none @w640:before:translate-x-8px @w640:before:border-t-primary',
                             'pl-5',
                           ],
 
