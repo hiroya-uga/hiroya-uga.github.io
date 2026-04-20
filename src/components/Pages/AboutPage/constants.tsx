@@ -5,9 +5,14 @@ import { TwitterEmbed } from '@/components/Media';
 type DescriptionItem =
   | string
   | {
-      key?: string;
-      date?: string;
+      date: string;
       description: string;
+      embed?: ReactNode;
+    }
+  | {
+      key: string;
+      date?: string;
+      description: ReactNode;
       embed?: ReactNode;
     };
 
@@ -36,8 +41,22 @@ export const PERSONAL_HISTORY: HistoryEntry[] = [
       'Webアプリケーションの開発・運用',
       'Webアクセシビリティの向上・推進',
       {
+        key: 'a11y-chiba-2026',
+        date: '2026.09',
+        description: (
+          <>
+            <a href="https://a11y-chiba.com/2026/">アクセシビリティカンファレンスCHIBA2026</a> ボランティアスタッフ
+          </>
+        ),
+      },
+      {
+        key: 'a11y-chiba-2025',
         date: '2025.09',
-        description: 'アクセシビリティカンファレンスCHIBA2025 ボランティアスタッフ',
+        description: (
+          <>
+            <a href="https://a11y-chiba.com/2025/">アクセシビリティカンファレンスCHIBA2025</a> ボランティアスタッフ
+          </>
+        ),
       },
       {
         date: '2026.06',
