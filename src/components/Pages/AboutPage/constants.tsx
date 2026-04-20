@@ -1,4 +1,20 @@
+import type { ReactNode } from 'react';
+
 import { TwitterEmbed } from '@/components/Media';
+
+type DescriptionItem =
+  | string
+  | {
+      key?: string;
+      date?: string;
+      description: string;
+      embed?: ReactNode;
+    };
+
+type HistoryEntry = {
+  data: string;
+  descriptions: DescriptionItem[];
+};
 
 const now = (() => {
   const date = new Date();
@@ -13,14 +29,18 @@ const Twitter = ({ href }: { href: string }) => {
   );
 };
 
-export const PERSONAL_HISTORY = [
+export const PERSONAL_HISTORY: HistoryEntry[] = [
   {
     data: `2022.04 - ${now}`,
     descriptions: [
       'Webアプリケーションの開発・運用',
       'Webアクセシビリティの向上・推進',
       {
-        key: 'twitter',
+        date: '2025.09',
+        description: 'アクセシビリティカンファレンスCHIBA2025 ボランティアスタッフ',
+      },
+      {
+        date: '2026.06',
         description:
           'Software Design 2025年6月号\n第1特集「これからのエンジニアの必須科目 ITアクセシビリティ入門」の第4章を執筆',
         embed: <Twitter href="https://x.com/hiroya_UGA/status/1918139344709407063" />,
@@ -44,7 +64,7 @@ export const PERSONAL_HISTORY = [
       'デジタル・トランスフォーメーション事業の立ち上げメンバー',
       'UiPath / Python を用いたRPA開発',
       {
-        key: 'twitter',
+        date: '2019.12',
         description: '「Form Design Patterns」日本語版 技術レビュアー（謝辞掲載）',
         embed: <Twitter href="https://twitter.com/hiroya_UGA/status/1209397613272764416" />,
       },
@@ -62,4 +82,4 @@ export const PERSONAL_HISTORY = [
     data: '2003',
     descriptions: ['HTMLに触り始める'],
   },
-] as const;
+];
