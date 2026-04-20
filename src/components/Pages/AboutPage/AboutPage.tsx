@@ -311,54 +311,89 @@ export const AboutPage = () => {
             <thead className="sr-only">
               <tr>
                 <th scope="col">時期</th>
-                <th scope="col">活動内容</th>
+                <th scope="col" colSpan={2}>
+                  活動内容
+                </th>
               </tr>
             </thead>
-            <tbody className="@w640:grid @w640:grid-cols-[auto_1fr]">
-              {PERSONAL_HISTORY.map(({ data, descriptions }) => {
-                return (
-                  <tr key={data} className="@w640:grid @w640:grid-cols-subgrid @w640:col-span-2 group">
-                    <th
-                      scope="row"
+            <tbody className="@w640:grid @w640:grid-cols-[auto_1fr] @w640:gap-x-2">
+              {PERSONAL_HISTORY.map(({ data, descriptions }) =>
+                descriptions.map((item, index) => {
+                  const key = typeof item === 'string' ? item : item.description;
+                  const description = typeof item === 'string' ? item : item.description;
+                  const date = typeof item === 'string' ? null : (item.date ?? null);
+                  const embed = typeof item === 'string' ? null : (item.embed ?? null);
+
+                  const isPeriod = index === 0;
+                  const hasDate = date !== null;
+
+                  return (
+                    <tr
+                      key={key}
                       className={clsx([
-                        'text-secondary bg-primary @w640:font-normal @w640:pb-8 @w640:group-last:pb-0 @w640:text-sm @w640:pt-0.5 @w640:static pb-2 pt-4 text-left align-top font-bold',
-                        'after:h-1px after:border-secondary @w640:after:hidden sticky top-0 z-10 after:absolute after:bottom-2 after:left-0 after:top-4 after:my-auto after:w-full after:border-t',
-                        '@w640:col-start-1',
+                        '@w640:grid @w640:grid-cols-subgrid @w640:col-span-2 group contents',
+                        isPeriod && 'mt-7',
                       ])}
                     >
-                      <span className="bg-primary @w640:sticky @w640:top-2 relative z-10 block w-fit pr-2">{data}</span>
-                    </th>
-                    <td className="@w640:pt-7 @w640:col-start-2 pb-8 pt-0.5 align-top group-last:pb-0">
-                      <ul className="@w640:pl-2.5 space-y-1 pl-1.5">
-                        {descriptions.map((item) => {
-                          const key = typeof item === 'string' ? item : item.key;
-                          const description = typeof item === 'string' ? item : item.description;
-                          const embed = typeof item === 'string' ? null : item.embed;
+                      {isPeriod && (
+                        <th
+                          rowSpan={descriptions.length}
+                          scope="rowgroup"
+                          className={clsx([
+                            '@w640:mt-0 @w640:font-normal @w640:text-sm @w640:p-0 @w640:static @w640:after:hidden @w640:bg-transparent',
+                            'text-secondary bg-primary sticky top-0 z-10 mt-12 pb-2 pt-4 text-left align-top font-bold',
 
-                          return (
-                            <li key={key}>
-                              <div
-                                className={clsx([
-                                  "before:size-4px before:bg-(--color-primary) flex gap-x-2 before:mt-3 before:inline-block before:shrink-0 before:rounded-full before:content-['']",
-                                  'animate-fade-up',
-                                ])}
-                              >
-                                <div className="grow">
-                                  {convertBreakLineToElement(description, {
-                                    className: 'block',
-                                  })}
-                                </div>
-                              </div>
+                            'after:h-1px after:border-secondary after:absolute after:bottom-2 after:left-0 after:top-4 after:my-auto after:w-full after:border-t',
+                          ])}
+                        >
+                          <span className="bg-primary @w640:py-0.5 @w640:pr-0 @w640:top-2 relative z-10 block w-fit pr-2">
+                            {data}
+                          </span>
+                        </th>
+                      )}
+                      {hasDate && (
+                        <th
+                          scope="row"
+                          className={clsx([
+                            '@w640:mt-7 @w640:text-sm @w640:font-normal @w640:text-right @w640:pl-0 @w640:pt-3px',
+                            'text-secondary bg-primary animate-fade-up mt-6 pb-2.5 pl-2.5 text-left',
+                          ])}
+                        >
+                          <time>{date}</time>
+                        </th>
+                      )}
+                      <td
+                        colSpan={hasDate ? 1 : 2}
+                        className={clsx([
+                          '@w640:pl-0',
 
-                              {embed && <div className="animate-fade-up @w640:max-w-full -ml-0.5 mt-4">{embed}</div>}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </td>
-                  </tr>
-                );
-              })}
+                          'animate-fade-up relative pr-2',
+                          ,
+                          isPeriod && '@w640:mt-10',
+                          hasDate && [
+                            '@w640:mt-7 @w640:pl-12px @w640:flex @w640:before:border-t @w640:before:w-3 @w640:before:top-15px @w640:before:absolute @w640:relative @w640:before:right-full @w640:before:pointer-events-none @w640:before:translate-x-8px @w640:before:border-t-primary',
+                            'pl-5',
+                          ],
+
+                          (isPeriod || (isPeriod === false && hasDate === false)) && '@w640:col-start-2',
+                          hasDate || [
+                            '@w640:before:mt-3.5 @w640:col-start-1',
+                            'pl-2.5',
+                            "before:size-4px before:bg-(--color-primary) flex gap-x-2 before:mt-2.5 before:inline-block before:shrink-0 before:rounded-full before:content-['']",
+                          ],
+                        ])}
+                      >
+                        <div>
+                          {convertBreakLineToElement(description, { className: 'block' })}
+                          {embed !== null && (
+                            <div className="animate-fade-up @w640:max-w-full -ml-0.5 mt-4">{embed}</div>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                }),
+              )}
             </tbody>
           </table>
         </div>
