@@ -320,7 +320,15 @@ export const AboutPage = () => {
             <tbody className="@w640:grid @w640:grid-cols-[auto_1fr] @w640:gap-x-2">
               {PERSONAL_HISTORY.map(({ data, descriptions }) =>
                 descriptions.map((item, index) => {
-                  const key = typeof item === 'string' ? item : item.description;
+                  const key = (() => {
+                    if (typeof item === 'string') {
+                      return item;
+                    }
+                    if ('key' in item) {
+                      return item.key;
+                    }
+                    return item.description;
+                  })();
                   const description = typeof item === 'string' ? item : item.description;
                   const date = typeof item === 'string' ? null : (item.date ?? null);
                   const embed = typeof item === 'string' ? null : (item.embed ?? null);
