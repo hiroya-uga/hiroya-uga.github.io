@@ -12,7 +12,13 @@ import Link from 'next/link';
 import { useSyncExternalStore } from 'react';
 
 const pickUpList = {
-  origin: [...TOOLS_LINK_LIST, ...TRANSLATION_DOCUMENTS_LINK_LIST, ...GAMES_LINK_LIST],
+  origin: [
+    ...TOOLS_LINK_LIST.cli,
+    ...TOOLS_LINK_LIST.web,
+    ...TOOLS_LINK_LIST.playground,
+    ...TRANSLATION_DOCUMENTS_LINK_LIST,
+    ...GAMES_LINK_LIST,
+  ],
   cache: null as EmojiLinkListItem[] | null,
 };
 

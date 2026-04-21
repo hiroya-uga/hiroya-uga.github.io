@@ -60,17 +60,9 @@ export const TRANSLATION_DOCUMENTS_LINK_LIST: EmojiLinkListItem[] = [
   },
 ];
 
-type ToolPage = (
-  | (EmojiLinkListItem & {
-      type: 'default' | 'playground';
-      userType?: JobRole[];
-    })
-  | (EmojiLinkListItem & {
-      type: 'oss';
-      title: string;
-      userType?: JobRole[];
-    })
-)[];
+type ToolPage = (EmojiLinkListItem & {
+  userType?: JobRole[];
+})[];
 
 export const OSS_LINK_LIST = [
   {
@@ -81,72 +73,68 @@ export const OSS_LINK_LIST = [
   },
 ] as const;
 
-export const TOOLS_LINK_LIST = [
+export const TOOLS_LINK_LIST: Record<string, ToolPage> = {
   // 追加順
-  ...(
-    [
-      {
-        emoji: '🌳',
-        pathname: '/tools/an-alt-decision-tree',
-        userType: ['developer', 'director', 'planner', 'writer'],
-      },
-      {
-        emoji: '🧮',
-        pathname: '/tools/character-count',
-        userType: [],
-      },
-      {
-        emoji: '🔔',
-        pathname: '/tools/slack-reminder-command-generator',
-        userType: [],
-      },
-      {
-        emoji: '',
-        pathname: '/tools/get-url-from-dom',
-        userType: ['director', 'planner', 'qa'],
-      },
-      {
-        emoji: '🪮',
-        pathname: '/tools/markup-dev-supporter',
-        userType: ['developer'],
-      },
-      {
-        emoji: '☀️',
-        pathname: '/tools/screen-wake-lock',
-        userType: [],
-      },
-      {
-        emoji: '🔖',
-        pathname: '/tools/nu-bookmarklet-generator',
-        userType: ['developer', 'qa'],
-      },
-      {
-        emoji: '🛠️',
-        pathname: '/tools/vnux',
-        userType: ['developer', 'qa'],
-      },
-      {
-        emoji: '🎨',
-        pathname: '/tools/contrast-checker',
-        userType: ['developer', 'designer', 'qa'],
-      },
-    ] as ToolPage
-  ).map((item) => ({ ...item, type: 'default' }) as const),
-
-  // playground
-  ...(
-    [
-      { emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
-      { emoji: '📏', pathname: '/tools/css-units' },
-      { emoji: '', pathname: '/tools/dom-events-watcher' },
-      { emoji: '👆', pathname: '/tools/touch-event-touches' },
-      { emoji: '⌨', pathname: '/tools/keyboard-event' },
-      { emoji: '♾️', pathname: '/tools/kaprekar-number' },
-      { emoji: '文', pathname: '/tools/render-text-in-react', noPickup: true },
-      { emoji: '📈', pathname: '/tools/sort-visualizer' },
-    ] as ToolPage
-  ).map((item) => ({ ...item, type: 'playground' }) as const),
-];
+  web: [
+    {
+      emoji: '🌳',
+      pathname: '/tools/an-alt-decision-tree',
+      userType: ['developer', 'director', 'planner', 'writer'],
+    },
+    {
+      emoji: '🧮',
+      pathname: '/tools/character-count',
+      userType: [],
+    },
+    {
+      emoji: '🔔',
+      pathname: '/tools/slack-reminder-command-generator',
+      userType: [],
+    },
+    {
+      emoji: '',
+      pathname: '/tools/get-url-from-dom',
+      userType: ['director', 'planner', 'qa'],
+    },
+    {
+      emoji: '🪮',
+      pathname: '/tools/markup-dev-supporter',
+      userType: ['developer'],
+    },
+    {
+      emoji: '☀️',
+      pathname: '/tools/screen-wake-lock',
+      userType: [],
+    },
+    {
+      emoji: '🔖',
+      pathname: '/tools/nu-bookmarklet-generator',
+      userType: ['developer', 'qa'],
+    },
+    {
+      emoji: '🎨',
+      pathname: '/tools/contrast-checker',
+      userType: ['developer', 'designer', 'qa'],
+    },
+  ],
+  cli: [
+    {
+      emoji: '🛠️',
+      pathname: '/tools/vnux',
+      userType: ['developer', 'qa'],
+    },
+  ],
+  playground: [
+    { emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
+    { emoji: '📏', pathname: '/tools/css-units' },
+    { emoji: '', pathname: '/tools/dom-events-watcher' },
+    { emoji: '👆', pathname: '/tools/touch-event-touches' },
+    { emoji: '⌨', pathname: '/tools/keyboard-event' },
+    { emoji: '♾️', pathname: '/tools/kaprekar-number' },
+    { emoji: '文', pathname: '/tools/render-text-in-react', noPickup: true },
+    { emoji: '📈', pathname: '/tools/sort-visualizer' },
+  ],
+};
 
 export const GAMES_LINK_LIST: EmojiLinkListItem[] = [
   { emoji: '🔢', pathname: '/games/sudoku' },
