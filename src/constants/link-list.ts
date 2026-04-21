@@ -60,9 +60,9 @@ export const TRANSLATION_DOCUMENTS_LINK_LIST: EmojiLinkListItem[] = [
   },
 ];
 
-type ToolPage = (EmojiLinkListItem & {
+type ToolPage = EmojiLinkListItem & {
   userType?: JobRole[];
-})[];
+};
 
 export const OSS_LINK_LIST = [
   {
@@ -73,7 +73,7 @@ export const OSS_LINK_LIST = [
   },
 ] as const;
 
-export const TOOLS_LINK_LIST: Record<string, ToolPage> = {
+export const TOOLS_LINK_LIST: Record<string, ToolPage[]> = {
   // 追加順
   web: [
     {
