@@ -200,6 +200,10 @@ html:has(.container) {
     margin: calc(var(--x-spacing-y) * 1.25) 0 0;
   }
 
+  [class~="codeblock-switcher"] + [class~="codeblock"][data-platform] {
+    margin-top: 0;
+  }
+
   p:has(customされたimg要素ˆ-ˆ),
   [class~="image-diff-viewer"] {
     position: relative;
@@ -631,7 +635,6 @@ html:has(.container) {
 
   [class~="codeblock-switcher"] {
     width: 100%;
-    margin: 0;
     overflow: auto;
     background: var(--border-color-primary);
     border-radius: 0.25rem 0.25rem 0 0;
