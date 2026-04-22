@@ -63,14 +63,17 @@ export const ToolsVnuxPage = ({ pageTitle, following, inLanguage = 'ja' }: Props
       <section className="mb-14">
         <h2 className="mb-3 text-sm font-bold tracking-widest text-[#4a5466] dark:text-[#9eb4da]">{t.stepsSection}</h2>
         <ol className="space-y-2.5 [counter-reset:step]">
-          {t.steps.map((content, index) => (
-            <li
-              key={index}
-              className="flex items-start gap-3 text-sm [counter-increment:step] before:shrink-0 before:content-[counter(step)_'.']"
-            >
-              <span>{content}</span>
-            </li>
-          ))}
+          {t.steps.map((content, index) => {
+            const key = `step-${index}`;
+            return (
+              <li
+                key={key}
+                className="flex items-start gap-3 text-sm [counter-increment:step] before:shrink-0 before:content-[counter(step)_'.']"
+              >
+                <span>{content}</span>
+              </li>
+            );
+          })}
         </ol>
       </section>
 
