@@ -106,7 +106,7 @@ html:has(.container) {
 
 .container {
   --x-list-gap-y: 0;
-  --x-list-font-size: 0.875rem;
+  --x-list-font-size: 87.5%; /* base: 16px → 14px */
   --x-spacing-y: 1.5rem;
   --x-spacing-heading-bottom: 1.5rem;
   --x-negative-margin-inline: calc(50% - 50dvw);
@@ -124,7 +124,7 @@ html:has(.container) {
 
   @container (min-width: 50rem) {
     --x-list-gap-y: 0.25rem;
-    --x-list-font-size: 1rem;
+    --x-list-font-size: 88.8888%; /* base: 18px → 16px */
   }
 
   section:not(:first-child) {
@@ -282,7 +282,8 @@ html:has(.container) {
     text-align: justify;
   }
 
-  :is(ul, ol) {
+  > :is(ul, ol),
+  > section > :is(ul, ol) {
     font-size: var(--x-list-font-size);
   }
 
