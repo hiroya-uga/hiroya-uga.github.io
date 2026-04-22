@@ -21,6 +21,7 @@ type Props =
   | (BaseProps & {
       title: string;
       copyButton?: true;
+      withPlatformSwitcher?: boolean;
     });
 
 export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restProps }: Props) => {
@@ -66,11 +67,33 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
 
   if ('title' in restProps) {
     return (
-      <figure className="rounded-t-lg border border-slate-200 shadow-sm dark:border-slate-700">
-        <figcaption className="grid grid-cols-[auto_1fr_auto] items-center gap-1.5 rounded-t-lg border-b border-slate-200 bg-slate-100 px-3 py-2.5 before:inline-block before:size-3 before:rounded-full before:bg-red-400 dark:border-slate-700 dark:bg-slate-800">
-          <span className="flex items-center gap-1.5 before:inline-block before:size-3 before:rounded-full before:bg-yellow-400">
+      <figure
+        className={clsx([
+          restProps.withPlatformSwitcher || 'rounded-t-lg border border-slate-200 shadow-sm dark:border-slate-700',
+        ])}
+      >
+        <figcaption
+          className={clsx([
+            'grid gap-1.5 rounded-t-lg border-b border-slate-200 bg-slate-100 px-3 dark:border-slate-700 dark:bg-slate-800',
+
+            restProps.withPlatformSwitcher && 'grid-cols-[1fr_auto] pt-2',
+            restProps.withPlatformSwitcher ||
+              'grid-cols-[auto_1fr_auto] items-center py-2.5 before:inline-block before:size-3 before:rounded-full before:bg-red-400',
+          ])}
+        >
+          <span
+            className={clsx([
+              restProps.withPlatformSwitcher && 'pb-8px',
+              restProps.withPlatformSwitcher ||
+                'flex items-center gap-1.5 before:inline-block before:size-3 before:rounded-full before:bg-yellow-400',
+            ])}
+          >
             <span
-              className="flex items-center gap-2 text-xs text-[#4a535f] before:inline-block before:size-3 before:rounded-full before:bg-green-400 dark:text-[#9eb4da]"
+              className={clsx([
+                'text-xs text-[#4a535f] dark:text-[#9eb4da]',
+                restProps.withPlatformSwitcher ||
+                  'flex items-center gap-2 before:inline-block before:size-3 before:rounded-full before:bg-green-400',
+              ])}
               id={id}
             >
               {restProps.title || language}
@@ -79,7 +102,10 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
           {restProps.copyButton && (
             <>
               <button
-                className="ml-auto rounded border border-slate-400 bg-slate-200 px-2 py-1 text-xs text-slate-600 transition-colors hover:bg-slate-300 hover:text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white"
+                className={clsx([
+                  'ml-auto rounded border border-slate-400 bg-slate-200 px-2 py-1 text-xs text-slate-600 transition-colors hover:bg-slate-300 hover:text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white',
+                  restProps.withPlatformSwitcher && 'mb-8px',
+                ])}
                 onClick={(e) => {
                   setToastMessage(
                     restProps.title +
