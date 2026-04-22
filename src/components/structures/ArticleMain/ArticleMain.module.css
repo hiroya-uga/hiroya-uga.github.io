@@ -654,7 +654,7 @@ html:has(.container) {
         z-index: 0;
         width: anchor-size(width);
         height: anchor-size(height);
-        position-anchor: --selected-book; /* 🌟どのアンカーを見るか指定 */
+        position-anchor: --selected-platform; /* 🌟どのアンカーを見るか指定 */
         content: "";
         background: var(--background-color-secondary);
         border-radius: 4px;
@@ -707,7 +707,7 @@ html:has(.container) {
       opacity: 0;
 
       &:checked {
-        anchor-name: --selected-book;
+        anchor-name: --selected-platform;
       }
     }
   }
