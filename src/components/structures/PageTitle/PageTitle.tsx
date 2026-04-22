@@ -24,7 +24,7 @@ export const PageTitle = ({
 }) => {
   const hasSubtitle = Boolean(previous || following);
   return (
-    <div className="mb-14 sm:mb-20">
+    <div className="@w640:mb-20 mb-14">
       <h1
         className={clsx([
           hasSubtitle

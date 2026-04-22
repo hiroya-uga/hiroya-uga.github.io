@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
-      <ToolsVnuxPage pageTitle={metadata.pageTitle} following={metadata.following} lang="ja" />
+      <ToolsVnuxPage {...metadata} />
     </>
   );
 }

@@ -28,7 +28,7 @@ export const ToolsContrastCheckerPage = ({ lang, metadata }: Props) => {
   const t = i18n[lang];
 
   return (
-    <>
+    <div className="mx-auto max-w-[50rem]">
       <PageTitle {...metadata} lang={lang} />
 
       <div className="bg-secondary px-16PX mx-auto rounded-2xl pb-6 pt-2.5 shadow-md">
@@ -45,6 +45,6 @@ export const ToolsContrastCheckerPage = ({ lang, metadata }: Props) => {
       <p className="mt-share-buttons mx-auto grid justify-end">
         <TweetLink hashtags={['WCAG', 'a11y']} lang={lang} />
       </p>
-    </>
+    </div>
   );
 };
