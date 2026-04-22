@@ -1,5 +1,6 @@
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { CodeBlock } from '@/components/CodeBlock';
+import { CommandTable } from '@/components/Table';
 import { Lang } from '@/types/lang';
 import Link from 'next/link';
 import { vnuxLocales } from './locales';
@@ -81,16 +82,7 @@ export const ToolsVnuxPage = ({ pageTitle, following, inLanguage = 'ja' }: Props
           {t.featureGroups.map(({ label, features }) => (
             <div key={label}>
               <h3 className="mb-1.5 text-xs font-bold text-[#4d5460] dark:text-[#9eb4da]">{label}</h3>
-              <div className="bg-secondary grid grid-cols-[auto_1fr] divide-y divide-slate-400 overflow-hidden rounded border border-slate-400 dark:divide-slate-600 dark:border-slate-600">
-                {features.map(({ cmd, desc }) => (
-                  <p key={cmd} className="col-start-1 -col-end-1 grid grid-cols-subgrid items-center gap-4 px-3 py-2">
-                    <span>
-                      <code>{cmd}</code>
-                    </span>
-                    <span className="text-sm leading-relaxed">{desc}</span>
-                  </p>
-                ))}
-              </div>
+              <CommandTable items={features} lang={inLanguage} />
             </div>
           ))}
         </div>
