@@ -4,6 +4,7 @@ import {
   ArticleFootNoteActivator,
   ArticleImageDiffViewerActivator,
   ArticleInformation,
+  ArticleSpeculationRulesActivator,
   ArticleTOC,
   ArticleTwitterActivator,
   ArticleYoutubeManager,
@@ -46,8 +47,6 @@ export const ArticleMain = async ({ post }: Props) => {
 
   return (
     <article className={styles.root}>
-      <script type="speculationrules" dangerouslySetInnerHTML={{ __html: getSpeculationRules(styles.article) }} />
-
       <div className={clsx(styles.hero, '@w640:px-content-inline @w1520:pl-10 @w640:mb-14 @w640:mt-8 mb-8 px-2')}>
         <div
           className={clsx([
@@ -148,6 +147,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <ArticleFootNoteActivator />
           <ArticleCodeHighlightActivator />
           <ArticleCodeBlockSwitchActivator />
+          <ArticleSpeculationRulesActivator rules={getSpeculationRules(styles.article)} />
           <ArticleYoutubeManager />
           <ArticleTwitterActivator />
         </div>
