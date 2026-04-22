@@ -572,6 +572,28 @@ export const ArticleCodeHighlightActivator = () => {
   );
 };
 
+export const ArticleSpeculationRulesActivator = ({ rules }: { rules: string }) => {
+  useEffect(() => {
+    const existingScript = document.querySelector<HTMLScriptElement>('script[data-article-speculation-rules="true"]');
+
+    if (existingScript instanceof HTMLScriptElement) {
+      existingScript.remove();
+    }
+
+    const script = document.createElement('script');
+    script.type = 'speculationrules';
+    script.textContent = rules;
+    script.dataset.articleSpeculationRules = 'true';
+    document.body.append(script);
+
+    return () => {
+      script.remove();
+    };
+  }, [rules]);
+
+  return null;
+};
+
 const resolveSwitchData = (nodeList: NodeListOf<HTMLElement>) => {
   const platforms = new Set<string>();
   const firstCodeBlocks = new Set<HTMLElement>();

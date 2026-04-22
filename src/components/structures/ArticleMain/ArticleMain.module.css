@@ -580,7 +580,7 @@ html:has(.container) {
   }
 
   [class~="codeblock"] pre {
-    overflow: auto;
+    white-space: pre-wrap;
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
   }
