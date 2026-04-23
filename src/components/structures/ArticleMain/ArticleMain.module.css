@@ -200,7 +200,8 @@ html:has(.container) {
     margin: calc(var(--x-spacing-y) * 1.25) 0 0;
   }
 
-  [class~="codeblock-switcher"] + [class~="codeblock"][data-platform] {
+  [class~="codeblock-switcher"] + [class~="codeblock"][data-platform],
+  [class~="codeblock-switcher"] + [class~="codeblock"][data-platform] + [class~="codeblock"][data-platform] {
     margin-top: 0;
   }
 
