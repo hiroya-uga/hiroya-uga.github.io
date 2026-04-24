@@ -135,7 +135,6 @@ html:has(.container) {
   h3,
   h4 {
     margin-bottom: var(--x-spacing-heading-bottom);
-    line-height: 1.375;
     letter-spacing: 0.02em;
 
     + section {
@@ -151,12 +150,24 @@ html:has(.container) {
   h2 {
     font-size: 1.25rem;
     font-weight: bold;
+    line-height: 1.375;
   }
   h3 {
+    position: relative;
     padding-left: 0.75rem;
     font-size: 1.125rem;
     font-weight: bold;
-    border-left: 0.175rem solid var(--color-accent);
+
+    &::before {
+      position: absolute;
+      top: 5%;
+      bottom: 0;
+      left: 0;
+      height: 90%;
+      margin-bottom: auto;
+      content: "";
+      border-left: 0.175rem solid var(--color-accent);
+    }
   }
   h4 {
     padding: 0 0 0.5rem;
@@ -195,9 +206,12 @@ html:has(.container) {
     margin: calc(var(--x-spacing-y) * 0.85) 0 0;
   }
 
-  > figure:not(:first-child):not(section) + p,
-  figure:where(section > :not(:first-child)) + p {
-    margin: calc(var(--x-spacing-y) * 1.25) 0 0;
+  :is(figure, [class^="table-container"]) {
+    margin: calc(var(--x-spacing-y) * 1.1) 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   [class~="codeblock-switcher"] + [class~="codeblock"][data-platform],
