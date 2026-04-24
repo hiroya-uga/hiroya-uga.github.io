@@ -86,6 +86,11 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
   border-radius: 50%;
   transition: background-color 0.3s ease-out;
 
+  &.of-next,
+  &.of-prev {
+    background: rgb(255 255 255 / 0.1);
+  }
+
   @media (hover: hover) {
     &:hover {
       background: rgb(255 255 255 / 0.2);
