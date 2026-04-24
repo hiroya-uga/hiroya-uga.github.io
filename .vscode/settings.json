@@ -5,6 +5,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "cSpell.words": [
+    "Aspherical",
     "Colorworks",
     "Doumei",
     "EXPEED",
@@ -19,13 +20,17 @@
     "NIKKOR",
     "nocards",
     "noconversation",
+    "NOKTON",
     "opengraph",
     "oxlint",
     "pauljadam",
+    "speculationrules",
     "Tamron",
     "ugadev",
     "vnux",
-    "zenn"
+    "Voigtlander",
+    "zenn",
+    "ZENRYAKU"
   ],
   "editor.codeLens": true,
   "js/ts.referencesCodeLens.enabled": true,
