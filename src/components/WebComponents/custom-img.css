@@ -82,6 +82,7 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
   height: var(--x-button-size);
   color: white;
   cursor: default;
+  user-select: none;
   border-radius: 50%;
   transition: background-color 0.3s ease-out;
 
