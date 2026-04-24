@@ -169,10 +169,10 @@ const showModal = ({
     ref.expandedIndex--;
   });
 
+  dialog.appendChild(closeButton);
   buttonWrapper.appendChild(prevButton);
   buttonWrapper.appendChild(nextButton);
   dialog.appendChild(buttonWrapper);
-  dialog.appendChild(closeButton);
 
   show();
 
