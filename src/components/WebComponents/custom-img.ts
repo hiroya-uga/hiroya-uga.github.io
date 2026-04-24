@@ -1,3 +1,5 @@
+import styleSheet from './custom-img.css?raw';
+
 const ref = {
   customImageElementIndex: 0,
   lastPathName: '',
@@ -13,100 +15,7 @@ const injectModalStyles = () => {
   }
   const element = document.createElement('style');
   element.id = styleId;
-  element.textContent = `
-      dialog.customされたimg要素ˆ-ˆのモーダル {
-        --x-backdrop: rgb(0 0 0 / 0.8);
-
-        font-size: 0.875rem;
-        padding: 1lh 0;
-        border: none;
-        background: transparent;
-        width: 100%;
-        height: 100dvh;
-        max-width: 100%;
-        max-height: 100dvh;
-        place-items: center;
-        position: fixed;
-        inset: 0;
-        overflow: clip auto;
-        overscroll-behavior: contain;
-        cursor: zoom-out;
-
-        &[open] {
-          display: grid;
-        }
-
-        &::backdrop {
-          background: var(--x-backdrop);
-          backdrop-filter: blur(4px);
-          transition: background 0.3s ease-out, backdrop-filter 0.3s ease-out;
-
-          @starting-style {
-            background: rgb(0 0 0 / 0);
-            backdrop-filter: blur(0);
-          }
-        }
-      }
-
-      .customされたimg要素ˆ-ˆのモーダル__caption {
-        color: #fff;
-        transition: opacity 0.3s ease-out;
-        cursor: auto;
-        container-type: inline-size;
-        mix-blend-mode: exclusion;
-        padding: .5rem min(0.25rem, 8px) 0;
-
-        @starting-style {
-          opacity: 0;
-        }
-      }
-
-      .customされたimg要素ˆ-ˆのモーダル__button-wrapper {
-        height: 36px;
-        position: fixed;
-        right: 10px;
-        top: 10px;
-        z-index: 1;
-        display: flex;
-        gap: 4px;
-      }
-
-      .customされたimg要素ˆ-ˆのモーダル__button {
-        width: 36px;
-        height: 36px;
-        display: grid;
-        place-items: center;
-        border-radius: 50%;
-        cursor: default;
-        color: white;
-        transition: background-color 0.3s ease-out;
-
-        @media (hover: hover) {
-          &:hover {
-            background: rgb(255 255 255 / 0.2);
-          }
-        }
-      }
-
-      .customされたimg要素ˆ-ˆのモーダル__svg {
-        width: 20px;
-        height: 20px;
-        pointer-events: none;
-      }
-
-      .customされたimg要素ˆ-ˆのモーダル__image {
-        display: block;
-        width: auto;
-        height: auto;
-        margin: auto;
-        /* 閉じるボタンの余白分 = (60px + 10px) * 2 */
-        max-height: calc(100dvh - 140px);
-      }
-
-      [data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
-        --x-backdrop: rgb(0 0 0 / 0.6);
-      }
-    `;
+  element.textContent = styleSheet;
   document.head.appendChild(element);
 };
 
@@ -262,8 +171,8 @@ const showModal = ({
 
   buttonWrapper.appendChild(prevButton);
   buttonWrapper.appendChild(nextButton);
-  buttonWrapper.appendChild(closeButton);
   dialog.appendChild(buttonWrapper);
+  dialog.appendChild(closeButton);
 
   show();
 

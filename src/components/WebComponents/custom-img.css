@@ -1,0 +1,112 @@
+dialog.customされたimg要素ˆ-ˆのモーダル {
+  --x-backdrop: rgb(0 0 0 / 0.8);
+  --x-button-size: 36px;
+  --x-padding-block: calc(20px + var(--x-button-size));
+
+  position: fixed;
+  inset: 0;
+  place-items: center;
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: var(--x-padding-block) 0;
+  overflow: clip auto;
+  overscroll-behavior: contain;
+  font-size: 0.875rem;
+  cursor: zoom-out;
+
+  background: transparent;
+  border: none;
+
+  &[open] {
+    display: grid;
+  }
+
+  &::backdrop {
+    background: var(--x-backdrop);
+    backdrop-filter: blur(4px);
+    transition:
+      background 0.3s ease-out,
+      backdrop-filter 0.3s ease-out;
+
+    @starting-style {
+      background: rgb(0 0 0 / 0);
+      backdrop-filter: blur(0);
+    }
+  }
+}
+
+.customされたimg要素ˆ-ˆのモーダル__caption {
+  padding: 0.5rem min(0.25rem, 8px) 0;
+  container-type: inline-size;
+  color: #fff;
+  cursor: auto;
+  mix-blend-mode: exclusion;
+  transition: opacity 0.3s ease-out;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.customされたimg要素ˆ-ˆのモーダル__button-wrapper {
+  position: fixed;
+  right: 0;
+  bottom: 10px;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  gap: 16px;
+  width: fit-content;
+  height: var(--x-button-size);
+  margin-inline: auto;
+
+  @media screen and (orientation: landscape) {
+    right: 10px;
+    left: auto;
+  }
+}
+
+.customされたimg要素ˆ-ˆのモーダル__button.of-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.customされたimg要素ˆ-ˆのモーダル__button {
+  display: grid;
+  place-items: center;
+  width: var(--x-button-size);
+  height: var(--x-button-size);
+  color: white;
+  cursor: default;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-out;
+
+  @media (hover: hover) {
+    &:hover {
+      background: rgb(255 255 255 / 0.2);
+    }
+  }
+}
+
+.customされたimg要素ˆ-ˆのモーダル__svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.customされたimg要素ˆ-ˆのモーダル__image {
+  display: block;
+  width: auto;
+  height: auto;
+  /* ボタンの余白分, caption の範囲 */
+  max-height: calc(100dvh - (var(--x-padding-block) * 2) - 1lh - 8px);
+  margin: auto;
+}
+
+[data-theme="dark"] dialog.customされたimg要素ˆ-ˆのモーダル {
+  --x-backdrop: rgb(0 0 0 / 0.6);
+}

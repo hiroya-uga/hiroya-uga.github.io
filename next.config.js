@@ -47,6 +47,11 @@ const nextConfig = {
 
   // Webpackの最適化
   webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      resourceQuery: /raw/,
+      type: 'asset/source',
+    });
+
     // 本番環境でのバンドルサイズ削減
     if (!isServer) {
       config.optimization = {
