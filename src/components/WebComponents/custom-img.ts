@@ -1,12 +1,16 @@
 const ref = {
   customImageElementIndex: 0,
   lastPathName: '',
+  imageList: [] as { src: string; width: number; height: number; alt: string }[],
+  expandedIndex: -1,
 };
 const styleId = 'customされたimg要素ˆ-ˆのモーダル-styles';
 
 const injectModalStyles = () => {
   const style = document.getElementById(styleId);
-  if (style) return;
+  if (style !== null) {
+    return;
+  }
   const element = document.createElement('style');
   element.id = styleId;
   element.textContent = `
@@ -57,17 +61,24 @@ const injectModalStyles = () => {
         }
       }
 
-      .customされたimg要素ˆ-ˆのモーダル__button {
-        width: 36px;
+      .customされたimg要素ˆ-ˆのモーダル__button-wrapper {
         height: 36px;
         position: fixed;
         right: 10px;
         top: 10px;
         z-index: 1;
+        display: flex;
+        gap: 4px;
+      }
+
+      .customされたimg要素ˆ-ˆのモーダル__button {
+        width: 36px;
+        height: 36px;
         display: grid;
         place-items: center;
         border-radius: 50%;
         cursor: default;
+        color: white;
         transition: background-color 0.3s ease-out;
 
         @media (hover: hover) {
@@ -100,7 +111,7 @@ const injectModalStyles = () => {
 };
 
 const showModal = ({
-  id,
+  index,
   button,
   context,
   src,
@@ -108,7 +119,7 @@ const showModal = ({
   height,
   alt,
 }: {
-  id: string;
+  index: number;
   button: HTMLElement;
   context: HTMLElement;
   src: string;
@@ -116,6 +127,7 @@ const showModal = ({
   height: number;
   alt: string;
 }) => {
+  const id = 'customされたimg要素ˆ-ˆのモーダルキャプション';
   const dialog = document.createElement('dialog');
   dialog.className = 'customされたimg要素ˆ-ˆのモーダル';
   dialog.setAttribute('aria-modal', 'true');
@@ -127,22 +139,34 @@ const showModal = ({
   dialog.appendChild(content);
 
   const originSizeImage = document.createElement('img');
-  originSizeImage.className = 'customされたimg要素ˆ-ˆのモーダル__image';
-  originSizeImage.src = src;
-  originSizeImage.alt = '';
-  originSizeImage.width = width;
-  originSizeImage.height = height;
-  content.appendChild(originSizeImage);
-  document.body.appendChild(dialog);
-
   const caption = document.createElement('p');
   caption.id = id;
   caption.className = 'customされたimg要素ˆ-ˆのモーダル__caption';
-  caption.textContent = `図${id.split('-').slice(-1)[0]}${alt ? `: ${alt}` : ''}`;
+  caption.setAttribute('aria-live', 'polite');
+
+  ref.expandedIndex = index - 1;
+
+  const inject = (next: { src: string; width: number; height: number; alt: string }) => {
+    originSizeImage.className = 'customされたimg要素ˆ-ˆのモーダル__image';
+    originSizeImage.src = next.src;
+    originSizeImage.alt = '';
+    originSizeImage.width = next.width;
+    originSizeImage.height = next.height;
+    caption.textContent = `図${ref.expandedIndex + 1}${next.alt ? `: ${next.alt}` : ''}`;
+  };
+
+  inject({
+    src,
+    width,
+    height,
+    alt,
+  });
+  content.appendChild(originSizeImage);
   content.appendChild(caption);
+  document.body.appendChild(dialog);
 
   const show = () => {
-    if (!('startViewTransition' in document)) {
+    if ('startViewTransition' in document === false) {
       dialog.showModal();
       return;
     }
@@ -162,7 +186,7 @@ const showModal = ({
   };
 
   const close = () => {
-    if (!('startViewTransition' in document)) {
+    if ('startViewTransition' in document === false) {
       dialog.close();
       dialog.remove();
       button.focus();
@@ -183,9 +207,19 @@ const showModal = ({
       });
   };
 
+  const prevButton = document.createElement('button');
+  const nextButton = document.createElement('button');
   const closeButton = document.createElement('button');
+  prevButton.type = 'button';
+  prevButton.setAttribute('aria-label', '前の画像');
+  nextButton.type = 'button';
+  nextButton.setAttribute('aria-label', '次の画像');
   closeButton.type = 'button';
-  closeButton.className = 'customされたimg要素ˆ-ˆのモーダル__button';
+  prevButton.className = 'customされたimg要素ˆ-ˆのモーダル__button of-prev';
+  nextButton.className = 'customされたimg要素ˆ-ˆのモーダル__button of-next';
+  closeButton.className = 'customされたimg要素ˆ-ˆのモーダル__button of-close';
+  prevButton.textContent = '←';
+  nextButton.textContent = '→';
   closeButton.insertAdjacentHTML(
     'beforeend',
     `
@@ -197,11 +231,61 @@ const showModal = ({
     </svg>
   `,
   );
-  dialog.appendChild(content);
-  dialog.appendChild(closeButton);
+
+  const buttonWrapper = document.createElement('p');
+  buttonWrapper.className = 'customされたimg要素ˆ-ˆのモーダル__button-wrapper';
+
+  prevButton.addEventListener('click', () => {
+    ref.expandedIndex--;
+
+    if (ref.imageList[ref.expandedIndex]) {
+      inject({
+        ...ref.imageList[ref.expandedIndex],
+      });
+      return;
+    }
+
+    ref.expandedIndex++;
+  });
+  nextButton.addEventListener('click', () => {
+    ref.expandedIndex++;
+
+    if (ref.imageList[ref.expandedIndex]) {
+      inject({
+        ...ref.imageList[ref.expandedIndex],
+      });
+      return;
+    }
+
+    ref.expandedIndex--;
+  });
+
+  buttonWrapper.appendChild(prevButton);
+  buttonWrapper.appendChild(nextButton);
+  buttonWrapper.appendChild(closeButton);
+  dialog.appendChild(buttonWrapper);
 
   show();
 
+  const onKeydown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        prevButton.focus({ preventScroll: true });
+        prevButton.click();
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        nextButton.focus({ preventScroll: true });
+        nextButton.click();
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  window.addEventListener('keydown', onKeydown);
   dialog.addEventListener('click', (e) => {
     if (e.target === dialog || e.target === closeButton || e.target === originSizeImage) {
       e.preventDefault();
@@ -211,6 +295,9 @@ const showModal = ({
   dialog.addEventListener('cancel', (e) => {
     e.preventDefault();
     close();
+  });
+  dialog.addEventListener('close', () => {
+    window.removeEventListener('keydown', onKeydown);
   });
 };
 
@@ -272,7 +359,9 @@ export const CustomImage = () => {
       const self = this;
       const { src, width, height, alt, controls } = self;
 
-      if (!src || !self.shadowRoot) return;
+      if (src === '' || self.shadowRoot === null) {
+        return;
+      }
 
       const img = document.createElement('img');
       const shadowRoot = self.shadowRoot;
@@ -348,11 +437,12 @@ export const CustomImage = () => {
 
       if (ref.lastPathName !== window.location.pathname) {
         ref.customImageElementIndex = 0;
+        ref.imageList = [];
         ref.lastPathName = window.location.pathname;
       }
 
       const customImageElementIndex = ++ref.customImageElementIndex;
-      const id = `custom-img-${ref.customImageElementIndex}`;
+      const id = `custom-img-${customImageElementIndex}`;
       const index = customImageElementIndex;
 
       img.alt = `${alt ? `図${index}：${alt}` : `図${index}`}`;
@@ -363,12 +453,21 @@ export const CustomImage = () => {
       shadowRoot.textContent = '';
       shadowRoot.appendChild(img);
 
+      const imageListIndex = ref.imageList.length;
+      ref.imageList.push({ src, width: 0, height: 0, alt });
+
       img.decode().then(() => {
         self.loading = false;
 
+        ref.imageList[imageListIndex] = {
+          src,
+          width: img.naturalWidth,
+          height: img.naturalHeight,
+          alt,
+        };
+
         if (controls) {
           const button = document.createElement('button');
-
           button.type = 'button';
           button.insertAdjacentHTML(
             'beforeend',
@@ -388,7 +487,7 @@ export const CustomImage = () => {
           );
           button.addEventListener('click', () => {
             showModal({
-              id,
+              index: customImageElementIndex,
               button,
               context: self,
               src,
