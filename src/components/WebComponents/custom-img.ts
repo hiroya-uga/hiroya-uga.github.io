@@ -180,12 +180,10 @@ const showModal = ({
     switch (e.key) {
       case 'ArrowLeft':
         e.preventDefault();
-        prevButton.focus({ preventScroll: true });
         prevButton.click();
         break;
       case 'ArrowRight':
         e.preventDefault();
-        nextButton.focus({ preventScroll: true });
         nextButton.click();
         break;
 
