@@ -1,103 +1,67 @@
 # Code Style
 
-## 否定表現
+## Negation
 
-`!` を使った否定表現は使わない。意図が明確な比較式を使う。`==` / `!=` は禁止。
+Avoid `!`. Use explicit comparisons. Ban `==`/`!=`.
 
 ```ts
 // Bad
-if (!value) { ... }
-if (value == null) { ... }
-
+if (!value) {
+}
+if (value == null) {
+}
 // Good
-if (value === null) { ... }
-if (value === undefined) { ... }
-if (value !== null) { ... }
-if (condition === false) { ... }
+if (value === null) {
+}
+if (value === undefined) {
+}
+if (value !== null) {
+}
+if (condition === false) {
+}
 ```
 
-## 数値比較
+## Numeric comparison
 
-右辺が大きい形に統一する。
+Always write smaller value on the left: `value < 100` ✓, `100 > value` ✗
 
-```ts
-value < 100; // Good
-100 < value; // Good
-100 > value; // Bad
-value > 100; // Bad
-```
+## Braces
 
-## ブレースの省略
-
-アロー関数と `switch` の `case` 以外でブレースの省略は認めない。`if` / `else` も単一文でも必ずブレースを使う。1行の `if` リターンも禁止。
+Never omit braces except in arrow functions and `switch case`. Single-line `if` returns are forbidden.
 
 ```ts
 // Bad
 if (condition) return;
-
 // Good
 if (condition) {
   return;
 }
 ```
 
-## 関数
+## Functions
 
-`function` 構文より関数式（アロー関数）を優先する。3つ以上の引数を受け取るなら、オブジェクトで受け取る。
+Prefer arrow functions over `function` declarations. Use object destructuring for 3+ params.
 
 ```ts
 // Bad
-function hoge(a, b, c) {}
 const hoge = (a, b, c) => {};
-
 // Good
 const hoge = ({ a, b, c }) => {};
 ```
 
-## イベントハンドラーの命名
+## Event handler naming
 
-| 命名         | 用途                                                                                              |
-| ------------ | ------------------------------------------------------------------------------------------------- |
-| `onHoge`     | `event` オブジェクトを受け取るハンドラー、またはコンポーネントの props として公開するコールバック |
-| `handleHoge` | `event` オブジェクトを受け取らない内部処理関数（引数は任意）                                      |
+| Name         | Use                                                 |
+| ------------ | --------------------------------------------------- |
+| `onHoge`     | Receives `event` object, or component prop callback |
+| `handleHoge` | Internal handler, no `event` object                 |
 
-```ts
-const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  handleSubmit();
-};
+## Form control font size
 
-const handleSubmit = () => {
-  // フォーム送信処理
-};
+`<input>` / `<textarea>` must use `text-base` (16px) or larger. Smaller sizes trigger iOS Safari auto-zoom on focus.
 
-type Props = {
-  onSubmitButtonClick: () => void;
-};
-```
+## Comments
 
-## フォームコントロールのフォントサイズ
-
-`<input>` および `<textarea>` のフォントサイズには `text-sm`（14px相当）以下を指定してはならない。16px未満はiOS Safariでフォーカス時に画面が自動ズームされる原因となる。`text-base`（16px）以上を使う。
-
-```html
-<!-- Bad -->
-<input class="text-sm" />
-
-<!-- Good -->
-<input class="text-base" />
-```
-
-## コメント
-
-実装上のメモや補足は `//` を使う。変数・定数・関数の説明は JSDoc 形式で書く。`// >` は式の評価結果や値、`// ->` はログや出力先に現れる内容を表す。
-
-```ts
-// ただのめも
-console.log(1000); // -> 1000
-
-/** 値の説明 */
-const hoge = 2000;
-
-hoge + 2; // > 2002
-```
+- `//` for implementation notes
+- JSDoc for variable/function descriptions
+- `// >` for expression results, `// ->` for log output
