@@ -6,7 +6,8 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const articlesDir = path.resolve(__dirname, '..', 'articles');
 
-let debounceTimer = null;
+/** @type {NodeJS.Timeout} */
+let debounceTimer;
 
 const runCopy = () => {
   console.log('[watch] Copying blog images...');
@@ -18,10 +19,11 @@ const runCopy = () => {
 
 watch(articlesDir, { recursive: true }, (_, filename) => {
   if (!filename) return;
-  if (path.extname(filename).toLowerCase() !== '.webp') return;
+  const ext = path.extname(filename).toLowerCase();
+  if (ext !== '.webp' && ext !== '.avif' && ext !== '.jpg') return;
 
   clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(runCopy, 300);
+  debounceTimer = globalThis.setTimeout(runCopy, 300);
 });
 
 console.log(`[watch] Watching ${articlesDir} for .webp changes...`);
