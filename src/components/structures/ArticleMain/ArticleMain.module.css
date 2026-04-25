@@ -596,7 +596,7 @@ html:has(.container) {
   }
 
   [class~="codeblock"] pre {
-    white-space: pre-wrap;
+    white-space: pre;
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
   }
@@ -606,6 +606,10 @@ html:has(.container) {
     padding: 1rem;
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
+  }
+  
+  [class~="codeblock"] pre:has([data-language="plain"]) {
+    white-space: pre-wrap;
   }
 
   [class~="codeblock__caption"] {
