@@ -7,15 +7,6 @@ import { usePlatform } from './hooks';
 
 import styles from './CodeBlockWithPlatfrom.module.css';
 
-interface PlatformSectionProps {
-  content: Record<string, React.ReactNode>;
-}
-
-export const PlatformSection = ({ content }: PlatformSectionProps) => {
-  const [platform] = usePlatform();
-  return <>{content[platform]}</>;
-};
-
 type BundledLanguage = ComponentProps<typeof CodeBlock>['language'];
 
 type BaseProps = {
@@ -33,19 +24,22 @@ export const CodeBlockWithPlatform = ({ codes, language, ...codeBlockProps }: Pr
   const resolvedLanguage = typeof language === 'string' ? language : language[platform];
 
   return (
-    <div className="overflow-hidden rounded-t-lg border border-slate-200 shadow-sm dark:border-slate-700">
+    <div className="overflow-hidden rounded-lg border border-slate-200 shadow-sm dark:border-slate-700">
       <div
         role="radiogroup"
         aria-label="言語切替"
-        className="animate-fade-in bg-(--border-color-primary) isolate grid w-full grid-cols-[auto_1fr_auto] items-center gap-1.5 overflow-auto px-3 before:inline-block before:size-3 before:rounded-full before:bg-red-400 dark:border-slate-700 dark:bg-slate-800"
+        className="animate-fade-in bg-(--border-color-primary) isolate grid w-full grid-cols-[auto_1fr_auto] items-center gap-1.5 overflow-auto px-3 before:inline-block before:size-3 before:rounded-full before:bg-red-400 dark:bg-slate-950"
       >
         <div className="flex items-center gap-1.5 before:inline-block before:size-3 before:rounded-full before:bg-yellow-400">
           <div className="flex items-center gap-2 text-xs text-[#4a535f] before:inline-block before:size-3 before:rounded-full before:bg-green-400 dark:text-[#9eb4da]">
             <ul className={clsx([styles.list, 'relative flex p-1 pb-0 text-center'])}>
               {Object.keys(codes).map((name) => (
-                <li key={name} className="relative z-[1] m-0 list-none p-0">
+                <li key={name} className="z-1 relative m-0 list-none p-0">
                   <label
-                    className={clsx('text-primary block min-w-20 rounded border-none bg-none p-2 text-xs leading-none')}
+                    className={clsx(
+                      'text-primary block min-w-20 rounded border-none bg-none p-2 pb-2.5 text-xs leading-none',
+                      platform === name || 'dark:text-[#9b9da6]',
+                    )}
                   >
                     <input
                       type="radio"

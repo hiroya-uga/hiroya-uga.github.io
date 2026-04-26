@@ -8,10 +8,14 @@
     height: anchor-size(height);
     position-anchor: --selected-platform;
     content: "";
-    background: var(--background-color-secondary);
-    border-radius: 4px;
+    background: var(--color-slate-100);
+    border-radius: 4px 4px 0 0;
     box-shadow: 0 0 3px #0003;
     transition: left 0.1s ease-out;
+  }
+
+  &:where([data-theme="dark"], [data-theme="dark"] *)::before {
+    background: var(--color-slate-800);
   }
 
   :checked {

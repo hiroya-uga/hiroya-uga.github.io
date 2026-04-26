@@ -14,20 +14,61 @@ interface BaseProps {
   language: BundledLanguage;
   className?: string;
   nowrap?: boolean;
+  copyButton?: true;
 }
+
+const CopyButton = ({
+  title = '',
+  code,
+  withPlatformSwitcher,
+  'aria-describedby': id,
+}: {
+  title?: string;
+  code: string;
+  withPlatformSwitcher?: boolean;
+  'aria-describedby'?: string;
+}) => {
+  const { handleClickCopyButton } = useCopyButton();
+  const [toastMessage, setToastMessage] = useState('');
+  const [isJa, setIsJa] = useState(false);
+
+  useEffect(() => {
+    setIsJa(document.documentElement.lang === 'ja');
+  }, []);
+
+  const label = isJa ? (title || `${code.slice(0, 8)}...`) + 'をコピー' : 'Copy ' + (title || `${code.slice(0, 8)}...`);
+
+  return (
+    <>
+      <button
+        className={clsx([
+          'ml-auto rounded border border-slate-400 bg-slate-200 px-2 py-1 text-xs text-slate-600 transition-colors hover:bg-slate-300 hover:text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white',
+          withPlatformSwitcher && 'mb-8px',
+        ])}
+        aria-label={label}
+        onClick={(e) => {
+          setToastMessage((title || `${code.slice(0, 8)}...`) + (isJa ? 'をコピーしました！' : ' has been copied!'));
+          handleClickCopyButton(code, e.currentTarget);
+          globalThis.window.gtag?.('event', 'click_copy_button');
+        }}
+        aria-describedby={id}
+      >
+        Copy
+      </button>
+      <Toast message={toastMessage} setMessage={setToastMessage} />
+    </>
+  );
+};
 
 type Props =
   | BaseProps
   | (BaseProps & {
       title: string;
-      copyButton?: true;
       withPlatformSwitcher?: boolean;
     });
 
 export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restProps }: Props) => {
   const [html, setHtml] = useState('');
-  const [toastMessage, setToastMessage] = useState('');
-  const { handleClickCopyButton } = useCopyButton();
   const id = useId();
 
   useEffect(() => {
@@ -53,12 +94,7 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
 
   const codeBlock = (
     <div
-      className={clsx([
-        styles.root,
-        'rounded text-sm',
-        nowrap === true ? 'whitespace-pre' : 'whitespace-pre-wrap',
-        className,
-      ])}
+      className={clsx([styles.root, 'text-sm', nowrap === true ? 'whitespace-pre' : 'whitespace-pre-wrap', className])}
       dangerouslySetInnerHTML={{
         __html: html ? html : `<pre><code>${escapeHtml(code)}</code></pre>`,
       }}
@@ -69,7 +105,8 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
     return (
       <figure
         className={clsx([
-          restProps.withPlatformSwitcher || 'rounded-t-lg border border-slate-200 shadow-sm dark:border-slate-700',
+          restProps.withPlatformSwitcher ||
+            'overflow-hidden rounded-lg border border-slate-200 shadow-sm dark:border-slate-700',
         ])}
       >
         <figcaption
@@ -100,26 +137,12 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
             </span>
           </span>
           {restProps.copyButton && (
-            <>
-              <button
-                className={clsx([
-                  'ml-auto rounded border border-slate-400 bg-slate-200 px-2 py-1 text-xs text-slate-600 transition-colors hover:bg-slate-300 hover:text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white',
-                  restProps.withPlatformSwitcher && 'mb-8px',
-                ])}
-                onClick={(e) => {
-                  setToastMessage(
-                    restProps.title +
-                      (document.documentElement.lang === 'ja' ? 'をコピーしました！' : ' has been copied!'),
-                  );
-                  handleClickCopyButton(code, e.currentTarget);
-                  window.gtag?.('event', 'click_copy_button');
-                }}
-                aria-describedby={id}
-              >
-                Copy
-              </button>
-              <Toast message={toastMessage} setMessage={setToastMessage} />
-            </>
+            <CopyButton
+              title={restProps.title}
+              code={code}
+              withPlatformSwitcher={restProps.withPlatformSwitcher}
+              aria-describedby={id}
+            />
           )}
         </figcaption>
 
@@ -128,5 +151,27 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
     );
   }
 
-  return codeBlock;
+  return (
+    <div
+      className={clsx([
+        restProps.copyButton && 'grid grid-cols-[1fr_auto]',
+        'overflow-hidden rounded-lg border border-slate-200 shadow-sm dark:border-slate-700',
+      ])}
+    >
+      {restProps.copyButton && (
+        <p className="px-12px col-start-2 row-start-1 bg-white py-3 dark:bg-[#24292e]">
+          <CopyButton code={code} />
+        </p>
+      )}
+
+      <div
+        className={clsx([
+          restProps.copyButton && 'col-start-1 row-start-1',
+          nowrap === true ? 'overflow-auto whitespace-pre' : 'whitespace-pre-wrap',
+        ])}
+      >
+        {codeBlock}
+      </div>
+    </div>
+  );
 };
