@@ -14,7 +14,13 @@ export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Props
     <TagName
       className={clsx([
         'mb-paragraph font-bold leading-snug',
-        keepUseMarginTop === true ? 'mt-heading-top' : 'not-first:mt-heading-top',
+        keepUseMarginTop === true
+          ? 'mt-heading-top'
+          : [
+              level === 2 && 'not-first:mt-heading-top',
+              level === 3 && 'not-first:mt-[calc(var(--margin-heading-top)/1.5)]',
+              level === 4 && 'not-first:mt-[calc(var(--margin-heading-top)/1.5)]',
+            ],
         level === 2 && '@w640:text-2xl text-xl',
         level === 3 && '@w640:text-xl text-lg',
         level === 4 && '@w640:text-lg text-base',
