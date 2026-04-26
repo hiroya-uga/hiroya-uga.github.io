@@ -135,7 +135,7 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
       <div className="mb-paragraph">
         <CommandTable items={t.commandGroups.options.features} lang={inLanguage} />
       </div>
-      <CodeBlock code="git cd ~/projects --depth 3 --cache" language="sh" className="rounded-b-lg" nowrap copyButton />
+      <CodeBlock code="git cd ~/projects --depth 3" language="sh" className="rounded-b-lg" nowrap copyButton />
 
       <div className="mt-20 border-t border-t-slate-200 pt-8 text-slate-600 dark:border-t-slate-700 dark:text-[#a5b4cd]">
         <p className="mb-8 text-right text-xs">
