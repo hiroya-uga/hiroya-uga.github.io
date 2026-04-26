@@ -418,6 +418,17 @@ export const SEO: Record<
     languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
     locale: 'en_US',
   },
+  '/tools/git-cd': {
+    title: 'git-cd',
+    description: '任意のローカルリポジトリへ移動できる機能をgitコマンドに追加するツールです。',
+    languages: { ja: '/tools/git-cd', en: '/tools/git-cd/en' },
+  },
+  '/tools/git-cd/en': {
+    title: 'git-cd',
+    description: 'A tool that adds the ability to jump to any local repository from the git command line.',
+    languages: { ja: '/tools/git-cd', en: '/tools/git-cd/en' },
+    locale: 'en_US',
+  },
   '/tools/vnux': {
     title: 'vnux',
     afterSubTitle: 'Nu Html Checker CLI',

@@ -1,0 +1,1 @@
+uga.dev git-cd A tool that adds the ability to jump to any local repository from the git command line.
