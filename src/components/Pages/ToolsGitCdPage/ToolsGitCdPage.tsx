@@ -58,7 +58,19 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
     <>
       <PageTitle title={pageTitle} following={following} lang={inLanguage} description={description}>
         <div className="my-paragraph">
-          <CodeBlock title="Example" code="git cd" language="sh" className="rounded-b-lg" nowrap />
+          <CodeBlock
+            title="📁 Here’s how it works - zsh"
+            code={[
+              '$ pwd',
+              '/Users/admin',
+              '$ git cd',
+              '$ pwd',
+              '/Users/admin/repos/github.com/hiroya-uga/git-cd',
+            ].join('\n')}
+            language="sh"
+            className="rounded-b-lg"
+            nowrap
+          />
         </div>
         <p>{t.introText}</p>
         <p className="mt-2 text-right text-xs text-slate-600 dark:text-[#a5b4cd]">
