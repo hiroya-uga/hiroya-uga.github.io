@@ -123,6 +123,11 @@ export const TOOLS_LINK_LIST: Record<string, ToolPage[]> = {
       pathname: '/tools/vnux',
       userType: ['developer', 'qa'],
     },
+    {
+      emoji: '💿',
+      pathname: '/tools/git-cd',
+      userType: ['developer'],
+    },
   ],
   playground: [
     { emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
