@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { RunButton } from '@/components/ui/buttons/RunButton';
-import { LoadingIcon } from '@/components/ui/Icons/LoadingIcon';
+import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
 
 export function KeepAwakeClient() {
   const wakeLockRef = useRef<WakeLockSentinel | null>(null);

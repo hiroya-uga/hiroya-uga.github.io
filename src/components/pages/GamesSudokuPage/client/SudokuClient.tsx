@@ -5,7 +5,7 @@ import { Confirm } from '@/components/ui/dialogs/Confirm';
 import { useConfirm } from '@/components/ui/dialogs/Confirm/hooks';
 import { Toast } from '@/components/ui/dialogs/Toast';
 import { Switch } from '@/components/ui/forms';
-import { LoadingIcon } from '@/components/ui/Icons/LoadingIcon';
+import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
 import { arrayShuffle } from '@/utils/array-shuffle';
 import { formatStringToNumericString } from '@/utils/formatter';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';

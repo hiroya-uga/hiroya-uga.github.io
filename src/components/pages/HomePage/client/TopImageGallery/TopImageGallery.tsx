@@ -1,9 +1,9 @@
 'use client';
 
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import { ImageViewModal } from '@/components/ui/dialogs/ImageViewModal';
 import { useImageViewModalTransition } from '@/components/ui/dialogs/ImageViewModal/utils';
 import { Picture } from '@/components/ui/features/Picture';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import { PhotoData } from '../constants';

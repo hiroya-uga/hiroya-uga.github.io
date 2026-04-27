@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import clsx from 'clsx';
 import { ButtonHTMLAttributes, forwardRef, Ref } from 'react';
 

@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { ArticleCategoryLabel } from '@/constants/articles';
 import clsx from 'clsx';
 import Link from 'next/link';

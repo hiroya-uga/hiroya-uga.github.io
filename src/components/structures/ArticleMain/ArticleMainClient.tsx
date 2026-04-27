@@ -1,7 +1,7 @@
 'use client';
 
 import { Toast } from '@/components/ui/dialogs/Toast';
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { ARTICLE_MAIN_ID } from '@/constants/id';
 import { copy } from '@/utils/copy';
 import { formattedDateString, formattedTimeString } from '@/utils/formatter';

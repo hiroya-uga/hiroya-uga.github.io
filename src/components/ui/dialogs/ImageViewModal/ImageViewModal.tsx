@@ -1,7 +1,7 @@
 'use client';
 
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import { Picture } from '@/components/ui/features/Picture';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
