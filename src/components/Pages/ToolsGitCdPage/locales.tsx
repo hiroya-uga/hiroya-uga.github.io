@@ -46,7 +46,11 @@ export const gitCdLocales = {
       { method: 'cd + tab 補完', note: 'リポジトリのフルパスを覚えていないと使いにくい' },
       { method: 'find + cd', note: 'コマンドが長く、都度入力するのが煩雑' },
       { method: 'fzf + find', note: 'カスタム設定が必要で、git との統合がない' },
-      { method: 'git cd（本ツール）', note: 'git サブコマンドとして統合済み、追加設定不要で即使える', highlight: true },
+      {
+        method: 'git cd（本ツール）',
+        note: 'git サブコマンドとして統合済み、追加設定不要ですぐに使えます',
+        highlight: true,
+      },
     ],
     targetSection: 'こんな方におすすめ',
     targetItems: [
@@ -90,8 +94,7 @@ export const gitCdLocales = {
     fzfNote: (
       <>
         <FzfExternalLink />
-        （ファジーファインダー
-        CLI）がインストール済みの場合はキーワードで絞り込みながら選択でき、未インストールの場合は番号付きリストから選択します。
+        （ファジーファインダーCLI）がインストール済みの場合はキーワードで絞り込みながら選択でき、未インストールの場合は番号付きリストから選択します。
       </>
     ),
     platforms: {
