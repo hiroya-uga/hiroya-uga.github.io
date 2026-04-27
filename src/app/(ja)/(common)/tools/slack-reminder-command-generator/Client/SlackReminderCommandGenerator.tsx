@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Checkbox, TextField } from '@/components/ui/client/forms';
+import { Checkbox, TextField } from '@/components/ui/forms';
 import { Tab } from '@/components/ui/tabs/Tab';
 
 import {

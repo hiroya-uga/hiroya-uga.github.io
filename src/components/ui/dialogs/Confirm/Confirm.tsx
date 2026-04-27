@@ -1,7 +1,7 @@
 'use client';
 
 import { RunButton } from '@/components/ui/buttons/RunButton';
-import { ConfirmData } from '@/components/ui/client/dialogs/Confirm/hooks';
+import { ConfirmData } from '@/components/ui/dialogs/Confirm/hooks';
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';

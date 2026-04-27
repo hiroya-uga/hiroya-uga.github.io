@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useId } from 'react';
 
-import { ClickableArea } from '@/components/ui/client/features/ClickableArea/ClickableArea';
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { ClickableArea } from '@/components/ui/features/ClickableArea/ClickableArea';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import { TOOLS_LINK_LIST } from '@/constants/link-list';
 import { JOB_ROLES_JA } from '@/constants/works';
 import { getMetadata } from '@/utils/get-metadata';

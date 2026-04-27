@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
-import { Details } from '@/components/ui/client/boxes/Details';
+import { Details } from '@/components/ui/boxes/Details';
 
 const getNow = () => {
   const date = new Date();

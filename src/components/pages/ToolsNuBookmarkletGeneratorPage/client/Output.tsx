@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import { useCopyButton } from '@/hooks/use-copy-button';
 
 const CopyButton = ({ label }: { label: string }) => {

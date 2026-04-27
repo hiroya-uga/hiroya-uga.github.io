@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes } from 'react';
 
-import { Picture } from '@/components/ui/client/features/Picture';
+import { Picture } from '@/components/ui/features/Picture';
 import Link from 'next/link';
 
 export type SimpleLnkListProps = {

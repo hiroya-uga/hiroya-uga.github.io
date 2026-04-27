@@ -1,7 +1,7 @@
 'use client';
 
 import { NoteBox } from '@/components/ui/boxes/NoteBox';
-import { Checkbox, TextField } from '@/components/ui/client/forms';
+import { Checkbox, TextField } from '@/components/ui/forms';
 import { NoteList } from '@/components/ui/lists/NoteList';
 import { Tab } from '@/components/ui/tabs/Tab';
 import { Lang } from '@/types/lang';

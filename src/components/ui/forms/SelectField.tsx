@@ -4,8 +4,8 @@ import { forwardRef, Ref, SelectHTMLAttributes, useId } from 'react';
 
 import clsx from 'clsx';
 
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon/SvgIcon';
-import { Required } from '@/components/ui/icons/Required';
+import { Required } from '@/components/ui/Icons/Required';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon/SvgIcon';
 
 type Props = {
   label: string;

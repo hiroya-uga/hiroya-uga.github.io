@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { TwitterEmbed } from '@/components/ui/client/embed/TwitterEmbed';
+import { TwitterEmbed } from '@/components/ui/embed/TwitterEmbed';
 
 export type HistoryItem =
   | string

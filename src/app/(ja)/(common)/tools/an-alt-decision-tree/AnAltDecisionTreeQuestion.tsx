@@ -1,4 +1,4 @@
-import { Picture } from '@/components/ui/client/features/Picture';
+import { Picture } from '@/components/ui/features/Picture';
 
 import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
 

@@ -1,5 +1,5 @@
 import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
-import { Details } from '@/components/ui/client/boxes/Details';
+import { Details } from '@/components/ui/boxes/Details';
 import { Fragment, useId } from 'react';
 
 const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {

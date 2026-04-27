@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 
 import { NoteBox } from '@/components/ui/boxes/NoteBox';
-import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
-import { Switch } from '@/components/ui/client/forms';
+import { CodeBlock } from '@/components/ui/embed/CodeBlock';
+import { Switch } from '@/components/ui/forms';
 
 type SwitchItemProps = Pick<
   React.InputHTMLAttributes<HTMLElement>,

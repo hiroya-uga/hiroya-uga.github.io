@@ -1,9 +1,9 @@
 'use client';
 
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
-import { ImageViewModal } from '@/components/ui/client/dialogs/ImageViewModal';
-import { useImageViewModalTransition } from '@/components/ui/client/dialogs/ImageViewModal/utils';
-import { Picture } from '@/components/ui/client/features/Picture';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { ImageViewModal } from '@/components/ui/dialogs/ImageViewModal';
+import { useImageViewModalTransition } from '@/components/ui/dialogs/ImageViewModal/utils';
+import { Picture } from '@/components/ui/features/Picture';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import { PhotoData } from '../constants';
@@ -152,7 +152,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                       "block size-full object-cover opacity-0 transition-[scale,opacity] group-focus-within:scale-110 group-hover:scale-110 data-[state='loaded']:opacity-100",
                     ])}
                     id={imageId}
-                    onLoad={(e) => (e.currentTarget.dataset.state = 'loaded')}
+                    onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => (e.currentTarget.dataset.state = 'loaded')}
                   />
                   {shouldSNSlink && (
                     <span className="gap-16PX pb-10PX pointer-events-none absolute inset-0 flex flex-wrap items-center justify-center rounded bg-black/50 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100">

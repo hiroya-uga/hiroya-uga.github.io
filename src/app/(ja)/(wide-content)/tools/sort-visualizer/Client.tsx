@@ -4,8 +4,8 @@ import { SortVisualizer } from '@/app/(ja)/(wide-content)/tools/sort-visualizer/
 import { sortMethods, sortRecursive } from '@/app/(ja)/(wide-content)/tools/sort-visualizer/sort-recursive';
 import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { RunButton } from '@/components/ui/buttons/RunButton';
-import { Toast } from '@/components/ui/client/dialogs/Toast';
-import { Checkbox, SelectField, Switch, TextField } from '@/components/ui/client/forms';
+import { Toast } from '@/components/ui/dialogs/Toast';
+import { Checkbox, SelectField, Switch, TextField } from '@/components/ui/forms';
 import { Table } from '@/components/ui/tables/Table';
 import { arrayShuffle } from '@/utils/array-shuffle';
 import { dispatchInputEvent } from '@/utils/dispatch-event';

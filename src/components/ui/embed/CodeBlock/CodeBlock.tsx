@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { type BundledLanguage, codeToHtml } from 'shiki';
 
-import { Toast } from '@/components/ui/client/dialogs/Toast';
+import { Toast } from '@/components/ui/dialogs/Toast';
 import { useCopyButton } from '@/hooks/use-copy-button';
 import { escapeHtml } from 'markdown-it/lib/common/utils.mjs';
 import { useEffect, useId, useState } from 'react';

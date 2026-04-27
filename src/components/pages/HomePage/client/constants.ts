@@ -1,4 +1,4 @@
-import { ImageData } from '@/components/ui/client/dialogs/ImageViewModal';
+import { ImageData } from '@/components/ui/dialogs/ImageViewModal';
 
 export type PhotoData = ImageData & {
   instagram?: string;

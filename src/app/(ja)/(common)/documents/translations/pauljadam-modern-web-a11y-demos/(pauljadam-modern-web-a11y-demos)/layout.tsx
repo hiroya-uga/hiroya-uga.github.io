@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/layout.module.css';
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 
 import { Inter } from 'next/font/google';
 import Link from 'next/link';

@@ -4,7 +4,7 @@ import {
   StartingField,
   TimeField,
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/parts/fields';
-import { Radio } from '@/components/ui/client/forms';
+import { Radio } from '@/components/ui/forms';
 import type { Dispatch, SetStateAction } from 'react';
 
 type FormState = Pick<SlackReminder.FormState, 'day' | 'time' | 'starting' | 'monthState'>;

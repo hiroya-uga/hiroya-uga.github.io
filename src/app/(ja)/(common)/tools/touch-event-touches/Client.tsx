@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { RunButton } from '@/components/ui/buttons/RunButton';
-import { LoadingIcon } from '@/components/ui/icons/LoadingIcon';
+import { LoadingIcon } from '@/components/ui/Icons/LoadingIcon';
 
 type Touches = Record<
   string,

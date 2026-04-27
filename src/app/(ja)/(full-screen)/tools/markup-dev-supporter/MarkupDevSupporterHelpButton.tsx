@@ -4,7 +4,7 @@ import { getMetadata } from '@/utils/get-metadata';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import styles from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton.module.css';
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import { PrivacyPolicyMessage } from '@/components/ui/embed/PrivacyPolicyMessage';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { setSelectionRange } from '@/utils/set-selection-range';

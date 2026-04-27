@@ -1,4 +1,4 @@
-import { TextField } from '@/components/ui/client/forms';
+import { TextField } from '@/components/ui/forms';
 import { Heading } from '@/components/ui/headings/Heading';
 import { Table } from '@/components/ui/tables/Table';
 import { SITE_NAME } from '@/constants/meta';

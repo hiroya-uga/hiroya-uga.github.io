@@ -2,8 +2,8 @@
 
 import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { RunButton } from '@/components/ui/buttons/RunButton';
-import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
-import { Radio } from '@/components/ui/client/forms';
+import { CodeBlock } from '@/components/ui/embed/CodeBlock';
+import { Radio } from '@/components/ui/forms';
 import { Heading } from '@/components/ui/headings/Heading';
 import { useMemo, useState } from 'react';
 

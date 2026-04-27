@@ -1,6 +1,6 @@
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { Fps } from '@/components/ui/client/features/Fps';
+import { Fps } from '@/components/ui/features/Fps';
 import { Metadata } from '@/utils/get-metadata';
 import { Suspense } from 'react';
 import { SimpleBlockBreaker } from './client';

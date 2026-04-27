@@ -1,7 +1,7 @@
 'use client';
 
-import { Picture } from '@/components/ui/client/features/Picture';
-import { LoadingIcon } from '@/components/ui/icons/LoadingIcon';
+import { Picture } from '@/components/ui/features/Picture';
+import { LoadingIcon } from '@/components/ui/Icons/LoadingIcon';
 import { useHiddenUntilFound } from '@/hooks/use-hidden-until-found';
 import { resolveArticleImagePath, resolveCategoryName } from '@/utils/articles';
 import { formattedDateString } from '@/utils/formatter';

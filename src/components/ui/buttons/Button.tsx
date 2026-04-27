@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes } from 'react';
 
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import Link, { LinkProps } from 'next/link';
 
 interface Props extends Omit<LinkProps, 'className'> {

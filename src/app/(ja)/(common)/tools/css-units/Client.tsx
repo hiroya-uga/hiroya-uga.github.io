@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
-import { Switch } from '@/components/ui/client/forms';
+import { Switch } from '@/components/ui/forms';
 import { NoteList } from '@/components/ui/lists/NoteList';
 import clsx from 'clsx';
 

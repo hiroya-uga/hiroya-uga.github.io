@@ -3,7 +3,7 @@ import { RunButton } from '@/components/ui/buttons/RunButton';
 import { useCallback, useId, useMemo, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client.module.css';
-import { TextField } from '@/components/ui/client/forms';
+import { TextField } from '@/components/ui/forms';
 import { formatStringToNumericString } from '@/utils/formatter';
 import clsx from 'clsx';
 

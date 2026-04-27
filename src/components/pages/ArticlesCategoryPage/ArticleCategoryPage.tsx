@@ -2,7 +2,7 @@ import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/Category
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { GlobalHeader } from '@/components/structures/GlobalHeader';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { ArticleList } from '@/components/ui/client/lists/ArticleList';
+import { ArticleList } from '@/components/ui/lists/ArticleList';
 import {
   ARTICLE_PATH_PATTERN_LIST,
   ArticleCategory,
