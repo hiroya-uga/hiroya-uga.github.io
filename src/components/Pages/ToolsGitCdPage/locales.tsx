@@ -77,7 +77,7 @@ export const gitCdLocales = {
           { cmd: '--depth <n>', desc: 'ディレクトリの探索深度を制限する（デフォルト: 5）' },
           {
             cmd: '--nested',
-            desc: 'git サブモジュール・モノレポ内のリポジトリなどのネストしたリポジトリも一覧に含める（デフォルトでは除外）',
+            desc: 'ネストしたリポジトリも一覧に含める（デフォルトでは除外）',
           },
           {
             cmd: '--cache',
@@ -180,7 +180,7 @@ export const gitCdLocales = {
           { cmd: '--depth <n>', desc: 'Limit directory traversal depth (default: 5)' },
           {
             cmd: '--nested',
-            desc: 'Include nested repositories (git submodules, monorepo sub-packages, etc.) in the list (excluded by default)',
+            desc: 'Include nested repositories in the list (excluded by default)',
           },
           {
             cmd: '--cache',
