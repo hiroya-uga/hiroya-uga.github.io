@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { resolveCategoryName } from '@/utils/articles';
 import { getMetadata } from '@/utils/get-metadata';

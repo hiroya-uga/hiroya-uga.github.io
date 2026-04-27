@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { OPEN_NEW_TAB } from '@/constants/messages';
 import Link from 'next/link';
 

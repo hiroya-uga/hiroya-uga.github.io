@@ -8,7 +8,7 @@ import { Details } from '@/components/ui/boxes/Details';
 import { ClearButton } from '@/components/ui/buttons/ClearButton';
 import { ClickableArea } from '@/components/ui/features/ClickableArea/ClickableArea';
 import { TextField } from '@/components/ui/forms';
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { mediaCategory, mediaTopics, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { createId } from '@/utils/create-id';

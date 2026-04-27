@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { useCopyButton } from '@/hooks/use-copy-button';
 
 import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';

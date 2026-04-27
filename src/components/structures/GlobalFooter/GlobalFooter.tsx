@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
 import { SEO } from '@/constants/seo';

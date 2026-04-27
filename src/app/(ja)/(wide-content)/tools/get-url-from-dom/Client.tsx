@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client.module.css';
 import { ClearButton } from '@/components/ui/buttons/ClearButton';
-import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 
 type FilterType = GetUrlFromDomFilterType;
 type SortType = 'none' | 'sort' | 'reverse';
