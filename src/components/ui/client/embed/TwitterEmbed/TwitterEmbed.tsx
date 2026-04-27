@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import styles from '@/components/Media/TwitterEmbed/TwitterEmbed.module.css';
+import styles from './TwitterEmbed.module.css';
 
 type Props = {
   href: string;

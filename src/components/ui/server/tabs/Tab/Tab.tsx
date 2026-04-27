@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useId, useMemo, useState } from
 
 import clsx from 'clsx';
 
-import styles from '@/components/Tab/Tab.module.css';
+import styles from './Tab.module.css';
 
 type Context = {
   readonly currentKey: string;
