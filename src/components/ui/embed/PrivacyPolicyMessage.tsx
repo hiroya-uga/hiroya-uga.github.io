@@ -1,4 +1,4 @@
-import { TextLink } from '@/components/ui/server/buttons/TextLink';
+import { TextLink } from '@/components/ui/buttons/TextLink';
 
 interface Props {
   lang: 'ja' | 'en';

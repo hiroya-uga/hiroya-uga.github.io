@@ -5,7 +5,7 @@ import { useDeferredValue, useId, useMemo } from 'react';
 
 import { Lang } from '@/types/lang';
 
-import { NoteList } from '@/components/ui/server/lists/NoteList';
+import { NoteList } from '@/components/ui/lists/NoteList';
 import { convertHexToRgb } from '@/utils/color';
 import { useContrastColors } from './hooks';
 import { contrastCheckerLocales } from './locales';

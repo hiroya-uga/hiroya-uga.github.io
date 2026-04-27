@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { LangSwitchLink } from '@/components/ui/server/features/LangSwitchLink';
+import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
 

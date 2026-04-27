@@ -1,4 +1,4 @@
-import { PrivacyPolicyMessage } from '@/components/ui/server/embed/PrivacyPolicyMessage';
+import { PrivacyPolicyMessage } from '@/components/ui/embed/PrivacyPolicyMessage';
 import clsx from 'clsx';
 
 interface Props {

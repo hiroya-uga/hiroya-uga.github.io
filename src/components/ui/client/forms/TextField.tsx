@@ -13,7 +13,7 @@ import {
 import clsx from 'clsx';
 
 import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon/SvgIcon';
-import { Required } from '@/components/ui/server/icons/Required';
+import { Required } from '@/components/ui/icons/Required';
 
 type BaseProps = {
   label: string;

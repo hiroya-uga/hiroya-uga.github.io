@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/server/buttons/Button';
+import { Button } from '@/components/ui/buttons/Button';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { getMetadata } from '@/utils/get-metadata';
 import clsx from 'clsx';

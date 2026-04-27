@@ -10,7 +10,7 @@ import { AnAltDecisionTreeException } from '@/app/(ja)/(common)/tools/an-alt-dec
 import { AnAltDecisionTreeQuestion } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeQuestion';
 
 import styles from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client.module.css';
-import { RunButton } from '@/components/ui/server/buttons/RunButton';
+import { RunButton } from '@/components/ui/buttons/RunButton';
 
 const formatIndex = (value: string | number | undefined | null) => {
   const index = typeof value !== 'number' ? Number(value) : value;

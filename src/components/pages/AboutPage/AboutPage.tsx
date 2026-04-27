@@ -1,9 +1,9 @@
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TextLink } from '@/components/ui/buttons/TextLink';
 import { Picture } from '@/components/ui/client/features/Picture';
-import { TextLink } from '@/components/ui/server/buttons/TextLink';
-import { Doumei } from '@/components/ui/server/embed/Doumei';
-import { Heading } from '@/components/ui/server/headings/Heading';
-import { DiscList } from '@/components/ui/server/lists/DiscList';
+import { Doumei } from '@/components/ui/embed/Doumei';
+import { Heading } from '@/components/ui/headings/Heading';
+import { DiscList } from '@/components/ui/lists/DiscList';
 import { getMetadata } from '@/utils/get-metadata';
 
 import { PersonalHistory, Zenryaku } from './server';

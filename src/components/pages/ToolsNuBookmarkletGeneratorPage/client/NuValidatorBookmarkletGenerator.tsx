@@ -1,9 +1,9 @@
 'use client';
 
+import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { Checkbox, TextField } from '@/components/ui/client/forms';
-import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
-import { NoteList } from '@/components/ui/server/lists/NoteList';
-import { Tab } from '@/components/ui/server/tabs/Tab';
+import { NoteList } from '@/components/ui/lists/NoteList';
+import { Tab } from '@/components/ui/tabs/Tab';
 import { Lang } from '@/types/lang';
 import { objectKeys } from '@/utils/object-keys';
 import { useRouter, useSearchParams } from 'next/navigation';
