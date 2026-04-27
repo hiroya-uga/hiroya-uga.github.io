@@ -8,7 +8,7 @@ type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   dispatch?: Dispatch<SetStateAction<boolean>>;
 };
 
-export const Switch = ({ dispatch, ...props }: Props) => {
+export const Switch = ({ dispatch, ...props }: Readonly<Props>) => {
   const state = useState(props.checked ?? props.defaultChecked ?? false);
   const isChecked = props.checked ?? state[0];
   const setIsChecked = dispatch ?? state[1];

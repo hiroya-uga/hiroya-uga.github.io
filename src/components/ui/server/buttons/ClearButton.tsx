@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 type Props = { size?: 'small' | 'medium'; children?: ReactNode; onClick: () => void };
 
-export const ClearButton = ({ size = 'medium', children = 'クリア', onClick }: Props) => {
+export const ClearButton = ({ size = 'medium', children = 'クリア', onClick }: Readonly<Props>) => {
   return (
     <button
       type="button"

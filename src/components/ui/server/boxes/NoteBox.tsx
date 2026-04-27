@@ -20,7 +20,7 @@ const getTitle = (level: NonNullable<Props['type']>) => {
   }
 };
 
-export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Props) => {
+export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Readonly<Props>) => {
   const TagName = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 
   return (

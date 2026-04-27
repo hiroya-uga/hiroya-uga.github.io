@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactElement | React.ReactElement[];
 };
 
-export const Table = (props: Props) => {
+export const Table = (props: Readonly<Props>) => {
   return (
     <div className={`${styles.root} scroll-hint-x`}>
       <table {...props} />

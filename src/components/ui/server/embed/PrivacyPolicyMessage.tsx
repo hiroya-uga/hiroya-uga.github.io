@@ -4,7 +4,7 @@ interface Props {
   lang: 'ja' | 'en';
 }
 
-export const PrivacyPolicyMessage = ({ lang }: Props) => {
+export const PrivacyPolicyMessage = ({ lang }: Readonly<Props>) => {
   if (lang === 'ja') {
     return (
       <>

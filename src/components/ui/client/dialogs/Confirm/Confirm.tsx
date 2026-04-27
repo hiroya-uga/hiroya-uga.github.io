@@ -12,7 +12,7 @@ type Props = {
   setConfirmData: (_: ConfirmData) => void;
 };
 
-export const Confirm = ({ confirm, setConfirmData }: Props) => {
+export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
   const id = useId();
   const portal = useSyncExternalStore(
     () => () => () => {},

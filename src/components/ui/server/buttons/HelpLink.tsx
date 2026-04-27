@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 } & React.ComponentProps<typeof Link>;
 
-export const HelpLink = ({ href, children, ...props }: Props) => {
+export const HelpLink = ({ href, children, ...props }: Readonly<Props>) => {
   return (
     <Link {...props} href={href} className="leading-base grid w-fit grid-cols-[1rem_auto] gap-1 text-base">
       <span className="mt-7px relative block size-4">

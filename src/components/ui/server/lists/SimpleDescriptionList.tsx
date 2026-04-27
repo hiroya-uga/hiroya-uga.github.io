@@ -1,11 +1,11 @@
-export const SimpleDescriptionList = ({
-  list,
-}: {
+interface Props {
   list: (
     | { title: string; description: React.ReactNode; key?: never }
     | { title: React.ReactNode; description: React.ReactNode; key: string }
   )[];
-}) => {
+}
+
+export const SimpleDescriptionList = ({ list }: Readonly<Props>) => {
   return (
     <dl>
       {list.map(({ title, description, ...item }) => {

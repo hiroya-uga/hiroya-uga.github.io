@@ -1,6 +1,10 @@
 import { ReactNode } from 'react';
 
-export const ExampleBox = ({ children }: { children: ReactNode }) => {
+interface Props {
+  children: ReactNode;
+}
+
+export const ExampleBox = ({ children }: Readonly<Props>) => {
   return (
     <figure>
       <figcaption className="relative z-10 w-fit bg-slate-600 px-2 text-white">Example</figcaption>

@@ -14,7 +14,7 @@ type Props = {
   list: ArticleFrontMatter[];
 };
 
-export const ArticleList = ({ type = 'simple', list }: Props) => {
+export const ArticleList = ({ type = 'simple', list }: Readonly<Props>) => {
   const untilFound = useHiddenUntilFound();
   const prefix = useId();
 

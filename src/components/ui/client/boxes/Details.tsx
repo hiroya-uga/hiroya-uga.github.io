@@ -2,19 +2,15 @@
 
 import { useState } from 'react';
 
-export const Details = ({
-  defaultOpen = false,
-  name,
-  summary,
-  children,
-  id,
-}: {
+interface Props {
   defaultOpen?: boolean;
   name?: string;
   summary: React.ReactNode;
   children: React.ReactNode;
   id: string;
-}) => {
+}
+
+export const Details = ({ defaultOpen = false, name, summary, children, id }: Readonly<Props>) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (

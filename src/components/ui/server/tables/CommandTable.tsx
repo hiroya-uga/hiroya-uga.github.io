@@ -15,7 +15,7 @@ interface Props {
   lang: Lang;
 }
 
-export const CommandTable = ({ items, lang }: Props) => {
+export const CommandTable = ({ items, lang }: Readonly<Props>) => {
   const { cmd: cmdLabel, desc: descLabel } = labels[lang];
 
   return (

@@ -10,7 +10,7 @@ type Props = {
   lang?: 'ja' | 'en';
 } & Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'hrefLang' | 'target'>;
 
-export const TextLink = ({ href, children, target, lang = 'ja', ...props }: Props) => {
+export const TextLink = ({ href, children, target, lang = 'ja', ...props }: Readonly<Props>) => {
   return (
     <Link
       {...props}
