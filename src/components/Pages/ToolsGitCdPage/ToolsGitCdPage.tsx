@@ -4,6 +4,7 @@ import { Heading } from '@/components/Heading';
 import { NoteList } from '@/components/List';
 import { CommandTable, Table } from '@/components/Table';
 import { CodeBlockWithPlatform } from '@/components/client/CodeBlockWithPlatform';
+import { LangSwitchLink } from '@/components/server/features/LangSwitchLink';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Lang } from '@/types/lang';
 import Link from 'next/link';
@@ -74,7 +75,7 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
         </div>
         <p>{t.introText}</p>
         <p className="mt-2 text-right text-xs text-slate-600 dark:text-[#a5b4cd]">
-          {inLanguage === 'ja' ? <Link href="./en">* View in English</Link> : <Link href="../">※ 日本語はこちら</Link>}
+          <LangSwitchLink lang={inLanguage} />
         </p>
       </PageTitle>
 

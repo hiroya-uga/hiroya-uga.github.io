@@ -1,8 +1,10 @@
+import Link from 'next/link';
+
 import { TweetLink } from '@/components/Clickable/TweetLink';
 import { CodeBlock } from '@/components/CodeBlock';
+import { LangSwitchLink } from '@/components/server/features/LangSwitchLink';
 import { CommandTable } from '@/components/Table';
 import { Lang } from '@/types/lang';
-import Link from 'next/link';
 import { vnuxLocales } from './locales';
 
 const INSTALL_COMMAND = 'curl -fsSL https://github.com/hiroya-uga/vnux/releases/latest/download/install.sh | zsh';
@@ -43,7 +45,7 @@ export const ToolsVnuxPage = ({ pageTitle, following, inLanguage = 'ja' }: Props
       </div>
 
       <p className="mb-14 text-right text-xs">
-        {inLanguage === 'ja' ? <Link href="./en">* View in English</Link> : <Link href="../">※ 日本語はこちら</Link>}
+        <LangSwitchLink lang={inLanguage} />
       </p>
 
       <section className="mb-14">
