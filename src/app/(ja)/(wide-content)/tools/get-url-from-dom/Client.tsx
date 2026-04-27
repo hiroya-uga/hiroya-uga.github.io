@@ -6,13 +6,13 @@ import {
   GetUrlFromDomFilterType,
   formatTargetList,
 } from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/format-target-list';
-import { Radio } from '@/components/Form';
+import { Radio } from '@/components/ui/client/forms';
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client.module.css';
-import { ClearButton } from '@/components/Clickable';
-import { SvgIcon } from '@/components/Icons';
+import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { ClearButton } from '@/components/ui/server/buttons/ClearButton';
 
 type FilterType = GetUrlFromDomFilterType;
 type SortType = 'none' | 'sort' | 'reverse';

@@ -1,6 +1,6 @@
 // app/articles/page.js
 
-import { Picture } from '@/components/Image';
+import { Picture } from '@/components/ui/client/features/Picture';
 import clsx from 'clsx';
 import Link from 'next/link';
 

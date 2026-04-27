@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/Icons';
+import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
 import { useCopyButton } from '@/hooks/use-copy-button';
 
 import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
@@ -6,7 +6,7 @@ import { useEffect, useId, useMemo, useState } from 'react';
 import { getCommandDescriptionNodes, getCommandNodes, parseMarkdownForSlack } from './utils';
 
 import styles from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/parts/PreviewAndResult/PreviewAndResult.module.css';
-import { Toast } from '@/components/Dialog';
+import { Toast } from '@/components/ui/client/dialogs/Toast';
 import clsx from 'clsx';
 
 type Props = {

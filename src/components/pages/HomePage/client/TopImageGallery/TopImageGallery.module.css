@@ -1,0 +1,35 @@
+@keyframes object-position {
+  from {
+    object-position: 50% 75%;
+  }
+  to {
+    object-position: 50% 40%;
+  }
+}
+
+.root {
+  overflow: clip;
+  transition:
+    height 0.3s ease-out,
+    visibility 0.3s ease-out;
+  interpolate-size: allow-keywords;
+
+  &[aria-hidden="true"] {
+    visibility: hidden;
+    height: 0;
+    transition-delay: 0.3s;
+  }
+}
+
+.item {
+  view-timeline-name: --x-gallery-item;
+  view-timeline-axis: block;
+}
+
+.image {
+  animation-name: object-position;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-timeline: --x-gallery-item;
+  animation-range: entry 0% exit 100%;
+}

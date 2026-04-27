@@ -34,5 +34,6 @@
   ],
   "editor.codeLens": true,
   "js/ts.referencesCodeLens.enabled": true,
-  "japanese-proofreading.textlint.外来語カタカナ表記": false
+  "japanese-proofreading.textlint.外来語カタカナ表記": false,
+  "js/ts.preferences.importModuleSpecifier": "non-relative"
 }

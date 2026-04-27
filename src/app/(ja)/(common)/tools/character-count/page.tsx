@@ -1,8 +1,8 @@
 import { useId } from 'react';
 
 import { CharacterCountContent } from '@/app/(ja)/(common)/tools/character-count/Client';
-import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/character-count');

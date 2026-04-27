@@ -1,4 +1,4 @@
-import { Checkbox, TextField } from '@/components/Form';
+import { Checkbox, TextField } from '@/components/ui/client/forms';
 import { Ref, RefObject } from 'react';
 import { KEYBOARD_EVENT_DEFAULT_OPTIONS } from '../constants';
 

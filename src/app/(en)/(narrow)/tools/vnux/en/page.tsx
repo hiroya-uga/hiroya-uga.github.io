@@ -1,5 +1,5 @@
-import { JsonLd } from '@/components/Meta';
-import { ToolsVnuxPage } from '@/components/Pages/ToolsVnuxPage';
+import { ToolsVnuxPage } from '@/components/pages/ToolsVnuxPage';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

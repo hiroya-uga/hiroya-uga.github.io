@@ -1,7 +1,7 @@
 'use client';
 
 import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
-import { TextField } from '@/components/Form';
+import { TextField } from '@/components/ui/client/forms';
 
 type FullDateValue = SlackReminder.FormState['fullDate'];
 

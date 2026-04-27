@@ -3,8 +3,8 @@
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { RunButton } from '@/components/Clickable';
-import { LoadingIcon } from '@/components/Icons';
+import { RunButton } from '@/components/ui/server/buttons/RunButton';
+import { LoadingIcon } from '@/components/ui/server/icons/LoadingIcon';
 
 export function KeepAwakeClient() {
   const wakeLockRef = useRef<WakeLockSentinel | null>(null);

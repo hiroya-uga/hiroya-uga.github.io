@@ -6,10 +6,10 @@ import { resolveCategoryName } from '@/utils/articles';
 import { Metadata } from 'next';
 
 import { getArticlesPageMeta } from '@/app/(ja)/(articles)/articles/[...slug]/utils';
-import { JsonLd } from '@/components/Meta';
-import { ArticleDetailPage } from '@/components/Pages/ArticleDetailPage';
-import { ArticleCategoryPage } from '@/components/Pages/ArticlesCategoryPage';
-import { ArticleYearOrSubCategoryPage } from '@/components/Pages/ArticleYearOrSubCategoryPage';
+import { ArticleDetailPage } from '@/components/pages/ArticleDetailPage';
+import { ArticleCategoryPage } from '@/components/pages/ArticlesCategoryPage';
+import { ArticleYearOrSubCategoryPage } from '@/components/pages/ArticleYearOrSubCategoryPage';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { objectKeys } from '@/utils/object-keys';
 import { notFound } from 'next/navigation';

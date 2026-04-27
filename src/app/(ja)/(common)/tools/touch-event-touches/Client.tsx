@@ -4,9 +4,9 @@ import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import clsx from 'clsx';
 
-import { NoteBox } from '@/components/Box';
-import { RunButton } from '@/components/Clickable';
-import { LoadingIcon } from '@/components/Icons';
+import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
+import { RunButton } from '@/components/ui/server/buttons/RunButton';
+import { LoadingIcon } from '@/components/ui/server/icons/LoadingIcon';
 
 type Touches = Record<
   string,

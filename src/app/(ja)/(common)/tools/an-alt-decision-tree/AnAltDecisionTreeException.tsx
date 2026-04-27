@@ -1,5 +1,5 @@
 import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/AnAltDecisionTreeHeading';
-import { Picture } from '@/components/Image';
+import { Picture } from '@/components/ui/client/features/Picture';
 import Link from 'next/link';
 
 export const AnAltDecisionTreeException = () => {

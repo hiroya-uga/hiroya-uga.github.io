@@ -1,6 +1,6 @@
-import { TextField } from '@/components/Form';
-import { Heading } from '@/components/Heading';
-import { Table } from '@/components/Table';
+import { TextField } from '@/components/ui/client/forms';
+import { Heading } from '@/components/ui/server/headings/Heading';
+import { Table } from '@/components/ui/server/tables/Table';
 import { SITE_NAME } from '@/constants/meta';
 import { Metadata } from 'next';
 

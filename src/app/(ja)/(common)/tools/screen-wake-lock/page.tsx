@@ -1,8 +1,8 @@
 import { KeepAwakeClient } from '@/app/(ja)/(common)/tools/screen-wake-lock/Client';
-import { TweetLink } from '@/components/Clickable/TweetLink';
-import { NoteList } from '@/components/List';
-import { JsonLd } from '@/components/Meta';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
+import { NoteList } from '@/components/ui/server/lists/NoteList';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

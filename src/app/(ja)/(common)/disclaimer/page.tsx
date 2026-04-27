@@ -1,5 +1,5 @@
-import { Heading } from '@/components/Heading';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { Heading } from '@/components/ui/server/headings/Heading';
 import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 

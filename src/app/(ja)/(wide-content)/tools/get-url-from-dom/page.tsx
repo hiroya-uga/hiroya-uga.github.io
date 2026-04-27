@@ -1,7 +1,7 @@
 import { GetUrlFromDOMContent } from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client';
-import { TweetLink } from '@/components/Clickable/TweetLink';
-import { Heading } from '@/components/Heading';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
+import { Heading } from '@/components/ui/server/headings/Heading';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/get-url-from-dom');

@@ -1,5 +1,5 @@
-import { JsonLd } from '@/components/Meta';
-import { HomePage } from '@/components/Pages/HomePage';
+import { HomePage } from '@/components/pages/HomePage';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

@@ -1,0 +1,56 @@
+import { Lang } from '@/types/lang';
+
+export const contrastCheckerLocales = {
+  ja: {
+    fgLabel: '前景色（テキスト）',
+    bgLabel: '背景色',
+    swapLabel: '前景色と背景色を入れ替える',
+    contrastRatioLabel: 'コントラスト比',
+    previewLabel: 'プレビュー',
+    previewNormal:
+      '通常テキスト：あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat itaque provident aliquam quasi dolorum recusandae, labore cupiditate quia doloremque sunt accusantium repellat nam soluta voluptatibus id! Veniam voluptas est corrupti!',
+    previewBoldLarge: '大きなテキスト：18pxの太字テキストです。This is 18px bold text.',
+    previewLarge: '大きなテキスト：24pxのテキストです。This is 24px text.',
+    criteriaTitle: '判定結果',
+    criteriaHeaderCriteria: '達成基準',
+    criteriaHeaderResult: '判定',
+    criteriaHeaderSuggest: '提案',
+    fixFg: '文字色',
+    fixBg: '背景色',
+    fixDescription: 'サジェストされた値を使う',
+    largeTextNote: '大きなテキスト：18pt（24px）以上、または14pt（約18.67px）以上の太字',
+    criteriaLabels: {
+      'aa-normal': { label: 'AA 通常テキスト', threshold: '4.5:1 以上' },
+      'aa-large': { label: 'AA 大きなテキスト', threshold: '3:1 以上' },
+      'aaa-normal': { label: 'AAA 通常テキスト', threshold: '7:1 以上' },
+      'aaa-large': { label: 'AAA 大きなテキスト', threshold: '4.5:1 以上' },
+      'aa-ui': { label: 'AA UIコンポーネント・グラフィック', threshold: '3:1 以上' },
+    } as const,
+  },
+  en: {
+    fgLabel: 'Foreground (Text)',
+    bgLabel: 'Background',
+    swapLabel: 'Swap foreground and background colors',
+    contrastRatioLabel: 'Contrast Ratio',
+    previewLabel: 'Preview',
+    previewNormal:
+      'Normal text: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat itaque provident aliquam quasi dolorum recusandae, labore cupiditate quia doloremque sunt accusantium repellat nam soluta voluptatibus id! Veniam voluptas est corrupti! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat itaque provident aliquam quasi dolorum recusandae, labore cupiditate quia doloremque sunt accusantium repellat nam soluta voluptatibus id! Veniam voluptas est corrupti!',
+    previewBoldLarge: 'Large text: This is 18px bold text.',
+    previewLarge: 'Large text: This is 24px text.',
+    criteriaTitle: 'Results',
+    criteriaHeaderCriteria: 'Criterion',
+    criteriaHeaderResult: 'Result',
+    criteriaHeaderSuggest: 'Suggest',
+    fixFg: 'Foreground',
+    fixBg: 'Background',
+    fixDescription: 'Use suggested color to fix low contrast',
+    largeTextNote: 'Large text: 18pt (24px) or larger, or 14pt (≈18.67px) or larger Bold',
+    criteriaLabels: {
+      'aa-normal': { label: 'AA Normal Text', threshold: '≥ 4.5:1' },
+      'aa-large': { label: 'AA Large Text', threshold: '≥ 3:1' },
+      'aaa-normal': { label: 'AAA Normal Text', threshold: '≥ 7:1' },
+      'aaa-large': { label: 'AAA Large Text', threshold: '≥ 4.5:1' },
+      'aa-ui': { label: 'AA UI Components & Graphics', threshold: '≥ 3:1' },
+    } as const,
+  },
+} satisfies Record<Lang, unknown>;

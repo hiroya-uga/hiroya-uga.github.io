@@ -7,12 +7,12 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import { Metadata } from 'next/types';
 import remarkGfm from 'remark-gfm';
 
+import { MainVisual } from '@/app/(ja)/(common)/documents/notes/components/MainVisual';
+import { TocForArticle } from '@/app/(ja)/(common)/documents/notes/components/TocForArticle';
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
-import { ExampleBox } from '@/components/Box';
-import { JsonLdForNote } from '@/components/Meta';
-import { SpecBlockQuote } from '@/components/SpecBlockQuote';
-import { MainVisual } from '@/components/specific/documents/notes/MainVisual';
-import { TocForArticle } from '@/components/specific/documents/notes/TocForArticle';
+import { JsonLdForNote } from '@/components/structures/JsonLd';
+import { ExampleBox } from '@/components/ui/server/boxes/ExampleBox';
+import { SpecBlockQuote } from '@/components/ui/server/boxes/SpecBlockQuote';
 import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 

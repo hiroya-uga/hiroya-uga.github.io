@@ -7,7 +7,7 @@ import React, { Children, HTMLAttributes, ReactNode } from 'react';
 import clsx from 'clsx';
 import type { MDXComponents } from 'mdx/types';
 
-import { CodeBlock } from '@/components/CodeBlock';
+import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
 import { DISALLOWED_ID_CHARACTERS_REGEX } from '@/constants/regexp';
 
 type TagName = keyof JSX.IntrinsicElements;

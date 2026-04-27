@@ -1,9 +1,9 @@
 'use client';
-import { RunButton } from '@/components/Clickable';
+import { RunButton } from '@/components/ui/server/buttons/RunButton';
 import { useCallback, useId, useMemo, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client.module.css';
-import { TextField } from '@/components/Form';
+import { TextField } from '@/components/ui/client/forms';
 import { formatStringToNumericString } from '@/utils/formatter';
 import clsx from 'clsx';
 
