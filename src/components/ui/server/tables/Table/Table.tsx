@@ -1,4 +1,4 @@
-import styles from '@/components/Table/Table.module.css';
+import styles from './Table.module.css';
 
 type Props = {
   children: React.ReactElement | React.ReactElement[];

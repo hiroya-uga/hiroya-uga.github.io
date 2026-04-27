@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 
-import styles from '@/components/Image/Picture.module.css';
 import { forwardRef } from 'react';
+import styles from './Picture.module.css';
 
 type Props = React.ComponentProps<typeof Image> & {
   alt: string;
