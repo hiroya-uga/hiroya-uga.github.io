@@ -18,7 +18,7 @@ type BaseProps = {
 
 type Props = BaseProps | (BaseProps & { title: string; copyButton?: true });
 
-export const CodeBlockWithPlatform = ({ codes, language, ...codeBlockProps }: Props) => {
+export const CodeBlockWithPlatform = ({ codes, language, ...codeBlockProps }: Readonly<Props>) => {
   const id = useId();
   const [platform, handleChange] = usePlatform();
   const resolvedLanguage = typeof language === 'string' ? language : language[platform];

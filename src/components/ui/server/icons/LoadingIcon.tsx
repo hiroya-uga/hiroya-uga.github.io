@@ -1,5 +1,9 @@
 // Safariでレンダリングがおかしくなるので、beforeの代わりにspan要素を使う
-export const LoadingIcon = ({ alt = '読み込み中' }: { alt?: string }) => {
+interface Props {
+  alt?: string;
+}
+
+export const LoadingIcon = ({ alt = '読み込み中' }: Readonly<Props>) => {
   return (
     <span
       role={alt ? 'img' : 'presentation'}

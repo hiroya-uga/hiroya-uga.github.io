@@ -8,7 +8,10 @@ type Props = {
   afterIcon?: Parameters<typeof SvgIcon>[0]['name'];
 } & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick' | 'disabled' | 'onTouchStart'>;
 
-const RunButtonComponent = ({ children, beforeIcon, afterIcon, ...props }: Props, ref: Ref<HTMLButtonElement>) => {
+const RunButtonComponent = (
+  { children, beforeIcon, afterIcon, ...props }: Readonly<Props>,
+  ref: Ref<HTMLButtonElement>,
+) => {
   return (
     <button
       ref={ref}

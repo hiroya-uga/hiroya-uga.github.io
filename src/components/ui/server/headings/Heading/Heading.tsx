@@ -7,7 +7,7 @@ type Props = {
   id?: string;
 };
 
-export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Props) => {
+export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Readonly<Props>) => {
   const TagName = `h${level}` as const;
 
   return (

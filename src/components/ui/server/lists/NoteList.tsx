@@ -3,7 +3,7 @@ interface Props {
   symbol?: string;
 }
 
-export const NoteList = ({ list, symbol = '※' }: Props) => {
+export const NoteList = ({ list, symbol = '※' }: Readonly<Props>) => {
   if (list.length === 0) {
     return null;
   }

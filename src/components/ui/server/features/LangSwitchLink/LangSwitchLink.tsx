@@ -6,7 +6,7 @@ interface Props {
   lang: Lang;
 }
 
-export const LangSwitchLink = ({ lang }: Props) => {
+export const LangSwitchLink = ({ lang }: Readonly<Props>) => {
   if (lang === 'ja') {
     return (
       <Link href="./en" lang="en" hrefLang="en">

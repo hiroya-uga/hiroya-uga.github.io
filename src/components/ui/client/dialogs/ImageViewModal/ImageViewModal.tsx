@@ -23,7 +23,7 @@ interface Props {
   handleNavigate: (index: number) => void;
 }
 
-export const ImageViewModal = ({ images, currentIndex, handleClose, handleNavigate }: Props) => {
+export const ImageViewModal = ({ images, currentIndex, handleClose, handleNavigate }: Readonly<Props>) => {
   const id = useId();
 
   const dialogRef = useRef<HTMLDialogElement>(null);

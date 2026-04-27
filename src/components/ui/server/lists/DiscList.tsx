@@ -1,4 +1,8 @@
-export const DiscList = ({ list }: { list: (string | { value: React.ReactNode; key: string })[] }) => {
+interface Props {
+  list: (string | { value: React.ReactNode; key: string })[];
+}
+
+export const DiscList = ({ list }: Readonly<Props>) => {
   if (list.length === 0) {
     return null;
   }

@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon/SvgIcon';
 import { Required } from '@/components/ui/server/icons/Required';
 
-type Props = {
+type BaseProps = {
   label: string;
   value?: string;
   description?: string;
@@ -45,22 +45,17 @@ type Props = {
     }
 );
 
+interface Props extends Omit<BaseProps, 'label' | 'description'> {
+  autoResize: boolean;
+  noResize: boolean;
+  onInput?: React.FormEventHandler<HTMLTextAreaElement>;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
+  id: string;
+  descriptionId?: string;
+}
+
 const TextareaComponent = (
-  {
-    descriptionId,
-    multiline: _,
-    autoResize,
-    noResize,
-    align,
-    ...props
-  }: Omit<Props, 'label' | 'description'> & {
-    autoResize: boolean;
-    noResize: boolean;
-    onInput?: React.FormEventHandler<HTMLTextAreaElement>;
-    onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
-    id: string;
-    descriptionId?: string;
-  },
+  { descriptionId, multiline: _, autoResize, noResize, align, ...props }: Readonly<Props>,
   ref: Ref<HTMLTextAreaElement>,
 ) => {
   const dummyTextareaRef = useRef<HTMLDivElement>(null);
@@ -111,7 +106,7 @@ const TextareaComponent = (
 
 const Textarea = forwardRef(TextareaComponent);
 const TextFieldComponent = (
-  { label, description, align = 'left', disabled, ...props }: Props,
+  { label, description, align = 'left', disabled, ...props }: BaseProps,
   ref: Ref<HTMLTextAreaElement | HTMLInputElement>,
 ) => {
   const id = useId();

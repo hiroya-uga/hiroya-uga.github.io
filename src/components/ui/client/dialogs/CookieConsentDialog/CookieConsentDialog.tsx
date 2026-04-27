@@ -81,7 +81,12 @@ const i18n = {
   },
 } satisfies Record<Lang, unknown>;
 
-const MajimenaNaiyou = ({ lang = 'ja', agreeLabel }: { lang?: Lang; agreeLabel: string }) => {
+interface MajimenaNaiyouProps {
+  lang?: Lang;
+  agreeLabel: string;
+}
+
+const MajimenaNaiyou = ({ lang = 'ja', agreeLabel }: Readonly<MajimenaNaiyouProps>) => {
   const t = i18n[lang];
 
   return (

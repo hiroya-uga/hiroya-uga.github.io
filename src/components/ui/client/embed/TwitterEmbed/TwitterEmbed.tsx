@@ -11,7 +11,7 @@ type Props = {
   theme?: 'light' | 'dark';
 };
 
-export const TwitterEmbed = ({ href, nocards = false, noconversation = false, theme }: Props) => {
+export const TwitterEmbed = ({ href, nocards = false, noconversation = false, theme }: Readonly<Props>) => {
   const ref = useRef<HTMLQuoteElement>(null);
 
   useEffect(() => {

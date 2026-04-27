@@ -13,7 +13,7 @@ export type SimpleLnkListProps = {
     target?: AnchorHTMLAttributes<HTMLAnchorElement>['target'];
   }[];
 };
-export const SimpleLinkList = ({ list }: SimpleLnkListProps) => {
+export const SimpleLinkList = ({ list }: Readonly<SimpleLnkListProps>) => {
   return (
     <ul>
       {list.map(({ title, href, description, lang, hrefLang, target }, index) => {

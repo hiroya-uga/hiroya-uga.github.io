@@ -9,7 +9,7 @@ type Props = {
   onChange: React.FormEventHandler<HTMLInputElement>;
 };
 
-export const Radio = ({ label, ...props }: Props) => {
+export const Radio = ({ label, ...props }: Readonly<Props>) => {
   const id = useId();
 
   return (

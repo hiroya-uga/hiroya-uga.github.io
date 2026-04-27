@@ -22,7 +22,12 @@ type Name =
   | 'question';
 const map = new Map<Name, boolean>();
 
-export const SvgIcon = ({ name, alt }: { name: Name; alt: string }) => {
+interface Props {
+  name: Name;
+  alt: string;
+}
+
+export const SvgIcon = ({ name, alt }: Readonly<Props>) => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {

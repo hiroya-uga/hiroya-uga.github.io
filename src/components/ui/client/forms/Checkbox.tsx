@@ -16,7 +16,7 @@ type Props = {
     }
 );
 
-export const Checkbox = (props: Props) => {
+export const Checkbox = (props: Readonly<Props>) => {
   const id = useId();
   const inputProps = (() => {
     if ('label' in props) {

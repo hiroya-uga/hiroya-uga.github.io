@@ -3,13 +3,12 @@ import { AnchorHTMLAttributes } from 'react';
 import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
 import Link, { LinkProps } from 'next/link';
 
-export const Button = ({
-  children,
-  ...props
-}: Omit<LinkProps, 'className'> & {
+interface Props extends Omit<LinkProps, 'className'> {
   children: React.ReactNode;
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target'];
-}) => {
+}
+
+export const Button = ({ children, ...props }: Readonly<Props>) => {
   const isNewTab = props.target === '_blank';
 
   return (

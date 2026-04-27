@@ -17,17 +17,14 @@ interface BaseProps {
   copyButton?: true;
 }
 
-const CopyButton = ({
-  title = '',
-  code,
-  withPlatformSwitcher,
-  'aria-describedby': id,
-}: {
+interface CopyButtonProps {
   title?: string;
   code: string;
   withPlatformSwitcher?: boolean;
   'aria-describedby'?: string;
-}) => {
+}
+
+const CopyButton = ({ title = '', code, withPlatformSwitcher, 'aria-describedby': id }: Readonly<CopyButtonProps>) => {
   const { handleClickCopyButton } = useCopyButton();
   const [toastMessage, setToastMessage] = useState('');
   const [isJa, setIsJa] = useState(false);
@@ -67,7 +64,7 @@ type Props =
       withPlatformSwitcher?: boolean;
     });
 
-export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restProps }: Props) => {
+export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restProps }: Readonly<Props>) => {
   const [html, setHtml] = useState('');
   const id = useId();
 

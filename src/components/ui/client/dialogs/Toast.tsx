@@ -11,7 +11,7 @@ type Props = {
   duration?: number;
 };
 
-export const Toast = ({ message, setMessage, duration = 3000 }: Props) => {
+export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>) => {
   const portal = useSyncExternalStore(
     () => () => {},
     () => document.getElementById(DIALOG_PORTAL_ID),

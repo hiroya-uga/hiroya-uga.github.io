@@ -13,7 +13,7 @@ type Props = {
   defaultClickable: string;
 };
 
-export const ClickableArea = ({ as, children, className, defaultClickable }: Props) => {
+export const ClickableArea = ({ as, children, className, defaultClickable }: Readonly<Props>) => {
   const ref = useRef<HTMLElement>(null);
   const targetRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const router = useRouter();
