@@ -2,9 +2,9 @@
 
 import { MarkupDevSupporterHelpButton } from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { Toast } from '@/components/ui/client/dialogs/Toast';
-import { Picture } from '@/components/ui/client/features/Picture';
-import { Switch } from '@/components/ui/client/forms';
+import { Toast } from '@/components/ui/dialogs/Toast';
+import { Picture } from '@/components/ui/features/Picture';
+import { Switch } from '@/components/ui/forms';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { copy } from '@/utils/copy';
 import { setSelectionRange } from '@/utils/set-selection-range';

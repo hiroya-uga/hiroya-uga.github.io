@@ -1,5 +1,5 @@
 import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
-import { TextField } from '@/components/ui/client/forms';
+import { TextField } from '@/components/ui/forms';
 
 type StartingValue = SlackReminder.FormState['starting'];
 

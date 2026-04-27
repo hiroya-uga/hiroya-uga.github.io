@@ -1,6 +1,6 @@
 'use client';
 
-import { Toast } from '@/components/ui/client/dialogs/Toast';
+import { Toast } from '@/components/ui/dialogs/Toast';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 

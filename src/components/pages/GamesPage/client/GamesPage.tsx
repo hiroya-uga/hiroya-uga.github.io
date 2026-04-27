@@ -3,9 +3,9 @@
 import Link from 'next/link';
 
 import { PageTitle } from '@/components/structures/PageTitle';
-import { ClickableArea } from '@/components/ui/client/features/ClickableArea/ClickableArea';
+import { ClickableArea } from '@/components/ui/features/ClickableArea/ClickableArea';
 
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
 import { GAMES_LINK_LIST } from '@/constants/link-list';
 import { getMetadata, Metadata } from '@/utils/get-metadata';
 import clsx from 'clsx';

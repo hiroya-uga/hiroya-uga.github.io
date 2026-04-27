@@ -1,6 +1,6 @@
 import { TextLink } from '@/components/ui/buttons/TextLink';
-import { Picture } from '@/components/ui/client/features/Picture';
 import { Doumei } from '@/components/ui/embed/Doumei';
+import { Picture } from '@/components/ui/features/Picture';
 import { SNS_LINKS } from '@/constants/sns';
 
 export const ProfileSection = () => {

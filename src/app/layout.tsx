@@ -6,8 +6,8 @@ import { Suspense } from 'react';
 
 import { Comment } from '@/components/jokes/Comment';
 import { Console } from '@/components/jokes/Console';
-import { CookieConsentDialog } from '@/components/ui/client/dialogs/CookieConsentDialog';
-import { Analytics } from '@/components/ui/client/features/Analytics';
+import { CookieConsentDialog } from '@/components/ui/dialogs/CookieConsentDialog';
+import { Analytics } from '@/components/ui/features/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';

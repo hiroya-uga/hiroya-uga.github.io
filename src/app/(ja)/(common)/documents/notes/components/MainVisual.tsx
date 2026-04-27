@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Picture } from '@/components/ui/client/features/Picture';
+import { Picture } from '@/components/ui/features/Picture';
 import clsx from 'clsx';
 
 export const MainVisual = () => {

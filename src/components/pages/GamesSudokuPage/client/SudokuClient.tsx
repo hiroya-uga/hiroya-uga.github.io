@@ -1,11 +1,11 @@
 'use client';
 
 import { RunButton } from '@/components/ui/buttons/RunButton';
-import { Confirm } from '@/components/ui/client/dialogs/Confirm';
-import { useConfirm } from '@/components/ui/client/dialogs/Confirm/hooks';
-import { Toast } from '@/components/ui/client/dialogs/Toast';
-import { Switch } from '@/components/ui/client/forms';
-import { LoadingIcon } from '@/components/ui/icons/LoadingIcon';
+import { Confirm } from '@/components/ui/dialogs/Confirm';
+import { useConfirm } from '@/components/ui/dialogs/Confirm/hooks';
+import { Toast } from '@/components/ui/dialogs/Toast';
+import { Switch } from '@/components/ui/forms';
+import { LoadingIcon } from '@/components/ui/Icons/LoadingIcon';
 import { arrayShuffle } from '@/utils/array-shuffle';
 import { formatStringToNumericString } from '@/utils/formatter';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';

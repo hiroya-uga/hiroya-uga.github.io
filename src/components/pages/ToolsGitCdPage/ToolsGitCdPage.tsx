@@ -1,7 +1,7 @@
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
-import { CodeBlockWithPlatform } from '@/components/ui/client/embed/CodeBlockWithPlatform';
+import { CodeBlock } from '@/components/ui/embed/CodeBlock';
+import { CodeBlockWithPlatform } from '@/components/ui/embed/CodeBlockWithPlatform';
 import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import { Heading } from '@/components/ui/headings/Heading';
 import { NoteList } from '@/components/ui/lists/NoteList';

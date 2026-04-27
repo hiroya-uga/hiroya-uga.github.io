@@ -1,7 +1,7 @@
 'use client';
 
-import { Picture } from '@/components/ui/client/features/Picture';
-import { LoadingIcon } from '@/components/ui/icons/LoadingIcon';
+import { Picture } from '@/components/ui/features/Picture';
+import { LoadingIcon } from '@/components/ui/Icons/LoadingIcon';
 import clsx from 'clsx';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { PhotoData, photoDataList } from './constants';

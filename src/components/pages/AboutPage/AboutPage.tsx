@@ -1,7 +1,7 @@
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TextLink } from '@/components/ui/buttons/TextLink';
-import { Picture } from '@/components/ui/client/features/Picture';
 import { Doumei } from '@/components/ui/embed/Doumei';
+import { Picture } from '@/components/ui/features/Picture';
 import { Heading } from '@/components/ui/headings/Heading';
 import { DiscList } from '@/components/ui/lists/DiscList';
 import { getMetadata } from '@/utils/get-metadata';

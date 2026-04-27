@@ -1,6 +1,6 @@
 'use client';
 
-import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
+import { CodeBlock } from '@/components/ui/embed/CodeBlock';
 import clsx from 'clsx';
 import { ComponentProps, useId } from 'react';
 import { usePlatform } from './hooks';

@@ -1,7 +1,7 @@
 'use client';
 
-import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
-import { Picture } from '@/components/ui/client/features/Picture';
+import { SvgIcon } from '@/components/ui/Icons/SvgIcon';
+import { Picture } from '@/components/ui/features/Picture';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
@@ -117,7 +117,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
             className="h-auto max-h-[calc(100dvh-12rem)] min-h-0 max-w-full object-contain"
             style={{ viewTransitionName: IMAGE_MODAL_VIEW_TRANSITION_NAME }}
             aria-describedby={['index', 'spec', 'data'].map((key) => `${id}-${key}`).join(' ')}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e: React.MouseEvent<HTMLImageElement>) => e.stopPropagation()}
           />
         </p>
         <p>
@@ -143,7 +143,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
         id={id}
       >
         <div // NOSONAR
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
         >
           <p className="sr-only" id={`${id}-index`}>{`${total}枚中${currentIndex + 1}枚目`}</p>
           <p className="font-bold">{photo.caption}</p>

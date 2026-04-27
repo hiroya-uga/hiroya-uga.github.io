@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { TweetLink } from '@/components/structures/TweetLink';
-import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
+import { CodeBlock } from '@/components/ui/embed/CodeBlock';
 import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import { CommandTable } from '@/components/ui/tables/CommandTable';
 import { Lang } from '@/types/lang';

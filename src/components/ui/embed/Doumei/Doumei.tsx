@@ -1,4 +1,4 @@
-import { Picture } from '@/components/ui/client/features/Picture';
+import { Picture } from '@/components/ui/features/Picture';
 import Script from 'next/script';
 
 export const Doumei = () => {
