@@ -2,7 +2,7 @@ import { TweetLink } from '@/components/Clickable/TweetLink';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Heading } from '@/components/Heading';
 import { NoteList } from '@/components/List';
-import { CommandTable } from '@/components/Table';
+import { CommandTable, Table } from '@/components/Table';
 import { CodeBlockWithPlatform } from '@/components/client/CodeBlockWithPlatform';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Lang } from '@/types/lang';
@@ -78,7 +78,61 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
         </p>
       </PageTitle>
 
-      <Heading level={2}>{t.installSection}</Heading>
+      <Heading level={2}>{t.whySection}</Heading>
+      <p className="-mt-3 mb-4 text-sm">
+        <Link href="#getting-started" className='after:content-["_↓"]'>
+          {t.installSection}
+        </Link>
+      </p>
+      <div className="mb-4 space-y-2 text-sm leading-relaxed">
+        {t.whyTexts.map((text) => (
+          <p key={text}>{text}</p>
+        ))}
+      </div>
+
+      <Heading level={3}>{t.comparisonSection}</Heading>
+      <div className="mb-8">
+        <Table>
+          <thead className="@w640:table-header-group border-primary block border-b bg-slate-50 dark:bg-slate-800/50">
+            <tr className="@w640:table-row block">
+              <th scope="col" className="@w640:table-cell block px-3 py-2 text-left font-medium">
+                {t.comparisonMethodLabel}
+              </th>
+              <th scope="col" className="@w640:table-cell block px-3 py-2 text-left font-medium">
+                {t.comparisonNoteLabel}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="@w640:table-row-group @w640:[&>tr:not(:first-child)>*]:border-t @w640:[&>tr:not(:first-child)>*]:border-primary divide-primary block divide-y dark:divide-slate-600">
+            {t.comparisonItems.map(({ method, note, highlight }) => (
+              <tr key={method} className="@w640:table-row block">
+                <th
+                  scope="row"
+                  className={`@w640:table-cell @w640:py-2 block overflow-auto whitespace-nowrap px-3 pt-2 text-left align-middle ${highlight ? 'font-semibold' : 'font-normal'}`}
+                >
+                  {method}
+                </th>
+                <td
+                  className={`@w640:table-cell @w640:py-2 block px-3 pb-2 align-middle leading-relaxed ${highlight ? 'font-semibold' : ''}`}
+                >
+                  {note}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+
+      <Heading level={3}>{t.targetSection}</Heading>
+      <ul className="mb-8 list-disc space-y-1 pl-5 text-sm">
+        {t.targetItems.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
+      <Heading level={2} id="getting-started">
+        {t.installSection}
+      </Heading>
 
       <p className="mb-4 text-sm leading-relaxed">{t.installDescription}</p>
       <div className="space-y-4">

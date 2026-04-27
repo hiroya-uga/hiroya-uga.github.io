@@ -420,12 +420,16 @@ export const SEO: Record<
   },
   '/tools/git-cd': {
     title: 'git-cd',
-    description: '任意のローカルリポジトリへ移動できる機能をgitコマンドに追加するツールです。',
+    afterSubTitle: 'ローカルリポジトリを横断移動するCLIツール',
+    description:
+      'git cd コマンドでローカルリポジトリを検索し、簡単に作業ディレクトリへ移動できるようになるCLI拡張ツールです。複数プロジェクト間の切り替えを高速化します。',
     languages: { ja: '/tools/git-cd', en: '/tools/git-cd/en' },
   },
   '/tools/git-cd/en': {
     title: 'git-cd',
-    description: 'A tool that adds the ability to jump to any local repository from the git command line.',
+    afterSubTitle: 'Jump across local repositories with a single command',
+    description:
+      'A CLI extension that lets you search local repositories and jump to any working directory with git cd. Speeds up switching between multiple projects.',
     languages: { ja: '/tools/git-cd', en: '/tools/git-cd/en' },
     locale: 'en_US',
   },
