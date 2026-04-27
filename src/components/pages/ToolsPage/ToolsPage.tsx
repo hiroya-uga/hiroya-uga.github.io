@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Heading } from '@/components/ui/server/headings/Heading';
-import { SimpleDescriptionList } from '@/components/ui/server/lists/SimpleDescriptionList';
+import { Heading } from '@/components/ui/headings/Heading';
+import { SimpleDescriptionList } from '@/components/ui/lists/SimpleDescriptionList';
 import { OSS_LINK_LIST, TOOLS_LINK_LIST } from '@/constants/link-list';
 import { getMetadata } from '@/utils/get-metadata';
 import { ToolCards } from './server';

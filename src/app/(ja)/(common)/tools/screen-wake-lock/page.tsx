@@ -2,7 +2,7 @@ import { KeepAwakeClient } from '@/app/(ja)/(common)/tools/screen-wake-lock/Clie
 import { JsonLd } from '@/components/structures/JsonLd';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { NoteList } from '@/components/ui/server/lists/NoteList';
+import { NoteList } from '@/components/ui/lists/NoteList';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

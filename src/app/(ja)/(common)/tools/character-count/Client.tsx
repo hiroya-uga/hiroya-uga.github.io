@@ -5,9 +5,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import styles from '@/app/(ja)/(common)/tools/character-count/Client.module.css';
+import { RunButton } from '@/components/ui/buttons/RunButton';
 import { Switch } from '@/components/ui/client/forms';
-import { RunButton } from '@/components/ui/server/buttons/RunButton';
-import { Heading } from '@/components/ui/server/headings/Heading';
+import { Heading } from '@/components/ui/headings/Heading';
 
 const HALF_CHARACTERS_REGEXP = /\s|\d|[a-z]/;
 const VERTICAL_CHARACTERS_REGEXP = /\d|[a-zA-Zａ-ｚＡ-Ｚ]/;

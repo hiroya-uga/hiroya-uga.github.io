@@ -1,8 +1,8 @@
 'use client';
 
+import { RunButton } from '@/components/ui/buttons/RunButton';
 import { Toast } from '@/components/ui/client/dialogs/Toast';
 import { Switch } from '@/components/ui/client/forms';
-import { RunButton } from '@/components/ui/server/buttons/RunButton';
 import { dispatchChangeEvent } from '@/utils/dispatch-event';
 import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';

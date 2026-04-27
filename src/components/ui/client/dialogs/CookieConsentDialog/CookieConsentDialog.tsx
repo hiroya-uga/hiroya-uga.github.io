@@ -5,8 +5,8 @@ import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import ReactGA from 'react-ga4';
 
-import { RunButton } from '@/components/ui/server/buttons/RunButton';
-import { TextLink } from '@/components/ui/server/buttons/TextLink';
+import { RunButton } from '@/components/ui/buttons/RunButton';
+import { TextLink } from '@/components/ui/buttons/TextLink';
 import { SITE_NAME } from '@/constants/meta';
 import { Lang } from '@/types/lang';
 import clsx from 'clsx';

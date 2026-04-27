@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Switch } from '@/components/ui/client/forms';
-import { NoteList } from '@/components/ui/server/lists/NoteList';
+import { NoteList } from '@/components/ui/lists/NoteList';
 import clsx from 'clsx';
 
 const ABSOLUTE = {

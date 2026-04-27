@@ -1,5 +1,5 @@
 'use client';
-import { RunButton } from '@/components/ui/server/buttons/RunButton';
+import { RunButton } from '@/components/ui/buttons/RunButton';
 import { useCallback, useId, useMemo, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client.module.css';

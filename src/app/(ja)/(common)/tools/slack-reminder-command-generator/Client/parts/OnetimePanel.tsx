@@ -5,7 +5,7 @@ import {
   FullDateField,
   TimeField,
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/parts/fields';
-import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
+import { NoteBox } from '@/components/ui/boxes/NoteBox';
 
 type FormState = Pick<SlackReminder.FormState, 'fullDate' | 'time'>;
 

@@ -1,10 +1,10 @@
 import { TweetLink } from '@/components/structures/TweetLink';
-import { Heading } from '@/components/ui/server/headings/Heading';
-import { DiscList } from '@/components/ui/server/lists/DiscList';
-import { NoteList } from '@/components/ui/server/lists/NoteList';
+import { Heading } from '@/components/ui/headings/Heading';
+import { DiscList } from '@/components/ui/lists/DiscList';
+import { NoteList } from '@/components/ui/lists/NoteList';
 
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Table } from '@/components/ui/server/tables/Table';
+import { Table } from '@/components/ui/tables/Table';
 import { Metadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 import { SudokuClient } from './client';

@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { TweetLink } from '@/components/structures/TweetLink';
 import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
-import { LangSwitchLink } from '@/components/ui/server/features/LangSwitchLink';
-import { CommandTable } from '@/components/ui/server/tables/CommandTable';
+import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
+import { CommandTable } from '@/components/ui/tables/CommandTable';
 import { Lang } from '@/types/lang';
 import { vnuxLocales } from './locales';
 

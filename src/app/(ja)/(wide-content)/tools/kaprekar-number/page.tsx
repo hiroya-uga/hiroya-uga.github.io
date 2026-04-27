@@ -1,6 +1,6 @@
 import { KaprekarNumberContent } from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
+import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { getMetadata } from '@/utils/get-metadata';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/page.module.css';

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { PageTitle } from '@/components/structures/PageTitle';
-import { SimpleDescriptionList } from '@/components/ui/server/lists/SimpleDescriptionList';
+import { SimpleDescriptionList } from '@/components/ui/lists/SimpleDescriptionList';
 import { DOCUMENTS_LINK_LIST } from '@/constants/link-list';
 import { getMetadata } from '@/utils/get-metadata';
 

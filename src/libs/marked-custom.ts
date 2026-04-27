@@ -1,4 +1,4 @@
-import { LOADING_ICON_HTML } from '@/components/ui/server/icons/LoadingIcon';
+import { LOADING_ICON_HTML } from '@/components/ui/icons/LoadingIcon';
 import { URL_ORIGIN } from '@/constants/meta';
 import { resolveArticleImagePath } from '@/utils/articles';
 import { marked, TokenizerAndRendererExtension, type Token } from 'marked';

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Heading } from '@/components/ui/server/headings/Heading';
+import { Heading } from '@/components/ui/headings/Heading';
 
 import type { HistoryItem } from '../constants';
 import { PERSONAL_HISTORY } from '../constants';

@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { HelpLink } from '@/components/ui/server/buttons/HelpLink';
-import { LangSwitchLink } from '@/components/ui/server/features/LangSwitchLink';
+import { HelpLink } from '@/components/ui/buttons/HelpLink';
+import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
 import { NuValidatorBookmarkletGenerator } from './client';

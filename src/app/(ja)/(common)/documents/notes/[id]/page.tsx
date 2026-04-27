@@ -11,8 +11,8 @@ import { MainVisual } from '@/app/(ja)/(common)/documents/notes/components/MainV
 import { TocForArticle } from '@/app/(ja)/(common)/documents/notes/components/TocForArticle';
 import { getArticles } from '@/app/(ja)/(common)/documents/notes/utils';
 import { JsonLdForNote } from '@/components/structures/JsonLd';
-import { ExampleBox } from '@/components/ui/server/boxes/ExampleBox';
-import { SpecBlockQuote } from '@/components/ui/server/boxes/SpecBlockQuote';
+import { ExampleBox } from '@/components/ui/boxes/ExampleBox';
+import { SpecBlockQuote } from '@/components/ui/boxes/SpecBlockQuote';
 import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 

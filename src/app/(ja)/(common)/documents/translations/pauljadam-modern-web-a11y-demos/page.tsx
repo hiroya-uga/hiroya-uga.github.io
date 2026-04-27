@@ -1,6 +1,6 @@
 import { PageTitle } from '@/components/structures/PageTitle';
 import { TweetLink } from '@/components/structures/TweetLink';
-import { SimpleLinkList } from '@/components/ui/server/lists/SimpleLinkList';
+import { SimpleLinkList } from '@/components/ui/lists/SimpleLinkList';
 import { getMetadata } from '@/utils/get-metadata';
 
 const pageList = [

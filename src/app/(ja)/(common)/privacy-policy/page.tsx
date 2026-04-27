@@ -1,8 +1,8 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { Button } from '@/components/ui/server/buttons/Button';
-import { TextLink } from '@/components/ui/server/buttons/TextLink';
-import { Heading } from '@/components/ui/server/headings/Heading';
-import { DiscList } from '@/components/ui/server/lists/DiscList';
+import { Button } from '@/components/ui/buttons/Button';
+import { TextLink } from '@/components/ui/buttons/TextLink';
+import { Heading } from '@/components/ui/headings/Heading';
+import { DiscList } from '@/components/ui/lists/DiscList';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/privacy-policy');

@@ -2,11 +2,11 @@
 
 import { SortVisualizer } from '@/app/(ja)/(wide-content)/tools/sort-visualizer/parts/SortVisualizer';
 import { sortMethods, sortRecursive } from '@/app/(ja)/(wide-content)/tools/sort-visualizer/sort-recursive';
+import { NoteBox } from '@/components/ui/boxes/NoteBox';
+import { RunButton } from '@/components/ui/buttons/RunButton';
 import { Toast } from '@/components/ui/client/dialogs/Toast';
 import { Checkbox, SelectField, Switch, TextField } from '@/components/ui/client/forms';
-import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
-import { RunButton } from '@/components/ui/server/buttons/RunButton';
-import { Table } from '@/components/ui/server/tables/Table';
+import { Table } from '@/components/ui/tables/Table';
 import { arrayShuffle } from '@/utils/array-shuffle';
 import { dispatchInputEvent } from '@/utils/dispatch-event';
 import { formatStringToNumericString } from '@/utils/formatter';

@@ -11,8 +11,8 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client.module.css';
+import { ClearButton } from '@/components/ui/buttons/ClearButton';
 import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
-import { ClearButton } from '@/components/ui/server/buttons/ClearButton';
 
 type FilterType = GetUrlFromDomFilterType;
 type SortType = 'none' | 'sort' | 'reverse';
