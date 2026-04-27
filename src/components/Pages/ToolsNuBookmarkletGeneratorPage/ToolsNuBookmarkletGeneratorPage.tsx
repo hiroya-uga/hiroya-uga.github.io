@@ -1,10 +1,11 @@
+import { Suspense } from 'react';
+
 import { HelpLink } from '@/components/Clickable';
 import { TweetLink } from '@/components/Clickable/TweetLink';
+import { LangSwitchLink } from '@/components/server/features/LangSwitchLink';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
-import Link from 'next/link';
-import { Suspense } from 'react';
 import { NuValidatorBookmarkletGenerator } from './client';
 
 const i18n = {
@@ -54,7 +55,7 @@ export const ToolsNuBookmarkletGeneratorPage = ({
 
       <div className="bg-secondary mx-auto max-w-5xl rounded-2xl px-4 pb-10 pt-2.5 shadow-md sm:pb-14">
         <p className="sm:mb-34px mb-2 text-right text-xs">
-          {lang === 'ja' ? <Link href="./en">* View in English</Link> : <Link href="../">※ 日本語はこちら</Link>}
+          <LangSwitchLink lang={lang} />
         </p>
         <Suspense>
           <NuValidatorBookmarkletGenerator lang={lang} />
