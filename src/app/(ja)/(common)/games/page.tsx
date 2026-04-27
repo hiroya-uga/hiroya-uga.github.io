@@ -1,4 +1,4 @@
-import { GamesPage } from '@/components/Pages/GamesPage';
+import { GamesPage } from '@/components/pages/GamesPage';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/games');

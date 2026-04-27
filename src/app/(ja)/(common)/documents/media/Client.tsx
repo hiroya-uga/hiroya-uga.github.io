@@ -4,11 +4,11 @@ import React, { SetStateAction, useId, useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Details } from '@/components/Box';
-import { ClearButton } from '@/components/Clickable';
-import { ClickableArea } from '@/components/Clickable/ClickableArea';
-import { TextField } from '@/components/Form';
-import { SvgIcon } from '@/components/Icons';
+import { Details } from '@/components/ui/client/boxes/Details';
+import { ClickableArea } from '@/components/ui/client/features/ClickableArea/ClickableArea';
+import { TextField } from '@/components/ui/client/forms';
+import { SvgIcon } from '@/components/ui/client/Icons/SvgIcon';
+import { ClearButton } from '@/components/ui/server/buttons/ClearButton';
 import { mediaCategory, mediaTopics, mediaTypes } from '@/constants/media';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { createId } from '@/utils/create-id';

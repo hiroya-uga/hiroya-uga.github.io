@@ -1,6 +1,6 @@
 import { RenderTextInReactPlaygroundContent } from '@/app/(ja)/(common)/tools/render-text-in-react/Client';
-import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
 import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 

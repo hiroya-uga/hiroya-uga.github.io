@@ -3,7 +3,7 @@
 import { useId, useMemo } from 'react';
 
 import type { SlackReminder } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
-import { Radio } from '@/components/Form';
+import { Radio } from '@/components/ui/client/forms';
 
 type DayValue = SlackReminder.FormState['day'];
 

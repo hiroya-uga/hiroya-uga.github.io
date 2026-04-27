@@ -1,6 +1,6 @@
 import styles from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/(pauljadam-modern-web-a11y-demos)/apple-system-css-font/page.module.css';
 
-import { SampleImage } from '@/components/specific/documents/pauljadam-modern-web-a11y-demos';
+import { SampleImage } from '@/app/(ja)/(common)/documents/translations/pauljadam-modern-web-a11y-demos/components';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/documents/translations/pauljadam-modern-web-a11y-demos/apple-system-css-font');

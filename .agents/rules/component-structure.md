@@ -1,11 +1,11 @@
 # Component Structure
 
-## `src/components/Pages/`
+## `src/components/pages/`
 
 Place page-level UI here. Keep `app/` focused on routing/SEO/metadata only.
 
 ```
-src/components/Pages/<PageName>/
+src/components/pages/<PageName>/
   index.ts               # barrel export
   <PageName>.tsx         # main component
   client/
@@ -21,7 +21,7 @@ Naming: PascalCase for dirs/files; `client/` and `server/` are lowercase excepti
 ### `app/page.tsx` pattern
 
 ```tsx
-import { HomePage } from '@/components/Pages/HomePage';
+import { HomePage } from '@/components/pages/HomePage';
 import { JsonLd } from '@/components/Meta';
 import { DEFAULT_JSON_LD } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';

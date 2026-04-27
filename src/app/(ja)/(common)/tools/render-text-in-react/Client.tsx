@@ -1,10 +1,10 @@
 'use client';
 
-import { NoteBox } from '@/components/Box';
-import { RunButton } from '@/components/Clickable';
-import { CodeBlock } from '@/components/CodeBlock';
-import { Radio } from '@/components/Form';
-import { Heading } from '@/components/Heading';
+import { CodeBlock } from '@/components/ui/client/embed/CodeBlock';
+import { Radio } from '@/components/ui/client/forms';
+import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
+import { RunButton } from '@/components/ui/server/buttons/RunButton';
+import { Heading } from '@/components/ui/server/headings/Heading';
 import { useMemo, useState } from 'react';
 
 const Example = ({ shouldUseTemplateLiteral }: { shouldUseTemplateLiteral: boolean }) => {

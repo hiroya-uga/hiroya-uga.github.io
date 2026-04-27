@@ -1,10 +1,10 @@
 import { KaprekarNumberContent } from '@/app/(ja)/(wide-content)/tools/kaprekar-number/Client';
-import { NoteBox } from '@/components/Box';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
 import { getMetadata } from '@/utils/get-metadata';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/page.module.css';
-import { TweetLink } from '@/components/Clickable/TweetLink';
+import { TweetLink } from '@/components/structures/TweetLink';
 
 export const metadata = getMetadata('/tools/kaprekar-number');
 

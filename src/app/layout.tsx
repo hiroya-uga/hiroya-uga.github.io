@@ -4,9 +4,10 @@ import '@/app/globals.css';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import { Analytics } from '@/components/Layout/Analytics';
-import { CookieConsentDialog } from '@/components/Layout/CookieConsentDialog';
-import { Comment, Console } from '@/components/Layout/Jokes';
+import { Comment } from '@/components/jokes/Comment';
+import { Console } from '@/components/jokes/Console';
+import { CookieConsentDialog } from '@/components/ui/client/dialogs/CookieConsentDialog';
+import { Analytics } from '@/components/ui/client/features/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';

@@ -1,5 +1,5 @@
-import { JsonLd } from '@/components/Meta';
-import { ToolsGitCdPage } from '@/components/Pages/ToolsGitCdPage';
+import { ToolsGitCdPage } from '@/components/pages/ToolsGitCdPage';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-import { NoteBox } from '@/components/Box';
-import { SimpleDescriptionList } from '@/components/List';
-import { LinkToOriginal } from '@/components/specific/documents/translations/LinkToOriginal';
-import { WEB_SPEC_TRANSLATIONS_NOTE } from '@/components/specific/documents/translations/constants';
-import { RelatedResourceBox } from '@/components/specific/documents/translations/w3c/wai';
+import { RelatedResourceBox } from '@/app/(ja)/(common)/documents/translations/w3c/components';
+import { LinkToOriginal } from '@/app/(ja)/(common)/documents/translations/w3c/components/LinkToOriginal';
+import { WEB_SPEC_TRANSLATIONS_NOTE } from '@/app/(ja)/(common)/documents/translations/w3c/components/constants';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { NoteBox } from '@/components/ui/server/boxes/NoteBox';
+import { SimpleDescriptionList } from '@/components/ui/server/lists/SimpleDescriptionList';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/documents/translations/w3c/wai/tutorials/images');

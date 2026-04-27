@@ -1,4 +1,4 @@
-import { GamesNumberPairingPage } from '@/components/Pages/GamesNumberPairingPage';
+import { GamesNumberPairingPage } from '@/components/pages/GamesNumberPairingPage';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/games/number-pairing');

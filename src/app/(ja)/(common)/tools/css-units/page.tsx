@@ -1,8 +1,8 @@
 import { useId } from 'react';
 
 import { CSSUnitsContent } from '@/app/(ja)/(common)/tools/css-units/Client';
-import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/css-units');

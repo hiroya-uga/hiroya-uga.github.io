@@ -1,10 +1,10 @@
 import { useId } from 'react';
 
 import { AccessibleNameAndDescriptionComputation } from '@/app/(ja)/(common)/tools/accessible-name-and-description-computation/Client';
-import { TextLink } from '@/components/Clickable';
-import { TweetLink } from '@/components/Clickable/TweetLink';
-import { DiscList } from '@/components/List';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
+import { TextLink } from '@/components/ui/server/buttons/TextLink';
+import { DiscList } from '@/components/ui/server/lists/DiscList';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/accessible-name-and-description-computation');

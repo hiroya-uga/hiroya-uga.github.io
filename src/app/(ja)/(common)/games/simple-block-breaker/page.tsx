@@ -1,4 +1,4 @@
-import { GamesSimpleBlockBreakerPage } from '@/components/Pages/GamesSimpleBlockBreakerPage';
+import { GamesSimpleBlockBreakerPage } from '@/components/pages/GamesSimpleBlockBreakerPage';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/games/simple-block-breaker');

@@ -1,5 +1,5 @@
-import { JsonLd } from '@/components/Meta';
-import { GamesSudokuPage } from '@/components/Pages/GamesSudokuPage';
+import { GamesSudokuPage } from '@/components/pages/GamesSudokuPage';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

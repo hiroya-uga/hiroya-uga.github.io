@@ -1,5 +1,5 @@
-import { JsonLd } from '@/components/Meta';
-import { ToolsNuBookmarkletGeneratorPage } from '@/components/Pages/ToolsNuBookmarkletGeneratorPage';
+import { ToolsNuBookmarkletGeneratorPage } from '@/components/pages/ToolsNuBookmarkletGeneratorPage';
+import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
 

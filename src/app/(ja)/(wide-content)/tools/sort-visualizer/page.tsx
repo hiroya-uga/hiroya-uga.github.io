@@ -1,6 +1,6 @@
 import { SortVisualizerContent } from '@/app/(ja)/(wide-content)/tools/sort-visualizer/Client';
-import { TweetLink } from '@/components/Clickable/TweetLink';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/sort-visualizer');

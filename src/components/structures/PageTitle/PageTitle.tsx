@@ -1,5 +1,17 @@
-import { PrivacyPolicyMessage } from '@/components/specific/message';
+import { PrivacyPolicyMessage } from '@/components/ui/server/embed/PrivacyPolicyMessage';
 import clsx from 'clsx';
+
+interface Props {
+  title?: string;
+  pageTitle?: string;
+  previous?: string;
+  following?: string;
+  children?: React.ReactNode;
+  description?: string;
+  lang?: 'ja' | 'en';
+  shouldShowPrivacyPolicyMessage?: boolean;
+  shouldShowNonAccessibleMessage?: boolean;
+}
 
 export const PageTitle = ({
   title,
@@ -11,17 +23,7 @@ export const PageTitle = ({
   lang = 'ja',
   shouldShowPrivacyPolicyMessage = false,
   shouldShowNonAccessibleMessage = false,
-}: {
-  title?: string;
-  pageTitle?: string;
-  previous?: string;
-  following?: string;
-  children?: React.ReactNode;
-  description?: string;
-  lang?: 'ja' | 'en';
-  shouldShowPrivacyPolicyMessage?: boolean;
-  shouldShowNonAccessibleMessage?: boolean;
-}) => {
+}: Readonly<Props>) => {
   const hasSubtitle = Boolean(previous || following);
   return (
     <div className="@w640:mb-20 mb-14">

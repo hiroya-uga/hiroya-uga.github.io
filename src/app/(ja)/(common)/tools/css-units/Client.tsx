@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
-import { Switch } from '@/components/Form';
-import { NoteList } from '@/components/List';
+import { Switch } from '@/components/ui/client/forms';
+import { NoteList } from '@/components/ui/server/lists/NoteList';
 import clsx from 'clsx';
 
 const ABSOLUTE = {

@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { Checkbox, TextField } from '@/components/Form';
-import { Tab } from '@/components/Tab';
+import { Checkbox, TextField } from '@/components/ui/client/forms';
+import { Tab } from '@/components/ui/server/tabs/Tab';
 
 import {
   everyTypeName,
