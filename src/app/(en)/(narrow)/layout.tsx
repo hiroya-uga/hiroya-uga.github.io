@@ -1,4 +1,4 @@
-import { NarrowLayout } from '@/components/Layout/NarrowLayout';
+import { NarrowLayout } from '@/components/layouts/NarrowLayout';
 
 interface Props {
   children: React.ReactNode;
