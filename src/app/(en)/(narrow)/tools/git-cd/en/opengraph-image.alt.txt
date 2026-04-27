@@ -1,1 +1,1 @@
-uga.dev git-cd A CLI extension that lets you search local repositories and jump to any working directory with git cd. Speeds up switching between multiple projects.
+uga.dev git-cd Jump across local repositories with a single command A CLI extension that lets you search local repositories and jump to any working directory with git cd. Speeds up switching between multiple projects.
