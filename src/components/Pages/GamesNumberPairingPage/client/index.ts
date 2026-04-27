@@ -1,1 +1,0 @@
-export { NumberPairingClient } from './NumberPairingClient';
