@@ -52,6 +52,10 @@ public/articles/**/*.avif
 # Claude Code
 .claude/settings.local.json
 
+# Storybook
+storybook-static/
+debug-storybook.log
+
 # temporary files
 /.tmp
 

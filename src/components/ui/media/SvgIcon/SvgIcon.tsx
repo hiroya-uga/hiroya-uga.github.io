@@ -50,7 +50,7 @@ export const SvgIcon = ({ name, alt }: Readonly<Props>) => {
     map.set(name, true);
 
     (async () => {
-      const { getSvg } = await import(`./${name}-icon-svg`);
+      const { getSvg } = await import(`./${name}-icon-svg.ts`);
       portal.insertAdjacentHTML('beforeend', getSvg(`${SVG_ID_PREFIX}-${name}`));
       document.body.appendChild(portal);
       setIsReady(true);
