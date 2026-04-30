@@ -112,9 +112,11 @@ const MajimenaNaiyou = ({ lang = 'ja', agreeLabel }: Readonly<MajimenaNaiyouProp
 export function CookieConsentDialog() {
   const id = useId();
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const isInEnglish = usePathname().endsWith('/en/');
+  const pathname = usePathname();
+  const isInEnglish = pathname.endsWith('/en/');
+  const isNotTop = pathname !== '/';
   const isFromSNSApp = useSearchParams()?.get('utm_medium') === 'social';
-  const shouldShowBanner = useRef(isInEnglish || isFromSNSApp);
+  const shouldShowBanner = useRef(isNotTop || isFromSNSApp);
 
   const [isBannerDialogOpen, setIsBannerDialogOpen] = useState(false);
   const [isAfterBannerDialogCloseRequest, setIsAfterBannerDialogCloseRequest] = useState(false);

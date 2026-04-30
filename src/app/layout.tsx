@@ -71,8 +71,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 if (window.location.search.includes('utm_medium=social')) {
                   document.documentElement.setAttribute('data-cookie-consent', 'waiting-from-sns');
                 }
-                if (window.location.pathname.includes('/en/')) {
+                if (window.location.pathname.endsWith('/en/')) {
                   document.documentElement.setAttribute('data-cookie-consent', 'waiting-in-en');
+                }
+                if (window.location.pathname === '/') {
+                  document.documentElement.setAttribute('data-cookie-consent', 'waiting-on-top');
                 }
               }
             } catch {}

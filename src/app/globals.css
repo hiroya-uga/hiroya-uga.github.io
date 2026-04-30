@@ -414,7 +414,7 @@
     transition: filter 0.3s ease-out;
   }
 
-  html[data-cookie-consent="waiting"] body {
+  html[data-cookie-consent="waiting-on-top"] body {
     filter: blur(5px);
   }
 
@@ -445,7 +445,7 @@
     background-image: radial-gradient(circle at 0% 0%, rgb(200 123 20), rgb(0 0 0) 100%);
   }
 
-  html:not([data-cookie-consent="waiting"]) body::before {
+  html:not([data-cookie-consent="waiting-on-top"]) body::before {
     opacity: 0;
     transition:
       opacity 0.5s ease-in,
