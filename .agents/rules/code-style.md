@@ -60,6 +60,33 @@ const hoge = ({ a, b, c }) => {};
 
 `<input>` / `<textarea>` must use `text-base` (16px) or larger. Smaller sizes trigger iOS Safari auto-zoom on focus.
 
+## JSX string interpolation with units
+
+Use template literals when appending units to a value in JSX.
+
+```tsx
+// Bad
+{
+  fl;
+}
+mm;
+// Good
+{
+  `${fl}mm`;
+}
+```
+
+## Refs
+
+`useRef` variables must use a `Ref` suffix.
+
+```ts
+// Bad
+const video = useRef(null);
+// Good
+const videoRef = useRef(null);
+```
+
 ## Comments
 
 - `//` for implementation notes
