@@ -176,6 +176,7 @@ export const photoDataList: PhotoData[] = [
     caption: '蓑掛岩（南伊豆・静岡）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE6INpCn9LC',
+    flickr: 'https://flic.kr/p/2saQbvn',
     date: '2020.08.16',
     width: 1920,
     height: 1278,
