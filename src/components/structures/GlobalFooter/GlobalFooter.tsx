@@ -14,7 +14,7 @@ import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
 
 import styles from '@/components/structures/GlobalFooter/GlobalFooter.module.css';
-import { OPEN_NEW_TAB } from '@/constants/messages';
+import { BREADCRUMB_LABEL, OPEN_NEW_TAB } from '@/constants/messages';
 import { Lang } from '@/types/lang';
 
 const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
@@ -84,11 +84,11 @@ type Props = {
 
 const i18n = {
   ja: {
-    breadcrumb: 'サイト内の現在位置',
+    breadcrumb: BREADCRUMB_LABEL.ja,
     snsLinks: 'SNSリンク',
   },
   en: {
-    breadcrumb: 'Current location within the site',
+    breadcrumb: BREADCRUMB_LABEL.en,
     snsLinks: 'SNS Links',
   },
 } satisfies Record<Lang, unknown>;
