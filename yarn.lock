@@ -2055,13 +2055,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.17.18":
-  version: 4.17.23
-  resolution: "@types/lodash@npm:4.17.23"
-  checksum: 10c0/9d9cbfb684e064a2b78aab9e220d398c9c2a7d36bc51a07b184ff382fa043a99b3d00c16c7f109b4eb8614118f4869678dbae7d5c6700ed16fb9340e26cc0bf6
-  languageName: node
-  linkType: hard
-
 "@types/markdown-it@npm:^14.1.2":
   version: 14.1.2
   resolution: "@types/markdown-it@npm:14.1.2"
@@ -4205,7 +4198,6 @@ __metadata:
     "@testing-library/user-event": "npm:^14.6.1"
     "@types/gtag.js": "npm:^0.0.20"
     "@types/jquery": "npm:^3.5.19"
-    "@types/lodash": "npm:^4.17.18"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/mdx": "npm:^2.0.5"
     "@types/node": "npm:24"
@@ -4223,7 +4215,6 @@ __metadata:
     jquery: "npm:^3.7.1"
     jsdom: "npm:^28.1.0"
     lint-staged: "npm:^16.2.7"
-    lodash: "npm:^4.18.1"
     markdown-it: "npm:^14.1.1"
     marked: "npm:^15.0.12"
     next: "npm:^16.2.3"
@@ -4944,13 +4935,6 @@ __metadata:
   linkType: hard
 
 "lodash@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21"
-  checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.18.1":
   version: 4.18.1
   resolution: "lodash@npm:4.18.1"
   checksum: 10c0/757228fc68805c59789e82185135cf85f05d0b2d3d54631d680ca79ec21944ec8314d4533639a14b8bcfbd97a517e78960933041a5af17ecb693ec6eecb99a27
