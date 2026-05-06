@@ -24,6 +24,10 @@ export const SEO: Record<
     title: '記事一覧',
     description: '技術メモや日記などをまとめています。',
   },
+  '/wiki': {
+    title: 'Wikiʻole',
+    description: 'FAQ、用語説明、ツールの使い方などの知識をまとめています。',
+  },
   '/disclaimer': {
     title: '免責事項',
     description: `このページでは${SITE_NAME}（以下「当サイト」）における免責事項についてご説明します。\n本免責事項は、必要に応じて改訂される場合があります。`,

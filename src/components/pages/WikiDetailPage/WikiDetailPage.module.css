@@ -1,0 +1,304 @@
+.edit {
+  text-decoration: line-through;
+}
+
+/** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
+@container (width <= 23.125rem) {
+  .title {
+    padding: 4px 10px 6px;
+    margin: 0 0 4px;
+    border: solid var(--border);
+    border-width: 2px 0;
+  }
+
+  .toc,
+  .content {
+    padding: 0 10px;
+
+    p {
+      margin: 1lh 0 0;
+    }
+
+    h2 {
+      margin: 1lh 0 0.5em;
+      color: darkblue;
+
+      &::before {
+        font-weight: normal;
+        content: "【";
+      }
+      &::after {
+        font-weight: normal;
+        content: "】";
+      }
+
+      + * {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      margin: 0.6em 0 0.5em;
+      font-weight: bold;
+
+      &::before {
+        content: "◆";
+      }
+    }
+
+    ol,
+    ul {
+      margin: 0.5em 0;
+    }
+    ol {
+      display: grid;
+      counter-reset: ol;
+
+      > li {
+        display: flex;
+        gap: 2px;
+        align-items: flex-start;
+        counter-increment: ol;
+
+        &::before {
+          min-width: calc(1lh + 2px);
+          margin-top: calc(1 / 18 * 1rem);
+          font-size: calc(10 / 18 * 1rem);
+          line-height: 1.16;
+          text-align: center;
+          content: counter(ol);
+          border: 1px solid currentColor;
+          border-radius: 2px;
+          corner-shape: scoop;
+        }
+      }
+    }
+
+    ul {
+      > li {
+        &::before {
+          margin-right: 2px;
+          content: "├";
+        }
+
+        &:last-child:before {
+          content: "└";
+        }
+      }
+    }
+  }
+
+  .edit {
+    flex-grow: 1;
+    padding: 0 10px;
+    margin: 1lh 0 3lh;
+    text-align: right;
+
+    p {
+      &::before {
+        content: "[";
+      }
+      &::after {
+        content: "]";
+      }
+    }
+  }
+}
+
+/** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
+@container (width > 23.125rem) {
+  .root {
+    --padding-inline: 8px;
+    --heading-margin: calc(0.875 * 0.5rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --paragraph-margin-bottom: 0.25lh;
+  }
+
+  .title {
+    padding: 8px 10px 0;
+    margin: 0 0 calc(0.875 * 0.75rlh);
+
+    .text {
+      display: block;
+      padding: 0 var(--padding-inline);
+      font-size: 1.25rem;
+      font-weight: bold;
+      border-bottom: 2px solid var(--border);
+    }
+  }
+
+  .toc {
+    padding: 0 10px;
+    margin: 0 0 calc(0.875 * 0.5rlh);
+    font-size: 0.875rem;
+
+    .inner {
+      padding: 8px 10px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+  }
+
+  .body {
+    padding: 0 10px 80px;
+  }
+
+  .toc,
+  .content {
+    ol,
+    ul {
+      padding-left: 4px;
+    }
+
+    ul {
+      > li {
+        position: relative;
+        padding-left: 1em;
+
+        &::before {
+          position: absolute;
+          top: 0.875em;
+          left: 0.125em;
+          display: block;
+          width: 0.25em;
+          height: 0.25em;
+          content: "";
+          background: currentColor;
+        }
+      }
+    }
+  }
+
+  .content {
+    padding: 0 var(--padding-inline);
+
+    > *:where(:not(:last-child)) {
+      margin-bottom: var(--paragraph-margin-bottom);
+    }
+
+    h2 {
+      padding: 2px var(--padding-inline);
+      margin: var(--heading-margin);
+      font-size: 1em;
+      font-weight: bold;
+      background: var(--nav-base);
+      border: 1px solid var(--border);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      padding: 2px var(--padding-inline);
+      margin: var(--heading-margin);
+      border-bottom: 1px solid var(--border);
+    }
+
+    ol {
+      list-style: none;
+      counter-reset: ol;
+
+      > li {
+        display: flex;
+        gap: 4px;
+        align-items: flex-start;
+        counter-increment: ol;
+
+        &::before {
+          text-align: center;
+          content: counter(ol) ".";
+        }
+      }
+    }
+
+    [class~="codeblock"] {
+      padding: 8px;
+      margin-bottom: 8px;
+      overflow: auto;
+      font-size: 0.875em;
+      background: #ececec;
+      border: 1px solid #999;
+    }
+
+    [class~="codeblock"] code {
+      display: block;
+      overflow: auto;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      white-space: pre;
+    }
+
+    [class~="codeblock__caption"] {
+      padding: 2px 4px;
+      margin-bottom: 4px;
+      font-size: 11px;
+      background: #ddd;
+      border-bottom: 1px solid #999;
+    }
+
+    [class~="custom-block"] {
+      padding: 8px;
+      margin-bottom: 8px;
+      background: #fffde7;
+      border: 1px solid #999;
+    }
+
+    [class~="custom-block__title"] {
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+  }
+
+  .edit {
+    padding: 1lh 10px 1lh;
+    font-size: 0.875rem;
+    text-align: right;
+
+    p::before {
+      margin-right: 2px;
+      content: "📝";
+    }
+  }
+}
+
+/** PC: 縦ナビのサイドバー */
+@container (width >= 40rem) {
+  .root {
+    --heading-margin: calc(0.875 * 2rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --paragraph-margin-bottom: 0.5lh;
+  }
+
+  .title {
+    padding-top: 0;
+  }
+}
+
+@container (width >= 64rem) {
+  .root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr min(290px, 20vw);
+    gap: 20px;
+  }
+
+  .title,
+  .body,
+  .edit {
+    grid-column: 1 / 2;
+  }
+
+  .title {
+    grid-row: 1 / 2;
+  }
+
+  .toc {
+    grid-row: 1 / -1;
+    grid-column: 2 / 3;
+    padding: 0 16px 0 0;
+    margin: 7px 0 0;
+  }
+
+  .body {
+    grid-row: 2 / 3;
+  }
+}

@@ -1,6 +1,7 @@
 import { LOADING_ICON_HTML } from '@/components/ui/media/LoadingIcon';
 import { URL_ORIGIN } from '@/constants/meta';
 import { resolveArticleImagePath } from '@/utils/articles';
+import { resolveWikiImagePath } from '@/utils/wiki';
 import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
 let currentFilePath = '';
@@ -9,10 +10,15 @@ const getLazyLoadMarkup = (params: { href: string; alt: string; controls: boolea
   const href = (() => {
     // ./filename.ext → /articles/{category}/{year}/filename.ext
     if (params.href.startsWith('./')) {
-      const match = /\/articles\/([^/]+)\/([^/]+)\/[^/]+\.md$/.exec(currentFilePath);
-      if (match) {
-        const [, category, year] = match;
+      const articleMatch = /\/articles\/([^/]+)\/([^/]+)\/[^/]+\.md$/.exec(currentFilePath);
+      if (articleMatch) {
+        const [, category, year] = articleMatch;
         return resolveArticleImagePath({ imagePath: params.href, category, year });
+      }
+
+      const wikiMatch = /\/wiki\//.exec(currentFilePath);
+      if (wikiMatch) {
+        return resolveWikiImagePath({ imagePath: params.href, filePath: currentFilePath });
       }
     }
 
@@ -563,7 +569,9 @@ const overrideListExtension: TokenizerAndRendererExtension = {
     const t = token as ListToken;
     const body = t.items
       .map((item) => {
-        const content = marked.parse(item.text, { async: false });
+        const content = item.loose
+          ? marked.parse(item.text, { async: false })
+          : marked.parseInline(item.text, { async: false });
         return `<li>${content}</li>`;
       })
       .join('\n');
