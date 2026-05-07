@@ -2,6 +2,7 @@ import '@/app/(ja)/common.css';
 import '@/app/globals.css';
 
 import { Metadata } from 'next';
+import Script from 'next/script';
 import { Suspense } from 'react';
 
 import { Comment } from '@/components/jokes/Comment';
@@ -43,45 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Console />
           <LoadWebComponents />
         </Suspense>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            if (/\\/en(\\/|$)/.test(window.location.pathname)) {
-              document.documentElement.lang = 'en';
-            }
-
-            try {
-              const theme = JSON.parse(localStorage.getItem('theme'))?.value || 'light';
-              document.documentElement.setAttribute('data-theme', theme);
-            } catch {}
-
-            try {
-              document.documentElement.setAttribute('data-cookie-consent', 'waiting');
-
-              const state = (() => {
-                if (/googlebot|lighthouse/i.test(navigator.userAgent)) {
-                  localStorage.setItem('cookie-consent', '{"type":"primitive","value":"rejected"}');
-                }
-                return JSON.parse(localStorage.getItem('cookie-consent'))?.value || 'waiting';
-              })();
-
-              if (state !== 'waiting') {
-                document.documentElement.removeAttribute('data-cookie-consent');
-              } else {
-                if (window.location.search.includes('utm_medium=social')) {
-                  document.documentElement.setAttribute('data-cookie-consent', 'waiting-from-sns');
-                }
-                if (window.location.pathname.endsWith('/en/')) {
-                  document.documentElement.setAttribute('data-cookie-consent', 'waiting-in-en');
-                }
-                if (window.location.pathname === '/') {
-                  document.documentElement.setAttribute('data-cookie-consent', 'waiting-on-top');
-                }
-              }
-            } catch {}
-          `.replaceAll(/\n|\s{2}/g, ''),
-          }}
-        />
+        <Script src="/common/scripts/init.js" strategy="beforeInteractive" />
       </head>
       <body id="top">
         <div id={DIALOG_PORTAL_ID} />
