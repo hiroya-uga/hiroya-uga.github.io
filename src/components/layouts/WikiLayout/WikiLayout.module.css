@@ -50,7 +50,7 @@
     display: flex;
     flex-direction: column;
     font-family: var(--font-dot-gothic), "MS P Gothic", "Osaka", sans-serif;
-    font-size: calc(13 / 18 * 1rem);
+    font-size: max(calc(13 / 18 * 1rem), 13px);
     line-height: 1.2;
     color: black;
     letter-spacing: 0.4px;
@@ -87,7 +87,8 @@
       flex-wrap: wrap;
       gap: 8px 4px;
       justify-content: flex-end;
-      padding: 4px 4px 10px;
+      padding: 4px;
+      font-size: max(calc(10 / 18 * 1rem), 10px);
 
       li {
         &::before {
@@ -123,19 +124,13 @@
     padding: 0 10px 10px;
   }
 
-  .content {
-    margin: 4px 0 0;
-  }
-
   .breadcrumb {
-    padding: 10px;
-    border: 1px solid var(--x-border);
-    border-width: 1px 0;
+    padding: 10px 10px 30px;
   }
 
   .footer {
     padding: 10px 0;
-    font-size: calc(10 / 18 * 1rem);
+    font-size: max(calc(10 / 18 * 1rem), 10px);
     text-align: center;
 
     .allRightsReserved {
@@ -227,6 +222,7 @@
 
   .breadcrumb {
     padding: 8px 10px;
+    border-bottom: 1px solid var(--x-border);
   }
 
   .footer {
@@ -251,7 +247,6 @@
 
   .header,
   .content,
-  .breadcrumb,
   .footer {
     grid-column: 2/3;
     border-left: 1px inset #fff;
@@ -259,7 +254,10 @@
 
   .header {
     grid-row: 1/2;
-    border-bottom: 0;
+  }
+
+  .breadcrumb {
+    border: 0;
   }
 
   .navigation {
@@ -284,11 +282,6 @@
 
   .navigation.ofNarrow {
     display: none;
-  }
-
-  .breadcrumb {
-    grid-row: 3 / 4;
-    font-size: 0.75rem;
   }
 
   .footer {

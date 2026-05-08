@@ -1,6 +1,7 @@
 import { BREADCRUMB_LABEL } from '@/constants/messages';
 import { SITE_NAME } from '@/constants/meta';
 import { WikiEntry } from '@/libs/wiki';
+import clsx from 'clsx';
 import { DotGothic16 } from 'next/font/google';
 import Link from 'next/link';
 import { WikiBreadcrumb } from './client/WikiBreadcrumb';
@@ -45,15 +46,17 @@ export const WikiLayout = ({ entries, children }: Readonly<Props>) => {
             </li>
           </ul>
         </header>
-        <nav className={`${styles.navigation} ${styles.ofWide}`} aria-label="Wiki ナビゲーション">
+        <nav className={clsx([styles.navigation, styles.ofWide])} aria-label="Wiki ナビゲーション">
           <WikiSidebarNav entries={entries} />
         </nav>
-        <div className={styles.content}>{children}</div>
-        <nav className={`${styles.navigation} ${styles.ofNarrow}`} aria-label="Wiki ナビゲーション">
+        <div className={styles.content}>
+          <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>
+            <WikiBreadcrumb entries={entries} />
+          </nav>
+          {children}
+        </div>
+        <nav className={clsx([styles.navigation, styles.ofNarrow])} aria-label="Wiki ナビゲーション">
           <WikiSidebarNav entries={entries} />
-        </nav>
-        <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>
-          <WikiBreadcrumb entries={entries} />
         </nav>
         <footer className={styles.footer}>
           <p>
