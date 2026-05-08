@@ -1,17 +1,9 @@
-.breadcrumb {
-  --x-color-background-breadcrumb: #ebe6e7;
-}
-
-.footer {
+.root {
   --x-color-text-footer: #fff;
   --x-color-background-footer: #4d4d4d;
 }
 
-[data-theme="dark"]:root .breadcrumb {
-  --x-color-background-breadcrumb: #3d3c3a;
-}
-
-[data-theme="dark"]:root .footer {
+[data-theme="dark"]:root .root {
   --x-color-text-footer: #fff;
   --x-color-background-footer: #575757;
 }

@@ -1,0 +1,7 @@
+.root {
+  --x-color-background-breadcrumb: #ebe6e7;
+}
+
+[data-theme="dark"]:root .root {
+  --x-color-background-breadcrumb: #3d3c3a;
+}
