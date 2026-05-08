@@ -282,7 +282,7 @@
       border-bottom: 1px solid var(--x-border);
 
       &:not(:has(ul, .text)) {
-        padding: 2px 4px 2px 0.75em;
+        padding: 2px 4px 2px 0.5em;
       }
 
       &::before {
@@ -291,30 +291,24 @@
 
       .text {
         display: block;
-        padding: 2px 4px 2px 1em;
+        padding: 2px 4px 2px 0.5em;
 
         + ul li {
-          padding: 2px 4px 2px 1.75em;
+          display: flex;
+          padding: 2px 4px 2px 0.5em;
         }
       }
 
-      .text,
       .text + ul li {
         position: relative;
 
         &::before {
-          position: absolute;
-          top: 0.875em;
-          left: 0.45em;
-          display: block;
-          width: 0.25em;
-          height: 0.25em;
-          content: "";
-          background: currentColor;
+          display: inline;
+          content: "├";
         }
 
-        + ul li::before {
-          left: 1em;
+        &:last-child::before {
+          content: "└";
         }
       }
     }
