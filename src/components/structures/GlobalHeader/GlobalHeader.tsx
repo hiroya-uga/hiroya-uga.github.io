@@ -13,7 +13,7 @@ export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-
   const lang = usePathname().endsWith('/en/') ? 'en' : 'ja';
 
   return (
-    <header className={clsx([styles.root, '@container text-primary'])}>
+    <header className={clsx([styles.root, '@container text-primary pwa:hidden'])}>
       <SiteName />
 
       <p className="@w1520:fixed @w1520:top-2 @w1520:right-2 @w1520:z-50 ml-auto w-fit pr-2 pt-2">

@@ -189,6 +189,7 @@ export function CookieConsentDialog() {
         aria-describedby={`${id}-description`}
         aria-modal="false"
         className={clsx([
+          'pwa:hidden!',
           'bg-secondary border-t-primary @container bottom-0 left-0 block w-full border-t p-4 transition-[translate,opacity,visibility] duration-500',
           isAfterBannerDialogCloseRequest ||
             'not-open:translate-y-full not-open:invisible not-open:opacity-0 not-open:pointer-events-none sticky',
