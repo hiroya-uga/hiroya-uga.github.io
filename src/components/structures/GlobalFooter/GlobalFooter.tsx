@@ -103,7 +103,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
   return (
     <>
       {isTop || (
-        <nav className={clsx(['@container mt-[20vh]', styles.breadcrumb])} aria-label={t.breadcrumb}>
+        <nav className={clsx(['@container pwa:hidden mt-[20vh]', styles.breadcrumb])} aria-label={t.breadcrumb}>
           <div className="max-w-structure px-content-inline @w1024:pl-(--x-spacing-content-inline) bg-(--x-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--x-spacing-content-inline)*2))] mx-auto py-4 text-sm">
             <ol className="flex flex-wrap gap-y-0.5 leading-normal">
               {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
@@ -112,7 +112,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
         </nav>
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer className={clsx(['@container', styles.footer])}>
+      <footer className={clsx(['@container pwa:hidden', styles.footer])}>
         <div className={clsx([isTop || 'bg-(--x-color-background-footer) text-(--x-color-text-footer)'])}>
           {!isTop && (
             <div className="max-w-structure bg-secondary px-content-inline relative mx-auto">
