@@ -18,6 +18,7 @@
 
     thead {
       font-size: 0.625rem;
+      background: var(--x-nav-base);
 
       th {
         vertical-align: middle;
