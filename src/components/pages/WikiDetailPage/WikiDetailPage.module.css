@@ -2,6 +2,36 @@
   text-decoration: line-through;
 }
 
+.content {
+  table {
+    th,
+    td {
+      padding: 2px 4px;
+      border: 1px solid var(--border);
+
+      &[class~="is-center"] {
+        text-align: center;
+      }
+    }
+
+    thead {
+      font-size: 0.625rem;
+
+      th {
+        word-break: keep-all;
+      }
+    }
+
+    tbody {
+      font-size: 87.5%;
+    }
+  }
+
+  video {
+    aspect-ratio: 1/ 1;
+  }
+}
+
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
 @container (width <= 23.125rem) {
   .title {
@@ -85,6 +115,10 @@
           content: "└";
         }
       }
+    }
+
+    table {
+      color: white;
     }
   }
 
@@ -209,6 +243,10 @@
           content: counter(ol) ".";
         }
       }
+    }
+
+    video {
+      border-radius: 8px;
     }
 
     [class~="codeblock"] {
