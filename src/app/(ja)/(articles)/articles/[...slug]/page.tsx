@@ -51,7 +51,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
     return (
       <>
-        <JsonLd data={jsonLd} />
+        <JsonLd
+          data={jsonLd}
+          breadcrumbs={[
+            { name: 'ホーム', url: `${URL_ORIGIN}/` },
+            { name: '記事一覧', url: `${URL_ORIGIN}/articles/` },
+            { name: pageTitle, url: `${URL_ORIGIN}/articles/${category}/` },
+          ]}
+        />
         <ArticleCategoryPage pageTitle={pageTitle} description={description} category={category} />
       </>
     );
@@ -70,7 +77,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
     return (
       <>
-        <JsonLd data={jsonLd} />
+        <JsonLd
+          data={jsonLd}
+          breadcrumbs={[
+            { name: 'ホーム', url: `${URL_ORIGIN}/` },
+            { name: '記事一覧', url: `${URL_ORIGIN}/articles/` },
+            { name: resolveCategoryName(category), url: `${URL_ORIGIN}/articles/${category}/` },
+            { name: pageTitle, url: `${URL_ORIGIN}/articles/${category}/${yearOrSubcategory}/` },
+          ]}
+        />
         <ArticleYearOrSubCategoryPage
           pageTitle={pageTitle}
           description={description}
@@ -119,7 +134,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd
+        data={jsonLd}
+        breadcrumbs={[
+          { name: 'ホーム', url: `${URL_ORIGIN}/` },
+          { name: '記事一覧', url: `${URL_ORIGIN}/articles/` },
+          { name: resolveCategoryName(category), url: `${URL_ORIGIN}/articles/${category}/` },
+          { name: String(yearOrSubcategory), url: `${URL_ORIGIN}/articles/${category}/${yearOrSubcategory}/` },
+          { name: title, url: canonical },
+        ]}
+      />
       <ArticleDetailPage
         post={post}
         category={category}

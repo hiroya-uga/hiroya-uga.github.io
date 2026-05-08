@@ -1,6 +1,6 @@
 import { WikiDetailPage } from '@/components/pages/WikiDetailPage';
-import { JsonLdForNote } from '@/components/structures/JsonLd';
-import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
+import { JsonLd } from '@/components/structures/JsonLd';
+import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { getWikiPost } from '@/libs/wiki';
 import { Metadata } from 'next';
 
@@ -33,12 +33,18 @@ export default function Page() {
   return (
     <>
       {frontmatter && (
-        <JsonLdForNote
-          title={frontmatter.title}
-          description={frontmatter.description}
-          publishedAt={frontmatter.publishedAt}
-          updatedAt={frontmatter.updatedAt}
-          pathname="/wiki/"
+        <JsonLd
+          data={{
+            ...DEFAULT_JSON_LD,
+            '@type': 'Article',
+            name: frontmatter.title,
+            headline: frontmatter.title,
+            description: frontmatter.description,
+            datePublished: frontmatter.publishedAt,
+            dateModified: frontmatter.updatedAt,
+            url: `${URL_ORIGIN}/wiki/`,
+            mainEntityOfPage: `${URL_ORIGIN}/wiki/`,
+          }}
         />
       )}
       <WikiDetailPage frontmatter={frontmatter} content={post?.content} toc={post?.toc} />

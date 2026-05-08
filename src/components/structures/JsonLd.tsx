@@ -1,6 +1,7 @@
-import { Article, WebPage, WithContext } from 'schema-dts';
+import { BreadcrumbList, ListItem, WithContext } from 'schema-dts';
 
 import { URL_ORIGIN } from '@/constants/meta';
+import { BreadcrumbItem, buildBreadcrumbsFromPath } from '@/utils/breadcrumb';
 
 const removeNewLinesTarget = ['name', 'title', 'description'];
 
@@ -25,35 +26,80 @@ const removeNewlines = (object: ObjectValue): ObjectValue => {
   );
 };
 
-export const JsonLd = ({ data }: { data: Record<string, unknown> }) => {
+const buildBreadcrumbJsonLd = (items: BreadcrumbItem[]): WithContext<BreadcrumbList> => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map(({ name, url }, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name,
+    item: url,
+  })) as ListItem[],
+});
+
+interface Props {
+  data: Record<string, unknown>;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+export const JsonLd = ({ data, breadcrumbs }: Readonly<Props>) => {
   const sanitized = removeNewlines(data);
+  const dataUrl = typeof data.url === 'string' ? data.url : undefined;
+  const pathname = dataUrl ? dataUrl.replace(URL_ORIGIN, '').replace(/\/$/, '') : undefined;
+  const resolvedBreadcrumbs = breadcrumbs ?? (pathname ? buildBreadcrumbsFromPath(pathname) : undefined);
 
   return (
-    <script key="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sanitized) }} />
+    <>
+      <script
+        key="json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(sanitized) }}
+      />
+      {resolvedBreadcrumbs && resolvedBreadcrumbs.length > 0 && (
+        <script
+          key="json-ld-breadcrumb"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(resolvedBreadcrumbs)) }}
+        />
+      )}
+    </>
   );
 };
 
+/** @deprecated Use JsonLd with Article data and breadcrumbs prop instead */
+export const JsonLdBreadcrumbList = ({ items }: { items: BreadcrumbItem[] }) => (
+  <script
+    key="json-ld-breadcrumb"
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(items)) }}
+  />
+);
+
+/** @deprecated Use JsonLd with Article data and breadcrumbs prop instead */
 export const JsonLdForNote = ({
   title,
   description,
   publishedAt,
   updatedAt,
   pathname,
+  breadcrumbs,
 }: {
   title: string;
   description?: string;
   publishedAt: string;
   updatedAt?: string;
   pathname: string;
+  breadcrumbs?: BreadcrumbItem[];
+  /** @deprecated use breadcrumbs */
+  breadcrumbItems?: BreadcrumbItem[];
 }) => {
   const url = `${URL_ORIGIN}${pathname}`;
-  const jsonLd: WithContext<Article | WebPage> = {
+  const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     name: title,
     headline: title,
     description: description ?? '',
-    // image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/icon_r.webp`,
     datePublished: publishedAt,
     dateModified: updatedAt,
     url,
@@ -74,7 +120,5 @@ export const JsonLdForNote = ({
     },
   };
 
-  return (
-    <script key="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-  );
+  return <JsonLd data={jsonLd} breadcrumbs={breadcrumbs} />;
 };

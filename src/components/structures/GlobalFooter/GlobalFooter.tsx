@@ -1,7 +1,5 @@
 'use client';
 
-import { Fragment } from 'react';
-
 import { Picture } from '@/components/ui/features/Picture';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -10,72 +8,12 @@ import { usePathname } from 'next/navigation';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
-import { SEO } from '@/constants/seo';
 import { SNS_LINKS } from '@/constants/sns';
 
 import styles from '@/components/structures/GlobalFooter/GlobalFooter.module.css';
 import { BREADCRUMB_LABEL, OPEN_NEW_TAB } from '@/constants/messages';
 import { Lang } from '@/types/lang';
-
-const ListItem = ({ additionalBreadcrumbs, currentPageTitle }: Props) => {
-  const pathname = usePathname() ?? '';
-  const generatePaths = (path: string) => {
-    const segments = path.replace(/^\/|\/$/g, '').split('/');
-
-    return segments.map((_, index) => '/' + segments.slice(0, index + 1).join('/'));
-  };
-  const pathnames = [...generatePaths(pathname)];
-
-  return (
-    <>
-      <li className='after:px-2 after:content-["/"]'>
-        <Link href="/" className="leading-inherit text-inherit">
-          HOME
-        </Link>
-      </li>
-
-      {pathnames.map((path, index) => {
-        if (path in SEO) {
-          if (index === pathnames.length - 1) {
-            return (
-              <li key={path}>
-                <a aria-current="page" className="leading-inherit text-inherit">
-                  {pathname.endsWith('/en/') ? 'English version' : SEO[path].title}
-                </a>
-              </li>
-            );
-          }
-
-          return (
-            <li key={path} className='after:px-2 after:content-["/"]'>
-              <Link href={path} className="leading-inherit text-inherit">
-                {SEO[path].title}
-              </Link>
-            </li>
-          );
-        }
-
-        return <Fragment key={path} />;
-      })}
-
-      {additionalBreadcrumbs?.map(({ title, href }) => (
-        <li key={href} className='after:px-2 after:content-["/"]'>
-          <Link href={href} className="leading-inherit text-inherit">
-            {title}
-          </Link>
-        </li>
-      ))}
-
-      {currentPageTitle && (
-        <li>
-          <a aria-current="page" className="leading-inherit text-inherit">
-            {pathname.endsWith('/en/') ? 'English version' : currentPageTitle}
-          </a>
-        </li>
-      )}
-    </>
-  );
-};
+import { Breadcrumb } from './parts';
 
 type Props = {
   additionalBreadcrumbs?: { title: string; href: string }[];
@@ -103,16 +41,14 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
   return (
     <>
       {isTop || (
-        <nav className={clsx(['@container pwa:hidden mt-[20vh]', styles.breadcrumb])} aria-label={t.breadcrumb}>
-          <div className="max-w-structure px-content-inline @w1024:pl-(--x-spacing-content-inline) bg-(--x-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--x-spacing-content-inline)*2))] mx-auto py-4 text-sm">
-            <ol className="flex flex-wrap gap-y-0.5 leading-normal">
-              {<ListItem additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />}
-            </ol>
-          </div>
-        </nav>
+        <Breadcrumb
+          label={t.breadcrumb}
+          additionalBreadcrumbs={additionalBreadcrumbs}
+          currentPageTitle={currentPageTitle}
+        />
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer className={clsx(['@container pwa:hidden', styles.footer])}>
+      <footer className={clsx(['@container pwa:hidden', styles.root])}>
         <div className={clsx([isTop || 'bg-(--x-color-background-footer) text-(--x-color-text-footer)'])}>
           {!isTop && (
             <div className="max-w-structure bg-secondary px-content-inline relative mx-auto">
