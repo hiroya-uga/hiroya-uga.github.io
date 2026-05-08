@@ -7,8 +7,8 @@ import path from 'node:path';
 export type WikiFrontmatter = {
   title: string;
   description: string;
-  updatedAt: string;
-  publishedAt?: string;
+  publishedAt: string;
+  updatedAt?: string;
   tags?: string[];
   redirectFrom?: string[];
 };
@@ -16,7 +16,7 @@ export type WikiFrontmatter = {
 const WIKI_DIR = path.join(process.cwd(), 'wiki');
 
 const validateFrontmatter = (data: Record<string, unknown>, filePath: string): WikiFrontmatter => {
-  const required = ['title', 'description', 'updatedAt'] as const;
+  const required = ['title', 'description', 'publishedAt'] as const;
 
   for (const key of required) {
     if (typeof data[key] !== 'string' || data[key] === '') {

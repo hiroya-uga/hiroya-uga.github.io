@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * Update publishedAt and updatedAt in article frontmatter with commit timestamps.
+ * Update publishedAt and updatedAt in article/wiki frontmatter with commit timestamps.
  * - publishedAt (date-only): replaced with the first commit time for that file
  * - updatedAt (date-only): replaced with the latest commit time for that file
  *
  * Usage:
- *   node scripts/update-article-dates.mjs         # staged articles only (pre-commit hook)
- *   node scripts/update-article-dates.mjs --all   # all articles/**\/*.md (migration)
+ *   node scripts/update-markdown-frontmatter.mjs         # staged articles/wiki only (pre-commit hook)
+ *   node scripts/update-markdown-frontmatter.mjs --all   # all articles/**\/*.md and wiki/**\/*.md (migration)
  */
 
 import { execSync } from 'node:child_process';
@@ -16,7 +16,9 @@ import { glob } from 'node:fs/promises';
 const DATE_ONLY_RE = /^\d{4}-\d{2}-\d{2}$/;
 const ALL_MODE = process.argv.includes('--all');
 
+/** @param {Date} date */
 function formatISO(date) {
+  /** @param {number} n */
   const pad = (n) => String(n).padStart(2, '0');
   const offset = -date.getTimezoneOffset();
   const sign = offset >= 0 ? '+' : '-';
@@ -35,19 +37,19 @@ function getStagedArticles() {
   return execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf8' })
     .trim()
     .split('\n')
-    .filter((f) => f.startsWith('articles/') && f.endsWith('.md'));
+    .filter((f) => (f.startsWith('articles/') || f.startsWith('wiki/')) && f.endsWith('.md'));
 }
 
 async function getAllArticles() {
   /** @type {string[]} */
   const files = [];
-  for await (const f of glob('articles/**/*.md')) {
+  for await (const f of glob('{articles,wiki}/**/*.md')) {
     files.push(f);
   }
   return files;
 }
 
-/** Get commit times for a file. Returns { first, latest } as Date or null. */
+/** @param {string} file */
 function getCommitTimes(file) {
   try {
     const out = execSync(`git log --follow --format="%ai" -- "${file}"`, { encoding: 'utf8' })
@@ -107,6 +109,6 @@ for (const file of files) {
   if (changed) {
     writeFileSync(file, `---\n${frontmatter}\n---${rest}`, 'utf8');
     if (!ALL_MODE) execSync(`git add "${file}"`);
-    console.log(`[update-article-dates] Updated ${file}`);
+    console.log(`[update-markdown-frontmatter] Updated ${file}`);
   }
 }

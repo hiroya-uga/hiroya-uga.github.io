@@ -1,2 +1,2 @@
-node scripts/update-article-dates.mjs
+node scripts/update-markdown-frontmatter.mjs
 yarn type-check && yarn lint-staged
