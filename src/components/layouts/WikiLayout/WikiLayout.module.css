@@ -47,6 +47,11 @@
 
   [data-theme="dark"] .root {
     filter: invert(1) hue-rotate(345deg);
+
+    img,
+    video {
+      filter: invert(1) hue-rotate(15deg);
+    }
   }
 
   .header {
