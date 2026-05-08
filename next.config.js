@@ -38,8 +38,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    // 画像最適化の追加設定
-    minimumCacheTTL: 60 * 60 * 24 * 365, // 1年間のキャッシュ
+    minimumCacheTTL: process.env.NODE_ENV === 'development' ? 0 : 60 * 60 * 24 * 7, // 7日
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
