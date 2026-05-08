@@ -6,3 +6,5 @@ export const SVG_ID_PREFIX = 'SVG';
 export const SVG_PORTAL_ID = 'SVG_PORTAL';
 
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? '';
+
+export const THEME_SWITCH_DESCRIPTION_ID = 'theme-switch-description';

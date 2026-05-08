@@ -1,10 +1,10 @@
 .root {
   a {
-    color: var(--link);
+    color: var(--x-link);
   }
 
   a:visited {
-    color: var(--link-visited);
+    color: var(--x-link-visited);
   }
 
   a[aria-current="page"] {

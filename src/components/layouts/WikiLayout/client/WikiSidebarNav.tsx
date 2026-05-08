@@ -1,5 +1,6 @@
 'use client';
 
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
 import { WikiEntry } from '@/libs/wiki';
@@ -37,6 +38,53 @@ export const WikiSidebarNav = ({ entries }: Props) => {
         }) ?? { pathname: '/wiki', frontmatter: { title: 'Wikiʻoleトップ' } })
       : undefined;
 
+  const currentEntry = entries.find(
+    ({ slug }) => slug.length === currentSlug.length && currentSlug.every((seg, i) => seg === slug[i]),
+  );
+
+  const showNavMenu = childEntries.length > 0 || siblingEntries.length > 0;
+
+  const navListItems = (() => {
+    if (childEntries.length > 0) {
+      // 子ページあり: 現在ページを起点にネスト（兄弟はひったん非表示）
+      if (currentEntry) {
+        return (
+          <li>
+            <span className={styles.text}>
+              <a aria-current="page">{currentEntry.frontmatter.title}</a>
+            </span>
+            <ul>
+              {childEntries.map(({ pathname: entryPathname, frontmatter }) => (
+                <li key={entryPathname}>
+                  <Link href={entryPathname}>{frontmatter.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+        );
+      }
+
+      return childEntries.map(({ pathname: entryPathname, frontmatter }) => (
+        <li key={entryPathname}>
+          <Link href={entryPathname}>{frontmatter.title}</Link>
+        </li>
+      ));
+    }
+
+    // 子ページなし: 兄弟を表示（ここでしか親への動線がない）
+    return siblingEntries.map(({ pathname: entryPathname, frontmatter }) => (
+      <li key={entryPathname}>
+        {pathname.replace(/\/$/, '') === entryPathname ? (
+          <span className={styles.text}>
+            <a aria-current="page">{frontmatter.title}</a>
+          </span>
+        ) : (
+          <Link href={entryPathname}>{frontmatter.title}</Link>
+        )}
+      </li>
+    ));
+  })();
+
   return (
     <div className={styles.root}>
       <p className={styles.top}>
@@ -63,61 +111,18 @@ export const WikiSidebarNav = ({ entries }: Props) => {
       </form>
 
       <div className={styles.menu}>
-        {(0 < childEntries.length || 0 < siblingEntries.length) &&
-          (() => {
-            const currentEntry = entries.find(
-              ({ slug }) => slug.length === currentSlug.length && currentSlug.every((seg, i) => seg === slug[i]),
-            );
-            return (
-              <>
-                <p className={styles.heading}>
-                  {parentEntry === undefined ? (
-                    'カテゴリー'
-                  ) : (
-                    <Link href={parentEntry.pathname}>{parentEntry.frontmatter.title}</Link>
-                  )}
-                </p>
-                <ul className={styles.list}>
-                  {0 < childEntries.length ? (
-                    // 子ページあり: 現在ページを起点にネスト（兄弟はひったん非表示）
-                    currentEntry ? (
-                      <li>
-                        <span>
-                          <a aria-current="page">{currentEntry.frontmatter.title}</a>
-                        </span>
-                        <ul>
-                          {childEntries.map(({ pathname: entryPathname, frontmatter }) => (
-                            <li key={entryPathname}>
-                              <Link href={entryPathname}>{frontmatter.title}</Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    ) : (
-                      childEntries.map(({ pathname: entryPathname, frontmatter }) => (
-                        <li key={entryPathname}>
-                          <Link href={entryPathname}>{frontmatter.title}</Link>
-                        </li>
-                      ))
-                    )
-                  ) : (
-                    // 子ページなし: 兄弟を表示（ここでしか親への動線がない）
-                    siblingEntries.map(({ pathname: entryPathname, frontmatter }) => (
-                      <li key={entryPathname}>
-                        {pathname.replace(/\/$/, '') === entryPathname ? (
-                          <span>
-                            <a aria-current="page">{frontmatter.title}</a>
-                          </span>
-                        ) : (
-                          <Link href={entryPathname}>{frontmatter.title}</Link>
-                        )}
-                      </li>
-                    ))
-                  )}
-                </ul>
-              </>
-            );
-          })()}
+        {showNavMenu && (
+          <>
+            <p className={styles.heading}>
+              {parentEntry === undefined ? (
+                'カテゴリー'
+              ) : (
+                <Link href={parentEntry.pathname}>{parentEntry.frontmatter.title}</Link>
+              )}
+            </p>
+            <ul className={styles.list}>{navListItems}</ul>
+          </>
+        )}
 
         <p className={styles.heading}>ご案内</p>
         <ul className={styles.list}>
@@ -126,11 +131,9 @@ export const WikiSidebarNav = ({ entries }: Props) => {
               {target === '_blank' ? (
                 <a href={href} target="_blank" rel="noopener noreferrer">
                   {label.ja}
-                  <img
-                    src="/common/images/icons/new-window.svg"
-                    alt="新しいタブで開く"
-                    className={styles.newWindowIcon}
-                  />
+                  <span className={styles.newWindowIcon}>
+                    <SvgIcon name="new-tab" alt="新しいタブで開く" />
+                  </span>
                 </a>
               ) : (
                 <Link href={href} aria-current={pathname === href ? 'page' : undefined}>

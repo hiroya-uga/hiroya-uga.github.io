@@ -6,11 +6,23 @@
   min-height: 100dvh;
 
   a {
-    color: var(--link);
+    color: var(--x-link);
     text-decoration: underline;
 
     &:visited {
-      color: var(--link-visited);
+      color: var(--x-link-visited);
+    }
+  }
+}
+
+.header .utility {
+  @media (hover: hover) {
+    button {
+      background: var(--x-background);
+      transition: 0.3s filter ease-out;
+    }
+    button:hover {
+      filter: invert(1);
     }
   }
 }
@@ -28,11 +40,12 @@
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
 @container (width <= 23.125rem) {
   .root {
-    --header-background: navy;
-    --header-link-color: white;
-    --link: blue;
-    --link-visited: purple;
-    --border: gray;
+    --x-background: white;
+    --x-header-background: navy;
+    --x-header-link-color: white;
+    --x-link: blue;
+    --x-link-visited: purple;
+    --x-border: gray;
 
     display: flex;
     flex-direction: column;
@@ -41,7 +54,7 @@
     line-height: 1.2;
     color: black;
     letter-spacing: 0.4px;
-    background: white;
+    background: var(--x-background);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -60,12 +73,12 @@
 
     .siteName {
       margin: 0 0 4px;
-      background-color: var(--header-background);
+      background-color: var(--x-header-background);
 
       a {
         display: block;
         padding: 4px 10px;
-        color: var(--header-link-color);
+        color: var(--x-header-link-color);
       }
     }
 
@@ -96,13 +109,8 @@
       }
 
       button {
-        padding: 0;
-        font: inherit;
-        color: var(--link);
+        color: var(--x-link);
         text-decoration: underline;
-        cursor: pointer;
-        background: none;
-        border: none;
       }
     }
   }
@@ -121,7 +129,7 @@
 
   .breadcrumb {
     padding: 10px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--x-border);
     border-width: 1px 0;
   }
 
@@ -139,35 +147,36 @@
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
 @container (width > 23.125rem) {
   .root {
-    --header-background: #f8f9fa;
-    --header-link-color: #202122;
-    --link: #00f;
-    --link-visited: #800080;
-    --border: #a2a9b1;
-    --surface: #f8f9fa;
-    --nav-base: #eaf3fb;
-    --nav-background: #fff;
+    --x-header-background: #f8f9fa;
+    --x-header-link-color: #202122;
+    --x-link: #00f;
+    --x-link-visited: #800080;
+    --x-border: #a2a9b1;
+    --x-surface: #f8f9fa;
+    --x-nav-base: #eaf3fb;
+    --x-nav-background: #fff;
+    --x-background: white;
 
     display: flex;
     flex-direction: column;
 
     font-size: 1rem;
     color: #202122;
-    background: #fff;
+    background: var(--x-background);
   }
 
   [data-theme="dark"] .root {
-    --header-background: #27292d;
-    --header-link-color: #eaf3fb;
-    --link: #74b3f1;
-    --link-visited: #a9b2c3;
-    --border: #54595d;
-    --surface: #27292d;
-    --nav-base: #202a36;
-    --nav-background: #1f2329;
+    --x-header-background: #27292d;
+    --x-header-link-color: #eaf3fb;
+    --x-link: #74b3f1;
+    --x-link-visited: #a9b2c3;
+    --x-border: #54595d;
+    --x-surface: #27292d;
+    --x-nav-base: #202a36;
+    --x-nav-background: #1f2329;
+    --x-background: #1f2329;
 
     color: #eaf3fb;
-    background: var(--nav-background);
   }
 
   .header {
@@ -175,7 +184,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 6px 16px 6px 10px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--x-border);
 
     .siteName {
       font-size: 0.875rem;
@@ -192,15 +201,14 @@
 
       li:not(:first-child)::before {
         padding: 0 0.5em;
-        color: var(--border);
+        color: var(--x-border);
         content: "|";
       }
 
       a,
       button {
-        color: var(--link);
+        color: var(--x-link);
         text-decoration: underline;
-        cursor: pointer;
       }
     }
   }
@@ -225,7 +233,7 @@
     padding: 8px 10px;
     font-size: 0.75rem;
     text-align: center;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--x-border);
 
     .allRightsReserved {
       display: inline;
@@ -238,7 +246,7 @@
   .root {
     display: grid;
     grid-template-rows: auto 1fr auto auto;
-    grid-template-columns: min(290px, 28vw) 1fr;
+    grid-template-columns: 12.5rem 1fr;
   }
 
   .header,
@@ -262,7 +270,7 @@
     grid-column: 1 / 2;
     max-height: 100dvh;
     overflow: auto;
-    background: var(--nav-base);
+    background: var(--x-nav-base);
     border-right: 1px inset #888;
   }
 

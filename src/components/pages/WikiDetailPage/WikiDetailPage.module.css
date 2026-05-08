@@ -9,7 +9,7 @@
     th,
     td {
       padding: 2px 4px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--x-border);
 
       &[class~="is-center"] {
         text-align: center;
@@ -40,7 +40,7 @@
   .title {
     padding: 4px 10px 6px;
     margin: 0 0 4px;
-    border: solid var(--border);
+    border: solid var(--x-border);
     border-width: 2px 0;
   }
 
@@ -82,6 +82,11 @@
     ol,
     ul {
       margin: 0.5em 0;
+
+      ol,
+      ul {
+        margin: 0 0 0 1em;
+      }
     }
     ol {
       display: grid;
@@ -120,8 +125,10 @@
       }
     }
 
-    table {
-      color: white;
+    [data-theme="dark"] & {
+      table {
+        color: white;
+      }
     }
   }
 
@@ -146,7 +153,7 @@
 @container (width > 23.125rem) {
   .root {
     --padding-inline: 8px;
-    --heading-margin: calc(0.875 * 0.5rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --heading-margin: calc(0.875 * 2rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
     --paragraph-margin-bottom: 0.25lh;
   }
 
@@ -159,7 +166,7 @@
       padding: 0 var(--padding-inline);
       font-size: 1.25rem;
       font-weight: bold;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid var(--x-border);
     }
   }
 
@@ -170,8 +177,8 @@
 
     .inner {
       padding: 8px 10px 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--x-surface);
+      border: 1px solid var(--x-border);
     }
   }
 
@@ -217,10 +224,14 @@
       margin: var(--heading-margin);
       font-size: 1em;
       font-weight: bold;
-      background: var(--nav-base);
-      border: 1px solid var(--border);
+      background: var(--x-nav-base);
+      border: 1px solid var(--x-border);
 
       &:first-child {
+        margin-top: 0;
+      }
+
+      + h3 {
         margin-top: 0;
       }
     }
@@ -228,7 +239,7 @@
     h3 {
       padding: 2px var(--padding-inline);
       margin: var(--heading-margin);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--x-border);
     }
 
     ol {
@@ -305,7 +316,6 @@
 /** PC: 縦ナビのサイドバー */
 @container (width >= 40rem) {
   .root {
-    --heading-margin: calc(0.875 * 2rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
     --paragraph-margin-bottom: 0.5lh;
   }
 
@@ -320,6 +330,7 @@
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr min(290px, 20vw);
     gap: 20px;
+    padding: 0 20px 0 0;
   }
 
   .title,
@@ -335,7 +346,7 @@
   .toc {
     grid-row: 1 / -1;
     grid-column: 2 / 3;
-    padding: 0 16px 0 0;
+    padding: 0;
     margin: 7px 0 0;
   }
 
