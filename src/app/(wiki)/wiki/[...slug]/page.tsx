@@ -1,4 +1,5 @@
 import { WikiDetailPage } from '@/components/pages/WikiDetailPage';
+import { JsonLdForNote } from '@/components/structures/JsonLd';
 import { SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { getAllWikiSlugs, getWikiPost } from '@/libs/wiki';
 import { Metadata } from 'next';
@@ -50,5 +51,18 @@ export default async function Page({ params }: Readonly<Props>) {
     return notFound();
   }
 
-  return <WikiDetailPage frontmatter={post.frontmatter} content={post.content} toc={post.toc} />;
+  const { frontmatter } = post;
+
+  return (
+    <>
+      <JsonLdForNote
+        title={frontmatter.title}
+        description={frontmatter.description}
+        publishedAt={frontmatter.publishedAt ?? frontmatter.updatedAt}
+        updatedAt={frontmatter.updatedAt}
+        pathname={`/wiki/${slug.join('/')}/`}
+      />
+      <WikiDetailPage frontmatter={frontmatter} content={post.content} toc={post.toc} />
+    </>
+  );
 }

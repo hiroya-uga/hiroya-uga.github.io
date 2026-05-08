@@ -1,31 +1,32 @@
 'use client';
 
-import { getTheme } from '@/utils/get-theme';
-import { setLocalStorage } from '@/utils/local-storage';
-import { useEffect, useState } from 'react';
+import { useThemeChange } from '@/hooks/use-theme-change';
 
+import { THEME_SWITCH_DESCRIPTION_ID } from '@/constants/id';
 import styles from './WikiThemeToggle.module.css';
 
+const currentThemeIs = (theme: string) =>
+  `現在のテーマは「${theme === 'dark' ? 'ダークモード' : 'ライトモード'}」です。`;
+
 export const WikiThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    setIsDark(getTheme() === 'dark');
-  }, []);
-
-  const toggle = () => {
-    setLocalStorage('theme', isDark ? 'light' : 'dark');
-    globalThis.window.location.reload();
-  };
+  const { theme, changeTheme } = useThemeChange();
+  const id = THEME_SWITCH_DESCRIPTION_ID;
+  const isDark = theme === 'dark';
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={isDark ? 'ライトモード' : 'ダークモード'}
-      className={styles.root}
-    >
-      <span>{isDark ? 'ライトモード' : 'ダークモード'}</span>
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={() => changeTheme(isDark ? 'light' : 'dark')}
+        aria-label={isDark ? 'ライトモード' : 'ダークモード'}
+        aria-describedby={id}
+        className={styles.root}
+      >
+        <span>{isDark ? 'ライトモード' : 'ダークモード'}</span>
+      </button>
+      <span id={id} aria-live="assertive" className="sr-only select-none">
+        {currentThemeIs(theme)}
+      </span>
+    </>
   );
 };
