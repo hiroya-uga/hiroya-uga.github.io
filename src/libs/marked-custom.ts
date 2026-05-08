@@ -473,9 +473,11 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
 
     const headerHtml = `<tr>${t.header
       .map((cell, j) => {
-        const align = t.align[j] ? ` class="${t.align[j]}"` : '';
+        const align = t.align[j] ? ` class="is-${t.align[j]}"` : '';
         const text = extractText(cell);
-        const content = marked.parse(text, { async: false });
+        const content = text.includes('\n\n')
+          ? marked.parse(text, { async: false })
+          : marked.parseInline(text, { async: false });
         return `<th${align} scope="col">${content}</th>`;
       })
       .join('')}</tr>`;
@@ -489,7 +491,10 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
               const align = t.align[j] ? ` class="is-${t.align[j]}"` : '';
               const text = extractText(cell);
               const tagName = text.trim().startsWith('^') ? 'th' : 'td';
-              const content = marked.parse(tagName === 'th' ? text.slice(1) : text, { async: false });
+              const rawText = tagName === 'th' ? text.slice(1) : text;
+              const content = rawText.includes('\n\n')
+                ? marked.parse(rawText, { async: false })
+                : marked.parseInline(rawText, { async: false });
               return `<${tagName}${align}>${content}</${tagName}>`;
             })
             .join('') +
