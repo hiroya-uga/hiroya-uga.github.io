@@ -180,9 +180,6 @@
   }
 
   .list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     padding: 2px 10px 4px;
     background: var(--nav-background);
     border-bottom: 1px solid var(--border);
@@ -197,11 +194,6 @@
 
     li:last-child:before {
       content: "└";
-    }
-
-    li + li::before {
-      padding: 0 0.5em;
-      content: "|";
     }
 
     a {
