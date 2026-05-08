@@ -1,7 +1,7 @@
 ---
 title: 'WikiʻoleWeb'
 description: 'uga.devのメモ帳'
-updatedAt: '2026-05-06'
+publishedAt: '2026-05-06T16:33:29+09:00'
 ---
 
 **WikiʻoleWeb**（ウィキオレウェブ）は、日常的なメモ書きやツールの使い方など、雑多な個人的知識を書き留めておくWikiっぽいなにかです。

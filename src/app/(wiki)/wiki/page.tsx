@@ -36,7 +36,7 @@ export default function Page() {
         <JsonLdForNote
           title={frontmatter.title}
           description={frontmatter.description}
-          publishedAt={frontmatter.publishedAt ?? frontmatter.updatedAt}
+          publishedAt={frontmatter.publishedAt}
           updatedAt={frontmatter.updatedAt}
           pathname="/wiki/"
         />
