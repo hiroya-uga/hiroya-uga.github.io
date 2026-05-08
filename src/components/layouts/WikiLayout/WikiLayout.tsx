@@ -27,7 +27,7 @@ export const WikiLayout = ({ entries, children }: Readonly<Props>) => {
       <div className={styles.root}>
         <header className={styles.header}>
           <p className={styles.siteName}>
-            <Link href="/wiki">Wikiʻole Web</Link>
+            <Link href="/wiki">WikiʻoleWeb</Link>
           </p>
           <ul className={styles.utility}>
             <li>

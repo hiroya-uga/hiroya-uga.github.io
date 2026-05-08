@@ -13,7 +13,7 @@ export const WikiBreadcrumb = ({ entries }: Props) => {
 
   const items: { label: string; href: string }[] = [
     { label: 'HOME', href: '/' },
-    { label: 'Wikiʻole', href: '/wiki' },
+    { label: 'WikiʻoleWeb', href: '/wiki' },
   ];
 
   const subSegments = pathname
