@@ -1,0 +1,37 @@
+{
+  "name": "焦点距離チェッカー",
+  "short_name": "焦点距離",
+  "description": "スマホやタブレットのカメラで、焦点距離ごとの撮影範囲を確認するツールです。自分のカメラの焦点距離（35mm換算）を入力すると、各焦点距離のレンズでどこまで写るかを枠で確認できます。",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

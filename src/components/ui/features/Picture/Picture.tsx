@@ -17,6 +17,7 @@ const PictureComponent = (props: Props, ref: React.Ref<HTMLImageElement>) => {
       {...restProps}
       ref={ref}
       className={`${styles.root} ${props.className || ''}`.trim()}
+      src={typeof props.src === 'string' ? props.src.replace(/^\/public/, '') : props.src}
       alt={props.alt}
       priority={priority ?? false}
       loading={priority ? undefined : (loading ?? 'lazy')}
