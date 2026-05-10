@@ -1,5 +1,11 @@
 type Key = keyof Value;
 type Value = {
+  'savedata-focal-length-checker': {
+    deviceFocalLength?: number;
+    selectedFormatId?: string;
+    selectedRefAspectRatioId?: string;
+    focalLengthsInput?: string;
+  };
   'savedata-sudoku-game': {
     shouldShowCorrectRatio?: boolean;
     shouldShowHints?: boolean;

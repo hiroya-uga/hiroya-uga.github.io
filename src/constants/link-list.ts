@@ -102,6 +102,11 @@ export const TOOLS_LINK_LIST: Record<string, ToolPage[]> = {
       userType: ['developer'],
     },
     {
+      emoji: '📷',
+      pathname: '/tools/focal-length-checker',
+      userType: [],
+    },
+    {
       emoji: '☀️',
       pathname: '/tools/screen-wake-lock',
       userType: [],

@@ -452,6 +452,11 @@ export const SEO: Record<
     languages: { ja: '/tools/vnux', en: '/tools/vnux/en' },
     locale: 'en_US',
   },
+  '/tools/focal-length-checker': {
+    title: '焦点距離チェッカー',
+    description:
+      'スマホやタブレットのカメラで、焦点距離ごとの撮影範囲を確認するツールです。\nデバイスの焦点距離（35mm換算）を入力すると、各焦点距離のレンズでどこまで写るかを枠で確認できます。',
+  },
   '/tools/markup-dev-supporter': {
     title: 'HTMLでtable実装するときとかに役立つツール',
     description:
