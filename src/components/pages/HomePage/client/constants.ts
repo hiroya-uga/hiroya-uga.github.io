@@ -167,6 +167,7 @@ export const photoDataList: PhotoData[] = [
     caption: '花の都公園（山中湖・山梨）',
     description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
     instagram: 'CE9XGAEHfS9',
+    flickr: 'https://flic.kr/p/2sbA3HM',
     date: '2020.08.22',
     width: 1920,
     height: 1278,
