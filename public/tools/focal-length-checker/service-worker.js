@@ -37,21 +37,28 @@ serviceWorker.addEventListener(
 
     // PWAで画像は表示しない
     const url = new URL(event.request.url);
+
     if (url.pathname.startsWith('/_next/')) {
       return;
     }
+
     event.respondWith(
       caches.open(CACHE_NAME).then(async (cache) => {
-        try {
-          const response = await fetch(event.request);
+        const cached = await cache.match(event.request);
+
+        const fetchAndCache = fetch(event.request).then((response) => {
           if (response.ok) {
             cache.put(event.request, response.clone());
           }
           return response;
-        } catch {
-          const cached = await cache.match(event.request);
-          return cached ?? Response.error();
+        });
+
+        if (cached) {
+          event.waitUntil(fetchAndCache);
+          return cached;
         }
+
+        return fetchAndCache.catch(() => Response.error());
       }),
     );
   },
