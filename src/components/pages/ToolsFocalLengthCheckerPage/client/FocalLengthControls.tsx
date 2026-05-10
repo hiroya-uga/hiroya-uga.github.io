@@ -205,7 +205,7 @@ export const FocalLengthControls = ({
             </fieldset>
           </div>
 
-          <p className="ml-auto mt-4 w-fit">
+          <p className="pwa:pb-[20vh] ml-auto mt-4 w-fit">
             <RunButton type="button" onClick={handleOpenResetConfirm}>
               設定を初期化
             </RunButton>
