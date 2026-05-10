@@ -17,7 +17,7 @@ publishedAt: '2026-05-08T19:09:59+09:00'
 |  3   | 表示されるメニューをスクロールして「ホーム画面に追加」をタップします           |
 |  4   | 名前を確認して右上の「追加」をタップします                                     |
 
-<!-- <video src="/wiki/help/pwa/install-pwa-for-ios.mp4" controls preload="none" width="360" height="780"></video> -->
+<video src="/wiki/help/pwa/install-pwa-for-ios.mp4" controls preload="none" width="360" height="780"></video>
 
 ### Android
 
