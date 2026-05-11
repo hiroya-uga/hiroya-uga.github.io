@@ -5,6 +5,7 @@ type Value = {
     selectedFormatId?: string;
     selectedRefAspectRatioId?: string;
     focalLengthsInput?: string;
+    focalLengthByCamera?: Record<string, number>;
   };
   'savedata-sudoku-game': {
     shouldShowCorrectRatio?: boolean;
