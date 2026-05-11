@@ -109,10 +109,11 @@ export const FocalLengthChecker = () => {
           className="text-2xs aspect-(--x-aspect-ratio) absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-clip border border-white/70 font-mono leading-none text-white mix-blend-difference"
           style={{ width: `${widthPct}%` }}
         >
-          <span className="absolute bottom-1 left-1 [text-shadow:0_0_4px_black,0_0_4px_black]">{`${fl}mm`}</span>
-          <span className="absolute -top-0.5 right-1 origin-bottom-right -rotate-90 [text-shadow:0_0_4px_black,0_0_4px_black]">
-            {`${fl}mm`}
+          <span className="absolute bottom-[-0.85em] left-[-3.9em] w-[5em] origin-top-right rotate-90 text-right">
+            <span className="block [text-shadow:0_0_4px_black,0_0_4px_black]">{`${fl}mm`}</span>
           </span>
+
+          <span className="absolute right-0.5 top-0.5 [text-shadow:0_0_4px_black,0_0_4px_black]">{`${fl}mm`}</span>
         </div>
       );
     });
