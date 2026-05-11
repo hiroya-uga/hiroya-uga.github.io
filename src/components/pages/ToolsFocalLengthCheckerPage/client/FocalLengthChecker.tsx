@@ -28,6 +28,16 @@ export const FocalLengthChecker = () => {
   const { videoRef, status, activeCameraId, cameraOptions, videoNativeSize, handleVideoMetadata } =
     useCameraStream(selectedCameraId);
 
+  const [isPortrait, setIsPortrait] = useState(true);
+
+  useEffect(() => {
+    const mq = globalThis.matchMedia('(orientation: portrait)');
+    setIsPortrait(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsPortrait(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   const focalLengths = useMemo(() => {
     return focalLengthsInput
       .split(',')
@@ -38,8 +48,6 @@ export const FocalLengthChecker = () => {
 
   const selectedRefAR =
     REFERENCE_ASPECT_RATIOS.find((ar) => ar.id === selectedRefAspectRatioId) ?? REFERENCE_ASPECT_RATIOS[0];
-
-  const isPortrait = videoNativeSize.height > videoNativeSize.width;
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
