@@ -43,13 +43,16 @@ export const FocalLengthControls = ({
   const id = useId();
   const { confirmData, setConfirmData } = useConfirm();
 
-  let cameraSelectPlaceholder = 'レンズを選択';
-  if (status === 'error') {
-    cameraSelectPlaceholder = 'カメラが利用できません';
-  } else if (cameraOptions.length === 0) {
-    cameraSelectPlaceholder = 'レンズ情報を取得中...';
-  }
-  const selectedFormat = SENSOR_FORMATS.find((f) => f.id === selectedFormatId) ?? SENSOR_FORMATS[0];
+  const cameraSelectPlaceholder = (() => {
+    if (status === 'error') {
+      return 'カメラが利用できません';
+    }
+    if (cameraOptions.length === 0) {
+      return 'レンズ情報を取得中...';
+    }
+    return 'レンズを選択';
+  })();
+  const selectedFormat = SENSOR_FORMATS.find((item) => item.id === selectedFormatId) ?? SENSOR_FORMATS[0];
   const isFullFrame = selectedFormat.cropFactor === 1;
   const selectedFormatLabel = selectedFormat.label.split(' (')[0];
   const equiv35mm = Math.round(deviceFocalLength / selectedFormat.cropFactor);
