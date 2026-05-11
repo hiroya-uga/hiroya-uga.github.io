@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
@@ -24,6 +24,9 @@ export const FocalLengthChecker = () => {
   const [selectedCameraId, setSelectedCameraId] = useState('');
   const [focalLengthsInput, setFocalLengthsInput] = useState(DEFAULT_FOCAL_LENGTHS_STRING);
   const [isSaveDataLoaded, setIsSaveDataLoaded] = useState(false);
+
+  const focalLengthByCameraRef = useRef<Record<string, number>>({});
+  const prevCameraRef = useRef('');
 
   const { videoRef, status, activeCameraId, cameraOptions, videoNativeSize, handleVideoMetadata } =
     useCameraStream(selectedCameraId);
@@ -57,23 +60,56 @@ export const FocalLengthChecker = () => {
 
   useEffect(() => {
     const saved = getLocalStorage('savedata-focal-length-checker');
-    if (saved?.deviceFocalLength !== undefined) setDeviceFocalLength(saved.deviceFocalLength);
-    if (saved?.selectedFormatId !== undefined) setSelectedFormatId(saved.selectedFormatId as SensorFormatId);
-    if (saved?.selectedRefAspectRatioId !== undefined)
+
+    if (typeof saved?.deviceFocalLength === 'number') {
+      setDeviceFocalLength(saved.deviceFocalLength);
+    }
+    if (typeof saved?.selectedFormatId === 'string') {
+      setSelectedFormatId(saved.selectedFormatId as SensorFormatId);
+    }
+    if (typeof saved?.selectedRefAspectRatioId === 'string') {
       setSelectedRefAspectRatioId(saved.selectedRefAspectRatioId as RefAspectRatioId);
-    if (saved?.focalLengthsInput !== undefined) setFocalLengthsInput(saved.focalLengthsInput);
+    }
+    if (typeof saved?.focalLengthsInput === 'string') {
+      setFocalLengthsInput(saved.focalLengthsInput);
+    }
+    if (saved?.focalLengthByCamera !== undefined) {
+      focalLengthByCameraRef.current = saved.focalLengthByCamera;
+    }
     setIsSaveDataLoaded(true);
   }, []);
+
+  const currentCameraSelectValue = selectedCameraId === '' ? activeCameraId : selectedCameraId;
+
+  useEffect(() => {
+    if (!isSaveDataLoaded || !currentCameraSelectValue) {
+      return;
+    }
+
+    if (prevCameraRef.current !== currentCameraSelectValue) {
+      prevCameraRef.current = currentCameraSelectValue;
+      const savedFl = focalLengthByCameraRef.current[currentCameraSelectValue] ?? 26;
+      setDeviceFocalLength(savedFl);
+      return;
+    }
+
+    focalLengthByCameraRef.current = {
+      ...focalLengthByCameraRef.current,
+      [currentCameraSelectValue]: deviceFocalLength,
+    };
+  }, [isSaveDataLoaded, deviceFocalLength, currentCameraSelectValue]);
 
   useEffect(() => {
     if (isSaveDataLoaded === false) {
       return;
     }
+
     setLocalStorage('savedata-focal-length-checker', {
       deviceFocalLength,
       selectedFormatId,
       selectedRefAspectRatioId,
       focalLengthsInput,
+      focalLengthByCamera: focalLengthByCameraRef.current,
     });
   }, [isSaveDataLoaded, deviceFocalLength, selectedFormatId, selectedRefAspectRatioId, focalLengthsInput]);
 
@@ -96,7 +132,6 @@ export const FocalLengthChecker = () => {
     setFocalLengthsInput(DEFAULT_FOCAL_LENGTHS_STRING);
   };
 
-  const currentCameraSelectValue = selectedCameraId === '' ? activeCameraId : selectedCameraId;
   const aspectRatio = isPortrait
     ? `${selectedRefAR.h} / ${selectedRefAR.w}`
     : `${selectedRefAR.w} / ${selectedRefAR.h}`;
