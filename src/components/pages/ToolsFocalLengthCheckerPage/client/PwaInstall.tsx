@@ -13,6 +13,7 @@ interface BeforeInstallPromptEvent extends Event {
 export const PwaInstall = () => {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isIOS, setIsIOS] = useState(false);
+
   useEffect(() => {
     if (globalThis.window.matchMedia('(display-mode: standalone)').matches) {
       return;
@@ -20,12 +21,14 @@ export const PwaInstall = () => {
 
     const isIOSDevice =
       /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent));
+
     setIsIOS(isIOSDevice);
 
     const handler = (e: Event) => {
       e.preventDefault();
       setInstallPrompt(e as BeforeInstallPromptEvent);
     };
+
     globalThis.window.addEventListener('beforeinstallprompt', handler);
     return () => {
       globalThis.window.removeEventListener('beforeinstallprompt', handler);

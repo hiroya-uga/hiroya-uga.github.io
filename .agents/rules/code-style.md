@@ -87,6 +87,17 @@ const video = useRef(null);
 const videoRef = useRef(null);
 ```
 
+## Callback parameter naming
+
+Use descriptive names, not single letters.
+
+```ts
+// Bad
+SENSOR_FORMATS.find((f) => f.id === id);
+// Good
+SENSOR_FORMATS.find((item) => item.id === id);
+```
+
 ## Comments
 
 - `//` for implementation notes
