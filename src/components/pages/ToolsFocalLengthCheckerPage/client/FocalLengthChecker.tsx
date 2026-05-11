@@ -88,10 +88,8 @@ export const FocalLengthChecker = () => {
 
     if (prevCameraRef.current !== currentCameraSelectValue) {
       prevCameraRef.current = currentCameraSelectValue;
-      const savedFl = focalLengthByCameraRef.current[currentCameraSelectValue];
-      if (savedFl !== undefined) {
-        setDeviceFocalLength(savedFl);
-      }
+      const savedFl = focalLengthByCameraRef.current[currentCameraSelectValue] ?? 26;
+      setDeviceFocalLength(savedFl);
       return;
     }
 
