@@ -61,16 +61,16 @@ export const FocalLengthChecker = () => {
   useEffect(() => {
     const saved = getLocalStorage('savedata-focal-length-checker');
 
-    if (saved?.deviceFocalLength !== undefined) {
+    if (typeof saved?.deviceFocalLength === 'number') {
       setDeviceFocalLength(saved.deviceFocalLength);
     }
-    if (saved?.selectedFormatId !== undefined) {
+    if (typeof saved?.selectedFormatId === 'string') {
       setSelectedFormatId(saved.selectedFormatId as SensorFormatId);
     }
-    if (saved?.selectedRefAspectRatioId !== undefined) {
+    if (typeof saved?.selectedRefAspectRatioId === 'string') {
       setSelectedRefAspectRatioId(saved.selectedRefAspectRatioId as RefAspectRatioId);
     }
-    if (saved?.focalLengthsInput !== undefined) {
+    if (typeof saved?.focalLengthsInput === 'string') {
       setFocalLengthsInput(saved.focalLengthsInput);
     }
     if (saved?.focalLengthByCamera !== undefined) {
