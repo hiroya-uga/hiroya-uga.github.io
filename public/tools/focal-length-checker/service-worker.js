@@ -38,7 +38,7 @@ serviceWorker.addEventListener(
     // PWAで画像は表示しない
     const url = new URL(event.request.url);
 
-    if (url.pathname.startsWith('/_next/')) {
+    if (url.pathname.startsWith('/_next/image')) {
       return;
     }
 
