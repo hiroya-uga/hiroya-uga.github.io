@@ -123,6 +123,7 @@ export const FocalLengthControls = ({
                       onClick={() => handleFocalLengthStep(-1)}
                       disabled={deviceFocalLength <= FOCAL_LENGTH_MIN}
                       className="size-8 rounded-full border border-gray-300 disabled:opacity-40 dark:border-gray-600"
+                      aria-label="焦点距離を1減らす"
                     >
                       -
                     </button>
@@ -143,6 +144,7 @@ export const FocalLengthControls = ({
                       onClick={() => handleFocalLengthStep(1)}
                       disabled={deviceFocalLength >= FOCAL_LENGTH_MAX}
                       className="size-8 rounded-full border border-gray-300 disabled:opacity-40 dark:border-gray-600"
+                      aria-label="焦点距離を1増やす"
                     >
                       +
                     </button>
