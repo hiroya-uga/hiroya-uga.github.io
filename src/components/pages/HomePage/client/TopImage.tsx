@@ -141,7 +141,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
               <svg
                 version="1.1"
                 role="img"
-                aria-label="ランダムに切り替える"
+                aria-label="トップ画像をランダムに切り替える"
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
                 y="0px"
