@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { RunButton } from '@/components/ui/buttons/RunButton';
 import Link from 'next/link';
+import ReactGA from 'react-ga4';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -29,9 +30,15 @@ export const PwaInstall = () => {
       setInstallPrompt(e as BeforeInstallPromptEvent);
     };
 
+    const onInstalled = () => {
+      ReactGA.event('pwa_installed');
+    };
+
     globalThis.window.addEventListener('beforeinstallprompt', handler);
+    globalThis.window.addEventListener('appinstalled', onInstalled);
     return () => {
       globalThis.window.removeEventListener('beforeinstallprompt', handler);
+      globalThis.window.removeEventListener('appinstalled', onInstalled);
     };
   }, []);
 
@@ -55,6 +62,8 @@ export const PwaInstall = () => {
             type="button"
             onClick={async () => {
               await installPrompt.prompt();
+              const { outcome } = await installPrompt.userChoice;
+              ReactGA.event(outcome === 'accepted' ? 'pwa_install_accepted' : 'pwa_install_dismissed');
               setInstallPrompt(null);
             }}
           >
