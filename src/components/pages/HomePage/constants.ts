@@ -7,6 +7,25 @@ export type PhotoData = ImageData & {
 
 export const photoDataList: PhotoData[] = [
   {
+    src: '/images/main-window.webp',
+    caption: '窓（新宿・東京）',
+    description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
+    flickr: 'https://flic.kr/p/2sce1iJ',
+    date: '2022.01.07',
+    width: 1920,
+    height: 1277,
+  },
+  {
+    src: '/images/main-taxi.webp',
+    caption: 'タクシー（新宿・東京）',
+    description: 'NIKKOR Z 24-70mm f/2.8 S + Nikon Z 6',
+    instagram: 'CVvJ88jh1kY',
+    flickr: 'https://flic.kr/p/2sbY2wr',
+    date: '2021.10.27',
+    width: 1920,
+    height: 1277,
+  },
+  {
     src: '/images/main-motor-bike-at-koenji.webp',
     caption: '白バイ（高円寺・東京）',
     description: 'Tamron SP 24-70mm F/2.8 Di VC USD G2 (Model A032) + FTZ + Nikon Z 6',

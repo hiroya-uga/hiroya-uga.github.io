@@ -1,7 +1,7 @@
 'use client';
 
 import { useId, useRef, useState } from 'react';
-import { PhotoData } from './constants';
+import { PhotoData } from '../constants';
 import { TopImage } from './TopImage';
 import { TopImageGallery } from './TopImageGallery';
 import { WelcomeMessage } from './WelcomeMessage';

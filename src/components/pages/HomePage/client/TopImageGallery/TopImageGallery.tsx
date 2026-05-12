@@ -6,7 +6,7 @@ import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
-import { PhotoData } from '../constants';
+import { PhotoData } from '../../constants';
 import { getClassNameForPhotoItem, getCSSRowVariables } from './utils';
 
 import styles from './TopImageGallery.module.css';
