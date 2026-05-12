@@ -442,6 +442,7 @@ html:has(.container) {
       place-items: center;
       width: 30px;
       height: 30px;
+      font-family: monospace;
       font-size: 14px;
       line-height: 1;
       pointer-events: none;
