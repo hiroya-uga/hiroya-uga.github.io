@@ -9,21 +9,26 @@ export const PowerOfTheWebSection = () => {
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
 
   useEffect(() => {
-    const currentMonth = new Date().toLocaleDateString('ja-JP', {
+    const now = new Date();
+    const currentDate = now.toLocaleDateString('ja-JP', {
       timeZone: 'Asia/Tokyo',
       year: 'numeric',
       month: '2-digit',
+      day: '2-digit',
     });
-    const isViewed = getLocalStorage('power-section-viewed-date') === currentMonth;
+    const stored = getLocalStorage('power-section-viewed-date');
+    const oneMonthAgo = new Date(now);
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const isWithinOneMonth = stored !== null && new Date(stored) > oneMonthAgo;
 
     queueMicrotask(() => {
-      if (isViewed) {
+      if (isWithinOneMonth) {
         setStatus('already');
-        return;
+      } else {
+        setStatus('ready');
       }
 
-      setStatus('ready');
-      setLocalStorage('power-section-viewed-date', currentMonth);
+      setLocalStorage('power-section-viewed-date', currentDate);
     });
   }, []);
 
