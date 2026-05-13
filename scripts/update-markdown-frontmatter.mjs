@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * Update publishedAt and updatedAt in article/wiki frontmatter with commit timestamps.
+ * Update publishedAt and updatedAt in article/notes frontmatter with commit timestamps.
  * - publishedAt (date-only): replaced with the first commit time for that file
  * - updatedAt (date-only): replaced with the latest commit time for that file
  *
  * Usage:
- *   node scripts/update-markdown-frontmatter.mjs         # staged articles/wiki only (pre-commit hook)
- *   node scripts/update-markdown-frontmatter.mjs --all   # all articles/**\/*.md and wiki/**\/*.md (migration)
+ *   node scripts/update-markdown-frontmatter.mjs         # staged articles/notes only (pre-commit hook)
+ *   node scripts/update-markdown-frontmatter.mjs --all   # all articles/**\/*.md and notes/**\/*.md (migration)
  */
 
 import { execSync } from 'node:child_process';
@@ -37,13 +37,13 @@ function getStagedArticles() {
   return execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf8' })
     .trim()
     .split('\n')
-    .filter((f) => (f.startsWith('articles/') || f.startsWith('wiki/')) && f.endsWith('.md'));
+    .filter((f) => (f.startsWith('articles/') || f.startsWith('notes/')) && f.endsWith('.md'));
 }
 
 async function getAllArticles() {
   /** @type {string[]} */
   const files = [];
-  for await (const f of glob('{articles,wiki}/**/*.md')) {
+  for await (const f of glob('{articles,notes}/**/*.md')) {
     files.push(f);
   }
   return files;

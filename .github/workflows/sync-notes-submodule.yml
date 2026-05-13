@@ -1,0 +1,34 @@
+name: Sync notes submodule
+
+on:
+  repository_dispatch:
+    types:
+      - sync-notes-submodule
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update notes submodule
+        run: |
+          git submodule update --remote notes
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Sync notes submodule'
+          title: 'Sync notes submodule'
+          branch: sync-notes-submodule
+          base: main
+          delete-branch: true
