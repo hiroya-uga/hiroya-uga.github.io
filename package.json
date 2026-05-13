@@ -40,6 +40,15 @@
       "sort-package-json"
     ]
   },
+  "resolutions": {
+    "lodash": "4.18.1",
+    "minimatch@9.0.3": "9.0.9",
+    "minimatch@^3.0.5": "3.1.5",
+    "minimatch@^3.1.1": "3.1.5",
+    "minimatch@^3.1.2": "3.1.5",
+    "picomatch@^4.0.3": "4.0.4",
+    "postcss@8.4.31": "8.5.10"
+  },
   "dependencies": {
     "@shikijs/rehype": "^4.0.2",
     "@types/node": "24",
