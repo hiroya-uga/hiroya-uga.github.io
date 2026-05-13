@@ -1,14 +1,16 @@
-import { WikiDetailPage } from '@/components/pages/WikiDetailPage';
+import { NotesDetailPage } from '@/components/pages/NotesDetailPage';
 import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
-import { getWikiPost } from '@/libs/wiki';
+import { generateOgpImage } from '@/libs/generate-ogp';
+import { getNotesPost } from '@/libs/notes';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const post = getWikiPost([]);
-  const title = post?.frontmatter.title ?? 'Wiki';
+  const post = getNotesPost([]);
+  const title = post?.frontmatter.title ?? 'Notes';
   const description = post?.frontmatter.description ?? '';
-  const url = `${URL_ORIGIN}/wiki/`;
+  const url = `${URL_ORIGIN}/notes/`;
+  const ogImage = await generateOgpImage(['notes', 'index'], title);
 
   return {
     title: `${title} | ${SITE_NAME}`,
@@ -19,6 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: 'website',
       url,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${SITE_NAME} ${title}` }],
+    },
+    twitter: {
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${SITE_NAME} ${title}` }],
     },
     alternates: {
       canonical: url,
@@ -27,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Page() {
-  const post = getWikiPost([]);
+  const post = getNotesPost([]);
   const frontmatter = post?.frontmatter;
 
   return (
@@ -42,12 +48,12 @@ export default function Page() {
             description: frontmatter.description,
             datePublished: frontmatter.publishedAt,
             dateModified: frontmatter.updatedAt,
-            url: `${URL_ORIGIN}/wiki/`,
-            mainEntityOfPage: `${URL_ORIGIN}/wiki/`,
+            url: `${URL_ORIGIN}/notes/`,
+            mainEntityOfPage: `${URL_ORIGIN}/notes/`,
           }}
         />
       )}
-      <WikiDetailPage frontmatter={frontmatter} content={post?.content} toc={post?.toc} />
+      <NotesDetailPage frontmatter={frontmatter} content={post?.content} toc={post?.toc} />
     </>
   );
 }

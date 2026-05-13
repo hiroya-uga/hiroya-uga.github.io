@@ -45,7 +45,7 @@ export const PwaInstall = () => {
   if (installPrompt === null && isIOS === false) {
     return (
       <p>
-        詳細は<Link href="/wiki/help/pwa">インストール可能なWebアプリについて</Link>をご覧ください
+        詳細は<Link href="/notes/help/pwa">インストール可能なWebアプリについて</Link>をご覧ください
       </p>
     );
   }
@@ -54,7 +54,7 @@ export const PwaInstall = () => {
     <>
       {isIOS && <p>Safariの共有メニューから「ホーム画面に追加」でインストールできます。</p>}
       <p>
-        詳しくは<Link href="/wiki/help/pwa">インストール可能なWebアプリについて</Link>をご覧ください
+        詳しくは<Link href="/notes/help/pwa">インストール可能なWebアプリについて</Link>をご覧ください
       </p>
       {installPrompt !== null && (
         <p className="mt-10">

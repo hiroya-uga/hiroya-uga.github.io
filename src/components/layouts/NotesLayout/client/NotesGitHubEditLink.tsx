@@ -3,10 +3,10 @@
 // import { GITHUB_REPOSITORY } from '@/constants/meta';
 import { usePathname } from 'next/navigation';
 
-export const WikiGitHubEditLink = () => {
+export const NotesGitHubEditLink = () => {
   const pathname = usePathname();
 
-  if (!pathname.startsWith('/wiki/')) {
+  if (!pathname.startsWith('/notes/')) {
     return null;
   }
 

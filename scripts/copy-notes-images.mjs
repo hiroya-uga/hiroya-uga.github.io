@@ -1,5 +1,6 @@
 /**
- * wiki/ ディレクトリ内の images/ フォルダにある画像ファイルを public/wiki/ にコピーする。
+ * notes/ ディレクトリ内のメディアファイルを public/notes/ にコピーする。
+ * 画像は images/ フォルダ内、動画等はmdファイルの隣に置く運用を想定。
  * predev / prebuild で実行する。
  */
 import fs from 'fs';
@@ -9,9 +10,9 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
-const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
+const MEDIA_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg', '.mp4', '.webm', '.mov']);
 
-const wikiDir = path.join(root, 'wiki');
+const notesDir = path.join(root, 'notes');
 
 const walk = (dir, relPath) => {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -20,11 +21,11 @@ const walk = (dir, relPath) => {
 
     if (entry.isDirectory()) {
       walk(entryPath, entryRelPath);
-    } else if (entry.name === path.basename(entryPath) && path.basename(dir) === 'images') {
+    } else {
       const ext = path.extname(entry.name).toLowerCase();
-      if (!IMAGE_EXTS.has(ext)) continue;
+      if (!MEDIA_EXTS.has(ext)) continue;
 
-      const destDir = path.join(root, 'public', 'wiki', path.dirname(entryRelPath));
+      const destDir = path.join(root, 'public', 'notes', path.dirname(entryRelPath));
       fs.mkdirSync(destDir, { recursive: true });
       fs.copyFileSync(entryPath, path.join(destDir, entry.name));
       console.log(`  copied: ${entryPath} → ${path.join(destDir, entry.name)}`);
@@ -32,8 +33,8 @@ const walk = (dir, relPath) => {
   }
 };
 
-if (fs.existsSync(wikiDir)) {
-  walk(wikiDir, '');
+if (fs.existsSync(notesDir)) {
+  walk(notesDir, '');
 }
 
-console.log('✓ Wiki images copied.');
+console.log('✓ Notes media copied.');

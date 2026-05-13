@@ -3,22 +3,22 @@
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import { SITE_NAME } from '@/constants/meta';
-import { WikiEntry } from '@/libs/wiki';
+import { NotesEntry } from '@/libs/notes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useId } from 'react';
-import styles from './WikiSidebarNav.module.css';
+import styles from './NotesSidebarNav.module.css';
 
 interface Props {
-  entries: WikiEntry[];
+  entries: NotesEntry[];
 }
 
-export const WikiSidebarNav = ({ entries }: Props) => {
+export const NotesSidebarNav = ({ entries }: Props) => {
   const pathname = usePathname();
   const id = useId();
 
   const currentSlug = pathname
-    .replace(/^\/wiki\/?/, '')
+    .replace(/^\/notes\/?/, '')
     .replace(/\/$/, '')
     .split('/')
     .filter(Boolean);
@@ -35,7 +35,7 @@ export const WikiSidebarNav = ({ entries }: Props) => {
       ? (entries.find(({ slug }) => {
           if (slug.length !== currentSlug.length - 1) return false;
           return currentSlug.slice(0, -1).every((seg, i) => seg === slug[i]);
-        }) ?? { pathname: '/wiki', frontmatter: { title: 'Wikiʻoleトップ' } })
+        }) ?? { pathname: '/notes', frontmatter: { title: 'Wikiʻoleトップ' } })
       : undefined;
 
   const currentEntry = entries.find(

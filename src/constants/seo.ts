@@ -24,7 +24,7 @@ export const SEO: Record<
     title: '記事一覧',
     description: '技術メモや日記などをまとめています。',
   },
-  '/wiki': {
+  '/notes': {
     title: 'Wikiʻole',
     description: 'FAQ、用語説明、ツールの使い方などの知識をまとめています。',
   },

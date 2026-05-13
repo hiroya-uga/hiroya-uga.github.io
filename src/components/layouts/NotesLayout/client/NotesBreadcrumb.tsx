@@ -1,29 +1,29 @@
 'use client';
-import { WikiEntry } from '@/libs/wiki';
+import { NotesEntry } from '@/libs/notes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from './WikiBreadcrumb.module.css';
+import styles from './NotesBreadcrumb.module.css';
 
 interface Props {
-  entries: WikiEntry[];
+  entries: NotesEntry[];
 }
 
-export const WikiBreadcrumb = ({ entries }: Props) => {
+export const NotesBreadcrumb = ({ entries }: Props) => {
   const pathname = usePathname();
 
   const items: { label: string; href: string }[] = [
     { label: 'HOME', href: '/' },
-    { label: 'WikiʻoleWeb', href: '/wiki' },
+    { label: 'WikiʻoleWeb', href: '/notes' },
   ];
 
   const subSegments = pathname
-    .replace(/^\/wiki\/?/, '')
+    .replace(/^\/notes\/?/, '')
     .split('/')
     .filter(Boolean);
 
   for (let i = 0; i < subSegments.length; i++) {
     const slug = subSegments.slice(0, i + 1);
-    const href = `/wiki/${slug.join('/')}`;
+    const href = `/notes/${slug.join('/')}`;
     const entry = entries.find((e) => e.pathname === href);
     items.push({ label: entry?.frontmatter.title ?? subSegments[i], href });
   }

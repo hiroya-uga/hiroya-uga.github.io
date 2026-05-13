@@ -1,13 +1,13 @@
 import { BREADCRUMB_LABEL } from '@/constants/messages';
 import { SITE_NAME } from '@/constants/meta';
-import { WikiEntry } from '@/libs/wiki';
+import { NotesEntry } from '@/libs/notes';
 import clsx from 'clsx';
 import { DotGothic16 } from 'next/font/google';
 import Link from 'next/link';
-import { WikiBreadcrumb } from './client/WikiBreadcrumb';
-import { WikiSidebarNav } from './client/WikiSidebarNav';
-import { WikiThemeToggle } from './client/WikiThemeToggle';
-import styles from './WikiLayout.module.css';
+import { NotesBreadcrumb } from './client/NotesBreadcrumb';
+import { NotesSidebarNav } from './client/NotesSidebarNav';
+import { NotesThemeToggle } from './client/NotesThemeToggle';
+import styles from './NotesLayout.module.css';
 
 const dotGothic16 = DotGothic16({
   weight: '400',
@@ -18,17 +18,17 @@ const dotGothic16 = DotGothic16({
 });
 
 interface Props {
-  entries: WikiEntry[];
+  entries: NotesEntry[];
   children: React.ReactNode;
 }
 
-export const WikiLayout = ({ entries, children }: Readonly<Props>) => {
+export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
   return (
     <div className={`${styles.container} ${dotGothic16.variable}`}>
       <div className={styles.root}>
         <header className={styles.header}>
           <p className={styles.siteName}>
-            <Link href="/wiki">WikiʻoleWeb</Link>
+            <Link href="/notes">WikiʻoleWeb</Link>
           </p>
           <ul className={styles.utility}>
             <li>
@@ -37,26 +37,26 @@ export const WikiLayout = ({ entries, children }: Readonly<Props>) => {
               </Link>
             </li>
             <li>
-              <Link href="/wiki/help">
+              <Link href="/notes/help">
                 <span>ご利用にあたって</span>
               </Link>
             </li>
             <li>
-              <WikiThemeToggle />
+              <NotesThemeToggle />
             </li>
           </ul>
         </header>
-        <nav className={clsx([styles.navigation, styles.ofWide])} aria-label="Wiki ナビゲーション">
-          <WikiSidebarNav entries={entries} />
+        <nav className={clsx([styles.navigation, styles.ofWide])} aria-label="Notes ナビゲーション">
+          <NotesSidebarNav entries={entries} />
         </nav>
         <div className={styles.content}>
           <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>
-            <WikiBreadcrumb entries={entries} />
+            <NotesBreadcrumb entries={entries} />
           </nav>
           {children}
         </div>
-        <nav className={clsx([styles.navigation, styles.ofNarrow])} aria-label="Wiki ナビゲーション">
-          <WikiSidebarNav entries={entries} />
+        <nav className={clsx([styles.navigation, styles.ofNarrow])} aria-label="Notes ナビゲーション">
+          <NotesSidebarNav entries={entries} />
         </nav>
         <footer className={styles.footer}>
           <p>

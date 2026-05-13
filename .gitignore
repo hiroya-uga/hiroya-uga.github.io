@@ -49,6 +49,18 @@ public/articles/**/*.webp
 public/articles/**/*.gif
 public/articles/**/*.avif
 
+# notes/ から yarn prebuild / predev 時にコピーされるメディア
+public/notes/**/*.jpg
+public/notes/**/*.jpeg
+public/notes/**/*.png
+public/notes/**/*.webp
+public/notes/**/*.gif
+public/notes/**/*.avif
+public/notes/**/*.svg
+public/notes/**/*.mp4
+public/notes/**/*.webm
+public/notes/**/*.mov
+
 # Claude Code
 .claude/settings.local.json
 

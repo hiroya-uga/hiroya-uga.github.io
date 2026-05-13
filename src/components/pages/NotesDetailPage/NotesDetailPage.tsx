@@ -1,14 +1,14 @@
-import { WikiGitHubEditLink } from '@/components/layouts/WikiLayout/client/WikiGitHubEditLink';
-import { WikiFrontmatter } from '@/libs/wiki';
-import styles from './WikiDetailPage.module.css';
+import { NotesGitHubEditLink } from '@/components/layouts/NotesLayout/client/NotesGitHubEditLink';
+import { NotesFrontmatter } from '@/libs/notes';
+import styles from './NotesDetailPage.module.css';
 
 interface Props {
-  frontmatter?: WikiFrontmatter;
+  frontmatter?: NotesFrontmatter;
   content?: string;
   toc?: string;
 }
 
-export const WikiDetailPage = ({ frontmatter, content, toc }: Props) => {
+export const NotesDetailPage = ({ frontmatter, content, toc }: Props) => {
   return (
     <main className={styles.root}>
       <h1 className={styles.title}>
@@ -29,7 +29,7 @@ export const WikiDetailPage = ({ frontmatter, content, toc }: Props) => {
         )}
 
         <div className={styles.edit}>
-          <WikiGitHubEditLink />
+          <NotesGitHubEditLink />
         </div>
       </div>
     </main>
