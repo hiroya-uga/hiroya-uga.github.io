@@ -1,6 +1,6 @@
 'use client';
 
-// import { GITHUB_REPOSITORY } from '@/constants/meta';
+import { GITHUB_NOTES_REPOSITORY } from '@/constants/meta';
 import { usePathname } from 'next/navigation';
 
 export const NotesGitHubEditLink = () => {
@@ -10,12 +10,11 @@ export const NotesGitHubEditLink = () => {
     return null;
   }
 
-  // const href = `${GITHUB_REPOSITORY}/edit/main${pathname}/index.md`;
+  const href = `${GITHUB_NOTES_REPOSITORY}/edit/main${pathname.replace(/^\/notes\//, '/')}index.md`;
 
   return (
     <p>
-      {/* <a href={href}>編集</a> */}
-      <a aria-disabled="true">編集</a>
+      <a href={href}>編集</a>
     </p>
   );
 };

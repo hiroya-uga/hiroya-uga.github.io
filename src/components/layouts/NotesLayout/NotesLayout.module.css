@@ -40,9 +40,11 @@
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
 @container (width <= 23.125rem) {
   .root {
+    --x-color: black;
     --x-background: white;
     --x-header-background: navy;
     --x-header-link-color: white;
+    --x-heading-color: darkblue;
     --x-link: blue;
     --x-link-visited: purple;
     --x-border: gray;
@@ -52,19 +54,21 @@
     font-family: var(--font-dot-gothic), "MS P Gothic", "Osaka", sans-serif;
     font-size: max(calc(13 / 18 * 1rem), 13px);
     line-height: 1.2;
-    color: black;
+    color: var(--x-color);
     letter-spacing: 0.4px;
     background: var(--x-background);
     -webkit-font-smoothing: antialiased;
   }
 
   [data-theme="dark"] .root {
-    filter: invert(1) hue-rotate(345deg);
-
-    img,
-    video {
-      filter: invert(1) hue-rotate(15deg);
-    }
+    --x-color: white;
+    --x-background: black;
+    --x-header-background: #ffdf7f;
+    --x-header-link-color: black;
+    --x-heading-color: #ffdc74;
+    --x-link: #ffbf00;
+    --x-link-visited: #9fff7f;
+    --x-border: #7f7f7f;
   }
 
   .header {

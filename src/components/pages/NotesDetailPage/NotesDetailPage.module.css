@@ -1,7 +1,3 @@
-.edit {
-  text-decoration: line-through;
-}
-
 .content {
   table {
     width: 100%;
@@ -55,7 +51,7 @@
 
     h2 {
       margin: 1lh 0 0.5em;
-      color: darkblue;
+      color: var(--x-heading-color);
 
       &::before {
         font-weight: normal;
@@ -134,7 +130,6 @@
   }
 
   .edit {
-    flex-grow: 1;
     padding: 0 10px;
     margin: 1lh 0 3lh;
     text-align: right;
