@@ -39,6 +39,7 @@ type BaseProps = {
       multiline?: false;
       type?: InputHTMLAttributes<HTMLInputElement>['type'];
       inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
+      list?: InputHTMLAttributes<HTMLInputElement>['list'];
       onInput?: InputHTMLAttributes<HTMLInputElement>['onInput'];
       onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
       autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
