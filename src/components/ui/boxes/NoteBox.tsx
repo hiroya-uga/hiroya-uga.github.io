@@ -1,4 +1,4 @@
-import { ReactNode, type JSX } from 'react';
+import { ReactNode, useId, type JSX } from 'react';
 
 import clsx from 'clsx';
 
@@ -21,10 +21,12 @@ const getTitle = (level: NonNullable<Props['type']>) => {
 };
 
 export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Readonly<Props>) => {
+  const id = useId();
   const TagName = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 
   return (
     <section
+      aria-labelledby={id}
       className={clsx([
         'border-secondary pb-6.5 rounded-md border px-2.5 pt-5',
         type === 'note' && 'bg-green-50 dark:bg-[#004b20]',
@@ -33,6 +35,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Re
       ])}
     >
       <TagName
+        id={id}
         className={clsx([
           'mb-2 mt-0 text-lg font-bold leading-relaxed',
           type === 'note' && 'text-green-800 dark:text-white',
