@@ -25,6 +25,7 @@ type BaseProps = {
   disabled?: boolean;
   min?: number;
   max?: number;
+  maxLength?: number;
   align?: 'left' | 'center' | 'right';
   defaultValue?: string;
 } & (
@@ -49,8 +50,8 @@ type BaseProps = {
 interface Props extends Omit<BaseProps, 'label' | 'description'> {
   autoResize: boolean;
   noResize: boolean;
-  onInput?: React.FormEventHandler<HTMLTextAreaElement>;
-  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
+  onInput?: TextareaHTMLAttributes<HTMLTextAreaElement>['onInput'];
+  onBlur?: TextareaHTMLAttributes<HTMLTextAreaElement>['onBlur'];
   id: string;
   descriptionId?: string;
 }
