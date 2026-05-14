@@ -24,21 +24,33 @@ export const SEO: Record<
     title: '記事一覧',
     description: '技術メモや日記などをまとめています。',
   },
-  '/notes': {
-    title: 'Wikiʻole',
-    description: 'FAQ、用語説明、ツールの使い方などの知識をまとめています。',
+  '/contact': {
+    title: 'お問い合わせ',
+    description: `${SITE_NAME}に関するお問い合わせはこちらから。`,
   },
   '/disclaimer': {
     title: '免責事項',
     description: `このページでは${SITE_NAME}（以下「当サイト」）における免責事項についてご説明します。\n本免責事項は、必要に応じて改訂される場合があります。`,
   },
-  '/contact': {
-    title: 'お問い合わせ',
-    description: `${SITE_NAME}に関するお問い合わせはこちらから。`,
-  },
   '/documents': {
     title: '資料集',
     description: 'ドキュメント系をまとめた階層です。',
+  },
+  '/documents/fantasized-specs': {
+    title: 'Fantasized specs',
+    description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
+  },
+  '/documents/fantasized-specs/css-observer': {
+    title: 'CSS Observer Module level 1 - Fantasized specs',
+    description: '',
+  },
+  '/documents/fantasized-specs/html-carousel': {
+    title: 'The carousel element - Fantasized specs',
+    description: '',
+  },
+  '/documents/media': {
+    title: '外部メディアリンク一覧',
+    description: '執筆・関与したブログ記事や動画コンテンツ、寄稿などへのリンクをまとめています。',
   },
   '/documents/notes': {
     title: 'UI Notes',
@@ -51,11 +63,6 @@ export const SEO: Record<
   '/documents/translations': {
     title: '日本語訳まとめ',
     description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',
-  },
-  '/documents/translations/w3c/wai/tutorials/images': {
-    beforeSubTitle: '日本語訳：',
-    title: 'Images Tutorial',
-    description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
   },
   '/documents/translations/pauljadam-modern-web-a11y-demos': {
     beforeSubTitle: '日本語訳：',
@@ -70,26 +77,12 @@ export const SEO: Record<
     title: '略語の展開を表すためのtitle属性を持つabbr要素',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  '/documents/translations/pauljadam-modern-web-a11y-demos/accesskey': {
-    title: 'アクセスキーのアクセシビリティDEMO',
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
   '/documents/translations/pauljadam-modern-web-a11y-demos/accessiblenameimg': {
     title: 'img要素のアクセシブルネームの計算',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile': {
-    beforeSubTitle: '日本語訳：',
-    title: 'モバイルアクセシビリティテスト＆開発ワークショップ',
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
-  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-bad': {
-    beforeSubTitle: '日本語訳：',
-    title: 'アコーディオンのアクセシビリティ失敗例',
-    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
-  },
-  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-aria': {
-    title: 'aria-*属性を利用したアコーディオンの実装例',
+  '/documents/translations/pauljadam-modern-web-a11y-demos/accesskey': {
+    title: 'アクセスキーのアクセシビリティDEMO',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
   '/documents/translations/pauljadam-modern-web-a11y-demos/accordion-heading': {
@@ -166,8 +159,8 @@ export const SEO: Record<
     title: 'VoiceOverのバグ：aria-pressed属性で要素が無視される',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  // ['aria-role-alertdialog-setTimeout', false],
   // ['aria-role-alertdialog', false],
+  // ['aria-role-alertdialog-setTimeout', false],
   // ['aria-role-tooltip', false],
   // ['aria-roledescription', false],
   // ['aria-table', false],
@@ -186,6 +179,9 @@ export const SEO: Record<
     title: 'オーディオ/ビデオの自動再生とループを使った悪い例',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
+  // ['bootcamp-contact-after-aria', false],
+  // ['bootcamp-contact-after-html5', false],
+  // ['bootcamp-contact-before', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown': {
     title: 'Bootstrapのドロップダウン',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
@@ -200,9 +196,6 @@ export const SEO: Record<
     title: 'WAI-ARIAを利用したものと純粋なチェックボックスの比較',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  // ['bootcamp-contact-before', false],
-  // ['bootcamp-contact-after-aria', false],
-  // ['bootcamp-contact-after-html5', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/css-content-new-window': {
     title:
       '新しいウィンドウを開くリンクのための、BootstrapのCSS ContentとFont Awesome Icons、JavaScriptによるtitle属性の付与',
@@ -215,9 +208,26 @@ export const SEO: Record<
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
   // ['csstext', false],
+  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile': {
+    beforeSubTitle: '日本語訳：',
+    title: 'モバイルアクセシビリティテスト＆開発ワークショップ',
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
+  // ['csunmobile-form-aria', false],
+  // ['csunmobile-form-bad', false],
+  // ['csunmobile-form-html5', false],
+  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-aria': {
+    title: 'aria-*属性を利用したアコーディオンの実装例',
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
+  '/documents/translations/pauljadam-modern-web-a11y-demos/csunmobile/accordion-bad': {
+    beforeSubTitle: '日本語訳：',
+    title: 'アコーディオンのアクセシビリティ失敗例',
+    description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
+  },
   // ['customcontrols', false],
-  // ['dates', false],
   // ['data-tables', false],
+  // ['dates', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/detail-message-dialog': {
     title: 'WAI-ARIAのrole="alertdialog"属性を使った詳細メッセージダイアログ',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
@@ -237,17 +247,14 @@ export const SEO: Record<
     title: 'フェイクボタンのアクセシビリティテスト',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  // ['focus-after-page-load', false],
+  // ['fieldsetlegend', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/figure-figcaption': {
     title: 'HTML5のfigure要素とfigcaption要素',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
   },
-  // ['csunmobile-form-bad', false],
-  // ['csunmobile-form-aria', false],
-  // ['csunmobile-form-html5', false],
-  // ['form-errors-top', false],
-  // ['fieldsetlegend', false],
+  // ['focus-after-page-load', false],
   // ['focusvisible', false],
+  // ['form-errors-top', false],
   '/documents/translations/pauljadam-modern-web-a11y-demos/goodav': {
     title: '自動再生またはループのないオーディオ/ビデオの良い例',
     description: 'PaulJAdam氏によるアクセシビリティデモの日本語訳。',
@@ -268,8 +275,8 @@ export const SEO: Record<
   // ['ios8bugs', false],
   // ['iosvocheatsheet', false],
   // ['jaws-ie-tabindex-bug', false],
-  // ['jsalertconfirmprompt', false],
   // ['jqueryui-autocomplete', false],
+  // ['jsalertconfirmprompt', false],
   // ['landmarks', false],
   // ['layout-table-role-presentation', false],
   // ['linkpurpose', false],
@@ -286,10 +293,10 @@ export const SEO: Record<
   // ['positivetabindexfail', false],
   // ['progressbar', false],
   // ['quad', false],
-  // ['repeating-buttons-accessibilty', false],
   // ['remove-filter-buttons', false],
-  // ['rolegroup', false],
+  // ['repeating-buttons-accessibilty', false],
   // ['role-alert', false],
+  // ['rolegroup', false],
   // ['rwd-aria-menu-button', false],
   // ['rwd-aria-menubar', false],
   // ['rwd-tabs-accordion', false],
@@ -317,39 +324,32 @@ export const SEO: Record<
   // ['voiosmultifocusbug', false],
   // ['web-speech-api', false],
   // ['youtubeHTML5embed', false],
-  '/documents/media': {
-    title: '外部メディアリンク一覧',
-    description: '執筆・関与したブログ記事や動画コンテンツ、寄稿などへのリンクをまとめています。',
-  },
-  '/documents/fantasized-specs': {
-    title: 'Fantasized specs',
-    description: '日々業務の中で思いついた「あんなこといいなできたらいいな」集。',
-  },
-  '/documents/fantasized-specs/html-carousel': {
-    title: 'The carousel element - Fantasized specs',
-    description: '',
-  },
-  '/documents/fantasized-specs/css-observer': {
-    title: 'CSS Observer Module level 1 - Fantasized specs',
-    description: '',
+  '/documents/translations/w3c/wai/tutorials/images': {
+    beforeSubTitle: '日本語訳：',
+    title: 'Images Tutorial',
+    description: 'WAI(W3C)による代替テキストに関するチュートリアルの日本語訳。',
   },
   '/games': {
     title: 'ゲーム置き場',
     description: `ちょっとしたゲームが置かれています。暇つぶしにどうぞ🥁`,
+  },
+  '/games/number-pairing': {
+    title: '数字を組み合わせて10を作るゲーム',
+    description: `ランダムに並んだ数字のボタンを2つ選んで、合計が10になるペアを探すゲームです。`,
   },
   '/games/simple-block-breaker': {
     title: 'ただのブロック崩し。',
     afterSubTitle: 'Simple Block Breaker',
     description: `本当になんの変哲もない、ただのブロック崩しです。\n設定で難易度を自由に変更できます。`,
   },
-  '/games/number-pairing': {
-    title: '数字を組み合わせて10を作るゲーム',
-    description: `ランダムに並んだ数字のボタンを2つ選んで、合計が10になるペアを探すゲームです。`,
-  },
   '/games/sudoku': {
     title: '無限数独（ナンプレ）',
     afterSubTitle: 'Infinity Sudoku',
     description: `ランダムに生成された数独がひたすら解けます。\n数独とは、9行9列、9つの3×3のブロックいずれも、1から9までの数字が1つずつ入るように数字を入れていくパズルです。`,
+  },
+  '/notes': {
+    title: 'Wikiʻole',
+    description: 'FAQ、用語説明、ツールの使い方などの知識をまとめています。',
   },
   '/privacy-policy': {
     title: 'プライバシーポリシー',
@@ -373,6 +373,19 @@ export const SEO: Record<
     title: '文字数カウント',
     description: '文章の文字数をカウントするツールです。原稿用紙換算、段落数も確認できます。',
   },
+  '/tools/contrast-checker': {
+    title: 'コントラストチェッカー',
+    description:
+      'WCAG 2.2準拠のカラーコントラスト確認ツールです。\n文字色と背景色のコントラスト比を計算し、AA・AAAの各基準で合否を確認できます。\n必要に応じて文字色や背景色の候補も提案します。',
+    languages: { ja: '/tools/contrast-checker', en: '/tools/contrast-checker/en' },
+  },
+  '/tools/contrast-checker/en': {
+    title: 'Color Contrast Checker',
+    description:
+      'WCAG 2.2-compliant color contrast checker.\nCalculate the contrast ratio between text and background colors and verify pass/fail against AA and AAA criteria.\nIf needed, it also suggests alternative text or background colors.',
+    languages: { ja: '/tools/contrast-checker', en: '/tools/contrast-checker/en' },
+    locale: 'en_US',
+  },
   '/tools/css-units': {
     title: 'CSS Units Playground',
     description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
@@ -381,46 +394,15 @@ export const SEO: Record<
     title: 'DOM Event Playground',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',
   },
+  '/tools/focal-length-checker': {
+    title: '焦点距離チェッカー',
+    description:
+      'スマホやタブレットのカメラで、焦点距離ごとの撮影範囲を確認するツールです。\nデバイスの焦点距離を入力すると、各焦点距離のレンズでどこまで写るか確認できます。',
+  },
   '/tools/get-url-from-dom': {
     title: 'WebページからURLを抽出できるツール',
     description:
       'リンク先一覧の調査や、画像のURL一覧を作ったりするタスクがある人のためのツールです。\nURLを抽出したいページの内容（DOM）をコピー＆ペーストしてください。\nSlackやエクセルなどのアプリケーションの内容からも抽出できます。',
-  },
-  '/tools/kaprekar-number': {
-    title: 'Kaprekar Number Playground',
-    afterSubTitle: 'カプレカ数（カプレカルーチン）に至るまでの計算テスト',
-    description:
-      'カプレカ数のテストができます。\nある整数を大きい順と小さい順に並べ替えてから、大きい数から小さい数を引いたとき、その結果が元の整数と同じになる値をカプレカ数といいます。入力した数字が特定の値を繰り返すようになる様子を確認してみましょう。',
-  },
-  '/tools/keyboard-event': {
-    title: 'KeyboardEvent Playground',
-    description: 'キーボード操作のテストができます。キーボードのキー名やキーコード、修飾キーの状態を確認しましょう。',
-  },
-  '/tools/render-text-in-react': {
-    title: 'Render Text in React Playground',
-    description:
-      'Reactでテキストを出力する際の書き方の違いが、どのような読み上げの違いが生じさせるか確認してみましょう。',
-  },
-  '/tools/slack-reminder-command-generator': {
-    title: 'Slack reminder command generator',
-    afterSubTitle: 'Slackのリマインダーコマンド作成ツール',
-    description:
-      'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
-  },
-  '/tools/nu-bookmarklet-generator': {
-    title: 'Nu Html Checker Bookmarklet Generator',
-    afterSubTitle: 'HTMLの品質をチェックするブックマークレット作成ツール',
-    description:
-      'Nu Html CheckerへHTMLを送信するブックマークレットが作れるジェネレーターです。\nローカル環境やイントラでホスティングされているNu Html Checkerにも対応しています。',
-    languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
-  },
-  '/tools/nu-bookmarklet-generator/en': {
-    title: 'Nu Html Checker Bookmarklet Generator',
-    afterSubTitle: 'Create bookmarklets to check HTML quality',
-    description:
-      'A generator for creating bookmarklets that send HTML to Nu Html Checker.\nWorks with locally hosted and intranet-hosted Nu Html Checker instances.',
-    languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
-    locale: 'en_US',
   },
   '/tools/git-cd': {
     title: 'git-cd',
@@ -437,6 +419,61 @@ export const SEO: Record<
     languages: { ja: '/tools/git-cd', en: '/tools/git-cd/en' },
     locale: 'en_US',
   },
+  '/tools/kaprekar-number': {
+    title: 'Kaprekar Number Playground',
+    afterSubTitle: 'カプレカ数（カプレカルーチン）に至るまでの計算テスト',
+    description:
+      'カプレカ数のテストができます。\nある整数を大きい順と小さい順に並べ替えてから、大きい数から小さい数を引いたとき、その結果が元の整数と同じになる値をカプレカ数といいます。入力した数字が特定の値を繰り返すようになる様子を確認してみましょう。',
+  },
+  '/tools/keyboard-event': {
+    title: 'KeyboardEvent Playground',
+    description: 'キーボード操作のテストができます。キーボードのキー名やキーコード、修飾キーの状態を確認しましょう。',
+  },
+  '/tools/markup-dev-supporter': {
+    title: 'HTMLでtable実装するときとかに役立つツール',
+    description:
+      'オフィスツールなどで作成された表をHTMLとして実装する人のための支援ツールです。\n業務上公開前の情報を外部に送信できないケースにおいて、指示書にある表を整形されたHTMLにフォーマットして実装しやすくすることを主な用途に想定しています。',
+  },
+  '/tools/nu-bookmarklet-generator': {
+    title: 'Nu Html Checker Bookmarklet Generator',
+    afterSubTitle: 'HTMLの品質をチェックするブックマークレット作成ツール',
+    description:
+      'Nu Html CheckerへHTMLを送信するブックマークレットが作れるジェネレーターです。\nローカル環境やイントラでホスティングされているNu Html Checkerにも対応しています。',
+    languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
+  },
+  '/tools/nu-bookmarklet-generator/en': {
+    title: 'Nu Html Checker Bookmarklet Generator',
+    afterSubTitle: 'Create bookmarklets to check HTML quality',
+    description:
+      'A generator for creating bookmarklets that send HTML to Nu Html Checker.\nWorks with locally hosted and intranet-hosted Nu Html Checker instances.',
+    languages: { ja: '/tools/nu-bookmarklet-generator', en: '/tools/nu-bookmarklet-generator/en' },
+    locale: 'en_US',
+  },
+  '/tools/render-text-in-react': {
+    title: 'Render Text in React Playground',
+    description:
+      'Reactでテキストを出力する際の書き方の違いが、どのような読み上げの違いが生じさせるか確認してみましょう。',
+  },
+  '/tools/screen-wake-lock': {
+    title: 'スリープモードを防止するツール',
+    description:
+      '開いておくだけで画面のスリープ（自動消灯）を防止できるツールです。\n大容量ファイルのアップロードやダウンロード中など、しばらく画面をスリープさせたくない場合に活用できます。',
+  },
+  '/tools/slack-reminder-command-generator': {
+    title: 'Slack reminder command generator',
+    afterSubTitle: 'Slackのリマインダーコマンド作成ツール',
+    description:
+      'Slackのリマインダーコマンドを生成するためのツールです。\nリマインダーの内容・時間・繰り返しの設定を行うためのコマンドを生成できます。',
+  },
+  '/tools/sort-visualizer': {
+    title: 'Sort Playground',
+    afterSubTitle: 'ソートアルゴリズムの動作を可視化するためのツール（Sort Visualizer）',
+    description: 'さまざまなソート手法を試して、どのようにデータが並べ替えられるかを観察しましょう。',
+  },
+  '/tools/touch-event-touches': {
+    title: 'TouchEvent.touches Playground',
+    description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
+  },
   '/tools/vnux': {
     title: 'vnux',
     afterSubTitle: 'Nu Html Checker CLI',
@@ -450,43 +487,6 @@ export const SEO: Record<
     description:
       'A CLI wrapper for Nu Html Checker (vnu). Provides vnu server start/stop, HTML fragment validation, and more.',
     languages: { ja: '/tools/vnux', en: '/tools/vnux/en' },
-    locale: 'en_US',
-  },
-  '/tools/focal-length-checker': {
-    title: '焦点距離チェッカー',
-    description:
-      'スマホやタブレットのカメラで、焦点距離ごとの撮影範囲を確認するツールです。\nデバイスの焦点距離を入力すると、各焦点距離のレンズでどこまで写るか確認できます。',
-  },
-  '/tools/markup-dev-supporter': {
-    title: 'HTMLでtable実装するときとかに役立つツール',
-    description:
-      'オフィスツールなどで作成された表をHTMLとして実装する人のための支援ツールです。\n業務上公開前の情報を外部に送信できないケースにおいて、指示書にある表を整形されたHTMLにフォーマットして実装しやすくすることを主な用途に想定しています。',
-  },
-  '/tools/screen-wake-lock': {
-    title: 'スリープモードを防止するツール',
-    description:
-      '開いておくだけで画面のスリープ（自動消灯）を防止できるツールです。\n大容量ファイルのアップロードやダウンロード中など、しばらく画面をスリープさせたくない場合に活用できます。',
-  },
-  '/tools/sort-visualizer': {
-    title: 'Sort Playground',
-    afterSubTitle: 'ソートアルゴリズムの動作を可視化するためのツール（Sort Visualizer）',
-    description: 'さまざまなソート手法を試して、どのようにデータが並べ替えられるかを観察しましょう。',
-  },
-  '/tools/touch-event-touches': {
-    title: 'TouchEvent.touches Playground',
-    description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
-  },
-  '/tools/contrast-checker': {
-    title: 'コントラストチェッカー',
-    description:
-      'WCAG 2.2準拠のカラーコントラスト確認ツールです。\n文字色と背景色のコントラスト比を計算し、AA・AAAの各基準で合否を確認できます。\n必要に応じて文字色や背景色の候補も提案します。',
-    languages: { ja: '/tools/contrast-checker', en: '/tools/contrast-checker/en' },
-  },
-  '/tools/contrast-checker/en': {
-    title: 'Color Contrast Checker',
-    description:
-      'WCAG 2.2-compliant color contrast checker.\nCalculate the contrast ratio between text and background colors and verify pass/fail against AA and AAA criteria.\nIf needed, it also suggests alternative text or background colors.',
-    languages: { ja: '/tools/contrast-checker', en: '/tools/contrast-checker/en' },
     locale: 'en_US',
   },
 };
