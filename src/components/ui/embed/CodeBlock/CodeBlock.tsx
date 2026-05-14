@@ -151,22 +151,16 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
   return (
     <div
       className={clsx([
-        restProps.copyButton && 'grid grid-cols-[1fr_auto]',
-        'overflow-hidden rounded-lg border border-slate-200 shadow-sm dark:border-slate-700',
+        'group relative overflow-hidden rounded-lg border border-slate-200 shadow-sm dark:border-slate-700',
       ])}
     >
       {restProps.copyButton && (
-        <p className="px-12px col-start-2 row-start-1 bg-white py-3 dark:bg-[#24292e]">
+        <p className="px-12px absolute right-0 top-0 col-start-2 row-start-1 bg-white py-3 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100 dark:bg-[#24292e]">
           <CopyButton code={code} />
         </p>
       )}
 
-      <div
-        className={clsx([
-          restProps.copyButton && 'col-start-1 row-start-1',
-          nowrap === true ? 'overflow-auto whitespace-pre' : 'whitespace-pre-wrap',
-        ])}
-      >
+      <div className={clsx([nowrap === true ? 'overflow-auto whitespace-pre' : 'whitespace-pre-wrap'])}>
         {codeBlock}
       </div>
     </div>
