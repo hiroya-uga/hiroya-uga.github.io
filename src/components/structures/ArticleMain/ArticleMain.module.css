@@ -198,16 +198,16 @@ html:has(.container) {
 .article {
   > :not(:first-child):not(section),
   :where(section > :not(:first-child)) {
-    margin: var(--x-spacing-y) 0 0;
+    margin-top: var(--x-spacing-y);
   }
 
   > ul:not(:first-child):not(section),
   ul:where(section > :not(:first-child)) {
-    margin: calc(var(--x-spacing-y) * 0.85) 0 0;
+    margin-top: calc(var(--x-spacing-y) * 0.85);
   }
 
   :is(figure, [class^="table-container"]) {
-    margin: calc(var(--x-spacing-y) * 1.1) 0;
+    margin-block: calc(var(--x-spacing-y) * 1.1);
 
     &:last-child {
       margin-bottom: 0;
