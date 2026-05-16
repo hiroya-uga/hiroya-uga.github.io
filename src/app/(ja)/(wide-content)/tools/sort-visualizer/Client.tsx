@@ -570,7 +570,7 @@ export const SortVisualizerContent = () => {
                 const value = e.currentTarget.value ? Number(e.currentTarget.value) : 0;
 
                 if (isNaN(value) || value < 2) {
-                  dispatchInputEvent({ target: e.currentTarget, value: '2' });
+                  dispatchInputEvent({ target: e.currentTarget as HTMLInputElement, value: '2' });
                   return;
                 }
               }}
@@ -611,7 +611,7 @@ export const SortVisualizerContent = () => {
                   const value = e.currentTarget.value ? Number(e.currentTarget.value) : 0;
 
                   if (isNaN(value) || value < 1) {
-                    dispatchInputEvent({ target: e.currentTarget, value: '60' });
+                    dispatchInputEvent({ target: e.currentTarget as HTMLInputElement, value: '60' });
                     return;
                   }
                 }}

@@ -1,10 +1,12 @@
 'use client';
 
 import {
-  forwardRef,
+  ClipboardEvent,
+  FocusEvent,
+  InputEvent,
   InputHTMLAttributes,
   Ref,
-  TextareaHTMLAttributes,
+  forwardRef,
   useId,
   useRef,
   useSyncExternalStore,
@@ -15,8 +17,18 @@ import clsx from 'clsx';
 import { Required } from '@/components/ui/media/Required';
 import { SvgIcon } from '@/components/ui/media/SvgIcon/SvgIcon';
 
-type BaseProps = {
-  label: string;
+type Label =
+  | {
+      label: string;
+    }
+  | {
+      id: string;
+    }
+  | {
+      'aria-labelledby': string;
+    };
+
+type BaseProps = Label & {
   value?: string;
   description?: string;
   placeholder?: string;
@@ -28,30 +40,27 @@ type BaseProps = {
   maxLength?: number;
   align?: 'left' | 'center' | 'right';
   defaultValue?: string;
+  onInput?: (e: InputEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onPaste?: (e: ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 } & (
-  | {
-      multiline: true;
-      autoResize?: boolean;
-      noResize?: boolean;
-      onInput?: TextareaHTMLAttributes<HTMLTextAreaElement>['onInput'];
-      onBlur?: TextareaHTMLAttributes<HTMLTextAreaElement>['onBlur'];
-    }
-  | {
-      multiline?: false;
-      type?: InputHTMLAttributes<HTMLInputElement>['type'];
-      inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
-      list?: InputHTMLAttributes<HTMLInputElement>['list'];
-      onInput?: InputHTMLAttributes<HTMLInputElement>['onInput'];
-      onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
-      autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
-    }
-);
+    | {
+        multiline: true;
+        autoResize?: boolean;
+        noResize?: boolean;
+      }
+    | {
+        multiline?: false;
+        type?: InputHTMLAttributes<HTMLInputElement>['type'];
+        inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
+        list?: InputHTMLAttributes<HTMLInputElement>['list'];
+        autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+      }
+  );
 
 interface Props extends Omit<BaseProps, 'label' | 'description'> {
   autoResize: boolean;
   noResize: boolean;
-  onInput?: TextareaHTMLAttributes<HTMLTextAreaElement>['onInput'];
-  onBlur?: TextareaHTMLAttributes<HTMLTextAreaElement>['onBlur'];
   id: string;
   descriptionId?: string;
 }
@@ -108,10 +117,11 @@ const TextareaComponent = (
 
 const Textarea = forwardRef(TextareaComponent);
 const TextFieldComponent = (
-  { label, description, align = 'left', disabled, ...props }: BaseProps,
+  { description, align = 'left', disabled, ...restProps }: BaseProps,
   ref: Ref<HTMLTextAreaElement | HTMLInputElement>,
 ) => {
-  const id = useId();
+  const useIdValue = useId();
+  const id = 'id' in restProps ? restProps.id : useIdValue;
   const descriptionId = description ? `${id}-description` : undefined;
   const disabledState = disabled
     ? {
@@ -120,14 +130,21 @@ const TextFieldComponent = (
       }
     : {};
 
+  const { label: _, ...commonProps } = {
+    label: '',
+    ...restProps,
+  };
+
   return (
     <>
-      <p>
-        <label htmlFor={id} className="block w-fit text-sm font-bold leading-snug">
-          {label}
-          {props.required && <Required />}
-        </label>
-      </p>
+      {'label' in restProps && (
+        <p>
+          <label htmlFor={id} className="block w-fit text-sm font-bold leading-snug">
+            {restProps.label}
+            {restProps.required && <Required />}
+          </label>
+        </p>
+      )}
 
       {description && (
         <div
@@ -146,13 +163,13 @@ const TextFieldComponent = (
       )}
 
       <p className="mt-2">
-        {props.multiline ? (
+        {commonProps.multiline ? (
           <Textarea
-            {...props}
+            {...commonProps}
             {...disabledState}
-            placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
-            autoResize={props.autoResize ?? false}
-            noResize={props.noResize ?? false}
+            placeholder={commonProps.placeholder ? `例）${commonProps.placeholder}` : undefined}
+            autoResize={commonProps.autoResize ?? false}
+            noResize={commonProps.noResize ?? false}
             id={id}
             descriptionId={descriptionId}
             align={align}
@@ -160,7 +177,7 @@ const TextFieldComponent = (
           />
         ) : (
           <input
-            {...props}
+            {...commonProps}
             {...disabledState}
             id={id}
             aria-describedby={descriptionId}
@@ -170,7 +187,7 @@ const TextFieldComponent = (
               align === 'right' && 'text-right',
               align === 'center' && 'text-center',
             ])}
-            placeholder={props.placeholder ? `例）${props.placeholder}` : undefined}
+            placeholder={commonProps.placeholder ? `例）${commonProps.placeholder}` : undefined}
             ref={ref as Ref<HTMLInputElement>}
           />
         )}
