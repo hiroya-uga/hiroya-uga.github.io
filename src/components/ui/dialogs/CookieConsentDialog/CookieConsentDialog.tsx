@@ -116,7 +116,7 @@ export function CookieConsentDialog() {
   const isInEnglish = pathname.endsWith('/en/');
   const isNotTop = pathname !== '/';
   const isFromSNSApp = useSearchParams()?.get('utm_medium') === 'social';
-  const shouldShowBanner = useRef(isNotTop || isFromSNSApp);
+  const shouldShowBanner = useRef(isNotTop && isFromSNSApp);
 
   const [isBannerDialogOpen, setIsBannerDialogOpen] = useState(false);
   const [isAfterBannerDialogCloseRequest, setIsAfterBannerDialogCloseRequest] = useState(false);
