@@ -9,11 +9,13 @@ type Props = {
 } & Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick' | 'disabled' | 'onTouchStart'>;
 
 const RunButtonComponent = (
-  { children, beforeIcon, afterIcon, ...props }: Readonly<Props>,
+  { type = 'button', children, beforeIcon, afterIcon, ...props }: Readonly<Props>,
   ref: Ref<HTMLButtonElement>,
 ) => {
   return (
     <button
+      {...props}
+      type={type}
       ref={ref}
       className={clsx([
         'max-w-260px bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto block w-full rounded-xl border border-solid py-2 transition-[background-color,border-color,box-shadow,opacity] [corner-shape:squircle] hover:shadow-lg active:shadow-none disabled:opacity-50',
@@ -22,7 +24,6 @@ const RunButtonComponent = (
         !beforeIcon && !afterIcon && 'px-8',
         beforeIcon && afterIcon && 'px-4',
       ])}
-      {...props}
     >
       {beforeIcon || afterIcon ? (
         <span
