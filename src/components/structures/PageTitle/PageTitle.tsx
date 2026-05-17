@@ -1,4 +1,5 @@
 import { PrivacyPolicyMessage } from '@/components/ui/embed/PrivacyPolicyMessage';
+import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import clsx from 'clsx';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
   lang?: 'ja' | 'en';
   shouldShowPrivacyPolicyMessage?: boolean;
   shouldShowNonAccessibleMessage?: boolean;
+  shouldShowOtherLanguageLink?: boolean;
 }
 
 export const PageTitle = ({
@@ -23,6 +25,7 @@ export const PageTitle = ({
   lang = 'ja',
   shouldShowPrivacyPolicyMessage = false,
   shouldShowNonAccessibleMessage = false,
+  shouldShowOtherLanguageLink = false,
 }: Readonly<Props>) => {
   const hasSubtitle = Boolean(previous || following);
   return (
@@ -73,11 +76,17 @@ export const PageTitle = ({
         {children}
 
         {shouldShowPrivacyPolicyMessage && (
-          <p className="flex gap-1 text-sm">
+          <p className="mt-[0.75lh] flex gap-1 text-sm">
             <span>{lang === 'ja' ? '※' : '*'}</span>
             <small>
               <PrivacyPolicyMessage lang={lang} />
             </small>
+          </p>
+        )}
+
+        {shouldShowOtherLanguageLink && (
+          <p className="mt-2 text-right text-xs text-slate-600 dark:text-[#a5b4cd]">
+            <LangSwitchLink lang={lang} />
           </p>
         )}
       </div>
