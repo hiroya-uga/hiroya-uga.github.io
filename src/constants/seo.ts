@@ -474,6 +474,21 @@ export const SEO: Record<
     title: 'TouchEvent.touches Playground',
     description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',
   },
+  '/tools/unicode-playground': {
+    title: 'Unicode Playground',
+    afterSubTitle: '絵文字・サロゲートペア・ZWJシーケンスを解析できるツール',
+    description:
+      '絵文字やZWJシーケンスの「見た目の文字数」と、JavaScriptの.lengthで数えた値の違いを確認できるUnicode解析ツールです。\n絵文字・サロゲートペア・ZWJシーケンスなどを分解しながら、UTF-16の.length、コードポイント数、書記素数の差を可視化できます。',
+    languages: { ja: '/tools/unicode-playground', en: '/tools/unicode-playground/en' },
+  },
+  '/tools/unicode-playground/en': {
+    title: 'Unicode Playground',
+    afterSubTitle: 'Analyze emojis, surrogate pairs, and ZWJ sequences',
+    description:
+      "A Unicode analysis tool that compares the perceived character count with JavaScript's .length value.\nIt breaks down emojis, surrogate pairs, and ZWJ sequences to visualize the differences between UTF-16 .length, code point count, and grapheme count.",
+    languages: { ja: '/tools/unicode-playground', en: '/tools/unicode-playground/en' },
+    locale: 'en_US',
+  },
   '/tools/vnux': {
     title: 'vnux',
     afterSubTitle: 'Nu Html Checker CLI',

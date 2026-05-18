@@ -143,6 +143,7 @@ export const TOOLS_LINK_LIST: Record<string, ToolPage[]> = {
     { emoji: '♾️', pathname: '/tools/kaprekar-number' },
     { emoji: '文', pathname: '/tools/render-text-in-react', noPickup: true },
     { emoji: '📈', pathname: '/tools/sort-visualizer' },
+    { emoji: '𩸽', pathname: '/tools/unicode-playground' },
   ],
 };
 

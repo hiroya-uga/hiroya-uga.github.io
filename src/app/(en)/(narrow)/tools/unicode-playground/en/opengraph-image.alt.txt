@@ -1,0 +1,1 @@
+uga.dev Unicode Playground Analyze emojis, surrogate pairs, and ZWJ sequences A Unicode analysis tool that compares the perceived character count with JavaScript's .length value.It breaks down emojis, surrogate pairs, and ZWJ sequences to visualize the differences between UTF-16 .length, code point count, and grapheme count.
