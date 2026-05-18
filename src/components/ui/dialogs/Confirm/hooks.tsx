@@ -3,6 +3,8 @@ import { useState } from 'react';
 export type ConfirmData = {
   message: string;
   children?: React.ReactNode;
+  yesLabel?: string;
+  noLabel?: string;
   yes: () => void;
   no?: () => void;
 };

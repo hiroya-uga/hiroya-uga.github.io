@@ -91,6 +91,8 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
     prompt.yes(inputRef.current?.value ?? '');
     ref.current?.close();
   };
+  const yesLabel = prompt.yesLabel ?? 'はい';
+  const noLabel = prompt.noLabel ?? 'いいえ';
 
   return createPortal(
     <dialog
@@ -121,9 +123,7 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
         <div className="mt-6">
           <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,5rem),1fr))] gap-4">
             <li>
-              <RunButton type="submit" onClick={handleYes}>
-                はい
-              </RunButton>
+              <RunButton type="submit">{yesLabel}</RunButton>
             </li>
             <li>
               <RunButton
@@ -132,7 +132,7 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
                   ref.current?.close();
                 }}
               >
-                いいえ
+                {noLabel}
               </RunButton>
             </li>
           </ul>
