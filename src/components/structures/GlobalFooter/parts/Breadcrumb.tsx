@@ -20,6 +20,14 @@ type Props = {
 const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'label'>) => {
   const pathname = usePathname() ?? '';
   const pathnames = getAncestorPaths(pathname);
+  const isOnEnPage = pathname.endsWith('/en/');
+
+  // 英語ページから日本語コンテンツへ遷移するリンクには (JP) を付ける
+  const labelForAncestor = (path: string) => {
+    const title = SEO[path].title;
+    const isJaTarget = path.endsWith('/en') === false;
+    return isOnEnPage && isJaTarget ? `${title} (JP)` : title;
+  };
 
   return (
     <>
@@ -44,7 +52,7 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
           return (
             <li key={path} className='after:px-2 after:content-["/"]'>
               <Link href={path} className="leading-inherit text-inherit">
-                {SEO[path].title}
+                {labelForAncestor(path)}
               </Link>
             </li>
           );

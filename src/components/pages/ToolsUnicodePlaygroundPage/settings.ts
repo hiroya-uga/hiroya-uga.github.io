@@ -66,10 +66,15 @@ const toJaOption = ({ ja, value }: SuggestItem) => {
   return { label: `${ja}（${codepointCount}コードポイント・${utf8Bytes}バイト）`, value };
 };
 
+const pluralize = (count: number, singular: string) => `${count} ${singular}${count === 1 ? '' : 's'}`;
+
 const toEnOption = ({ en, value, valueEn }: SuggestItem) => {
   const actualValue = valueEn ?? value;
   const { codepointCount, utf8Bytes } = getStringMetrics(actualValue);
-  return { label: `${en} (${codepointCount} code points · ${utf8Bytes} bytes)`, value: actualValue };
+  return {
+    label: `${en} (${pluralize(codepointCount, 'code point')} · ${pluralize(utf8Bytes, 'byte')})`,
+    value: actualValue,
+  };
 };
 
 export const unicodeSuggest = suggestItems.map(toJaOption);
