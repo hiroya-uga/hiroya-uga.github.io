@@ -23,7 +23,7 @@ export const PrivacyPolicyMessage = ({ lang }: Readonly<Props>) => {
       <span className="inline-block">
         For more details, please see our
         <TextLink href="/privacy-policy" hrefLang="ja">
-          Privacy Policy（Japanese）
+          Privacy Policy (Japanese)
         </TextLink>
         .
       </span>
