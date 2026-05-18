@@ -1,0 +1,1 @@
+uga.dev Unicode Playground 絵文字・サロゲートペア・ZWJシーケンスを解析できるツール 絵文字やZWJシーケンスの「見た目の文字数」と、JavaScriptの.lengthで数えた値の違いを確認できるUnicode解析ツールです。絵文字・サロゲートペア・ZWJシーケンスなどを分解しながら、UTF-16の.length、コードポイント数、書記素数の差を可視化できます。
