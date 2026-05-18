@@ -5,6 +5,8 @@ export type PromptData = {
   description?: string;
   defaultValue?: string;
   placeholder?: string;
+  yesLabel?: string;
+  noLabel?: string;
   yes: (value: string) => void;
   no?: () => void;
 };

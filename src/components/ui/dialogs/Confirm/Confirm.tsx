@@ -78,6 +78,9 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
     return null;
   }
 
+  const yesLabel = confirm.yesLabel ?? 'はい';
+  const noLabel = confirm.noLabel ?? 'いいえ';
+
   return createPortal(
     <dialog
       ref={ref}
@@ -102,7 +105,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
                 ref.current?.close();
               }}
             >
-              はい
+              {yesLabel}
             </RunButton>
           </p>
         ) : (
@@ -114,7 +117,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
                   ref.current?.close();
                 }}
               >
-                はい
+                {yesLabel}
               </RunButton>
             </li>
             <li>
@@ -124,7 +127,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
                   ref.current?.close();
                 }}
               >
-                いいえ
+                {noLabel}
               </RunButton>
             </li>
           </ul>
