@@ -37,7 +37,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Re
       <TagName
         id={id}
         className={clsx([
-          'mb-2 mt-0 text-lg font-bold leading-relaxed',
+          'mb-2 mt-0 flex text-lg font-bold leading-relaxed',
           type === 'note' && 'text-green-800 dark:text-white',
           type === 'warn' && 'text-yellow-800 dark:text-white',
           type === 'error' && 'text-red-800',
@@ -48,7 +48,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Re
           {type === 'warn' && '⚠️'}
           {type === 'error' && '🚨'}
         </span>
-        {title ?? getTitle(type)}
+        <span>{title ?? getTitle(type)}</span>
       </TagName>
       <div className="px-6.5">{children}</div>
     </section>
