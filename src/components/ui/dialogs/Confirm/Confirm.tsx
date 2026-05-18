@@ -1,7 +1,7 @@
 'use client';
 
-import { RunButton } from '@/components/ui/buttons/RunButton';
 import { ConfirmData } from '@/components/ui/dialogs/Confirm/hooks';
+import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
@@ -80,6 +80,26 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
 
   const yesLabel = confirm.yesLabel ?? 'はい';
   const noLabel = confirm.noLabel ?? 'いいえ';
+  const yesAction = {
+    label: yesLabel,
+    onClick: () => {
+      confirm.yes?.();
+      ref.current?.close();
+    },
+  };
+  const items =
+    confirm.no === undefined
+      ? [yesAction]
+      : [
+          yesAction,
+          {
+            label: noLabel,
+            onClick: () => {
+              confirm.no?.();
+              ref.current?.close();
+            },
+          },
+        ];
 
   return createPortal(
     <dialog
@@ -97,41 +117,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       {confirm.children}
 
       <div className="mt-6">
-        {typeof confirm.no === 'undefined' ? (
-          <p>
-            <RunButton
-              onClick={() => {
-                confirm.yes?.();
-                ref.current?.close();
-              }}
-            >
-              {yesLabel}
-            </RunButton>
-          </p>
-        ) : (
-          <ul className="flex justify-center gap-4">
-            <li>
-              <RunButton
-                onClick={() => {
-                  confirm.yes?.();
-                  ref.current?.close();
-                }}
-              >
-                {yesLabel}
-              </RunButton>
-            </li>
-            <li>
-              <RunButton
-                onClick={() => {
-                  confirm.no?.();
-                  ref.current?.close();
-                }}
-              >
-                {noLabel}
-              </RunButton>
-            </li>
-          </ul>
-        )}
+        <ModalButtons items={items} />
       </div>
     </dialog>,
     portal,

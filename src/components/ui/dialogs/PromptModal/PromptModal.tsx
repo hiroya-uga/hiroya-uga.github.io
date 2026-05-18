@@ -3,17 +3,17 @@
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
-import { RunButton } from '@/components/ui/buttons/RunButton';
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 
+import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TextField } from '@/components/ui/forms';
 import { PromptData } from './hooks';
 
-type Props = {
+interface Props {
   prompt: PromptData;
   setPromptData: (_: PromptData) => void;
-};
+}
 
 export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
   const id = useId();
@@ -121,21 +121,18 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
         />
 
         <div className="mt-6">
-          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,5rem),1fr))] gap-4">
-            <li>
-              <RunButton type="submit">{yesLabel}</RunButton>
-            </li>
-            <li>
-              <RunButton
-                onClick={() => {
+          <ModalButtons
+            items={[
+              { label: yesLabel, type: 'submit' },
+              {
+                label: noLabel,
+                onClick: () => {
                   prompt.no?.();
                   ref.current?.close();
-                }}
-              >
-                {noLabel}
-              </RunButton>
-            </li>
-          </ul>
+                },
+              },
+            ]}
+          />
         </div>
       </form>
     </dialog>,
