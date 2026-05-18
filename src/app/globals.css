@@ -385,6 +385,10 @@
   box-shadow: 0 0 0 2px #fff;
 }
 
+@utility btn-run {
+  @apply bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto w-full rounded-xl border border-solid transition-[background-color,border-color,box-shadow,opacity] [corner-shape:squircle] hover:shadow-lg active:shadow-none disabled:opacity-50;
+}
+
 @layer base {
   *,
   *::before,
