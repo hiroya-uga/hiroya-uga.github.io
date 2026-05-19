@@ -141,7 +141,7 @@ export const MarkupDevSupporterHelpButton = () => {
               </p>
             </div>
 
-            <div className="overflow-auto p-4 pb-8 sm:p-8">
+            <div className="w640:p-8 overflow-auto p-4 pb-8">
               {getMetadata('/tools/markup-dev-supporter')
                 .description?.split('\n')
                 .map((description) => {

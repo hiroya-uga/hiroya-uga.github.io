@@ -28,7 +28,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Re
     <section
       aria-labelledby={id}
       className={clsx([
-        'border-secondary pb-6.5 rounded-md border px-2.5 pt-5',
+        '@container border-secondary pb-6.5 rounded-md border px-2.5 pt-5',
         type === 'note' && 'bg-green-50 dark:bg-[#004b20]',
         type === 'warn' && 'bg-yellow-50 dark:bg-[#4a4401]',
         type === 'error' && 'bg-red-50',
@@ -50,7 +50,7 @@ export const NoteBox = ({ title, headingLevel = 3, type = 'note', children }: Re
         </span>
         <span>{title ?? getTitle(type)}</span>
       </TagName>
-      <div className="px-6.5">{children}</div>
+      <div className="@w360:px-26px px-6PX">{children}</div>
     </section>
   );
 };

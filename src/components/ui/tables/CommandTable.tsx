@@ -19,23 +19,22 @@ export const CommandTable = ({ items, lang }: Readonly<Props>) => {
   const { cmd: cmdLabel, desc: descLabel } = labels[lang];
 
   return (
-    <table className="bg-secondary @w640:table @w640:border-separate @w640:border-spacing-0 border-primary block w-full overflow-hidden rounded border">
+    <table className="bg-secondary w640:table w640:border-separate w640:border-spacing-0 border-primary block w-full overflow-hidden rounded border">
       <thead className="sr-only">
         <tr>
           <th scope="col">{cmdLabel}</th>
           <th scope="col">{descLabel}</th>
         </tr>
       </thead>
-      <tbody className="@w640:table-row-group @w640:[&>tr:not(:first-child)>*]:border-t @w640:[&>tr:not(:first-child)>*]:border-primary divide-primary block divide-y dark:divide-slate-600">
+      <tbody className="w640:table-row-group w640:[&>tr:not(:first-child)>*]:border-t w640:[&>tr:not(:first-child)>*]:border-primary divide-primary block divide-y dark:divide-slate-600">
         {items.map(({ cmd, desc }) => (
-          <tr key={cmd} className="@w640:table-row block">
-            <th
-              scope="row"
-              className="@w640:table-cell @w640:py-2 block overflow-auto whitespace-nowrap px-3 pt-2 text-left align-middle font-normal"
-            >
-              <code>{cmd}</code>
+          <tr key={cmd} className="w640:table-row block">
+            <th scope="row" className="w640:table-cell w640:py-2 block px-3 pt-2 text-left align-middle font-normal">
+              <p className="overflow-auto whitespace-nowrap">
+                <code>{cmd}</code>
+              </p>
             </th>
-            <td className="@w640:table-cell @w640:py-2 block px-3 pb-2 align-middle text-sm leading-relaxed">{desc}</td>
+            <td className="w640:table-cell w640:py-2 block px-3 pb-2 align-middle text-sm leading-relaxed">{desc}</td>
           </tr>
         ))}
       </tbody>

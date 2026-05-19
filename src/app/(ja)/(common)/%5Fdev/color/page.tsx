@@ -24,7 +24,7 @@ const textColors = [
 const TextColor = () => {
   return (
     <>
-      <ul className="@w640:grid-cols-4 @w400:grid-cols-2 @w500:grid-cols-3 mb-8 grid gap-4">
+      <ul className="w640:grid-cols-4 w400:grid-cols-2 w500:grid-cols-3 mb-8 grid gap-4">
         {textColors.map((color) => (
           <li key={color}>
             <div className="size-100PX" style={{ background: `var(${color.replace('text', '--color')})` }}></div>
@@ -61,7 +61,7 @@ export default function Page() {
   return (
     <>
       <Heading level={2}>Color</Heading>
-      <div className="@w640:grid-cols-2 @w800:grid-cols-3 grid gap-4 p-4">
+      <div className="w640:grid-cols-2 w800:grid-cols-3 grid gap-4 p-4">
         {Object.entries({
           '--x-color-text-primary': 'ベーステキスト',
           '--x-color-text-secondary': 'サブテキスト',

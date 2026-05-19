@@ -40,7 +40,7 @@ export const PowerOfTheWebSection = () => {
         status === 'loading' && 'invisible min-h-[50vh]',
         status === 'already' && [styles.already, 'animate-fade-in min-h-0'],
         status === 'ready' && [styles.ready, 'animate-fade-in min-h-[400vh]'],
-        'bg-secondary @w640:pb-24 @w640:pt-18 pb-18 pt-14',
+        'bg-secondary w640:pb-24 w640:pt-18 pb-18 pt-14',
       ])}
     >
       <div

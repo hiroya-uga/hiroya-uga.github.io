@@ -13,7 +13,7 @@ export const KeyboardEventOptions = (
   ref: Ref<HTMLTextAreaElement>,
 ) => {
   return (
-    <div className="mb-6 flex flex-wrap gap-3 sm:gap-10">
+    <div className="w640:gap-10 mb-6 flex flex-wrap gap-3">
       <div className="grow">
         <TextField label="テスト用テキストフィールド" multiline noResize ref={ref} />
       </div>

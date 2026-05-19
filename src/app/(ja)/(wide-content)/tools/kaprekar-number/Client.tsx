@@ -187,7 +187,7 @@ export const KaprekarNumberContent = () => {
       >
         <div
           ref={containerRef}
-          className="grid min-h-[90dvh] grid-rows-[1fr_auto_auto] rounded-lg bg-[#303030] px-6 pb-16 pt-2 text-[#f1f1f1] sm:pt-4"
+          className="w640:pt-4 grid min-h-[90dvh] grid-rows-[1fr_auto_auto] rounded-lg bg-[#303030] px-6 pb-16 pt-2 text-[#f1f1f1]"
         >
           <div>
             <div className="mb-6">
@@ -256,7 +256,7 @@ export const KaprekarNumberContent = () => {
           />
         </div>
 
-        <div className="pointer-events-none sticky bottom-2 z-10 sm:bottom-6 sm:grid sm:grid-cols-[1fr_16.25rem_1fr] sm:items-end">
+        <div className="w640:bottom-6 w640:grid w640:grid-cols-[1fr_16.25rem_1fr] w640:items-end pointer-events-none sticky bottom-2 z-10">
           <div className="col-start-2">
             <p className={clsx(['transition-fade', isOver === false && 'invisible opacity-0'])}>
               <RunButton
@@ -274,7 +274,7 @@ export const KaprekarNumberContent = () => {
                 <span className="break-all">{`${currentNumberRef.current}から再開する`}</span>
               </RunButton>
             </p>
-            <p className="mt-2 sm:mt-6">
+            <p className="w640:mt-6 mt-2">
               <RunButton
                 type="submit"
                 onClick={

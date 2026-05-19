@@ -102,7 +102,7 @@ export const ArticleInformation = ({ publishedAt, updatedAt }: ArticleInformatio
       : ({ shouldShowUpdate: false } as const);
 
   return (
-    <p className="@w640:mt-4 @w640:text-sm text-secondary mt-3 text-xs">
+    <p className="w640:mt-4 w640:text-sm text-secondary mt-3 text-xs">
       <span
         className={clsx([
           'noscript:hidden delay-300 duration-700',
@@ -243,17 +243,17 @@ export const ArticleTOC = ({ toc }: { toc: string }) => {
       ref={ref}
       className={clsx([
         styles.toc,
-        '@w1280:col-start-3 @w1280:row-start-1 @w1280:row-end-3 @w1280:pl-14 @w640:mb-14 mb-8 ml-auto',
+        'w1280:col-start-3 w1280:row-start-1 w1280:row-end-3 w1280:pl-14 w640:mb-14 mb-8 ml-auto',
       ])}
     >
       <nav
         className={clsx([
           'border-accent bg-secondary px-18PX pt-16PX rounded-r-md border-l-2 pb-6 text-sm',
-          '@w1280:sticky @w1280:top-17 @w1280:w-fit @w1280:min-w-280px @w1280:max-w-360px @w1280:shadow-sticky @w1280:max-h-[calc(80vh-4.25rem)] @w1280:scroll-hint-y @w1280:overflow-y-auto',
+          'w1280:sticky w1280:top-17 w1280:w-fit w1280:min-w-280px w1280:max-w-360px w1280:shadow-sticky w1280:max-h-[calc(80vh-4.25rem)] w1280:scroll-hint-y w1280:overflow-y-auto',
         ])}
       >
-        <h2 className="@w800:text-lg font-bold">目次</h2>
-        <div className="@w1280:pl-0 pl-16PX mt-4" dangerouslySetInnerHTML={{ __html: toc }} />
+        <h2 className="w800:text-lg font-bold">目次</h2>
+        <div className="w1280:pl-0 pl-16PX mt-4" dangerouslySetInnerHTML={{ __html: toc }} />
       </nav>
     </div>
   );
@@ -394,7 +394,7 @@ export const ArticleFootNoteActivator = () => {
     <dialog
       ref={ref}
       className={clsx([
-        'bg-primary/90 border-t-primary fixed bottom-0 left-0 z-50 flex w-full flex-row-reverse border-t p-4 transition-[translate,visibility]',
+        'bg-primary/90 border-t-primary fixed bottom-0 left-0 z-50 flex max-h-[50dvh] w-full flex-row-reverse overflow-auto border-t p-4 transition-[translate,visibility]',
         // 150%くらいにしないとTwitterのWebViewでチラ見えする。
         isOpen ? 'translate-y-0' : 'translate-y-[150%]',
       ])}

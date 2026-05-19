@@ -15,7 +15,7 @@ export default function Page() {
     <>
       <PageTitle previous={metadata.previous} title={metadata.pageTitle} description={metadata.description}>
         <div className="bg-tertiary mt-2 rounded-md p-3">
-          <div className="mb-2 text-sm leading-normal sm:mb-4 sm:text-base sm:leading-relaxed">
+          <div className="w640:mb-4 w640:text-base w640:leading-relaxed mb-2 text-sm leading-normal">
             <LinkToOriginal
               origins={[
                 {
@@ -28,7 +28,7 @@ export default function Page() {
             />
           </div>
 
-          <div className="text-xs leading-normal sm:text-sm">
+          <div className="w640:text-sm text-xs leading-normal">
             <p className="flex gap-1">
               <span>※</span>
               <small>
@@ -54,7 +54,7 @@ export default function Page() {
               () => (
                 <>
                   概念や情報を表現する画像。通常は写真やイラストです。
-                  <span className="sm:inline-block">
+                  <span className="w640:inline-block">
                     代替テキストは少なくとも、画像によって示される情報の要点を伝える簡単な説明であるべきです。
                   </span>
                 </>
@@ -76,7 +76,7 @@ export default function Page() {
               () => (
                 <>
                   リンクまたはボタンとして使用される画像の代替テキストは、視覚的な画像ではなく、リンクまたはボタンの機能を説明する必要があります。
-                  <span className="sm:inline-block">
+                  <span className="w640:inline-block">
                     このような画像の例としては、印刷機能を表すプリンターアイコンや、フォームを送信するボタンなどがあげられます。
                   </span>
                 </>
@@ -88,8 +88,8 @@ export default function Page() {
               () => (
                 <>
                   判読可能なテキストが画像内に含まれている場合がありますが、
-                  <span className="sm:inline-block">ロゴ画像ではない場合は画像内テキストを避けるべきです。</span>
-                  <span className="sm:inline-block">
+                  <span className="w640:inline-block">ロゴ画像ではない場合は画像内テキストを避けるべきです。</span>
+                  <span className="w640:inline-block">
                     その上で文字画像を使用する場合、代替テキストには画像と同じ文言が指定する必要があります。
                   </span>
                 </>
@@ -119,7 +119,7 @@ export default function Page() {
               () => (
                 <>
                   複数のクリック可能な領域を含む画像の代替テキストは、リンクセットの全体的なコンテキストを提供する必要があります。
-                  <span className="sm:inline-block">
+                  <span className="w640:inline-block">
                     また、個別にクリック可能な領域には、リンクの目的やリンク先を説明する代替テキストが必要です。
                   </span>
                 </>
@@ -131,14 +131,14 @@ export default function Page() {
 
           return (
             <div key={href} className="focus-within:bg-tertiary group -mx-3 w-full rounded p-3">
-              <dt className="mb-1 font-bold sm:text-lg">
+              <dt className="w640:text-lg mb-1 font-bold">
                 <a href={href} hrefLang={isW3C ? 'en' : undefined}>
                   {title}
                   {isW3C && '（外部サイト）'}
                 </a>
                 {isW3C && <b>※翻訳予定</b>}
               </dt>
-              <dd className="text-sm leading-relaxed sm:text-base">
+              <dd className="w640:text-base text-sm leading-relaxed">
                 <Description />
               </dd>
             </div>
@@ -156,7 +156,7 @@ export default function Page() {
         を参照してください。
       </p>
 
-      <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">
+      <h2 className="w640:mb-6 w640:mt-20 w640:text-2xl mb-4 mt-14 text-xl font-bold">
         <span className="target" id="why-is-this-important">
           どうして代替テキストは重要なの？
         </span>
@@ -164,14 +164,14 @@ export default function Page() {
 
       <p className="mb-6">
         画像やグラフィックは、多くの人々、特に認知障害や学習障害を抱えた方々にとってコンテンツをより快適で理解しやすくします。
-        <span className="sm:inline-block">
+        <span className="w640:inline-block">
           弱視の人を含む視覚障害のある方にとってそれらは、Webコンテンツの中で自分がどのあたりを読んでいるか理解するための手がかりとしても役立つからです。
         </span>
       </p>
 
       <p className="mb-6">
         画像はWebサイトで広く使用されています。そのため、画像がアクセシブルではない場合には大きな障壁となる可能性があります。
-        <span className="sm:inline-block">アクセシブルな画像は、次のような多くの状況で有益です。</span>
+        <span className="w640:inline-block">アクセシブルな画像は、次のような多くの状況で有益です。</span>
       </p>
 
       <div className="mb-6">

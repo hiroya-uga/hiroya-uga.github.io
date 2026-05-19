@@ -95,27 +95,27 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
       <Heading level={3}>{t.comparisonSection}</Heading>
       <div className="mb-8">
         <Table>
-          <thead className="@w640:table-header-group border-primary block border-b bg-slate-50 dark:bg-slate-800/50">
-            <tr className="@w640:table-row block">
-              <th scope="col" className="@w640:table-cell block px-3 py-2 text-left font-medium">
+          <thead className="w640:table-header-group border-primary block border-b bg-slate-50 dark:bg-slate-800/50">
+            <tr className="w640:table-row block">
+              <th scope="col" className="w640:table-cell block px-3 py-2 text-left font-medium">
                 {t.comparisonMethodLabel}
               </th>
-              <th scope="col" className="@w640:table-cell block px-3 py-2 text-left font-medium">
+              <th scope="col" className="w640:table-cell block px-3 py-2 text-left font-medium">
                 {t.comparisonNoteLabel}
               </th>
             </tr>
           </thead>
-          <tbody className="@w640:table-row-group @w640:[&>tr:not(:first-child)>*]:border-t @w640:[&>tr:not(:first-child)>*]:border-primary divide-primary block divide-y dark:divide-slate-600">
+          <tbody className="w640:table-row-group w640:[&>tr:not(:first-child)>*]:border-t w640:[&>tr:not(:first-child)>*]:border-primary divide-primary block divide-y dark:divide-slate-600">
             {t.comparisonItems.map(({ method, note, highlight }) => (
-              <tr key={method} className="@w640:table-row block">
+              <tr key={method} className="w640:table-row block">
                 <th
                   scope="row"
-                  className={`@w640:table-cell @w640:py-2 block overflow-auto whitespace-nowrap px-3 pt-2 text-left align-middle ${highlight ? 'font-semibold' : 'font-normal'}`}
+                  className={`w640:table-cell w640:py-2 block overflow-auto whitespace-nowrap px-3 pt-2 text-left align-middle ${highlight ? 'font-semibold' : 'font-normal'}`}
                 >
                   {method}
                 </th>
                 <td
-                  className={`@w640:table-cell @w640:py-2 block px-3 pb-2 align-middle leading-relaxed ${highlight ? 'font-semibold' : ''}`}
+                  className={`w640:table-cell w640:py-2 block px-3 pb-2 align-middle leading-relaxed ${highlight ? 'font-semibold' : ''}`}
                 >
                   {note}
                 </td>

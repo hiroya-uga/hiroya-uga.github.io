@@ -36,14 +36,14 @@ export const ArticleYearOrSubCategoryPage = async ({ pageTitle, description, cat
     <>
       <GlobalHeader layout="wide-content" />
 
-      <main className="@container px-content-inline">
+      <main className="px-content-inline">
         <div className="max-w-structure mx-auto mb-8">
           <PageTitle title={pageTitle} description={description} />
           <CategoryLinks currentCategory={category} />
         </div>
-        <div className="@w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
+        <div className="w1024:grid-cols-[1fr_minmax(auto,25%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
           <ArticleList type={category === 'tech-blog' ? 'simple' : 'thumbnail'} list={blogs} />
-          <div className="@w1024:w-248px @w1024:ml-auto">
+          <div className="w1024:w-248px w1024:ml-auto">
             <h2 className="bg-tertiary px-3 py-1">{headingText}</h2>
             <ul className="bg-secondary px-3 py-3">
               {ARTICLE_PATH_PATTERN_LIST[category].map((key) => (

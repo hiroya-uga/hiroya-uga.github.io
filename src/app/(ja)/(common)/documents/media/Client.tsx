@@ -267,8 +267,8 @@ export const MediaContent = () => {
             </h2>
           }
         >
-          <div className="@w640:p-8 @w640:pb-9 @w640:pt-7 p-6 pb-8">
-            <div className="@w640:mb-10 mb-6 flex flex-row-reverse">
+          <div className="w640:p-8 w640:pb-9 w640:pt-7 @container p-6 pb-8">
+            <div className="@w640:mb-10 @w640:flex @w640:flex-row-reverse mb-6">
               <p className="relative bottom-2 left-2 min-w-36 text-right">
                 <ClearButton
                   onClick={() => {
@@ -288,14 +288,14 @@ export const MediaContent = () => {
               </fieldset>
             </div>
 
-            <fieldset className="@w640:mb-10 mb-6">
+            <fieldset className="w640:mb-10 mb-6">
               <legend className="mb-3 font-bold">Categories</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
                 <CheckBoxes nameSet={mediaCategory} stateSet={categoriesStatus} dispatch={setCategoriesStatus} />
               </ul>
             </fieldset>
 
-            <fieldset className="@w640:mb-10 mb-6">
+            <fieldset className="w640:mb-10 mb-6">
               <legend className="mb-3 font-bold">Tags</legend>
               <ul className="flex flex-wrap gap-2 pl-4">
                 <CheckBoxes nameSet={mediaTopics} stateSet={tagsStatus} dispatch={setTagsStatus} />
@@ -326,7 +326,7 @@ export const MediaContent = () => {
           </p>
         </div>
 
-        <ul className="@w640:space-y-4 mb-2 space-y-6">
+        <ul className="w640:space-y-4 mb-2 space-y-6">
           {result.map(({ type, date, category, title, href, topics }) => {
             const defaultClickable = createId(id, href);
             return (
@@ -334,11 +334,11 @@ export const MediaContent = () => {
                 key={href}
                 as="li"
                 defaultClickable={defaultClickable}
-                className="hover:bg-secondary @w640:grid-cols-[6.25rem_4.75rem_1fr] @w640:p-4 @w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--x-fill:var(--x-color-text-link)] hover:shadow"
+                className="hover:bg-secondary w640:grid-cols-[6.25rem_4.75rem_1fr] w640:p-4 w640:leading-7 grid grid-cols-[auto_1fr] rounded-lg p-2 leading-6 transition-[background-color,box-shadow] [--x-fill:var(--x-color-text-link)] hover:shadow"
               >
                 <p className="col-start-1 col-end-2 content-center">
-                  <span className="@w640:bg-card @w640:aspect-4/3 @w640:h-auto @w640:w-full relative grid place-items-center rounded-lg">
-                    <span className="@w640:size-8 relative block size-4">
+                  <span className="w640:bg-card w640:aspect-4/3 w640:h-auto w640:w-full relative grid place-items-center rounded-lg">
+                    <span className="w640:size-8 relative block size-4">
                       {(() => {
                         switch (type) {
                           case 'video':
@@ -352,23 +352,25 @@ export const MediaContent = () => {
                     </span>
                   </span>
                 </p>
-                <p className="@w640:content-center @w640:px-4 @w640:text-center leading-inherit col-start-2 col-end-3 pl-2 font-mono text-xs uppercase">
+                <p className="w640:content-center w640:px-4 w640:text-center leading-inherit col-start-2 col-end-3 pl-2 font-mono text-xs uppercase">
                   {category}
                 </p>
-                <div className="@w640:col-start-3 @w640:col-end-4 @w640:text-base leading-inherit col-start-1 col-end-3 text-sm">
+                <div className="w640:col-start-3 w640:col-end-4 w640:text-base leading-inherit col-start-1 col-end-3 text-sm">
                   <p>
                     <a href={href} id={defaultClickable} className="break-all visited:[--x-color-text-link:#515a9c]">
                       <Title title={title} keyword={keyword} />
                     </a>
                   </p>
 
-                  <p className="align-center mt-1 flex gap-2 text-xs leading-snug">
-                    <span>{date}</span>
+                  <div className="@container mt-1 text-xs leading-snug">
+                    <p className="@w360:align-center @w360:flex @w360:gap-2">
+                      <span>{date}</span>
 
-                    <span className="text-secondary @w640:break-all overflow-hidden text-ellipsis">
-                      {href.replace(/#.*/, '')}
-                    </span>
-                  </p>
+                      <span className="text-secondary @w360:break-all @w360:text-wrap block overflow-hidden text-ellipsis text-nowrap">
+                        {href.replace(/#.*/, '')}
+                      </span>
+                    </p>
+                  </div>
 
                   {topics && topics.length && (
                     <ul className="mt-2 flex flex-wrap gap-2">

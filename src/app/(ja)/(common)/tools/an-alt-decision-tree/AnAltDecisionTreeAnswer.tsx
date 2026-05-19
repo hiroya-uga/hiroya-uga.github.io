@@ -10,7 +10,7 @@ const Accordion = ({ list }: { list: [string, React.ReactNode][] }) => {
       {list.map(([title, content]) => {
         return (
           <Details name="if" key={title} summary={title} id={id}>
-            <div className="border-secondary border-t px-4 py-6 text-sm sm:pb-16 sm:text-base">{content}</div>
+            <div className="border-secondary w640:pb-16 w640:text-base border-t px-4 py-6 text-sm">{content}</div>
           </Details>
         );
       })}
@@ -189,7 +189,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
             ]}
           />
 
-          {/* <div className="mb-14 sm:mb-40">
+          {/* <div className="mb-14 w640:mb-40">
             <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">単純なグラフィックまたは写真の場合</h3>
 
             <div className="py-2 px-3">
@@ -210,7 +210,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
             </div>
           </div>
 
-          <div className="mb-14 sm:mb-40">
+          <div className="mb-14 w640:mb-40">
             <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">グラフまたは複雑な情報の場合</h3>
 
             <div className="py-2 px-3">
@@ -244,7 +244,7 @@ export const AnAltDecisionTreeAnswer = ({ index }: { index: number }) => {
             </div>
           </div>
 
-          <div className="mb-14 sm:mb-40">
+          <div className="mb-14 w640:mb-40">
             <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
               側に同じ内容のテキストが書かれている場合
             </h3>

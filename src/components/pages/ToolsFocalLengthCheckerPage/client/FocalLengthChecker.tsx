@@ -165,7 +165,7 @@ export const FocalLengthChecker = () => {
   return (
     <>
       <div
-        className="@w640:rounded-lg @w640:shadow-lg relative mx-auto grid max-h-dvh max-w-full place-items-center overflow-hidden bg-black transition-[aspect-ratio,width]"
+        className="w640:rounded-lg w640:shadow-lg relative mx-auto grid max-h-dvh max-w-full place-items-center overflow-hidden bg-black transition-[aspect-ratio,width]"
         style={{
           aspectRatio,
           width: videoNativeSize.width === 4 ? 'var(--max-width-content)' : videoNativeSize.width,
@@ -185,7 +185,7 @@ export const FocalLengthChecker = () => {
         />
 
         {status === 'error' && (
-          <div className="px-content-inline @w1280:px-16PX animate-fade-in absolute inset-0 flex items-center justify-center bg-black py-8 text-center text-white">
+          <div className="px-content-inline w1280:px-16PX animate-fade-in absolute inset-0 flex items-center justify-center bg-black py-8 text-center text-white">
             <div className="text-sm">
               <p>カメラへのアクセスが許可されていません。</p>
               <p>ブラウザの設定を確認し、カメラへのアクセスを許可してください。</p>

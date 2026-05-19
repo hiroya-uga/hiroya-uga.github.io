@@ -152,7 +152,7 @@ export const WelcomeMessage = () => {
               {message[0].mapping.map(([a, b]) => (status === 'already' ? b : a))}
             </span>
           </span>
-          <span className="@w640:inline relative block">
+          <span className="w640:inline relative block">
             <span className="sr-only inset-0">{`あなたは${srOnlyAccessCount}番目の訪問者かもしれません。`}</span>
 
             <span ref={message2Ref} aria-hidden="true">

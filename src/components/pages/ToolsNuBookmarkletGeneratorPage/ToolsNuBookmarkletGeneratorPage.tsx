@@ -53,8 +53,8 @@ export const ToolsNuBookmarkletGeneratorPage = ({
         </p>
       </PageTitle>
 
-      <div className="bg-secondary mx-auto max-w-5xl rounded-2xl px-4 pb-10 pt-2.5 shadow-md sm:pb-14">
-        <p className="sm:mb-34px mb-2 text-right text-xs">
+      <div className="bg-secondary w640:pb-14 mx-auto max-w-5xl rounded-2xl px-4 pb-10 pt-2.5 shadow-md">
+        <p className="w640:mb-34px mb-2 text-right text-xs">
           <LangSwitchLink lang={lang} />
         </p>
         <Suspense>

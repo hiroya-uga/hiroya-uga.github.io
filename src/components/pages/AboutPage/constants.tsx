@@ -28,7 +28,7 @@ const now = (() => {
 
 const Twitter = ({ href }: { href: string }) => {
   return (
-    <div className="@w640:max-w-[22.4375rem]">
+    <div className="w640:max-w-[22.4375rem]">
       <TwitterEmbed href={href} noconversation />
     </div>
   );

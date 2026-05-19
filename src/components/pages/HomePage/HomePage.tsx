@@ -11,8 +11,8 @@ export const HomePage = () => {
     <>
       <Header pageTitle={pageTitle} />
 
-      <main className="@container">
-        <div className="bg-primary z-1 @w640:pb-16 relative pb-8">
+      <main>
+        <div className="bg-primary z-1 w640:pb-16 relative pb-8">
           <MainVisualSection />
         </div>
 
@@ -22,7 +22,7 @@ export const HomePage = () => {
           <DiscoverSection />
           <CategoriesSection />
 
-          <div className="px-content-inline @w640:pt-28 @w640:pb-23 pb-15 pt-11">
+          <div className="px-content-inline w640:pt-28 w640:pb-23 pb-15 pt-11">
             <div className="max-w-content mx-auto">
               <ExternalMediaSection />
               <BookMarkSection />

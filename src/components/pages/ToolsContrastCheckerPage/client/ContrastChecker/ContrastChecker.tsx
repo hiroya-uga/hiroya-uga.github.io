@@ -84,21 +84,23 @@ export const ContrastChecker = ({ lang }: { lang: Lang }) => {
         </output>
       </div>
 
-      <ColorInputSection
-        foregroundColor={foregroundColor}
-        backgroundColor={backgroundColor}
-        updateForegroundColor={updateForegroundColor}
-        updateBackgroundColor={updateBackgroundColor}
-        idList={{
-          foreground: foregroundInputId,
-          background: backgroundInputId,
-        }}
-        lang={lang}
-      />
+      <div className="@container">
+        <ColorInputSection
+          foregroundColor={foregroundColor}
+          backgroundColor={backgroundColor}
+          updateForegroundColor={updateForegroundColor}
+          updateBackgroundColor={updateBackgroundColor}
+          idList={{
+            foreground: foregroundInputId,
+            background: backgroundInputId,
+          }}
+          lang={lang}
+        />
+      </div>
 
       <div className="mb-14">
         <div
-          className="border-primary mb-6 rounded-lg border p-6 pt-4"
+          className="border-primary px-24PX mb-6 rounded-lg border pb-6 pt-4"
           style={{ backgroundColor: backgroundColor, color: foregroundColor }}
         >
           <p className="bg-primary text-primary border-primary pt-1px -ml-3 mb-2 w-fit rounded-md border px-3 text-sm font-bold">
@@ -120,15 +122,17 @@ export const ContrastChecker = ({ lang }: { lang: Lang }) => {
         </div>
       </div>
 
-      <ColorInputSection
-        foregroundColor={foregroundColor}
-        backgroundColor={backgroundColor}
-        updateForegroundColor={updateForegroundColor}
-        updateBackgroundColor={updateBackgroundColor}
-        lang={lang}
-      />
+      <div className="@container">
+        <ColorInputSection
+          foregroundColor={foregroundColor}
+          backgroundColor={backgroundColor}
+          updateForegroundColor={updateForegroundColor}
+          updateBackgroundColor={updateBackgroundColor}
+          lang={lang}
+        />
+      </div>
 
-      <div className="mb-8 overflow-x-auto">
+      <div className="scroll-hint-x mb-8 overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <caption className="mb-1 text-left text-sm font-bold">{t.criteriaTitle}</caption>
           <thead>
@@ -152,11 +156,13 @@ export const ContrastChecker = ({ lang }: { lang: Lang }) => {
 
               return (
                 <tr key={key} className="border-primary border-b last:border-0">
-                  <td className="@w640:leading-31px @w640:pl-16PX pl-8PX @w640:text-sm @w360:w-[calc(20em+8px)] py-2 align-top text-xs">
-                    {lang === 'ja' ? `${label}（${threshold}）` : `${label} (${threshold})`}
+                  <td className="w640:leading-31px w640:pl-16PX pl-8PX w640:text-sm w360:w-[calc(20em+8px)] py-2 align-top text-xs">
+                    <div className="min-w-[8em]">
+                      {lang === 'ja' ? `${label}（${threshold}）` : `${label} (${threshold})`}
+                    </div>
                   </td>
 
-                  <td className="px-16PX @w360:w-[calc(4.5em+32px)] py-2 text-center align-middle">
+                  <td className="px-16PX w360:w-[calc(4.5em+32px)] py-2 text-center align-middle">
                     {pass === null ? (
                       '—'
                     ) : (
@@ -172,7 +178,7 @@ export const ContrastChecker = ({ lang }: { lang: Lang }) => {
                   </td>
                   <td className="py-2 text-center">
                     {suggestion ? (
-                      <div className="@w640:gap-1 @w640:flex-wrap @w800:flex-row ml-auto flex w-fit flex-col items-end gap-2">
+                      <div className="w640:gap-1 w640:flex-wrap w800:flex-row ml-auto flex w-fit flex-col items-end gap-2">
                         {suggestion.fg && (
                           <SuggestColorButton
                             suggestedColor={suggestion.fg}

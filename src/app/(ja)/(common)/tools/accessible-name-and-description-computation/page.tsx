@@ -21,13 +21,13 @@ export default function Page() {
         </p>
         <p>
           スクリーンリーダによって呼び上げ内容に違いがあります。
-          <span className="sm:inline-block">
+          <span className="w640:inline-block">
             実際にスクリーンリーダにテキストフィールドを読ませて、どのように読み上げが変化するかを確認してみましょう。
           </span>
         </p>
       </PageTitle>
 
-      <p className="mb-2 font-bold sm:mb-1">スクリーンリーダの例：</p>
+      <p className="w640:mb-1 mb-2 font-bold">スクリーンリーダの例：</p>
 
       <DiscList
         list={[

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-const viewportList = ['xs', 'sm', 'md', 'lg'] as const;
+const viewportList = ['w400', 'w640', 'w768', 'w1024'] as const;
 
 type Viewport = (typeof viewportList)[number];
 
@@ -11,7 +11,7 @@ const rowConfig: Record<
     rows: { start: number; end: number }[];
   }
 > = {
-  xs: {
+  w400: {
     lineBase: 10,
     rows: [
       { start: 1, end: 3 },
@@ -26,7 +26,7 @@ const rowConfig: Record<
       { start: 10, end: 11 },
     ],
   },
-  sm: {
+  w640: {
     lineBase: 8,
     rows: [
       { start: 1, end: 3 },
@@ -41,7 +41,7 @@ const rowConfig: Record<
       { start: 8, end: 9 },
     ],
   },
-  md: {
+  w768: {
     lineBase: 6,
     rows: [
       { start: 1, end: 3 },
@@ -56,7 +56,7 @@ const rowConfig: Record<
       { start: 6, end: 7 },
     ],
   },
-  lg: {
+  w1024: {
     lineBase: 4,
     rows: [
       { start: 1, end: 3 },
@@ -74,64 +74,64 @@ const rowConfig: Record<
 };
 
 const classes: Record<Viewport, { base: string; cols: string[] }> = {
-  xs: {
-    base: 'xs:row-start-(--_xs-row-start) xs:row-end-(--_xs-row-end)',
+  w400: {
+    base: 'w400:row-start-(--_w400-row-start) w400:row-end-(--_w400-row-end)',
     cols: [
-      'xs:col-start-1 xs:col-end-2 xs:aspect-auto',
-      'xs:col-start-2 xs:col-end-3 xs:aspect-square',
-      'xs:col-start-1 xs:col-end-2 xs:aspect-square',
-      'xs:col-start-2 xs:col-end-3 xs:aspect-auto',
-      'xs:col-start-1 xs:col-end-2 xs:aspect-auto',
-      'xs:col-start-2 xs:col-end-3 xs:aspect-5/7',
-      'xs:col-start-1 xs:col-end-2 xs:aspect-auto',
-      'xs:col-start-1 xs:col-end-2 xs:aspect-auto',
-      'xs:col-start-2 xs:col-end-3 xs:aspect-5/7',
-      'xs:col-start-1 xs:col-end-3 xs:aspect-auto',
+      'w400:col-start-1 w400:col-end-2 w400:aspect-auto',
+      'w400:col-start-2 w400:col-end-3 w400:aspect-square',
+      'w400:col-start-1 w400:col-end-2 w400:aspect-square',
+      'w400:col-start-2 w400:col-end-3 w400:aspect-auto',
+      'w400:col-start-1 w400:col-end-2 w400:aspect-auto',
+      'w400:col-start-2 w400:col-end-3 w400:aspect-5/7',
+      'w400:col-start-1 w400:col-end-2 w400:aspect-auto',
+      'w400:col-start-1 w400:col-end-2 w400:aspect-auto',
+      'w400:col-start-2 w400:col-end-3 w400:aspect-5/7',
+      'w400:col-start-1 w400:col-end-3 w400:aspect-auto',
     ],
   },
-  sm: {
-    base: 'sm:row-start-(--_sm-row-start) sm:row-end-(--_sm-row-end)',
+  w640: {
+    base: 'w640:row-start-(--_w640-row-start) w640:row-end-(--_w640-row-end)',
     cols: [
-      'sm:col-start-1 sm:col-end-2 sm:aspect-auto',
-      'sm:col-start-2 sm:col-end-3 sm:aspect-auto',
-      'sm:col-start-3 sm:col-end-4 sm:aspect-square',
-      'sm:col-start-1 sm:col-end-2 sm:aspect-square',
-      'sm:col-start-2 sm:col-end-3 sm:aspect-3/5',
-      'sm:col-start-3 sm:col-end-4 sm:aspect-auto',
-      'sm:col-start-1 sm:col-end-2 sm:aspect-auto',
-      'sm:col-start-2 sm:col-end-3 sm:aspect-auto',
-      'sm:col-start-3 sm:col-end-4 sm:aspect-auto',
-      'sm:col-start-1 sm:col-end-4 sm:aspect-5/2',
+      'w640:col-start-1 w640:col-end-2 w640:aspect-auto',
+      'w640:col-start-2 w640:col-end-3 w640:aspect-auto',
+      'w640:col-start-3 w640:col-end-4 w640:aspect-square',
+      'w640:col-start-1 w640:col-end-2 w640:aspect-square',
+      'w640:col-start-2 w640:col-end-3 w640:aspect-3/5',
+      'w640:col-start-3 w640:col-end-4 w640:aspect-auto',
+      'w640:col-start-1 w640:col-end-2 w640:aspect-auto',
+      'w640:col-start-2 w640:col-end-3 w640:aspect-auto',
+      'w640:col-start-3 w640:col-end-4 w640:aspect-auto',
+      'w640:col-start-1 w640:col-end-4 w640:aspect-5/2',
     ],
   },
-  md: {
-    base: 'md:row-start-(--_md-row-start) md:row-end-(--_md-row-end)',
+  w768: {
+    base: 'w768:row-start-(--_w768-row-start) w768:row-end-(--_w768-row-end)',
     cols: [
-      'md:col-start-1 md:col-end-2 md:aspect-3/4',
-      'md:col-start-2 md:col-end-3 md:aspect-auto',
-      'md:col-start-3 md:col-end-4 md:aspect-square',
-      'md:col-start-3 md:col-end-4 md:aspect-auto',
-      'md:col-start-4 md:col-end-5 md:aspect-auto',
-      'md:col-start-1 md:col-end-2 md:aspect-square',
-      'md:col-start-1 md:col-end-2 md:aspect-auto',
-      'md:col-start-2 md:col-end-3 md:aspect-auto',
-      'md:col-start-3 md:col-end-5 md:aspect-auto',
-      'md:col-start-3 md:col-end-5 md:aspect-auto',
+      'w768:col-start-1 w768:col-end-2 w768:aspect-3/4',
+      'w768:col-start-2 w768:col-end-3 w768:aspect-auto',
+      'w768:col-start-3 w768:col-end-4 w768:aspect-square',
+      'w768:col-start-3 w768:col-end-4 w768:aspect-auto',
+      'w768:col-start-4 w768:col-end-5 w768:aspect-auto',
+      'w768:col-start-1 w768:col-end-2 w768:aspect-square',
+      'w768:col-start-1 w768:col-end-2 w768:aspect-auto',
+      'w768:col-start-2 w768:col-end-3 w768:aspect-auto',
+      'w768:col-start-3 w768:col-end-5 w768:aspect-auto',
+      'w768:col-start-3 w768:col-end-5 w768:aspect-auto',
     ],
   },
-  lg: {
-    base: 'lg:row-start-(--_lg-row-start) lg:row-end-(--_lg-row-end)',
+  w1024: {
+    base: 'w1024:row-start-(--_w1024-row-start) w1024:row-end-(--_w1024-row-end)',
     cols: [
-      'lg:col-start-1 lg:col-end-2 lg:aspect-auto',
-      'lg:col-start-2 lg:col-end-3 lg:aspect-8/7',
-      'lg:col-start-2 lg:col-end-3 lg:aspect-auto',
-      'lg:col-start-3 lg:col-end-4 lg:aspect-auto',
-      'lg:col-start-4 lg:col-end-6 lg:aspect-64/27',
-      'lg:col-start-4 lg:col-end-6 lg:aspect-64/27',
-      'lg:col-start-1 lg:col-end-2 lg:aspect-auto',
-      'lg:col-start-2 lg:col-end-5 lg:aspect-400/87',
-      'lg:col-start-3 lg:col-end-5 lg:aspect-16/6',
-      'lg:col-start-5 lg:col-end-6 lg:aspect-auto',
+      'w1024:col-start-1 w1024:col-end-2 w1024:aspect-auto',
+      'w1024:col-start-2 w1024:col-end-3 w1024:aspect-8/7',
+      'w1024:col-start-2 w1024:col-end-3 w1024:aspect-auto',
+      'w1024:col-start-3 w1024:col-end-4 w1024:aspect-auto',
+      'w1024:col-start-4 w1024:col-end-6 w1024:aspect-64/27',
+      'w1024:col-start-4 w1024:col-end-6 w1024:aspect-64/27',
+      'w1024:col-start-1 w1024:col-end-2 w1024:aspect-auto',
+      'w1024:col-start-2 w1024:col-end-5 w1024:aspect-400/87',
+      'w1024:col-start-3 w1024:col-end-5 w1024:aspect-16/6',
+      'w1024:col-start-5 w1024:col-end-6 w1024:aspect-auto',
     ],
   },
 };

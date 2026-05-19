@@ -22,7 +22,7 @@ export const ToolsContrastCheckerPage = ({ lang, metadata }: Props) => {
         <p className="mb-3 text-right text-xs">
           <LangSwitchLink lang={lang} />
         </p>
-        <div className="@w640:px-16PX">
+        <div className="w640:px-16PX">
           <Suspense>
             <ContrastChecker lang={lang} />
           </Suspense>

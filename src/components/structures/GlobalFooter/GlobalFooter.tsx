@@ -48,14 +48,14 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
         />
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer className={clsx(['@container pwa:hidden', styles.root])}>
+      <footer className={clsx(['pwa:hidden', styles.root])}>
         <div className={clsx([isTop || 'bg-(--x-color-background-footer) text-(--x-color-text-footer)'])}>
           {!isTop && (
             <div className="max-w-structure bg-secondary px-content-inline relative mx-auto">
-              <div className="@w1024:absolute @w1024:bottom-full @w1024:right-[calc(var(--x-spacing-content-inline)-0.75rem)] @w1024:py-1 mx-auto py-4 text-center">
+              <div className="w1024:absolute w1024:bottom-full w1024:right-[calc(var(--x-spacing-content-inline)-0.75rem)] w1024:py-1 mx-auto py-4 text-center">
                 {/* m-0 for bootstrap pages */}
                 <ul
-                  className="@w1024:justify-end @w1024:gap-2 m-0 flex flex-wrap items-center justify-center gap-4 dark:invert"
+                  className="w1024:justify-end w1024:gap-2 m-0 flex flex-wrap items-center justify-center gap-4 dark:invert"
                   aria-label={t.snsLinks}
                 >
                   {SNS_LINKS.map(({ href, alt, ...props }) => {
@@ -80,14 +80,14 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                 isTop && 'max-w-content border-t-secondary mx-auto border-t',
                 // Articleページのゲージ分を含む padding-bottom が必要
                 'flow-root py-12',
-                '@w768:flex @w768:flex-wrap @w768:justify-center @w768:gap-6 @w768:pb-20 @w768:pt-7',
+                'w768:flex w768:flex-wrap w768:justify-center w768:gap-6 w768:pb-20 w768:pt-7',
               )}
             >
-              <ul className="@w768:flex @w768:grow @w768:flex-wrap @w768:justify-start @w768:gap-y-2 text-xs">
+              <ul className="w768:flex w768:grow w768:flex-wrap w768:justify-start w768:gap-y-2 text-xs">
                 {FOOTER_LINK_LIST.map(({ href, label, target }, index) => {
                   const className = clsx([
-                    "@w768:float-none @w768:p-0 float-left py-1 after:mx-2.5 after:content-['|']",
-                    index === FOOTER_LINK_LIST.length - 1 && '@w768:after:hidden',
+                    "w768:float-none w768:p-0 float-left py-1 after:mx-2.5 after:content-['|']",
+                    index === FOOTER_LINK_LIST.length - 1 && 'w768:after:hidden',
                   ]);
 
                   return (
@@ -96,7 +96,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                         href={href}
                         className={clsx([
                           'text-inherit [--x-fill:var(--x-color-text-footer)]',
-                          isTop ? '@w640:[--x-fill:var(--text-color)]' : 'outline-white!',
+                          isTop ? 'w640:[--x-fill:var(--text-color)]' : 'outline-white!',
                         ])}
                         target={target}
                         rel={target === '_blank' ? 'noopener noreferrer' : undefined}
@@ -112,7 +112,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
                   );
                 })}
               </ul>
-              <p className="-top-1px @w768:float-none @w768:h-auto relative float-left grid h-[1.90625rem] place-items-center text-center text-xs">
+              <p className="-top-1px w768:float-none w768:h-auto relative float-left grid h-[1.90625rem] place-items-center text-center text-xs">
                 {/* text-[100%] for bootstrap pages */}
                 <small className="text-[100%]">&copy; {SITE_NAME}</small>
               </p>

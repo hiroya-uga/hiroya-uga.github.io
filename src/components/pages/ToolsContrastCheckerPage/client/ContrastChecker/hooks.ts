@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 export const useContrastColors = () => {
   const searchParams = useSearchParams();
-  const { defaultForeground = '#fff', defaultBackground = '#005a9c' } = {
+  const { defaultForeground = '#ffffff', defaultBackground = '#005a9c' } = {
     defaultForeground: searchParams.get('f') ?? undefined,
     defaultBackground: searchParams.get('b') ?? undefined,
   };

@@ -9,7 +9,7 @@ export const LinkToOriginal = ({
         この文書は
         {origins.map(({ title, href, lang, ...item }) => {
           return (
-            <span className="sm:inline-block sm:[&:not(:first-child:last-child)]:block" key={title}>
+            <span className="w640:[&:not(:first-child:last-child)]:block w640:inline-block" key={title}>
               「
               <a href={href} hrefLang={item.hrefLang ?? lang} lang={lang}>
                 {title}

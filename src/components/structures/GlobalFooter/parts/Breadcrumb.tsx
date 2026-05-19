@@ -82,8 +82,8 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
 
 export const Breadcrumb = ({ label, additionalBreadcrumbs, currentPageTitle }: Props) => {
   return (
-    <nav className={clsx(['@container pwa:hidden mt-[20vh]', styles.root])} aria-label={label}>
-      <div className="max-w-structure px-content-inline @w1024:pl-(--x-spacing-content-inline) bg-(--x-color-background-breadcrumb) @w1024:bg-transparent @w1024:py-5 @w1024:pr-[calc(13.5rem+calc(var(--x-spacing-content-inline)*2))] mx-auto py-4 text-sm">
+    <nav className={clsx(['pwa:hidden mt-[20vh]', styles.root])} aria-label={label}>
+      <div className="max-w-structure px-content-inline w1024:pl-(--x-spacing-content-inline) bg-(--x-color-background-breadcrumb) w1024:bg-transparent w1024:py-5 w1024:pr-[calc(13.5rem+calc(var(--x-spacing-content-inline)*2))] mx-auto py-4 text-sm">
         <ol className="flex flex-wrap gap-y-0.5 leading-normal">
           <ListItems additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />
         </ol>

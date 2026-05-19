@@ -21,13 +21,13 @@ export const PersonalHistory = () => {
     <>
       <Heading level={3}>これまでのあらすじ</Heading>
 
-      <div className="@w640:pl-0.5 pl-2">
+      <div className="w640:pl-0.5 pl-2">
         <p className="mb-paragraph text-sm">
           <Link href="/documents/media/">外部メディアリンク一覧はこちら</Link>をご覧ください。
         </p>
 
-        <div className="@w640:after:w-1px @w640:after:border-primary @w640:after:absolute @w640:after:left-4 @w640:after:top-0 @w640:after:h-full @w640:after:border-l relative">
-          <table className="@w640:text-base block-table text-sm">
+        <div className="w640:after:w-1px w640:after:border-primary w640:after:absolute w640:after:left-4 w640:after:top-0 w640:after:h-full w640:after:border-l relative">
+          <table className="w640:text-base block-table text-sm">
             <thead className="sr-only">
               <tr>
                 <th scope="col">時期</th>
@@ -36,7 +36,7 @@ export const PersonalHistory = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="@w640:grid @w640:grid-cols-[auto_1fr] @w640:gap-x-2">
+            <tbody className="w640:grid w640:grid-cols-[auto_1fr] w640:gap-x-2">
               {PERSONAL_HISTORY.map(({ data, descriptions }) =>
                 descriptions.map((item, index) => (
                   <HistoryRow

@@ -21,7 +21,7 @@ export const Details = ({ defaultOpen = false, name, summary, children, id }: Re
       name={name}
     >
       <summary
-        className="bg-primary hover:bg-primary-hover @w640:text-lg relative flex cursor-pointer list-none items-center justify-between text-base transition-colors duration-200 after:hidden focus:z-10 group-first:rounded-t-lg group-last:rounded-b-lg group-first:group-last:py-3 group-open:rounded-t-lg group-last:group-open:rounded-none"
+        className="bg-primary hover:bg-primary-hover w640:text-lg relative flex cursor-pointer list-none items-center justify-between text-base transition-colors duration-200 after:hidden focus:z-10 group-first:rounded-t-lg group-last:rounded-b-lg group-first:group-last:py-3 group-open:rounded-t-lg group-last:group-open:rounded-none"
         role="button"
         aria-expanded={isOpen ? 'true' : 'false'}
         aria-controls={id}

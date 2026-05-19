@@ -24,7 +24,7 @@ interface Props {
 
 export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
   return (
-    <div className={`${styles.container} ${dotGothic16.variable}`}>
+    <div className={dotGothic16.variable}>
       <div className={styles.root}>
         <header className={styles.header}>
           <p className={styles.siteName}>

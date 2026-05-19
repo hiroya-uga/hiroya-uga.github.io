@@ -226,13 +226,13 @@ export const TouchEventTouchesContent = () => {
         >
           <div
             className={clsx([
-              'rounded p-2 py-3 sm:p-6',
+              'w640:p-6 rounded p-2 py-3',
               'bg-secondary/90 flex flex-wrap items-center justify-center gap-2',
             ])}
           >
             <p
               className={clsx([
-                'grow transition-[visibility,opacity] sm:text-left',
+                'w640:text-left grow transition-[visibility,opacity]',
                 isRunning !== true && 'invisible opacity-0',
               ])}
             >
@@ -260,7 +260,10 @@ export const TouchEventTouchesContent = () => {
           <div
             aria-live="assertive"
             aria-busy={isTouchDevice === undefined}
-            className={clsx(['mx-2 mt-2 transition-[visibility,opacity] sm:mx-6', isRunning || 'invisible opacity-0'])}
+            className={clsx([
+              'w640:mx-6 mx-2 mt-2 transition-[visibility,opacity]',
+              isRunning || 'invisible opacity-0',
+            ])}
           >
             <NoteBox headingLevel={2} type="warn">
               <p>このページは現在、Stopボタン以外のタッチ操作が無効になっています。</p>

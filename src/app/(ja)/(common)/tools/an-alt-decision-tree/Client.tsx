@@ -58,8 +58,8 @@ const Container = ({
       <div className={clsx([`${styles.slide}`, index === 0 && 'pb-4'])}>
         <AnAltDecisionTreeQuestion index={index} />
 
-        <div className="border-primary mt-12 border-t pt-10">
-          <ul className="@w640:grid-cols-[minmax(7rem,1fr)_minmax(7rem,1fr)] mx-auto grid w-fit justify-center gap-4">
+        <div className="border-primary @container mt-12 border-t pt-10">
+          <ul className="@w240:grid-cols-2 mx-auto grid w-fit justify-center gap-4">
             <li>
               <RunButton
                 type="button"

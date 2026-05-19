@@ -29,27 +29,27 @@ export const PageTitle = ({
 }: Readonly<Props>) => {
   const hasSubtitle = Boolean(previous || following);
   return (
-    <div className="@w640:mb-20 mb-14">
+    <div className="w640:mb-20 w320:break-normal mb-14 break-all">
       <h1
         className={clsx([
           hasSubtitle
             ? 'not-last:mb-2.5'
-            : 'not-last:mb-3 sm:not-last:mb-2.5 text-3xl font-bold leading-relaxed sm:text-[2.625rem]',
+            : 'not-last:mb-3 w640:not-last:mb-2.5 w640:text-[2.625rem] w320:text-3xl text-2xl font-bold leading-relaxed',
           'leading-relaxed',
         ])}
       >
         {hasSubtitle ? (
           <>
             {previous && (
-              <span className="bg-secondary border-secondary relative -left-3 block w-fit rounded-2xl border px-3 py-1 text-sm font-bold text-[#666] dark:text-[#cacaca]">
+              <span className="bg-secondary border-secondary w640:-left-3 relative block w-fit rounded-2xl border px-3 py-1 text-sm font-bold text-[#666] dark:text-[#cacaca]">
                 {previous}
               </span>
             )}
-            <strong className="block min-h-[3.046875rem] pt-1 text-3xl font-bold leading-snug sm:text-[2.625rem]">
+            <strong className="w640:text-[2.625rem] w320:text-3xl w320:leading-snug block min-h-[3.046875rem] pt-1 text-2xl font-bold">
               {pageTitle ?? title}
             </strong>
             {following && (
-              <span className="relative mt-3 block pl-9 font-bold leading-normal before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black sm:mt-2 sm:text-lg">
+              <span className="w640:mt-2 w640:text-lg relative mt-3 block pl-9 font-bold leading-normal before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black">
                 {following}
               </span>
             )}
@@ -69,7 +69,7 @@ export const PageTitle = ({
         </p>
       )}
 
-      <div className="text-sm sm:text-base">
+      <div className="w640:text-base text-sm">
         {description?.split('\n').map((description) => {
           return <p key={description}>{description}</p>;
         })}

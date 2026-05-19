@@ -88,7 +88,7 @@ export const Tab = {
           <div className="border-(--x-tab-border) border-b">
             <div
               role="tablist"
-              className="relative top-px flex overflow-x-auto overflow-y-hidden whitespace-nowrap px-4"
+              className="px-16PX relative top-px flex overflow-x-auto overflow-y-hidden whitespace-nowrap"
             >
               {tabKeys.map((tabKey) => {
                 const isSelected = currentKey === tabKey;

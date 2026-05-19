@@ -63,7 +63,7 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
   margin-inline: auto;
 
   @media screen and (orientation: landscape) {
-    right: 10px;
+    right: 20px;
     left: auto;
   }
 }
@@ -71,7 +71,7 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
 .customされたimg要素ˆ-ˆのモーダル__button.of-close {
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 20px;
   z-index: 1;
 }
 

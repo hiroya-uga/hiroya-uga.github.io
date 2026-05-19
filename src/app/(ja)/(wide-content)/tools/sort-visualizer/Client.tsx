@@ -520,14 +520,14 @@ export const SortVisualizerContent = () => {
 
   return (
     <>
-      <div className="@w640:flex flex-row-reverse items-start gap-4">
+      <div className="w640:flex flex-row-reverse items-start gap-4">
         <div
           className={clsx([
-            '@w640:top-4 @w640:w-fit @w350:sticky ml-auto',
-            isVisualizerMode ? '@w350:-top-[19.125rem]' : '@w350:-top-[11.5rem]',
+            'w640:top-4 w640:w-fit w350:sticky ml-auto',
+            isVisualizerMode ? 'w350:-top-[19.125rem]' : 'w350:-top-[11.5rem]',
           ])}
         >
-          <div className="@w640:contain-inline-size mb-4">
+          <div className="w640:contain-inline-size mb-4">
             <SelectField
               label="実行種別"
               onChange={(e) => setMode(e.currentTarget.value as 'visualizer' | 'benchmark')}
@@ -538,7 +538,7 @@ export const SortVisualizerContent = () => {
               <option value="benchmark">ベンチマーク</option>
             </SelectField>
           </div>
-          <div className="@w640:contain-inline-size mb-4">
+          <div className="w640:contain-inline-size mb-4">
             <TextField
               label="要素数（2〜1000）"
               inputMode="numeric"
@@ -578,7 +578,7 @@ export const SortVisualizerContent = () => {
           </div>
 
           {isVisualizerMode && (
-            <div className="@w640:contain-inline-size mb-4">
+            <div className="w640:contain-inline-size mb-4">
               <TextField
                 label="処理速度（1〜1000）"
                 inputMode="numeric"
@@ -619,20 +619,20 @@ export const SortVisualizerContent = () => {
             </div>
           )}
 
-          <div className="@w350:grid-cols-2 @w640:grid-cols-1 mt-4 grid gap-4">
+          <div className="w350:grid-cols-2 w640:grid-cols-1 mt-4 grid gap-4">
             {isVisualizerMode && (
               <>
                 <p className="grow">
-                  <label className="@w400:gap-2 @w640:justify-between @w350:justify-end flex items-center justify-between gap-1.5">
-                    <span className="@w400:text-base text-sm">ハイライト</span>
+                  <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
+                    <span className="w400:text-base text-sm">ハイライト</span>
                     <span>
                       <Switch checked={shouldHighlight} dispatch={setShouldHighlight} disabled={running} />
                     </span>
                   </label>
                 </p>
                 <p className="grow">
-                  <label className="@w400:gap-2 @w640:justify-between @w350:justify-end flex items-center justify-between gap-1.5">
-                    <span className="@w400:text-base text-sm">ランダムな数値</span>
+                  <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
+                    <span className="w400:text-base text-sm">ランダムな数値</span>
                     <span>
                       <Switch
                         checked={shouldBeRandom}
@@ -654,13 +654,13 @@ export const SortVisualizerContent = () => {
           <div
             className={clsx([
               // ビルドで生成されないので important をつけてみる
-              '@w640:[border:none]!',
-              '@w350:grid-cols-2 @w640:grid-cols-1 grid gap-4 py-4 [border-image:linear-gradient(color-mix(in_oklab,var(--background-color-primary)_90%,transparent))_fill_0//0_100lvi]',
+              'w640:[border:none]!',
+              'w350:grid-cols-2 w640:grid-cols-1 grid gap-4 py-4 [border-image:linear-gradient(color-mix(in_oklab,var(--background-color-primary)_90%,transparent))_fill_0//0_100lvi]',
             ])}
           >
             <p className="grow">
-              <label className="@w400:gap-2 @w640:justify-between @w350:justify-end flex items-center justify-between gap-1.5">
-                <span className="@w400:text-base text-sm">説明文を表示</span>
+              <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
+                <span className="w400:text-base text-sm">説明文を表示</span>
                 <span>
                   <Switch checked={shouldShowDescription} dispatch={setShouldShowDescription} />
                 </span>
@@ -668,8 +668,8 @@ export const SortVisualizerContent = () => {
             </p>
             {isVisualizerMode ? (
               <p className="grow">
-                <label className="@w400:gap-2 @w640:justify-between @w350:justify-end flex items-center justify-between gap-1.5">
-                  <span className="@w400:text-base text-sm">グラフを表示</span>
+                <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
+                  <span className="w400:text-base text-sm">グラフを表示</span>
                   <span>
                     <Switch checked={shouldShowGraph} dispatch={setShouldShowGraph} />
                   </span>
@@ -677,8 +677,8 @@ export const SortVisualizerContent = () => {
               </p>
             ) : (
               <p className="grow">
-                <label className="@w400:gap-2 @w640:justify-between @w350:justify-end flex items-center justify-between gap-1.5">
-                  <span className="@w400:text-base text-sm">ランダムな数値</span>
+                <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
+                  <span className="w400:text-base text-sm">ランダムな数値</span>
                   <span>
                     <Switch
                       checked={shouldBeRandom}
@@ -696,7 +696,7 @@ export const SortVisualizerContent = () => {
             )}
           </div>
         </div>
-        <div className="@container bg-secondary border-primary grow rounded-md border p-4">
+        <div className="bg-secondary border-primary grow rounded-md border p-4">
           {Object.keys(sortDictionary).map((key) => {
             const category = key as keyof SortDictionary;
             const sortsInCategory = Object.keys(sortDictionary[category]) as SortName[];
@@ -709,7 +709,7 @@ export const SortVisualizerContent = () => {
                 className="not-last:mb-4 not-last:pb-5 not-last:border-b-primary not-last:border-b last:mb-2"
               >
                 <div className="mb-4 grid grid-cols-[auto_1fr] items-center gap-4">
-                  <p className="@w400:gap-2 @w640:justify-between @w350:justify-end flex items-center justify-between gap-1.5">
+                  <p className="w400:gap-2 w640:justify-between w350:justify-end grid grid-cols-[auto_1fr] items-center justify-between gap-1.5">
                     <input
                       type="checkbox"
                       id={`${id}-${key}-all`}
@@ -741,9 +741,9 @@ export const SortVisualizerContent = () => {
                 <ul
                   className={clsx([
                     'grid gap-x-8 gap-y-4 pl-4',
-                    shouldShowDescription === true && '@w1024:grid-cols-3 @w768:grid-cols-2',
+                    shouldShowDescription === true && 'w1024:grid-cols-3 w768:grid-cols-2',
                     shouldShowDescription === false &&
-                      '@w500:grid-cols-3 @w640:grid-cols-4 @w768:grid-cols-5 @w1024:grid-cols-6 @w350:grid-cols-2',
+                      'w500:grid-cols-3 w640:grid-cols-4 w768:grid-cols-5 w1024:grid-cols-6 w350:grid-cols-2',
                   ])}
                 >
                   {sortsInCategory.map((sort) => {
@@ -807,12 +807,12 @@ export const SortVisualizerContent = () => {
         </div>
       )}
 
-      <div className="bg-primary/90 border-b-primary @w640:items-center @w640:grid @w640:grid-cols-[1fr_auto_1fr] @w640:py-2 @w350:sticky top-0 mb-8 border-b pb-[1lh]">
-        <p role="alert" className="text-alert @w640:text-left min-h-lh text-center">
+      <div className="bg-primary/90 border-b-primary w640:items-center w640:grid w640:grid-cols-[1fr_auto_1fr] w640:py-2 w350:sticky top-0 mb-8 border-b pb-[1lh]">
+        <p role="alert" className="text-alert w640:text-left min-h-lh text-center">
           {errorMessage}
         </p>
 
-        <p className="@w640:py-4">
+        <p className="w640:py-4">
           <RunButton
             type="button"
             onClick={(e) => {
@@ -881,8 +881,8 @@ export const SortVisualizerContent = () => {
             className={clsx([
               'gap-x-16PX grid gap-y-4',
               2 < activeSorts.length
-                ? '@w360:grid-cols-2 @w640:grid-cols-3 @w1024:grid-cols-4 @w640:gap-y-14 @w640:gap-x-32PX'
-                : '@w768:grid-cols-2',
+                ? 'w360:grid-cols-2 w640:grid-cols-3 w1024:grid-cols-4 w640:gap-y-14 w640:gap-x-32PX'
+                : 'w768:grid-cols-2',
             ])}
           >
             {flatSortDictionary.map(([sort, [label]]) => {
@@ -892,7 +892,7 @@ export const SortVisualizerContent = () => {
 
               return (
                 <div key={sort}>
-                  <h2 className="@w640:text-base mb-2 text-xs font-bold">{`${label} - ${sort}`}</h2>
+                  <h2 className="w640:text-base mb-2 text-xs font-bold">{`${label} - ${sort}`}</h2>
                   {shouldShowGraph ? (
                     <div className="border-primary bg-secondary border">
                       <SortVisualizer
@@ -957,14 +957,14 @@ export const SortVisualizerContent = () => {
             <Table>
               <thead>
                 <tr>
-                  <th scope="col" className="@w640:text-left text-center align-middle">
+                  <th scope="col" className="w640:text-left text-center align-middle">
                     ソート名
                   </th>
-                  <th scope="col" className="@w640:text-left text-center align-middle">
-                    10000回呼び出しに<span className="@w640:inline block">かかった時間</span>
+                  <th scope="col" className="w640:text-left text-center align-middle">
+                    10000回呼び出しに<span className="w640:inline block">かかった時間</span>
                   </th>
-                  <th scope="col" className="@w640:text-left text-center align-middle">
-                    5秒あたりの<span className="@w640:inline block">呼び出し回数</span>
+                  <th scope="col" className="w640:text-left text-center align-middle">
+                    5秒あたりの<span className="w640:inline block">呼び出し回数</span>
                   </th>
                 </tr>
               </thead>

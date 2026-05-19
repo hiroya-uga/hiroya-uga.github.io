@@ -71,7 +71,7 @@ export const RenderTextInReactPlaygroundContent = () => {
           に結合せずにレンダリングした場合、テキストノードは分断された状態でレンダリングされます。
         </p>
 
-        <div className="@w640:grid-cols-2 mt-paragraph grid gap-4">
+        <div className="w640:grid-cols-2 mt-paragraph grid gap-4">
           <div>
             <p className="mb-2 font-bold">テンプレートリテラルを使わない場合：</p>
             <pre className="border-primary grid overflow-auto rounded-lg border">

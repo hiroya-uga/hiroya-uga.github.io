@@ -21,7 +21,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
       <FocalLengthChecker />
 
       <div className="px-content-inline pwa:hidden mt-20">
-        <div className="mx-auto max-w-[max(40rem,40vw)]">
+        <div className="@container mx-auto max-w-[max(40rem,40vw)]">
           <h2 className="mb-10 text-center text-2xl font-bold leading-snug" id="how-to-use">
             使い方
           </h2>
@@ -29,7 +29,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
           <h3 className="mb-paragraph text-lg font-bold">1. 焦点距離の確認</h3>
 
           <div className="flow-root">
-            <div className="mb-paragraph @w640:ml-32PX @w640:float-right">
+            <div className="mb-paragraph w640px:ml-32PX w640px:float-right">
               <Picture
                 src="/public/tools/focal-length-checker/images/step-01.webp"
                 width={600 / 2}
@@ -48,7 +48,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
           <h3 className="mb-paragraph mt-20 text-lg font-bold">2. カメラ情報を入力</h3>
 
           <div className="flow-root">
-            <div className="mb-paragraph @w640:ml-32PX @w640:float-right">
+            <div className="mb-paragraph w640px:ml-32PX w640px:float-right">
               <Picture
                 src="/public/tools/focal-length-checker/images/step-02.webp"
                 width={600 / 2}
@@ -69,14 +69,14 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
 
           <NoteList list={['キャプチャは開発中のものです。']} />
 
-          <div className="@w640:grid @w640:grid-cols-2 mb-paragraph mt-2 gap-4">
-            <div className="@w640:m-0 mb-4">
+          <div className="w640px:grid w640px:grid-cols-2 mb-paragraph mt-2 gap-4">
+            <div className="w640px:m-0 mb-4">
               <Picture
                 src="/public/tools/focal-length-checker/images/step-03.webp"
                 width={600 / 2}
                 height={902 / 2}
                 alt="本アプリで東京駅を写し、各種焦点距離を確認している様子の画面キャプチャ"
-                className="@w640:w-full mx-auto border border-black dark:border-white/20"
+                className="w640px:w-full mx-auto border border-black dark:border-white/20"
               />
             </div>
             <div>
@@ -85,7 +85,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
                 width={600 / 2}
                 height={902 / 2}
                 alt="実際に200mmで撮影した東京駅"
-                className="@w640:w-full mx-auto border border-black dark:border-white/20"
+                className="w640px:w-full mx-auto border border-black dark:border-white/20"
               />
             </div>
           </div>
@@ -101,7 +101,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
           <h3 className="mb-paragraph mt-20 text-lg font-bold">4. スマホにインストール</h3>
 
           <div className="flow-root">
-            <div className="mb-paragraph @w640:ml-32PX @w640:float-right">
+            <div className="mb-paragraph w640px:ml-32PX w640px:float-right">
               <Picture
                 src="/public/tools/focal-length-checker/images/step-05.webp"
                 width={600 / 2}

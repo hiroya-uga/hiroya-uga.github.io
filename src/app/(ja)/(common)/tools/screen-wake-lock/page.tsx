@@ -26,7 +26,7 @@ export default function Page() {
         </p>
       </PageTitle>
       <KeepAwakeClient />
-      <div className="mt-14 sm:mt-20">
+      <div className="w640:mt-20 mt-14">
         <NoteList
           list={[
             'バッテリー消費が増える場合があります。',

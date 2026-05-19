@@ -357,10 +357,10 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
   );
 
   return (
-    <div className={clsx(['transition-fade md:mt-28', isFirstView ? 'invisible opacity-0' : ''])}>
-      <div className="md:grid md:grid-cols-2 md:gap-8">
+    <div className={clsx(['transition-fade w768:mt-28', isFirstView ? 'invisible opacity-0' : ''])}>
+      <div className="w768:grid-cols-2 w768:gap-8 w768:grid">
         <div>
-          <div className="md:sticky md:top-8">
+          <div className="w768:top-8 w768:sticky">
             <Heading level={2}>
               <label htmlFor={id}>本文</label>
             </Heading>
@@ -378,7 +378,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
             <p className="mb-3">
               <textarea
                 id={id}
-                className="border-secondary bg-secondary min-h-108px h-[max(5lh,23vh)] w-full resize-y rounded-md border px-4 py-2"
+                className="border-secondary bg-secondary min-h-108px px-16PX h-[max(5lh,23vh)] w-full resize-y rounded-md border py-2"
                 style={{
                   fontSize: fontSize ? `${fontSize}px` : DEFAULT_FONT_SIZE,
                 }}
@@ -404,38 +404,40 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                 }}
               />
             </p>
-            <ul className="flex justify-between gap-4">
-              <li className="relative z-20">
-                <RunButton
-                  type="button"
-                  onClick={() => {
-                    setCurrentValue('');
-                    setValue('');
-                  }}
-                  afterIcon="reload"
-                >
-                  リセット
-                </RunButton>
-              </li>
-              <li className={clsx(['transition-fade relative z-20', isAutoCount && 'invisible opacity-0'])}>
-                <RunButton
-                  type="button"
-                  onClick={() => {
-                    setValue(currentValue);
-                  }}
-                >
-                  文字数を数える
-                </RunButton>
-              </li>
-            </ul>
+            <div className="@container">
+              <ul className="@w320:justify-between @w320:flex-row gap-x-16PX flex flex-col gap-y-4">
+                <li className="relative z-20">
+                  <RunButton
+                    type="button"
+                    onClick={() => {
+                      setCurrentValue('');
+                      setValue('');
+                    }}
+                    afterIcon="reload"
+                  >
+                    リセット
+                  </RunButton>
+                </li>
+                <li className={clsx(['transition-fade relative z-20', isAutoCount && 'invisible opacity-0'])}>
+                  <RunButton
+                    type="button"
+                    onClick={() => {
+                      setValue(currentValue);
+                    }}
+                  >
+                    文字数を数える
+                  </RunButton>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div className="text-sm">
-          <div className="text-sm sm:grid sm:grid-cols-[60%_40%] md:block lg:text-base">
-            <div className="mt-16 sm:mt-0 sm:pr-14">
+          <div className="w1024:text-base w768:block w640:grid w640:grid-cols-[60%_40%] text-sm">
+            <div className="w768:mt-0 w768:pr-0 w640:pr-14 @container mt-16">
               <Heading level={2}>結果</Heading>
-              <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 md:grid-cols-[auto_auto]">
+              <div className="@w280:grid-cols-[auto_auto] grid gap-x-4 gap-y-2">
                 <p className="col-span-full grid grid-cols-subgrid">
                   <label className="grow" htmlFor={`${id}-文字数`}>
                     文字数
@@ -574,7 +576,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
           </div>
         </div>
 
-        <div className="mt-16 sm:mt-24 md:col-span-2">
+        <div className="w768:col-span-2 w640:mt-24 mt-16">
           <Heading level={2}>原稿用紙イメージ</Heading>
 
           <div id="原稿用紙イメージ">
@@ -583,7 +585,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                 <React.Fragment key={containerIndex}>
                   <h3 className="not-first:mt-8 mb-4 text-lg">{`${containerIndex + 1}件`}</h3>
 
-                  <div className="sm:pl-2">
+                  <div className="w640:pl-2">
                     <p className="sr-only">
                       {container
                         .flatMap((array) => array)
@@ -591,7 +593,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                         .trim()}
                     </p>
                     <p
-                      className="text-2xs not-last:mb-24 mx-auto w-min max-w-full overflow-auto sm:text-base"
+                      className="text-2xs not-last:mb-24 w640:text-base mx-auto w-min max-w-full overflow-auto"
                       aria-hidden="true"
                     >
                       <span

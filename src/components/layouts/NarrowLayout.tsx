@@ -6,7 +6,7 @@ export const NarrowLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="grid min-h-dvh grid-cols-1 grid-rows-[auto_1fr_auto]">
       <GlobalHeader />
 
-      <main className="@container px-content-inline">
+      <main className="px-content-inline">
         <div className="mx-auto max-w-[max(40rem,40vw)]">{children}</div>
       </main>
 

@@ -190,7 +190,7 @@ export function CookieConsentDialog() {
         aria-modal="false"
         className={clsx([
           'pwa:hidden!',
-          'bg-secondary border-t-primary @container bottom-0 left-0 block w-full border-t p-4 transition-[translate,opacity,visibility] duration-500',
+          'bg-secondary border-t-primary bottom-0 left-0 block w-full border-t p-4 transition-[translate,opacity,visibility] duration-500',
           isAfterBannerDialogCloseRequest ||
             'not-open:translate-y-full not-open:invisible not-open:opacity-0 not-open:pointer-events-none sticky',
           isAfterBannerDialogCloseRequest && 'pointer-events-none invisible fixed opacity-0',
@@ -204,7 +204,7 @@ export function CookieConsentDialog() {
         <div className="text-xs" id={`${id}-description`}>
           <MajimenaNaiyou lang={isInEnglish ? 'en' : 'ja'} agreeLabel={t.agreeLabel} />
         </div>
-        <div className="@w400:mr-0 mx-auto mt-2 grid w-fit grid-cols-2 gap-4">
+        <div className="w400:mr-0 mx-auto mt-2 grid w-fit grid-cols-2 gap-4">
           <p className="">
             <RunButton onClick={() => closeDialog('rejected')}>{t.disagreeLabel}</RunButton>
           </p>
@@ -230,14 +230,14 @@ export function CookieConsentDialog() {
       )}
       closedby="none"
     >
-      <div className="@container scroll-hint-y m-auto grid place-items-center overflow-auto rounded-lg px-4 pb-8 pt-6 text-sm shadow-lg">
-        <div className="@w640:pt-2 w-full max-w-[min(40rem,88%)]">
+      <div className="scroll-hint-y m-auto grid place-items-center overflow-auto rounded-lg px-4 pb-8 pt-6 text-sm shadow-lg">
+        <div className="w640:pt-2 w-full max-w-[min(40rem,88%)]">
           <h2
             tabIndex={-1} // for Safari
             id={id}
             className="mb-paragraph pb-paragraph border-b border-dashed border-[#585858]/50 shadow-none outline-none dark:border-[#c2c2c2]/50"
           >
-            <span className="@w640:mx-0 @w640:text-lg mx-auto block w-fit text-base text-[#585858] dark:text-[#c2c2c2]">
+            <span className="w640:mx-0 w640:text-lg mx-auto block w-fit text-base text-[#585858] dark:text-[#c2c2c2]">
               † YOUR COOKIE PREFERENCES †
             </span>
           </h2>
@@ -283,7 +283,7 @@ export function CookieConsentDialog() {
           <p className="mt-8">
             <button
               type="button"
-              className="@w640:text-4xl hover:text-link text-3xl underline"
+              className="w640:text-4xl hover:text-link text-3xl underline"
               onClick={() => closeDialog('accepted')}
               title="Cookie利用に同意してコンテンツを閲覧する"
             >
@@ -292,8 +292,8 @@ export function CookieConsentDialog() {
           </p>
         </div>
         {/* 目の錯覚分 + 5rem */}
-        <div className="@w640:mt-0 mt-8 w-full max-w-[min(45rem,88%)]">
-          <p className="@w640:justify-end grid justify-center">
+        <div className="w640:mt-0 mt-8 w-full max-w-[min(45rem,88%)]">
+          <p className="w640:justify-end grid justify-center">
             <RunButton onClick={() => closeDialog('rejected')}>同意せずに閲覧する</RunButton>
           </p>
         </div>

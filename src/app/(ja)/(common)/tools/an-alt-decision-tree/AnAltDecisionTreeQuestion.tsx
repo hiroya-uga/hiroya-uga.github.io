@@ -16,7 +16,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 //       <figure className="border border-[#0d1117] border-b-0 mx-auto">
 //         <figcaption className="text-sm bg-[#0d1117] text-white p-2">{title}</figcaption>
 
-//         <div className="px-4 py-6 sm:px-8 sm:py-16">{children}</div>
+//         <div className="px-4 py-6 w640:px-8 w640:py-16">{children}</div>
 //       </figure>
 
 //       <Code code={code} />
@@ -26,8 +26,8 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 
 // const SamplePresentation = ({ isVisible }: { isVisible?: boolean }) => {
 //   return (
-//     <div className="flex text-left flex-wrap sm:flex-nowrap gap-4">
-//       <div className="sm:max-w-[150px]">
+//     <div className="flex text-left flex-wrap w640:flex-nowrap gap-4">
+//       <div className="w640:max-w-[150px]">
 //         <div className={clsx([isVisible === false ? 'border-gray-300' : 'border-transparent', 'border inline-block'])}>
 //           <Picture
 //             src="/tools/an-alt-decision-tree/sushi.jpg"
@@ -171,7 +171,7 @@ import { AnAltDecisionTreeHeading as Heading } from '@/app/(ja)/(common)/tools/a
 
 const Shrimp = () => {
   return (
-    <div className="my-8 sm:my-10">
+    <div className="w640:my-10 my-8">
       <Picture
         src="/tools/an-alt-decision-tree/shrimp.png"
         width={200}
@@ -220,7 +220,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
           </ImageWrapper> */}
           <Shrimp />
 
-          <p className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
+          <p className="w640:px-0 w640:text-center mx-auto max-w-xl px-4">
             画像の中に文字が書かれているかを確認してください。
           </p>
         </>
@@ -258,14 +258,14 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
           </ImageWrapper> */}
           <Shrimp />
 
-          <div className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
-            <p className="mb-2 sm:mb-0">
+          <div className="w640:px-0 w640:text-center mx-auto max-w-xl px-4">
+            <p className="w640:mb-0 mb-2">
               リンクまたはボタンなど、
-              <span className="inline-block sm:inline">機能のために使用されているかを確認してください。</span>
+              <span className="w640:inline inline-block">機能のために使用されているかを確認してください。</span>
             </p>
             <p>
               画像が存在しない場合、
-              <span className="inline-block sm:inline">リンクまたはボタンの機能を理解できなくなりますか？</span>
+              <span className="w640:inline inline-block">リンクまたはボタンの機能を理解できなくなりますか？</span>
             </p>
           </div>
         </>
@@ -329,9 +329,9 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 
           <Shrimp />
 
-          <p className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
+          <p className="w640:px-0 w640:text-center mx-auto max-w-xl px-4">
             その画像がないとコンテンツの意味が変わったり、
-            <span className="sm:inline-block">伝わらなくなるかを確認してください。</span>
+            <span className="w640:inline-block">伝わらなくなるかを確認してください。</span>
           </p>
         </>
       );
@@ -380,7 +380,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 
           <Shrimp />
 
-          <p className="mx-auto max-w-xl px-4 sm:px-0 sm:text-center">
+          <p className="w640:px-0 w640:text-center mx-auto max-w-xl px-4">
             純粋に装飾のため、
             <span className="inline-block">またはユーザーに直接関係しないものですか？</span>
           </p>
@@ -392,7 +392,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 // const AnswerContainsText = () => {
 //   return (
 //     <>
-//       <div className="mb-14 sm:mb-40">
+//       <div className="mb-14 w640:mb-40">
 //         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
 //           側に同じ内容のテキストが書かれている場合
 //         </h3>
@@ -439,7 +439,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //         </div>
 //       </div>
 
-//       <div className="mb-14 sm:mb-40">
+//       <div className="mb-14 w640:mb-40">
 //         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
 //           雰囲気づくりや、見た目のためにだけ置かれている場合
 //         </h3>
@@ -448,7 +448,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //         </div>
 //       </div>
 
-//       <div className="mb-14 sm:mb-40">
+//       <div className="mb-14 w640:mb-40">
 //         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">
 //           アイコンなど、特定の機能を説明する役割がある場合
 //         </h3>
@@ -475,7 +475,7 @@ export const AnAltDecisionTreeQuestion = ({ index }: { index: number }) => {
 //         </div>
 //       </div>
 
-//       <div className="mb-14 sm:mb-40">
+//       <div className="mb-14 w640:mb-40">
 //         <h3 className="p-2 px-3 text-lg font-bold rounded mb-6 bg-tertiary">ロゴや文字画像などの場合</h3>
 //         <div className="py-2 px-3">
 //           <p className="mb-6">

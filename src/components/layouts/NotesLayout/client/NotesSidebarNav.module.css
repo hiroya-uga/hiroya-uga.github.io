@@ -29,7 +29,7 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@container (width <= 23.125rem) {
+@media screen and (width <= 23.125rem) {
   .root {
     padding: 10px;
     margin: 10px;
@@ -112,7 +112,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@container (width > 23.125rem) {
+@media screen and (width > 23.125rem) {
   .root {
     --x-form-background: white;
     font-size: 0.875rem;
@@ -233,7 +233,7 @@
 }
 
 /** PC: 縦ナビのサイドバー */
-@container (width >= 40rem) {
+@media screen and (width >= 40rem) {
   .root {
     padding: 0;
   }

@@ -80,16 +80,16 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
 
   return (
     <>
-      <div className="border-secondary mb-4 mt-[calc(-1*var(--x-header-margin-bottom))] border-b border-dashed pb-6 sm:mb-7 sm:pb-9">
-        <div className="text-2xs bg-secondary rounded-md p-2 leading-snug sm:p-4 sm:text-xs">
-          <p className="mb-2 font-bold sm:mb-1.5">
+      <div className="border-secondary w640:mb-7 w640:pb-9 mb-4 mt-[calc(-1*var(--x-header-margin-bottom))] border-b border-dashed pb-6">
+        <div className="text-2xs bg-secondary w640:p-4 w640:text-xs rounded-md p-2 leading-snug">
+          <p className="w640:mb-1.5 mb-2 font-bold">
             原文：
             <a href={originalPath} hrefLang="en" className="inline-block break-all">
               {originalPath}
             </a>
           </p>
           <p>
-            <strong className="text-alert flex font-normal leading-[inherit] sm:font-bold">
+            <strong className="text-alert w640:font-bold flex font-normal leading-[inherit]">
               <span>※</span>
               <span>
                 このページは動作確認用ページです。
@@ -100,7 +100,7 @@ export default function PauljadamLayout({ children }: { children: React.ReactNod
         </div>
       </div>
 
-      <p className="mb-3.5 flex flex-wrap gap-y-2 text-sm sm:mb-4 sm:text-base">
+      <p className="w640:mb-4 w640:text-base mb-3.5 flex flex-wrap gap-y-2 text-sm">
         <span className='after:mx-2 after:content-["|"]'>
           <Link href="/documents/translations/pauljadam-modern-web-a11y-demos">
             <span className="relative mr-1 mt-1 inline-block size-3">

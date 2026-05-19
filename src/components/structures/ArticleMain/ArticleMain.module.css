@@ -36,7 +36,7 @@
 .root {
   --x-max-width: 90%;
 
-  @container (width >= 40rem) {
+  @media screen and (width >= 40rem) {
     --x-max-width: 37.5rem;
   }
 
@@ -113,16 +113,16 @@ html:has(.container) {
 
   transition: max-width 0.3s ease-out;
 
-  @container (width >= 600px) {
+  @media screen and (width >= 600px) {
     --x-negative-margin-inline: 0;
     --x-spacing-heading-bottom: 2rem;
   }
 
-  @container (min-width: 40rem) {
+  @media screen and (min-width: 40rem) {
     --x-spacing-y: 2.25rem;
   }
 
-  @container (min-width: 50rem) {
+  @media screen and (min-width: 50rem) {
     --x-list-gap-y: 0.25rem;
     --x-list-font-size: 88.8888%; /* base: 18px → 16px */
   }
@@ -175,14 +175,14 @@ html:has(.container) {
     border-bottom: 1px solid var(--border-color-secondary);
   }
 
-  @container (width >= 600px) {
+  @media screen and (width >= 600px) {
     h2,
     h3 {
       transition: margin-inline 0.3s ease-out;
     }
   }
 
-  @container (width >= 50rem) {
+  @media screen and (width >= 50rem) {
     h2 {
       font-size: 1.5rem;
     }
@@ -241,7 +241,7 @@ html:has(.container) {
     }
   }
 
-  @container (width >= 600px) {
+  @media screen and (width >= 600px) {
     p:has(customされたimg要素ˆ-ˆ) {
       transition: margin-inline 0.3s ease-out;
     }
@@ -395,7 +395,7 @@ html:has(.container) {
       color: #fff;
       background: rgb(0 0 0 / 0.7);
 
-      @container (width >= 600px) {
+      @media screen and (width >= 600px) {
         padding-inline: 0.5rem;
       }
     }

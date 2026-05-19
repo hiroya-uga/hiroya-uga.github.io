@@ -34,7 +34,7 @@ export default function Page() {
       <div className="grid min-h-dvh grid-cols-1 grid-rows-[auto_1fr_auto]">
         <GlobalHeader />
 
-        <main className="@container">
+        <main>
           <ToolsFocalLengthCheckerPage {...metadata} />
         </main>
 

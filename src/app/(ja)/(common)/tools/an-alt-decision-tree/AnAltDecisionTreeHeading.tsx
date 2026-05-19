@@ -7,11 +7,11 @@ const HeadingInnerComponent = (
   if (typeof index === 'number') {
     return (
       <h2
-        className="relative mx-auto mb-5 mt-0 flex w-fit items-center justify-center pb-16 pl-8 pr-6 pt-9 text-lg before:pointer-events-none before:absolute before:inset-0 before:bg-[url(/tools/an-alt-decision-tree/e0880_1.svg)] before:bg-cover before:bg-no-repeat sm:w-full sm:max-w-[80%] sm:text-center sm:text-2xl dark:before:invert"
+        className="w640:w-full w640:max-w-[80%] w640:text-center w640:text-2xl relative mx-auto mb-5 mt-0 flex w-fit items-center justify-center pb-16 pl-8 pr-6 pt-9 text-lg before:pointer-events-none before:absolute before:inset-0 before:bg-[url(/tools/an-alt-decision-tree/e0880_1.svg)] before:bg-cover before:bg-no-repeat dark:before:invert"
         ref={ref}
         tabIndex={-1}
       >
-        <span className="bg-tertiary mr-3 grid aspect-square h-10 place-items-center rounded-md p-1 leading-none sm:mr-4 sm:h-12">
+        <span className="bg-tertiary w640:mr-4 w640:h-12 mr-3 grid aspect-square h-10 place-items-center rounded-md p-1 leading-none">
           Q{index + 1}
         </span>
         <strong className="font-normal">{children}</strong>
@@ -20,7 +20,7 @@ const HeadingInnerComponent = (
   }
 
   return (
-    <h2 className="mb-9 mt-0 text-center text-xl sm:text-2xl" ref={ref} tabIndex={-1}>
+    <h2 className="w640:text-2xl mb-9 mt-0 text-center text-xl" ref={ref} tabIndex={-1}>
       {children}
     </h2>
   );

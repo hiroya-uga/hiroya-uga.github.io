@@ -6,7 +6,7 @@ import clsx from 'clsx';
 export const ExternalMediaSection = () => {
   return (
     <>
-      <h2 className="@w640:text-2xl text-xl font-bold tracking-wide">External Media</h2>
+      <h2 className="w640:text-2xl text-xl font-bold tracking-wide">External Media</h2>
 
       <p className="mb-11">{getMetadata('/documents/media').description}</p>
 
@@ -21,10 +21,10 @@ export const ExternalMediaSection = () => {
           {externalMediaLinkList.slice(0, 3).map(({ date, title, href }, index) => {
             return (
               <tr key={href} className="leading-6">
-                <td className="@w640:pr-4 @w640:text-sm leading-inherit pr-2 font-mono text-xs">
+                <td className="w640:pr-4 w640:text-sm leading-inherit pr-2 font-mono text-xs">
                   <span className="inline-block">{date}</span>
                 </td>
-                <td className={clsx([index !== 2 && '@w640:pb-4 pb-3', '@w640:text-base leading-inherit text-sm'])}>
+                <td className={clsx([index !== 2 && 'w640:pb-4 pb-3', 'w640:text-base leading-inherit text-sm'])}>
                   <a href={href} className="break-all">
                     {title}
                   </a>
@@ -37,7 +37,7 @@ export const ExternalMediaSection = () => {
         </tbody>
       </table>
 
-      <p className="@w640:mt-6.5 @w640:place-items-end mt-4 grid place-items-center">
+      <p className="w640:mt-6.5 w640:place-items-end mt-4 grid place-items-center">
         <Button href="/documents/media/">外部メディアリンク一覧を見る</Button>
       </p>
     </>

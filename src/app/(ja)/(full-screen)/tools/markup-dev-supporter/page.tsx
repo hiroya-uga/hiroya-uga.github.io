@@ -11,9 +11,9 @@ export const metadata = getMetadata('/tools/markup-dev-supporter');
 export default function Page() {
   return (
     <div className={clsx([styles.page, 'grid grid-cols-1 grid-rows-[auto_1fr_auto] bg-[#222] text-white'])}>
-      <header className="sm:pr-(--navigation-width) sm:pt-1px flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c] sm:gap-1 sm:px-2">
+      <header className="w640:pr-(--navigation-width) w640:pt-1px w640:gap-1 w640:px-2 flex items-center border-b border-black bg-[#333] text-xs leading-none text-[#9c9c9c]">
         <p>
-          <Link href="../" className="grid size-8 place-items-center rounded-full sm:size-6">
+          <Link href="../" className="w640:size-6 grid size-8 place-items-center rounded-full">
             <svg
               role="img"
               aria-label="戻る"
@@ -36,12 +36,12 @@ export default function Page() {
             </svg>
           </Link>
         </p>
-        <h1 className="sm:pt-px">{metadata.pageTitle}</h1>
+        <h1 className="w640:pt-px">{metadata.pageTitle}</h1>
       </header>
-      <main className="sm:pr-(--navigation-width) relative grid">
+      <main className="w640:pr-(--navigation-width) relative grid">
         <TableDevSupporterContent />
       </main>
-      <footer className="border-t border-black bg-[#333] px-2 pb-px text-center text-xs text-[#9c9c9c] sm:pr-[calc(var(--navigation-width)+0.75rem)] sm:text-right">
+      <footer className="w640:pr-[calc(var(--navigation-width)+0.75rem)] w640:text-right border-t border-black bg-[#333] px-2 pb-px text-center text-xs text-[#9c9c9c]">
         <p>
           <small className="text-[100%]">
             &copy;{' '}

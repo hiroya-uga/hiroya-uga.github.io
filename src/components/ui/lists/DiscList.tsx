@@ -8,7 +8,7 @@ export const DiscList = ({ list }: Readonly<Props>) => {
   }
 
   return (
-    <ul className="space-y-1 pl-1.5 sm:pl-2.5">
+    <ul className="w640:pl-2.5 space-y-1 pl-1.5">
       {list.map((item) => {
         const key = typeof item === 'string' ? item : item.key;
         const value = typeof item === 'string' ? item : item.value;

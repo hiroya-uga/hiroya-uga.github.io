@@ -125,7 +125,8 @@
     display: block !important;
   }
 
-  @media screen and (min-width: 640px) {
+  /* 640px */
+  @media screen and (min-width: 40rem) {
     :root {
       --x-spacing-content-inline: min(1.5rem, 24px);
       --x-spacing-share-buttons: 8rem;
@@ -134,7 +135,8 @@
     }
   }
 
-  @media screen and (min-width: 1024px) {
+  /* 1024px */
+  @media screen and (min-width: 64rem) {
     :root {
       --x-spacing-content-inline: min(3rem, 48px);
     }
@@ -148,19 +150,43 @@
 }
 
 @theme {
-  --breakpoint-w500: 500px;
-  --breakpoint-w700: 700px;
-  --breakpoint-w800: 800px;
-  --breakpoint-xs: 400px;
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
+  --breakpoint-w320: 20rem;
+  --breakpoint-w400: 25rem;
+  --breakpoint-w500: 31.25rem;
+  --breakpoint-w640: 40rem;
+  --breakpoint-w640px: 640px;
+  --breakpoint-w700: 43.75rem;
+  --breakpoint-w768: 48rem;
+  --breakpoint-w800: 50rem;
+  --breakpoint-w800px: 800px;
+  --breakpoint-w976: 61rem;
+  --breakpoint-w1024: 64rem;
+  --breakpoint-w1280: 80rem;
+  --breakpoint-w1520: 95rem;
 
   --container-content: 60rem; /* 960px */
 
+  --container-w120: 7.5rem;
+  --container-w140: 8.75rem;
+  --container-w160: 1rem;
+  --container-w200: 12.5rem;
+  --container-w240: 15rem;
+  --container-w280: 17.5rem;
+  --container-w320: 20rem;
+  --container-w360: 22.5rem;
+  --container-w400: 25rem;
+  --container-w640: 40rem;
+  --container-w700: 43.75rem;
+  --container-w768: 48rem;
+  --container-w800: 50rem;
+  --container-w800px: 800px;
+  --container-w1024: 64rem;
+  --container-w1280: 80rem;
+  --container-w1520: 95rem;
+
   --text-*: initial;
+  --text-10px: 0.625rem;
+  --text-12px: 0.75rem;
   --text-2xs: 0.625rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -210,20 +236,6 @@
   --transition-property-fade: opacity, visibility;
   --transition-property-bg: background-color;
   --default-transition-duration: 0.3s;
-
-  --container-w1520: 95rem;
-  --container-w1280: 80rem;
-  --container-w1024: 64rem;
-  --container-w976: 61rem;
-  --container-w800px: 800px;
-  --container-w800: 50rem;
-  --container-w768: 48rem;
-  --container-w700: 43.75rem;
-  --container-w640: 40rem;
-  --container-w500: 31.25rem;
-  --container-w400: 25rem;
-  --container-w360: 22.5rem;
-  --container-w350: 21.875rem;
 
   /* new */
   --color-primary: var(--x-color-text-primary);

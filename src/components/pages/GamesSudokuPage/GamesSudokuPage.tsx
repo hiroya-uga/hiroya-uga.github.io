@@ -33,9 +33,7 @@ export const GamesSudokuPage = ({ metadata }: Readonly<Props>) => {
         </div>
       </PageTitle>
 
-      <div className="@container">
-        <SudokuClient />
-      </div>
+      <SudokuClient />
 
       <Heading level={2} id={'anchor-遊び方'}>
         遊び方

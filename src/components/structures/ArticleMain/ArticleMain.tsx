@@ -47,26 +47,26 @@ export const ArticleMain = async ({ post }: Props) => {
 
   return (
     <article className={styles.root}>
-      <div className={clsx(styles.hero, '@w640:px-content-inline @w1520:pl-10 @w640:mb-14 @w640:mt-8 mb-8 px-2')}>
+      <div className={clsx(styles.hero, 'w640:px-content-inline w1520:pl-10 w640:mb-14 w640:mt-8 mb-8 px-2')}>
         <div
           className={clsx([
             'mx-auto text-center',
-            hasTags === true && '@w640:pt-20 pt-12',
-            hasTags === false && '@w640:py-20 py-12',
+            hasTags === true && 'w640:pt-20 pt-12',
+            hasTags === false && 'w640:py-20 py-12',
           ])}
         >
           <h1
             className={clsx([
               styles.h1,
-              'wrap-anywhere @w640:text-4xl text-2xl',
-              post.meta.title?.endsWith('。') && '@w800:pl-[0.5em]',
+              'wrap-anywhere w640:text-4xl text-2xl',
+              post.meta.title?.endsWith('。') && 'w800:pl-[0.5em]',
             ])}
           >
             {post.meta.title?.split('\n').map((title, index) => {
               const key = `${title}-${index}`;
 
               return (
-                <span key={key} className="@w400:inline-block @w400:whitespace-pre-wrap">
+                <span key={key} className="w400:inline-block w400:whitespace-pre-wrap">
                   {/* {title.split('`').map((part, partIndex) => {
                       if (part === '') {
                         return null;
@@ -86,7 +86,7 @@ export const ArticleMain = async ({ post }: Props) => {
           <ArticleInformation publishedAt={post.meta.publishedAt} updatedAt={post.meta.updatedAt} />
         </div>
         {hasTags && (
-          <div className="@w640:mt-13.5 mt-5 flex flex-wrap justify-end pb-1 text-right text-xs">
+          <div className="w640:mt-13.5 mt-5 flex flex-wrap justify-end pb-1 text-right text-xs">
             {/* <p>この記事のテーマ：</p> */}
             <ul className="text-secondary flex flex-wrap justify-end gap-2">
               {post.meta.topics?.map((tag: string) => (
@@ -99,11 +99,11 @@ export const ArticleMain = async ({ post }: Props) => {
         )}
       </div>
 
-      <div className="px-content-inline @w1024:pl-10">
+      <div className="px-content-inline w1024:pl-10">
         <div
           className={clsx([
             'max-w-(--x-max-width) mx-auto',
-            hasToc && '@w1280:max-w-none @w1280:grid @w1280:grid-cols-[1fr_var(--x-max-width)_1fr]',
+            hasToc && 'w1280:max-w-none w1280:grid w1280:grid-cols-[1fr_var(--x-max-width)_1fr]',
           ])}
         >
           {hasToc && <ArticleTOC toc={post.toc} />}
@@ -111,8 +111,8 @@ export const ArticleMain = async ({ post }: Props) => {
             id={ARTICLE_MAIN_ID}
             className={clsx(
               styles.container,
-              '@w800:text-lg',
-              hasToc && '@w1280:col-start-2 @w1280:col-end-3 @w1280:row-start-1 @w1280:row-end-2',
+              'w800:text-lg',
+              hasToc && 'w1280:col-start-2 w1280:col-end-3 w1280:row-start-1 w1280:row-end-2',
             )}
           >
             <div

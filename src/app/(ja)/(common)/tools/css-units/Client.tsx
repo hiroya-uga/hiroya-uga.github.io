@@ -178,8 +178,8 @@ const Line = ({
         key={unit}
         className={clsx([
           shouldShowDescriptions ? 'mt-6' : 'mt-4',
-          'z-1 sticky -left-2 mb-2 pl-2 text-sm leading-snug sm:text-lg',
-          'sm:mt-6',
+          'z-1 w640:text-lg sticky -left-2 mb-2 pl-2 text-sm leading-snug',
+          'w640:mt-6',
           unit === 'px' && 'font-bold',
         ])}
       >
@@ -194,7 +194,7 @@ const Line = ({
         ref={ref}
         className={clsx([
           'pointer-events-none relative z-0 -mt-8 mr-8 block overflow-hidden border-b border-dashed border-black pt-7 before:absolute before:inset-0 before:bg-blue-900 before:opacity-20 dark:text-white dark:before:bg-[#ffdccc] dark:before:opacity-20',
-          'sm:-mt-10 sm:pt-9',
+          'w640:pt-9 w640:-mt-10',
           'after:z-2 after:absolute after:right-0 after:top-0 after:block after:h-full after:border-r after:border-dashed after:border-black',
         ])}
         style={{
@@ -207,8 +207,8 @@ const Line = ({
         hidden={!shouldShowDescriptions}
         className={clsx(shouldShowDescriptions && 'sticky left-0')}
       >
-        <p className="w-full pr-2 pt-1 text-xs sm:pb-4 sm:pt-2 sm:text-base">{description}</p>
-        {note && <p className="block text-xs sm:pt-1 sm:text-sm">{note}</p>}
+        <p className="w640:pb-4 w640:pt-2 w640:text-base w-full pr-2 pt-1 text-xs">{description}</p>
+        {note && <p className="w640:pt-1 w640:text-sm block text-xs">{note}</p>}
       </div>
     </>
   );
@@ -297,8 +297,8 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="shadow-sticky bg-secondary border-secondary sticky top-2 z-10 mb-4 rounded-md border border-solid p-2 sm:flex sm:items-center sm:justify-between sm:gap-x-8 sm:px-4">
-        <p className="text-secondary text-xs sm:text-inherit">サンプルは横スクロールできます。</p>
+      <div className="shadow-sticky bg-secondary border-secondary w640:flex w640:items-center w640:justify-between w640:gap-x-8 w640:px-4 sticky top-2 z-10 mb-4 rounded-md border border-solid p-2">
+        <p className="text-secondary w640:text-inherit text-xs">サンプルは横スクロールできます。</p>
         <p>
           <label className="flex items-center justify-between gap-2 text-sm">
             <span>説明文を表示する</span>
@@ -325,7 +325,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
           className="scroll-hint-x overflow-x-auto overflow-y-hidden p-4 before:absolute before:inset-0 before:-z-10 before:size-full before:rounded-md"
           tabIndex={0}
         >
-          <h2 className="sticky left-0 m-0 mb-2 text-lg font-bold sm:text-2xl">絶対値</h2>
+          <h2 className="w640:text-2xl sticky left-0 m-0 mb-2 text-lg font-bold">絶対値</h2>
 
           {Object.entries(ABSOLUTE).map(([unit, description]) => {
             return (
@@ -340,28 +340,28 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             );
           })}
 
-          <h2 className="sticky left-0 m-0 mt-12 text-lg font-bold sm:mb-2 sm:text-2xl">相対値</h2>
+          <h2 className="w640:mb-2 w640:text-2xl sticky left-0 m-0 mt-12 text-lg font-bold">相対値</h2>
 
-          <dl className="sticky left-0 mb-2 grid-cols-[auto_1fr] gap-x-4 text-xs sm:grid sm:gap-y-1 sm:text-base">
+          <dl className="w640:grid w640:gap-y-1 w640:text-base sticky left-0 mb-2 grid-cols-[auto_1fr] gap-x-4 text-xs">
             <div className="flex items-end">
               <dt className="mr-1 leading-snug after:content-[':']">サンプルの文字サイズ</dt>
-              <dd className="text-sm leading-snug sm:text-lg" ref={lineRef}>
+              <dd className="w640:text-lg text-sm leading-snug" ref={lineRef}>
                 {em}
               </dd>
             </div>
             <div className="flex items-end">
               <dt className="mr-1 leading-snug after:content-[':']">サンプルの行の高さ</dt>
-              <dd className="text-sm leading-snug sm:text-lg">{lh}</dd>
+              <dd className="w640:text-lg text-sm leading-snug">{lh}</dd>
             </div>
 
             <div className="flex items-end">
               <dt className="mr-1 leading-snug after:content-[':']">ルート要素の文字サイズ</dt>
-              <dd className="text-sm leading-snug sm:text-lg">{rem}</dd>
+              <dd className="w640:text-lg text-sm leading-snug">{rem}</dd>
             </div>
 
             <div className="flex grow items-end">
               <dt className="mr-1 leading-snug after:content-[':']">ルート要素の行の高さ</dt>
-              <dd className="text-sm leading-snug sm:text-lg">{rlh}</dd>
+              <dd className="w640:text-lg text-sm leading-snug">{rlh}</dd>
             </div>
           </dl>
 
@@ -378,7 +378,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             );
           })}
 
-          <h3 className="sticky left-0 mt-8 text-lg sm:mb-2 sm:mt-10 sm:text-2xl">
+          <h3 className="w640:mb-2 w640:mt-10 w640:text-2xl sticky left-0 mt-8 text-lg">
             Viewport
             <span className="pointer-events-none relative block size-0 overflow-hidden">
               <span className="absolute h-screen w-screen" ref={vRef}></span>
@@ -388,22 +388,22 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
             </span>
           </h3>
 
-          <dl className="sticky left-0 mb-2 text-sm sm:text-base">
-            <div className="flex items-center sm:items-stretch">
-              <dt className="mr-1 after:content-[':'] sm:mr-2">Viewport</dt>
-              <dd className="leading-snug sm:text-lg">{viewport}</dd>
+          <dl className="w640:text-base sticky left-0 mb-2 text-sm">
+            <div className="w640:items-stretch flex items-center">
+              <dt className="w640:mr-2 mr-1 after:content-[':']">Viewport</dt>
+              <dd className="w640:text-lg leading-snug">{viewport}</dd>
             </div>
-            <div className="flex items-center sm:items-stretch">
-              <dt className="mr-1 after:content-[':'] sm:mr-2">Small Viewport</dt>
-              <dd className="leading-snug sm:text-lg">{smallViewport}</dd>
+            <div className="w640:items-stretch flex items-center">
+              <dt className="w640:mr-2 mr-1 after:content-[':']">Small Viewport</dt>
+              <dd className="w640:text-lg leading-snug">{smallViewport}</dd>
             </div>
-            <div className="flex items-center sm:items-stretch">
-              <dt className="mr-1 after:content-[':'] sm:mr-2">Large Viewport</dt>
-              <dd className="leading-snug sm:text-lg">{largeViewport}</dd>
+            <div className="w640:items-stretch flex items-center">
+              <dt className="w640:mr-2 mr-1 after:content-[':']">Large Viewport</dt>
+              <dd className="w640:text-lg leading-snug">{largeViewport}</dd>
             </div>
-            <div className="flex items-center sm:items-stretch">
-              <dt className="mr-1 after:content-[':'] sm:mr-2">Dynamic Viewport</dt>
-              <dd className="leading-snug sm:text-lg">{dynamicViewport}</dd>
+            <div className="w640:items-stretch flex items-center">
+              <dt className="w640:mr-2 mr-1 after:content-[':']">Dynamic Viewport</dt>
+              <dd className="w640:text-lg leading-snug">{dynamicViewport}</dd>
             </div>
           </dl>
 
@@ -423,8 +423,8 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
         </div>
       </div>
 
-      <div className="shadow-sticky bg-secondary border-secondary sticky bottom-6 z-10 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded-md border py-2 pl-4 pr-3">
-        <p className="min-w-200px grow">
+      <div className="shadow-sticky bg-secondary border-secondary pl-16PX pr-12PX sticky bottom-6 z-10 mt-10 flex flex-wrap items-center justify-end gap-x-3 rounded-md border py-2">
+        <p className="grow">
           <input
             type="range"
             value={value}
@@ -450,7 +450,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 min={0}
                 max={200}
                 value={value}
-                className="outline-hidden block w-full pr-2 text-right"
+                className="outline-hidden pr-8PX block w-full pb-1 pt-1.5 text-right"
                 onChange={({ currentTarget }) => {
                   const currentValue = Number(currentTarget.value);
 

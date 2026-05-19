@@ -102,31 +102,33 @@ export const CodeBlock = ({ code, className, language = 'html', nowrap, ...restP
     return (
       <figure
         className={clsx([
+          '@container',
           restProps.withPlatformSwitcher ||
             'overflow-hidden rounded-lg border border-slate-200 shadow-sm dark:border-slate-700',
         ])}
       >
         <figcaption
           className={clsx([
-            'grid gap-1.5 rounded-t-lg border-b border-slate-200 bg-slate-100 px-3 dark:border-slate-700 dark:bg-slate-800',
+            '@w240:grid @w240:gap-1.5 rounded-t-lg border-b border-slate-200 bg-slate-100 px-3 dark:border-slate-700 dark:bg-slate-800',
 
-            restProps.withPlatformSwitcher && 'grid-cols-[1fr_auto] pt-2',
+            restProps.withPlatformSwitcher && '@w240:grid-cols-[1fr_auto] pt-2',
             restProps.withPlatformSwitcher ||
-              'grid-cols-[auto_1fr_auto] items-center py-2.5 before:inline-block before:size-3 before:rounded-full before:bg-red-400',
+              '@w240:grid-cols-[.75rem_1fr_auto] @w240:items-center @w240:before:inline-block @w240:before:size-3 @w240:before:rounded-full @w240:before:bg-red-400 py-2.5',
           ])}
         >
           <span
             className={clsx([
+              '@w240:mb-0 mb-2 block',
               restProps.withPlatformSwitcher && 'pb-8px',
               restProps.withPlatformSwitcher ||
-                'flex items-center gap-1.5 before:inline-block before:size-3 before:rounded-full before:bg-yellow-400',
+                '@w240:grid @w240:grid-cols-[.75rem_1fr] @w240:items-center @w240:gap-1.5 @w240:before:inline-block @w240:before:size-3 @w240:before:rounded-full @w240:before:bg-yellow-400',
             ])}
           >
             <span
               className={clsx([
                 'text-xs text-[#4a535f] dark:text-[#9eb4da]',
                 restProps.withPlatformSwitcher ||
-                  'flex items-center gap-2 before:inline-block before:size-3 before:rounded-full before:bg-green-400',
+                  '@w240:grid @w240:grid-cols-[.75rem_1fr] @w240:items-center @w240:gap-2 @w240:before:inline-block @w240:before:size-3 @w240:before:rounded-full @w240:before:bg-green-400',
               ])}
               id={id}
             >

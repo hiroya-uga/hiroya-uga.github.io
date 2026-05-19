@@ -3,7 +3,7 @@ import Script from 'next/script';
 
 export const Doumei = () => {
   return (
-    <ul className="flex flex-wrap items-end gap-x-3 gap-y-4 sm:gap-y-3">
+    <ul className="w640:gap-y-3 flex flex-wrap items-end gap-x-3 gap-y-4">
       <li>
         <div id="web1_0">
           <Script

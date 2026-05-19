@@ -88,7 +88,7 @@ export const StepViewer = ({
       <div className="border-primary bg-secondary mt-3.5 flex items-center justify-center rounded-xl border px-6 py-8 text-center">
         <p
           aria-live="polite"
-          className="font-emoji min-h-lh @w640:text-8xl whitespace-pre-line break-all text-7xl leading-tight"
+          className="font-emoji min-h-lh w640:text-8xl whitespace-pre-line break-all text-7xl leading-tight"
         >
           {totalSteps > 0 && (
             <>
@@ -110,7 +110,7 @@ export const StepViewer = ({
       </div>
 
       <div>
-        <ul className="@w640:gap-x-19PX gap-x-33PX @w640:justify-start mt-12 flex flex-wrap justify-start gap-y-1.5">
+        <ul className="w640:gap-x-19PX gap-x-33PX w640:justify-start mt-12 flex flex-wrap justify-start gap-y-1.5 contain-layout">
           {inputCodepoints.map((char, index) => {
             const codePoint = char.codePointAt(0) ?? 0;
             const hex = toHex(codePoint);
@@ -121,7 +121,7 @@ export const StepViewer = ({
 
             return (
               <li key={`${index}-${codePoint}`} className="group flex flex-col gap-1.5">
-                <div className="after:w-33PX @w640:after:w-19PX @w640:after:text-[11px] relative flex grow after:absolute after:bottom-0 after:left-full after:top-0 after:my-auto after:grid after:place-items-center after:text-[17px] after:content-['+'] group-last:after:hidden">
+                <div className="after:w-33PX w640:after:w-19PX w640:after:text-[11px] relative flex grow after:absolute after:bottom-0 after:left-full after:top-0 after:my-auto after:grid after:place-items-center after:text-[17px] after:content-['+'] group-last:after:hidden">
                   <button
                     type="button"
                     aria-label={t.stepAria(index + 1, hex)}
@@ -176,9 +176,9 @@ export const StepViewer = ({
           })}
         </ul>
 
-        <div className="shadow-sticky sticky bottom-4 mt-6">
+        <div className="sticky bottom-4 mt-6">
           {currentStepMeta !== undefined && (
-            <section className="border-primary px-12PX scroll-hint-y max-h-[20vh] overflow-auto rounded-lg border py-3">
+            <section className="shadow-sticky border-primary px-12PX scroll-hint-y max-h-[20vh] overflow-auto rounded-lg border py-3">
               <h3 className="mb-2 text-sm font-bold">{`💡 ${currentStepMeta.noteSubject} (${toHex(currentStepCodepoint)})`}</h3>
               <div className="text-xs">
                 <p aria-live="polite">{currentStepMeta.note}</p>
@@ -192,7 +192,7 @@ export const StepViewer = ({
               aria-label={t.navLabel}
               className="mx-auto mt-4 flex w-fit flex-wrap justify-center gap-x-1 gap-y-2"
             >
-              <p className="bg-primary rounded-full">
+              <p className="bg-primary shadow-sticky rounded-full">
                 <button
                   type="button"
                   className="bg-secondary px-8PX grid aspect-square shrink-0 place-items-center rounded-full border-2 text-sm font-bold disabled:opacity-40"
@@ -202,12 +202,12 @@ export const StepViewer = ({
                   Prev
                 </button>
               </p>
-              <p className="text-secondary bg-primary grid place-items-center rounded-md px-1 text-sm">
+              <p className="text-secondary bg-primary shadow-sticky grid place-items-center rounded-md px-1 text-sm">
                 <span>
                   {clampedStep + 1} / {totalSteps}
                 </span>
               </p>
-              <p className="bg-primary rounded-full">
+              <p className="bg-primary shadow-sticky rounded-full">
                 <button
                   type="button"
                   className="bg-secondary px-8PX grid aspect-square shrink-0 place-items-center rounded-full border-2 text-sm font-bold disabled:opacity-40"

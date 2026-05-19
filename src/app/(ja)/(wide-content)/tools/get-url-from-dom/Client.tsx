@@ -376,12 +376,12 @@ export const GetUrlFromDOMContent = () => {
   }, [duplicateType, exportResult, filterType, formatType, sortType]);
 
   return (
-    <div className="border border-slate-400 sm:grid md:h-[80dvh] md:grid-cols-3">
+    <div className="w768:h-[80dvh] w768:grid-cols-3 w640:grid border border-slate-400">
       <div
         className={clsx([
           "scroll-hint-y bg-secondary relative h-[30dvh] overflow-auto p-2 pt-0 before:pointer-events-none before:absolute before:inset-0 before:top-5 before:m-auto before:size-full before:max-h-16 before:max-w-56 before:place-items-center before:rounded-md before:bg-[pink] before:text-sm before:text-[#333] before:content-['ここに貼り付けてください']",
           isEdited ? 'before:hidden' : 'before:grid',
-          'md:h-auto',
+          'w768:h-auto',
         ])}
       >
         <div className="bg-secondary/90 sticky -left-2 top-0 z-10 -mx-2 mb-0.5 flex justify-between p-4 text-sm font-bold">
@@ -405,7 +405,7 @@ export const GetUrlFromDOMContent = () => {
         </div>
         <div ref={editAreaContainerRef}></div>
       </div>
-      <div className="space-y-paragraph scroll-hint-y h-[30dvh] overflow-auto border-y border-slate-400 p-4 md:h-auto md:border-x md:border-y-0">
+      <div className="space-y-paragraph scroll-hint-y w768:h-auto w768:border-x w768:border-y-0 h-[30dvh] overflow-auto border-y border-slate-400 p-4">
         <fieldset>
           <legend className="text-sm font-bold">フィルタ</legend>
           <ul className="space-y-2 p-2">

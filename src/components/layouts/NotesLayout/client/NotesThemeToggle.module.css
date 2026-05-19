@@ -1,5 +1,5 @@
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@container (width <= 23.125rem) {
+@media screen and (width <= 23.125rem) {
   .root {
     &::before {
       content: "ﾀﾞｰｸﾓｰﾄﾞ";

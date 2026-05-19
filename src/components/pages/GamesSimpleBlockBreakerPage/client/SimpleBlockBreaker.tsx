@@ -518,8 +518,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         </button>
       </p>
 
-      <div className="@container px-2">
-        <fieldset className="@w640:pl-0 max-w-w640 relative mx-auto pl-4">
+      <div className="px-2">
+        <fieldset className="w640:pl-0 max-w-w640 @container relative mx-auto pl-4">
           <legend className="mb-3 text-sm font-bold">設定</legend>
 
           <p className="absolute right-0 top-0"></p>
@@ -540,7 +540,10 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
             ).map(({ key, label, min, max }) => {
               const inputKey = `${id}-${key}`;
               return (
-                <p key={key} className="col-start-1 col-end-4 grid grid-cols-subgrid">
+                <p
+                  key={key}
+                  className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2"
+                >
                   <label
                     htmlFor={inputKey}
                     id={`${inputKey}-label`}
@@ -555,7 +558,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                     min={min}
                     defaultValue={DEFAULT_BLOCK_SETTING[key]}
                     max={max}
-                    className="col-start-2 row-start-1 min-h-8"
+                    className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                     onChange={(e) => {
                       const newSize = Number.parseInt(e.target.value, 10);
                       if (paddle.current) {
@@ -575,7 +578,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                       initBlocks();
                     }}
                   />
-                  <span className="col-start-3 row-start-1 content-center">
+                  <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                     <input
                       inputMode="decimal"
                       aria-labelledby={`${inputKey}-label`}
@@ -589,7 +592,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               );
             })}
 
-            <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
+            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-paddle-width`}
                 id={`${id}-paddle-width-label`}
@@ -604,7 +607,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_PADDLE_WIDTH}
                 max={1000}
-                className="col-start-2 row-start-1 min-h-8"
+                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newSize = Number.parseInt(e.target.value, 10);
                   if (paddle.current) {
@@ -618,7 +621,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, newSize.toString());
                 }}
               />
-              <span className="col-start-3 row-start-1 content-center">
+              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-paddle-width-label`}
@@ -630,7 +633,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               </span>
             </p>
 
-            <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
+            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-radius`}
                 id={`${id}-ball-radius-label`}
@@ -645,7 +648,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_BALL_RADIUS}
                 max={100}
-                className="col-start-2 row-start-1 min-h-8"
+                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newSize = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
@@ -662,7 +665,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
                 }}
               />
-              <span className="col-start-3 row-start-1 content-center">
+              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-radius-label`}
@@ -673,7 +676,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 />
               </span>
             </p>
-            <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
+            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-speed`}
                 id={`${id}-ball-speed-label`}
@@ -688,7 +691,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_BALL_SPEED}
                 max={10}
-                className="col-start-2 row-start-1 min-h-8"
+                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newSize = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
@@ -701,7 +704,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, newSize.toString());
                 }}
               />
-              <span className="col-start-3 row-start-1 content-center">
+              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-speed-label`}
@@ -712,7 +715,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 />
               </span>
             </p>
-            <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
+            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-acceleration`}
                 id={`${id}-ball-acceleration-label`}
@@ -728,7 +731,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 step={0.01}
                 defaultValue={DEFAULT_BALL_ACCELERATION}
                 max={0.15}
-                className="col-start-2 row-start-1 min-h-8"
+                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newSize = Number(e.target.value);
                   if (ball.current) {
@@ -755,7 +758,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, textContent);
                 }}
               />
-              <span className="col-start-3 row-start-1 content-center">
+              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-acceleration-label`}
@@ -782,11 +785,11 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               </span>
             </p>
 
-            <p className="col-start-1 col-end-4 grid grid-cols-subgrid">
+            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label htmlFor={`${id}-ball-path-through`} className="col-start-1 row-start-1 content-center pr-2">
                 ボールが貫通
               </label>
-              <span className="col-start-2 col-end-4">
+              <span className="@w360:col-end-4 col-start-2 row-start-1 content-center">
                 <Switch
                   disabled={running}
                   id={`${id}-ball-path-through`}

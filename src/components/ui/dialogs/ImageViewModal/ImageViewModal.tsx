@@ -61,7 +61,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
       aria-label="画像ビューア"
       aria-modal="true"
       closedby="closerequest"
-      className="@container fixed inset-0 m-0 grid h-dvh max-h-none w-dvw max-w-none grid-rows-[auto_1fr_auto] bg-black/85 p-0 text-white backdrop:opacity-0"
+      className="fixed inset-0 m-0 grid h-dvh max-h-none w-dvw max-w-none grid-rows-[auto_1fr_auto] bg-black/85 p-0 text-white backdrop:opacity-0"
       onClick={(e) => {
         // dialog要素が全画面を覆い尽くすのでユーザは backdrop に触れないため onClick イベントハンドラを用意する。
         e.preventDefault();
@@ -137,7 +137,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
       </div>
 
       <div
-        className="p-8PX pb-16PX min-h-140px @w640:min-h-0 grid items-end text-center text-sm"
+        className="p-8PX pb-16PX min-h-140px w640:min-h-0 grid items-end text-center text-sm"
         aria-live="polite"
         aria-atomic="true"
         id={id}

@@ -23,19 +23,19 @@ export const OnetimePanel = ({ formState, setFormState }: Props) => (
     <TimeField value={formState.time} handleChange={(time) => setFormState((prev) => ({ ...prev, time }))} />
     <NoteBox headingLevel={2} title="手書きの際、こんな相対表現も使えます">
       <dl>
-        <div className="@w640:flex @w640:gap-2">
+        <div className="w640:flex w640:gap-2">
           <dt>次の金曜日</dt>
           <dd className='before:mr-2 before:content-["-"]'>
             <code>next Friday</code>
           </dd>
         </div>
-        <div className="@w640:flex @w640:gap-2">
+        <div className="w640:flex w640:gap-2">
           <dt>30分後</dt>
           <dd className='before:mr-2 before:content-["-"]'>
             <code>in 30 minutes </code>
           </dd>
         </div>
-        <div className="@w640:flex @w640:gap-2">
+        <div className="w640:flex w640:gap-2">
           <dt>今月の最終日</dt>
           <dd className='before:mr-2 before:content-["-"]'>
             <code>on the last day of this month</code>

@@ -29,8 +29,8 @@ export const ColorInputSection = ({
   const t = i18n[lang];
 
   return (
-    <div className="@w640:grid @w640:grid-cols-[1fr_auto_1fr] @w640:items-end @w640:gap-4 mb-14">
-      <div className="@w640:mb-0 mb-6">
+    <div className="@w400:grid @w400:grid-cols-[1fr_auto_1fr] @w400:items-end @w400:gap-4 mb-14">
+      <div className="@w400:mb-0 mb-6">
         <ColorInput
           id={idList?.foreground ?? `${id}-foreground`}
           label={t.fgLabel}
@@ -39,7 +39,7 @@ export const ColorInputSection = ({
         />
       </div>
 
-      <p className="@w640:pb-[0.3125rem] grid place-items-center">
+      <p className="@w400:pb-[0.3125rem] grid place-items-center">
         <button
           type="button"
           className="border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg grid h-10 w-10 place-items-center rounded-full border"
@@ -60,11 +60,11 @@ export const ColorInputSection = ({
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M7 16V4m0 0L3 8m4-4 4 4" className="@w640:hidden" />
-            <path d="M17 8v12m0 0 4-4m-4 4-4-4" className="@w640:hidden" />
+            <path d="M7 16V4m0 0L3 8m4-4 4 4" className="@w400:hidden" />
+            <path d="M17 8v12m0 0 4-4m-4 4-4-4" className="@w400:hidden" />
 
-            <path d="M4 8H20m-4-4 4 4-4 4" className="@w640:block hidden" />
-            <path d="M20 16H4m4-4-4 4 4 4" className="@w640:block hidden" />
+            <path d="M4 8H20m-4-4 4 4-4 4" className="@w400:block hidden" />
+            <path d="M20 16H4m4-4-4 4 4 4" className="@w400:block hidden" />
           </svg>
         </button>
       </p>

@@ -406,11 +406,11 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </Details>
       </div>
 
-      <div className="gap-6 lg:flex lg:h-min">
-        <div className="lg:min-w-375px lg:max-w-375px relative">
+      <div className="w1024:flex w1024:h-min gap-6">
+        <div className="w1024:min-w-375px w1024:max-w-375px relative">
           <form
             ref={ref}
-            className="border-secondary max-h-[30vh] overflow-y-scroll overscroll-contain border border-solid p-4 pb-8 lg:absolute lg:left-0 lg:top-0 lg:h-full lg:max-h-none"
+            className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none max-h-[30vh] overflow-y-scroll overscroll-contain border border-solid p-4 pb-8"
             id="container"
             role="group"
             aria-labelledby={`${id}-title`}
@@ -541,7 +541,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </div>
 
         <section>
-          <h2 className="mb-2 block w-fit font-bold lg:mt-0">
+          <h2 className="w1024:mt-0 mb-2 block w-fit font-bold">
             <strong id={`${id}-log-title`}>ログ</strong>（最大300行）
           </h2>
 
@@ -549,11 +549,11 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
 
           <div
-            className="bg-tertiary h-[30vh] overflow-y-scroll overscroll-contain py-2 sm:h-[50vh]"
+            className="bg-tertiary w640:h-[50vh] h-[30vh] overflow-y-scroll overscroll-contain py-2"
             aria-labelledby={`${id}-log-title`}
           >
             <div
-              className="grid grid-cols-[auto_auto_1fr] sm:grid-cols-[auto_auto_auto_1fr]"
+              className="w640:grid-cols-[auto_auto_auto_1fr] grid grid-cols-[auto_auto_1fr]"
               style={{
                 counterReset: 'log',
               }}
@@ -561,7 +561,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               {log.map((item, index) => {
                 if (typeof item === 'string') {
                   return (
-                    <p key={item} className="bg-secondary col-[1/4] my-1 grid px-2 text-right text-xs sm:col-[1/5]">
+                    <p key={item} className="bg-secondary w640:col-[1/5] col-[1/4] my-1 grid px-2 text-right text-xs">
                       ↓ until {item}
                     </p>
                   );
@@ -579,20 +579,20 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                 return (
                   <p
                     key={index}
-                    className="keep-all col-[1/4] my-1 grid grid-cols-subgrid grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1/2] before:pr-3 before:font-mono before:content-[counter(log)] sm:col-[1/5] sm:grid-cols-subgrid sm:before:text-right"
+                    className="keep-all w640:col-[1/5] w640:grid-cols-subgrid w640:before:text-right col-[1/4] my-1 grid grid-cols-subgrid grid-rows-[auto_auto] px-2 text-xs leading-tight before:col-[1/2] before:pr-3 before:font-mono before:content-[counter(log)]"
                     style={{
                       counterIncrement: 'log',
                     }}
                   >
-                    <span className="leading-inherit col-[2/3] row-[1/2] pr-3 text-center sm:col-[2/3] sm:row-[1/2]">
-                      <code className="block sm:inline">{tagName}</code>
+                    <span className="leading-inherit w640:col-[2/3] w640:row-[1/2] col-[2/3] row-[1/2] pr-3 text-center">
+                      <code className="w640:inline block text-nowrap">{tagName}</code>
                     </span>
-                    <span className="col-[3/4] row-[1/2] sm:col-[3/4] sm:row-[1/2]">
+                    <span className="w640:col-[3/4] w640:row-[1/2] col-[3/4] row-[1/2]">
                       {name}
                       {times && ` x ${times}`}
                     </span>
                     {options && (
-                      <span className="text-alert leading-inherit col-[2/4] row-[2/3] sm:col-[4/5] sm:row-[1/2] sm:pl-4">
+                      <span className="text-alert leading-inherit w640:col-[4/5] w640:row-[1/2] w640:pl-4 col-[2/4] row-[2/3]">
                         {options}
                       </span>
                     )}

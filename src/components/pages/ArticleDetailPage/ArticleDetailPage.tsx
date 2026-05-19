@@ -37,23 +37,23 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
     <>
       <GlobalHeader layout="article-content" />
 
-      <main className="@container">
+      <main>
         <ArticleMain post={post} />
-        <div className="mx-content-inline @container not-empty:mt-[20vh] text-center">
+        <div className="mx-content-inline not-empty:mt-[20vh] text-center">
           <p className="mb-10">
             <TweetLink
               message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
               hashtags={post.meta.topics}
             />
           </p>
-          <ul className="@w640:grid-cols-2 @w640:gap-8 @w640:justify-center mx-auto grid max-w-[min(37.5rem,90%)] gap-4">
+          <ul className="w640:grid-cols-2 w640:gap-8 w640:justify-center mx-auto grid max-w-[min(37.5rem,90%)] gap-4">
             {previousArticle && (
-              <li className="@w640:flex @w640:first:last:col-span-2">
+              <li className="w640:flex w640:first:last:col-span-2">
                 <ArticleNavigation article={previousArticle} categoryName={categoryName} direction="previous" />
               </li>
             )}
             {nextArticle && (
-              <li className="@w640:col-start-2 @w640:flex @w640:first:last:col-span-2">
+              <li className="w640:col-start-2 w640:flex w640:first:last:col-span-2">
                 <ArticleNavigation article={nextArticle} categoryName={categoryName} direction="next" />
               </li>
             )}

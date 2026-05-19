@@ -33,7 +33,7 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@container (width <= 23.125rem) {
+@media screen and (width <= 23.125rem) {
   .title {
     padding: 4px 10px 6px;
     margin: 0 0 4px;
@@ -146,7 +146,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@container (width > 23.125rem) {
+@media screen and (width > 23.125rem) {
   .root {
     --padding-inline: 8px;
     --heading-margin: calc(0.875 * 2rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
@@ -310,7 +310,7 @@
 }
 
 /** PC: 縦ナビのサイドバー */
-@container (width >= 40rem) {
+@media screen and (width >= 40rem) {
   .root {
     --paragraph-margin-bottom: 0.5lh;
   }
@@ -320,7 +320,7 @@
   }
 }
 
-@container (width >= 64rem) {
+@media screen and (width >= 64rem) {
   .root {
     display: grid;
     grid-template-rows: auto 1fr auto;

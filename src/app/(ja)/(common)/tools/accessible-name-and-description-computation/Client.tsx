@@ -18,8 +18,8 @@ type SwitchItemProps = Pick<
 
 const SwitchItem = ({ emoji, code, label, ...props }: SwitchItemProps) => {
   return (
-    <li className="border-secondary mb-2 border-b pb-2 first:border-t first:pt-2">
-      <label className="wd-fit min-h-45px flex items-center">
+    <li className="border-secondary @container mb-2 border-b pb-2 first:border-t first:pt-2">
+      <label className="min-h-45px @w240:grid @w240:grid-cols-[1fr_auto] @w240:items-center @w240:gap-x-2">
         <span className={clsx(props.disabled && 'opacity-50', 'grow transition-opacity')}>
           {emoji && (
             <>
@@ -35,7 +35,9 @@ const SwitchItem = ({ emoji, code, label, ...props }: SwitchItemProps) => {
             label
           )}
         </span>
-        <Switch {...props} />
+        <span className="ml-auto block w-fit">
+          <Switch {...props} />
+        </span>
       </label>
     </li>
   );
@@ -467,9 +469,9 @@ export const AccessibleNameAndDescriptionComputation = ({
   };
 
   return (
-    <div className="grid-cols-2 md:grid">
-      <div className="mb-12 md:mb-0 md:pr-14">
-        <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">フラグ</h2>
+    <div className="w768:grid grid-cols-2">
+      <div className="w768:mb-0 w768:pr-56PX mb-12">
+        <h2 className="w640:mb-6 w640:mt-20 w640:text-2xl mb-4 mt-14 text-xl font-bold">フラグ</h2>
 
         <div className="mb-12">
           <ul>
@@ -616,7 +618,7 @@ export const AccessibleNameAndDescriptionComputation = ({
       </div>
 
       <div>
-        <h2 className="mb-4 mt-14 text-xl font-bold sm:mb-6 sm:mt-20 sm:text-2xl">
+        <h2 className="w640:mb-6 w640:mt-20 w640:text-2xl mb-4 mt-14 text-xl font-bold">
           結果のレンダリングとHTML
           <sup>
             <a href={`#${anchorLinkId}`}>※</a>

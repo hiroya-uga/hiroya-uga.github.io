@@ -13,24 +13,24 @@ export const GlobalHeader = ({ layout = 'common' }: { layout?: 'common' | 'wide-
   const lang = usePathname().endsWith('/en/') ? 'en' : 'ja';
 
   return (
-    <header className={clsx([styles.root, '@container text-primary pwa:hidden'])}>
+    <header className={clsx([styles.root, 'text-primary pwa:hidden'])}>
       <SiteName />
 
-      <p className="@w1520:fixed @w1520:top-2 @w1520:right-2 @w1520:z-50 ml-auto w-fit pr-2 pt-2">
+      <p className="w1520:fixed w1520:top-2 w1520:right-2 w1520:z-50 ml-auto w-fit pr-2 pt-2">
         <ThemeSwitch />
       </p>
 
       <div
         className={clsx([
-          '@w1520:pt-16 px-content-inline my-4 sm:pt-8',
+          'w1520:pt-16 px-content-inline w640:pt-8 my-4',
           layout !== 'article-content' && 'mb-(--x-header-margin-bottom)',
         ])}
       >
         <div className="max-w-structure relative mx-auto">
-          <p className={clsx(['-left-16PX relative -top-2', layout === 'common' && '@w1520:left-0'])}>
+          <p className={clsx(['-left-16PX relative -top-2', layout === 'common' && 'w1520:left-0'])}>
             <Link
               href="../"
-              className="hover:text-link sm:hover:bg-secondary sm:focus:bg-secondary px-16PX group inline-block rounded-md py-2 no-underline transition-colors delay-0 duration-300"
+              className="hover:text-link w640:hover:bg-secondary w640:focus:bg-secondary px-16PX group inline-block rounded-md py-2 no-underline transition-colors delay-0 duration-300"
             >
               <span className="underline" translate="no">
                 ../

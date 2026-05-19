@@ -80,7 +80,7 @@ export default function Page() {
         Analyticsによるデータ収集を拒否することができます。ただし、その場合、ウェブサイトの一部の機能が制限される可能性があります。
       </p>
 
-      <p className="mt-6 grid place-items-center sm:mt-8">
+      <p className="w640:mt-8 mt-6 grid place-items-center">
         <Button href="https://tools.google.com/dlpage/gaoptout" target="_blank">
           アクセス解析を拒否する
         </Button>

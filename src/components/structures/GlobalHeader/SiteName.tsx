@@ -20,8 +20,8 @@ export const SiteName = () => {
   );
   return (
     <>
-      {/* <p className="text-[0.78125rem] mb-4 @w1520:mb-0">
-        <span className="font-mono block bg-white min-w-[29.2929vh] text-right px-2 @w1520:fixed lg:-rotate-90 lg:inline-block lg:py-1 lg:origin-top-right lg:right-full lg:top-0 lg:max-w-[100vh] lg:overflow-auto lg:whitespace-nowrap">
+      {/* <p className="text-[0.78125rem] mb-4 w1520:mb-0">
+        <span className="font-mono block bg-white min-w-[29.2929vh] text-right px-2 w1520:fixed w1024:-rotate-90 w1024:inline-block w1024:py-1 w1024:origin-top-right w1024:right-full w1024:top-0 w1024:max-w-[100vh] w1024:overflow-auto w1024:whitespace-nowrap">
           <a href="/" className="text-inherit">
             {SITE_NAME}
           </a>{' '}
@@ -29,15 +29,15 @@ export const SiteName = () => {
         </span>
       </p> */}
 
-      <p className="@w500:text-[0.78125rem] @w1520:fixed @w1520:left-0 @w1520:top-0 @w1520:overflow-auto @w1520:bg-transparent @w1520:py-0 bg-(--x-color-background-header) @w1520:px-0 @w1520:min-h-screen overflow-auto px-4 py-1 text-[12.5px]">
-        <span className="@w1520:min-h-296px @w1520:box-content @w1520:h-[29.2929vh] @w1520:w-8 @w1520:min-w-8 @w1520:overflow-visible @w1520:pb-4 bg-(--x-color-background-header) block">
+      <p className="w500:text-[0.78125rem] w1520:fixed w1520:left-0 w1520:top-0 w1520:overflow-auto w1520:bg-transparent w1520:py-0 bg-(--x-color-background-header) w1520:px-0 w1520:min-h-screen overflow-auto px-4 py-1 text-[12.5px]">
+        <span className="w1520:min-h-296px w1520:box-content w1520:h-[29.2929vh] w1520:w-8 w1520:min-w-8 w1520:overflow-visible w1520:pb-4 bg-(--x-color-background-header) block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             role="graphics-document"
-            className="@w1520:h-296px @w1520:min-h-296px w500:w-60 @w1520:w-8 @w1520:min-w-8 w-240px h-[1.465rem] max-h-full max-w-full overflow-visible [fill:var(--x-color-text-primary)]"
+            className="w1520:h-296px w1520:min-h-296px w500:w-60 w1520:w-8 w1520:min-w-8 w-240px h-[1.465rem] max-h-full max-w-full overflow-visible [fill:var(--x-color-text-primary)]"
             aria-labelledby={id}
           >
-            <text x="0" y="50%" textAnchor="start" className="@w1520:hidden translate-y-4px" id={id}>
+            <text x="0" y="50%" textAnchor="start" className="w1520:hidden translate-y-4px" id={id}>
               {siteName}
               <tspan> - {SITE_SUBTITLE}</tspan>
             </text>
@@ -51,7 +51,7 @@ export const SiteName = () => {
                 // e.g. /documents/translations/pauljadam-modern-web-a11y-demos/bootstrap-dropdown/
                 display: 'none',
               }}
-              className="@w1520:block! border border-red-500"
+              className="w1520:block! border border-red-500"
               transform="rotate(-90)"
             >
               {siteName}

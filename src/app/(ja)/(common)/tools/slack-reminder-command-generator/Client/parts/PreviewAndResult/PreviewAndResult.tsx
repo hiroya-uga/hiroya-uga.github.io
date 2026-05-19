@@ -87,12 +87,12 @@ export const PreviewAndResult = ({ formState, isEnableMarkdown }: Props) => {
           {getCommandDescriptionNodes({ result, type: formState.type, isEnableMarkdown })}
         </p>
       </div>
-      <div className="@w640:sticky @w640:bottom-0 @w640:z-10 pb-4">
-        <div className="@w640:shadow-sticky @w640:grid @w640:grid-cols-[1fr_auto] rounded-lg border border-transparent dark:border-slate-500">
+      <div className="w640:sticky w640:bottom-0 w640:z-10 pb-4">
+        <div className="w640:shadow-sticky w640:grid w640:grid-cols-[1fr_auto] rounded-lg border border-transparent dark:border-slate-500">
           <div
             className={clsx(
               styles.message,
-              '@w640:rounded-l-lg @w640:rounded-r-none whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-orange-300',
+              'w640:rounded-l-lg w640:rounded-r-none whitespace-pre-wrap rounded-t-lg bg-gray-800 p-4 font-mono text-xs text-orange-300',
             )}
             onClick={(e) => {
               globalThis.window.getSelection()?.removeAllRanges();
@@ -131,7 +131,7 @@ export const PreviewAndResult = ({ formState, isEnableMarkdown }: Props) => {
             <span className="text-red-300">at {result.time || '9:00'}</span>
             <span className="text-purple-300">{result.starting && ` starting ${result.starting}`}</span>
           </div>
-          <p className="@w640:w-89px bg-tertiary @w640:rounded-l-none @w640:rounded-r-lg grid rounded-b-lg text-xs">
+          <p className="w640:w-89px bg-tertiary w640:rounded-l-none w640:rounded-r-lg grid rounded-b-lg text-xs">
             <button
               type="button"
               className="hover:bg-(--x-color-background-tertiary-hover) bg-(--x-color-background-tertiary) grid grid-cols-[1rem_auto] items-center justify-center gap-1 rounded-r-lg p-3 transition-colors"

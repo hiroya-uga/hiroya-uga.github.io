@@ -11,7 +11,7 @@ export const AnAltDecisionTreeException = () => {
         <Picture src="/tools/an-alt-decision-tree/exception.png" width={246} height={292} alt="" className="mx-auto" />
       </div>
 
-      <div className="px-4 sm:px-0 sm:text-center">
+      <div className="w640:px-0 w640:text-center px-4">
         <p className="mb-4">この決定木はすべてのケースをカバーしているわけではありません。</p>
 
         <p>

@@ -17,11 +17,11 @@ export const LastKey = ({
   textFieldRef: RefObject<HTMLTextAreaElement | null>;
 }) => {
   return (
-    <p className={clsx([styles.root, 'relative mb-6 sm:mb-14', lastKey !== '' && 'before:opacity-0'])}>
+    <p className={clsx([styles.root, 'w640:mb-14 relative mb-6', lastKey !== '' && 'before:opacity-0'])}>
       <span
         className={clsx([
-          'mx-auto mb-4 block w-fit transition-transform duration-700 sm:mb-14',
-          lastKey === '' && 'translate-y-[17vw] sm:translate-y-full',
+          'w640:mb-14 mx-auto mb-4 block w-fit transition-transform duration-700',
+          lastKey === '' && 'w640:translate-y-full translate-y-[17vw]',
         ])}
       >
         あなたが最後に押したキーは
@@ -36,7 +36,7 @@ export const LastKey = ({
         </kbd>
         です。
       </span>
-      <span translate="no">
+      <span translate="no" className="w320:block hidden">
         <svg
           viewBox="0 0 1032 292"
           xmlns="http://www.w3.org/2000/svg"

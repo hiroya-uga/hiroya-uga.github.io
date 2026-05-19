@@ -28,7 +28,7 @@ export default function Page() {
         <p>代替テキストにお悩みの際にご活用ください。</p>
       </PageTitle>
 
-      <section className="bg-secondary mx-auto max-w-3xl rounded-xl px-4 pb-6 pt-10 sm:px-6">
+      <section className="bg-secondary w640:px-6 mx-auto max-w-3xl rounded-xl px-4 pb-6 pt-10">
         <Suspense>
           <AnAltDecisionTreeContent />
         </Suspense>

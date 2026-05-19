@@ -47,7 +47,10 @@ export const SlackReminderCommandGenerator = () => {
 
   return (
     <>
-      <div ref={ref} className="bg-secondary @w640:px-12 @w640:py-14 mx-auto max-w-5xl rounded-2xl p-4 py-10 shadow-md">
+      <div
+        ref={ref}
+        className="bg-secondary w640:px-48PX w640:py-14 px-16PX py-30PX mx-auto max-w-5xl rounded-2xl shadow-md"
+      >
         <div className="mx-auto max-w-2xl">
           <div className="mb-12">
             <TextField

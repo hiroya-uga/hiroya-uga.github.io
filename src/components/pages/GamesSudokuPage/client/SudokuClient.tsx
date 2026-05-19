@@ -257,7 +257,7 @@ export const SudokuClient = () => {
 
   return (
     <>
-      <div className="@w800px:grid @w800px:gap-8 transition-discrete starting:opacity-0 @w800px:items-start grid-cols-[auto_var(--spacing-260PX)] gap-4 transition-opacity">
+      <div className="w800px:grid w800px:gap-8 transition-discrete starting:opacity-0 w800px:items-start grid-cols-[auto_var(--spacing-260PX)] gap-4 transition-opacity">
         <div
           className="border-secondary group mx-auto table w-full table-fixed border-collapse border-4 leading-none"
           ref={(div) => {
@@ -294,7 +294,7 @@ export const SudokuClient = () => {
                   <div
                     key={`${rowIndex}-${colIndex}`}
                     className={clsx([
-                      '@w800px:size-[min(5vw,4rem)] transition-bg border-secondary table-cell border',
+                      'w800px:size-[min(5vw,4rem)] transition-bg border-secondary table-cell border',
                       rowIndex % 3 === 0 && 'border-t-4',
                       colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
                       type === 'input' && state === 'invalid' && 'bg-error text-high-contrast',
@@ -309,7 +309,7 @@ export const SudokuClient = () => {
                         return currentInput[0] === rowIndex && currentInput[1] === colIndex ? 0 : -1;
                       })()}
                       className={clsx([
-                        'w500:text-[max(4vw,1rem)] @w800px:text-[min(4vw,3rem)] focus:z-1 relative aspect-square w-full text-center text-[clamp(16px,5rem,20px)] transition-[color] focus:rounded-lg',
+                        'w500:text-[max(4vw,1rem)] w800px:text-[min(4vw,3rem)] focus:z-1 relative aspect-square w-full text-center text-[clamp(16px,5rem,20px)] transition-[color] focus:rounded-lg',
                         Number.isNaN(value) && 'text-transparent',
                         type === 'hint' && 'cursor-default font-bold',
                         type !== 'hint' && 'font-mono',
@@ -491,8 +491,8 @@ export const SudokuClient = () => {
           ))}
         </div>
 
-        <div className="@w800px:mt-0 @w800:flex @w800:flex-col mt-8 w-full">
-          <ul className="@w500:grid-cols-2 @w700:grid-cols-4 @w800:grid-cols-1 grid grid-cols-1 gap-4">
+        <div className="w800px:mt-0 w800:flex w800:flex-col @container mt-8 w-full">
+          <ul className="@w360:grid-cols-2 @w640:grid-cols-4 grid grid-cols-1 gap-4">
             <li>
               <RunButton
                 disabled={gameState !== 'playing' && gameState !== 'clear'}
@@ -664,14 +664,14 @@ export const SudokuClient = () => {
 
           <p
             className={clsx([
-              'px-9px @w800px:py-0 @w800px:pr-0 @w800px:pt-5 transition-fade starting:opacity-0 @w800px:block transition-discrete bg-primary sticky bottom-0 mt-5 flex grow items-center justify-between gap-2 border-t border-dashed border-t-gray-600 py-2 font-bold',
+              'px-9px w800px:py-0 w800px:pr-0 w800px:pt-5 transition-fade starting:opacity-0 w800px:block transition-discrete bg-primary sticky bottom-0 mt-5 flex grow items-center justify-between gap-2 border-t border-dashed border-t-gray-600 py-2 font-bold',
               shouldShowCorrectRatio === false && 'invisible opacity-0',
             ])}
           >
             <span className="block text-sm">進捗率</span>
-            <span className="@w800px:text-[min(80px,6vw)] block text-right text-2xl leading-[1.75]" aria-hidden="true">
+            <span className="w800px:text-[min(80px,6vw)] block text-right text-2xl leading-[1.75]" aria-hidden="true">
               {correctRatio}
-              <span className="@w800px:text-[0.5em]">%</span>
+              <span className="w800px:text-[0.5em]">%</span>
             </span>
             <span className="sr-only" aria-live="polite" aria-atomic="true">{`${correctRatio}%`}</span>
           </p>

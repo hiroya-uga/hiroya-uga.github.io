@@ -155,11 +155,11 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
         />
       )}
 
-      <div className="mt-7 md:mt-20 md:grid md:grid-cols-[minmax(0,1fr)_minmax(30%,260px)] md:gap-8">
-        <div className="mb-20 md:col-start-2 md:col-end-3 md:row-[1/2] md:mb-0">
+      <div className="w768:mt-20 w768:grid w768:grid-cols-[minmax(0,1fr)_minmax(30%,260px)] w768:gap-8 mt-7">
+        <div className="w768:col-start-2 w768:col-end-3 w768:row-[1/2] w768:mb-0 mb-20">
           <TocForArticle />
         </div>
-        <div id="article" className="md:col-start-1 md:col-end-2 md:row-[1/2]">
+        <div id="article" className="w768:col-end-2 w768:row-[1/2] w768:col-start-1">
           {content}
         </div>
       </div>

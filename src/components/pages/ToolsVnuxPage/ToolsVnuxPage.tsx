@@ -27,14 +27,14 @@ export const ToolsVnuxPage = ({ pageTitle, following, inLanguage = 'ja' }: Props
         <span className="block text-sm">for macOS</span>
       </h1>
 
-      <div className="@w640:text-center @w640:pl-1.5 @w640:text-sm mb-2">
-        <p className="@w640:space-y-2">
+      <div className="w640:text-center w640:pl-1.5 w640:text-sm mb-2">
+        <p className="w640:space-y-2">
           {t.descriptions.map((description) => (
-            <span key={description} className="@w640:text-balance inline-block">
+            <span key={description} className="w640:text-balance inline-block">
               {description}
             </span>
           ))}
-          <span className="@w640:block mb-6">
+          <span className="w640:block mb-6">
             {t.descriptionExtra}
             <a href="https://adoptium.net/temurin" className="dark:text-[#85b4ff]">
               Temurin

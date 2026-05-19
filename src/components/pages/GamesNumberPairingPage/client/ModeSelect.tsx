@@ -8,7 +8,7 @@ export const ModeSelect = ({ onSelect }: Readonly<Props>) => {
   return (
     <>
       <p className="mb-6 text-center text-lg font-bold">難易度を選んでください</p>
-      <ul className="@w400:grid-cols-2 mx-auto grid w-fit gap-4">
+      <ul className="w400:grid-cols-2 mx-auto grid w-fit gap-4">
         <li className="flex">
           <button
             type="button"

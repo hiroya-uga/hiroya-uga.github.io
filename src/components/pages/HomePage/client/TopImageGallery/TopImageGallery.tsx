@@ -66,7 +66,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
       className={clsx(styles.root, 'px-content-inline animation-fade-in relative')}
       aria-hidden={galleryState.shouldShow === false ? 'true' : undefined}
     >
-      <h2 className="@w640:text-2xl mb-4 text-center text-xl font-bold shadow-none outline-0" tabIndex={-1}>
+      <h2 className="w640:text-2xl mb-4 text-center text-xl font-bold shadow-none outline-0" tabIndex={-1}>
         Gallery
       </h2>
 
@@ -99,7 +99,7 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
                     });
                   });
                 }}
-                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary @w640:text-sm @w640:py-1 pointer-events-auto z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline after:content-['↑']"
+                className="transition-bg bg-panel-primary text-primary hover:bg-panel-primary-hover dark:border-primary w640:text-sm w640:py-1 pointer-events-auto z-10 ml-auto block w-fit rounded-full border border-transparent px-3 py-2 text-xs leading-tight no-underline after:content-['↑']"
               >
                 Galleryを閉じる
               </button>
@@ -109,10 +109,10 @@ export const TopImageGallery = ({ galleryId, galleryToggleButtonRef, galleryStat
           <ul
             className={clsx([
               'gap-16PX grid grid-cols-1',
-              'xs:grid-cols-2',
-              'sm:grid-cols-3',
-              'md:grid-cols-4',
-              'lg:grid-cols-5',
+              'w400:grid-cols-2',
+              'w640:grid-cols-3',
+              'w768:grid-cols-4',
+              'w1024:grid-cols-5',
             ])}
           >
             {photos.map((photoData, index) => {

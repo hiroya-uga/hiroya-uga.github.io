@@ -21,9 +21,9 @@ export const Heading = ({ level = 2, keepUseMarginTop = false, ...props }: Reado
               level === 3 && 'not-first:mt-[calc(var(--margin-heading-top)/1.5)]',
               level === 4 && 'not-first:mt-[calc(var(--margin-heading-top)/1.5)]',
             ],
-        level === 2 && '@w640:text-2xl text-xl',
-        level === 3 && '@w640:text-xl text-lg',
-        level === 4 && '@w640:text-lg text-base',
+        level === 2 && 'w640:text-2xl text-xl',
+        level === 3 && 'w640:text-xl text-lg',
+        level === 4 && 'w640:text-lg text-base',
       ])}
       {...props}
     />
