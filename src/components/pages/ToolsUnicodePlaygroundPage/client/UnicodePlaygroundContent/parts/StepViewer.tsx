@@ -129,7 +129,7 @@ export const StepViewer = ({
                     onClick={() => onStepChange(index)}
                     onDoubleClick={handleEdit}
                     className={clsx([
-                      'min-w-80px px-8PX flex w-min grow flex-col items-center rounded-lg border border-dashed py-2 font-mono text-xs transition-colors',
+                      'min-w-80px px-8PX flex w-min grow flex-col items-center rounded-lg border border-dashed py-2 font-mono text-xs hover:border-solid hover:border-current',
                       isCurrentStep && 'ring-2 ring-indigo-500 ring-offset-1',
                       className,
                     ])}

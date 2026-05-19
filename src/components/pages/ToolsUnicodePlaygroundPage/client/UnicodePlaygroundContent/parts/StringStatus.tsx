@@ -21,12 +21,12 @@ export const StringStatus = ({ lang, utf16Length, utf8Bytes, codepointCount, gra
   ];
 
   return (
-    <dl className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,8rem),1fr))] gap-3">
+    <dl className="gap-x-8PX grid grid-cols-[repeat(auto-fit,minmax(min(100%,8rem),1fr))] gap-y-3">
       {items.map(({ label, sub, value }) => (
-        <div key={label} className="px-12PX border-secondary bg-secondary rounded-lg border pb-3 pt-2">
+        <div key={label} className="px-12PX border-primary rounded-lg border pb-3 pt-2">
           <dt className="text-2xs text-secondary mb-1 font-bold uppercase tracking-wide">{label}</dt>
           <dd className="flex flex-col">
-            <span className="text-2xl font-bold">{value}</span>
+            <span className="pl-3px text-2xl font-bold">{value}</span>
             <span className="text-2xs text-secondary mt-1">{sub}</span>
           </dd>
         </div>
