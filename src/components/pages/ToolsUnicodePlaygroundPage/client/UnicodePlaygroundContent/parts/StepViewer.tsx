@@ -84,8 +84,8 @@ export const StepViewer = ({
   };
 
   return (
-    <>
-      <div className="border-primary bg-secondary mt-3.5 flex items-center justify-center rounded-xl border px-6 py-8 text-center">
+    <div className="mt-3.5">
+      <div className="border-primary bg-secondary flex items-center justify-center rounded-xl border px-6 py-8 text-center">
         <p
           aria-live="polite"
           className="font-emoji min-h-lh w640:text-8xl whitespace-pre-line break-all text-7xl leading-tight"
@@ -109,121 +109,119 @@ export const StepViewer = ({
         />
       </div>
 
-      <div>
-        <ul className="w640:gap-x-19PX gap-x-33PX w640:justify-start mt-12 flex flex-wrap justify-start gap-y-1.5 contain-layout">
-          {inputCodepoints.map((char, index) => {
-            const codePoint = char.codePointAt(0) ?? 0;
-            const hex = toHex(codePoint);
-            const { name, categoryLabel, className, noGlyph } = getCodepointMeta(codePoint, lang);
-            const row3Label = noGlyph ? categoryLabel : name;
-            const isCurrentStep = index === clampedStep;
-            const handleEdit = () => handleReplace({ index, codePoint });
+      <ul className="w640:gap-x-19PX gap-x-33PX w640:justify-start mt-12 flex flex-wrap justify-start gap-y-1.5 contain-layout">
+        {inputCodepoints.map((char, index) => {
+          const codePoint = char.codePointAt(0) ?? 0;
+          const hex = toHex(codePoint);
+          const { name, categoryLabel, className, noGlyph } = getCodepointMeta(codePoint, lang);
+          const row3Label = noGlyph ? categoryLabel : name;
+          const isCurrentStep = index === clampedStep;
+          const handleEdit = () => handleReplace({ index, codePoint });
 
-            return (
-              <li key={`${index}-${codePoint}`} className="group flex flex-col gap-1.5">
-                <div className="after:w-33PX w640:after:w-19PX w640:after:text-[11px] relative flex grow after:absolute after:bottom-0 after:left-full after:top-0 after:my-auto after:grid after:place-items-center after:text-[17px] after:content-['+'] group-last:after:hidden">
-                  <button
-                    type="button"
-                    aria-label={t.stepAria(index + 1, hex)}
-                    aria-pressed={isCurrentStep}
-                    onClick={() => onStepChange(index)}
-                    onDoubleClick={handleEdit}
-                    className={clsx([
-                      'min-w-80px px-8PX flex w-min grow flex-col items-center rounded-lg border border-dashed py-2 font-mono text-xs hover:border-solid hover:border-current',
-                      isCurrentStep && 'ring-2 ring-indigo-500 ring-offset-1',
-                      className,
-                    ])}
-                  >
-                    {noGlyph ? (
-                      <span className="min-h-lh mb-1 grid min-w-[1ic] place-items-center font-mono text-2xl leading-none">
-                        <span className="text-2xs border border-dotted border-current p-1.5">{name}</span>
-                      </span>
-                    ) : (
-                      <span className="font-emoji min-h-lh mb-1 min-w-[1ic] text-2xl leading-none">{char}</span>
-                    )}
-                    <span className="text-[0.7rem] font-bold">{toHex(codePoint)}</span>
-                    <span className="text-secondary mt-0.5 text-center text-[0.65rem]">{row3Label}</span>
-                  </button>
-                </div>
-
+          return (
+            <li key={`${index}-${codePoint}`} className="group flex flex-col gap-1.5">
+              <div className="after:w-33PX w640:after:w-19PX w640:after:text-[11px] relative flex grow after:absolute after:bottom-0 after:left-full after:top-0 after:my-auto after:grid after:place-items-center after:text-[17px] after:content-['+'] group-last:after:hidden">
                 <button
                   type="button"
-                  aria-label={tList.editAria(hex)}
-                  tabIndex={isCurrentStep ? undefined : -1}
+                  aria-label={t.stepAria(index + 1, hex)}
+                  aria-pressed={isCurrentStep}
+                  onClick={() => onStepChange(index)}
+                  onDoubleClick={handleEdit}
                   className={clsx([
-                    'bg-panel-primary transition-bg border-primary hover:bg-panel-primary-hover mt-1 w-full rounded border px-1.5 py-0.5 text-xs font-bold',
-                    isCurrentStep ? 'visible' : 'invisible',
+                    'min-w-80px px-8PX flex w-min grow flex-col items-center rounded-lg border border-dashed py-2 font-mono text-xs hover:border-solid hover:border-current',
+                    isCurrentStep && 'ring-2 ring-indigo-500 ring-offset-1',
+                    className,
                   ])}
-                  onClick={handleEdit}
                 >
-                  {tList.editLabel}
+                  {noGlyph ? (
+                    <span className="min-h-lh mb-1 grid min-w-[1ic] place-items-center font-mono text-2xl leading-none">
+                      <span className="text-2xs border border-dotted border-current p-1.5">{name}</span>
+                    </span>
+                  ) : (
+                    <span className="font-emoji min-h-lh mb-1 min-w-[1ic] text-2xl leading-none">{char}</span>
+                  )}
+                  <span className="text-[0.7rem] font-bold">{toHex(codePoint)}</span>
+                  <span className="text-secondary mt-0.5 text-center text-[0.65rem]">{row3Label}</span>
                 </button>
-
-                <button
-                  type="button"
-                  aria-label={tList.deleteAria(hex)}
-                  tabIndex={isCurrentStep ? undefined : -1}
-                  className={clsx([
-                    'bg-panel-primary transition-bg border-primary hover:bg-panel-primary-hover w-full rounded border px-1.5 py-0.5 text-xs font-bold',
-                    isCurrentStep ? 'visible' : 'invisible',
-                  ])}
-                  onClick={() => handleDelete(index)}
-                >
-                  {tList.deleteLabel}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-
-        <div className="sticky bottom-4 mt-6">
-          {currentStepMeta !== undefined && (
-            <section className="shadow-sticky border-primary px-12PX scroll-hint-y max-h-[20vh] overflow-auto rounded-lg border py-3">
-              <h3 className="mb-2 text-sm font-bold">{`💡 ${currentStepMeta.noteSubject} (${toHex(currentStepCodepoint)})`}</h3>
-              <div className="text-xs">
-                <p aria-live="polite">{currentStepMeta.note}</p>
               </div>
-            </section>
-          )}
 
-          {totalSteps > 1 && (
-            <div
-              role="group"
-              aria-label={t.navLabel}
-              className="mx-auto mt-4 flex w-fit flex-wrap justify-center gap-x-1 gap-y-2"
-            >
-              <p className="bg-primary shadow-sticky rounded-full">
-                <button
-                  type="button"
-                  className="bg-secondary px-8PX grid aspect-square shrink-0 place-items-center rounded-full border-2 text-sm font-bold disabled:opacity-40"
-                  onClick={() => onStepChange(clampedStep - 1)}
-                  disabled={clampedStep === 0}
-                >
-                  Prev
-                </button>
-              </p>
-              <p className="text-secondary bg-primary shadow-sticky grid place-items-center rounded-md px-1 text-sm">
-                <span>
-                  {clampedStep + 1} / {totalSteps}
-                </span>
-              </p>
-              <p className="bg-primary shadow-sticky rounded-full">
-                <button
-                  type="button"
-                  className="bg-secondary px-8PX grid aspect-square shrink-0 place-items-center rounded-full border-2 text-sm font-bold disabled:opacity-40"
-                  onClick={() => onStepChange(clampedStep + 1)}
-                  disabled={clampedStep === totalSteps - 1}
-                >
-                  Next
-                </button>
-              </p>
+              <button
+                type="button"
+                aria-label={tList.editAria(hex)}
+                tabIndex={isCurrentStep ? undefined : -1}
+                className={clsx([
+                  'bg-panel-primary transition-bg border-primary hover:bg-panel-primary-hover mt-1 w-full rounded border px-1.5 py-0.5 text-xs font-bold',
+                  isCurrentStep ? 'visible' : 'invisible',
+                ])}
+                onClick={handleEdit}
+              >
+                {tList.editLabel}
+              </button>
+
+              <button
+                type="button"
+                aria-label={tList.deleteAria(hex)}
+                tabIndex={isCurrentStep ? undefined : -1}
+                className={clsx([
+                  'bg-panel-primary transition-bg border-primary hover:bg-panel-primary-hover w-full rounded border px-1.5 py-0.5 text-xs font-bold',
+                  isCurrentStep ? 'visible' : 'invisible',
+                ])}
+                onClick={() => handleDelete(index)}
+              >
+                {tList.deleteLabel}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div className="sticky bottom-4 mt-6">
+        {currentStepMeta !== undefined && (
+          <section className="shadow-sticky border-primary px-12PX scroll-hint-y max-h-[20vh] overflow-auto rounded-lg border py-3">
+            <h3 className="mb-2 text-sm font-bold">{`💡 ${currentStepMeta.noteSubject} (${toHex(currentStepCodepoint)})`}</h3>
+            <div className="text-xs">
+              <p aria-live="polite">{currentStepMeta.note}</p>
             </div>
-          )}
-        </div>
+          </section>
+        )}
+
+        {totalSteps > 1 && (
+          <div
+            role="group"
+            aria-label={t.navLabel}
+            className="mx-auto mt-4 flex w-fit flex-wrap justify-center gap-x-1 gap-y-2"
+          >
+            <p className="bg-primary shadow-sticky rounded-full">
+              <button
+                type="button"
+                className="bg-secondary px-8PX grid aspect-square shrink-0 place-items-center rounded-full border-2 text-sm font-bold disabled:opacity-40"
+                onClick={() => onStepChange(clampedStep - 1)}
+                disabled={clampedStep === 0}
+              >
+                Prev
+              </button>
+            </p>
+            <p className="text-secondary bg-primary shadow-sticky grid place-items-center rounded-md px-1 text-sm">
+              <span>
+                {clampedStep + 1} / {totalSteps}
+              </span>
+            </p>
+            <p className="bg-primary shadow-sticky rounded-full">
+              <button
+                type="button"
+                className="bg-secondary px-8PX grid aspect-square shrink-0 place-items-center rounded-full border-2 text-sm font-bold disabled:opacity-40"
+                onClick={() => onStepChange(clampedStep + 1)}
+                disabled={clampedStep === totalSteps - 1}
+              >
+                Next
+              </button>
+            </p>
+          </div>
+        )}
       </div>
 
       <Confirm confirm={confirmData} setConfirmData={setConfirmData} />
       <PromptModal prompt={promptData} setPromptData={setPromptData} />
-    </>
+    </div>
   );
 };
