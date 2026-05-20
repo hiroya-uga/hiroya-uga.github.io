@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   icons: {
     icon: '/demo/slack-launch/favicon.ico',
   },
+  openGraph: null,
+  twitter: null,
 };
 
 export default function Page() {

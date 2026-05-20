@@ -11,8 +11,9 @@ export const DemoSlackLaunchContent = () => {
   const id = useId();
   const [expanded, setExpanded] = useState(false);
   const searchParams = useSearchParams();
-  const title = searchParams.get('t1') ?? 'Launching...';
-  const title2 = searchParams.get('t2') ?? 'Oops!';
+  const text1 = searchParams.get('t1') ?? 'Launching...';
+  const text2 = searchParams.get('t2') ?? 'Oops!';
+  const linkText = searchParams.get('t3') ?? 'use Slack in your browser';
 
   return (
     <>
@@ -59,14 +60,20 @@ export const DemoSlackLaunchContent = () => {
         {expanded === false && (
           <>
             <p className="relative m-0 text-[42px] font-black leading-[1.2143] text-[#1d1c1d]">
-              <span className={styles.title}>{title}</span>
-              <span className={styles.oops}>{title2}</span>
+              <span className={styles.title}>{text1}</span>
+              <span className={styles.oops}>{text2}</span>
             </p>
 
             <div className="mt-16PX mb-24PX text-18px relative leading-[1.50001] text-[rgb(29_28_29/0.7)]">
-              <p className={styles.status1}>Dredging pipes...</p>
-              <p className={styles.status2}>Boiling water...</p>
-              <p className={styles.status3}>Tuning channels...</p>
+              <p aria-hidden="true" className={styles.status1}>
+                Dredging pipes...
+              </p>
+              <p aria-hidden="true" className={styles.status2}>
+                Boiling water...
+              </p>
+              <p aria-hidden="true" className={styles.status3}>
+                Tuning channels...
+              </p>
               <p className={styles.status4}>
                 Click &quot;<b>Open Slack</b>&quot; to launch the desktop app.
                 <br />
@@ -80,7 +87,7 @@ export const DemoSlackLaunchContent = () => {
                   aria-expanded={expanded}
                   aria-controls={id}
                 >
-                  use Slack in your browser
+                  {linkText}
                 </button>
                 .
               </p>
@@ -90,12 +97,28 @@ export const DemoSlackLaunchContent = () => {
 
         <div id={id} role="alert" className="contain-paint">
           {expanded && (
-            <div className="mt-32PX max-w-600px px-28PX py-24PX mx-auto mb-[20vh] w-full rounded-lg border-2 border-[#e8912d] bg-[#fff7e6] text-left text-[15px] leading-relaxed text-[#1d1c1d]">
-              <h2 className="mb-12PX mt-0 text-lg font-bold text-[#b45309]">これはセキュリティ啓発用のデモです</h2>
+            <>
+              <div className="mt-32PX max-w-600px px-28PX py-24PX mx-auto w-full rounded-lg border-2 border-[#e8912d] bg-[#fff7e6] text-left text-[15px] leading-relaxed text-[#1d1c1d]">
+                <h2 className="mb-12PX mt-0 text-lg font-bold text-[#b45309]">これはセキュリティ啓発用のデモです。</h2>
 
-              <p>フィッシング攻撃を模した学習用デモです。</p>
-              <p>本デモで使用している Slack ロゴ・ファビコン等の権利は Slack Technologies, LLC に帰属します。</p>
-            </div>
+                <p>ドメインの違いに気づきましたか？ 見た目やロゴが本物らしく見えても、それだけで安全とは限りません。</p>
+                <p>
+                  ログインやアプリ起動を促す画面では、操作を続ける前にアドレスバーのドメインを確認するだけでも、怪しいページに気づきやすくなります。
+                </p>
+
+                <h3 className="mt-16PX mb-8PX text-base font-bold text-[#b45309]">免責事項</h3>
+                <p>
+                  本デモは、フィッシング詐欺の手口を理解するための学習・啓発目的で公開しています。どなたでも参照・共有していただいて構いませんが、悪用は固くお断りします。
+                </p>
+                <p>
+                  学習・啓発以外の用途で本デモを利用したことにより生じた損害について、当方は一切の責任を負いません。
+                </p>
+              </div>
+
+              <p className="text-12px pl-2px mb-[20vh] mt-1 text-left">
+                ※ 本デモで使用している Slack ロゴ・ファビコン等の権利は Slack Technologies, LLC に帰属します。
+              </p>
+            </>
           )}
         </div>
       </div>
