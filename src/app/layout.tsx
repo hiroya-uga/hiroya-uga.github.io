@@ -7,7 +7,6 @@ import { Suspense } from 'react';
 
 import { Comment } from '@/components/jokes/Comment';
 import { Console } from '@/components/jokes/Console';
-import { CookieConsentDialog } from '@/components/ui/dialogs/CookieConsentDialog';
 import { Analytics } from '@/components/ui/features/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
@@ -16,6 +15,9 @@ import { getTheme } from '@/utils/get-theme';
 
 export const metadata: Metadata = {
   metadataBase: new URL(URL_ORIGIN),
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -25,7 +27,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="ja" data-theme={theme} suppressHydrationWarning>
       <head>
         <meta name="text-scale" content="scale" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -49,9 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body id="top">
         <div id={DIALOG_PORTAL_ID} />
         {children}
-        <Suspense>
-          <CookieConsentDialog />
-        </Suspense>
+
         <div id={SVG_PORTAL_ID} hidden />
       </body>
     </html>

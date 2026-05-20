@@ -1,8 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
+import { CookieConsentDialog } from '@/components/ui/dialogs/CookieConsentDialog';
 
-export default function EnglishLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+import { Suspense, useEffect } from 'react';
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function EnglishLayout({ children }: Readonly<Props>) {
   useEffect(() => {
     // TODO: root layout に html 要素がないと再レンダリングが無限に起こる可能性があり暫定対応。
     document.documentElement.lang = 'en';
@@ -12,5 +18,13 @@ export default function EnglishLayout({ children }: Readonly<{ children: React.R
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+
+      <Suspense>
+        <CookieConsentDialog lang="en" />
+      </Suspense>
+    </>
+  );
 }

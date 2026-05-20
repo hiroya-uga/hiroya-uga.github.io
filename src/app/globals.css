@@ -187,6 +187,7 @@
   --text-*: initial;
   --text-10px: 0.625rem;
   --text-12px: 0.75rem;
+  --text-18px: 1.125rem;
   --text-2xs: 0.625rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -426,7 +427,7 @@
     fill: #fff;
   }
 
-  :root {
+  :root:not(:has([data-no-scrollbar-gutter])) {
     scrollbar-gutter: stable;
   }
 

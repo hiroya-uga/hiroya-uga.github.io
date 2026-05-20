@@ -1,0 +1,51 @@
+.redirecting {
+  animation: hide 0s 1500ms forwards;
+}
+
+.oops {
+  position: absolute;
+  clip-path: inset(100%);
+  animation: show 0s 1500ms forwards;
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: auto;
+
+  .circle {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-45deg);
+    animation:
+      spin 1.2s cubic-bezier(0.25, 0.29, 0.54, 0.86) infinite,
+      hide 0s 1500ms forwards;
+  }
+
+  .tail {
+    animation-timing-function: cubic-bezier(0.41, 0.24, 0.64, 0.69);
+  }
+}
+
+@keyframes hide {
+  to {
+    position: absolute;
+    clip-path: inset(100%);
+  }
+}
+
+@keyframes show {
+  to {
+    position: relative;
+    clip-path: inset(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
