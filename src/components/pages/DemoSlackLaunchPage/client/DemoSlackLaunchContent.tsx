@@ -11,7 +11,7 @@ export const DemoSlackLaunchContent = () => {
   const id = useId();
   const [expanded, setExpanded] = useState(false);
   const searchParams = useSearchParams();
-  const title = searchParams.get('t') ?? 'Redirecting...';
+  const title = searchParams.get('t') ?? 'Launching...';
 
   return (
     <>
@@ -58,27 +58,32 @@ export const DemoSlackLaunchContent = () => {
         {expanded === false && (
           <>
             <p className="relative m-0 text-[42px] font-black leading-[1.2143] text-[#1d1c1d]">
-              <span className={styles.redirecting}>{title}</span>
+              <span className={styles.title}>{title}</span>
               <span className={styles.oops}>Oops!</span>
             </p>
 
-            <p className="mt-16PX mb-24PX text-18px leading-[1.50001] text-[rgb(29_28_29/0.7)]">
-              Click &quot;<b>Open Slack</b>&quot; to launch the desktop app.
-              <br />
-              Not working? You can also{' '}
-              <button
-                type="button"
-                className="cursor-pointer bg-transparent p-0 font-[inherit] text-[#1264a3] no-underline hover:underline focus-visible:underline"
-                onClick={() => {
-                  setExpanded(true);
-                }}
-                aria-expanded={expanded}
-                aria-controls={id}
-              >
-                use Slack in your browser
-              </button>
-              .
-            </p>
+            <div className="mt-16PX mb-24PX text-18px relative leading-[1.50001] text-[rgb(29_28_29/0.7)]">
+              <p className={styles.status1}>Dredging pipes...</p>
+              <p className={styles.status2}>Boiling water...</p>
+              <p className={styles.status3}>Tuning channels...</p>
+              <p className={styles.status4}>
+                Click &quot;<b>Open Slack</b>&quot; to launch the desktop app.
+                <br />
+                Not working? You can also{' '}
+                <button
+                  type="button"
+                  className="cursor-pointer bg-transparent p-0 font-[inherit] text-[#1264a3] no-underline hover:underline focus-visible:underline"
+                  onClick={() => {
+                    setExpanded(true);
+                  }}
+                  aria-expanded={expanded}
+                  aria-controls={id}
+                >
+                  use Slack in your browser
+                </button>
+                .
+              </p>
+            </div>
           </>
         )}
 

@@ -1,11 +1,11 @@
-.redirecting {
-  animation: hide 0s 1500ms forwards;
+.title {
+  animation: hide 0s 2100ms forwards;
 }
 
 .oops {
   position: absolute;
   clip-path: inset(100%);
-  animation: show 0s 1500ms forwards;
+  animation: show 0s 2100ms forwards;
 }
 
 .spinner {
@@ -22,12 +22,39 @@
     transform: rotate(-45deg);
     animation:
       spin 1.2s cubic-bezier(0.25, 0.29, 0.54, 0.86) infinite,
-      hide 0s 1500ms forwards;
+      hide 0s 2800ms forwards;
   }
 
   .tail {
     animation-timing-function: cubic-bezier(0.41, 0.24, 0.64, 0.69);
   }
+}
+
+.status1 {
+  animation: hide 0s 700ms forwards;
+}
+
+.status2,
+.status3,
+.status4 {
+  position: absolute;
+  clip-path: inset(100%);
+}
+
+.status2 {
+  animation:
+    show 0s 700ms forwards,
+    hide 0s 1400ms forwards;
+}
+
+.status3 {
+  animation:
+    show 0s 1400ms forwards,
+    hide 0s 2100ms forwards;
+}
+
+.status4 {
+  animation: show 0s 2100ms forwards;
 }
 
 @keyframes hide {
