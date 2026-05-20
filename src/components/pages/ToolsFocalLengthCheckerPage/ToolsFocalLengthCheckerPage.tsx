@@ -1,4 +1,5 @@
 import { PageTitle } from '@/components/structures/PageTitle';
+import { TweetLink } from '@/components/structures/TweetLink';
 import { Picture } from '@/components/ui/features/Picture';
 import { NoteList } from '@/components/ui/lists/NoteList';
 import { Metadata } from '@/utils/get-metadata';
@@ -117,6 +118,10 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
               <NoteList list={['このツールのアイコンはChatGPTにより生成されました。']} />
             </div>
           </div>
+
+          <p className="mt-share-buttons pwa:hidden mx-auto grid justify-end">
+            <TweetLink />
+          </p>
         </div>
       </div>
     </>
