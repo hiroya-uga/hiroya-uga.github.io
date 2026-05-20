@@ -11,7 +11,8 @@ export const DemoSlackLaunchContent = () => {
   const id = useId();
   const [expanded, setExpanded] = useState(false);
   const searchParams = useSearchParams();
-  const title = searchParams.get('t') ?? 'Launching...';
+  const title = searchParams.get('t1') ?? 'Launching...';
+  const title2 = searchParams.get('t2') ?? 'Oops!';
 
   return (
     <>
@@ -59,7 +60,7 @@ export const DemoSlackLaunchContent = () => {
           <>
             <p className="relative m-0 text-[42px] font-black leading-[1.2143] text-[#1d1c1d]">
               <span className={styles.title}>{title}</span>
-              <span className={styles.oops}>Oops!</span>
+              <span className={styles.oops}>{title2}</span>
             </p>
 
             <div className="mt-16PX mb-24PX text-18px relative leading-[1.50001] text-[rgb(29_28_29/0.7)]">
