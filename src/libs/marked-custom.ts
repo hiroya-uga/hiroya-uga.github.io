@@ -574,10 +574,13 @@ const overrideListExtension: TokenizerAndRendererExtension = {
     const t = token as ListToken;
     const body = t.items
       .map((item) => {
-        const content = item.loose
-          ? marked.parse(item.text, { async: false })
-          : marked.parseInline(item.text, { async: false });
-        return `<li>${content}</li>`;
+        const hasBlockTokens = item.tokens.some((tok) => tok.type !== 'text');
+        const content = hasBlockTokens
+          ? marked.parser(item.tokens, { async: false })
+          : item.loose
+            ? marked.parse(item.text, { async: false })
+            : marked.parseInline(item.text, { async: false });
+        return `<li><div>${content}</div></li>`;
       })
       .join('\n');
 
