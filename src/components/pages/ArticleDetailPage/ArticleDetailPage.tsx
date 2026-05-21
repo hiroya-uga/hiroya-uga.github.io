@@ -41,10 +41,7 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
         <ArticleMain post={post} />
         <div className="mx-content-inline not-empty:mt-[20vh] text-center">
           <p className="mb-10">
-            <TweetLink
-              message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`}
-              hashtags={post.meta.topics}
-            />
+            <TweetLink message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`} />
           </p>
           <ul className="w640:grid-cols-2 w640:gap-8 w640:justify-center mx-auto grid max-w-[min(37.5rem,90%)] gap-4">
             {previousArticle && (

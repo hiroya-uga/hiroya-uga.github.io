@@ -35,7 +35,7 @@ export default function Page() {
       </section>
 
       <p className="mt-share-buttons mx-auto grid max-w-3xl justify-end">
-        <TweetLink hashtags={['代替テキスト']} />
+        <TweetLink />
       </p>
     </>
   );

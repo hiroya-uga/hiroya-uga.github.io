@@ -77,7 +77,7 @@ export const ToolsNuBookmarkletGeneratorPage = ({
       </section>
 
       <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink hashtags={['html', 'bookmarklet']} lang={lang} />
+        <TweetLink lang={lang} />
       </p>
     </>
   );

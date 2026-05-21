@@ -215,7 +215,7 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
           </a>
         </p>
         <p className="mt-share-buttons grid justify-end">
-          <TweetLink hashtags={['git']} lang={inLanguage} />
+          <TweetLink lang={inLanguage} />
         </p>
       </div>
     </>

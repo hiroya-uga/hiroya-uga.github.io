@@ -121,7 +121,7 @@ export const ToolsVnuxPage = ({ pageTitle, following, inLanguage = 'ja' }: Props
           </a>
         </p>
         <p className="mt-share-buttons grid justify-end">
-          <TweetLink hashtags={['html']} lang={inLanguage} />
+          <TweetLink lang={inLanguage} />
         </p>
       </div>
     </div>

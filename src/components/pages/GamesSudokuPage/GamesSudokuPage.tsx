@@ -106,7 +106,7 @@ export const GamesSudokuPage = ({ metadata }: Readonly<Props>) => {
       </Table>
 
       <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink hashtags={['数独']} />
+        <TweetLink />
       </p>
     </>
   );

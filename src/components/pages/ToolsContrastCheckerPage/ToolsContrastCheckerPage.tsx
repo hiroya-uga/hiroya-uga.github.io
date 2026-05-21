@@ -30,7 +30,7 @@ export const ToolsContrastCheckerPage = ({ lang, metadata }: Props) => {
       </div>
 
       <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink hashtags={['WCAG', 'a11y']} lang={lang} />
+        <TweetLink lang={lang} />
       </p>
     </div>
   );
