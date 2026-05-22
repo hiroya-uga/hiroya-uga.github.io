@@ -1,14 +1,16 @@
 import { NotesGitHubEditLink } from '@/components/layouts/NotesLayout/client/NotesGitHubEditLink';
-import { NotesFrontmatter } from '@/libs/notes';
+import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
+import Link from 'next/link';
 import styles from './NotesDetailPage.module.css';
 
 interface Props {
   frontmatter?: NotesFrontmatter;
   content?: string;
   toc?: string;
+  childEntries?: NotesEntry[];
 }
 
-export const NotesDetailPage = ({ frontmatter, content, toc }: Props) => {
+export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Props) => {
   return (
     <main className={styles.root}>
       <h1 className={styles.title}>
@@ -24,9 +26,21 @@ export const NotesDetailPage = ({ frontmatter, content, toc }: Props) => {
         </nav>
       )}
       <div className={styles.body}>
-        {content !== undefined && content !== '' && (
-          <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
-        )}
+        <div className={styles.content}>
+          {content !== undefined && content !== '' && <div dangerouslySetInnerHTML={{ __html: content }} />}
+
+          {childEntries && 0 < childEntries.length && (
+            <>
+              <ul>
+                {childEntries.map((entry) => (
+                  <li key={entry.pathname}>
+                    <Link href={`${entry.pathname}/`}>{entry.frontmatter.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
 
         <div className={styles.edit}>
           <NotesGitHubEditLink />

@@ -90,6 +90,23 @@ export const resolveNotesMediaPath = ({ imagePath, filePath }: { imagePath: stri
   return imagePath.replace('./', `/notes${dirPrefix}/`);
 };
 
+const NOTES_HUB_SLUGS = [['help']];
+
+const isHubSlug = (slug: string[]) =>
+  NOTES_HUB_SLUGS.some((hub) => hub.length === slug.length && hub.every((segment, i) => segment === slug[i]));
+
+export const getNotesChildEntries = (parentSlug: string[]): NotesEntry[] => {
+  if (isHubSlug(parentSlug) === false) {
+    return [];
+  }
+
+  const entries = getAllNotesEntries();
+
+  return entries
+    .filter((entry) => entry.slug.length === parentSlug.length + 1 && parentSlug.every((s, i) => s === entry.slug[i]))
+    .sort((a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title, 'ja'));
+};
+
 export const getAllNotesEntries = (): NotesEntry[] => {
   const slugs = getAllNotesSlugs();
 

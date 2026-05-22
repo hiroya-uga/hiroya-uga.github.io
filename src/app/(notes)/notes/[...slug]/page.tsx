@@ -2,7 +2,7 @@ import { NotesDetailPage } from '@/components/pages/NotesDetailPage';
 import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
-import { getAllNotesSlugs, getNotesPost } from '@/libs/notes';
+import { getAllNotesSlugs, getNotesChildEntries, getNotesPost } from '@/libs/notes';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -88,7 +88,12 @@ export default async function Page({ params }: Readonly<Props>) {
         }}
         breadcrumbs={breadcrumbItems}
       />
-      <NotesDetailPage frontmatter={frontmatter} content={post.content} toc={post.toc} />
+      <NotesDetailPage
+        frontmatter={frontmatter}
+        content={post.content}
+        toc={post.toc}
+        childEntries={getNotesChildEntries(slug)}
+      />
     </>
   );
 }
