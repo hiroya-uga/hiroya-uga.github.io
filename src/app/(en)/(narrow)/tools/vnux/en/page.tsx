@@ -18,7 +18,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
-      <ToolsVnuxPage {...metadata} />
+      <ToolsVnuxPage {...metadata} inLanguage="en" />
     </>
   );
 }
