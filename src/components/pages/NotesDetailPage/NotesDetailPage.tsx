@@ -1,6 +1,6 @@
-import { NotesGitHubEditLink } from '@/components/layouts/NotesLayout/client/NotesGitHubEditLink';
 import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
 import Link from 'next/link';
+import { NotesGitHubEditLink } from './client';
 import styles from './NotesDetailPage.module.css';
 
 interface Props {
