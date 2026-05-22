@@ -263,15 +263,14 @@ export const CustomImage = () => {
     }
 
     connectedCallback() {
-      const self = this;
-      const { src, width, height, alt, controls } = self;
+      const { src, width, height, alt, controls } = this;
 
-      if (src === '' || self.shadowRoot === null) {
+      if (src === '' || this.shadowRoot === null) {
         return;
       }
 
       const img = document.createElement('img');
-      const shadowRoot = self.shadowRoot;
+      const shadowRoot = this.shadowRoot;
 
       if (width && height) {
         const style = new CSSStyleSheet();
@@ -355,7 +354,7 @@ export const CustomImage = () => {
       img.width = width;
       img.height = height;
       img.src = src;
-      self.loading = true;
+      this.loading = true;
       shadowRoot.textContent = '';
       shadowRoot.appendChild(img);
 
@@ -363,7 +362,7 @@ export const CustomImage = () => {
       ref.imageList.push({ src, width: 0, height: 0, alt });
 
       img.decode().then(() => {
-        self.loading = false;
+        this.loading = false;
 
         ref.imageList[imageListIndex] = {
           src,
@@ -395,7 +394,7 @@ export const CustomImage = () => {
             showModal({
               index: customImageElementIndex,
               button,
-              context: self,
+              context: this,
               src,
               width: img.naturalWidth,
               height: img.naturalHeight,
