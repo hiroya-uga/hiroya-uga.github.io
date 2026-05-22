@@ -13,6 +13,15 @@ interface Props {
   entries: NotesEntry[];
 }
 
+const META_SLUGS = ['help'];
+
+const compareEntries = (a: NotesEntry, b: NotesEntry) => {
+  const aMeta = a.slug.length > 0 && META_SLUGS.includes(a.slug[0]);
+  const bMeta = b.slug.length > 0 && META_SLUGS.includes(b.slug[0]);
+  if (aMeta !== bMeta) return aMeta ? 1 : -1;
+  return a.frontmatter.title.localeCompare(b.frontmatter.title, 'ja');
+};
+
 export const NotesSidebarNav = ({ entries }: Props) => {
   const pathname = usePathname();
   const id = useId();
@@ -22,14 +31,18 @@ export const NotesSidebarNav = ({ entries }: Props) => {
     .replace(/\/$/, '')
     .split('/')
     .filter(Boolean);
-  const siblingEntries = entries.filter(({ slug }) => {
-    if (slug.length !== currentSlug.length) return false;
-    return currentSlug.slice(0, -1).every((seg, i) => seg === slug[i]);
-  });
-  const childEntries = entries.filter(({ slug }) => {
-    if (slug.length !== currentSlug.length + 1) return false;
-    return currentSlug.every((seg, i) => seg === slug[i]);
-  });
+  const siblingEntries = entries
+    .filter(({ slug }) => {
+      if (slug.length !== currentSlug.length) return false;
+      return currentSlug.slice(0, -1).every((seg, i) => seg === slug[i]);
+    })
+    .sort(compareEntries);
+  const childEntries = entries
+    .filter(({ slug }) => {
+      if (slug.length !== currentSlug.length + 1) return false;
+      return currentSlug.every((seg, i) => seg === slug[i]);
+    })
+    .sort(compareEntries);
   const parentEntry =
     currentSlug.length > 0
       ? (entries.find(({ slug }) => {

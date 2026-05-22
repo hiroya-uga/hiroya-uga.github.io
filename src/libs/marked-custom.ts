@@ -566,23 +566,38 @@ type ListToken = Token & {
   }>;
 };
 
+const renderListItemContent = (item: ListToken['items'][number]): string => {
+  const hasBlockTokens = item.tokens.some((tok) => tok.type !== 'text');
+  if (hasBlockTokens === false) {
+    return item.loose
+      ? (marked.parse(item.text, { async: false }) as string)
+      : (marked.parseInline(item.text, { async: false }) as string);
+  }
+  // marked.parser はカスタム extension に dispatch しないため、list トークンだけ再帰で処理
+  return item.tokens
+    .map((tok) => {
+      if (tok.type === 'list') {
+        return renderListToken(tok as ListToken);
+      }
+      return marked.parser([tok], { async: false }) as string;
+    })
+    .join('');
+};
+
+const renderListToken = (t: ListToken): string => {
+  const body = t.items.map((item) => `<li><div>${renderListItemContent(item)}</div></li>`).join('\n');
+  const tag = t.ordered ? 'ol' : 'ul';
+  const startAttr = t.ordered && t.start !== 1 && t.start !== '' ? ` start="${t.start}"` : '';
+  return `<${tag}${startAttr}>\n${body}\n</${tag}>`;
+};
+
 const overrideListExtension: TokenizerAndRendererExtension = {
   name: 'list',
   level: 'block',
 
   renderer(token) {
     const t = token as ListToken;
-    const body = t.items
-      .map((item) => {
-        const hasBlockTokens = item.tokens.some((tok) => tok.type !== 'text');
-        const content = hasBlockTokens
-          ? marked.parser(item.tokens, { async: false })
-          : item.loose
-            ? marked.parse(item.text, { async: false })
-            : marked.parseInline(item.text, { async: false });
-        return `<li><div>${content}</div></li>`;
-      })
-      .join('\n');
+    const body = t.items.map((item) => `<li><div>${renderListItemContent(item)}</div></li>`).join('\n');
 
     // 全てのli要素に<span class="associate">が含まれているかチェック
     const allAssociate = t.items.every((item) => {

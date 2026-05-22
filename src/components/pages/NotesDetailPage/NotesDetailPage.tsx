@@ -31,7 +31,7 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
 
           {childEntries && 0 < childEntries.length && (
             <>
-              <ul>
+              <ul className={styles.children}>
                 {childEntries.map((entry) => (
                   <li key={entry.pathname}>
                     <Link href={`${entry.pathname}/`}>{entry.frontmatter.title}</Link>

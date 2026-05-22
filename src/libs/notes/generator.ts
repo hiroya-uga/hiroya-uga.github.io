@@ -66,11 +66,17 @@ const walk = (dir: string, currentSlug: string[]): string[][] => {
   return slugs;
 };
 
+const isPreviewSlug = (slug: string[]) => slug[slug.length - 1] === 'preview';
+
 export const getAllNotesSlugs = (): string[][] => {
   if (fs.existsSync(NOTES_DIR) === false) {
     return [];
   }
-  return walk(NOTES_DIR, []);
+  const slugs = walk(NOTES_DIR, []);
+  if (process.env.NODE_ENV === 'production') {
+    return slugs.filter((slug) => isPreviewSlug(slug) === false);
+  }
+  return slugs;
 };
 
 /** ./foo.mp4 や ./images/foo.png → /notes/{slugDir}/foo.mp4 などに解決する */
@@ -90,7 +96,7 @@ export const resolveNotesMediaPath = ({ imagePath, filePath }: { imagePath: stri
   return imagePath.replace('./', `/notes${dirPrefix}/`);
 };
 
-const NOTES_HUB_SLUGS = [['help']];
+const NOTES_HUB_SLUGS = [['help'], ['life'], ['setup'], ['setup', 'device'], ['setup', 'tools']];
 
 const isHubSlug = (slug: string[]) =>
   NOTES_HUB_SLUGS.some((hub) => hub.length === slug.length && hub.every((segment, i) => segment === slug[i]));
