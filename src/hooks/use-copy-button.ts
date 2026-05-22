@@ -51,7 +51,7 @@ export function useCopyButton({ mimeType = 'text/plain' }: Params = {}) {
           });
         }) satisfies PlainCopyButtonHandler;
     }
-  }, [mimeType]);
+  }, [mimeType, write]);
 
   useEffect(() => {
     return () => {

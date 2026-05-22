@@ -45,12 +45,6 @@ interface ContrastRatioForLightnessParams {
   otherLuminance: number;
 }
 
-interface ConvertLightnessToHexColorParams {
-  hue: number;
-  saturation: number;
-  lightness: number;
-}
-
 interface SearchAccessibleLightnessParams {
   hue: number;
   saturation: number;

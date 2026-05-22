@@ -349,7 +349,6 @@ export const CustomImage = () => {
       }
 
       const customImageElementIndex = ++ref.customImageElementIndex;
-      const id = `custom-img-${customImageElementIndex}`;
       const index = customImageElementIndex;
 
       img.alt = `${alt ? `図${index}：${alt}` : `図${index}`}`;

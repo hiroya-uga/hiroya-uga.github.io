@@ -77,7 +77,7 @@ export const PreviewAndResult = ({ formState, isEnableMarkdown }: Props) => {
     }
 
     return cleanUp;
-  }, [safeHtmlMessage, isEnableMarkdown, result.message]);
+  }, [safeHtmlMessage, isEnableMarkdown, result.message, startQuoteId, endQuoteId]);
 
   return (
     <>

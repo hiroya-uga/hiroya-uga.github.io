@@ -430,7 +430,7 @@ describe('SlackReminderCommandGenerator', () => {
         document.body.appendChild(portal);
 
         writeClipboardMock = vi.fn().mockResolvedValue(undefined);
-        clipboardItemCtorMock = vi.fn((_items: Record<string, Blob>) => undefined);
+        clipboardItemCtorMock = vi.fn((_: Record<string, Blob>) => undefined);
 
         class MockClipboardItem {
           constructor(items: Record<string, Blob>) {
