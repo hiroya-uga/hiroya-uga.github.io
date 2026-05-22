@@ -67,15 +67,6 @@ export const JsonLd = ({ data, breadcrumbs }: Readonly<Props>) => {
 };
 
 /** @deprecated Use JsonLd with Article data and breadcrumbs prop instead */
-export const JsonLdBreadcrumbList = ({ items }: { items: BreadcrumbItem[] }) => (
-  <script
-    key="json-ld-breadcrumb"
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(items)) }}
-  />
-);
-
-/** @deprecated Use JsonLd with Article data and breadcrumbs prop instead */
 export const JsonLdForNote = ({
   title,
   description,
