@@ -1,5 +1,5 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { CodeBlock } from '@/components/ui/embed/CodeBlock';
 import { CodeBlockWithPlatform } from '@/components/ui/embed/CodeBlockWithPlatform';
 import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
@@ -214,10 +214,9 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
             View on GitHub →
           </a>
         </p>
-        <p className="mt-share-buttons grid justify-end">
-          <TweetLink lang={inLanguage} />
-        </p>
       </div>
+
+      <ShareSection lang={inLanguage} />
     </>
   );
 };

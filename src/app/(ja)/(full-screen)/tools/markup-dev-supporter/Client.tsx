@@ -1,7 +1,7 @@
 'use client';
 
 import { MarkupDevSupporterHelpButton } from '@/app/(ja)/(full-screen)/tools/markup-dev-supporter/MarkupDevSupporterHelpButton';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { Toast } from '@/components/ui/dialogs/Toast';
 import { Picture } from '@/components/ui/features/Picture';
 import { Switch } from '@/components/ui/forms';
@@ -551,9 +551,7 @@ export const TableDevSupporterContent = () => {
             })}
           </ul>
 
-          <p className="mt-share-buttons mx-auto grid justify-end">
-            <TweetLink />
-          </p>
+          <ShareSection />
         </div>
       </nav>
 

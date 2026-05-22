@@ -1,6 +1,6 @@
 import { SortVisualizerContent } from '@/app/(ja)/(wide-content)/tools/sort-visualizer/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/sort-visualizer');
@@ -18,9 +18,7 @@ export default function Page() {
         </p>
       </PageTitle>
       <SortVisualizerContent />
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { SimpleLinkList } from '@/components/ui/lists/SimpleLinkList';
 import { getMetadata } from '@/utils/get-metadata';
 
@@ -167,9 +167,7 @@ export default function Page() {
           };
         })}
       />
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

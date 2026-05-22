@@ -33,19 +33,6 @@
   }
 }
 
-.root {
-  --x-max-width: 90%;
-
-  @media screen and (width >= 40rem) {
-    --x-max-width: 37.5rem;
-  }
-
-  :target,
-  :target * {
-    animation: target-highlight 1s ease 0.3s;
-  }
-}
-
 @keyframes rotateAnimation {
   from {
     width: 0;

@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import { DOMEventWatcherContent } from '@/app/(ja)/(common)/tools/dom-events-watcher/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/dom-events-watcher');
@@ -26,9 +26,7 @@ export default function Page() {
         </p>
       </PageTitle>
       <DOMEventWatcherContent id={id} />
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

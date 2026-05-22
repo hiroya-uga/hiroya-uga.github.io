@@ -4,7 +4,7 @@ import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { getMetadata } from '@/utils/get-metadata';
 
 import styles from '@/app/(ja)/(wide-content)/tools/kaprekar-number/page.module.css';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 
 export const metadata = getMetadata('/tools/kaprekar-number');
 
@@ -91,9 +91,7 @@ export default function Page() {
           </table>
         </NoteBox>
       </div>
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

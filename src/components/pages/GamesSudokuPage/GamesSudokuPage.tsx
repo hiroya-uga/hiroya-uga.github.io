@@ -1,4 +1,4 @@
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { Heading } from '@/components/ui/headings/Heading';
 import { DiscList } from '@/components/ui/lists/DiscList';
 import { NoteList } from '@/components/ui/lists/NoteList';
@@ -105,9 +105,7 @@ export const GamesSudokuPage = ({ metadata }: Readonly<Props>) => {
         </tbody>
       </Table>
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 };

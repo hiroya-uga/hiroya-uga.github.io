@@ -1,5 +1,5 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { Fps } from '@/components/ui/features/Fps';
 import { Metadata } from '@/utils/get-metadata';
 import { Suspense } from 'react';
@@ -25,9 +25,7 @@ export const GamesSimpleBlockBreakerPage = ({ metadata }: Readonly<Props>) => {
         </div>
       </div>
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 };

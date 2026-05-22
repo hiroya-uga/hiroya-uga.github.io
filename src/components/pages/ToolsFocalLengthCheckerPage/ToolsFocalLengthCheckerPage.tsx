@@ -1,5 +1,5 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { Picture } from '@/components/ui/features/Picture';
 import { NoteList } from '@/components/ui/lists/NoteList';
 import { Metadata } from '@/utils/get-metadata';
@@ -119,9 +119,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
             </div>
           </div>
 
-          <p className="mt-share-buttons pwa:hidden mx-auto grid justify-end">
-            <TweetLink />
-          </p>
+          <ShareSection />
         </div>
       </div>
     </>

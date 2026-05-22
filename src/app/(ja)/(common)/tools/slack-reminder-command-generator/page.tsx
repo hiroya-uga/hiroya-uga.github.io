@@ -1,7 +1,7 @@
 import { SlackReminderCommandGenerator } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client';
 import { JsonLd } from '@/components/structures/JsonLd';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { HelpLink } from '@/components/ui/buttons/HelpLink';
 import { DEFAULT_JSON_LD, URL_ORIGIN } from '@/constants/meta';
 import { getMetadata } from '@/utils/get-metadata';
@@ -34,9 +34,7 @@ export default function Page() {
         </p>
       </PageTitle>
       <SlackReminderCommandGenerator />
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

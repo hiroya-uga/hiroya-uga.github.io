@@ -1,12 +1,13 @@
 'use client';
 
+import { Lang } from '@/types/lang';
 import { useEffect, useState } from 'react';
 
 type Props = {
   className?: string;
   message?: string;
   hashtags?: string[];
-  lang?: 'ja' | 'en';
+  lang?: Lang;
 };
 
 export const TweetLink = (props: Props) => {

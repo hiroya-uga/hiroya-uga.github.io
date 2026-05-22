@@ -1,8 +1,8 @@
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
 import { Lang } from '@/types/lang';
 import { Metadata } from '@/utils/get-metadata';
 
+import { ShareSection } from '@/components/structures/ShareSection';
 import { NoteBox } from '@/components/ui/boxes/NoteBox';
 import { Heading } from '@/components/ui/headings/Heading';
 import { Table } from '@/components/ui/tables/Table';
@@ -76,9 +76,7 @@ export const ToolsUnicodePlaygroundPage = ({ metadata, lang = 'ja' }: Readonly<P
         <NoteBox title={t.graphemeBackspaceNoteTitle}>{t.graphemeBackspaceNoteBody}</NoteBox>
       </div>
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink lang={lang} />
-      </p>
+      <ShareSection lang={lang} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { RenderTextInReactPlaygroundContent } from '@/app/(ja)/(common)/tools/render-text-in-react/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { getMetadata } from '@/utils/get-metadata';
 import Link from 'next/link';
 
@@ -21,9 +21,7 @@ export default function Page() {
 
       <RenderTextInReactPlaygroundContent />
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

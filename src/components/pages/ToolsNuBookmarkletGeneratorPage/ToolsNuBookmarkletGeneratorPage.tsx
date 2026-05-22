@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { HelpLink } from '@/components/ui/buttons/HelpLink';
 import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import { Lang } from '@/types/lang';
@@ -76,9 +76,7 @@ export const ToolsNuBookmarkletGeneratorPage = ({
         </ol>
       </section>
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink lang={lang} />
-      </p>
+      <ShareSection lang={lang} />
     </>
   );
 };

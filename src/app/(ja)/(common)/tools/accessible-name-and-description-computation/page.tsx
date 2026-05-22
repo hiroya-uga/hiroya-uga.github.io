@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import { AccessibleNameAndDescriptionComputation } from '@/app/(ja)/(common)/tools/accessible-name-and-description-computation/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { TextLink } from '@/components/ui/buttons/TextLink';
 import { DiscList } from '@/components/ui/lists/DiscList';
 import { getMetadata } from '@/utils/get-metadata';
@@ -80,9 +80,7 @@ export default function Page() {
 
       <AccessibleNameAndDescriptionComputation anchorLinkId={anchorLinkId} textboxDescId={textboxDescId} />
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

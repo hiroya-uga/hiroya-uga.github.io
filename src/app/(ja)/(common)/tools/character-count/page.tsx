@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import { CharacterCountContent } from '@/app/(ja)/(common)/tools/character-count/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/character-count');
@@ -16,9 +16,7 @@ export default function Page() {
         <p>本文に文字数をチェックしたいテキストを入力してください。</p>
       </PageTitle>
       <CharacterCountContent id={id} />
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

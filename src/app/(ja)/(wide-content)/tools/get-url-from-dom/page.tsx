@@ -1,6 +1,6 @@
 import { GetUrlFromDOMContent } from '@/app/(ja)/(wide-content)/tools/get-url-from-dom/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { Heading } from '@/components/ui/headings/Heading';
 import { getMetadata } from '@/utils/get-metadata';
 
@@ -53,9 +53,7 @@ export default function Page() {
         </li>
       </ol>
 
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }

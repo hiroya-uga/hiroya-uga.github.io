@@ -1,6 +1,6 @@
 import { AnAltDecisionTreeContent } from '@/app/(ja)/(common)/tools/an-alt-decision-tree/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { getMetadata } from '@/utils/get-metadata';
 import { Suspense } from 'react';
 
@@ -28,15 +28,15 @@ export default function Page() {
         <p>代替テキストにお悩みの際にご活用ください。</p>
       </PageTitle>
 
-      <section className="bg-secondary w640:px-6 mx-auto max-w-3xl rounded-xl px-4 pb-6 pt-10">
-        <Suspense>
-          <AnAltDecisionTreeContent />
-        </Suspense>
-      </section>
+      <div className="mx-auto max-w-3xl rounded-xl">
+        <div className="bg-secondary w640:px-6 px-4 pb-6 pt-10">
+          <Suspense>
+            <AnAltDecisionTreeContent />
+          </Suspense>
+        </div>
 
-      <p className="mt-share-buttons mx-auto grid max-w-3xl justify-end">
-        <TweetLink />
-      </p>
+        <ShareSection />
+      </div>
     </>
   );
 }

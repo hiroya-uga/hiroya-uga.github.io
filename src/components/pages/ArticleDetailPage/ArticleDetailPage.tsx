@@ -1,7 +1,7 @@
 import { ArticleMain } from '@/components/structures/ArticleMain';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { GlobalHeader } from '@/components/structures/GlobalHeader';
-import { TweetLink } from '@/components/structures/TweetLink';
+
 import { ARTICLE_PATH_PATTERN_LIST, ArticleCategory, getSubCategoryName } from '@/constants/articles';
 import { resolveCategoryName } from '@/utils/articles';
 import { getArticles } from '@/utils/ssg-articles';
@@ -9,6 +9,9 @@ import { getArticles } from '@/utils/ssg-articles';
 import { getPostBySlug } from '@/libs/marked';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { ArticleNavigation } from './server';
+
+import { ShareSection } from '@/components/structures/ShareSection';
+import styles from './ArticleDetailPage.module.css';
 
 interface Props {
   post: NonNullable<ReturnType<typeof getPostBySlug>>;
@@ -37,12 +40,16 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
     <>
       <GlobalHeader layout="article-content" />
 
-      <main>
+      <main className={styles.root}>
         <ArticleMain post={post} />
-        <div className="mx-content-inline not-empty:mt-[20vh] text-center">
-          <p className="mb-10">
-            <TweetLink message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`} />
-          </p>
+
+        <div className="px-content-inline">
+          <div className="max-w-(--x-max-width) mx-auto">
+            <ShareSection align="center" message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`} />
+          </div>
+        </div>
+
+        <div className="mx-content-inline mt-10 text-center">
           <ul className="w640:grid-cols-2 w640:gap-8 w640:justify-center mx-auto grid max-w-[min(37.5rem,90%)] gap-4">
             {previousArticle && (
               <li className="w640:flex w640:first:last:col-span-2">

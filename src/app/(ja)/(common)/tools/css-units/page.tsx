@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import { CSSUnitsContent } from '@/app/(ja)/(common)/tools/css-units/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
-import { TweetLink } from '@/components/structures/TweetLink';
+import { ShareSection } from '@/components/structures/ShareSection';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/css-units');
@@ -22,9 +22,7 @@ export default function Page() {
         </p>
       </PageTitle>
       <CSSUnitsContent id={id} />
-      <p className="mt-share-buttons mx-auto grid justify-end">
-        <TweetLink />
-      </p>
+      <ShareSection />
     </>
   );
 }
