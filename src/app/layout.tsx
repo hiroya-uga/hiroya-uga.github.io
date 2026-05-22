@@ -19,6 +19,7 @@ const lineSeedJp = LINE_Seed_JP({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-line-seed-jp',
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
