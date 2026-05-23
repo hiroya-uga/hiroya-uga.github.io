@@ -28,7 +28,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
       <div className={styles.root}>
         <header className={styles.header}>
           <p className={styles.siteName}>
-            <Link href="/notes">WikiʻoleWeb</Link>
+            <Link href="/">{SITE_NAME}</Link>
           </p>
           <ul className={styles.utility}>
             <li>
@@ -61,7 +61,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
         <footer className={styles.footer}>
           <p>
             <small>
-              &copy;{new Date().getFullYear()} {SITE_NAME}
+              &copy;<span className={styles.year}>{new Date().getFullYear()}</span> {SITE_NAME}
               <span className={styles.allRightsReserved}>. All rights reserved.</span>
             </small>
           </p>

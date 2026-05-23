@@ -1,4 +1,7 @@
 .root {
+  /* px 床から rem 拡大に切り替わるブラウザ拡大率（130% = iOS Safari の拡大ステップ） */
+  --font-zoom-base: 1.3;
+
   min-height: 100dvh;
 
   a {
@@ -34,10 +37,11 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@media screen and (width <= 23.125rem) {
+@media screen and (width <= 19.9375rem) {
   .root {
     --x-color: black;
-    --x-background: white;
+    --x-code: darkred;
+    --x-background: ghostwhite;
     --x-header-background: navy;
     --x-header-link-color: white;
     --x-heading-color: darkblue;
@@ -48,7 +52,7 @@
     display: flex;
     flex-direction: column;
     font-family: var(--font-dot-gothic), "MS P Gothic", "Osaka", sans-serif;
-    font-size: max(calc(13 / 18 * 1rem), 13px);
+    font-size: max(calc(13 / 16 / var(--font-zoom-base) * 1rem), 13px);
     line-height: 1.2;
     color: var(--x-color);
     letter-spacing: 0.4px;
@@ -58,26 +62,27 @@
 
   [data-theme="dark"] .root {
     --x-color: white;
+    --x-code: palegreen;
     --x-background: black;
-    --x-header-background: #ffdf7f;
+    --x-header-background: khaki;
     --x-header-link-color: black;
-    --x-heading-color: #ffdc74;
-    --x-link: #ffbf00;
-    --x-link-visited: #9fff7f;
+    --x-heading-color: gold;
+    --x-link: khaki;
+    --x-link-visited: lavender;
     --x-border: #7f7f7f;
   }
 
   .header {
-    padding: 0 0 4px;
+    padding: 0 0 max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px);
     text-align: center;
 
     .siteName {
-      margin: 0 0 4px;
+      margin: 0 0 max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px);
       background-color: var(--x-header-background);
 
       a {
         display: block;
-        padding: 4px 10px;
+        padding: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px) 10px;
         color: var(--x-header-link-color);
       }
     }
@@ -85,10 +90,10 @@
     .utility {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 4px;
+      gap: max(calc(8 / 16 / var(--font-zoom-base) * 1rem), 8px) 4px;
       justify-content: flex-end;
-      padding: 4px;
-      font-size: max(calc(10 / 18 * 1rem), 10px);
+      padding: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px) 4px;
+      font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
 
       li {
         &::before {
@@ -121,26 +126,23 @@
   }
 
   .ad {
-    padding: 0 10px 10px;
+    padding: 0 10px max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
   }
 
   .breadcrumb {
-    padding: 10px 10px 20px;
+    padding: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px) 10px
+      max(calc(20 / 16 / var(--font-zoom-base) * 1rem), 20px);
   }
 
   .footer {
-    padding: 10px 0;
-    font-size: max(calc(10 / 18 * 1rem), 10px);
+    padding: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px) 0;
+    font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
     text-align: center;
-
-    .allRightsReserved {
-      display: none;
-    }
   }
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (width > 23.125rem) {
+@media screen and (width > 19.9375rem) {
   .root {
     --x-header-background: #f8f9fa;
     --x-header-link-color: #202122;
@@ -176,6 +178,7 @@
 
   .header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding: 6px 16px 6px 10px;
@@ -192,6 +195,7 @@
     .utility {
       display: flex;
       justify-content: flex-end;
+      margin-left: auto;
       font-size: 0.625rem;
 
       li:not(:first-child)::before {
@@ -213,7 +217,8 @@
   }
 
   .content {
-    flex-grow: 1;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 
   .navigation.ofNarrow {
@@ -232,7 +237,7 @@
     border-top: 1px solid var(--x-border);
 
     .allRightsReserved {
-      display: inline;
+      display: none;
     }
   }
 }
@@ -300,5 +305,10 @@
   }
   .content {
     padding-left: 10px;
+  }
+  .footer {
+    .year {
+      display: none;
+    }
   }
 }

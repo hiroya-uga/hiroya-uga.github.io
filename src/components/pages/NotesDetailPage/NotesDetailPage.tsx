@@ -1,3 +1,4 @@
+import { ArticleCodeHighlightActivator } from '@/components/structures/ArticleMain/ArticleMainClient';
 import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
 import Link from 'next/link';
 import { NotesGitHubEditLink } from './client';
@@ -46,6 +47,7 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
           <NotesGitHubEditLink />
         </div>
       </div>
+      <ArticleCodeHighlightActivator />
     </main>
   );
 };

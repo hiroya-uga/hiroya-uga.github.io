@@ -2,7 +2,6 @@
 
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
-import { SITE_NAME } from '@/constants/meta';
 import { NotesEntry } from '@/libs/notes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -101,7 +100,7 @@ export const NotesSidebarNav = ({ entries }: Props) => {
   return (
     <div className={styles.root}>
       <p className={styles.top}>
-        <Link href="/">{SITE_NAME}</Link>
+        <Link href="/notes">WikiʻoleWeb</Link>
       </p>
       <form
         role="search"
