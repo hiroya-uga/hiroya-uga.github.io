@@ -1,0 +1,10 @@
+version: 1
+rules:
+  - expected: ウインドウ
+    patterns:
+      - /ウィンドウ/
+    specs:
+      - from: ウィンドウ
+        to: ウインドウ
+      - from: ウィンドウのまわり
+        to: ウインドウのまわり
