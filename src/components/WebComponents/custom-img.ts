@@ -282,7 +282,7 @@ export const CustomImage = () => {
           :host {
             display: block;
             position: relative;
-            width: fit-content;
+            width: 100%;
             margin: 0 auto;
           }
 

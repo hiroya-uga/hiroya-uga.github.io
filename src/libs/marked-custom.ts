@@ -43,7 +43,7 @@ const getLazyLoadMarkup = (params: { href: string; alt: string; controls: boolea
   })();
 
   if (src && width && height) {
-    return `<span class="relative block mx-auto"><span class="absolute grid place-items-center inset-0">${LOADING_ICON_HTML}</span><customされたimg要素ˆ-ˆ src="${src}" alt="${params.alt}" width="${width}" height="${height}" class="relative noscript:invisible" loading${params.controls ? ' controls' : ''}><span style="aspect-ratio: ${width} / ${height}; display: block; width: 100%;" aria-hidden="true"></span></customされたimg要素ˆ-ˆ><noscript><img src="${src}" alt="${params.alt}" width="${width}" height="${height}" /></noscript></span>`;
+    return `<span class="relative block mx-auto"><span class="absolute grid place-items-center inset-0">${LOADING_ICON_HTML}</span><customされたimg要素ˆ-ˆ src="${src}" alt="${params.alt}" width="${width}" height="${height}" class="relative noscript:invisible" loading${params.controls ? ' controls' : ''} style="display:block;width:100%;max-width:${width}px;aspect-ratio:${width}/${height};height:auto;margin-inline:auto"></customされたimg要素ˆ-ˆ><noscript><img src="${src}" alt="${params.alt}" width="${width}" height="${height}" /></noscript></span>`;
   }
 
   return `<img src="${src}" alt="${params.alt}" loading="lazy" />`;
