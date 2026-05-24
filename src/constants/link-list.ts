@@ -138,6 +138,7 @@ export const TOOLS_LINK_LIST: Record<string, ToolPage[]> = {
     { emoji: '', pathname: '/tools/accessible-name-and-description-computation' },
     { emoji: '📏', pathname: '/tools/css-units' },
     { emoji: '', pathname: '/tools/dom-events-watcher' },
+    { emoji: '🩺', pathname: '/tools/browser-info' },
     { emoji: '👆', pathname: '/tools/touch-event-touches' },
     { emoji: '⌨', pathname: '/tools/keyboard-event' },
     { emoji: '♾️', pathname: '/tools/kaprekar-number' },

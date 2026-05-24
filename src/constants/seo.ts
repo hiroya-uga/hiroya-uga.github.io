@@ -390,6 +390,19 @@ export const SEO: Record<
     title: 'CSS Units Playground',
     description: 'それぞれのCSSの単位が、実際にはどのようなCSSピクセルになるのかを確認できるページです。',
   },
+  '/tools/browser-info': {
+    title: 'Browserinfo',
+    afterSubTitle: 'Webブラウザ・端末情報表示ツール',
+    description: '使っているブラウザや端末の情報、ユーザー設定、対応機能などをまとめて表示するツールです。',
+    languages: { ja: '/tools/browser-info', en: '/tools/browser-info/en' },
+  },
+  '/tools/browser-info/en': {
+    title: 'Browserinfo',
+    afterSubTitle: 'Browser & Device Inspector',
+    description:
+      'Displays information about the browser and device you are using, user preferences, and feature support.',
+    languages: { ja: '/tools/browser-info', en: '/tools/browser-info/en' },
+  },
   '/tools/dom-events-watcher': {
     title: 'DOM Event Playground',
     description: 'JavaScriptがどのようなイベントを受け取るのかを確認できます。',

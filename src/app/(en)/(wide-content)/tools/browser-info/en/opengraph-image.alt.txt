@@ -1,0 +1,1 @@
+uga.dev Browserinfo Browser & Device Inspector Displays information about the browser and device you are using, user preferences, and feature support.
