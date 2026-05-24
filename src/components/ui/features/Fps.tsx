@@ -12,7 +12,7 @@ export const Fps = () => {
     const updateFps = () => {
       const currentTime = performance.now();
       frameCount++;
-      if (currentTime - lastTime >= 1000) {
+      if (1000 <= currentTime - lastTime) {
         setFps(frameCount);
         frameCount = 0;
         lastTime = currentTime;
