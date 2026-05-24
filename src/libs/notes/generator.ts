@@ -96,13 +96,16 @@ export const resolveNotesMediaPath = ({ imagePath, filePath }: { imagePath: stri
   return imagePath.replace('./', `/notes${dirPrefix}/`);
 };
 
-const NOTES_HUB_SLUGS = [['help'], ['life'], ['setup'], ['setup', 'device'], ['setup', 'tools']];
-
-const isHubSlug = (slug: string[]) =>
-  NOTES_HUB_SLUGS.some((hub) => hub.length === slug.length && hub.every((segment, i) => segment === slug[i]));
+const isIndexBackedPage = (slug: string[]): boolean => {
+  const filePath = resolveNotesFilePath(slug);
+  if (filePath === null) {
+    return false;
+  }
+  return path.basename(filePath) === 'index.md';
+};
 
 export const getNotesChildEntries = (parentSlug: string[]): NotesEntry[] => {
-  if (isHubSlug(parentSlug) === false) {
+  if (isIndexBackedPage(parentSlug) === false) {
     return [];
   }
 
