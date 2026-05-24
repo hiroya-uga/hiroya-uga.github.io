@@ -265,11 +265,7 @@
 
   .heading {
     padding: 0.125rem 4px;
-
-    &::before {
-      margin-right: 0.25em;
-      content: "📃";
-    }
+    text-align: center;
   }
 
   .list {
@@ -282,7 +278,7 @@
       border-bottom: 1px solid var(--x-border);
 
       &:not(:has(ul, .text)) {
-        padding: 0.125rem 4px 0.125rem 0.5em;
+        padding: 0.125rem 0.25rem 0.125rem;
       }
 
       &::before {

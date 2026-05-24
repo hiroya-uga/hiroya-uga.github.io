@@ -381,7 +381,7 @@
       }
 
       > :is(h2, h3, h4, h5) + [class~="table-container"] {
-        margin: 0.75lh 0 0;
+        margin: 0.75lh calc(var(--padding-inline) * -1) 0;
       }
     }
 
