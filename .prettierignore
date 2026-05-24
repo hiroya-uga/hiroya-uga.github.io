@@ -5,6 +5,9 @@ obj/
 out/
 .next/
 
+# submodules
+notes/
+
 # others
 jquery.connections.js
 
