@@ -8,6 +8,7 @@ export const Fps = () => {
   useEffect(() => {
     let lastTime = performance.now();
     let frameCount = 0;
+    let rafId = 0;
     const updateFps = () => {
       const currentTime = performance.now();
       frameCount++;
@@ -16,12 +17,11 @@ export const Fps = () => {
         frameCount = 0;
         lastTime = currentTime;
       }
-      requestAnimationFrame(updateFps);
+      rafId = requestAnimationFrame(updateFps);
     };
-    requestAnimationFrame(updateFps);
+    rafId = requestAnimationFrame(updateFps);
     return () => {
-      // Cleanup function to stop the animation frame
-      setFps(0);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
