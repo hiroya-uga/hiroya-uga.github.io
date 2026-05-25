@@ -265,7 +265,6 @@
 
   .heading {
     padding: 0.125rem 4px;
-    text-align: center;
   }
 
   .list {
@@ -278,7 +277,14 @@
       border-bottom: 1px solid var(--x-border);
 
       &:not(:has(ul, .text)) {
-        padding: 0.125rem 0.25rem 0.125rem;
+        a {
+          display: block;
+          padding: 0.125rem 0.25rem;
+
+          &:hover {
+            background: var(--x-nav-background-hover);
+          }
+        }
       }
 
       &::before {

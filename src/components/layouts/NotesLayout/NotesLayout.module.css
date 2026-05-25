@@ -152,6 +152,7 @@
     --x-surface: #f8f9fa;
     --x-nav-base: #eaf3fb;
     --x-nav-background: #fff;
+    --x-nav-background-hover: #ffffea;
     --x-background: white;
 
     display: flex;
@@ -171,6 +172,7 @@
     --x-surface: #27292d;
     --x-nav-base: #202a36;
     --x-nav-background: #1f2329;
+    --x-nav-background-hover: #2c3540;
     --x-background: #1f2329;
 
     color: #eaf3fb;
