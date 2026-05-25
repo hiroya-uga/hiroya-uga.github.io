@@ -1,5 +1,5 @@
 @layer base {
-  :where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
+  :root :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > code {
     padding: 0.1428em 0.2857em;
     font-size: 0.875em;
     color: #27476b;
@@ -7,12 +7,12 @@
     border-radius: 4px;
   }
 
-  [data-theme="dark"] :where(li, th, td, figcaption, caption, p, span, a, dd, label) > code {
+  [data-theme="dark"] :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > code {
     color: #f2eeee;
     background-color: #6d4444cc;
   }
 
-  :where(li, th, td, figcaption, caption, p, span, a, dd, label, strong) > kbd {
+  :root :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > kbd {
     padding: 0.1428em 0.2857em;
     font-size: 0.875em;
     color: #ddd;
@@ -20,7 +20,7 @@
     border-radius: 4px;
   }
 
-  [data-theme="dark"] :where(li, th, td, figcaption, caption, p, span, a, dd, label) > kbd {
+  [data-theme="dark"] :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > kbd {
     color: #fff;
     background-color: #777777cc;
   }

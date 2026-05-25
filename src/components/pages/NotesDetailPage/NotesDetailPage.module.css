@@ -368,7 +368,7 @@
         margin: 0.5lh 0 0;
       }
 
-      > p {
+      > :is(p, ul, ol) {
         margin: 0.35lh 0 0;
       }
 
