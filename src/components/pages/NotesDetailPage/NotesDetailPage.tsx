@@ -26,11 +26,18 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
 
       {frontmatter !== undefined && (
         <div className={styles.meta}>
-          <p>
-            <time className={styles.date} dateTime={frontmatter.publishedAt}>
-              {dateFormatter.format(new Date(frontmatter.publishedAt))}
-            </time>
-          </p>
+          <div className={styles.date}>
+            <p>
+              公開日：
+              <time dateTime={frontmatter.publishedAt}>{dateFormatter.format(new Date(frontmatter.publishedAt))}</time>
+            </p>
+            {frontmatter.updatedAt !== undefined && frontmatter.updatedAt !== frontmatter.publishedAt && (
+              <p>
+                最終更新：
+                <time dateTime={frontmatter.updatedAt}>{dateFormatter.format(new Date(frontmatter.updatedAt))}</time>
+              </p>
+            )}
+          </div>
           {frontmatter.description !== '' && <p className={styles.description}>{frontmatter.description}</p>}
         </div>
       )}
