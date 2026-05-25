@@ -77,6 +77,7 @@
     }
   }
 
+  .meta,
   .toc,
   .content {
     > div:not([class]) > :where(p, blockquote, [class~="table-container"]) {
@@ -328,6 +329,7 @@
     padding: 0 10px 80px;
   }
 
+  .meta,
   .toc,
   .content {
     ol,

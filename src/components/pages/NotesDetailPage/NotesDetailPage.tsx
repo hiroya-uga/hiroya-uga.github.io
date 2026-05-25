@@ -1,5 +1,7 @@
 import { ArticleCodeHighlightActivator } from '@/components/structures/ArticleMain/ArticleMainClient';
+import '@/libs/marked';
 import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
+import { marked } from 'marked';
 import Link from 'next/link';
 import { NotesGitHubEditLink } from './client';
 import styles from './NotesDetailPage.module.css';
@@ -38,7 +40,14 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
               </p>
             )}
           </div>
-          {frontmatter.description !== '' && <p className={styles.description}>{frontmatter.description}</p>}
+          {frontmatter.description !== '' && (
+            <p
+              className={styles.description}
+              dangerouslySetInnerHTML={{
+                __html: marked.parseInline(frontmatter.description, { async: false }) as string,
+              }}
+            />
+          )}
         </div>
       )}
 
