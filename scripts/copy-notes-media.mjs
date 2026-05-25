@@ -1,7 +1,7 @@
 /**
- * notes/ ディレクトリ内のメディアファイルを public/notes/ にコピーする。
- * 画像は images/ フォルダ内、動画等はmdファイルの隣に置く運用を想定。
- * predev / prebuild で実行する。
+ * notes/ 内のメディアファイル（画像・動画など）を public/notes/ にコピーする。
+ * 画像は images/ フォルダ内、動画等は md ファイルの隣に置く運用を想定。
+ * dev / build の前段で実行する。
  */
 import fs from 'fs';
 import path from 'path';

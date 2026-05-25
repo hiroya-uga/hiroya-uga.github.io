@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-notes-images.mjs && next build && next-sitemap",
+    "build": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-notes-media.mjs && next build && next-sitemap",
     "build:analyze": "ANALYZE=true next build",
-    "dev": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-notes-images.mjs && next dev -p 3001",
-    "dev:articles": "node scripts/watch-blog-images.mjs",
+    "dev": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-notes-media.mjs && next dev -p 3001",
+    "dev:md": "node scripts/watch-media.mjs",
     "fix": "yarn lint:fix && yarn format:fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
