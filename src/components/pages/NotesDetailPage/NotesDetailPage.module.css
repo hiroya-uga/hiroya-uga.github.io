@@ -1,3 +1,11 @@
+.meta {
+  .date {
+    display: block;
+    font-family: var(--font-mono, monospace);
+    text-align: right;
+  }
+}
+
 .content {
   table {
     width: 100%;
@@ -42,18 +50,35 @@
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
 @media screen and (width <= 19.9375rem) {
+  .title,
+  .meta,
+  .toc,
+  .content {
+    padding: 0 10px;
+  }
+
   .title {
-    padding: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px) 10px
-      max(calc(6 / 16 / var(--font-zoom-base) * 1rem), 6px);
+    padding-top: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px);
+    padding-bottom: max(calc(6 / 16 / var(--font-zoom-base) * 1rem), 6px);
     margin: 0 0 max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px);
     border: solid var(--x-border);
     border-width: 2px 0;
   }
 
+  .meta {
+    margin: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px) 0 0;
+
+    .date {
+      font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
+    }
+
+    .description {
+      margin: 0.5lh 0 0;
+    }
+  }
+
   .toc,
   .content {
-    padding: 0 10px;
-
     > div:not([class]) > :where(p, blockquote, [class~="table-container"]) {
       margin: 1lh 0 0;
     }
@@ -273,9 +298,23 @@
     }
   }
 
+  .meta {
+    padding: 0 10px;
+
+    .date {
+      padding: 0 var(--padding-inline);
+      font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
+    }
+
+    .description {
+      padding: 0 var(--padding-inline);
+      margin: calc(0.875 * 0.75rlh * 0.5) 0 0;
+    }
+  }
+
   .toc {
     padding: 0 10px;
-    margin: 0 0 calc(0.875 * 0.5rlh);
+    margin: 2lh 0 1lh;
     font-size: 0.875rem;
 
     .inner {
@@ -465,7 +504,7 @@
     }
   }
 
-  .children {
+  .children:not(:first-child) {
     margin: 1lh 0 0;
   }
 
@@ -485,34 +524,42 @@
 @media screen and (width >= 40rem) {
   .root {
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
   }
+
   .title {
     padding-top: 0;
   }
+
   .body {
     display: grid;
     grid-template-rows: 1fr auto;
-    grid-row-start: 3;
+    grid-row-start: 4;
   }
 }
 
 @media screen and (width >= 64rem) {
   .root {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 1fr min(290px, 20vw);
     column-gap: 20px;
     padding: 0 20px 0 0;
   }
 
   .title,
+  .meta,
   .body {
     grid-column: 1 / 2;
   }
 
   .title {
     grid-row: 1 / 2;
+  }
+
+  .meta {
+    grid-row: 2 / 3;
+    margin-bottom: 2lh;
   }
 
   .toc {
@@ -523,6 +570,6 @@
   }
 
   .body {
-    grid-row: 2 / 3;
+    grid-row: 3 / 4;
   }
 }

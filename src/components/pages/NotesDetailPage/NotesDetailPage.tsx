@@ -11,12 +11,29 @@ interface Props {
   childEntries?: NotesEntry[];
 }
 
+const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+
 export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Props) => {
   return (
     <main className={styles.root}>
       <h1 className={styles.title}>
         <span className={styles.text}>{frontmatter?.title}</span>
       </h1>
+
+      {frontmatter !== undefined && (
+        <div className={styles.meta}>
+          <p>
+            <time className={styles.date} dateTime={frontmatter.publishedAt}>
+              {dateFormatter.format(new Date(frontmatter.publishedAt))}
+            </time>
+          </p>
+          {frontmatter.description !== '' && <p className={styles.description}>{frontmatter.description}</p>}
+        </div>
+      )}
 
       {toc !== undefined && toc !== '' && (
         <nav aria-label="目次" className={styles.toc}>
