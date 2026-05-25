@@ -22,7 +22,7 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@media screen and (width <= 19.9375rem) {
+@media screen and (width <= 20.38rem) {
   .root {
     display: flex;
     flex-wrap: wrap;
@@ -33,7 +33,7 @@
   }
 }
 
-@media screen and (width > 19.9375rem) {
+@media screen and (width > 20.38rem) {
   .root {
     display: flex;
     flex-wrap: wrap;

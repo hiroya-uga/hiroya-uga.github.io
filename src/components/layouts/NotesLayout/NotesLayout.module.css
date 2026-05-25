@@ -1,6 +1,6 @@
 .root {
-  /* px 床から rem 拡大に切り替わるブラウザ拡大率（130% = iOS Safari の拡大ステップ） */
-  --font-zoom-base: 1.3;
+  /* px 床から rem 拡大に切り替わるブラウザ拡大率（115% = iOS Safari の拡大ステップ） */
+  --font-zoom-base: 1.15;
 
   min-height: 100dvh;
 
@@ -37,7 +37,7 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@media screen and (width <= 19.9375rem) {
+@media screen and (width <= 20.38rem) {
   .root {
     --x-color: black;
     --x-code: darkred;
@@ -142,7 +142,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (width > 19.9375rem) {
+@media screen and (width > 20.38rem) {
   .root {
     --x-header-background: #f8f9fa;
     --x-header-link-color: #202122;
