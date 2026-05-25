@@ -103,7 +103,7 @@ export const toolsBrowserInfoLocales = {
     },
     notes: {
       // Screen
-      physicalOrientation: 'screen.orientation の値。端末を回転すると変化する。',
+      physicalOrientation: 'デバイス自体の画面の向き。',
       viewportOrientation: 'メディアクエリの値。',
       dpiEstimate: 'devicePixelRatio × 96の概算値。',
 
@@ -130,7 +130,7 @@ export const toolsBrowserInfoLocales = {
       refreshSection: 'このセクションを更新',
       getLocalFonts: '端末のフォント一覧を取得',
       gettingLocalFonts: '取得中…',
-      localFontsUnsupported: 'このブラウザはLocal Font Access APIをサポートしていません（Chromium系のみ）。',
+      localFontsUnsupported: 'このブラウザはLocal Font Access APIをサポートしていません。',
       localFontsDenied: '権限が拒否されました。',
       localFontsCount: (n: number) => `${n}件取得（クリックで展開）`,
       keysCount: (n: number, bytes: string) => `${n}件（${bytes}）`,
@@ -236,7 +236,7 @@ export const toolsBrowserInfoLocales = {
     },
     notes: {
       // Screen
-      physicalOrientation: 'Value of screen.orientation. Changes when you rotate the device.',
+      physicalOrientation: "The device's own screen orientation.",
       viewportOrientation: 'Value of the media query.',
       dpiEstimate: 'Approximate value of devicePixelRatio × 96.',
 
@@ -263,7 +263,7 @@ export const toolsBrowserInfoLocales = {
       refreshSection: 'Refresh this section',
       getLocalFonts: 'Get installed fonts',
       gettingLocalFonts: 'Fetching…',
-      localFontsUnsupported: 'This browser does not support the Local Font Access API (Chromium-only).',
+      localFontsUnsupported: 'This browser does not support the Local Font Access API.',
       localFontsDenied: 'Permission denied.',
       localFontsCount: (n: number) => `${n} fonts (click to expand)`,
       keysCount: (n: number, bytes: string) => `${n} ${n === 1 ? 'key' : 'keys'} (${bytes})`,
