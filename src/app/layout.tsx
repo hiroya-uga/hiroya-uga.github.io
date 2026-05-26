@@ -3,7 +3,8 @@ import '@/app/globals.css';
 
 import { Metadata } from 'next';
 import { LINE_Seed_JP } from 'next/font/google';
-import Script from 'next/script';
+import fs from 'node:fs';
+import path from 'node:path';
 import { Suspense } from 'react';
 
 import { Comment } from '@/components/jokes/Comment';
@@ -29,6 +30,8 @@ export const metadata: Metadata = {
   },
 };
 
+const initScript = fs.readFileSync(path.join(process.cwd(), 'src/scripts/init.js'), 'utf8').replaceAll(/\n|\s{2}/g, '');
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const theme = getTheme();
 
@@ -41,13 +44,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+
         <Comment />
         <Suspense>
           <Analytics />
           <Console />
           <LoadWebComponents />
         </Suspense>
-        <Script src="/common/scripts/init.js" strategy="beforeInteractive" />
+
+        <script dangerouslySetInnerHTML={{ __html: initScript }} />
       </head>
       <body id="top">
         <div id={DIALOG_PORTAL_ID} />
