@@ -59,7 +59,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
                     <span className="relative block size-[1lh]">
                       <SvgIcon name="information" alt="" />
                     </span>
-                    <span className={styles.adText}>AI生成画像</span>
+                    <span className={styles.adText}>AI生成バナー</span>
                   </span>
                 </span>
                 <picture>
