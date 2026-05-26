@@ -545,7 +545,8 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
     headings.push({ id, text: t.text, level: t.depth });
     headingDefs.set(currentFilePath, headings);
 
-    return `<h${t.depth} id="${id}">${t.text}</h${t.depth}>`;
+    const inner = marked.parseInline(t.text, { async: false }) as string;
+    return `<h${t.depth} id="${id}">${inner}</h${t.depth}>`;
   },
 };
 
@@ -674,7 +675,7 @@ export const getTOC = (filePath: string, isExistFootnotes: boolean): string => {
   const levelStack: number[] = [];
 
   for (const heading of headings) {
-    const linkHtml = heading.text;
+    const linkHtml = marked.parseInline(heading.text, { async: false }) as string;
 
     if (heading.level > currentLevel) {
       // より深いレベル：新しいulを開始

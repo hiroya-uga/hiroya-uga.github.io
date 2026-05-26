@@ -197,6 +197,19 @@ describe('marked-custom', () => {
       expect(toc).toContain('セクション1');
       expect(toc).toContain('セクション2');
     });
+
+    test('見出し内のインラインコード（`<blink>` 等）がエスケープされる', () => {
+      const html = markedParse(FILE, '## `<blink>` 要素') as string;
+      expect(html).toContain('<code>&lt;blink&gt;</code>');
+      expect(html).not.toContain('<blink>');
+    });
+
+    test('getTOC の項目内インラインコードもエスケープされる', () => {
+      markedParse(FILE, '## `<blink>` 要素');
+      const toc = getTOC(FILE, false);
+      expect(toc).toContain('<code>&lt;blink&gt;</code>');
+      expect(toc).not.toContain('<blink>');
+    });
   });
 
   describe('table', () => {
