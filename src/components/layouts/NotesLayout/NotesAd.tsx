@@ -97,16 +97,16 @@ export const NotesAd = () => {
     }
 
     const target = ref.current;
-    const onPointerDown = (e: PointerEvent) => {
+    const onClick = (e: MouseEvent) => {
       if (e.target instanceof Node && target.contains(e.target) === false) {
         setIsExpanded(false);
       }
     };
 
-    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('click', onClick);
 
     return () => {
-      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('click', onClick);
     };
   }, [isExpanded]);
 
