@@ -29,14 +29,16 @@
 .ad {
   padding: 0 10px;
 
+  p {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
   a {
     --x-fill: currentColor;
 
     position: relative;
     display: block;
-    width: fit-content;
-    margin: 0 auto;
-    text-wrap: nowrap;
     border: 1px solid #fff;
 
     .adBadge {
@@ -48,6 +50,7 @@
       font-size: 0.625rem;
       line-height: 1;
       color: #585858;
+      text-wrap: nowrap;
       background: #fff;
     }
 
@@ -62,19 +65,54 @@
       interpolate-size: allow-keywords;
     }
 
-    &:hover,
-    &:focus {
-      .adText {
-        width: auto;
-      }
-    }
-
     [data-theme="dark"] & {
       border-color: #ccc;
 
       .adBadge {
         color: #3a3a3a;
         background: #ccc;
+      }
+    }
+  }
+
+  p {
+    &:hover,
+    &:focus-within {
+      .adText {
+        width: auto;
+      }
+    }
+  }
+
+  @media (hover: none) {
+    a {
+      pointer-events: none;
+    }
+
+    p {
+      a::before {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        visibility: hidden;
+        place-items: center;
+        margin: auto;
+        font-size: 0.625rem;
+        line-height: 1;
+        color: var(--x-link);
+        text-decoration: underline;
+        pointer-events: auto;
+        content: "このツールを見る";
+        background: rgb(from var(--x-background) r g b / 0.9);
+        opacity: 0;
+        transition:
+          0.3s opacity ease-out,
+          0.3s visibility ease-out;
+      }
+
+      &:hover a::before {
+        visibility: visible;
+        opacity: 1;
       }
     }
   }
