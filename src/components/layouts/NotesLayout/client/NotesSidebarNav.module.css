@@ -86,7 +86,7 @@
       content: "├";
     }
 
-    li:last-child:before {
+    li:last-child::before {
       content: "└";
     }
 
@@ -152,10 +152,6 @@
     }
   }
 
-  .menu {
-    border-top: 1px solid var(--x-border);
-  }
-
   .search {
     padding: 0.25rem 10px 1.25rem;
     background: transparent;
@@ -179,6 +175,10 @@
     }
   }
 
+  .menu {
+    border-top: 1px solid var(--x-border);
+  }
+
   .heading {
     padding: 0 10px;
     background: var(--x-nav-base);
@@ -198,7 +198,7 @@
       content: "├";
     }
 
-    li:last-child:before {
+    li:last-child::before {
       content: "└";
     }
 
@@ -207,10 +207,6 @@
       padding: 0 2px;
       color: var(--x-link);
       text-decoration: underline;
-    }
-
-    a::before {
-      content: none;
     }
 
     a:visited {
@@ -225,16 +221,14 @@
       color: inherit;
       text-decoration: none;
     }
-
-    a[aria-current="page"]::before {
-      content: none;
-    }
   }
 }
 
 /** PC: 縦ナビのサイドバー */
 @media screen and (width >= 40rem) {
   .root {
+    --x-padding-block: 0.375rem;
+
     padding: 0;
   }
 
@@ -264,7 +258,7 @@
   }
 
   .heading {
-    padding: 0.125rem 4px;
+    padding: var(--x-padding-block) 0.5rem;
   }
 
   .list {
@@ -273,67 +267,44 @@
     border: 0;
     border-bottom: 1px solid var(--x-border);
 
+    ul {
+      padding-left: 0;
+      margin-left: 0.5em;
+      border-top: 1px solid var(--x-border);
+      border-left: 1px solid var(--x-border);
+    }
+
     li {
       border-bottom: 1px solid var(--x-border);
-
-      &:not(:has(ul, .text)) {
-        a {
-          display: block;
-          padding: 0.125rem 0.25rem;
-
-          &:hover {
-            background: var(--x-nav-background-hover);
-          }
-        }
-      }
 
       &::before {
         display: none;
       }
 
-      .text {
+      a {
         display: block;
-        padding: 0.125rem 4px 0.125rem 0.5em;
+        padding: var(--x-padding-block) 4px var(--x-padding-block) 0.5em;
 
-        + ul li {
-          display: flex;
-          padding: 0.125rem 4px 0.125rem 0.5em;
+        &[href]:hover {
+          background: var(--x-nav-background-hover);
         }
       }
 
-      .text + ul li {
-        position: relative;
+      &:not(:has(ul, .text)) a {
+        padding: var(--x-padding-block) 0.5rem;
+      }
 
-        &::before {
-          display: inline;
-          content: "├";
-        }
-
-        &:last-child::before {
-          content: "└";
-        }
+      .text {
+        display: block;
       }
     }
 
     li:last-child {
       border-bottom: 0;
-    }
-
-    ul {
-      padding-left: 0;
-      border-top: 1px solid var(--x-border);
-
-      li {
-        padding: 0.125rem 4px 0.125rem 1.5em;
-      }
     }
   }
 
   .list:last-child {
     border-bottom: 0;
-
-    li:last-child {
-      border-bottom: 0;
-    }
   }
 }

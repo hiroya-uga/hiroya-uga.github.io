@@ -16,11 +16,12 @@ type Name =
   | 'description'
   | 'expand'
   | 'headphone'
+  | 'information'
   | 'play'
   | 'reload'
   | 'new-tab'
   | 'question';
-const map = new Map<Name, boolean>();
+const loadingMap = new Map<Name, Promise<void>>();
 
 interface Props {
   name: Name;
@@ -35,36 +36,34 @@ export const SvgIcon = ({ name, alt }: Readonly<Props>) => {
       return;
     }
 
-    if (map.get(name) === true) {
-      setIsReady(true);
-      return;
+    let loading = loadingMap.get(name);
+
+    if (loading === undefined) {
+      const portal = document.getElementById(SVG_PORTAL_ID);
+
+      if (portal === null) {
+        console.warn(`SVG portal with id "${SVG_PORTAL_ID}" not found.`);
+        return;
+      }
+
+      loading = (async () => {
+        const { getSvg } = await import(`./${name}-icon-svg`);
+        portal.insertAdjacentHTML('beforeend', getSvg(`${SVG_ID_PREFIX}-${name}`));
+      })();
+      loadingMap.set(name, loading);
     }
 
-    const portal = document.getElementById(SVG_PORTAL_ID);
-
-    if (!portal) {
-      console.warn(`SVG portal with id "${SVG_PORTAL_ID}" not found.`);
-      return;
-    }
-
-    map.set(name, true);
-
-    (async () => {
-      const { getSvg } = await import(`./${name}-icon-svg`);
-      portal.insertAdjacentHTML('beforeend', getSvg(`${SVG_ID_PREFIX}-${name}`));
-      document.body.appendChild(portal);
-      setIsReady(true);
-    })();
+    loading.then(() => setIsReady(true));
   }, [name]);
 
   const svgId = `${SVG_ID_PREFIX}-${name}`;
+  const hasAlt = alt !== '';
 
   return (
     <svg
-      role={alt ? 'graphics-symbol' : 'presentation'}
-      aria-label={alt || undefined}
+      role={hasAlt ? 'graphics-symbol' : 'presentation'}
+      aria-label={hasAlt ? alt : undefined}
       className={clsx(['absolute inset-0 block size-full transition-opacity', isReady === false && 'opacity-0'])}
-      // suppressHydrationWarning
     >
       <use href={`#${svgId}`} />
     </svg>

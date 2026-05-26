@@ -50,15 +50,27 @@ export const NotesSidebarNav = ({ entries }: Props) => {
         }) ?? { pathname: '/notes', frontmatter: { title: 'Wikiʻoleトップ' } })
       : undefined;
 
+  const grandparentEntry =
+    currentSlug.length > 1
+      ? (entries.find(({ slug }) => {
+          if (slug.length !== currentSlug.length - 2) return false;
+          return currentSlug.slice(0, -2).every((seg, i) => seg === slug[i]);
+        }) ?? { pathname: '/notes', frontmatter: { title: 'Wikiʻoleトップ' } })
+      : undefined;
+
   const currentEntry = entries.find(
     ({ slug }) => slug.length === currentSlug.length && currentSlug.every((seg, i) => seg === slug[i]),
   );
 
+  const isLeaf = childEntries.length === 0;
   const showNavMenu = childEntries.length > 0 || siblingEntries.length > 0;
+  const headingEntry = isLeaf && grandparentEntry !== undefined ? grandparentEntry : parentEntry;
+
+  const isCurrentPath = (entryPathname: string) => pathname.replace(/\/$/, '') === entryPathname;
 
   const navListItems = (() => {
     if (childEntries.length > 0) {
-      // 子ページあり: 現在ページを起点にネスト（兄弟はひったん非表示）
+      // 子ページあり: 現在ページを起点にネスト（兄弟はいったん非表示）
       if (currentEntry) {
         return (
           <li>
@@ -68,7 +80,9 @@ export const NotesSidebarNav = ({ entries }: Props) => {
             <ul>
               {childEntries.map(({ pathname: entryPathname, frontmatter }) => (
                 <li key={entryPathname}>
-                  <Link href={entryPathname}>{frontmatter.title}</Link>
+                  <span className={styles.text}>
+                    <Link href={entryPathname}>{frontmatter.title}</Link>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -78,20 +92,50 @@ export const NotesSidebarNav = ({ entries }: Props) => {
 
       return childEntries.map(({ pathname: entryPathname, frontmatter }) => (
         <li key={entryPathname}>
-          <Link href={entryPathname}>{frontmatter.title}</Link>
+          <span className={styles.text}>
+            <Link href={entryPathname}>{frontmatter.title}</Link>
+          </span>
         </li>
       ));
     }
 
-    // 子ページなし: 兄弟を表示（ここでしか親への動線がない）
+    // 子ページなし + 祖父あり: 親をラップして兄弟をネスト（カレントは葉のまま）
+    if (parentEntry && grandparentEntry) {
+      return (
+        <li>
+          <span className={styles.text}>
+            <Link href={parentEntry.pathname}>{parentEntry.frontmatter.title}</Link>
+          </span>
+          <ul>
+            {siblingEntries.map(({ pathname: entryPathname, frontmatter }) => (
+              <li key={entryPathname}>
+                {isCurrentPath(entryPathname) ? (
+                  <span className={styles.text}>
+                    <a aria-current="page">{frontmatter.title}</a>
+                  </span>
+                ) : (
+                  <span className={styles.text}>
+                    <Link href={entryPathname}>{frontmatter.title}</Link>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    }
+
+    // 子ページなし + 祖父なし: 兄弟をフラット表示
     return siblingEntries.map(({ pathname: entryPathname, frontmatter }) => (
       <li key={entryPathname}>
-        {pathname.replace(/\/$/, '') === entryPathname ? (
+        {isCurrentPath(entryPathname) ? (
           <span className={styles.text}>
             <a aria-current="page">{frontmatter.title}</a>
           </span>
         ) : (
-          <Link href={entryPathname}>{frontmatter.title}</Link>
+          <span className={styles.text}>
+            <Link href={entryPathname}>{frontmatter.title}</Link>
+          </span>
         )}
       </li>
     ));
@@ -126,10 +170,10 @@ export const NotesSidebarNav = ({ entries }: Props) => {
         {showNavMenu && (
           <>
             <p className={styles.heading}>
-              {parentEntry === undefined ? (
+              {headingEntry === undefined ? (
                 'カテゴリー'
               ) : (
-                <Link href={parentEntry.pathname}>{parentEntry.frontmatter.title}</Link>
+                <Link href={headingEntry.pathname}>{headingEntry.frontmatter.title}</Link>
               )}
             </p>
             <ul className={styles.list}>{navListItems}</ul>

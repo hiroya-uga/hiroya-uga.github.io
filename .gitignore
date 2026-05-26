@@ -60,6 +60,7 @@ public/notes/**/*.svg
 public/notes/**/*.mp4
 public/notes/**/*.webm
 public/notes/**/*.mov
+!public/notes/images/**/*
 
 # Claude Code
 .claude/settings.local.json

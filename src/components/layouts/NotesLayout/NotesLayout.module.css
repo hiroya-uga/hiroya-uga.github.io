@@ -27,8 +27,56 @@
 }
 
 .ad {
-  img {
+  padding: 0 10px;
+
+  a {
+    --x-fill: currentColor;
+
+    position: relative;
+    display: block;
+    width: fit-content;
     margin: 0 auto;
+    text-wrap: nowrap;
+    border: 1px solid #fff;
+
+    .adBadge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 0 1px 1px;
+      overflow: hidden;
+      font-size: 0.625rem;
+      line-height: 1;
+      color: #585858;
+      background: #fff;
+    }
+
+    .adLabel {
+      display: flex;
+    }
+
+    .adText {
+      display: block;
+      width: 0;
+      transition: 0.2s width ease-out;
+      interpolate-size: allow-keywords;
+    }
+
+    &:hover,
+    &:focus {
+      .adText {
+        width: auto;
+      }
+    }
+
+    [data-theme="dark"] & {
+      border-color: #ccc;
+
+      .adBadge {
+        color: #3a3a3a;
+        background: #ccc;
+      }
+    }
   }
 }
 
@@ -92,7 +140,7 @@
       flex-wrap: wrap;
       gap: max(calc(8 / 16 / var(--font-zoom-base) * 1rem), 8px) 4px;
       justify-content: flex-end;
-      padding: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px) 4px;
+      padding: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px) 4px 0;
       font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
 
       li {
@@ -126,12 +174,11 @@
   }
 
   .ad {
-    padding: 0 10px max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
+    padding-block: max(calc(20 / 16 / var(--font-zoom-base) * 1rem), 20px);
   }
 
   .breadcrumb {
-    padding: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px) 10px
-      max(calc(20 / 16 / var(--font-zoom-base) * 1rem), 20px);
+    padding: 0 10px max(calc(20 / 16 / var(--font-zoom-base) * 1rem), 20px);
   }
 
   .footer {
@@ -215,12 +262,12 @@
   }
 
   .ad {
-    padding: 20px 10px;
+    padding: 1.25rem 10px;
   }
 
   .content {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
   }
 
   .navigation.ofNarrow {
@@ -228,7 +275,7 @@
   }
 
   .breadcrumb {
-    padding: 8px 10px;
+    padding: 0 10px 0.5rem;
     border-bottom: 1px solid var(--x-border);
   }
 
@@ -280,7 +327,7 @@
   }
 
   .ad {
-    padding: 20px calc(min(290px, 20vw) + 10px) 40px 10px;
+    padding-bottom: 1rem;
   }
 
   .content {
@@ -305,6 +352,7 @@
   .header {
     padding-left: 20px;
   }
+
   .content {
     padding-left: 10px;
   }
