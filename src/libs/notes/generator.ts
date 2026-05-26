@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -29,6 +30,64 @@ export const validateFrontmatter = (data: Record<string, unknown>, filePath: str
   }
 
   return data as NotesFrontmatter;
+};
+
+export const parseGitLogUpdatedAt = (stdout: string): Map<string, string> => {
+  const map = new Map<string, string>();
+  let currentTime: string | null = null;
+
+  for (const rawLine of stdout.split('\n')) {
+    const line = rawLine.trim();
+    if (line === '') continue;
+    if (line.startsWith('COMMIT ')) {
+      currentTime = line.slice('COMMIT '.length);
+      continue;
+    }
+    if (currentTime !== null && line.endsWith('.md') && map.has(line) === false) {
+      map.set(line, currentTime);
+    }
+  }
+
+  return map;
+};
+
+let gitUpdatedAtCache: Map<string, string> | null = null;
+
+const loadGitUpdatedAtMap = (): Map<string, string> => {
+  if (fs.existsSync(NOTES_DIR) === false) {
+    return new Map();
+  }
+
+  try {
+    const stdout = execFileSync(
+      'git',
+      ['-C', NOTES_DIR, 'log', '--name-only', '--format=COMMIT %aI', '--', '*.md'],
+      { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 },
+    );
+    return parseGitLogUpdatedAt(stdout);
+  } catch {
+    // git が無い / submodule が初期化されていない等のケースでは諦める
+    return new Map();
+  }
+};
+
+export const resetGitUpdatedAtCacheForTest = (next?: Map<string, string>): void => {
+  gitUpdatedAtCache = next ?? null;
+};
+
+export const enrichFrontmatter = (frontmatter: NotesFrontmatter, filePath: string): NotesFrontmatter => {
+  if (typeof frontmatter.updatedAt === 'string' && frontmatter.updatedAt !== '') {
+    return frontmatter;
+  }
+  if (gitUpdatedAtCache === null) {
+    gitUpdatedAtCache = loadGitUpdatedAtMap();
+  }
+  const relFromNotes = path.relative(NOTES_DIR, filePath);
+  const derived = gitUpdatedAtCache.get(relFromNotes);
+  if (derived === undefined) {
+    return frontmatter;
+  }
+  return { ...frontmatter, updatedAt: derived };
 };
 
 export const resolveNotesFilePath = (slug: string[]): string | null => {
@@ -127,7 +186,7 @@ export const getAllNotesEntries = (): NotesEntry[] => {
 
     const file = fs.readFileSync(filePath, 'utf-8');
     const { data } = matter(file);
-    const frontmatter = validateFrontmatter(data as Record<string, unknown>, filePath);
+    const frontmatter = enrichFrontmatter(validateFrontmatter(data as Record<string, unknown>, filePath), filePath);
 
     return {
       slug,
