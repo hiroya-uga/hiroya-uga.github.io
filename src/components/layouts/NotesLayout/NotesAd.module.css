@@ -1,0 +1,162 @@
+.root {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+
+  .link {
+    --x-fill: currentColor;
+
+    position: relative;
+    display: block;
+    border: 1px solid #fff;
+  }
+
+  .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    padding: 0 0 1px 1px;
+    overflow: hidden;
+    font-size: min(0.625rem, 20px);
+    line-height: 1;
+    color: #585858;
+    text-wrap: nowrap;
+    background: #fff;
+  }
+
+  .icon {
+    position: relative;
+    display: block;
+    width: 1lh;
+  }
+
+  .label {
+    display: flex;
+  }
+
+  .text {
+    display: block;
+    width: 0;
+    transition: 0.2s width ease-out;
+    interpolate-size: allow-keywords;
+  }
+
+  [data-theme="dark"] & .link {
+    border-color: #ccc;
+
+    .badge {
+      color: #3a3a3a;
+      background: #ccc;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:focus-within {
+      .label {
+        gap: 0.25em;
+      }
+
+      .text {
+        width: auto;
+      }
+    }
+  }
+
+  @media (hover: none) {
+    .badge {
+      transition: 0.2s width ease-out;
+      interpolate-size: allow-keywords;
+    }
+
+    &:focus-within {
+      .badge {
+        width: 100%;
+        border-bottom: 1px solid #777;
+      }
+
+      .label {
+        gap: 0.25em;
+      }
+
+      .text {
+        width: auto;
+      }
+    }
+
+    .textLink {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      visibility: hidden;
+      align-items: end;
+      margin: auto;
+      font-size: min(0.625rem, 20px);
+      line-height: 1;
+      color: var(--x-link);
+      text-align: center;
+      text-decoration: underline;
+      background: rgb(from var(--x-background) r g b / 0.9);
+      border: 1px solid #777;
+      opacity: 0;
+      transition:
+        0.3s opacity ease-out,
+        0.3s visibility ease-out;
+    }
+
+    [aria-expanded="true"] + .textLink {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    [data-theme="dark"] & .textLink {
+      border-color: #ccc;
+    }
+  }
+}
+
+/** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
+@media screen and (width <= 21.8rem) {
+  .root {
+    .badge {
+      font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
+    }
+
+    .textLink {
+      padding: 0 10px 0.3125rem;
+    }
+  }
+
+  .img {
+    width: max(calc(120 / 16 / var(--font-zoom-base) * 1rem), 120px);
+  }
+}
+
+/** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
+@media screen and (width > 21.8rem) {
+  .root {
+    .textLink {
+      padding: 0 10px 0.75rem;
+    }
+  }
+
+  .img {
+    width: calc(168 * 1.5 / 16 * 1rem);
+  }
+}
+
+/** PC: 縦ナビのサイドバー */
+@media screen and (width >= 40rem) {
+  .root {
+    .textLink {
+      place-items: center;
+      padding: 0 10px;
+    }
+  }
+
+  .img {
+    width: calc(468 * 1.5 / 16 * 1rem);
+  }
+}

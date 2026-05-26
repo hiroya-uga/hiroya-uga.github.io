@@ -1,4 +1,3 @@
-import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { BREADCRUMB_LABEL } from '@/constants/messages';
 import { SITE_NAME } from '@/constants/meta';
 import { NotesEntry } from '@/libs/notes';
@@ -8,6 +7,7 @@ import Link from 'next/link';
 import { NotesBreadcrumb } from './client/NotesBreadcrumb';
 import { NotesSidebarNav } from './client/NotesSidebarNav';
 import { NotesThemeToggle } from './client/NotesThemeToggle';
+import { NotesAd } from './NotesAd';
 import styles from './NotesLayout.module.css';
 
 const dotGothic16 = DotGothic16({
@@ -52,38 +52,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
         </nav>
         <div className={styles.content}>
           <aside className={styles.ad}>
-            <p>
-              <Link href="/tools/vnux">
-                <span className={styles.adBadge}>
-                  <span className={styles.adLabel}>
-                    <span className="relative block size-[1lh]">
-                      <SvgIcon name="information" alt="" />
-                    </span>
-                    <span className={styles.adText}>AI生成バナー</span>
-                  </span>
-                </span>
-                <picture>
-                  <source
-                    media="(width <= 20.38rem)"
-                    srcSet="/notes/images/gemini-generated-vnux-240x60.webp"
-                    width={120}
-                    height={30}
-                  />
-                  <source
-                    media="(20.38rem < width < 40rem)"
-                    srcSet="/notes/images/gemini-generated-vnux-504x84.webp"
-                    width={168 * 1.5}
-                    height={28 * 1.5}
-                  />
-                  <img
-                    src="/notes/images/gemini-generated-vnux-1404x180.webp"
-                    width={468 * 1.5}
-                    height={60 * 1.5}
-                    alt="vnux: Nu Html Checker for macOS"
-                  />
-                </picture>
-              </Link>
-            </p>
+            <NotesAd />
           </aside>
 
           <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>

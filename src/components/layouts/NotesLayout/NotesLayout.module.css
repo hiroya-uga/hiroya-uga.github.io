@@ -28,94 +28,6 @@
 
 .ad {
   padding: 0 10px;
-
-  p {
-    width: fit-content;
-    margin: 0 auto;
-  }
-
-  a {
-    --x-fill: currentColor;
-
-    position: relative;
-    display: block;
-    border: 1px solid #fff;
-
-    .adBadge {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0 0 1px 1px;
-      overflow: hidden;
-      font-size: 0.625rem;
-      line-height: 1;
-      color: #585858;
-      text-wrap: nowrap;
-      background: #fff;
-    }
-
-    .adLabel {
-      display: flex;
-    }
-
-    .adText {
-      display: block;
-      width: 0;
-      transition: 0.2s width ease-out;
-      interpolate-size: allow-keywords;
-    }
-
-    [data-theme="dark"] & {
-      border-color: #ccc;
-
-      .adBadge {
-        color: #3a3a3a;
-        background: #ccc;
-      }
-    }
-  }
-
-  p {
-    &:hover,
-    &:focus-within {
-      .adText {
-        width: auto;
-      }
-    }
-  }
-
-  @media (hover: none) {
-    a {
-      pointer-events: none;
-    }
-
-    p {
-      a::before {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        visibility: hidden;
-        place-items: center;
-        margin: auto;
-        font-size: 0.625rem;
-        line-height: 1;
-        color: var(--x-link);
-        text-decoration: underline;
-        pointer-events: auto;
-        content: "このツールを見る";
-        background: rgb(from var(--x-background) r g b / 0.9);
-        opacity: 0;
-        transition:
-          0.3s opacity ease-out,
-          0.3s visibility ease-out;
-      }
-
-      &:hover a::before {
-        visibility: visible;
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .navigation {
@@ -123,7 +35,7 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@media screen and (width <= 20.38rem) {
+@media screen and (width <= 21.8rem) {
   .root {
     --x-color: black;
     --x-code: darkred;
@@ -227,7 +139,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (width > 20.38rem) {
+@media screen and (width > 21.8rem) {
   .root {
     --x-header-background: #f8f9fa;
     --x-header-link-color: #202122;

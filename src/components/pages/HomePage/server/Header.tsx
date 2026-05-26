@@ -9,9 +9,9 @@ export const Header = ({ pageTitle }: Props) => {
     <header className="bg-primary relative z-10">
       <div className="w1024:pb-60px w1024:pt-14 px-4 pb-12 pt-20">
         <div className="max-w-content mx-auto">
-          <div className="w1024:mb-2 w1024:flex items-center text-center">
+          <div className="w1024:mb-2 w1024:flex w1024:text-left items-center text-center">
             <h1 className="w640:text-2xl w640:leading-8 w1024:mb-0 mb-3 text-xl font-bold leading-none">{pageTitle}</h1>
-            <p className="w1024:pl-0 pl-1.5 text-xs">
+            <p className="w1024:pl-0 w1024:grow pl-1.5 text-xs">
               <span className="w1024:inline hidden px-2">-</span>
               <span>
                 Web標準とアクセシビリティの話が好きな、

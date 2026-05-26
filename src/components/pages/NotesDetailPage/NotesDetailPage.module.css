@@ -49,7 +49,7 @@
 }
 
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
-@media screen and (width <= 20.38rem) {
+@media screen and (width <= 21.8rem) {
   .title,
   .meta,
   .toc,
@@ -279,7 +279,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (width > 20.38rem) {
+@media screen and (width > 21.8rem) {
   .root {
     --padding-inline: 8px;
 
