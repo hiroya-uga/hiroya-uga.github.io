@@ -6,6 +6,10 @@
   }
 }
 
+.description {
+  white-space: pre-wrap;
+}
+
 .content {
   table {
     width: 100%;
