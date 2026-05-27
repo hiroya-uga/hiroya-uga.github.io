@@ -73,81 +73,41 @@ export async function generateOgpImage(
   }
 
   const x = 54;
-  const halfCharRegExp = /[0-9a-zA-Z`]/;
   const lines = (() => {
-    /** 文字のカウント */
-    let i = 0;
-    /** 行数のカウント */
-    let lineIndex = 1;
-    let currentBreakIndex = -1;
-    /* 12.5 を許容 */
-    const MAX_COL_LENGTH = 14;
-    const getMaxColLength = () => {
-      if (lineIndex < 3) {
-        return MAX_COL_LENGTH;
+    // タイトルに明示的な改行があれば、それだけを信じて分割する
+    if (title.includes('\n')) {
+      return title
+        .split(/\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+    }
+
+    // 改行がない場合は実ピクセル幅で自動改行（uga.dev 透かしを避ける）
+    ctx.font = 'bold 60px "LINE Seed JP"';
+    const MAX_PIXEL_WIDTH = 800;
+    const chars = [...title.trim()];
+    const result: string[] = [];
+    let current = '';
+
+    for (let idx = 0; idx < chars.length; idx++) {
+      const char = chars[idx];
+      const candidate = current + char;
+      const exceedsWidth = ctx.measureText(candidate).width > MAX_PIXEL_WIDTH;
+      const nextChar = chars[idx + 1];
+      // 次行頭に来るとカッコ悪い記号は折り返しを 1 文字遅らせる
+      const nextIsBadStart = ['。', '、', 'ー', ' '].includes(nextChar);
+      // タグの値を閉じる記号の前では改行しない
+      const isInClosingTag = char + nextChar === '">' || nextChar + chars[idx + 2] === '">';
+
+      if (exceedsWidth && current.length > 0 && !nextIsBadStart && !isInClosingTag) {
+        result.push(current);
+        current = char;
+      } else {
+        current = candidate;
       }
-      return 19;
-    };
-    const isOver4rows = 3 < title.split('\n').length;
-    const titleString = (isOver4rows ? title.replaceAll('\n', '') : title).trim();
-    const getLength = (value: string[]) => {
-      return value.reduce((acc, char) => {
-        if (halfCharRegExp.test(char)) {
-          return acc + 0.5;
-        }
-        return acc + 1;
-      }, 0);
-    };
-
-    return [...titleString]
-      .map((char, index, self) => {
-        const maxColLength = getMaxColLength();
-
-        if (char === '\n') {
-          const after = self.slice(index + 1);
-          const nextBreakIndex = after.findIndex((c) => c === '\n');
-          const previousTextLength = getLength(self.slice(currentBreakIndex + 1, index));
-
-          currentBreakIndex = index;
-
-          if (nextBreakIndex === -1) {
-            // 12.5 を許容
-            if (previousTextLength + getLength(after) < maxColLength) {
-              return '';
-            }
-          }
-
-          i = 0;
-          lineIndex++;
-          return '\n';
-        }
-
-        if (
-          (i === maxColLength - 1 || i === maxColLength - 0.5) &&
-          // 改行しようとしているが、次が句読点やスペースなら改行しない
-          ['。', '、', 'ー', ' '].includes(self[index + 1]) === false &&
-          // 改行しようとしているが、次がタグの値を閉じる記号なら改行しない
-          self[index] + self[index + 1] !== '">' &&
-          self[index + 1] + self[index + 2] !== '">'
-        ) {
-          i = 0;
-          currentBreakIndex = index;
-          lineIndex++;
-          return `${char}\n`;
-        }
-        if (halfCharRegExp.test(char)) {
-          i += 0.5; // 調整中
-          return char;
-        }
-
-        // console.log({ i, char, maxColLength });
-
-        i += 1;
-        return char;
-      })
-      .join('')
-      .split(/\n/)
-      .filter(Boolean);
+    }
+    if (current) result.push(current);
+    return result;
   })();
 
   if (categoryName) {

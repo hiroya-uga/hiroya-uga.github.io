@@ -69,7 +69,7 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
           </div>
         </nav>
       )}
-      <div className={styles.body}>
+      <article className={styles.body} aria-label="本文">
         <div className={styles.content}>
           {content !== undefined && content !== '' && <div dangerouslySetInnerHTML={{ __html: content }} />}
 
@@ -86,10 +86,10 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
           )}
         </div>
 
-        <div className={styles.edit}>
+        <footer className={styles.edit}>
           <NotesGitHubEditLink />
-        </div>
-      </div>
+        </footer>
+      </article>
       <ArticleCodeHighlightActivator />
     </main>
   );
