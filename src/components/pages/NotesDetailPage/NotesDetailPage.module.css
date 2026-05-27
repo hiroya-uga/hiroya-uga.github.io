@@ -221,14 +221,14 @@
 
     [class~="codeblock__caption"] {
       display: flex;
+      min-height: 2.0625rem;
       margin: 0 8px;
       font-size: max(calc(11 / 16 / var(--font-zoom-base) * 1rem), 11px);
       border-bottom: 1px solid #999;
 
       [class~="codeblock__title"] {
         flex-grow: 1;
-        padding-top: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
-        margin-bottom: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px);
+        padding-block: max(calc(8 / 16 / var(--font-zoom-base) * 1rem), 8px);
         font-weight: bold;
       }
 
@@ -475,6 +475,7 @@
 
     [class~="codeblock__caption"] {
       display: flex;
+      min-height: 2.0625rem;
       padding: 0 8px;
       font-size: max(calc(11 / 16 / var(--font-zoom-base) * 1rem), 11px);
       border-bottom: 1px solid #999;
