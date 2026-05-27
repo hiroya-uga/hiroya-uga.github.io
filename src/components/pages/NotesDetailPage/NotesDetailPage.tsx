@@ -62,9 +62,9 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
       </div>
 
       {toc !== undefined && toc !== '' && (
-        <nav aria-label="目次" className={styles.toc}>
+        <nav aria-labelledby="TOC" className={styles.toc}>
           <div className={styles.inner}>
-            <h2>目次</h2>
+            <h2 id="TOC">目次</h2>
             <div className={styles.list} dangerouslySetInnerHTML={{ __html: toc }} />
           </div>
         </nav>

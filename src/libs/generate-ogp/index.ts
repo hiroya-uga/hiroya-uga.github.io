@@ -93,13 +93,45 @@ export async function generateOgpImage(
       const char = chars[idx];
       const candidate = current + char;
       const exceedsWidth = ctx.measureText(candidate).width > MAX_PIXEL_WIDTH;
-      const nextChar = chars[idx + 1];
-      // 次行頭に来るとカッコ悪い記号は折り返しを 1 文字遅らせる
-      const nextIsBadStart = ['。', '、', 'ー', ' '].includes(nextChar);
-      // タグの値を閉じる記号の前では改行しない
-      const isInClosingTag = char + nextChar === '">' || nextChar + chars[idx + 2] === '">';
+      // ここで改行すると char が次行頭に来るので、行頭に来るとカッコ悪い記号なら改行を 1 文字遅らせる
+      // 行頭禁則文字（句読点・閉じ括弧類・繰り返し記号など）
+      const charIsBadStart = [
+        '。',
+        '、',
+        '．',
+        '，',
+        '・',
+        'ー',
+        'ゝ',
+        'ゞ',
+        '々',
+        '）',
+        ')',
+        '］',
+        ']',
+        '｝',
+        '}',
+        '〉',
+        '》',
+        '」',
+        '』',
+        '】',
+        '〕',
+        '？',
+        '！',
+        '?',
+        '!',
+        '：',
+        '；',
+        ':',
+        ';',
+        ' ',
+        '　',
+      ].includes(char);
+      // タグの値を閉じる記号の直前では改行しない
+      const isInClosingTag = char + chars[idx + 1] === '">' || chars[idx + 1] + chars[idx + 2] === '">';
 
-      if (exceedsWidth && current.length > 0 && !nextIsBadStart && !isInClosingTag) {
+      if (exceedsWidth && current.length > 0 && !charIsBadStart && !isInClosingTag) {
         result.push(current);
         current = char;
       } else {
