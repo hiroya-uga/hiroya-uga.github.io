@@ -86,10 +86,6 @@
   .content {
     > div:not([class]) > :where(p, blockquote, [class~="table-container"], [class~="codeblock"]) {
       margin: 1lh 0 0;
-
-      &:first-child {
-        margin-top: 0;
-      }
     }
 
     > div:not([class]) > :where(blockquote, [class~="table-container"], [class~="codeblock"]) + :is(ol, ul) {
@@ -190,11 +186,17 @@
       > li {
         &::before {
           margin-right: 2px;
-          content: "├";
+          content: "・";
         }
 
-        &:last-child::before {
-          content: "└";
+        &:has(a) {
+          &::before {
+            content: none;
+          }
+
+          a::before {
+            content: "・";
+          }
         }
       }
     }
@@ -331,7 +333,7 @@
 
   .meta {
     padding: 0 10px;
-    margin: 0 0 1lh;
+    margin: 0 0 0.35lh;
 
     .date {
       padding: 0 var(--padding-inline);
@@ -366,9 +368,6 @@
     > div:not([class]) > :where(blockquote, [class~="table-container"], [class~="codeblock"]) {
       margin: 1lh 0;
 
-      &:first-child {
-        margin-top: 0;
-      }
       &:last-child {
         margin-bottom: 0;
       }
@@ -641,6 +640,12 @@
       max-height: calc(100dvh - 32px);
       padding-bottom: 16px;
       overflow: auto;
+    }
+  }
+
+  .content {
+    h2:first-child {
+      margin: var(--heading-margin);
     }
   }
 

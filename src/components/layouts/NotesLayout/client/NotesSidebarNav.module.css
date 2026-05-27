@@ -105,8 +105,9 @@
     }
 
     a[aria-current="page"]::before {
+      padding-right: 2px;
       color: var(--x-link);
-      content: "▶";
+      content: "→";
     }
   }
 }
@@ -192,6 +193,17 @@
 
     ul {
       padding-left: 1em;
+    }
+
+    li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2px;
+
+      ul {
+        grid-column-start: 2;
+        padding-left: 0;
+      }
     }
 
     li::before {
@@ -288,6 +300,7 @@
     }
 
     li {
+      display: block;
       border-bottom: 1px solid var(--x-border);
 
       &::before {

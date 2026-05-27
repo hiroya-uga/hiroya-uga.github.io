@@ -297,7 +297,7 @@
 
 @media screen and (width >= 64rem) {
   .root {
-    grid-template-columns: min(18.125rem, 20vw) 1fr;
+    grid-template-columns: min(18.125rem, 25vw) 1fr;
   }
 
   .header {

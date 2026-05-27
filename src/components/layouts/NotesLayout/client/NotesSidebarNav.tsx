@@ -30,116 +30,43 @@ export const NotesSidebarNav = ({ entries }: Props) => {
     .replace(/\/$/, '')
     .split('/')
     .filter(Boolean);
-  const siblingEntries = entries
-    .filter(({ slug }) => {
-      if (slug.length !== currentSlug.length) return false;
-      return currentSlug.slice(0, -1).every((seg, i) => seg === slug[i]);
-    })
-    .sort(compareEntries);
-  const childEntries = entries
-    .filter(({ slug }) => {
-      if (slug.length !== currentSlug.length + 1) return false;
-      return currentSlug.every((seg, i) => seg === slug[i]);
-    })
-    .sort(compareEntries);
-  const parentEntry =
-    currentSlug.length > 0
-      ? (entries.find(({ slug }) => {
-          if (slug.length !== currentSlug.length - 1) return false;
-          return currentSlug.slice(0, -1).every((seg, i) => seg === slug[i]);
-        }) ?? { pathname: '/notes', frontmatter: { title: 'Wikiʻoleトップ' } })
-      : undefined;
-
-  const grandparentEntry =
-    currentSlug.length > 1
-      ? (entries.find(({ slug }) => {
-          if (slug.length !== currentSlug.length - 2) return false;
-          return currentSlug.slice(0, -2).every((seg, i) => seg === slug[i]);
-        }) ?? { pathname: '/notes', frontmatter: { title: 'Wikiʻoleトップ' } })
-      : undefined;
-
-  const currentEntry = entries.find(
-    ({ slug }) => slug.length === currentSlug.length && currentSlug.every((seg, i) => seg === slug[i]),
-  );
-
-  const isLeaf = childEntries.length === 0;
-  const showNavMenu = childEntries.length > 0 || siblingEntries.length > 0;
-  const headingEntry = isLeaf && grandparentEntry !== undefined ? grandparentEntry : parentEntry;
 
   const isCurrentPath = (entryPathname: string) => pathname.replace(/\/$/, '') === entryPathname;
+  const isAncestorOfCurrent = (slug: string[]) =>
+    slug.length <= currentSlug.length && slug.every((seg, i) => seg === currentSlug[i]);
 
-  const navListItems = (() => {
-    if (childEntries.length > 0) {
-      // 子ページあり: 現在ページを起点にネスト（兄弟はいったん非表示）
-      if (currentEntry) {
-        return (
-          <li>
-            <span className={styles.text}>
-              <a aria-current="page">{currentEntry.frontmatter.title}</a>
-            </span>
-            <ul>
-              {childEntries.map(({ pathname: entryPathname, frontmatter }) => (
-                <li key={entryPathname}>
-                  <span className={styles.text}>
-                    <Link href={entryPathname}>{frontmatter.title}</Link>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </li>
-        );
-      }
+  const getChildren = (parentSlug: string[]) =>
+    entries
+      .filter(({ slug }) => slug.length === parentSlug.length + 1 && parentSlug.every((seg, i) => seg === slug[i]))
+      .sort(compareEntries);
 
-      return childEntries.map(({ pathname: entryPathname, frontmatter }) => (
-        <li key={entryPathname}>
-          <span className={styles.text}>
-            <Link href={entryPathname}>{frontmatter.title}</Link>
-          </span>
-        </li>
-      ));
-    }
+  const renderTree = (parentSlug: string[], className?: string) => {
+    const children = getChildren(parentSlug);
+    if (children.length === 0) return null;
 
-    // 子ページなし + 祖父あり: 親をラップして兄弟をネスト（カレントは葉のまま）
-    if (parentEntry && grandparentEntry) {
-      return (
-        <li>
-          <span className={styles.text}>
-            <Link href={parentEntry.pathname}>{parentEntry.frontmatter.title}</Link>
-          </span>
-          <ul>
-            {siblingEntries.map(({ pathname: entryPathname, frontmatter }) => (
-              <li key={entryPathname}>
-                {isCurrentPath(entryPathname) ? (
-                  <span className={styles.text}>
-                    <a aria-current="page">{frontmatter.title}</a>
-                  </span>
+    return (
+      <ul className={className}>
+        {children.map(({ pathname: entryPathname, frontmatter, slug }) => {
+          const isCurrent = isCurrentPath(entryPathname);
+          return (
+            <li key={entryPathname}>
+              <span className={styles.text}>
+                {isCurrent ? (
+                  <a aria-current="page">{frontmatter.title}</a>
                 ) : (
-                  <span className={styles.text}>
-                    <Link href={entryPathname}>{frontmatter.title}</Link>
-                  </span>
+                  <Link href={entryPathname}>{frontmatter.title}</Link>
                 )}
-              </li>
-            ))}
-          </ul>
-        </li>
-      );
-    }
+              </span>
+              {isAncestorOfCurrent(slug) && renderTree(slug)}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
 
-    // 子ページなし + 祖父なし: 兄弟をフラット表示
-    return siblingEntries.map(({ pathname: entryPathname, frontmatter }) => (
-      <li key={entryPathname}>
-        {isCurrentPath(entryPathname) ? (
-          <span className={styles.text}>
-            <a aria-current="page">{frontmatter.title}</a>
-          </span>
-        ) : (
-          <span className={styles.text}>
-            <Link href={entryPathname}>{frontmatter.title}</Link>
-          </span>
-        )}
-      </li>
-    ));
-  })();
+  const topLevelChildren = getChildren([]);
+  const showNavMenu = topLevelChildren.length > 0;
 
   return (
     <div className={styles.root}>
@@ -170,13 +97,9 @@ export const NotesSidebarNav = ({ entries }: Props) => {
         {showNavMenu && (
           <>
             <p className={styles.heading}>
-              {headingEntry === undefined ? (
-                'カテゴリー'
-              ) : (
-                <Link href={headingEntry.pathname}>{headingEntry.frontmatter.title}</Link>
-              )}
+              <Link href="/notes">Wikiʻoleトップ</Link>
             </p>
-            <ul className={styles.list}>{navListItems}</ul>
+            {renderTree([], styles.list)}
           </>
         )}
 
