@@ -533,6 +533,10 @@
     margin: 1lh 0 0;
   }
 
+  .content:has(> div:not([class]) > h2:last-child) > .children {
+    margin-top: 0.35lh;
+  }
+
   .edit {
     padding: 1lh 10px 1lh;
     font-size: 0.875rem;
