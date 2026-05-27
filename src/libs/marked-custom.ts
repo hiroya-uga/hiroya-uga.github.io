@@ -399,6 +399,9 @@ const kbdTextOnly: Record<string, string> = {
   alt: 'Alt',
   ctrl: 'Ctrl',
   tab: 'Tab',
+  '@': '@',
+  '.': '.',
+  ',': ',',
 };
 
 const overrideCodespanExtension: TokenizerAndRendererExtension = {

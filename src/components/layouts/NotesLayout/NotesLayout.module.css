@@ -1,6 +1,6 @@
 .root {
-  /* px 床から rem 拡大に切り替わるブラウザ拡大率（115% = iOS Safari の拡大ステップ） */
-  --font-zoom-base: 1.15;
+  /* px 床から rem 拡大に切り替わるブラウザ拡大率（125% = iOS Safari の拡大ステップ） */
+  --font-zoom-base: 1.25;
 
   min-height: 100dvh;
 
