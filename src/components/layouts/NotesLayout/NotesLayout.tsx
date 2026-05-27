@@ -61,7 +61,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
 
           {children}
         </div>
-        <nav className={clsx([styles.navigation, styles.ofNarrow])} aria-label="Notes ナビゲーション">
+        <nav id="navigation" className={clsx([styles.navigation, styles.ofNarrow])} aria-label="Notes ナビゲーション">
           <NotesSidebarNav entries={entries} />
         </nav>
         <footer className={styles.footer}>

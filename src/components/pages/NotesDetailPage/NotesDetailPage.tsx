@@ -30,30 +30,36 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
         <span className={styles.text}>{frontmatter?.title}</span>
       </h1>
 
-      {frontmatter !== undefined && (
-        <div className={styles.meta}>
-          <div className={styles.date}>
-            <p>
-              公開日：
-              <time dateTime={frontmatter.publishedAt}>{publishedDate}</time>
-            </p>
-            {updatedDate !== undefined && updatedDate !== publishedDate && (
+      <div className={styles.meta}>
+        {frontmatter !== undefined && (
+          <>
+            <div className={styles.date}>
               <p>
-                最終更新：
-                <time dateTime={frontmatter.updatedAt}>{updatedDate}</time>
+                公開日：
+                <time dateTime={frontmatter.publishedAt}>{publishedDate}</time>
               </p>
+              {updatedDate !== undefined && updatedDate !== publishedDate && (
+                <p>
+                  最終更新：
+                  <time dateTime={frontmatter.updatedAt}>{updatedDate}</time>
+                </p>
+              )}
+            </div>
+            {frontmatter.description !== '' && (
+              <p
+                className={styles.description}
+                dangerouslySetInnerHTML={{
+                  __html: marked.parseInline(frontmatter.description, { async: false }) as string,
+                }}
+              />
             )}
-          </div>
-          {frontmatter.description !== '' && (
-            <p
-              className={styles.description}
-              dangerouslySetInnerHTML={{
-                __html: marked.parseInline(frontmatter.description, { async: false }) as string,
-              }}
-            />
-          )}
-        </div>
-      )}
+          </>
+        )}
+
+        <p className={styles.toMenu}>
+          <a href="#navigation">メニュー</a>
+        </p>
+      </div>
 
       {toc !== undefined && toc !== '' && (
         <nav aria-label="目次" className={styles.toc}>
