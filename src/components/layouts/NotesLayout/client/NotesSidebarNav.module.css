@@ -257,7 +257,20 @@
     border: 1px solid var(--x-border);
   }
 
-  .heading {
+  .heading:has(a) {
+    padding: 0;
+
+    a {
+      display: block;
+      padding: var(--x-padding-block) 0.5rem;
+
+      &:hover {
+        background: var(--x-nav-background-hover);
+      }
+    }
+  }
+
+  .heading:not(:has(a)) {
     padding: var(--x-padding-block) 0.5rem;
   }
 

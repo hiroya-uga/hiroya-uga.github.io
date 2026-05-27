@@ -42,10 +42,4 @@
     font-size: 0.75rem;
     list-style: none;
   }
-
-  .item {
-    &:not(:first-child)::before {
-      content: "|";
-    }
-  }
 }

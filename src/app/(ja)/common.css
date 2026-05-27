@@ -13,11 +13,19 @@
   }
 
   :root :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > kbd {
-    padding: 0.1428em 0.2857em;
+    display: inline-block;
+    padding: 0 0.2857em;
+    margin-right: 2px;
     font-size: 0.875em;
     color: #ddd;
     background-color: #222222cc;
     border-radius: 4px;
+
+    &:has(.symbol) {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
   }
 
   [data-theme="dark"] :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > kbd {

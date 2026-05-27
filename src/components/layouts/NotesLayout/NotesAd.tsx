@@ -113,7 +113,7 @@ export const NotesAd = () => {
   if (isSupportedHover) {
     return (
       <p className={styles.root}>
-        <Link href={ad.href} className={styles.link} title="このバナーはAIによって生成されたものです。">
+        <Link href={ad.href} className={styles.link}>
           <Banner sources={ad.sources} alt={ad.alt} />
         </Link>
       </p>

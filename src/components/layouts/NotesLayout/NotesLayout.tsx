@@ -51,13 +51,13 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
           <NotesSidebarNav entries={entries} />
         </nav>
         <div className={styles.content}>
-          <aside className={styles.ad}>
-            <NotesAd />
-          </aside>
-
           <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>
             <NotesBreadcrumb entries={entries} />
           </nav>
+
+          <aside className={styles.ad}>
+            <NotesAd />
+          </aside>
 
           {children}
         </div>

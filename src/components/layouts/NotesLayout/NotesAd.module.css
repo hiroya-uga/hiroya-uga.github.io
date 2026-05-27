@@ -157,6 +157,12 @@
   }
 
   .img {
+    width: calc(468 / 16 * 1rem);
+  }
+}
+
+@media screen and (width >= 64rem) {
+  .img {
     width: calc(468 * 1.5 / 16 * 1rem);
   }
 }

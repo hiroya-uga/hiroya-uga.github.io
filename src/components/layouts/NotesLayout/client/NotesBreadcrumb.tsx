@@ -1,4 +1,5 @@
 'use client';
+
 import { NotesEntry } from '@/libs/notes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,7 +14,7 @@ export const NotesBreadcrumb = ({ entries }: Props) => {
 
   const items: { label: string; href: string }[] = [
     { label: 'HOME', href: '/' },
-    { label: 'WikiʻoleWeb', href: '/notes' },
+    { label: 'WikiʻoleWeb', href: '/notes/' },
   ];
 
   const subSegments = pathname

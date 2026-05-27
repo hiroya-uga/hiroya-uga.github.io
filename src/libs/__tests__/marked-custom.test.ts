@@ -152,6 +152,52 @@ describe('marked-custom', () => {
     });
   });
 
+  describe('codespan (kbd)', () => {
+    test.each([
+      ['Command', '⌘', 'Command'],
+      ['Cmd', '⌘', 'Command'],
+      ['Shift', '⇧', 'Shift'],
+      ['Option', '⌥', 'Option'],
+      ['Control', '⌃', 'Control'],
+      ['Ctrl', '⌃', 'Control'],
+      ['Return', '⏎', 'Return'],
+      ['Enter', '⏎', 'Enter'],
+      ['Tab', '⇥', 'Tab'],
+      ['Escape', '⎋', 'Escape'],
+      ['Esc', '⎋', 'Escape'],
+      ['Delete', '⌫', 'Delete'],
+      ['Space', '␣', 'Space'],
+    ])('`%s` を %s シンボルの <kbd> に変換する', (input, symbol, label) => {
+      const html = markedParse(FILE, `\`${input}\``) as string;
+      expect(html).toContain(`<kbd><span class="symbol">${symbol}</span>${label}</kbd>`);
+    });
+
+    test('キー名の大文字小文字を吸収する', () => {
+      const html = markedParse(FILE, '`command`') as string;
+      expect(html).toContain('<kbd><span class="symbol">⌘</span>Command</kbd>');
+    });
+
+    test.each([['Alt'], ['PrintScreen']])('`%s` は記号化せず <kbd>%s</kbd> にする', (input) => {
+      const html = markedParse(FILE, `\`${input}\``) as string;
+      expect(html).toContain(`<kbd>${input}</kbd>`);
+    });
+
+    test('`Alt` は ⌥ シンボルを含まない（Windows記事との両立）', () => {
+      const html = markedParse(FILE, '`Alt`') as string;
+      expect(html).not.toContain('⌥');
+    });
+
+    test.each([['4'], ['A'], ['F12']])('単一キー `%s` を <kbd> 化する', (input) => {
+      const html = markedParse(FILE, `\`${input}\``) as string;
+      expect(html).toContain(`<kbd>${input}</kbd>`);
+    });
+
+    test.each([['i'], ['useEffect']])('`%s` はコード扱いのまま <kbd> 化しない', (input) => {
+      const html = markedParse(FILE, `\`${input}\``) as string;
+      expect(html).not.toContain('<kbd>');
+    });
+  });
+
   describe('blockquote', () => {
     test('通常の引用を <blockquote> にレンダリングする', () => {
       const html = markedParse(FILE, '> 引用テキスト') as string;

@@ -370,6 +370,63 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
   },
 };
 
+type CodespanToken = Token & {
+  type: 'codespan';
+  raw: string;
+  text: string;
+};
+
+const kbdSymbols: Record<string, { symbol: string; label: string }> = {
+  command: { symbol: '⌘', label: 'Command' },
+  cmd: { symbol: '⌘', label: 'Command' },
+  shift: { symbol: '⇧', label: 'Shift' },
+  option: { symbol: '⌥', label: 'Option' },
+  control: { symbol: '⌃', label: 'Control' },
+  ctrl: { symbol: '⌃', label: 'Control' },
+  return: { symbol: '⏎', label: 'Return' },
+  enter: { symbol: '⏎', label: 'Enter' },
+  tab: { symbol: '⇥', label: 'Tab' },
+  escape: { symbol: '⎋', label: 'Escape' },
+  esc: { symbol: '⎋', label: 'Escape' },
+  delete: { symbol: '⌫', label: 'Delete' },
+  space: { symbol: '␣', label: 'Space' },
+};
+
+const kbdTextOnly: Record<string, string> = {
+  printscreen: 'PrintScreen',
+  space: 'Space',
+  alt: 'Alt',
+  ctrl: 'Ctrl',
+  tab: 'Tab',
+};
+
+const overrideCodespanExtension: TokenizerAndRendererExtension = {
+  name: 'codespan',
+  level: 'inline',
+
+  renderer(token) {
+    const t = token as CodespanToken;
+    const lower = t.text.toLowerCase();
+
+    const symbolKey = kbdSymbols[lower];
+    if (symbolKey) {
+      return `<kbd><span class="symbol">${symbolKey.symbol}</span>${symbolKey.label}</kbd>`;
+    }
+
+    const textKey = kbdTextOnly[lower];
+
+    if (textKey) {
+      return `<kbd>${textKey}</kbd>`;
+    }
+
+    if (/^[A-Z0-9]$/.test(t.text) || /^F(?:[1-9]|1[0-9]|2[0-4])$/.test(t.text)) {
+      return `<kbd>${t.text}</kbd>`;
+    }
+
+    return false;
+  },
+};
+
 type BlockquoteToken = Token & {
   type: 'blockquote';
   raw: string;
@@ -728,6 +785,7 @@ export const customMarkdownSyntaxes = [
   footnoteRefExtension,
   footnoteDefExtension,
   overrideCodeBlockExtension,
+  overrideCodespanExtension,
   overrideBlockquoteExtension,
   tableCaptionExtension,
   overrideTableExtension,
