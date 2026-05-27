@@ -293,7 +293,7 @@ export const CustomImage = () => {
             display: flex;
             align-items: flex-end;
             justify-content: flex-end;
-            padding: 0.5em;
+            padding: 0;
             border: none;
             background: none;
             cursor: zoom-in;
@@ -334,6 +334,12 @@ export const CustomImage = () => {
             outline: 2px solid var(--x-color-text-link, #fff);
             outline-offset: var(--x-outline-offset, 2px);
             box-shadow: 0 0 0 2px var(--x-color-background-secondary);
+          }
+
+          @media screen and (min-width: 640px) {
+            :host button {
+              padding: 0.25rem;
+            }
           }
           `,
         );

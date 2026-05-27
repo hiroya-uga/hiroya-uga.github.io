@@ -260,6 +260,21 @@
         padding: 1lh 8px;
       }
     }
+
+    :root & p:has(customされたimg要素ˆ-ˆ[src]) {
+      margin-block: 1lh;
+
+      noscript,
+      customされたimg要素ˆ-ˆ {
+        overflow: hidden;
+        border: 1px solid var(--x-border);
+      }
+
+      noscript {
+        position: absolute;
+        inset: 0;
+      }
+    }
   }
 
   .toc {
@@ -525,6 +540,30 @@
       + pre code {
         padding: 0.875rem;
         line-height: 1.5;
+      }
+    }
+
+    :root & p:has(customされたimg要素ˆ-ˆ[src]) {
+      margin-block: 1lh;
+
+      noscript,
+      customされたimg要素ˆ-ˆ {
+        overflow: hidden;
+        border-radius: 0.5rem;
+        box-shadow:
+          0 0 1px rgb(0 0 0 / 0.2),
+          0 0 12px rgb(0 0 0 / 0.1);
+        transition: border-radius 0.3s ease-out;
+
+        @supports (corner-shape: squircle) {
+          border-radius: 0.5rem;
+          corner-shape: squircle;
+        }
+      }
+
+      noscript {
+        position: absolute;
+        inset: 0;
       }
     }
   }
