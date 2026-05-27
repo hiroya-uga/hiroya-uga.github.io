@@ -20,6 +20,10 @@ const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
 });
 
 export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Props) => {
+  const publishedDate = frontmatter ? dateFormatter.format(new Date(frontmatter.publishedAt)) : '';
+  const updatedDate =
+    frontmatter?.updatedAt !== undefined ? dateFormatter.format(new Date(frontmatter.updatedAt)) : undefined;
+
   return (
     <main className={styles.root}>
       <h1 className={styles.title}>
@@ -31,12 +35,12 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
           <div className={styles.date}>
             <p>
               公開日：
-              <time dateTime={frontmatter.publishedAt}>{dateFormatter.format(new Date(frontmatter.publishedAt))}</time>
+              <time dateTime={frontmatter.publishedAt}>{publishedDate}</time>
             </p>
-            {frontmatter.updatedAt !== undefined && frontmatter.updatedAt !== frontmatter.publishedAt && (
+            {updatedDate !== undefined && updatedDate !== publishedDate && (
               <p>
                 最終更新：
-                <time dateTime={frontmatter.updatedAt}>{dateFormatter.format(new Date(frontmatter.updatedAt))}</time>
+                <time dateTime={frontmatter.updatedAt}>{updatedDate}</time>
               </p>
             )}
           </div>
