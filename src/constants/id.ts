@@ -7,4 +7,11 @@ export const SVG_PORTAL_ID = 'SVG_PORTAL';
 
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? '';
 
-export const THEME_SWITCH_DESCRIPTION_ID = 'theme-switch-description';
+export const BODY_ELEMENT_ID = 'top';
+export const FOOTNOTES_HEADING_ID = 'footnotes';
+export const NOTES_NAVIGATION_ID = 'navigation';
+export const TOC_ID = 'toc';
+export const CATEGORIES_SECTION_HEADING_ID = 'heading-categories';
+export const HOW_TO_USE_ID = 'how-to-use';
+export const GETTING_STARTED_ID = 'getting-started';
+export const DOM_EVENTS_CONTAINER_ID = 'container';

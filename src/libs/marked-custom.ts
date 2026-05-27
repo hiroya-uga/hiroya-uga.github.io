@@ -1,4 +1,5 @@
 import { LOADING_ICON_HTML } from '@/components/ui/media/LoadingIcon';
+import { FOOTNOTES_HEADING_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
 import { resolveNotesMediaPath } from '@/libs/notes';
 import { resolveArticleImagePath } from '@/utils/articles';
@@ -761,7 +762,7 @@ export const getTOC = (filePath: string, isExistFootnotes: boolean): string => {
   while (levelStack.length > 0) {
     if (levelStack.length === 1 && isExistFootnotes) {
       // 最後のulを閉じる前に脚注へのリンクを追加
-      html += `<li><a href="#footnotes">脚注</a>`;
+      html += `<li><a href="#${FOOTNOTES_HEADING_ID}">脚注</a>`;
     }
     html += '</ul>';
     levelStack.pop();

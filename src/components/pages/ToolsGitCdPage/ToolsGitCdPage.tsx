@@ -7,6 +7,7 @@ import { Heading } from '@/components/ui/headings/Heading';
 import { NoteList } from '@/components/ui/lists/NoteList';
 import { CommandTable } from '@/components/ui/tables/CommandTable';
 import { Table } from '@/components/ui/tables/Table';
+import { GETTING_STARTED_ID } from '@/constants/id';
 import { Lang } from '@/types/lang';
 import Link from 'next/link';
 import { SwitchByPlatformSection } from './client/SwitchByPlatformSection';
@@ -82,7 +83,7 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
 
       <Heading level={2}>{t.whySection}</Heading>
       <p className="-mt-3 mb-4 text-sm">
-        <Link href="#getting-started" className='after:content-["_↓"]'>
+        <Link href={`#${GETTING_STARTED_ID}`} className='after:content-["_↓"]'>
           {t.installSection}
         </Link>
       </p>
@@ -132,7 +133,7 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
         ))}
       </ul>
 
-      <Heading level={2} id="getting-started">
+      <Heading level={2} id={GETTING_STARTED_ID}>
         {t.installSection}
       </Heading>
 

@@ -2,7 +2,7 @@
 
 import { useThemeChange } from '@/hooks/use-theme-change';
 
-import { THEME_SWITCH_DESCRIPTION_ID } from '@/constants/id';
+import { useId } from 'react';
 import styles from './NotesThemeToggle.module.css';
 
 const currentThemeIs = (theme: string) =>
@@ -10,7 +10,7 @@ const currentThemeIs = (theme: string) =>
 
 export const NotesThemeToggle = () => {
   const { theme, changeTheme } = useThemeChange();
-  const id = THEME_SWITCH_DESCRIPTION_ID;
+  const id = useId();
   const isDark = theme === 'dark';
 
   return (

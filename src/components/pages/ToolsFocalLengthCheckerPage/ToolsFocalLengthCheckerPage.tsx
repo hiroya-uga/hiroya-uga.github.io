@@ -2,6 +2,7 @@ import { PageTitle } from '@/components/structures/PageTitle';
 import { ShareSection } from '@/components/structures/ShareSection';
 import { Picture } from '@/components/ui/features/Picture';
 import { NoteList } from '@/components/ui/lists/NoteList';
+import { HOW_TO_USE_ID } from '@/constants/id';
 import { Metadata } from '@/utils/get-metadata';
 import { FocalLengthChecker, PwaInstall } from './client';
 
@@ -13,7 +14,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
           <PageTitle {...props}>
             <p className="mt-4">このツールはインストール版が利用できます。</p>
             <p>
-              詳細は<a href="#how-to-use">使い方はこちら</a>を参照してください。
+              詳細は<a href={`#${HOW_TO_USE_ID}`}>使い方はこちら</a>を参照してください。
             </p>
           </PageTitle>
         </div>
@@ -23,7 +24,7 @@ export const ToolsFocalLengthCheckerPage = (props: Metadata) => {
 
       <div className="px-content-inline pwa:hidden mt-20">
         <div className="@container mx-auto max-w-[max(40rem,40vw)]">
-          <h2 className="mb-10 text-center text-2xl font-bold leading-snug" id="how-to-use">
+          <h2 className="mb-10 text-center text-2xl font-bold leading-snug" id={HOW_TO_USE_ID}>
             使い方
           </h2>
 

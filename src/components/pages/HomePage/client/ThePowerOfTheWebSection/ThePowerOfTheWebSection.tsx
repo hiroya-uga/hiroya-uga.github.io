@@ -1,5 +1,6 @@
 'use client';
 
+import { CATEGORIES_SECTION_HEADING_ID } from '@/constants/id';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
@@ -77,11 +78,11 @@ export const PowerOfTheWebSection = () => {
       {status === 'ready' && (
         <p className="animate-fade-in pointer-events-none fixed inset-0 flex items-end justify-end px-4 py-2 text-right text-sm">
           <a
-            href="#heading-categories"
+            href={`#${CATEGORIES_SECTION_HEADING_ID}`}
             className="pointer-events-auto before:content-['↓_']"
             onClick={(e) => {
               e.preventDefault();
-              const target = document.querySelector<HTMLElement>('#heading-categories');
+              const target = document.querySelector<HTMLElement>(`#${CATEGORIES_SECTION_HEADING_ID}`);
               if (target) {
                 target.setAttribute('tabindex', '-1');
                 target.focus({ preventScroll: true });

@@ -3,6 +3,7 @@ import { useId } from 'react';
 import { DOMEventWatcherContent } from '@/app/(ja)/(common)/tools/dom-events-watcher/Client';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { ShareSection } from '@/components/structures/ShareSection';
+import { DOM_EVENTS_CONTAINER_ID } from '@/constants/id';
 import { getMetadata } from '@/utils/get-metadata';
 
 export const metadata = getMetadata('/tools/dom-events-watcher');
@@ -15,7 +16,7 @@ export default function Page() {
       <PageTitle title={metadata.pageTitle}>
         <p className="mb-6">
           このページの
-          <a href="#container" id={`${id}-title`}>
+          <a href={`#${DOM_EVENTS_CONTAINER_ID}`} id={`${id}-title`}>
             いろんなイベントを受け取るフォーカス・スクロール可能なform要素
           </a>
           内のUIを操作すると、JavaScriptがどのようなイベントを受け取るのかを確認できます。

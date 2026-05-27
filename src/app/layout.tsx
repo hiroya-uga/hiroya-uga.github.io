@@ -11,7 +11,7 @@ import { Comment } from '@/components/jokes/Comment';
 import { Console } from '@/components/jokes/Console';
 import { Analytics } from '@/components/ui/features/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
-import { DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
+import { BODY_ELEMENT_ID, DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
 import { getTheme } from '@/utils/get-theme';
 
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         <script dangerouslySetInnerHTML={{ __html: initScript }} />
       </head>
-      <body id="top">
+      <body id={BODY_ELEMENT_ID}>
         <div id={DIALOG_PORTAL_ID} />
         {children}
 

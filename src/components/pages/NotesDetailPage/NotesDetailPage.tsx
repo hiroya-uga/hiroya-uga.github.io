@@ -1,8 +1,10 @@
 import { ArticleCodeHighlightActivator } from '@/components/structures/ArticleMain/ArticleMainClient';
+import { NOTES_NAVIGATION_ID, TOC_ID } from '@/constants/id';
 import '@/libs/marked';
 import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
 import { marked } from 'marked';
 import Link from 'next/link';
+import { useId } from 'react';
 import { NotesGitHubEditLink } from './client';
 import styles from './NotesDetailPage.module.css';
 
@@ -20,6 +22,8 @@ const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
 });
 
 export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Props) => {
+  const id = useId();
+
   const publishedDate = frontmatter ? dateFormatter.format(new Date(frontmatter.publishedAt)) : '';
   const updatedDate =
     frontmatter?.updatedAt !== undefined ? dateFormatter.format(new Date(frontmatter.updatedAt)) : undefined;
@@ -57,14 +61,14 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
         )}
 
         <p className={styles.toMenu}>
-          <a href="#navigation">メニュー</a>
+          <a href={`#${NOTES_NAVIGATION_ID}`}>メニュー</a>
         </p>
       </div>
 
       {toc !== undefined && toc !== '' && (
-        <nav id="toc" aria-labelledby="toc-heading" className={styles.toc}>
+        <nav id={TOC_ID} aria-labelledby={id} className={styles.toc}>
           <div className={styles.inner}>
-            <h2 id="toc-heading">目次</h2>
+            <h2 id={id}>目次</h2>
             <div className={styles.list} dangerouslySetInnerHTML={{ __html: toc }} />
           </div>
         </nav>

@@ -1,3 +1,4 @@
+import { NOTES_NAVIGATION_ID } from '@/constants/id';
 import { BREADCRUMB_LABEL } from '@/constants/messages';
 import { SITE_NAME } from '@/constants/meta';
 import { NotesEntry } from '@/libs/notes';
@@ -61,7 +62,11 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
 
           {children}
         </div>
-        <nav id="navigation" className={clsx([styles.navigation, styles.ofNarrow])} aria-label="Notes ナビゲーション">
+        <nav
+          id={NOTES_NAVIGATION_ID}
+          className={clsx([styles.navigation, styles.ofNarrow])}
+          aria-label="Notes ナビゲーション"
+        >
           <NotesSidebarNav entries={entries} />
         </nav>
         <footer className={styles.footer}>

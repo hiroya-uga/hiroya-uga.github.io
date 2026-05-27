@@ -1,10 +1,10 @@
 'use client';
 
-import { THEME_SWITCH_DESCRIPTION_ID } from '@/constants/id';
 import { useThemeChange } from '@/hooks/use-theme-change';
 import { Lang } from '@/types/lang';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { useId } from 'react';
 
 const i18n = {
   ja: {
@@ -29,7 +29,7 @@ const i18n = {
 
 export const ThemeSwitch = () => {
   const lang = usePathname().endsWith('/en/') ? 'en' : 'ja';
-  const id = THEME_SWITCH_DESCRIPTION_ID;
+  const id = useId();
   const { theme, changeTheme } = useThemeChange();
   const t = i18n[lang];
 

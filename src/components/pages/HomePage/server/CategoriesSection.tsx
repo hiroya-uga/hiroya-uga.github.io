@@ -1,4 +1,5 @@
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
+import { CATEGORIES_SECTION_HEADING_ID } from '@/constants/id';
 import { externalMediaLinkList } from '@/data/external-media-link-list';
 import { resolveCategoryName } from '@/utils/articles';
 import { getMetadata } from '@/utils/get-metadata';
@@ -81,7 +82,10 @@ export const CategoriesSection = () => {
   return (
     <div className="bg-tertiary px-content-inline w640:py-28 py-11 pb-12">
       <div className="max-w-content mx-auto">
-        <h2 className="w640:text-2xl mb-11 text-xl font-bold tracking-wide outline-none" id="heading-categories">
+        <h2
+          className="w640:text-2xl mb-11 text-xl font-bold tracking-wide outline-none"
+          id={CATEGORIES_SECTION_HEADING_ID}
+        >
           Categories
         </h2>
 

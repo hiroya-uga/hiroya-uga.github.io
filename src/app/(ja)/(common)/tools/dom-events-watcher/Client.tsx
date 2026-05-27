@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Details } from '@/components/ui/boxes/Details';
+import { DOM_EVENTS_CONTAINER_ID } from '@/constants/id';
 
 const getNow = () => {
   const date = new Date();
@@ -411,7 +412,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <form
             ref={ref}
             className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none max-h-[30vh] overflow-y-scroll overscroll-contain border border-solid p-4 pb-8"
-            id="container"
+            id={DOM_EVENTS_CONTAINER_ID}
             role="group"
             aria-labelledby={`${id}-title`}
             aria-describedby={`${id}-container-desc`}

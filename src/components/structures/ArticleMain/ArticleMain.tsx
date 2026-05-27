@@ -11,7 +11,7 @@ import {
 } from '@/components/structures/ArticleMain/ArticleMainClient';
 
 import styles from '@/components/structures/ArticleMain/ArticleMain.module.css';
-import { ARTICLE_MAIN_ID } from '@/constants/id';
+import { ARTICLE_MAIN_ID, FOOTNOTES_HEADING_ID } from '@/constants/id';
 import clsx from 'clsx';
 
 const getSpeculationRules = (selector: string) =>
@@ -128,8 +128,8 @@ export const ArticleMain = async ({ post }: Props) => {
               }}
             />
             {0 < post.footnotes.length && (
-              <section role="note" className="empty:hidden" aria-labelledby="footnotes">
-                <h2 id="footnotes">脚注</h2>
+              <section role="note" className="empty:hidden" aria-labelledby={FOOTNOTES_HEADING_ID}>
+                <h2 id={FOOTNOTES_HEADING_ID}>脚注</h2>
                 <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
                   {post.footnotes.map(async ([id, { html }]) => (
                     <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">

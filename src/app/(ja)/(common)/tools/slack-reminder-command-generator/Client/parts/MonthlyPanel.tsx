@@ -5,7 +5,7 @@ import {
   TimeField,
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/parts/fields';
 import { Radio } from '@/components/ui/forms';
-import type { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction, useId } from 'react';
 
 type FormState = Pick<SlackReminder.FormState, 'day' | 'time' | 'starting' | 'monthState'>;
 
@@ -55,30 +55,34 @@ type FixedDayInputProps = {
   setFormState: Dispatch<SetStateAction<SlackReminder.FormState>>;
 };
 
-const FixedDayInput = ({ formState, setFormState }: FixedDayInputProps) => (
-  <>
-    <p className="mb-1 text-sm font-bold leading-snug">毎月</p>
-    <p className="outline-hidden has-focus-visible:outline-black mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-2">
-      <input
-        type="number"
-        min={1}
-        max={31}
-        id="month-day"
-        value={formState.monthState.day}
-        className="focus-visible:outline-hidden box-content w-[2ch] px-0.5 py-1 text-center"
-        onInput={(e) => {
-          setFormState((prev) => ({
-            ...prev,
-            monthState: { ...prev.monthState, day: `${Number((e.target as HTMLInputElement).value) || '1'}` },
-          }));
-        }}
-      />
-      <label htmlFor="month-day" className="pt-0.5 text-xs leading-none">
-        日
-      </label>
-    </p>
-  </>
-);
+const FixedDayInput = ({ formState, setFormState }: FixedDayInputProps) => {
+  const id = useId();
+
+  return (
+    <>
+      <p className="mb-1 text-sm font-bold leading-snug">毎月</p>
+      <p className="outline-hidden has-focus-visible:outline-black mb-10 flex w-fit items-center gap-1 rounded-md border border-gray-300 px-2 py-1 outline-2">
+        <input
+          type="number"
+          min={1}
+          max={31}
+          id={id}
+          value={formState.monthState.day}
+          className="focus-visible:outline-hidden box-content w-[2ch] px-0.5 py-1 text-center"
+          onInput={(e) => {
+            setFormState((prev) => ({
+              ...prev,
+              monthState: { ...prev.monthState, day: `${Number((e.target as HTMLInputElement).value) || '1'}` },
+            }));
+          }}
+        />
+        <label htmlFor={id} className="pt-0.5 text-xs leading-none">
+          日
+        </label>
+      </p>
+    </>
+  );
+};
 
 type MonthTypeRadiosProps = {
   formState: FormState;
