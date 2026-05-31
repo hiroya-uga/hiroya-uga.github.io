@@ -399,9 +399,9 @@ const kbdTextOnly: Record<string, string> = {
   alt: 'Alt',
   ctrl: 'Ctrl',
   tab: 'Tab',
-  '@': '@',
-  '.': '.',
-  ',': ',',
+  ...Object.fromEntries(
+    '1234567890-^¥qwertyuiop@[asdfghjkl;:]zxcvbnm,./_'.split('').map((char) => [char, char] as const),
+  ),
 };
 
 const overrideCodespanExtension: TokenizerAndRendererExtension = {

@@ -1,5 +1,8 @@
-import { ArticleCodeHighlightActivator } from '@/components/structures/ArticleMain/ArticleMainClient';
-import { NOTES_NAVIGATION_ID, TOC_ID } from '@/constants/id';
+import {
+  ArticleCodeHighlightActivator,
+  ArticleFootNoteActivator,
+} from '@/components/structures/ArticleMain/ArticleMainClient';
+import { FOOTNOTES_HEADING_ID, NOTES_NAVIGATION_ID, TOC_ID } from '@/constants/id';
 import '@/libs/marked';
 import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
 import { marked } from 'marked';
@@ -13,6 +16,7 @@ interface Props {
   content?: string;
   toc?: string;
   childEntries?: NotesEntry[];
+  footnotes?: [string, { html: string | Promise<string> }][];
 }
 
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
@@ -21,7 +25,7 @@ const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
   day: '2-digit',
 });
 
-export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Props) => {
+export const NotesDetailPage = ({ frontmatter, content, toc, childEntries, footnotes = [] }: Props) => {
   const id = useId();
 
   const publishedDate = frontmatter ? dateFormatter.format(new Date(frontmatter.publishedAt)) : '';
@@ -88,6 +92,22 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
               </ul>
             </>
           )}
+
+          {0 < footnotes.length && (
+            <section role="note" aria-labelledby={FOOTNOTES_HEADING_ID}>
+              <h2 id={FOOTNOTES_HEADING_ID}>出典</h2>
+              <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
+                {footnotes.map(async ([id, { html }]) => (
+                  <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
+                    <span className="whitespace-nowrap font-mono">
+                      <a href={`#ref-${id}`} title={`本文の[^${id}]へ戻る`}>{`[^${id}]`}</a>:
+                    </span>
+                    <span dangerouslySetInnerHTML={{ __html: await html }} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
 
         <footer className={styles.edit}>
@@ -95,6 +115,7 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries }: Pro
         </footer>
       </article>
       <ArticleCodeHighlightActivator />
+      <ArticleFootNoteActivator />
     </main>
   );
 };

@@ -93,6 +93,7 @@ export default async function Page({ params }: Readonly<Props>) {
         content={post.content}
         toc={post.toc}
         childEntries={getNotesChildEntries(slug)}
+        footnotes={post.footnotes}
       />
     </>
   );

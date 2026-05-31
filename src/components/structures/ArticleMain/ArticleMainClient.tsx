@@ -418,12 +418,7 @@ export const ArticleFootNoteActivator = () => {
 };
 
 export const ArticleCodeHighlightActivator = () => {
-  const isInitialized = useRef(false);
-
   useEffect(() => {
-    if (isInitialized.current) return;
-    isInitialized.current = true;
-
     const highlight = document.querySelectorAll<HTMLElement>('pre code[data-language]');
 
     if (highlight.length === 0) {
@@ -431,12 +426,11 @@ export const ArticleCodeHighlightActivator = () => {
     }
 
     highlight.forEach(async (node) => {
-      // 既にハイライトされている場合はスキップ
+      // 既にハイライト処理中・完了の場合はスキップ（StrictMode の二重実行対策のため await 前にフラグを立てる）
       if (node.dataset.highlighted === 'true') {
         return;
       }
 
-      const code = node.textContent || '';
       const lang = node.getAttribute('data-language') || 'html';
 
       if (
@@ -451,12 +445,17 @@ export const ArticleCodeHighlightActivator = () => {
           'typescript',
           'json',
           'sh',
+          'zsh',
           'powershell',
           'yml',
         ].includes(lang) === false
       ) {
         return;
       }
+
+      node.dataset.highlighted = 'true';
+
+      const code = node.textContent || '';
 
       const __html = await codeToHtml(code, {
         lang,
@@ -474,7 +473,6 @@ export const ArticleCodeHighlightActivator = () => {
       });
 
       node.classList.add(`language-${lang}`);
-      node.dataset.highlighted = 'true';
       node.parentElement?.insertAdjacentHTML('afterend', __html);
       node.parentElement?.remove();
     });

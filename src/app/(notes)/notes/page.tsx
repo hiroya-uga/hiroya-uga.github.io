@@ -53,7 +53,7 @@ export default function Page() {
           }}
         />
       )}
-      <NotesDetailPage frontmatter={frontmatter} content={post?.content} toc={post?.toc} />
+      <NotesDetailPage frontmatter={frontmatter} content={post?.content} toc={post?.toc} footnotes={post?.footnotes} />
     </>
   );
 }

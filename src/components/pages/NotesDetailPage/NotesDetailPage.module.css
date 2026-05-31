@@ -52,6 +52,19 @@
   }
 }
 
+@layer base {
+  .content [role="note"] {
+    ul,
+    li {
+      all: unset;
+    }
+
+    li::before {
+      display: none;
+    }
+  }
+}
+
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
 @media screen and (width <= 21.8rem) {
   .title,
@@ -323,7 +336,7 @@
   .root {
     --padding-inline: 8px;
 
-    --heading-margin: calc(0.875 * 2rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --heading-margin: calc(0.875 * 3rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
   }
 
   .title {
@@ -367,7 +380,7 @@
 
   .toc {
     padding: 0 10px;
-    margin: 2lh 0 1lh;
+    margin: 3lh 0 2lh;
     font-size: 0.875rem;
 
     .inner {
@@ -393,6 +406,10 @@
       &:last-child {
         margin-bottom: 0;
       }
+    }
+
+    > div:not([class]) > p + :where(blockquote, [class~="table-container"], [class~="codeblock"]) {
+      margin-top: 0.35lh;
     }
 
     ol,
@@ -480,6 +497,31 @@
       margin-top: 1rlh;
     }
 
+    hr {
+      margin: 1.5lh 0;
+    }
+
+    h2 {
+      padding: 2px var(--padding-inline);
+      font-size: 1em;
+      font-weight: bold;
+      background: var(--x-nav-base);
+      border: 1px solid var(--x-border);
+
+      + h3 {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      padding: 2px var(--padding-inline);
+      border-bottom: 1px solid var(--x-border);
+    }
+
+    video {
+      border-radius: 8px;
+    }
+
     > div:not([class]) {
       > [class~="table-container"] {
         margin: 0.5lh 0 0;
@@ -500,35 +542,10 @@
       > :is(h2, h3, h4, h5) + [class~="table-container"] {
         margin: 0.75lh calc(var(--padding-inline) * -1) 0;
       }
-    }
 
-    hr {
-      margin: 1.5lh 0;
-    }
-
-    h2 {
-      padding: 2px var(--padding-inline);
-      font-size: 1em;
-      font-weight: bold;
-      background: var(--x-nav-base);
-      border: 1px solid var(--x-border);
-
-      &:first-child {
+      > h2:first-child {
         margin-top: 0;
       }
-
-      + h3 {
-        margin-top: 0;
-      }
-    }
-
-    h3 {
-      padding: 2px var(--padding-inline);
-      border-bottom: 1px solid var(--x-border);
-    }
-
-    video {
-      border-radius: 8px;
     }
 
     [class~="codeblock"] {
@@ -689,7 +706,7 @@
   }
 
   .content {
-    h2:first-child {
+    div:not([class]) > h2:first-child {
       margin: var(--heading-margin);
     }
   }
