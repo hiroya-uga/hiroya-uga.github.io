@@ -26,7 +26,6 @@
 
     thead {
       font-size: 0.625rem;
-      background: var(--x-nav-base);
 
       th {
         vertical-align: middle;
@@ -422,6 +421,12 @@
 
       li:not(:first-child) {
         margin-top: 0.25lh;
+      }
+    }
+
+    [role="note"] {
+      li:not(:first-child) {
+        margin-top: 0;
       }
     }
 
