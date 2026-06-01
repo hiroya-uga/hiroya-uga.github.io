@@ -96,7 +96,7 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries, footn
           {0 < footnotes.length && (
             <section role="note" aria-labelledby={FOOTNOTES_HEADING_ID}>
               <h2 id={FOOTNOTES_HEADING_ID}>出典</h2>
-              <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
+              <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2">
                 {footnotes.map(async ([id, { html }]) => (
                   <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">
                     <span className="whitespace-nowrap font-mono">
