@@ -400,7 +400,7 @@
 }
 
 @utility btn-run {
-  @apply bg-primary border-secondary text-high-contrast hover:bg-high-contrast-reverse pointer-events-auto mx-auto w-full rounded-xl border border-solid transition-[background-color,border-color,box-shadow,opacity] [corner-shape:squircle] hover:shadow-lg active:shadow-none disabled:opacity-50;
+  @apply bg-primary border-secondary text-high-contrast [&:not(:is(:disabled,[aria-disabled="true"]))]:hover:bg-high-contrast-reverse pointer-events-auto mx-auto w-full rounded-xl border border-solid transition-[background-color,border-color,box-shadow,opacity] [corner-shape:squircle] active:shadow-none [&:not(:is(:disabled,[aria-disabled="true"]))]:hover:shadow-lg;
 }
 
 @layer base {
