@@ -8,23 +8,26 @@
   vertical-align: middle;
 }
 
-.search {
-  .field {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4px;
-  }
+/* 基本 */
+@media screen and (width < 90rem) {
+  .search {
+    .field {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px;
+    }
 
-  input[type="search"] {
-    min-width: 0;
-    padding: 0 4px;
-    font-size: min(16px, 1rem);
-    border: 1px solid var(--x-border);
-  }
+    input[type="search"] {
+      min-width: 0;
+      padding: 0 4px;
+      font-size: min(16px, 1rem);
+      border: 1px solid var(--x-border);
+    }
 
-  button {
-    white-space: nowrap;
-    border: 1px solid var(--x-border);
+    button {
+      white-space: nowrap;
+      border: 1px solid var(--x-border);
+    }
   }
 }
 
@@ -113,7 +116,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (width > 21.8rem) {
+@media screen and (21.8rem < width < 90rem) {
   .root {
     --x-form-background: white;
     font-size: 0.875rem;
@@ -237,7 +240,7 @@
 }
 
 /** PC: 縦ナビのサイドバー */
-@media screen and (width >= 40rem) {
+@media screen and (40rem <= width < 90rem) {
   .root {
     --x-padding-block: 0.375rem;
 
@@ -332,5 +335,124 @@
 
   .list:last-child {
     border-bottom: 0;
+  }
+}
+
+@media screen and (90rem <= width) {
+  .root {
+    position: sticky;
+    top: 3.625rem;
+    left: 0;
+    width: 100%;
+    max-height: 100dvh;
+    padding: 0 14px 3.625rem 24px;
+    overflow: auto;
+    scrollbar-gutter: stable;
+    font-size: 0.875rem;
+    scrollbar-color: var(--x-color) transparent;
+
+    .top {
+      margin: 1rem 0;
+
+      a {
+        display: block;
+        padding: 1rem 0;
+        font-size: 0.875rem;
+        text-align: center;
+        background: var(--background-color-panel-primary);
+        border-radius: 4px;
+        transition:
+          0.3s color ease-out,
+          0.3s background-color ease-out;
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: var(--background-color-panel-primary-hover);
+          }
+        }
+      }
+    }
+
+    .search {
+      p {
+        label {
+          font-size: 0.625rem;
+          color: var(--x-nav-link);
+        }
+
+        .field {
+          display: grid;
+          grid-template-columns: 1fr auto;
+        }
+
+        input {
+          padding: 0.25em 0.5em;
+          background-color: var(--background-color-panel-primary);
+          border-radius: 4px 0 0 4px;
+        }
+
+        button {
+          padding: 0.25em 1em;
+          background-color: var(--background-color-panel-primary);
+          border-radius: 0 4px 4px 0;
+          transition: 0.3s background-color ease-out;
+
+          @media (hover: hover) {
+            &:hover {
+              background-color: var(--background-color-panel-primary-hover);
+            }
+          }
+        }
+      }
+    }
+
+    .heading {
+      margin-top: 1.5lh;
+
+      a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    .list {
+      ul {
+        position: relative;
+        padding: 0 0 0 1em;
+
+        &::before {
+          position: absolute;
+          top: 0.25lh;
+          bottom: 0.25lh;
+          left: 0.5em;
+          display: block;
+          width: 1px;
+          margin: auto 0;
+          content: "";
+          background: var(--x-border);
+        }
+
+        li {
+          padding: 0 0 0 0.5em;
+        }
+      }
+
+      .text {
+        display: block;
+      }
+
+      a {
+        display: block;
+        margin: 0.5em 0;
+        text-decoration: none;
+      }
+
+      li:has(ul) > .text a,
+      a[aria-current="page"] {
+        font-weight: bold;
+        color: var(--x-color-text-link);
+      }
+    }
   }
 }

@@ -135,7 +135,7 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (width > 21.8rem) {
+@media screen and (21.8rem < width < 90rem) {
   .root {
     .textLink {
       padding: 0 10px 0.75rem;
@@ -148,7 +148,7 @@
 }
 
 /** PC: 縦ナビのサイドバー */
-@media screen and (width >= 40rem) {
+@media screen and (40rem <= width < 90rem) {
   .root {
     .textLink {
       place-items: center;
@@ -161,7 +161,7 @@
   }
 }
 
-@media screen and (width >= 64rem) {
+@media screen and (64rem <= width < 90rem) {
   .img {
     width: calc(468 * 1.5 / 16 * 1rem);
   }

@@ -1,3 +1,4 @@
+import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 import { NOTES_NAVIGATION_ID } from '@/constants/id';
 import { BREADCRUMB_LABEL } from '@/constants/messages';
 import { SITE_NAME } from '@/constants/meta';
@@ -45,6 +46,9 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
             </li>
             <li>
               <NotesThemeToggle />
+            </li>
+            <li>
+              <ThemeSwitch />
             </li>
           </ul>
         </header>

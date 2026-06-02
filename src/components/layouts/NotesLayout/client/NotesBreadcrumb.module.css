@@ -1,23 +1,26 @@
-.root {
-  a {
-    color: var(--x-link);
+/* 基本 */
+@media screen and (width < 90rem) {
+  .root {
+    a {
+      color: var(--x-link);
+    }
+
+    a:visited {
+      color: var(--x-link-visited);
+    }
+
+    a[aria-current="page"] {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
-  a:visited {
-    color: var(--x-link-visited);
-  }
-
-  a[aria-current="page"] {
-    color: inherit;
-    text-decoration: none;
-  }
-}
-
-.item {
-  &:not(:first-child)::before {
-    padding: 0 0.5em;
-    color: inherit;
-    content: ">";
+  .item {
+    &:not(:first-child)::before {
+      padding: 0 0.5em;
+      color: inherit;
+      content: ">";
+    }
   }
 }
 
@@ -33,7 +36,7 @@
   }
 }
 
-@media screen and (width > 21.8rem) {
+@media screen and (21.8rem < width < 90rem) {
   .root {
     display: flex;
     flex-wrap: wrap;
@@ -41,5 +44,26 @@
     margin: 0;
     font-size: 0.75rem;
     list-style: none;
+  }
+}
+
+@media screen and (90rem <= width) {
+  .root {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    font-size: 0.875rem;
+
+    li:not(:first-child)::before {
+      display: inline-block;
+      width: 0.4em;
+      height: 0.4em;
+      margin-inline: 0.6em;
+      vertical-align: middle;
+      content: "";
+      border-top: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
   }
 }

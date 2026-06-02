@@ -408,6 +408,7 @@
   *::before,
   *::after {
     box-sizing: border-box;
+    min-width: 0;
   }
 
   :focus-visible {
