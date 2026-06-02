@@ -1073,11 +1073,6 @@
       background: var(--background-color-error);
     }
 
-    [class~="codeblock"] [class~="of-command"]::before {
-      color: var(--color-accent);
-      content: "$ ";
-    }
-
     [class~="codeblock"] pre {
       overflow: auto;
       white-space: pre-wrap;
