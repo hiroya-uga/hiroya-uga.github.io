@@ -1178,7 +1178,16 @@
 
     [role="note"] {
       ul {
+        margin: 1lh 0 0;
         font-size: 0.875rem;
+
+        li {
+          padding-left: 0;
+
+          &::before {
+            display: none;
+          }
+        }
       }
     }
 
