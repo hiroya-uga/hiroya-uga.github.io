@@ -13,7 +13,7 @@
   }
 
   .content {
-    blockquote {
+    [class~="blockquote"] {
       padding: 1rem;
       font-size: 0.875rem;
       background: var(--x-surface);
@@ -142,11 +142,11 @@
 
   .meta,
   .content {
-    > div:not([class]) > :where(p, blockquote, [class~="table-container"], [class~="codeblock"]) {
+    > div:not([class]) > :where(p, [class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
       margin: 1lh 0 0;
     }
 
-    > div:not([class]) > :where(blockquote, [class~="table-container"], [class~="codeblock"]) + :is(ol, ul) {
+    > div:not([class]) > :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) + :is(ol, ul) {
       margin-top: 1lh;
     }
 
@@ -263,7 +263,7 @@
       }
     }
 
-    blockquote {
+    [class~="blockquote"] {
       font-size: max(calc(12 / 16 / var(--font-zoom-base) * 1rem), 12px);
     }
 
@@ -484,7 +484,7 @@
   .meta,
   .toc,
   .content {
-    > div:not([class]) > :where(blockquote, [class~="table-container"], [class~="codeblock"]) {
+    > div:not([class]) > :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
       margin: 1lh 0;
 
       &:last-child {
@@ -492,7 +492,7 @@
       }
     }
 
-    > div:not([class]) > p + :where(blockquote, [class~="table-container"], [class~="codeblock"]) {
+    > div:not([class]) > p + :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
       margin-top: 0.35lh;
     }
 
@@ -923,7 +923,7 @@
       margin: 1.25lh 0 0;
     }
 
-    :where(blockquote, [class~="table-container"], [class~="codeblock"]) {
+    :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
       margin: 1lh 0 0;
     }
 
@@ -1021,7 +1021,7 @@
       }
     }
 
-    blockquote {
+    [class~="blockquote"] {
       padding: 1.25lh;
       background: var(--background-color-secondary);
       border-left: 0.5rem solid var(--x-border);
