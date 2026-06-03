@@ -869,6 +869,10 @@
     grid-column: 2 / 3;
     font-size: 0.875rem;
 
+    h2 + * {
+      padding-left: 0.25rem;
+    }
+
     .inner {
       position: sticky;
       top: calc(3.625rem + 16px);
