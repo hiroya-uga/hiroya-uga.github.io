@@ -298,6 +298,49 @@ describe('marked-custom', () => {
       const html = markedParse(FILE, md2) as string;
       expect(html).toContain('<th');
     });
+
+    test('tbody 全行の先頭セルが数字のみのテーブルには of-steps クラスが付く', () => {
+      const stepsMd = `
+| 手順 | 内容 |
+| --- | --- |
+| 1 | サーバーに氷を入れる |
+| 2 | 豆を挽く |
+| 3 | お湯を注ぐ |
+`.trim();
+      const html = markedParse(FILE, stepsMd) as string;
+      expect(html).toContain('class="table-container scroll-hint-x of-steps"');
+    });
+
+    test('先頭セルに数字以外が混ざるテーブルには of-steps クラスが付かない', () => {
+      const html = markedParse(FILE, md) as string;
+      expect(html).not.toContain('of-steps');
+    });
+
+    test('数字とそれ以外が混在するテーブルには of-steps クラスが付かない', () => {
+      const mixedMd = `
+| 手順 | 内容 |
+| --- | --- |
+| 1 | 最初 |
+| 次 | 二番目 |
+`.trim();
+      const html = markedParse(FILE, mixedMd) as string;
+      expect(html).not.toContain('of-steps');
+    });
+
+    test('全テーブルに colgroup と列数ぶんの col が出力される', () => {
+      const html = markedParse(FILE, md) as string;
+      expect(html).toContain('<colgroup><col><col></colgroup>');
+    });
+
+    test('align 指定のある列の col に is-* クラスが付く', () => {
+      const alignMd = `
+| 名前 | 数値 |
+| :--- | ---: |
+| Alice | 30 |
+`.trim();
+      const html = markedParse(FILE, alignMd) as string;
+      expect(html).toContain('<colgroup><col class="is-left"><col class="is-right"></colgroup>');
+    });
   });
 
   describe('list: image-list', () => {

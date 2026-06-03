@@ -38,6 +38,14 @@ export const formattedTimeString = (date: Date) =>
     .format(date)
     .replace(':', '時') + '分';
 
+export const formattedLogTimeString = (date: Date) => {
+  const hh = `${date.getHours()}`.padStart(2, '0');
+  const mm = `${date.getMinutes()}`.padStart(2, '0');
+  const ss = `${date.getSeconds()}`.padStart(2, '0');
+  const ms = `${date.getMilliseconds()}`.padStart(3, '0');
+  return `${hh}:${mm}:${ss}.${ms}`;
+};
+
 export const formatHexString = (input: string) => {
   const value = input.trim().replace(/^#/, '');
 

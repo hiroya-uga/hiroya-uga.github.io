@@ -1,10 +1,13 @@
 import path from 'node:path';
 import { afterEach, describe, expect, test } from 'vitest';
+import { compareNotesEntries } from '../compare';
 import {
   enrichFrontmatter,
   NOTES_DIR,
   parseGitLogUpdatedAt,
   resetGitUpdatedAtCacheForTest,
+  validateFrontmatter,
+  type NotesEntry,
   type NotesFrontmatter,
 } from '../generator';
 
@@ -103,5 +106,82 @@ describe('enrichFrontmatter', () => {
 
     expect(result).toStrictEqual(baseFrontmatter);
     expect(result.updatedAt).toBeUndefined();
+  });
+});
+
+describe('validateFrontmatter', () => {
+  const validData = {
+    title: 'タイトル',
+    description: '説明',
+    publishedAt: '2026-01-01T00:00:00+09:00',
+  };
+
+  test('sortIndex が数値ならそのまま通す', () => {
+    expect(() => validateFrontmatter({ ...validData, sortIndex: 1 }, 'foo.md')).not.toThrow();
+    expect(() => validateFrontmatter({ ...validData, sortIndex: 0 }, 'foo.md')).not.toThrow();
+    expect(() => validateFrontmatter({ ...validData, sortIndex: -10 }, 'foo.md')).not.toThrow();
+  });
+
+  test('sortIndex が文字列ならエラー', () => {
+    expect(() => validateFrontmatter({ ...validData, sortIndex: '1' }, 'foo.md')).toThrow(/sortIndex/);
+  });
+
+  test('sortIndex が NaN や Infinity ならエラー', () => {
+    expect(() => validateFrontmatter({ ...validData, sortIndex: NaN }, 'foo.md')).toThrow(/sortIndex/);
+    expect(() => validateFrontmatter({ ...validData, sortIndex: Infinity }, 'foo.md')).toThrow(/sortIndex/);
+  });
+});
+
+describe('compareNotesEntries', () => {
+  const makeEntry = (slug: string, frontmatter: Partial<NotesFrontmatter> & { title: string }): NotesEntry => ({
+    slug: [slug],
+    pathname: `/notes/${slug}`,
+    frontmatter: {
+      description: '',
+      publishedAt: '2026-01-01T00:00:00+09:00',
+      ...frontmatter,
+    },
+  });
+
+  test('両方に sortIndex があれば降順で比較する', () => {
+    const a = makeEntry('a', { title: 'あ', sortIndex: 1 });
+    const b = makeEntry('b', { title: 'い', sortIndex: 10 });
+
+    expect([a, b].sort(compareNotesEntries).map((e) => e.slug[0])).toStrictEqual(['b', 'a']);
+  });
+
+  test('片方にしか sortIndex が無ければ、ある方が先', () => {
+    const a = makeEntry('a', { title: 'あ' });
+    const b = makeEntry('b', { title: 'い', sortIndex: 99 });
+
+    expect([a, b].sort(compareNotesEntries).map((e) => e.slug[0])).toStrictEqual(['b', 'a']);
+  });
+
+  test('両方に sortIndex が無ければ title でロケール比較する', () => {
+    const a = makeEntry('a', { title: 'りんご' });
+    const b = makeEntry('b', { title: 'あんず' });
+
+    expect([a, b].sort(compareNotesEntries).map((e) => e.slug[0])).toStrictEqual(['b', 'a']);
+  });
+
+  test('sortIndex: -1 は常に最下段に来る（数値指定より下）', () => {
+    const a = makeEntry('a', { title: 'あ', sortIndex: -1 });
+    const b = makeEntry('b', { title: 'い', sortIndex: 5 });
+
+    expect([a, b].sort(compareNotesEntries).map((e) => e.slug[0])).toStrictEqual(['b', 'a']);
+  });
+
+  test('sortIndex: -1 は未指定よりも下', () => {
+    const a = makeEntry('a', { title: 'あ', sortIndex: -1 });
+    const b = makeEntry('b', { title: 'い' });
+
+    expect([a, b].sort(compareNotesEntries).map((e) => e.slug[0])).toStrictEqual(['b', 'a']);
+  });
+
+  test('両方 sortIndex: -1 なら title でロケール比較する', () => {
+    const a = makeEntry('a', { title: 'りんご', sortIndex: -1 });
+    const b = makeEntry('b', { title: 'あんず', sortIndex: -1 });
+
+    expect([a, b].sort(compareNotesEntries).map((e) => e.slug[0])).toStrictEqual(['b', 'a']);
   });
 });

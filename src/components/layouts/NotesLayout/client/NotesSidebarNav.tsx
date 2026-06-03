@@ -2,7 +2,8 @@
 
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
-import { NotesEntry } from '@/libs/notes';
+import type { NotesEntry } from '@/libs/notes';
+import { compareNotesEntries } from '@/libs/notes/compare';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useId } from 'react';
@@ -11,15 +12,6 @@ import styles from './NotesSidebarNav.module.css';
 interface Props {
   entries: NotesEntry[];
 }
-
-const META_SLUGS = ['help'];
-
-const compareEntries = (a: NotesEntry, b: NotesEntry) => {
-  const aMeta = a.slug.length > 0 && META_SLUGS.includes(a.slug[0]);
-  const bMeta = b.slug.length > 0 && META_SLUGS.includes(b.slug[0]);
-  if (aMeta !== bMeta) return aMeta ? 1 : -1;
-  return a.frontmatter.title.localeCompare(b.frontmatter.title, 'ja');
-};
 
 export const NotesSidebarNav = ({ entries }: Props) => {
   const pathname = usePathname();
@@ -38,7 +30,7 @@ export const NotesSidebarNav = ({ entries }: Props) => {
   const getChildren = (parentSlug: string[]) =>
     entries
       .filter(({ slug }) => slug.length === parentSlug.length + 1 && parentSlug.every((seg, i) => seg === slug[i]))
-      .sort(compareEntries);
+      .sort(compareNotesEntries);
 
   const renderTree = (parentSlug: string[], className?: string) => {
     const children = getChildren(parentSlug);

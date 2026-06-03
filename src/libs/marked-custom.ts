@@ -557,7 +557,14 @@ const overrideTableExtension: TokenizerAndRendererExtension = {
       })
       .join('');
 
-    return `<div class="table-container scroll-hint-x"><table><thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody></table></div>`;
+    const isStepsTable = t.rows.length > 0 && t.rows.every((row) => /^\d+$/.test(extractText(row[0]).trim()));
+    const containerClass = `table-container scroll-hint-x${isStepsTable ? ' of-steps' : ''}`;
+
+    const colgroupHtml = `<colgroup>${t.align
+      .map((align) => (align ? `<col class="is-${align}">` : '<col>'))
+      .join('')}</colgroup>`;
+
+    return `<div class="${containerClass}"><table>${colgroupHtml}<thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody></table></div>`;
   },
 };
 

@@ -55,6 +55,21 @@
       }
     }
 
+    [class~="of-steps"] table {
+      col:first-child {
+        width: calc(10px + 2em);
+      }
+      thead th:first-child {
+        padding-inline: 0;
+      }
+
+      td:first-child {
+        padding-inline: 0;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+
     video {
       aspect-ratio: 1 / 1;
     }
@@ -364,6 +379,12 @@
 
       :is(ol, ul) {
         margin-left: 0;
+      }
+    }
+
+    [class~="of-steps"] table {
+      col:first-child {
+        width: calc(18px + 2em);
       }
     }
 
@@ -808,7 +829,7 @@
 
 @media screen and (90rem <= width) {
   .root {
-    --x-section-padding-left: 6px;
+    --x-section-padding-left: 2.5rem;
 
     display: grid;
     grid-template-rows: auto auto 1fr auto;
@@ -829,7 +850,8 @@
 
   .meta {
     grid-row: 2 / 3;
-    padding: 0 0 0 var(--x-section-padding-left);
+    /* padding: 0 0 0 var(--x-section-padding-left); */
+    padding: 0 0 0 2px;
     margin: 0 0 0.75lh;
 
     .date {
@@ -890,9 +912,18 @@
     grid-row: 3 / 4;
   }
 
-  .content,
-  .content + [role="note"] {
-    :where(p, ul, ol, blockquote) {
+  .content > div:not([class]),
+  .children,
+  .content [role="note"] {
+    padding: 0 0 0 var(--x-section-padding-left);
+  }
+
+  .content {
+    :where(p, ul, ol) {
+      margin: 1.25lh 0 0;
+    }
+
+    :where(blockquote, [class~="table-container"], [class~="codeblock"]) {
       margin: 1lh 0 0;
     }
 
@@ -934,7 +965,7 @@
 
     ol,
     ul {
-      margin: 0.5lh 0 0 1ic;
+      margin: 0.5lh 0 0 0.5ic;
 
       ol,
       ul {
@@ -1015,10 +1046,6 @@
       + :is(p, ul, ol) {
         margin-top: 1lh;
       }
-
-      + [class~="table-container"] {
-        margin: 0.75lh calc(var(--padding-inline) * -1) 0;
-      }
     }
 
     hr {
@@ -1048,6 +1075,21 @@
           vertical-align: middle;
           word-break: keep-all;
         }
+      }
+    }
+
+    [class~="of-steps"] table {
+      col:first-child {
+        width: calc(24px + 2em);
+      }
+      thead th:first-child {
+        padding-inline: 0;
+      }
+
+      td:first-child {
+        padding-inline: 0;
+        vertical-align: middle;
+        text-align: center;
       }
     }
 
@@ -1167,13 +1209,16 @@
       }
     }
 
-    > div:not([class]),
-    > div:not([class]) + [role="note"] {
-      padding: 0 0 0 var(--x-section-padding-left);
+    :where([class~="table-container"], [class~="codeblock"]) {
+      margin: 1.25lh 0 0;
+    }
 
-      > :where([class~="table-container"], [class~="codeblock"]) {
-        margin: 1.25lh 0 0;
-      }
+    .children:not(:first-child) {
+      margin: 1lh 0 0;
+    }
+
+    .content:has(> div:not([class]) > h2:last-child) > .children {
+      margin-top: 0.35lh;
     }
 
     [role="note"] {
@@ -1189,14 +1234,6 @@
           }
         }
       }
-    }
-
-    .children:not(:first-child) {
-      margin: 1lh 0 0;
-    }
-
-    .content:has(> div:not([class]) > h2:last-child) > .children {
-      margin-top: 0.35lh;
     }
   }
 

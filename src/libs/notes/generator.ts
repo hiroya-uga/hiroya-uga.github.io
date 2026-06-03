@@ -2,12 +2,14 @@ import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import fs from 'node:fs';
 import path from 'node:path';
+import { compareNotesEntries } from './compare';
 
 export type NotesFrontmatter = {
   title: string;
   description: string;
   publishedAt: string;
   updatedAt?: string;
+  sortIndex?: number;
   tags?: string[];
   redirectFrom?: string[];
 };
@@ -27,6 +29,10 @@ export const validateFrontmatter = (data: Record<string, unknown>, filePath: str
     if (typeof data[key] !== 'string' || data[key] === '') {
       throw new Error(`Notes frontmatter error: "${key}" is required but missing or empty in ${filePath}`);
     }
+  }
+
+  if (data.sortIndex !== undefined && (typeof data.sortIndex !== 'number' || Number.isFinite(data.sortIndex) === false)) {
+    throw new Error(`Notes frontmatter error: "sortIndex" must be a finite number in ${filePath}`);
   }
 
   return data as NotesFrontmatter;
@@ -172,7 +178,7 @@ export const getNotesChildEntries = (parentSlug: string[]): NotesEntry[] => {
 
   return entries
     .filter((entry) => entry.slug.length === parentSlug.length + 1 && parentSlug.every((s, i) => s === entry.slug[i]))
-    .sort((a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title, 'ja'));
+    .sort(compareNotesEntries);
 };
 
 export const getAllNotesEntries = (): NotesEntry[] => {
