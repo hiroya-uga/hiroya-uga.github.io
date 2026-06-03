@@ -117,7 +117,7 @@
     "tailwindcss": "^4.3.0",
     "textlint": "^15.7.1",
     "textlint-rule-prh": "^6.1.0",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.7"
   },
   "packageManager": "yarn@4.13.0",
   "engines": {
