@@ -1,6 +1,7 @@
 import {
   ArticleCodeHighlightActivator,
   ArticleFootNoteActivator,
+  ArticleSpeculationRulesActivator,
 } from '@/components/structures/ArticleMain/ArticleMainClient';
 import { FOOTNOTES_HEADING_ID, NOTES_NAVIGATION_ID, TOC_ID } from '@/constants/id';
 import '@/libs/marked';
@@ -24,6 +25,18 @@ const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
   month: '2-digit',
   day: '2-digit',
 });
+
+const getSpeculationRules = (selector: string) =>
+  JSON.stringify({
+    prerender: [
+      {
+        where: {
+          and: [{ selector_matches: `.${selector} a[href^='/']` }, { not: { selector_matches: '[rel~=nofollow]' } }],
+        },
+        eagerness: 'immediate',
+      },
+    ],
+  });
 
 export const NotesDetailPage = ({ frontmatter, content, toc, childEntries, footnotes = [] }: Props) => {
   const id = useId();
@@ -116,6 +129,7 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries, footn
       </article>
       <ArticleCodeHighlightActivator />
       <ArticleFootNoteActivator />
+      <ArticleSpeculationRulesActivator rules={getSpeculationRules(styles.content)} />
     </main>
   );
 };
