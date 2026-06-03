@@ -98,6 +98,33 @@ SENSOR_FORMATS.find((f) => f.id === id);
 SENSOR_FORMATS.find((item) => item.id === id);
 ```
 
+## Re-exports
+
+A symbol must have a single canonical import path: the module that defines it (or a dedicated barrel `index.ts` that exposes it as the public API). Regular implementation modules must not re-export symbols they don't define — neither via `import` + `export`, nor via `export ... from`. Otherwise the same symbol becomes importable from multiple paths, fragmenting grep, refactor, and navigation.
+
+```ts
+// Bad: middle.ts uses foo internally but exposes it as if it owns it
+// middle.ts
+import { foo } from './foo';
+export { foo };
+export const bar = () => foo() + 1;
+
+// Bad: same problem, just different syntax
+// middle.ts
+export { foo } from './foo';
+export const bar = () => /* ... */;
+
+// Good
+// middle.ts
+import { foo } from './foo';
+export const bar = () => foo() + 1;
+
+// Good (barrel `index.ts` is the only place that may re-export)
+// index.ts
+export * from './foo';
+export * from './middle';
+```
+
 ## Comments
 
 - `//` for implementation notes
