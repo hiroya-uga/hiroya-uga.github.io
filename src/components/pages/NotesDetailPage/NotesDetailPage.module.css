@@ -1,3 +1,7 @@
+.content [class~="table-container"] {
+  overflow: auto;
+}
+
 /* 基本 */
 @media screen and (width < 90rem) {
   .meta {
