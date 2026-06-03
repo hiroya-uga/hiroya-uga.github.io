@@ -271,7 +271,7 @@
       border: 1px solid #999;
 
       pre {
-        white-space: pre-wrap;
+        white-space: pre;
       }
 
       code {
@@ -653,7 +653,7 @@
       border: 1px solid #999;
 
       pre {
-        white-space: pre-wrap;
+        white-space: pre;
       }
 
       code {
@@ -779,6 +779,14 @@
     display: grid;
     grid-template-rows: 1fr auto;
     grid-row-start: 4;
+  }
+
+  .content {
+    [class~="codeblock"] {
+      pre {
+        white-space: pre-wrap;
+      }
+    }
   }
 }
 
