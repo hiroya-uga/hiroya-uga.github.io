@@ -48,6 +48,7 @@ type BaseProps = Label & {
         multiline: true;
         autoResize?: boolean;
         noResize?: boolean;
+        minHeight?: 1 | 2 | 3 | 4 | 5;
       }
     | {
         multiline?: false;
@@ -61,12 +62,21 @@ type BaseProps = Label & {
 interface Props extends Omit<BaseProps, 'label' | 'description'> {
   autoResize: boolean;
   noResize: boolean;
+  minHeight?: 1 | 2 | 3 | 4 | 5;
   id: string;
   descriptionId?: string;
 }
 
+const MIN_HEIGHT_CLASSES = {
+  1: 'min-h-[calc(1lh+1rem+2px)]',
+  2: 'min-h-[calc(2lh+1rem+2px)]',
+  3: 'min-h-[calc(3lh+1rem+2px)]',
+  4: 'min-h-[calc(4lh+1rem+2px)]',
+  5: 'min-h-[calc(5lh+1rem+2px)]',
+} as const;
+
 const TextareaComponent = (
-  { descriptionId, multiline: _, autoResize, noResize, align, ...props }: Readonly<Props>,
+  { descriptionId, multiline: _, autoResize, noResize, minHeight, align, ...props }: Readonly<Props>,
   ref: Ref<HTMLTextAreaElement>,
 ) => {
   const dummyTextareaRef = useRef<HTMLDivElement>(null);
@@ -89,7 +99,8 @@ const TextareaComponent = (
           {...props}
           aria-describedby={descriptionId}
           className={clsx([
-            'border-textfield bg-textfield min-h-[calc(1.75lh+1rem)] w-full resize-none overflow-hidden rounded-md border p-2',
+            'border-textfield bg-textfield w-full resize-none overflow-hidden rounded-md border p-2',
+            minHeight ? MIN_HEIGHT_CLASSES[minHeight] : 'min-h-[calc(1.75lh+1rem)]',
             align === 'right' && 'text-right',
             align === 'center' && 'text-center',
           ])}
@@ -107,6 +118,7 @@ const TextareaComponent = (
       className={clsx([
         'border-textfield bg-textfield w-full rounded-md border p-2',
         noResize === true ? 'resize-none' : 'resize-y',
+        minHeight && MIN_HEIGHT_CLASSES[minHeight],
         align === 'right' && 'text-right',
         align === 'center' && 'text-center',
       ])}
