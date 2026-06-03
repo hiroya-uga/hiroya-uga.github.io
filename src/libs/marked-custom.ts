@@ -383,7 +383,6 @@ const kbdSymbols: Record<string, { symbol: string; label: string }> = {
   Shift: { symbol: '⇧', label: 'Shift' },
   Option: { symbol: '⌥', label: 'Option' },
   Control: { symbol: '⌃', label: 'Control' },
-  Ctrl: { symbol: '⌃', label: 'Control' },
   Return: { symbol: '⏎', label: 'Return' },
   Enter: { symbol: '⏎', label: 'Enter' },
   Tab: { symbol: '⇥', label: 'Tab' },
@@ -396,6 +395,7 @@ const kbdSymbols: Record<string, { symbol: string; label: string }> = {
 const kbdTextOnly: Record<string, string> = {
   PrintScreen: 'PrintScreen',
   Alt: 'Alt',
+  Ctrl: 'Ctrl',
   ...Object.fromEntries(Array.from({ length: 12 }).map((_, index) => [`F${index + 1}`, `F${index + 1}`])),
   ...Object.fromEntries(
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-^¥@[;:],./_'.split('').map((char) => [char, char] as const),

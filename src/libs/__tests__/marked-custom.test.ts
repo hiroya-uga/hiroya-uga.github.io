@@ -159,7 +159,6 @@ describe('marked-custom', () => {
       ['Shift', '⇧', 'Shift'],
       ['Option', '⌥', 'Option'],
       ['Control', '⌃', 'Control'],
-      ['Ctrl', '⌃', 'Control'],
       ['Return', '⏎', 'Return'],
       ['Enter', '⏎', 'Enter'],
       ['Tab', '⇥', 'Tab'],
@@ -180,7 +179,7 @@ describe('marked-custom', () => {
       },
     );
 
-    test.each([['Alt'], ['PrintScreen']])('`%s` は記号化せず <kbd>%s</kbd> にする', (input) => {
+    test.each([['Alt'], ['Ctrl'], ['PrintScreen']])('`%s` は記号化せず <kbd>%s</kbd> にする', (input) => {
       const html = markedParse(FILE, `\`${input}\``) as string;
       expect(html).toContain(`<kbd>${input}</kbd>`);
     });
