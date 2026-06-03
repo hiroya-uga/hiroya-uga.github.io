@@ -1026,12 +1026,42 @@
     }
 
     [class~="blockquote"] {
-      padding: 1.25lh;
+      position: relative;
+      padding: 0.75rem 1.5rem 1.5rem 0.5rem;
+      margin-inline: 1rem;
       background: var(--background-color-secondary);
-      border-left: 0.5rem solid var(--x-border);
+      border-radius: 0.375rem;
 
-      p:first-child {
-        margin-top: 0 !important;
+      &::before {
+        display: block;
+        margin-bottom: -2rem;
+        font-family: var(--font-mono);
+        font-size: 6rem;
+        line-height: 1;
+        user-select: none;
+        content: "“";
+        opacity: 0.1;
+      }
+
+      [class~="blockquote__content"] {
+        padding-left: 1.5rem;
+
+        &:last-child {
+          padding-bottom: 0.75rem;
+        }
+
+        > * {
+          margin: 0.5lh 0 0;
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+
+      [class~="blockquote__caption"] {
+        margin-top: 2rem;
+        text-align: right;
       }
     }
 
