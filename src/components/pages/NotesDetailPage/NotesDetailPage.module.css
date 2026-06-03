@@ -805,6 +805,8 @@
   .content {
     [class~="codeblock"] {
       pre {
+        max-height: 10.5lh;
+        overflow: auto;
         white-space: pre-wrap;
       }
     }
@@ -1190,6 +1192,7 @@
     }
 
     [class~="codeblock"] pre {
+      max-height: 10lh;
       overflow: auto;
       white-space: pre-wrap;
       border-bottom-right-radius: 0.5rem;
