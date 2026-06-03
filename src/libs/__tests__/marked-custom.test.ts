@@ -172,10 +172,13 @@ describe('marked-custom', () => {
       expect(html).toContain(`<kbd><span class="symbol">${symbol}</span>${label}</kbd>`);
     });
 
-    test('キー名の大文字小文字を吸収する', () => {
-      const html = markedParse(FILE, '`command`') as string;
-      expect(html).toContain('<kbd><span class="symbol">⌘</span>Command</kbd>');
-    });
+    test.each([['command'], ['delete'], ['return'], ['shift']])(
+      '先頭大文字でないキー名 `%s` はコード扱いのまま <kbd> 化しない',
+      (input) => {
+        const html = markedParse(FILE, `\`${input}\``) as string;
+        expect(html).not.toContain('<kbd>');
+      },
+    );
 
     test.each([['Alt'], ['PrintScreen']])('`%s` は記号化せず <kbd>%s</kbd> にする', (input) => {
       const html = markedParse(FILE, `\`${input}\``) as string;
@@ -192,7 +195,20 @@ describe('marked-custom', () => {
       expect(html).toContain(`<kbd>${input}</kbd>`);
     });
 
-    test.each([['i'], ['useEffect']])('`%s` はコード扱いのまま <kbd> 化しない', (input) => {
+    test.each(Array.from({ length: 12 }).map((_, index) => [`F${index + 1}`]))(
+      'ファンクションキー `%s` を <kbd> 化する',
+      (input) => {
+        const html = markedParse(FILE, `\`${input}\``) as string;
+        expect(html).toContain(`<kbd>${input}</kbd>`);
+      },
+    );
+
+    test.each([['f1'], ['f12'], ['F0'], ['F13']])('ファンクションキーとして無効な `%s` は <kbd> 化しない', (input) => {
+      const html = markedParse(FILE, `\`${input}\``) as string;
+      expect(html).not.toContain('<kbd>');
+    });
+
+    test.each([['a'], ['i'], ['useEffect']])('`%s` はコード扱いのまま <kbd> 化しない', (input) => {
       const html = markedParse(FILE, `\`${input}\``) as string;
       expect(html).not.toContain('<kbd>');
     });

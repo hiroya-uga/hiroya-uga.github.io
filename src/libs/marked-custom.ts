@@ -378,29 +378,27 @@ type CodespanToken = Token & {
 };
 
 const kbdSymbols: Record<string, { symbol: string; label: string }> = {
-  command: { symbol: '⌘', label: 'Command' },
-  cmd: { symbol: '⌘', label: 'Command' },
-  shift: { symbol: '⇧', label: 'Shift' },
-  option: { symbol: '⌥', label: 'Option' },
-  control: { symbol: '⌃', label: 'Control' },
-  ctrl: { symbol: '⌃', label: 'Control' },
-  return: { symbol: '⏎', label: 'Return' },
-  enter: { symbol: '⏎', label: 'Enter' },
-  tab: { symbol: '⇥', label: 'Tab' },
-  escape: { symbol: '⎋', label: 'Escape' },
-  esc: { symbol: '⎋', label: 'Escape' },
-  delete: { symbol: '⌫', label: 'Delete' },
-  space: { symbol: '␣', label: 'Space' },
+  Command: { symbol: '⌘', label: 'Command' },
+  Cmd: { symbol: '⌘', label: 'Command' },
+  Shift: { symbol: '⇧', label: 'Shift' },
+  Option: { symbol: '⌥', label: 'Option' },
+  Control: { symbol: '⌃', label: 'Control' },
+  Ctrl: { symbol: '⌃', label: 'Control' },
+  Return: { symbol: '⏎', label: 'Return' },
+  Enter: { symbol: '⏎', label: 'Enter' },
+  Tab: { symbol: '⇥', label: 'Tab' },
+  Escape: { symbol: '⎋', label: 'Escape' },
+  Esc: { symbol: '⎋', label: 'Escape' },
+  Delete: { symbol: '⌫', label: 'Delete' },
+  Space: { symbol: '␣', label: 'Space' },
 };
 
 const kbdTextOnly: Record<string, string> = {
-  printscreen: 'PrintScreen',
-  space: 'Space',
-  alt: 'Alt',
-  ctrl: 'Ctrl',
-  tab: 'Tab',
+  PrintScreen: 'PrintScreen',
+  Alt: 'Alt',
+  ...Object.fromEntries(Array.from({ length: 12 }).map((_, index) => [`F${index + 1}`, `F${index + 1}`])),
   ...Object.fromEntries(
-    '1234567890-^¥qwertyuiop@[asdfghjkl;:]zxcvbnm,./_'.split('').map((char) => [char, char] as const),
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-^¥@[;:],./_'.split('').map((char) => [char, char] as const),
   ),
 };
 
@@ -410,21 +408,16 @@ const overrideCodespanExtension: TokenizerAndRendererExtension = {
 
   renderer(token) {
     const t = token as CodespanToken;
-    const lower = t.text.toLowerCase();
 
-    const symbolKey = kbdSymbols[lower];
+    const symbolKey = kbdSymbols[t.text];
     if (symbolKey) {
       return `<kbd><span class="symbol">${symbolKey.symbol}</span>${symbolKey.label}</kbd>`;
     }
 
-    const textKey = kbdTextOnly[lower];
+    const textKey = kbdTextOnly[t.text];
 
     if (textKey) {
       return `<kbd>${textKey}</kbd>`;
-    }
-
-    if (/^[A-Z0-9]$/.test(t.text) || /^F(?:[1-9]|1[0-9]|2[0-4])$/.test(t.text)) {
-      return `<kbd>${t.text}</kbd>`;
     }
 
     return false;
