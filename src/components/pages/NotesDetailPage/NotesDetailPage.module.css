@@ -506,7 +506,7 @@
   .toc,
   .content {
     > div:not([class]) > :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
-      margin: 1lh 0;
+      margin: 1lh 0 0;
 
       &:last-child {
         margin-bottom: 0;
@@ -514,7 +514,7 @@
     }
 
     > div:not([class]) > p + :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
-      margin-top: 0.35lh;
+      margin-block: 0.5lh;
     }
 
     ol,
@@ -860,7 +860,7 @@
 
 @media screen and (90rem <= width) {
   .root {
-    --x-section-padding-left: 2.5rem;
+    --x-section-padding-left: 1.5rem;
 
     display: grid;
     grid-template-rows: auto auto 1fr auto;
@@ -968,7 +968,7 @@
     }
 
     h3 {
-      margin: 2lh 0 0;
+      margin: 2lh 0 0 -1px;
       font-size: 1.5rem;
     }
 
