@@ -928,7 +928,7 @@
     }
 
     h2 {
-      margin: 2lh 0 0 calc(var(--x-section-padding-left) * -1);
+      margin: 1.5lh 0 0 calc(var(--x-section-padding-left) * -1);
       font-size: 1.875rem;
     }
 
@@ -1039,7 +1039,7 @@
         }
       }
 
-      + :is(h2, h3, h4, h5, h6) {
+      + :is(h3, h4, h5, h6) {
         margin-top: 1rlh;
       }
 
@@ -1235,6 +1235,10 @@
         }
       }
     }
+  }
+
+  .children:first-child:last-child {
+    padding-left: 0;
   }
 
   .edit {
