@@ -42,7 +42,7 @@ export const CardWithSymbol = ({ href, title, symbol, description }: Readonly<Pr
             ])}
             aria-hidden="true"
           >
-            <span className="backface-hidden rotate-[0.1deg] scale-[0.85] transition-transform duration-300 group-hover:scale-100">
+            <span className="backface-hidden rotate-[0.1deg] scale-[0.85] drop-shadow-[1px_1px_0px_rgb(0_0_0/0.5)] transition-transform duration-300 group-hover:scale-100 dark:drop-shadow-[1px_2px_0px_rgb(255_255_255/0.5)]">
               {symbol}
             </span>
           </span>
