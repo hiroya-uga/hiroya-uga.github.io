@@ -174,12 +174,16 @@ const toPathname = (imagePath) => {
  * @param {object} metadata - メタデータオブジェクト
  * @param {string} [metadata.previous] - タイトルの前に付ける文字列
  * @param {string} metadata.pageTitle - ページタイトル
+ * @param {string} [metadata.following] - タイトルの後に付ける文字列
  * @param {string} metadata.description - ページ説明文
  * @returns {string} 生成されたalt text
  */
-const createAltText = ({ previous = '', pageTitle, description }) => {
+const createAltText = ({ previous = '', pageTitle, following = '', description }) => {
   const siteName = 'uga.dev';
-  const titlePart = pageTitle === siteName ? '' : `${previous}${pageTitle}`;
+  const titlePart =
+    pageTitle === siteName
+      ? ''
+      : [previous, /^[a-zA-Z0-9 ]+$/.test(previous) ? ' ' : '', pageTitle, ' ', following].join('').trim();
   const descriptionPart = (() => {
     if (/^[a-zA-Z0-9\-.*/,\s]+$/.test(description)) {
       return description.replaceAll('\n', '').replaceAll('.', '. ').replaceAll('.  ', '. ');
