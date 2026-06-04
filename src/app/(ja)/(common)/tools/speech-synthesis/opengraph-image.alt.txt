@@ -1,0 +1,1 @@
+uga.dev SpeechSynthesis Playground Web Speech APIで文字列を音声で読み上げるツール Web Speech APIのSpeechSynthesis（合成音声）でテキストを音声に変換し、voice・rate・pitch・volumeを調整しながらstart/end/boundaryなどのイベント発火を確認できるツールです。

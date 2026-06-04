@@ -483,6 +483,21 @@ export const SEO: Record<
     afterSubTitle: 'ソートアルゴリズムの動作を可視化するためのツール（Sort Visualizer）',
     description: 'さまざまなソート手法を試して、どのようにデータが並べ替えられるかを観察しましょう。',
   },
+  '/tools/speech-synthesis': {
+    title: 'SpeechSynthesis Playground',
+    afterSubTitle: 'Web Speech APIで文字列を音声で読み上げるツール',
+    description:
+      'Web Speech APIのSpeechSynthesis（合成音声）でテキストを音声に変換し、voice・rate・pitch・volumeを調整しながらstart/end/boundaryなどのイベント発火を確認できるツールです。',
+    languages: { ja: '/tools/speech-synthesis', en: '/tools/speech-synthesis/en' },
+  },
+  '/tools/speech-synthesis/en': {
+    title: 'SpeechSynthesis Playground',
+    afterSubTitle: 'A Web Speech API playground for text-to-speech',
+    description:
+      'A tool for the Web Speech API SpeechSynthesis. Convert text to speech while adjusting voice, rate, pitch, and volume, and observe start/end/boundary events firing.',
+    languages: { ja: '/tools/speech-synthesis', en: '/tools/speech-synthesis/en' },
+    locale: 'en_US',
+  },
   '/tools/touch-event-touches': {
     title: 'TouchEvent.touches Playground',
     description: 'デバイスのタッチ操作が利用可能か、何本の指でタッチできるのかをテストできます。',

@@ -1,0 +1,56 @@
+import { Lang } from '@/types/lang';
+
+export const speechSynthesisLocales = {
+  ja: {
+    notSupported: 'ご利用のブラウザはWeb Speech API（SpeechSynthesis）に対応していません。',
+    textHeading: '読み上げるテキスト',
+    parametersHeading: 'パラメータ',
+    voiceLabel: '音声',
+    noVoices: '（利用可能な音声がありません）',
+    defaultSuffix: '（default）',
+    rateLabel: '読み上げ速度（0.1 〜 10）',
+    pitchLabel: '声の高さ（0 〜 2）',
+    volumeLabel: '音量（0 〜 1）',
+    statusLabel: 'Status：',
+    eventLogHeading: 'イベントログ',
+    clearButton: 'クリア',
+    codeHeading: 'サンプルコード',
+    defaultText: 'こんにちは！Web Speech APIのSpeechSynthesisを試してみましょう！',
+    preferredVoiceLangPrefix: 'ja',
+    preferredVoiceNames: [
+      'Kyoko', // macOS / iOS
+      'Otoya', // macOS / iOS
+      'Google 日本語', // Chrome
+      'Microsoft Nanami Online (Natural) - Japanese (Japan)', // Edge
+      'Microsoft Ayumi - Japanese (Japan)', // Windows
+      'Microsoft Haruka Desktop', // Windows (legacy)
+    ],
+  },
+  en: {
+    notSupported: 'Your browser does not support the Web Speech API (SpeechSynthesis).',
+    textHeading: 'Text to speak',
+    parametersHeading: 'Parameters',
+    voiceLabel: 'Voice',
+    noVoices: '(No voices available)',
+    defaultSuffix: ' (default)',
+    rateLabel: 'Rate (0.1–10)',
+    pitchLabel: 'Pitch (0–2)',
+    volumeLabel: 'Volume (0–1)',
+    statusLabel: 'Status: ',
+    eventLogHeading: 'Event log',
+    clearButton: 'Clear',
+    codeHeading: 'Sample code',
+    defaultText: "Hello! Let's try out the Web Speech API SpeechSynthesis!",
+    preferredVoiceLangPrefix: 'en',
+    preferredVoiceNames: [
+      'Samantha', // macOS / iOS (en-US)
+      'Alex', // macOS premium (en-US)
+      'Karen', // macOS (en-AU)
+      'Daniel', // macOS (en-GB)
+      'Google US English', // Chrome
+      'Microsoft Aria Online (Natural) - English (United States)', // Edge
+      'Microsoft Zira Desktop', // Windows (legacy)
+      'Microsoft David Desktop', // Windows (legacy)
+    ],
+  },
+} satisfies Record<Lang, unknown>;

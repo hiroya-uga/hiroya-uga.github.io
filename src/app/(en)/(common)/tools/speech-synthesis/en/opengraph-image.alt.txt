@@ -1,0 +1,1 @@
+uga.dev SpeechSynthesis Playground A Web Speech API playground for text-to-speech A tool for the Web Speech API SpeechSynthesis. Convert text to speech while adjusting voice, rate, pitch, and volume, and observe start/end/boundary events firing.
