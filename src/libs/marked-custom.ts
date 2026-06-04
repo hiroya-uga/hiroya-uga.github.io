@@ -253,6 +253,20 @@ type FootnoteDefToken = Token & {
 };
 
 const footnoteDefs = new Map<string, Record<string, string>>();
+const footnoteOrders = new Map<string, Map<string, number>>();
+
+const getOrAssignFootnoteNumber = (filePath: string, identifier: string): number => {
+  let orders = footnoteOrders.get(filePath);
+  if (!orders) {
+    orders = new Map();
+    footnoteOrders.set(filePath, orders);
+  }
+  const existing = orders.get(identifier);
+  if (existing !== undefined) return existing;
+  const num = orders.size + 1;
+  orders.set(identifier, num);
+  return num;
+};
 
 const footnoteRefExtension: TokenizerAndRendererExtension = {
   name: 'footnoteRef',
@@ -267,6 +281,7 @@ const footnoteRefExtension: TokenizerAndRendererExtension = {
     if (!match) return;
 
     const [, identifier] = match;
+    getOrAssignFootnoteNumber(currentFilePath, identifier);
 
     const token: FootnoteRefToken = {
       type: 'footnoteRef',
@@ -278,7 +293,8 @@ const footnoteRefExtension: TokenizerAndRendererExtension = {
   },
   renderer(token) {
     const t = token as FootnoteRefToken;
-    return `<sup id="ref-${t.identifier}" class="font-mono inline-block"><a href="#note-${t.identifier}" aria-describedby="note-${t.identifier}">[${t.identifier}]</a></sup>`;
+    const num = getOrAssignFootnoteNumber(currentFilePath, t.identifier);
+    return `<sup id="ref-${num}" class="font-mono inline-block"><a href="#note-${num}" aria-describedby="note-${num}">[${num}]</a></sup>`;
   },
 };
 
@@ -298,6 +314,7 @@ const footnoteDefExtension: TokenizerAndRendererExtension = {
 
     const footnotes = footnoteDefs.get(currentFilePath) ?? {};
     footnoteDefs.set(currentFilePath, { ...footnotes, [identifier]: text });
+    getOrAssignFootnoteNumber(currentFilePath, identifier);
 
     const token: FootnoteDefToken = {
       type: 'footnoteDef',
@@ -775,9 +792,15 @@ export const getTOC = (filePath: string, isExistFootnotes: boolean): string => {
 };
 
 export const getFootnotes = (filePath: string): [string, { html: string | Promise<string> }][] => {
-  return Object.entries(footnoteDefs.get(filePath) ?? []).map(([id, text]) => {
-    return [id, { html: marked.parseInline(text, { async: false }) }];
-  });
+  const orders = footnoteOrders.get(filePath);
+  const defs = footnoteDefs.get(filePath);
+  if (!orders || !defs) return [];
+  return Array.from(orders.entries())
+    .filter(([identifier]) => defs[identifier] !== undefined)
+    .sort(([, a], [, b]) => a - b)
+    .map(([identifier, num]) => {
+      return [String(num), { html: marked.parseInline(defs[identifier], { async: false }) }];
+    });
 };
 
 export const customMarkdownSyntaxes = [
@@ -801,5 +824,6 @@ export const markedParse = (filePath: string, content: string) => {
   currentFilePath = filePath;
   headingDefs.delete(filePath);
   footnoteDefs.delete(filePath);
+  footnoteOrders.delete(filePath);
   return marked.parse(content);
 };

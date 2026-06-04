@@ -94,11 +94,19 @@ describe('marked-custom', () => {
       expect(html).toContain('href="#note-1"');
     });
 
-    test('getFootnotes が脚注定義を返す', () => {
+    test('getFootnotes が脚注定義を出現順の連番で返す', () => {
       markedParse(FILE, 'テキスト[^abc]\n\n[^abc]: 脚注テキスト');
       const notes = getFootnotes(FILE);
       expect(notes).toHaveLength(1);
-      expect(notes[0][0]).toBe('abc');
+      expect(notes[0][0]).toBe('1');
+    });
+
+    test('複数の脚注が本文中の出現順に採番される', () => {
+      markedParse(FILE, 'A[^foo] B[^bar]\n\n[^bar]: bar の定義\n\n[^foo]: foo の定義');
+      const notes = getFootnotes(FILE);
+      expect(notes).toHaveLength(2);
+      expect(notes[0][0]).toBe('1');
+      expect(notes[1][0]).toBe('2');
     });
   });
 
