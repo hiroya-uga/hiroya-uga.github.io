@@ -40,7 +40,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
               </Link>
             </li>
             <li>
-              <Link href="/notes/help">
+              <Link href="/notes/#heading-ご利用にあたって">
                 <span>ご利用にあたって</span>
               </Link>
             </li>

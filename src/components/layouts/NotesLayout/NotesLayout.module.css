@@ -1,3 +1,25 @@
+/* @keyframes target-highlight {
+  0% {
+    color: inherit;
+    background-color: transparent;
+  }
+  50% {
+    color: var(--color-mark);
+    background-color: var(--background-color-mark);
+  }
+  100% {
+    color: inherit;
+    background-color: transparent;
+  }
+}
+
+.root {
+  :target,
+  :target * {
+    animation: target-highlight 1s ease 0.3s;
+  }
+} */
+
 .navigation {
   display: none;
 }
