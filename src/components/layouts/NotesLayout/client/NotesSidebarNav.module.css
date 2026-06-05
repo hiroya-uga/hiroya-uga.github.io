@@ -446,6 +446,12 @@
         display: block;
         margin: 0.5em 0;
         text-decoration: none;
+
+        @media (hover: hover) {
+          &:hover {
+            color: inherit;
+          }
+        }
       }
 
       li:has(ul) > .text a,
