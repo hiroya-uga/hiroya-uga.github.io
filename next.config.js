@@ -65,6 +65,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/index.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/:path*/index.html',
+        destination: '/:path*/',
+        permanent: true,
+      },
+      {
         // /en/ は存在しないページだが Google がクロールして Search Console でエラーになっていたため追加
         source: '/en/',
         destination: '/',

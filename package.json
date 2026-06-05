@@ -28,7 +28,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs}": [
-      "oxlint --fix --ignore-path .oxlintignore",
+      "oxlint --fix --ignore-path .oxlintignore --no-error-on-unmatched-pattern",
       "prettier --write"
     ],
     "*.css": [
