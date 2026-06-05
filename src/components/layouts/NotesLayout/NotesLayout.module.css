@@ -2,6 +2,11 @@
   display: none;
 }
 
+.navigation.ofNarrow {
+  display: block;
+  min-height: calc(100dvh - 2.5rem); /* 2.5rem = 40px = footerの高さ） */
+}
+
 .utility li:last-child {
   display: none;
 }
@@ -128,10 +133,6 @@
     }
   }
 
-  .navigation.ofNarrow {
-    display: block;
-  }
-
   .breadcrumb {
     padding: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px) 10px 0;
   }
@@ -225,10 +226,6 @@
         text-decoration: underline;
       }
     }
-  }
-
-  .navigation.ofNarrow {
-    display: block;
   }
 
   .breadcrumb {

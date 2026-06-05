@@ -1196,7 +1196,7 @@
     }
 
     [class~="codeblock"] pre {
-      max-height: calc(10lh + 2rem);
+      max-height: calc(11lh + 2rem);
       overflow: auto;
       white-space: pre-wrap;
       border-bottom-right-radius: 0.5rem;
