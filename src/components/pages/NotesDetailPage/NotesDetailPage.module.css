@@ -426,7 +426,7 @@
 
   .edit {
     padding: 0 10px;
-    margin: 2lh 0 4lh;
+    margin: 3lh 0 4lh;
     text-align: right;
 
     p {
@@ -772,7 +772,7 @@
 
   .edit {
     padding: 0 10px;
-    margin: 2lh 0 1lh;
+    margin: 3lh 0 1lh;
     font-size: 0.875rem;
     text-align: right;
 
@@ -814,6 +814,9 @@
         white-space: pre-wrap;
       }
     }
+  }
+  .edit {
+    margin-top: max(2lh, 25vh);
   }
 }
 
@@ -1310,7 +1313,7 @@
   .edit {
     width: fit-content;
     padding: 0 10px;
-    margin: 20vh 0 4lh auto;
+    margin: max(2lh, 25vh) 0 4lh auto;
 
     p {
       a {
