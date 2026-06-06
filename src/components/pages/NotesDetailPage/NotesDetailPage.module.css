@@ -1,5 +1,22 @@
-.content [class~="table-container"] {
-  overflow: auto;
+.content {
+  [class~="table-container"] {
+    overflow: auto;
+  }
+
+  [class~="associate"] {
+    small {
+      display: block;
+      font-size: max(10px, 80%);
+    }
+
+    + [class~="associate"] {
+      display: inline-block;
+
+      small {
+        display: none;
+      }
+    }
+  }
 }
 
 /* 基本 */
