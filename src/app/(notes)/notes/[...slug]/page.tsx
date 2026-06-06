@@ -25,8 +25,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const url = `${URL_ORIGIN}${pathname}/`;
   const ogImage = await generateOgpImage(['notes', ...slug], title);
 
+  const notesIndexTitle = getNotesPost([])?.frontmatter.title ?? 'Notes';
+  const parentTitles = slug.slice(0, -1).map((_, i) => {
+    const prefixSlug = slug.slice(0, i + 1);
+    return getNotesPost(prefixSlug)?.frontmatter.title ?? slug[i];
+  });
+  const pageTitle = [title, ...parentTitles.reverse(), notesIndexTitle, SITE_NAME].join(' | ');
+
   return {
-    title: `${title} | Notes | ${SITE_NAME}`,
+    title: pageTitle,
     description,
     openGraph: {
       siteName: SITE_NAME,
