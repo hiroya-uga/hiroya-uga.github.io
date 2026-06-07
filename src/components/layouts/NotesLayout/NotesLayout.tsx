@@ -1,3 +1,4 @@
+import { NotesSearch } from '@/components/layouts/NotesLayout/client/NotesSearch';
 import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 import { NOTES_NAVIGATION_ID } from '@/constants/id';
 import { BREADCRUMB_LABEL } from '@/constants/messages';
@@ -52,13 +53,17 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
             </li>
           </ul>
         </header>
-        <nav className={clsx([styles.navigation, styles.ofWide])} aria-label="Notes ナビゲーション">
+        <nav className={clsx([styles.navigation, styles.ofWide])} aria-label="Wikiʻoleナビゲーション">
           <NotesSidebarNav entries={entries} />
         </nav>
         <div className={styles.content}>
           <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>
             <NotesBreadcrumb entries={entries} />
           </nav>
+
+          <div className={styles.search}>
+            <NotesSearch />
+          </div>
 
           <aside className={styles.ad}>
             <NotesAd />
@@ -69,7 +74,7 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
         <nav
           id={NOTES_NAVIGATION_ID}
           className={clsx([styles.navigation, styles.ofNarrow])}
-          aria-label="Notes ナビゲーション"
+          aria-label="Wikiʻoleナビゲーション"
         >
           <NotesSidebarNav entries={entries} />
         </nav>

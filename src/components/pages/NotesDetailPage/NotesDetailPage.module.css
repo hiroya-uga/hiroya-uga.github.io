@@ -458,43 +458,34 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (21.8rem < width < 90rem) {
+@media screen and (21.8rem < width < 40rem) {
   .root {
-    --padding-inline: 8px;
-
-    --heading-margin: calc(0.875 * 3rlh) calc(var(--padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
   }
 
   .title {
-    padding: 8px 10px 0;
-    margin: 0 0 calc(0.875 * 0.75rlh);
-
-    .text {
-      display: block;
-      padding: 0 var(--padding-inline);
-      font-size: 1.25rem;
-      font-weight: bold;
-      border-bottom: 2px solid var(--x-border);
-    }
+    padding: 8px var(--x-padding-inline);
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    background: var(--x-gradient-background);
+    border-bottom: 1px solid var(--x-border);
   }
 
   .meta {
-    padding: 0 10px;
+    padding: 0 var(--x-padding-inline);
     margin: 0 0 0.35lh;
 
     .date {
-      padding: 0 var(--padding-inline);
       font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
     }
 
     .description {
-      padding: 0 var(--padding-inline);
       margin: calc(0.875 * 0.75rlh * 0.5) 0 0;
     }
 
     .toMenu {
       width: fit-content;
-      padding: 0 var(--padding-inline);
       margin: 0.5lh 0 0 auto;
       font-size: 0.875rem;
 
@@ -513,6 +504,7 @@
       padding: 8px 10px 10px;
       background: var(--x-surface);
       border: 1px solid var(--x-border);
+      border-radius: 4px;
     }
     h2 {
       margin-bottom: 0.25lh;
@@ -520,7 +512,365 @@
   }
 
   .body {
-    padding: 0 10px 80px;
+    padding: 0 var(--x-padding-inline);
+  }
+
+  .meta,
+  .toc,
+  .content {
+    > div:not([class]) > :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
+      margin: 1lh 0 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    > div:not([class]) > p + :where([class~="blockquote"], [class~="table-container"], [class~="codeblock"]) {
+      margin-block: 0.5lh;
+    }
+
+    ol,
+    ul {
+      padding-left: 4px;
+
+      :where(ol, ul) {
+        padding-left: 0;
+        margin-top: 0.25lh;
+      }
+
+      li:not(:first-child) {
+        margin-top: 0.25lh;
+      }
+    }
+
+    [role="note"] {
+      ul,
+      li {
+        padding: 0;
+      }
+
+      li {
+        &::before {
+          display: none;
+        }
+
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+      }
+    }
+
+    ol {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px;
+      counter-reset: ol;
+
+      > li {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: 1 / 3;
+        counter-increment: ol;
+
+        &::before {
+          display: block;
+          grid-column: 1 / 2;
+          padding-left: 0.625rem;
+          content: counter(ol) ".";
+        }
+
+        > div {
+          grid-column: 2 / 3;
+        }
+      }
+    }
+
+    ul {
+      > li {
+        position: relative;
+        padding-left: 1em;
+
+        &::before {
+          position: absolute;
+          top: 0.875em;
+          left: 0.125em;
+          display: block;
+          width: 0.25em;
+          height: 0.25em;
+          content: "";
+          background: currentColor;
+        }
+      }
+    }
+
+    :where(ol, ul) ol > li::before {
+      padding-left: 0.375rem;
+    }
+
+    :is(h2, h3, h4, h5, h6, .toc a) {
+      code {
+        padding: 0;
+        color: inherit;
+        background: transparent;
+
+        &::before,
+        &::after {
+          content: "`";
+        }
+      }
+    }
+  }
+
+  .content {
+    padding: 0 var(--x-padding-inline);
+
+    :is(h2, h3, h4, h5, h6) {
+      margin: var(--heading-margin);
+    }
+
+    :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
+      margin-top: 1rlh;
+    }
+
+    hr {
+      margin: 1.5lh 0;
+    }
+
+    h2 {
+      padding: 2px var(--x-padding-inline);
+      font-size: 1em;
+      font-weight: bold;
+      background: var(--x-nav-base);
+      border: 1px solid var(--x-border);
+
+      + h3 {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      padding: 2px var(--x-padding-inline);
+      border-bottom: 1px solid var(--x-border);
+    }
+
+    thead {
+      background: var(--x-gradient-background);
+    }
+
+    video {
+      border-radius: 8px;
+    }
+
+    > div:not([class]) {
+      > [class~="table-container"] {
+        margin: 0.5lh 0 0;
+      }
+
+      > :is(p, ul, ol) {
+        margin: 0.35lh 0 0;
+      }
+
+      > :is(h2, h3) + p {
+        margin-top: 0.5lh;
+      }
+
+      > p:has(video) {
+        margin: 1lh 0 0;
+      }
+
+      > :is(h2, h3, h4, h5) + [class~="table-container"] {
+        margin: 0.75lh calc(var(--x-padding-inline) * -1) 0;
+      }
+
+      > h2:first-child {
+        margin-top: 0;
+      }
+    }
+
+    [class~="codeblock"] {
+      border: 1px solid var(--x-border);
+
+      pre {
+        white-space: pre;
+      }
+
+      code {
+        display: block;
+        padding-bottom: 1lh;
+        overflow: auto;
+        font-family: "Courier New", monospace;
+
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    [class~="codeblock__caption"] {
+      display: flex;
+      min-height: 2.0625rem;
+      padding: 0 8px;
+      font-size: max(calc(11 / 16 / var(--font-zoom-base) * 1rem), 11px);
+      background: var(--x-gradient-background);
+      border-bottom: 1px solid var(--x-border);
+
+      [class~="codeblock__title"] {
+        flex-grow: 1;
+        padding-top: 0.375rem;
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      [class~="codeblock__caption__copy"] {
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        margin-right: -8px;
+
+        svg {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      + pre code {
+        padding: 0.875rem;
+        line-height: 1.5;
+      }
+    }
+
+    :root & p:has(customされたimg要素ˆ-ˆ[src]) {
+      margin-block: 1lh;
+
+      noscript,
+      customされたimg要素ˆ-ˆ {
+        overflow: hidden;
+        border-radius: 0.5rem;
+        box-shadow:
+          0 0 1px rgb(0 0 0 / 0.2),
+          0 0 12px rgb(0 0 0 / 0.1);
+        transition: border-radius 0.3s ease-out;
+
+        @supports (corner-shape: squircle) {
+          border-radius: 0.5rem;
+          corner-shape: squircle;
+        }
+      }
+
+      noscript {
+        position: absolute;
+        inset: 0;
+      }
+    }
+
+    [role="note"] {
+      h2 {
+        margin-bottom: 0.5lh;
+      }
+
+      ul {
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .children:not(:first-child) {
+    margin: 1lh 0 0;
+  }
+
+  .content:has(> div:not([class]) > h2:last-child) > .children {
+    margin-top: 0.35lh;
+  }
+
+  .edit {
+    margin: 2lh 0 0;
+    font-size: 0.875rem;
+    text-align: right;
+
+    a {
+      display: inline-block;
+      padding: 0.25em 2em;
+      color: inherit;
+      text-decoration: none;
+      background: var(--x-gradient-button-background);
+      border: var(--x-gradient-button-border);
+      border-radius: var(--x-gradient-button-border-radius);
+      box-shadow: var(--x-gradient-button-box-shadow);
+    }
+  }
+}
+
+/** Tablet: 左ナビのサイドバーありレイアウト */
+@media screen and (40rem <= width < 90rem) {
+  .root {
+    --heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+  }
+
+  .title {
+    padding: 0 var(--x-padding-inline);
+    margin: 0 0 calc(0.875 * 0.75rlh);
+
+    .text {
+      display: block;
+      padding: 0 var(--x-padding-inline);
+      font-size: 1.25rem;
+      font-weight: bold;
+      border-bottom: 2px solid var(--x-border);
+    }
+  }
+
+  .meta {
+    padding: 0 var(--x-padding-inline);
+    margin: 0 0 0.35lh;
+
+    .date {
+      padding: 0 var(--x-padding-inline);
+      font-size: max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
+    }
+
+    .description {
+      padding: 0 var(--x-padding-inline);
+      margin: calc(0.875 * 0.75rlh * 0.5) 0 0;
+    }
+
+    .toMenu {
+      display: none;
+      width: fit-content;
+      padding: 0 var(--x-padding-inline);
+      margin: 0.5lh 0 0 auto;
+      font-size: 0.875rem;
+
+      a::before {
+        content: "↓";
+      }
+    }
+  }
+
+  .toc {
+    padding: 0 var(--x-padding-inline);
+    margin: 3lh 0 2lh;
+    font-size: 0.875rem;
+
+    .inner {
+      padding: 8px 10px 10px;
+      background: var(--x-surface);
+      border: 1px solid var(--x-border);
+    }
+    h2 {
+      margin-bottom: 0.25lh;
+    }
+  }
+
+  .body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-row-start: 4;
+    padding: 0 var(--x-padding-inline) 80px;
   }
 
   .meta,
@@ -630,8 +980,6 @@
   }
 
   .content {
-    padding: 0 var(--padding-inline);
-
     :is(h2, h3, h4, h5, h6) {
       margin: var(--heading-margin);
     }
@@ -645,7 +993,7 @@
     }
 
     h2 {
-      padding: 2px var(--padding-inline);
+      padding: 2px var(--x-padding-inline);
       font-size: 1em;
       font-weight: bold;
       background: var(--x-nav-base);
@@ -657,7 +1005,7 @@
     }
 
     h3 {
-      padding: 2px var(--padding-inline);
+      padding: 2px var(--x-padding-inline);
       border-bottom: 1px solid var(--x-border);
     }
 
@@ -683,7 +1031,7 @@
       }
 
       > :is(h2, h3, h4, h5) + [class~="table-container"] {
-        margin: 0.75lh calc(var(--padding-inline) * -1) 0;
+        margin: 0.75lh calc(var(--x-padding-inline) * -1) 0;
       }
 
       > h2:first-child {
@@ -695,7 +1043,9 @@
       border: 1px solid #999;
 
       pre {
-        white-space: pre;
+        max-height: 10.5lh;
+        overflow: auto;
+        white-space: pre-wrap;
       }
 
       code {
@@ -789,7 +1139,7 @@
 
   .edit {
     padding: 0 10px;
-    margin: 3lh 0 1lh;
+    margin: max(2lh, 25vh) 0 1lh;
     font-size: 0.875rem;
     text-align: right;
 
@@ -800,43 +1150,7 @@
   }
 }
 
-/** PC: 縦ナビのサイドバー */
-@media screen and (40rem <= width < 90rem) {
-  .root {
-    display: grid;
-    grid-template-rows: auto auto auto 1fr;
-  }
-
-  .title {
-    padding-top: 0;
-  }
-
-  .meta {
-    .toMenu {
-      display: none;
-    }
-  }
-
-  .body {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    grid-row-start: 4;
-  }
-
-  .content {
-    [class~="codeblock"] {
-      pre {
-        max-height: 10.5lh;
-        overflow: auto;
-        white-space: pre-wrap;
-      }
-    }
-  }
-  .edit {
-    margin-top: max(2lh, 25vh);
-  }
-}
-
+/** PC: 目次が右ナビ */
 @media screen and (64rem <= width < 90rem) {
   .root {
     display: grid;
@@ -882,6 +1196,7 @@
   }
 }
 
+/** Wide Screen: 本体と揃ったトンマナ */
 @media screen and (90rem <= width) {
   .root {
     --x-section-padding-left: 1.5rem;

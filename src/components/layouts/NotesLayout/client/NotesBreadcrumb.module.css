@@ -47,6 +47,7 @@
   }
 }
 
+/** Wide Screen: 本体と揃ったトンマナ */
 @media screen and (90rem <= width) {
   .root {
     display: flex;

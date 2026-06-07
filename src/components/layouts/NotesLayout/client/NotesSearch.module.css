@@ -1,0 +1,179 @@
+.root {
+  isolation: isolate;
+
+  input[type="search"] {
+    font-size: max(16px, 1rem);
+
+    &::placeholder {
+      font-size: 0.75rem;
+    }
+  }
+
+  input[type="search"],
+  button {
+    position: relative;
+    z-index: 0;
+
+    &:focus-visible {
+      z-index: 1;
+    }
+  }
+}
+
+/** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
+@media screen and (width <= 21.8rem) {
+  .root {
+    margin: 0 0 max(calc(10 / 16 / var(--font-zoom-base) * 1rem), 10px);
+
+    .field {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px;
+      margin: max(calc(2 / 16 / var(--font-zoom-base) * 1rem), 2px) 0 0;
+    }
+
+    input[type="search"] {
+      min-width: 0;
+      padding: 0 4px;
+      background: var(--x-form-background);
+      border: 1px solid var(--x-border);
+
+      &::placeholder {
+        font-size: calc(13 / 16 / var(--font-zoom-base) * 1rem);
+      }
+    }
+
+    button {
+      padding: 0 4px;
+      white-space: nowrap;
+      border: 1px solid var(--x-border);
+    }
+  }
+}
+
+/** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
+@media screen and (21.8rem < width < 40rem) {
+  .root {
+    --x-form-background: white;
+
+    [data-theme="dark"] & {
+      --x-form-background: #0006;
+    }
+
+    font-size: 0.75rem;
+
+    .label {
+      padding: 0 0 0 2px;
+    }
+
+    .field {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+
+    input[type="search"] {
+      min-width: 0;
+      padding: 0 4px 0 0.5em;
+      background: var(--x-form-background);
+      border: var(--x-gradient-button-border);
+      border-right: 0;
+      border-radius: 9999px 0 0 9999px;
+      box-shadow: var(--x-gradient-button-box-shadow);
+
+      [data-theme="dark"] & {
+        padding-bottom: 1px;
+        border-bottom: 0;
+        box-shadow:
+          inset 0 -1px 0 #fff6,
+          0 1px 2px #00000026;
+      }
+
+      &::placeholder {
+        font-size: 0.875rem;
+      }
+    }
+
+    button {
+      padding: 0 1.25em 0 1em;
+      white-space: nowrap;
+      background: var(--x-gradient-button-background);
+      border: var(--x-gradient-button-border);
+      border-radius: 0 9999px 9999px 0;
+      box-shadow: var(--x-gradient-button-box-shadow);
+    }
+  }
+}
+
+/** Tablet: 左ナビのサイドバーありレイアウト */
+@media screen and (40rem <= width < 90rem) {
+  .root {
+    --x-form-background: white;
+
+    [data-theme="dark"] & {
+      --x-form-background: #1f2329;
+    }
+
+    margin: 0 8px 1.25rem;
+
+    .field {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px;
+      margin: 0.125rem 0 0;
+    }
+
+    input[type="search"] {
+      min-width: 0;
+      padding: 0 4px;
+      background: var(--x-form-background);
+      border: 1px solid var(--x-border);
+    }
+
+    button {
+      padding: 0 4px;
+      white-space: nowrap;
+      background: var(--x-form-background);
+      border: 1px solid var(--x-border);
+    }
+  }
+}
+
+/** Wide Screen: 本体と揃ったトンマナ */
+@media screen and (90rem <= width) {
+  .root {
+    p {
+      label {
+        font-size: 0.625rem;
+        color: var(--x-nav-link);
+      }
+
+      .field {
+        display: grid;
+        grid-template-columns: 1fr auto;
+      }
+
+      input {
+        padding: 0.25em 0.5em;
+        background-color: var(--background-color-panel-primary);
+        border: 1px solid var(--x-border);
+        border-right: 0;
+        border-radius: 4px 0 0 4px;
+      }
+
+      button {
+        padding: 0.25em 1em;
+        white-space: nowrap;
+        background-color: var(--background-color-panel-primary);
+        border: 1px solid var(--x-border);
+        border-radius: 0 4px 4px 0;
+        transition: 0.3s background-color ease-out;
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: var(--background-color-panel-primary-hover);
+          }
+        }
+      }
+    }
+  }
+}

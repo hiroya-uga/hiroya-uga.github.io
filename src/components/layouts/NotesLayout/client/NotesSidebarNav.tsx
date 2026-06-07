@@ -1,12 +1,12 @@
 'use client';
 
+import { NotesSearch } from '@/components/layouts/NotesLayout/client/NotesSearch';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import type { NotesEntry } from '@/libs/notes';
 import { compareNotesEntries } from '@/libs/notes/compare';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useId, useState } from 'react';
 import styles from './NotesSidebarNav.module.css';
 
 interface Props {
@@ -15,9 +15,6 @@ interface Props {
 
 export const NotesSidebarNav = ({ entries }: Props) => {
   const pathname = usePathname();
-  const id = useId();
-  const [keyword, setKeyword] = useState('');
-
   const currentSlug = pathname
     .replace(/^\/notes\/?/, '')
     .replace(/\/$/, '')
@@ -61,45 +58,14 @@ export const NotesSidebarNav = ({ entries }: Props) => {
   const topLevelChildren = getChildren([]);
   const showNavMenu = topLevelChildren.length > 0;
 
-  const onSubmit: React.SubmitEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    const form =
-      document.querySelector<HTMLFormElement>('form[action="https://www.google.com/search"]') ??
-      document.createElement('form');
-    form.replaceChildren();
-    form.action = 'https://www.google.com/search';
-    form.method = 'get';
-    const input = document.createElement('input');
-    input.name = 'q';
-    input.value = `site:uga.dev/notes/ ${keyword}`;
-    form.append(input);
-    document.body.append(form);
-    form.submit();
-  };
-
   return (
     <div className={styles.root}>
       <p className={styles.top}>
         <Link href="/notes">WikiʻoleWeb</Link>
       </p>
-      <form role="search" className={styles.search} onSubmit={onSubmit}>
-        <p>
-          <label htmlFor={id} className={styles.label}>
-            サイト内検索
-          </label>
-          <span className={styles.field}>
-            <input
-              type="search"
-              id={id}
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              placeholder="ここにキーワードを入力"
-              required
-            />
-            <button type="submit">検索</button>
-          </span>
-        </p>
-      </form>
+      <div className={styles.search}>
+        <NotesSearch />
+      </div>
 
       <div className={styles.menu}>
         {showNavMenu && (

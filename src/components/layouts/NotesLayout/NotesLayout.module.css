@@ -20,6 +20,7 @@
   }
 } */
 
+.search,
 .navigation {
   display: none;
 }
@@ -58,9 +59,10 @@
       button {
         background: var(--x-background);
         transition: 0.3s filter ease-out;
-      }
-      button:hover {
-        filter: invert(1);
+
+        &:hover {
+          filter: invert(1);
+        }
       }
     }
   }
@@ -205,18 +207,160 @@
 }
 
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
-@media screen and (21.8rem < width < 90rem) {
+@media screen and (21.8rem < width < 40rem) {
   .root {
+    --x-padding-inline: 10px;
+    --x-surface: #f7f7f7;
+    --x-border: rgb(0 0 0 / 0.15);
+    --x-gradient-background: linear-gradient(
+      to bottom,
+      rgb(248 248 248 / 0.85),
+      rgb(230 230 230 / 0.55) 25%,
+      rgb(180 180 180 / 0.4)
+    );
+
+    --x-gradient-button-background: linear-gradient(
+      to bottom,
+      rgb(235 248 255 / 0.85),
+      rgb(200 230 250 / 0.55) 50%,
+      rgb(120 180 220 / 0.4) 50%,
+      rgb(80 140 200 / 0.55)
+    );
+    --x-gradient-button-border: 1px solid #0000004d;
+    --x-gradient-button-border-radius: 0.5em;
+    --x-gradient-button-box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6), 0 1px 2px rgb(0 0 0 / 0.15);
+
+    [data-theme="dark"] & {
+      --x-surface: #3a3a3a;
+
+      --x-gradient-button-background: linear-gradient(
+        to bottom,
+        rgb(255 255 255 / 0.6),
+        rgb(255 255 255 / 0.25) 50%,
+        rgb(0 0 0 / 0.15) 50%,
+        rgb(0 0 0 / 0.4)
+      );
+      --x-gradient-button-border: 1px solid rgb(0 0 0 / 0.3);
+      --x-gradient-button-border-radius: 0.5em;
+      --x-gradient-button-box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4), 0 1px 2px rgb(0 0 0 / 0.15);
+
+      --x-gradient-background: linear-gradient(
+        to bottom,
+        rgb(10 10 10 / 0.85),
+        rgb(30 30 30 / 0.55) 25%,
+        rgb(120 120 120 / 0.4)
+      );
+    }
     display: flex;
     flex-direction: column;
-
-    font-size: 1rem;
-    background: var(--x-background);
   }
 
   .header {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px var(--x-padding-inline);
+    border-bottom: 1px solid var(--x-border);
+
+    .siteName {
+      flex-grow: 1;
+      max-width: 12.5rem;
+      font-family: var(--font-dot-gothic), "MS P Gothic", "Osaka", sans-serif;
+      font-size: 1.625rem;
+      line-height: 1;
+      text-align: center;
+
+      a {
+        vertical-align: text-top;
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    .utility {
+      display: grid;
+      grid-template-columns: repeat(3, 3.75rem);
+      gap: 0.5rem;
+      width: fit-content;
+      margin-left: auto;
+      font-size: 0.625rem;
+      text-align: center;
+
+      li:not(:last-child) {
+        display: grid;
+      }
+
+      a,
+      button {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        padding: 4px 0;
+        color: var(--x-color);
+        text-decoration: none;
+        background: var(--x-gradient-button-background);
+        border: var(--x-gradient-button-border);
+        border-radius: var(--x-gradient-button-border-radius);
+        box-shadow: var(--x-gradient-button-box-shadow);
+      }
+    }
+  }
+
+  .breadcrumb {
+    padding: 0.5rem var(--x-padding-inline);
+    border-bottom: 1px solid var(--x-border);
+  }
+
+  .search {
+    display: block;
+    padding: 0.25rem var(--x-padding-inline) 0.75rem;
+    border-bottom: 1px solid var(--x-border);
+  }
+
+  .ad {
+    padding: 0.875rem var(--x-padding-inline);
+    border-bottom: 1px solid var(--x-border);
+  }
+
+  .content {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    margin: 0 0 4lh;
+  }
+
+  .footer {
+    padding: 8px var(--x-padding-inline);
+    font-size: 0.75rem;
+    text-align: center;
+    border-top: 1px solid var(--x-border);
+  }
+}
+
+/** Tablet: 左ナビのサイドバーありレイアウト */
+@media screen and (40rem <= width < 90rem) {
+  .root {
+    --x-padding-inline: 8px;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 12.5rem 1fr;
+    font-size: 1rem;
+    background: var(--x-background);
+  }
+
+  .header,
+  .content,
+  .footer {
+    grid-column: 2/3;
+    border-left: 1px inset #fff;
+  }
+
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    grid-row: 1/2;
     align-items: center;
     justify-content: space-between;
     padding: 6px 16px 6px 10px;
@@ -250,51 +394,6 @@
     }
   }
 
-  .breadcrumb {
-    padding: 0.5rem 10px;
-    border-bottom: 1px solid var(--x-border);
-  }
-
-  .ad {
-    padding: 1.25rem 10px;
-  }
-
-  .content {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-  }
-
-  .footer {
-    padding: 8px 10px;
-    font-size: 0.75rem;
-    text-align: center;
-    border-top: 1px solid var(--x-border);
-
-    .allRightsReserved {
-      display: none;
-    }
-  }
-}
-
-/** PC: 縦ナビのサイドバー */
-@media screen and (40rem <= width < 90rem) {
-  .root {
-    display: grid;
-    grid-template-rows: auto 1fr auto auto;
-    grid-template-columns: 12.5rem 1fr;
-  }
-
-  .header,
-  .content,
-  .footer {
-    grid-column: 2/3;
-    border-left: 1px inset #fff;
-  }
-
-  .header {
-    grid-row: 1/2;
-  }
-
   .navigation {
     position: sticky;
     top: 0;
@@ -308,15 +407,17 @@
   }
 
   .breadcrumb {
-    padding-bottom: 0;
+    padding: 0.5rem 10px 0;
     border: 0;
   }
 
   .ad {
-    padding-bottom: 2lh;
+    padding: 1.25rem 10px 2lh;
   }
 
   .content {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
     grid-row: 2 / 3;
   }
 
@@ -326,10 +427,18 @@
 
   .footer {
     grid-row: 5/6;
+    padding: 8px 10px;
+    font-size: 0.75rem;
     text-align: right;
+    border-top: 1px solid var(--x-border);
+
+    .allRightsReserved {
+      display: none;
+    }
   }
 }
 
+/** PC: 目次が右ナビ */
 @media screen and (64rem <= width < 90rem) {
   .root {
     grid-template-columns: min(18.125rem, 25vw) 1fr;
@@ -349,6 +458,7 @@
   }
 }
 
+/** Wide Screen: 本体と揃ったトンマナ */
 @media screen and (90rem <= width) {
   .root {
     display: grid;
