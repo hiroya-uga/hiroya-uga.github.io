@@ -8,6 +8,7 @@ import { CodeBlock } from '@/components/ui/embed/CodeBlock';
 import { SelectField, TextField } from '@/components/ui/forms';
 import { Heading } from '@/components/ui/headings/Heading';
 import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
+import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
 import { Lang } from '@/types/lang';
 import { formattedLogTimeString } from '@/utils/formatter';
 
@@ -90,9 +91,11 @@ export const SpeechSynthesisPlayground = ({ lang }: { lang: Lang }) => {
   const logCounterRef = useRef(0);
   const currentUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
-  const [isSupported, setIsSupported] = useState<boolean | null>(null);
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [voiceURI, setVoiceURI] = useState('');
+  const { isSupported, voices, voiceURI, setVoiceURI, selectedVoice, voiceGroups } = useSpeechSynthesis({
+    preferredVoiceNames: t.preferredVoiceNames,
+    preferredVoiceLangPrefix: lang,
+  });
+
   const [text, setText] = useState(t.defaultText);
   const [rate, setRate] = useState(DEFAULT_RATE);
   const [pitch, setPitch] = useState(DEFAULT_PITCH);
@@ -111,69 +114,16 @@ export const SpeechSynthesisPlayground = ({ lang }: { lang: Lang }) => {
     setLog((current) => [entry, ...current].slice(0, MAX_LOG));
   }, []);
 
-  const selectedVoice = useMemo(() => {
-    return voices.find((voice) => voice.voiceURI === voiceURI);
-  }, [voices, voiceURI]);
-
-  const voiceGroups = useMemo(() => {
-    const map = new Map<string, SpeechSynthesisVoice[]>();
-    for (const voice of voices) {
-      const group = voice.lang || 'unknown';
-      const existing = map.get(group) ?? [];
-      existing.push(voice);
-      map.set(group, existing);
-    }
-    return [...map.entries()].sort(([langA], [langB]) => langA.localeCompare(langB));
-  }, [voices]);
-
   const codeSnippet = useMemo(
-    () => buildCodeSnippet({ text, voice: selectedVoice, rate, pitch, volume }),
+    () => buildCodeSnippet({ text, voice: selectedVoice ?? undefined, rate, pitch, volume }),
     [text, selectedVoice, rate, pitch, volume],
   );
-
-  useEffect(() => {
-    setIsSupported('speechSynthesis' in globalThis.window);
-  }, []);
 
   useEffect(() => {
     if (isSupported !== true) {
       return;
     }
-
-    const reloadVoices = () => {
-      const list = globalThis.window.speechSynthesis.getVoices();
-
-      setVoices(list);
-      setVoiceURI((current) => {
-        if (current !== '' && list.some((voice) => voice.voiceURI === current)) {
-          return current;
-        }
-
-        for (const name of t.preferredVoiceNames) {
-          const preferredVoice = list.find((voice) => voice.name === name);
-
-          if (preferredVoice !== undefined) {
-            return preferredVoice.voiceURI;
-          }
-        }
-
-        const browserDefault = list.find((voice) => voice.default);
-
-        if (browserDefault !== undefined) {
-          return browserDefault.voiceURI;
-        }
-
-        const fallback = list.find((voice) => voice.lang.startsWith(t.preferredVoiceLangPrefix));
-
-        return (fallback ?? list[0])?.voiceURI ?? '';
-      });
-    };
-
-    reloadVoices();
-    globalThis.window.speechSynthesis.addEventListener('voiceschanged', reloadVoices);
-
     return () => {
-      globalThis.window.speechSynthesis.removeEventListener('voiceschanged', reloadVoices);
       // アンマウント後の遅延イベント発火で setState が走らないようにハンドラを外す
       const current = currentUtteranceRef.current;
       if (current !== null) {
@@ -182,7 +132,7 @@ export const SpeechSynthesisPlayground = ({ lang }: { lang: Lang }) => {
       }
       globalThis.window.speechSynthesis.cancel();
     };
-  }, [isSupported, t.preferredVoiceLangPrefix, t.preferredVoiceNames]);
+  }, [isSupported]);
 
   if (isSupported === null) {
     return (
@@ -252,7 +202,7 @@ export const SpeechSynthesisPlayground = ({ lang }: { lang: Lang }) => {
 
     const utterance = new SpeechSynthesisUtterance(text);
 
-    if (selectedVoice !== undefined) {
+    if (selectedVoice !== null) {
       utterance.voice = selectedVoice;
       utterance.lang = selectedVoice.lang;
     }
@@ -337,7 +287,7 @@ export const SpeechSynthesisPlayground = ({ lang }: { lang: Lang }) => {
                   ))}
                 </SelectField>
                 <p className="min-h-[lh] text-xs">
-                  {selectedVoice !== undefined && (
+                  {selectedVoice !== null && (
                     <>
                       lang: {selectedVoice.lang} / localService: {String(selectedVoice.localService)}
                     </>

@@ -1,3 +1,4 @@
+import { DEFAULT_PREFERRED_VOICE_NAMES } from '@/hooks/use-speech-synthesis';
 import { Lang } from '@/types/lang';
 
 export const speechSynthesisLocales = {
@@ -17,14 +18,7 @@ export const speechSynthesisLocales = {
     codeHeading: 'サンプルコード',
     defaultText: 'こんにちは！Web Speech APIのSpeechSynthesisを試してみましょう！',
     preferredVoiceLangPrefix: 'ja',
-    preferredVoiceNames: [
-      'Kyoko', // macOS / iOS
-      'Otoya', // macOS / iOS
-      'Google 日本語', // Chrome
-      'Microsoft Nanami Online (Natural) - Japanese (Japan)', // Edge
-      'Microsoft Ayumi - Japanese (Japan)', // Windows
-      'Microsoft Haruka Desktop', // Windows (legacy)
-    ],
+    preferredVoiceNames: DEFAULT_PREFERRED_VOICE_NAMES.ja,
   },
   en: {
     notSupported: 'Your browser does not support the Web Speech API (SpeechSynthesis).',
@@ -42,15 +36,6 @@ export const speechSynthesisLocales = {
     codeHeading: 'Sample code',
     defaultText: "Hello! Let's try out the Web Speech API SpeechSynthesis!",
     preferredVoiceLangPrefix: 'en',
-    preferredVoiceNames: [
-      'Samantha', // macOS / iOS (en-US)
-      'Alex', // macOS premium (en-US)
-      'Karen', // macOS (en-AU)
-      'Daniel', // macOS (en-GB)
-      'Google US English', // Chrome
-      'Microsoft Aria Online (Natural) - English (United States)', // Edge
-      'Microsoft Zira Desktop', // Windows (legacy)
-      'Microsoft David Desktop', // Windows (legacy)
-    ],
+    preferredVoiceNames: DEFAULT_PREFERRED_VOICE_NAMES.en,
   },
 } satisfies Record<Lang, unknown>;
