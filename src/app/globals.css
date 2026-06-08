@@ -409,6 +409,7 @@
   *::after {
     box-sizing: border-box;
     min-width: 0;
+    scrollbar-color: var(--x-color-text-low-contrast) transparent;
   }
 
   :focus-visible {
