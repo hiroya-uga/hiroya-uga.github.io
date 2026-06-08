@@ -31,7 +31,7 @@ const SelectFieldComponent = (
   const descriptionId = description ? `${id}-description` : undefined;
 
   return (
-    <>
+    <div>
       <p>
         <label htmlFor={id} className="block w-fit text-sm font-bold leading-snug">
           {label}
@@ -42,7 +42,7 @@ const SelectFieldComponent = (
       {description && (
         <div
           id={descriptionId}
-          className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-sm leading-relaxed"
+          className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-xs leading-relaxed"
         >
           <p className="pt-3px mt-3px relative grid size-4 place-items-center [--x-fill:var(--x-color-text-secondary)]">
             <SvgIcon name="description" alt="" />
@@ -68,7 +68,7 @@ const SelectFieldComponent = (
           ref={ref as Ref<HTMLSelectElement>}
         />
       </p>
-    </>
+    </div>
   );
 };
 

@@ -1,16 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 interface Props {
   defaultOpen?: boolean;
   name?: string;
   summary: React.ReactNode;
   children: React.ReactNode;
-  id: string;
+  id?: string;
 }
 
-export const Details = ({ defaultOpen = false, name, summary, children, id }: Readonly<Props>) => {
+export const Details = ({ defaultOpen = false, name, summary, children, id: argId }: Readonly<Props>) => {
+  const generatedId = useId();
+  const id = argId ?? generatedId;
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
@@ -31,7 +33,7 @@ export const Details = ({ defaultOpen = false, name, summary, children, id }: Re
         }}
       >
         <div className="px-4 py-2">{summary}</div>
-        <div className="mr-2 w-[32px]">
+        <div className="w-32PX mr-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

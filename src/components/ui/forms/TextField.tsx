@@ -30,6 +30,7 @@ type Label =
 
 type BaseProps = Label & {
   value?: string;
+  descriptions?: string[];
   description?: string;
   placeholder?: string;
   required?: boolean;
@@ -129,7 +130,7 @@ const TextareaComponent = (
 
 const Textarea = forwardRef(TextareaComponent);
 const TextFieldComponent = (
-  { description, align = 'left', disabled, ...restProps }: BaseProps,
+  { descriptions, description, align = 'left', disabled, ...restProps }: BaseProps,
   ref: Ref<HTMLTextAreaElement | HTMLInputElement>,
 ) => {
   const useIdValue = useId();
@@ -148,7 +149,7 @@ const TextFieldComponent = (
   };
 
   return (
-    <>
+    <div>
       {'label' in restProps && (
         <p>
           <label htmlFor={id} className="block w-fit text-sm font-bold leading-snug">
@@ -158,7 +159,7 @@ const TextFieldComponent = (
         </p>
       )}
 
-      {description && (
+      {(descriptions || description) && (
         <div
           id={descriptionId}
           className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-0.5 text-xs leading-relaxed"
@@ -167,7 +168,7 @@ const TextFieldComponent = (
             <SvgIcon name="description" alt="" />
           </p>
           <div>
-            {description.split('\n').map((line) => {
+            {(descriptions ?? description?.split('\n'))?.map((line) => {
               return <p key={line}>{line}</p>;
             })}
           </div>
@@ -204,7 +205,7 @@ const TextFieldComponent = (
           />
         )}
       </p>
-    </>
+    </div>
   );
 };
 
