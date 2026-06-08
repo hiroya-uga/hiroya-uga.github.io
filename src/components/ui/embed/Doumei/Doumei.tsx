@@ -11,6 +11,12 @@ export const Doumei = () => {
             integrity="sha384-xncK0UxUwYP/sVifbjUeoTOjEd+qERUhoy2pXw2Y+xY2QNwnN6FAbCrx40dKfftp"
             crossOrigin="anonymous"
           />
+          <Script>
+            {/* for localhost */}
+            {`
+              window.ringID = window.ringID ?? '';
+            `}
+          </Script>
           <Script
             src="https://gebecy.github.io/web10unite/onionring-widget.js"
             integrity="sha384-4yuwNPHYXejEWUlSW7ehSnXVF+ILr3/quf5h8z4SWBvPX5OdfnsFAWXo+uLEjiDD"
