@@ -117,6 +117,13 @@
   }
 }
 
+.skeleton {
+  box-sizing: content-box;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid transparent;
+}
+
 /** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
 @media screen and (width <= 21.8rem) {
   .root {
@@ -129,8 +136,10 @@
     }
   }
 
+  .skeleton,
   .img {
     width: max(calc(120 / 16 / var(--font-zoom-base) * 1rem), 120px);
+    aspect-ratio: 120 / 30;
   }
 }
 
@@ -142,8 +151,10 @@
     }
   }
 
+  .skeleton,
   .img {
     width: calc(168 * 1.5 / 16 * 1rem);
+    aspect-ratio: 252 / 42;
   }
 }
 
@@ -156,14 +167,18 @@
     }
   }
 
+  .skeleton,
   .img {
     width: calc(468 / 16 * 1rem);
+    aspect-ratio: 468 / 60;
   }
 }
 
 /** PC: 目次が右ナビ */
 @media screen and (64rem <= width < 90rem) {
+  .skeleton,
   .img {
     width: calc(468 * 1.5 / 16 * 1rem);
+    aspect-ratio: 702 / 90;
   }
 }

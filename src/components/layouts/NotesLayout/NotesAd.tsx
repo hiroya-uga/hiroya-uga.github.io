@@ -2,7 +2,6 @@
 
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import styles from './NotesAd.module.css';
 
@@ -18,7 +17,7 @@ interface Ad {
 
 const ADS: Ad[] = [
   {
-    href: '/tools/vnux',
+    href: '/tools/vnux/',
     alt: 'vnux: Nu Html Checker for macOS',
     sources: {
       '240x60': '/notes/images/gemini-generated-vnux-240x60.webp',
@@ -26,21 +25,23 @@ const ADS: Ad[] = [
       '1404x180': '/notes/images/gemini-generated-vnux-1404x180.webp',
     },
   },
+  {
+    href: '/tools/contrast-checker/',
+    alt: 'is your color accessible? WCAG AA / AAA checker TEST NOW',
+    sources: {
+      '240x60': '/notes/images/firefly-generated-a11y-contrast-240x60.webp',
+      '504x84': '/notes/images/firefly-generated-a11y-contrast-504x84.webp',
+      '1404x180': '/notes/images/firefly-generated-a11y-contrast-1404x180.webp',
+    },
+  },
 ];
 
-const indexCache = new Map<string, number>();
-
-const pickIndexFor = (pathname: string) => {
-  const cache = indexCache.get(pathname);
-
-  if (typeof cache === 'number') {
-    return cache;
+let clientAdIndex: number | null = null;
+const getClientAdIndex = () => {
+  if (clientAdIndex === null) {
+    clientAdIndex = Math.floor(Math.random() * ADS.length);
   }
-
-  const index = Math.floor(Math.random() * ADS.length);
-  indexCache.set(pathname, index);
-
-  return index;
+  return clientAdIndex;
 };
 
 interface BannerProps {
@@ -80,13 +81,11 @@ export const NotesAd = () => {
     () => window.matchMedia('(hover: hover)').matches,
     () => true,
   );
-  const pathname = usePathname();
   const index = useSyncExternalStore(
     () => () => {},
-    () => pickIndexFor(pathname),
-    () => 0,
+    getClientAdIndex,
+    () => -1,
   );
-
   const ad = ADS[index];
   const id = useId();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -109,6 +108,14 @@ export const NotesAd = () => {
       document.removeEventListener('click', onClick);
     };
   }, [isExpanded]);
+
+  if (index === -1) {
+    return (
+      <p aria-busy="true" className={styles.root}>
+        <span className={styles.skeleton}></span>
+      </p>
+    );
+  }
 
   if (isSupportedHover) {
     return (
