@@ -460,7 +460,7 @@
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
 @media screen and (21.8rem < width < 40rem) {
   .root {
-    --x-heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --x-heading-margin: calc(0.875 * 3lh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
   }
 
   .title {
@@ -508,6 +508,15 @@
     }
     h2 {
       margin-bottom: 0.25lh;
+      font-weight: bold;
+    }
+
+    ul {
+      font-weight: bold;
+
+      ul {
+        font-weight: normal;
+      }
     }
   }
 
@@ -639,8 +648,7 @@
 
     h2 {
       padding: 2px var(--x-padding-inline);
-      font-size: 1em;
-      font-weight: bold;
+      font-size: 1.5rem;
       background: var(--x-nav-base);
       border: 1px solid var(--x-border);
 
@@ -651,6 +659,8 @@
 
     h3 {
       padding: 2px var(--x-padding-inline);
+      font-size: 1.125rem;
+      font-weight: bold;
       border-bottom: 1px solid var(--x-border);
     }
 
@@ -828,7 +838,7 @@
 /** Tablet: 左ナビのサイドバーありレイアウト */
 @media screen and (40rem <= width < 90rem) {
   .root {
-    --x-heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -0.5) calc(0.875 * 0.5rlh);
+    --x-heading-margin: calc(0.875 * 3lh) calc(var(--x-padding-inline) * -0.5) calc(0.875 * 0.5rlh);
     display: grid;
     grid-template-rows: auto auto auto 1fr;
   }
@@ -840,7 +850,7 @@
     .text {
       display: block;
       padding: 0 var(--x-padding-inline);
-      font-size: 1.5rem;
+      font-size: 1.875rem;
       font-weight: bold;
       border-bottom: 2px solid var(--x-border);
     }
@@ -1015,8 +1025,7 @@
 
     h2 {
       padding: 2px calc(var(--x-padding-inline) * 0.5);
-      font-size: 1em;
-      font-weight: bold;
+      font-size: 1.5rem;
       background: var(--x-nav-base);
       border: 1px solid var(--x-border);
 
@@ -1027,6 +1036,8 @@
 
     h3 {
       padding: 2px calc(var(--x-padding-inline) * 0.5);
+      font-size: 1.125rem;
+      font-weight: bold;
       border-bottom: 1px solid var(--x-border);
     }
 
@@ -1196,7 +1207,8 @@
     grid-row: 1 / -1;
     grid-column: 2 / 3;
     padding: 0 16px 0 0;
-    margin: 7px 0 16px;
+    /* h1の 4 /1 の行の高さ */
+    margin: calc(30 / 16 * (1.875 - 1) / 2 / 2 * 1rem) 0 16px;
 
     .inner {
       position: sticky;
@@ -1232,7 +1244,7 @@
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 1fr 20%;
-    column-gap: 64px;
+    column-gap: 56px; /* 32 * 1.75 */
   }
 
   .title,

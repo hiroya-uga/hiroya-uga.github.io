@@ -40,10 +40,6 @@
     a {
       color: var(--x-link);
       text-decoration: underline;
-
-      &:visited {
-        color: var(--x-link-visited);
-      }
     }
   }
 
@@ -120,6 +116,10 @@
         display: block;
         padding: max(calc(4 / 16 / var(--font-zoom-base) * 1rem), 4px) 10px;
         color: var(--x-header-link-color);
+
+        &:visited {
+          color: var(--x-link-visited);
+        }
       }
     }
 
