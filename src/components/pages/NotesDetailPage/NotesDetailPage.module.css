@@ -460,7 +460,7 @@
 /** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
 @media screen and (21.8rem < width < 40rem) {
   .root {
-    --heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --x-heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
   }
 
   .title {
@@ -626,7 +626,7 @@
     padding: 0 var(--x-padding-inline);
 
     :is(h2, h3, h4, h5, h6) {
-      margin: var(--heading-margin);
+      margin: var(--x-heading-margin);
     }
 
     :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
@@ -685,6 +685,28 @@
 
       > h2:first-child {
         margin-top: 0;
+      }
+    }
+
+    [class~="table-container"] {
+      table {
+        width: 40rem;
+      }
+
+      &[class~="of-steps"] {
+        :where(th, td):first-child {
+          position: sticky;
+          left: 0;
+          z-index: 1;
+        }
+
+        th:first-child {
+          background: var(--x-gradient-background);
+        }
+
+        td:first-child {
+          background: var(--background-color-secondary);
+        }
       }
     }
 
@@ -806,7 +828,7 @@
 /** Tablet: 左ナビのサイドバーありレイアウト */
 @media screen and (40rem <= width < 90rem) {
   .root {
-    --heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -1) calc(0.875 * 0.5rlh);
+    --x-heading-margin: calc(0.875 * 3rlh) calc(var(--x-padding-inline) * -0.5) calc(0.875 * 0.5rlh);
     display: grid;
     grid-template-rows: auto auto auto 1fr;
   }
@@ -818,7 +840,7 @@
     .text {
       display: block;
       padding: 0 var(--x-padding-inline);
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: bold;
       border-bottom: 2px solid var(--x-border);
     }
@@ -834,7 +856,6 @@
     }
 
     .description {
-      padding: 0 var(--x-padding-inline);
       margin: calc(0.875 * 0.75rlh * 0.5) 0 0;
     }
 
@@ -981,7 +1002,7 @@
 
   .content {
     :is(h2, h3, h4, h5, h6) {
-      margin: var(--heading-margin);
+      margin: var(--x-heading-margin);
     }
 
     :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
@@ -993,7 +1014,7 @@
     }
 
     h2 {
-      padding: 2px var(--x-padding-inline);
+      padding: 2px calc(var(--x-padding-inline) * 0.5);
       font-size: 1em;
       font-weight: bold;
       background: var(--x-nav-base);
@@ -1005,7 +1026,7 @@
     }
 
     h3 {
-      padding: 2px var(--x-padding-inline);
+      padding: 2px calc(var(--x-padding-inline) * 0.5);
       border-bottom: 1px solid var(--x-border);
     }
 
@@ -1028,10 +1049,6 @@
 
       > p:has(video) {
         margin: 1lh 0 0;
-      }
-
-      > :is(h2, h3, h4, h5) + [class~="table-container"] {
-        margin: 0.75lh calc(var(--x-padding-inline) * -1) 0;
       }
 
       > h2:first-child {
@@ -1157,17 +1174,22 @@
     grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 1fr max(290px, 20vw);
     column-gap: 20px;
-    padding: 0 20px 0 0;
+    padding: 0 var(--x-padding-inline);
   }
 
   .title,
   .meta,
   .body {
     grid-column: 1 / 2;
+    padding-inline: 0;
   }
 
   .title {
     grid-row: 1 / 2;
+
+    .text {
+      padding-inline: 0;
+    }
   }
 
   .toc {
@@ -1190,8 +1212,14 @@
   }
 
   .content {
-    div:not([class]) > h2:first-child {
-      margin: var(--heading-margin);
+    div:not([class]) {
+      > h2:first-child {
+        margin: var(--x-heading-margin);
+      }
+
+      > [class~="table-container"] {
+        /* margin-inline: calc(var(--x-padding-inline) * -1); */
+      }
     }
   }
 }
