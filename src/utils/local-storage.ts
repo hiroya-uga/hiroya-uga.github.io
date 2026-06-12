@@ -13,6 +13,12 @@ type Value = {
     shouldHighLight?: boolean;
     level?: number;
   };
+  'savedata-ascii-pet': {
+    voiceURI?: string;
+    speechEnabled?: boolean;
+    runWhenInactive?: boolean;
+    volume?: number;
+  };
   'cookie-consent': 'accepted' | 'rejected';
   'power-section-viewed-date': string;
   platform: string;
