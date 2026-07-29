@@ -138,7 +138,8 @@ export const FocalLengthChecker = () => {
 
   const frames = useMemo(() => {
     const cropFactor = SENSOR_FORMATS.find((f) => f.id === selectedFormatId)?.cropFactor ?? 1;
-    return focalLengths.map((fl) => {
+
+    return [...new Set([...focalLengths, deviceFocalLength])].map((fl) => {
       const pct = deviceFocalLength / (fl * cropFactor);
 
       if (pct > 1) {
@@ -177,7 +178,8 @@ export const FocalLengthChecker = () => {
 
         <video
           ref={videoRef}
-          className="absolute inset-0 size-full object-cover"
+          tabIndex={-1}
+          className="pointer-events-none absolute inset-0 size-full object-cover"
           autoPlay
           playsInline
           muted
