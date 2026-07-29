@@ -12,33 +12,38 @@ export const CardWithSymbol = ({ href, title, symbol, description }: Readonly<Pr
   const descriptionId = description ? href : undefined;
 
   return (
-    <div className={clsx(['@w360:grid @w360:grid-cols-[8.5rem_1fr] @w360:grid-rows-[auto_1fr] gap-x-3 gap-y-1'])}>
+    <div
+      className={clsx([
+        'gap-x-3 gap-y-1',
+        '@w280:grid @w280:grid-cols-[min(8.5rem,30%)_1fr] @w280:grid-rows-[auto_1fr]',
+      ])}
+    >
       <p
         className={clsx([
           'mb-1 block',
-          '@w360:grid @w360:grid-cols-subgrid @w360:grid-rows-subgrid @w360:col-start-1 @w360:-col-end-1 @w360:row-start-1 @w360:-row-end-1 @w360:mb-0',
+          '@w280:grid @w280:grid-cols-subgrid @w280:grid-rows-subgrid @w280:col-start-1 @w280:-col-end-1 @w280:row-start-1 @w280:-row-end-1 @w280:mb-0',
         ])}
       >
         <Link
           href={href}
           className={clsx([
             'group flex flex-col-reverse rounded-md no-underline',
-            '@w360:grid @w360:grid-cols-subgrid @w360:grid-rows-subgrid @w360:col-start-1 @w360:-col-end-1 @w360:row-start-1 @w360:-row-end-1',
+            '@w280:grid @w280:grid-cols-subgrid @w280:grid-rows-subgrid @w280:col-start-1 @w280:-col-end-1 @w280:row-start-1 @w280:-row-end-1',
           ])}
           aria-describedby={descriptionId}
         >
           <span
             className={clsx([
               'inline-block leading-normal underline decoration-transparent transition-[text-decoration-color] duration-200 group-hover:decoration-current',
-              '@w360:col-start-2 @w360:pt-0.5 @w360:col-end-3 @w360:row-start-1 @w360:row-end-2',
+              '@w280:col-start-2 @w280:pt-0.5 @w280:col-end-3 @w280:row-start-1 @w280:row-end-2',
             ])}
           >
             {title}
           </span>
           <span
             className={clsx([
-              'bg-card font-emoji mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md text-[3.5rem] leading-none',
-              '@w360:col-start-1 @w360:col-end-2 @w360:row-start-1 @w360:row-end-3 @w360:mb-0 @w360:aspect-square',
+              'bg-card font-emoji text-56px mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md leading-none',
+              '@w280:col-start-1 @w280:col-end-2 @w280:row-start-1 @w280:row-end-3 @w280:mb-0 @w280:aspect-square @w280:text-[min(14.93vw,56px)]',
             ])}
             aria-hidden="true"
           >
@@ -50,7 +55,7 @@ export const CardWithSymbol = ({ href, title, symbol, description }: Readonly<Pr
       </p>
       {description && (
         <p
-          className={clsx(['@w360:col-start-2 @w360:col-end-3 @w360:row-start-2 @w360:row-end-3', 'text-sm'])}
+          className={clsx(['@w280:col-start-2 @w280:col-end-3 @w280:row-start-2 @w280:row-end-3', 'text-sm'])}
           id={descriptionId}
         >
           {description}
