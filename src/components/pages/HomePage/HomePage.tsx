@@ -4,6 +4,9 @@ import { getMetadata } from '@/utils/get-metadata';
 import { DiscoverSection, MainVisualSection, PowerOfTheWebSection } from './client';
 import { BookMarkSection, CategoriesSection, ExternalMediaSection, Header, ProfileSection } from './server';
 
+import clsx from 'clsx';
+import styles from './HomePage.module.css';
+
 const { pageTitle } = getMetadata('/');
 
 export const HomePage = () => {
@@ -11,21 +14,25 @@ export const HomePage = () => {
     <>
       <Header pageTitle={pageTitle} />
 
-      <main>
+      <main className={styles.root}>
         <div className="bg-primary z-1 w640:pb-16 relative pb-8">
           <MainVisualSection />
         </div>
 
         <PowerOfTheWebSection />
 
-        <div className="bg-primary z-1 relative">
+        <div className={clsx([styles.sections, 'bg-primary z-1 relative'])}>
           <DiscoverSection />
           <CategoriesSection />
 
-          <div className="px-content-inline w640:pt-28 w640:pb-23 pb-15 pt-11">
+          <div className="px-content-inline pt-(--x-section-padding-top) pb-(--x-section-padding-bottom)">
             <div className="max-w-content mx-auto">
               <ExternalMediaSection />
-              <BookMarkSection />
+
+              <div className="mt-(--x-section-padding-top)">
+                <BookMarkSection />
+              </div>
+
               <ProfileSection />
             </div>
           </div>

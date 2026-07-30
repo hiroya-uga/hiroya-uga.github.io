@@ -77,10 +77,12 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
           <div className="max-w-structure px-content-inline mx-auto">
             <div
               className={clsx(
-                isTop && 'max-w-content border-t-secondary mx-auto border-t',
                 // Articleページのゲージ分を含む padding-bottom が必要
-                'flow-root py-12',
-                'w768:flex w768:flex-wrap w768:justify-center w768:gap-6 w768:pb-20 w768:pt-7',
+                'flow-root',
+                'w768:flex w768:flex-wrap w768:justify-center w768:gap-6',
+                isTop
+                  ? ['max-w-content border-t-secondary mx-auto border-t py-12', 'w640:pt-32']
+                  : ['py-12', 'w768:pb-20 w768:pt-7'],
               )}
             >
               <ul className="w768:flex w768:grow w768:flex-wrap w768:justify-start w768:gap-y-2 text-xs">

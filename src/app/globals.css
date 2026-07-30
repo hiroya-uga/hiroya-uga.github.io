@@ -262,6 +262,8 @@
   --border-color-primary: var(--x-color-border-primary);
   --border-color-secondary: var(--x-color-border-secondary);
 
+  --spacing-resolve-line-height: calc(var(--leading-base)/2 * 1rem);
+
   --z-index-toast: 100;
   --z-index-modeless: 99;
 

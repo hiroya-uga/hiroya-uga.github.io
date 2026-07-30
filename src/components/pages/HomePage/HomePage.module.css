@@ -1,0 +1,27 @@
+.root {
+  --x-section-heading: 1.75rem;
+
+  --x-section-padding-top: calc(var(--spacing) * 22);
+  --x-section-padding-bottom: calc(var(--x-section-padding-top) + var(--spacing-resolve-line-height));
+  --x-section-margin-top: calc(var(--x-section-padding-top) + var(--spacing-resolve-line-height));
+
+  .sections {
+    h2 {
+      margin: 0 0 0.25rem;
+      font-size: var(--x-section-heading);
+      font-weight: bold;
+      letter-spacing: var(--tracking-wide);
+    }
+  }
+
+  @media screen and (min-width: 40rem) {
+    --x-section-heading: 2.5rem;
+    --x-section-padding-top: calc(var(--spacing) * 30);
+
+    .sections {
+      h2 {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
