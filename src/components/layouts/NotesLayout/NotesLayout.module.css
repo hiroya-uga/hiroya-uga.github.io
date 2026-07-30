@@ -267,10 +267,10 @@
     .siteName {
       flex-grow: 1;
       max-width: 12.5rem;
+      padding: 0 0 0 var(--x-padding-inline);
       font-family: var(--font-dot-gothic), "MS P Gothic", "Osaka", sans-serif;
       font-size: 1.625rem;
       line-height: 1;
-      text-align: center;
 
       a {
         vertical-align: text-top;
