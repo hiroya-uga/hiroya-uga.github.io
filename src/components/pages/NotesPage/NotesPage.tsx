@@ -1,21 +1,29 @@
+import { NotesNavigation } from '@/components/domains/notes/NotesNavigation';
 import {
   ArticleCodeHighlightActivator,
   ArticleFootNoteActivator,
   ArticleSpeculationRulesActivator,
 } from '@/components/structures/ArticleMain/ArticleMainClient';
-import { FOOTNOTES_HEADING_ID, NOTES_NAVIGATION_ID, TOC_ID } from '@/constants/id';
+import { FOOTNOTES_HEADING_ID, TOC_ID } from '@/constants/id';
 import '@/libs/marked';
 import { NotesEntry, NotesFrontmatter } from '@/libs/notes';
 import { marked } from 'marked';
 import Link from 'next/link';
 import { useId } from 'react';
-import { NotesGitHubEditLink } from './client';
-import styles from './NotesDetailPage.module.css';
+import { NotesGitHubEditLink } from '../NotesDetailPage/client';
+import detailStyles from '../NotesDetailPage/NotesDetailPage.module.css';
+import topStyles from './NotesPage.module.css';
+
+const styles = {
+  ...detailStyles,
+  ...topStyles,
+};
 
 interface Props {
   frontmatter?: NotesFrontmatter;
   content?: string;
   toc?: string;
+  entries: NotesEntry[];
   childEntries?: NotesEntry[];
   footnotes?: [string, { html: string | Promise<string> }][];
 }
@@ -38,7 +46,7 @@ const getSpeculationRules = (selector: string) =>
     ],
   });
 
-export const NotesDetailPage = ({ frontmatter, content, toc, childEntries, footnotes = [] }: Props) => {
+export const NotesPage = ({ frontmatter, content, toc, entries, childEntries, footnotes = [] }: Props) => {
   const id = useId();
 
   const publishedDate = frontmatter ? dateFormatter.format(new Date(frontmatter.publishedAt)) : '';
@@ -76,10 +84,10 @@ export const NotesDetailPage = ({ frontmatter, content, toc, childEntries, footn
             )}
           </>
         )}
+      </div>
 
-        <p className={styles.toMenu}>
-          <a href={`#${NOTES_NAVIGATION_ID}`}>メニュー</a>
-        </p>
+      <div className={styles.navigation}>
+        <NotesNavigation entries={entries} />
       </div>
 
       {toc !== undefined && toc !== '' && (

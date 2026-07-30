@@ -1,3 +1,4 @@
+import { NotesNavigation } from '@/components/domains/notes/NotesNavigation';
 import { NotesSearch } from '@/components/layouts/NotesLayout/client/NotesSearch';
 import { ThemeSwitch } from '@/components/structures/ThemeSwitch';
 import { NOTES_NAVIGATION_ID } from '@/constants/id';
@@ -8,7 +9,6 @@ import clsx from 'clsx';
 import { DotGothic16 } from 'next/font/google';
 import Link from 'next/link';
 import { NotesBreadcrumb } from './client/NotesBreadcrumb';
-import { NotesSidebarNav } from './client/NotesSidebarNav';
 import { NotesThemeToggle } from './client/NotesThemeToggle';
 import { NotesAd } from './NotesAd';
 import styles from './NotesLayout.module.css';
@@ -53,9 +53,11 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
             </li>
           </ul>
         </header>
-        <nav className={clsx([styles.navigation, styles.ofWide])} aria-label="Wikiʻoleナビゲーション">
-          <NotesSidebarNav entries={entries} />
-        </nav>
+
+        <div className={clsx([styles.navigation, styles.ofWide])}>
+          <NotesNavigation entries={entries} />
+        </div>
+
         <div className={styles.content}>
           <nav className={styles.breadcrumb} aria-label={BREADCRUMB_LABEL.ja}>
             <NotesBreadcrumb entries={entries} />
@@ -71,13 +73,11 @@ export const NotesLayout = ({ entries, children }: Readonly<Props>) => {
 
           {children}
         </div>
-        <nav
-          id={NOTES_NAVIGATION_ID}
-          className={clsx([styles.navigation, styles.ofNarrow])}
-          aria-label="Wikiʻoleナビゲーション"
-        >
-          <NotesSidebarNav entries={entries} />
-        </nav>
+
+        <div className={clsx([styles.navigation, styles.ofNarrow])}>
+          <NotesNavigation id={NOTES_NAVIGATION_ID} entries={entries} />
+        </div>
+
         <footer className={styles.footer}>
           <p>
             <small>

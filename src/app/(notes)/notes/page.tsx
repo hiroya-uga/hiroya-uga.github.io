@@ -1,8 +1,8 @@
-import { NotesDetailPage } from '@/components/pages/NotesDetailPage';
+import { NotesPage } from '@/components/pages/NotesPage';
 import { JsonLd } from '@/components/structures/JsonLd';
 import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
-import { getNotesPost } from '@/libs/notes';
+import { getAllNotesEntries, getNotesPost } from '@/libs/notes';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,6 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Page() {
   const post = getNotesPost([]);
   const frontmatter = post?.frontmatter;
+  const entries = getAllNotesEntries();
 
   return (
     <>
@@ -53,7 +54,13 @@ export default function Page() {
           }}
         />
       )}
-      <NotesDetailPage frontmatter={frontmatter} content={post?.content} toc={post?.toc} footnotes={post?.footnotes} />
+      <NotesPage
+        frontmatter={frontmatter}
+        content={post?.content}
+        toc={post?.toc}
+        entries={entries}
+        footnotes={post?.footnotes}
+      />
     </>
   );
 }

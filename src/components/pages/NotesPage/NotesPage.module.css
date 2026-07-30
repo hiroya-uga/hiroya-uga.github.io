@@ -1,0 +1,34 @@
+/** 画面幅をめちゃちじめるか、iPhone SE基準、375px幅のスマホで文字サイズを上げるとガラケーサイトになる */
+@media screen and (width <= 21.8rem) {
+  .navigation {
+    margin: 0 0 2lh;
+  }
+}
+
+/** 旧スマホ〜タブレット: Wikipedia モバイル風の横並びナビ */
+@media screen and (21.8rem < width < 40rem) {
+  .navigation {
+    display: none;
+  }
+}
+
+/** Tablet: 左ナビのサイドバーありレイアウト */
+@media screen and (40rem <= width < 90rem) {
+  .navigation {
+    display: none;
+  }
+}
+
+/** PC: 目次が右ナビ */
+@media screen and (64rem <= width < 90rem) {
+  .navigation {
+    display: none;
+  }
+}
+
+/** Wide Screen: 本体と揃ったトンマナ */
+@media screen and (90rem <= width) {
+  .navigation {
+    display: none;
+  }
+}

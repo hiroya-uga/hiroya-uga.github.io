@@ -402,7 +402,6 @@
     grid-column: 1 / 2;
     max-height: 100dvh;
     overflow: auto;
-    background: var(--x-nav-base);
     border-right: 1px inset #888;
   }
 
