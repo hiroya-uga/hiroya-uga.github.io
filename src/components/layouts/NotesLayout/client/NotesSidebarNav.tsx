@@ -1,6 +1,7 @@
 'use client';
 
 import { NotesSearch } from '@/components/layouts/NotesLayout/client/NotesSearch';
+import { AsciiPetView } from '@/components/ui/embed/AsciiPetView';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { FOOTER_LINK_LIST } from '@/constants/link-list';
 import type { NotesEntry } from '@/libs/notes';
@@ -76,6 +77,10 @@ export const NotesSidebarNav = ({ entries }: Props) => {
             {renderTree([], styles.list)}
           </>
         )}
+
+        <div className="my-6">
+          <AsciiPetView />
+        </div>
 
         <p className={styles.heading}>ご案内</p>
         <ul className={styles.list}>
