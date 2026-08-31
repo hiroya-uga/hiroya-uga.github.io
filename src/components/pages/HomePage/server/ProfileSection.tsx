@@ -10,7 +10,7 @@ export const ProfileSection = () => {
       <div className="w640:grid w640:gap-x-12 w640:pt-20 border-t-secondary pt-(--x-section-padding-top) mt-(--x-section-margin-top) grid-cols-[1fr_min(30%,360px)] grid-rows-[auto_1fr] border-t border-dashed">
         <h2 className="col-start-1 col-end-2 row-start-1 row-end-2">Profile</h2>
 
-        <div className="w640:leading-inherit w640:pt-resolve-line-height w640:col-start-2 w640:col-end-3 w640:row-start-1 w640:row-end-3 w640:m-0 mx-auto mb-8 pr-4">
+        <div className="w640:leading-inherit w640:pt-[calc(var(--x-section-heading)/1.75*var(--leading-base))] w640:col-start-2 w640:col-end-3 w640:row-start-1 w640:row-end-3 w640:m-0 mx-auto mb-8 pr-4">
           <p className="@container">
             <AvatarAuthor />
           </p>
