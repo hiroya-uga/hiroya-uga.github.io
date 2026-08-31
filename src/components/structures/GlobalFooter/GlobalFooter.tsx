@@ -48,8 +48,8 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
         />
       )}
       {/* Linkコンポーネントを使うと別レイアウト階層に移動した時に layout.css が引き継がれてしまう */}
-      <footer className={clsx(['pwa:hidden', styles.root])}>
-        <div className={clsx([isTop || 'bg-(--x-color-background-footer) text-(--x-color-text-footer)'])}>
+      <footer className={clsx(['pwa:hidden', isTop ? 'relative' : styles.root])}>
+        <div className={clsx([isTop ? 'bg-primary' : 'bg-(--x-color-background-footer) text-(--x-color-text-footer)'])}>
           {!isTop && (
             <div className="max-w-structure bg-secondary px-content-inline relative mx-auto">
               <div className="w1024:absolute w1024:bottom-full w1024:right-[calc(var(--x-spacing-content-inline)-0.75rem)] w1024:py-1 mx-auto py-4 text-center">
