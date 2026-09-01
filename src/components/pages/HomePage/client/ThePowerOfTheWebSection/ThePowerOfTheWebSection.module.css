@@ -68,7 +68,7 @@
   }
 
   .heading {
-    margin: 0 0 0.625em;
+    margin: 0 0 min(0.625em, 1rem);
     font-size: 1.6875rem;
     font-weight: 700;
     line-height: 1.6;
@@ -195,6 +195,19 @@
     }
   }
 
+  &:not(.already) {
+    .heading {
+      font-size: min(1.6875rem, 6vw);
+    }
+    .message {
+      font-size: min(0.875rem, 3vw);
+    }
+
+    .caption {
+      font-size: min(0.875rem, 2vw);
+    }
+  }
+
   @media screen and (min-width: 40rem) {
     .heading {
       font-size: 2.875rem;
@@ -206,6 +219,32 @@
 
     .caption {
       font-size: 0.875rem;
+    }
+  }
+
+  @media screen and (min-width: 640px) {
+    &:not(.already) {
+      .heading {
+        font-size: min(6rem, 6vw);
+      }
+      .message {
+        font-size: min(1rem, 3vw);
+      }
+
+      .caption {
+        font-size: min(0.875rem, 2vw);
+      }
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    &:not(.already) {
+      .message {
+        font-size: min(1.3125rem, 3vw);
+      }
+      .caption {
+        font-size: min(1rem, 2vw);
+      }
     }
   }
 }

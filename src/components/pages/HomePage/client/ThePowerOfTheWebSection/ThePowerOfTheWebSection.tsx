@@ -51,7 +51,7 @@ export const PowerOfTheWebSection = () => {
         ])}
       >
         <div className={styles.content}>
-          <h2 className={styles.heading}>The power of the web</h2>
+          <h2 className={styles.heading}>The power of the Web</h2>
 
           <figure className={clsx([(status === 'ready') === false && 'px-content-inline'])}>
             <blockquote cite="https://www.w3.org/mission/accessibility/" lang="en" className={styles.message}>
