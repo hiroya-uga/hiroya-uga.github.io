@@ -100,6 +100,7 @@ html:has(.container) {
 
   transition: max-width 0.3s ease-out;
 
+  /* 画像の表示サイズに関するブレークポイント */
   @media screen and (width >= 600px) {
     --x-negative-margin-inline: 0;
     --x-spacing-heading-bottom: 2rem;
@@ -121,63 +122,103 @@ html:has(.container) {
   h2,
   h3,
   h4 {
-    margin-bottom: var(--x-spacing-heading-bottom);
+    font-size: var(--x-font-size);
+    line-height: var(--x-line-height);
     letter-spacing: 0.02em;
+  }
+
+  h3 {
+    font-weight: bold;
+  }
+  h4 {
+    padding: 0 0 0.5rem;
+    border-bottom: 1px solid var(--border-color-secondary);
+  }
+
+  [class~="heading-wrapper"] {
+    --x-line-height: 1.375;
+    --x-padding-left: max(calc(var(--spacing-content-inline) * 2), calc(var(--x-font-size) * var(--x-line-height)));
+
+    position: relative;
+    padding-left: var(--x-padding-left);
+    margin-inline: var(--x-negative-margin-inline);
+    margin-bottom: var(--x-spacing-heading-bottom);
 
     + section {
       margin-top: 0;
     }
-  }
 
-  h2,
-  h3 {
-    margin-inline: calc(var(--x-negative-margin-inline) + var(--spacing-content-inline));
-  }
+    &:has(h2) {
+      --x-font-size: 1.25rem;
+    }
+    &:has(h3) {
+      --x-font-size: 1.125rem;
+    }
+    &:has(h4) {
+      --x-font-size: 1rem;
+    }
 
-  h2 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1.375;
-  }
-  h3 {
-    position: relative;
-    padding-left: 0.75rem;
-    font-size: 1.125rem;
-    font-weight: bold;
+    [class~="anchor"] {
+      --x-width: calc(var(--x-font-size) * var(--x-line-height));
 
-    &::before {
       position: absolute;
-      top: 5%;
-      bottom: 0;
-      left: 0;
-      height: 90%;
-      margin-bottom: auto;
-      content: "";
-      border-left: 0.175rem solid var(--color-accent);
-    }
-  }
-  h4 {
-    padding: 0 0 0.5rem;
-    font-size: 1rem;
-    border-bottom: 1px solid var(--border-color-secondary);
-  }
+      top: 0;
+      left: calc((var(--x-padding-left) - var(--x-width)));
+      display: grid;
+      place-items: center;
+      width: var(--x-width);
+      height: calc(var(--x-font-size) * var(--x-line-height));
+      overflow: hidden;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: 1;
+      text-align: center;
+      border-radius: 50%;
 
-  @media screen and (width >= 600px) {
-    h2,
-    h3 {
-      transition: margin-inline 0.3s ease-out;
+      &::before {
+        content: "§";
+        opacity: 0.5;
+        transition: opacity 0.3s ease-out;
+      }
     }
-  }
+    [class~="anchor"]:focus,
+    &:hover [class~="anchor"] {
+      &::before {
+        opacity: 1;
+      }
+    }
+    [class~="anchor"] span {
+      position: absolute;
+      clip: rect(0 0 0 0);
+    }
 
-  @media screen and (width >= 50rem) {
-    h2 {
-      font-size: 1.5rem;
+    @media screen and (width >= 600px) {
+      padding-left: 0;
+      transition:
+        margin-inline 0.3s ease-out,
+        padding-left 0.3s ease-out;
+
+      [class~="anchor"] {
+        left: 0;
+        font-size: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-out;
+      }
     }
-    h3 {
-      font-size: 1.25rem;
-    }
-    h4 {
-      font-size: 1.125rem;
+
+    @media screen and (width >= 50rem) {
+      &:has(h2) {
+        --x-font-size: 1.5rem;
+        --x-line-height: 1.375;
+      }
+      &:has(h3) {
+        --x-font-size: 1.25rem;
+        --x-line-height: var(--leading-base);
+      }
+      &:has(h4) {
+        --x-font-size: 1.125rem;
+        --x-line-height: var(--leading-base);
+      }
     }
   }
 }
@@ -228,6 +269,7 @@ html:has(.container) {
     }
   }
 
+  /* 画像の表示サイズに関するブレークポイント */
   @media screen and (width >= 600px) {
     p:has(customされたimg要素ˆ-ˆ) {
       transition: margin-inline 0.3s ease-out;
@@ -378,6 +420,7 @@ html:has(.container) {
       color: #fff;
       background: rgb(0 0 0 / 0.7);
 
+      /* 画像の表示サイズに関するブレークポイント */
       @media screen and (width >= 600px) {
         padding-inline: 0.5rem;
       }
@@ -648,7 +691,8 @@ html:has(.container) {
 
     [class~="codeblock-switcher__list"] {
       position: relative;
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
       padding: 4px;
       text-align: center;
 
@@ -671,6 +715,7 @@ html:has(.container) {
     [class~="codeblock-switcher__item"] {
       position: relative;
       z-index: 1;
+      grid-row: 1 / 2;
       padding: 0;
       margin: 0;
       list-style: none;
@@ -683,7 +728,6 @@ html:has(.container) {
     [class~="codeblock-switcher__label"] {
       z-index: 1;
       display: block;
-      min-width: 5rem;
       padding: 8px;
       font-size: 0.75rem;
       line-height: 1;

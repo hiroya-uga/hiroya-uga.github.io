@@ -1,5 +1,5 @@
 .root {
-  --x-max-width: 90%;
+  --x-max-width: calc(100% - (var(--spacing-content-inline) * 2));
 
   @media screen and (width >= 40rem) {
     --x-max-width: 37.5rem;

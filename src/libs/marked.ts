@@ -15,19 +15,22 @@ export function getAllNoteIds(fullPath: string) {
 marked.use({ extensions: customMarkdownSyntaxes });
 
 function wrapHeadingsWithSections(html: string): string {
-  const headingPattern = /<h([1-6])\b[^>]*>[\s\S]*?<\/h\1>/g;
+  const headingBlockPattern = /<div class="heading-wrapper">[\s\S]*?<\/div>/g;
   let result = '';
   let lastIndex = 0;
   const openLevels: number[] = [];
   let match: RegExpExecArray | null;
 
-  while ((match = headingPattern.exec(html)) !== null) {
-    const heading = match[0];
-    const level = Number.parseInt(match[1], 10);
-    const headingStart = match.index;
-    const headingEnd = headingStart + heading.length;
+  while ((match = headingBlockPattern.exec(html)) !== null) {
+    const headingBlock = match[0];
+    const levelMatch = /<h([1-6])\b/.exec(headingBlock);
+    if (!levelMatch) continue;
 
-    result += html.slice(lastIndex, headingStart);
+    const level = Number.parseInt(levelMatch[1], 10);
+    const blockStart = match.index;
+    const blockEnd = blockStart + headingBlock.length;
+
+    result += html.slice(lastIndex, blockStart);
 
     while (openLevels.length > 0 && openLevels[openLevels.length - 1] >= level) {
       result += '\n</section>';
@@ -35,9 +38,9 @@ function wrapHeadingsWithSections(html: string): string {
     }
 
     result += '<section>\n';
-    result += heading;
+    result += headingBlock;
     openLevels.push(level);
-    lastIndex = headingEnd;
+    lastIndex = blockEnd;
   }
 
   result += html.slice(lastIndex);

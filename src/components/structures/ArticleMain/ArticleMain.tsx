@@ -129,7 +129,12 @@ export const ArticleMain = async ({ post }: Props) => {
             />
             {0 < post.footnotes.length && (
               <section role="note" className="empty:hidden" aria-labelledby={FOOTNOTES_HEADING_ID}>
-                <h2 id={FOOTNOTES_HEADING_ID}>脚注</h2>
+                <div className="heading-wrapper">
+                  <h2 id={FOOTNOTES_HEADING_ID}>脚注</h2>
+                  <a href={`#${FOOTNOTES_HEADING_ID}`} className="anchor" title="ページ内リンク">
+                    <span>「脚注」へのパーマリンク</span>
+                  </a>
+                </div>
                 <ul className="grid grid-cols-[auto_1fr] gap-x-1 gap-y-2 text-sm">
                   {post.footnotes.map(async ([id, { html }]) => (
                     <li key={id} id={`note-${id}`} className="col-start-1 col-end-3 grid grid-cols-subgrid">

@@ -626,7 +626,17 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
     headingDefs.set(currentFilePath, headings);
 
     const inner = marked.parseInline(t.text, { async: false }) as string;
-    return `<h${t.depth} id="${id}">${inner}</h${t.depth}>`;
+    const plainText = inner
+      .replace(/<[^>]+>/g, '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    const label = `「${plainText}」へのパーマリンク`;
+    const anchor = `<a href="#${id}" class="anchor" title="ページ内リンク"><span>${label}</span></a>`;
+    const heading = `<h${t.depth} id="${id}">${inner}</h${t.depth}>`;
+
+    return `<div class="heading-wrapper">${heading}${anchor}</div>`;
   },
 };
 
