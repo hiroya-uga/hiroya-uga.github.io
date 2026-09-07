@@ -52,14 +52,6 @@ export const SEO: Record<
     title: '外部メディアリンク一覧',
     description: '執筆・関与したブログ記事や動画コンテンツ、寄稿などへのリンクをまとめています。',
   },
-  '/documents/notes': {
-    title: 'UI Notes',
-    description: 'Web上に登場するUIに関するメモ書き。',
-  },
-  '/documents/notes/ui-discount-price': {
-    title: '【HTML】割引などの金額変更で打ち消し線を表現するためのマークアップ',
-    description: '',
-  },
   '/documents/translations': {
     title: '日本語訳まとめ',
     description: '仕様書など、外部資料を日本語訳したものをまとめた階層です。',

@@ -1,10 +1,8 @@
 import specStyles from '@/app/(en)/(specs)/layout.module.css';
-import noteStyles from '@/app/(ja)/(common)/documents/notes/layout.module.css';
 import type { JSX } from 'react';
 
 import React, { Children, HTMLAttributes, ReactNode } from 'react';
 
-import clsx from 'clsx';
 import type { MDXComponents } from 'mdx/types';
 
 import { CodeBlock } from '@/components/ui/embed/CodeBlock';
@@ -46,12 +44,7 @@ const headingLevel = (tagName: TagName) => {
     return (
       <DynamicTagComponent tagName={tagName} id={id}>
         <strong>{children}</strong>
-        <a
-          href={`#${id}`}
-          className={clsx(specStyles.anchor, noteStyles.anchor)}
-          aria-label="Anchor link"
-          title="ページ内リンク"
-        >
+        <a href={`#${id}`} className={specStyles.anchor} aria-label="Anchor link" title="ページ内リンク">
           <span>Anchor Link</span>
         </a>
       </DynamicTagComponent>

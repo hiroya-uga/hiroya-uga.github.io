@@ -224,7 +224,9 @@ const linkExtension: TokenizerAndRendererExtension = {
 
       if (url.hostname === 'codepen.io') {
         const id = url.pathname.split('/').pop();
-        return `<span class="codepen"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe title="${t.text ?? t.href}" src="https://codepen.io/hiroya_uga/embed/${id}?default-tab=html%2Cresult" loading="lazy" data-loading="true" onload="if(typeof window !== 'undefined'){this.removeAttribute('data-loading');this.removeAttribute('onload');}"></iframe></span>`;
+        const defaultTab = url.searchParams.get('tab') === 'result' ? 'result' : 'html,result';
+
+        return `<span class="codepen"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe title="${t.text ?? t.href}" src="https://codepen.io/hiroya_uga/embed/${id}?default-tab=${encodeURIComponent(defaultTab)}" loading="lazy" data-loading="true" onload="if(typeof window !== 'undefined'){this.removeAttribute('data-loading');this.removeAttribute('onload');}"></iframe></span>`;
       }
 
       if (url.hostname === 'amzn.to') {

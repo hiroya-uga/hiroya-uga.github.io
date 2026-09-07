@@ -44,7 +44,6 @@ export type EmojiLinkListItem = {
 
 export const DOCUMENTS_LINK_LIST: EmojiLinkListItem[] = [
   { emoji: '', pathname: '/documents/translations' },
-  { emoji: '', pathname: '/documents/notes' },
   { emoji: '', pathname: '/documents/media' },
   { emoji: '', pathname: '/documents/fantasized-specs' },
 ];

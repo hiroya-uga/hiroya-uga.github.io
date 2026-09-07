@@ -86,6 +86,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/documents/notes/ui-discount-price/',
+        destination: '/articles/tech-blog/2024/06-10-discount-price/',
+        permanent: true,
+      },
+      {
+        source: '/documents/notes/',
+        destination: '/articles/',
+        permanent: true,
+      },
+      {
         source: '/tools/nu-installer/',
         destination: '/tools/vnux/',
         permanent: true,

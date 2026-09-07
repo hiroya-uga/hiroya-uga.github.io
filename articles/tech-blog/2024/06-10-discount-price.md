@@ -1,45 +1,38 @@
 ---
-title: '【HTML】割引などの金額変更で打ち消し線を表現するためのマークアップ'
+title: "割引などの金額変更で\n打ち消し線を表現するための\nマークアップを考える"
 description: '文中の訂正や、既に事実とは異なることを表現する場合には`s`要素や`del`要素が用意されていますが、ECサイトなどの商品説明で割引を表すために元の金額に打ち消し線（取り消し線）を描く表現がしたいとき、どのようになっているのが良いかを検討します。'
-publishedAt: '2024-06-10'
-updatedAt:
-keywords: ['s要素', 'del要素']
-dependencies: ['TailwindCSS']
+ogImage: './06-10-thumb.jpg'
+publishedAt: '2024-06-10T00:00:00+09:00'
+topics: [UI考察, s要素, del要素]
+proficiencyLevel: 'Intermediate'
 ---
+
+![](./06-10-thumb.webp?w=1200&h=630)
 
 ## Web標準から考える
 
 ブラウザCSSに打ち消し線（`text-decoration: line-through;`）が指定されている要素は`s`要素と`del`要素がある。
 
-<SpecBlockQuote
-  cite="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-s-element"
-  title="HTML Living Standard"
-  ja="https://momdo.github.io/html/text-level-semantics.html#the-s-element"
+> The `s` element represents contents that are no longer accurate or no longer relevant.
 >
-  The <code>s</code> element represents contents that are no longer accurate or no longer relevant.
-</SpecBlockQuote>
+> 出典：[HTML Living Standard](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-s-element)（[日本語訳](https://momdo.github.io/html/text-level-semantics.html#the-s-element)）
 
-いずれも文章を訂正したことを表すときに用いられる要素だが、２つの要素の大きな違いはコンテンツが文書から削除されているものであるかどうかにある。
+いずれも文章を訂正したことを表すときに用いられる要素だが、2つの要素の大きな違いはコンテンツが文書から削除されているものであるかどうかにある。
 `s`要素は、正確ではなくなった情報や関連しなくなった情報を表すものだが、Webページの一部として必要な情報であることに変わりはない。現在はこうだが昔はこうだった、という情報を表すために必要な要素だ。
 
-<SpecBlockQuote
-  cite="https://html.spec.whatwg.org/multipage/edits.html#the-del-element"
-  title="HTML Living Standard"
-  ja="https://momdo.github.io/html/edits.html#the-del-element"
+> The `del` element represents a removal from the document.
 >
-  The <code>del</code> element represents a removal from the document.
-</SpecBlockQuote>
+> 出典：[HTML Living Standard](https://html.spec.whatwg.org/multipage/edits.html#the-del-element)（[日本語訳](https://momdo.github.io/html/edits.html#the-del-element)）
 
 一方で`del`要素は文書からコンテンツが削除されたことを表すもので、修正履歴などをマークアップする際に用いられる。主に編集に関連する画面で活躍するものだ。
 
 なお、[ARIA in HTML](https://www.w3.org/TR/2024/REC-html-aria-20240507/)（[日本語版](https://momdo.github.io/html-aria/)）を参照するといずれも暗黙のロールは削除されたコンテンツを示す「`deletion`」である。
 
-<SpecBlockQuote cite="https://www.w3.org/TR/wai-aria-1.2/#deletion" title="Accessible Rich Internet Applications (WAI-ARIA) 1.2" ja="https://momdo.github.io/wai-aria-1.2/#deletion">
-<p className='mb-4'>A deletion contains content that is marked as removed or content that is being suggested for removal. See related insertion.</p>
-
-Deletions are typically used to either mark differences between two versions of content or to designate content suggested for removal in scenarios where multiple people are revising content.
-
-</SpecBlockQuote>
+> A deletion contains content that is marked as removed or content that is being suggested for removal. See related insertion.
+>
+> Deletions are typically used to either mark differences between two versions of content or to designate content suggested for removal in scenarios where multiple people are revising content.
+>
+> 出典：[Accessible Rich Internet Applications (WAI-ARIA) 1.2](https://www.w3.org/TR/wai-aria-1.2/#deletion)（[日本語訳](https://momdo.github.io/wai-aria-1.2/#deletion)）
 
 変更前の価格に打ち消し線を引きたい場合は、`s`要素を採用するのが妥当だろう。
 
@@ -47,27 +40,25 @@ Deletions are typically used to either mark differences between two versions of 
 
 `s`要素は古くから存在する要素だが、アクセシビリティ・サポーテッドかどうかを確認しておく。
 
-<ExampleBox>
-  私は昨日、<s>ラーメン</s>お寿司を食べました。
-</ExampleBox>
+[Codepen: \[Markup example\] the s element](https://codepen.io/hiroya_uga/pen/YPZqZLX?tab=result)
 
 上記の例をブラウザがどう解釈しているのかを確認してみる。
 
-![](/documents/notes/ui/discount-price/accessibility-tree--chrome.png)
+![](./06-10-a11y-tree-chrome.png?w=620&h=222)
 
 Google Chromeは「ラーメン」の部分を`deletion`ロールとして解釈している。
 
-![](/documents/notes/ui/discount-price/accessibility-tree--fx.png)
+![](./06-10-a11y-tree-firefox.png?w=620&h=222)
 
 Firefoxも同様だ。一方で、支援技術側のサポート状況は次のようになっている。
 
 | AT                         | Google Chromeでの読み上げ内容                            |
 | -------------------------- | -------------------------------------------------------- |
-| ^Voice Over (macOS 12)     | 私は昨日、ラーメンお寿司を食べました。                   |
-| ^Voice Over (iOS)          | 私は昨日、ラーメンお寿司を食べました。                   |
-| ^ナレーター (Windows10)    | 私は昨日、ラーメンお寿司を食べました。                   |
-| ^PC-Talker NEO (Windows10) | 私は昨日、ラーメンお寿司を食べました。                   |
-| ^NVDA (Windows10)          | 私は昨日、**削除マークあり**ラーメンお寿司を食べました。 |
+| Voice Over (macOS 12)      | 私は昨日、ラーメンお寿司を食べました。                   |
+| Voice Over (iOS)           | 私は昨日、ラーメンお寿司を食べました。                   |
+| ナレーター (Windows 10)    | 私は昨日、ラーメンお寿司を食べました。                   |
+| PC-Talker NEO (Windows 10) | 私は昨日、ラーメンお寿司を食べました。                   |
+| NVDA (Windows 10)          | 私は昨日、**削除マークあり**ラーメンお寿司を食べました。 |
 
 セマンティクスとしては`s`要素を採用することが望ましいが、スクリーンリーダを利用するユーザにとって、手元で確認できる範囲ではほとんどのケースで意味がないことがわかる。ラーメンお寿司ってなんだろう。おいしいのかな。
 
@@ -79,13 +70,13 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://www.amazon.co.jp/](https://www.amazon.co.jp/)
 
-![](/documents/notes/ui/discount-price/amazon.jpg)
+![](./06-10-amazon.jpg?w=1200&h=600)
 
 参考価格に打ち消し線が入った見た目になっているが、参考にしていた価格としては現在も正しい情報と解釈できるので、`s`要素を採用する妥当性は低く感じる。
 
 なお、実際の構造は以下の通りで`s`要素は採用されていない。
 
-```jsx
+```html
 <span>
   <span>￥147,000</span>
   <span aria-hidden="true">
@@ -94,7 +85,7 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
   </span>
 </span>
 <div>
-  <span>参考: </span>
+  <span>参考:</span>
   <span>
     <span>￥161,700</span>
     <span aria-hidden="true">￥161,700</span>
@@ -108,18 +99,18 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://www.rakuten.co.jp/](https://www.rakuten.co.jp/)
 
-![](/documents/notes/ui/discount-price/rakuten.jpg)
+![](./06-10-rakuten-01.jpg?w=1200&h=600)
 
-![](/documents/notes/ui/discount-price/rakuten-02.jpg)
+![](./06-10-rakuten-02.jpg?w=1200&h=600)
 
 最終的な金額のみの表示か、「商品価格＋送料−獲得予定ポイント」の表で価格が掲載されている。
 セール価格の場合も同様で、通常価格や参考価格が書かれるパターンは見当たらなかった。
 
-![](/documents/notes/ui/discount-price/rakuten-03.jpg)
+![](./06-10-rakuten-03.jpg?w=1200&h=600)
 
 商品詳細画面には通常価格があるが、打ち消し線の表現はされていない。
 
-```jsx
+```html
 <tr>
   <td>
     <div>当店通常価格</div>
@@ -149,16 +140,16 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://shopping.yahoo.co.jp/](https://shopping.yahoo.co.jp/)
 
-![](/documents/notes/ui/discount-price/yahoo.jpg)
+![](./06-10-yahoo-01.jpg?w=1200&h=600)
 
 商品一覧画面では通常価格は書かれておらず、セール表示のみ。
 
-![](/documents/notes/ui/discount-price/yahoo-02.jpg)
+![](./06-10-yahoo-02.jpg?w=1200&h=600)
 
 商品詳細画面ではメーカー希望小売価格が表示されており、打ち消し線が表示されている。
 セマンティクスは以下の通りで、`text-decoration`が用いられていた。
 
-```jsx
+```html
 <p>メーカー希望小売価格 45,210円</p>
 ```
 
@@ -166,18 +157,19 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 [https://zozo.jp/](https://zozo.jp/)
 
-![](/documents/notes/ui/discount-price/zozo.jpg)
+![](./06-10-zozo-01.jpg?w=1200&h=600)
 
 商品一覧画面では通常価格は書かれておらず、セール表示のみ。
 
-![](/documents/notes/ui/discount-price/zozo-02.jpg)
+![](./06-10-zozo-02.jpg?w=1200&h=600)
 
 商品詳細画面ではメーカー希望小売価格が表示されており、打ち消し線が表示されている。
 `div`要素と`span`のみでマークアップされおり、`text-decoration`が用いられていた。
 
-```jsx
+```html
 <div>
-  <span>¥7,920</span>（2024年5月27日時点の価格）
+  <span>¥7,920</span>
+  （2024年5月27日時点の価格）
 </div>
 ```
 
@@ -185,17 +177,9 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 
 ワイヤーフレームの段階で調整ができるのであれば、素直にすべて文字列で表示するのが好みではある。こうなっていれば読み間違えることも少なく、スクリーンリーダユーザへの誤解も避けられる。また、著者がセール価格を重要だと考えるならば`strong`要素を採用できる。
 
-<ExampleBox>
-  <p>
-    <span className="mb-1 block text-xs">通常価格：¥3,000</span>
-    <strong className="text-alert">
-      <span className="text-alert mb-1 block text-xs leading-tight">セール価格（税込）：</span>
-      <span className="mr-2 block text-4xl font-bold leading-none">¥1,980</span>
-    </strong>
-  </p>
-</ExampleBox>
+[Codepen: \[Markup example\] Discount price 1](https://codepen.io/hiroya_uga/pen/NPpNpag?tab=result)
 
-```jsx
+```html
 <p>
   <span>通常価格：¥3,000</span>
   <strong>
@@ -205,62 +189,40 @@ Firefoxも同様だ。一方で、支援技術側のサポート状況は次の�
 </p>
 ```
 
-<div className="mt-24">
 もし元の価格に打ち消し線を引きたい場合は、`s`要素を用いずにCSSのみで表現するのが妥当だろう。打ち消し線が引かれていても「元の金額」は正確でなくなった情報**ではない**ためだ。
 
-<ExampleBox className="mt-4">
-  <p>
-    <span className="block text-xs">
-      通常価格：<span className="text-sm line-through">¥3,000</span>
-    </span>
-    <strong>
-      <span className="sr-only">セール価格</span>
-      <span className="text-alert mr-2 text-3xl font-bold leading-none">¥1,980</span>
-    </strong>
-  </p>
-</ExampleBox>
+[Codepen: \[Markup example\] Discount price 2](https://codepen.io/hiroya_uga/pen/MYpyprG?tab=result)
 
-```jsx
+```html
 <p>
-  通常価格：<span class="line-through">¥3,000</span>
+  通常価格：
+  <span class="line-through">¥3,000</span>
   <strong>
-    <span class="sr-only">セール価格</span>¥1,980
+    <span class="sr-only">セール価格</span>
+    ¥1,980
   </strong>
 </p>
 ```
 
-</div>
-
-<div className="mt-24">
 もっとシンプルに「現在の金額」「元の金額」だけの表示で、且つ元の金額を打ち消し線だけで表現したい場合は、スクリーンリーダ用の文字列を設置するとよいかもしれない。
 
-<ExampleBox className="mt-4">
-  <p>
-    <s className="block text-sm">
-      <span className="sr-only">価格</span>¥3,000
-    </s>
-    <strong>
-      <span className="sr-only">セール価格</span>
-      <span className="text-alert mr-2 text-3xl font-bold leading-none">¥1,980</span>
-    </strong>
-  </p>
-</ExampleBox>
+[Codepen: \[Markup example\] Discount price 3](https://codepen.io/hiroya_uga/pen/gbmrmew?tab=result)
 
-```jsx
+```html
 <p>
   <s>
-    <span class="sr-only">価格</span>¥3,000
+    <span class="sr-only">価格</span>
+    ¥3,000
   </s>
   <strong>
-    <span class="sr-only">セール価格</span>¥1,980
+    <span class="sr-only">セール価格</span>
+    ¥1,980
   </strong>
 </p>
 ```
 
-なお、疑似要素でこれを再現しようとすると WCAG の達成基準 [1.3.1 情報及び関係性](https://www.w3.org/TR/WCAG22/#info-and-relationships)（[日本語版](https://waic.jp/translations/WCAG22/#info-and-relationships)）に反することに注意が必要だ。
+なお、疑似要素でこれを再現しようとするとWCAGの達成基準 [1.3.1 情報及び関係性](https://www.w3.org/TR/WCAG22/#info-and-relationships)（[日本語版](https://waic.jp/translations/WCAG22/#info-and-relationships)）に反することに注意が必要だ。
 
-<SpecBlockQuote cite="https://www.w3.org/WAI/WCAG22/Techniques/failures/F87" title="Technique F87:
-Failure of Success Criterion 1.3.1 due to inserting non-decorative content by using ::before and ::after pseudo-elements and the 'content' property in CSS">
-<p>The CSS ::before and ::after pseudo-elements specify the location of content before and after an element's document tree content. The content property, in conjunction with these pseudo-elements, specifies what is inserted. For users who need to customize style information in order to view content according to their needs, they may not be able to access the information that is inserted using CSS. Therefore, it is a failure to use these properties to insert non-decorative content.</p>
-</SpecBlockQuote>
-</div>
+> The CSS ::before and ::after pseudo-elements specify the location of content before and after an element's document tree content. The content property, in conjunction with these pseudo-elements, specifies what is inserted. For users who need to customize style information in order to view content according to their needs, they may not be able to access the information that is inserted using CSS. Therefore, it is a failure to use these properties to insert non-decorative content.
+>
+> 出典：[Technique F87: Failure of Success Criterion 1.3.1 due to inserting non-decorative content by using ::before and ::after pseudo-elements and the 'content' property in CSS](https://www.w3.org/WAI/WCAG22/Techniques/failures/F87)
