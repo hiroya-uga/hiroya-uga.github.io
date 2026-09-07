@@ -31,7 +31,7 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
 
   return (
     <>
-      <li className='after:px-2 after:content-["/"]'>
+      <li className='float-left after:px-2 after:content-["/"]'>
         <Link href="/" className="leading-inherit text-inherit">
           HOME
         </Link>
@@ -41,7 +41,8 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
         if (path in SEO) {
           if (index === pathnames.length - 1) {
             return (
-              <li key={path}>
+              // Safari で flex だと中途半端な位置で改行することがあるため float で対応
+              <li key={path} className="float-left">
                 <a aria-current="page" className="leading-inherit text-inherit">
                   {pathname.endsWith('/en/') ? 'English version' : SEO[path].title}
                 </a>
@@ -50,7 +51,7 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
           }
 
           return (
-            <li key={path} className='after:px-2 after:content-["/"]'>
+            <li key={path} className='float-left after:px-2 after:content-["/"]'>
               <Link href={path} className="leading-inherit text-inherit">
                 {labelForAncestor(path)}
               </Link>
@@ -62,7 +63,7 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
       })}
 
       {additionalBreadcrumbs?.map(({ title, href }) => (
-        <li key={href} className='after:px-2 after:content-["/"]'>
+        <li key={href} className='float-left after:px-2 after:content-["/"]'>
           <Link href={href} className="leading-inherit text-inherit">
             {title}
           </Link>
@@ -70,7 +71,7 @@ const ListItems = ({ additionalBreadcrumbs, currentPageTitle }: Omit<Props, 'lab
       ))}
 
       {currentPageTitle && (
-        <li>
+        <li className="float-left">
           <a aria-current="page" className="leading-inherit text-inherit">
             {pathname.endsWith('/en/') ? 'English version' : currentPageTitle}
           </a>
@@ -84,7 +85,7 @@ export const Breadcrumb = ({ label, additionalBreadcrumbs, currentPageTitle }: P
   return (
     <nav className={clsx(['pwa:hidden mt-[20vh]', styles.root])} aria-label={label}>
       <div className="max-w-structure px-content-inline w1024:pl-(--x-spacing-content-inline) bg-(--x-color-background-breadcrumb) w1024:bg-transparent w1024:py-5 w1024:pr-[calc(13.5rem+calc(var(--x-spacing-content-inline)*2))] mx-auto py-4 text-sm">
-        <ol className="flex flex-wrap gap-y-0.5 leading-normal">
+        <ol className="flow-root flex-wrap gap-y-0.5 leading-normal">
           <ListItems additionalBreadcrumbs={additionalBreadcrumbs} currentPageTitle={currentPageTitle} />
         </ol>
       </div>
