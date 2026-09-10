@@ -1,3 +1,4 @@
+import { ToolHistoryRecorder } from '@/components/layouts/ToolHistoryRecorder';
 import { CookieConsentDialog } from '@/components/ui/dialogs/CookieConsentDialog';
 import { Suspense } from 'react';
 
@@ -13,6 +14,7 @@ export default function JapaneseLayout({ children }: Readonly<Props>) {
       <Suspense>
         <CookieConsentDialog lang="ja" />
       </Suspense>
+      <ToolHistoryRecorder />
     </>
   );
 }

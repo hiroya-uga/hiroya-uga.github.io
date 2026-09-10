@@ -24,6 +24,13 @@ type Value = {
     shouldHighLight?: boolean;
     level?: number;
   };
+
+  // その他
+  'recent-tools': {
+    pathname: string;
+    count: number;
+    lastAccessedAt: string;
+  }[];
 };
 export type LocalStorageItems = Value;
 
