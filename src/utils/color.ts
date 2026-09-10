@@ -1,6 +1,6 @@
 import convert from 'color-convert';
 
-export const convertRgbToHsl = ([r, g, b]: [number, number, number]) => {
+export const convertRgbToHsl = ([r, g, b]: [number, number, number]): [number, number, number] => {
   const [h, s, l] = convert.rgb.hsl(r, g, b);
 
   // color-convertは H:0-360, S/L:0-100 なので合わせる
