@@ -1,5 +1,16 @@
 type Key = keyof Value;
 type Value = {
+  // ユーザ設定
+  theme: 'dark' | 'light';
+  platform: string;
+  'cookie-consent': 'accepted' | 'rejected';
+
+  // ページごとのキー
+  home: {
+    'power-section-viewed-at'?: string;
+  };
+
+  // tools
   'savedata-focal-length-checker': {
     deviceFocalLength?: number;
     selectedFormatId?: string;
@@ -13,10 +24,6 @@ type Value = {
     shouldHighLight?: boolean;
     level?: number;
   };
-  'cookie-consent': 'accepted' | 'rejected';
-  'power-section-viewed-date': string;
-  platform: string;
-  theme: 'dark' | 'light';
 };
 export type LocalStorageItems = Value;
 
@@ -29,22 +36,52 @@ export const setLocalStorage = <T extends Key>(key: T, value: Value[T]) => {
   }
 };
 
-export const getLocalStorage = <T extends Key>(key: T): Value[T] | null => {
+interface GetLocalStorageOptions {
+  withRaw: true;
+}
+
+interface GetLocalStorageWithRawResult<T extends Key> {
+  raw: string | null;
+  parsed: Value[T] | null;
+}
+
+export function getLocalStorage<T extends Key>(
+  key: T,
+  options: {
+    withRaw: true;
+  },
+): GetLocalStorageWithRawResult<T>;
+export function getLocalStorage<T extends Key>(key: T): Value[T] | null;
+export function getLocalStorage<T extends Key>(
+  key: T,
+  options?: GetLocalStorageOptions,
+): GetLocalStorageWithRawResult<T> | Value[T] | null {
   if (typeof window === 'undefined') {
     return null;
   }
 
-  try {
-    const value = JSON.parse(localStorage.getItem(key) ?? '{"type": "primitive"}');
+  const result = (() => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) ?? '{"type": "primitive"}');
 
-    if (value.type === 'primitive') {
-      return value.value ?? (null as Value[T] | null);
+      if (value.type === 'primitive') {
+        return value.value ?? (null as Value[T] | null);
+      }
+
+      return value as Value[T] | null;
+    } catch (error) {
+      console.error(`Error setting local storage for key "${key}":`, error);
     }
 
-    return value as Value[T] | null;
-  } catch (error) {
-    console.error(`Error setting local storage for key "${key}":`, error);
+    return null;
+  })();
+
+  if (options?.withRaw) {
+    return {
+      raw: localStorage.getItem(key),
+      parsed: result,
+    };
   }
 
-  return null;
-};
+  return result;
+}

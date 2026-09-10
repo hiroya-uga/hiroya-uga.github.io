@@ -17,10 +17,11 @@ export const PowerOfTheWebSection = () => {
       month: '2-digit',
       day: '2-digit',
     });
-    const stored = getLocalStorage('power-section-viewed-date');
+    const home = getLocalStorage('home');
+    const stored = home?.['power-section-viewed-at'];
     const oneMonthAgo = new Date(now);
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-    const isWithinOneMonth = stored !== null && new Date(stored) > oneMonthAgo;
+    const isWithinOneMonth = stored != null && new Date(stored) > oneMonthAgo;
 
     queueMicrotask(() => {
       if (isWithinOneMonth) {
@@ -29,7 +30,7 @@ export const PowerOfTheWebSection = () => {
         setStatus('ready');
       }
 
-      setLocalStorage('power-section-viewed-date', currentDate);
+      setLocalStorage('home', { ...home, 'power-section-viewed-at': currentDate });
     });
   }, []);
 
