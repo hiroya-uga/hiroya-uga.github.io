@@ -19,6 +19,7 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
     description,
     languages,
     locale,
+    robots,
   } = (() => {
     if (pathname in SEO) {
       return SEO[pathname];
@@ -30,6 +31,7 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
       afterSubTitle: '',
       description: '',
       languages: undefined,
+      robots: undefined,
     };
   })();
 
@@ -47,6 +49,7 @@ export const getMetadata = (pathname: keyof typeof SEO): Metadata => {
     following: afterSubTitle,
     title: titleValue,
     description,
+    robots,
     alternates: {
       canonical: `${URL_ORIGIN}${pathname}`,
       ...(languages && {
