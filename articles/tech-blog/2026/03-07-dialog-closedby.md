@@ -5,6 +5,8 @@ topics: [HTML, Web標準, dialog要素, Tips]
 proficiencyLevel: 'Beginner'
 ---
 
+<!-- textlint-disable -->
+
 `dialog`要素の`closedby`属性がとにかく本当に便利だ…という話です🍣
 
 `showModal()`が出てきた時、フォーカスの閉じ込めをブラウザがやってくれるようになったニュースでも感動しましたが、ついに<ruby>簡易非表示機能<rt>ライトディスミス</rt></ruby>までブラウザがやってくれるようになりました[^1]。

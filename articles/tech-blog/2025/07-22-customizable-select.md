@@ -5,6 +5,8 @@ topics: [HTML, CSS, フォーム, Web標準]
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 7月22日、かねてより議論が進められていた`select`要素をカスタマイズ可能にする仕様が、HTML Living Standardにマージされました[^1]。
 
 たとえば以下のようなマークアップもWeb標準に則ったものとなります。

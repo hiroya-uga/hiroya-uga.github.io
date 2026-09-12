@@ -6,6 +6,8 @@ dependencies: 'dom-accessibility-api'
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 テストとかチェックツールとか書いてると、たまにアクセシブルな名前（accessible name）やアクセシブルな説明（accessible description）を気軽に拾いたくなることがありますよね。
 
 そこで今回は[dom-accessibility-api](https://www.npmjs.com/package/dom-accessibility-api)ご紹介します[^1]。

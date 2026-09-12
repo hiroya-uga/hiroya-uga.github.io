@@ -6,6 +6,8 @@ topics: [Security, JavaScript, npm, Yarn, pnpm, Bun]
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 2026年3月、週間1億ダウンロードを超える`axios`に悪意あるコードが混入しました。過去にも`ua-parser-js`や`@solana/web3.js`など、広く使われるパッケージが同様の被害を受けています。
 
 主要なパッケージマネージャー（npm、Yarn、pnpm、Bun）や自動アップデートツール（Dependabot、Renovate）は、こうした**サプライチェーン攻撃**への対策を整備してきました。

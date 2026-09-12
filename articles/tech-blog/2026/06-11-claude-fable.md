@@ -6,6 +6,8 @@ dependencies: 'Claude Code'
 proficiencyLevel: 'Beginner'
 ---
 
+<!-- textlint-disable -->
+
 先日[Claude Fable 5](https://www.anthropic.com/claude/fable)がリリースされました。
 
 30日間データがClaudeに保持される点や、他のモデルとは別次元のトークン使用量と引き換えに、最先端の性能を得られるというものらしいです。

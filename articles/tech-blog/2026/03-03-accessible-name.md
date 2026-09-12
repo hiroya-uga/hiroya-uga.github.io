@@ -5,6 +5,8 @@ topics: [Web標準, アクセシビリティ, HTML, 表記揺れ]
 proficiencyLevel: 'Beginner'
 ---
 
+<!-- textlint-disable -->
+
 `img`要素の`alt`属性や`a`要素のコンテンツなどを**accessible name**と呼びます。`input`要素など、[Labelable elements](https://html.spec.whatwg.org/multipage/forms.html#category-label)に紐づいている`label`要素のコンテンツも同様です[^1]。
 
 [^1]: HTMLのみならずWAI-ARIAなどで指定した場合も含めて、[Accessible Name and Description Computation](https://w3c.github.io/accname/#computation-steps)に沿って計算された最終的な値がaccessible nameと呼ばれます。

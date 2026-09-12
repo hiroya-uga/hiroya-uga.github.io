@@ -6,6 +6,8 @@ dependencies: 'React'
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 Reactで何かがクリックされた回数を変数`count`にいれて画面に表示させるような場合、次のように書かれることがほとんどでしょう[^1]。
 
 ```html:jsx

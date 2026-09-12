@@ -5,6 +5,8 @@ topics: [CSS, Web標準, dialog要素, Tips]
 proficiencyLevel: 'Beginner'
 ---
 
+<!-- textlint-disable -->
+
 最近でもないけれど、スクロールロック時に画面幅がガタガタするのをよく見るような気がする、というメモ書き。
 
 ## body.clientWidth の違いでがんばっていたあの頃

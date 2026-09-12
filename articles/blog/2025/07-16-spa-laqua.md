@@ -5,6 +5,8 @@ publishedAt: '2025-07-16T02:33:42+09:00'
 topics: [日記]
 ---
 
+<!-- textlint-disable -->
+
 とタコの図鑑。
 
 ---

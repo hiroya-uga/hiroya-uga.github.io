@@ -8,6 +8,8 @@ topics: [UI考察, s要素, del要素]
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 ![半額になったおにぎり2つの写真](./06-10-thumb.webp?w=1200&h=630)
 
 ## Web標準から考える

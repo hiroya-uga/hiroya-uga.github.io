@@ -5,6 +5,8 @@ topics: [VoiceOver, macOS, Tips]
 proficiencyLevel: 'Beginner'
 ---
 
+<!-- textlint-disable -->
+
 結論、**VOキー＋2本指を反時計回りに回してオフ。**  
 時計回りでオン。
 
@@ -38,7 +40,7 @@ VOキー（`Control + Option` または `Caps Lock`）を押しながらトラ�
 
 ## VoiceOverのトラックパッドコマンドとは？
 
-そもそもこれは何かというと、macOSのVoiceOverをiOSと同じように操作することができるようになる機能でした。
+そもそもこれは何かというと、macOSのVoiceOverをiOSと同じように操作できるようになる機能でした。
 
 ![トラックパッドコマンドでVoiceOverローターを表示させ、見出しを選択している様子](./05-22-voice-over-blue-circle-03.webp?size=1200x798)
 

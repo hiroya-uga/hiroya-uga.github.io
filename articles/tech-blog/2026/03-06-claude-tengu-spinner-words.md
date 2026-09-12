@@ -7,6 +7,8 @@ dependencies: 'Claude Code'
 proficiencyLevel: 'Beginner'
 ---
 
+<!-- textlint-disable -->
+
 ![VS Codeの拡張機能からClaude Codeに「uga.dev のこと、どう思う？」と尋ね、Deliberating…と表示されているチャット画面](./03-06-claude-tengu-spinner-words-01.webp?w=1200&h=630)
 
 Claude Codeくんに話しかけると、思考中にいろんなキーワードが出てきます。

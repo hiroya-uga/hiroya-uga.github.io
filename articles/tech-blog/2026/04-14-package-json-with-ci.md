@@ -5,6 +5,8 @@ topics: [DevOps, Yarn, Node.js, Formatter, Prettier, Tips]
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 Yarn Berry（v4）は`yarn install`時に`package.json`の一部のメタデータフィールドを複数行に正規化する仕様になっていて、CIのフォーマットチェックで*初回だけ*転ける原因になることがあります。
 
 ## 発生する事象
@@ -45,7 +47,7 @@ Code style issues found in the above file. Run Prettier with --write to fix.
 
 こうした背景があるため、依存キャッシュの有無で`yarn install`の実行可否が分岐するCI構成では、初回とRe-runで次のように結果が変わるようです。
 
-初回実行:
+初回実行：
 
 1. `yarn install --immutable`が実行される
 2. `package.json`が書き換わる

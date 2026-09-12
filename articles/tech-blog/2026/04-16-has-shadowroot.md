@@ -5,6 +5,8 @@ topics: [CSS, Web標準]
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 あるいは、要素がShadow hostかどうかを知りたい。そんなニーズはありませんか？筆者の場合は、まさにそれでした。
 
 現状、Shadow DOMに関連するCSSセレクタは以下の通りです[^1]。

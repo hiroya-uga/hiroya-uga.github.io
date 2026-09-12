@@ -5,6 +5,8 @@ topics: [JavaScript, ESLint, IME, アクセシビリティ]
 proficiencyLevel: 'Intermediate'
 ---
 
+<!-- textlint-disable -->
+
 日本語などのIME（Input Method Editor）を利用するユーザが、たびたび遭遇する不具合があります。**まだ入力中なのに送信されてしまう**というアレです。
 
 この件について大変わかりやすいスライドで問題提起をしている、かみくずさんのツイートを拝見しまして、ESLintのプラグイン [eslint-plugin-ime-safe-form](https://github.com/hiroya-uga/eslint-plugin-ime-safe-form) を用意しました。

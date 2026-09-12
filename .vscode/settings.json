@@ -41,7 +41,8 @@
     "zenn",
     "ZENRYAKU",
     "ZWNJ",
-    "ZWSP"
+    "ZWSP",
+    "no-doubled-joshi"
   ],
   "editor.codeLens": true,
   "js/ts.referencesCodeLens.enabled": true,
