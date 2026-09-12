@@ -10,7 +10,7 @@ import {
   type SlackReminder,
 } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client/config';
 import { useBeforeUnload } from '@/hooks/use-before-unload';
-import { BiweeklyPanel, DailyOrWeeklyPanel, MonthlyPanel, OnetimePanel, PreviewAndResult, YearlyPanel } from './parts';
+import { DailyOrWeeklyPanel, MonthlyPanel, OnetimePanel, PreviewAndResult, YearlyPanel } from './parts';
 
 const getInitialFormState = (): SlackReminder.FormState => {
   const today = new Date();
@@ -100,9 +100,9 @@ export const SlackReminderCommandGenerator = () => {
               <DailyOrWeeklyPanel formState={formState} setFormState={setFormState} />
             </Tab.Panel>
 
-            <Tab.Panel tabKey={everyTypeName.BIWEEKLY}>
+            {/* <Tab.Panel tabKey={everyTypeName.BIWEEKLY}>
               <BiweeklyPanel formState={formState} setFormState={setFormState} />
-            </Tab.Panel>
+            </Tab.Panel> */}
 
             <Tab.Panel tabKey={everyTypeName.MONTHLY}>
               <MonthlyPanel formState={formState} setFormState={setFormState} />

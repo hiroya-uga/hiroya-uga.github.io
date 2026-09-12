@@ -16,6 +16,7 @@ type Props = {
 
 export const PreviewAndResult = ({ formState, isEnableMarkdown }: Props) => {
   const id = useId();
+  const resultHeadingId = `${id}-result-heading`;
   const startQuoteId = `${id}-start-quote`;
   const endQuoteId = `${id}-end-quote`;
 
@@ -82,8 +83,10 @@ export const PreviewAndResult = ({ formState, isEnableMarkdown }: Props) => {
   return (
     <>
       <div className="mb-2 px-1 pt-14">
-        <h2 className="mb-1 font-bold">出力結果：</h2>
-        <p className="whitespace-pre-wrap">
+        <h2 className="mb-1 font-bold" id={resultHeadingId}>
+          出力結果：
+        </h2>
+        <p className="whitespace-pre-wrap" role="status" aria-labelledby={resultHeadingId}>
           {getCommandDescriptionNodes({ result, type: formState.type, isEnableMarkdown })}
         </p>
       </div>

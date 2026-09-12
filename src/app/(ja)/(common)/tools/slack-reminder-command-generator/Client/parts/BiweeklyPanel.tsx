@@ -16,6 +16,10 @@ type Props = {
 
 export const BiweeklyPanel = ({ formState, setFormState }: Props) => (
   <>
+    <p className="text-alert mb-2 font-bold">
+      <strong>※ 現在サポートされていません。</strong>
+    </p>
+
     <DayField value={formState.day} handleChange={(day) => setFormState((prev) => ({ ...prev, day }))} />
     <TimeField value={formState.time} handleChange={(time) => setFormState((prev) => ({ ...prev, time }))} />
     <StartingField
