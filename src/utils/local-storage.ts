@@ -92,3 +92,11 @@ export function getLocalStorage<T extends Key>(
 
   return result;
 }
+
+export const subscribeToStorage = (onStoreChange: () => void) => {
+  globalThis.window.addEventListener('storage', onStoreChange);
+
+  return () => {
+    globalThis.window.removeEventListener('storage', onStoreChange);
+  };
+};

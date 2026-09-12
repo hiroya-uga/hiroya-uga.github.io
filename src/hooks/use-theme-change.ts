@@ -1,7 +1,7 @@
 'use client';
 
 import { getTheme } from '@/utils/get-theme';
-import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
+import { getLocalStorage, setLocalStorage, subscribeToStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 
 const { window } = globalThis;
@@ -27,19 +27,7 @@ export function useThemeChange() {
   const setTimeoutIdRef = useRef<ReturnType<typeof setTimeout> | number>(-1);
 
   const theme = useSyncExternalStore(
-    (callback) => {
-      const handleStorageChange = (e: StorageEvent) => {
-        if (e.key === 'theme') {
-          callback();
-        }
-      };
-
-      globalThis.addEventListener('storage', handleStorageChange);
-
-      return () => {
-        globalThis.removeEventListener('storage', handleStorageChange);
-      };
-    },
+    subscribeToStorage,
     () => {
       const currentTheme = getTheme();
       if (getLocalStorage('theme') === null) {
