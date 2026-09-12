@@ -56,6 +56,11 @@
   }
 }
 
+:root:has(.root:not(.already)) {
+  /* ページの最下部で Skip to categories section がチラ見えするのを回避する */
+  overscroll-behavior: none;
+}
+
 .root {
   position: relative;
   color: #747474;

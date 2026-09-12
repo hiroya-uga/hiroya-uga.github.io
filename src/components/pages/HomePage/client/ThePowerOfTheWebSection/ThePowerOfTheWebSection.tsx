@@ -91,7 +91,7 @@ export const PowerOfTheWebSection = () => {
               }
             }}
           >
-            Skip to Categories
+            Skip to categories section
           </a>
         </p>
       )}
