@@ -102,7 +102,7 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
       aria-modal="true"
       closedby="none"
     >
-      <h2 id={id} className="mb-3 font-bold">
+      <h2 id={id} className="mb-[calc(var(--spacing-paragraph)*0.75)] font-bold">
         <label htmlFor={inputId}>{prompt.message}</label>
       </h2>
 
@@ -120,7 +120,7 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
           placeholder={prompt.placeholder}
         />
 
-        <div className="mt-6">
+        <div className="mt-[calc(var(--spacing-paragraph)*1.5)]">
           <ModalButtons
             items={[
               { label: yesLabel, type: 'submit' },

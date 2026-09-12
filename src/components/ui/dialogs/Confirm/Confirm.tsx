@@ -4,6 +4,7 @@ import { ConfirmData } from '@/components/ui/dialogs/Confirm/hooks';
 import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
+import clsx from 'clsx';
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -101,6 +102,8 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
           },
         ];
 
+  const hasContent = confirm.children !== undefined && confirm.children !== null;
+
   return createPortal(
     <dialog
       ref={ref}
@@ -110,13 +113,13 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       aria-modal="true"
       closedby="none"
     >
-      <h2 id={id} className="mb-3 text-center font-bold">
+      <h2 id={id} className={clsx(['text-center font-bold', hasContent ? 'mb-paragraph' : 'mb-6'])}>
         {confirm.message}
       </h2>
 
       {confirm.children}
 
-      <div className="mt-6">
+      <div className={clsx([hasContent && 'mt-[calc(var(--spacing-paragraph)*1.5)]'])}>
         <ModalButtons items={items} />
       </div>
     </dialog>,
