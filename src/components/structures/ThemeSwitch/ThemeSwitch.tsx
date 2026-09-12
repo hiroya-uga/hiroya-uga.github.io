@@ -37,6 +37,8 @@ export const ThemeSwitch = () => {
     <>
       <button
         type="button"
+        role="switch"
+        aria-checked={theme === 'light'}
         className={clsx([
           'border-high-contrast bg-tertiary relative block h-8 w-16 rounded-full border',
           'after:bg-secondary after:border-high-contrast after:-top-1PX after:-left-1PX after:pointer-events-none after:absolute after:size-8 after:translate-x-8 after:rounded-full after:border after:transition-[translate] after:duration-300',
@@ -55,6 +57,7 @@ export const ThemeSwitch = () => {
           y="0px"
           viewBox="0 0 512 512"
           className="pointer-events-none absolute bottom-0 right-2 top-0 my-auto size-4"
+          role="none"
         >
           <g>
             <path
@@ -82,6 +85,7 @@ export const ThemeSwitch = () => {
           y="0px"
           viewBox="0 0 512 512"
           className="pointer-events-none absolute bottom-0 left-2 top-0 my-auto size-5"
+          role="none"
         >
           <g>
             <path
