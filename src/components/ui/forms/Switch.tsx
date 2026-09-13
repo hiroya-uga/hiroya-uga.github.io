@@ -6,14 +6,15 @@ import clsx from 'clsx';
 
 type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   dispatch?: Dispatch<SetStateAction<boolean>>;
+  label?: string;
 };
 
-export const Switch = ({ dispatch, ...props }: Readonly<Props>) => {
+export const Switch = ({ dispatch, label, ...props }: Readonly<Props>) => {
   const state = useState(props.checked ?? props.defaultChecked ?? false);
   const isChecked = props.checked ?? state[0];
   const setIsChecked = dispatch ?? state[1];
 
-  return (
+  const content = (
     <span
       className={clsx([
         'w-64PX min-w-64PX h-32PX relative block cursor-default rounded-full border',
@@ -42,4 +43,15 @@ export const Switch = ({ dispatch, ...props }: Readonly<Props>) => {
       />
     </span>
   );
+
+  if (typeof label === 'string' && label !== '') {
+    return (
+      <label className="flex items-center justify-between gap-2 text-sm">
+        <span>{label}</span>
+        {content}
+      </label>
+    );
+  }
+
+  return content;
 };

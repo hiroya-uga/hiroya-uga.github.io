@@ -36,15 +36,13 @@ export const ConfigPage = ({ pageTitle, description }: Props) => {
         noValidate
       >
         <p>
-          <label className="flex items-center justify-between gap-2 text-sm">
-            <span>ツールページの閲覧履歴を利用する</span>
-            <Switch
-              checked={isHistoryEnabled}
-              onChange={({ currentTarget }) => {
-                setIsHistoryEnabled(currentTarget.checked);
-              }}
-            />
-          </label>
+          <Switch
+            label="ツールページの閲覧履歴を利用する"
+            checked={isHistoryEnabled}
+            onChange={({ currentTarget }) => {
+              setIsHistoryEnabled(currentTarget.checked);
+            }}
+          />
         </p>
 
         <p className="mt-12">

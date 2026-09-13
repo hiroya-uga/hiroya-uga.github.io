@@ -300,14 +300,12 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
       <div className="shadow-sticky bg-secondary border-secondary w640:flex w640:items-center w640:justify-between w640:gap-x-8 w640:px-4 sticky top-2 z-10 mb-4 rounded-md border border-solid p-2">
         <p className="text-secondary w640:text-inherit text-xs">サンプルは横スクロールできます。</p>
         <p>
-          <label className="flex items-center justify-between gap-2 text-sm">
-            <span>説明文を表示する</span>
-            <Switch
-              checked={shouldShowDescriptions}
-              aria-controls={controls}
-              onClick={() => setShouldShowDescriptions(!shouldShowDescriptions)}
-            />
-          </label>
+          <Switch
+            label="説明文を表示する"
+            checked={shouldShowDescriptions}
+            aria-controls={controls}
+            onClick={() => setShouldShowDescriptions(!shouldShowDescriptions)}
+          />
         </p>
       </div>
 
