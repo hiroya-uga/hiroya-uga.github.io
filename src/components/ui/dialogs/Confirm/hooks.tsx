@@ -1,24 +1,14 @@
+import { ConfirmData } from '@/components/ui/dialogs/Confirm/Confirm';
 import { useState } from 'react';
 
-export type ConfirmData = {
-  message: string;
-  children?: React.ReactNode;
-  yesLabel?: string;
-  noLabel?: string;
-  yes: () => void;
-  no?: () => void;
-};
-
 export const useConfirm = () => {
-  const [confirmData, setConfirmData] = useState<ConfirmData>({
-    message: '',
-    children: undefined,
-    yes: () => {},
-    no: undefined,
-  });
+  const [confirmData, setConfirmData] = useState<ConfirmData | null>(null);
 
   return {
     confirmData,
     setConfirmData,
+    closeConfirm: () => {
+      setConfirmData(null);
+    },
   };
 };

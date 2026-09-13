@@ -1,6 +1,5 @@
 'use client';
 
-import { ConfirmData } from '@/components/ui/dialogs/Confirm/hooks';
 import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TRANSITION_DURATION } from '@/constants/css';
 import { DIALOG_PORTAL_ID } from '@/constants/id';
@@ -8,9 +7,20 @@ import clsx from 'clsx';
 import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
+import styles from './Confirm.module.css';
+
+export type ConfirmData = {
+  message: string;
+  children?: React.ReactNode;
+  yesLabel?: string;
+  noLabel?: string;
+  yes: () => void;
+  no?: () => void;
+};
+
 type Props = {
-  confirm: ConfirmData;
-  setConfirmData: (_: ConfirmData) => void;
+  confirm: ConfirmData | null;
+  setConfirmData: (data: ConfirmData | null) => void;
 };
 
 export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
@@ -25,6 +35,13 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
   );
   const ref = useRef<HTMLDialogElement>(null);
   const setTimeoutId = useRef(-1);
+  const cachedConfirmRef = useRef(confirm);
+
+  if (confirm !== null) {
+    cachedConfirmRef.current = confirm;
+  }
+
+  const data = cachedConfirmRef.current;
 
   useEffect(() => {
     const dialog = ref.current;
@@ -33,13 +50,13 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       return;
     }
 
-    if (confirm.message === '') {
+    if (confirm === null) {
       dialog.close();
       return;
     }
 
     dialog.showModal();
-  }, [confirm.message]);
+  }, [confirm]);
 
   useEffect(() => {
     const dialog = ref.current;
@@ -56,10 +73,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
           mutation.target.open === false
         ) {
           setTimeoutId.current = window.setTimeout(() => {
-            setConfirmData({
-              ...confirm,
-              message: '',
-            });
+            setConfirmData(null);
           }, TRANSITION_DURATION);
         }
       }
@@ -73,51 +87,54 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       mutationObserver.disconnect();
       clearTimeout(setTimeoutId.current);
     };
-  }, [confirm, portal, setConfirmData]);
+  }, [portal, setConfirmData]);
 
-  if (portal === null) {
+  if (portal === null || data === null) {
     return null;
   }
 
-  const yesLabel = confirm.yesLabel ?? 'はい';
-  const noLabel = confirm.noLabel ?? 'いいえ';
+  const yesLabel = data.yesLabel ?? 'はい';
+  const noLabel = data.noLabel ?? 'いいえ';
   const yesAction = {
     label: yesLabel,
     onClick: () => {
-      confirm.yes?.();
+      data.yes?.();
       ref.current?.close();
     },
   };
   const items =
-    confirm.no === undefined
+    data.no === undefined
       ? [yesAction]
       : [
           yesAction,
           {
             label: noLabel,
             onClick: () => {
-              confirm.no?.();
+              data.no?.();
               ref.current?.close();
             },
           },
         ];
 
-  const hasContent = confirm.children !== undefined && confirm.children !== null;
+  const hasContent = data.children !== undefined && data.children !== null;
 
   return createPortal(
     <dialog
       ref={ref}
       aria-labelledby={id}
-      className="shadow-sticky transition-fade bg-secondary [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 pointer-events-none invisible fixed inset-0 bottom-[15%] z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0"
+      className={clsx([
+        styles.root,
+        'shadow-sticky bg-secondary [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 inset-0z-50 pointer-events-none invisible fixed m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 transition-[opacity,visibility,bottom]',
+      ])}
       role="alertdialog"
       aria-modal="true"
       closedby="none"
     >
       <h2 id={id} className={clsx(['text-center font-bold', hasContent ? 'mb-paragraph' : 'mb-6'])}>
-        {confirm.message}
+        {data.message}
       </h2>
 
-      {confirm.children}
+      {data.children}
 
       <div className={clsx([hasContent && 'mt-[calc(var(--spacing-paragraph)*1.5)]'])}>
         <ModalButtons items={items} />
