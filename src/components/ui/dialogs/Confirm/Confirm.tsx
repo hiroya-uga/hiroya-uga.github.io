@@ -55,6 +55,8 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       return;
     }
 
+    // CSSOM再生成
+    ref.current?.scrollHeight;
     dialog.showModal();
   }, [confirm]);
 
@@ -124,7 +126,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       aria-labelledby={id}
       className={clsx([
         styles.root,
-        'shadow-sticky bg-secondary [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 inset-0z-50 pointer-events-none invisible fixed m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 transition-[opacity,visibility,bottom]',
+        'shadow-sticky bg-secondary [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 pointer-events-none invisible fixed inset-0 z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 transition-[opacity,visibility,bottom]',
       ])}
       role="alertdialog"
       aria-modal="true"
