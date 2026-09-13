@@ -16,12 +16,12 @@ export const Switch = ({ dispatch, ...props }: Readonly<Props>) => {
   return (
     <span
       className={clsx([
-        'relative block h-8 w-16 cursor-default rounded-full border',
+        'w-64PX min-w-64PX h-32PX relative block cursor-default rounded-full border',
         'transition-[opacity_border-color_background-color]',
         'before:absolute before:left-px before:top-px',
         'before:aspect-square before:h-[calc(100%-2px)] before:bg-white',
         'before:rounded-[50%] before:transition-transform',
-        isChecked && 'before:translate-x-8',
+        isChecked && 'before:translate-x-32PX',
         isChecked ? 'border-green-400 bg-green-400' : 'border-secondary bg-gray-400',
         props.disabled && 'opacity-40',
       ])}

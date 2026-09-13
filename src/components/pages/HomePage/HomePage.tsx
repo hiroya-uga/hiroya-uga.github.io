@@ -1,7 +1,7 @@
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 
 import { getMetadata } from '@/utils/get-metadata';
-import { DiscoverSection, MainVisualSection, PowerOfTheWebSection } from './client';
+import { DiscoverSection, MainVisualSection, PowerOfTheWebSection, RecentToolsSection } from './client';
 import { BookMarkSection, CategoriesSection, ExternalMediaSection, Header, ProfileSection } from './server';
 
 import clsx from 'clsx';
@@ -17,6 +17,15 @@ export const HomePage = () => {
       <main className={styles.root}>
         <div className="bg-primary z-1 w640:pb-16 relative pb-8">
           <MainVisualSection />
+        </div>
+
+        <div
+          className={clsx([
+            styles.sections,
+            'bg-primary z-1 px-content-inline pb-(--x-section-padding-bottom) relative empty:hidden',
+          ])}
+        >
+          <RecentToolsSection />
         </div>
 
         <PowerOfTheWebSection />

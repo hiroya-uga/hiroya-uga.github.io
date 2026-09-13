@@ -8,6 +8,7 @@ type Value = {
   // ページごとのキー
   home: {
     'power-section-viewed-at'?: string;
+    'recent-tools-section-is-enabled'?: boolean;
   };
 
   // tools
@@ -31,6 +32,9 @@ type Value = {
     count: number;
     lastAccessedAt: string;
   }[];
+  shown: {
+    'recent-tools-section-prompt'?: boolean;
+  };
 };
 export type LocalStorageItems = Value;
 

@@ -30,6 +30,13 @@ export const FOOTER_LINK_LIST = [
     },
   },
   {
+    href: '/config',
+    label: {
+      ja: '設定',
+      en: 'Config (JP)',
+    },
+  },
+  {
     href: 'https://github.com/hiroya-uga/hiroya-uga.github.io/issues',
     label: { ja: 'フィードバック', en: 'Feedback' },
     target: '_blank',
@@ -147,6 +154,12 @@ export const TOOLS_LINK_LIST: Record<string, ToolPage[]> = {
     { emoji: '𩸽', pathname: '/tools/unicode-playground' },
   ],
 };
+
+export const ALL_TOOLS_LINK_LIST: (typeof TOOLS_LINK_LIST)[string] = [
+  ...TOOLS_LINK_LIST.cli,
+  ...TOOLS_LINK_LIST.web,
+  ...TOOLS_LINK_LIST.playground,
+];
 
 export const GAMES_LINK_LIST: EmojiLinkListItem[] = [
   { emoji: '🔢', pathname: '/games/sudoku' },

@@ -24,6 +24,11 @@ export const SEO: Record<
     title: '記事一覧',
     description: '技術メモや日記などをまとめています。',
   },
+  '/config': {
+    title: '設定',
+    description: `${SITE_NAME}の設定ページです。`,
+    robots: 'noindex',
+  },
   '/contact': {
     title: 'お問い合わせ',
     description: `${SITE_NAME}に関するお問い合わせはこちらから。`,
