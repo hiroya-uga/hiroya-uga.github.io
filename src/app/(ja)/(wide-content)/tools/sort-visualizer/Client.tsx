@@ -520,10 +520,10 @@ export const SortVisualizerContent = () => {
 
   return (
     <>
-      <div className="w640:flex flex-row-reverse items-start gap-4">
+      <div className="w640:grid w640:grid-cols-[1fr_11.25rem] w640:items-start w640:gap-16PX">
         <div
           className={clsx([
-            'w640:top-4 w640:w-fit w350:sticky ml-auto',
+            'w640:col-start-2 w640:row-start-1 w640:top-4 w640:w-fit w350:sticky ml-auto',
             isVisualizerMode ? 'w350:-top-[19.125rem]' : 'w350:-top-[11.5rem]',
           ])}
         >
@@ -623,29 +623,25 @@ export const SortVisualizerContent = () => {
             {isVisualizerMode && (
               <>
                 <p className="grow">
-                  <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
-                    <span className="w400:text-base text-sm">ハイライト</span>
-                    <span>
-                      <Switch checked={shouldHighlight} dispatch={setShouldHighlight} disabled={running} />
-                    </span>
-                  </label>
+                  <Switch
+                    label="ハイライト"
+                    checked={shouldHighlight}
+                    dispatch={setShouldHighlight}
+                    disabled={running}
+                  />
                 </p>
                 <p className="grow">
-                  <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
-                    <span className="w400:text-base text-sm">ランダムな数値</span>
-                    <span>
-                      <Switch
-                        checked={shouldBeRandom}
-                        dispatch={setShouldBeRandom}
-                        disabled={running}
-                        onChange={(e) => {
-                          randomArrayRef.current = getRandomArray(DEFAULT_LENGTH, {
-                            shouldBeRandom: e.currentTarget.checked,
-                          });
-                        }}
-                      />
-                    </span>
-                  </label>
+                  <Switch
+                    label="ランダムな数値"
+                    checked={shouldBeRandom}
+                    dispatch={setShouldBeRandom}
+                    disabled={running}
+                    onChange={(e) => {
+                      randomArrayRef.current = getRandomArray(DEFAULT_LENGTH, {
+                        shouldBeRandom: e.currentTarget.checked,
+                      });
+                    }}
+                  />
                 </p>
               </>
             )}
@@ -659,44 +655,30 @@ export const SortVisualizerContent = () => {
             ])}
           >
             <p className="grow">
-              <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
-                <span className="w400:text-base text-sm">説明文を表示</span>
-                <span>
-                  <Switch checked={shouldShowDescription} dispatch={setShouldShowDescription} />
-                </span>
-              </label>
+              <Switch label="説明文を表示" checked={shouldShowDescription} dispatch={setShouldShowDescription} />
             </p>
             {isVisualizerMode ? (
               <p className="grow">
-                <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
-                  <span className="w400:text-base text-sm">グラフを表示</span>
-                  <span>
-                    <Switch checked={shouldShowGraph} dispatch={setShouldShowGraph} />
-                  </span>
-                </label>
+                <Switch label="グラフを表示" checked={shouldShowGraph} dispatch={setShouldShowGraph} />
               </p>
             ) : (
               <p className="grow">
-                <label className="w400:gap-2 w640:justify-between w350:justify-end flex items-center justify-between gap-1.5">
-                  <span className="w400:text-base text-sm">ランダムな数値</span>
-                  <span>
-                    <Switch
-                      checked={shouldBeRandom}
-                      dispatch={setShouldBeRandom}
-                      disabled={running}
-                      onChange={(e) => {
-                        randomArrayRef.current = getRandomArray(DEFAULT_LENGTH, {
-                          shouldBeRandom: e.currentTarget.checked,
-                        });
-                      }}
-                    />
-                  </span>
-                </label>
+                <Switch
+                  label="ランダムな数値"
+                  checked={shouldBeRandom}
+                  dispatch={setShouldBeRandom}
+                  disabled={running}
+                  onChange={(e) => {
+                    randomArrayRef.current = getRandomArray(DEFAULT_LENGTH, {
+                      shouldBeRandom: e.currentTarget.checked,
+                    });
+                  }}
+                />
               </p>
             )}
           </div>
         </div>
-        <div className="bg-secondary border-primary grow rounded-md border p-4">
+        <div className="bg-secondary border-primary w640:col-start-1 w640:row-start-1 grow rounded-md border p-4">
           {Object.keys(sortDictionary).map((key) => {
             const category = key as keyof SortDictionary;
             const sortsInCategory = Object.keys(sortDictionary[category]) as SortName[];

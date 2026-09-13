@@ -46,7 +46,7 @@ export const Switch = ({ dispatch, label, ...props }: Readonly<Props>) => {
 
   if (typeof label === 'string' && label !== '') {
     return (
-      <label className="flex items-center justify-between gap-2 text-sm">
+      <label className="gap-8PX flex items-center justify-between text-sm">
         <span>{label}</span>
         {content}
       </label>

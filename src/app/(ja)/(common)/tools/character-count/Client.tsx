@@ -548,7 +548,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
               </p>
 
               <p className="mb-4 text-right">
-                <label className="flex items-center gap-2">
+                <label className="gap-8PX flex items-center">
                   <span className="grow">リアルタイムカウント</span>
                   <span>
                     <Switch checked={isAutoCount} dispatch={setIsAutoCount} />
@@ -557,7 +557,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
               </p>
 
               <p className="mb-4 text-right">
-                <label className="flex items-center gap-2">
+                <label className="gap-8PX flex items-center">
                   <span className="grow">半角文字は２文字で１文字としてカウント</span>
                   <span>
                     <Switch checked={isHalfWidthCount} dispatch={setIsHalfWidthCount} />
@@ -565,7 +565,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                 </label>
               </p>
               <p className="text-right">
-                <label className="flex items-center gap-2">
+                <label className="gap-8PX flex items-center">
                   <span className="grow">原稿用紙のルールを有効にする（実験中）</span>
                   <span>
                     <Switch checked={isStrict} dispatch={setIsStrict} />

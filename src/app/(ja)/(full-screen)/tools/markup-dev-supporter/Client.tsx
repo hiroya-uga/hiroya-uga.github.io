@@ -333,57 +333,53 @@ export const TableDevSupporterContent = () => {
 
       <nav className="w640:w-(--navigation-width) w640:fixed w640:left-auto w640:right-0 w640:top-0 w640:h-full w640:max-h-screen w640:border-0 w640:border-l absolute bottom-0 left-0 z-10 h-[70%] w-full overflow-y-scroll border-y border-black bg-[#333] pb-2.5 text-[#eee]">
         <div className="sticky -top-px z-10 border-b border-black bg-[#333] px-2.5 text-xs">
-          <p className="border-b border-dashed border-[#777]">
-            <label className="flex items-center justify-between gap-2 py-3">
-              <span>HTMLを表示する</span>
-              <Switch
-                checked={isViewSrc}
-                onChange={() => {
-                  const editor = editorRef.current;
-                  const textarea = textareaRef.current;
+          <p className="border-b border-dashed border-[#777] py-3">
+            <Switch
+              label="HTMLを表示する"
+              checked={isViewSrc}
+              onChange={() => {
+                const editor = editorRef.current;
+                const textarea = textareaRef.current;
 
-                  if (!editor || !textarea) {
-                    return;
-                  }
+                if (!editor || !textarea) {
+                  return;
+                }
 
-                  if (isViewSrc) {
-                    editor.textContent = '';
-                    editor.insertAdjacentHTML(
-                      'beforeend',
-                      textarea.value.replace(/<\/script>/g, '</noscript>').replace(/<script(\s.*?)>/g, '<noscript$1>'),
-                    );
-                  } else {
-                    setSource(editor.innerHTML);
-                  }
+                if (isViewSrc) {
+                  editor.textContent = '';
+                  editor.insertAdjacentHTML(
+                    'beforeend',
+                    textarea.value.replace(/<\/script>/g, '</noscript>').replace(/<script(\s.*?)>/g, '<noscript$1>'),
+                  );
+                } else {
+                  setSource(editor.innerHTML);
+                }
 
-                  setIsViewSrc(!isViewSrc);
-                }}
-              />
-            </label>
+                setIsViewSrc(!isViewSrc);
+              }}
+            />
           </p>
-          <p>
-            <label className="flex items-center justify-between gap-2 py-3">
-              <span>クリックで値コピーを有効にする</span>
-              <Switch
-                checked={isCopyMode}
-                onChange={() => {
-                  const editor = editorRef.current;
-                  if (!editor) {
-                    return;
-                  }
+          <p className="py-3">
+            <Switch
+              label="クリックで値コピーを有効にする"
+              checked={isCopyMode}
+              onChange={() => {
+                const editor = editorRef.current;
+                if (!editor) {
+                  return;
+                }
 
-                  if (isCopyMode) {
-                    editor.setAttribute('contentEditable', '');
-                    editor.removeEventListener('click', editorClickHandler);
-                  } else {
-                    editor.removeAttribute('contentEditable');
-                    editor.addEventListener('click', editorClickHandler);
-                  }
+                if (isCopyMode) {
+                  editor.setAttribute('contentEditable', '');
+                  editor.removeEventListener('click', editorClickHandler);
+                } else {
+                  editor.removeAttribute('contentEditable');
+                  editor.addEventListener('click', editorClickHandler);
+                }
 
-                  setIsCopyMode(!isCopyMode);
-                }}
-              />
-            </label>
+                setIsCopyMode(!isCopyMode);
+              }}
+            />
           </p>
         </div>
 
