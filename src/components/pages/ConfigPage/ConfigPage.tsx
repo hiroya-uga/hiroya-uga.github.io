@@ -61,7 +61,7 @@ export const ConfigPage = ({ pageTitle, description }: Props) => {
         </p>
       </form>
 
-      <Toast message={toastMessage} setMessage={setToastMessage} />
+      <Toast message={toastMessage} setMessage={setToastMessage} duration={2000} />
     </>
   );
 };
