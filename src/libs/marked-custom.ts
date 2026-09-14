@@ -443,6 +443,23 @@ const overrideCodespanExtension: TokenizerAndRendererExtension = {
   },
 };
 
+type DelToken = Token & {
+  type: 'del';
+  raw: string;
+  tokens: Token[];
+};
+
+const overrideDelExtension: TokenizerAndRendererExtension = {
+  name: 'del',
+  level: 'inline',
+
+  renderer(token) {
+    const t = token as DelToken;
+
+    return `<s>${this.parser.parseInline(t.tokens)}</s>`;
+  },
+};
+
 type BlockquoteToken = Token & {
   type: 'blockquote';
   raw: string;
@@ -825,6 +842,7 @@ export const customMarkdownSyntaxes = [
   footnoteDefExtension,
   overrideCodeBlockExtension,
   overrideCodespanExtension,
+  overrideDelExtension,
   overrideBlockquoteExtension,
   tableCaptionExtension,
   overrideTableExtension,
