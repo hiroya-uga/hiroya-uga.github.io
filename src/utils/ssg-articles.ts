@@ -30,7 +30,8 @@ export async function getArticles(articlesDir: string, urlBase?: string) {
       const { data } = matter(fileContents);
 
       if ('title' in data === false || 'publishedAt' in data === false) {
-        throw new Error(`Invalid front matter in file: ${filename}`);
+        console.error(`Invalid front matter in file: ${filename}`);
+        return null;
       }
 
       return {
@@ -40,6 +41,7 @@ export async function getArticles(articlesDir: string, urlBase?: string) {
           : articlesDir.replace(process.cwd(), '') + '/' + filename.replace('.md', ''),
       } as ArticleFrontMatter;
     })
+    .filter((item) => item !== null)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
   return articles;
