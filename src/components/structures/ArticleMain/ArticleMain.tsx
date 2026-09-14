@@ -99,11 +99,17 @@ export const ArticleMain = async ({ post }: Props) => {
         )}
       </div>
 
-      <div className="px-content-inline w1024:pl-10">
+      <div
+        className={clsx([
+          'px-content-inline w1024:pl-10',
+          // 見出しのパーマリンク分の錯視対応
+          '[--diff:1rem]',
+        ])}
+      >
         <div
           className={clsx([
             'max-w-(--x-max-width) mx-auto',
-            hasToc && 'w1280:max-w-none w1280:grid w1280:grid-cols-[1fr_var(--x-max-width)_1fr]',
+            hasToc && 'w1280:max-w-none w1280:grid w1280:grid-cols-[1fr_calc(var(--x-max-width)+var(--diff))_1fr]',
           ])}
         >
           {hasToc && <ArticleTOC toc={post.toc} />}
@@ -112,7 +118,7 @@ export const ArticleMain = async ({ post }: Props) => {
             className={clsx(
               styles.container,
               'w800:text-lg',
-              hasToc && 'w1280:col-start-2 w1280:col-end-3 w1280:row-start-1 w1280:row-end-2',
+              hasToc && 'w1280:col-start-2 w1280:col-end-3 w1280:row-start-1 w1280:row-end-2 w1280:pr-[var(--diff)]',
             )}
           >
             <div
