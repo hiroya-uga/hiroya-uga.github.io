@@ -70,7 +70,7 @@ export const RecentToolsSection = () => {
       <h2>Recent Tools</h2>
 
       <div className="mt-5">
-        <dl className="w640:px-1 w640:grid-cols-2 w800:grid-cols-3 grid grid-cols-1 gap-4">
+        <dl className="w640:px-1 w640:grid-cols-2 w800:grid-cols-3 w640:gap-4 grid grid-cols-1 gap-3">
           {historyList.map((item) => {
             const metadata = getMetadata(item.pathname);
 

@@ -67,10 +67,13 @@ export const ToolCard = ({ pageTitle, pathname, description, jobRoles = [], trun
   return (
     <ClickableArea
       as="div"
-      className="bg-secondary w640:p-4 group relative flex flex-col items-start gap-2 rounded-lg px-3 py-2 pr-12 shadow-md transition-shadow duration-300 hover:shadow-lg"
+      className={clsx([
+        'bg-secondary group relative flex flex-col items-start rounded-lg px-3 pr-12 shadow-md transition-shadow duration-300 hover:shadow-lg',
+        truncate ? 'w640:px-3.5 w640:py-2.5 py-3' : 'w640:p-4 gap-2 py-2',
+      ])}
       defaultClickable={linkAreaId}
     >
-      <dt className={clsx(['px-1', /^[a-zA-Z\s-]+$/.test(pageTitle) || 'text-balance'])}>
+      <dt className={clsx([truncate ? 'pr-1' : 'px-1', /^[a-zA-Z\s-]+$/.test(pageTitle) || 'text-balance'])}>
         <Link
           href={pathname}
           id={linkAreaId}
