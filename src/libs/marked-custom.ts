@@ -466,6 +466,8 @@ type BlockquoteToken = Token & {
   tokens: Token[];
 };
 
+let isInsideBlockquote = false;
+
 const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
   name: 'blockquote',
   level: 'block',
@@ -473,25 +475,30 @@ const overrideBlockquoteExtension: TokenizerAndRendererExtension = {
   renderer(token) {
     const t = token as BlockquoteToken;
 
-    const hasCiteMatches = t.text.match(/\n出典：/);
+    isInsideBlockquote = true;
+    try {
+      const hasCiteMatches = t.text.match(/\n出典：/);
 
-    if (hasCiteMatches) {
-      const [text, cite] = t.text.split(/\n出典：/);
-      const inner = marked.parse(text, { async: false });
-      const caption = marked.parse(`出典：${cite}`, { async: false });
-      const closedCaption = caption.replace(/(<a\b[^>]*>)([\s\S]*?)(<\/a>)/g, (_, open, content, close) => {
-        const wrapped = content.replace(
-          / - ([^]*?)(?= - |$)/g,
-          (_: string, part: string) => ` <span class="inline-block">- ${part}</span>`,
-        );
-        return `${open}${wrapped}${close}`;
-      });
+      if (hasCiteMatches) {
+        const [text, cite] = t.text.split(/\n出典：/);
+        const inner = marked.parse(text, { async: false });
+        const caption = marked.parse(`出典：${cite}`, { async: false });
+        const closedCaption = caption.replace(/(<a\b[^>]*>)([\s\S]*?)(<\/a>)/g, (_, open, content, close) => {
+          const wrapped = content.replace(
+            / - ([^]*?)(?= - |$)/g,
+            (_: string, part: string) => ` <span class="inline-block">- ${part}</span>`,
+          );
+          return `${open}${wrapped}${close}`;
+        });
 
-      return `<figure class="blockquote"><blockquote class="blockquote__content space-y-3">${inner}</blockquote><figcaption class="blockquote__caption">${closedCaption}</figcaption></figure>`;
+        return `<figure class="blockquote"><blockquote class="blockquote__content space-y-3">${inner}</blockquote><figcaption class="blockquote__caption">${closedCaption}</figcaption></figure>`;
+      }
+
+      const inner = marked.parser(t.tokens);
+      return `<blockquote class="blockquote"><div class="blockquote__content space-y-3">${inner}</div></blockquote>`;
+    } finally {
+      isInsideBlockquote = false;
     }
-
-    const inner = marked.parser(t.tokens);
-    return `<blockquote class="blockquote"><div class="blockquote__content space-y-3">${inner}</div></blockquote>`;
   },
 };
 
@@ -628,6 +635,12 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
 
   renderer(token) {
     const t = token as Token & { type: 'heading'; depth: number; text: string };
+
+    if (isInsideBlockquote) {
+      const inner = marked.parseInline(t.text, { async: false }) as string;
+      return `<h${t.depth}>${inner}</h${t.depth}>`;
+    }
+
     const headings = headingDefs.get(currentFilePath) ?? [];
 
     const baseSlug = createHeadingSlug(t.text) || `section-${headings.length + 1}`;

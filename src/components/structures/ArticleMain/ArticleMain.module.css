@@ -797,6 +797,19 @@ html:has(.container) {
   [class~="blockquote__content"] {
     padding: 0.25rem min(0.75rem, 24px) 0;
     font-style: italic;
+
+    :where(h1, h2, h3, h4, h5, h6) {
+      all: unset;
+      display: block;
+      margin: revert;
+      font-size: 100%;
+      font-weight: bold;
+      line-height: inherit;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 
   [class~="blockquote__caption"] {
