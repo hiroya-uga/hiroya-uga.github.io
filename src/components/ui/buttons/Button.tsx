@@ -14,7 +14,7 @@ export const Button = ({ children, ...props }: Readonly<Props>) => {
   return (
     <Link
       {...props}
-      className="group/button bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover) text-high-contrast block w-full max-w-80 rounded-full py-3 pl-7 pr-5 align-middle text-sm no-underline transition-colors"
+      className="group/button bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover) text-high-contrast pl-28PX pr-20PX block w-full max-w-80 rounded-full py-3 align-middle text-sm no-underline transition-colors"
       rel={isNewTab ? 'noopener noreferrer' : undefined}
     >
       <span className="mx-auto grid w-fit grid-cols-[auto_0.875rem] place-items-center gap-1.5 [--x-fill:var(--color-high-contrast)]">

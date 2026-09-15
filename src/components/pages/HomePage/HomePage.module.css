@@ -11,6 +11,7 @@
       font-size: var(--x-section-heading);
       font-weight: bold;
       letter-spacing: var(--tracking-wide);
+      line-break: anywhere;
     }
   }
 

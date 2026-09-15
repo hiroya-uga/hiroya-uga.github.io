@@ -23,7 +23,7 @@
 
 @layer base {
   :root {
-    --x-spacing-content-inline: min(1rem, 16px);
+    --x-spacing-content-inline: 16px;
     --x-spacing-share-buttons: 6rem;
     --x-spacing-paragraph: 1rem;
 

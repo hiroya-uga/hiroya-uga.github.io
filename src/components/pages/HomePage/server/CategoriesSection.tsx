@@ -107,7 +107,7 @@ export const CategoriesSection = () => {
                       ])}
                       aria-hidden="true"
                     >
-                      <span className="w640:transition-transform w640:duration-300 w640:group-hover:scale-[1.15] w640:blur-none w640:opacity-100 w640:text-5xl w640:relative w640:top-0 blur-xs absolute right-0 top-1.5 text-[200px] leading-none opacity-30">
+                      <span className="w640:transition-transform w640:duration-300 w640:group-hover:scale-[1.15] w640:blur-none w640:opacity-100 w640:text-[48px] w640:relative w640:top-0 blur-xs absolute right-0 top-1.5 text-[200px] leading-none opacity-30">
                         {emoji}
                       </span>
                     </span>

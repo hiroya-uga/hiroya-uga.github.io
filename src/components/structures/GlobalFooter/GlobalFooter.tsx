@@ -88,7 +88,7 @@ export const GlobalFooter = ({ additionalBreadcrumbs, currentPageTitle }: Props)
               <ul className="w768:flex w768:grow w768:flex-wrap w768:justify-start w768:gap-y-2 text-xs">
                 {FOOTER_LINK_LIST.map(({ href, label, target }, index) => {
                   const className = clsx([
-                    "w768:float-none w768:p-0 float-left py-1 after:mx-2.5 after:content-['|']",
+                    "w768:float-none w768:p-0 after:mx-10PX float-left py-1 after:content-['|']",
                     index === FOOTER_LINK_LIST.length - 1 && 'w768:after:hidden',
                   ]);
 

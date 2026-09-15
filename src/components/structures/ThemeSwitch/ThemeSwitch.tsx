@@ -40,8 +40,8 @@ export const ThemeSwitch = () => {
         role="switch"
         aria-checked={theme === 'light'}
         className={clsx([
-          'border-high-contrast bg-tertiary relative block h-8 w-16 rounded-full border',
-          'after:bg-secondary after:border-high-contrast after:-top-1PX after:-left-1PX after:pointer-events-none after:absolute after:size-8 after:translate-x-8 after:rounded-full after:border after:transition-[translate] after:duration-300',
+          'border-high-contrast bg-tertiary h-32PX w-64PX relative block rounded-full border',
+          'after:bg-secondary after:border-high-contrast after:-top-1PX after:-left-1PX after:size-32PX after:translate-x-32PX after:pointer-events-none after:absolute after:rounded-full after:border after:transition-[translate] after:duration-300',
           'dark:after:translate-x-0',
         ])}
         onClick={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -56,7 +56,7 @@ export const ThemeSwitch = () => {
           x="0px"
           y="0px"
           viewBox="0 0 512 512"
-          className="pointer-events-none absolute bottom-0 right-2 top-0 my-auto size-4"
+          className="right-8PX size-16PX pointer-events-none absolute bottom-0 top-0 my-auto"
           role="none"
         >
           <g>
@@ -84,7 +84,7 @@ export const ThemeSwitch = () => {
           x="0px"
           y="0px"
           viewBox="0 0 512 512"
-          className="pointer-events-none absolute bottom-0 left-2 top-0 my-auto size-5"
+          className="left-8PX size-20PX pointer-events-none absolute bottom-0 top-0 my-auto"
           role="none"
         >
           <g>

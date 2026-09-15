@@ -97,15 +97,15 @@ export const BookMarkSection = () => {
 
       <p className="w640:mb-7 mb-3.5">外部サイトへのリンク集です。</p>
 
-      <ul className="w500:grid-cols-2 w640:mt-7 w640:gap-20px w768:grid-cols-3 w640:text-sm w640:leading-21px leading-18px mb-2 grid gap-4 text-xs">
+      <ul className="@container w500:grid-cols-2 w640:mt-7 w640:gap-20PX w768:grid-cols-3 w640:text-sm w640:leading-21px leading-18px gap-16PX mb-2 grid text-xs">
         {linkList.map(({ title, href, japanese, ...prop }) => {
           return (
             <li key={href} className="grid min-h-[calc(1em+1em*2*1.5)] break-all">
-              <div className="min-h-60px flex">
+              <div className="min-h-60px @w280:flex">
                 <a
                   href={href}
                   {...prop}
-                  className="bg-panel-primary hover:bg-panel-primary-hover border-primary transition-bg grid grow content-center rounded-l border px-3 py-1.5 no-underline last:rounded-r focus:relative focus:z-10"
+                  className="bg-panel-primary hover:bg-panel-primary-hover border-primary transition-bg @w280:rounded-l @w280:rounded-r-none @w280:last:rounded-r grid grow content-center rounded-t border px-3 py-1.5 no-underline last:rounded focus:relative focus:z-10"
                 >
                   {title}
                   <span className="text-secondary text-2xs leading-18px inline-block no-underline">
@@ -113,10 +113,10 @@ export const BookMarkSection = () => {
                   </span>
                 </a>{' '}
                 {japanese && (
-                  <span className="-left-1PX group relative flex shrink-0">
+                  <span className="@w280:-left-1PX @w280:top-0 -top-1PX group relative flex shrink-0">
                     <a
                       href={japanese}
-                      className="border-primary bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover) transition-bg flex grow items-center rounded-r border px-2"
+                      className="border-primary bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover) transition-bg @w280:rounded-r @w280:rounded-none @w280:py-0 flex grow items-center rounded-b border p-2"
                       aria-label={`日本語訳：${title}`}
                     >
                       日本語訳

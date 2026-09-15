@@ -2,8 +2,8 @@ import { Picture } from '@/components/ui/features/Picture';
 
 export const AvatarAuthor = () => {
   return (
-    <span className="max-w-360px @w360:grid-cols-2 @w360:gap-x-6 @w360:pr-4 mx-auto grid place-items-center items-center gap-4">
-      <span className="@w360:col-start-2 w-40">
+    <span className="max-w-360px @w360:grid-cols-2 @w360:gap-x-6 @w360:pr-4 gap-16PX mx-auto grid place-items-center items-center">
+      <span className="@w360:col-start-2 w-160PX">
         <Picture
           width={160}
           height={160}
