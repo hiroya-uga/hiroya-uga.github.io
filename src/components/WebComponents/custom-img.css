@@ -66,6 +66,10 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
     right: 20px;
     left: auto;
   }
+
+  &.is-invisible {
+    visibility: hidden;
+  }
 }
 
 .customされたimg要素ˆ-ˆのモーダル__button.of-close {

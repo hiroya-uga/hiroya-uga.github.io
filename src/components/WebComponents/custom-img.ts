@@ -143,6 +143,9 @@ const showModal = ({
 
   const buttonWrapper = document.createElement('p');
   buttonWrapper.className = 'customされたimg要素ˆ-ˆのモーダル__button-wrapper';
+  if (ref.imageList.length <= 1) {
+    buttonWrapper.classList.add('is-invisible');
+  }
 
   prevButton.addEventListener('click', () => {
     ref.expandedIndex--;
