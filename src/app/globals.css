@@ -165,6 +165,7 @@
   --breakpoint-w1520: 95rem;
 
   --container-content: 60rem; /* 960px */
+  --container-content-px: 960px;
 
   --container-w120: 7.5rem;
   --container-w140: 8.75rem;

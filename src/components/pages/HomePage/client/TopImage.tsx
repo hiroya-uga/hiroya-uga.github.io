@@ -108,11 +108,11 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
   };
 
   return (
-    <div className="@container max-w-content mx-auto mb-4">
+    <div className="@container mx-auto mb-4 max-w-[960px]">
       <div
         role="group"
         aria-label="トップ画像"
-        className="@content:rounded-lg group relative overflow-hidden"
+        className="@content-px:rounded-[8px] group relative overflow-hidden"
         tabIndex={-1}
         onClick={(e) => {
           if (e.target instanceof HTMLAnchorElement || e.target instanceof HTMLButtonElement) {
@@ -124,9 +124,9 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
       >
         <p
           className={clsx([
-            'w640:pl-3.5 w640:pr-3 w640:pt-2.5 w640:min-h-20 w640:bg-transparent w640:bg-[linear-gradient(rgb(0_0_0/0.45),rgb(0_0_0/0.2),transparent)]',
+            'w640:pl-14PX w640:pr-12PX w640:pt-10PX w640:min-h-80PX w640:bg-transparent w640:bg-[linear-gradient(rgb(0_0_0/0.45),rgb(0_0_0/0.2),transparent)]',
 
-            'absolute left-0 top-0 z-10 w-full -translate-y-full px-2 py-1',
+            'px-8PX py-4PX absolute left-0 top-0 z-10 w-full -translate-y-full',
 
             'transition-[color,text-shadow,translate]',
             'group-focus-within:translate-y-0 group-hover:translate-y-0',
@@ -134,7 +134,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
         >
           <button
             type="button"
-            className="w640:top-2 w640:size-8 w640:p-0 size-32px ml-auto block rounded-full p-1 outline-offset-2"
+            className="w640:top-8PX w640:p-0 size-32PX p-4PX ml-auto block rounded-full outline-offset-2"
             onClick={updateImage}
           >
             <span className="border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg grid size-full place-items-center rounded-full border">
@@ -146,7 +146,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
-                className="w640:size-5 block size-4"
+                className="w640:size-20PX size-16PX block"
               >
                 <g>
                   <path
@@ -169,7 +169,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           </button>
         </p>
 
-        <figure className="min-h bg-primary relative" aria-live="polite">
+        <figure className="bg-primary relative" aria-live="polite">
           <p className="aspect-3/2 isolate">
             {photoData && 'error' in photoData === false && (
               <Picture
@@ -262,7 +262,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
           </figcaption>
         </figure>
       </div>
-      <p className="w976:px-0 mt-2 px-2 transition-[padding-inline]">
+      <p className="w976:px-0 px-8PX mt-2 transition-[padding-inline]">
         <button
           type="button"
           className={clsx([
