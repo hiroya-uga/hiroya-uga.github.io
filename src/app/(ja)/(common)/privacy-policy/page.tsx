@@ -12,8 +12,12 @@ export default function Page() {
     <>
       <PageTitle title={metadata.pageTitle} description={metadata.description}>
         <div className="mt-2 text-right text-sm">
-          <p>改定日: 2025年07月10日</p>
-          <p>制定日: 2025年06月02日</p>
+          <p>
+            改定日：<span className="font-sans tabular-nums">2025年07月10日</span>
+          </p>
+          <p>
+            制定日：<span className="font-sans tabular-nums">2025年06月02日</span>
+          </p>
         </div>
       </PageTitle>
 
