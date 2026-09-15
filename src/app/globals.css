@@ -290,6 +290,18 @@
     }
   }
 
+  /* Toast の登場アニメーション: 右からスライドイン */
+  --animate-toast-in: toast-in 0.3s ease-out forwards;
+
+  @keyframes toast-in {
+    0% {
+      transform: translateX(calc(100% + 20px));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
   --animate-spin: spin 1s linear infinite;
 
   @keyframes spin {

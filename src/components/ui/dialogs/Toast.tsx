@@ -105,7 +105,7 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>)
         <p
           key={item.id}
           // 100% + 20px は scrollbar-gutter: stable; の時にモーダルダイアログを表示するとチラチラToastが見えてしまう問題の回避
-          className="no-hidden animate-fade-in bg-secondary border-l-link [[hidden]]:pointer-events-none [[hidden]]:translate-x-[calc(100%+20px)] pointer-events-auto ml-auto w-fit max-w-[95%] rounded-l border-l-8 px-4 py-2 pr-6 transition-transform delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
+          className="no-hidden animate-toast-in bg-secondary border-l-link [[hidden]]:pointer-events-none last:[[hidden]]:opacity-0 pointer-events-auto ml-auto w-fit max-w-[min(300px,95%)] rounded-l border-l-8 px-4 py-2 pr-6 transition-opacity delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
           style={{
             transitionDuration: `${TRANSITION_DURATION}ms`,
           }}
