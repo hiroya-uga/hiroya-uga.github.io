@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import { CSSProperties } from 'react';
 
 type Props = {
   href: string;
@@ -12,7 +13,10 @@ export const CardWithSymbol = ({ href, title, symbol, description }: Readonly<Pr
   const descriptionId = description ? href : undefined;
 
   return (
-    <div className="flow-root gap-x-3 gap-y-1 leading-[1.640625rem]">
+    <div
+      className="leading-(--x-leading) flow-root gap-x-3 gap-y-1"
+      style={{ '--x-leading': '1.640625rem' } as CSSProperties}
+    >
       <p className={clsx(['mb-1 block', '@w280:contents'])}>
         <Link
           href={href}
@@ -32,8 +36,8 @@ export const CardWithSymbol = ({ href, title, symbol, description }: Readonly<Pr
               'bg-card font-emoji mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md text-[56px] leading-none',
               // for zoom
               'mx-auto w-[stretch] max-w-[60vw]',
-              '@w280:aspect-square @w280:text-[min(14.93vw,56px)] @w280:w-[30%]',
-              '@w280:float-left @w280:mr-14PX @w280:mt-5px',
+              '@w280:aspect-square @w280:text-[min(14.93vw,56px)] @w280:w-[calc(var(--x-leading)*4-0.625rem)]',
+              '@w280:float-left @w280:mr-14PX @w280:mt-5px @w280:mb-0',
             ])}
             aria-hidden="true"
           >
