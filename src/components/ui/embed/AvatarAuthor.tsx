@@ -3,7 +3,7 @@ import { Picture } from '@/components/ui/features/Picture';
 export const AvatarAuthor = () => {
   return (
     <span className="max-w-360px @w360:grid-cols-2 @w360:gap-x-6 @w360:pr-4 gap-16PX mx-auto grid place-items-center items-center">
-      <span className="@w360:col-start-2 w-160PX">
+      <span className="@w360:col-start-2 max-w-160PX">
         <Picture
           width={160}
           height={160}
@@ -14,7 +14,7 @@ export const AvatarAuthor = () => {
         />
       </span>
 
-      <span className="@w360:col-start-1 @w360:row-start-1 grow whitespace-nowrap text-center text-xl">
+      <span className="@w360:col-start-1 @w360:row-start-1 grow text-center text-xl">
         <span className="block leading-6 tracking-[0.2rem]" translate="no">
           宇賀景哉
         </span>

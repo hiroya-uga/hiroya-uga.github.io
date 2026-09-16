@@ -243,6 +243,8 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
               className={clsx([
                 'w640:font-thin w640:leading-snug',
                 'transition-fade',
+                // for Safari
+                'w-[stretch]',
                 shouldShowImage
                   ? [
                       'w640:text-shadow-[0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6,0_0_3px_#000000e6] text-shadow-[0_0_2px_rgb(0_0_0/.9)]',
