@@ -13,7 +13,7 @@ const metadata = getMetadata('/about');
 export const AboutPage = () => {
   return (
     <>
-      <PageTitle title={metadata.pageTitle}>
+      <PageTitle {...metadata}>
         <p>当サイトは、Webコンテンツを作るのが好きなエンジニアのおもちゃ箱です。</p>
         <p>メモ書きや、ちょっとしたツールなどが置いてあります。</p>
       </PageTitle>

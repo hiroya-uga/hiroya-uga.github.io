@@ -18,6 +18,7 @@ export const SEO: Record<
   },
   '/about': {
     title: `${SITE_NAME}とは？`,
+    afterSubTitle: '当サイトおよび管理人について',
     description: '当サイトについて説明しているページです。',
   },
   '/articles': {
