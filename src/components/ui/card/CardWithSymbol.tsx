@@ -30,6 +30,8 @@ export const CardWithSymbol = ({ href, title, symbol, description }: Readonly<Pr
           <span
             className={clsx([
               'bg-card font-emoji mb-2 grid aspect-[1.618/1] place-content-center overflow-hidden rounded-md text-[56px] leading-none',
+              // for zoom
+              'mx-auto w-[stretch] max-w-[60vw]',
               '@w280:aspect-square @w280:text-[min(14.93vw,56px)] @w280:w-[30%]',
               '@w280:float-left @w280:mr-14PX @w280:mt-5px',
             ])}

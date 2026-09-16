@@ -84,7 +84,8 @@ TailwindCSSを導入しているなら、たったこれだけでおしまい。
 
 [Codepen: [Example] Skip Link](https://codepen.io/hiroya_uga/pen/yyMVyee?tab=result)
 
-- [I want landmark navigation to be implemented natively in the browsers · WebWeWant/webwewant.fyi · Discussion #63](https://github.com/WebWeWant/webwewant.fyi/discussions/63)
 - [Nascent Proposal: keyboard navigation of headings and HTML5 ‘landmark’ elements](https://discourse.wicg.io/t/nascent-proposal-keyboard-navigation-of-headings-and-html5-landmark-elements/948/)
+- [Skip link · Issue #66 · alphagov/govuk-design-system-backlog](https://github.com/alphagov/govuk-design-system-backlog/issues/66)
 - [Improving access to landmark navigation - TPGi — a Vispero company (web.archive.org)](https://web.archive.org/web/20250927025310/https://www.tpgi.com/improving-access-to-landmark-navigation/)
+- [I want landmark navigation to be implemented natively in the browsers · WebWeWant/webwewant.fyi · Discussion #63](https://github.com/WebWeWant/webwewant.fyi/discussions/63)
 - [スクリーンリーダーを併用しなくてもランドマーク間の移動 (ユーザ操作) を可能にする「Landmarks」 | Accessible & Usable](https://accessible-usable.net/2017/06/entry_170612.html)

@@ -124,7 +124,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
       >
         <p
           className={clsx([
-            'w640:pl-14PX w640:pr-12PX w640:pt-10PX w640:min-h-80PX w640:bg-transparent w640:bg-[linear-gradient(rgb(0_0_0/0.45),rgb(0_0_0/0.2),transparent)]',
+            'w640px:pl-14PX w640px:pr-12PX w640px:pt-10PX w640px:min-h-80PX w640px:bg-transparent w640px:bg-[linear-gradient(rgb(0_0_0/0.45),rgb(0_0_0/0.2),transparent)]',
 
             'px-8PX py-4PX absolute left-0 top-0 z-10 w-full -translate-y-full',
 
@@ -134,7 +134,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
         >
           <button
             type="button"
-            className="w640:top-8PX w640:p-0 size-32PX p-4PX ml-auto block rounded-full outline-offset-2"
+            className="w640px:top-8PX w640px:p-0 size-32PX p-4PX ml-auto block rounded-full outline-offset-2"
             onClick={updateImage}
           >
             <span className="border-primary bg-panel-primary hover:bg-panel-primary-hover transition-bg grid size-full place-items-center rounded-full border">
@@ -146,7 +146,7 @@ export const TopImage = ({ galleryId, galleryToggleButtonRef, galleryState, setG
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
-                className="w640:size-20PX size-16PX block"
+                className="w640px:size-20PX size-16PX block"
               >
                 <g>
                   <path
