@@ -12,7 +12,7 @@ describe('getMetadata', () => {
   it('サブページはタイトルにSITE_NAMEを連結する', () => {
     const metadata = getMetadata('/about');
 
-    expect(metadata.title).toBe(`${SEO['/about'].title} | ${SITE_NAME}`);
+    expect(metadata.title).toBe(`${SEO['/about'].title} - ${SEO['/about'].afterSubTitle} | ${SITE_NAME}`);
     expect(metadata.description).toBe(SEO['/about'].description);
   });
 

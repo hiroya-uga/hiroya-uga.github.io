@@ -154,7 +154,8 @@ describe('SlackReminderCommandGenerator', () => {
     expect(previewText).toBe(`/remind ${who} "${message}" every Wednesday at ${time} starting ${starting}`);
   });
 
-  it('隔週設定がリザルト textContent と一致する', async () => {
+  // 隔週タブは a11c43e9 で無効化されているため一時的に skip
+  it.skip('隔週設定がリザルト textContent と一致する', async () => {
     render(<SlackReminderCommandGenerator />);
 
     const who = '@qa';
@@ -297,7 +298,8 @@ describe('SlackReminderCommandGenerator', () => {
   });
 
   describe('共通', () => {
-    it('開始日を入力後、タブUIを切り替えてから元のタブに戻っても開始日が保持される', async () => {
+    // 隔週タブは a11c43e9 で無効化されているため一時的に skip
+    it.skip('開始日を入力後、タブUIを切り替えてから元のタブに戻っても開始日が保持される', async () => {
       render(<SlackReminderCommandGenerator />);
 
       const user = userEvent.setup({ delay: null });
