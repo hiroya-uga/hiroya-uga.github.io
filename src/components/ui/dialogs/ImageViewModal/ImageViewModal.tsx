@@ -2,9 +2,8 @@
 
 import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
-import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
-import { createPortal } from 'react-dom';
+import { useDialog } from '@/hooks/use-dialog';
+import { useEffect, useId, useRef } from 'react';
 import { IMAGE_MODAL_VIEW_TRANSITION_NAME } from './utils';
 
 export type ImageData = {
@@ -30,11 +29,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
   const photo = images[currentIndex];
   const total = images.length;
 
-  const portal = useSyncExternalStore(
-    () => () => {},
-    () => document.getElementById(DIALOG_PORTAL_ID),
-    () => null,
-  );
+  const { renderDialog } = useDialog();
 
   useEffect(() => {
     document.documentElement.dataset.modal = 'open';
@@ -53,9 +48,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
     return () => globalThis.window.removeEventListener('keydown', handleKeyDown);
   }, [currentIndex, total, handleNavigate]);
 
-  if (portal === null) return null;
-
-  return createPortal(
+  return renderDialog(
     <dialog // NOSONAR
       ref={dialogRef}
       aria-label="画像ビューア"
@@ -156,6 +149,5 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
         </div>
       </div>
     </dialog>,
-    portal,
   );
 };

@@ -2,10 +2,9 @@
 
 import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TRANSITION_DURATION } from '@/constants/css';
-import { DIALOG_PORTAL_ID } from '@/constants/id';
+import { useDialog } from '@/hooks/use-dialog';
 import clsx from 'clsx';
-import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useId, useRef } from 'react';
 
 import styles from './Confirm.module.css';
 
@@ -25,14 +24,7 @@ type Props = {
 
 export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
   const id = useId();
-  const portal = useSyncExternalStore(
-    () => () => () => {},
-    () => {
-      const div = document.getElementById(DIALOG_PORTAL_ID);
-      return div instanceof HTMLDivElement ? div : null;
-    },
-    () => null,
-  );
+  const { isPortalReady, renderDialog } = useDialog();
   const ref = useRef<HTMLDialogElement>(null);
   const setTimeoutId = useRef(-1);
   const cachedConfirmRef = useRef(confirm);
@@ -63,7 +55,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
   useEffect(() => {
     const dialog = ref.current;
 
-    if (dialog === null || portal === null) {
+    if (dialog === null || !isPortalReady) {
       return;
     }
 
@@ -89,9 +81,9 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       mutationObserver.disconnect();
       clearTimeout(setTimeoutId.current);
     };
-  }, [portal, setConfirmData]);
+  }, [isPortalReady, setConfirmData]);
 
-  if (portal === null || data === null) {
+  if (!isPortalReady || data === null) {
     return null;
   }
 
@@ -120,7 +112,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
 
   const hasContent = data.children !== undefined && data.children !== null;
 
-  return createPortal(
+  return renderDialog(
     <dialog
       ref={ref}
       aria-labelledby={id}
@@ -142,6 +134,5 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
         <ModalButtons items={items} />
       </div>
     </dialog>,
-    portal,
   );
 };

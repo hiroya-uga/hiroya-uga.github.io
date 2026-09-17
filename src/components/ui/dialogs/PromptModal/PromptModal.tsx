@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useId, useRef } from 'react';
 
 import { TRANSITION_DURATION } from '@/constants/css';
-import { DIALOG_PORTAL_ID } from '@/constants/id';
 
 import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TextField } from '@/components/ui/forms';
+import { useDialog } from '@/hooks/use-dialog';
 import { PromptData } from './hooks';
 
 interface Props {
@@ -18,14 +17,7 @@ interface Props {
 export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
   const id = useId();
   const inputId = useId();
-  const portal = useSyncExternalStore(
-    () => () => () => {},
-    () => {
-      const div = document.getElementById(DIALOG_PORTAL_ID);
-      return div instanceof HTMLDivElement ? div : null;
-    },
-    () => null,
-  );
+  const { isPortalReady, renderDialog } = useDialog();
   const ref = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const setTimeoutId = useRef(-1);
@@ -52,7 +44,7 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
   useEffect(() => {
     const dialog = ref.current;
 
-    if (dialog === null || portal === null) {
+    if (dialog === null || !isPortalReady) {
       return;
     }
 
@@ -81,9 +73,9 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
       mutationObserver.disconnect();
       clearTimeout(setTimeoutId.current);
     };
-  }, [prompt, portal, setPromptData]);
+  }, [prompt, isPortalReady, setPromptData]);
 
-  if (portal === null) {
+  if (!isPortalReady) {
     return null;
   }
 
@@ -94,7 +86,7 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
   const yesLabel = prompt.yesLabel ?? 'はい';
   const noLabel = prompt.noLabel ?? 'いいえ';
 
-  return createPortal(
+  return renderDialog(
     <dialog
       ref={ref}
       aria-labelledby={id}
@@ -136,6 +128,5 @@ export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
         </div>
       </form>
     </dialog>,
-    portal,
   );
 };

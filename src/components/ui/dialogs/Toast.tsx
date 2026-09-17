@@ -1,9 +1,8 @@
 'use client';
 
 import { TRANSITION_DURATION } from '@/constants/css';
-import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { useEffect, useRef, useState, useSyncExternalStore, type Dispatch, type SetStateAction } from 'react';
-import { createPortal } from 'react-dom';
+import { useDialog } from '@/hooks/use-dialog';
+import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 'react';
 
 interface ToastItem {
   id: number;
@@ -53,11 +52,7 @@ interface Props {
 }
 
 export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>) => {
-  const portal = useSyncExternalStore(
-    () => () => {},
-    () => document.getElementById(DIALOG_PORTAL_ID),
-    () => null,
-  );
+  const { renderDialog } = useDialog();
   const [items, setItems] = useState<ToastItem[]>([]);
   const nextId = useRef(0);
   const timeoutIds = useRef(new Set<number>());
@@ -91,11 +86,7 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>)
     };
   }, []);
 
-  if (portal === null) {
-    return null;
-  }
-
-  return createPortal(
+  return renderDialog(
     <div
       role="status"
       aria-atomic="false"
@@ -115,6 +106,5 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>)
         </p>
       ))}
     </div>,
-    portal,
   );
 };
