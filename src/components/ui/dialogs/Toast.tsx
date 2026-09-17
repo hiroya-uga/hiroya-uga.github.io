@@ -2,7 +2,10 @@
 
 import { TRANSITION_DURATION } from '@/constants/css';
 import { useDialog } from '@/hooks/use-dialog';
+import clsx from 'clsx';
 import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 'react';
+
+import styles from './Toast.module.css';
 
 interface ToastItem {
   id: number;
@@ -49,13 +52,16 @@ interface Props {
   message: string;
   setMessage: (_: string) => void;
   duration?: number;
+  /** モーダルダイアログの上に重ねて表示したい場合に指定する。要素をトップレイヤーへ昇格させる */
+  popover?: boolean;
 }
 
-export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>) => {
+export const Toast = ({ message, setMessage, duration = 3000, popover = false }: Readonly<Props>) => {
   const { renderDialog } = useDialog();
   const [items, setItems] = useState<ToastItem[]>([]);
   const nextId = useRef(0);
   const timeoutIds = useRef(new Set<number>());
+  const ref = useRef<HTMLDivElement>(null);
 
   // message が渡されるたびにキューへ積む。表示中の他アイテムには影響しない。
   useEffect(() => {
@@ -86,11 +92,37 @@ export const Toast = ({ message, setMessage, duration = 3000 }: Readonly<Props>)
     };
   }, []);
 
+  // items が空になるまでトップレイヤーに乗せ続ける。表示中に showPopover() を呼ぶと例外になるため既存の開閉状態を見て判定する
+  useEffect(() => {
+    if (popover === false) {
+      return;
+    }
+
+    const dialog = ref.current;
+
+    if (dialog === null) {
+      return;
+    }
+
+    if (items.length === 0) {
+      if (dialog.matches(':popover-open')) {
+        dialog.hidePopover();
+      }
+      return;
+    }
+
+    if (dialog.matches(':popover-open') === false) {
+      dialog.showPopover();
+    }
+  }, [items, popover]);
+
   return renderDialog(
     <div
+      ref={ref}
       role="status"
       aria-atomic="false"
-      className="z-toast pointer-events-none fixed right-0 top-0 max-h-full w-full space-y-2 overflow-y-auto overflow-x-clip pt-4"
+      className={clsx(styles.root, 'z-toast pointer-events-none space-y-2')}
+      popover={popover ? 'manual' : undefined}
     >
       {items.map((item) => (
         <p

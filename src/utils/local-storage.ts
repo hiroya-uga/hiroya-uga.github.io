@@ -35,6 +35,9 @@ type Value = {
   shown: {
     'recent-tools-section-prompt'?: boolean;
   };
+  achievement: {
+    'business-card'?: boolean;
+  };
 };
 export type LocalStorageItems = Value;
 
