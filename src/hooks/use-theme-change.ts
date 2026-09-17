@@ -5,6 +5,7 @@ import { getLocalStorage, setLocalStorage, subscribeToStorage } from '@/utils/lo
 import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 
 const { window } = globalThis;
+const DURATION = 300;
 
 export function useThemeChange() {
   const styleElement = useMemo(() => {
@@ -13,12 +14,27 @@ export function useThemeChange() {
     }
 
     const style = document.createElement('style');
+    const durationAndTimingFunction = `
+      transition-duration: ${DURATION}ms!important;
+      transition-timing-function: ease-out!important;
+    `;
 
     style.textContent = `
-      * {
-        transition-property: color, background-color, border-color, box-shadow, text-decoration-color, fill, stroke, filter !important;
-        transition-duration: 0.3s!important;
-        transition-timing-function: ease-out!important;
+      body :where(a) {
+        transition-property: color !important;
+        ${durationAndTimingFunction}
+      }
+      body, body :where(p,button,h1,h2,h3,h4,h5,h6,figure,[class*="bg-"],[class*="shadow-"]) {
+        transition-property: color, background-color, border-color, box-shadow, text-decoration-color !important;
+        ${durationAndTimingFunction}
+      }
+      body [class*=":invert"] {
+        transition-property: filter !important;
+        ${durationAndTimingFunction}
+      }
+      body :where(g,path,polygon) {
+        transition-property:  fill, stroke !important;
+        ${durationAndTimingFunction}
       }
     `;
 
@@ -45,7 +61,7 @@ export function useThemeChange() {
         document.head.appendChild(styleElement);
         setTimeoutIdRef.current = globalThis.setTimeout(() => {
           styleElement.remove();
-        }, 300);
+        }, DURATION);
       }
 
       document.documentElement.dataset.theme = newTheme;
