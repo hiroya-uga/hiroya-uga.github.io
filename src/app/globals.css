@@ -21,6 +21,12 @@
   animation-timeline: auto !important;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+}
+
 @layer base {
   :root {
     --x-spacing-content-inline: 16px;
