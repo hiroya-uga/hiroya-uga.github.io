@@ -42,10 +42,11 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
     <dialog
       ref={dialogRef}
       aria-label="デジタル名刺"
+      aria-modal="true"
       closedby="any"
       className={clsx([
-        'shadow-sticky transition-fade [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 backdrop:opacity-0',
-        'backdrop:transition-fade backdrop:black/85 [[open]]:backdrop:animate-fade-in [[open]]:backdrop:[backdrop-filter:blur(8px)] wrap-anywhere bg-primary text-primary gap-16PX p-24PX pointer-events-none invisible fixed inset-0 z-50 m-auto grid size-full max-h-none max-w-none grid-rows-[1fr_auto] items-center text-center opacity-0',
+        'shadow-sticky transition-fade [[open]]:pointer-events-auto [[open]]:opacity-100 backdrop:opacity-0',
+        'backdrop:transition-fade backdrop:black/85 [[open]]:backdrop:animate-fade-in [[open]]:backdrop:[backdrop-filter:blur(8px)] wrap-anywhere bg-primary text-primary gap-16PX p-24PX pointer-events-none fixed inset-0 z-50 m-auto grid size-full max-h-none max-w-none grid-rows-[1fr_auto] items-center text-center opacity-0',
         //
         'landscape:px-16PX landscape:grid-cols-[1fr_auto] landscape:grid-rows-1 landscape:pb-1 landscape:text-left',
         // wide
@@ -64,16 +65,18 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
       ])}
       onClose={onClose}
     >
-      <button
-        type="button"
-        onClick={() => dialogRef.current?.close()}
-        aria-label="デジタル名刺を閉じる"
-        className="bg-panel-primary hover:bg-panel-primary-hover size-32PX right-8PX top-8PX absolute grid place-items-center rounded-full"
-      >
-        <span className="size-16PX relative block">
-          <SvgIcon name="cross" alt="" />
-        </span>
-      </button>
+      <p className="right-8PX top-8PX absolute">
+        <button
+          type="button"
+          onClick={() => dialogRef.current?.close()}
+          aria-label="デジタル名刺を閉じる"
+          className="bg-panel-primary hover:bg-panel-primary-hover size-32PX grid place-items-center rounded-full"
+        >
+          <span className="size-16PX relative block">
+            <SvgIcon name="cross" alt="" />
+          </span>
+        </button>
+      </p>
 
       <div className="landscape:gap-16PX mb-24PX landscape:flex">
         <p className="mb-16PX landscape:mb-44PX mx-auto w-fit">
