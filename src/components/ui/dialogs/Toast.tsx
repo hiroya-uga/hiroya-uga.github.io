@@ -14,6 +14,20 @@ interface ToastItem {
 }
 
 type SetItems = Dispatch<SetStateAction<ToastItem[]>>;
+type TimeoutIds = Map<number, Set<number>>;
+
+const addTimeoutId = ({ id, timeoutId, timeoutIds }: { id: number; timeoutId: number; timeoutIds: TimeoutIds }) => {
+  const ids = timeoutIds.get(id) ?? new Set<number>();
+  ids.add(timeoutId);
+  timeoutIds.set(id, ids);
+};
+
+const clearTimeoutIds = ({ id, timeoutIds }: { id: number; timeoutIds: TimeoutIds }) => {
+  for (const timeoutId of timeoutIds.get(id) ?? []) {
+    clearTimeout(timeoutId);
+  }
+  timeoutIds.delete(id);
+};
 
 const removeAfterTransition = ({
   id,
@@ -22,12 +36,13 @@ const removeAfterTransition = ({
 }: {
   id: number;
   setItems: SetItems;
-  timeoutIds: Set<number>;
+  timeoutIds: TimeoutIds;
 }) => {
   const removeTimeoutId = window.setTimeout(() => {
     setItems((prev) => prev.filter((item) => item.id !== id));
+    timeoutIds.delete(id);
   }, TRANSITION_DURATION);
-  timeoutIds.add(removeTimeoutId);
+  addTimeoutId({ id, timeoutId: removeTimeoutId, timeoutIds });
 };
 
 const hideAfterDuration = ({
@@ -39,13 +54,19 @@ const hideAfterDuration = ({
   id: number;
   duration: number;
   setItems: SetItems;
-  timeoutIds: Set<number>;
+  timeoutIds: TimeoutIds;
 }) => {
   const hideTimeoutId = window.setTimeout(() => {
     setItems((prev) => prev.map((item) => (item.id === id ? { ...item, hidden: true } : item)));
     removeAfterTransition({ id, setItems, timeoutIds });
   }, duration);
-  timeoutIds.add(hideTimeoutId);
+  addTimeoutId({ id, timeoutId: hideTimeoutId, timeoutIds });
+};
+
+// クリックによる即時ディスミス。フェード待ちはせず、保留中のタイマーを打ち切って即座に取り除く
+const dismiss = ({ id, setItems, timeoutIds }: { id: number; setItems: SetItems; timeoutIds: TimeoutIds }) => {
+  clearTimeoutIds({ id, timeoutIds });
+  setItems((prev) => prev.filter((item) => item.id !== id));
 };
 
 interface Props {
@@ -58,11 +79,17 @@ interface Props {
   assertive?: boolean;
 }
 
-export const Toast = ({ message, setMessage, duration = 3000, popover = false }: Readonly<Props>) => {
+export const Toast = ({
+  message,
+  setMessage,
+  duration = 3000,
+  popover = false,
+  assertive = false,
+}: Readonly<Props>) => {
   const { renderDialog } = useDialog();
   const [items, setItems] = useState<ToastItem[]>([]);
   const nextId = useRef(0);
-  const timeoutIds = useRef(new Set<number>());
+  const timeoutIds = useRef<TimeoutIds>(new Map());
   const ref = useRef<HTMLDivElement>(null);
 
   // message が渡されるたびにキューへ積む。表示中の他アイテムには影響しない。
@@ -88,8 +115,10 @@ export const Toast = ({ message, setMessage, duration = 3000, popover = false }:
   useEffect(() => {
     const ids = timeoutIds.current;
     return () => {
-      for (const id of ids) {
-        clearTimeout(id);
+      for (const timeoutIdsForItem of ids.values()) {
+        for (const timeoutId of timeoutIdsForItem) {
+          clearTimeout(timeoutId);
+        }
       }
     };
   }, []);
@@ -130,13 +159,22 @@ export const Toast = ({ message, setMessage, duration = 3000, popover = false }:
         <p
           key={item.id}
           // 100% + 20px は scrollbar-gutter: stable; の時にモーダルダイアログを表示するとチラチラToastが見えてしまう問題の回避
-          className="no-hidden animate-toast-in bg-secondary border-l-link [[hidden]]:pointer-events-none last:[[hidden]]:opacity-0 pointer-events-auto ml-auto w-fit max-w-[min(300px,95%)] rounded-l border-l-8 px-4 py-2 pr-6 transition-opacity delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
+          className="no-hidden animate-toast-in [[hidden]]:pointer-events-none last:[[hidden]]:opacity-0 pointer-events-auto ml-auto w-fit max-w-[min(300px,95%)] transition-opacity delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
           style={{
             transitionDuration: `${TRANSITION_DURATION}ms`,
           }}
           hidden={item.hidden}
         >
-          {item.message}
+          <button
+            type="button"
+            className="border-l-link bg-secondary block w-fit rounded-l border-l-8 px-4 py-2 pr-6 text-left"
+            onClick={() => {
+              dismiss({ id: item.id, setItems, timeoutIds: timeoutIds.current });
+            }}
+            title="この通知を閉じる"
+          >
+            {item.message}
+          </button>
         </p>
       ))}
     </div>,
