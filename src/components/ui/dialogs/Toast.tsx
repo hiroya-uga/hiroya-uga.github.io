@@ -54,6 +54,8 @@ interface Props {
   duration?: number;
   /** モーダルダイアログの上に重ねて表示したい場合に指定する。要素をトップレイヤーへ昇格させる */
   popover?: boolean;
+  /** 実績解除など、即座に読み上げさせたい通知に指定する。role="alert" で aria-live="assertive" 相当にする */
+  assertive?: boolean;
 }
 
 export const Toast = ({ message, setMessage, duration = 3000, popover = false }: Readonly<Props>) => {
@@ -119,7 +121,7 @@ export const Toast = ({ message, setMessage, duration = 3000, popover = false }:
   return renderDialog(
     <div
       ref={ref}
-      role="status"
+      role={assertive ? 'alert' : 'status'}
       aria-atomic="false"
       className={clsx(styles.root, 'z-toast pointer-events-none space-y-2')}
       popover={popover ? 'manual' : undefined}

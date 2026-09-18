@@ -3,17 +3,14 @@
 import { Toast } from '@/components/ui/dialogs/Toast';
 import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
+import { ACHIEVEMENT_BUSINESS_CARD } from '@/constants/achievement';
 import { PROFILE_TEXT, SITE_AUTHOR, SITE_AUTHOR_JA, SITE_NAME } from '@/constants/meta';
 import { useDialog } from '@/hooks/use-dialog';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 
-const ACHIEVEMENT_MESSAGE = '実績解除：デジタル名刺を見つけた';
-
 const AVATAR_SRC = '/common/images/profile.png';
-const QR_CODE_SRC = '/about/images/qrcode-to-about-page.png';
-const X_HANDLE = '@hiroya_UGA';
 
 interface BusinessCardProps {
   isOpen: boolean;
@@ -112,10 +109,10 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
               width={16}
               height={16}
               src="/common/images/logos/twitter.svg"
-              alt=""
+              alt="Twitter（X）"
               className="size-14px dark:invert [@media(min-width:640px)_and_(min-height:500px)]:size-[12px]"
             />
-            <span>{X_HANDLE}</span>
+            <span>@hiroya_UGA</span>
           </p>
         </div>
       </div>
@@ -132,7 +129,7 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
           <Picture
             width={96}
             height={96}
-            src={QR_CODE_SRC}
+            src="/about/images/qrcode-to-about-page.png"
             alt={`${SITE_NAME} へのQRコード`}
             className="min-w-80PX h-auto rounded drop-shadow"
           />
@@ -144,33 +141,45 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
 };
 
 export const AvatarAuthorPicture = () => {
+  const wasOpenedRef = useRef(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
-  const handleOpen = () => {
-    setIsExpanded(true);
-
-    const achievement = getLocalStorage('achievement');
-
-    if (achievement?.['business-card'] === true) {
-      return;
-    }
-
-    setToastMessage(ACHIEVEMENT_MESSAGE);
-    setLocalStorage('achievement', {
-      ...achievement,
-      'business-card': true,
-    });
-  };
-
   return (
     <>
-      <button type="button" className="block aspect-square rounded-full" aria-haspopup="dialog" onClick={handleOpen}>
+      <button
+        type="button"
+        className="block aspect-square rounded-full"
+        aria-haspopup="dialog"
+        onClick={() => {
+          setIsExpanded(true);
+          wasOpenedRef.current = true;
+        }}
+      >
         <Picture width={160} height={160} src={AVATAR_SRC} alt="似顔絵アイコン" className="w-full" priority />
       </button>
 
-      <BusinessCard isOpen={isExpanded} onClose={() => setIsExpanded(false)} />
-      <Toast message={toastMessage} setMessage={setToastMessage} popover />
+      <BusinessCard
+        isOpen={isExpanded}
+        onClose={() => {
+          setIsExpanded(false);
+
+          const achievement = getLocalStorage('achievement');
+
+          if (wasOpenedRef.current === false || achievement?.['business-card'] === true) {
+            return;
+          }
+
+          setTimeout(() => {
+            setToastMessage(ACHIEVEMENT_BUSINESS_CARD);
+            setLocalStorage('achievement', {
+              ...achievement,
+              'business-card': true,
+            });
+          }, 300);
+        }}
+      />
+      <Toast message={toastMessage} setMessage={setToastMessage} assertive />
     </>
   );
 };
