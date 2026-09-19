@@ -62,7 +62,7 @@ export const AchievementsSection = () => {
           ))}
         </dl>
 
-        <h3 className="w640:mb-7 before:h-2px before:border-primary relative mb-3.5 mt-12 before:absolute before:inset-0 before:m-auto before:w-full before:border before:border-dashed">
+        <h3 className="w640:mt-8 w640:mb-6 before:h-2px before:border-primary mt-4.5 relative mb-3.5 before:absolute before:inset-0 before:m-auto before:w-full before:border before:border-dashed">
           <span className="bg-primary relative mx-auto block w-fit px-1">残りの実績</span>
         </h3>
 

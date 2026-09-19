@@ -48,7 +48,7 @@ export type AchievementKey = keyof typeof ACHIEVEMENTS;
 export const useAchievement = () => {
   const [toastMessage, setToastMessage] = useState('');
 
-  const unlock = (key: AchievementKey, delay = 0) => {
+  const unlock = (key: AchievementKey, delay = 300) => {
     const achievement = getLocalStorage('achievement');
 
     if (achievement?.[key] !== undefined) {
