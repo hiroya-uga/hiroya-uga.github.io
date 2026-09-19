@@ -2,7 +2,14 @@ import { GlobalFooter } from '@/components/structures/GlobalFooter';
 
 import { getMetadata } from '@/utils/get-metadata';
 import { DiscoverSection, MainVisualSection, PowerOfTheWebSection, RecentToolsSection } from './client';
-import { BookMarkSection, CategoriesSection, ExternalMediaSection, Header, ProfileSection } from './server';
+import {
+  BookMarkSection,
+  CategoriesSection,
+  DoumeiSection,
+  ExternalMediaSection,
+  Header,
+  ProfileSection,
+} from './server';
 
 import clsx from 'clsx';
 import styles from './HomePage.module.css';
@@ -43,6 +50,7 @@ export const HomePage = () => {
               </div>
 
               <ProfileSection />
+              <DoumeiSection />
             </div>
           </div>
         </div>
