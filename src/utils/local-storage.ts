@@ -35,9 +35,7 @@ type Value = {
   shown: {
     'recent-tools-section-prompt'?: boolean;
   };
-  achievement: {
-    'business-card'?: boolean;
-  };
+  achievement: Partial<Record<string, boolean>>;
 };
 export type LocalStorageItems = Value;
 
