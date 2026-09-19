@@ -1,20 +1,35 @@
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useState } from 'react';
 
+// 実績解除：ネタバレ
+// ACHIEVEMENTSのソースを閲覧した
 export const ACHIEVEMENTS: Record<
   string,
   {
     symbol: string;
     title: string;
     description: string;
-    hidden?: true;
+    hidden?: {
+      symbol?: true;
+      title?: true;
+      description?: true;
+    };
   }
 > = {
+  'everything-in-moderation': {
+    symbol: '🫩',
+    title: '不摂生はほどほどに',
+    description: 'スリープモードを防止するツールを利用した。',
+    hidden: {
+      symbol: true,
+      description: true,
+    },
+  },
   'mirror-mirror': {
     symbol: '🪞',
     title: '鏡よ鏡',
     description: 'Browser Info ツールを開いた。',
-    hidden: true,
+    hidden: { description: true },
   },
   'ran-out-of-business-cards': {
     symbol: '📇',

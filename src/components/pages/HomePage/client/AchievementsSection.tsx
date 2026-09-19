@@ -31,12 +31,14 @@ export const AchievementsSection = () => {
                       isDone ? 'bg-secondary shadow' : 'opacity-50 grayscale',
                     ])}
                   >
-                    {symbol}
+                    {isDone === false && hidden?.symbol === true ? '？' : symbol}
                   </span>
-                  <span className="col-start-2 row-start-1 pt-1">{title}</span>
+                  <span className="col-start-2 row-start-1 pt-1">
+                    {isDone === false && hidden?.title === true ? '？？？？？？？？' : title}
+                  </span>
                 </dt>
                 <dd className="text-secondary col-start-2 row-start-2 text-xs">
-                  {hidden === true ? '？？？？？？？？' : description}
+                  {isDone === false && hidden?.description === true ? '？？？？？？？？' : description}
                   <span className="sr-only">{isDone ? '獲得済み' : '未獲得'}</span>
                 </dd>
               </div>

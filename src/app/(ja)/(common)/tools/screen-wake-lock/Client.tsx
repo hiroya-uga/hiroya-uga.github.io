@@ -4,10 +4,13 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { RunButton } from '@/components/ui/buttons/RunButton';
+import { Toast } from '@/components/ui/dialogs/Toast';
 import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
+import { useAchievement } from '@/hooks/use-achievement';
 
 export function KeepAwakeClient() {
   const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+  const { toastProps, unlock } = useAchievement();
 
   const [isSupported, setIsSupported] = useState<boolean | null>(null);
   const [isEnabled, setIsEnabled] = useState(false);
@@ -44,12 +47,13 @@ export function KeepAwakeClient() {
       wakeLockRef.current = await navigator.wakeLock.request('screen');
       addReleaseListener(wakeLockRef.current);
       setIsActive(true);
+      unlock('everything-in-moderation');
     } catch {
       wakeLockRef.current = null;
       setIsActive(false);
       setIsError(true);
     }
-  }, [addReleaseListener]);
+  }, [addReleaseListener, unlock]);
 
   const stop = useCallback(async () => {
     setIsEnabled(false);
@@ -151,6 +155,8 @@ export function KeepAwakeClient() {
           {isActive ? 'スリープ防止を解除する' : 'スリープ防止を開始する'}
         </RunButton>
       </p>
+
+      <Toast {...toastProps} />
     </>
   );
 }
