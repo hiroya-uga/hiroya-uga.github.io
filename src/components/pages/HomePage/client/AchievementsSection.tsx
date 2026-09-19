@@ -19,7 +19,7 @@ export const AchievementsSection = () => {
 
       <div className="@container">
         <dl className="gap-16PX @w640:grid-cols-2 grid">
-          {objectEntries(ACHIEVEMENTS).map(([key, { symbol, title, description }]) => {
+          {objectEntries(ACHIEVEMENTS).map(([key, { symbol, title, description, hidden }]) => {
             const isDone = key in achievements;
 
             return (
@@ -35,8 +35,8 @@ export const AchievementsSection = () => {
                   </span>
                   <span className="col-start-2 row-start-1 pt-1">{title}</span>
                 </dt>
-                <dd className="col-start-2 row-start-2 text-xs">
-                  {description}
+                <dd className="text-secondary col-start-2 row-start-2 text-xs">
+                  {hidden === true ? '？？？？？？？？' : description}
                   <span className="sr-only">{isDone ? '獲得済み' : '未獲得'}</span>
                 </dd>
               </div>

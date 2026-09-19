@@ -1,7 +1,21 @@
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useState } from 'react';
 
-export const ACHIEVEMENTS = {
+export const ACHIEVEMENTS: Record<
+  string,
+  {
+    symbol: string;
+    title: string;
+    description: string;
+    hidden?: true;
+  }
+> = {
+  'mirror-mirror': {
+    symbol: '🪞',
+    title: '鏡よ鏡',
+    description: 'Browser Info ツールを開いた。',
+    hidden: true,
+  },
   'ran-out-of-business-cards': {
     symbol: '📇',
     title: '名刺を切らしておりまして',
@@ -12,7 +26,7 @@ export const ACHIEVEMENTS = {
     title: 'ありがとうございます！',
     description: 'シェアボタンを押した。',
   },
-} as const;
+};
 
 export type AchievementKey = keyof typeof ACHIEVEMENTS;
 

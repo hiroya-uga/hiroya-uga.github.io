@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
+import { Toast } from '@/components/ui/dialogs/Toast';
 import { Fps } from '@/components/ui/features/Fps';
+import { useAchievement } from '@/hooks/use-achievement';
 import { Lang } from '@/types/lang';
 
 import clsx from 'clsx';
@@ -136,6 +138,7 @@ interface Props {
 export const ToolsBrowserInfoClient = ({ lang = 'ja' }: Readonly<Props>) => {
   const t = toolsBrowserInfoLocales[lang];
   const { yesNo, onOff, enabledDisabled } = createFormatters(t);
+  const { toastProps, unlock } = useAchievement();
 
   const [sync, setSync] = useState<SyncSnapshot>(createEmptySync);
   const [fixed, setFixed] = useState<FixedInfo | null>(null);
@@ -182,6 +185,11 @@ export const ToolsBrowserInfoClient = ({ lang = 'ja' }: Readonly<Props>) => {
 
   useEffect(() => {
     captureFixed().then(setFixed);
+  }, []);
+
+  useEffect(() => {
+    unlock('mirror-mirror');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -254,6 +262,7 @@ export const ToolsBrowserInfoClient = ({ lang = 'ja' }: Readonly<Props>) => {
 
   return (
     <UnsupportedLabelProvider value={t.status.unsupported}>
+      <Toast {...toastProps} />
       <Section title={t.sections.browser}>
         <Row label={t.labels.userAgent} value={sync.userAgent} />
         <Row
