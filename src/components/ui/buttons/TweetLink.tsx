@@ -1,7 +1,9 @@
 'use client';
 
+import { Toast } from '@/components/ui/dialogs/Toast';
+import { useAchievement } from '@/hooks/use-achievement';
 import { Lang } from '@/types/lang';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   className?: string;
@@ -12,6 +14,31 @@ type Props = {
 
 export const TweetLink = (props: Props) => {
   const [twitterShareUrl, setTwitterShareUrl] = useState('');
+  const { toastProps, unlock } = useAchievement();
+  const onFocusRef = useRef<(() => void) | null>(null);
+
+  // 実績解除イベントハンドラ
+  const onClick = () => {
+    if (typeof onFocusRef.current === 'function') {
+      return;
+    }
+
+    const onFocus = () => {
+      onFocusRef.current = null;
+      unlock('tweet-share', 300);
+    };
+
+    window.addEventListener('focus', onFocus, { once: true });
+  };
+
+  // 実績解除イベントハンドラのunmount制御
+  useEffect(() => {
+    return () => {
+      if (typeof onFocusRef.current === 'function') {
+        window.removeEventListener('focus', onFocusRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const url = new URL(location.href);
@@ -38,16 +65,20 @@ export const TweetLink = (props: Props) => {
   const lang = props.lang ?? 'ja';
 
   return (
-    <a
-      {...shareButtonProps}
-      className={
-        props.className ??
-        'not-[[href]]:opacity-0 not-[[href]]:invisible w640:py-0 w640:text-base mx-auto flex w-fit place-items-center gap-1 rounded-xl border border-solid bg-black py-0.5 pl-4 pr-3 text-sm text-white no-underline transition-[opacity,visibility,box-shadow] [corner-shape:squircle] hover:underline hover:shadow-lg'
-      }
-      title={lang === 'ja' ? 'Twitter(X)でシェアする' : 'Share on Twitter(X)'}
-    >
-      <span className="text-[1.2em]">𝕏</span>
-      {lang === 'ja' ? '拍手する' : 'Share'}
-    </a>
+    <>
+      <a
+        {...shareButtonProps}
+        className={
+          props.className ??
+          'not-[[href]]:opacity-0 not-[[href]]:invisible w640:py-0 w640:text-base mx-auto flex w-fit place-items-center gap-1 rounded-xl border border-solid bg-black py-0.5 pl-4 pr-3 text-sm text-white no-underline transition-[opacity,visibility,box-shadow] [corner-shape:squircle] hover:underline hover:shadow-lg'
+        }
+        title={lang === 'ja' ? 'Twitter(X)でシェアする' : 'Share on Twitter(X)'}
+        onClick={onClick}
+      >
+        <span className="text-[1.2em]">𝕏</span>
+        {lang === 'ja' ? '拍手する' : 'Share'}
+      </a>
+      <Toast {...toastProps} />
+    </>
   );
 };

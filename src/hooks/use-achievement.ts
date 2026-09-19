@@ -1,11 +1,12 @@
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useState } from 'react';
 
-const achievementMessages = {
+export const ACHIEVEMENTS = {
   'business-card': 'デジタル名刺を見つけた',
+  'tweet-share': 'シェアボタンを押した',
 } as const;
 
-export type AchievementKey = keyof typeof achievementMessages;
+export type AchievementKey = keyof typeof ACHIEVEMENTS;
 
 export const useAchievement = () => {
   const [toastMessage, setToastMessage] = useState('');
@@ -23,7 +24,7 @@ export const useAchievement = () => {
     });
 
     setTimeout(() => {
-      setToastMessage(`🏆 実績解除：${achievementMessages[key]}`);
+      setToastMessage(`🏆 実績解除：${ACHIEVEMENTS[key]}`);
     }, delay);
   };
 
