@@ -1,4 +1,3 @@
-type Key = keyof Value;
 type Value = {
   // ユーザ設定
   theme: 'dark' | 'light';
@@ -37,6 +36,8 @@ type Value = {
   };
   achievement: Partial<Record<string, boolean>>;
 };
+type Key = keyof Value;
+
 export type LocalStorageItems = Value;
 
 export const setLocalStorage = <T extends Key>(key: T, value: Value[T]) => {
@@ -97,11 +98,3 @@ export function getLocalStorage<T extends Key>(
 
   return result;
 }
-
-export const subscribeToStorage = (onStoreChange: () => void) => {
-  globalThis.window.addEventListener('storage', onStoreChange);
-
-  return () => {
-    globalThis.window.removeEventListener('storage', onStoreChange);
-  };
-};

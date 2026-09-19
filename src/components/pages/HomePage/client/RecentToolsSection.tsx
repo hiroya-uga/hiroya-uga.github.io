@@ -1,23 +1,14 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
+import { useMemo } from 'react';
 
 import { ToolCard } from '@/components/ui/card/ToolCard';
 import { ALL_TOOLS_LINK_LIST } from '@/constants/link-list';
+import { useLocalStorage } from '@/hooks/use-storage';
 import { getMetadata } from '@/utils/get-metadata';
-import { getLocalStorage, type LocalStorageItems, subscribeToStorage } from '@/utils/local-storage';
+import type { LocalStorageItems } from '@/utils/local-storage';
 
 const emptyHistoryList: typeof ALL_TOOLS_LINK_LIST = [];
-
-const historyListCache: {
-  raw: string | null;
-  homeRaw: string | null;
-  list: typeof ALL_TOOLS_LINK_LIST;
-} = {
-  raw: null,
-  homeRaw: null,
-  list: emptyHistoryList,
-};
 
 export const resolveHistoryList = (
   history: LocalStorageItems['recent-tools'] | null,
@@ -32,34 +23,10 @@ export const resolveHistoryList = (
     .filter((item) => item !== undefined);
 };
 
-const getHistoryList = (): typeof ALL_TOOLS_LINK_LIST => {
-  if (globalThis.window === undefined) {
-    return emptyHistoryList;
-  }
-
-  const { raw: historyRaw, parsed: history } = getLocalStorage('recent-tools', { withRaw: true });
-  const { raw: homeRaw, parsed: home } = getLocalStorage('home', { withRaw: true });
-
-  // localStorageの生の値が変わっていない間はgetSnapshotが同じ参照を返す必要があるためキャッシュを使い回す
-  const isCacheValid = historyRaw === historyListCache.raw && homeRaw === historyListCache.homeRaw;
-
-  if (isCacheValid) {
-    return historyListCache.list;
-  }
-
-  historyListCache.raw = historyRaw;
-  historyListCache.homeRaw = homeRaw;
-  historyListCache.list = resolveHistoryList(history, home);
-
-  return historyListCache.list;
-};
-
 export const RecentToolsSection = () => {
-  const historyList = useSyncExternalStore(
-    subscribeToStorage,
-    () => getHistoryList(),
-    () => emptyHistoryList,
-  );
+  const history = useLocalStorage('recent-tools');
+  const home = useLocalStorage('home');
+  const historyList = useMemo(() => resolveHistoryList(history, home), [history, home]);
 
   if (historyList.length === 0) {
     return null;

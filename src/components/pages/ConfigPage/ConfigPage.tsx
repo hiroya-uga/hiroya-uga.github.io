@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PageTitle } from '@/components/structures/PageTitle';
 import { RunButton } from '@/components/ui/buttons/RunButton';
 import { Toast } from '@/components/ui/dialogs/Toast';
 import { Switch } from '@/components/ui/forms';
-import { getLocalStorage, setLocalStorage, subscribeToStorage } from '@/utils/local-storage';
+import { useLocalStorage } from '@/hooks/use-storage';
+import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 
 interface Props {
   pageTitle: string;
@@ -15,11 +16,8 @@ interface Props {
 
 export const ConfigPage = ({ pageTitle, description }: Props) => {
   const [toastMessage, setToastMessage] = useState('');
-  const syncedHistoryEnabled = useSyncExternalStore(
-    subscribeToStorage,
-    () => getLocalStorage('home')?.['recent-tools-section-is-enabled'] ?? false,
-    () => false,
-  );
+  const home = useLocalStorage('home');
+  const syncedHistoryEnabled = home?.['recent-tools-section-is-enabled'] ?? false;
   const [isHistoryEnabled, setIsHistoryEnabled] = useState(syncedHistoryEnabled);
 
   useEffect(() => {
