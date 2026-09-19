@@ -1,4 +1,4 @@
-import { DEFAULT_PREFERRED_VOICE_NAMES } from '@/hooks/use-speech-synthesis';
+import { DEFAULT_PREFERRED_VOICE_NAMES } from '@/components/pages/ToolsSpeechSynthesisPage/hooks';
 import { Lang } from '@/types/lang';
 
 export const speechSynthesisLocales = {

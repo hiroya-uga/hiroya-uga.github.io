@@ -1,7 +1,6 @@
+import { useSpeechSynthesis } from '@/components/pages/ToolsSpeechSynthesisPage/hooks';
 import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-
-import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
 
 const createVoice = (overrides: Partial<SpeechSynthesisVoice>): SpeechSynthesisVoice => ({
   default: false,

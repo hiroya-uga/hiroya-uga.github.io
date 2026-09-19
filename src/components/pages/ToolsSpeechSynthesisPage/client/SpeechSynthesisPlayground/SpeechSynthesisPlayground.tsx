@@ -8,10 +8,11 @@ import { CodeBlock } from '@/components/ui/embed/CodeBlock';
 import { SelectField, TextField } from '@/components/ui/forms';
 import { Heading } from '@/components/ui/headings/Heading';
 import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
-import { useSpeechSynthesis } from '@/hooks/use-speech-synthesis';
+
 import { Lang } from '@/types/lang';
 import { formattedLogTimeString } from '@/utils/formatter';
 
+import { useSpeechSynthesis } from '@/components/pages/ToolsSpeechSynthesisPage/hooks';
 import { speechSynthesisLocales } from './locales';
 
 type Status = 'idle' | 'speaking' | 'paused';
