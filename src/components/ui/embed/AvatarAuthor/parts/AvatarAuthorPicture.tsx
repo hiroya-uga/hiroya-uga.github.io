@@ -167,7 +167,7 @@ export const AvatarAuthorPicture = () => {
             return;
           }
 
-          unlock('business-card', 300);
+          unlock('ran-out-of-business-cards', 300);
         }}
       />
       <Toast {...toastProps} />

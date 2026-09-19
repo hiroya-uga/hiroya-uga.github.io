@@ -25,7 +25,7 @@ export const TweetLink = (props: Props) => {
 
     const onFocus = () => {
       onFocusRef.current = null;
-      unlock('tweet-share', 300);
+      unlock('thank-you-for-sharing', 300);
     };
 
     window.addEventListener('focus', onFocus, { once: true });

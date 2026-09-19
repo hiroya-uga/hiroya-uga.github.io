@@ -1,7 +1,13 @@
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 
 import { getMetadata } from '@/utils/get-metadata';
-import { DiscoverSection, MainVisualSection, PowerOfTheWebSection, RecentToolsSection } from './client';
+import {
+  AchievementsSection,
+  DiscoverSection,
+  MainVisualSection,
+  PowerOfTheWebSection,
+  RecentToolsSection,
+} from './client';
 import {
   BookMarkSection,
   CategoriesSection,
@@ -51,6 +57,7 @@ export const HomePage = () => {
 
               <ProfileSection />
               <DoumeiSection />
+              <AchievementsSection />
             </div>
           </div>
         </div>
