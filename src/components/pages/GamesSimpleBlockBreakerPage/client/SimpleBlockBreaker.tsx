@@ -3,6 +3,7 @@
 import { RunButton } from '@/components/ui/buttons/RunButton';
 import { Toast } from '@/components/ui/dialogs/Toast';
 import { Switch } from '@/components/ui/forms';
+import { useAchievement } from '@/hooks/use-achievement';
 import { dispatchChangeEvent } from '@/utils/dispatch-event';
 import clsx from 'clsx';
 import { useSearchParams } from 'next/navigation';
@@ -56,6 +57,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   const id = useId();
   const searchParams = useSearchParams();
   const [isReady, setIsReady] = useState(false);
+  const { toastProps: achievementToastProps, unlock } = useAchievement();
   const [toastMessage, setToastMessage] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
 
@@ -355,6 +357,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         if (dx * dx + dy * dy < ball.current.radius * ball.current.radius) {
           if (ball.current.mode.passThrough === false) {
             ball.current.speedY *= -1;
+          } else {
+            unlock('walls-never-existed');
           }
           block.broken = true;
           setAllBlocksUnbroken(false);
@@ -403,6 +407,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         });
         setToastMessage('おめでとうございます!!🎉🎉🎉');
         setStatusMessage('おめでとうございます!!🎉🎉🎉');
+        unlock('defrag-complete');
       }
     };
 
@@ -421,6 +426,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     return () => {
       cancelAnimationFrame(requestRef.current!);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height, initBlocks, reset, running]);
 
   useEffect(() => {
@@ -473,13 +479,13 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
 
   return (
     <>
-      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10dvh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto">
+      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10vh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto">
         <canvas
           ref={canvasRef}
           width={width}
           height={height}
           className={clsx([
-            'starting:opacity-0 mx-auto size-auto max-h-[80dvh] max-w-[90%] border-2 border-[#a4a4a4] transition-opacity',
+            'starting:opacity-0 mx-auto size-auto max-h-[80vh] max-w-[90%] border-2 border-[#a4a4a4] transition-opacity',
             isReady ? 'opacity-100' : 'opacity-0',
             cursorHidden && 'cursor-none',
           ])}
@@ -832,6 +838,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       </div>
 
       <Toast message={toastMessage} setMessage={setToastMessage} />
+      <Toast {...achievementToastProps} />
     </>
   );
 };

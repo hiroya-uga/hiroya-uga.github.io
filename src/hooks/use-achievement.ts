@@ -16,6 +16,17 @@ export const ACHIEVEMENTS: Record<
     };
   }
 > = {
+  'ran-out-of-business-cards': {
+    symbol: '📇',
+    title: '名刺を切らしておりまして',
+    description: 'デジタル名刺を見つけた。',
+  },
+  'thank-you-for-sharing': {
+    symbol: '👏',
+    title: 'ありがとうございます！',
+    description: 'シェアボタンを押した。',
+  },
+  // ツール
   'everything-in-moderation': {
     symbol: '🫩',
     title: '不摂生はほどほどに',
@@ -31,15 +42,17 @@ export const ACHIEVEMENTS: Record<
     description: 'Browser Info ツールを開いた。',
     hidden: { description: true },
   },
-  'ran-out-of-business-cards': {
-    symbol: '📇',
-    title: '名刺を切らしておりまして',
-    description: 'デジタル名刺を見つけた。',
+
+  // ブロック崩し
+  'defrag-complete': {
+    symbol: '🧹',
+    title: 'デフラグ完了？',
+    description: 'ブロック崩しをクリアした。',
   },
-  'thank-you-for-sharing': {
-    symbol: '👏',
-    title: 'ありがとうございます！',
-    description: 'シェアボタンを押した。',
+  'walls-never-existed': {
+    symbol: '🏓',
+    title: '壁などなかった',
+    description: 'ブロック崩しでボールが貫通する状態をONにしてプレイした。',
   },
 };
 
