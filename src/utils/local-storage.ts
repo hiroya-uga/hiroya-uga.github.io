@@ -34,7 +34,7 @@ type Value = {
   shown: {
     'recent-tools-section-prompt'?: boolean;
   };
-  achievement: Partial<Record<string, boolean>>;
+  achievement: Partial<Record<string, string>>;
 };
 type Key = keyof Value;
 

@@ -14,17 +14,17 @@ export const useAchievement = () => {
   const unlock = (key: AchievementKey, delay = 0) => {
     const achievement = getLocalStorage('achievement');
 
-    if (achievement?.[key] === true) {
+    if (achievement?.[key] !== undefined) {
       return;
     }
 
     setLocalStorage('achievement', {
       ...achievement,
-      [key]: true,
+      [key]: new Date().toLocaleDateString(),
     });
 
     setTimeout(() => {
-      setToastMessage(`🏆 実績解除：${ACHIEVEMENTS[key]}`);
+      setToastMessage(`🏆 実績解除：${ACHIEVEMENTS[key].title}`);
     }, delay);
   };
 
