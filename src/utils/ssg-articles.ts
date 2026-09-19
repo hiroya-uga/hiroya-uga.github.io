@@ -5,7 +5,7 @@ import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-pa
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-import { objectKeys } from './object-keys';
+import { objectKeys } from './object-utils';
 
 export type ArticleFrontMatter = {
   [key: string]: unknown;

@@ -5,7 +5,7 @@ import { Checkbox, TextField } from '@/components/ui/forms';
 import { NoteList } from '@/components/ui/lists/NoteList';
 import { Tab } from '@/components/ui/tabs/Tab';
 import { Lang } from '@/types/lang';
-import { objectKeys } from '@/utils/object-keys';
+import { objectKeys } from '@/utils/object-utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Output } from './Output';

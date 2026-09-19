@@ -11,7 +11,7 @@ import { ArticleCategoryPage } from '@/components/pages/ArticlesCategoryPage';
 import { ArticleYearOrSubCategoryPage } from '@/components/pages/ArticleYearOrSubCategoryPage';
 import { JsonLd } from '@/components/structures/JsonLd';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
-import { objectKeys } from '@/utils/object-keys';
+import { objectKeys } from '@/utils/object-utils';
 import { notFound } from 'next/navigation';
 
 export const dynamicParams = false;

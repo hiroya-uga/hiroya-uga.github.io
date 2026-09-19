@@ -11,7 +11,7 @@ import {
 } from '@/constants/articles';
 import { resolveCategoryName } from '@/utils/articles';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
-import { objectKeys } from '@/utils/object-keys';
+import { objectKeys } from '@/utils/object-utils';
 import { getArticles } from '@/utils/ssg-articles';
 import Link from 'next/link';
 
