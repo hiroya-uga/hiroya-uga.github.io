@@ -97,7 +97,7 @@ const MajimenaNaiyou = ({ lang = 'ja', agreeLabel }: Readonly<MajimenaNaiyouProp
         <summary className="group-open:list-[disclosure-open]! list-item w-fit [list-style:inside_disclosure-closed] after:hidden hover:underline">
           {t.readMoreLabel}
         </summary>
-        <div className="pl-4 pt-4">
+        <div className="pl-16PX pt-4">
           <p>{t.moreDescriptions[0]}</p>
           <p>{t.moreDescriptions[1]}</p>
           <p>{t.moreDescriptions[2]}</p>
@@ -143,16 +143,24 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
     if (dialogRef.current) {
       if (shouldShowBanner.current) {
         const dialog = dialogRef.current;
-        const setTimeoutId = globalThis.window.setTimeout(() => {
+        const handleScroll = () => {
+          const scrollableHeight = document.documentElement.scrollHeight - globalThis.window.innerHeight;
+
+          // スクロールできないページでは進捗を測れないため即座に表示する
+          if (0 < scrollableHeight && globalThis.window.scrollY / scrollableHeight < 0.5) {
+            return;
+          }
+
+          globalThis.window.removeEventListener('scroll', handleScroll);
           setIsBannerDialogOpen(true);
-          requestAnimationFrame(() => {
-            dialog.querySelector('h2')?.focus({
-              preventScroll: true,
-            });
-          });
-        }, 10000);
+        };
+
+        // 復元されたスクロール位置が既に50%を超えている場合に備えて初回も判定する
+        handleScroll();
+        globalThis.window.addEventListener('scroll', handleScroll, { passive: true });
+
         return () => {
-          clearTimeout(setTimeoutId);
+          globalThis.window.removeEventListener('scroll', handleScroll);
         };
       } else {
         // SNS経由ではない場合
@@ -194,30 +202,33 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
         aria-modal="false"
         className={clsx([
           'pwa:hidden!',
-          'bg-secondary border-t-primary bottom-0 left-0 block w-full border-t p-4 transition-[translate,opacity,visibility] duration-500',
+          'bg-secondary border-t-primary group bottom-0 left-0 block w-full overscroll-contain border-t transition-[translate,opacity] duration-500',
           isAfterBannerDialogCloseRequest ||
-            'not-open:translate-y-full not-open:invisible not-open:opacity-0 not-open:pointer-events-none sticky',
-          isAfterBannerDialogCloseRequest && 'pointer-events-none invisible fixed opacity-0',
+            'not-open:translate-y-full not-open:opacity-0 not-open:pointer-events-none sticky',
+          isAfterBannerDialogCloseRequest && 'pointer-events-none fixed opacity-0',
         ])}
         closedby="none"
         open={isBannerDialogOpen}
+        aria-live="assertive"
       >
-        <h2 id={id} className="mb-2 font-bold" tabIndex={-1}>
-          {t.title}
-        </h2>
-        <div className="text-xs" id={`${id}-description`}>
-          <MajimenaNaiyou lang={isInEnglish ? 'en' : 'ja'} agreeLabel={t.agreeLabel} />
-        </div>
-        <div className="w400:mr-0 mx-auto mt-2 grid w-fit grid-cols-2 gap-4">
-          <p className="">
-            <RunButton onClick={() => closeDialog('rejected')}>{t.disagreeLabel}</RunButton>
-          </p>
+        <div className="p-16PX invisible max-h-dvh overflow-auto group-open:visible">
+          <h2 id={id} className="mb-2 font-bold" tabIndex={-1}>
+            {t.title}
+          </h2>
+          <div className="text-xs" id={`${id}-description`}>
+            <MajimenaNaiyou lang={isInEnglish ? 'en' : 'ja'} agreeLabel={t.agreeLabel} />
+          </div>
+          <div className="w400:mr-0 mx-auto mt-2 grid w-fit grid-cols-2 gap-4">
+            <p className="">
+              <RunButton onClick={() => closeDialog('rejected')}>{t.disagreeLabel}</RunButton>
+            </p>
 
-          <p className="">
-            <RunButton type="button" onClick={() => closeDialog('accepted')}>
-              {t.agreeLabel}
-            </RunButton>
-          </p>
+            <p className="">
+              <RunButton type="button" onClick={() => closeDialog('accepted')}>
+                {t.agreeLabel}
+              </RunButton>
+            </p>
+          </div>
         </div>
       </dialog>
     );
@@ -230,76 +241,78 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
       aria-labelledby={id}
       className={clsx(
         styles.root,
-        'starting:opacity-0 text-primary transition-fade inset-0 m-auto cursor-crosshair duration-500',
+        'starting:opacity-0 text-primary transition-fade group inset-0 m-auto cursor-crosshair duration-500',
       )}
       closedby="none"
     >
-      <div className="scroll-hint-y m-auto grid place-items-center overflow-auto rounded-lg px-4 pb-8 pt-6 text-sm shadow-lg">
-        <div className="w640:pt-2 w-full max-w-[min(40rem,88%)]">
-          <h2
-            tabIndex={-1} // for Safari
-            id={id}
-            className="mb-paragraph pb-paragraph border-b border-dashed border-[#585858]/50 shadow-none outline-none dark:border-[#c2c2c2]/50"
-          >
-            <span className="w640:mx-0 w640:text-lg mx-auto block w-fit text-base text-[#585858] dark:text-[#c2c2c2]">
-              † YOUR COOKIE PREFERENCES †
-            </span>
-          </h2>
-          <div className="mb-paragraph text-sm">
-            <p>当サイトは「うぇぶ⭐︎ひょーじゅん！」の二次創作を扱う非公式ファンサイトです。</p>
-            <ul className="mb-4">
-              {[
-                '当サイトの画像および内容などの無断転載、加工使用、再配布、直リンクなどは禁止です。',
-                '表示がおかしい場合はIE6.0以上、800×600以上の環境でご覧ください。',
-                'この先、BGMが自動再生されます。不要な方はBGMオフのリンクからご入場ください。',
-              ].map((item) => (
-                <li key={item} className="flex">
-                  <span aria-hidden="true">・</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mb-1">
-              <p className="min-w-200px aspect-200/40 grid w-fit cursor-default border border-solid border-black dark:border-white">
-                <span className="bg-tertiary content-end border border-solid border-transparent px-1 py-1.5 text-right font-mono text-xs leading-none dark:border-black dark:bg-gray-300 dark:text-black">
-                  <span>{SITE_NAME}</span>
-                </span>
+      <div className="invisible group-open:visible">
+        <div className="scroll-hint-y px-16PX m-auto grid place-items-center overflow-auto overscroll-contain rounded-lg pb-8 pt-6 text-sm shadow-lg">
+          <div className="w640:pt-2 w-full max-w-[min(40rem,88%)]">
+            <h2
+              tabIndex={-1} // for Safari
+              id={id}
+              className="mb-paragraph pb-paragraph border-b border-dashed border-[#585858]/50 shadow-none outline-none dark:border-[#c2c2c2]/50"
+            >
+              <span className="w640:mx-0 w640:text-lg wrap-anywhere mx-auto block w-fit text-base text-[#585858] dark:text-[#c2c2c2]">
+                † YOUR COOKIE PREFERENCES †
+              </span>
+            </h2>
+            <div className="mb-paragraph text-sm">
+              <p>当サイトは「うぇぶ⭐︎ひょーじゅん！」の二次創作を扱う非公式ファンサイトです。</p>
+              <ul className="mb-4">
+                {[
+                  '当サイトの画像および内容などの無断転載、加工使用、再配布、直リンクなどは禁止です。',
+                  '表示がおかしい場合はIE6.0以上、800×600以上の環境でご覧ください。',
+                  'この先、BGMが自動再生されます。不要な方はBGMオフのリンクからご入場ください。',
+                ].map((item) => (
+                  <li key={item} className="flex">
+                    <span aria-hidden="true">・</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mb-1">
+                <p className="min-w-200PX aspect-200/40 grid w-fit cursor-default border border-solid border-black dark:border-white">
+                  <span className="bg-tertiary px-4PX py-6PX content-end border border-solid border-transparent text-right font-mono text-[12px] leading-none dark:border-black dark:bg-gray-300 dark:text-black">
+                    <span>{SITE_NAME}</span>
+                  </span>
+                </p>
+              </div>
+              <p className="flex flex-wrap text-xs">
+                <span className="shrink-0">推奨環境：</span>
+                <span>Windows XP IE6.0↑／フォントサイズ：中↑／解像度：1024ｘ768↑</span>
               </p>
             </div>
-            <p className="flex text-xs">
-              <span className="shrink-0">推奨環境：</span>
-              <span>Windows XP IE6.0↑／フォントサイズ：中↑／解像度：1024ｘ768↑</span>
+
+            <p>
+              なお、ここまでの内容はすべて
+              <strong>
+                <ruby>
+                  嘘<rt>うそ</rt>
+                </ruby>
+              </strong>
+              です。
+            </p>
+
+            <MajimenaNaiyou agreeLabel="Enter" />
+
+            <p className="mt-8">
+              <button
+                type="button"
+                className="w640:text-[min(2.25rem,72px)] hover:text-link text-[min(1.875rem,40px)] underline"
+                onClick={() => closeDialog('accepted')}
+                title="Cookie利用に同意してコンテンツを閲覧する"
+              >
+                {`>>ENTER`}
+              </button>
             </p>
           </div>
-
-          <p>
-            なお、ここまでの内容はすべて
-            <strong>
-              <ruby>
-                嘘<rt>うそ</rt>
-              </ruby>
-            </strong>
-            です。
-          </p>
-
-          <MajimenaNaiyou agreeLabel="Enter" />
-
-          <p className="mt-8">
-            <button
-              type="button"
-              className="w640:text-4xl hover:text-link text-3xl underline"
-              onClick={() => closeDialog('accepted')}
-              title="Cookie利用に同意してコンテンツを閲覧する"
-            >
-              {`>>ENTER`}
-            </button>
-          </p>
-        </div>
-        {/* 目の錯覚分 + 5rem */}
-        <div className="w640:mt-0 mt-8 w-full max-w-[min(45rem,88%)]">
-          <p className="w640:justify-end grid justify-center">
-            <RunButton onClick={() => closeDialog('rejected')}>同意せずに閲覧する</RunButton>
-          </p>
+          {/* 目の錯覚分 + 5rem */}
+          <div className="w640:mt-0 mt-8 w-full max-w-[min(45rem,88%)]">
+            <p className="w640:justify-end grid justify-center">
+              <RunButton onClick={() => closeDialog('rejected')}>同意せずに閲覧する</RunButton>
+            </p>
+          </div>
         </div>
       </div>
     </dialog>

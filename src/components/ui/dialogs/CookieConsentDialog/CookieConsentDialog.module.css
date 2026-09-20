@@ -8,7 +8,7 @@
   background: transparent;
   opacity: 0;
 
-  > div {
+  > div > div {
     max-width: 90dvw;
     max-height: 80vh; /* ガタガタするためdvhではなくvhを使う */
 

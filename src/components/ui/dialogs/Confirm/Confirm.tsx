@@ -118,20 +118,22 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       aria-labelledby={id}
       className={clsx([
         styles.root,
-        'shadow-sticky bg-secondary [[open]]:pointer-events-auto [[open]]:visible [[open]]:opacity-100 pointer-events-none invisible fixed inset-0 z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 transition-[opacity,visibility,bottom]',
+        'shadow-sticky bg-secondary [[open]]:pointer-events-auto [[open]]:opacity-100 group pointer-events-none fixed inset-0 z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 transition-[opacity,visibility,bottom]',
       ])}
       role="alertdialog"
       aria-modal="true"
       closedby="none"
     >
-      <h2 id={id} className={clsx(['text-center font-bold', hasContent ? 'mb-paragraph' : 'mb-6'])}>
-        {data.message}
-      </h2>
+      <div className="invisible group-open:visible">
+        <h2 id={id} className={clsx(['text-center font-bold', hasContent ? 'mb-paragraph' : 'mb-6'])}>
+          {data.message}
+        </h2>
 
-      {data.children}
+        {data.children}
 
-      <div className={clsx([hasContent && 'mt-[calc(var(--spacing-paragraph)*1.5)]'])}>
-        <ModalButtons items={items} />
+        <div className={clsx([hasContent && 'mt-[calc(var(--spacing-paragraph)*1.5)]'])}>
+          <ModalButtons items={items} />
+        </div>
       </div>
     </dialog>,
   );
