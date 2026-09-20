@@ -1,7 +1,7 @@
 'use client';
 
 import { TRANSITION_DURATION } from '@/constants/css';
-import { useDialog } from '@/hooks/use-dialog';
+import { usePortal } from '@/hooks/use-portal';
 import clsx from 'clsx';
 import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 'react';
 
@@ -86,7 +86,7 @@ export const Toast = ({
   popover = false,
   assertive = false,
 }: Readonly<Props>) => {
-  const { renderDialog } = useDialog();
+  const { renderDialog } = usePortal();
   const [items, setItems] = useState<ToastItem[]>([]);
   const nextId = useRef(0);
   const timeoutIds = useRef<TimeoutIds>(new Map());

@@ -6,7 +6,7 @@ import { TRANSITION_DURATION } from '@/constants/css';
 
 import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TextField } from '@/components/ui/forms';
-import { useDialog } from '@/hooks/use-dialog';
+import { usePortal } from '@/hooks/use-portal';
 import { PromptData } from './hooks';
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 export const PromptModal = ({ prompt, setPromptData }: Readonly<Props>) => {
   const id = useId();
   const inputId = useId();
-  const { isPortalReady, renderDialog } = useDialog();
+  const { isPortalReady, renderDialog } = usePortal();
   const ref = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const setTimeoutId = useRef(-1);

@@ -2,7 +2,7 @@ import { render, renderHook, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { DIALOG_PORTAL_ID } from '@/constants/id';
-import { useDialog } from '@/hooks/use-dialog';
+import { usePortal } from '@/hooks/use-portal';
 
 let portalContainer: HTMLDivElement;
 
@@ -16,9 +16,9 @@ afterEach(() => {
   portalContainer.remove();
 });
 
-describe('useDialog', () => {
+describe('usePortal', () => {
   it('DIALOG_PORTAL_IDの要素が存在するときisPortalReadyはtrueになる', () => {
-    const { result } = renderHook(() => useDialog());
+    const { result } = renderHook(() => usePortal());
 
     expect(result.current.isPortalReady).toBe(true);
   });
@@ -26,13 +26,13 @@ describe('useDialog', () => {
   it('DIALOG_PORTAL_IDの要素が存在しないときisPortalReadyはfalseになる', () => {
     portalContainer.remove();
 
-    const { result } = renderHook(() => useDialog());
+    const { result } = renderHook(() => usePortal());
 
     expect(result.current.isPortalReady).toBe(false);
   });
 
   it('renderDialogはportal要素の配下に渡した要素を描画する', () => {
-    const { result } = renderHook(() => useDialog());
+    const { result } = renderHook(() => usePortal());
 
     render(result.current.renderDialog(<p>portalの中身</p>));
 
@@ -43,7 +43,7 @@ describe('useDialog', () => {
   it('portal要素が存在しないときrenderDialogはnullを返す', () => {
     portalContainer.remove();
 
-    const { result } = renderHook(() => useDialog());
+    const { result } = renderHook(() => usePortal());
 
     expect(result.current.renderDialog(<p>portalの中身</p>)).toBeNull();
   });

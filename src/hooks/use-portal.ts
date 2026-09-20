@@ -4,10 +4,10 @@ import { createPortal } from 'react-dom';
 
 import { DIALOG_PORTAL_ID } from '@/constants/id';
 
-export const useDialog = () => {
+export const usePortal = (id?: string) => {
   const portal = useSyncExternalStore(
     () => () => {},
-    () => document.getElementById(DIALOG_PORTAL_ID),
+    () => document.getElementById(id ?? DIALOG_PORTAL_ID),
     () => null,
   );
 

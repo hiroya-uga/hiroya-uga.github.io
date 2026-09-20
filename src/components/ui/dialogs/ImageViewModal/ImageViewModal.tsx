@@ -2,7 +2,7 @@
 
 import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
-import { useDialog } from '@/hooks/use-dialog';
+import { usePortal } from '@/hooks/use-portal';
 import { useEffect, useId, useRef } from 'react';
 import { IMAGE_MODAL_VIEW_TRANSITION_NAME } from './utils';
 
@@ -29,7 +29,7 @@ export const ImageViewModal = ({ images, currentIndex, handleClose, handleNaviga
   const photo = images[currentIndex];
   const total = images.length;
 
-  const { renderDialog } = useDialog();
+  const { renderDialog } = usePortal();
 
   useEffect(() => {
     document.documentElement.dataset.modal = 'open';

@@ -2,7 +2,7 @@
 
 import { ModalButtons } from '@/components/ui/dialogs/shared';
 import { TRANSITION_DURATION } from '@/constants/css';
-import { useDialog } from '@/hooks/use-dialog';
+import { usePortal } from '@/hooks/use-portal';
 import clsx from 'clsx';
 import { useEffect, useId, useRef } from 'react';
 
@@ -24,7 +24,7 @@ type Props = {
 
 export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
   const id = useId();
-  const { isPortalReady, renderDialog } = useDialog();
+  const { isPortalReady, renderDialog } = usePortal();
   const ref = useRef<HTMLDialogElement>(null);
   const setTimeoutId = useRef(-1);
   const cachedConfirmRef = useRef(confirm);

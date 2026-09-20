@@ -5,7 +5,7 @@ import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { PROFILE_TEXT, SITE_AUTHOR, SITE_AUTHOR_JA, SITE_NAME } from '@/constants/meta';
 import { useAchievement } from '@/hooks/use-achievement';
-import { useDialog } from '@/hooks/use-dialog';
+import { usePortal } from '@/hooks/use-portal';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 
@@ -18,7 +18,7 @@ interface BusinessCardProps {
 
 const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { renderDialog } = useDialog();
+  const { renderDialog } = usePortal();
 
   useEffect(() => {
     const dialog = dialogRef.current;
