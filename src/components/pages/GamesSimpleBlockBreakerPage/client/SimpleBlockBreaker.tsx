@@ -206,16 +206,22 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   useEffect(() => {
     let direction: 'none' | 'left' | 'right' = 'none';
     let moveAnimationFrameId = -1;
-    const baseSpeed = 8;
-    const boostedSpeed = 16;
+    let lastTimestamp = -1;
+    // 60fps で 16px / 8px ずつ動かしていたときの体感を px/秒 に換算した値
+    const baseSpeed = 960;
+    const slowedSpeed = 480;
 
-    const move = (dir: 'left' | 'right') => {
+    const move = (dir: 'left' | 'right', timestamp: number) => {
       const canvas = canvasRef.current;
       if (canvas instanceof HTMLCanvasElement === false) {
         return;
       }
 
-      const speed = keysPressed.has('Shift') ? boostedSpeed : baseSpeed;
+      // 生の delta をそのまま使うと、裏タブから復帰したときに停止中の秒数がまとめて加算されて端までワープする
+      const delta = Math.min((timestamp - lastTimestamp) / 1000, 0.1);
+      lastTimestamp = timestamp;
+
+      const speed = (keysPressed.has('Shift') ? slowedSpeed : baseSpeed) * delta;
 
       if (dir === 'left') {
         paddle.current.x -= speed;
@@ -230,7 +236,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       }
 
       if (direction === dir) {
-        moveAnimationFrameId = requestAnimationFrame(() => move(dir));
+        moveAnimationFrameId = requestAnimationFrame((nextTimestamp) => move(dir, nextTimestamp));
       }
     };
 
@@ -246,13 +252,15 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         if (direction !== 'left') {
           direction = 'left';
           cancelAnimationFrame(moveAnimationFrameId);
-          move('left');
+          lastTimestamp = performance.now();
+          moveAnimationFrameId = requestAnimationFrame((timestamp) => move('left', timestamp));
         }
       } else if (rightKeys.includes(e.key)) {
         if (direction !== 'right') {
           direction = 'right';
           cancelAnimationFrame(moveAnimationFrameId);
-          move('right');
+          lastTimestamp = performance.now();
+          moveAnimationFrameId = requestAnimationFrame((timestamp) => move('right', timestamp));
         }
       }
     };
