@@ -42,7 +42,17 @@ export const ACHIEVEMENTS: Record<
     description: 'Browser Info ツールを開いた。',
     hidden: { description: true },
   },
-
+  // 無限数独（ナンプレ）
+  'worth-not-quitting': {
+    symbol: '💯',
+    title: '諦めなくてよかった',
+    description: '無限数独（ナンプレ）を1問クリアした。',
+  },
+  'the-art-of-giving-up': {
+    symbol: '🏳️',
+    title: '諦めが肝心',
+    description: '無限数独（ナンプレ）でギブアップした。',
+  },
   // ブロック崩し
   'defrag-complete': {
     symbol: '🧹',

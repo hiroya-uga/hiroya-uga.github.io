@@ -1,10 +1,9 @@
 'use client';
 
+import type { SudokuFocus, SudokuGameState } from '@/components/pages/GamesSudokuPage/client/hooks';
+import type { SudokuState } from '@/components/pages/GamesSudokuPage/utils';
 import { formatStringToNumericString } from '@/utils/formatter';
 import clsx from 'clsx';
-
-import type { SudokuFocus } from '@/components/pages/GamesSudokuPage/client/hooks';
-import type { SudokuState } from '@/components/pages/GamesSudokuPage/utils';
 import type { ChangeEvent } from 'react';
 
 /** 入力途中の文字列ではなく、確定した1桁だけを取り出す */
@@ -22,6 +21,7 @@ const readValue = (e: ChangeEvent<HTMLInputElement>) => {
 };
 
 interface Props {
+  gameState: SudokuGameState;
   sudoku: SudokuState;
   focus: SudokuFocus;
   shouldShowHints: boolean;
@@ -30,7 +30,15 @@ interface Props {
   onChangeCell: (input: { rowIndex: number; colIndex: number; value: number }) => void;
 }
 
-export const SudokuBoard = ({ sudoku, focus, shouldShowHints, shouldHighLight, onInput, onChangeCell }: Props) => {
+export const SudokuBoard = ({
+  gameState,
+  sudoku,
+  focus,
+  shouldShowHints,
+  shouldHighLight,
+  onInput,
+  onChangeCell,
+}: Props) => {
   const { inputMapRef, currentInput, setCurrentInput, hoverCoords, setHoverCoords, setGrid } = focus;
 
   /** 矢印キーの移動先。端まで来たら反対側へ回り込む */
@@ -72,6 +80,8 @@ export const SudokuBoard = ({ sudoku, focus, shouldShowHints, shouldHighLight, o
               Number.isNaN(currentInput[0]) || Number.isNaN(currentInput[1])
                 ? currentInput[2] === rowIndex && currentInput[3] === colIndex
                 : isFocusCurrent;
+            // ギブアップとクリアは結果の表示そのもののため、ヒントの設定に関わらず正解を示す
+            const isCorrect = state === 'correct' && (gameState !== 'playing' || shouldShowHints);
 
             return (
               <div
@@ -80,7 +90,9 @@ export const SudokuBoard = ({ sudoku, focus, shouldShowHints, shouldHighLight, o
                   'w800px:size-[min(5vw,4rem)] transition-bg border-secondary table-cell border',
                   rowIndex % 3 === 0 && 'border-t-4',
                   colIndex !== 0 && colIndex % 3 === 0 && 'border-l-4',
-                  type === 'input' && state === 'invalid' && 'bg-error text-high-contrast',
+                  type === 'input'
+                    ? [state === 'invalid' && 'bg-error text-high-contrast']
+                    : [gameState === 'give-up' ? 'bg-high-contrast text-high-contrast-reverse' : ''],
                 ])}
               >
                 <input
@@ -93,6 +105,7 @@ export const SudokuBoard = ({ sudoku, focus, shouldShowHints, shouldHighLight, o
                     type !== 'hint' && 'font-mono',
 
                     shouldShowHints && duplicated && 'text-alert',
+                    isCorrect && 'text-success',
 
                     shouldHighLight && isHoverCurrent && 'bg-cyan-800/15',
                     shouldHighLight && isHoverCurrent === false && isHoverRowOrColumn && 'bg-cyan-800/10',
@@ -106,7 +119,7 @@ export const SudokuBoard = ({ sudoku, focus, shouldShowHints, shouldHighLight, o
                   value={Number.isNaN(value) ? '' : value}
                   title={`${rowIndex + 1}行目${colIndex + 1}列目`}
                   aria-invalid={duplicated || state === 'invalid'}
-                  readOnly={type === 'hint' || state === 'answer'}
+                  readOnly={type === 'hint' || gameState !== 'playing'}
                   onMouseEnter={() => {
                     setHoverCoords([rowIndex, colIndex]);
                     setCurrentInput((prev) => {

@@ -2,11 +2,20 @@
 
 import { useSudokuFocus, useSudokuGame, useSudokuSettings } from '@/components/pages/GamesSudokuPage/client/hooks';
 import { ProgressMeter, SudokuBoard, SudokuSettings } from '@/components/pages/GamesSudokuPage/client/parts';
+import {
+  TOAST_ANSWER_EXAMPLE,
+  TOAST_CLEAR,
+  TOAST_NEW_GAME,
+  TOAST_NO_MISTAKE,
+  TOAST_RESET,
+  TOAST_UNSOLVABLE,
+} from '@/components/pages/GamesSudokuPage/constants';
 import { RunButton } from '@/components/ui/buttons/RunButton';
 import { Confirm } from '@/components/ui/dialogs/Confirm';
 import { useConfirm } from '@/components/ui/dialogs/Confirm/hooks';
 import { Toast } from '@/components/ui/dialogs/Toast';
 import { LoadingIcon } from '@/components/ui/media/LoadingIcon';
+import { useAchievement } from '@/hooks/use-achievement';
 import { useEffect, useState } from 'react';
 
 export const SudokuClient = () => {
@@ -15,6 +24,7 @@ export const SudokuClient = () => {
   const focus = useSudokuFocus();
 
   const { confirmData, setConfirmData } = useConfirm();
+  const { toastProps: achievementToastProps, unlock } = useAchievement();
   const [toastMessage, setToastMessage] = useState('');
 
   const handleNewGame = () => {
@@ -40,6 +50,7 @@ export const SudokuClient = () => {
     <>
       <div className="w800px:grid w800px:gap-8 transition-discrete starting:opacity-0 w800px:items-start grid-cols-[auto_var(--spacing-260PX)] gap-4 transition-opacity">
         <SudokuBoard
+          gameState={gameState}
           sudoku={sudokuState}
           focus={focus}
           shouldShowHints={settings.shouldShowHints}
@@ -52,17 +63,8 @@ export const SudokuClient = () => {
               return;
             }
 
-            setConfirmData({
-              message: 'おめでとうございます！',
-              children: (
-                <>
-                  <p>ゲームクリアです！</p>
-                  <p>次の問題へ進みますか？</p>
-                </>
-              ),
-              yes: handleNewGame,
-              no: () => {},
-            });
+            unlock('worth-not-quitting');
+            setToastMessage(TOAST_CLEAR);
           }}
         />
 
@@ -75,8 +77,8 @@ export const SudokuClient = () => {
                   setConfirmData({
                     message: '本当にリセットしてよろしいですか？',
                     yes: () => {
-                      setToastMessage('リセットしました');
                       reset();
+                      setToastMessage(TOAST_RESET);
                     },
                     no: () => {},
                   });
@@ -86,7 +88,22 @@ export const SudokuClient = () => {
               </RunButton>
             </li>
             <li>
-              <RunButton disabled={gameState !== 'playing'} onClick={check}>
+              <RunButton
+                disabled={gameState !== 'playing'}
+                onClick={() => {
+                  const { removed, status } = check();
+
+                  if (status === 'unsolvable') {
+                    setToastMessage(TOAST_UNSOLVABLE);
+                    return;
+                  }
+
+                  // 重複を消したこと自体が結果の表示になるため、何も直さなかったときだけ明示する
+                  if (removed === false && status === 'solved') {
+                    setToastMessage(TOAST_NO_MISTAKE);
+                  }
+                }}
+              >
                 正誤確認
               </RunButton>
             </li>
@@ -96,7 +113,13 @@ export const SudokuClient = () => {
                 onClick={() => {
                   setConfirmData({
                     message: '答えを表示していいですか？',
-                    yes: giveUp,
+                    yes: () => {
+                      unlock('the-art-of-giving-up', 1000);
+
+                      if (giveUp() === false) {
+                        setToastMessage(TOAST_ANSWER_EXAMPLE);
+                      }
+                    },
                     no: () => {},
                   });
                 }}
@@ -117,7 +140,7 @@ export const SudokuClient = () => {
                             <input
                               type="range"
                               defaultValue={levelRef.current}
-                              min={20}
+                              min={1}
                               max={90}
                               onChange={(e) => {
                                 const level = Number(e.currentTarget.value);
@@ -137,8 +160,8 @@ export const SudokuClient = () => {
                       </p>
                     ),
                     yes: () => {
-                      setToastMessage('問題を再生成しました。');
                       handleNewGame();
+                      setToastMessage(TOAST_NEW_GAME);
                     },
                     no: () => {},
                   });
@@ -155,7 +178,8 @@ export const SudokuClient = () => {
         </div>
       </div>
 
-      <Toast message={toastMessage} setMessage={setToastMessage} />
+      <Toast message={toastMessage} setMessage={setToastMessage} assertive />
+      <Toast {...achievementToastProps} />
       <Confirm confirm={confirmData} setConfirmData={setConfirmData} />
     </>
   );

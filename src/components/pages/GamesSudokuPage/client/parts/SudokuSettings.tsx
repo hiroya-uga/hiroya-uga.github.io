@@ -1,8 +1,7 @@
 'use client';
 
-import { Switch } from '@/components/ui/forms';
-
 import type { SudokuSettings as Settings } from '@/components/pages/GamesSudokuPage/client/hooks';
+import { Switch } from '@/components/ui/forms';
 
 const ITEMS: { key: keyof Settings; label: string }[] = [
   { key: 'shouldHighLight', label: 'ハイライト表示' },

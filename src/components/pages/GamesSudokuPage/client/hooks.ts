@@ -1,18 +1,18 @@
 'use client';
 
+import type { SudokuState } from '@/components/pages/GamesSudokuPage/utils';
 import {
   checkDuplicate,
-  clearDuplicatedInputs,
   createLoadingState,
   createSudokuState,
   fillAnswer,
   getCorrectRatio,
+  markCorrectInputs,
   resetInputs,
+  reviewInputs,
 } from '@/components/pages/GamesSudokuPage/utils';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useRef, useState } from 'react';
-
-import type { SudokuState } from '@/components/pages/GamesSudokuPage/utils';
 
 const SAVEDATA_KEY = 'savedata-sudoku-game';
 const DEFAULT_LEVEL = 50;
@@ -29,7 +29,10 @@ const DEFAULT_SETTINGS: SudokuSettings = {
   shouldHighLight: false,
 };
 
-/** 表示設定と難易度を保持する */
+/**
+ * 表示設定と難易度を保持する。
+ * localStorageは保存のたびに全体を書き換えるため、常に全項目を書き出す。
+ */
 export const useSudokuSettings = () => {
   const [isReady, setIsReady] = useState(false);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
@@ -63,11 +66,7 @@ export const useSudokuSettings = () => {
   const updateLevel = useCallback(
     (level: number) => {
       levelRef.current = level;
-      setLocalStorage(SAVEDATA_KEY, {
-        shouldShowHints: settings.shouldShowHints,
-        shouldHighLight: settings.shouldHighLight,
-        level,
-      });
+      setLocalStorage(SAVEDATA_KEY, { ...settings, level });
     },
     [settings],
   );
@@ -112,7 +111,11 @@ export type SudokuFocus = ReturnType<typeof useSudokuFocus>;
 
 export type SudokuGameState = 'playing' | 'give-up' | 'clear';
 
-/** 盤面と進行状況を保持する */
+/**
+ * 盤面と進行状況を保持する。
+ * 次の状態は更新関数の外で組み立てる。StrictModeでは更新関数が二度呼ばれるため、
+ * 中で副作用を起こすと実績の解除やダイアログの表示も二度走る。
+ */
 export const useSudokuGame = () => {
   const [gameState, setGameState] = useState<SudokuGameState>('playing');
   const [sudokuState, setSudokuState] = useState<SudokuState>(createLoadingState);
@@ -121,10 +124,10 @@ export const useSudokuGame = () => {
 
   /** level は入力マス（空欄）の割合（％） */
   const start = useCallback((level: number) => {
-    setGameState('playing');
-    setIsDirty(false);
-    setCorrectRatio(0);
     setSudokuState(createSudokuState(level));
+    setGameState('playing');
+    setCorrectRatio(0);
+    setIsDirty(false);
   }, []);
 
   /** 1マスへ数字を入力する。戻り値は入力後の進捗率 */
@@ -132,21 +135,23 @@ export const useSudokuGame = () => {
     ({ rowIndex, colIndex, value }: { rowIndex: number; colIndex: number; value: number }) => {
       const next = checkDuplicate(
         sudokuState.map((row, r) =>
-          r === rowIndex
-            ? row.map((cell, c) => (c === colIndex ? { ...cell, value, state: 'idle' as const } : cell))
-            : row,
+          row.map((cell, c) => {
+            if (r === rowIndex && c === colIndex) {
+              return { ...cell, value, state: 'idle' as const };
+            }
+
+            // 盤面が変わった以上、前回の正誤確認の結果は他のマスについても当てにならない
+            return cell.state === 'correct' ? { ...cell, state: 'idle' as const } : cell;
+          }),
         ),
       );
       const ratio = getCorrectRatio(next);
+      const isClear = ratio === 100;
 
-      if (ratio === 100) {
-        setSudokuState(clearDuplicatedInputs(next));
-        setGameState('clear');
-      } else {
-        setSudokuState(next);
-      }
-
+      // クリアした盤面は入力マスがすべて正しく埋まっている
+      setSudokuState(isClear ? markCorrectInputs(next) : next);
       setCorrectRatio(ratio);
+      setGameState(isClear ? 'clear' : 'playing');
 
       return ratio;
     },
@@ -154,18 +159,36 @@ export const useSudokuGame = () => {
   );
 
   const reset = useCallback(() => {
-    setSudokuState(resetInputs(sudokuState));
+    const next = resetInputs(sudokuState);
+
+    setSudokuState(next);
+    // クリア後のリセットで 'clear' が残ると、正誤確認とギブアップが押せないまま盤面だけ空になる
+    setGameState('playing');
+    setCorrectRatio(getCorrectRatio(next));
   }, [sudokuState]);
 
-  /** 重複している入力と未入力のマスへ印を付ける */
+  /** 重複しているマスを空にして、残りの盤面を完成させられるか調べる */
   const check = useCallback(() => {
-    setSudokuState(clearDuplicatedInputs(checkDuplicate(sudokuState)));
+    const { sudoku, status } = reviewInputs(sudokuState);
+
+    setSudokuState(sudoku);
+    setCorrectRatio(getCorrectRatio(sudoku));
+
+    return {
+      removed: sudoku.some((row) => row.some((cell) => cell.state === 'invalid')),
+      status,
+    };
   }, [sudokuState]);
 
-  /** 答えを表示する */
+  /** 答えを表示する。戻り値はユーザーの入力を残したまま完成させられたか */
   const giveUp = useCallback(() => {
+    const { sudoku, keepsOwnInput } = fillAnswer(sudokuState);
+
+    setSudokuState(sudoku);
     setGameState('give-up');
-    setSudokuState(fillAnswer(sudokuState));
+    setCorrectRatio(getCorrectRatio(sudoku));
+
+    return keepsOwnInput;
   }, [sudokuState]);
 
   useEffect(() => {

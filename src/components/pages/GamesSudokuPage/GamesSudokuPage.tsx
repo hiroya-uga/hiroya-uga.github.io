@@ -64,7 +64,7 @@ export const GamesSudokuPage = ({ metadata }: Readonly<Props>) => {
 
       <Table>
         <colgroup>
-          <col />
+          <col className="w-140px" />
           <col />
         </colgroup>
         <thead>
@@ -80,15 +80,21 @@ export const GamesSudokuPage = ({ metadata }: Readonly<Props>) => {
           </tr>
           <tr>
             <th scope="row">正誤確認</th>
-            <td>現在入力されている値のうち、間違っている部分を削除します。</td>
+            <td>
+              現在入力されている値のうち、重複している値を削除します。
+              <span className="inline-block">あわせて、残りのマスを最後まで埋められるかどうかも判定します。</span>
+            </td>
           </tr>
           <tr>
             <th scope="row">ギブアップ</th>
-            <td>現在の問題をやめて、回答例を確認します。</td>
+            <td>
+              現在の問題をやめて、解答例を確認します。
+              <span className="inline-block">入力した値から解答を導ける場合は、その入力を残したまま完成させます。</span>
+            </td>
           </tr>
           <tr>
             <th scope="row">次の問題</th>
-            <td>現在の問題をやめて、新しい問題を生成します。</td>
+            <td>現在の問題を終了し、新しい問題を生成します。</td>
           </tr>
           <tr>
             <th scope="row">ハイライト表示</th>

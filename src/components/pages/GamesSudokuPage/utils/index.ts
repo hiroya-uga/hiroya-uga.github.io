@@ -5,7 +5,9 @@ export {
   createSudokuState,
   fillAnswer,
   getCorrectRatio,
+  markCorrectInputs,
   resetInputs,
+  reviewInputs,
 } from './board';
-export { generate } from './solver';
+export { generate, solve } from './solver';
 export type { SudokuCell, SudokuState } from './types';
