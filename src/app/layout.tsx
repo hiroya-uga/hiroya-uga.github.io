@@ -11,7 +11,7 @@ import { Comment } from '@/components/jokes/Comment';
 import { Console } from '@/components/jokes/Console';
 import { Analytics } from '@/components/ui/features/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
-import { BODY_ELEMENT_ID, DIALOG_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
+import { BODY_ELEMENT_ID, DIALOG_PORTAL_ID, DIALOG_TOAST_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
 import { getTheme } from '@/utils/get-theme';
 
@@ -56,6 +56,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body id={BODY_ELEMENT_ID}>
         <div id={DIALOG_PORTAL_ID} />
+        <div
+          id={DIALOG_TOAST_PORTAL_ID}
+          className="z-toast pointer-events-none fixed right-0 top-0 max-h-full max-w-[min(400px,95%)] space-y-2 overflow-y-auto overflow-x-clip pt-4"
+        />
         {children}
 
         <div id={SVG_PORTAL_ID} hidden />

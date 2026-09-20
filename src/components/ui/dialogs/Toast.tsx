@@ -2,10 +2,9 @@
 
 import { TRANSITION_DURATION } from '@/constants/css';
 import { usePortal } from '@/hooks/use-portal';
-import clsx from 'clsx';
 import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 'react';
 
-import styles from './Toast.module.css';
+import { DIALOG_TOAST_PORTAL_ID } from '@/constants/id';
 
 interface ToastItem {
   id: number;
@@ -73,20 +72,12 @@ interface Props {
   message: string;
   setMessage: (_: string) => void;
   duration?: number;
-  /** モーダルダイアログの上に重ねて表示したい場合に指定する。要素をトップレイヤーへ昇格させる */
-  popover?: boolean;
   /** 実績解除など、即座に読み上げさせたい通知に指定する。role="alert" で aria-live="assertive" 相当にする */
   assertive?: boolean;
 }
 
-export const Toast = ({
-  message,
-  setMessage,
-  duration = 3000,
-  popover = false,
-  assertive = false,
-}: Readonly<Props>) => {
-  const { renderDialog } = usePortal();
+export const Toast = ({ message, setMessage, duration = 3000, assertive = false }: Readonly<Props>) => {
+  const { renderDialog } = usePortal(DIALOG_TOAST_PORTAL_ID);
   const [items, setItems] = useState<ToastItem[]>([]);
   const nextId = useRef(0);
   const timeoutIds = useRef<TimeoutIds>(new Map());
@@ -123,43 +114,13 @@ export const Toast = ({
     };
   }, []);
 
-  // items が空になるまでトップレイヤーに乗せ続ける。表示中に showPopover() を呼ぶと例外になるため既存の開閉状態を見て判定する
-  useEffect(() => {
-    if (popover === false) {
-      return;
-    }
-
-    const dialog = ref.current;
-
-    if (dialog === null) {
-      return;
-    }
-
-    if (items.length === 0) {
-      if (dialog.matches(':popover-open')) {
-        dialog.hidePopover();
-      }
-      return;
-    }
-
-    if (dialog.matches(':popover-open') === false) {
-      dialog.showPopover();
-    }
-  }, [items, popover]);
-
   return renderDialog(
-    <div
-      ref={ref}
-      role={assertive ? 'alert' : 'status'}
-      aria-atomic="false"
-      className={clsx(styles.root, 'z-toast pointer-events-none space-y-2')}
-      popover={popover ? 'manual' : undefined}
-    >
+    <div ref={ref} role={assertive ? 'alert' : 'status'} aria-atomic="false" className="space-y-2">
       {items.map((item) => (
         <p
           key={item.id}
           // 100% + 20px は scrollbar-gutter: stable; の時にモーダルダイアログを表示するとチラチラToastが見えてしまう問題の回避
-          className="no-hidden animate-toast-in [[hidden]]:pointer-events-none last:[[hidden]]:opacity-0 pointer-events-auto ml-auto w-fit max-w-[min(300px,95%)] transition-opacity delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
+          className="no-hidden animate-toast-in [[hidden]]:pointer-events-none last:[[hidden]]:opacity-0 pointer-events-auto ml-auto w-fit transition-opacity delay-100 ease-out [box-shadow:1px_2px_6px_#00000099]"
           style={{
             transitionDuration: `${TRANSITION_DURATION}ms`,
           }}
