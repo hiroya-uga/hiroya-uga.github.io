@@ -62,6 +62,7 @@
     --x-color-text-high-contrast-reverse: #fff;
     --x-color-text-link: #004d86;
     --x-color-text-alert: #9c0000;
+    --x-color-text-success: #005800;
     --x-color-text-required: #fffcfc;
     --x-color-text-textfield: #333;
 
@@ -107,6 +108,7 @@
     --x-color-text-high-contrast-reverse: #000;
     --x-color-text-link: #edc56c;
     --x-color-text-alert: #ffadab;
+    --x-color-text-success: #9bef9d;
     --x-color-text-required: #e6e6e6;
     --x-color-text-textfield: #cfcfcf;
     --x-color-background-success: #1d521d;
@@ -255,6 +257,7 @@
   --color-high-contrast-reverse: var(--x-color-text-high-contrast-reverse);
   --color-link: var(--x-color-text-link);
   --color-alert: var(--x-color-text-alert);
+  --color-success: var(--x-color-text-success);
   --color-textfield: var(--x-color-text-textfield);
 
   --background-color-primary: var(--x-color-background-primary);

@@ -19,6 +19,7 @@ const textColors = [
   'text-high-contrast-reverse',
   'text-link',
   'text-alert',
+  'text-success',
 ];
 
 const TextColor = () => {
