@@ -65,7 +65,7 @@ export const ACHIEVEMENTS: Record<
     description: 'ブロック崩しでボールが貫通する状態をONにしてプレイした。',
   },
   'speed-star': {
-    symbol: '🏎️',
+    symbol: '⭐️',
     title: 'スピードスター',
     description: 'ブロック崩しを速度が上限に達した状態でクリアした。',
   },
