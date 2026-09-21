@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Details } from '@/components/ui/boxes/Details';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { DOM_EVENTS_CONTAINER_ID } from '@/constants/id';
 
 const getNow = () => {
@@ -14,141 +15,64 @@ const getNow = () => {
   )}`;
 };
 
+// Object.keys は own プロパティしか返さず、継承元（Element など）の on* を取りこぼすため for...in でチェーンを辿る
+const getHandlerEventNames = (prototype: object) => {
+  const eventNames: string[] = [];
+
+  for (const propName in prototype) {
+    if (propName.startsWith('on')) {
+      eventNames.push(propName.slice(2));
+    }
+  }
+
+  return eventNames;
+};
+
 let key = -1;
 
-const inputElementEvents = [
-  'invalid',
-  'search', //Non-standard
-  'select',
-  'selectionchange', // Experimental
-];
-const mediaElementEvents = [
-  ...new Set([
-    // video
-    'abort',
-    'canplay',
-    'canplaythrough',
-    'durationchange',
-    'emptied',
-    'encrypted',
-    'ended',
-    'error',
-    'loadeddata',
-    'loadedmetadata',
-    'loadstart',
-    'pause',
-    'play',
-    'playing',
-    'progress',
-    'ratechange',
-    'seeked',
-    'seeking',
-    'stalled',
-    'suspend',
-    'timeupdate',
-    'volumechange',
-    'waiting',
-  ]),
-];
-
+const emptyEventNames: string[] = [];
 let cachedEventNames: string[] | null = null;
 
 const getEventNames = () => {
   if (!globalThis.window) {
-    return [];
+    return emptyEventNames;
   }
 
-  if (cachedEventNames) {
-    return cachedEventNames;
-  }
-
-  cachedEventNames = [
+  return (cachedEventNames ??= [
     ...new Set([
+      // リスナーは要素に付けるため、Element / HTMLElement に on* が生えるイベントは下の抽出で拾える。ここには on* を持たないもの・生えないものだけを残す
       'afterscriptexecute', // Non-standard
-      'animationcancel',
-      'animationend',
-      'animationiteration',
-      'animationstart',
-      'auxclick',
-      'beforematch', // Experimental
       'beforescriptexecute', // Non-standard
-      'beforexrselect', // Experimental
-      'blur',
-      'click',
       'compositionend',
       'compositionstart',
       'compositionupdate',
-      'contentvisibilityautostatechange', // Experimental
-      'contextmenu',
-      'copy',
-      'cut',
-      'dblclick',
-      // "DOMActivate",// 非推奨
-      // 'DOMMouseScroll', // Non-standard & 非推奨
-      'focus',
+      'encrypted', // on* が無い
       'focusin',
       'focusout',
-      'fullscreenchange',
-      'fullscreenerror',
       'gesturechange', // Non-standard
       'gestureend', // Non-standard
       'gesturestart', // Non-standard
-      'gotpointercapture',
-      'keydown',
-      // "keypress",// 非推奨
-      'keyup',
-      'lostpointercapture',
-      'mousedown',
-      'mouseenter',
-      'mouseleave',
-      'mousemove',
-      'mouseout',
-      'mouseover',
-      'mouseup',
-      // 'mousewheel', // Non-standard & 非推奨
-      // 'MozMousePixelScroll', // Non-standard & 非推奨
-      'paste',
-      'pointercancel',
-      'pointerdown',
-      'pointerenter',
-      'pointerleave',
-      'pointermove',
-      'pointerout',
-      'pointerover',
-      'pointerrawupdate', // Experimental
-      'pointerup',
-      'scroll',
-      'scrollend',
-      'securitypolicyviolation',
+      'pointerlockchange',
+      'pointerlockerror',
+      // タッチ非対応の環境では on* が生えない
       'touchcancel',
       'touchend',
       'touchmove',
       'touchstart',
-      'transitioncancel',
-      'transitionend',
-      'transitionrun',
-      'transitionstart',
       'webkitmouseforcechanged', // Non-standard
       'webkitmouseforcedown', // Non-standard
       'webkitmouseforceup', // Non-standard
       'webkitmouseforcewillbegin', // Non-standard
-      'wheel',
-      ...Object.keys(globalThis.window)
-        .filter((propName) => propName.startsWith('on'))
-        .map((eventName) => eventName.slice(2)),
+      // input / video 固有の on*（enterpictureinpicture など）は HTMLElement からは辿れないため個別に集める
+      ...getHandlerEventNames(HTMLElement.prototype),
+      ...getHandlerEventNames(HTMLInputElement.prototype),
+      ...getHandlerEventNames(HTMLVideoElement.prototype),
     ]),
-  ];
-
-  return cachedEventNames;
+  ]);
 };
-
-const emptyEventNames: string[] = [];
 
 export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   const ref = useRef<HTMLFormElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const requiredInputRef = useRef<HTMLInputElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const timestampRef = useRef(getNow());
   const eventNames = useSyncExternalStore(
     () => () => {},
@@ -302,53 +226,14 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
       return;
     }
 
+    // bubble しないイベント（invalid / play など）も子孫宛てなら capture フェーズで必ず通るため、form だけに登録する
     eventNames.forEach((eventName) => {
-      target.addEventListener(eventName, handler);
+      target.addEventListener(eventName, handler, true);
     });
 
     return () => {
       eventNames.forEach((eventName) => {
-        target.removeEventListener(eventName, handler);
-      });
-    };
-  }, [eventNames, handler]);
-
-  useEffect(() => {
-    const targets = [inputRef.current, requiredInputRef.current];
-
-    targets.forEach((target) => {
-      if (!target) {
-        return;
-      }
-
-      inputElementEvents.forEach((eventName) => {
-        target.addEventListener(eventName, handler);
-      });
-    });
-
-    return () => {
-      targets.forEach((target) => {
-        inputElementEvents.forEach((eventName) => {
-          target?.removeEventListener(eventName, handler);
-        });
-      });
-    };
-  }, [handler]);
-
-  useEffect(() => {
-    const target = videoRef.current;
-
-    if (!target) {
-      return;
-    }
-
-    mediaElementEvents.forEach((eventName) => {
-      target.addEventListener(eventName, handler);
-    });
-
-    return () => {
-      mediaElementEvents.forEach((eventName) => {
-        target.removeEventListener(eventName, handler);
+        target.removeEventListener(eventName, handler, true);
       });
     };
   }, [eventNames, handler]);
@@ -368,40 +253,18 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         <Details summary="サポートしているイベントタイプ" id={`${id}-details`}>
           <div className="max-h-[70vh] overflow-y-scroll px-8 py-4">
             <p className="mb-2">このページで採用されているイベント一覧です。一部非標準、非推奨も含まれています。</p>
-            <p className="mb-2">form要素には以下のイベントに関するハンドラを登録しています。</p>
-
-            <ul className="mb-8 pl-6">
-              {eventNames.sort().map((eventName) => {
-                return (
-                  <li className="mb-1 list-disc pl-1" key={eventName}>
-                    {eventName}
-                  </li>
-                );
-              })}
-            </ul>
-
-            <p className="mb-2">input要素には以下のイベントに関するハンドラを登録しています。</p>
-
-            <ul className="mb-8 pl-6">
-              {inputElementEvents.sort().map((eventName) => {
-                return (
-                  <li className="mb-1 list-disc pl-1" key={eventName}>
-                    {eventName}
-                  </li>
-                );
-              })}
-            </ul>
-
-            <p className="mb-2">video要素には以下のイベントに関するハンドラを登録しています。</p>
+            <p className="mb-2">form要素には以下のイベントに関するハンドラをキャプチャフェーズで登録しています。</p>
 
             <ul className="pl-6">
-              {mediaElementEvents.sort().map((eventName) => {
-                return (
-                  <li className="mb-1 list-disc pl-1" key={eventName}>
-                    {eventName}
-                  </li>
-                );
-              })}
+              {eventNames
+                .toSorted((a, b) => a.localeCompare(b))
+                .map((eventName) => {
+                  return (
+                    <li className="mb-1 list-disc pl-1" key={eventName}>
+                      {eventName}
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </Details>
@@ -437,7 +300,6 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               <p className="mb-8">
                 <input
                   id={id}
-                  ref={inputRef}
                   autoComplete="none"
                   aria-describedby={`${id}-description`}
                   placeholder="hogehoge"
@@ -453,7 +315,6 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
               <p className="mb-8">
                 <input
-                  ref={requiredInputRef}
                   id={`${id}-required`}
                   autoComplete="none"
                   placeholder="hogehoge"
@@ -514,7 +375,6 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
             <figure className="mb-8 text-center">
               <p className="mb-2">
                 <video
-                  ref={videoRef}
                   src="/tools/dom-events-watcher/sample.mp4"
                   controls
                   muted
@@ -542,15 +402,31 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </div>
 
         <section>
-          <h2 className="w1024:mt-0 mb-2 block w-fit font-bold">
+          <h2 className="w1024:mt-0 mb-1.5 block w-fit font-bold">
             <strong id={`${id}-log-title`}>ログ</strong>（最大300行）
           </h2>
 
-          <p>最後の作業から１秒経過すると、次の操作時にタイムスタンプの行が挿入されます。</p>
-          <p className="mb-3">イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
+          <div className="mb-3 text-sm">
+            <p>最後の作業から１秒経過すると、次の操作時にタイムスタンプの行が挿入されます。</p>
+            <p>イベントを受け取った要素名、イベント名、一部補足情報が出力されます。</p>
+          </div>
+          <p className="border-secondary border border-b-0">
+            <button
+              type="button"
+              className="ml-auto block rounded-lg p-2"
+              onClick={() => {
+                logRef.current = [['', '', getNow()]];
+                setLog(logRef.current);
+              }}
+            >
+              <span className="relative block size-4">
+                <SvgIcon name="reload" alt="ログをクリア" />
+              </span>
+            </button>
+          </p>
 
           <div
-            className="bg-tertiary w640:h-[50vh] h-[30vh] overflow-y-scroll overscroll-contain py-2"
+            className="scroll-hint-y w640:h-[50vh] border-secondary h-[30vh] overflow-y-scroll overscroll-contain border border-t-0 py-2"
             aria-labelledby={`${id}-log-title`}
           >
             <div
