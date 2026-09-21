@@ -52,12 +52,18 @@ const MAX_PADDLE_WIDTH_RATIO = 110;
 const DEFAULT_PADDLE_HEIGHT = 20;
 const DEFAULT_PADDLE_POSITION_Y = 30;
 const DEFAULT_BALL_RADIUS = 16;
-// 速度はすべて 60fps 基準の px/フレーム で扱う。上限・加速度と同じモノサシに揃えるため倍率では持たない
-const DEFAULT_BALL_SPEED = 16;
-const MIN_BALL_SPEED = 4;
-const MAX_BALL_SPEED = 40;
-const DEFAULT_BALL_ACCELERATION = 0;
-const MAX_BALL_ACCELERATION = 0.6;
+// 安全上限（getSafeStepLimit の結果）に対する割合(%)で持つ。速度の上限と同じモノサシに揃え、半径・ブロック高さの変更に自動追従させる
+const MIN_BALL_SPEED_RATIO = 5;
+const MAX_BALL_SPEED_RATIO = 100;
+const DEFAULT_BALL_SPEED_RATIO = 25;
+// 初速に対する割合(%)で持つ。初速を変えても1ブロックあたりの体感加速ペースが揃うよう固定pxでは持たない
+const MIN_BALL_ACCELERATION_RATIO = 0;
+const MAX_BALL_ACCELERATION_RATIO = 100;
+const DEFAULT_BALL_ACCELERATION_RATIO = 0;
+// 安全上限（getSafeStepLimit の結果）に対する割合(%)で持つ。実際の px 値は半径・ブロック高さ次第で変わるため固定値では持てない
+const MIN_BALL_MAX_STEP_RATIO = 0;
+const MAX_BALL_MAX_STEP_RATIO = 100;
+const DEFAULT_BALL_MAX_STEP_RATIO = 100;
 
 /**
  * すり抜けずに動ける1フレームあたりの移動量（60fps基準）を設定値から求める
@@ -70,11 +76,6 @@ const getSafeStepLimit = ({ radius, blockHeight }: { radius: number; blockHeight
   const blockWindow = blockHeight + diameter;
   return Math.min(paddleWindow, blockWindow);
 };
-
-const DEFAULT_BALL_MAX_STEP = getSafeStepLimit({
-  radius: DEFAULT_BALL_RADIUS,
-  blockHeight: DEFAULT_BLOCK_SETTING.blockHeight,
-});
 
 export const SimpleBlockBreaker = ({ width, height }: { width: number; height: number }) => {
   const id = useId();
@@ -97,7 +98,6 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   const cursorHiddenSetTimeoutId = useRef<number>(-1);
   const [cursorHidden, setCursorHidden] = useState(false);
   const [allBlocksUnbroken, setAllBlocksUnbroken] = useState(true);
-  const [maxStepLimit, setMaxStepLimit] = useState(DEFAULT_BALL_MAX_STEP);
 
   // Game state refs
   const paddle = useRef({
@@ -110,11 +110,18 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     x: width / 2,
     y: height - DEFAULT_BALL_RADIUS - DEFAULT_PADDLE_HEIGHT - DEFAULT_PADDLE_POSITION_Y,
     radius: DEFAULT_BALL_RADIUS,
-    speedX: DEFAULT_BALL_SPEED,
-    speedY: DEFAULT_BALL_SPEED * -1,
-    defaultSpeed: DEFAULT_BALL_SPEED,
-    acceleration: DEFAULT_BALL_ACCELERATION,
-    maxStep: DEFAULT_BALL_MAX_STEP,
+    speedX:
+      (getSafeStepLimit({ radius: DEFAULT_BALL_RADIUS, blockHeight: DEFAULT_BLOCK_SETTING.blockHeight }) *
+        DEFAULT_BALL_SPEED_RATIO) /
+      100,
+    speedY:
+      ((getSafeStepLimit({ radius: DEFAULT_BALL_RADIUS, blockHeight: DEFAULT_BLOCK_SETTING.blockHeight }) *
+        DEFAULT_BALL_SPEED_RATIO) /
+        100) *
+      -1,
+    speedRatio: DEFAULT_BALL_SPEED_RATIO,
+    accelerationRatio: DEFAULT_BALL_ACCELERATION_RATIO,
+    maxStepRatio: DEFAULT_BALL_MAX_STEP_RATIO,
     mode: {
       passThrough: false,
     },
@@ -147,25 +154,15 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     paddle.current.x = width / 2 - paddle.current.width / 2;
     ball.current.x = width / 2;
     ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
-    ball.current.speedX = ball.current.defaultSpeed;
-    ball.current.speedY = ball.current.defaultSpeed * -1;
+    const speed =
+      (getSafeStepLimit({ radius: ball.current.radius, blockHeight: blockSettingRef.current.blockHeight }) *
+        ball.current.speedRatio) /
+      100;
+    ball.current.speedX = speed;
+    ball.current.speedY = speed * -1;
     initBlocks();
     setRunning(true);
   }, [height, initBlocks, width]);
-
-  const applyStepLimit = useCallback(
-    ({ radius, blockHeight }: { radius: number; blockHeight: number }) => {
-      const limit = getSafeStepLimit({ radius, blockHeight });
-      setMaxStepLimit(limit);
-
-      const input = document.getElementById(`${id}-ball-max-step`);
-      // max 属性を縮めるとブラウザが value を丸めるが ref と数値入力は取り残されるため、変更イベントを流して揃える
-      if (input instanceof HTMLInputElement && limit < Number(input.value)) {
-        dispatchChangeEvent({ target: input, value: limit.toString() });
-      }
-    },
-    [id],
-  );
 
   const updateConfigTextValue = useCallback((e: React.ChangeEvent<HTMLInputElement>, value: string) => {
     if (e.currentTarget.nextElementSibling?.firstElementChild instanceof HTMLInputElement === false) {
@@ -359,13 +356,17 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
     };
 
     const collision = () => {
-      // スライダーの max は描画済みの値でしか制限できないため、実行時にも安全値で抑えて設定の反映漏れで壊れないようにする
-      const step = Math.min(
-        getSafeStepLimit({ radius: ball.current.radius, blockHeight: blockSettingRef.current.blockHeight }),
-        ball.current.maxStep,
-      );
+      // 割合(%)で持つため、安全上限に対する掛け算だけで済み px 上限を別途クランプし直す必要がない
+      const safeStepLimit = getSafeStepLimit({
+        radius: ball.current.radius,
+        blockHeight: blockSettingRef.current.blockHeight,
+      });
+      const step = (safeStepLimit * ball.current.maxStepRatio) / 100;
+      const defaultSpeed = (safeStepLimit * ball.current.speedRatio) / 100;
       // 上限が初速を下回る設定でも、プレイヤーが指定した速さより遅くするのは意図と違うので初速は下回らせない
-      const maxSpeedY = Math.max(ball.current.defaultSpeed, step);
+      const maxSpeedY = Math.max(defaultSpeed, step);
+      // 初速に対する割合で持つため、初速を上げ下げしても1ブロックごとの体感加速ペースが変わらない
+      const acceleration = (defaultSpeed * ball.current.accelerationRatio) / 100;
 
       // Wall
       // めり込んだ位置を境界まで戻してから速度の向きを強制する。単純な符号反転だけだと、
@@ -428,9 +429,9 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
           block.broken = true;
           setAllBlocksUnbroken(false);
           if (ball.current.speedY < 0) {
-            ball.current.speedY = Math.max(maxSpeedY * -1, ball.current.speedY - ball.current.acceleration);
+            ball.current.speedY = Math.max(maxSpeedY * -1, ball.current.speedY - acceleration);
           } else {
-            ball.current.speedY = Math.min(maxSpeedY, ball.current.speedY + ball.current.acceleration);
+            ball.current.speedY = Math.min(maxSpeedY, ball.current.speedY + acceleration);
           }
         }
       });
@@ -504,9 +505,9 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       [
         {
           radius: ball.current.radius,
-          speed: ball.current.defaultSpeed,
-          acceleration: ball.current.acceleration,
-          'max-step': ball.current.maxStep,
+          speed: ball.current.speedRatio,
+          acceleration: ball.current.accelerationRatio,
+          'max-step': ball.current.maxStepRatio,
         },
         'ball-',
       ],
@@ -538,16 +539,13 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       });
     }
 
-    // 復元は描画済みの max 属性を見て丸められるため、復元後の半径・ブロック高で安全値を計算し直して上限超えを切り戻す
-    applyStepLimit({ radius: ball.current.radius, blockHeight: blockSettingRef.current.blockHeight });
-
     blocks.current = createBlocksArray();
     // Defer state updates to avoid cascading renders warning
     queueMicrotask(() => {
       setIsReady(true);
       setAllBlocksUnbroken(true);
     });
-  }, [id, createBlocksArray, searchParams, applyStepLimit]);
+  }, [id, createBlocksArray, searchParams]);
 
   return (
     <>
@@ -652,10 +650,6 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                       });
                       updateConfigTextValue(e, newSize.toString());
 
-                      if (key === 'blockHeight') {
-                        applyStepLimit({ radius: ball.current.radius, blockHeight: newSize });
-                      }
-
                       // 反映処理
                       initBlocks();
                     }}
@@ -673,6 +667,50 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 </p>
               );
             })}
+
+            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+              <label
+                htmlFor={`${id}-ball-radius`}
+                id={`${id}-ball-radius-label`}
+                className="col-start-1 row-start-1 content-center pr-2"
+              >
+                ボールのサイズ
+              </label>
+              <input
+                disabled={running}
+                id={`${id}-ball-radius`}
+                type="range"
+                min={1}
+                defaultValue={DEFAULT_BALL_RADIUS}
+                max={100}
+                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                onChange={(e) => {
+                  const newSize = Number.parseInt(e.target.value, 10);
+                  if (ball.current) {
+                    ball.current.radius = newSize;
+                  }
+                  updateQueryParams({
+                    key: 'ball-radius',
+                    value: newSize.toString(),
+                  });
+                  updateConfigTextValue(e, newSize.toString());
+
+                  // 反映処理
+                  ball.current.x = width / 2;
+                  ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
+                }}
+              />
+              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+                <input
+                  inputMode="decimal"
+                  aria-labelledby={`${id}-ball-radius-label`}
+                  defaultValue={DEFAULT_BALL_RADIUS}
+                  className="w-12 rounded bg-[#404653] px-1 text-base"
+                  onChange={onChangeInputForRange}
+                  onBlur={onBlurInputForRange}
+                />
+              </span>
+            </p>
 
             <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
@@ -718,81 +756,37 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
 
             <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
-                htmlFor={`${id}-ball-radius`}
-                id={`${id}-ball-radius-label`}
-                className="col-start-1 row-start-1 content-center pr-2"
-              >
-                ボールのサイズ
-              </label>
-              <input
-                disabled={running}
-                id={`${id}-ball-radius`}
-                type="range"
-                min={1}
-                defaultValue={DEFAULT_BALL_RADIUS}
-                max={100}
-                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
-                onChange={(e) => {
-                  const newSize = Number.parseInt(e.target.value, 10);
-                  if (ball.current) {
-                    ball.current.radius = newSize;
-                  }
-                  updateQueryParams({
-                    key: 'ball-radius',
-                    value: newSize.toString(),
-                  });
-                  updateConfigTextValue(e, newSize.toString());
-                  applyStepLimit({ radius: newSize, blockHeight: blockSettingRef.current.blockHeight });
-
-                  // 反映処理
-                  ball.current.x = width / 2;
-                  ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
-                }}
-              />
-              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
-                <input
-                  inputMode="decimal"
-                  aria-labelledby={`${id}-ball-radius-label`}
-                  defaultValue={DEFAULT_BALL_RADIUS}
-                  className="w-12 rounded bg-[#404653] px-1 text-base"
-                  onChange={onChangeInputForRange}
-                  onBlur={onBlurInputForRange}
-                />
-              </span>
-            </p>
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
-              <label
                 htmlFor={`${id}-ball-speed`}
                 id={`${id}-ball-speed-label`}
                 className="col-start-1 row-start-1 content-center pr-2"
               >
-                ボールの速さ（px/フレーム）
+                ボールの速さ（%）
               </label>
               <input
                 disabled={running}
                 id={`${id}-ball-speed`}
                 type="range"
-                min={MIN_BALL_SPEED}
-                defaultValue={DEFAULT_BALL_SPEED}
-                max={MAX_BALL_SPEED}
+                min={MIN_BALL_SPEED_RATIO}
+                defaultValue={DEFAULT_BALL_SPEED_RATIO}
+                max={MAX_BALL_SPEED_RATIO}
                 className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
-                  const newSize = Number.parseInt(e.target.value, 10);
+                  const newRatio = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
-                    ball.current.defaultSpeed = newSize;
+                    ball.current.speedRatio = newRatio;
                   }
                   updateQueryParams({
                     key: 'ball-speed',
-                    value: newSize.toString(),
+                    value: newRatio.toString(),
                   });
-                  updateConfigTextValue(e, newSize.toString());
+                  updateConfigTextValue(e, newRatio.toString());
                 }}
               />
               <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-speed-label`}
-                  defaultValue={DEFAULT_BALL_SPEED}
+                  defaultValue={DEFAULT_BALL_SPEED_RATIO}
                   className="w-12 rounded bg-[#404653] px-1 text-base"
                   onChange={onChangeInputForRange}
                   onBlur={onBlurInputForRange}
@@ -805,66 +799,36 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 id={`${id}-ball-acceleration-label`}
                 className="col-start-1 row-start-1 content-center pr-2"
               >
-                ブロックを消すごとに増える速度（px/フレーム）
+                ブロックを消すごとに増える速度（%）
               </label>
               <input
                 disabled={running}
                 id={`${id}-ball-acceleration`}
                 type="range"
-                min={0}
-                step={0.01}
-                defaultValue={DEFAULT_BALL_ACCELERATION}
-                max={MAX_BALL_ACCELERATION}
+                min={MIN_BALL_ACCELERATION_RATIO}
+                defaultValue={DEFAULT_BALL_ACCELERATION_RATIO}
+                max={MAX_BALL_ACCELERATION_RATIO}
                 className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
-                  const newSize = Number(e.target.value);
+                  const newRatio = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
-                    ball.current.acceleration = newSize;
+                    ball.current.accelerationRatio = newRatio;
                   }
-
-                  const textContent = (() => {
-                    const value = newSize.toString();
-                    if (value.length === 1) {
-                      return value.padEnd(4, '.00');
-                    }
-
-                    if (value.length === 3) {
-                      return value.padEnd(4, '0');
-                    }
-
-                    return value;
-                  })();
-
                   updateQueryParams({
                     key: 'ball-acceleration',
-                    value: newSize.toString(),
+                    value: newRatio.toString(),
                   });
-                  updateConfigTextValue(e, textContent);
+                  updateConfigTextValue(e, newRatio.toString());
                 }}
               />
               <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-acceleration-label`}
-                  defaultValue={DEFAULT_BALL_ACCELERATION.toString().padEnd(4, '.00')}
+                  defaultValue={DEFAULT_BALL_ACCELERATION_RATIO}
                   className="w-12 rounded bg-[#404653] px-1 text-base"
                   onChange={onChangeInputForRange}
-                  onBlur={(e) => {
-                    onBlurInputForRange(e);
-                    const newValue = e.currentTarget.value;
-
-                    if (newValue === undefined) {
-                      return;
-                    }
-
-                    if (newValue.length === 1) {
-                      e.currentTarget.value = newValue.padEnd(4, '.00');
-                    } else if (newValue.length === 3) {
-                      e.currentTarget.value = newValue.padEnd(4, '0');
-                    } else {
-                      e.currentTarget.value = newValue;
-                    }
-                  }}
+                  onBlur={onBlurInputForRange}
                 />
               </span>
             </p>
@@ -875,31 +839,31 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 id={`${id}-ball-max-step-label`}
                 className="col-start-1 row-start-1 content-center pr-2"
               >
-                速度の上限（px/フレーム）
+                速度の上限（%）
               </label>
               <input
                 disabled={running}
                 id={`${id}-ball-max-step`}
                 type="range"
-                min={DEFAULT_BALL_SPEED}
-                defaultValue={DEFAULT_BALL_MAX_STEP}
-                max={maxStepLimit}
+                min={MIN_BALL_MAX_STEP_RATIO}
+                defaultValue={DEFAULT_BALL_MAX_STEP_RATIO}
+                max={MAX_BALL_MAX_STEP_RATIO}
                 className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
-                  const newSize = Number.parseInt(e.target.value, 10);
-                  ball.current.maxStep = newSize;
+                  const newRatio = Number.parseInt(e.target.value, 10);
+                  ball.current.maxStepRatio = newRatio;
                   updateQueryParams({
                     key: 'ball-max-step',
-                    value: newSize.toString(),
+                    value: newRatio.toString(),
                   });
-                  updateConfigTextValue(e, newSize.toString());
+                  updateConfigTextValue(e, newRatio.toString());
                 }}
               />
               <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-max-step-label`}
-                  defaultValue={DEFAULT_BALL_MAX_STEP}
+                  defaultValue={DEFAULT_BALL_MAX_STEP_RATIO}
                   className="w-12 rounded bg-[#404653] px-1 text-base"
                   onChange={onChangeInputForRange}
                   onBlur={onBlurInputForRange}
