@@ -348,9 +348,11 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       ctx.closePath();
 
       // Draw blocks
+      // 段数・列数は上限が大きく、キャンバス外に生成されたブロックも大量に fillRect すると描画コストが無駄にかかる
       ctx.fillStyle = '#38bdf8';
       blocks.current.forEach(({ x, y, w, h, broken }) => {
-        if (broken === false) {
+        const isOffCanvas = x + w < 0 || x > width || y + h < 0 || y > height;
+        if (broken === false && isOffCanvas === false) {
           ctx.fillRect(x, y, w, h);
         }
       });
