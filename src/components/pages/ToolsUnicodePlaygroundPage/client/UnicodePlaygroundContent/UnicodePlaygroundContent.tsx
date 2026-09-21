@@ -2,6 +2,7 @@
 
 import { useId } from 'react';
 
+import { Toast } from '@/components/ui/dialogs/Toast';
 import { CodeBlock } from '@/components/ui/embed/CodeBlock';
 import { Switch, TextField } from '@/components/ui/forms';
 import { Heading } from '@/components/ui/headings/Heading';
@@ -25,8 +26,10 @@ export const UnicodePlaygroundContent = ({ lang = 'ja' }: Readonly<Props>) => {
   const suggests = lang === 'en' ? unicodeSuggestEn : unicodeSuggest;
 
   const id = useId();
-  const { value, stepIndex, setStepIndex, multiline, setMultiline, applyValue } =
-    useUnicodePlaygroundState(defaultValue);
+  const { value, stepIndex, setStepIndex, multiline, setMultiline, applyValue, toastProps } = useUnicodePlaygroundState(
+    defaultValue,
+    lang,
+  );
 
   const inputCodepoints = [...value];
   const totalSteps = inputCodepoints.length;
@@ -161,6 +164,8 @@ export const UnicodePlaygroundContent = ({ lang = 'ja' }: Readonly<Props>) => {
           />
         </div>
       )}
+
+      <Toast {...toastProps} />
     </div>
   );
 };

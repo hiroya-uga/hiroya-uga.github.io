@@ -42,6 +42,12 @@ export const ACHIEVEMENTS: Record<
     description: 'Browser Info ツールを開いた。',
     hidden: { description: true },
   },
+  'beyond-a-single-character': {
+    symbol: '👩🏻‍❤️‍💋‍👨🏼',
+    title: '一文字の向こう側',
+    description: 'Unicode Playground で1書記素・10コードポイント以上の文字を入力した。',
+    hidden: { symbol: true },
+  },
   // 無限数独（ナンプレ）
   'worth-not-quitting': {
     symbol: '💯',
