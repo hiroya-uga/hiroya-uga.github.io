@@ -57,7 +57,7 @@ export const ACHIEVEMENTS: Record<
   'defrag-complete': {
     symbol: '🧹',
     title: 'デフラグ完了？',
-    description: 'ブロック崩しをクリアした。',
+    description: 'ブロック崩しを段数10以上・列数20以上でクリアした。',
   },
   'walls-never-existed': {
     symbol: '🏓',

@@ -472,7 +472,9 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         });
         setToastMessage('おめでとうございます!!🎉🎉🎉');
         setStatusMessage('おめでとうございます!!🎉🎉🎉');
-        unlock('defrag-complete');
+        if (blockSettingRef.current.rows >= 10 && blockSettingRef.current.cols >= 20) {
+          unlock('defrag-complete');
+        }
       }
     };
 
