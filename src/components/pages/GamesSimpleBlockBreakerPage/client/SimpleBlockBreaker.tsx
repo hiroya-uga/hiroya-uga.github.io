@@ -568,7 +568,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
 
   return (
     <>
-      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10vh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto">
+      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10vh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto after:select-none after:[-webkit-touch-callout:none]">
         <canvas
           ref={canvasRef}
           width={width}
@@ -637,7 +637,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               return (
                 <p
                   key={key}
-                  className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2"
+                  className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2"
                 >
                   <label
                     htmlFor={inputKey}
@@ -653,7 +653,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                     min={min}
                     defaultValue={DEFAULT_BLOCK_SETTING[key]}
                     max={max}
-                    className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                    className="@w400:col-start-2 @w400:row-start-1 col-start-1 row-start-2 min-h-8"
                     onChange={(e) => {
                       const newSize = Number.parseInt(e.target.value, 10);
                       if (paddle.current) {
@@ -673,7 +673,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                       initBlocks();
                     }}
                   />
-                  <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+                  <span className="@w400:col-start-3 @w400:row-start-1 row-start-2 row-end-3 content-center">
                     <input
                       inputMode="decimal"
                       aria-labelledby={`${inputKey}-label`}
@@ -687,7 +687,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               );
             })}
 
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+            <p className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-radius`}
                 id={`${id}-ball-radius-label`}
@@ -702,7 +702,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={1}
                 defaultValue={DEFAULT_BALL_RADIUS}
                 max={100}
-                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                className="@w400:col-start-2 @w400:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newSize = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
@@ -719,7 +719,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   ball.current.y = height - ball.current.radius - paddle.current.height - DEFAULT_PADDLE_POSITION_Y;
                 }}
               />
-              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+              <span className="@w400:col-start-3 @w400:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-radius-label`}
@@ -731,7 +731,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               </span>
             </p>
 
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+            <p className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-paddle-width`}
                 id={`${id}-paddle-width-label`}
@@ -746,7 +746,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={MIN_PADDLE_WIDTH_RATIO}
                 defaultValue={Math.round((DEFAULT_PADDLE_WIDTH / width) * 100)}
                 max={MAX_PADDLE_WIDTH_RATIO}
-                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                className="@w400:col-start-2 @w400:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newRatio = Number.parseInt(e.target.value, 10);
                   const newSize = Math.round((width * newRatio) / 100);
@@ -761,7 +761,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, newRatio.toString());
                 }}
               />
-              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+              <span className="@w400:col-start-3 @w400:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-paddle-width-label`}
@@ -773,7 +773,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               </span>
             </p>
 
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+            <p className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-speed`}
                 id={`${id}-ball-speed-label`}
@@ -788,7 +788,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={MIN_BALL_SPEED_RATIO}
                 defaultValue={DEFAULT_BALL_SPEED_RATIO}
                 max={MAX_BALL_SPEED_RATIO}
-                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                className="@w400:col-start-2 @w400:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newRatio = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
@@ -801,7 +801,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, newRatio.toString());
                 }}
               />
-              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+              <span className="@w400:col-start-3 @w400:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-speed-label`}
@@ -812,7 +812,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 />
               </span>
             </p>
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+            <p className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-acceleration`}
                 id={`${id}-ball-acceleration-label`}
@@ -827,7 +827,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={MIN_BALL_ACCELERATION_RATIO}
                 defaultValue={DEFAULT_BALL_ACCELERATION_RATIO}
                 max={MAX_BALL_ACCELERATION_RATIO}
-                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                className="@w400:col-start-2 @w400:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newRatio = Number.parseInt(e.target.value, 10);
                   if (ball.current) {
@@ -840,7 +840,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, newRatio.toString());
                 }}
               />
-              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+              <span className="@w400:col-start-3 @w400:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-acceleration-label`}
@@ -852,7 +852,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               </span>
             </p>
 
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+            <p className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label
                 htmlFor={`${id}-ball-max-step`}
                 id={`${id}-ball-max-step-label`}
@@ -867,7 +867,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 min={MIN_BALL_MAX_STEP_RATIO}
                 defaultValue={DEFAULT_BALL_MAX_STEP_RATIO}
                 max={MAX_BALL_MAX_STEP_RATIO}
-                className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
+                className="@w400:col-start-2 @w400:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
                   const newRatio = Number.parseInt(e.target.value, 10);
                   ball.current.maxStepRatio = newRatio;
@@ -878,7 +878,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                   updateConfigTextValue(e, newRatio.toString());
                 }}
               />
-              <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
+              <span className="@w400:col-start-3 @w400:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-ball-max-step-label`}
@@ -890,11 +890,11 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
               </span>
             </p>
 
-            <p className="@w360:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
+            <p className="@w400:grid-cols-subgrid col-start-1 col-end-4 grid grid-cols-[1fr_auto] gap-x-2">
               <label htmlFor={`${id}-ball-path-through`} className="col-start-1 row-start-1 content-center pr-2">
                 ボールが貫通
               </label>
-              <span className="@w360:col-end-4 col-start-2 row-start-1 content-center">
+              <span className="@w400:col-end-4 col-start-2 row-start-1 content-center">
                 <Switch
                   disabled={running}
                   id={`${id}-ball-path-through`}
