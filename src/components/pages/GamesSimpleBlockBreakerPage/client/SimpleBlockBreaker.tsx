@@ -568,7 +568,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
 
   return (
     <>
-      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10vh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto after:select-none after:[-webkit-touch-callout:none]">
+      <div className="pointer-coarse:after:touch-none pointer-coarse:after:h-[10vh] pointer-coarse:after:block pointer-coarse:after:bg-[#a4a4a4] pointer-coarse:after:max-w-[90%] pointer-coarse:after:mx-auto select-none [-webkit-touch-callout:none]">
         <canvas
           ref={canvasRef}
           width={width}
