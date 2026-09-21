@@ -47,6 +47,8 @@ const DEFAULT_BLOCK_SETTING = {
   blockHeight: 60,
 };
 const DEFAULT_PADDLE_WIDTH = 360;
+const MIN_PADDLE_WIDTH_RATIO = 10;
+const MAX_PADDLE_WIDTH_RATIO = 110;
 const DEFAULT_PADDLE_HEIGHT = 20;
 const DEFAULT_PADDLE_POSITION_Y = 30;
 const DEFAULT_BALL_RADIUS = 16;
@@ -364,11 +366,18 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       const maxSpeedY = Math.max(ball.current.defaultSpeed, step);
 
       // Wall
-      if (ball.current.x + ball.current.radius > width || ball.current.x - ball.current.radius < 0) {
-        ball.current.speedX *= -1;
+      // めり込んだ位置を境界まで戻してから速度の向きを強制する。単純な符号反転だけだと、
+      // めり込みが解消しきらないフレームで反転を繰り返し、左右/上下に高速でぶれ続ける
+      if (ball.current.x + ball.current.radius > width) {
+        ball.current.x = width - ball.current.radius;
+        ball.current.speedX = Math.abs(ball.current.speedX) * -1;
+      } else if (ball.current.x - ball.current.radius < 0) {
+        ball.current.x = ball.current.radius;
+        ball.current.speedX = Math.abs(ball.current.speedX);
       }
       if (ball.current.y - ball.current.radius < 0) {
-        ball.current.speedY *= -1;
+        ball.current.y = ball.current.radius;
+        ball.current.speedY = Math.abs(ball.current.speedY);
       }
 
       // Paddle
@@ -377,7 +386,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         ball.current.x >= paddle.current.x &&
         ball.current.x <= paddle.current.x + paddle.current.width
       ) {
-        ball.current.speedY *= -1;
+        ball.current.y = paddle.current.y - ball.current.radius;
+        ball.current.speedY = Math.abs(ball.current.speedY) * -1;
         // tweak angle based on where hit
         // const hitPos = (ball.current.x - paddle.current.x) / paddle.current.width - 0.5;
         // ball.current.speedX = ball.current.radius * hitPos;
@@ -485,7 +495,8 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
   useEffect(() => {
     [
       [blockSettingRef.current, ''],
-      [paddle.current, 'paddle-'],
+      // paddle.current.width は px 管理だが、range 入力側は割合(%)で扱うため復元前に変換する
+      [{ ...paddle.current, width: Math.round((paddle.current.width / width) * 100) }, 'paddle-'],
       [
         {
           radius: ball.current.radius,
@@ -665,34 +676,35 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
                 id={`${id}-paddle-width-label`}
                 className="col-start-1 row-start-1 content-center pr-2"
               >
-                バーの幅
+                バーの幅（%）
               </label>
               <input
                 disabled={running}
                 id={`${id}-paddle-width`}
                 type="range"
-                min={1}
-                defaultValue={DEFAULT_PADDLE_WIDTH}
-                max={1000}
+                min={MIN_PADDLE_WIDTH_RATIO}
+                defaultValue={Math.round((DEFAULT_PADDLE_WIDTH / width) * 100)}
+                max={MAX_PADDLE_WIDTH_RATIO}
                 className="@w360:col-start-2 @w360:row-start-1 col-start-1 row-start-2 min-h-8"
                 onChange={(e) => {
-                  const newSize = Number.parseInt(e.target.value, 10);
+                  const newRatio = Number.parseInt(e.target.value, 10);
+                  const newSize = Math.round((width * newRatio) / 100);
                   if (paddle.current) {
                     paddle.current.width = newSize;
                   }
 
                   updateQueryParams({
                     key: 'paddle-width',
-                    value: newSize.toString(),
+                    value: newRatio.toString(),
                   });
-                  updateConfigTextValue(e, newSize.toString());
+                  updateConfigTextValue(e, newRatio.toString());
                 }}
               />
               <span className="@w360:col-start-3 @w360:row-start-1 row-start-2 row-end-3 content-center">
                 <input
                   inputMode="decimal"
                   aria-labelledby={`${id}-paddle-width-label`}
-                  defaultValue={DEFAULT_PADDLE_WIDTH}
+                  defaultValue={Math.round((DEFAULT_PADDLE_WIDTH / width) * 100)}
                   className="w-12 rounded bg-[#404653] px-1 text-base"
                   onChange={onChangeInputForRange}
                   onBlur={onBlurInputForRange}
