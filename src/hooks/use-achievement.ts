@@ -64,6 +64,11 @@ export const ACHIEVEMENTS: Record<
     title: '壁などなかった',
     description: 'ブロック崩しでボールが貫通する状態をONにしてプレイした。',
   },
+  'speed-star': {
+    symbol: '🏎️',
+    title: 'スピードスター',
+    description: 'ブロック崩しを速度が上限に達した状態でクリアした。',
+  },
 };
 
 export type AchievementKey = keyof typeof ACHIEVEMENTS;

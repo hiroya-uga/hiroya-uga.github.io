@@ -476,6 +476,25 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
         if (blockSettingRef.current.rows >= 10 && blockSettingRef.current.cols >= 20) {
           unlock('defrag-complete');
         }
+        // collision() 内の maxSpeedY と同じ式。クリア直前の collision() 呼び出しから
+        // 設定は変わっていないため、同じフレーム内なら同じ値になる
+        const safeStepLimit = getSafeStepLimit({
+          radius: ball.current.radius,
+          blockHeight: blockSettingRef.current.blockHeight,
+        });
+        const step = (safeStepLimit * ball.current.maxStepRatio) / 100;
+        const defaultSpeed = (safeStepLimit * ball.current.speedRatio) / 100;
+        const maxSpeedY = Math.max(defaultSpeed, step);
+        // 上限スライダーを100%にしていないと初速だけで上限到達＝トリビアルに解除できてしまうため対象外にする。
+        // ただし加速度0%でも、初速自体を100%にして最初から上限速度でプレイし切った場合は正当な達成として認める
+        const reachedMaxSpeedByOwnEffort = ball.current.accelerationRatio !== 0 || ball.current.speedRatio === 100;
+        if (
+          ball.current.maxStepRatio === 100 &&
+          reachedMaxSpeedByOwnEffort &&
+          maxSpeedY <= Math.abs(ball.current.speedY)
+        ) {
+          unlock('speed-star');
+        }
       }
     };
 
