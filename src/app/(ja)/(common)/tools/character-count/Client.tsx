@@ -605,9 +605,9 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                       >
                         <span
                           className={clsx([
-                            'grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,1fr)] gap-x-1 leading-none',
+                            'gap-x-4PX grid w-fit grid-cols-[repeat(21,1fr)] grid-rows-[repeat(20,1fr)] leading-none',
                             'before:row-end-21 before:row-start-1 before:border-l before:border-l-[orange] dark:before:border-l-[orange]/80',
-                            'before:col-start-11 before:col-end-12',
+                            'before:col-start-11 before:col-end-12 before:w-[calc(1lh+4px)]',
                           ])}
                           key={containerIndex}
                         >
@@ -616,7 +616,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               aria-hidden={true}
                               className={clsx([
                                 'col-start-11 col-end-12 row-start-6 row-end-7 text-center',
-                                'vertical-rl pl-3px text-justify text-[orange] dark:text-[orange]/80',
+                                'vertical-rl pl-4PX text-justify text-[orange] dark:text-[orange]/80',
                               ])}
                             >
                               【
@@ -625,7 +625,7 @@ export const CharacterCountContent = ({ id }: { id: string }) => {
                               aria-hidden={true}
                               className={clsx([
                                 'row-start-15 row-end-17 col-start-11 col-end-12 text-center',
-                                'vertical-rl pl-3px text-justify text-[orange] dark:text-[orange]/80',
+                                'vertical-rl pl-4PX text-justify text-[orange] dark:text-[orange]/80',
                               ])}
                             >
                               】

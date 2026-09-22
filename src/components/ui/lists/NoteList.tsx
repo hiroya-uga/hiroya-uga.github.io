@@ -12,7 +12,7 @@ export const NoteList = ({ list, symbol = '※' }: Readonly<Props>) => {
     const value = typeof list[0] === 'string' ? list[0] : list[0].value;
 
     return (
-      <p className="palt w640:text-sm flex gap-x-1 text-xs leading-relaxed">
+      <p className="palt w640:text-sm grid grid-cols-[auto_1fr] gap-x-1 text-xs leading-relaxed">
         <span>{symbol}</span>
         <small>{value}</small>
       </p>
@@ -26,7 +26,10 @@ export const NoteList = ({ list, symbol = '※' }: Readonly<Props>) => {
         const value = typeof item === 'string' ? item : item.value;
 
         return (
-          <li key={key} className="palt w640:not-last:mb-1 w640:text-sm flex gap-x-1 text-xs leading-relaxed">
+          <li
+            key={key}
+            className="palt w640:not-last:mb-1 w640:text-sm grid grid-cols-[auto_1fr] gap-x-1 text-xs leading-relaxed"
+          >
             <span>{symbol}</span>
             <small>{value}</small>
           </li>

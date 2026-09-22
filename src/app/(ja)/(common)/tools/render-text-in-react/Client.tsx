@@ -65,6 +65,20 @@ export const RenderTextInReactPlaygroundContent = () => {
         </li>
       </ul>
 
+      <Heading
+        level={2}
+      >{`${shouldUseTemplateLiteral ? 'テンプレートリテラルを使った' : 'テンプレートリテラルを使わない'}動作サンプル`}</Heading>
+
+      <Example shouldUseTemplateLiteral={shouldUseTemplateLiteral} />
+
+      <Heading level={2}>コードイメージ</Heading>
+      <CodeBlock
+        code={code}
+        language="javascript"
+        nowrap
+        className="border-primary mb-paragraph grid overflow-auto rounded-lg border"
+      />
+
       <NoteBox>
         <p>
           JSX（TSX）でテキストをレンダリングする際、1つの<code>string</code>
@@ -99,20 +113,6 @@ export const RenderTextInReactPlaygroundContent = () => {
           </div>
         </div>
       </NoteBox>
-
-      <Heading
-        level={2}
-      >{`${shouldUseTemplateLiteral ? 'テンプレートリテラルを使った' : 'テンプレートリテラルを使わない'}動作サンプル`}</Heading>
-
-      <Example shouldUseTemplateLiteral={shouldUseTemplateLiteral} />
-
-      <Heading level={2}>コードイメージ</Heading>
-      <CodeBlock
-        code={code}
-        language="javascript"
-        nowrap
-        className="border-primary mb-paragraph grid overflow-auto rounded-lg border"
-      />
     </>
   );
 };

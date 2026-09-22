@@ -51,7 +51,7 @@ export const ColorInput = ({ id, label, value, handleChange }: Readonly<Props>) 
         </label>
       </p>
 
-      <p className="mt-2 grid grid-cols-[auto_1fr] gap-3">
+      <p className="mt-2 grid grid-cols-[50px_1fr] gap-3">
         <span className="relative block aspect-square">
           <input
             type="color"
