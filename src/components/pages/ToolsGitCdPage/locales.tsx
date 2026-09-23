@@ -1,5 +1,7 @@
 import { Lang } from '@/types/lang';
 
+type ComparisonMark = '○' | '×' | '△';
+
 export const FzfExternalLink = () => (
   <a href="https://github.com/junegunn/fzf" className="dark:text-[#85b4ff]">
     fzf
@@ -41,17 +43,22 @@ export const gitCdLocales = {
     ],
     comparisonSection: '従来の方法との比較',
     comparisonMethodLabel: '方法',
-    comparisonNoteLabel: '特徴',
+    comparisonCriteria: ['フルパス不要', '追加設定不要', 'git統合', 'あいまい検索'],
+    comparisonMarkLabels: {
+      '○': '対応',
+      '×': '非対応',
+      '△': '一部対応',
+    } satisfies Record<ComparisonMark, string>,
     comparisonItems: [
-      { method: 'cd + tab 補完', note: 'リポジトリのフルパスを覚えていないと使いにくい' },
-      { method: 'find + cd', note: 'コマンドが長く、都度入力するのが煩雑' },
-      { method: 'fzf + find', note: 'カスタム設定が必要で、git との統合がない' },
+      { method: 'cd + tab 補完', marks: ['×', '○', '×', '×'] },
+      { method: 'find + cd', marks: ['○', '○', '×', '×'] },
+      { method: 'fzf + find', marks: ['○', '×', '×', '○'] },
       {
         method: 'git cd（本ツール）',
-        note: 'git サブコマンドとして統合済み、追加設定不要ですぐに使えます',
+        marks: ['○', '○', '○', '△'],
         highlight: true,
       },
-    ],
+    ] satisfies { method: string; marks: ComparisonMark[]; highlight?: boolean }[],
     targetSection: 'こんな方におすすめ',
     targetItems: [
       '複数のリポジトリを日常的に横断して開発している',
@@ -144,17 +151,22 @@ export const gitCdLocales = {
     ],
     comparisonSection: 'How it compares',
     comparisonMethodLabel: 'Method',
-    comparisonNoteLabel: 'Notes',
+    comparisonCriteria: ['No full path needed', 'No extra setup', 'Git integration', 'Fuzzy search'],
+    comparisonMarkLabels: {
+      '○': 'Yes',
+      '×': 'No',
+      '△': 'Partial',
+    } satisfies Record<ComparisonMark, string>,
     comparisonItems: [
-      { method: 'cd + tab completion', note: 'Requires knowing and typing the full repository path' },
-      { method: 'find + cd', note: 'Verbose command, tedious to repeat daily' },
-      { method: 'fzf + find', note: 'Needs custom setup and configuration, no git integration' },
+      { method: 'cd + tab completion', marks: ['×', '○', '×', '×'] },
+      { method: 'find + cd', marks: ['○', '○', '×', '×'] },
+      { method: 'fzf + find', marks: ['○', '×', '×', '○'] },
       {
         method: 'git cd (this tool)',
-        note: 'Works as a git subcommand out of the box, no extra setup needed',
+        marks: ['○', '○', '○', '△'],
         highlight: true,
       },
-    ],
+    ] satisfies { method: string; marks: ComparisonMark[]; highlight?: boolean }[],
     targetSection: "Who it's for",
     targetItems: [
       'Developers who work across multiple repositories daily',

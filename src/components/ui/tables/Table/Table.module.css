@@ -47,6 +47,10 @@
       border-top: 2px solid var(--border-color-primary);
     }
 
+    tbody tr:last-child :where(th, td) {
+      border-bottom: 0;
+    }
+
     tbody th {
       background-color: var(--background-color-table-header);
     }

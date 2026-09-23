@@ -9,6 +9,7 @@ import { CommandTable } from '@/components/ui/tables/CommandTable';
 import { Table } from '@/components/ui/tables/Table';
 import { GETTING_STARTED_ID } from '@/constants/id';
 import { Lang } from '@/types/lang';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { SwitchByPlatformSection } from './client/SwitchByPlatformSection';
 import { gitCdLocales } from './locales';
@@ -96,30 +97,33 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
       <Heading level={3}>{t.comparisonSection}</Heading>
       <div className="mb-8">
         <Table>
-          <thead className="w640:table-header-group border-primary block border-b bg-slate-50 dark:bg-slate-800/50">
-            <tr className="w640:table-row block">
-              <th scope="col" className="w640:table-cell block px-3 py-2 text-left font-medium">
+          <thead>
+            <tr>
+              <th scope="col" className="text-center font-normal">
                 {t.comparisonMethodLabel}
               </th>
-              <th scope="col" className="w640:table-cell block px-3 py-2 text-left font-medium">
-                {t.comparisonNoteLabel}
-              </th>
+              {t.comparisonCriteria.map((criterion) => (
+                <th key={criterion} scope="col" className="text-center font-normal">
+                  {criterion}
+                </th>
+              ))}
             </tr>
           </thead>
-          <tbody className="w640:table-row-group w640:[&>tr:not(:first-child)>*]:border-t w640:[&>tr:not(:first-child)>*]:border-primary divide-primary block divide-y dark:divide-slate-600">
-            {t.comparisonItems.map(({ method, note, highlight }) => (
-              <tr key={method} className="w640:table-row block">
-                <th
-                  scope="row"
-                  className={`w640:table-cell w640:py-2 block overflow-auto whitespace-nowrap px-3 pt-2 text-left align-middle ${highlight ? 'font-semibold' : 'font-normal'}`}
-                >
+          <tbody>
+            {t.comparisonItems.map(({ method, marks, highlight }) => (
+              <tr key={method}>
+                <th scope="row" className={clsx([highlight ? 'font-bold' : 'font-normal'])}>
                   {method}
                 </th>
-                <td
-                  className={`w640:table-cell w640:py-2 block px-3 pb-2 align-middle leading-relaxed ${highlight ? 'font-semibold' : ''}`}
-                >
-                  {note}
-                </td>
+                {marks.map((mark, index) => (
+                  <td
+                    key={`${method}-${t.comparisonCriteria[index]}`}
+                    className={clsx(['text-center', highlight && 'font-bold'])}
+                  >
+                    <span aria-hidden="true">{mark}</span>
+                    <span className="sr-only">{t.comparisonMarkLabels[mark]}</span>
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
