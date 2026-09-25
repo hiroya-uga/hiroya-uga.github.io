@@ -7,7 +7,7 @@ import { NodeQuest, QuestNodeProps } from './types';
 
 const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
-const TextareaQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
+const TextareaClearQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const [value, setValue] = useState(LOREM_IPSUM);
 
   return (
@@ -27,11 +27,11 @@ const TextareaQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   );
 };
 
-export const textareaQuest: NodeQuest = {
+export const textareaClearQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの中身をカラにしろ',
   hint: '10秒以内に全部選択してから Delete や Backspace で消すんや',
   explanation: '全部選択してから消す、テキスト編集の基本操作。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
-  Node: TextareaQuestNode,
+  Node: TextareaClearQuestNode,
 };

@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';
 
-const EscapeQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
+const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
+  const titleId = useId();
   const ref = useRef<HTMLDialogElement>(null);
   const closedViaEscapeRef = useRef(false);
 
@@ -17,6 +18,7 @@ const EscapeQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   return (
     <dialog
       ref={ref}
+      aria-labelledby={titleId}
       className="border-primary bg-secondary p-16PX fixed inset-0 m-auto rounded border text-xl"
       onKeyDown={(e) => {
         if (e.key === 'Escape') {
@@ -34,7 +36,7 @@ const EscapeQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
         onFail();
       }}
     >
-      <p>Escape キーで閉じろ</p>
+      <p id={titleId}>Escape キーで閉じろ</p>
       <button
         type="button"
         className="border-primary mt-16PX px-16PX py-8PX rounded border"
@@ -46,11 +48,11 @@ const EscapeQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   );
 };
 
-export const escapeQuest: NodeQuest = {
+export const dialogCloseQuest: NodeQuest = {
   type: 'node',
   title: 'ダイアログを Escape キーで閉じろ',
-  hint: '閉じるボタンや背景クリックは Fail や。Escape 一発で閉じろ',
+  hint: 'ダイアログは Escape キー一発で閉じられるんや。閉じるボタンや背景クリックは Fail やで',
   explanation:
-    '実はダイアログ、Escape キー一発で閉じられる。背景クリックで閉じるのはマウス操作なので、このクエストでは Fail 扱いにしている。',
-  Node: EscapeQuestNode,
+    'ダイアログは Escape キー一発で閉じられる。閉じるボタンまでフォーカスを移動しなくていい。閉じるボタンや背景クリックはマウス前提の操作なので、このクエストでは Fail 扱いにしている。',
+  Node: DialogCloseQuestNode,
 };

@@ -6,29 +6,29 @@ import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const RadioQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
-  const [value, setValue] = useState<'a' | 'b'>('a');
+  const [checked, setChecked] = useState(false);
 
   return (
-    <div className="flex gap-4">
-      <Radio label="A" name="keyboard-master-radio-quest" checked={value === 'a'} onChange={() => setValue('a')} />
-      <Radio
-        label="B"
-        name="keyboard-master-radio-quest"
-        checked={value === 'b'}
-        onChange={() => {
-          setValue('b');
+    <Radio
+      label="選択する"
+      name="keyboard-master-radio-quest"
+      checked={checked}
+      onChange={(e) => {
+        if (e.currentTarget.checked) {
+          setChecked(true);
           onClear();
-        }}
-      />
-    </div>
+        }
+      }}
+    />
   );
 };
 
 export const radioQuest: NodeQuest = {
   type: 'node',
-  title: 'ラジオボタンを「B」に切り替えろ',
-  hint: '10秒以内に矢印キーか Space で切り替えるんや',
-  explanation: 'ラジオボタンは同じグループの中なら、クリックしなくても矢印キーだけで選択を移動できる。',
+  title: 'ラジオボタンを選択しろ',
+  hint: '10秒以内に Tab でフォーカスして Space で選択するんや',
+  explanation:
+    'ラジオボタンも Space キーで選択できる。ただしチェックボックスと違って、選択済みのものを Space でもう一度押しても解除はされない。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioQuestNode,
 };

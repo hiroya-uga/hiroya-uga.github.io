@@ -26,11 +26,22 @@
       gap: 4px;
       align-items: center;
     }
+
+    kbd {
+      display: inline-block;
+      padding: 0 0.2857em;
+      background-color: #222222cc;
+      border-radius: 4px;
+    }
   }
 
   [data-theme="dark"] :where(li, li > div, th, td, figcaption, caption, p, span, a, dd, label) > kbd {
     color: #fff;
     background-color: #777777cc;
+
+    kbd {
+      background-color: #777777cc;
+    }
   }
 
   body {

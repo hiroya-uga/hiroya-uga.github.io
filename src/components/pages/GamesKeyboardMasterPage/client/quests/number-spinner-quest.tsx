@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const NUMBER_TARGET = 7;
@@ -9,38 +9,45 @@ const NUMBER_TARGET = 7;
 const ALLOWED_KEYS = new Set(['ArrowUp', 'ArrowDown', 'Tab', 'Shift']);
 
 const NumberSpinnerQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
+  const id = useId();
   const [value, setValue] = useState(0);
 
   return (
-    <input
-      type="number"
-      value={value}
-      className="spin-button border-primary px-16PX py-8PX rounded border text-2xl"
-      onKeyDown={(e) => {
-        if (ALLOWED_KEYS.has(e.key)) {
-          return;
-        }
+    <div className="grid gap-2">
+      <label htmlFor={id} className="text-lg font-bold">
+        数値
+      </label>
+      <input
+        id={id}
+        type="number"
+        value={value}
+        className="spin-button border-primary px-16PX py-8PX rounded border text-2xl"
+        onKeyDown={(e) => {
+          if (ALLOWED_KEYS.has(e.key)) {
+            return;
+          }
 
-        e.preventDefault();
-        onFail();
-      }}
-      onWheel={(e) => {
-        e.preventDefault();
-        onFail();
-      }}
-      onPaste={(e) => {
-        e.preventDefault();
-        onFail();
-      }}
-      onChange={(e) => {
-        const next = Number(e.currentTarget.value);
-        setValue(next);
+          e.preventDefault();
+          onFail();
+        }}
+        onWheel={(e) => {
+          e.preventDefault();
+          onFail();
+        }}
+        onPaste={(e) => {
+          e.preventDefault();
+          onFail();
+        }}
+        onChange={(e) => {
+          const next = Number(e.currentTarget.value);
+          setValue(next);
 
-        if (next === NUMBER_TARGET) {
-          onClear();
-        }
-      }}
-    />
+          if (next === NUMBER_TARGET) {
+            onClear();
+          }
+        }}
+      />
+    </div>
   );
 };
 

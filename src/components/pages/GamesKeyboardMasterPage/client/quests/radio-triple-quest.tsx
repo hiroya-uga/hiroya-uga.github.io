@@ -1,37 +1,46 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/client/quests/config';
+import { Checkbox } from '@/components/ui/forms/Checkbox';
 import { Radio } from '@/components/ui/forms/Radio';
 import { useId, useState } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';
 
-const RADIO_TRIPLE_OPTIONS = ['1', '2', '3'];
-const RADIO_TRIPLE_LEGENDS = ['1つ目', '2つ目', '3つ目'];
-const RADIO_TRIPLE_ANSWERS = ['2', '3', '1'];
+const RADIO_OPTIONS = ['1', '2', '3'];
+const RADIO_LEGENDS = ['1つ目', '2つ目'];
+const RADIO_ANSWERS = ['2', '3'];
 
 const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const nameA = useId();
   const nameB = useId();
-  const nameC = useId();
-  const names = [nameA, nameB, nameC];
-  const [values, setValues] = useState<(string | null)[]>([null, null, null]);
+  const names = [nameA, nameB];
+  const [values, setValues] = useState<(string | null)[]>([null, null]);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleChange = (groupIndex: number, value: string) => {
-    const next = values.map((current, i) => (i === groupIndex ? value : current));
-    setValues(next);
-
-    if (next.every((current, i) => current === RADIO_TRIPLE_ANSWERS[i])) {
+  const judge = (nextValues: (string | null)[], nextIsChecked: boolean) => {
+    if (nextIsChecked && nextValues.every((current, i) => current === RADIO_ANSWERS[i])) {
       onClear();
     }
   };
 
+  const handleRadioChange = (groupIndex: number, value: string) => {
+    const next = values.map((current, i) => (i === groupIndex ? value : current));
+    setValues(next);
+    judge(next, isChecked);
+  };
+
+  const handleCheckboxChange = (checked: boolean) => {
+    setIsChecked(checked);
+    judge(values, checked);
+  };
+
   return (
     <div className="flex flex-col gap-4">
-      {RADIO_TRIPLE_LEGENDS.map((legend, groupIndex) => (
+      {RADIO_LEGENDS.map((legend, groupIndex) => (
         <fieldset key={legend}>
           <legend className="mb-2 text-sm font-bold leading-snug">{legend}</legend>
           <ul className="flex gap-4">
-            {RADIO_TRIPLE_OPTIONS.map((option) => (
+            {RADIO_OPTIONS.map((option) => (
               <li key={option}>
                 <Radio
                   label={option}
@@ -39,7 +48,7 @@ const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
                   checked={values[groupIndex] === option}
                   onChange={(e) => {
                     if (e.currentTarget.checked) {
-                      handleChange(groupIndex, option);
+                      handleRadioChange(groupIndex, option);
                     }
                   }}
                 />
@@ -48,15 +57,26 @@ const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
           </ul>
         </fieldset>
       ))}
+      <fieldset>
+        <legend className="mb-2 text-sm font-bold leading-snug">3つ目</legend>
+        <Checkbox
+          label="チェックする"
+          checked={isChecked}
+          onChange={(e) => {
+            handleCheckboxChange(e.currentTarget.checked);
+          }}
+        />
+      </fieldset>
     </div>
   );
 };
 
 export const radioTripleQuest: NodeQuest = {
   type: 'node',
-  title: '上から「2」「3」「1」の順に選べ',
-  hint: '10秒以内に3つのラジオグループそれぞれで指定の数字を選ぶんや',
-  explanation: '複数のラジオグループをまたいで操作する応用編。ひとつずつ順番に選んでいこう。',
+  title: '上から「2」「3」を選んで、最後にチェックを入れろ',
+  hint: '10秒以内に1つ目は「2」、2つ目は「3」を選んで、3つ目にチェックを入れるんや',
+  explanation:
+    'ラジオボタンは Space や矢印キー、チェックボックスは Space と、部品ごとに操作が違う。複数のグループをまたいで Tab で移動しながら操作する応用編。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioTripleQuestNode,
 };
