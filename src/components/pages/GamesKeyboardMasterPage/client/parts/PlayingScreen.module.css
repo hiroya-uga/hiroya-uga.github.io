@@ -1,0 +1,14 @@
+@keyframes shrinkWidth {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.timeBar::after {
+  animation: shrinkWidth linear forwards;
+  animation-duration: var(--x-duration, 0s);
+}

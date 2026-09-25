@@ -25,6 +25,12 @@ type Value = {
     level?: number;
   };
 
+  // games
+  'savedata-keyboard-master': {
+    shouldDisableTimeLimit?: boolean;
+    shouldDisableAnimation?: boolean;
+  };
+
   // その他
   'recent-tools': {
     pathname: string;
