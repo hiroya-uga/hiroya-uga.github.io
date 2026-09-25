@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { CSSProperties, useEffect, useRef } from 'react';
-import { useQuestTimer } from '../hooks';
+import { CSSProperties, useEffect, useId, useRef } from 'react';
+import { useKeyQuest, useQuestTimer } from '../hooks';
 import { MODIFIER_LABELS, Quest } from '../quests';
 import styles from './PlayingScreen.module.css';
 
@@ -30,35 +30,38 @@ export const PlayingScreen = ({
   onClear,
   onFail,
 }: Readonly<Props>) => {
-  const statusRef = useRef<HTMLSpanElement>(null);
-  const remainingMs = useQuestTimer({ isDisabled: shouldDisableTimeLimit, quest, onTimeout: onFail });
+  const id = useId();
+
+  const ref = useRef<HTMLDivElement>(null);
+  useKeyQuest({ quest, onClear, onFail });
+  const remainingMs = useQuestTimer({
+    isDisabled: shouldDisableTimeLimit,
+    quest,
+    onTimeout: onFail,
+  });
 
   useEffect(() => {
     queueMicrotask(() => {
-      statusRef.current?.focus({ preventScroll: true });
+      ref.current?.focus({ preventScroll: true });
     });
   }, [questIndex]);
 
   return (
     <>
-      <p className="bg-secondary p-16PX sticky top-0">
-        <span
-          ref={statusRef}
-          role="status"
-          aria-live="assertive"
-          aria-atomic="false"
-          tabIndex={-1}
-          className="block"
-        >{`お題：${quest.title}`}</span>
-      </p>
-      {quest.type === 'node' && (
-        <div className="p-16PX grid place-items-center">
-          <quest.Node onClear={onClear} onFail={onFail} />
-        </div>
-      )}
-      {quest.type === 'key' && (
-        <div className="p-16PX grid place-items-center text-4xl">
-          <p>
+      <h2 className="bg-secondary p-16PX sticky top-0" id={id}>
+        {`お題：${quest.title}`}
+      </h2>
+
+      <div
+        ref={ref}
+        className="p-16PX scrollbar-gutter-stable grid place-items-center overflow-auto"
+        role="region"
+        aria-labelledby={id}
+        tabIndex={0}
+      >
+        {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
+        {quest.type === 'key' && (
+          <p className="text-4xl">
             {quest.modifiers?.map((modifier) => (
               <span key={modifier}>
                 <kbd>{MODIFIER_LABELS[modifier]}</kbd>+
@@ -66,8 +69,8 @@ export const PlayingScreen = ({
             ))}
             <kbd>{quest.key}</kbd>
           </p>
-        </div>
-      )}
+        )}
+      </div>
       <p
         key={questIndex}
         className={clsx([
@@ -80,7 +83,7 @@ export const PlayingScreen = ({
         ])}
         style={{ '--x-duration': quest.timeLimit !== undefined ? `${quest.timeLimit}ms` : undefined } as CSSProperties}
       >
-        ⌚︎ 残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
+        残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
       </p>
     </>
   );

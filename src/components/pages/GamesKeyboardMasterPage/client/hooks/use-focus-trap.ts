@@ -20,7 +20,7 @@ export const useFocusTrap = ({ containerRef, isActive }: Props) => {
       if (containerRef.current?.contains(document.activeElement)) {
         return;
       }
-      containerRef.current?.querySelector<HTMLElement>('[role="status"]')?.focus();
+      containerRef.current?.querySelector<HTMLElement>('[role="region"]')?.focus();
       containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
