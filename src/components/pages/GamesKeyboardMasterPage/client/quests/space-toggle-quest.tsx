@@ -1,34 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { Switch } from '@/components/ui/forms';
 import { NodeQuest, QuestNodeProps } from './types';
 
-const SpaceToggleQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
-  const [checked, setChecked] = useState(false);
-
+const SpaceToggleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   return (
-    <div
-      role="switch"
-      aria-checked={checked}
-      tabIndex={0}
-      className="border-primary px-16PX py-8PX select-none rounded border text-2xl"
-      onKeyDown={(e) => {
-        if (e.key === ' ') {
-          // ネイティブの Space はページスクロールを起こすので止める
-          e.preventDefault();
-          setChecked(true);
-          onClear();
-          return;
-        }
-
-        if (e.key === 'Enter') {
-          // Enter でも切り替わってしまうと Space 固有の操作か判別できなくなる
-          onFail();
-        }
+    <Switch
+      label="通知"
+      onChange={(e) => {
+        // ネイティブの Space はページスクロールを起こすので止める
+        e.preventDefault();
+        onClear();
       }}
-    >
-      {checked ? 'ON' : 'OFF'}
-    </div>
+    />
   );
 };
 

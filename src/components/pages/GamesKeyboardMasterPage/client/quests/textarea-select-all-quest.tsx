@@ -7,7 +7,7 @@ import { NodeQuest, QuestNodeProps } from './types';
 
 const SELECT_ALL_TEXT = 'この文章をぜんぶ選択しろ';
 
-const SelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
+const TextareaSelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const ref = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
 
   useEffect(() => {
@@ -34,11 +34,11 @@ const SelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   return <TextField label="本文" multiline readOnly defaultValue={SELECT_ALL_TEXT} ref={ref} />;
 };
 
-export const selectAllQuest: NodeQuest = {
+export const textareaSelectAllQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの中身を全部選択しろ',
   hint: '10秒以内に Ctrl+A（Mac は Cmd+A）で全選択するんや',
   explanation: 'Ctrl+A（Mac は Cmd+A）を使えば、ドラッグなしで一瞬で全選択できる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
-  Node: SelectAllQuestNode,
+  Node: TextareaSelectAllQuestNode,
 };

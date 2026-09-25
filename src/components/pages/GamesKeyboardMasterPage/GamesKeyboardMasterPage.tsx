@@ -13,7 +13,11 @@ export const GamesKeyboardMasterPage = ({ metadata }: Readonly<Props>) => {
         <p>中断するにはESCキーを3秒以上押し続けてください。</p>
       </PageTitle>
 
-      <div className="relative aspect-video rounded" role="group" aria-label="ゲーム画面">
+      <div
+        className="w640:min-h-0 w640:aspect-video relative min-h-[50vh] rounded"
+        role="group"
+        aria-label="ゲーム画面"
+      >
         <KeyboardMasterChallengeClient />
       </div>
     </>
