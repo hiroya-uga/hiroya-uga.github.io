@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { KeyboardMasterConfig } from '../hooks';
+import { useKeyboardMasterConfig } from '../hooks';
 import type { Quest } from '../quests';
 import type { Mode, Pulse, QuestResult } from '../types';
 import styles from './Game.module.css';
@@ -13,9 +13,6 @@ interface Props {
   questIndex: number;
   pulse: Pulse | null;
   results: QuestResult[];
-  remainingMs: number | null;
-  config: KeyboardMasterConfig;
-  onChangeConfig: (patch: Partial<KeyboardMasterConfig>) => void;
   onStart: () => void;
   onRetry: () => void;
   onClear: () => void;
@@ -28,17 +25,16 @@ export const Game = ({
   questIndex,
   pulse,
   results,
-  remainingMs,
-  config,
-  onChangeConfig,
   onStart,
   onRetry,
   onClear,
   onFail,
 }: Readonly<Props>) => {
+  const { config, updateConfig } = useKeyboardMasterConfig();
+
   return (
     <>
-      {mode === 'idle' && <IdleScreen config={config} onChangeConfig={onChangeConfig} onStart={onStart} />}
+      {mode === 'idle' && <IdleScreen config={config} onChangeConfig={updateConfig} onStart={onStart} />}
       {mode === 'clear' && (
         <ResultScreen results={results} shouldDisableAnimation={config.shouldDisableAnimation} onRetry={onRetry} />
       )}
@@ -46,7 +42,7 @@ export const Game = ({
         <PlayingScreen
           quest={quests[questIndex]}
           questIndex={questIndex}
-          remainingMs={remainingMs}
+          shouldDisableTimeLimit={config.shouldDisableTimeLimit}
           shouldDisableAnimation={config.shouldDisableAnimation}
           onClear={onClear}
           onFail={onFail}

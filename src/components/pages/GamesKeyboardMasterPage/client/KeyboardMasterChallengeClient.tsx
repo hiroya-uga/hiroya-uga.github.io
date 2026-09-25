@@ -3,7 +3,7 @@
 import { arrayShuffle } from '@/utils/array-shuffle';
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useEscapeHold, useFocusTrap, useKeyboardMasterConfig, useKeyQuest, useQuestTimer } from './hooks';
+import { useEscapeHold, useFocusTrap, useKeyQuest } from './hooks';
 import { Game } from './parts';
 import { QUESTS } from './quests';
 import type { Mode, Pulse, QuestResult } from './types';
@@ -17,7 +17,6 @@ export const KeyboardMasterChallengeClient = () => {
   const [questIndex, setQuestIndex] = useState(0);
   const [pulse, setPulse] = useState<Pulse | null>(null);
   const [results, setResults] = useState<QuestResult[]>([]);
-  const { config, updateConfig } = useKeyboardMasterConfig();
 
   useEffect(() => {
     resolvedRef.current = false;
@@ -106,12 +105,6 @@ export const KeyboardMasterChallengeClient = () => {
   useFocusTrap({ containerRef: ref, isActive: isPlaying });
   useEscapeHold({ isActive: isPlaying, onAbort: handleAbort });
   useKeyQuest({ isActive: isPlaying, quest, onClear: handleClear, onFail: handleFail });
-  const remainingMs = useQuestTimer({
-    isActive: isPlaying,
-    isDisabled: config.shouldDisableTimeLimit,
-    quest,
-    onTimeout: handleFail,
-  });
 
   return (
     <div className="relative aspect-video rounded">
@@ -129,9 +122,6 @@ export const KeyboardMasterChallengeClient = () => {
           questIndex={questIndex}
           pulse={pulse}
           results={results}
-          remainingMs={remainingMs}
-          config={config}
-          onChangeConfig={updateConfig}
           onStart={() => setMode('playing')}
           onRetry={handleRetry}
           onClear={handleClear}

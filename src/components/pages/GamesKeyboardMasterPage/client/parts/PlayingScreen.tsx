@@ -2,13 +2,14 @@
 
 import clsx from 'clsx';
 import { CSSProperties, useEffect, useRef } from 'react';
+import { useQuestTimer } from '../hooks';
 import { MODIFIER_LABELS, Quest } from '../quests';
 import styles from './PlayingScreen.module.css';
 
 interface Props {
   quest: Quest;
   questIndex: number;
-  remainingMs: number | null;
+  shouldDisableTimeLimit: boolean;
   shouldDisableAnimation: boolean;
   onClear: () => void;
   onFail: () => void;
@@ -24,12 +25,13 @@ const formatRemaining = (ms: number) => {
 export const PlayingScreen = ({
   quest,
   questIndex,
-  remainingMs,
+  shouldDisableTimeLimit,
   shouldDisableAnimation,
   onClear,
   onFail,
 }: Readonly<Props>) => {
   const statusRef = useRef<HTMLSpanElement>(null);
+  const remainingMs = useQuestTimer({ isDisabled: shouldDisableTimeLimit, quest, onTimeout: onFail });
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -69,7 +71,7 @@ export const PlayingScreen = ({
       <p
         key={questIndex}
         className={clsx([
-          'pr-16PX pb-2PX relative text-right',
+          'pr-16PX pb-2PX sticky bottom-0 text-right',
           shouldDisableAnimation === false && [
             styles.timeBar,
             'after:bg-accent after:h-3PX after:absolute after:bottom-0 after:left-0 after:w-full',
