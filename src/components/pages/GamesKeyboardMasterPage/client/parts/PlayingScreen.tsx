@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { CSSProperties, useEffect, useId, useRef } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
-import { MODIFIER_LABELS, Quest } from '../quests';
+import { Quest } from '../quests';
 import styles from './PlayingScreen.module.css';
 
 interface Props {
@@ -59,7 +59,7 @@ export const PlayingScreen = ({
 
       <div
         ref={ref}
-        className="p-16PX scrollbar-gutter-stable mx-2PX grid place-items-center overflow-auto outline-offset-[-2px]"
+        className="p-16PX scrollbar-gutter-stable mx-2PX grid place-items-center overflow-auto -outline-offset-2"
         role="region"
         aria-labelledby={id}
         tabIndex={0}
@@ -67,12 +67,7 @@ export const PlayingScreen = ({
         {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
         {quest.type === 'key' && (
           <p className="text-4xl">
-            {quest.modifiers?.map((modifier) => (
-              <span key={modifier}>
-                <kbd>{MODIFIER_LABELS[modifier]}</kbd>+
-              </span>
-            ))}
-            <kbd>{quest.key}</kbd>
+            <quest.Node />
           </p>
         )}
       </div>

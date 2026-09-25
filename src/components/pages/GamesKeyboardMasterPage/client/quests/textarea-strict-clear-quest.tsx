@@ -1,0 +1,46 @@
+'use client';
+
+import { TextField } from '@/components/ui/forms/TextField';
+import { useState } from 'react';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
+import { NodeQuest, QuestNodeProps } from './types';
+
+const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+const BLOCKED_KEYS = new Set(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']);
+
+const TextareaStrictClearQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
+  const [value, setValue] = useState(LOREM_IPSUM);
+
+  return (
+    <TextField
+      label="本文"
+      multiline
+      value={value}
+      onKeyDown={(e) => {
+        // Shift や Cmd を組み合わせた選択範囲の拡張も key は Arrow のままなので、まとめて止まる
+        if (BLOCKED_KEYS.has(e.key)) {
+          e.preventDefault();
+          onFail();
+        }
+      }}
+      onInput={(e) => {
+        const next = e.currentTarget.value;
+        setValue(next);
+
+        if (next === '') {
+          onClear();
+        }
+      }}
+    />
+  );
+};
+
+export const textareaStrictClearQuest: NodeQuest = {
+  type: 'node',
+  title: '矢印キーを使わずに、テキストエリアの中身をカラにしろ',
+  hint: '10秒以内に Ctrl+A（Mac は Cmd+A）で全部選択してから Delete や Backspace で消すんや。矢印キーを押したらアウトやで',
+  explanation:
+    '全選択のショートカットを覚えておけば、矢印キーでカーソルを動かさなくても一気に選択できる。Shift+Home / Shift+End のような選択の仕方もある。',
+  timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
+  Node: TextareaStrictClearQuestNode,
+};

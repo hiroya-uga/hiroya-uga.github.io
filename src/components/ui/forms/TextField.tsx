@@ -5,7 +5,9 @@ import {
   FocusEvent,
   InputEvent,
   InputHTMLAttributes,
+  KeyboardEvent,
   Ref,
+  SyntheticEvent,
   forwardRef,
   useId,
   useRef,
@@ -42,7 +44,10 @@ type BaseProps = Label & {
   align?: 'left' | 'center' | 'right';
   defaultValue?: string;
   onInput?: (e: InputEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onFocus?: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onSelect?: (e: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onPaste?: (e: ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 } & (
     | {

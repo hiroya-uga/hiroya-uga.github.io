@@ -10,22 +10,16 @@ export const keyQuests: KeyQuest[] = [
     hint: '5秒以内にキーボードの a キーをそのまま押すだけや',
     explanation: '実は画面のどこにフォーカスがあっても、キーを押せばちゃんと反応する。一番シンプルなキー入力。',
     timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
+    Node: () => <kbd>a</kbd>,
   },
   {
     type: 'key',
-    key: 'b',
-    title: 'b キーを押せ',
-    hint: '5秒以内に b キーを押すだけや',
+    key: 'Tab',
+    title: 'tabキーを押せ',
+    hint: '5秒以内に tab キーを押すだけや',
     explanation: 'さっきと同じく、基本のキー入力の練習。',
     timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
-  },
-  {
-    type: 'key',
-    key: '3',
-    title: '3 キーを押せ',
-    hint: '5秒以内に数字の 3 キーを押すだけや',
-    explanation: '数字キーもアルファベットキーとまったく同じ扱い。押すだけで反応する。',
-    timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
+    Node: () => <kbd>Tab(⇥)</kbd>,
   },
   {
     type: 'key',
@@ -35,5 +29,12 @@ export const keyQuests: KeyQuest[] = [
     hint: '5秒以内に Shift を押しながら Tab を押すんや',
     explanation: 'Shift を押しながら Tab を押すと、いつもとは逆方向にフォーカスが移動する。',
     timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
+    Node: () => (
+      <kbd>
+        <kbd>Shift(⇧)</kbd>
+        <span> + </span>
+        <kbd>Tab(⇥)</kbd>
+      </kbd>
+    ),
   },
 ];

@@ -29,6 +29,7 @@ export interface KeyQuest extends QuestBase {
   type: 'key';
   key: string;
   modifiers?: ModifierKey[];
+  Node: () => ReactNode;
 }
 
 export interface NodeQuest extends QuestBase {

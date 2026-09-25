@@ -1,0 +1,53 @@
+'use client';
+
+import { useId, useState } from 'react';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
+import { NodeQuest, QuestNodeProps } from './types';
+
+const MIN = 0;
+const MAX = 100;
+const INITIAL = 50;
+
+const SliderMaxQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
+  const id = useId();
+  const [value, setValue] = useState(INITIAL);
+
+  return (
+    <div className="grid gap-2">
+      <label htmlFor={id} className="text-lg font-bold">
+        音量
+      </label>
+      <input
+        id={id}
+        type="range"
+        min={MIN}
+        max={MAX}
+        step={1}
+        value={value}
+        className="w-full"
+        onChange={(e) => {
+          const next = Number(e.currentTarget.value);
+          setValue(next);
+
+          if (MAX === next) {
+            onClear();
+          }
+        }}
+      />
+      {/* output の暗黙ロール status による通知が、スライダー自身の値の読み上げと重複するので止める */}
+      <output htmlFor={id} aria-live="off" className="text-lg">
+        {value}
+      </output>
+    </div>
+  );
+};
+
+export const sliderMaxQuest: NodeQuest = {
+  type: 'node',
+  title: 'スライダーを最大にしろ',
+  hint: '10秒以内に Tab でスライダーに入って、End キーを押すんや',
+  explanation:
+    'スライダーは、←→ で1つずつ、PageUp / PageDown で大きく動かせる。Home で最小値、End で最大値へ一気に飛べるので、つまみをドラッグする必要はない。',
+  timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
+  Node: SliderMaxQuestNode,
+};
