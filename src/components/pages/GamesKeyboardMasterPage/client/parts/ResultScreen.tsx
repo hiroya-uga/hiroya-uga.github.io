@@ -9,7 +9,12 @@ interface Props {
 
 export const ResultScreen = ({ results, shouldDisableAnimation, onRetry }: Readonly<Props>) => {
   return (
-    <div className={clsx(['p-16PX w-full', shouldDisableAnimation === false && 'animate-fade-in opacity-0'])}>
+    <div
+      className={clsx([
+        'p-16PX max-h-full w-full overflow-auto',
+        shouldDisableAnimation === false && 'animate-fade-in opacity-0',
+      ])}
+    >
       <h2 role="status" aria-live="assertive" aria-atomic="false" className="mb-4 text-2xl font-bold">
         結果発表
       </h2>

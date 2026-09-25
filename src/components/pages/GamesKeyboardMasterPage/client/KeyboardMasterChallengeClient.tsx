@@ -3,7 +3,7 @@
 import { arrayShuffle } from '@/utils/array-shuffle';
 import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useEscapeHold, useFocusTrap, useKeyQuest } from './hooks';
+import { useEscapeHold, useFocusTrap } from './hooks';
 import { Game } from './parts';
 import { QUESTS } from './quests';
 import type { Mode, Pulse, QuestResult } from './types';
@@ -100,19 +100,17 @@ export const KeyboardMasterChallengeClient = () => {
   const handleFail = useCallback(() => advance('fail'), [advance]);
 
   const isPlaying = mode === 'playing';
-  const quest = quests[questIndex];
 
   useFocusTrap({ containerRef: ref, isActive: isPlaying });
   useEscapeHold({ isActive: isPlaying, onAbort: handleAbort });
-  useKeyQuest({ isActive: isPlaying, quest, onClear: handleClear, onFail: handleFail });
 
   return (
-    <div className="relative aspect-video rounded">
+    <div className="relative aspect-video rounded" role="group" aria-label="ゲーム画面">
       <div
         ref={ref}
         tabIndex={-1}
         className={clsx([
-          'absolute inset-0 size-full overflow-auto rounded border',
+          'absolute inset-0 size-full rounded border',
           mode === 'playing' && 'pointer-events-none grid cursor-none grid-rows-[auto_1fr_auto]',
         ])}
       >
