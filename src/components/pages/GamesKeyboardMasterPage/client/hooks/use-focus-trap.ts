@@ -4,24 +4,20 @@ import { RefObject, useEffect } from 'react';
 
 interface Props {
   containerRef: RefObject<HTMLElement | null>;
-  isActive: boolean;
 }
 
-/** コンテナの外へフォーカスが出たら、コンテナ内の role="status" へ引き戻す */
-export const useFocusTrap = ({ containerRef, isActive }: Props) => {
+/** コンテナの外へフォーカスが出たら、コンテナへ引き戻す */
+export const useFocusTrap = ({ containerRef }: Props) => {
   useEffect(() => {
-    if (isActive === false) {
-      return;
-    }
-
-    containerRef.current?.focus();
-
     const handleFocus = () => {
-      if (containerRef.current?.contains(document.activeElement)) {
+      const container = containerRef.current;
+
+      if (container === null || container.contains(document.activeElement)) {
         return;
       }
-      containerRef.current?.querySelector<HTMLElement>('[role="region"]')?.focus();
-      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      container.focus();
+      container.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
     window.addEventListener('focusin', handleFocus);
@@ -29,5 +25,5 @@ export const useFocusTrap = ({ containerRef, isActive }: Props) => {
     return () => {
       window.removeEventListener('focusin', handleFocus);
     };
-  }, [containerRef, isActive]);
+  }, [containerRef]);
 };
