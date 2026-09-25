@@ -27,8 +27,10 @@ type Value = {
 
   // games
   'savedata-keyboard-master': {
-    shouldDisableTimeLimit?: boolean;
-    shouldDisableAnimation?: boolean;
+    flags?: {
+      timeLimit?: boolean;
+      animation?: boolean;
+    };
   };
 
   // その他

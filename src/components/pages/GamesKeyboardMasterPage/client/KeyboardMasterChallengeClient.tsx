@@ -17,7 +17,7 @@ export const KeyboardMasterChallengeClient = () => {
   const [questIndex, setQuestIndex] = useState(0);
   const [pulse, setPulse] = useState<Pulse | null>(null);
   const [results, setResults] = useState<QuestResult[]>([]);
-  const { config, updateConfig } = useKeyboardMasterConfig();
+  const { config, updateFlags } = useKeyboardMasterConfig();
 
   useEffect(() => {
     resolvedRef.current = false;
@@ -91,18 +91,16 @@ export const KeyboardMasterChallengeClient = () => {
 
   return (
     <div className="absolute inset-0 grid size-full overflow-hidden rounded border">
-      {mode === 'idle' && (
-        <IdleScreen config={config} onChangeConfig={updateConfig} onStart={() => setMode('playing')} />
-      )}
+      {mode === 'idle' && <IdleScreen config={config} onChangeFlags={updateFlags} onStart={() => setMode('playing')} />}
       {mode === 'clear' && (
-        <ResultScreen results={results} shouldDisableAnimation={config.shouldDisableAnimation} onRetry={handleRetry} />
+        <ResultScreen results={results} shouldEnableAnimation={config.flags.animation} onRetry={handleRetry} />
       )}
       {mode === 'playing' && (
         <PlayingScreen
           quest={quests[questIndex]}
           questIndex={questIndex}
-          shouldDisableTimeLimit={config.shouldDisableTimeLimit}
-          shouldDisableAnimation={config.shouldDisableAnimation}
+          shouldEnableTimeLimit={config.flags.timeLimit}
+          shouldEnableAnimation={config.flags.animation}
           onClear={handleClear}
           onFail={handleFail}
         />
@@ -113,7 +111,7 @@ export const KeyboardMasterChallengeClient = () => {
             key={pulse.id}
             className={clsx([
               'grid place-items-center text-2xl font-bold',
-              config.shouldDisableAnimation ? styles.pulseInstant : styles.pulse,
+              config.flags.animation ? styles.pulse : styles.pulseInstant,
               pulse.result === 'success' ? 'bg-primary' : 'bg-error',
             ])}
           >

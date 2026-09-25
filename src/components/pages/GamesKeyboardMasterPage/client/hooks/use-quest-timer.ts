@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import type { Quest } from '../quests';
 
 interface Props {
-  isDisabled: boolean;
+  isEnabled: boolean;
   quest: Quest;
   onTimeout: () => void;
 }
@@ -13,13 +13,13 @@ interface Props {
  * お題の制限時間をカウントダウンし、0 になったら onTimeout を呼ぶ。
  * 制限時間のないお題や無効化中は null を返す。
  */
-export const useQuestTimer = ({ isDisabled, quest, onTimeout }: Props) => {
+export const useQuestTimer = ({ isEnabled, quest, onTimeout }: Props) => {
   const [remainingMs, setRemainingMs] = useState<number | null>(null);
 
   useEffect(() => {
     const { timeLimit } = quest;
 
-    if (timeLimit === undefined || isDisabled) {
+    if (timeLimit === undefined || isEnabled === false) {
       setRemainingMs(null);
       return;
     }
@@ -37,7 +37,7 @@ export const useQuestTimer = ({ isDisabled, quest, onTimeout }: Props) => {
       window.clearInterval(interval);
       window.clearTimeout(timeout);
     };
-  }, [isDisabled, quest, onTimeout]);
+  }, [isEnabled, quest, onTimeout]);
 
   return remainingMs;
 };

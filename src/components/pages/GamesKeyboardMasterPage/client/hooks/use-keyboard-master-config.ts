@@ -5,14 +5,20 @@ import { useCallback, useEffect, useState } from 'react';
 
 const SAVEDATA_KEY = 'savedata-keyboard-master';
 
+export interface KeyboardMasterFlags {
+  timeLimit: boolean;
+  animation: boolean;
+}
+
 export interface KeyboardMasterConfig {
-  shouldDisableTimeLimit: boolean;
-  shouldDisableAnimation: boolean;
+  flags: KeyboardMasterFlags;
 }
 
 const DEFAULT_CONFIG: KeyboardMasterConfig = {
-  shouldDisableTimeLimit: false,
-  shouldDisableAnimation: false,
+  flags: {
+    timeLimit: false,
+    animation: true,
+  },
 };
 
 /**
@@ -26,14 +32,16 @@ export const useKeyboardMasterConfig = () => {
     const saveData = getLocalStorage(SAVEDATA_KEY);
 
     setConfig({
-      shouldDisableTimeLimit: saveData?.shouldDisableTimeLimit ?? DEFAULT_CONFIG.shouldDisableTimeLimit,
-      shouldDisableAnimation: saveData?.shouldDisableAnimation ?? DEFAULT_CONFIG.shouldDisableAnimation,
+      flags: {
+        timeLimit: saveData?.flags?.timeLimit ?? DEFAULT_CONFIG.flags.timeLimit,
+        animation: saveData?.flags?.animation ?? DEFAULT_CONFIG.flags.animation,
+      },
     });
   }, []);
 
-  const updateConfig = useCallback(
-    (patch: Partial<KeyboardMasterConfig>) => {
-      const next = { ...config, ...patch };
+  const updateFlags = useCallback(
+    (patch: Partial<KeyboardMasterFlags>) => {
+      const next = { ...config, flags: { ...config.flags, ...patch } };
 
       setConfig(next);
       setLocalStorage(SAVEDATA_KEY, next);
@@ -41,5 +49,5 @@ export const useKeyboardMasterConfig = () => {
     [config],
   );
 
-  return { config, updateConfig };
+  return { config, updateFlags };
 };
