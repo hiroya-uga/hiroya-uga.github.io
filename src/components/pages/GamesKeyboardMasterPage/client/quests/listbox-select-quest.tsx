@@ -80,7 +80,7 @@ const ListboxSelectQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
 export const listboxSelectQuest: NodeQuest = {
   type: 'node',
   title: 'リストを矢印キーで移動して、「うさぎ」を Enter で決定しろ',
-  hint: '10秒以内に Tab でリストに入って、↑↓ で項目を移動して、Enter か Space で決定するんや',
+  hint: 'Tab でリストに移動して、↑↓ で項目を選び、Enter か Space で決定する',
   explanation:
     'リスト（リストボックス）は、Tab キーでリストに入ったら、↑↓ で項目を移動して、Enter か Space で決定するのが定番。Home / End で最初と最後の項目にも飛べる。Tab キーは項目ひとつひとつには止まらず、リストごと飛び越えていく。',
   Node: ListboxSelectQuestNode,

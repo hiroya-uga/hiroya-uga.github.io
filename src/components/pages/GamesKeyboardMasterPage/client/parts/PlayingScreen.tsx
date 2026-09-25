@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { CSSProperties, useEffect, useId, useRef } from 'react';
+import { CSSProperties, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
 import { Quest } from '../quests';
 import styles from './PlayingScreen.module.css';
@@ -20,6 +20,20 @@ const formatRemaining = (ms: number) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+};
+
+const HINT_DELAY = 3000;
+
+const QuestHint = ({ hint }: Readonly<{ hint: string }>) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setIsVisible(true), HINT_DELAY);
+
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  return isVisible ? `ヒント：${hint}` : null;
 };
 
 export const PlayingScreen = ({
@@ -74,16 +88,21 @@ export const PlayingScreen = ({
       <p
         key={questIndex}
         className={clsx([
-          'pr-16PX pb-2PX sticky bottom-0 text-right',
-          shouldEnableAnimation && [
-            styles.timeBar,
-            'after:bg-accent after:h-3PX after:absolute after:bottom-0 after:left-0 after:w-full',
-          ],
-          remainingMs !== null ? 'visible' : 'invisible',
+          'pr-16PX pb-2PX sticky bottom-0 grid grid-cols-[1fr_auto] items-end gap-[1em] text-right',
+          shouldEnableAnimation &&
+            shouldEnableTimeLimit && [
+              styles.timeBar,
+              'after:bg-accent after:h-3PX after:absolute after:bottom-0 after:left-0 after:w-full',
+            ],
         ])}
         style={{ '--x-duration': quest.timeLimit !== undefined ? `${quest.timeLimit}ms` : undefined } as CSSProperties}
       >
-        残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
+        <span role="status" className="pl-16PX float-left max-w-[75%] text-left text-sm">
+          <QuestHint hint={quest.hint} />
+        </span>
+        <span className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
+          残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
+        </span>
       </p>
     </div>
   );

@@ -45,9 +45,9 @@ const FocusAndSpaceQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
 export const focusAndSpaceQuest: NodeQuest = {
   type: 'node',
   title: 'Tab で「C」に移動して Space で押せ',
-  hint: 'Tab でボタン C にフォーカスを合わせて、Enter やなくて Space で押すんや',
+  hint: 'Tab でボタン C にフォーカスして、Enter ではなく Space で押す',
   explanation:
-    'Tab キーで要素から要素へ移動して、ボタンは Space キーで押せる。Enter でも押せるけど、リンクは Enter だけ、ボタンは Space も使えると覚えておくと区別しやすい。ボタンが Space でも押せるのは、OS のアプリにある本物のボタンが Space で押す作りで、ブラウザの button がそれに合わせているから。ちなみに Enter は押した瞬間、Space は離した瞬間に反応する。',
+    'ボタンは Enter だけでなく Space でも押せる。リンクは Enter だけなので、そこが見分けるポイント。ちなみに Enter は押した瞬間、Space は離した瞬間に反応する。',
   Node: FocusAndSpaceQuestNode,
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
 };

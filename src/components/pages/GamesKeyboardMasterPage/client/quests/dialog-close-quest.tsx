@@ -51,8 +51,8 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
 export const dialogCloseQuest: NodeQuest = {
   type: 'node',
   title: 'ダイアログを Escape キーで閉じろ',
-  hint: 'ダイアログは Escape キー一発で閉じられるんや。閉じるボタンや背景クリックは Fail やで',
+  hint: 'Escape キーで閉じる。閉じるボタンや背景クリックは失敗になる',
   explanation:
-    'ダイアログは Escape キー一発で閉じられる。閉じるボタンまでフォーカスを移動しなくていい。閉じるボタンや背景クリックはマウス前提の操作なので、このクエストでは Fail 扱いにしている。',
+    'ダイアログは Escape キー一発で閉じられる。閉じるボタンまでフォーカスを移動しなくていい。閉じるボタンや背景クリックはマウス前提の操作なので、このお題では Failed 扱いにしている。',
   Node: DialogCloseQuestNode,
 };

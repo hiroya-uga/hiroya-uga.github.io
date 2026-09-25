@@ -37,7 +37,7 @@ const TextareaCopyQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const textareaCopyQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの中身を全部選択してコピーしろ',
-  hint: '10秒以内に Ctrl+A → Ctrl+C（Mac は Cmd+A → Cmd+C）や',
+  hint: 'Ctrl+A → Ctrl+C（Mac は Cmd+A → Cmd+C）で全部選択してコピーする',
   explanation:
     '全選択とコピーはセットで覚えたい操作。Ctrl+C（Mac は Cmd+C）でコピー、Ctrl+V（Mac は Cmd+V）で貼り付けられるから、マウスなしで文章を写せる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

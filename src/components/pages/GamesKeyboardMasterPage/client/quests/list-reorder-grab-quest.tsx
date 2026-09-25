@@ -122,7 +122,7 @@ const ListReorderGrabQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const listReorderGrabQuest: NodeQuest = {
   type: 'node',
   title: 'リストの「C」を掴んで、一番上に動かして置け',
-  hint: '15秒以内に Tab で「C」へ移動して、Space で掴むんや。↑ を2回押して動かしたら、もう一度 Space で置け',
+  hint: 'Tab で「C」に移動して、Space で掴む。↑ を2回押したら、もう一度 Space で置く',
   explanation:
     '並べ替えできるリストには、Space で項目を掴んで、矢印キーで動かして、もう一度 Space で置くものがある。掴んでいる途中で Escape を押すと、元の並びに戻せる。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,

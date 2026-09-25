@@ -35,7 +35,7 @@ const RadioChangeQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const radioChangeQuest: NodeQuest = {
   type: 'node',
   title: 'ラジオボタンを「B」に切り替えろ',
-  hint: '10秒以内に矢印キーか Space で切り替えるんや',
+  hint: '矢印キーか Space で切り替える',
   explanation: 'ラジオボタンは同じグループの中なら、クリックしなくても矢印キーだけで選択を移動できる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioChangeQuestNode,
