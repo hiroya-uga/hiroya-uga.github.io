@@ -66,7 +66,14 @@ export const PlayingScreen = ({
   }, [questIndex]);
 
   return (
-    <div className="pointer-events-none grid cursor-none grid-rows-[auto_1fr_auto]">
+    <div
+      className="grid grid-rows-[auto_1fr_auto]"
+      onClick={(e) => {
+        e.preventDefault();
+        onFail();
+        ref.current?.focus();
+      }}
+    >
       <h2 className="bg-secondary p-16PX sticky top-0" id={id}>
         {`お題：${quest.title}`}
       </h2>
@@ -85,10 +92,10 @@ export const PlayingScreen = ({
           </p>
         )}
       </div>
-      <p
+      <div
         key={questIndex}
         className={clsx([
-          'pr-16PX pb-2PX sticky bottom-0 grid grid-cols-[1fr_auto] items-end gap-[1em] text-right',
+          'px-8PX pb-2PX sticky bottom-0 grid min-h-[3lh] grid-cols-[1fr_auto] items-end gap-[1em] text-sm',
           shouldEnableAnimation &&
             shouldEnableTimeLimit && [
               styles.timeBar,
@@ -97,13 +104,13 @@ export const PlayingScreen = ({
         ])}
         style={{ '--x-duration': quest.timeLimit !== undefined ? `${quest.timeLimit}ms` : undefined } as CSSProperties}
       >
-        <span role="status" className="pl-16PX float-left max-w-[75%] text-left text-sm">
+        <p role="status">
           <QuestHint hint={quest.hint} />
-        </span>
-        <span className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
+        </p>
+        <p className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
           残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
-        </span>
-      </p>
+        </p>
+      </div>
     </div>
   );
 };
