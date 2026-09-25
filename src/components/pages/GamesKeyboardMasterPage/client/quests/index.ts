@@ -16,7 +16,7 @@ import { radioTripleQuest } from './radio-triple-quest';
 import { selectQuest } from './select-quest';
 import { sliderMaxQuest } from './slider-max-quest';
 import { sliderStrictQuest } from './slider-strict-quest';
-import { spaceToggleQuest } from './space-toggle-quest';
+import { switchQuest } from './switch-quest';
 import { tabsSwitchQuest } from './tabs-switch-quest';
 import { textareaClearQuest } from './textarea-clear-quest';
 import { textareaCopyAndPasteQuest } from './textarea-copy-and-paste-quest';
@@ -42,7 +42,7 @@ export const QUESTS: Quest[] = [
   focusReverseQuest,
   // スペースキーの場合があることを覚える
   focusAndSpaceQuest,
-  spaceToggleQuest,
+  switchQuest,
   checkboxQuest,
   radioQuest,
   // 方向キーの活用を覚える
