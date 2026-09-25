@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useId } from 'react';
 import type { QuestResult } from '../types';
 
 interface Props {
@@ -8,14 +9,19 @@ interface Props {
 }
 
 export const ResultScreen = ({ results, shouldDisableAnimation, onRetry }: Readonly<Props>) => {
+  const id = useId();
+
   return (
-    <div
+    <section
+      tabIndex={0}
       className={clsx([
-        'p-16PX max-h-full w-full overflow-auto',
+        'p-16PX max-h-full w-full overflow-auto rounded outline-offset-[-4px]',
         shouldDisableAnimation === false && 'animate-fade-in opacity-0',
       ])}
+      ref={(element) => element?.focus()}
+      aria-labelledby={id}
     >
-      <h2 role="status" aria-live="assertive" aria-atomic="false" className="mb-4 text-2xl font-bold">
+      <h2 id={id} className="mb-4 text-2xl font-bold">
         結果発表
       </h2>
       <dl className="space-y-3">
@@ -44,6 +50,6 @@ export const ResultScreen = ({ results, shouldDisableAnimation, onRetry }: Reado
           Retry
         </button>
       </p>
-    </div>
+    </section>
   );
 };
