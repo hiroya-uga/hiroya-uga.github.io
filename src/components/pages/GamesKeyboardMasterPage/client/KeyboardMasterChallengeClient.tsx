@@ -113,8 +113,7 @@ export const KeyboardMasterChallengeClient = () => {
             key={pulse.id}
             className={clsx([
               'grid place-items-center text-2xl font-bold',
-              config.shouldDisableAnimation === true && styles.pulseInstant,
-              config.shouldDisableAnimation === false && styles.pulse,
+              config.shouldDisableAnimation ? styles.pulseInstant : styles.pulse,
               pulse.result === 'success' ? 'bg-primary' : 'bg-error',
             ])}
           >
