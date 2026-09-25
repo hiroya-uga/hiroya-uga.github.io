@@ -165,4 +165,5 @@ export const GAMES_LINK_LIST: EmojiLinkListItem[] = [
   { emoji: '🔢', pathname: '/games/sudoku' },
   { emoji: '🏓', pathname: '/games/simple-block-breaker' },
   { emoji: '🔟', pathname: '/games/number-pairing' },
+  { emoji: '⌨️', pathname: '/games/keyboard-master' },
 ];
