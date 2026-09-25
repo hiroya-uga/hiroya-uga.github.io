@@ -1,5 +1,6 @@
 'use client';
 
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/client/quests/config';
 import { useId, useState } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';
 
@@ -57,5 +58,6 @@ export const numberSpinnerQuest: NodeQuest = {
   hint: '↑↓ キーだけで数値を変える。直接入力すると失敗になる',
   explanation:
     '数値入力欄、実は ↑↓ キーだけで数字を増減できる。直接入力やマウスホイールとはまったく別の操作として扱われている。',
+  timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: NumberSpinnerQuestNode,
 };
