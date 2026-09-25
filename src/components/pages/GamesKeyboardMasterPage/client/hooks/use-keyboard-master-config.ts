@@ -8,6 +8,7 @@ const SAVEDATA_KEY = 'savedata-keyboard-master';
 export interface KeyboardMasterFlags {
   timeLimit: boolean;
   animation: boolean;
+  random: boolean;
 }
 
 export interface KeyboardMasterConfig {
@@ -18,6 +19,7 @@ const DEFAULT_CONFIG: KeyboardMasterConfig = {
   flags: {
     timeLimit: false,
     animation: true,
+    random: false,
   },
 };
 
@@ -35,6 +37,7 @@ export const useKeyboardMasterConfig = () => {
       flags: {
         timeLimit: saveData?.flags?.timeLimit ?? DEFAULT_CONFIG.flags.timeLimit,
         animation: saveData?.flags?.animation ?? DEFAULT_CONFIG.flags.animation,
+        random: saveData?.flags?.random ?? DEFAULT_CONFIG.flags.random,
       },
     });
   }, []);

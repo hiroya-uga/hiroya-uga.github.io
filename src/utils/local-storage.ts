@@ -30,6 +30,7 @@ type Value = {
     flags?: {
       timeLimit?: boolean;
       animation?: boolean;
+      random?: boolean;
     };
   };
 

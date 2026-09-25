@@ -12,7 +12,7 @@ import type { Mode, Pulse, QuestResult } from './types';
 export const KeyboardMasterChallengeClient = () => {
   const advanceTimeoutRef = useRef<number | null>(null);
   const resolvedRef = useRef(false);
-  const [quests, setQuests] = useState(() => arrayShuffle(QUESTS));
+  const [quests, setQuests] = useState(QUESTS);
   const [mode, setMode] = useState<Mode>('idle');
   const [questIndex, setQuestIndex] = useState(0);
   const [pulse, setPulse] = useState<Pulse | null>(null);
@@ -77,12 +77,20 @@ export const KeyboardMasterChallengeClient = () => {
     [quests, questIndex],
   );
 
+  // ランダム出題は設定が有効なときだけ。読み込み後に設定が変わりうるので、開始のたびに決める
+  const pickQuests = useCallback(() => (config.flags.random ? arrayShuffle(QUESTS) : QUESTS), [config.flags.random]);
+
+  const handleStart = useCallback(() => {
+    setQuests(pickQuests());
+    setMode('playing');
+  }, [pickQuests]);
+
   const handleRetry = useCallback(() => {
-    setQuests(arrayShuffle(QUESTS));
+    setQuests(pickQuests());
     setPulse(null);
     setQuestIndex(0);
     setMode('playing');
-  }, []);
+  }, [pickQuests]);
 
   const handleClear = useCallback(() => advance('success'), [advance]);
   const handleFail = useCallback(() => advance('fail'), [advance]);
@@ -91,7 +99,7 @@ export const KeyboardMasterChallengeClient = () => {
 
   return (
     <div className="absolute inset-0 grid size-full overflow-hidden rounded border">
-      {mode === 'idle' && <IdleScreen config={config} onChangeFlags={updateFlags} onStart={() => setMode('playing')} />}
+      {mode === 'idle' && <IdleScreen config={config} onChangeFlags={updateFlags} onStart={handleStart} />}
       {mode === 'clear' && (
         <ResultScreen results={results} shouldEnableAnimation={config.flags.animation} onRetry={handleRetry} />
       )}
