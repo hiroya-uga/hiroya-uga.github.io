@@ -21,6 +21,24 @@ export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) 
 
   return (
     <>
+      <p className="absolute inset-0 grid place-items-center">
+        <button
+          type="button"
+          aria-live="polite"
+          className="size-[90%] rounded text-5xl"
+          onClick={(e) => {
+            // detail === 0 はキーボード操作(Enter/Space)経由のクリックのみを通す
+            if (e.detail === 0) {
+              onStart();
+              return;
+            }
+
+            e.currentTarget.textContent = 'Press Enter!';
+          }}
+        >
+          Click to start!
+        </button>
+      </p>
       <p>
         <button
           type="button"
@@ -51,24 +69,6 @@ export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) 
           ))}
         </div>
       </Modal>
-      <p className="absolute inset-0 grid place-items-center">
-        <button
-          type="button"
-          aria-live="polite"
-          className="size-[90%] rounded text-5xl"
-          onClick={(e) => {
-            // detail === 0 はキーボード操作(Enter/Space)経由のクリックのみを通す
-            if (e.detail === 0) {
-              onStart();
-              return;
-            }
-
-            e.currentTarget.textContent = 'Press Enter!';
-          }}
-        >
-          Click to start!
-        </button>
-      </p>
     </>
   );
 };
