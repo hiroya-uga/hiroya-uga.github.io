@@ -641,10 +641,19 @@
     height: 24px;
   }
 
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    margin: 0;
-    -webkit-appearance: none;
+  input[type="number"] {
+    &:not(.spin-button)::-webkit-inner-spin-button,
+    &:not(.spin-button)::-webkit-outer-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+
+    &.spin-button {
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        opacity: 1;
+      }
+    }
   }
 
   dialog {
