@@ -107,10 +107,7 @@ export const KeyboardMasterChallengeClient = () => {
           onFail={handleFail}
         />
       )}
-      <p
-        role="status"
-        className={clsx(['pointer-events-none absolute inset-0 z-10 grid', pulse === null && 'opacity-0'])}
-      >
+      <p role="status" className="pointer-events-none absolute inset-0 z-10 grid">
         {pulse !== null && (
           <span
             key={pulse.id}
