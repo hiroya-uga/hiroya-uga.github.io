@@ -48,20 +48,24 @@ export const Game = ({
           onFail={onFail}
         />
       )}
-      {pulse !== null && (
-        <p
-          key={pulse.id}
-          aria-hidden
-          className={clsx([
-            config.shouldDisableAnimation === true && styles.pulseInstant,
-            config.shouldDisableAnimation === false && styles.pulse,
-            'pointer-events-none absolute inset-0 z-10 grid place-items-center text-2xl font-bold',
-            pulse.result === 'success' ? 'bg-primary' : 'bg-error',
-          ])}
-        >
-          {pulse.result === 'success' ? 'Success!' : 'Failed!'}
-        </p>
-      )}
+      <p
+        role="status"
+        className={clsx(['pointer-events-none absolute inset-0 z-10 grid', pulse === null && 'opacity-0'])}
+      >
+        {pulse !== null && (
+          <span
+            key={pulse.id}
+            className={clsx([
+              'grid place-items-center text-2xl font-bold',
+              config.shouldDisableAnimation === true && styles.pulseInstant,
+              config.shouldDisableAnimation === false && styles.pulse,
+              pulse.result === 'success' ? 'bg-primary' : 'bg-error',
+            ])}
+          >
+            {pulse.result === 'success' ? 'Success!' : 'Failed!'}
+          </span>
+        )}
+      </p>
     </>
   );
 };

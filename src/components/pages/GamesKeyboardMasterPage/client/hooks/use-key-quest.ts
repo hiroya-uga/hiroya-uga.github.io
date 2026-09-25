@@ -6,16 +6,15 @@ import { MODIFIER_KEYS, Quest } from '../quests';
 const MODIFIER_SINGLE_KEYS = new Set(['Shift', 'Control', 'Alt', 'Meta']);
 
 interface Props {
-  isActive: boolean;
   quest: Quest;
   onClear: () => void;
   onFail: () => void;
 }
 
 /** キー入力型のお題の正誤を keydown で判定する。key 型以外のお題では何もしない */
-export const useKeyQuest = ({ isActive, quest, onClear, onFail }: Props) => {
+export const useKeyQuest = ({ quest, onClear, onFail }: Props) => {
   useEffect(() => {
-    if (isActive === false || quest.type !== 'key') {
+    if (quest.type !== 'key') {
       return;
     }
 
@@ -44,5 +43,5 @@ export const useKeyQuest = ({ isActive, quest, onClear, onFail }: Props) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isActive, quest, onClear, onFail]);
+  }, [quest, onClear, onFail]);
 };
