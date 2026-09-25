@@ -26,7 +26,7 @@ const RadioQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const radioQuest: NodeQuest = {
   type: 'node',
   title: 'ラジオボタンを選択しろ',
-  hint: '10秒以内に Tab でフォーカスして Space で選択するんや',
+  hint: 'Tab でラジオボタンにフォーカスして、Space で選択する',
   explanation:
     'ラジオボタンも Space キーで選択できる。ただしチェックボックスと違って、選択済みのものを Space でもう一度押しても解除はされない。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

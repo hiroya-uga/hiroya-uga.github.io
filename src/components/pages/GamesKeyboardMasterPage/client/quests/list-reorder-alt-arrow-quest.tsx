@@ -94,7 +94,7 @@ const ListReorderAltArrowQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => 
 export const listReorderAltArrowQuest: NodeQuest = {
   type: 'node',
   title: 'リストの「C」を Alt+↑ で一番上に動かせ',
-  hint: '並べ替えできるリストは、項目にフォーカスして Alt+↑↓（Mac は Option+↑↓）で動かせるんや。15秒以内に Tab で「C」へ移動して、Alt+↑ を2回押せ',
+  hint: 'Tab で「C」に移動して、Alt+↑（Mac は Option+↑）を2回押す',
   explanation:
     '並べ替えできるリストは、ドラッグだけの操作ではない。項目にフォーカスして Alt+↑↓（Mac は Option+↑↓）を押せば、マウスなしでも順番を変えられる画面がある。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,

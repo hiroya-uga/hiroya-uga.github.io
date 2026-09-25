@@ -113,7 +113,7 @@ export const KeyboardMasterChallengeClient = () => {
           onFail={handleFail}
         />
       )}
-      <p role="status" className="pointer-events-none absolute inset-0 z-10 grid">
+      <p aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 grid">
         {pulse !== null && (
           <span
             key={pulse.id}

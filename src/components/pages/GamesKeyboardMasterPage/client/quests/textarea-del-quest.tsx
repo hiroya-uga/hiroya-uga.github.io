@@ -35,10 +35,10 @@ const TextareaDelQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
 
 export const textareaDelQuest: NodeQuest = {
   type: 'node',
-  title: 'キャレットが先頭に固定されたテキストエリアの文字を、Delete キーで全部消せ',
-  hint: '10秒以内に Tab でテキストエリアに入って、Delete キーを押し続けるんや。キャレットは先頭から動かせんで。Mac は fn+Delete（Ctrl+D でも消せる）',
+  title: 'カーソルが先頭に固定されたテキストエリアの文字を、Delete キーで全部消せ',
+  hint: 'Tab でテキストエリアに移動して、Delete キーを押し続ける。カーソルは先頭から動かせない。Mac は fn+Delete（Ctrl+D でも消せる）',
   explanation:
-    'Delete キーはキャレットの右側の文字、Backspace キーは左側の文字を消す。Mac のキーボードは Delete キーが Backspace 相当なので、右側を消すには fn+Delete か Ctrl+D を使う。',
+    'Delete キーはカーソルの右側の文字、Backspace キーは左側の文字を消す。Mac のキーボードは Delete キーが Backspace 相当なので、右側を消すには fn+Delete か Ctrl+D を使う。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TextareaDelQuestNode,
 };

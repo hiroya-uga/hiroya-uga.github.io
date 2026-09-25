@@ -37,7 +37,7 @@ const TextareaSelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const textareaSelectAllQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの中身を全部選択しろ',
-  hint: '10秒以内に Ctrl+A（Mac は Cmd+A）で全選択するんや',
+  hint: 'Ctrl+A（Mac は Cmd+A）で全選択する',
   explanation: 'Ctrl+A（Mac は Cmd+A）を使えば、ドラッグなしで一瞬で全選択できる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TextareaSelectAllQuestNode,
