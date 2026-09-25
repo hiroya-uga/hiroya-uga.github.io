@@ -35,6 +35,8 @@ export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) 
             }
 
             e.currentTarget.textContent = 'Press Enter!';
+            // for Safari
+            e.currentTarget.focus();
           }}
         >
           Click to start!
