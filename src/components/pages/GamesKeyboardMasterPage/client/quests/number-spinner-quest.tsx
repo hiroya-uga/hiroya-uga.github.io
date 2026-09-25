@@ -3,12 +3,10 @@
 import { useState } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';
 
-const NUMBER_MIN = 0;
-const NUMBER_MAX = 10;
 const NUMBER_TARGET = 7;
 
 // 矢印キー操作以外(直接入力・ホイール・貼り付け)は Fail 扱いにする。Tab/Shift はフォーカス移動のため許可する
-const ALLOWED_KEYS = ['ArrowUp', 'ArrowDown', 'Tab', 'Shift'];
+const ALLOWED_KEYS = new Set(['ArrowUp', 'ArrowDown', 'Tab', 'Shift']);
 
 const NumberSpinnerQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   const [value, setValue] = useState(0);
@@ -16,12 +14,10 @@ const NumberSpinnerQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
   return (
     <input
       type="number"
-      min={NUMBER_MIN}
-      max={NUMBER_MAX}
       value={value}
       className="spin-button border-primary px-16PX py-8PX rounded border text-2xl"
       onKeyDown={(e) => {
-        if (ALLOWED_KEYS.includes(e.key)) {
+        if (ALLOWED_KEYS.has(e.key)) {
           return;
         }
 
