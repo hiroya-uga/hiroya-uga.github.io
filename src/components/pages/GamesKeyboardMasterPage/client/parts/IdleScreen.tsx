@@ -12,8 +12,9 @@ interface Props {
 }
 
 const CONFIG_ITEMS: { key: keyof KeyboardMasterFlags; label: string }[] = [
-  { key: 'timeLimit', label: '時間制限有効' },
-  { key: 'animation', label: 'アニメーション表現有効' },
+  { key: 'timeLimit', label: '時間制限' },
+  { key: 'animation', label: 'アニメーション表現' },
+  { key: 'random', label: 'ランダム出題' },
 ];
 
 export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) => {
