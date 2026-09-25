@@ -44,6 +44,10 @@ export const PlayingScreen = ({
   useEffect(() => {
     queueMicrotask(() => {
       ref.current?.focus({ preventScroll: true });
+      ref.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
     });
   }, [questIndex]);
 
