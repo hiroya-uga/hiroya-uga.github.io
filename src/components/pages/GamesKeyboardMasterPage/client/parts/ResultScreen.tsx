@@ -4,11 +4,11 @@ import type { QuestResult } from '../types';
 
 interface Props {
   results: QuestResult[];
-  shouldDisableAnimation: boolean;
+  shouldEnableAnimation: boolean;
   onRetry: () => void;
 }
 
-export const ResultScreen = ({ results, shouldDisableAnimation, onRetry }: Readonly<Props>) => {
+export const ResultScreen = ({ results, shouldEnableAnimation, onRetry }: Readonly<Props>) => {
   const id = useId();
 
   return (
@@ -16,7 +16,7 @@ export const ResultScreen = ({ results, shouldDisableAnimation, onRetry }: Reado
       tabIndex={0}
       className={clsx([
         'p-16PX max-h-full w-full overflow-auto rounded outline-offset-[-4px]',
-        shouldDisableAnimation === false && 'animate-fade-in opacity-0',
+        shouldEnableAnimation && 'animate-fade-in opacity-0',
       ])}
       ref={(element) => element?.focus()}
       aria-labelledby={id}

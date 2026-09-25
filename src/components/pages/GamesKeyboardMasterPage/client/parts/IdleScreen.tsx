@@ -3,20 +3,20 @@
 import { Modal } from '@/components/ui/dialogs/Modal';
 import { Switch } from '@/components/ui/forms';
 import { useState } from 'react';
-import type { KeyboardMasterConfig } from '../hooks';
+import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
 
 interface Props {
   config: KeyboardMasterConfig;
-  onChangeConfig: (patch: Partial<KeyboardMasterConfig>) => void;
+  onChangeFlags: (patch: Partial<KeyboardMasterFlags>) => void;
   onStart: () => void;
 }
 
-const CONFIG_ITEMS: { key: keyof KeyboardMasterConfig; label: string }[] = [
-  { key: 'shouldDisableTimeLimit', label: '時間制限無効' },
-  { key: 'shouldDisableAnimation', label: 'アニメーション表現無効' },
+const CONFIG_ITEMS: { key: keyof KeyboardMasterFlags; label: string }[] = [
+  { key: 'timeLimit', label: '時間制限有効' },
+  { key: 'animation', label: 'アニメーション表現有効' },
 ];
 
-export const IdleScreen = ({ config, onChangeConfig, onStart }: Readonly<Props>) => {
+export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
 
   return (
@@ -40,9 +40,9 @@ export const IdleScreen = ({ config, onChangeConfig, onStart }: Readonly<Props>)
                 <span className="grow text-left text-sm">{label}</span>
                 <span>
                   <Switch
-                    checked={config[key]}
+                    checked={config.flags[key]}
                     onChange={(e) => {
-                      onChangeConfig({ [key]: e.currentTarget.checked });
+                      onChangeFlags({ [key]: e.currentTarget.checked });
                     }}
                   />
                 </span>

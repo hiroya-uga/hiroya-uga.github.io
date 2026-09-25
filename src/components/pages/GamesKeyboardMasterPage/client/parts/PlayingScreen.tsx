@@ -9,8 +9,8 @@ import styles from './PlayingScreen.module.css';
 interface Props {
   quest: Quest;
   questIndex: number;
-  shouldDisableTimeLimit: boolean;
-  shouldDisableAnimation: boolean;
+  shouldEnableTimeLimit: boolean;
+  shouldEnableAnimation: boolean;
   onClear: () => void;
   onFail: () => void;
 }
@@ -25,8 +25,8 @@ const formatRemaining = (ms: number) => {
 export const PlayingScreen = ({
   quest,
   questIndex,
-  shouldDisableTimeLimit,
-  shouldDisableAnimation,
+  shouldEnableTimeLimit,
+  shouldEnableAnimation,
   onClear,
   onFail,
 }: Readonly<Props>) => {
@@ -36,7 +36,7 @@ export const PlayingScreen = ({
   useFocusTrap({ containerRef: ref });
   useKeyQuest({ quest, onClear, onFail });
   const remainingMs = useQuestTimer({
-    isDisabled: shouldDisableTimeLimit,
+    isEnabled: shouldEnableTimeLimit,
     quest,
     onTimeout: onFail,
   });
@@ -76,7 +76,7 @@ export const PlayingScreen = ({
         key={questIndex}
         className={clsx([
           'pr-16PX pb-2PX sticky bottom-0 text-right',
-          shouldDisableAnimation === false && [
+          shouldEnableAnimation && [
             styles.timeBar,
             'after:bg-accent after:h-3PX after:absolute after:bottom-0 after:left-0 after:w-full',
           ],
