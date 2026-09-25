@@ -36,7 +36,7 @@ const SelectQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
 export const selectQuest: NodeQuest = {
   type: 'node',
   title: '「3つ目」の選択肢を選べ',
-  hint: 'プルダウンを開いて「ぶどう」を選ぶんや',
+  hint: 'プルダウンを開いて「ぶどう」を選ぶ',
   explanation: 'プルダウン、実はマウスがなくても開いて選択肢を選べる。',
   Node: SelectQuestNode,
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

@@ -41,7 +41,7 @@ const TextareaCutAndPasteQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => 
 export const textareaCutAndPasteQuest: NodeQuest = {
   type: 'node',
   title: '1つ目の文章を切り取って、2つ目のテキストエリアに貼り付けろ',
-  hint: '15秒以内に Ctrl+A → Ctrl+X（Mac は Cmd+A → Cmd+X）で切り取って、Tab で移動して Ctrl+V（Mac は Cmd+V）で貼り付けるんや',
+  hint: 'Ctrl+A → Ctrl+X（Mac は Cmd+A → Cmd+X）で切り取り、Tab で次の欄へ移動して、Ctrl+V（Mac は Cmd+V）で貼り付ける',
   explanation:
     'Ctrl+X（Mac は Cmd+X）は、コピーと違って元の文章を消しながらクリップボードに入れる。文章を別の場所へ移したいときは、切り取って貼り付けると一手で済む。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,

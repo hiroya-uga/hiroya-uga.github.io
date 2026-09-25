@@ -17,7 +17,7 @@ export const MODIFIER_LABELS: Record<ModifierKey, string> = {
 
 export interface QuestBase {
   title: string;
-  // リザルト画面でのヒント表示用
+  // プレイ中に一定時間が経ったら表示するヒント
   hint: string;
   // リザルト画面での解説表示用
   explanation: string;

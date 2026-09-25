@@ -95,7 +95,7 @@ const TabsSwitchQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const tabsSwitchQuest: NodeQuest = {
   type: 'node',
   title: 'タブを矢印キーで切り替えて、「ぶどう」を表示しろ',
-  hint: '10秒以内に Tab でタブに入って、→ を2回押すんや',
+  hint: 'Tab でタブに移動して、→ を2回押す',
   explanation:
     'タブは、Tab キーでタブの並びに入って、←→ で隣のタブに切り替える。Tab キーを押しても他のタブには止まらず、次は中身のパネルに進む。Home / End で最初と最後のタブにも飛べる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

@@ -74,7 +74,7 @@ const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const radioTripleQuest: NodeQuest = {
   type: 'node',
   title: '上から「2」「3」を選んで、最後にチェックを入れろ',
-  hint: '10秒以内に1つ目は「2」、2つ目は「3」を選んで、3つ目にチェックを入れるんや',
+  hint: '1つ目は「2」、2つ目は「3」を選んで、3つ目にチェックを入れる',
   explanation:
     'ラジオボタンは Space や矢印キー、チェックボックスは Space と、部品ごとに操作が違う。複数のグループをまたいで Tab で移動しながら操作する応用編。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

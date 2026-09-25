@@ -170,7 +170,7 @@ const TreeExpandQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const treeExpandQuest: NodeQuest = {
   type: 'node',
   title: 'ツリーを矢印キーで開いて、「富士山」まで移動しろ',
-  hint: '15秒以内に Tab でツリーに入って、→ でフォルダを開いて、↓ で下の項目へ移るんや',
+  hint: 'Tab でツリーに移動して、→ でフォルダを開き、↓ で下の項目へ移る',
   explanation:
     'ツリーは、Tab キーでツリーに入って、↑↓ で表示中の項目を移動する。閉じたフォルダで → を押すと開き、開いたフォルダで → を押すと最初の子へ進む。← は開いたフォルダを閉じるか、親へ戻る。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,

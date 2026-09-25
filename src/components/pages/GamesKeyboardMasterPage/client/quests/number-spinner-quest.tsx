@@ -54,8 +54,8 @@ const NumberSpinnerQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
 export const numberSpinnerQuest: NodeQuest = {
   type: 'node',
   title: '矢印キーだけで数値を 7 にしろ',
-  hint: '↑↓ キー以外は使うたらあかん。直接入力は Fail や',
+  hint: '↑↓ キーだけで数値を変える。直接入力すると失敗になる',
   explanation:
-    '数値入力欄、実は ↑↓ キーだけで数字を増減できる。直接入力やマウスホイールとはまったく別の操作として扱われているんだ。',
+    '数値入力欄、実は ↑↓ キーだけで数字を増減できる。直接入力やマウスホイールとはまったく別の操作として扱われている。',
   Node: NumberSpinnerQuestNode,
 };
