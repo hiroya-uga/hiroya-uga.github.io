@@ -20,7 +20,7 @@ const CheckboxQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const checkboxQuest: NodeQuest = {
   type: 'node',
   title: 'チェックボックスを切り替えろ',
-  hint: 'Tabでチェックボックスにフォーカスして、Spaceでチェックを入れる',
+  hint: 'チェックボックスにフォーカスを合わせて、Spaceでチェックを入れる',
   explanation: 'チェックボックスのON/OFFはSpaceキーひとつで切り替えられる。Enterキーじゃないのがポイント。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: CheckboxQuestNode,

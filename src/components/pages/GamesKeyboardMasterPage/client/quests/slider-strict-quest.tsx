@@ -68,7 +68,7 @@ const SliderStrictQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =>
 export const sliderStrictQuest: NodeQuest = {
   type: 'node',
   title: 'スライダーをHome → Endの順に押して最大にしろ',
-  hint: 'Tabでスライダーに移動して、Home → Endの順に押す。順番を間違えたり他のキーを押すと失敗になる',
+  hint: 'スライダーにフォーカスを合わせて、Home → Endの順に押す。順番を間違えたり他のキーを押すと失敗になる',
   explanation:
     'Homeは最小値、Endは最大値へ一気に飛べるキー。つまみをドラッグしなくても、スライダーの両端まで動かせる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

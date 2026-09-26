@@ -46,7 +46,7 @@ const FocusReverseQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const focusReverseQuest: NodeQuest = {
   type: 'node',
   title: '3つ目のリンクにフォーカスしてから、Shift + Tabで2つ目のリンクに戻れ',
-  hint: 'Tabで3つ目のリンクまで進んで、Shift+Tabで1つ戻る。SafariはOption+Tab / Option+Shift+Tab',
+  hint: 'Tabで3つ目のリンクまで進んで、Shift+Tabで1つ戻る',
   explanation: 'Shift+Tabで、Tabとは逆の順番にフォーカスを戻せる。行きすぎたときも、最初からやり直さずに1つ戻れる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: FocusReverseQuestNode,

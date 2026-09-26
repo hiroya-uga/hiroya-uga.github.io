@@ -101,7 +101,7 @@ const ListReorderQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const listReorderQuest: NodeQuest = {
   type: 'node',
   title: 'リストの「C」を選んで、「上へ」ボタンで一番上に動かせ',
-  hint: 'Tabでリストに移動して、↓で「C」を選ぶ。そのあとTabで「上へ」ボタンに移動して、EnterかSpaceを2回押す',
+  hint: 'リストにフォーカスを合わせて、↓で「C」を選ぶ。そのあと「上へ」ボタンにフォーカスを合わせて、EnterかSpaceを2回押す',
   explanation:
     '並べ替えできるリストには、項目を選んで「上へ」「下へ」ボタンで動かす作りがある。リストの中は矢印キーで選んで、ボタンはTabで移動してEnterかSpaceで押す。ドラッグ以外の手段があれば、マウスなしでも順番を変えられる。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,

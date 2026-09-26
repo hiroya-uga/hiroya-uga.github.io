@@ -45,7 +45,7 @@ const FocusAndSpaceQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
 export const focusAndSpaceQuest: NodeQuest = {
   type: 'node',
   title: 'Tabで「C」に移動してSpaceで押せ',
-  hint: 'TabでボタンCにフォーカスして、EnterではなくSpaceで押す',
+  hint: 'ボタンCにフォーカスを合わせて、EnterではなくSpaceで押す',
   explanation:
     'ボタンはEnterだけでなくSpaceでも押せる。リンクはEnterだけなので、そこが見分けるポイント。ちなみにEnterは押した瞬間、Spaceは離した瞬間に反応する。',
   Node: FocusAndSpaceQuestNode,

@@ -26,7 +26,7 @@ export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) 
         <button
           type="button"
           aria-live="polite"
-          className="size-[90%] rounded text-5xl"
+          className="size-[90%] rounded text-[48px] transition-[font-size] hover:text-[50px]"
           onClick={(e) => {
             // detail === 0 はキーボード操作(Enter/Space)経由のクリックのみを通す
             if (e.detail === 0) {
