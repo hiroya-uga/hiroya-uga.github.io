@@ -8,7 +8,7 @@ const BUTTON_ANSWER = 'C';
 
 const FocusAndSpaceQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   return (
-    <div className="flex gap-4">
+    <div className="gap-16PX flex flex-wrap">
       {BUTTON_OPTIONS.map((option) => (
         <button
           key={option}
@@ -44,10 +44,10 @@ const FocusAndSpaceQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
 
 export const focusAndSpaceQuest: NodeQuest = {
   type: 'node',
-  title: 'Tab で「C」に移動して Space で押せ',
-  hint: 'Tab でボタン C にフォーカスして、Enter ではなく Space で押す',
+  title: 'Tabで「C」に移動してSpaceで押せ',
+  hint: 'TabでボタンCにフォーカスして、EnterではなくSpaceで押す',
   explanation:
-    'ボタンは Enter だけでなく Space でも押せる。リンクは Enter だけなので、そこが見分けるポイント。ちなみに Enter は押した瞬間、Space は離した瞬間に反応する。',
+    'ボタンはEnterだけでなくSpaceでも押せる。リンクはEnterだけなので、そこが見分けるポイント。ちなみにEnterは押した瞬間、Spaceは離した瞬間に反応する。',
   Node: FocusAndSpaceQuestNode,
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
 };

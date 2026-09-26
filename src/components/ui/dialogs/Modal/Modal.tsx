@@ -47,7 +47,7 @@ export const Modal = ({ title, children, isOpen, closeModal }: Readonly<Props>) 
       aria-labelledby={id}
       className={clsx([
         styles.root,
-        '[[open]]:pointer-events-auto [[open]]:opacity-100 group pointer-events-none fixed inset-0 grid size-full max-h-none max-w-none place-items-center items-center bg-transparent opacity-0 transition-[opacity,visibility,bottom]',
+        '[[open]]:opacity-100 group pointer-events-none fixed inset-0 grid size-full max-h-none max-w-none place-items-center items-center bg-transparent opacity-0 transition-[opacity,visibility,bottom]',
       ])}
       aria-modal="true"
       closedby="any"
@@ -55,7 +55,7 @@ export const Modal = ({ title, children, isOpen, closeModal }: Readonly<Props>) 
     >
       <div
         className={clsx([
-          'invisible group-open:visible',
+          'invisible group-open:pointer-events-auto group-open:visible',
           'shadow-sticky bg-secondary relative m-auto block max-h-[90%] w-fit min-w-[min(50vw,400px)] max-w-[90%] rounded-lg pb-8 pt-2 text-center',
         ])}
       >

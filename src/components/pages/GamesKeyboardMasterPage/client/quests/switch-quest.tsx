@@ -17,9 +17,9 @@ const SwitchQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 
 export const switchQuest: NodeQuest = {
   type: 'node',
-  title: 'Space キーでスイッチを ON にしろ',
-  hint: 'Enter ではなく Space で切り替える',
-  explanation: 'スイッチの ON/OFF は Space キーで切り替えるのが基本。Enter で開くリンクとは、使うキーが違う。',
+  title: 'SpaceキーでスイッチをONにしろ',
+  hint: 'EnterではなくSpaceで切り替える',
+  explanation: 'スイッチのON/OFFはSpaceキーで切り替えるのが基本。Enterで開くリンクとは、使うキーが違う。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: SwitchQuestNode,
 };
