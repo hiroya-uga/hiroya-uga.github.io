@@ -19,7 +19,7 @@ const DatetimeQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
         id={id}
         type="datetime-local"
         defaultValue={DATETIME_INITIAL}
-        className="border-primary px-16PX py-8PX rounded border text-2xl"
+        className="border-primary px-16PX py-8PX rounded border font-sans text-2xl tabular-nums"
         onChange={(e) => {
           if (e.currentTarget.value === DATETIME_TARGET) {
             onClear();
