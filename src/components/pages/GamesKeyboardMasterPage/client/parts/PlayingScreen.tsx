@@ -1,5 +1,6 @@
 'use client';
 
+import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import clsx from 'clsx';
 import { CSSProperties, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
@@ -60,7 +61,7 @@ export const PlayingScreen = ({
   useEffect(() => {
     setTimeout(() => {
       ref.current?.focus({ preventScroll: true });
-      ref.current?.scrollIntoView({
+      document.getElementById(GAME_ROOT_ID)?.scrollIntoView({
         behavior: 'instant',
         block: 'center',
       });
