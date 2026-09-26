@@ -39,7 +39,7 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
       <p id={titleId}>Escape キーで閉じろ</p>
       <button
         type="button"
-        className="border-primary mt-16PX px-16PX py-8PX rounded border"
+        className="border-primary mt-16PX px-16PX py-8PX mx-auto block rounded border"
         onClick={() => ref.current?.close()}
       >
         閉じる
