@@ -11,18 +11,16 @@ const StarRatingClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const [rating, setRating] = useState(0);
 
   return (
-    <div role="group" aria-labelledby="keyboard-master-star-rating-click-quest-label">
-      <p id="keyboard-master-star-rating-click-quest-label" className="mb-2 text-sm font-bold leading-snug">
-        評価
-      </p>
-      <div className="flex">
+    <fieldset>
+      <legend className="mb-2 text-sm font-bold">評価</legend>
+      <div className="flex flex-wrap leading-none">
         {STARS.map((star) => (
           <button
             key={star}
             type="button"
             aria-label={`${star}つ星`}
             aria-pressed={star === rating}
-            className="rounded text-5xl"
+            className="outline-link p-4PX rounded-full text-5xl focus-visible:outline-2"
             onClick={(e) => {
               setRating(star);
 
@@ -35,7 +33,7 @@ const StarRatingClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
           </button>
         ))}
       </div>
-    </div>
+    </fieldset>
   );
 };
 
