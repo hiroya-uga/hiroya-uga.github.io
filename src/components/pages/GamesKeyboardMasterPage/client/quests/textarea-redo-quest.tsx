@@ -26,8 +26,8 @@ const TextareaRedoQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const textareaRedoQuest: NodeQuest = {
   type: 'node',
   title: 'テキストを全部消して元に戻してから、やり直せ',
-  hint: 'Ctrl+A → Delete で全部消して、Ctrl+Z で戻し、Ctrl+Y（Mac は Cmd+Shift+Z）でやり直す',
-  explanation: 'Ctrl+Y（Mac は Cmd+Shift+Z）で、取り消した操作をやり直せる。Ctrl+Z で戻りすぎたときの保険になる。',
+  hint: 'Ctrl+A → Deleteで全部消して、Ctrl+Zで戻し、Ctrl+Y（MacはCmd+Shift+Z）でやり直す',
+  explanation: 'Ctrl+Y（MacはCmd+Shift+Z）で、取り消した操作をやり直せる。Ctrl+Zで戻りすぎたときの保険になる。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,
   Node: TextareaRedoQuestNode,
 };

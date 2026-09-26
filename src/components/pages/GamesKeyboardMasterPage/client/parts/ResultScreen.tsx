@@ -15,7 +15,7 @@ export const ResultScreen = ({ results, shouldEnableAnimation, onRetry }: Readon
     <section
       tabIndex={0}
       className={clsx([
-        'p-16PX max-h-full w-full overflow-auto rounded outline-offset-[-4px]',
+        'p-16PX pb-32PX max-h-full w-full overflow-auto rounded -outline-offset-4',
         shouldEnableAnimation && 'animate-fade-in opacity-0',
       ])}
       ref={(element) => element?.focus()}

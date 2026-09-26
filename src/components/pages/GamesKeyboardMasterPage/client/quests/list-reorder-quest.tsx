@@ -71,7 +71,7 @@ const ListReorderQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
           </li>
         ))}
       </ul>
-      <div className="flex gap-4">
+      <div className="gap-16PX flex flex-wrap">
         <button
           type="button"
           className="border-primary px-16PX py-8PX rounded border"
@@ -101,9 +101,9 @@ const ListReorderQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const listReorderQuest: NodeQuest = {
   type: 'node',
   title: 'リストの「C」を選んで、「上へ」ボタンで一番上に動かせ',
-  hint: 'Tab でリストに移動して、↓ で「C」を選ぶ。そのあと Tab で「上へ」ボタンに移動して、Enter か Space を2回押す',
+  hint: 'Tabでリストに移動して、↓で「C」を選ぶ。そのあとTabで「上へ」ボタンに移動して、EnterかSpaceを2回押す',
   explanation:
-    '並べ替えできるリストには、項目を選んで「上へ」「下へ」ボタンで動かす作りがある。リストの中は矢印キーで選んで、ボタンは Tab で移動して Enter か Space で押す。ドラッグ以外の手段があれば、マウスなしでも順番を変えられる。',
+    '並べ替えできるリストには、項目を選んで「上へ」「下へ」ボタンで動かす作りがある。リストの中は矢印キーで選んで、ボタンはTabで移動してEnterかSpaceで押す。ドラッグ以外の手段があれば、マウスなしでも順番を変えられる。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,
   Node: ListReorderQuestNode,
 };

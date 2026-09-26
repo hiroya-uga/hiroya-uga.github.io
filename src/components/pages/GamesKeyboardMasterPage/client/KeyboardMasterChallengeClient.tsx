@@ -89,7 +89,7 @@ export const KeyboardMasterChallengeClient = () => {
     setQuests(pickQuests());
     setPulse(null);
     setQuestIndex(0);
-    setMode('playing');
+    setMode('idle');
   }, [pickQuests]);
 
   const handleClear = useCallback(() => advance('success'), [advance]);

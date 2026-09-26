@@ -36,7 +36,7 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
         onFail();
       }}
     >
-      <p id={titleId}>Escape キーで閉じろ</p>
+      <p id={titleId}>Escapeキーで閉じろ</p>
       <button
         type="button"
         className="border-primary mt-16PX px-16PX py-8PX mx-auto block rounded border"
@@ -50,9 +50,9 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
 
 export const dialogCloseQuest: NodeQuest = {
   type: 'node',
-  title: 'ダイアログを Escape キーで閉じろ',
-  hint: 'Escape キーで閉じる。閉じるボタンや背景クリックは失敗になる',
+  title: 'ダイアログをEscapeキーで閉じろ',
+  hint: 'Escapeキーで閉じる。閉じるボタンや背景クリックは失敗になる',
   explanation:
-    'ダイアログは Escape キー一発で閉じられる。閉じるボタンまでフォーカスを移動しなくていい。閉じるボタンや背景クリックはマウス前提の操作なので、このお題では Failed 扱いにしている。',
+    'ダイアログはEscapeキー一発で閉じられる。閉じるボタンまでフォーカスを移動しなくていい。閉じるボタンや背景クリックはマウス前提の操作なので、このお題ではFailed扱いにしている。',
   Node: DialogCloseQuestNode,
 };

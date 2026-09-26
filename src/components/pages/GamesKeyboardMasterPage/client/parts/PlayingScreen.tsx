@@ -56,51 +56,91 @@ export const PlayingScreen = ({
   });
 
   useEffect(() => {
-    queueMicrotask(() => {
+    setTimeout(() => {
       ref.current?.focus({ preventScroll: true });
       ref.current?.scrollIntoView({
-        behavior: 'smooth',
+        behavior: 'instant',
         block: 'center',
       });
-    });
+    }, 0);
   }, [questIndex]);
 
   return (
     <div
-      className="grid grid-rows-[auto_1fr_auto]"
+      className="absolute inset-0 grid size-full grid-rows-[auto_1fr_auto]"
       onClick={(e) => {
-        e.preventDefault();
-
         if (e.detail === 0) {
           return;
         }
 
-        onFail();
+        e.preventDefault();
+
+        if (ref.current !== document.activeElement && ref.current?.contains(document.activeElement)) {
+          onFail();
+        }
+
         ref.current?.focus();
+      }}
+      onKeyDown={(e) => {
+        if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement) {
+          return;
+        }
+
+        switch (e.key) {
+          case ' ':
+            if (
+              (e.target instanceof HTMLButtonElement === false && e.target instanceof HTMLInputElement === false) ||
+              (e.target instanceof HTMLInputElement && e.target.type === 'range')
+            ) {
+              e.preventDefault();
+            }
+            break;
+
+          case 'ArrowUp':
+          case 'ArrowLeft':
+          case 'ArrowRight':
+          case 'ArrowDown':
+            if (e.target instanceof HTMLInputElement) {
+              if (e.target.type === 'range' || e.target.type === 'text') {
+                return;
+              }
+
+              if (
+                e.target.type === 'radio' &&
+                1 < e.currentTarget.querySelectorAll(`input[name="${e.target.name}"]`).length
+              ) {
+                return;
+              }
+            }
+            e.preventDefault();
+            break;
+        }
       }}
     >
       <h2 className="bg-secondary p-16PX sticky top-0" id={id}>
         {`お題：${quest.title}`}
       </h2>
 
-      <div
-        ref={ref}
-        className="p-16PX scrollbar-gutter-stable mx-2PX grid place-items-center overflow-auto -outline-offset-2"
-        role="region"
-        aria-labelledby={id}
-        tabIndex={0}
-      >
-        {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
-        {quest.type === 'key' && (
-          <p className="text-4xl">
-            <quest.Node />
-          </p>
-        )}
+      <div className="p-8PX scrollbar-gutter-both grid items-center overflow-auto">
+        <div
+          ref={ref}
+          role="region"
+          aria-labelledby={id}
+          tabIndex={-1}
+          className="p-8PX grid aspect-video place-items-center -outline-offset-2"
+        >
+          {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
+          {quest.type === 'key' && (
+            <p className="text-4xl">
+              <quest.Node />
+            </p>
+          )}
+        </div>
       </div>
       <div
         key={questIndex}
         className={clsx([
-          'px-8PX pb-2PX sticky bottom-0 grid min-h-[3lh] grid-cols-[1fr_auto] items-end gap-[1em] text-sm',
+          'sticky bottom-0 grid min-h-[3lh] items-end',
           shouldEnableAnimation &&
             shouldEnableTimeLimit && [
               styles.timeBar,
@@ -109,12 +149,14 @@ export const PlayingScreen = ({
         ])}
         style={{ '--x-duration': quest.timeLimit !== undefined ? `${quest.timeLimit}ms` : undefined } as CSSProperties}
       >
-        <p role="status">
-          <QuestHint hint={quest.hint} />
-        </p>
-        <p className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
-          残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
-        </p>
+        <div className="px-8PX pb-2PX bg-secondary border-t-primary grid grid-cols-[1fr_auto] items-end gap-[1em] border-t text-sm">
+          <p role="status">
+            <QuestHint hint={quest.hint} />
+          </p>
+          <p className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
+            残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
+          </p>
+        </div>
       </div>
     </div>
   );
