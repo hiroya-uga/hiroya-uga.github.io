@@ -2,8 +2,10 @@
 
 import { Modal } from '@/components/ui/dialogs/Modal';
 import { Switch } from '@/components/ui/forms';
+import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
+import styles from './IdleScreen.module.css';
 
 interface Props {
   config: KeyboardMasterConfig;
@@ -20,6 +22,7 @@ const CONFIG_ITEMS: { key: keyof KeyboardMasterFlags; label: string }[] = [
 
 export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }: Readonly<Props>) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
   // ref コールバックだと再描画のたびに走り、CONFIG モーダルからフォーカスを奪うので、値が変わったときだけ走る effect にする
@@ -36,7 +39,7 @@ export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }:
           ref={startButtonRef}
           type="button"
           aria-live="polite"
-          className="size-[90%] rounded text-[48px] transition-[font-size] hover:text-[50px]"
+          className={clsx(['size-[90%] rounded', styles.root])}
           onClick={(e) => {
             // detail === 0 はキーボード操作(Enter/Space)経由のクリックのみを通す
             if (e.detail === 0) {
@@ -44,12 +47,23 @@ export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }:
               return;
             }
 
-            e.currentTarget.textContent = 'Press Enter!';
+            setClickCount((current) => current + 1);
+
             // for Safari
             e.currentTarget.focus();
           }}
         >
-          Click to start!
+          {/* key を変えて作り直すことで、クリックのたびに揺れを最初から再生する */}
+          <kbd
+            key={clickCount}
+            aria-hidden="true"
+            className={clsx([styles.keycap, config.flags.animation && (clickCount <= 1 ? styles.pulse : styles.shake)])}
+          >
+            Enter
+          </kbd>
+          <span className={clsx(clickCount === 0 ? 'opacity-0' : 'transition-opacity')}>
+            {clickCount <= 1 ? 'Enterキーを押してスタート' : 'クリックでは始まりません。Enterキーを押してください'}
+          </span>
         </button>
       </p>
       <p>
