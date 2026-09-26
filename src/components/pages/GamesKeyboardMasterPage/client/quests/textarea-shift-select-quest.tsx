@@ -32,7 +32,7 @@ const TextareaShiftSelectQuestNode = ({ onClear, onFail }: Readonly<QuestNodePro
 export const textareaShiftSelectQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの「こんにちは」だけを、Shift+→で選択しろ',
-  hint: 'Tabでテキストエリアに移動して、Shiftを押しながら→を5回押す。マウスでの選択は失敗になる',
+  hint: 'テキストエリアにフォーカスを合わせて、Shiftを押しながら→を5回押す。マウスでの選択は失敗になる',
   explanation:
     'Shiftを押しながら矢印キーを押すと、カーソルを動かした分だけ文字を選択できる。Shift+→で右へ、Shift+←で左へ広げられるから、ドラッグしなくても好きな範囲を選べる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

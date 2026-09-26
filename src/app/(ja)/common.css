@@ -30,6 +30,7 @@
     kbd {
       display: inline-block;
       padding: 0 0.2857em;
+      line-height: 1.4;
       background-color: #222222cc;
       border-radius: 4px;
     }

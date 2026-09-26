@@ -334,7 +334,7 @@ export const SEO: Record<
   '/games/keyboard-master': {
     title: 'キーボード操作練習',
     afterSubTitle: 'The Keyboard Master',
-    description: `マウスやタッチを使わず、キーボード操作だけでお題の状態を再現するゲームです。\nTabキーやショートカットキーでフォームを操作し、制限時間内に達成できるか挑戦しましょう。`,
+    description: `マウスやタッチを使わず、キーボード操作だけでお題の状態を再現するゲームです。\nTabキーやショートカットキーで操作して、さまざまなUIの操作方法を学びましょう🔰`,
   },
   '/games/number-pairing': {
     title: '数字を組み合わせて10を作るゲーム',

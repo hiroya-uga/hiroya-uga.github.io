@@ -31,7 +31,7 @@ const FocusAndClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const focusAndClickQuest: NodeQuest = {
   type: 'node',
   title: 'テキストリンクにTabキーでフォーカスしてEnterで開け',
-  hint: 'Tabでリンクにフォーカスして、Enterを押す。SafariはOption+Tab',
+  hint: 'リンクにフォーカスを合わせて、Enterを押す',
   explanation:
     'リンクはEnterキーで開ける。ボタンはSpaceでも押せるけど、リンクはSpaceでは開けない（ページがスクロールするだけ）。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
