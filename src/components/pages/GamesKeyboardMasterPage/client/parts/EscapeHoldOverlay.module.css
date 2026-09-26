@@ -1,0 +1,71 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fillRing {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 短い Escape(ダイアログを閉じる操作など)では見せないよう、表示は --x-delay だけ遅らせる */
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  gap: 16px;
+  place-items: center;
+  align-content: center;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--background-color-primary) 85%, transparent);
+  animation: fadeIn 0.2s ease-out 300ms both;
+}
+
+/* アニメーション無効時はフェードさせず、遅延後に一気に出す */
+.instant {
+  animation-duration: 0s;
+}
+
+.gauge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 6;
+  transform: rotate(-90deg);
+}
+
+.track {
+  stroke: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.progress {
+  stroke: var(--color-accent);
+  stroke-dasharray: 1;
+  animation: fillRing var(--x-duration, 3s) linear forwards;
+}
+
+/* アニメーション無効時は、滑らかに動かさず1秒ごとに進める */
+.instant .progress {
+  animation-timing-function: steps(var(--x-steps, 3), end);
+}
