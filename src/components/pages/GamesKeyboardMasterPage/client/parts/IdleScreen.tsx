@@ -2,11 +2,12 @@
 
 import { Modal } from '@/components/ui/dialogs/Modal';
 import { Switch } from '@/components/ui/forms';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
 
 interface Props {
   config: KeyboardMasterConfig;
+  shouldFocusStart: boolean;
   onChangeFlags: (patch: Partial<KeyboardMasterFlags>) => void;
   onStart: () => void;
 }
@@ -17,13 +18,22 @@ const CONFIG_ITEMS: { key: keyof KeyboardMasterFlags; label: string }[] = [
   { key: 'random', label: 'ランダム出題' },
 ];
 
-export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) => {
+export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }: Readonly<Props>) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+
+  // ref コールバックだと再描画のたびに走り、CONFIG モーダルからフォーカスを奪うので、値が変わったときだけ走る effect にする
+  useEffect(() => {
+    if (shouldFocusStart) {
+      startButtonRef.current?.focus();
+    }
+  }, [shouldFocusStart]);
 
   return (
     <>
       <p className="absolute inset-0 grid place-items-center">
         <button
+          ref={startButtonRef}
           type="button"
           aria-live="polite"
           className="size-[90%] rounded text-[48px] transition-[font-size] hover:text-[50px]"

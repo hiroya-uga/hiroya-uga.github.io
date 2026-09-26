@@ -17,6 +17,7 @@ export const KeyboardMasterChallengeClient = () => {
   const [questIndex, setQuestIndex] = useState(0);
   const [pulse, setPulse] = useState<Pulse | null>(null);
   const [results, setResults] = useState<QuestResult[]>([]);
+  const [shouldFocusStart, setShouldFocusStart] = useState(false);
   const { config, updateFlags } = useKeyboardMasterConfig();
 
   useEffect(() => {
@@ -45,6 +46,8 @@ export const KeyboardMasterChallengeClient = () => {
 
     setPulse(null);
     setQuestIndex(0);
+    // プレイ画面ごと消えるので、フォーカスが落ちないよう開始ボタンへ移す
+    setShouldFocusStart(true);
     setMode('idle');
   }, []);
 
@@ -82,13 +85,16 @@ export const KeyboardMasterChallengeClient = () => {
 
   const handleStart = useCallback(() => {
     setQuests(pickQuests());
+    setShouldFocusStart(false);
     setMode('playing');
   }, [pickQuests]);
 
+  // 結果画面の Retry ボタンごと消えるので、フォーカスが落ちないよう開始ボタンへ移す
   const handleRetry = useCallback(() => {
     setQuests(pickQuests());
     setPulse(null);
     setQuestIndex(0);
+    setShouldFocusStart(true);
     setMode('idle');
   }, [pickQuests]);
 
@@ -99,7 +105,14 @@ export const KeyboardMasterChallengeClient = () => {
 
   return (
     <div className="absolute inset-0 grid size-full overflow-hidden rounded border">
-      {mode === 'idle' && <IdleScreen config={config} onChangeFlags={updateFlags} onStart={handleStart} />}
+      {mode === 'idle' && (
+        <IdleScreen
+          config={config}
+          shouldFocusStart={shouldFocusStart}
+          onChangeFlags={updateFlags}
+          onStart={handleStart}
+        />
+      )}
       {mode === 'clear' && (
         <ResultScreen results={results} shouldEnableAnimation={config.flags.animation} onRetry={handleRetry} />
       )}
