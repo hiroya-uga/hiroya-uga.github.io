@@ -33,7 +33,7 @@ export const focusAndClickQuest: NodeQuest = {
   title: 'テキストリンクにTabキーでフォーカスしてEnterで開け',
   hint: 'リンクにフォーカスを合わせて、Enterを押す',
   explanation:
-    'リンクはEnterキーで開ける。ボタンはSpaceでも押せるけど、リンクはSpaceでは開けない（ページがスクロールするだけ）。',
+    'リンクはEnterキーで開ける作りが一般的。ボタンはSpaceでも押せるものが多いけど、リンクはSpaceでは開かないことが多い（ページがスクロールするだけの場合もある）。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: FocusAndClickQuestNode,
 };

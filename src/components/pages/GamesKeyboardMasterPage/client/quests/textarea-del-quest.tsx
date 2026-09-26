@@ -38,7 +38,7 @@ export const textareaDelQuest: NodeQuest = {
   title: 'カーソルが先頭に固定されたテキストエリアの文字を、Deleteキーで全部消せ',
   hint: 'テキストエリアにフォーカスを合わせて、Deleteキーを押し続ける。カーソルは先頭から動かせない。Macはfn+Delete（Ctrl+Dでも消せる）',
   explanation:
-    'Deleteキーはカーソルの右側の文字、Backspaceキーは左側の文字を消す。MacのキーボードはDeleteキーがBackspace相当なので、右側を消すにはfn+DeleteかCtrl+Dを使う。',
+    'Deleteキーはカーソルの右側の文字、Backspaceキーは左側の文字を消すのが一般的。MacのキーボードはDeleteキーがBackspace相当のことが多く、右側を消すにはfn+DeleteかCtrl+Dを使う。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TextareaDelQuestNode,
 };

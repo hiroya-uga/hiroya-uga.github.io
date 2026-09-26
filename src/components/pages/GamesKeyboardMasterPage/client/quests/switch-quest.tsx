@@ -19,7 +19,8 @@ export const switchQuest: NodeQuest = {
   type: 'node',
   title: 'SpaceキーでスイッチをONにしろ',
   hint: 'EnterではなくSpaceで切り替える',
-  explanation: 'スイッチのON/OFFはSpaceキーで切り替えるのが基本。Enterで開くリンクとは、使うキーが違う。',
+  explanation:
+    'スイッチのON/OFFは、Spaceキーで切り替える作りが一般的。Enterで開くリンクとは、使うキーが違う場合が多い。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: SwitchQuestNode,
 };

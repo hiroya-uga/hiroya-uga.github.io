@@ -97,7 +97,7 @@ export const tabsSwitchQuest: NodeQuest = {
   title: 'タブを矢印キーで切り替えて、「ぶどう」を表示しろ',
   hint: 'タブにフォーカスを合わせて、→を2回押す',
   explanation:
-    'タブは、Tabキーでタブの並びに入って、←→で隣のタブに切り替える。Tabキーを押しても他のタブには止まらず、次は中身のパネルに進む。Home / Endで最初と最後のタブにも飛べる。',
+    'タブは、Tabキーでタブの並びに入って、←→で隣のタブに切り替える作りが一般的。Tabキーを押しても他のタブには止まらず、次は中身のパネルに進む実装が多い。Home / Endで最初と最後のタブに飛べるものもある。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TabsSwitchQuestNode,
 };

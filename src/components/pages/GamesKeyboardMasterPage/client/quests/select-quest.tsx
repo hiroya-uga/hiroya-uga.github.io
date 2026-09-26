@@ -37,7 +37,7 @@ export const selectQuest: NodeQuest = {
   type: 'node',
   title: '「3つ目」の選択肢を選べ',
   hint: 'プルダウンを開いて「ぶどう」を選ぶ',
-  explanation: 'プルダウン、実はマウスがなくても開いて選択肢を選べる。',
+  explanation: 'プルダウンは、マウスがなくても開いて選択肢を選べる作りが一般的。',
   Node: SelectQuestNode,
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
 };

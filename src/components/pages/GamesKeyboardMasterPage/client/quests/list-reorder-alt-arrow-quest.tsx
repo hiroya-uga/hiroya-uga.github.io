@@ -96,7 +96,7 @@ export const listReorderAltArrowQuest: NodeQuest = {
   title: 'リストの「C」をAlt+↑で一番上に動かせ',
   hint: '「C」にフォーカスを合わせて、Alt+↑（MacはOption+↑）を2回押す',
   explanation:
-    '並べ替えできるリストは、ドラッグだけの操作ではない。項目にフォーカスしてAlt+↑↓（MacはOption+↑↓）を押せば、マウスなしでも順番を変えられる画面がある。',
+    '並べ替えできるリストは、ドラッグだけの操作とは限らない。項目にフォーカスしてAlt+↑↓（MacはOption+↑↓）を押せば、マウスなしでも順番を変えられる実装がある。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,
   Node: ListReorderAltArrowQuestNode,
 };

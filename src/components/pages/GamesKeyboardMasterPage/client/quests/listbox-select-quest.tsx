@@ -82,7 +82,7 @@ export const listboxSelectQuest: NodeQuest = {
   title: 'リストを矢印キーで移動して、「うさぎ」をEnterで決定しろ',
   hint: 'リストにフォーカスを合わせて、↑↓で項目を選び、EnterかSpaceで決定する',
   explanation:
-    'リスト（リストボックス）は、Tabキーでリストに入ったら、↑↓で項目を移動して、EnterかSpaceで決定するのが定番。Home / Endで最初と最後の項目にも飛べる。Tabキーは項目ひとつひとつには止まらず、リストごと飛び越えていく。',
+    'リスト（リストボックス）は、Tabキーでリストに入ったら、↑↓で項目を移動して、EnterかSpaceで決定する作りが定番。Home / Endで最初と最後の項目に飛べるものもある。Tabキーは項目ひとつひとつには止まらず、リストごと飛び越える実装が一般的。',
   Node: ListboxSelectQuestNode,
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
 };
