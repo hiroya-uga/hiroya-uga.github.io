@@ -69,7 +69,16 @@ export const PlayingScreen = ({
   const ref = useRef<HTMLDivElement>(null);
   const setTimeoutIdRef = useRef(-1);
   useFocusTrap({ containerRef: ref });
-  useKeyQuest({ quest, onClear, onFail });
+
+  // 最後に押したキーが履歴に見えるよう、クリア直後ではなく少し遅らせて空にする。node 型・key 型のどちらでも共通
+  const handleClear = () => {
+    onClear();
+    setTimeout(() => {
+      setInputKeys([]);
+    }, 400);
+  };
+
+  const { pressedKeys } = useKeyQuest({ quest, onClear: handleClear, onFail });
   const remainingMs = useQuestTimer({
     isEnabled: shouldEnableTimeLimit,
     quest,
@@ -126,6 +135,11 @@ export const PlayingScreen = ({
         if (e.repeat === false) {
           const keyCombo = formatKeyCombo(e);
           setInputKeys((prev) => [...prev, keyCombo].slice(-INPUT_HISTORY_LIMIT));
+        }
+
+        if (quest.type === 'key') {
+          e.preventDefault();
+          return;
         }
 
         if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement) {
@@ -200,20 +214,10 @@ export const PlayingScreen = ({
             tabIndex={-1}
             className="p-8PX grid aspect-video place-items-center shadow-none outline-none"
           >
-            {quest.type === 'node' && (
-              <quest.Node
-                onClear={() => {
-                  onClear();
-                  setTimeout(() => {
-                    setInputKeys([]);
-                  }, 400);
-                }}
-                onFail={onFail}
-              />
-            )}
+            {quest.type === 'node' && <quest.Node onClear={handleClear} onFail={onFail} />}
             {quest.type === 'key' && (
               <p className="text-4xl">
-                <quest.Node />
+                <quest.Node pressedKeys={pressedKeys} />
               </p>
             )}
           </div>
@@ -231,7 +235,7 @@ export const PlayingScreen = ({
         ])}
         style={{ '--x-duration': quest.timeLimit !== undefined ? `${quest.timeLimit}ms` : undefined } as CSSProperties}
       >
-        <div className="px-8PX pb-2PX bg-secondary border-t-primary grid grid-cols-[1fr_auto] items-end gap-[1em] border-t text-sm">
+        <div className="px-12PX py-8PX bg-secondary border-t-primary grid grid-cols-[1fr_auto] items-end gap-[1em] border-t text-sm">
           <p role="status">
             <QuestHint hint={quest.hint} />
           </p>
