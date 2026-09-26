@@ -1,8 +1,8 @@
 'use client';
 
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { TextField } from '@/components/ui/forms/TextField';
 import { useEffect, useRef } from 'react';
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const SELECT_ALL_TEXT = 'この文章をぜんぶ選択しろ';

@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/client/quests/config';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { Checkbox } from '@/components/ui/forms/Checkbox';
 import { Radio } from '@/components/ui/forms/Radio';
 import { useId, useState } from 'react';

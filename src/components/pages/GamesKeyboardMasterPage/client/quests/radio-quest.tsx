@@ -1,8 +1,8 @@
 'use client';
 
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { Radio } from '@/components/ui/forms/Radio';
 import { useState } from 'react';
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const RadioQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {

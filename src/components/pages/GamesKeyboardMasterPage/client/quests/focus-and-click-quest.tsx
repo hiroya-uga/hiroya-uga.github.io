@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const FocusAndClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {

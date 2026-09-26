@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const LINK_LABELS = ['1つ目のリンク', '2つ目のリンク', '3つ目のリンク'];
