@@ -10,12 +10,11 @@ const INITIAL = 50;
 
 // Tab/Shift はフォーカス移動のため許可する。それ以外は順序の指定にないキーなので Fail 扱いにする
 const PASSTHROUGH_KEYS = new Set(['Tab', 'Shift']);
-const KEY_SEQUENCE = ['Home', 'End'];
 
 const SliderStrictQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   const id = useId();
   const [value, setValue] = useState(INITIAL);
-  const progressRef = useRef(0);
+  const keyHistoryRef = useRef(new Set<string>());
 
   return (
     <div className="grid gap-2">
@@ -35,25 +34,23 @@ const SliderStrictQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =>
             return;
           }
 
-          if (e.key === KEY_SEQUENCE[progressRef.current]) {
-            progressRef.current += 1;
-            return;
-          }
-
-          e.preventDefault();
-          onFail();
-        }}
-        // つまみのドラッグやクリックでも値を動かせてしまうため、キー以外の操作も Fail 扱いにする
-        onPointerDown={(e) => {
-          e.preventDefault();
-          onFail();
+          // Set は挿入順を保つので、消してから入れ直すと最後に押したキーが末尾に来る
+          keyHistoryRef.current.delete(e.key);
+          keyHistoryRef.current.add(e.key);
         }}
         onChange={(e) => {
           const next = Number(e.currentTarget.value);
           setValue(next);
 
+          // Set には末尾を取る手段がないので、配列にして最後の2つを見る
+          const [previousKey, lastKey] = [...keyHistoryRef.current].slice(-2);
+
           if (MAX === next) {
-            onClear();
+            if (previousKey === 'Home' && lastKey === 'End') {
+              onClear();
+            } else {
+              onFail();
+            }
           }
         }}
       />
