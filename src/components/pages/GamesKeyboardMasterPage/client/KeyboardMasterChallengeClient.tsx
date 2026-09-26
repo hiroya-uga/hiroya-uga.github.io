@@ -120,7 +120,7 @@ export const KeyboardMasterChallengeClient = () => {
             className={clsx([
               'grid place-items-center text-2xl font-bold',
               config.flags.animation ? styles.pulse : styles.pulseInstant,
-              pulse.result === 'success' ? 'bg-primary' : 'bg-error',
+              pulse.result === 'success' ? 'bg-success' : 'bg-error',
             ])}
           >
             {pulse.result === 'success' ? 'Success!' : 'Failed!'}
