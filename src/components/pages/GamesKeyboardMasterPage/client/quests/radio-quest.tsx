@@ -28,7 +28,7 @@ export const radioQuest: NodeQuest = {
   title: 'ラジオボタンを選択しろ',
   hint: 'ラジオボタンにフォーカスを合わせて、Spaceで選択する',
   explanation:
-    'ラジオボタンもSpaceキーで選択できる。ただしチェックボックスと違って、選択済みのものをSpaceでもう一度押しても解除はされない。',
+    'ラジオボタンもSpaceキーで選択できる作りが一般的。ただしチェックボックスと違って、選択済みのものをSpaceでもう一度押しても、解除されないのが標準的。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioQuestNode,
 };

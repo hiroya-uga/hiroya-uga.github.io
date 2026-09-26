@@ -70,7 +70,7 @@ export const sliderStrictQuest: NodeQuest = {
   title: 'スライダーをHome → Endの順に押して最大にしろ',
   hint: 'スライダーにフォーカスを合わせて、Home → Endの順に押す。順番を間違えたり他のキーを押すと失敗になる',
   explanation:
-    'Homeは最小値、Endは最大値へ一気に飛べるキー。つまみをドラッグしなくても、スライダーの両端まで動かせる。',
+    'スライダーには、Homeで最小値、Endで最大値へ一気に飛べる作りがある。つまみをドラッグしなくても、両端まで動かせる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: SliderStrictQuestNode,
 };

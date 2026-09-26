@@ -1,6 +1,7 @@
 import { checkboxQuest } from './checkbox-quest';
 import { datetimeQuest } from './datetime-quest';
 import { dialogCloseQuest } from './dialog-close-quest';
+import { enterSubmitQuest } from './enter-submit-quest';
 import { focusAndClickQuest } from './focus-and-click-quest';
 import { focusAndSpaceQuest } from './focus-and-space-quest';
 import { focusQuest } from './focus-quest';
@@ -18,6 +19,9 @@ import { radioQuest } from './radio-quest';
 import { selectQuest } from './select-quest';
 import { sliderMaxQuest } from './slider-max-quest';
 import { sliderStrictQuest } from './slider-strict-quest';
+import { splitterQuest } from './splitter-quest';
+import { starRatingClickQuest } from './star-rating-click-quest';
+import { starRatingQuest } from './star-rating-quest';
 import { switchQuest } from './switch-quest';
 import { tabsSwitchQuest } from './tabs-switch-quest';
 import { textareaClearQuest } from './textarea-clear-quest';
@@ -51,8 +55,11 @@ const ALL = [
   // 方向キーの活用を覚える
   radioChangeQuest,
   radioAndCheckboxQuest,
+  starRatingQuest,
+  starRatingClickQuest,
   numberSpinnerQuest,
   datetimeQuest,
+  enterSubmitQuest,
   selectQuest,
   sliderMaxQuest,
   sliderStrictQuest,
@@ -73,6 +80,7 @@ const ALL = [
   menuButtonQuest,
   tabsSwitchQuest,
   treeExpandQuest,
+  splitterQuest,
   listReorderQuest,
   listReorderGrabQuest,
   listReorderAltArrowQuest,

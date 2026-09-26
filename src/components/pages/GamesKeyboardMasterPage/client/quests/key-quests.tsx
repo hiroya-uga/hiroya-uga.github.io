@@ -8,7 +8,7 @@ export const keyQuests: KeyQuest[] = [
     key: 'a',
     title: 'aキーを押せ',
     hint: 'キーボードのaキーを押す',
-    explanation: '実は画面のどこにフォーカスがあっても、キーを押せばちゃんと反応する。一番シンプルなキー入力。',
+    explanation: '画面のどこにフォーカスがあっても、キー入力を受け取れる作りがある。一番シンプルなキー入力。',
     timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
     Node: () => <kbd>a</kbd>,
   },
@@ -17,7 +17,7 @@ export const keyQuests: KeyQuest[] = [
     key: 'Tab',
     title: 'Tabキーを押せ',
     hint: 'Tabキーを押す',
-    explanation: 'Tabキーはフォーカスを次の要素へ進めるキー。キーボード操作は、ここから始まる。',
+    explanation: 'Tabキーは、フォーカスを次の要素へ進めるキーとして使われる。キーボード操作は、ここから始まる。',
     timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
     Node: () => <kbd>Tab(⇥)</kbd>,
   },
@@ -27,7 +27,7 @@ export const keyQuests: KeyQuest[] = [
     modifiers: ['shiftKey'],
     title: 'Shift + Tabを押せ',
     hint: 'Shiftを押しながらTabを押す',
-    explanation: 'Shiftを押しながらTabを押すと、いつもとは逆方向にフォーカスが移動する。',
+    explanation: 'Shiftを押しながらTabを押すと、いつもとは逆方向にフォーカスが移動する、という使い方が一般的。',
     timeLimit: DEFAULT_KEY_QUEST_TIMEOUT,
     Node: () => (
       <kbd>

@@ -36,7 +36,7 @@ export const radioChangeQuest: NodeQuest = {
   type: 'node',
   title: 'ラジオボタンを「B」に切り替えろ',
   hint: '矢印キーかSpaceで切り替える',
-  explanation: 'ラジオボタンは同じグループの中なら、クリックしなくても矢印キーだけで選択を移動できる。',
+  explanation: 'ラジオボタンは、同じグループの中ならクリックしなくても、矢印キーで選択を移動できる作りが一般的。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioChangeQuestNode,
 };

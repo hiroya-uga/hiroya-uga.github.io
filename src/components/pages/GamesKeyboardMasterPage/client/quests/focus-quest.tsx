@@ -36,7 +36,7 @@ export const focusQuest: NodeQuest = {
   title: '3つ目のテキストリンクにTabキーでフォーカスしろ',
   hint: 'Tabを押して、リンクを順番にたどる',
   explanation:
-    'リンクもボタンと同じく、Tabキーでひとつずつフォーカスできる。Safariは初期設定だとリンクを飛ばすので、Option+Tabを使うか、設定で切り替える。',
+    'リンクもボタンと同じく、Tabキーでひとつずつフォーカスできる作りが一般的。Safariは初期設定だとリンクを飛ばすことがあり、Option+Tabを使うか、設定で切り替える方法がある。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: FocusQuestNode,
 };

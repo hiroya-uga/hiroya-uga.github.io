@@ -76,7 +76,7 @@ export const radioAndCheckboxQuest: NodeQuest = {
   title: '上から「2」「3」を選んで、最後にチェックを入れろ',
   hint: '1つ目は「2」、2つ目は「3」を選んで、3つ目にチェックを入れる',
   explanation:
-    'ラジオボタンはSpaceや矢印キー、チェックボックスはSpaceと、部品ごとに操作が違う。複数のグループをまたいでTabで移動しながら操作する応用編。',
+    'ラジオボタンはSpaceや矢印キー、チェックボックスはSpaceと、部品ごとに操作が違う場合が多い。複数のグループをまたいでTabで移動しながら操作する応用編。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioAndCheckboxQuestNode,
 };

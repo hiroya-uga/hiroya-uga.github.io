@@ -11,9 +11,16 @@ const RETURN_INDEX = LAST_INDEX - 1;
 const FocusReverseQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   // 再描画は要らないので state にはしない
   const hasReachedLastRef = useRef(false);
+  // フォーカスは keydown の後に動くので、直前の keydown が Shift+Tab だったかを覚えておく
+  const isShiftTabRef = useRef(false);
 
   return (
-    <p className="text-lg">
+    <p
+      className="text-lg"
+      onKeyDown={(e) => {
+        isShiftTabRef.current = e.key === 'Tab' && e.shiftKey;
+      }}
+    >
       {LINK_LABELS.map((label, index) => (
         <span key={label}>
           <a
@@ -24,8 +31,8 @@ const FocusReverseQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
                 return;
               }
 
-              // 3つ目に着くより前に2つ目を通過しただけではクリアにしない
-              if (index === RETURN_INDEX && hasReachedLastRef.current) {
+              // Tab で1周して戻ってきた場合や、3つ目に着くより前に2つ目を通過しただけではクリアにしない
+              if (index === RETURN_INDEX && hasReachedLastRef.current && isShiftTabRef.current) {
                 onClear();
               }
             }}
@@ -47,7 +54,8 @@ export const focusReverseQuest: NodeQuest = {
   type: 'node',
   title: '3つ目のリンクにフォーカスしてから、Shift + Tabで2つ目のリンクに戻れ',
   hint: 'Tabで3つ目のリンクまで進んで、Shift+Tabで1つ戻る',
-  explanation: 'Shift+Tabで、Tabとは逆の順番にフォーカスを戻せる。行きすぎたときも、最初からやり直さずに1つ戻れる。',
+  explanation:
+    'Shift+Tabは、Tabとは逆の順番にフォーカスを戻すキーとして使われる。行きすぎたときも、最初からやり直さずに1つ戻れる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: FocusReverseQuestNode,
 };
