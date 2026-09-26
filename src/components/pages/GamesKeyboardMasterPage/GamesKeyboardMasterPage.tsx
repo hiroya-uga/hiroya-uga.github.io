@@ -1,3 +1,4 @@
+import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DiscList } from '@/components/ui/lists/DiscList';
 import { Metadata } from '@/utils/get-metadata';
@@ -16,9 +17,10 @@ export const GamesKeyboardMasterPage = ({ metadata }: Readonly<Props>) => (
     </PageTitle>
 
     <div
-      className="mb-paragraph w640:min-h-0 w640:aspect-4/3 relative min-h-[50vh] rounded"
+      className="mb-paragraph w640:min-h-0 w640:aspect-4/3 relative mx-auto max-h-[calc(100dvh-80px)] min-h-[50vh] rounded"
       role="group"
       aria-label="ゲーム画面"
+      id={GAME_ROOT_ID}
     >
       <KeyboardMasterChallengeClient />
     </div>
