@@ -27,9 +27,11 @@ export interface QuestBase {
 
 export interface KeyQuest extends QuestBase {
   type: 'key';
-  key: string;
+  // 配列のときは全キーが押されるまで待つ。順不同・同時押し不要で、無関係なキーを押しても Fail にしない
+  key: string | string[];
   modifiers?: ModifierKey[];
-  Node: () => ReactNode;
+  // key を配列で指定したお題のみ、押し終えたキーを受け取って表示に反映できる
+  Node: (props: Readonly<{ pressedKeys: ReadonlySet<string> }>) => ReactNode;
 }
 
 export interface NodeQuest extends QuestBase {
