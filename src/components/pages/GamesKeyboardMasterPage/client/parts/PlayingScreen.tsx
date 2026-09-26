@@ -24,6 +24,23 @@ const formatRemaining = (ms: number) => {
 };
 
 const HINT_DELAY = 3000;
+const INPUT_HISTORY_LIMIT = 30;
+
+// 修飾キー単体を押したときに「Shift+Shift」と出ないよう、押したキー自身は修飾側から除く
+const formatKeyCombo = ({
+  key,
+  shiftKey,
+  ctrlKey,
+  altKey,
+}: Pick<KeyboardEvent, 'key' | 'shiftKey' | 'ctrlKey' | 'altKey'>) => {
+  const modifiers = [
+    shiftKey && key !== 'Shift' && 'Shift',
+    ctrlKey && key !== 'Control' && 'Ctrl',
+    altKey && key !== 'Alt' && 'Alt',
+  ].filter(Boolean);
+
+  return [...modifiers, key === ' ' ? 'Space' : key].join(' + ');
+};
 
 const QuestHint = ({ hint }: Readonly<{ hint: string }>) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -47,6 +64,7 @@ export const PlayingScreen = ({
 }: Readonly<Props>) => {
   const id = useId();
   const [isCursorHidden, setIsCursorHidden] = useState(true);
+  const [inputKeys, setInputKeys] = useState<string[]>([]);
 
   const ref = useRef<HTMLDivElement>(null);
   const setTimeoutIdRef = useRef(-1);
@@ -59,6 +77,7 @@ export const PlayingScreen = ({
   });
 
   useEffect(() => {
+    setInputKeys([]);
     setTimeout(() => {
       ref.current?.focus({ preventScroll: true });
       document.getElementById(GAME_ROOT_ID)?.scrollIntoView({
@@ -87,7 +106,10 @@ export const PlayingScreen = ({
 
   return (
     <div
-      className={clsx(['absolute inset-0 grid size-full grid-rows-[auto_1fr_auto]', isCursorHidden && 'cursor-none'])}
+      className={clsx([
+        'absolute inset-0 grid size-full grid-rows-[auto_auto_1fr_auto]',
+        isCursorHidden && 'cursor-none',
+      ])}
       onClick={(e) => {
         if (e.detail === 0) {
           return;
@@ -102,6 +124,9 @@ export const PlayingScreen = ({
         ref.current?.focus();
       }}
       onKeyDown={(e) => {
+        const keyCombo = formatKeyCombo(e);
+        setInputKeys((prev) => [...prev, keyCombo].slice(-INPUT_HISTORY_LIMIT));
+
         if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement) {
           return;
         }
@@ -120,8 +145,17 @@ export const PlayingScreen = ({
           case 'ArrowLeft':
           case 'ArrowRight':
           case 'ArrowDown':
+          case 'Home':
+          case 'End':
+          case 'PageUp':
+          case 'PageDown':
             if (e.target instanceof HTMLInputElement) {
-              if (e.target.type === 'text' || e.target.type === 'range' || e.target.type === 'number') {
+              if (
+                e.target.type === 'text' ||
+                e.target.type === 'range' ||
+                e.target.type === 'number' ||
+                e.target.type === 'datetime-local'
+              ) {
                 return;
               }
 
@@ -140,6 +174,16 @@ export const PlayingScreen = ({
       <h2 className="bg-secondary p-16PX sticky top-0" id={id}>
         {`お題：${quest.title}`}
       </h2>
+
+      <div className="pt-2PX relative overflow-hidden after:pointer-events-none after:absolute after:right-0 after:top-0 after:h-full after:w-[20%] after:bg-[linear-gradient(to_right,transparent,var(--x-color-background-primary))]">
+        <ol className="px-8PX min-h-30px flex w-max text-nowrap" aria-label="入力履歴">
+          {inputKeys.toReversed().map((key, index) => (
+            <li key={`${key}${index}`} className="not-last:after:px-1 not-last:after:content-['←']">
+              <kbd className="min-w-[1lh] text-center">{key}</kbd>
+            </li>
+          ))}
+        </ol>
+      </div>
 
       <div
         className={clsx([
