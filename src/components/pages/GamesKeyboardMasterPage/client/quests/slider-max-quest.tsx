@@ -45,9 +45,9 @@ const SliderMaxQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const sliderMaxQuest: NodeQuest = {
   type: 'node',
   title: 'スライダーを最大にしろ',
-  hint: 'Tab でスライダーに移動して、End キーを押す',
+  hint: 'Tabでスライダーに移動して、Endキーを押す',
   explanation:
-    'スライダーは、←→ で1つずつ、PageUp / PageDown で大きく動かせる。Home で最小値、End で最大値へ一気に飛べるので、つまみをドラッグする必要はない。',
+    'スライダーは、←→で1つずつ、PageUp / PageDownで大きく動かせる。Homeで最小値、Endで最大値へ一気に飛べるので、つまみをドラッグする必要はない。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: SliderMaxQuestNode,
 };

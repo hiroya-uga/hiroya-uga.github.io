@@ -11,7 +11,7 @@ const RadioChangeQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   return (
     <fieldset>
       <legend className="mb-2 text-sm font-bold leading-snug">選択肢</legend>
-      <div className="flex gap-4">
+      <div className="gap-16PX flex flex-wrap">
         <Radio
           label="A"
           name="keyboard-master-radio-change-quest"
@@ -35,7 +35,7 @@ const RadioChangeQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 export const radioChangeQuest: NodeQuest = {
   type: 'node',
   title: 'ラジオボタンを「B」に切り替えろ',
-  hint: '矢印キーか Space で切り替える',
+  hint: '矢印キーかSpaceで切り替える',
   explanation: 'ラジオボタンは同じグループの中なら、クリックしなくても矢印キーだけで選択を移動できる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: RadioChangeQuestNode,

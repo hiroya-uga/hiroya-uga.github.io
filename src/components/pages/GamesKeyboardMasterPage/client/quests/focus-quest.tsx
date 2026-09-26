@@ -33,10 +33,10 @@ const FocusQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 
 export const focusQuest: NodeQuest = {
   type: 'node',
-  title: '3つ目のテキストリンクに Tab キーでフォーカスしろ',
-  hint: 'Tab を押して、リンクを順番にたどる。Safari は Option+Tab',
+  title: '3つ目のテキストリンクにTabキーでフォーカスしろ',
+  hint: 'Tabを押して、リンクを順番にたどる。SafariはOption+Tab',
   explanation:
-    'リンクもボタンと同じく、Tab キーでひとつずつフォーカスできる。Safari は初期設定だとリンクを飛ばすので、Option+Tab を使うか、設定で切り替える。',
+    'リンクもボタンと同じく、Tabキーでひとつずつフォーカスできる。Safariは初期設定だとリンクを飛ばすので、Option+Tabを使うか、設定で切り替える。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: FocusQuestNode,
 };

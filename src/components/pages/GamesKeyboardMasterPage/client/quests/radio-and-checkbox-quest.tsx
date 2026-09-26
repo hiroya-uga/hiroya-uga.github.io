@@ -10,7 +10,7 @@ const RADIO_OPTIONS = ['1', '2', '3'];
 const RADIO_LEGENDS = ['1つ目', '2つ目'];
 const RADIO_ANSWERS = ['2', '3'];
 
-const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
+const RadioAndCheckboxQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const nameA = useId();
   const nameB = useId();
   const names = [nameA, nameB];
@@ -39,7 +39,7 @@ const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
       {RADIO_LEGENDS.map((legend, groupIndex) => (
         <fieldset key={legend}>
           <legend className="mb-2 text-sm font-bold leading-snug">{legend}</legend>
-          <ul className="flex gap-4">
+          <ul className="gap-16PX flex flex-wrap">
             {RADIO_OPTIONS.map((option) => (
               <li key={option}>
                 <Radio
@@ -71,12 +71,12 @@ const RadioTripleQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   );
 };
 
-export const radioTripleQuest: NodeQuest = {
+export const radioAndCheckboxQuest: NodeQuest = {
   type: 'node',
   title: '上から「2」「3」を選んで、最後にチェックを入れろ',
   hint: '1つ目は「2」、2つ目は「3」を選んで、3つ目にチェックを入れる',
   explanation:
-    'ラジオボタンは Space や矢印キー、チェックボックスは Space と、部品ごとに操作が違う。複数のグループをまたいで Tab で移動しながら操作する応用編。',
+    'ラジオボタンはSpaceや矢印キー、チェックボックスはSpaceと、部品ごとに操作が違う。複数のグループをまたいでTabで移動しながら操作する応用編。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
-  Node: RadioTripleQuestNode,
+  Node: RadioAndCheckboxQuestNode,
 };

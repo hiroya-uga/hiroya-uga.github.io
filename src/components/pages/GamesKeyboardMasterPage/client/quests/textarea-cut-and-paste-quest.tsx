@@ -22,10 +22,9 @@ const TextareaCutAndPasteQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => 
 
   return (
     <div className="flex flex-col gap-4">
-      <TextField label="切り取り元" multiline defaultValue={SOURCE_TEXT} ref={sourceRef} onInput={judge} />
+      <TextField label="切り取り元" defaultValue={SOURCE_TEXT} ref={sourceRef} onInput={judge} />
       <TextField
         label="貼り付け先"
-        multiline
         defaultValue=""
         ref={destinationRef}
         onInput={(e) => {
@@ -41,9 +40,9 @@ const TextareaCutAndPasteQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => 
 export const textareaCutAndPasteQuest: NodeQuest = {
   type: 'node',
   title: '1つ目の文章を切り取って、2つ目のテキストエリアに貼り付けろ',
-  hint: 'Ctrl+A → Ctrl+X（Mac は Cmd+A → Cmd+X）で切り取り、Tab で次の欄へ移動して、Ctrl+V（Mac は Cmd+V）で貼り付ける',
+  hint: 'Ctrl+A → Ctrl+X（MacはCmd+A → Cmd+X）で切り取り、Tabで次の欄へ移動して、Ctrl+V（MacはCmd+V）で貼り付ける',
   explanation:
-    'Ctrl+X（Mac は Cmd+X）は、コピーと違って元の文章を消しながらクリップボードに入れる。文章を別の場所へ移したいときは、切り取って貼り付けると一手で済む。',
+    'Ctrl+X（MacはCmd+X）は、コピーと違って元の文章を消しながらクリップボードに入れる。文章を別の場所へ移したいときは、切り取って貼り付けると一手で済む。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,
   Node: TextareaCutAndPasteQuestNode,
 };

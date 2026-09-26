@@ -38,9 +38,9 @@ const TextareaStrictClearQuestNode = ({ onClear, onFail }: Readonly<QuestNodePro
 export const textareaStrictClearQuest: NodeQuest = {
   type: 'node',
   title: '矢印キーを使わずに、テキストエリアの中身をカラにしろ',
-  hint: 'Ctrl+A（Mac は Cmd+A）で全部選択して、Delete か Backspace で消す。矢印キーを押すと失敗になる',
+  hint: 'Ctrl+A（MacはCmd+A）で全部選択して、DeleteかBackspaceで消す。矢印キーを押すと失敗になる',
   explanation:
-    '全選択のショートカットを覚えておけば、矢印キーでカーソルを動かさなくても一気に選択できる。Shift+Home / Shift+End のような選択の仕方もある。',
+    '全選択のショートカットを覚えておけば、矢印キーでカーソルを動かさなくても一気に選択できる。Shift+Home / Shift+Endのような選択の仕方もある。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TextareaStrictClearQuestNode,
 };
