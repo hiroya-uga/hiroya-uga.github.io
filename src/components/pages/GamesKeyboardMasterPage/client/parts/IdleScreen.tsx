@@ -39,7 +39,8 @@ export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }:
           ref={startButtonRef}
           type="button"
           aria-live="polite"
-          className={clsx(['size-[90%] rounded', styles.root])}
+          // ボタン全面に outline が出るとキーキャップとの対応が分かりにくいので、フォーカスの輪郭は枠側に出す
+          className="group grid size-full place-items-center content-center gap-8 rounded outline-none"
           onClick={(e) => {
             // detail === 0 はキーボード操作(Enter/Space)経由のクリックのみを通す
             if (e.detail === 0) {
@@ -53,14 +54,20 @@ export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }:
             e.currentTarget.focus();
           }}
         >
-          {/* key を変えて作り直すことで、クリックのたびに揺れを最初から再生する */}
-          <kbd
-            key={clickCount}
-            aria-hidden="true"
-            className={clsx([styles.keycap, config.flags.animation && (clickCount <= 1 ? styles.pulse : styles.shake)])}
-          >
-            Enter
-          </kbd>
+          {/* 影(8px)が outline に重ならないよう、影の分だけ下に余白を持つ枠を outline の対象にする。アニメーションは内側だけが動く */}
+          <span className="outline-link pb-8PX block rounded-xl group-focus-visible:outline-2 group-focus-visible:outline-offset-4">
+            {/* key を変えて作り直すことで、クリックのたびに揺れを最初から再生する */}
+            <span
+              key={clickCount <= 1 ? '' : clickCount}
+              aria-hidden="true"
+              className={clsx([
+                'border-accent bg-secondary text-primary group-active:translate-y-6PX min-w-160PX block rounded-xl border-2 px-8 py-4 text-center text-[40px] font-bold shadow-[0_8px_0_var(--color-accent)] group-active:shadow-[0_2px_0_var(--color-accent)]',
+                config.flags.animation && (clickCount <= 1 ? styles.pulse : styles.shake),
+              ])}
+            >
+              Enter
+            </span>
+          </span>
           <span className={clsx(clickCount === 0 ? 'opacity-0' : 'transition-opacity')}>
             {clickCount <= 1 ? 'Enterキーを押してスタート' : 'クリックでは始まりません。Enterキーを押してください'}
           </span>
