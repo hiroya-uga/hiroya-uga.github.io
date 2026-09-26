@@ -1,0 +1,64 @@
+@keyframes press {
+  0%,
+  60%,
+  100% {
+    box-shadow: 0 8px 0 var(--color-accent);
+    transform: translateY(0);
+  }
+
+  30% {
+    box-shadow: 0 2px 0 var(--color-accent);
+    transform: translateY(6px);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.root {
+  display: grid;
+  gap: 32px;
+  place-items: center;
+  align-content: center;
+}
+
+.keycap {
+  min-width: 160px;
+  padding: 16px 32px;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--color-primary);
+  text-align: center;
+  background: var(--background-color-secondary);
+  border: 2px solid var(--color-accent);
+  border-radius: 12px;
+  box-shadow: 0 8px 0 var(--color-accent);
+}
+
+/* 自動で始まる動きは5秒を超えると止める手段が要るので、1.5秒 × 3回 = 4.5秒で終わらせる */
+.pulse {
+  animation: press 1.5s ease-in-out 3;
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.root:active .keycap {
+  box-shadow: 0 2px 0 var(--color-accent);
+  transform: translateY(6px);
+}
