@@ -1,7 +1,7 @@
 'use client';
 
+import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useId, useState } from 'react';
-import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const INITIAL_ITEMS = ['A', 'B', 'C'];

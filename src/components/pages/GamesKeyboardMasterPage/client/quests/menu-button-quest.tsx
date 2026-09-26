@@ -1,7 +1,7 @@
 'use client';
 
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useEffect, useId, useRef, useState } from 'react';
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const MENU_ITEMS = ['新規作成', '開く', '保存', '名前を付けて保存', '閉じる'];

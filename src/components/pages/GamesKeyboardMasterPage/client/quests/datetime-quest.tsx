@@ -1,7 +1,7 @@
 'use client';
 
+import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useId } from 'react';
-import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const DATETIME_INITIAL = '2026-01-01T00:00';

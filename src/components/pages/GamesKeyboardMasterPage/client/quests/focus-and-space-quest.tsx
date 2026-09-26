@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/client/quests/config';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const BUTTON_OPTIONS = ['A', 'B', 'C', 'D'];

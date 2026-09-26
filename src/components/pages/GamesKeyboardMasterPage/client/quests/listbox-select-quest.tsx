@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/client/quests/config';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import clsx from 'clsx';
 import { useId, useState } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';

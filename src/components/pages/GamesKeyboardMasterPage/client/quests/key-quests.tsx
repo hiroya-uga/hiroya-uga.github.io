@@ -1,4 +1,4 @@
-import { DEFAULT_KEY_QUEST_TIMEOUT } from './config';
+import { DEFAULT_KEY_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { KeyQuest } from './types';
 
 // 他のクエストと違い専用の Node コンポーネントを持たないため、1ファイル1クエストには分割せず配列でまとめている

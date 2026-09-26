@@ -1,7 +1,7 @@
 'use client';
 
+import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useRef, useState } from 'react';
-import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 interface TreeNode {
