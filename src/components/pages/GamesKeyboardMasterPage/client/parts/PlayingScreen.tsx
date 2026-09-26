@@ -77,7 +77,6 @@ export const PlayingScreen = ({
   });
 
   useEffect(() => {
-    setInputKeys([]);
     setTimeout(() => {
       ref.current?.focus({ preventScroll: true });
       document.getElementById(GAME_ROOT_ID)?.scrollIntoView({
@@ -201,7 +200,17 @@ export const PlayingScreen = ({
             tabIndex={-1}
             className="p-8PX grid aspect-video place-items-center shadow-none outline-none"
           >
-            {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
+            {quest.type === 'node' && (
+              <quest.Node
+                onClear={() => {
+                  onClear();
+                  setTimeout(() => {
+                    setInputKeys([]);
+                  }, 400);
+                }}
+                onFail={onFail}
+              />
+            )}
             {quest.type === 'key' && (
               <p className="text-4xl">
                 <quest.Node />

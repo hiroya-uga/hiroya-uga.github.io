@@ -23,10 +23,10 @@ const StarRatingClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
             aria-label={`${star}つ星`}
             aria-pressed={star === rating}
             className="rounded text-5xl"
-            onClick={() => {
+            onClick={(e) => {
               setRating(star);
 
-              if (star === TARGET) {
+              if (star === TARGET && e.detail === 0) {
                 onClear();
               }
             }}
