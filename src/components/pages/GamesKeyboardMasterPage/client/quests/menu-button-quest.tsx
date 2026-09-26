@@ -134,7 +134,7 @@ const MenuButtonQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
 export const menuButtonQuest: NodeQuest = {
   type: 'node',
   title: 'メニューを開いて「保存」を選べ',
-  hint: 'Tabでボタンに移動して、EnterかSpaceか↓でメニューを開く。↑↓で項目を選び、Enterで決定する',
+  hint: 'ボタンにフォーカスを合わせて、EnterかSpaceか↓でメニューを開く。↑↓で項目を選び、Enterで決定する',
   explanation:
     'メニューボタンは、Enter・Space・↓のどれかで開ける。開いたら↑↓で項目を移動して、Enterで決定、Escapeで閉じる。リストと同じで、Tabキーは項目ひとつひとつには止まらない。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,

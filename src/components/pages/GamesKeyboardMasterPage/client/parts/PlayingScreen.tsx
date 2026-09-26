@@ -45,8 +45,10 @@ export const PlayingScreen = ({
   onFail,
 }: Readonly<Props>) => {
   const id = useId();
+  const [isCursorHidden, setIsCursorHidden] = useState(true);
 
   const ref = useRef<HTMLDivElement>(null);
+  const setTimeoutIdRef = useRef(-1);
   useFocusTrap({ containerRef: ref });
   useKeyQuest({ quest, onClear, onFail });
   const remainingMs = useQuestTimer({
@@ -65,9 +67,26 @@ export const PlayingScreen = ({
     }, 0);
   }, [questIndex]);
 
+  useEffect(() => {
+    const onPointerMove = () => {
+      setIsCursorHidden(false);
+      clearTimeout(setTimeoutIdRef.current);
+
+      setTimeoutIdRef.current = window.setTimeout(() => {
+        setIsCursorHidden(true);
+      }, 1000);
+    };
+
+    window.addEventListener('pointermove', onPointerMove);
+
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove);
+    };
+  }, []);
+
   return (
     <div
-      className="absolute inset-0 grid size-full grid-rows-[auto_1fr_auto]"
+      className={clsx(['absolute inset-0 grid size-full grid-rows-[auto_1fr_auto]', isCursorHidden && 'cursor-none'])}
       onClick={(e) => {
         if (e.detail === 0) {
           return;

@@ -27,7 +27,7 @@ const TextareaCopyAndPasteQuestNode = ({ onClear }: Readonly<QuestNodeProps>) =>
 export const textareaCopyAndPasteQuest: NodeQuest = {
   type: 'node',
   title: '1つ目の文章を、2つ目のテキストエリアに貼り付けろ',
-  hint: 'Ctrl+A → Ctrl+C（MacはCmd+A → Cmd+C）でコピーして、Tabで次の欄へ移動し、Ctrl+V（MacはCmd+V）で貼り付ける',
+  hint: 'Ctrl+A → Ctrl+C（MacはCmd+A → Cmd+C）でコピーして、次の欄にフォーカスを合わせ、Ctrl+V（MacはCmd+V）で貼り付ける',
   explanation:
     'Ctrl+C（MacはCmd+C）でコピー、Ctrl+V（MacはCmd+V）で貼り付け。Tabで欄を移動すれば、マウスなしで文章を写せる。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,
