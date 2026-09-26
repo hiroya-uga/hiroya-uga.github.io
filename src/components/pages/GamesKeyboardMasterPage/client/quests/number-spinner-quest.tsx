@@ -7,7 +7,7 @@ import { NodeQuest, QuestNodeProps } from './types';
 const NUMBER_TARGET = 7;
 
 // 矢印キー操作以外(直接入力・ホイール・貼り付け)は Fail 扱いにする。Tab/Shift はフォーカス移動のため許可する
-const ALLOWED_KEYS = new Set(['ArrowUp', 'ArrowDown', 'Tab', 'Shift']);
+const ALLOWED_KEYS = new Set(['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Tab', 'Shift']);
 
 const NumberSpinnerQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   const id = useId();
