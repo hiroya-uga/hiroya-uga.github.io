@@ -33,7 +33,7 @@ const QuestHint = ({ hint }: Readonly<{ hint: string }>) => {
     return () => window.clearTimeout(timeout);
   }, []);
 
-  return isVisible ? `ヒント：${hint}` : null;
+  return isVisible ? <span className="animate-fade-in">{`ヒント：${hint}`}</span> : null;
 };
 
 export const PlayingScreen = ({
