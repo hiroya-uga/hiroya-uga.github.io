@@ -1,1 +1,4 @@
 export const GAME_ROOT_ID = 'game-root';
+export const DEFAULT_OPERATION_QUEST_TIMEOUT = 10000;
+export const DEFAULT_KEY_QUEST_TIMEOUT = 5000;
+export const DEFAULT_LONG_OPERATION_QUEST_TIMEOUT = 15000;

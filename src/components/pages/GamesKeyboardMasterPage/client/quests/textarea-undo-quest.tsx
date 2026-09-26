@@ -1,7 +1,7 @@
 'use client';
 
+import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { TextField } from '@/components/ui/forms/TextField';
-import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from './config';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const INITIAL_TEXT = '消しても戻せる';
