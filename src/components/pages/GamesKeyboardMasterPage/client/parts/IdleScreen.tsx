@@ -53,7 +53,7 @@ export const IdleScreen = ({ config, onChangeFlags, onStart }: Readonly<Props>) 
           CONFIG
         </button>
       </p>
-      <Modal title="CONFIG" isOpen={isConfigOpen} setIsOpen={setIsConfigOpen}>
+      <Modal title="CONFIG" isOpen={isConfigOpen} closeModal={() => setIsConfigOpen(false)}>
         <div className="space-y-3">
           {CONFIG_ITEMS.map(({ key, label }) => (
             <p key={key}>

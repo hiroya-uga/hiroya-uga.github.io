@@ -2,18 +2,19 @@
 
 import { usePortal } from '@/hooks/use-portal';
 import clsx from 'clsx';
-import { Dispatch, SetStateAction, useEffect, useId, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import styles from './Modal.module.css';
 
 interface Props {
   title: string;
   children?: React.ReactNode;
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  closeModal: () => void;
 }
 
-export const Modal = ({ title, children, isOpen, setIsOpen }: Readonly<Props>) => {
+export const Modal = ({ title, children, isOpen, closeModal }: Readonly<Props>) => {
   const id = useId();
   const { isPortalReady, renderDialog } = usePortal();
   const ref = useRef<HTMLDialogElement>(null);
@@ -27,14 +28,14 @@ export const Modal = ({ title, children, isOpen, setIsOpen }: Readonly<Props>) =
 
     if (isOpen === false) {
       dialog.close();
-      setIsOpen(false);
+      closeModal();
       return;
     }
 
     // CSSOM再生成
     ref.current?.scrollHeight;
     dialog.showModal();
-  }, [isOpen, setIsOpen]);
+  }, [isOpen, closeModal]);
 
   if (!isPortalReady) {
     return null;
@@ -46,18 +47,33 @@ export const Modal = ({ title, children, isOpen, setIsOpen }: Readonly<Props>) =
       aria-labelledby={id}
       className={clsx([
         styles.root,
-        'shadow-sticky bg-secondary [[open]]:pointer-events-auto [[open]]:opacity-100 group pointer-events-none fixed inset-0 z-50 m-auto block w-fit rounded-lg px-8 py-6 text-center opacity-0 transition-[opacity,visibility,bottom]',
+        '[[open]]:pointer-events-auto [[open]]:opacity-100 group pointer-events-none fixed inset-0 grid size-full max-h-none max-w-none place-items-center items-center bg-transparent opacity-0 transition-[opacity,visibility,bottom]',
       ])}
       aria-modal="true"
       closedby="any"
-      onClose={() => setIsOpen(false)}
+      onClose={closeModal}
     >
-      <div className="invisible group-open:visible">
-        <h2 id={id} className="mb-paragraph text-center font-bold">
-          {title}
-        </h2>
+      <div
+        className={clsx([
+          'invisible group-open:visible',
+          'shadow-sticky bg-secondary relative m-auto block max-h-[90%] w-fit min-w-[min(50vw,400px)] max-w-[90%] rounded-lg pb-8 pt-2 text-center',
+        ])}
+      >
+        <div className="mb-paragraph grid grid-cols-[48px_1fr_48px]">
+          <h2 id={id} className="py-9PX col-start-2 self-center text-center font-bold">
+            {title}
+          </h2>
 
-        <div className="p-16PX pt-0">{children}</div>
+          <p>
+            <button type="button" className="p-16PX rounded-full" onClick={closeModal}>
+              <span className="relative block size-4">
+                <SvgIcon name="cross" alt={`${title}を閉じる`} />
+              </span>
+            </button>
+          </p>
+        </div>
+
+        <div className="px-24PX">{children}</div>
       </div>
     </dialog>,
   );

@@ -1,5 +1,5 @@
 @media screen and (min-height: 768px) {
   .root {
-    bottom: 15%;
+    padding-bottom: 15vh;
   }
 }
