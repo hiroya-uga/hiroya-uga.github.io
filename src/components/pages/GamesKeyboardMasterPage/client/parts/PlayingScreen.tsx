@@ -124,8 +124,10 @@ export const PlayingScreen = ({
         ref.current?.focus();
       }}
       onKeyDown={(e) => {
-        const keyCombo = formatKeyCombo(e);
-        setInputKeys((prev) => [...prev, keyCombo].slice(-INPUT_HISTORY_LIMIT));
+        if (e.repeat === false) {
+          const keyCombo = formatKeyCombo(e);
+          setInputKeys((prev) => [...prev, keyCombo].slice(-INPUT_HISTORY_LIMIT));
+        }
 
         if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement) {
           return;
