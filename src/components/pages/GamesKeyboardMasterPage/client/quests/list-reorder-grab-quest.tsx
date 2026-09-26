@@ -124,7 +124,7 @@ export const listReorderGrabQuest: NodeQuest = {
   title: 'リストの「C」を掴んで、一番上に動かして置け',
   hint: '「C」にフォーカスを合わせて、Spaceで掴む。↑を2回押したら、もう一度Spaceで置く',
   explanation:
-    '並べ替えできるリストには、Spaceで項目を掴んで、矢印キーで動かして、もう一度Spaceで置くものがある。掴んでいる途中でEscapeを押すと、元の並びに戻せる。',
+    '並べ替えできるリストには、Spaceで項目を掴んで、矢印キーで動かして、もう一度Spaceで置くものがある。掴んでいる途中でEscapeを押すと、元の並びに戻せる実装もある。',
   timeLimit: DEFAULT_LONG_OPERATION_QUEST_TIMEOUT,
   Node: ListReorderGrabQuestNode,
 };

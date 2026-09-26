@@ -21,7 +21,7 @@ export const checkboxQuest: NodeQuest = {
   type: 'node',
   title: 'チェックボックスを切り替えろ',
   hint: 'チェックボックスにフォーカスを合わせて、Spaceでチェックを入れる',
-  explanation: 'チェックボックスのON/OFFはSpaceキーひとつで切り替えられる。Enterキーじゃないのがポイント。',
+  explanation: 'チェックボックスは、Spaceキーで切り替える作りが一般的。Enterキーではなく、Spaceキーを使うものが多い。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: CheckboxQuestNode,
 };

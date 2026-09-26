@@ -136,7 +136,7 @@ export const menuButtonQuest: NodeQuest = {
   title: 'メニューを開いて「保存」を選べ',
   hint: 'ボタンにフォーカスを合わせて、EnterかSpaceか↓でメニューを開く。↑↓で項目を選び、Enterで決定する',
   explanation:
-    'メニューボタンは、Enter・Space・↓のどれかで開ける。開いたら↑↓で項目を移動して、Enterで決定、Escapeで閉じる。リストと同じで、Tabキーは項目ひとつひとつには止まらない。',
+    'メニューボタンには、Enter・Space・↓のどれかで開ける作りがある。開いたら↑↓で項目を移動して、Enterで決定、Escapeで閉じる実装が一般的。リストと同じで、Tabキーは項目ひとつひとつには止まらない場合が多い。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: MenuButtonQuestNode,
 };

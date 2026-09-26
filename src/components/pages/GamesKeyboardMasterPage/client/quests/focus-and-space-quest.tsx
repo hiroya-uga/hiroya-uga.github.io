@@ -47,7 +47,7 @@ export const focusAndSpaceQuest: NodeQuest = {
   title: 'Tabで「C」に移動してSpaceで押せ',
   hint: 'ボタンCにフォーカスを合わせて、EnterではなくSpaceで押す',
   explanation:
-    'ボタンはEnterだけでなくSpaceでも押せる。リンクはEnterだけなので、そこが見分けるポイント。ちなみにEnterは押した瞬間、Spaceは離した瞬間に反応する。',
+    'ボタンはEnterだけでなくSpaceでも押せる作りが一般的。リンクはEnterだけの場合が多いので、そこが見分けるポイント。ちなみに、Enterは押した瞬間、Spaceは離した瞬間に反応する実装が多い。',
   Node: FocusAndSpaceQuestNode,
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
 };

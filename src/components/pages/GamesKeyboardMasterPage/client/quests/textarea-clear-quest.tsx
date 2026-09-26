@@ -31,7 +31,7 @@ export const textareaClearQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの中身をカラにしろ',
   hint: '全部選択してから、DeleteかBackspaceで消す',
-  explanation: '全部選択してから消す、テキスト編集の基本操作。',
+  explanation: '全選択してから消すのは、テキスト編集の基本操作の1つ。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TextareaClearQuestNode,
 };

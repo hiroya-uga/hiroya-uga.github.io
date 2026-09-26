@@ -62,6 +62,8 @@ type BaseProps = Label & {
         inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
         list?: InputHTMLAttributes<HTMLInputElement>['list'];
         autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+        pattern?: InputHTMLAttributes<HTMLInputElement>['pattern'];
+        title?: InputHTMLAttributes<HTMLInputElement>['title'];
       }
   );
 

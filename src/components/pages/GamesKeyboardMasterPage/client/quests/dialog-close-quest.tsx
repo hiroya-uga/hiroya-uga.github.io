@@ -53,6 +53,6 @@ export const dialogCloseQuest: NodeQuest = {
   title: 'ダイアログをEscapeキーで閉じろ',
   hint: 'Escapeキーで閉じる。閉じるボタンや背景クリックは失敗になる',
   explanation:
-    'ダイアログはEscapeキー一発で閉じられる。閉じるボタンまでフォーカスを移動しなくていい。閉じるボタンや背景クリックはマウス前提の操作なので、このお題ではFailed扱いにしている。',
+    'ダイアログは、Escapeキーで閉じられる作りが一般的。閉じるボタンまでフォーカスを移動しなくても閉じられる。このお題ではEscapeキーで閉じることを求めているので、閉じるボタンや背景クリックはFailed扱いにしている。',
   Node: DialogCloseQuestNode,
 };

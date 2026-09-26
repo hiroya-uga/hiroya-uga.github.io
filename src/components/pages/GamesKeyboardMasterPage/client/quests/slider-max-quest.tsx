@@ -47,7 +47,7 @@ export const sliderMaxQuest: NodeQuest = {
   title: 'スライダーを最大にしろ',
   hint: 'スライダーにフォーカスを合わせて、Endキーを押す',
   explanation:
-    'スライダーは、←→で1つずつ、PageUp / PageDownで大きく動かせる。Homeで最小値、Endで最大値へ一気に飛べるので、つまみをドラッグする必要はない。',
+    'スライダーには、←→で1つずつ、PageUp / PageDownで大きく動かせる作りがある。Homeで最小値、Endで最大値へ一気に飛べるものも多く、つまみをドラッグしなくても操作できる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: SliderMaxQuestNode,
 };

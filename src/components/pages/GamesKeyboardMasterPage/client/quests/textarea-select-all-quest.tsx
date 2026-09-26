@@ -38,7 +38,7 @@ export const textareaSelectAllQuest: NodeQuest = {
   type: 'node',
   title: 'テキストエリアの中身を全部選択しろ',
   hint: 'Ctrl+A（MacはCmd+A）で全選択する',
-  explanation: 'Ctrl+A（MacはCmd+A）を使えば、ドラッグなしで一瞬で全選択できる。',
+  explanation: '一般的に、Ctrl+A（MacはCmd+A）を使えば、ドラッグなしで一瞬で全選択できる。',
   timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
   Node: TextareaSelectAllQuestNode,
 };
