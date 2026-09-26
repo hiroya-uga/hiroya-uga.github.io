@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useEscapeHold, useKeyboardMasterConfig } from './hooks';
 import styles from './KeyboardMasterChallengeClient.module.css';
-import { IdleScreen, PlayingScreen, ResultScreen } from './parts';
+import { EscapeHoldOverlay, IdleScreen, PlayingScreen, ResultScreen } from './parts';
 import { QUESTS } from './quests';
 import type { Mode, Pulse, QuestResult } from './types';
 
@@ -101,7 +101,7 @@ export const KeyboardMasterChallengeClient = () => {
   const handleClear = useCallback(() => advance('success'), [advance]);
   const handleFail = useCallback(() => advance('fail'), [advance]);
 
-  useEscapeHold({ isActive: mode === 'playing', onAbort: handleAbort });
+  const { isHolding } = useEscapeHold({ isActive: mode === 'playing', onAbort: handleAbort });
 
   return (
     <div className="absolute inset-0 grid size-full overflow-hidden rounded border">
@@ -126,6 +126,7 @@ export const KeyboardMasterChallengeClient = () => {
           onFail={handleFail}
         />
       )}
+      {isHolding && <EscapeHoldOverlay shouldEnableAnimation={config.flags.animation} />}
       <p aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 grid">
         {pulse !== null && (
           <span
