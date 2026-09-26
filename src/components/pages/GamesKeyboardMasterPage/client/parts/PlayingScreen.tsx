@@ -141,20 +141,27 @@ export const PlayingScreen = ({
         {`お題：${quest.title}`}
       </h2>
 
-      <div className="p-8PX scrollbar-gutter-both grid items-center overflow-auto">
-        <div
-          ref={ref}
-          role="region"
-          aria-labelledby={id}
-          tabIndex={-1}
-          className="p-8PX grid aspect-video place-items-center -outline-offset-2"
-        >
-          {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
-          {quest.type === 'key' && (
-            <p className="text-4xl">
-              <quest.Node />
-            </p>
-          )}
+      <div
+        className={clsx([
+          'relative min-h-0',
+          'has-[[role="region"]:focus-visible]:after:outline-(--color-link,red) has-[[role="region"]:focus-visible]:after:pointer-events-none has-[[role="region"]:focus-visible]:after:absolute has-[[role="region"]:focus-visible]:after:inset-0 has-[[role="region"]:focus-visible]:after:outline-2 has-[[role="region"]:focus-visible]:after:-outline-offset-8',
+        ])}
+      >
+        <div className="p-8PX scrollbar-gutter-both grid size-full items-center overflow-auto">
+          <div
+            ref={ref}
+            role="region"
+            aria-labelledby={id}
+            tabIndex={-1}
+            className="p-8PX grid aspect-video place-items-center shadow-none outline-none"
+          >
+            {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
+            {quest.type === 'key' && (
+              <p className="text-4xl">
+                <quest.Node />
+              </p>
+            )}
+          </div>
         </div>
       </div>
       <div
