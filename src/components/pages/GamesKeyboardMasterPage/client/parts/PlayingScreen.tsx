@@ -70,6 +70,11 @@ export const PlayingScreen = ({
       className="grid grid-rows-[auto_1fr_auto]"
       onClick={(e) => {
         e.preventDefault();
+
+        if (e.detail === 0) {
+          return;
+        }
+
         onFail();
         ref.current?.focus();
       }}
