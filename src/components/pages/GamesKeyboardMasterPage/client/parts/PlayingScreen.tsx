@@ -121,7 +121,7 @@ export const PlayingScreen = ({
           case 'ArrowRight':
           case 'ArrowDown':
             if (e.target instanceof HTMLInputElement) {
-              if (e.target.type === 'range' || e.target.type === 'text') {
+              if (e.target.type === 'text' || e.target.type === 'range' || e.target.type === 'number') {
                 return;
               }
 

@@ -78,6 +78,6 @@ const ALL = [
   listReorderAltArrowQuest,
 ];
 
-// const DEBUG = [datetimeQuest, textareaShiftSelectQuest, menuButtonQuest];
+const DEBUG: Quest[] = [];
 
-export const QUESTS: Quest[] = ALL;
+export const QUESTS: Quest[] = DEBUG.length ? DEBUG : ALL;
