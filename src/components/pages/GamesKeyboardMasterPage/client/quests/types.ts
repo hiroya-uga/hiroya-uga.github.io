@@ -39,3 +39,10 @@ export interface NodeQuest extends QuestBase {
 }
 
 export type Quest = KeyQuest | NodeQuest;
+
+// お題文と Node が同じ乱数を共有する必要があるクエストは、開始のたびに生成し直せるよう関数で持たせる
+export type QuestFactory = () => Quest;
+export type QuestSource = Quest | QuestFactory;
+
+export const resolveQuests = (sources: QuestSource[]): Quest[] =>
+  sources.map((source) => (typeof source === 'function' ? source() : source));

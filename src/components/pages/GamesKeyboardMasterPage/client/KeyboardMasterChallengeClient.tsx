@@ -6,13 +6,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useEscapeHold, useKeyboardMasterConfig } from './hooks';
 import styles from './KeyboardMasterChallengeClient.module.css';
 import { EscapeHoldOverlay, IdleScreen, PlayingScreen, ResultScreen } from './parts';
-import { QUESTS } from './quests';
+import { QUESTS, resolveQuests } from './quests';
 import type { Mode, Pulse, QuestResult } from './types';
 
 export const KeyboardMasterChallengeClient = () => {
   const advanceTimeoutRef = useRef<number | null>(null);
   const resolvedRef = useRef(false);
-  const [quests, setQuests] = useState(QUESTS);
+  const [quests, setQuests] = useState(() => resolveQuests(QUESTS));
   const [mode, setMode] = useState<Mode>('idle');
   const [questIndex, setQuestIndex] = useState(0);
   const [pulse, setPulse] = useState<Pulse | null>(null);
@@ -80,8 +80,11 @@ export const KeyboardMasterChallengeClient = () => {
     [quests, questIndex],
   );
 
-  // ランダム出題は設定が有効なときだけ。読み込み後に設定が変わりうるので、開始のたびに決める
-  const pickQuests = useCallback(() => (config.flags.random ? arrayShuffle(QUESTS) : QUESTS), [config.flags.random]);
+  // ランダム出題は設定が有効なときだけ。読み込み後に設定が変わりうるので、開始のたびに決める。
+  const pickQuests = useCallback(
+    () => resolveQuests(config.flags.random ? arrayShuffle(QUESTS) : QUESTS),
+    [config.flags.random],
+  );
 
   const handleStart = useCallback(() => {
     setQuests(pickQuests());

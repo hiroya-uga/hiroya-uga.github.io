@@ -35,11 +35,11 @@ import { textareaShiftSelectQuest } from './textarea-shift-select-quest';
 import { textareaStrictClearQuest } from './textarea-strict-clear-quest';
 import { textareaUndoQuest } from './textarea-undo-quest';
 import { treeExpandQuest } from './tree-expand-quest';
-import { Quest } from './types';
+import { QuestSource } from './types';
 
 export * from './types';
 
-const ALL = [
+const ALL: QuestSource[] = [
   // タブキーの位置を覚える
   ...keyQuests,
   // タブキーの位置を覚える
@@ -86,6 +86,6 @@ const ALL = [
   listReorderAltArrowQuest,
 ];
 
-const DEBUG: Quest[] = [];
+const DEBUG: QuestSource[] = [];
 
-export const QUESTS: Quest[] = DEBUG.length ? DEBUG : ALL;
+export const QUESTS: QuestSource[] = DEBUG.length ? DEBUG : ALL;
