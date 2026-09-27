@@ -88,4 +88,35 @@ const ALL: QuestSource[] = [
 
 const DEBUG: QuestSource[] = [];
 
-export const QUESTS: QuestSource[] = DEBUG.length ? DEBUG : ALL;
+const FIRST: QuestSource[] = [
+  // 1回目の挑戦。キー入力とフォーカス移動という、最も基礎的な操作だけに絞った厳選の10問
+  ...keyQuests,
+  focusQuest,
+  focusAndClickQuest,
+  focusReverseQuest,
+  focusAndSpaceQuest,
+];
+
+const SECOND: QuestSource[] = [
+  // 2回目の挑戦。チェックボックスやラジオボタンなど、基本的なフォーム部品を扱う厳選の10問
+  switchQuest,
+  checkboxQuest,
+  radioQuest,
+  radioChangeQuest,
+  radioAndCheckboxQuest,
+  starRatingQuest,
+  starRatingClickQuest,
+  numberSpinnerQuest,
+  datetimeQuest,
+  enterSubmitQuest,
+];
+
+/**
+ * 1・2回目の挑戦は操作を順番に覚えられるよう固定の10問ずつに絞り、3回目からは全問を対象にする。
+ * DEBUG が指定されているときは、段階分けせず常に DEBUG をそのまま使う
+ */
+export const QUESTS = {
+  first: DEBUG.length ? DEBUG : FIRST,
+  second: DEBUG.length ? DEBUG : SECOND,
+  all: DEBUG.length ? DEBUG : ALL,
+};

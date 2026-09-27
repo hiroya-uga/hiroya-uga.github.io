@@ -2,9 +2,10 @@
 
 import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import clsx from 'clsx';
-import { CSSProperties, useEffect, useId, useRef, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
 import { Quest } from '../quests';
+import type { FailAttempt, FailReason, QuestAttempt } from '../types';
 import styles from './PlayingScreen.module.css';
 
 interface Props {
@@ -12,8 +13,8 @@ interface Props {
   questIndex: number;
   shouldEnableTimeLimit: boolean;
   shouldEnableAnimation: boolean;
-  onClear: () => void;
-  onFail: () => void;
+  onClear: (attempt: QuestAttempt) => void;
+  onFail: (attempt: FailAttempt) => void;
 }
 
 const formatRemaining = (ms: number) => {
@@ -65,6 +66,9 @@ export const PlayingScreen = ({
   const id = useId();
   const [isCursorHidden, setIsCursorHidden] = useState(true);
   const [inputKeys, setInputKeys] = useState<string[]>([]);
+  // 表示用の inputKeys は決着後に空にするうえ、React の onKeyDown は window の keydown より先に走るため、
+  // 決着の瞬間に最後のキーまで含めて結果へ渡せるよう、お題ごとの履歴を同期的に更新できる ref で別に持つ
+  const attemptKeysRef = useRef<string[]>([]);
 
   const ref = useRef<HTMLDivElement>(null);
   const setTimeoutIdRef = useRef(-1);
@@ -72,18 +76,33 @@ export const PlayingScreen = ({
 
   // 最後に押したキーが履歴に見えるよう、クリア直後ではなく少し遅らせて空にする。node 型・key 型のどちらでも共通
   const handleClear = () => {
-    onClear();
+    onClear({ inputKeys: attemptKeysRef.current });
     setTimeout(() => {
       setInputKeys([]);
     }, 400);
   };
 
-  const { pressedKeys } = useKeyQuest({ quest, onClear: handleClear, onFail });
+  // useQuestTimer は onTimeout が変わるとカウントダウンを最初からやり直すので、identity を固定する
+  const handleFail = useCallback(
+    (reason: FailReason) => {
+      onFail({ reason, inputKeys: attemptKeysRef.current });
+    },
+    [onFail],
+  );
+  const handleTimeout = useCallback(() => handleFail('timeout'), [handleFail]);
+  // お題側は onMouseDown={onFail} のようにイベントを引数で渡すことがあるので、引数を捨てて理由を固定する
+  const handleNodeFail = () => handleFail('wrong-operation');
+
+  const { pressedKeys } = useKeyQuest({ quest, onClear: handleClear, onFail: handleFail });
   const remainingMs = useQuestTimer({
     isEnabled: shouldEnableTimeLimit,
     quest,
-    onTimeout: onFail,
+    onTimeout: handleTimeout,
   });
+
+  useEffect(() => {
+    attemptKeysRef.current = [];
+  }, [questIndex]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -126,17 +145,21 @@ export const PlayingScreen = ({
         e.preventDefault();
 
         if (ref.current !== document.activeElement && ref.current?.contains(document.activeElement)) {
-          onFail();
+          handleFail('mouse');
         }
 
         ref.current?.focus();
       }}
-      onKeyDown={(e) => {
+      // お題側は自前の onKeyDown で即座に onFail を呼ぶことがあり、bubble 側で履歴を追記すると
+      // その呼び出しより後になって失敗の原因になったキーが履歴から漏れる。capture 側で先に記録する。
+      onKeyDownCapture={(e) => {
         if (e.repeat === false) {
           const keyCombo = formatKeyCombo(e);
           setInputKeys((prev) => [...prev, keyCombo].slice(-INPUT_HISTORY_LIMIT));
+          attemptKeysRef.current = [...attemptKeysRef.current, keyCombo].slice(-INPUT_HISTORY_LIMIT);
         }
-
+      }}
+      onKeyDown={(e) => {
         if (quest.type === 'key') {
           e.preventDefault();
           return;
@@ -186,9 +209,10 @@ export const PlayingScreen = ({
         }
       }}
     >
-      <h2 className="bg-secondary p-16PX sticky top-0" id={id}>
-        {`お題：${quest.title}`}
-      </h2>
+      <div className="bg-secondary p-16PX sticky top-0 flex items-center justify-between">
+        <h2 id={id}>{`お題：${quest.title}`}</h2>
+        <p className="text-10px">{`No. ${String(questIndex + 1).padStart(2, '0')}`}</p>
+      </div>
 
       <div className="pt-2PX relative overflow-hidden after:pointer-events-none after:absolute after:right-0 after:top-0 after:h-full after:w-[20%] after:bg-[linear-gradient(to_right,transparent,var(--x-color-background-primary))]">
         <ol className="px-8PX min-h-30px flex w-max text-nowrap" aria-label="入力履歴">
@@ -214,7 +238,7 @@ export const PlayingScreen = ({
             tabIndex={-1}
             className="p-8PX grid aspect-video place-items-center shadow-none outline-none"
           >
-            {quest.type === 'node' && <quest.Node onClear={handleClear} onFail={onFail} />}
+            {quest.type === 'node' && <quest.Node onClear={handleClear} onFail={handleNodeFail} />}
             {quest.type === 'key' && (
               <p className="text-4xl">
                 <quest.Node pressedKeys={pressedKeys} />
