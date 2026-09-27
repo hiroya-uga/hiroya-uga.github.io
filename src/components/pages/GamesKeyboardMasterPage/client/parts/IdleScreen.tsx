@@ -139,6 +139,10 @@ export const IdleScreen = ({
               onInput={(e) => {
                 const value = Number.parseInt(e.currentTarget.value, 10);
 
+                if (Number.isNaN(value)) {
+                  return;
+                }
+
                 if (value < 1) {
                   onChangeQuestCount(1);
                   return;
@@ -149,7 +153,7 @@ export const IdleScreen = ({
                   return;
                 }
 
-                onChangeQuestCount(value || 10);
+                onChangeQuestCount(value);
               }}
             />
           )}
