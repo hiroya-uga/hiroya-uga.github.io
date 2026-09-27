@@ -56,6 +56,21 @@ const QuestHint = ({ hint }: Readonly<{ hint: string }>) => {
   return isVisible ? <span className="animate-fade-in">{`ヒント：${hint}`}</span> : null;
 };
 
+// 1秒ごとのカウントダウン更新を親から切り離し、入力履歴やヒントを含む兄弟サブツリーの再レンダーを避ける
+const QuestTimer = ({
+  quest,
+  isEnabled,
+  onTimeout,
+}: Readonly<{ quest: Quest; isEnabled: boolean; onTimeout: () => void }>) => {
+  const remainingMs = useQuestTimer({ isEnabled, quest, onTimeout });
+
+  return (
+    <p className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
+      残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
+    </p>
+  );
+};
+
 export const PlayingScreen = ({
   quest,
   questIndex,
@@ -95,11 +110,6 @@ export const PlayingScreen = ({
   const handleNodeFail = () => handleFail('wrong-operation');
 
   const { pressedKeys } = useKeyQuest({ quest, onClear: handleClear, onFail: handleFail });
-  const remainingMs = useQuestTimer({
-    isEnabled: shouldEnableTimeLimit,
-    quest,
-    onTimeout: handleTimeout,
-  });
 
   useEffect(() => {
     attemptKeysRef.current = [];
@@ -264,9 +274,7 @@ export const PlayingScreen = ({
           <p role="status">
             <QuestHint hint={quest.hint} />
           </p>
-          <p className={clsx([remainingMs !== null ? 'visible' : 'invisible'])}>
-            残り：<span className="font-sans tabular-nums">{formatRemaining(remainingMs ?? 0)}</span>秒
-          </p>
+          <QuestTimer quest={quest} isEnabled={shouldEnableTimeLimit} onTimeout={handleTimeout} />
         </div>
       </div>
     </div>
