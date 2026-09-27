@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const FocusAndClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
@@ -13,8 +14,7 @@ const FocusAndClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
           // href="#" はフォーカス可能にするためだけの指定なので、ページ先頭へのジャンプは止める
           e.preventDefault();
 
-          // detail === 0 はキーボード操作(Enter)経由のクリックのみを通す
-          if (e.detail !== 0) {
+          if (!isKeyboardActivatedClick(e)) {
             return;
           }
 

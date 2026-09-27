@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import { useState } from 'react';
 import { NodeQuest, QuestNodeProps } from './types';
 
@@ -24,7 +25,7 @@ const StarRatingClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
             onClick={(e) => {
               setRating(star);
 
-              if (star === TARGET && e.detail === 0) {
+              if (star === TARGET && isKeyboardActivatedClick(e)) {
                 onClear();
               }
             }}
