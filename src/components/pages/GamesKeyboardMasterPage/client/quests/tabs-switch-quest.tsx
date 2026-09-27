@@ -2,7 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useId, useRef, useState } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const TABS = [
   { label: 'りんご', description: '赤くて丸い果物です。' },

@@ -4,7 +4,7 @@ import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboar
 import { Checkbox } from '@/components/ui/forms/Checkbox';
 import { Radio } from '@/components/ui/forms/Radio';
 import { useId, useState } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const RADIO_OPTIONS = ['1', '2', '3'];
 const RADIO_LEGENDS = ['1つ目', '2つ目'];

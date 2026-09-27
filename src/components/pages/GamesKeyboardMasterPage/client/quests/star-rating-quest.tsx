@@ -2,7 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useState } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const STARS = [1, 2, 3, 4, 5];
 const TARGET = 3;

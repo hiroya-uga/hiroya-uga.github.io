@@ -2,7 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const FocusAndClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   return (

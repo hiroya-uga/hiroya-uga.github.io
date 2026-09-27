@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   const titleId = useId();

@@ -2,7 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { Checkbox } from '@/components/ui/forms/Checkbox';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const CheckboxQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   return (

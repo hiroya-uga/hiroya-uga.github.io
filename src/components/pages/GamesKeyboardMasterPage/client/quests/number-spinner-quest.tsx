@@ -3,7 +3,7 @@
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { getRandomInt } from '@/utils/number';
 import { useId, useState } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const NUMBER_TARGET_MIN = 3;
 const NUMBER_TARGET_MAX = 9;

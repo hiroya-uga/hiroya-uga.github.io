@@ -1,7 +1,7 @@
 import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { PageTitle } from '@/components/structures/PageTitle';
 import { DiscList } from '@/components/ui/lists/DiscList';
-import { Metadata } from '@/utils/get-metadata';
+import type { Metadata } from '@/utils/get-metadata';
 import { KeyboardMasterChallengeClient } from './client';
 
 interface Props {

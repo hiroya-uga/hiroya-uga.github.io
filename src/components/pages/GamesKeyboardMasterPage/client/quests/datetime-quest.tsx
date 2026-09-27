@@ -3,7 +3,7 @@
 import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { getRandomInt } from '@/utils/number';
 import { useId } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const YEAR_MIN = 1990;
 const MINUTE_STEP = 5;
