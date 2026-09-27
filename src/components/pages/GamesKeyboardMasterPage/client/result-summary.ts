@@ -1,13 +1,13 @@
-import type { BestRecord, FailReason, QuestResult } from './types';
+import type { KeyboardMasterBestRecord, QuestFailReason, QuestResult } from './types';
 
-export const FAIL_REASON_LABELS: Record<FailReason, string> = {
+export const FAIL_REASON_LABELS: Record<QuestFailReason, string> = {
   timeout: '時間切れ',
   'wrong-key': '違うキーを押した',
   mouse: 'マウスでクリックした',
   'wrong-operation': '操作を間違えた',
 };
 
-export interface ResultSummary {
+interface ResultSummary {
   total: number;
   successCount: number;
   failCount: number;
@@ -53,7 +53,13 @@ export const getRankTitle = ({ successCount, total }: Pick<ResultSummary, 'succe
  * 自己ベストを更新するか。クリア数が多いほうを優先し、同数なら早いほうを取る。
  * お題の数が変わった記録とは比べようがないので、お題数が違うときは古い記録を捨てて更新扱いにする。
  */
-export const isBetterRecord = ({ current, best }: { current: BestRecord; best: BestRecord | null }) => {
+export const isBetterRecord = ({
+  current,
+  best,
+}: {
+  current: KeyboardMasterBestRecord;
+  best: KeyboardMasterBestRecord | null;
+}) => {
   if (best === null || best.total !== current.total) {
     return true;
   }

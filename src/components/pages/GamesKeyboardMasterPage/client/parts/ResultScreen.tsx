@@ -12,7 +12,7 @@ import {
   isBetterRecord,
   summarizeResults,
 } from '../result-summary';
-import type { BestRecord, QuestResult } from '../types';
+import type { KeyboardMasterBestRecord, QuestResult } from '../types';
 import { Confetti } from './Confetti';
 import { ResultEntry } from './ResultEntry';
 import styles from './ResultScreen.module.css';
@@ -23,10 +23,10 @@ interface Props {
   isFullRun: boolean;
   // ちょうど2回目をクリアした直後かどうかの判定に使う
   tryCount: number;
-  bestRecord: BestRecord | null;
+  bestRecord: KeyboardMasterBestRecord | null;
   shouldEnableAnimation: boolean;
   shouldEnableTimeLimit: boolean;
-  onRecordBest: (record: BestRecord) => void;
+  onRecordBest: (record: KeyboardMasterBestRecord) => void;
   onRetry: () => void;
   onRetryFailed: () => void;
 }
@@ -51,7 +51,7 @@ export const ResultScreen = ({
   const [previousBest] = useState(bestRecord);
 
   const summary = useMemo(() => summarizeResults(results), [results]);
-  const record = useMemo<BestRecord>(
+  const record = useMemo<KeyboardMasterBestRecord>(
     () => ({ successCount: summary.successCount, total: summary.total, totalMs: summary.totalMs }),
     [summary],
   );

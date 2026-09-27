@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { MODIFIER_KEYS, Quest } from '../quests';
-import type { FailReason } from '../types';
+import { MODIFIER_KEYS, type Quest } from '../quests';
+import type { QuestFailReason } from '../types';
 
 const MODIFIER_SINGLE_KEYS = new Set(['Shift', 'Control', 'Alt', 'Meta']);
 
 interface Props {
   quest: Quest;
   onClear: () => void;
-  onFail: (reason: FailReason) => void;
+  onFail: (reason: QuestFailReason) => void;
 }
 
 /** キー入力型のお題の正誤を keydown で判定する。key 型以外のお題では何もしない */

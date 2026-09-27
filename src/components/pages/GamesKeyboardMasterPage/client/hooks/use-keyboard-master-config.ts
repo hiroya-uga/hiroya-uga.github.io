@@ -3,7 +3,7 @@
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { QUESTS } from '../quests';
-import type { BestRecord } from '../types';
+import type { KeyboardMasterBestRecord } from '../types';
 
 const SAVEDATA_KEY = 'savedata-keyboard-master';
 
@@ -15,7 +15,7 @@ export type KeyboardMasterFlags = {
 
 export type KeyboardMasterConfig = {
   flags: KeyboardMasterFlags;
-  best: BestRecord | null;
+  best: KeyboardMasterBestRecord | null;
   // これまでに開始した「全問プレイ」の回数
   tryCount: number;
   // 3回目以降の挑戦で出題する問題数
@@ -82,7 +82,7 @@ export const useKeyboardMasterConfig = () => {
   );
 
   const updateBest = useCallback(
-    (best: BestRecord) => {
+    (best: KeyboardMasterBestRecord) => {
       commit({ ...configRef.current, best });
     },
     [commit],
