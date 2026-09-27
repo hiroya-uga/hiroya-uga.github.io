@@ -35,7 +35,7 @@ import { textareaShiftSelectQuest } from './textarea-shift-select-quest';
 import { textareaStrictClearQuest } from './textarea-strict-clear-quest';
 import { textareaUndoQuest } from './textarea-undo-quest';
 import { treeExpandQuest } from './tree-expand-quest';
-import { QuestSource } from './types';
+import type { QuestSource } from './types';
 
 export * from './types';
 

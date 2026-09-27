@@ -2,7 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { SelectField } from '@/components/ui/forms/SelectField';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const SELECT_OPTIONS = ['りんご', 'みかん', 'ぶどう', 'なし'];
 const SELECT_ANSWER = SELECT_OPTIONS[2];

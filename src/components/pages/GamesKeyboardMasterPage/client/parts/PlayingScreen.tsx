@@ -3,9 +3,9 @@
 import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import clsx from 'clsx';
-import { CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
+import { type CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
-import { Quest } from '../quests';
+import type { Quest } from '../quests';
 import type { FailAttempt, QuestAttempt, QuestFailReason } from '../types';
 import styles from './PlayingScreen.module.css';
 

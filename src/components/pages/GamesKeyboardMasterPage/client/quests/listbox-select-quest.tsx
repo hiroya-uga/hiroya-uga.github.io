@@ -3,7 +3,7 @@
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import clsx from 'clsx';
 import { useId, useState } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const LIST_ITEMS = ['ねこ', 'いぬ', 'うさぎ', 'とり'];
 const LIST_ANSWER_INDEX = 2;

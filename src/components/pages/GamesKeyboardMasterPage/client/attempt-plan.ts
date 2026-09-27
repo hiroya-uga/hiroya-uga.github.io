@@ -1,6 +1,5 @@
 import { arrayShuffle } from '@/utils/array-shuffle';
-import type { QuestSource } from './quests';
-import { QUESTS } from './quests';
+import { QUESTS, type QuestSource } from './quests';
 
 interface AttemptPlanInput {
   // これから始める「全問プレイ」が何回目かを表す1始まりの番号

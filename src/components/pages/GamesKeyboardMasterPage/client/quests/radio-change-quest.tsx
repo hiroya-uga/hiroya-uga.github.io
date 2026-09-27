@@ -3,7 +3,7 @@
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { Radio } from '@/components/ui/forms/Radio';
 import { useState } from 'react';
-import { NodeQuest, QuestNodeProps } from './types';
+import type { NodeQuest, QuestNodeProps } from './types';
 
 const RadioChangeQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const [value, setValue] = useState<'a' | 'b'>('a');

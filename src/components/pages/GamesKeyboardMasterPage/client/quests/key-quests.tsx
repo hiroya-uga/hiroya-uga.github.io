@@ -1,6 +1,6 @@
 import { DEFAULT_KEY_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import clsx from 'clsx';
-import { KeyQuest } from './types';
+import type { KeyQuest } from './types';
 
 const ARROW_KEYS = [
   { key: 'ArrowUp', label: '↑' },
