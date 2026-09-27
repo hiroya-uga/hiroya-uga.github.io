@@ -137,7 +137,7 @@ describe('IdleScreen の問題数表示', () => {
     expect(onChangeQuestCount).toHaveBeenLastCalledWith(1);
   });
 
-  it('空欄にすると、既定値の10にする', async () => {
+  it('空欄にしても、入力し直せるようconfigを書き換えない', async () => {
     const user = userEvent.setup();
     const onChangeQuestCount = vi.fn();
     render(
@@ -157,7 +157,7 @@ describe('IdleScreen の問題数表示', () => {
     const input = screen.getByRole('spinbutton', { name: '問題数' });
     fireEvent.input(input, { target: { value: '' } });
 
-    expect(onChangeQuestCount).toHaveBeenLastCalledWith(10);
+    expect(onChangeQuestCount).not.toHaveBeenCalled();
   });
 });
 
