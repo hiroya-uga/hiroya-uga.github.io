@@ -1,14 +1,22 @@
 'use client';
 
-import { RefObject, useEffect } from 'react';
+import { type RefObject, useEffect } from 'react';
 
 interface Props {
   containerRef: RefObject<HTMLElement | null>;
 }
 
 // Tabで実際に辿り着ける要素だけを対象にする。disabled/tabIndex=-1は既定のTab移動でも読み飛ばされるため対象外
-const FOCUSABLE_SELECTOR =
-  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]',
+]
+  .map((selector) => `${selector}:not([tabindex="-1"])`)
+  .join(', ');
 
 // セレクタに一致してもdisplay:noneで隠れている要素はTabで辿り着けないので、境界の的地から除く
 const getFocusable = (container: HTMLElement) =>
