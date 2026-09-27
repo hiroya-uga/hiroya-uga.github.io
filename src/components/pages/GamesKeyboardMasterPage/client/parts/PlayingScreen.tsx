@@ -1,6 +1,7 @@
 'use client';
 
 import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import clsx from 'clsx';
 import { CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
@@ -138,7 +139,7 @@ export const PlayingScreen = ({
         isCursorHidden && 'cursor-none',
       ])}
       onClick={(e) => {
-        if (e.detail === 0) {
+        if (isKeyboardActivatedClick(e)) {
           return;
         }
 

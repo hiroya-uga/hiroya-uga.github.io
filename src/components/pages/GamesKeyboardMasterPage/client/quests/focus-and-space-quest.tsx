@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import { NodeQuest, QuestNodeProps } from './types';
 
 const BUTTON_OPTIONS = ['A', 'B', 'C', 'D'];
@@ -22,8 +23,7 @@ const FocusAndSpaceQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
             }
           }}
           onClick={(e) => {
-            // detail === 0 はキーボード操作(Space)経由のクリックのみを通す
-            if (e.detail !== 0) {
+            if (!isKeyboardActivatedClick(e)) {
               return;
             }
 

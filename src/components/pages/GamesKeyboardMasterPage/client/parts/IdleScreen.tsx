@@ -2,6 +2,7 @@
 
 import { Modal } from '@/components/ui/dialogs/Modal';
 import { Switch, TextField } from '@/components/ui/forms';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import clsx from 'clsx';
 import { useEffect, useId, useRef, useState } from 'react';
 import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
@@ -56,8 +57,7 @@ export const IdleScreen = ({
           // ボタン全面に outline が出るとキーキャップとの対応が分かりにくいので、フォーカスの輪郭は枠側に出す
           className="group grid size-full place-items-center content-center gap-8 rounded outline-none"
           onClick={(e) => {
-            // detail === 0 はキーボード操作(Enter/Space)経由のクリックのみを通す
-            if (e.detail === 0) {
+            if (isKeyboardActivatedClick(e)) {
               onStart();
               return;
             }
