@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
 import { Quest } from '../quests';
-import type { FailAttempt, FailReason, QuestAttempt } from '../types';
+import type { FailAttempt, QuestAttempt, QuestFailReason } from '../types';
 import styles from './PlayingScreen.module.css';
 
 interface Props {
@@ -100,7 +100,7 @@ export const PlayingScreen = ({
 
   // useQuestTimer は onTimeout が変わるとカウントダウンを最初からやり直すので、identity を固定する
   const handleFail = useCallback(
-    (reason: FailReason) => {
+    (reason: QuestFailReason) => {
       onFail({ reason, inputKeys: attemptKeysRef.current });
     },
     [onFail],

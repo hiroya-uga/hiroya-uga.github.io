@@ -6,9 +6,11 @@ import { resolveAttemptPlan } from './attempt-plan';
 import { useEscapeHold, useKeyboardMasterConfig } from './hooks';
 import styles from './KeyboardMasterChallengeClient.module.css';
 import { EscapeHoldOverlay, IdleScreen, PlayingScreen, ResultScreen } from './parts';
-import type { QuestSource } from './quests';
-import { QUESTS, resolveQuests } from './quests';
-import type { FailAttempt, FailReason, Mode, Pulse, QuestAttempt, QuestResult } from './types';
+import { type Quest, type QuestSource, QUESTS } from './quests';
+import type { FailAttempt, Mode, QuestAttempt, QuestFailReason, QuestPulse, QuestResult } from './types';
+
+const resolveQuests = (sources: QuestSource[]): Quest[] =>
+  sources.map((source) => (typeof source === 'function' ? source() : source));
 
 // 「失敗した問題だけやり直す」でランダム値を持つお題を作り直せるよう、解決前の定義と一緒に持つ
 const createPlan = (sources: QuestSource[]) => ({ sources, quests: resolveQuests(sources) });
@@ -23,7 +25,7 @@ export const KeyboardMasterChallengeClient = () => {
   const [isFullRun, setIsFullRun] = useState(true);
   const [mode, setMode] = useState<Mode>('idle');
   const [questIndex, setQuestIndex] = useState(0);
-  const [pulse, setPulse] = useState<Pulse | null>(null);
+  const [pulse, setPulse] = useState<QuestPulse | null>(null);
   const [results, setResults] = useState<QuestResult[]>([]);
   const [shouldFocusStart, setShouldFocusStart] = useState(false);
   const { config, updateFlags, updateBest, updateTryCount, updateQuestCount } = useKeyboardMasterConfig();
@@ -69,7 +71,15 @@ export const KeyboardMasterChallengeClient = () => {
   }, []);
 
   const advance = useCallback(
-    ({ result, reason, inputKeys }: { result: Pulse['result']; reason?: FailReason; inputKeys: string[] }) => {
+    ({
+      result,
+      reason,
+      inputKeys,
+    }: {
+      result: QuestPulse['result'];
+      reason?: QuestFailReason;
+      inputKeys: string[];
+    }) => {
       if (resolvedRef.current) {
         return;
       }
