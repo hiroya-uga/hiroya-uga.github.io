@@ -1,16 +1,21 @@
 'use client';
 
 import { Modal } from '@/components/ui/dialogs/Modal';
-import { Switch } from '@/components/ui/forms';
+import { Switch, TextField } from '@/components/ui/forms';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
+import { QUESTS } from '../quests';
 import styles from './IdleScreen.module.css';
 
 interface Props {
   config: KeyboardMasterConfig;
   shouldFocusStart: boolean;
+  // 失敗した問題だけをやり直すときの問題数。全問プレイなら null
+  retryCount: number | null;
   onChangeFlags: (patch: Partial<KeyboardMasterFlags>) => void;
+  onChangeQuestCount: (questCount: number) => void;
+  onClearRetry: () => void;
   onStart: () => void;
 }
 
@@ -20,10 +25,19 @@ const CONFIG_ITEMS: { key: keyof KeyboardMasterFlags; label: string }[] = [
   { key: 'random', label: 'ランダム出題' },
 ];
 
-export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }: Readonly<Props>) => {
+export const IdleScreen = ({
+  config,
+  shouldFocusStart,
+  retryCount,
+  onChangeFlags,
+  onChangeQuestCount,
+  onClearRetry,
+  onStart,
+}: Readonly<Props>) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const startButtonRef = useRef<HTMLButtonElement>(null);
+  const randomHintId = useId();
 
   // ref コールバックだと再描画のたびに走り、CONFIG モーダルからフォーカスを奪うので、値が変わったときだけ走る effect にする
   useEffect(() => {
@@ -73,6 +87,14 @@ export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }:
           </span>
         </button>
       </p>
+      {retryCount !== null && (
+        <p className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2 text-sm">
+          <span>{`失敗した${retryCount}問だけをやり直します`}</span>
+          <button type="button" className="bg-secondary border-primary rounded border px-2 py-1" onClick={onClearRetry}>
+            全問に戻す
+          </button>
+        </p>
+      )}
       <p>
         <button
           type="button"
@@ -93,14 +115,44 @@ export const IdleScreen = ({ config, shouldFocusStart, onChangeFlags, onStart }:
                 <span>
                   <Switch
                     checked={config.flags[key]}
+                    // ランダム出題は1・2回目には効かないので、2回クリアするまでは切り替えさせない
+                    disabled={key === 'random' && config.tryCount < 2}
                     onChange={(e) => {
                       onChangeFlags({ [key]: e.currentTarget.checked });
                     }}
+                    aria-describedby={key === 'random' && config.tryCount < 2 ? randomHintId : undefined}
                   />
                 </span>
               </label>
             </p>
           ))}
+          {config.tryCount < 2 ? (
+            // 3回目以降はflags.randomの値に関わらず常にランダム出題になるため、鍵となるのはtryCountで、flags.randomでは判定しない
+            <p id={randomHintId}>ランダム出題は3回目以降解放されます。</p>
+          ) : (
+            <TextField
+              type="number"
+              label="問題数"
+              min={1}
+              max={QUESTS.all.length}
+              value={String(config.questCount)}
+              onInput={(e) => {
+                const value = Number.parseInt(e.currentTarget.value, 10);
+
+                if (value < 1) {
+                  onChangeQuestCount(1);
+                  return;
+                }
+
+                if (QUESTS.all.length < value) {
+                  onChangeQuestCount(QUESTS.all.length);
+                  return;
+                }
+
+                onChangeQuestCount(value || 10);
+              }}
+            />
+          )}
         </div>
       </Modal>
     </>
