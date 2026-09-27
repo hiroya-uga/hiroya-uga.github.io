@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { SlackReminderCommandGenerator } from '@/app/(ja)/(common)/tools/slack-reminder-command-generator/Client';
-import { DIALOG_PORTAL_ID } from '@/constants/id';
+import { DIALOG_PORTAL_ID, DIALOG_TOAST_PORTAL_ID } from '@/constants/id';
 
 describe('SlackReminderCommandGenerator', () => {
   beforeEach(() => {
@@ -392,6 +392,10 @@ describe('SlackReminderCommandGenerator', () => {
         portal.id = DIALOG_PORTAL_ID;
         document.body.appendChild(portal);
 
+        const toastPortal = document.createElement('div');
+        toastPortal.id = DIALOG_TOAST_PORTAL_ID;
+        document.body.appendChild(toastPortal);
+
         // クリップボード API をモック
         Object.defineProperty(navigator, 'clipboard', {
           value: {
@@ -405,6 +409,7 @@ describe('SlackReminderCommandGenerator', () => {
 
       afterEach(() => {
         document.getElementById(DIALOG_PORTAL_ID)?.remove();
+        document.getElementById(DIALOG_TOAST_PORTAL_ID)?.remove();
       });
 
       it('コピーボタンを押下するとトーストが表示される', async () => {
@@ -431,6 +436,10 @@ describe('SlackReminderCommandGenerator', () => {
         portal.id = DIALOG_PORTAL_ID;
         document.body.appendChild(portal);
 
+        const toastPortal = document.createElement('div');
+        toastPortal.id = DIALOG_TOAST_PORTAL_ID;
+        document.body.appendChild(toastPortal);
+
         writeClipboardMock = vi.fn().mockResolvedValue(undefined);
         clipboardItemCtorMock = vi.fn((_: Record<string, Blob>) => undefined);
 
@@ -455,6 +464,7 @@ describe('SlackReminderCommandGenerator', () => {
 
       afterEach(() => {
         document.getElementById(DIALOG_PORTAL_ID)?.remove();
+        document.getElementById(DIALOG_TOAST_PORTAL_ID)?.remove();
         vi.unstubAllGlobals();
       });
 
