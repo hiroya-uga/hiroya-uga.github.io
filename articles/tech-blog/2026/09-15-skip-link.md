@@ -38,9 +38,13 @@ Chrome・Safari・Firefoxのいずれも、スクリーンリーダなしで`mai
 
 [^記事執筆時点]: 2026年09月15日現在。
 
+<!-- textlint-disable ja-technical-writing/max-comma -->
+
 > They are, however, only beneficial for users who have ways of navigating with this information. For example, adding headings to a document will only help users who can “jump” from heading to heading (such a possibility can be provided by browsers, browsers plugins, screen readers, or other assistive technologies). Techniques and solutions based on links will benefit all users (for example, sighted keyboard users with no other assistive technology) and are therefore recommended.
 >
 > 出典：[Bypass Blocks of Repeated Content[proposed] | ACT Rule | WAI | W3C](https://www.w3.org/WAI/standards-guidelines/act/rules/cf77f2/proposed/)
+
+<!-- textlint-enable ja-technical-writing/max-comma -->
 
 ACT規則[^act]をみてみると、`main`要素のようなランドマークがあれば2.4.1は適合となりますが、重要な補足情報も添えられています。
 
@@ -54,7 +58,11 @@ WCAGの達成基準を気にしたり、コントラスト比を気にしたり�
 
 そのUIがあることで、誰かが助かっているのか。逆に誰かにとって不利になっていないか。
 
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+
 要件はWebコンテンツによってさまざまだと思います。しかしながら、誰にとっても使いやすいこと自体が要件と衝突することはないでしょう[^使いやすさ？]。
+
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 
 [^使いやすさ？]: ビジネスの都合上、使いやすすぎたら困っちゃうケースの話は除外。ここでの「使いやすいこと」とは知覚可能性、操作可能性、理解可能性、堅牢性に限った話。
 

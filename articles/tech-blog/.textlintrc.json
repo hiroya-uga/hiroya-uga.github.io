@@ -4,7 +4,10 @@
   },
   "rules": {
     "preset-ja-technical-writing": {
-      "no-exclamation-question-mark": false
+      "no-exclamation-question-mark": false,
+      "ja-no-successive-word": {
+        "allow": ["─"]
+      }
     },
     "preset-jtf-style": {
       "4.2.1.感嘆符(！)": false,
