@@ -29,7 +29,7 @@ export const useQuestTimer = ({ isEnabled, quest, onTimeout }: Props) => {
 
     const interval = window.setInterval(() => {
       setRemainingMs(Math.max(0, deadline - Date.now()));
-    }, 200);
+    }, 1000);
 
     const timeout = window.setTimeout(onTimeout, timeLimit);
 
