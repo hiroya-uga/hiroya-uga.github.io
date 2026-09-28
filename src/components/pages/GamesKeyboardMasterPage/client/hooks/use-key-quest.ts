@@ -36,7 +36,7 @@ export const useKeyQuest = ({ quest, onClear, onFail }: Props) => {
 
       if (Array.isArray(key)) {
         // 押しっぱなしのリピートで重複カウントされないよう、e.repeat は無視する
-        if (e.repeat || !modifiersMatch || !key.includes(e.key)) {
+        if (e.repeat || modifiersMatch === false || key.includes(e.key) === false) {
           return;
         }
 
