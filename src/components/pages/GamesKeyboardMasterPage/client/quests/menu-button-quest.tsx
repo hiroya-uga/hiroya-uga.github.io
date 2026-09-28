@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import { useEffect, useId, useRef, useState } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -112,7 +113,11 @@ const MenuButtonQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
                 role="menuitem"
                 tabIndex={-1}
                 className="focus:bg-secondary px-16PX py-8PX block w-full text-left focus:font-bold"
-                onClick={() => {
+                onClick={(e) => {
+                  if (isKeyboardActivatedClick(e) === false) {
+                    return;
+                  }
+
                   if (item === MENU_ANSWER) {
                     onClear();
                     return;
