@@ -33,8 +33,9 @@ describe('useKeyboardMasterConfig', () => {
       result.current.updateTryCount(3);
     });
 
+    // localStorageへの書き込みはデバウンスされるため、config反映は同期・保存は非同期で確認する
     expect(result.current.config.tryCount).toBe(3);
-    expect(localStorage.getItem(SAVEDATA_KEY)).not.toBeNull();
+    await waitFor(() => expect(localStorage.getItem(SAVEDATA_KEY)).not.toBeNull());
     expect(JSON.parse(localStorage.getItem(SAVEDATA_KEY) ?? '{}').tryCount).toBe(3);
   });
 
@@ -48,7 +49,7 @@ describe('useKeyboardMasterConfig', () => {
     });
 
     expect(result.current.config.questCount).toBe(20);
-    expect(JSON.parse(localStorage.getItem(SAVEDATA_KEY) ?? '{}').questCount).toBe(20);
+    await waitFor(() => expect(JSON.parse(localStorage.getItem(SAVEDATA_KEY) ?? '{}').questCount).toBe(20));
   });
 
   it('bestがnullのときは保存データにbestを含めない', async () => {

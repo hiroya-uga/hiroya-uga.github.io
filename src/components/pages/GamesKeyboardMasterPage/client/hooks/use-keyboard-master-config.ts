@@ -6,6 +6,17 @@ import { QUESTS } from '../quests';
 import type { KeyboardMasterBestRecord } from '../types';
 
 const SAVEDATA_KEY = 'savedata-keyboard-master';
+// 問題数入力のキー連打のたびに書き込まないよう、保存だけ間引く
+const SAVE_DEBOUNCE_MS = 400;
+
+const saveConfig = (next: KeyboardMasterConfig) => {
+  setLocalStorage(SAVEDATA_KEY, {
+    flags: next.flags,
+    tryCount: next.tryCount,
+    questCount: next.questCount,
+    best: next.best ?? undefined,
+  });
+};
 
 export type KeyboardMasterFlags = {
   timeLimit: boolean;
@@ -44,16 +55,24 @@ export const useKeyboardMasterConfig = () => {
   const [config, setConfig] = useState(DEFAULT_CONFIG);
   // 更新関数の identity を固定するため、最新の設定は ref でも持つ(結果画面の effect から呼ばれる)
   const configRef = useRef(DEFAULT_CONFIG);
+  const saveTimeoutRef = useRef(-1);
 
   const commit = useCallback((next: KeyboardMasterConfig) => {
     configRef.current = next;
     setConfig(next);
-    setLocalStorage(SAVEDATA_KEY, {
-      flags: next.flags,
-      tryCount: next.tryCount,
-      questCount: next.questCount,
-      ...(next.best !== null && { best: next.best }),
-    });
+
+    window.clearTimeout(saveTimeoutRef.current);
+    saveTimeoutRef.current = window.setTimeout(() => {
+      saveConfig(next);
+    }, SAVE_DEBOUNCE_MS);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      // アンマウント時に保存待ちの変更が失われないよう、間引いた分を即時反映する
+      window.clearTimeout(saveTimeoutRef.current);
+      saveConfig(configRef.current);
+    };
   }, []);
 
   useEffect(() => {
