@@ -1,46 +1,19 @@
 'use client';
 
 import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useReorderableList } from '../hooks';
 import type { NodeQuest, QuestNodeProps } from './types';
 
 const INITIAL_ITEMS = ['A', 'B', 'C'];
 const TARGET_ITEM = 'C';
 
 const ListReorderGrabQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
-  const [items, setItems] = useState(INITIAL_ITEMS);
   const [grabbedItem, setGrabbedItem] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState('');
-  const itemRefs = useRef(new Map<string, HTMLButtonElement>());
-  const focusedItemRef = useRef<string | null>(null);
+  const { items, setItems, move, registerItemRef, focusItem } = useReorderableList({ initialItems: INITIAL_ITEMS });
   // Escape で掴む前の並びへ戻すために控えておく
   const itemsBeforeGrabRef = useRef(INITIAL_ITEMS);
-
-  // 並び替えで DOM ノードが付け替わるとフォーカスが外れるので、動かした項目へ戻す
-  useEffect(() => {
-    if (focusedItemRef.current === null) {
-      return;
-    }
-
-    itemRefs.current.get(focusedItemRef.current)?.focus();
-  }, [items]);
-
-  const move = (item: string, offset: -1 | 1) => {
-    const from = items.indexOf(item);
-    const to = from + offset;
-
-    if (0 > to || to >= items.length) {
-      return;
-    }
-
-    const next = [...items];
-    next.splice(from, 1);
-    next.splice(to, 0, item);
-
-    focusedItemRef.current = item;
-    setItems(next);
-    setAnnouncement(`${item}を${to + 1}番目に移動しました`);
-  };
 
   // Space・Enter・クリックはどれも click として届くので、掴む・置くの切り替えはここに集約する
   const handleToggle = (item: string) => {
@@ -51,8 +24,13 @@ const ListReorderGrabQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
       return;
     }
 
+    // 掴んでいる項目以外のボタンを押しても drop 扱いにしない（stale な grabbedItem での誤判定を防ぐ）
+    if (item !== grabbedItem) {
+      return;
+    }
+
     setGrabbedItem(null);
-    setAnnouncement(`${grabbedItem}を${items.indexOf(grabbedItem) + 1}番目に置きました`);
+    setAnnouncement(`${item}を${items.indexOf(item) + 1}番目に置きました`);
 
     if (items[0] === TARGET_ITEM) {
       onClear();
@@ -68,16 +46,9 @@ const ListReorderGrabQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
               type="button"
               aria-pressed={grabbedItem === item}
               className="border-secondary px-16PX py-8PX aria-pressed:bg-secondary w-full rounded border text-xl aria-pressed:border-dashed aria-pressed:-outline-offset-4"
-              ref={(element) => {
-                if (element === null) {
-                  itemRefs.current.delete(item);
-                  return;
-                }
-
-                itemRefs.current.set(item, element);
-              }}
+              ref={registerItemRef(item)}
               onFocus={() => {
-                focusedItemRef.current = item;
+                focusItem(item);
               }}
               onClick={() => {
                 handleToggle(item);
@@ -89,13 +60,19 @@ const ListReorderGrabQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 
                 if (e.key === 'ArrowUp') {
                   e.preventDefault();
-                  move(item, -1);
+                  const to = move(item, -1);
+                  if (to !== null) {
+                    setAnnouncement(`${item}を${to + 1}番目に移動しました`);
+                  }
                   return;
                 }
 
                 if (e.key === 'ArrowDown') {
                   e.preventDefault();
-                  move(item, 1);
+                  const to = move(item, 1);
+                  if (to !== null) {
+                    setAnnouncement(`${item}を${to + 1}番目に移動しました`);
+                  }
                   return;
                 }
 

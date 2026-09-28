@@ -1,47 +1,23 @@
 'use client';
 
 import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useReorderableList } from '../hooks';
 import type { NodeQuest, QuestNodeProps } from './types';
 
 const INITIAL_ITEMS = ['A', 'B', 'C'];
 const TARGET_ITEM = 'C';
 
 const ListReorderAltArrowQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
-  const [items, setItems] = useState(INITIAL_ITEMS);
   const [announcement, setAnnouncement] = useState('');
-  const itemRefs = useRef(new Map<string, HTMLButtonElement>());
-  const focusedItemRef = useRef<string | null>(null);
-
-  // 並び替えで DOM ノードが付け替わるとフォーカスが外れるので、動かした項目へ戻す
-  useEffect(() => {
-    if (focusedItemRef.current === null) {
-      return;
-    }
-
-    itemRefs.current.get(focusedItemRef.current)?.focus();
-  }, [items]);
-
-  const move = (item: string, offset: -1 | 1) => {
-    const from = items.indexOf(item);
-    const to = from + offset;
-
-    if (0 > to || to >= items.length) {
-      return;
-    }
-
-    const next = [...items];
-    next.splice(from, 1);
-    next.splice(to, 0, item);
-
-    focusedItemRef.current = item;
-    setItems(next);
-    setAnnouncement(`${item}を${to + 1}番目に移動しました`);
-
-    if (next[0] === TARGET_ITEM) {
-      onClear();
-    }
-  };
+  const { items, move, registerItemRef, focusItem } = useReorderableList({
+    initialItems: INITIAL_ITEMS,
+    onAfterMove: (next) => {
+      if (next[0] === TARGET_ITEM) {
+        onClear();
+      }
+    },
+  });
 
   return (
     <>
@@ -51,16 +27,9 @@ const ListReorderAltArrowQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => 
             <button
               type="button"
               className="border-primary px-16PX py-8PX w-full rounded border text-xl"
-              ref={(element) => {
-                if (element === null) {
-                  itemRefs.current.delete(item);
-                  return;
-                }
-
-                itemRefs.current.set(item, element);
-              }}
+              ref={registerItemRef(item)}
               onFocus={() => {
-                focusedItemRef.current = item;
+                focusItem(item);
               }}
               onKeyDown={(e) => {
                 if (e.altKey === false) {
@@ -69,13 +38,19 @@ const ListReorderAltArrowQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => 
 
                 if (e.key === 'ArrowUp') {
                   e.preventDefault();
-                  move(item, -1);
+                  const to = move(item, -1);
+                  if (to !== null) {
+                    setAnnouncement(`${item}を${to + 1}番目に移動しました`);
+                  }
                   return;
                 }
 
                 if (e.key === 'ArrowDown') {
                   e.preventDefault();
-                  move(item, 1);
+                  const to = move(item, 1);
+                  if (to !== null) {
+                    setAnnouncement(`${item}を${to + 1}番目に移動しました`);
+                  }
                 }
               }}
             >
