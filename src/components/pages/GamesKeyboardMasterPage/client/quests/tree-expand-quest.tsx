@@ -71,7 +71,7 @@ const TreeExpandQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   };
 
   return (
-    <ul role="tree" aria-label="ファイル" className="grid gap-1 text-xl">
+    <ul role="tree" aria-label="メニュー" className="grid gap-1 text-xl">
       {items.map((item, index) => {
         const isExpanded = expandedIds.has(item.id);
 

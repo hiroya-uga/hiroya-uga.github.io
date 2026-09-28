@@ -62,14 +62,14 @@ const MenuButtonQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
           }
         }}
       >
-        ファイル
+        メニュー
       </button>
 
       {isOpen && (
         <ul
           id={menuId}
           role="menu"
-          aria-label="ファイル"
+          aria-label="メニュー"
           className="border-primary overflow-hidden rounded border text-xl"
           onKeyDown={(e) => {
             if (e.key === 'ArrowDown') {
