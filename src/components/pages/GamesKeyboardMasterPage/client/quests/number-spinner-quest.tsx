@@ -8,8 +8,18 @@ import type { NodeQuest, QuestNodeProps } from './types';
 const NUMBER_TARGET_MIN = 3;
 const NUMBER_TARGET_MAX = 9;
 
-// 矢印キー操作以外(直接入力・ホイール・貼り付け)は Fail 扱いにする。Tab/Shift はフォーカス移動のため許可する
-const ALLOWED_KEYS = new Set(['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Tab', 'Shift']);
+const ALLOWED_KEYS = new Set([
+  // 矢印キー操作以外は Fail 扱いにする
+  'ArrowUp',
+  'ArrowLeft',
+  'ArrowDown',
+  'ArrowRight',
+  // Tab/Shift はフォーカス移動のため例外
+  'Tab',
+  'Shift',
+  //Escapeは長押し中断機能と競合するため許可する例外
+  'Escape',
+]);
 
 export const numberSpinnerQuest = (): NodeQuest => {
   const target = getRandomInt(NUMBER_TARGET_MIN, NUMBER_TARGET_MAX);
