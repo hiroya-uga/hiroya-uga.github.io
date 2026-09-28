@@ -45,8 +45,12 @@ const SliderStrictQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =>
             return;
           }
 
+          // Escape は useEscapeHold の長押し中断が拾うため、Fail扱いにせずここで止める
+          if (e.key === 'Escape') {
+            return;
+          }
+
           // Home以外から始めた、または Home→End の途中に他キーを挟んだ場合はここに落ちる。
-          // Escapeもここに来るため、useEscapeHold の長押し中断と二重発火しないよう preventDefault する
           e.preventDefault();
           stepRef.current = 'idle';
           onFail();

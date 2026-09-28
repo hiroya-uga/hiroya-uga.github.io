@@ -179,7 +179,10 @@ export const PlayingScreen = ({
       }}
       onKeyDown={(e) => {
         if (quest.type === 'key') {
-          e.preventDefault();
+          // Escape は useEscapeHold の長押し中断が拾うため、ここで止めない
+          if (e.key !== 'Escape') {
+            e.preventDefault();
+          }
           return;
         }
 
