@@ -5,3 +5,12 @@ export const DEFAULT_LONG_OPERATION_QUEST_TIMEOUT = 15000;
 
 // focus-quest / focus-reverse-quest で共有するダミーリンクのラベル
 export const LINK_LABELS = ['1つ目のリンク', '2つ目のリンク', '3つ目のリンク'];
+
+export const MODIFIER_KEYS = ['shiftKey', 'ctrlKey', 'altKey', 'metaKey'] as const;
+
+export const MODIFIER_LABELS: Record<(typeof MODIFIER_KEYS)[number], string> = {
+  shiftKey: 'Shift',
+  ctrlKey: 'Ctrl',
+  altKey: 'Alt',
+  metaKey: 'Cmd',
+};

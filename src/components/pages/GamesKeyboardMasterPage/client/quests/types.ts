@@ -1,3 +1,4 @@
+import { MODIFIER_KEYS } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import type { ReactNode } from 'react';
 
 export type QuestNodeProps = {
@@ -5,15 +6,7 @@ export type QuestNodeProps = {
   onFail: () => void;
 };
 
-export const MODIFIER_KEYS = ['shiftKey', 'ctrlKey', 'altKey', 'metaKey'] as const;
 export type ModifierKey = (typeof MODIFIER_KEYS)[number];
-
-export const MODIFIER_LABELS: Record<ModifierKey, string> = {
-  shiftKey: 'Shift',
-  ctrlKey: 'Ctrl',
-  altKey: 'Alt',
-  metaKey: 'Cmd',
-};
 
 interface QuestBase {
   title: string;
