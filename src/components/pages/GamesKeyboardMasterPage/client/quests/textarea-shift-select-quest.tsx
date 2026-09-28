@@ -13,6 +13,7 @@ const TextareaShiftSelectQuestNode = ({ onClear, onFail }: Readonly<QuestNodePro
     <div onMouseDown={onFail}>
       <TextField
         label="本文"
+        multiline
         defaultValue={INITIAL_TEXT}
         onFocus={(e) => {
           e.currentTarget.setSelectionRange(0, 0);
