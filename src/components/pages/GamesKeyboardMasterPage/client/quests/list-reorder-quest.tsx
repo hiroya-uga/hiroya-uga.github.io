@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import { useId, useState } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -63,9 +64,6 @@ const ListReorderQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
             role="option"
             aria-selected={item === selectedItem}
             className="border-primary px-16PX py-8PX aria-selected:bg-secondary rounded border text-xl aria-selected:font-bold aria-selected:outline aria-selected:outline-2 aria-selected:-outline-offset-2"
-            onClick={() => {
-              setSelectedItem(item);
-            }}
           >
             {item}
           </li>
@@ -75,7 +73,11 @@ const ListReorderQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
         <button
           type="button"
           className="border-primary px-16PX py-8PX rounded border"
-          onClick={() => {
+          onClick={(e) => {
+            if (isKeyboardActivatedClick(e) === false) {
+              return;
+            }
+
             move(-1);
           }}
         >
@@ -84,7 +86,11 @@ const ListReorderQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
         <button
           type="button"
           className="border-primary px-16PX py-8PX rounded border"
-          onClick={() => {
+          onClick={(e) => {
+            if (isKeyboardActivatedClick(e) === false) {
+              return;
+            }
+
             move(1);
           }}
         >
