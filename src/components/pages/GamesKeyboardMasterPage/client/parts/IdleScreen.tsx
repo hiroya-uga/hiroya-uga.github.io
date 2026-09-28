@@ -87,25 +87,32 @@ export const IdleScreen = ({
           </span>
         </button>
       </p>
-      {retryCount !== null && (
-        <p className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2 text-sm">
-          <span>{`失敗した${retryCount}問だけをやり直します`}</span>
-          <button type="button" className="bg-secondary border-primary rounded border px-2 py-1" onClick={onClearRetry}>
-            全問に戻す
-          </button>
-        </p>
-      )}
-      <p>
-        <button
-          type="button"
-          className="bg-secondary border-primary absolute bottom-4 right-4 z-10 rounded border p-2"
-          onClick={() => {
-            setIsConfigOpen(true);
-          }}
-        >
-          CONFIG
-        </button>
-      </p>
+      <div className="px-16PX pointer-events-none absolute bottom-4 right-0 z-10 w-full">
+        {retryCount !== null ? (
+          <p className="pointer-events-auto flex flex-wrap items-center justify-center gap-2 text-sm">
+            <span>{`失敗した${retryCount}問だけをやり直します`}</span>
+            <button
+              type="button"
+              className="bg-secondary border-primary rounded border px-2 py-1"
+              onClick={onClearRetry}
+            >
+              全問に戻す
+            </button>
+          </p>
+        ) : (
+          <p className="ml-auto w-fit">
+            <button
+              type="button"
+              className="bg-secondary border-primary pointer-events-auto rounded border p-2"
+              onClick={() => {
+                setIsConfigOpen(true);
+              }}
+            >
+              CONFIG
+            </button>
+          </p>
+        )}
+      </div>
       <Modal title="CONFIG" isOpen={isConfigOpen} closeModal={() => setIsConfigOpen(false)}>
         <div className="space-y-3">
           {CONFIG_ITEMS.map(({ key, label }) => (
