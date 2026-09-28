@@ -35,10 +35,7 @@ const SelectFieldComponent = (
   const descriptionId = hasDescription ? `${id}-description` : undefined;
 
   return (
-    <div
-      // 親のtext-alignを打ち消す
-      className="text-left"
-    >
+    <div>
       <p>
         <label htmlFor={id} className="block w-fit text-sm font-bold leading-snug">
           {label}
