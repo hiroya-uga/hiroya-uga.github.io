@@ -23,7 +23,7 @@ const FocusAndSpaceQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
             }
           }}
           onClick={(e) => {
-            if (!isKeyboardActivatedClick(e)) {
+            if (isKeyboardActivatedClick(e) === false) {
               return;
             }
 

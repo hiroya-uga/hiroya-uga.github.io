@@ -14,7 +14,7 @@ const FocusAndClickQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
           // href="#" はフォーカス可能にするためだけの指定なので、ページ先頭へのジャンプは止める
           e.preventDefault();
 
-          if (!isKeyboardActivatedClick(e)) {
+          if (isKeyboardActivatedClick(e) === false) {
             return;
           }
 

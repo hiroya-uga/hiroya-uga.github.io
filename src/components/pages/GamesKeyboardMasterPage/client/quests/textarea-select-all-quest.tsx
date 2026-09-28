@@ -13,7 +13,7 @@ const TextareaSelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   useEffect(() => {
     const el = ref.current;
 
-    if (!el) {
+    if (el === null) {
       return;
     }
 

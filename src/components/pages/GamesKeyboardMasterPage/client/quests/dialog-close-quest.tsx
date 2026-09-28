@@ -22,7 +22,10 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
       className="border-primary bg-secondary p-16PX fixed inset-0 m-auto rounded border text-xl"
       onKeyDown={(e) => {
         if (e.key === 'Escape') {
+          // useEscapeHold の長押し中断と二重発火しないよう、ネイティブのEscape-closeもここで肩代わりする
+          e.preventDefault();
           closedViaEscapeRef.current = true;
+          ref.current?.close();
         }
       }}
       onClose={() => {

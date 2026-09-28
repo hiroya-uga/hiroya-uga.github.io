@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import { useId, useRef, useState } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -42,7 +43,11 @@ const TabsSwitchQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
             ref={(element) => {
               tabRefs.current[index] = element;
             }}
-            onClick={() => {
+            onClick={(e) => {
+              if (isKeyboardActivatedClick(e) === false) {
+                return;
+              }
+
               select(index);
             }}
             onKeyDown={(e) => {
