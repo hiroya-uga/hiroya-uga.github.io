@@ -68,10 +68,17 @@ export const useKeyboardMasterConfig = () => {
   }, []);
 
   useEffect(() => {
-    return () => {
-      // アンマウント時に保存待ちの変更が失われないよう、間引いた分を即時反映する
+    const flush = () => {
       window.clearTimeout(saveTimeoutRef.current);
       saveConfig(configRef.current);
+    };
+
+    // タブを閉じる・戻るなどアンマウントを経由しない離脱でも保存待ちの変更を失わないようにする
+    window.addEventListener('beforeunload', flush);
+
+    return () => {
+      window.removeEventListener('beforeunload', flush);
+      flush();
     };
   }, []);
 
