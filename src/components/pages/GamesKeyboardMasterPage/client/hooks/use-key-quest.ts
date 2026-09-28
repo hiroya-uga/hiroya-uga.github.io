@@ -1,7 +1,8 @@
 'use client';
 
+import { MODIFIER_KEYS } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useEffect, useRef, useState } from 'react';
-import { MODIFIER_KEYS, type Quest } from '../quests';
+import type { Quest } from '../quests';
 import type { QuestFailReason } from '../types';
 
 const MODIFIER_SINGLE_KEYS = new Set(['Shift', 'Control', 'Alt', 'Meta']);

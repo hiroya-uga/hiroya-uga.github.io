@@ -1,6 +1,6 @@
 'use client';
 
-import { GAME_ROOT_ID } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { GAME_ROOT_ID, MODIFIER_LABELS } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import clsx from 'clsx';
 import { type CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
@@ -36,9 +36,9 @@ const formatKeyCombo = ({
   altKey,
 }: Pick<KeyboardEvent, 'key' | 'shiftKey' | 'ctrlKey' | 'altKey'>) => {
   const modifiers = [
-    shiftKey && key !== 'Shift' && 'Shift',
-    ctrlKey && key !== 'Control' && 'Ctrl',
-    altKey && key !== 'Alt' && 'Alt',
+    shiftKey && key !== 'Shift' && MODIFIER_LABELS.shiftKey,
+    ctrlKey && key !== 'Control' && MODIFIER_LABELS.ctrlKey,
+    altKey && key !== 'Alt' && MODIFIER_LABELS.altKey,
   ].filter(Boolean);
 
   return [...modifiers, key === ' ' ? 'Space' : key].join(' + ');
