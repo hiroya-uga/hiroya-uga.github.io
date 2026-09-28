@@ -9,10 +9,7 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
   const closedViaEscapeRef = useRef(false);
 
   useEffect(() => {
-    const dialog = ref.current;
-    // closedby="any" は React の DialogHTMLAttributes 型に未対応のため setAttribute で付与する
-    dialog?.setAttribute('closedby', 'any');
-    dialog?.showModal();
+    ref.current?.showModal();
   }, []);
 
   return (
@@ -20,6 +17,7 @@ const DialogCloseQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
       ref={ref}
       aria-labelledby={titleId}
       className="border-primary bg-secondary p-16PX fixed inset-0 m-auto rounded border text-xl"
+      closedby="any"
       onKeyDown={(e) => {
         if (e.key === 'Escape') {
           // useEscapeHold の長押し中断と二重発火しないよう、ネイティブのEscape-closeもここで肩代わりする

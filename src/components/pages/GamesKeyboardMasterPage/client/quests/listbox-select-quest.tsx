@@ -66,9 +66,6 @@ const ListboxSelectQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =
           id={`${id}-option-${index}`}
           role="option"
           className={clsx(['px-16PX py-8PX', index === activeIndex && 'bg-secondary font-bold'])}
-          onClick={() => {
-            setActiveIndex(index);
-          }}
         >
           {item}
         </li>
