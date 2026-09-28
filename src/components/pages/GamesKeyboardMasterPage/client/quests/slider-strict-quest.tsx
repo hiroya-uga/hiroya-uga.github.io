@@ -14,7 +14,8 @@ const PASSTHROUGH_KEYS = new Set(['Tab', 'Shift']);
 const SliderStrictQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
   const id = useId();
   const [value, setValue] = useState(INITIAL);
-  const keyHistoryRef = useRef(new Set<string>());
+  // Home → End の正しい順序をたどれているかを追跡する。途中に他のキーを挟んだら即座にリセットして失敗させる
+  const stepRef = useRef<'idle' | 'home-pressed'>('idle');
 
   return (
     <div className="grid gap-2">
@@ -34,24 +35,22 @@ const SliderStrictQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) =>
             return;
           }
 
-          // Set は挿入順を保つので、消してから入れ直すと最後に押したキーが末尾に来る
-          keyHistoryRef.current.delete(e.key);
-          keyHistoryRef.current.add(e.key);
+          if (e.key === 'Home') {
+            stepRef.current = 'home-pressed';
+            return;
+          }
+
+          if (e.key === 'End' && stepRef.current === 'home-pressed') {
+            onClear();
+            return;
+          }
+
+          // Home以外から始めた、または Home→End の途中に他キーを挟んだ場合はここに落ちる
+          stepRef.current = 'idle';
+          onFail();
         }}
         onChange={(e) => {
-          const next = Number(e.currentTarget.value);
-          setValue(next);
-
-          // Set には末尾を取る手段がないので、配列にして最後の2つを見る
-          const [previousKey, lastKey] = [...keyHistoryRef.current].slice(-2);
-
-          if (MAX === next) {
-            if (previousKey === 'Home' && lastKey === 'End') {
-              onClear();
-            } else {
-              onFail();
-            }
-          }
+          setValue(Number(e.currentTarget.value));
         }}
       />
       {/* output の暗黙ロール status による通知が、スライダー自身の値の読み上げと重複するので止める */}
