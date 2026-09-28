@@ -19,7 +19,7 @@ const TextareaSelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 
     // Ctrl+A / Cmd+A の全選択は input イベントを発火しないので selectionchange 相当の select イベントで検知する
     const handleSelect = () => {
-      if (el.selectionStart === 0 && el.selectionEnd === el.value.length && el.value.length > 0) {
+      if (el.selectionStart === 0 && el.selectionEnd === el.value.length && 0 < el.value.length) {
         onClear();
       }
     };
