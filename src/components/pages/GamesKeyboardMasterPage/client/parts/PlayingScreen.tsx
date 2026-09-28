@@ -271,7 +271,7 @@ export const PlayingScreen = ({
           'sticky bottom-0 grid min-h-[3lh] items-end',
           shouldEnableAnimation &&
             shouldEnableTimeLimit && [
-              styles.timeBar,
+              styles.bar,
               'after:bg-accent after:h-3PX after:absolute after:bottom-0 after:left-0 after:w-full',
             ],
         ])}

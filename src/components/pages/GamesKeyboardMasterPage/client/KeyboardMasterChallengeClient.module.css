@@ -47,6 +47,7 @@
   }
 }
 
-.pulseInstant {
+/* アニメーション無効時は、伸びる演出をやめて点滅だけにする(.pulse を上書き) */
+.instant {
   animation: pulsePopInstant 0.8s ease-out forwards;
 }
