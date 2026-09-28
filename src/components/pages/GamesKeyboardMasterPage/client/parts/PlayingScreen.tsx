@@ -88,15 +88,18 @@ export const PlayingScreen = ({
 
   const ref = useRef<HTMLDivElement>(null);
   const setTimeoutIdRef = useRef(-1);
+  const clearInputTimeoutIdRef = useRef(-1);
   useFocusTrap({ containerRef: ref });
 
   // 最後に押したキーが履歴に見えるよう、クリア直後ではなく少し遅らせて空にする。node 型・key 型のどちらでも共通
-  const handleClear = () => {
+  // useKeyQuest の keydown リスナー再登録を避けるため identity を固定する
+  const handleClear = useCallback(() => {
     onClear({ inputKeys: attemptKeysRef.current });
-    setTimeout(() => {
+    window.clearTimeout(clearInputTimeoutIdRef.current);
+    clearInputTimeoutIdRef.current = window.setTimeout(() => {
       setInputKeys([]);
     }, 400);
-  };
+  }, [onClear]);
 
   // useQuestTimer は onTimeout が変わるとカウントダウンを最初からやり直すので、identity を固定する
   const handleFail = useCallback(
@@ -113,6 +116,8 @@ export const PlayingScreen = ({
 
   useEffect(() => {
     attemptKeysRef.current = [];
+    // 直前のお題で予約された「入力履歴を空にする」タイマーが、次のお題に持ち越されて誤発火しないようにする
+    window.clearTimeout(clearInputTimeoutIdRef.current);
   }, [questIndex]);
 
   useEffect(() => {
@@ -139,12 +144,14 @@ export const PlayingScreen = ({
 
     return () => {
       window.removeEventListener('pointermove', onPointerMove);
+      window.clearTimeout(setTimeoutIdRef.current);
     };
   }, []);
 
   return (
     <div
       className={clsx([
+        styles.root,
         'absolute inset-0 grid size-full grid-rows-[auto_auto_1fr_auto]',
         isCursorHidden && 'cursor-none',
       ])}
