@@ -1,10 +1,9 @@
 'use client';
 
-import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { DEFAULT_OPERATION_QUEST_TIMEOUT, LINK_LABELS } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { useRef } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
-const LINK_LABELS = ['1つ目のリンク', '2つ目のリンク', '3つ目のリンク'];
 const LAST_INDEX = LINK_LABELS.length - 1;
 const RETURN_INDEX = LAST_INDEX - 1;
 

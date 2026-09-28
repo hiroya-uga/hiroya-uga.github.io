@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { clamp } from '@/utils/number';
 import { useId, useState } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -12,8 +13,6 @@ const TARGET = 20;
 
 const SIDEBAR_ITEMS = ['w-4/5', 'w-3/5', 'w-2/3', 'w-1/2'];
 const CONTENT_LINES = ['w-full', 'w-11/12', 'w-full', 'w-3/4', 'w-5/6', 'w-1/2'];
-
-const clamp = (value: number) => Math.min(MAX, Math.max(MIN, value));
 
 const SplitterQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
   const sidebarId = useId();
@@ -57,7 +56,11 @@ const SplitterQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
               return;
             }
 
-            const clamped = clamp(next);
+            const clamped = clamp({
+              value: next,
+              min: MIN,
+              max: MAX,
+            });
             setValue(clamped);
 
             if (clamped === TARGET) {
