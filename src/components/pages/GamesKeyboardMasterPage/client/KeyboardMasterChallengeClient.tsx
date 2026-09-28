@@ -193,7 +193,8 @@ export const KeyboardMasterChallengeClient = () => {
             key={pulse.id}
             className={clsx([
               'grid place-items-center text-2xl font-bold',
-              config.flags.animation ? styles.pulse : styles.pulseInstant,
+              styles.pulse,
+              config.flags.animation === false && styles.instant,
               pulse.result === 'success' ? 'bg-success' : 'bg-error',
             ])}
           >
