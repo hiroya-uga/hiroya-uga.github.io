@@ -1,3 +1,5 @@
+import type { KeyboardMasterBestRecord } from '@/components/pages/GamesKeyboardMasterPage/client/types';
+
 type Value = {
   // ユーザ設定
   theme: 'dark' | 'light';
@@ -32,11 +34,7 @@ type Value = {
       animation?: boolean;
       random?: boolean;
     };
-    best?: {
-      successCount: number;
-      total: number;
-      totalMs: number;
-    };
+    best?: KeyboardMasterBestRecord;
     // これまでに開始した「全問プレイ」の回数。最初の2回は固定の10問、3回目からは全問のうち questCount 問をランダム出題する
     tryCount?: number;
     // 3回目以降の挑戦で出題する問題数

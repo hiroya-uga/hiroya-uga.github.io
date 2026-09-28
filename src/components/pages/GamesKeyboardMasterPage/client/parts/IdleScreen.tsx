@@ -3,6 +3,7 @@
 import { Modal } from '@/components/ui/dialogs/Modal';
 import { Switch, TextField } from '@/components/ui/forms';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
+import { clamp } from '@/utils/number';
 import clsx from 'clsx';
 import { useEffect, useId, useRef, useState } from 'react';
 import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
@@ -150,17 +151,13 @@ export const IdleScreen = ({
                   return;
                 }
 
-                if (value < 1) {
-                  onChangeQuestCount(1);
-                  return;
-                }
-
-                if (QUESTS.all.length < value) {
-                  onChangeQuestCount(QUESTS.all.length);
-                  return;
-                }
-
-                onChangeQuestCount(value);
+                onChangeQuestCount(
+                  clamp({
+                    value,
+                    min: 1,
+                    max: QUESTS.all.length,
+                  }),
+                );
               }}
             />
           )}
