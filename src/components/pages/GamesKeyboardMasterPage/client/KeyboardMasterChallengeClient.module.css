@@ -1,3 +1,7 @@
+/* 現状はTailwindユーティリティのみでスタイリングしているため空だが、先頭要素のセレクタとして規約上必要 */
+.root {
+}
+
 @keyframes pulsePop {
   0% {
     height: 0;
