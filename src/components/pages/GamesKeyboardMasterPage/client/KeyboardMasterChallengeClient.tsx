@@ -22,7 +22,7 @@ export const KeyboardMasterChallengeClient = () => {
   const [{ sources, quests }, setPlan] = useState(() => createPlan(QUESTS.first));
   // null は全問プレイ。配列のときは、失敗したお題だけをやり直す
   const [retrySources, setRetrySources] = useState<QuestSource[] | null>(null);
-  const [isFullRun, setIsFullRun] = useState(true);
+  const isFullRun = retrySources === null;
   const [mode, setMode] = useState<Mode>('idle');
   const [questIndex, setQuestIndex] = useState(0);
   const [pulse, setPulse] = useState<QuestPulse | null>(null);
@@ -34,12 +34,6 @@ export const KeyboardMasterChallengeClient = () => {
     resolvedRef.current = false;
     startedAtRef.current = performance.now();
   }, [mode, questIndex]);
-
-  useEffect(() => {
-    if (mode === 'playing') {
-      setResults([]);
-    }
-  }, [mode]);
 
   // 3回目の解放条件(2回クリア)を満たした時点で、開始を待たずランダム出題をONにしておく
   useEffect(() => {
@@ -56,19 +50,23 @@ export const KeyboardMasterChallengeClient = () => {
     };
   }, []);
 
+  // 結果画面・プレイ画面ごと消えるので、フォーカスが落ちないよう開始ボタンへ移す
+  const backToIdle = useCallback((nextRetrySources: QuestSource[] | null) => {
+    setRetrySources(nextRetrySources);
+    setPulse(null);
+    setQuestIndex(0);
+    setShouldFocusStart(true);
+    setMode('idle');
+  }, []);
+
   const handleAbort = useCallback(() => {
     if (advanceTimeoutRef.current !== null) {
       window.clearTimeout(advanceTimeoutRef.current);
       advanceTimeoutRef.current = null;
     }
 
-    setPulse(null);
-    setQuestIndex(0);
-    setRetrySources(null);
-    // プレイ画面ごと消えるので、フォーカスが落ちないよう開始ボタンへ移す
-    setShouldFocusStart(true);
-    setMode('idle');
-  }, []);
+    backToIdle(null);
+  }, [backToIdle]);
 
   const advance = useCallback(
     ({
@@ -116,7 +114,7 @@ export const KeyboardMasterChallengeClient = () => {
     // やり直しのお題は、直前の並びのまま出す。tryCount には数えない
     if (retrySources !== null) {
       setPlan(createPlan(retrySources));
-      setIsFullRun(false);
+      setResults([]);
       setShouldFocusStart(false);
       setMode('playing');
       return;
@@ -134,20 +132,11 @@ export const KeyboardMasterChallengeClient = () => {
     }
 
     setPlan(createPlan(plan.sources));
-    setIsFullRun(true);
+    setResults([]);
     updateTryCount(attemptNumber);
     setShouldFocusStart(false);
     setMode('playing');
   }, [retrySources, config.tryCount, config.flags.random, config.questCount, updateFlags, updateTryCount]);
-
-  // 結果画面のボタンごと消えるので、フォーカスが落ちないよう開始ボタンへ移す
-  const backToIdle = useCallback((nextRetrySources: QuestSource[] | null) => {
-    setRetrySources(nextRetrySources);
-    setPulse(null);
-    setQuestIndex(0);
-    setShouldFocusStart(true);
-    setMode('idle');
-  }, []);
 
   const handleRetry = useCallback(() => backToIdle(null), [backToIdle]);
 
@@ -162,7 +151,7 @@ export const KeyboardMasterChallengeClient = () => {
   const { isHolding } = useEscapeHold({ isActive: mode === 'playing', onAbort: handleAbort });
 
   return (
-    <div className="absolute inset-0 grid size-full overflow-hidden rounded border">
+    <div className={clsx([styles.root, 'absolute inset-0 grid size-full overflow-hidden rounded border'])}>
       {mode === 'idle' && (
         <IdleScreen
           config={config}
