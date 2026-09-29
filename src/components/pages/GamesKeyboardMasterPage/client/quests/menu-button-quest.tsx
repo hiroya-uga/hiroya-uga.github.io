@@ -2,6 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
+import { resolveLoopIndex } from '@/utils/number';
 import { useEffect, useId, useRef, useState } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -74,13 +75,13 @@ const MenuButtonQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => {
           onKeyDown={(e) => {
             if (e.key === 'ArrowDown') {
               e.preventDefault();
-              setActiveIndex((current) => (current + 1) % MENU_ITEMS.length);
+              setActiveIndex((current) => resolveLoopIndex({ nextIndex: current + 1, total: MENU_ITEMS.length }));
               return;
             }
 
             if (e.key === 'ArrowUp') {
               e.preventDefault();
-              setActiveIndex((current) => (current + MENU_ITEMS.length - 1) % MENU_ITEMS.length);
+              setActiveIndex((current) => resolveLoopIndex({ nextIndex: current - 1, total: MENU_ITEMS.length }));
               return;
             }
 

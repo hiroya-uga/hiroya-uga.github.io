@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isInputTypeWithValue } from '@/components/pages/GamesKeyboardMasterPage/utils';
 import { TextField } from '@/components/ui/forms/TextField';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -25,7 +26,7 @@ const TextareaDelQuestNode = ({ onClear, onFail }: Readonly<QuestNodeProps>) => 
       }}
       onInput={(e) => {
         // Delete キー(と Mac の Ctrl+D)は deleteContentForward になる
-        if (e.nativeEvent.inputType === 'deleteContentForward' && e.currentTarget.value === 'ete') {
+        if (isInputTypeWithValue({ inputEvent: e, expectedInputType: 'deleteContentForward', expectedValue: 'ete' })) {
           onClear();
         }
       }}

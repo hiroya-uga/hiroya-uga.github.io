@@ -3,7 +3,7 @@
 import { GAME_ROOT_ID, MODIFIER_LABELS } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
 import clsx from 'clsx';
-import { type CSSProperties, useCallback, useEffect, useId, useRef, useState } from 'react';
+import { type CSSProperties, memo, useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap, useKeyQuest, useQuestTimer } from '../hooks';
 import type { Quest } from '../quests';
 import type { FailAttempt, QuestAttempt, QuestFailReason } from '../types';
@@ -71,6 +71,30 @@ const QuestTimer = ({
   );
 };
 
+// 入力履歴やヒントの更新(毎キー入力)で約35種あるクエスト本体まで再レンダーされないよう、必要な props だけで親から切り離す
+const QuestStage = memo(
+  ({
+    quest,
+    pressedKeys,
+    onClear,
+    onFail,
+  }: Readonly<{
+    quest: Quest;
+    pressedKeys: ReadonlySet<string>;
+    onClear: () => void;
+    onFail: () => void;
+  }>) => (
+    <>
+      {quest.type === 'node' && <quest.Node onClear={onClear} onFail={onFail} />}
+      {quest.type === 'key' && (
+        <p className="text-4xl">
+          <quest.Node pressedKeys={pressedKeys} />
+        </p>
+      )}
+    </>
+  ),
+);
+
 export const PlayingScreen = ({
   quest,
   questIndex,
@@ -110,7 +134,8 @@ export const PlayingScreen = ({
   );
   const handleTimeout = useCallback(() => handleFail('timeout'), [handleFail]);
   // お題側は onMouseDown={onFail} のようにイベントを引数で渡すことがあるので、引数を捨てて理由を固定する
-  const handleNodeFail = () => handleFail('wrong-operation');
+  // QuestStage を memo 化した意味がなくなるため、identity を固定する
+  const handleNodeFail = useCallback(() => handleFail('wrong-operation'), [handleFail]);
 
   const { pressedKeys } = useKeyQuest({ quest, onClear: handleClear, onFail: handleFail });
 
@@ -179,10 +204,7 @@ export const PlayingScreen = ({
       }}
       onKeyDown={(e) => {
         if (quest.type === 'key') {
-          // Escape は useEscapeHold の長押し中断が拾うため、ここで止めない
-          if (e.key !== 'Escape') {
-            e.preventDefault();
-          }
+          e.preventDefault();
           return;
         }
 
@@ -259,12 +281,7 @@ export const PlayingScreen = ({
             tabIndex={-1}
             className="p-8PX grid aspect-video place-items-center shadow-none outline-none"
           >
-            {quest.type === 'node' && <quest.Node onClear={handleClear} onFail={handleNodeFail} />}
-            {quest.type === 'key' && (
-              <p className="text-4xl">
-                <quest.Node pressedKeys={pressedKeys} />
-              </p>
-            )}
+            <QuestStage quest={quest} pressedKeys={pressedKeys} onClear={handleClear} onFail={handleNodeFail} />
           </div>
         </div>
       </div>

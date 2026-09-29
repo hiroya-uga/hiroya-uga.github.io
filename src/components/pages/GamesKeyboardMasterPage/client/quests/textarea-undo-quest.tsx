@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isInputTypeWithValue } from '@/components/pages/GamesKeyboardMasterPage/utils';
 import { TextField } from '@/components/ui/forms/TextField';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -14,8 +15,13 @@ const TextareaUndoQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
       multiline
       defaultValue={INITIAL_TEXT}
       onInput={(e) => {
-        // 打ち直しで同じ文字列にしても戻したことにはならないので、undo 由来の入力だけを見る
-        if (e.nativeEvent.inputType === 'historyUndo' && e.currentTarget.value === INITIAL_TEXT) {
+        if (
+          isInputTypeWithValue({
+            inputEvent: e,
+            expectedInputType: 'historyUndo',
+            expectedValue: INITIAL_TEXT,
+          })
+        ) {
           onClear();
         }
       }}

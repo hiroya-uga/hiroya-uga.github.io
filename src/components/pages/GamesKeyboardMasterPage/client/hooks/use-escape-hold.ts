@@ -33,9 +33,7 @@ export const useEscapeHold = ({ isActive, onAbort }: Props) => {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       // 長押し判定なので keydown の連続発火(e.repeat)ではタイマーを張り直さない。
-      // お題側が独自にEscapeへ意味を持たせて preventDefault() 済みの場合は、中断ホールドの対象から外す
-      // (React の delegated listener は bubble phase で window より先に発火するため、ここに来た時点で判定できる)
-      if (e.key !== 'Escape' || e.repeat || timeoutId !== null || e.defaultPrevented) {
+      if (e.key !== 'Escape' || e.repeat || timeoutId !== null) {
         return;
       }
 

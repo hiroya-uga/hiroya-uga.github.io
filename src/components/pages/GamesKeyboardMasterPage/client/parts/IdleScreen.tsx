@@ -3,7 +3,7 @@
 import { Modal } from '@/components/ui/dialogs/Modal';
 import { Switch, TextField } from '@/components/ui/forms';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
-import { clamp } from '@/utils/number';
+import { clamp, parseInteger } from '@/utils/number';
 import clsx from 'clsx';
 import { useEffect, useId, useRef, useState } from 'react';
 import type { KeyboardMasterConfig, KeyboardMasterFlags } from '../hooks';
@@ -38,6 +38,7 @@ export const IdleScreen = ({
 }: Readonly<Props>) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const [questCountConfig, setQuestCountConfig] = useState(String(config.questCount));
   const startButtonRef = useRef<HTMLButtonElement>(null);
   const randomHintId = useId();
 
@@ -139,25 +140,27 @@ export const IdleScreen = ({
             <p id={randomHintId}>ランダム出題は3回目以降解放されます。</p>
           ) : (
             <TextField
-              type="number"
+              inputMode="numeric"
               label="問題数"
               min={1}
               max={QUESTS.all.length}
-              value={String(config.questCount)}
+              value={questCountConfig}
               onInput={(e) => {
-                const value = Number.parseInt(e.currentTarget.value, 10);
+                const value = parseInteger(e.currentTarget.value);
 
-                if (Number.isNaN(value)) {
+                if (Number.isNaN(value) || 0) {
+                  setQuestCountConfig(e.currentTarget.value);
                   return;
                 }
 
-                onChangeQuestCount(
-                  clamp({
-                    value,
-                    min: 1,
-                    max: QUESTS.all.length,
-                  }),
-                );
+                const validValue = clamp({
+                  value,
+                  min: 1,
+                  max: QUESTS.all.length,
+                });
+
+                setQuestCountConfig(String(validValue));
+                onChangeQuestCount(validValue);
               }}
             />
           )}

@@ -28,14 +28,18 @@ export const useQuestTimer = ({ isEnabled, quest, onTimeout }: Props) => {
     setRemainingMs(timeLimit);
 
     const interval = window.setInterval(() => {
-      setRemainingMs(Math.max(0, deadline - Date.now()));
-    }, 1000);
+      const remaining = Math.max(0, deadline - Date.now());
+      setRemainingMs(remaining);
 
-    const timeout = window.setTimeout(onTimeout, timeLimit);
+      // 表示の更新とタイムアウト判定を同じtickにまとめ、表示が0になる前にonTimeoutが先行しないようにする
+      if (remaining === 0) {
+        window.clearInterval(interval);
+        onTimeout();
+      }
+    }, 1000);
 
     return () => {
       window.clearInterval(interval);
-      window.clearTimeout(timeout);
     };
   }, [isEnabled, quest, onTimeout]);
 

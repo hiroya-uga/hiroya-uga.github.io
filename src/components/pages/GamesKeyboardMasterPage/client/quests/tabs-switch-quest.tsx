@@ -2,6 +2,7 @@
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
 import { isKeyboardActivatedClick } from '@/utils/keyboard';
+import { resolveLoopIndex } from '@/utils/number';
 import { useId, useRef, useState } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -54,13 +55,13 @@ const TabsSwitchQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
               // 矢印キーで動かした時点で表示も切り替える(自動アクティベーション)
               if (e.key === 'ArrowRight') {
                 e.preventDefault();
-                select((index + 1) % TABS.length);
+                select(resolveLoopIndex({ nextIndex: index + 1, total: TABS.length }));
                 return;
               }
 
               if (e.key === 'ArrowLeft') {
                 e.preventDefault();
-                select((index + TABS.length - 1) % TABS.length);
+                select(resolveLoopIndex({ nextIndex: index - 1, total: TABS.length }));
                 return;
               }
 
