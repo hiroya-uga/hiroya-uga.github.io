@@ -69,7 +69,7 @@ describe('IdleScreen の問題数表示', () => {
     await openConfig(user);
 
     expect(screen.getByText('ランダム出題は3回目以降解放されます。')).toBeInTheDocument();
-    expect(screen.queryByRole('spinbutton', { name: '問題数' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: '問題数' })).not.toBeInTheDocument();
   });
 
   it('2回クリア後はflags.randomの値に関わらず現在値を持つ数値入力欄が出る', async () => {
@@ -88,7 +88,7 @@ describe('IdleScreen の問題数表示', () => {
 
     await openConfig(user);
 
-    expect(screen.getByRole('spinbutton', { name: '問題数' })).toHaveValue(10);
+    expect(screen.getByRole('textbox', { name: '問題数' })).toHaveValue('10');
   });
 
   it('ALLの総数を超える値を入力すると、ALLの総数にクランプする', async () => {
@@ -108,7 +108,7 @@ describe('IdleScreen の問題数表示', () => {
 
     await openConfig(user);
 
-    const input = screen.getByRole('spinbutton', { name: '問題数' });
+    const input = screen.getByRole('textbox', { name: '問題数' });
     fireEvent.input(input, { target: { value: String(QUESTS.all.length + 100) } });
 
     expect(onChangeQuestCount).toHaveBeenLastCalledWith(QUESTS.all.length);
@@ -131,8 +131,9 @@ describe('IdleScreen の問題数表示', () => {
 
     await openConfig(user);
 
-    const input = screen.getByRole('spinbutton', { name: '問題数' });
-    fireEvent.input(input, { target: { value: '0' } });
+    // "0" は formatStringToNumericString が先頭ゼロとして落とし空文字(NaN)になるため、クランプ経路を通る負数で検証する
+    const input = screen.getByRole('textbox', { name: '問題数' });
+    fireEvent.input(input, { target: { value: '-5' } });
 
     expect(onChangeQuestCount).toHaveBeenLastCalledWith(1);
   });
@@ -154,7 +155,7 @@ describe('IdleScreen の問題数表示', () => {
 
     await openConfig(user);
 
-    const input = screen.getByRole('spinbutton', { name: '問題数' });
+    const input = screen.getByRole('textbox', { name: '問題数' });
     fireEvent.input(input, { target: { value: '' } });
 
     expect(onChangeQuestCount).not.toHaveBeenCalled();
