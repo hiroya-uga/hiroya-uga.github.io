@@ -72,9 +72,12 @@ export const ResultScreen = ({
 
   // 失敗を先頭に並べる。元の問題番号は index で持ち回る
   const entries = useMemo(() => {
-    const indexed = results.map((entry, index) => ({ entry, index }));
-    const failed = indexed.filter(({ entry }) => entry.result === 'fail');
-    const succeeded = indexed.filter(({ entry }) => entry.result === 'success');
+    const failed: { entry: QuestResult; index: number }[] = [];
+    const succeeded: { entry: QuestResult; index: number }[] = [];
+
+    results.forEach((entry, index) => {
+      (entry.result === 'fail' ? failed : succeeded).push({ entry, index });
+    });
 
     return [...failed, ...succeeded];
   }, [results]);

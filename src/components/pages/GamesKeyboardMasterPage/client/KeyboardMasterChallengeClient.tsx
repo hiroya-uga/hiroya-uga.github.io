@@ -96,14 +96,16 @@ export const KeyboardMasterChallengeClient = () => {
 
       // successPop が不透明で覆っている間(20%〜80% = 160ms〜640ms)に進めて切り替わりを隠す
       advanceTimeoutRef.current = window.setTimeout(() => {
-        setQuestIndex((current) => {
-          if (current + 1 >= quests.length) {
-            setMode('clear');
-            return current;
-          }
+        if (questIndex + 1 >= quests.length) {
+          setMode('clear');
+          return;
+        }
 
-          return current + 1;
-        });
+        // 次のクエストがマウントされた直後に同期発火する onClear/onFail を握りつぶさないよう、
+        // questIndex の更新と同じタイミングでリセットする(遅延 effect 任せにしない)
+        resolvedRef.current = false;
+        startedAtRef.current = performance.now();
+        setQuestIndex(questIndex + 1);
       }, 400);
     },
     [quests, sources, questIndex],
@@ -116,6 +118,8 @@ export const KeyboardMasterChallengeClient = () => {
       setPlan(createPlan(retrySources));
       setResults([]);
       setShouldFocusStart(false);
+      resolvedRef.current = false;
+      startedAtRef.current = performance.now();
       setMode('playing');
       return;
     }
@@ -135,6 +139,8 @@ export const KeyboardMasterChallengeClient = () => {
     setResults([]);
     updateTryCount(attemptNumber);
     setShouldFocusStart(false);
+    resolvedRef.current = false;
+    startedAtRef.current = performance.now();
     setMode('playing');
   }, [retrySources, config.tryCount, config.flags.random, config.questCount, updateFlags, updateTryCount]);
 

@@ -16,17 +16,20 @@ interface ResultSummary {
 }
 
 export const summarizeResults = (results: QuestResult[]): ResultSummary => {
-  const successCount = results.filter((entry) => entry.result === 'success').length;
-  const slowest = results.reduce<QuestResult | null>(
-    (current, entry) => (current === null || current.elapsedMs < entry.elapsedMs ? entry : current),
-    null,
+  const { successCount, totalMs, slowest } = results.reduce(
+    (acc, entry) => ({
+      successCount: acc.successCount + (entry.result === 'success' ? 1 : 0),
+      totalMs: acc.totalMs + entry.elapsedMs,
+      slowest: acc.slowest === null || acc.slowest.elapsedMs < entry.elapsedMs ? entry : acc.slowest,
+    }),
+    { successCount: 0, totalMs: 0, slowest: null as QuestResult | null },
   );
 
   return {
     total: results.length,
     successCount,
     failCount: results.length - successCount,
-    totalMs: results.reduce((sum, entry) => sum + entry.elapsedMs, 0),
+    totalMs,
     slowest,
   };
 };

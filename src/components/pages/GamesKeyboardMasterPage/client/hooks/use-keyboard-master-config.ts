@@ -1,6 +1,7 @@
 'use client';
 
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
+import { clamp } from '@/utils/number';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { QUESTS } from '../quests';
 import type { KeyboardMasterBestRecord } from '../types';
@@ -92,8 +93,8 @@ export const useKeyboardMasterConfig = () => {
       },
       best: saveData?.best ?? DEFAULT_CONFIG.best,
       tryCount: saveData?.tryCount ?? DEFAULT_CONFIG.tryCount,
-      // 問題を減らしたときに範囲外の値が残っていても壊れないようクランプする
-      questCount: Math.min(saveData?.questCount ?? DEFAULT_CONFIG.questCount, QUESTS.all.length),
+      // 問題を減らしたときや壊れた保存データが残っていても範囲外にならないようクランプする
+      questCount: clamp({ value: saveData?.questCount ?? DEFAULT_CONFIG.questCount, min: 1, max: QUESTS.all.length }),
     };
 
     configRef.current = loaded;

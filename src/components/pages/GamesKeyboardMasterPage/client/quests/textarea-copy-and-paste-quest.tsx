@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_LONG_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isInputTypeWithValue } from '@/components/pages/GamesKeyboardMasterPage/utils';
 import { TextField } from '@/components/ui/forms/TextField';
 import type { NodeQuest, QuestNodeProps } from './types';
 
@@ -14,8 +15,9 @@ const TextareaCopyAndPasteQuestNode = ({ onClear }: Readonly<QuestNodeProps>) =>
         label="貼り付け先"
         defaultValue=""
         onInput={(e) => {
-          // 同じ文字列を打ち直しても貼り付けたことにはならないので、貼り付け由来の入力だけを見る
-          if (e.nativeEvent.inputType === 'insertFromPaste' && e.currentTarget.value === SOURCE_TEXT) {
+          if (
+            isInputTypeWithValue({ inputEvent: e, expectedInputType: 'insertFromPaste', expectedValue: SOURCE_TEXT })
+          ) {
             onClear();
           }
         }}

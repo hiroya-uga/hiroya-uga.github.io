@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isFullySelected } from '@/components/pages/GamesKeyboardMasterPage/utils';
 import { TextField } from '@/components/ui/forms/TextField';
 import { useEffect, useRef } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
@@ -19,7 +20,7 @@ const TextareaSelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 
     // Ctrl+A / Cmd+A の全選択は input イベントを発火しないので selectionchange 相当の select イベントで検知する
     const handleSelect = () => {
-      if (el.selectionStart === 0 && el.selectionEnd === el.value.length && 0 < el.value.length) {
+      if (isFullySelected(el) && 0 < el.value.length) {
         onClear();
       }
     };

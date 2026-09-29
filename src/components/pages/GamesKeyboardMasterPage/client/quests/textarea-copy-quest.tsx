@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isFullySelected } from '@/components/pages/GamesKeyboardMasterPage/utils';
 import { TextField } from '@/components/ui/forms/TextField';
 import { useEffect, useRef } from 'react';
 import type { NodeQuest, QuestNodeProps } from './types';
@@ -19,7 +20,7 @@ const TextareaCopyQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
 
     // 何も選択していない状態の Ctrl+C でも copy イベントは発火するので、全選択されているときだけクリアにする
     const handleCopy = () => {
-      if (el.selectionStart === 0 && el.selectionEnd === el.value.length) {
+      if (isFullySelected(el)) {
         onClear();
       }
     };
