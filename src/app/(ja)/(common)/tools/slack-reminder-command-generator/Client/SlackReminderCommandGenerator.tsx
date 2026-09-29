@@ -71,7 +71,10 @@ export const SlackReminderCommandGenerator = () => {
               placeholder="@group-name チケットの確認をお願いします！"
               description={
                 isEnableMarkdown
-                  ? 'Markdown Syntaxのうち、リンク、太字・イタリック、取り消し線、インラインコード、ブロック引用、コードブロック、リストが使えます。リスト内の改行はスペースに変換されます。\nまた、複数行の空行は無視されるため必要に応じて出力結果を調整してください。'
+                  ? [
+                      'Markdown Syntaxのうち、リンク、太字・イタリック、取り消し線、インラインコード、ブロック引用、コードブロック、リストが使えます。リスト内の改行はスペースに変換されます。',
+                      'また、複数行の空行は無視されるため必要に応じて出力結果を調整してください。',
+                    ]
                   : undefined
               }
               value={formState.message}

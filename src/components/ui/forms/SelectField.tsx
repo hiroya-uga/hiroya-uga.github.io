@@ -6,11 +6,13 @@ import clsx from 'clsx';
 
 import { Required } from '@/components/ui/media/Required';
 import { SvgIcon } from '@/components/ui/media/SvgIcon/SvgIcon';
+import { formatValidStringArray } from '@/utils/formatter';
+import { hasItems } from '@/utils/types';
 
 type Props = {
   label: string;
   value?: string;
-  description?: string;
+  description?: string | string[];
   placeholder?: string;
   required?: boolean;
   readOnly?: boolean;
@@ -24,11 +26,13 @@ type Props = {
 };
 
 const SelectFieldComponent = (
-  { label, description, align = 'left', ...props }: Props,
+  { label, description = [], align = 'left', ...props }: Props,
   ref: Ref<HTMLTextAreaElement | HTMLSelectElement>,
 ) => {
   const id = useId();
-  const descriptionId = description ? `${id}-description` : undefined;
+  const descriptions = formatValidStringArray(description);
+  const hasDescription = hasItems(descriptions);
+  const descriptionId = hasDescription ? `${id}-description` : undefined;
 
   return (
     <div>
@@ -39,16 +43,16 @@ const SelectFieldComponent = (
         </label>
       </p>
 
-      {description && (
+      {hasDescription && (
         <div
           id={descriptionId}
-          className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-1 text-xs leading-relaxed"
+          className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-0.5 text-xs leading-relaxed"
         >
-          <p className="pt-3px mt-3px relative grid size-4 place-items-center [--x-fill:var(--x-color-text-secondary)]">
+          <p className="mt-2px relative grid size-3.5 place-items-center [--x-fill:var(--x-color-text-secondary)]">
             <SvgIcon name="description" alt="" />
           </p>
           <div>
-            {description.split('\n').map((line) => {
+            {descriptions.map((line) => {
               return <p key={line}>{line}</p>;
             })}
           </div>
@@ -61,7 +65,7 @@ const SelectFieldComponent = (
           id={id}
           aria-describedby={descriptionId}
           className={clsx([
-            'border-primary text-SelectField bg-secondary text w-full appearance-none rounded-md border p-2 text-left',
+            'border-primary text-textfield bg-textfield text w-full appearance-none rounded-md border p-2 text-left',
             align === 'right' && 'text-right',
             align === 'center' && 'text-center',
           ])}

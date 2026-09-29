@@ -5,7 +5,9 @@ import {
   FocusEvent,
   InputEvent,
   InputHTMLAttributes,
+  KeyboardEvent,
   Ref,
+  SyntheticEvent,
   forwardRef,
   useId,
   useRef,
@@ -16,6 +18,8 @@ import clsx from 'clsx';
 
 import { Required } from '@/components/ui/media/Required';
 import { SvgIcon } from '@/components/ui/media/SvgIcon/SvgIcon';
+import { formatValidStringArray } from '@/utils/formatter';
+import { hasItems } from '@/utils/types';
 
 type Label =
   | {
@@ -30,8 +34,7 @@ type Label =
 
 type BaseProps = Label & {
   value?: string;
-  descriptions?: string[];
-  description?: string;
+  description?: string | string[];
   placeholder?: string;
   required?: boolean;
   readOnly?: boolean;
@@ -42,7 +45,10 @@ type BaseProps = Label & {
   align?: 'left' | 'center' | 'right';
   defaultValue?: string;
   onInput?: (e: InputEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onFocus?: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onSelect?: (e: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onPaste?: (e: ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 } & (
     | {
@@ -57,6 +63,8 @@ type BaseProps = Label & {
         inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
         list?: InputHTMLAttributes<HTMLInputElement>['list'];
         autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+        pattern?: InputHTMLAttributes<HTMLInputElement>['pattern'];
+        title?: InputHTMLAttributes<HTMLInputElement>['title'];
       }
   );
 
@@ -130,12 +138,14 @@ const TextareaComponent = (
 
 const Textarea = forwardRef(TextareaComponent);
 const TextFieldComponent = (
-  { descriptions, description, align = 'left', disabled, ...restProps }: BaseProps,
+  { description = [], align = 'left', disabled, ...restProps }: BaseProps,
   ref: Ref<HTMLTextAreaElement | HTMLInputElement>,
 ) => {
   const useIdValue = useId();
   const id = 'id' in restProps ? restProps.id : useIdValue;
-  const descriptionId = description ? `${id}-description` : undefined;
+  const descriptions = formatValidStringArray(description);
+  const hasDescription = hasItems(descriptions);
+  const descriptionId = hasDescription ? `${id}-description` : undefined;
   const disabledState = disabled
     ? {
         'aria-disabled': true,
@@ -159,7 +169,7 @@ const TextFieldComponent = (
         </p>
       )}
 
-      {(descriptions || description) && (
+      {hasDescription && (
         <div
           id={descriptionId}
           className="text-secondary ml-0.5 mt-1 grid grid-cols-[1rem_1fr] items-start gap-0.5 text-xs leading-relaxed"
@@ -168,7 +178,7 @@ const TextFieldComponent = (
             <SvgIcon name="description" alt="" />
           </p>
           <div>
-            {(descriptions ?? description?.split('\n'))?.map((line) => {
+            {descriptions.map((line) => {
               return <p key={line}>{line}</p>;
             })}
           </div>

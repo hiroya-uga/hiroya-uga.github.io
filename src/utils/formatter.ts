@@ -62,3 +62,15 @@ export const formatHexString = (input: string) => {
 
   return null;
 };
+
+export const formatValidStringArray = (value: string | string[]): string[] => {
+  if (value === '') {
+    return [];
+  }
+
+  if (typeof value === 'string') {
+    return [value];
+  }
+
+  return value;
+};
