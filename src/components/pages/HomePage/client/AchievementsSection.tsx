@@ -1,6 +1,6 @@
 'use client';
 
-import { ACHIEVEMENTS, type AchievementKey } from '@/hooks/use-achievement';
+import { ACHIEVEMENTS, type Achievement, type AchievementKey } from '@/hooks/use-achievement';
 import { useLocalStorage } from '@/hooks/use-storage';
 import { objectEntries } from '@/utils/object-utils';
 import clsx from 'clsx';
@@ -14,7 +14,7 @@ interface AchievementItemProps {
 }
 
 const AchievementItem = ({ achievementKey, isDone }: Readonly<AchievementItemProps>) => {
-  const { symbol, title, description, hidden } = ACHIEVEMENTS[achievementKey];
+  const { symbol, title, description, hidden }: Achievement = ACHIEVEMENTS[achievementKey];
 
   return (
     <div className="gap-x-8PX group grid grid-cols-[64px_1fr] grid-rows-[auto_1fr]">

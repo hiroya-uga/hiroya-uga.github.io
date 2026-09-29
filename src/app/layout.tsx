@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 
 import { Comment } from '@/components/jokes/Comment';
 import { Console } from '@/components/jokes/Console';
+import { GrassAchievement } from '@/components/jokes/GrassAchievement';
 import { Analytics } from '@/components/ui/features/Analytics';
 import { LoadWebComponents } from '@/components/WebComponents';
 import { BODY_ELEMENT_ID, DIALOG_PORTAL_ID, DIALOG_TOAST_PORTAL_ID, SVG_PORTAL_ID } from '@/constants/id';
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Suspense>
           <Analytics />
           <Console />
+          <GrassAchievement />
           <LoadWebComponents />
         </Suspense>
 

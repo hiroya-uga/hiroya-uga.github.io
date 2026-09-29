@@ -1,21 +1,20 @@
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useState } from 'react';
 
+export type Achievement = {
+  symbol: string;
+  title: string;
+  description: string;
+  hidden?: {
+    symbol?: true;
+    title?: true;
+    description?: true;
+  };
+};
+
 // 実績解除：ネタバレ
 // ACHIEVEMENTSのソースを閲覧した
-export const ACHIEVEMENTS: Record<
-  string,
-  {
-    symbol: string;
-    title: string;
-    description: string;
-    hidden?: {
-      symbol?: true;
-      title?: true;
-      description?: true;
-    };
-  }
-> = {
+export const ACHIEVEMENTS = {
   'ran-out-of-business-cards': {
     symbol: '📇',
     title: '名刺を切らしておりまして',
@@ -75,7 +74,16 @@ export const ACHIEVEMENTS: Record<
     title: 'スピードスター',
     description: 'ブロック崩しを速度が上限に達した状態でクリアした。',
   },
-};
+  // ネタ
+  'kusa-ni-kusa-wo-hayasuna': {
+    symbol: '🌱',
+    title: '草に草を生やすな',
+    description: 'サイト内の入力欄に「草ｗ」と入力した。',
+    hidden: {
+      description: true,
+    },
+  },
+} satisfies Record<string, Achievement>;
 
 export type AchievementKey = keyof typeof ACHIEVEMENTS;
 
