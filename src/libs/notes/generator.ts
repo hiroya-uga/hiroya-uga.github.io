@@ -191,7 +191,7 @@ export const getAllNotesEntries = (): NotesEntry[] => {
       throw new Error(`Notes file not found for slug: ${slug.join('/')}`);
     }
 
-    const file = fs.readFileSync(filePath, 'utf-8');
+    const file = fs.readFileSync(/* turbopackIgnore: true */ filePath, 'utf-8');
     const { data } = matter(file);
     const frontmatter = enrichFrontmatter(validateFrontmatter(data as Record<string, unknown>, filePath), filePath);
 
