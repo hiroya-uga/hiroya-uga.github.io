@@ -115,6 +115,7 @@ const walk = (dir: string, currentSlug: string[]): string[][] => {
 
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.isDirectory()) {
+      if (entry.name === 'node_modules' || entry.name === '.git') continue;
       slugs.push(...walk(path.join(dir, entry.name), [...currentSlug, entry.name]));
     } else if (entry.name.endsWith('.md')) {
       const base = entry.name.replace(/\.md$/, '');
