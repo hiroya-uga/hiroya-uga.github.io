@@ -47,7 +47,7 @@ proficiencyLevel: 'Beginner'
 
 起動するたびにNode.jsが走ることにはなりますが、毎回出力スタイルが変化するのはなかなか愉快ですね🍵
 
-![PullRequestの作成を頼んだらキリ番#12000を踏んだことに反応するClaude Codeの様子](./06-11-claude-fable.webp?size=1200x666)
+![PullRequestの作成を頼んだらキリ番#12000を踏んだことに反応するClaude Codeの様子](./06-11-claude-fable/main.webp?size=1200x666)
 
 文面だけでキャラクター性がみえるってなかなかすごいことだ…。日本語って素晴らしい。
 

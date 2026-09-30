@@ -25,7 +25,7 @@ proficiencyLevel: 'Beginner'
 
 Nu Html Checkerは、WHATWGやW3Cでも使われているHTMLのバリデーションツールです。
 
-![](./03-22-nu-html-checker-01.webp?size=1200x740)
+![](./03-22-nu-html-checker/01.webp?size=1200x740)
 
 Web上にURLを貼り付けたり、HTMLをコピペしたり、ファイルを添付することでHTMLのエラーや警告を検出できます[^2]。
 

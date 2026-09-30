@@ -9,7 +9,7 @@ proficiencyLevel: 'Beginner'
 
 <!-- textlint-disable -->
 
-![VS Codeの拡張機能からClaude Codeに「uga.dev のこと、どう思う？」と尋ね、Deliberating…と表示されているチャット画面](./03-06-claude-tengu-spinner-words-01.webp?w=1200&h=630)
+![VS Codeの拡張機能からClaude Codeに「uga.dev のこと、どう思う？」と尋ね、Deliberating…と表示されているチャット画面](./03-06-claude-tengu-spinner-words/01.webp?w=1200&h=630)
 
 Claude Codeくんに話しかけると、思考中にいろんなキーワードが出てきます。
 「wondering」とか「pondering」とか……ぽ、ポンデリング🍩!?
@@ -55,7 +55,7 @@ https://github.com/levindixon/tengu_spinner_words
 }
 ```
 
-![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているClaude Code CLIの画面](./03-06-claude-tengu-spinner-words-02.webp?w=1490&h=580)
+![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているClaude Code CLIの画面](./03-06-claude-tengu-spinner-words/02.webp?w=1490&h=580)
 
 VS CodeはVS Codeで設定外必要[^3]。
 
@@ -70,7 +70,7 @@ VS CodeはVS Codeで設定外必要[^3]。
 }
 ```
 
-![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているVS Codeの拡張機能のClaude Code](./03-06-claude-tengu-spinner-words-03.webp?w=1200&h=630)
+![AIに「ふとんがふっとんだーーー！」と話しかけ、審議中 ( ´・ω) (´・ω・) (・ω・｀) (ω・｀ )と表示されているVS Codeの拡張機能のClaude Code](./03-06-claude-tengu-spinner-words/03.webp?w=1200&h=630)
 
 ## おもしろスピナーワード
 

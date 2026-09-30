@@ -14,7 +14,7 @@ proficiencyLevel: 'Beginner'
 
 先日、macOSでVoiceOverを起動すると、なにかしたわけでもないと思いますが、マウスカーソルが消えて代わりに青いリングが現れました。
 
-![VoiceOverの青いリング（トラックパッドコマンド）がVoiceOverユーティリティの上に表示されている様子](./05-22-voice-over-blue-circle-01.webp?size=1200x738)
+![VoiceOverの青いリング（トラックパッドコマンド）がVoiceOverユーティリティの上に表示されている様子](./05-22-voice-over-blue-circle/01.webp?size=1200x738)
 
 普段のマウス操作ができない不思議な挙動に困ってしまい、恥ずかしながら解決策を求めてネットの海を漂うこと数分😭
 
@@ -30,7 +30,7 @@ VOキー（`Control + Option` または `Caps Lock`）を押しながらトラ�
 
 また、[VoiceOverユーティリティ](https://support.apple.com/ja-jp/guide/voiceover/vo28017/mac)からも切り替えることができます。
 
-![VoiceOverユーティリティで「トラックパッド」のチェックを外す様子](./05-22-voice-over-blue-circle-02.webp?size=1200x738)
+![VoiceOverユーティリティで「トラックパッド」のチェックを外す様子](./05-22-voice-over-blue-circle/02.webp?size=1200x738)
 
 1. VoiceOverユーティリティを開く
    - アプリケーション → ユーティリティ → VoiceOverユーティリティ。VoiceOver起動中の場合は`VO + Fn + F8`。
@@ -42,13 +42,13 @@ VOキー（`Control + Option` または `Caps Lock`）を押しながらトラ�
 
 そもそもこれは何かというと、macOSのVoiceOverをiOSと同じように操作できるようになる機能でした。
 
-![トラックパッドコマンドでVoiceOverローターを表示させ、見出しを選択している様子](./05-22-voice-over-blue-circle-03.webp?size=1200x798)
+![トラックパッドコマンドでVoiceOverローターを表示させ、見出しを選択している様子](./05-22-voice-over-blue-circle/03.webp?size=1200x798)
 
 iOSのVOと同じ操作だとわかっていれば、思った通りに操作できて不思議な感じです。ローターも2本指Zジェスチャーキャンセル（スクラブ）も使えました。
 
 公式ドキュメントでは[トラックパッドジェスチャ](https://support.apple.com/ja-jp/guide/voiceover/vo28030/10/mac/26)と呼ばれているようですが、実装上はトラックパッドコマンドとなっているようです。
 
-![トラックパッドコマンドをオンにしたときのキャプションパネル。「トラックパッドコマンドオン」と表示されている。](./05-22-voice-over-blue-circle-04.webp?size=1200x798)
+![トラックパッドコマンドをオンにしたときのキャプションパネル。「トラックパッドコマンドオン」と表示されている。](./05-22-voice-over-blue-circle/04.webp?size=1200x798)
 
 余談ですが、トラックパットコマンドと誤字しそうになりますねこれ。それも含めて日本語での検索難易度が高い。
 

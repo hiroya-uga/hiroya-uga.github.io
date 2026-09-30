@@ -1,11 +1,11 @@
 ---
 title: "あけましておめでとう\nございました"
-ogImage: './01-31-january.jpg'
+ogImage: './01-31-january/thumb.jpg'
 publishedAt: '2026-01-31T01:57:34+09:00'
 topics: [日記]
 ---
 
-![](./01-31-january.webp?w=1200&h=630)
+![](./01-31-january/thumb.webp?w=1200&h=630)
 
 年始のご挨拶ができなかったみなさま、あけましておめでとうございます。  
 本年もどうぞよろしくお願いいたします。
