@@ -454,8 +454,14 @@
     fill: #fff;
   }
 
-  :root:not(:has([data-no-scrollbar-gutter])) {
-    scrollbar-gutter: stable;
+  :root {
+    &:not(:has([data-no-scrollbar-gutter])) {
+      scrollbar-gutter: stable;
+    }
+
+    @media (pointer: fine) {
+      overscroll-behavior-y: none;
+    }
   }
 
   html,
