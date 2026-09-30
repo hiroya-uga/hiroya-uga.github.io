@@ -11,6 +11,14 @@
   background-position: center bottom;
   background-size: 200% 50%;
 }
+[data-theme="dark"]:root {
+  p:has(customされたimg要素ˆ-ˆ) {
+    noscript,
+    customされたimg要素ˆ-ˆ {
+      border-color: #ffffff33;
+    }
+  }
+}
 
 .h1 {
   letter-spacing: 0.02em;
@@ -258,9 +266,11 @@ html:has(.container) {
     customされたimg要素ˆ-ˆ {
       /* outline: 1px solid rgb(0 0 0 / 0.5); */
       overflow: hidden;
+      border: 1px solid transparent;
       box-shadow:
         0 0 1px rgb(0 0 0 / 0.2),
         0 0 12px rgb(0 0 0 / 0.1);
+      transition: 0.3s border-color ease-out;
     }
 
     noscript {
