@@ -260,23 +260,13 @@ html:has(.container) {
       overflow: hidden;
       box-shadow:
         0 0 1px rgb(0 0 0 / 0.2),
-        0 0 12px rgb(0 0 0 / 0.1);
+        0 0 12px rgb(0 0 0 / 0.1),
+        0 0 0 1px #ffffff22;
     }
 
     noscript {
       position: absolute;
       inset: 0;
-    }
-  }
-
-  customされたimg要素ˆ-ˆ,
-  noscript,
-  [class~="image-diff-viewer"] {
-    border: 1px solid transparent;
-    border-width: 1px 0;
-
-    [data-theme="dark"]:root & {
-      border-color: #ffffff33;
     }
   }
 
@@ -290,11 +280,8 @@ html:has(.container) {
     noscript,
     [class~="image-diff-viewer"] {
       overflow: hidden;
-      border-width: 1px;
       border-radius: 0.5rem;
-      transition:
-        0.3s border-radius ease-out,
-        0.3s border ease-out;
+      transition: 0.3s border-radius ease-out;
 
       @supports (corner-shape: squircle) {
         border-radius: 0.5rem;

@@ -229,7 +229,7 @@ const linkExtension: TokenizerAndRendererExtension = {
         return `<span class="codepen"><span class="animate-fade-in-spinner">${LOADING_ICON_HTML}</span><iframe title="${t.text ?? t.href}" src="https://codepen.io/hiroya_uga/embed/${id}?default-tab=${encodeURIComponent(defaultTab)}" loading="lazy" data-loading="true" onload="if(typeof window !== 'undefined'){this.removeAttribute('data-loading');this.removeAttribute('onload');}"></iframe></span>`;
       }
 
-      if (url.hostname === 'amzn.to') {
+      if (url.hostname === 'amzn.to' || url.hostname === 'link.amazon') {
         const notice = '※ 当サイトはAmazonアソシエイト・プログラムの参加者であり、適格販売により収入を得ています。';
         return `<span class="associate"><small>${notice}</small>\n<a href="${t.href}">Amazonリンク: ${t.text ?? t.href}</a></span>`;
       }
