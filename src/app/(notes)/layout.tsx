@@ -1,5 +1,6 @@
 import { NotesLayout } from '@/components/layouts/NotesLayout';
 import { CookieConsentDialog } from '@/components/ui/dialogs/CookieConsentDialog';
+import { DevReload } from '@/components/ui/features/DevReload';
 import { getAllNotesEntries } from '@/libs/notes';
 import { Suspense } from 'react';
 
@@ -16,6 +17,7 @@ export default function Layout({ children }: Readonly<Props>) {
       <Suspense>
         <CookieConsentDialog lang="ja" />
       </Suspense>
+      <DevReload />
     </>
   );
 }
