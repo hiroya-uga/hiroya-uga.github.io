@@ -39,10 +39,10 @@ export const ArticleList = ({ type = 'simple', list }: Readonly<Props>) => {
   }
 
   return (
-    <ul className="w500:grid-cols-2 w800:grid-cols-3 w1280:grid-cols-4 grid gap-x-4 gap-y-8">
+    <ul className="w500:grid-cols-2 w800:grid-cols-3 w1440:grid-cols-4 grid gap-x-4 gap-y-8">
       {list.map((article) => {
         return (
-          <li key={article.pathname} className="@container">
+          <li key={article.pathname} className="@container grid">
             <ArticleCard article={article} type={type} />
           </li>
         );

@@ -50,7 +50,7 @@ export const ArticleCard = ({ article, type }: Readonly<Props>) => {
           </span>
         </div>
 
-        <div className="grid grid-rows-[1fr_auto_auto]">
+        <div className="grid grid-rows-[1fr_auto_auto] items-start">
           <div className="content-center px-3 group-hover:underline" {...(type === 'thumbnail' ? {} : untilFound)}>
             <div className="pb-1 leading-snug" id={titleId}>
               {article.title.replaceAll('\n', '')}

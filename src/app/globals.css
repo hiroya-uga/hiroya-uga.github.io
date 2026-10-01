@@ -170,6 +170,7 @@
   --breakpoint-w976: 61rem;
   --breakpoint-w1024: 64rem;
   --breakpoint-w1280: 80rem;
+  --breakpoint-w1440: 90rem;
   --breakpoint-w1520: 95rem;
 
   --container-content: 60rem; /* 960px */
