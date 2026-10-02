@@ -79,6 +79,11 @@ const bookmarks: Bookmark[] = [
     hrefLang: 'en',
     title: 'TC39/Proposals',
   },
+  {
+    href: 'https://www.w3.org/WAI/standards-guidelines/act/rules/',
+    hrefLang: 'en',
+    title: 'All ACT Rules',
+  },
 ];
 
 const linkList = bookmarks.toSorted((a, b) => {
