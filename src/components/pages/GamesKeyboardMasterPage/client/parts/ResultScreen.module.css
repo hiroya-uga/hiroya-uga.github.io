@@ -1,0 +1,10 @@
+/* Tailwindのanimate-pulse相当の点滅を5往復(=5秒)だけ行い、気づいてもらったら止める */
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) 3;
+}

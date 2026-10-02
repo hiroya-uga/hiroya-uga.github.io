@@ -331,6 +331,11 @@ export const SEO: Record<
     title: 'ゲーム置き場',
     description: `ちょっとしたゲームが置かれています。暇つぶしにどうぞ🥁`,
   },
+  '/games/keyboard-master': {
+    title: 'キーボード操作練習',
+    afterSubTitle: 'The Keyboard Master',
+    description: `マウスやタッチを使わず、キーボード操作だけでお題の状態を再現するゲームです。\nTabキーやショートカットキーで操作して、さまざまなUIの操作方法を学びましょう🔰`,
+  },
   '/games/number-pairing': {
     title: '数字を組み合わせて10を作るゲーム',
     description: `ランダムに並んだ数字のボタンを2つ選んで、合計が10になるペアを探すゲームです。`,

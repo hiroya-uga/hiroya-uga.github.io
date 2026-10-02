@@ -1,0 +1,27 @@
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.piece {
+  position: absolute;
+  top: -5%;
+  width: 8px;
+  height: 14px;
+  animation: fall var(--x-duration) linear var(--x-delay) forwards;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--x-drift), 110vh, 0) rotate(var(--x-spin));
+  }
+}

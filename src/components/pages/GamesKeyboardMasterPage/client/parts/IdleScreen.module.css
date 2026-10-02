@@ -1,0 +1,39 @@
+@keyframes press {
+  0%,
+  60%,
+  100% {
+    box-shadow: 0 8px 0 var(--color-accent);
+    transform: translateY(0);
+  }
+
+  30% {
+    box-shadow: 0 2px 0 var(--color-accent);
+    transform: translateY(6px);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+/* 自動で始まる動きは5秒を超えると止める手段が要るので、1.5秒 × 3回 = 4.5秒で終わらせる */
+.pulse {
+  animation: press 1.5s ease-in-out 3;
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
