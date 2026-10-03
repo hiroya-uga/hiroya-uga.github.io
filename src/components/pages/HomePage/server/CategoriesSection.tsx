@@ -9,8 +9,8 @@ import Link from 'next/link';
 
 const MAIN_PAGES = [
   { emoji: '🔧', href: '/tools' },
-  { emoji: '📚', href: '/documents' },
   { emoji: '🎮', href: '/games' },
+  { emoji: '📚', href: '/documents' },
   { emoji: '✍️', href: '/articles' },
 ] as const;
 
