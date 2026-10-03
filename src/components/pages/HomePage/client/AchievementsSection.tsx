@@ -22,7 +22,7 @@ const AchievementItem = ({ achievementKey, isDone }: Readonly<AchievementItemPro
         <span
           className={clsx([
             'row-span-2 grid size-16 place-items-center rounded text-[32px]',
-            isDone ? 'bg-secondary shadow' : 'opacity-50 grayscale',
+            isDone ? 'bg-secondary shadow' : 'opacity-50 mix-blend-exclusion grayscale',
           ])}
         >
           {isDone === false && hidden?.symbol === true ? MASKED_SYMBOL : symbol}
