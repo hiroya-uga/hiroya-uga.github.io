@@ -98,6 +98,24 @@ SENSOR_FORMATS.find((f) => f.id === id);
 SENSOR_FORMATS.find((item) => item.id === id);
 ```
 
+## Props naming
+
+If a file has only one main component, name its props type `Props`, not `<ComponentName>Props`. Only prefix with the component name when multiple components coexist in the same file and need disambiguation.
+
+```ts
+// Bad (single component in file)
+interface AuthorButtonProps {
+  onClick?: () => void;
+}
+const AuthorButton = ({ onClick }: Readonly<AuthorButtonProps>) => {};
+
+// Good
+interface Props {
+  onClick?: () => void;
+}
+const AuthorButton = ({ onClick }: Readonly<Props>) => {};
+```
+
 ## Re-exports
 
 A symbol must have a single canonical import path: the module that defines it (or a dedicated barrel `index.ts` that exposes it as the public API). Regular implementation modules must not re-export symbols they don't define — neither via `import` + `export`, nor via `export ... from`. Otherwise the same symbol becomes importable from multiple paths, fragmenting grep, refactor, and navigation.

@@ -74,3 +74,17 @@ export const formatValidStringArray = (value: string | string[]): string[] => {
 
   return value;
 };
+
+interface FormatUrlParams {
+  pathname: string;
+  query?: string | URLSearchParams;
+  hash?: string;
+}
+
+export const formatUrl = ({ pathname, query, hash }: FormatUrlParams) => {
+  const stringQuery = typeof query === 'object' ? query.toString() : query;
+  const normalizedQuery = stringQuery === undefined || stringQuery === '' ? '' : `?${stringQuery}`;
+  const normalizedHash = hash === undefined || hash === '' ? '' : `#${hash}`;
+
+  return `${pathname}${normalizedQuery}${normalizedHash}`;
+};

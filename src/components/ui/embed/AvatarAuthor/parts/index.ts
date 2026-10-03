@@ -1,1 +1,1 @@
-export * from './AvatarAuthorPicture';
+export * from './AuthorPicture';

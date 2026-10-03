@@ -1,29 +1,27 @@
 'use client';
 
-import { Toast } from '@/components/ui/dialogs/Toast';
 import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { PROFILE_TEXT, SITE_AUTHOR, SITE_AUTHOR_JA, SITE_NAME } from '@/constants/meta';
-import { useAchievement } from '@/hooks/use-achievement';
 import { usePortal } from '@/hooks/use-portal';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
-const AVATAR_SRC = '/common/images/profile.png';
+import { AVATAR_SRC } from './AuthorButton';
 
-interface BusinessCardProps {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
+export const BusinessCard = ({ isOpen, onClose }: Readonly<Props>) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { renderDialog } = usePortal();
+  const { renderDialog, isPortalReady } = usePortal();
 
   useEffect(() => {
     const dialog = dialogRef.current;
 
-    if (dialog === null) {
+    if (dialog === null || isPortalReady === false) {
       return;
     }
 
@@ -32,7 +30,7 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
     } else {
       dialog.close();
     }
-  }, [isOpen]);
+  }, [isOpen, isPortalReady]);
 
   return renderDialog(
     <dialog
@@ -136,41 +134,5 @@ const BusinessCard = ({ isOpen, onClose }: Readonly<BusinessCardProps>) => {
         <p className="mt-4PX text-12px [@media(min-width:640px)_and_(min-height:500px)]:text-[10px]">{SITE_NAME}</p>
       </div>
     </dialog>,
-  );
-};
-
-export const AvatarAuthorPicture = () => {
-  const wasOpenedRef = useRef(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const { toastProps, unlock } = useAchievement();
-
-  return (
-    <>
-      <button
-        type="button"
-        className="block aspect-square rounded-full"
-        aria-haspopup="dialog"
-        onClick={() => {
-          setIsExpanded(true);
-          wasOpenedRef.current = true;
-        }}
-      >
-        <Picture width={160} height={160} src={AVATAR_SRC} alt="似顔絵アイコン" className="w-full" priority />
-      </button>
-
-      <BusinessCard
-        isOpen={isExpanded}
-        onClose={() => {
-          setIsExpanded(false);
-
-          if (wasOpenedRef.current === false) {
-            return;
-          }
-
-          unlock('ran-out-of-business-cards', 300);
-        }}
-      />
-      <Toast {...toastProps} />
-    </>
   );
 };
