@@ -3,10 +3,12 @@
 import { useMemo } from 'react';
 
 import { ToolCard } from '@/components/ui/card/ToolCard';
+import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { ALL_TOOLS_LINK_LIST } from '@/constants/link-list';
 import { useLocalStorage } from '@/hooks/use-storage';
 import { getMetadata } from '@/utils/get-metadata';
 import type { LocalStorageItems } from '@/utils/local-storage';
+import Link from 'next/link';
 
 const emptyHistoryList: typeof ALL_TOOLS_LINK_LIST = [];
 
@@ -52,6 +54,18 @@ export const RecentToolsSection = () => {
             );
           })}
         </dl>
+
+        <p className="mr-6PX ml-auto mt-4 w-fit">
+          <Link
+            href="/tools"
+            className="gap-x-6PX pointer-fine:gap-x-4PX group grid grid-cols-[1fr_12px] items-center text-sm text-inherit no-underline hover:underline"
+          >
+            <span>ツールをすべて見る</span>
+            <span className="size-12PX group-hover:translate-x-2PX relative transition-transform [--x-fill:currentColor]">
+              <SvgIcon name="arrow2-right" alt="" />
+            </span>
+          </Link>
+        </p>
       </div>
     </div>
   );
