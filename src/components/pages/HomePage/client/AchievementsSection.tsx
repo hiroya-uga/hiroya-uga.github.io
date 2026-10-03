@@ -22,7 +22,7 @@ const AchievementItem = ({ achievementKey, isDone }: Readonly<AchievementItemPro
         <span
           className={clsx([
             'row-span-2 grid size-16 place-items-center rounded text-[32px]',
-            isDone ? 'bg-secondary shadow' : 'opacity-50 mix-blend-exclusion grayscale',
+            isDone ? 'bg-secondary shadow' : 'opacity-50 grayscale dark:mix-blend-exclusion',
           ])}
         >
           {isDone === false && hidden?.symbol === true ? MASKED_SYMBOL : symbol}
@@ -53,7 +53,7 @@ export const AchievementsSection = () => {
   return (
     <div className="border-t-secondary pt-(--x-section-padding-top) mt-(--x-section-margin-top) border-t border-dashed">
       <h2>🏆 Achievements</h2>
-      <p className="w640:mb-7 mb-3.5">このブラウザであなたが解除した実績一覧です！</p>
+      <p className="w640:mb-7 mb-3.5">このブラウザであなたが達成した実績一覧です！</p>
 
       <div className="@container">
         <dl className="gap-16PX @w640:grid-cols-2 grid">
