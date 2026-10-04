@@ -1,28 +1,16 @@
 'use client';
 
-import { GA_MEASUREMENT_ID } from '@/constants/id';
-import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
+import { getLocalStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
-import ReactGA from 'react-ga4';
 
 import { RunButton } from '@/components/ui/buttons/RunButton';
 import { TextLink } from '@/components/ui/buttons/TextLink';
 import { SITE_NAME } from '@/constants/meta';
 import { Lang } from '@/types/lang';
+import { applyCookieConsent, initGA } from '@/utils/cookie-consent';
 import clsx from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './CookieConsentDialog.module.css';
-
-const initGA = () => {
-  if (process.env.NODE_ENV !== 'production') {
-    return;
-  }
-
-  const pathname = window.location.pathname;
-  const searchParams = new URLSearchParams(window.location.search);
-  ReactGA.initialize(GA_MEASUREMENT_ID);
-  ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
-};
 
 const i18n = {
   ja: {
@@ -171,14 +159,8 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
   }, [shouldShowDialog]);
 
   const closeDialog = useCallback((state: 'accepted' | 'rejected') => {
-    setLocalStorage('cookie-consent', state);
+    applyCookieConsent(state);
     setIsAfterBannerDialogCloseRequest(true);
-
-    if (state === 'accepted') {
-      initGA();
-    }
-
-    document.documentElement.setAttribute('data-cookie-consent', state);
     dialogRef.current?.close();
     document.body.tabIndex = -1;
     document.body.focus({
