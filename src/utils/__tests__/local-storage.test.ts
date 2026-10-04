@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '@/utils/local-storage';
 
 beforeEach(() => {
   localStorage.clear();
@@ -77,6 +77,32 @@ describe('getLocalStorage', () => {
         parsed: null,
       });
     });
+  });
+});
+
+describe('removeLocalStorage', () => {
+  it('保存済みのキーを削除してtrueを返す', () => {
+    setLocalStorage('theme', 'dark');
+
+    expect(removeLocalStorage('theme')).toBe(true);
+    expect(localStorage.getItem('theme')).toBeNull();
+  });
+
+  it('未保存のキーを指定しても例外を投げずtrueを返す', () => {
+    expect(removeLocalStorage('theme')).toBe(true);
+  });
+
+  it('localStorageからの削除に失敗した場合は例外を投げずfalseを返しエラーログを出す', () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const removeItemSpy = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+      throw new Error('removeItem failed');
+    });
+
+    expect(removeLocalStorage('theme')).toBe(false);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+
+    removeItemSpy.mockRestore();
+    consoleErrorSpy.mockRestore();
   });
 });
 

@@ -49,6 +49,16 @@ export const setLocalStorage = <T extends Key>(key: T, value: Value[T]) => {
   }
 };
 
+export const removeLocalStorage = <T extends Key>(key: T): boolean => {
+  try {
+    localStorage.removeItem(key);
+    return true;
+  } catch (error) {
+    console.error(`Error removing local storage for key "${key}":`, error);
+    return false;
+  }
+};
+
 interface GetLocalStorageOptions {
   withRaw: true;
 }

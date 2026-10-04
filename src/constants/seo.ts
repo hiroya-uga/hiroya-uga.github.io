@@ -27,7 +27,7 @@ export const SEO: Record<
   },
   '/config': {
     title: '設定',
-    description: `${SITE_NAME}の設定ページです。`,
+    description: `${SITE_NAME}の設定ページです。\nこのブラウザに保存されている各種データの初期化や、設定の変更ができます。`,
     robots: 'noindex',
   },
   '/contact': {
