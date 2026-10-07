@@ -84,7 +84,7 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
   place-items: center;
   width: var(--x-button-size);
   height: var(--x-button-size);
-  color: white;
+  color: black;
   cursor: default;
   user-select: none;
   border-radius: 50%;
@@ -92,12 +92,12 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
 
   &.of-next,
   &.of-prev {
-    background: rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.8);
   }
 
   @media (hover: hover) {
     &:hover {
-      background: rgb(255 255 255 / 0.2);
+      background: rgb(255 255 255 / 0.95);
     }
   }
 }
