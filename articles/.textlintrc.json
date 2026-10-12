@@ -14,6 +14,7 @@
       "max": 6
     },
     "preset-jtf-style": {
+      "1.1.1.本文": false,
       "1.1.2.見出し": false,
       "4.3.2.大かっこ［］": false
     },
