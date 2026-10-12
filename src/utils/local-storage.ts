@@ -35,6 +35,7 @@ type Value = {
     'recent-tools-section-prompt'?: boolean;
   };
   achievement: Partial<Record<string, string>>;
+  liked: string[];
 };
 type Key = keyof Value;
 

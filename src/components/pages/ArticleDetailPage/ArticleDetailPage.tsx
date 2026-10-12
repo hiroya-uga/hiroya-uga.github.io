@@ -10,7 +10,8 @@ import { getPostBySlug } from '@/libs/marked';
 import { getArticleMarkdownFilePath } from '@/utils/get-article-markdown-file-path';
 import { ArticleNavigation } from './server';
 
-import { ShareSection } from '@/components/structures/ShareSection';
+import { LikeButton } from '@/components/ui/buttons/LikeButton';
+import { TweetLink } from '@/components/ui/buttons/TweetLink';
 import styles from './ArticleDetailPage.module.css';
 
 interface Props {
@@ -43,9 +44,17 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
       <main className={styles.root}>
         <ArticleMain post={post} />
 
+        <div className="mt-share-buttons px-content-inline bottom-16PX sticky">
+          <p className="ml-auto w-fit">
+            <LikeButton name={pathname} />
+          </p>
+        </div>
+
         <div className="px-content-inline">
           <div className="max-w-(--x-max-width) mx-auto">
-            <ShareSection align="center" message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`} />
+            <p className="mx-auto grid place-items-center">
+              <TweetLink lang="ja" message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`} />
+            </p>
           </div>
         </div>
 
