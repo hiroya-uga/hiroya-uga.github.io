@@ -1,16 +1,27 @@
 import { GA_MEASUREMENT_ID } from '@/constants/id';
-import { setLocalStorage } from '@/utils/local-storage';
+import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import ReactGA from 'react-ga4';
 
-export const initGA = () => {
-  if (process.env.NODE_ENV !== 'production') {
+export const sendPageview = () => {
+  if (!ReactGA.isInitialized) {
     return;
   }
 
-  const pathname = window.location.pathname;
-  const searchParams = new URLSearchParams(window.location.search);
-  ReactGA.initialize(GA_MEASUREMENT_ID);
-  ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
+  ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
+};
+
+// 呼び出し側に同意の確認を任せると、確認漏れがそのまま同意前の送信になるため、ここで門番になる
+export const initGA = () => {
+  if (process.env.NODE_ENV !== 'production' || GA_MEASUREMENT_ID === '') {
+    return;
+  }
+
+  if (getLocalStorage('cookie-consent') !== 'accepted') {
+    return;
+  }
+
+  // config の自動 page_view を止めないと、sendPageview と合わせて二重に計上される
+  ReactGA.initialize(GA_MEASUREMENT_ID, { gtagOptions: { send_page_view: false } });
 };
 
 export const applyCookieConsent = (state: 'accepted' | 'rejected') => {
@@ -19,5 +30,6 @@ export const applyCookieConsent = (state: 'accepted' | 'rejected') => {
 
   if (state === 'accepted') {
     initGA();
+    sendPageview();
   }
 };

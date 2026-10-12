@@ -731,6 +731,11 @@ export const ArticleYoutubeManager = () => {
   const instancesRef = useRef<YT.Player[]>([]);
 
   useEffect(() => {
+    // 埋め込みのない記事で YouTube へ不要な通信をしないため、iframe がなければ読み込まない
+    if (document.querySelector('.youtube iframe') === null) {
+      return;
+    }
+
     let setTimeoutId = -1;
     const instances = instancesRef.current;
     const init = () => {
@@ -789,6 +794,11 @@ export const ArticleTwitterActivator = () => {
   const id = useId();
 
   useEffect(() => {
+    // 埋め込みのない記事で X へ不要な通信をしないため、投稿がなければ読み込まない
+    if (document.querySelector('.twitter-tweet') === null) {
+      return;
+    }
+
     if (document.getElementById(id) === null) {
       const script = document.createElement('script');
       script.id = id;

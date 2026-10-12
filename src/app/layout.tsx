@@ -41,11 +41,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <meta name="text-scale" content="scale" />
 
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
-
         <Comment />
         <Suspense>
           <Analytics />

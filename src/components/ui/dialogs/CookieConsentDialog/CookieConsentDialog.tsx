@@ -7,7 +7,7 @@ import { RunButton } from '@/components/ui/buttons/RunButton';
 import { TextLink } from '@/components/ui/buttons/TextLink';
 import { SITE_NAME } from '@/constants/meta';
 import { Lang } from '@/types/lang';
-import { applyCookieConsent, initGA } from '@/utils/cookie-consent';
+import { applyCookieConsent } from '@/utils/cookie-consent';
 import clsx from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './CookieConsentDialog.module.css';
@@ -124,7 +124,6 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
 
   useEffect(() => {
     if (shouldShowDialog === false) {
-      initGA();
       return;
     }
 

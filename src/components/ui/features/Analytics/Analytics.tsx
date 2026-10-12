@@ -4,22 +4,22 @@ import { useEffect } from 'react';
 
 import { usePathname, useSearchParams } from 'next/navigation';
 
-import ReactGA from 'react-ga4';
+import { initGA, sendPageview } from '@/utils/cookie-consent';
 
 import { useReportWebVitals } from 'next/web-vitals';
-
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? '';
 
 export const Analytics = () => {
   const pathname = usePathname() ?? '';
   const searchParams = useSearchParams() ?? '';
 
   useEffect(() => {
-    if (GA_MEASUREMENT_ID === '' || !pathname) {
+    if (!pathname) {
       return;
     }
 
-    ReactGA.send({ hitType: 'pageview', page: pathname + searchParams.toString() });
+    // 保存済みの同意は再訪時にここで反映する。初回の同意は applyCookieConsent が扱う
+    initGA();
+    sendPageview();
   }, [pathname, searchParams]);
 
   useReportWebVitals((metric) => {
