@@ -6,8 +6,10 @@ const ga = vi.hoisted(() => ({
   initialize: vi.fn(),
   send: vi.fn(),
 }));
+const counter = vi.hoisted(() => ({ increment: vi.fn() }));
 const navigation = vi.hoisted(() => ({ pathname: '/a/', searchParams: new URLSearchParams() }));
 
+vi.mock('@/api', () => ({ counterApi: counter }));
 vi.mock('react-ga4', () => ({ default: ga }));
 vi.mock('@/constants/id', () => ({ GA_MEASUREMENT_ID: 'G-TEST' }));
 vi.mock('next/navigation', () => ({
@@ -32,6 +34,7 @@ beforeEach(() => {
     ga.isInitialized = true;
   });
   ga.send.mockReset();
+  counter.increment.mockReset().mockResolvedValue(1);
   navigation.pathname = '/a/';
   saveConsent(null);
 });
@@ -79,5 +82,15 @@ describe('Analytics', () => {
     rerender(<Analytics />);
 
     expect(ga.send).toHaveBeenCalledTimes(1);
+  });
+
+  it('同意の有無にかかわらず、サイト内の遷移ではアクセス数を加算せず、表示時に1回だけ加算する', () => {
+    saveConsent('rejected');
+    const { rerender } = render(<Analytics />);
+
+    navigation.pathname = '/b/';
+    rerender(<Analytics />);
+
+    expect(counter.increment).toHaveBeenCalledTimes(1);
   });
 });

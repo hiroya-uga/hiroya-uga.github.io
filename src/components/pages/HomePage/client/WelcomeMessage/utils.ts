@@ -9,15 +9,16 @@ export const getRandomIndexArray = (length: number) => {
 interface ShuffleCounterParams {
   counterTarget: HTMLSpanElement;
   isViewed: boolean;
+  realCount: number | null;
 }
 
 const getRandomAccessCount = () => [...String(Math.floor(Math.random() * (10 ** COUNTER_LENGTH + 1)))];
 
-export const shuffleCounter = ({ counterTarget, isViewed }: ShuffleCounterParams) => {
+export const shuffleCounter = ({ counterTarget, isViewed, realCount }: ShuffleCounterParams) => {
   let i = 0;
   let loop = 0;
   let indexArray = getRandomIndexArray(COUNTER_LENGTH);
-  const finallyCount = getRandomAccessCount().join('').padStart(COUNTER_LENGTH, '0');
+  const finallyCount = (realCount?.toString() ?? getRandomAccessCount().join('')).padStart(COUNTER_LENGTH, '0');
 
   const getValue = () => {
     if (loop !== 1) {
