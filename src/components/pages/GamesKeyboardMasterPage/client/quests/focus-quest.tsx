@@ -1,0 +1,40 @@
+'use client';
+
+import { DEFAULT_OPERATION_QUEST_TIMEOUT, LINK_LABELS } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import type { NodeQuest, QuestNodeProps } from './types';
+
+const FocusQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
+  return (
+    <p className="text-lg">
+      {LINK_LABELS.map((label, index) => (
+        <span key={label}>
+          <a
+            href="#"
+            onFocus={() => {
+              if (index === LINK_LABELS.length - 1) {
+                onClear();
+              }
+            }}
+            onClick={(e) => {
+              // href="#" はフォーカス可能にするためだけの指定なので、ページ先頭へのジャンプは止める
+              e.preventDefault();
+            }}
+          >
+            {label}
+          </a>
+          {index < LINK_LABELS.length - 1 && '、'}
+        </span>
+      ))}
+    </p>
+  );
+};
+
+export const focusQuest: NodeQuest = {
+  type: 'node',
+  title: '3つ目のテキストリンクにTabキーでフォーカスしろ',
+  hint: 'Tabを押して、リンクを順番にたどる',
+  explanation:
+    'リンクもボタンと同じく、Tabキーでひとつずつフォーカスできる作りが一般的。Safariは初期設定だとリンクを飛ばすことがあり、Option+Tabを使うか、設定で切り替える方法がある。',
+  timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
+  Node: FocusQuestNode,
+};

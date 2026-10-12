@@ -1,0 +1,45 @@
+'use client';
+
+import { DEFAULT_OPERATION_QUEST_TIMEOUT } from '@/components/pages/GamesKeyboardMasterPage/constants';
+import { isFullySelected } from '@/components/pages/GamesKeyboardMasterPage/utils';
+import { TextField } from '@/components/ui/forms/TextField';
+import { useEffect, useRef } from 'react';
+import type { NodeQuest, QuestNodeProps } from './types';
+
+const SELECT_ALL_TEXT = 'この文章をぜんぶ選択しろ';
+
+const TextareaSelectAllQuestNode = ({ onClear }: Readonly<QuestNodeProps>) => {
+  const ref = useRef<HTMLTextAreaElement | HTMLInputElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+
+    if (el === null) {
+      return;
+    }
+
+    // Ctrl+A / Cmd+A の全選択は input イベントを発火しないので selectionchange 相当の select イベントで検知する
+    const handleSelect = () => {
+      if (isFullySelected(el) && 0 < el.value.length) {
+        onClear();
+      }
+    };
+
+    el.addEventListener('select', handleSelect);
+
+    return () => {
+      el.removeEventListener('select', handleSelect);
+    };
+  }, [onClear]);
+
+  return <TextField label="本文" multiline readOnly defaultValue={SELECT_ALL_TEXT} ref={ref} />;
+};
+
+export const textareaSelectAllQuest: NodeQuest = {
+  type: 'node',
+  title: 'テキストエリアの中身を全部選択しろ',
+  hint: 'Ctrl+A（MacはCmd+A）で全選択する',
+  explanation: '一般的に、Ctrl+A（MacはCmd+A）を使えば、ドラッグなしで一瞬で全選択できる。',
+  timeLimit: DEFAULT_OPERATION_QUEST_TIMEOUT,
+  Node: TextareaSelectAllQuestNode,
+};
