@@ -1,5 +1,6 @@
 'use client';
 
+import { counterApi } from '@/api';
 import { SITE_NAME } from '@/constants/meta';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
@@ -36,16 +37,31 @@ const message = [
       ['險ｪ°', '訪'],
       ['蝠�', '問'],
       ['繧ゅ', '者'],
-      ['＠繧', 'か'],
-      ['後', 'も'],
-      ['∪', 'し'],
-      ['縺', 'れ'],
-      ['帙', 'ま'],
-      ['ｓ', 'せ'],
-      ['縲', 'ん'],
-      ['�', '。'],
     ],
   },
+];
+
+// 取得に成功したときは断定し、失敗してランダム値のときだけ「かもしれません」と濁す
+const successSuffix = [
+  ['＠繧', 'で'],
+  ['後', 'す'],
+  ['�', '。'],
+];
+const fallbackSuffix = [
+  ['＠繧', 'か'],
+  ['後', 'も'],
+  ['∪', 'し'],
+  ['縺', 'れ'],
+  ['帙', 'ま'],
+  ['ｓ', 'せ'],
+  ['縲', 'ん'],
+  ['�', '。'],
+];
+
+const getMessage = (isSuccess: boolean) => [
+  message[0],
+  message[1],
+  { mapping: [...message[2].mapping, ...(isSuccess ? successSuffix : fallbackSuffix)] },
 ];
 
 export const WelcomeMessage = () => {
@@ -55,6 +71,9 @@ export const WelcomeMessage = () => {
   const counterRef = useRef<HTMLSpanElement>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'already'>('loading');
   const isInitialized = useRef(false);
+
+  const [isSuccess, setIsSuccess] = useState(false);
+  const fullMessage = getMessage(isSuccess);
 
   const [srOnlyAccessCount, setSrOnlyAccessCount] = useState('');
 
@@ -66,18 +85,33 @@ export const WelcomeMessage = () => {
     if (counterTarget === null) return;
 
     const isViewed = getSessionStorage('welcome-message-viewed') === 'true';
-    const { finallyCount, cleanup } = shuffleCounter({ counterTarget, isViewed });
+    // fetch の完了前にアンマウントされたときは止めるタイマーを受け取るための変数
+    let cleanup: null | (() => void) = null;
 
-    setSrOnlyAccessCount(finallyCount);
+    // 加算は Analytics が行う。ここは読むだけ。取得に失敗したら従来どおりランダム値で演出する
+    void counterApi
+      .fetchCount()
+      .then((count) => {
+        const result = shuffleCounter({
+          counterTarget,
+          isViewed,
+          realCount: count,
+        });
 
-    if (isViewed) {
-      setStatus('already');
-      return cleanup;
-    }
+        cleanup = result.cleanup;
+        setSrOnlyAccessCount(result.finallyCount);
+        setIsSuccess(count !== null);
 
-    setStatus('ready');
-    setSessionStorage('welcome-message-viewed', 'true');
-    return cleanup;
+        if (!isViewed) {
+          setSessionStorage('welcome-message-viewed', 'true');
+        }
+      })
+      .finally(() => {
+        setStatus(isViewed ? 'already' : 'ready');
+      });
+
+    // isInitialized で二重実行を防ぐ都合上、StrictMode の擬似アンマウントで中断しない
+    return () => cleanup?.();
   }, []);
 
   // その他の文字
@@ -91,7 +125,7 @@ export const WelcomeMessage = () => {
     }
 
     const nodeList = [message1, message2, message3];
-    const characterList = message.map((item, index) => {
+    const characterList = fullMessage.map((item, index) => {
       return item.mapping.map((_, index2) => ({ messageIndex: index, wordIndex: index2, done: false }));
     });
     const flatCharacterList = characterList.flat();
@@ -108,9 +142,9 @@ export const WelcomeMessage = () => {
         node.textContent = characterList[i]
           .map((item) => {
             if (item.done) {
-              return message[i].mapping[item.wordIndex][1];
+              return fullMessage[i].mapping[item.wordIndex][1];
             }
-            return message[i].mapping[item.wordIndex][0];
+            return fullMessage[i].mapping[item.wordIndex][0];
           })
           .join('');
       });
@@ -153,7 +187,7 @@ export const WelcomeMessage = () => {
             </span>
           </span>
           <span className="w640:inline relative block">
-            <span className="sr-only inset-0">{`あなたは${srOnlyAccessCount}番目の訪問者かもしれません。`}</span>
+            <span className="sr-only inset-0">{`あなたは${srOnlyAccessCount}番目の訪問者${isSuccess ? 'です' : 'かもしれません'}。`}</span>
 
             <span ref={message2Ref} aria-hidden="true">
               {message[1].mapping.map(([a, b]) => (status === 'already' ? b : a)).join('')}
@@ -162,7 +196,7 @@ export const WelcomeMessage = () => {
               {''.padStart(COUNTER_LENGTH, '0')}
             </span>
             <span ref={message3Ref} aria-hidden="true">
-              {message[2].mapping.map(([a, b]) => (status === 'already' ? b : a))}
+              {fullMessage[2].mapping.map(([a, b]) => (status === 'already' ? b : a))}
             </span>
           </span>
         </p>
