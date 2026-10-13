@@ -88,7 +88,7 @@ export const WelcomeMessage = () => {
     // fetch の完了前にアンマウントされたときは止めるタイマーを受け取るための変数
     let cleanup: null | (() => void) = null;
 
-    // 加算は Analytics が行う。ここは読むだけ。取得に失敗したら従来どおりランダム値で演出する
+    // 加算は <Analytics /> が行う。取得に失敗したら従来どおりランダム値で演出する
     void counterApi
       .fetchCount()
       .then((count) => {
