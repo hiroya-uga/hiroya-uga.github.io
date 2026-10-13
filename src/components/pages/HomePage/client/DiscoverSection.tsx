@@ -63,7 +63,7 @@ export const DiscoverSection = () => {
             'w768:grid-cols-3 w768:gap-8',
             'w640:mt-7',
             'w500:gap-y-6',
-            'mt-5 grid gap-y-11 transition-opacity',
+            'gap-y-paragraph mt-5 grid transition-opacity',
             pickUpList.length === 0 && 'min-h-72 opacity-0',
           ])}
         >
