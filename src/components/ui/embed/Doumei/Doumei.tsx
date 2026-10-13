@@ -1,28 +1,23 @@
 import { Picture } from '@/components/ui/features/Picture';
-import Script from 'next/script';
+import { SupportSpaScripts } from '@/components/ui/features/SupportSpaScripts';
+
+const WEB_10_UNITE_SCRIPTS = [
+  {
+    src: 'https://gebecy.github.io/web10unite/onionring-variables.js',
+    integrity: 'sha384-k1DGJHB2qqfJz5gZoo6AINW3ybBeDkVRHqhKWo6JqlVpV5z7oz/u9qed/2437lo3',
+  },
+  {
+    src: 'https://gebecy.github.io/web10unite/onionring-widget.js',
+    integrity: 'sha384-4yuwNPHYXejEWUlSW7ehSnXVF+ILr3/quf5h8z4SWBvPX5OdfnsFAWXo+uLEjiDD',
+  },
+];
 
 export const Doumei = () => {
   return (
     <ul className="w640:gap-y-3 flex flex-wrap items-end gap-x-3 gap-y-4">
       <li>
-        <div id="web1_0">
-          <Script
-            src="https://gebecy.github.io/web10unite/onionring-variables.js"
-            integrity="sha384-k1DGJHB2qqfJz5gZoo6AINW3ybBeDkVRHqhKWo6JqlVpV5z7oz/u9qed/2437lo3"
-            crossOrigin="anonymous"
-          />
-          <Script id="onionring-ring-id">
-            {
-              // for localhost
-              "window.ringID = window.ringID ?? '';"
-            }
-          </Script>
-          <Script
-            src="https://gebecy.github.io/web10unite/onionring-widget.js"
-            integrity="sha384-4yuwNPHYXejEWUlSW7ehSnXVF+ILr3/quf5h8z4SWBvPX5OdfnsFAWXo+uLEjiDD"
-            crossOrigin="anonymous"
-          />
-        </div>
+        <div id="web1_0" />
+        <SupportSpaScripts scripts={WEB_10_UNITE_SCRIPTS} />
       </li>
       {[
         {
