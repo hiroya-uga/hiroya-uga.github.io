@@ -47,7 +47,7 @@ export const Confirm = ({ confirm, setConfirmData }: Readonly<Props>) => {
       return;
     }
 
-    // CSSOM再生成
+    // oxlint-disable-next-line no-unused-expressions CSSOM再生成
     ref.current?.scrollHeight;
     dialog.showModal();
   }, [confirm]);

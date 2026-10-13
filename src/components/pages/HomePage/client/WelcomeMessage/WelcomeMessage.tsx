@@ -4,7 +4,7 @@ import { counterApi } from '@/api';
 import { SITE_NAME } from '@/constants/meta';
 import { getSessionStorage, setSessionStorage } from '@/utils/session-storage';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { COUNTER_LENGTH } from './constants';
 import { getRandomIndexArray, shuffleCounter } from './utils';
 
@@ -73,7 +73,7 @@ export const WelcomeMessage = () => {
   const isInitialized = useRef(false);
 
   const [isSuccess, setIsSuccess] = useState(false);
-  const fullMessage = getMessage(isSuccess);
+  const fullMessage = useMemo(() => getMessage(isSuccess), [isSuccess]);
 
   const [srOnlyAccessCount, setSrOnlyAccessCount] = useState('');
 
@@ -164,7 +164,7 @@ export const WelcomeMessage = () => {
     return () => {
       clearTimeout(setTimeoutId);
     };
-  }, [status]);
+  }, [status, fullMessage]);
 
   return (
     <div className="px-content-inline">

@@ -564,7 +564,7 @@ export const SimpleBlockBreaker = ({ width, height }: { width: number; height: n
       setIsReady(true);
       setAllBlocksUnbroken(true);
     });
-  }, [id, createBlocksArray, searchParams]);
+  }, [id, createBlocksArray, searchParams, width]);
 
   return (
     <>

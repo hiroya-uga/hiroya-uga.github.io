@@ -129,7 +129,6 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
 
     if (dialogRef.current) {
       if (shouldShowBanner.current) {
-        const dialog = dialogRef.current;
         const handleScroll = () => {
           const scrollableHeight = document.documentElement.scrollHeight - globalThis.window.innerHeight;
 

@@ -32,8 +32,7 @@ export const Modal = ({ title, children, isOpen, closeModal }: Readonly<Props>) 
     }
 
     if (isOpen && dialog.open === false) {
-      // ここで scrollHeight を読んでレイアウトを強制フラッシュしないと、[open] 付与と
-      // opacity トランジションがブラウザにまとめて処理され、フェードインが再生されない
+      // oxlint-disable-next-line no-unused-expressions CSSOM再生成
       ref.current?.scrollHeight;
       dialog.showModal();
     }
