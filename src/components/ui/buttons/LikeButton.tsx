@@ -67,17 +67,17 @@ export const LikeButton = ({ name }: Props) => {
       <button
         type="button"
         className={clsx([
-          'bg-secondary hover:bg-panel-primary-hover shadow-sticky text-high-contrast pl-14PX pr-10PX gap-x-4PX border-primary pt-4PX pb-3PX grid grid-cols-[auto_auto] items-center rounded-full border transition-[background-color,opacity,visibility]',
+          'bg-secondary hover:bg-panel-primary-hover shadow-sticky text-high-contrast pl-14PX pr-12PX gap-x-6PX border-primary pt-4PX pb-3PX grid grid-cols-[auto_auto] items-center rounded-full border transition-[background-color,opacity,visibility]',
           isLoading && 'invisible opacity-0',
         ])}
         aria-label={`いいねする（${count}件のいいね）`}
         aria-pressed={pressed}
         onClick={onClick}
       >
-        <span aria-hidden="true" title="いいねする">
+        <span aria-hidden="true" title="いいねする" className="text-18px">
           {pressed ? '♥' : '♡'}
         </span>
-        <span aria-hidden="true" className="text-12px min-w-[2ch] tabular-nums">
+        <span aria-hidden="true" className="text-14px min-w-[2ch] tabular-nums">
           {count ?? '0'}
         </span>
       </button>

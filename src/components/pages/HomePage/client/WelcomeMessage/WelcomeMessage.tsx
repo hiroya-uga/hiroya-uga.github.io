@@ -159,9 +159,7 @@ export const WelcomeMessage = () => {
       clearTimeout(setTimeoutId);
     };
 
-    setTimeout(() => {
-      updateCharacter();
-    }, 1000);
+    updateCharacter();
 
     return () => {
       clearTimeout(setTimeoutId);
@@ -176,7 +174,7 @@ export const WelcomeMessage = () => {
             // 14 * 1.875 = 26.25px
             // 26 * 3 = 78px (3lh)
             // 78px + 1px = 79px (for iOS Safari)
-            'leading-26px min-h-79px pl-[0.5ch] text-center text-sm transition-opacity',
+            'leading-26px min-h-79px pl-[1ch] text-center text-sm transition-opacity',
             status === 'loading' ? 'opacity-0' : 'opacity-100',
           ])}
         >

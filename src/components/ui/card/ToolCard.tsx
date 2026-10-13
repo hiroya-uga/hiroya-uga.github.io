@@ -16,7 +16,7 @@ const Descriptions = ({
   if (truncate) {
     return (
       <dd className="max-w-full grow text-sm">
-        <div className="truncate">{description.join('')}</div>
+        <div className="w400:line-clamp-2 line-clamp-1">{description.join('')}</div>
       </dd>
     );
   }

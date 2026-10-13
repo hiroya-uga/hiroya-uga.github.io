@@ -44,7 +44,7 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
       <main className={styles.root}>
         <ArticleMain post={post} />
 
-        <div className="mt-share-buttons px-content-inline bottom-12PX sticky">
+        <div className="mt-share-buttons bottom-12PX sticky pr-2">
           <p className="ml-auto w-fit">
             <LikeButton name={pathname} />
           </p>

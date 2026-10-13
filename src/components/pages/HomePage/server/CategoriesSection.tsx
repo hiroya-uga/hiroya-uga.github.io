@@ -44,16 +44,22 @@ const ArticleListForTop = async () => {
 
   return (
     <>
-      <h3 className={clsx(['mb-2 mt-12 text-xl font-bold', 'w640:mt-0', 'w800:mb-5 w800:text-[1.125rem]'])}>
+      <h3
+        className={clsx([
+          'mb-3 mt-12 text-xl font-bold',
+          'w640:mt-1 w640:mb-3',
+          'w800:mt-2 w800:mb-1.5 w800:text-[1.125rem]',
+        ])}
+      >
         Latest Articles
       </h3>
 
-      <ul className="w800:grid w800:gap-x-24PX w800:text-14px">
+      <ul className="w800:grid w800:gap-x-24PX">
         {blogs.slice(0, 5).map((article) => {
           const title = article.title.replaceAll('\n', '');
           return (
             <li
-              className="w800:grid w800:grid-cols-subgrid w800:col-end-4 w800:col-start-1 w800:pb-3 w800:items-center w800:not-last:border-b w800:not-last:border-b-primary w800:border-dashed w800:min-h-[calc(2lh+0.75rem)] mb-3"
+              className="w800:grid w800:grid-cols-subgrid w800:col-end-4 w800:col-start-1 w800:pb-4 w800:items-center w800:not-last:border-b w800:not-last:border-b-primary w800:border-dashed w800:min-h-[calc(2lh+0.75rem)] w800:mb-2 mb-3.5"
               key={article.pathname}
             >
               <time dateTime={article.publishedAt} className="w800:col-start-1 w800:mr-0 mr-3 font-mono text-sm">
@@ -61,7 +67,7 @@ const ArticleListForTop = async () => {
               </time>
               <span
                 className={clsx([
-                  'text-primary pt-1.25 inline-block content-center border border-solid p-1 text-center font-mono text-sm leading-none',
+                  'text-primary pb-5px text-12px p-4px inline-block content-center border border-solid text-center font-mono leading-none',
                   'w800:col-start-2 w800:mt-1px',
                 ])}
               >
@@ -98,7 +104,7 @@ export const CategoriesSection = () => {
             'w800:gap-x-32PX',
           ])}
         >
-          <ul className="w640:mb-0 w640:space-y-4 w640:col-start-2">
+          <ul className="w640:mb-0 w640:space-y-4 w800:space-y-6 w640:col-start-2">
             {MAIN_PAGES.map(({ emoji, href }) => {
               const { pageTitle } = getMetadata(href);
               return (
