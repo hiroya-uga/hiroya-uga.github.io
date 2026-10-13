@@ -121,8 +121,10 @@ export const ArticleMain = async ({ post }: Props) => {
               hasToc && 'w1280:col-start-2 w1280:col-end-3 w1280:row-start-1 w1280:row-end-2 w1280:pr-[var(--diff)]',
             )}
           >
+            {/* CodePen埋め込みのiframeはhydration前にloadが完了し得る。その場合inline onloadがdata-loadingとonload属性を外すため、サーバーHTMLと差分が出る。差分は意図した挙動なので警告だけ抑止する */}
             <div
               className={styles.article}
+              suppressHydrationWarning
               dangerouslySetInnerHTML={{
                 __html: (await post.content)
                   .replaceAll(
