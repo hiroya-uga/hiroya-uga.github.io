@@ -421,7 +421,7 @@
 @utility focus-ring {
   outline: 2px solid var(--x-color-text-link, #fff);
   outline-offset: var(--x-outline-offset, 2px);
-  box-shadow: 0 0 0 2px #fff;
+  box-shadow: 0 0 0 2px var(--x-color-background-secondary);
 }
 
 @utility btn-run {

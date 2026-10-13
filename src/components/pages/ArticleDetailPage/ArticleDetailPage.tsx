@@ -46,11 +46,11 @@ export const ArticleDetailPage = async ({ post, category, yearOrSubcategory, pat
 
         <div className="mt-share-buttons bottom-12PX sticky pr-2">
           <p className="ml-auto w-fit">
-            <LikeButton name={pathname} />
+            <LikeButton target={pathname} />
           </p>
         </div>
 
-        <div className="px-content-inline">
+        <div className="px-content-inline mt-2">
           <div className="max-w-(--x-max-width) mx-auto">
             <p className="mx-auto grid place-items-center">
               <TweetLink lang="ja" message={`【${categoryName}】${post.meta.title.replaceAll('\n', '')}`} />

@@ -1,0 +1,17 @@
+@keyframes particle {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(cos(var(--x-angle)) * var(--x-distance)), calc(sin(var(--x-angle)) * var(--x-distance)))
+      scale(1.5);
+  }
+}
+
+/* @keyframes は CSS Modules 内でローカル名になるため、参照する animation も同じファイルに置く */
+.particle {
+  animation: particle var(--x-duration) var(--x-delay) ease-out forwards;
+}
