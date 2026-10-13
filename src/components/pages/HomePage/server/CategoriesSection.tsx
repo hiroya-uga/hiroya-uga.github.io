@@ -59,7 +59,7 @@ const ArticleListForTop = async () => {
           const title = article.title.replaceAll('\n', '');
           return (
             <li
-              className="w800:grid w800:grid-cols-subgrid w800:col-end-4 w800:col-start-1 w800:pb-4 w800:items-center w800:not-last:border-b w800:not-last:border-b-primary w800:border-dashed w800:min-h-[calc(2lh+0.75rem)] w800:mb-2 mb-3.5"
+              className="w800:grid w800:grid-cols-subgrid w800:col-end-4 w800:col-start-1 w800:pt-3 w800:pb-3.5 w800:items-center w800:not-last:border-b w800:not-last:border-b-primary w800:border-dashed w800:min-h-[calc(2lh+0.75rem)] w800:mb-0 mb-3.5"
               key={article.pathname}
             >
               <time dateTime={article.publishedAt} className="w800:col-start-1 w800:mr-0 mr-3 font-mono text-sm">
