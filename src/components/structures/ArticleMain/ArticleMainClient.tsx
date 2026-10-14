@@ -447,6 +447,8 @@ export const ArticleCodeHighlightActivator = () => {
           'sh',
           'zsh',
           'powershell',
+          'sql',
+          'toml',
           'yml',
         ].includes(lang) === false
       ) {
