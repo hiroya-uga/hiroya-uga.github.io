@@ -118,7 +118,7 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
       const cookieConsent = getLocalStorage('cookie-consent');
       return cookieConsent === null;
     },
-    () => true,
+    () => false,
   );
 
   useEffect(() => {
