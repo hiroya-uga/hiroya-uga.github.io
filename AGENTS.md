@@ -3,6 +3,7 @@
 - Editing code (required): [code-style](.agents/rules/code-style.md)
 - Components / pages / i18n: [component-structure](.agents/rules/component-structure.md)
 - Blog / tech articles: [writing-guideline](.agents/rules/writing-guideline.md)
+- Article topics (tags): [article-topics](.agents/rules/article-topics.md)
 
 ## Content URL Structure
 

@@ -4,7 +4,7 @@ description: '文中の訂正や、既に事実とは異なることを表現す
 ogImage: './06-10-discount-price/thumb.jpg'
 publishedAt: '2024-06-10T00:00:00+09:00'
 updatedAt: '2026-09-07T00:00:00+09:00'
-topics: [UI考察, s要素, del要素]
+topics: [UI, s要素, del要素]
 proficiencyLevel: 'Intermediate'
 ---
 

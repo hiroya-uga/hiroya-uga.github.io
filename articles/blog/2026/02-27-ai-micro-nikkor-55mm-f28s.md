@@ -2,7 +2,7 @@
 title: "AI-S Micro-Nikkor \n55mm f/2.8を買った話"
 ogImage: './02-27-ai-micro-nikkor-55mm-f28s/thumb.jpg'
 publishedAt: '2026-02-27T02:58:19+09:00'
-topics: [カメラ機材, レビュー]
+topics: [カメラ機材, レビュー記事]
 ---
 
 <!-- textlint-disable -->

@@ -2,7 +2,7 @@
 title: "Lightroomの初期設定で\n絶対にやるべきこと1選！"
 ogImage: './03-21-lightroom/thumb.jpg'
 publishedAt: '2026-03-21T03:28:00+09:00'
-topics: [Lightroom, カメラ, RAW現像, Tips]
+topics: [Lightroom, カメラ機材, RAW現像, Tips]
 ---
 
 巷で見かけた写真のTips…。
