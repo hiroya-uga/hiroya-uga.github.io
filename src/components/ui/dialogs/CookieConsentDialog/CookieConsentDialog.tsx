@@ -9,7 +9,7 @@ import { SITE_NAME } from '@/constants/meta';
 import { Lang } from '@/types/lang';
 import { applyCookieConsent } from '@/utils/cookie-consent';
 import clsx from 'clsx';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import styles from './CookieConsentDialog.module.css';
 
 const i18n = {
@@ -107,8 +107,7 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
   const pathname = usePathname();
   const isInEnglish = lang === 'en';
   const isNotTop = pathname !== '/';
-  const isFromSNSApp = useSearchParams()?.get('utm_medium') === 'social';
-  const shouldShowBanner = useRef(isNotTop || isFromSNSApp);
+  const shouldShowBanner = useRef(isNotTop);
 
   const [isBannerDialogOpen, setIsBannerDialogOpen] = useState(false);
   const [isAfterBannerDialogCloseRequest, setIsAfterBannerDialogCloseRequest] = useState(false);
@@ -149,7 +148,7 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
           globalThis.window.removeEventListener('scroll', handleScroll);
         };
       } else {
-        // トップページかつSNS経由ではない場合
+        // トップページの場合
         dialogRef.current.showModal();
         dialogRef.current.scroll(0, 0);
       }
