@@ -38,6 +38,12 @@
     "*.{json,md,mdx}": [
       "prettier --write"
     ],
+    "articles/{blog,gunpla}/**/*.md": [
+      "textlint --config articles/.textlintrc.json"
+    ],
+    "articles/tech-blog/**/*.md": [
+      "textlint --config articles/tech-blog/.textlintrc.json"
+    ],
     "package.json": [
       "sort-package-json"
     ]
