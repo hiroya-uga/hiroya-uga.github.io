@@ -25,7 +25,7 @@
 
 - Web標準、WHATWG、アクセシビリティ、ユーザビリティ、表記揺れ
 - HTML、CSS、JavaScript
-- UI、フォーム、IME、Security
+- UI、ビジュアルデザイン、フォーム、IME、Security
 - Formatter、DevOps、バージョン管理ツール、生成AI
 
 ## 写真・カメラ
