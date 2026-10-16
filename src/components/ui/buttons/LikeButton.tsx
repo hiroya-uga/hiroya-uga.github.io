@@ -13,7 +13,6 @@ const MESSAGES = {
   error: 'いいねに失敗しました',
 } as const;
 
-// useLocalStorage は defaultValue の参照が変わると購読をやり直すため、レンダーごとに新しい配列を渡さない
 const NOT_LIKED: string[] = [];
 
 const PARTICLE_COUNT = 10;
@@ -40,7 +39,8 @@ interface Props {
 export const LikeButton = ({ target }: Props) => {
   const id = useId();
 
-  const liked = useLocalStorage('liked') ?? NOT_LIKED;
+  const { value } = useLocalStorage('liked');
+  const liked = value ?? NOT_LIKED;
   // 通信中も押下済みに見せるための楽観的な状態。localStorage へは成功時にだけ書く
   const [isPending, setIsPending] = useState(false);
   const [count, setCount] = useState<number | null>(null);

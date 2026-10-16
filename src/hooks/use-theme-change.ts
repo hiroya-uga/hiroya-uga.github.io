@@ -14,7 +14,8 @@ export function useThemeChange() {
     return currentTheme;
   }, []);
 
-  const theme = useLocalStorage('theme', { getSnapshot }) ?? 'light';
+  const { value } = useLocalStorage('theme', { getSnapshot });
+  const theme = value ?? 'light';
 
   const changeTheme = useCallback((newTheme: 'light' | 'dark') => {
     const applyTheme = () => {

@@ -1,3 +1,4 @@
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import { getLocalStorage, LocalStorageItems } from '@/utils/local-storage';
 import { useMemo, useSyncExternalStore } from 'react';
 
@@ -34,7 +35,12 @@ interface UseLocalStorageOptions<T extends Key> {
   getSnapshot?: () => Value[T] | null;
 }
 
-export function useLocalStorage<T extends Key>(key: T, options?: UseLocalStorageOptions<T>): Value[T] | null {
+interface UseLocalStorageResult<T extends Key> {
+  isReady: boolean;
+  value: Value[T] | null;
+}
+
+export function useLocalStorage<T extends Key>(key: T, options?: UseLocalStorageOptions<T>): UseLocalStorageResult<T> {
   const customGetSnapshot = options?.getSnapshot;
 
   // keyが変わらない限りgetSnapshotの参照を保ち、内部キャッシュを毎レンダーで作り直さないようにする
@@ -43,5 +49,18 @@ export function useLocalStorage<T extends Key>(key: T, options?: UseLocalStorage
     [key, customGetSnapshot],
   );
 
-  return useSyncExternalStore(subscribeToStorage, getSnapshot, () => null);
+  const value = useSyncExternalStore(subscribeToStorage, getSnapshot, () => null);
+  const isReady = useSyncExternalStore(
+    NO_SUBSCRIBE,
+    () => true,
+    () => false,
+  );
+
+  return useMemo(
+    () => ({
+      isReady,
+      value,
+    }),
+    [isReady, value],
+  );
 }

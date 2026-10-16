@@ -26,8 +26,8 @@ export const resolveHistoryList = (
 };
 
 export const RecentToolsSection = () => {
-  const history = useLocalStorage('recent-tools');
-  const home = useLocalStorage('home');
+  const { value: history } = useLocalStorage('recent-tools');
+  const { value: home } = useLocalStorage('home');
   const historyList = useMemo(() => resolveHistoryList(history, home), [history, home]);
 
   if (historyList.length === 0) {

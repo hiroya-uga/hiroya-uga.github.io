@@ -100,11 +100,11 @@ export const ConfigPage = ({ pageTitle, description }: Props) => {
     return () => window.removeEventListener('storage', onStorage);
   }, []);
 
-  const home = useLocalStorage('home');
+  const { value: home } = useLocalStorage('home');
   const syncedHistoryEnabled = home?.['recent-tools-section-is-enabled'] ?? false;
   const [isHistoryEnabled, setIsHistoryEnabled] = useState(syncedHistoryEnabled);
 
-  const cookieConsent = useLocalStorage('cookie-consent');
+  const { value: cookieConsent } = useLocalStorage('cookie-consent');
   const syncedCookieConsentEnabled = cookieConsent === 'accepted';
   const [isCookieConsentEnabled, setIsCookieConsentEnabled] = useState(syncedCookieConsentEnabled);
 

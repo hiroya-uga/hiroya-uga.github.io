@@ -40,7 +40,7 @@ const AchievementItem = ({ achievementKey, isDone }: Readonly<AchievementItemPro
 };
 
 export const AchievementsSection = () => {
-  const achievements = useLocalStorage('achievement');
+  const { value: achievements } = useLocalStorage('achievement');
 
   if (achievements === null) {
     return null;
