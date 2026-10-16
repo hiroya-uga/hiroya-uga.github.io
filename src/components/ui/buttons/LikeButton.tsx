@@ -40,9 +40,7 @@ interface Props {
 export const LikeButton = ({ target }: Props) => {
   const id = useId();
 
-  const liked = useLocalStorage('liked', {
-    defaultValue: NOT_LIKED,
-  });
+  const liked = useLocalStorage('liked') ?? NOT_LIKED;
   // 通信中も押下済みに見せるための楽観的な状態。localStorage へは成功時にだけ書く
   const [isPending, setIsPending] = useState(false);
   const [count, setCount] = useState<number | null>(null);

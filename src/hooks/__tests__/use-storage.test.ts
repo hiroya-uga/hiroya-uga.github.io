@@ -28,20 +28,16 @@ describe('useLocalStorage', () => {
     expect(result.current).toStrictEqual({ foo: false });
   });
 
-  it('値がnullの場合はdefaultValueにフォールバックする', () => {
-    const { result } = renderHook(() => useLocalStorage('theme', { defaultValue: 'light' }));
+  it('値が無い場合はnullを返す', () => {
+    const { result } = renderHook(() => useLocalStorage('theme'));
 
-    expect(result.current).toBe('light');
-  });
-
-  it('customGetSnapshotがnullを返してもdefaultValueにフォールバックする', () => {
-    const { result } = renderHook(() => useLocalStorage('theme', { getSnapshot: () => null, defaultValue: 'light' }));
-
-    expect(result.current).toBe('light');
+    expect(result.current).toBeNull();
   });
 
   it('customGetSnapshotが値を返せばそれを優先する', () => {
-    const { result } = renderHook(() => useLocalStorage('theme', { getSnapshot: () => 'dark', defaultValue: 'light' }));
+    localStorage.setItem('theme', JSON.stringify({ type: 'primitive', value: 'light' }));
+
+    const { result } = renderHook(() => useLocalStorage('theme', { getSnapshot: () => 'dark' }));
 
     expect(result.current).toBe('dark');
   });

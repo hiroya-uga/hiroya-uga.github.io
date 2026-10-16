@@ -32,27 +32,16 @@ const createLocalStorageSnapshotGetter = <T extends Key>(key: T) => {
 interface UseLocalStorageOptions<T extends Key> {
   // 渡す場合はcreateLocalStorageSnapshotGetterと同じ契約（値が変わっていなければ同じ参照を返す）を呼び出し側で満たすこと
   getSnapshot?: () => Value[T] | null;
-  defaultValue?: Value[T];
 }
 
-export function useLocalStorage<T extends Key>(
-  key: T,
-  options: UseLocalStorageOptions<T> & { defaultValue: Value[T] },
-): Value[T];
-export function useLocalStorage<T extends Key>(key: T, options?: UseLocalStorageOptions<T>): Value[T] | null;
-export function useLocalStorage<T extends Key>(key: T, options?: UseLocalStorageOptions<T>) {
-  const { getSnapshot: customGetSnapshot, defaultValue } = options ?? {};
+export function useLocalStorage<T extends Key>(key: T, options?: UseLocalStorageOptions<T>): Value[T] | null {
+  const customGetSnapshot = options?.getSnapshot;
 
   // keyが変わらない限りgetSnapshotの参照を保ち、内部キャッシュを毎レンダーで作り直さないようにする
-  const getSnapshot = useMemo(() => {
-    const baseGetSnapshot = customGetSnapshot ?? createLocalStorageSnapshotGetter(key);
+  const getSnapshot = useMemo(
+    () => customGetSnapshot ?? createLocalStorageSnapshotGetter(key),
+    [key, customGetSnapshot],
+  );
 
-    if (defaultValue === undefined) {
-      return baseGetSnapshot;
-    }
-
-    return () => baseGetSnapshot() ?? defaultValue;
-  }, [key, customGetSnapshot, defaultValue]);
-
-  return useSyncExternalStore(subscribeToStorage, getSnapshot, () => defaultValue ?? null);
+  return useSyncExternalStore(subscribeToStorage, getSnapshot, () => null);
 }
