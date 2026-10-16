@@ -1,8 +1,17 @@
 const LIKES_API_URL = process.env.NEXT_PUBLIC_LIKES_API_URL ?? '';
 
-type LikeResult = 'success' | 'duplicate' | 'limit' | 'error';
+interface LikeIncrementResponse {
+  result: 'success' | 'duplicate' | 'limit' | 'error';
+  // サーバーが確定した加算後の件数。success / duplicate 以外では null
+  count: number | null;
+}
 
-const fetchCounts = async (): Promise<Record<string, number> | null> => {
+const failed = (result: 'limit' | 'error'): LikeIncrementResponse => ({
+  result,
+  count: null,
+});
+
+const getCounts = async (): Promise<Record<string, number> | null> => {
   if (LIKES_API_URL === '') {
     return null;
   }
@@ -16,9 +25,9 @@ const fetchCounts = async (): Promise<Record<string, number> | null> => {
   }
 };
 
-const postLike = async (target: string): Promise<LikeResult> => {
+const postLike = async (target: string): Promise<LikeIncrementResponse> => {
   if (LIKES_API_URL === '') {
-    return 'error';
+    return failed('error');
   }
 
   try {
@@ -28,22 +37,32 @@ const postLike = async (target: string): Promise<LikeResult> => {
     });
 
     if (response.status === 429) {
-      return 'limit';
+      return failed('limit');
     }
 
     if (!response.ok) {
-      return 'error';
+      return failed('error');
     }
 
-    const { result } = (await response.json()) as { result?: unknown };
+    const { result, count } = (await response.json()) as {
+      result?: unknown;
+      count?: unknown;
+    };
 
-    return result === 'success' || result === 'duplicate' ? result : 'error';
+    if (result !== 'success' && result !== 'duplicate') {
+      return failed('error');
+    }
+
+    return {
+      result,
+      count: typeof count === 'number' ? count : null,
+    };
   } catch {
-    return 'error';
+    return failed('error');
   }
 };
 
 export const likesApi = {
-  fetchCounts: fetchCounts,
+  fetchCounts: getCounts,
   increment: postLike,
 };

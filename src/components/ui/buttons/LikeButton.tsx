@@ -57,7 +57,7 @@ export const LikeButton = ({ target }: Props) => {
   const postIncrement = async () => {
     setIsPending(true);
 
-    const result = await likesApi.increment(target);
+    const { result } = await likesApi.increment(target);
 
     if (result === 'success') {
       setCount((prev) => (prev === null ? prev : prev + 1));
