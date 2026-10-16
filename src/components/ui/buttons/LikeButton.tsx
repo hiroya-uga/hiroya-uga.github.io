@@ -57,20 +57,20 @@ export const LikeButton = ({ target }: Props) => {
   const postIncrement = async () => {
     setIsPending(true);
 
-    const { result } = await likesApi.increment(target);
+    const result = await likesApi.increment(target);
 
-    if (result === 'success') {
+    if (result.status === 'success') {
       setCount((prev) => (prev === null ? prev : prev + 1));
     }
 
     // duplicate は記録を消した後の再押下など。サーバーが加算していないため、件数は動かさず押下済みだけ揃える
-    if (result === 'success' || result === 'duplicate') {
+    if (result.status === 'success' || result.status === 'duplicate') {
       setLocalStorage('liked', [...liked, target]);
       setParticles(createParticles());
     }
 
-    if (result === 'limit' || result === 'error') {
-      setMessage(MESSAGES[result]);
+    if (result.status === 'limit' || result.status === 'error') {
+      setMessage(MESSAGES[result.status]);
     }
 
     setIsPending(false);

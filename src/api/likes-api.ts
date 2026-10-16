@@ -1,13 +1,13 @@
 const LIKES_API_URL = process.env.NEXT_PUBLIC_LIKES_API_URL ?? '';
 
 interface LikeIncrementResponse {
-  result: 'success' | 'duplicate' | 'limit' | 'error';
+  status: 'success' | 'duplicate' | 'limit' | 'error';
   // サーバーが確定した加算後の件数。success / duplicate 以外では null
   count: number | null;
 }
 
-const failed = (result: 'limit' | 'error'): LikeIncrementResponse => ({
-  result,
+const failed = (status: 'limit' | 'error'): LikeIncrementResponse => ({
+  status,
   count: null,
 });
 
@@ -44,17 +44,17 @@ const postLike = async (target: string): Promise<LikeIncrementResponse> => {
       return failed('error');
     }
 
-    const { result, count } = (await response.json()) as {
-      result?: unknown;
+    const { status, count } = (await response.json()) as {
+      status?: unknown;
       count?: unknown;
     };
 
-    if (result !== 'success' && result !== 'duplicate') {
+    if (status !== 'success' && status !== 'duplicate') {
       return failed('error');
     }
 
     return {
-      result,
+      status,
       count: typeof count === 'number' ? count : null,
     };
   } catch {

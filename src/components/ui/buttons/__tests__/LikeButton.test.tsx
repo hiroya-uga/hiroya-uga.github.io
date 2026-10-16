@@ -18,7 +18,7 @@ const stored = () => JSON.parse(localStorage.getItem('liked') ?? 'null');
 beforeEach(() => {
   localStorage.clear();
   api.fetchCounts.mockReset().mockResolvedValue({ [TARGET]: 5 });
-  api.increment.mockReset().mockResolvedValue({ result: 'success', count: 6 });
+  api.increment.mockReset().mockResolvedValue({ status: 'success', count: 6 });
 });
 
 describe('LikeButton', () => {
@@ -66,7 +66,7 @@ describe('LikeButton', () => {
   });
 
   it('重複と判定された場合は件数を増やさず、押下済みとして記録する', async () => {
-    api.increment.mockResolvedValue({ result: 'duplicate', count: 5 });
+    api.increment.mockResolvedValue({ status: 'duplicate', count: 5 });
     render(<LikeButton target={TARGET} />);
     await userEvent.click(await screen.findByRole('button', { name: 'いいねする' }));
 
@@ -92,8 +92,8 @@ describe('LikeButton', () => {
   it.each([
     ['error', 'いいねに失敗しました'],
     ['limit', 'いいねの回数が上限に達しました。時間をおいてお試しください'],
-  ] as const)('%s の場合は通知し、押下済みにも記録にもしない', async (result, message) => {
-    api.increment.mockResolvedValue({ result, count: null });
+  ] as const)('%s の場合は通知し、押下済みにも記録にもしない', async (status, message) => {
+    api.increment.mockResolvedValue({ status, count: null });
     render(<LikeButton target={TARGET} />);
     await userEvent.click(await screen.findByRole('button', { name: 'いいねする' }));
 
@@ -103,7 +103,7 @@ describe('LikeButton', () => {
   });
 
   it('通信中は押下済みとして扱い、二重送信しない', async () => {
-    let resolve: (value: { result: 'success'; count: number }) => void = () => {};
+    let resolve: (value: { status: 'success'; count: number }) => void = () => {};
     api.increment.mockReturnValue(new Promise((r) => (resolve = r)));
     render(<LikeButton target={TARGET} />);
     const button = await screen.findByRole('button', { name: 'いいねする' });
@@ -113,6 +113,6 @@ describe('LikeButton', () => {
 
     expect(api.increment).toHaveBeenCalledTimes(1);
     expect(button).toHaveAttribute('aria-pressed', 'true');
-    await act(async () => resolve({ result: 'success', count: 6 }));
+    await act(async () => resolve({ status: 'success', count: 6 }));
   });
 });

@@ -54,9 +54,9 @@ describe('likesApi.fetchCounts', () => {
 describe('likesApi.increment', () => {
   it('target をクエリに載せて POST し、success を返す', async () => {
     const likesApi = await loadLikesApi();
-    fetchMock.mockResolvedValue(Response.json({ result: 'success', count: 6 }));
+    fetchMock.mockResolvedValue(Response.json({ status: 'success', count: 6 }));
 
-    expect(await likesApi.increment('/articles/a/b')).toStrictEqual({ result: 'success', count: 6 });
+    expect(await likesApi.increment('/articles/a/b')).toStrictEqual({ status: 'success', count: 6 });
     expect(fetchMock).toHaveBeenCalledWith('https://likes.test/increment?target=%2Farticles%2Fa%2Fb', {
       method: 'POST',
     });
@@ -64,50 +64,50 @@ describe('likesApi.increment', () => {
 
   it('duplicate を返す', async () => {
     const likesApi = await loadLikesApi();
-    fetchMock.mockResolvedValue(Response.json({ result: 'duplicate', count: 5 }));
+    fetchMock.mockResolvedValue(Response.json({ status: 'duplicate', count: 5 }));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'duplicate', count: 5 });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'duplicate', count: 5 });
   });
 
   it('count が数値でなければ null にする', async () => {
     const likesApi = await loadLikesApi();
-    fetchMock.mockResolvedValue(Response.json({ result: 'success' }));
+    fetchMock.mockResolvedValue(Response.json({ status: 'success' }));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'success', count: null });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'success', count: null });
   });
 
   it('200 でも想定外のボディなら error を返す', async () => {
     const likesApi = await loadLikesApi();
-    fetchMock.mockResolvedValue(Response.json({ result: 'unknown' }));
+    fetchMock.mockResolvedValue(Response.json({ status: 'unknown' }));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'error', count: null });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'error', count: null });
   });
 
   it('200 でも JSON でなければ error を返す', async () => {
     const likesApi = await loadLikesApi();
     fetchMock.mockResolvedValue(new Response('<html>'));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'error', count: null });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'error', count: null });
   });
 
   it('429 は limit を返す', async () => {
     const likesApi = await loadLikesApi();
     fetchMock.mockResolvedValue(new Response(null, { status: 429 }));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'limit', count: null });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'limit', count: null });
   });
 
   it('400 は error を返す', async () => {
     const likesApi = await loadLikesApi();
     fetchMock.mockResolvedValue(new Response(null, { status: 400 }));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'error', count: null });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'error', count: null });
   });
 
   it('通信に失敗したら error を返す', async () => {
     const likesApi = await loadLikesApi();
     fetchMock.mockRejectedValue(new TypeError('Failed to fetch'));
 
-    expect(await likesApi.increment('/articles/a')).toStrictEqual({ result: 'error', count: null });
+    expect(await likesApi.increment('/articles/a')).toStrictEqual({ status: 'error', count: null });
   });
 });
