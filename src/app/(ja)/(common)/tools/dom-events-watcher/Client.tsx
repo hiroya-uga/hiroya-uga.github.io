@@ -1,5 +1,6 @@
 'use client';
 
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Details } from '@/components/ui/boxes/Details';
@@ -74,11 +75,7 @@ const getEventNames = () => {
 export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   const ref = useRef<HTMLFormElement>(null);
   const timestampRef = useRef(getNow());
-  const eventNames = useSyncExternalStore(
-    () => () => {},
-    getEventNames,
-    () => emptyEventNames,
-  );
+  const eventNames = useSyncExternalStore(NO_SUBSCRIBE, getEventNames, () => emptyEventNames);
   const logRef = useRef<[[string, string, string], ...([string, string] | string)[]]>([['', '', getNow()]]);
   const [log, setLog] = useState<typeof logRef.current>([['', '', getNow()]]);
 

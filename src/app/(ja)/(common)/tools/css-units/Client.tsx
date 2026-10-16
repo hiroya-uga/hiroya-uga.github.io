@@ -1,5 +1,6 @@
 'use client';
 
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { Switch } from '@/components/ui/forms';
@@ -167,7 +168,7 @@ const Line = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const currentWidth = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => ref.current?.clientWidth ?? 0,
     () => 0,
   );

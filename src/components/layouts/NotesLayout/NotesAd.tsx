@@ -1,6 +1,7 @@
 'use client';
 
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import Link from 'next/link';
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import styles from './NotesAd.module.css';
@@ -81,11 +82,7 @@ export const NotesAd = () => {
     () => window.matchMedia('(hover: hover)').matches,
     () => true,
   );
-  const index = useSyncExternalStore(
-    () => () => {},
-    getClientAdIndex,
-    () => -1,
-  );
+  const index = useSyncExternalStore(NO_SUBSCRIBE, getClientAdIndex, () => -1);
   const ad = ADS[index];
   const id = useId();
   const [isExpanded, setIsExpanded] = useState(false);

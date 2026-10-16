@@ -1,5 +1,6 @@
 'use client';
 
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import Link from 'next/link';
 import { useSyncExternalStore } from 'react';
 
@@ -36,12 +37,12 @@ const getBrowserName = () => {
 
 export function NotFoundClient() {
   const browserName = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => getBrowserName(),
     () => '',
   );
   const historyLength = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => history.length,
     () => 0,
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import { getLocalStorage } from '@/utils/local-storage';
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 
@@ -113,7 +114,7 @@ export function CookieConsentDialog({ lang }: Readonly<Props>) {
   const [isAfterBannerDialogCloseRequest, setIsAfterBannerDialogCloseRequest] = useState(false);
 
   const shouldShowDialog = useSyncExternalStore(
-    () => () => () => {},
+    NO_SUBSCRIBE,
     () => {
       const cookieConsent = getLocalStorage('cookie-consent');
       return cookieConsent === null;

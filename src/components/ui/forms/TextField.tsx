@@ -1,5 +1,6 @@
 'use client';
 
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import {
   ClipboardEvent,
   FocusEvent,
@@ -90,7 +91,7 @@ const TextareaComponent = (
 ) => {
   const dummyTextareaRef = useRef<HTMLDivElement>(null);
   const textareaHeight = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => (dummyTextareaRef.current?.clientHeight ? `${dummyTextareaRef.current?.clientHeight}px` : '0px'),
     () => '0px',
   );

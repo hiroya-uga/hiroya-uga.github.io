@@ -1,6 +1,7 @@
 'use client';
 
 import styles from '@/app/(en)/(specs)/layout.module.css';
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import { useEffect, useSyncExternalStore } from 'react';
 
 import { marked } from 'marked';
@@ -86,7 +87,7 @@ export const Toc = ({
   onready?: () => void;
 }) => {
   const headingList = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => getHeadingList(numberingOnly),
     () => emptyHeadingList,
   );

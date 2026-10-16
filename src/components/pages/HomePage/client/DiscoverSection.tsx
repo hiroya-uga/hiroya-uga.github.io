@@ -1,6 +1,7 @@
 'use client';
 
 import { CardWithSymbol } from '@/components/ui/card/CardWithSymbol';
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import {
   EmojiLinkListItem,
   GAMES_LINK_LIST,
@@ -45,7 +46,7 @@ const getPickUpList = () => {
 
 export const DiscoverSection = () => {
   const pickUpList = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => getPickUpList(),
     () => emptyPickUpList,
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import clsx from 'clsx';
@@ -91,7 +92,7 @@ const TouchPoints = ({ dataSets }: { dataSets: Touches }) => {
 export const TouchEventTouchesContent = () => {
   const [isRunning, setIsRunning] = useState(false);
   const isTouchDevice = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => 'ontouchstart' in globalThis.window,
     () => null,
   );

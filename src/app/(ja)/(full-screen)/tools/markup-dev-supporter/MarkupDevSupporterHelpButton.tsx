@@ -1,5 +1,6 @@
 'use client';
 import { DiscList } from '@/components/ui/lists/DiscList';
+import { NO_SUBSCRIBE } from '@/constants/hooks';
 import { getMetadata } from '@/utils/get-metadata';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
@@ -14,7 +15,7 @@ import { createPortal } from 'react-dom';
 export const MarkupDevSupporterHelpButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const portal = useSyncExternalStore(
-    () => () => {},
+    NO_SUBSCRIBE,
     () => document.getElementById(DIALOG_PORTAL_ID),
     () => null,
   );
