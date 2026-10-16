@@ -22,7 +22,7 @@ export const ACHIEVEMENTS = {
   },
   'thank-you-for-sharing': {
     symbol: '👏',
-    title: 'ありがとうございます！',
+    title: 'ありがとうございます！！',
     description: 'シェアボタンを押した。',
   },
   // ツール
