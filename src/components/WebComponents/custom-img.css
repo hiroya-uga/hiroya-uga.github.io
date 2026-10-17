@@ -41,12 +41,17 @@ dialog.customされたimg要素ˆ-ˆのモーダル {
   padding: 0.5rem min(0.25rem, 8px) 0;
   container-type: inline-size;
   color: #fff;
+  pointer-events: none;
   cursor: auto;
   mix-blend-mode: exclusion;
   transition: opacity 0.3s ease-out;
 
   @starting-style {
     opacity: 0;
+  }
+
+  span {
+    pointer-events: auto;
   }
 }
 

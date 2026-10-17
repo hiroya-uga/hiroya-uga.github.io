@@ -61,7 +61,9 @@ const showModal = ({
     originSizeImage.alt = '';
     originSizeImage.width = next.width;
     originSizeImage.height = next.height;
-    caption.textContent = `図${ref.expandedIndex + 1}${next.alt ? `: ${next.alt}` : ''}`;
+    const captionText = document.createElement('span');
+    captionText.textContent = `図${ref.expandedIndex + 1}${next.alt ? `: ${next.alt}` : ''}`;
+    caption.replaceChildren(captionText);
   };
 
   inject({
