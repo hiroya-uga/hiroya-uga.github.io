@@ -141,3 +141,11 @@ export const Toast = ({ message, setMessage, duration = 3000, assertive = false 
     </div>,
   );
 };
+
+export const useToast = () => {
+  const [message, setMessage] = useState('');
+  return {
+    message,
+    setMessage,
+  };
+};
