@@ -6,6 +6,7 @@
   },
   "cSpell.words": [
     "Aspherical",
+    "Berners",
     "bingbot",
     "Browserinfo",
     "Colorworks",
@@ -24,6 +25,7 @@
     "LSEP",
     "multicriteria",
     "NIKKOR",
+    "no-doubled-joshi",
     "nocards",
     "noconversation",
     "NOKTON",
@@ -41,8 +43,7 @@
     "zenn",
     "ZENRYAKU",
     "ZWNJ",
-    "ZWSP",
-    "no-doubled-joshi"
+    "ZWSP"
   ],
   "editor.codeLens": true,
   "js/ts.referencesCodeLens.enabled": true,

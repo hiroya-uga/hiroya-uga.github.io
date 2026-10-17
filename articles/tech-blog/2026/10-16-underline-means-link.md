@@ -1,7 +1,7 @@
 ---
 title: "下線を持つUIは\nすべてリンクなのか？"
 publishedAt: '2026-10-16T12:34:11+09:00'
-topics: [UI, アクセシビリティ, ユーザビリティ, ビジュアルデザイン, CSS]
+topics: [UI, アクセシビリティ, ユーザビリティ, ビジュアルデザイン]
 proficiencyLevel: 'Beginner'
 ---
 
@@ -11,13 +11,13 @@ proficiencyLevel: 'Beginner'
 
 Webを構成する基本的な要素は、文書とリンクです。Web誕生当時、そのリンクを識別するために考えられた方法が「下線」でした[^始祖]。現在もCSSで無効化しない限り、多くのWebブラウザでリンクには下線が表示されます。
 
-[^始祖]: [Why are hyperlinks blue? - Mozilla](https://blog.mozilla.org/en/internet-culture/deep-dives/why-are-hyperlinks-blue/)によると、Tim Berners-Leeが作った最初のブラウザ「WorldWideWeb」は白黒表示で、リンクには下線がついていた。なお、同記事は1987年としているが、このブラウザが書かれたのは[Tim Berners-Lee本人の説明](https://www.w3.org/People/Berners-Lee/WorldWideWeb.html)では1990年。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+[^始祖]: [Why are hyperlinks blue? - Mozilla](https://blog.mozilla.org/en/internet-culture/deep-dives/why-are-hyperlinks-blue/)によると、Tim Berners-Lee氏が作った最初のブラウザ「WorldWideWeb」は白黒表示で、リンクには下線がついていた。なお、同記事は1987年としているが、このブラウザが書かれたのは[Tim Berners-Lee氏による説明](https://www.w3.org/People/Berners-Lee/WorldWideWeb.html)では1990年。
 
 ![ブラウザのウィンドウ内にある文中のテキストリンク「TextLink」に下線がついており、その部分が拡大されているイメージ図（ChatGPTで生成）](./10-16-underline-means-link/01.webp?size=1200x800)
 
 かつて、Googleの検索結果のリンクから下線が外れたとき、ちょっとした混乱が起きたのを覚えています[^google検索]。当時はそれくらい、下線がリンクを見分ける重要な手がかりとして受け止められていたのでしょう。
-
-<!-- textlint-disable ja-technical-writing/sentence-length -->
 
 [^google検索]: 2014年3月にGoogleが検索結果のリンクから下線を外した際、反応は分かれた（参考記事：[End of an era: Google no longer underlining hyperlinks in search - Los Angeles Times](https://www.latimes.com/business/technology/la-fi-tn-google-search-no-underlining-hyperlinks-20140313-story.html)、[I Don’t Care What Google Did, Just Keep Underlining Links](https://adrianroselli.com/2014/03/i-dont-care-what-google-did-just-keep.html)）。[MozillaZine日本語版のフォーラム](https://forums.mozillazine.jp/viewtopic.php?f=2&t=14654)には同月5日、Firefoxだけで下線が消えたとの相談がある。また、同時期の議論には[On Link Underlines](https://adrianroselli.com/2016/06/on-link-underlines.html)などもある。
 
@@ -36,7 +36,7 @@ Webを構成する基本的な要素は、文書とリンクです。Web誕生�
 
 リンクにおける下線の有無に揺れはありますが、WebコンテンツであれOSであれ、*リンクではないUI*に下線がついているものは、探した限りだと見つけられませんでした[^例外]。
 
-[^例外]: `abbr`要素による点線下線などは例外。基本的には`text-decoration: underline;`に注目しています。
+[^例外]: カレント表示を示す`border-bottom`や、`abbr`要素による点線下線などは例外。基本的には`text-decoration: underline;`に注目している。
 
 ### Webサイト
 
@@ -107,7 +107,7 @@ macOSも場所によって揺れていて、一貫した整理にはなってい
 
 WCAG 2.2の[1.4.1 Use of Color](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)では、情報の区別が色だけに頼った見た目であってはならないとされており[^コントラスト]、下線がないリンクはこの達成基準を満たすことが難しくなっています。
 
-[^コントラスト]: リンクの文字色と周囲の本文の文字色とのコントラスト比が3:1以上あれば、色相だけでなく明度差でもリンクを識別できるため、1.4.1を満たす方法として十分である（[G183](https://www.w3.org/WAI/WCAG22/Techniques/general/G183.html)）。ただし、下線などの手がかりがホバー時やフォーカス時にしか現れない場合は、1.4.1を満たさない（[F73](https://www.w3.org/WAI/WCAG22/Techniques/failures/F73.html)）。筆者は、色の組み合わせごとに3:1を確認するより、常に下線を付ける方がデザインシステムの運用コストを抑えやすいと考える。
+[^コントラスト]: 下線などの手がかりがホバー時やフォーカス時にしか現れない場合も、1.4.1を満たさない（[F73](https://www.w3.org/WAI/WCAG22/Techniques/failures/F73.html)）。ただしリンクの文字色と周囲の本文の文字色とのコントラスト比が3:1以上あれば、色相だけでなく明度差でもリンクを識別できるため、1.4.1を満たす方法として十分である（[G183](https://www.w3.org/WAI/WCAG22/Techniques/general/G183.html)）。とはいえ、色の組み合わせごとに3:1を確認するより、常に下線を付ける方がデザインシステムの運用コストも抑えやすいと、筆者は考える。
 
 ## 結論
 
