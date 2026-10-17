@@ -1,11 +1,12 @@
 'use client';
 
 import { likesApi } from '@/api';
-import { Toast } from '@/components/ui/dialogs/Toast';
+import { Toast, useToast } from '@/components/ui/dialogs/Toast';
+import { useAchievement } from '@/hooks/use-achievement';
 import { useLocalStorage } from '@/hooks/use-storage';
-import { setLocalStorage } from '@/utils/local-storage';
+import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import clsx from 'clsx';
-import { useEffect, useId, useState, type CSSProperties } from 'react';
+import { useId, useRef, useState, type CSSProperties } from 'react';
 import styles from './LikeButton.module.css';
 
 const MESSAGES = {
@@ -38,62 +39,99 @@ interface Props {
 
 export const LikeButton = ({ target }: Props) => {
   const id = useId();
+  const toastProps = useToast();
+  const { toastProps: achievementToastProps, unlock } = useAchievement();
 
-  const { value } = useLocalStorage('liked');
-  const liked = value ?? NOT_LIKED;
-  // 通信中も押下済みに見せるための楽観的な状態。localStorage へは成功時にだけ書く
-  const [isPending, setIsPending] = useState(false);
+  const isCountRequestingRef = useRef(false);
+
   const [count, setCount] = useState<number | null>(null);
-  const [message, setMessage] = useState('');
-  const [particles, setParticles] = useState<Particle[]>([]);
-  const pressed = isPending || liked.includes(target);
 
-  useEffect(() => {
-    void likesApi.fetchCounts().then((counts) => {
-      setCount(counts === null ? null : (counts[target] ?? 0));
-    });
-  }, [target]);
+  const [isPending, setIsPending] = useState(false);
+  const [isLikedSuccess, setIsLikedSuccess] = useState(false);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isThanksTransitionEnd, setIsThanksTransitionEnd] = useState(false);
+
+  const { isReady, value: localStorageValue } = useLocalStorage('liked');
+
+  const liked = localStorageValue ?? NOT_LIKED;
+  const isAlreadyLiked = liked.includes(target);
+  const pressed = isPending || isAlreadyLiked;
+  const shouldShowThanksMessage = isPending || isLikedSuccess;
 
   const postIncrement = async () => {
     setIsPending(true);
 
     const result = await likesApi.increment(target);
 
-    if (result.status === 'success') {
-      setCount((prev) => (prev === null ? prev : prev + 1));
+    switch (result.status) {
+      case 'success':
+        setIsLikedSuccess(true);
+        setParticles(createParticles());
+        unlock('thank-you-for-liking');
+      case 'duplicate': {
+        // 直前に読み直して他タブの記録を消さないようにする
+        const latest = getLocalStorage('liked') ?? NOT_LIKED;
+
+        setLocalStorage('liked', latest.includes(target) ? latest : [...latest, target]);
+
+        break;
+      }
+
+      case 'limit':
+      case 'error':
+        toastProps.setMessage(MESSAGES[result.status]);
+        break;
+      default:
+        result.status satisfies never;
     }
 
-    // duplicate は記録を消した後の再押下など。サーバーが加算していないため、件数は動かさず押下済みだけ揃える
-    if (result.status === 'success' || result.status === 'duplicate') {
-      setLocalStorage('liked', [...liked, target]);
-      setParticles(createParticles());
-    }
-
-    if (result.status === 'limit' || result.status === 'error') {
-      setMessage(MESSAGES[result.status]);
+    if (typeof result.count === 'number') {
+      setCount(result.count);
     }
 
     setIsPending(false);
   };
 
-  const isLoading = count === null;
   const labelledby = `labelledby-${id}`;
   const describedby1 = `describedby-${id}-status`;
   const describedby2 = `describedby-${id}-count`;
+
+  const handleFetchCount = isAlreadyLiked
+    ? () => {
+        // 確定済みの件数をキャッシュされた /counts で上書きしない。取得中はホバーとフォーカスが同時に発火しうるため、通信を1回にまとめる
+        if (count !== null || isCountRequestingRef.current) {
+          return;
+        }
+
+        isCountRequestingRef.current = true;
+
+        void likesApi.fetchCounts().then((counts) => {
+          if (counts === null) {
+            isCountRequestingRef.current = false;
+
+            return;
+          }
+
+          setCount(counts[target] ?? 0);
+        });
+      }
+    : undefined;
 
   return (
     <>
       <span
         className={clsx([
-          'bg-secondary shadow-sticky text-high-contrast pl-14PX pr-12PX border-primary py-4PX group relative isolate grid grid-cols-[auto_auto_auto] items-center rounded-full border transition-[background-color,opacity,visibility] contain-layout',
-          isLoading && 'invisible opacity-0',
+          'bg-secondary shadow-sticky text-high-contrast border-primary group relative isolate grid grid-cols-[auto_auto_auto] items-center rounded-full border transition-[background-color,opacity,visibility] contain-layout',
+          !isReady && 'invisible opacity-0',
           pressed ? '' : 'hover:bg-panel-primary-hover',
         ])}
+        onPointerEnter={handleFetchCount}
+        onFocus={handleFetchCount}
       >
         <button
           type="button"
           aria-labelledby={labelledby}
-          aria-describedby={[pressed ? describedby1 : '', describedby2].join(' ').trim()}
+          aria-describedby={pressed && count !== null ? [describedby1, describedby2].join(' ') : undefined}
           aria-pressed={pressed}
           onClick={(e) => {
             e.currentTarget.focus();
@@ -104,10 +142,10 @@ export const LikeButton = ({ target }: Props) => {
 
             void postIncrement();
           }}
-          title={pressed ? 'いいね済み' : 'いいねする'}
-          className="focus-visible:before:focus-ring select-none before:absolute before:inset-0 before:m-auto before:rounded-full focus-visible:outline-none"
+          title={pressed ? 'いいね済み' : undefined}
+          className="focus-visible:before:focus-ring size-40px select-none before:absolute before:inset-0 before:m-auto before:rounded-full focus-visible:outline-none"
         >
-          <span className="z-1 relative top-[-0.2ex] block">👍</span>
+          <span className={clsx(['z-1 relative top-[-0.2ex] block', !pressed && styles.outline])}>👍</span>
           <span className="sr-only" id={labelledby}>
             いいねする
           </span>
@@ -115,7 +153,7 @@ export const LikeButton = ({ target }: Props) => {
             {particles.map(({ angle, distance, duration, delay }) => (
               <span
                 key={angle}
-                className={clsx([styles.particle, "absolute left-0 top-0 opacity-0 before:content-['👍']"])}
+                className={clsx([styles.particle, 'absolute left-0 top-0 opacity-0'])}
                 style={
                   {
                     '--x-angle': `${angle}deg`,
@@ -124,32 +162,48 @@ export const LikeButton = ({ target }: Props) => {
                     '--x-delay': `${delay}ms`,
                   } as CSSProperties
                 }
-              />
+              >
+                👍
+              </span>
             ))}
           </span>
         </button>
         <span
           className={clsx([
-            'text-12px ml-6PX block max-w-0 overflow-clip whitespace-nowrap font-bold transition-[max-width,padding-right]',
+            'text-12px block max-w-0 overflow-clip whitespace-nowrap font-bold transition-[max-width,padding-right]',
             pressed
-              ? 'group-hover:pr-6PX group-focus-within:pr-6PX group-focus-within:max-w-[calc(4.5rem+6px)] group-hover:max-w-[calc(4.5rem+6px)] motion-reduce:transition-none'
+              ? 'group-focus-within:max-w-[8rem] group-focus-within:pr-4 group-hover:max-w-[8rem] group-hover:pr-4 motion-reduce:transition-none'
               : 'select-none',
+            shouldShowThanksMessage && !isThanksTransitionEnd ? 'delay-300' : 'delay-0',
           ])}
-          id={pressed ? describedby1 : undefined}
+          onTransitionEnd={(e) => {
+            if (e.propertyName === 'max-width') {
+              setIsThanksTransitionEnd(true);
+            }
+          }}
         >
-          Thank you!
-          <span className="sr-only select-none">（いいね済み）</span>
-        </span>
-        <span
-          aria-hidden="true"
-          className={clsx(['text-14px min-w-[2ch] text-center tabular-nums', pressed && 'font-bold'])}
-          id={describedby2}
-        >
-          <span>{count ?? '0'}</span>
-          <span className="sr-only select-none">件のいいね</span>
+          {count === null ? null : (
+            <>
+              {shouldShowThanksMessage ? (
+                <span id={describedby1}>
+                  <span>Thank you!</span>
+                  <span className="sr-only select-none">（いいね済み）</span>
+                </span>
+              ) : (
+                <span id={describedby1}>いいね済み</span>
+              )}
+              <span className="pl-8PX">
+                {count}
+                <span className="sr-only select-none" id={describedby2}>
+                  {`${count}件のいいね`}
+                </span>
+              </span>
+            </>
+          )}
         </span>
       </span>
-      <Toast message={message} setMessage={setMessage} />
+      <Toast {...toastProps} assertive />
+      <Toast {...achievementToastProps} />
     </>
   );
 };

@@ -25,6 +25,11 @@ export const ACHIEVEMENTS = {
     title: 'ありがとうございます！！',
     description: 'シェアボタンを押した。',
   },
+  'thank-you-for-liking': {
+    symbol: '👍',
+    title: 'ありがとうございます！',
+    description: 'いいねボタンを押した。',
+  },
   // ツール
   'everything-in-moderation': {
     symbol: '🫩',

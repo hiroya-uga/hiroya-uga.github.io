@@ -3,10 +3,15 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const api = vi.hoisted(() => ({ fetchCounts: vi.fn(), increment: vi.fn() }));
+const unlock = vi.hoisted(() => vi.fn());
 
 vi.mock('@/api/likes-api', () => ({ likesApi: api }));
-vi.mock('@/components/ui/dialogs/Toast', () => ({
-  Toast: ({ message }: { message: string }) => <p data-testid="toast">{message}</p>,
+vi.mock('@/hooks/use-achievement', () => ({
+  useAchievement: () => ({ toastProps: { message: '', setMessage: vi.fn() }, unlock }),
+}));
+vi.mock('@/components/ui/dialogs/Toast', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/components/ui/dialogs/Toast')>()),
+  Toast: ({ message }: { message: string }) => (message ? <p data-testid="toast">{message}</p> : null),
 }));
 
 import { LikeButton } from '@/components/ui/buttons/LikeButton';
@@ -19,63 +24,133 @@ beforeEach(() => {
   localStorage.clear();
   api.fetchCounts.mockReset().mockResolvedValue({ [TARGET]: 5 });
   api.increment.mockReset().mockResolvedValue({ status: 'success', count: 6 });
+  unlock.mockReset();
 });
 
 describe('LikeButton', () => {
-  it('取得した件数を表示する', async () => {
+  it('押下済みでもホバーするまで件数を取得しない', async () => {
+    localStorage.setItem('liked', JSON.stringify([TARGET]));
     render(<LikeButton target={TARGET} />);
+    await screen.findByRole('button', { name: 'いいねする' });
 
+    expect(api.fetchCounts).not.toHaveBeenCalled();
+    expect(screen.queryByText('5')).not.toBeInTheDocument();
+  });
+
+  it('未押下のユーザーはホバーやフォーカスをしても件数を取得しない', async () => {
+    render(<LikeButton target={TARGET} />);
+    await userEvent.hover(await screen.findByRole('button', { name: 'いいねする' }));
+    await userEvent.tab();
+
+    expect(api.fetchCounts).not.toHaveBeenCalled();
+    expect(screen.queryByText('5')).not.toBeInTheDocument();
+  });
+
+  it('押下済みのユーザーがホバーすると件数を取得して表示する', async () => {
+    localStorage.setItem('liked', JSON.stringify([TARGET]));
+    render(<LikeButton target={TARGET} />);
+    await userEvent.hover(await screen.findByRole('button', { name: 'いいねする' }));
+
+    expect(await screen.findByText('5')).toBeInTheDocument();
+  });
+
+  it('押下済みのユーザーがフォーカスしても件数を取得して表示する', async () => {
+    localStorage.setItem('liked', JSON.stringify([TARGET]));
+    render(<LikeButton target={TARGET} />);
+    await userEvent.tab();
+
+    expect(await screen.findByText('5')).toBeInTheDocument();
+  });
+
+  it('ホバーとフォーカスが続いても取得は 1 回にまとめる', async () => {
+    localStorage.setItem('liked', JSON.stringify([TARGET]));
+    render(<LikeButton target={TARGET} />);
     const button = await screen.findByRole('button', { name: 'いいねする' });
 
-    expect(button).toHaveAttribute('aria-pressed', 'false');
-    expect(button).toHaveAccessibleDescription('5件のいいね');
+    await userEvent.hover(button);
+    await userEvent.tab();
+    await screen.findByText('5');
+
+    expect(api.fetchCounts).toHaveBeenCalledTimes(1);
   });
 
   it('件数が無い記事は 0 を表示する', async () => {
+    localStorage.setItem('liked', JSON.stringify([TARGET]));
     api.fetchCounts.mockResolvedValue({});
     render(<LikeButton target={TARGET} />);
+    await userEvent.hover(await screen.findByRole('button', { name: 'いいねする' }));
 
-    expect(await screen.findByRole('button', { name: 'いいねする' })).toHaveAccessibleDescription('0件のいいね');
+    expect(await screen.findByText('0')).toBeInTheDocument();
   });
 
-  it('件数の取得に失敗したら、ボタンを非表示にする', async () => {
-    api.fetchCounts.mockResolvedValue(null);
+  it('件数の取得に失敗しても、ボタンは表示したまま件数を出さず、次のホバーで再取得する', async () => {
+    localStorage.setItem('liked', JSON.stringify([TARGET]));
+    api.fetchCounts.mockResolvedValueOnce(null);
     render(<LikeButton target={TARGET} />);
+    const button = await screen.findByRole('button', { name: 'いいねする' });
 
-    // jsdom は CSS を解釈しないため、非表示は invisible クラスの有無で確かめる
-    await waitFor(() => expect(api.fetchCounts).toHaveBeenCalled());
-    expect(screen.getByRole('button', { hidden: true }).parentElement).toHaveClass('invisible');
+    await userEvent.hover(button);
+    await waitFor(() => expect(api.fetchCounts).toHaveBeenCalledTimes(1));
+
+    expect(button.parentElement).not.toHaveClass('invisible');
+    expect(screen.queryByText('5')).not.toBeInTheDocument();
+
+    await userEvent.unhover(button);
+    await userEvent.hover(button);
+
+    expect(await screen.findByText('5')).toBeInTheDocument();
   });
 
-  it('件数の取得が済むと、ボタンを表示する', async () => {
+  it('件数の取得を待たずにボタンを表示する', async () => {
     render(<LikeButton target={TARGET} />);
 
     expect((await screen.findByRole('button', { name: 'いいねする' })).parentElement).not.toHaveClass('invisible');
   });
 
-  it('押すと件数が増え、押下済みになり、記録される', async () => {
+  it('押すと、サーバーが返した件数を表示して押下済みになり、記録される', async () => {
     render(<LikeButton target={TARGET} />);
     await userEvent.click(await screen.findByRole('button', { name: 'いいねする' }));
 
     const button = screen.getByRole('button', { name: 'いいねする' });
 
-    await waitFor(() => expect(button).toHaveAccessibleDescription('Thank you!（いいね済み） 6件のいいね'));
+    expect(await screen.findByText('6')).toBeInTheDocument();
     expect(button).toHaveAttribute('aria-pressed', 'true');
     expect(api.increment).toHaveBeenCalledWith(TARGET);
     await waitFor(() => expect(stored()).toStrictEqual([TARGET]));
+    expect(unlock).toHaveBeenCalledWith('thank-you-for-liking');
   });
 
-  it('重複と判定された場合は件数を増やさず、押下済みとして記録する', async () => {
+  it('未押下のユーザーが押しても、件数は取得せずサーバーが返した件数を使う', async () => {
+    render(<LikeButton target={TARGET} />);
+    await userEvent.click(await screen.findByRole('button', { name: 'いいねする' }));
+
+    expect(await screen.findByText('6')).toBeInTheDocument();
+    expect(api.fetchCounts).not.toHaveBeenCalled();
+  });
+
+  it('押した直後にホバーしても、キャッシュされた件数で上書きしない', async () => {
+    render(<LikeButton target={TARGET} />);
+    const button = await screen.findByRole('button', { name: 'いいねする' });
+
+    await userEvent.click(button);
+    expect(await screen.findByText('6')).toBeInTheDocument();
+    await userEvent.hover(button);
+
+    expect(api.fetchCounts).not.toHaveBeenCalled();
+    expect(screen.getByText('6')).toBeInTheDocument();
+  });
+
+  it('重複と判定された場合は、サーバーが返した件数を表示して押下済みとして記録する', async () => {
     api.increment.mockResolvedValue({ status: 'duplicate', count: 5 });
     render(<LikeButton target={TARGET} />);
     await userEvent.click(await screen.findByRole('button', { name: 'いいねする' }));
 
     const button = screen.getByRole('button', { name: 'いいねする' });
 
-    await waitFor(() => expect(button).toHaveAccessibleDescription('Thank you!（いいね済み） 5件のいいね'));
+    expect(await screen.findByText('5')).toBeInTheDocument();
     expect(button).toHaveAttribute('aria-pressed', 'true');
     await waitFor(() => expect(stored()).toStrictEqual([TARGET]));
-    expect(screen.getByTestId('toast')).toBeEmptyDOMElement();
+    expect(screen.queryByTestId('toast')).not.toBeInTheDocument();
   });
 
   it('記録済みの記事は押下済みで表示され、再度押しても送信しない', async () => {
