@@ -811,6 +811,13 @@ html:has(.container) {
         margin-top: 0;
       }
     }
+
+    dt {
+      font-weight: bold;
+    }
+    dd {
+      padding-left: 1em;
+    }
   }
 
   [class~="blockquote__caption"] {
