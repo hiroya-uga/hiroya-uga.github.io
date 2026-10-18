@@ -5,7 +5,7 @@ export const SITE_AUTHOR = 'Hiroya UGA';
 export const SITE_AUTHOR_JA = '宇賀景哉';
 export const SITE_SUBTITLE = "A Front-end Engineer's shed";
 export const PROFILE_TEXT = 'Web標準とWebアクセシビリティの話が好きな、大器晩成型のフロントエンドエンジニア';
-export const SITE_DESCRIPTION = `${PROFILE_TEXT}の物置。`;
+export const SITE_DESCRIPTION = `${PROFILE_TEXT}の物置です。`;
 export const GITHUB_PROFILE = 'https://github.com/hiroya-uga';
 export const GITHUB_REPOSITORY = 'https://github.com/hiroya-uga/hiroya-uga.github.io';
 export const GITHUB_NOTES_REPOSITORY = 'https://github.com/hiroya-uga/notes';
@@ -18,7 +18,10 @@ export const DEFAULT_JSON_LD = {
   inLanguage: 'ja',
   author: {
     '@type': 'Person',
-    name: SITE_AUTHOR,
+    '@id': `${URL_ORIGIN}/about/#/schema/person`,
+    name: SITE_AUTHOR_JA,
+    alternateName: [SITE_AUTHOR],
+    jobTitle: 'フロントエンドエンジニア',
     url: URL_ORIGIN,
     sameAs: [
       'https://x.com/hiroya_UGA',
