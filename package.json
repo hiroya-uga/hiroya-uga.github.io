@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-notes-media.mjs && next build && next-sitemap",
+    "build": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-articles-markdown.mjs && node scripts/copy-notes-media.mjs && next build && next-sitemap",
     "build:analyze": "ANALYZE=true next build",
     "dev": "git -C notes lfs install --local && git -C notes lfs pull && node scripts/copy-blog-images.mjs && node scripts/copy-notes-media.mjs && next dev -p 3001",
     "dev:article": "node scripts/watch-media.mjs",

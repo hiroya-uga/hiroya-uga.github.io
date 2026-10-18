@@ -275,6 +275,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     alternates: {
       canonical: url,
+      types: {
+        'text/markdown': `${url}.md`,
+      },
     },
   };
 }

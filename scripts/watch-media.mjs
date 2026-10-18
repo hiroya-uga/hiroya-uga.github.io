@@ -11,6 +11,7 @@ const MEDIA_EXTS = new Set(['.webp', '.avif', '.jpg', '.jpeg', '.png', '.gif', '
 
 const targets = [
   { dir: path.join(root, 'articles'), script: 'copy-blog-images.mjs', label: 'blog' },
+  { dir: path.join(root, 'articles'), script: 'copy-articles-markdown.mjs', label: 'blog-md' },
   { dir: path.join(root, 'notes'), script: 'copy-notes-media.mjs', label: 'notes' },
 ];
 
@@ -73,16 +74,21 @@ for (const target of targets) {
       }
       const ext = path.extname(filename).toLowerCase();
 
-      if (ext === '.md') {
-        clearTimeout(timers.get(`${target.label}-md`));
-        timers.set(
-          `${target.label}-md`,
-          globalThis.setTimeout(() => notifyReload(), 300),
-        );
+      const isMarkdownTarget = target.script === 'copy-articles-markdown.mjs';
+
+      if (isMarkdownTarget !== (ext === '.md')) {
+        // 画像用 target の .md は reload のみ通知する（Markdown 用 target は .md 以外を無視）
+        if (ext === '.md') {
+          clearTimeout(timers.get(`${target.label}-md`));
+          timers.set(
+            `${target.label}-md`,
+            globalThis.setTimeout(() => notifyReload(), 300),
+          );
+        }
         return;
       }
 
-      if (MEDIA_EXTS.has(ext) === false) {
+      if (isMarkdownTarget === false && MEDIA_EXTS.has(ext) === false) {
         return;
       }
       clearTimeout(timers.get(target.label));

@@ -48,6 +48,7 @@ public/articles/**/*.png
 public/articles/**/*.webp
 public/articles/**/*.gif
 public/articles/**/*.avif
+public/articles/**/*.md
 
 # notes/ から yarn prebuild / predev 時にコピーされるメディア
 public/notes/**/*.jpg
