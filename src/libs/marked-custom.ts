@@ -3,6 +3,7 @@ import { FOOTNOTES_HEADING_ID } from '@/constants/id';
 import { URL_ORIGIN } from '@/constants/meta';
 import { resolveNotesMediaPath } from '@/libs/notes';
 import { resolveArticleImagePath } from '@/utils/articles';
+import { escapeHtml } from '@/utils/escape-html';
 import { marked, TokenizerAndRendererExtension, type Token } from 'marked';
 
 let currentFilePath = '';
@@ -354,16 +355,10 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
       </div>`;
     }
 
-    const sanitize = (string: string) =>
-      string.replace(
-        /[&<>"']/g,
-        (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!,
-      );
-
     const [lang, ...rest] = (t.lang || 'plain:サンプルコード').split(':');
     const title = rest.join('');
     const escaped = (() => {
-      const sanitized = sanitize(t.text);
+      const sanitized = escapeHtml(t.text);
 
       if (lang === 'diff') {
         return sanitized.replace(/^(.*)/gm, (_, row) => {
@@ -384,7 +379,7 @@ const overrideCodeBlockExtension: TokenizerAndRendererExtension = {
 
     const forSomePlatform = /^[a-zA-Z]+向け：?/.test(title);
     const dataPlatform = forSomePlatform ? ` data-platform="${title.split(/(^[a-zA-Z]+)向け/)[1]}"` : '';
-    const resolvedTitle = sanitize(forSomePlatform ? title.replace(/^[a-zA-Z]+向け：?/, '') : title);
+    const resolvedTitle = escapeHtml(forSomePlatform ? title.replace(/^[a-zA-Z]+向け：?/, '') : title);
 
     return `<figure class="codeblock"${dataPlatform}><figcaption class="codeblock__caption"><span class="codeblock__title${resolvedTitle ? '' : ' of-langName'}">${resolvedTitle || `${lang.toUpperCase()}<span class="sr-only">のサンプルコード</span>`}</span></figcaption><pre><code data-language=${lang}>${escaped}</code></pre></figure>`;
   },
@@ -656,12 +651,7 @@ const overrideHeadingExtension: TokenizerAndRendererExtension = {
     headingDefs.set(currentFilePath, headings);
 
     const inner = marked.parseInline(t.text, { async: false }) as string;
-    const plainText = inner
-      .replace(/<[^>]+>/g, '')
-      .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+    const plainText = escapeHtml(inner.replace(/<[^>]+>/g, ''));
     const label = `「${plainText}」へのパーマリンク`;
     const anchor = `<a href="#${id}" class="anchor" title="ページ内リンク"><span>${label}</span></a>`;
     const heading = `<h${t.depth} id="${id}">${inner}</h${t.depth}>`;
