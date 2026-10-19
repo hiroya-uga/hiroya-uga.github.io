@@ -261,6 +261,18 @@ export const SpeechSynthesisPlayground = ({ lang }: { lang: Lang }) => {
             multiline
             autoResize
             minHeight={5}
+            placeholder={(() => {
+              switch (voiceURI) {
+                case 'Bad News':
+                  return 'ah na ta gah o sagashi no file wa, mitsu kari mah sen de shita';
+                case 'Cellos':
+                  return 'anatani wa. kono file ni access suru ken gen gut nie';
+                case 'ささやき声':
+                  return 'mou ne, aho ca to. baka ca to.';
+              }
+
+              return 'Hello world!';
+            })()}
           />
         </div>
 

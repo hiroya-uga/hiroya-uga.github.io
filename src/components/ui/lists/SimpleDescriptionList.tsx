@@ -23,7 +23,7 @@ export const SimpleDescriptionList = ({ list }: Readonly<Props>) => {
                 <span className="palt">{title}</span>
               </span>
             </dt>
-            <dd className="w640:text-base pl-7 text-sm">{description}</dd>
+            <dd className="pl-7 text-sm">{description}</dd>
           </div>
         );
       })}

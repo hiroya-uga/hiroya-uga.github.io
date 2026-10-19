@@ -33,7 +33,7 @@ export const PageTitle = ({
       <h1
         className={clsx([
           hasSubtitle
-            ? 'not-last:mb-2.5'
+            ? 'not-last:mb-paragraph'
             : 'not-last:mb-3 w640:not-last:mb-2.5 w640:text-[2.625rem] w320:text-3xl text-2xl font-bold leading-relaxed',
           'leading-relaxed',
         ])}
@@ -49,7 +49,7 @@ export const PageTitle = ({
               {pageTitle ?? title}
             </strong>
             {following && (
-              <span className="w640:mt-2 w640:text-lg relative mt-3 block pl-9 font-bold leading-normal before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black">
+              <span className="w640:mt-2 w640:text-lg relative mt-3 block pl-9 leading-normal before:absolute before:left-0 before:top-[0.5lh] before:w-8 before:-translate-y-1/2 before:border before:border-t-black">
                 {following}
               </span>
             )}
