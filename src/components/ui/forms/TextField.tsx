@@ -36,6 +36,8 @@ type Label =
 type BaseProps = Label & {
   value?: string;
   description?: string | string[];
+  /** 空でない場合は aria-invalid にして、メッセージを入力欄に関連付ける */
+  errorMessages?: string | string[];
   placeholder?: string;
   required?: boolean;
   readOnly?: boolean;
@@ -69,12 +71,13 @@ type BaseProps = Label & {
       }
   );
 
-interface Props extends Omit<BaseProps, 'label' | 'description'> {
+interface Props extends Omit<BaseProps, 'label' | 'description' | 'errorMessages'> {
   autoResize: boolean;
   noResize: boolean;
   minHeight?: 1 | 2 | 3 | 4 | 5;
   id: string;
   descriptionId?: string;
+  invalid?: boolean;
 }
 
 const MIN_HEIGHT_CLASSES = {
@@ -86,7 +89,7 @@ const MIN_HEIGHT_CLASSES = {
 } as const;
 
 const TextareaComponent = (
-  { descriptionId, multiline: _, autoResize, noResize, minHeight, align, ...props }: Readonly<Props>,
+  { descriptionId, invalid, multiline: _, autoResize, noResize, minHeight, align, ...props }: Readonly<Props>,
   ref: Ref<HTMLTextAreaElement>,
 ) => {
   const dummyTextareaRef = useRef<HTMLDivElement>(null);
@@ -108,6 +111,7 @@ const TextareaComponent = (
         <textarea
           {...props}
           aria-describedby={descriptionId}
+          aria-invalid={invalid ? true : undefined}
           className={clsx([
             'border-textfield bg-textfield w-full resize-none overflow-hidden rounded-md border p-2',
             minHeight ? MIN_HEIGHT_CLASSES[minHeight] : 'min-h-[calc(1.75lh+1rem)]',
@@ -125,6 +129,7 @@ const TextareaComponent = (
     <textarea
       {...props}
       aria-describedby={descriptionId}
+      aria-invalid={invalid ? true : undefined}
       className={clsx([
         'border-textfield bg-textfield w-full rounded-md border p-2',
         noResize === true ? 'resize-none' : 'resize-y',
@@ -139,7 +144,7 @@ const TextareaComponent = (
 
 const Textarea = forwardRef(TextareaComponent);
 const TextFieldComponent = (
-  { description = [], align = 'left', disabled, ...restProps }: BaseProps,
+  { description = [], errorMessages = [], align = 'left', disabled, ...restProps }: BaseProps,
   ref: Ref<HTMLTextAreaElement | HTMLInputElement>,
 ) => {
   const useIdValue = useId();
@@ -147,6 +152,10 @@ const TextFieldComponent = (
   const descriptions = formatValidStringArray(description);
   const hasDescription = hasItems(descriptions);
   const descriptionId = hasDescription ? `${id}-description` : undefined;
+  const errors = formatValidStringArray(errorMessages);
+  const hasError = hasItems(errors);
+  const errorId = hasError ? `${id}-error` : undefined;
+  const describedBy = [descriptionId, errorId].filter((item) => item !== undefined).join(' ') || undefined;
   const disabledState = disabled
     ? {
         'aria-disabled': true,
@@ -195,7 +204,8 @@ const TextFieldComponent = (
             autoResize={commonProps.autoResize ?? false}
             noResize={commonProps.noResize ?? false}
             id={id}
-            descriptionId={descriptionId}
+            descriptionId={describedBy}
+            invalid={hasError}
             align={align}
             ref={ref as Ref<HTMLTextAreaElement>}
           />
@@ -204,7 +214,8 @@ const TextFieldComponent = (
             {...commonProps}
             {...disabledState}
             id={id}
-            aria-describedby={descriptionId}
+            aria-describedby={describedBy}
+            aria-invalid={hasError ? true : undefined}
             className={clsx([
               'min-h-12', // for iOS 32px + 8px padding * 2 = 48px
               'border-primary text-textfield bg-textfield text w-full appearance-none rounded-md border p-2 text-left',
@@ -216,6 +227,16 @@ const TextFieldComponent = (
           />
         )}
       </p>
+
+      <div id={errorId} role="alert">
+        {hasError && (
+          <div className="text-alert mt-1 text-sm">
+            {errors.map((line) => {
+              return <p key={line}>{line}</p>;
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
