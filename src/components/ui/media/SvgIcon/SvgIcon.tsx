@@ -26,9 +26,10 @@ const loadingMap = new Map<Name, Promise<void>>();
 interface Props {
   name: Name;
   alt: string;
+  className?: string;
 }
 
-export const SvgIcon = ({ name, alt }: Readonly<Props>) => {
+export const SvgIcon = ({ name, alt, className = '' }: Readonly<Props>) => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -61,9 +62,14 @@ export const SvgIcon = ({ name, alt }: Readonly<Props>) => {
 
   return (
     <svg
-      role={hasAlt ? 'graphics-symbol' : 'presentation'}
+      role={hasAlt ? 'graphics-symbol' : 'none'}
       aria-label={hasAlt ? alt : undefined}
-      className={clsx(['absolute inset-0 block size-full transition-opacity', isReady === false && 'opacity-0'])}
+      aria-hidden={hasAlt ? undefined : 'true'}
+      className={clsx([
+        className.includes('transition-') === false && 'transition-opacity',
+        className ? className : 'absolute inset-0 block size-full',
+        isReady === false && 'opacity-0',
+      ])}
     >
       <use href={`#${svgId}`} />
     </svg>
