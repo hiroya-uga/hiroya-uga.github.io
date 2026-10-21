@@ -44,6 +44,13 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
+  turbopack: {
+    rules: {
+      // Turbopack は ?raw を標準解釈しないため、webpack 側の asset/source 相当をここで定義する
+      '*.css': { condition: { query: '?raw' }, type: 'text' },
+    },
+  },
+
   // Webpackの最適化
   webpack: (config, { isServer }) => {
     config.module.rules.push({
