@@ -62,14 +62,17 @@ const ArticleListForTop = async () => {
                   <Picture src={thumbnail} alt="" width={1200} height={630} className="block size-full object-cover" />
                 )}
               </div>
-              <div className="px-1PX mt-2.5 grow">
-                <span className="group-hover:underline group-focus:underline">{title}</span>
+              <div className="px-1PX mt-1.5 grow">
+                <span className="w400:tracking-wide group-hover:underline group-focus:underline">{title}</span>
               </div>
-              <div className="px-1PX ml-auto mt-1 w-fit">
-                <time dateTime={article.publishedAt} className="text-primary font-mono text-sm">
+              <div className="px-1PX w400:gap-x-6PX w400:flex w400:flex-wrap w400:justify-end ml-auto mt-0.5">
+                <time
+                  dateTime={article.publishedAt}
+                  className="text-primary leading-23px align-middle font-mono text-sm"
+                >
                   {intl.format(new Date(article.publishedAt))}
                 </time>{' '}
-                <span className="text-primary pb-5px p-4px w400:inline-block text-12px ml-auto block w-fit content-center border border-solid text-center font-mono leading-none">
+                <span className="text-primary pb-5px p-4px text-12px ml-auto block w-fit content-center border border-solid text-center align-middle font-mono leading-none">
                   {resolveCategoryName(article.pathname)}
                 </span>
               </div>
@@ -145,13 +148,20 @@ export const CategoriesSection = () => {
           </ul>
 
           <div className="w640:mt-64px w640:pl-1 mt-12 pl-2">
-            <h3 className={clsx(['text-xl font-bold', 'w640:mt-2 w640:text-[2rem]'])}>Articles</h3>
+            <h3 className={clsx(['text-xl font-bold', 'w640:text-[2rem]'])}>Articles</h3>
 
-            <p className="w640:mt-5 mt-3">
+            <p className="mt-paragraph">
               最近更新された記事の一覧です。<Link href="/articles">記事一覧はこちら</Link>。
             </p>
 
-            <ul className="w640:mt-6 mt-paragraph gap-x-16PX text-14px w640:grid-cols-3 w640:text-base gap-y-32px mt-1 grid grid-cols-2">
+            <ul
+              className={clsx([
+                // 1.875の875*0.75
+                'w640:mt-[calc(var(--spacing-paragraph)+0.65625em)]',
+                'w640:grid-cols-3 w640:text-base w640:gap-y-32px w640:gap-x-24PX',
+                'mt-paragraph gap-x-16PX text-14px grid grid-cols-2',
+              ])}
+            >
               <ArticleListForTop />
             </ul>
           </div>
