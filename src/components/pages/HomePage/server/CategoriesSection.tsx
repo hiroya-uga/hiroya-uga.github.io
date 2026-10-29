@@ -158,8 +158,8 @@ export const CategoriesSection = () => {
               className={clsx([
                 // 1.875の875*0.75
                 'w640:mt-[calc(var(--spacing-paragraph)+0.65625em)]',
-                'w640:grid-cols-3 w640:text-base w640:gap-y-32px w640:gap-x-24PX',
-                'mt-paragraph gap-x-16PX text-14px grid grid-cols-2',
+                'w640:grid-cols-3 w640:text-base w640:gap-y-[calc(var(--spacing-paragraph)+0.65625em)] w640:gap-x-24PX',
+                'mt-paragraph gap-x-16PX gap-y-paragraph text-14px grid grid-cols-2',
               ])}
             >
               <ArticleListForTop />
