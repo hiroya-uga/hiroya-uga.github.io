@@ -287,8 +287,11 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               className={clsx('p-4 pb-8', isMouseHover && styles.mouseHover)}
             >
               <div className="min-h-[40vh]">
-                <p className="border-secondary mb-8 touch-none border border-solid p-8 text-center">
-                  タッチイベントを無視するp要素
+                <p className="border-secondary text-14px mb-2 touch-none border border-solid p-4 text-center">
+                  touch-action: none;
+                </p>
+                <p className="border-secondary text-14px pointer-events-none mb-8 border border-solid p-4 text-center">
+                  pointer-events: none;
                 </p>
 
                 <p>
