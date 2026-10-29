@@ -272,7 +272,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
         </Details>
       </div>
 
-      <div className="w1024:flex w1024:h-min gap-6">
+      <div className="w1024:flex w1024:h-min w1024:space-y-0 w1024:gap-6 space-y-6">
         <div className="w1024:min-w-375px w1024:max-w-375px relative">
           <div className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none max-h-[30vh] overflow-y-scroll overscroll-x-none border border-solid">
             <div className="border-b-solid border-b p-4">
@@ -383,7 +383,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
                     src="/tools/dom-events-watcher/sample.mp4"
                     controls
                     muted
-                    className="aspect-video h-auto w-96 max-w-full"
+                    className="block aspect-video h-auto w-96 max-w-full"
                   ></video>
                 </p>
 
@@ -407,7 +407,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           </div>
         </div>
 
-        <section>
+        <div>
           <h2 className="w1024:mt-0 mb-1.5 block w-fit font-bold">
             <strong id={`${id}-log-title`}>ログ</strong>（最大300行）
           </h2>
@@ -419,13 +419,13 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
           <p className="border-secondary border border-b-0">
             <button
               type="button"
-              className="ml-auto block rounded-lg p-2"
+              className="ml-auto block rounded-full p-3"
               onClick={() => {
                 logRef.current = [['', '', getNow()]];
                 setLog(logRef.current);
               }}
             >
-              <span className="relative block size-4">
+              <span className="relative block size-5">
                 <SvgIcon name="reload" alt="ログをクリア" />
               </span>
             </button>
@@ -484,7 +484,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               })}
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </>
   );
