@@ -25,6 +25,10 @@ export default function Page() {
         <p>
           イベントハンドラを持っている要素はform要素のみですが、一部のイベントによってはバブリングしないため直接イベントを受け取る要素にハンドラを登録しています。
         </p>
+
+        <p id={`${id}-container-desc`}>
+          <strong>ここで入力された値はどこにも送信されません。</strong>
+        </p>
       </PageTitle>
       <DOMEventWatcherContent id={id} />
       <ShareSection />

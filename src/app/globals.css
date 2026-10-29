@@ -455,6 +455,11 @@
     fill: #fff;
   }
 
+  ::placeholder {
+    /* Chrome は UA の overflow: hidden で g などの下が欠ける */
+    overflow: visible;
+  }
+
   :root {
     &:not(:has([data-no-scrollbar-gutter])) {
       scrollbar-gutter: stable;

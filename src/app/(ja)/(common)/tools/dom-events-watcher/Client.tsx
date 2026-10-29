@@ -3,7 +3,11 @@
 import { NO_SUBSCRIBE } from '@/constants/hooks';
 import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
+import clsx from 'clsx';
+
+import styles from '@/app/(ja)/(common)/tools/dom-events-watcher/Client.module.css';
 import { Details } from '@/components/ui/boxes/Details';
+import { Switch } from '@/components/ui/forms';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { DOM_EVENTS_CONTAINER_ID } from '@/constants/id';
 
@@ -78,6 +82,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
   const eventNames = useSyncExternalStore(NO_SUBSCRIBE, getEventNames, () => emptyEventNames);
   const logRef = useRef<[[string, string, string], ...([string, string] | string)[]]>([['', '', getNow()]]);
   const [log, setLog] = useState<typeof logRef.current>([['', '', getNow()]]);
+  const [isMouseHover, setIsMouseHover] = useState(false);
 
   const handler = useCallback((e: Event) => {
     clearInterval(key);
@@ -269,133 +274,134 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
       <div className="w1024:flex w1024:h-min gap-6">
         <div className="w1024:min-w-375px w1024:max-w-375px relative">
-          <form
-            ref={ref}
-            className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none max-h-[30vh] overflow-y-scroll overscroll-contain border border-solid p-4 pb-8"
-            id={DOM_EVENTS_CONTAINER_ID}
-            role="group"
-            aria-labelledby={`${id}-title`}
-            aria-describedby={`${id}-container-desc`}
-          >
-            <div className="min-h-[40vh]">
-              <p id={`${id}-container-desc`} className="mb-8">
-                <strong>ここに入力された値はどこにも送信されません。</strong>
-              </p>
-
-              <p className="border-secondary mb-8 touch-none border border-solid p-8 text-center">
-                タッチイベントを無視するp要素
-              </p>
-
-              <p>
-                <label htmlFor={id} className="mb-2 block w-fit font-bold">
-                  テキストフィールド
-                </label>
-              </p>
-              <p id={`${id}-description`} className="mb-2">
-                ファイルのドラッグ＆ドロップも可能です。
-              </p>
-              <p className="mb-8">
-                <input
-                  id={id}
-                  autoComplete="none"
-                  aria-describedby={`${id}-description`}
-                  placeholder="hogehoge"
-                  className="w-full rounded border border-solid border-gray-500 p-4"
-                />
-              </p>
-
-              <p>
-                <label htmlFor={`${id}-required`} className="mb-2 block w-fit font-bold">
-                  テキストフィールド（必須）
-                </label>
-              </p>
-
-              <p className="mb-8">
-                <input
-                  id={`${id}-required`}
-                  autoComplete="none"
-                  placeholder="hogehoge"
-                  required
-                  className="w-full rounded border border-solid border-gray-500 p-4"
-                />
-              </p>
-
-              <fieldset className="mb-8">
-                <legend className="mb-2 block w-fit font-bold">ラジオボタン</legend>
-                <ul>
-                  <li>
-                    <label>
-                      <input type="radio" name="hoge" />
-                      <span className="pl-2">項目1</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label>
-                      <input type="radio" name="hoge" />
-                      <span className="pl-2">項目2</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label>
-                      <input type="radio" name="hoge" />
-                      <span className="pl-2">項目3</span>
-                    </label>
-                  </li>
-                </ul>
-              </fieldset>
-
-              <fieldset className="mb-8">
-                <legend className="mb-2 block w-fit font-bold">チェックボタン</legend>
-                <ul>
-                  <li>
-                    <label>
-                      <input type="checkbox" name="hoge" />
-                      <span className="pl-2">項目1</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label>
-                      <input type="checkbox" name="hoge" />
-                      <span className="pl-2">項目2</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label>
-                      <input type="checkbox" name="hoge" />
-                      <span className="pl-2">項目3</span>
-                    </label>
-                  </li>
-                </ul>
-              </fieldset>
+          <div className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none max-h-[30vh] overflow-y-scroll overscroll-contain border border-solid">
+            <div className="border-b-solid border-b p-4">
+              <Switch label="マウスホバーを可視化" checked={isMouseHover} dispatch={setIsMouseHover} />
             </div>
+            <form
+              ref={ref}
+              id={DOM_EVENTS_CONTAINER_ID}
+              role="group"
+              aria-labelledby={`${id}-title`}
+              aria-describedby={`${id}-container-desc`}
+              className={clsx('p-4 pb-8', isMouseHover && styles.mouseHover)}
+            >
+              <div className="min-h-[40vh]">
+                <p className="border-secondary mb-8 touch-none border border-solid p-8 text-center">
+                  タッチイベントを無視するp要素
+                </p>
 
-            <figure className="mb-8 text-center">
-              <p className="mb-2">
-                <video
-                  src="/tools/dom-events-watcher/sample.mp4"
-                  controls
-                  muted
-                  className="aspect-video h-auto w-96 max-w-full"
-                ></video>
-              </p>
+                <p>
+                  <label htmlFor={id} className="mb-2 block w-fit font-bold">
+                    テキストフィールド
+                  </label>
+                </p>
+                <p id={`${id}-description`} className="mb-2">
+                  ファイルのドラッグ＆ドロップも可能です。
+                </p>
+                <p className="mb-8">
+                  <input
+                    id={id}
+                    autoComplete="none"
+                    aria-describedby={`${id}-description`}
+                    placeholder="hogehoge"
+                    className="w-full rounded border border-solid border-gray-500 p-4"
+                  />
+                </p>
 
-              <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
-            </figure>
+                <p>
+                  <label htmlFor={`${id}-required`} className="mb-2 block w-fit font-bold">
+                    テキストフィールド（必須）
+                  </label>
+                </p>
 
-            <div className="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-8 text-center">
-              <p>
-                <button type="button" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2 text-black">
-                  何も起こらないただのボタン
-                </button>
-              </p>
+                <p className="mb-8">
+                  <input
+                    id={`${id}-required`}
+                    autoComplete="none"
+                    placeholder="hogehoge"
+                    required
+                    className="w-full rounded border border-solid border-gray-500 p-4"
+                  />
+                </p>
 
-              <p>
-                <button type="submit" className="min-w-64 rounded-lg bg-orange-300 px-4 py-2 text-black">
-                  送信ボタン
-                </button>
-              </p>
-            </div>
-          </form>
+                <fieldset className="mb-8">
+                  <legend className="mb-2 block w-fit font-bold">ラジオボタン</legend>
+                  <ul>
+                    <li>
+                      <label>
+                        <input type="radio" name="hoge" />
+                        <span className="pl-2">項目1</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="radio" name="hoge" />
+                        <span className="pl-2">項目2</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="radio" name="hoge" />
+                        <span className="pl-2">項目3</span>
+                      </label>
+                    </li>
+                  </ul>
+                </fieldset>
+
+                <fieldset className="mb-8">
+                  <legend className="mb-2 block w-fit font-bold">チェックボタン</legend>
+                  <ul>
+                    <li>
+                      <label>
+                        <input type="checkbox" name="hoge" />
+                        <span className="pl-2">項目1</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" name="hoge" />
+                        <span className="pl-2">項目2</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" name="hoge" />
+                        <span className="pl-2">項目3</span>
+                      </label>
+                    </li>
+                  </ul>
+                </fieldset>
+              </div>
+
+              <figure className="mb-8 text-center">
+                <p className="mb-2">
+                  <video
+                    src="/tools/dom-events-watcher/sample.mp4"
+                    controls
+                    muted
+                    className="aspect-video h-auto w-96 max-w-full"
+                  ></video>
+                </p>
+
+                <figcaption>ミュートされた音声ありのサンプル動画（2.86秒）</figcaption>
+              </figure>
+
+              <div className="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-8 text-center">
+                <p>
+                  <button type="button" className="min-w-64 rounded-lg border border-current px-4 py-2">
+                    何も起こらないただのボタン
+                  </button>
+                </p>
+
+                <p>
+                  <button type="submit" className="min-w-64 rounded-lg border border-current px-4 py-2">
+                    送信ボタン
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
 
         <section>
