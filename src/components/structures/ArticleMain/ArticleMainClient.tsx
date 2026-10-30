@@ -444,6 +444,7 @@ export const ArticleCodeHighlightActivator = () => {
           'ts',
           'typescript',
           'json',
+          'md',
           'sh',
           'zsh',
           'powershell',
