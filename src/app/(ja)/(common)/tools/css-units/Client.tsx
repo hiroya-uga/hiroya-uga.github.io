@@ -448,7 +448,7 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                 type="number"
                 min={0}
                 max={200}
-                value={value}
+                value={String(value)}
                 className="outline-hidden pr-8PX block w-full pb-1 pt-1.5 text-right"
                 onChange={({ currentTarget }) => {
                   const currentValue = Number(currentTarget.value);
@@ -460,9 +460,6 @@ export const CSSUnitsContent = ({ id }: { id: string }) => {
                   } else {
                     setValue(currentValue);
                   }
-
-                  // 先頭の0を削除する
-                  currentTarget.value = String(currentValue);
                 }}
               />
             </span>

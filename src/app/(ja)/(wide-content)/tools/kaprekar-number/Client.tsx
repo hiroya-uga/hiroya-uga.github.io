@@ -30,9 +30,9 @@ export const KaprekarNumberContent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-  const countRef = useRef<HTMLSpanElement>(null);
   const [tryValue, setTryValue] = useState('');
   const [digitsLength, setDigitsLength] = useState(0);
+  const [tryCount, setTryCount] = useState(0);
   const [maxTimes, setMaxTimes] = useState(100);
   const [isRunning, setIsRunning] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -48,9 +48,8 @@ export const KaprekarNumberContent = () => {
       const container = containerRef.current;
       const input = inputRef.current;
       const result = resultRef.current;
-      const count = countRef.current;
 
-      if (!container || !input || !result || !count) {
+      if (!container || !input || !result) {
         return;
       }
 
@@ -137,7 +136,7 @@ export const KaprekarNumberContent = () => {
         }
 
         if (i < maxTimes) {
-          count.textContent = String(i + 1);
+          setTryCount(i + 1);
 
           if (currentNumberRef.current === next) {
             result.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -203,9 +202,10 @@ export const KaprekarNumberContent = () => {
                     inputMode="numeric"
                     value={tryValue}
                     onInput={(e) => {
-                      e.currentTarget.value = formatStringToNumericString(e.currentTarget.value);
-                      setTryValue(e.currentTarget.value);
-                      setDigitsLength(e.currentTarget.value.length);
+                      const formattedValue = formatStringToNumericString(e.currentTarget.value);
+
+                      setTryValue(formattedValue);
+                      setDigitsLength(formattedValue.length);
                     }}
                     onFocus={() => {
                       containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -297,10 +297,7 @@ export const KaprekarNumberContent = () => {
           <div className="bg-(--background-color-primary)/80 pointer-events-auto ml-auto mr-4 mt-2 w-fit rounded px-2 py-1 text-right text-xs leading-tight">
             <p>
               試行回数：
-              <span ref={countRef} className="mx-1 font-mono">
-                0
-              </span>
-              回
+              <span className="mx-1 font-mono">{tryCount}</span>回
             </p>
             <p>
               入力桁数：
