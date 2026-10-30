@@ -274,7 +274,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
 
       <div className="w1024:flex w1024:h-min w1024:space-y-0 w1024:gap-6 space-y-6">
         <div className="w1024:min-w-375px w1024:max-w-375px relative">
-          <div className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none max-h-[30vh] overflow-y-scroll overscroll-x-none border border-solid">
+          <div className="border-secondary w1024:absolute w1024:left-0 w1024:top-0 w1024:h-full w1024:max-h-none grid max-h-[30vh] grid-rows-[auto_1fr] border border-solid">
             <div className="border-b-solid border-b p-4">
               <Switch label="マウスホバーを可視化" checked={isMouseHover} dispatch={setIsMouseHover} />
             </div>
@@ -284,7 +284,7 @@ export const DOMEventWatcherContent = ({ id }: { id: string }) => {
               role="group"
               aria-labelledby={`${id}-title`}
               aria-describedby={`${id}-container-desc`}
-              className={clsx('p-4 pb-8', isMouseHover && styles.mouseHover)}
+              className={clsx('overflow-y-scroll overscroll-x-none p-4 pb-8', isMouseHover && styles.mouseHover)}
             >
               <div className="min-h-[40vh]">
                 <p className="border-secondary text-14px mb-2 touch-none border border-solid p-4 text-center">
