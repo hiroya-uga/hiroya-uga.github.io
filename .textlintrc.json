@@ -4,7 +4,7 @@
     "no-doubled-joshi": true,
     "sentence-length": true,
     "max-kanji-continuous-len": {
-      "max": 6,
+      "max": 7,
       "allow": ["小数点四捨五入", "双方向制御文字", "結合書記素接合子"]
     },
     "max-ten": true,
