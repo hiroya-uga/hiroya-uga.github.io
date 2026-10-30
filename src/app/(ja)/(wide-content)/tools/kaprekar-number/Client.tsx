@@ -24,6 +24,8 @@ const calculateKaprekar = (inputNumber: number | bigint) => {
   };
 };
 
+const DEFAULT_MAX_TIMES = 100;
+
 export const KaprekarNumberContent = () => {
   const differenceClassName = useId();
 
@@ -33,7 +35,7 @@ export const KaprekarNumberContent = () => {
   const [tryValue, setTryValue] = useState('');
   const [digitsLength, setDigitsLength] = useState(0);
   const [tryCount, setTryCount] = useState(0);
-  const [maxTimes, setMaxTimes] = useState(100);
+  const [maxTimesText, setMaxTimesText] = useState(String(DEFAULT_MAX_TIMES));
   const [isRunning, setIsRunning] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [resultMessage, setResultMessage] = useState<string>('');
@@ -65,6 +67,11 @@ export const KaprekarNumberContent = () => {
         showErrorMessage('エラー：中断ボタンが押されました。');
         return;
       }
+
+      const parsedMaxTimes = Number(formatStringToNumericString(maxTimesText));
+      const maxTimes = Number.isInteger(parsedMaxTimes) && 0 < parsedMaxTimes ? parsedMaxTimes : DEFAULT_MAX_TIMES;
+
+      setMaxTimesText(String(maxTimes));
 
       const inputNumber = (() => {
         try {
@@ -165,7 +172,7 @@ export const KaprekarNumberContent = () => {
       intervalId.current = window.setInterval(calculate, 40);
       calculate();
     },
-    [set, differenceClassName, tryValue, maxTimes],
+    [set, differenceClassName, tryValue, maxTimesText],
   );
 
   return (
@@ -240,17 +247,8 @@ export const KaprekarNumberContent = () => {
           <TextField
             label="最大試行回数"
             inputMode="numeric"
-            value={String(maxTimes)}
-            onInput={(e) => {
-              const value = e.currentTarget.value
-                .replace(/[０-９ー]/g, (c) => {
-                  return String.fromCharCode(c.charCodeAt(0) - 0xfee0);
-                })
-                .replace(/^0+|[^0-9-]/g, '');
-
-              setMaxTimes(Number(value));
-            }}
-            onBlur={(e) => setMaxTimes(Number(e.currentTarget.value) || 100)}
+            value={maxTimesText}
+            onInput={(e) => setMaxTimesText(e.currentTarget.value)}
             readOnly={isRunning}
             description="途中式が画面に出力されるため、膨大な試行回数を設定すると、ブラウザがフリーズする可能性があります。"
           />

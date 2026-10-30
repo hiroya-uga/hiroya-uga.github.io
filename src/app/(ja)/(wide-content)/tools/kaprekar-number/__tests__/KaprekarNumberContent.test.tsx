@@ -63,4 +63,39 @@ describe('KaprekarNumberContent', () => {
 
     expect(screen.getByText('エラー：ゾロ目以外の数値を入力してください。')).toBeDefined();
   });
+
+  describe('最大試行回数', () => {
+    const getMaxTimesInput = () => screen.getByLabelText<HTMLInputElement>('最大試行回数');
+
+    it('入力中は整形されず、計算する押下時に半角へ整形される', async () => {
+      const user = userEvent.setup();
+      render(<KaprekarNumberContent />);
+
+      await user.clear(getMaxTimesInput());
+      await user.type(getMaxTimesInput(), '５０a');
+
+      expect(getMaxTimesInput().value).toBe('５０a');
+
+      await user.type(getInput(), '6174');
+      await user.click(screen.getByRole('button', { name: '計算する' }));
+
+      expect(getMaxTimesInput().value).toBe('50');
+    });
+
+    it.each(['', '0', 'abc', '-5'])('異常値「%s」は計算する押下時に100へ戻る', async (value) => {
+      const user = userEvent.setup();
+      render(<KaprekarNumberContent />);
+
+      await user.clear(getMaxTimesInput());
+
+      if (value !== '') {
+        await user.type(getMaxTimesInput(), value);
+      }
+
+      await user.type(getInput(), '6174');
+      await user.click(screen.getByRole('button', { name: '計算する' }));
+
+      expect(getMaxTimesInput().value).toBe('100');
+    });
+  });
 });
