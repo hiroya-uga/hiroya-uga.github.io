@@ -302,6 +302,7 @@ export const SortVisualizerContent = () => {
   const [elementCount, setElementCount] = useState(DEFAULT_LENGTH);
   const [times, setTimes] = useState(0);
   const [running, setRunning] = useState(false);
+  const [isAborting, setIsAborting] = useState(false);
 
   const fpsRef = useRef(60);
   const abortRef = useRef(false);
@@ -517,6 +518,12 @@ export const SortVisualizerContent = () => {
   }, []);
 
   const isVisualizerMode = mode === 'visualizer';
+
+  let runButtonLabel = '実行する';
+
+  if (running) {
+    runButtonLabel = isAborting ? '処理中...' : '処理を強制終了する';
+  }
 
   return (
     <>
@@ -797,15 +804,15 @@ export const SortVisualizerContent = () => {
         <p className="w640:py-4">
           <RunButton
             type="button"
-            onClick={(e) => {
-              e.currentTarget.textContent = '処理中...';
-
+            onClick={() => {
               if (running) {
                 abortRef.current = true;
+                setIsAborting(true);
                 return;
               }
 
               abortRef.current = false;
+              setIsAborting(false);
 
               try {
                 setTimes(0);
@@ -830,7 +837,7 @@ export const SortVisualizerContent = () => {
             }}
             disabled={running === false && (activeSorts.length === 0 || randomArrayRef.current.length < 2)}
           >
-            {running ? '処理を強制終了する' : '実行する'}
+            {runButtonLabel}
           </RunButton>
         </p>
       </div>
