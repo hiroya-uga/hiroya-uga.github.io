@@ -1,7 +1,7 @@
 import { PageTitle } from '@/components/structures/PageTitle';
 import { ShareSection } from '@/components/structures/ShareSection';
 import { CodeBlock } from '@/components/ui/embed/CodeBlock';
-import { CodeBlockWithPlatform } from '@/components/ui/embed/CodeBlockWithPlatform';
+import { CodeBlockWithSwitcher } from '@/components/ui/embed/CodeBlockWithSwitcher';
 import { LangSwitchLink } from '@/components/ui/features/LangSwitchLink';
 import { Heading } from '@/components/ui/headings/Heading';
 import { NoteList } from '@/components/ui/lists/NoteList';
@@ -143,7 +143,8 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
 
       <p className="mb-4 text-sm leading-relaxed">{t.installDescription}</p>
       <div className="space-y-4">
-        <CodeBlockWithPlatform
+        <CodeBlockWithSwitcher
+          type="platform"
           codes={cloneInstallCommandByPlatform}
           language={languageByPlatform}
           title={t.cloneInstallTitle}
@@ -151,7 +152,8 @@ export const ToolsGitCdPage = ({ pageTitle, following, description, inLanguage =
           nowrap
           copyButton
         />
-        <CodeBlockWithPlatform
+        <CodeBlockWithSwitcher
+          type="platform"
           codes={quickInstallCommandByPlatform}
           language={languageByPlatform}
           title={t.quickInstallTitle}

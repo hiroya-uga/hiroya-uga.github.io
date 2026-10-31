@@ -1,7 +1,13 @@
+export const LOCAL_STORAGE_KEYS = {
+  PLATFORM: 'platform',
+  CODE_LANGUAGE: 'code-language',
+} as const;
+
 type Value = {
   // ユーザ設定
   theme: 'dark' | 'light';
-  platform: string;
+  [LOCAL_STORAGE_KEYS.PLATFORM]: string;
+  [LOCAL_STORAGE_KEYS.CODE_LANGUAGE]: string;
   'cookie-consent': 'accepted' | 'rejected';
 
   // ページごとのキー

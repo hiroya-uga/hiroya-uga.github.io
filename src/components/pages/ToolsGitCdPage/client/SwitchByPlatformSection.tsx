@@ -1,12 +1,12 @@
 'use client';
 
-import { usePlatform } from '@/components/ui/embed/CodeBlockWithPlatform/hooks';
+import { useContentSwitcher } from '@/hooks/use-content-switcher';
 
 interface Props {
   content: Record<string, React.ReactNode>;
 }
 
 export const SwitchByPlatformSection = ({ content }: Props) => {
-  const [platform] = usePlatform();
+  const [platform] = useContentSwitcher('platform');
   return <>{content[platform]}</>;
 };
