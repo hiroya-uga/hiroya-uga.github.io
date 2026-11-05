@@ -1,7 +1,7 @@
-import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { GlobalFooter } from '@/components/structures/GlobalFooter';
 import { GlobalHeader } from '@/components/structures/GlobalHeader';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { ArticleCategoryLinkList } from '@/components/ui/features/ArticleCategoryLinkList';
 import { ArticleList } from '@/components/ui/lists/ArticleList';
 import {
   ARTICLE_PATH_PATTERN_LIST,
@@ -38,7 +38,7 @@ export const ArticleCategoryPage = async ({ pageTitle, description, category }: 
       <main className="px-content-inline">
         <div className="max-w-structure mx-auto mb-8">
           <PageTitle title={pageTitle} description={description} />
-          <CategoryLinks currentCategory={category} />
+          <ArticleCategoryLinkList currentCategory={category} />
         </div>
         <div className="w1024:grid-cols-[1fr_minmax(auto,20%)] max-w-structure mx-auto grid gap-x-8 gap-y-20">
           <ArticleList type={category === 'tech-blog' ? 'simple' : 'thumbnail'} list={blogs} />

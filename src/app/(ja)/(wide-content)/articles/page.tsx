@@ -1,6 +1,6 @@
-import { CategoryLinks } from '@/app/(ja)/(wide-content)/articles/parts/CategoryLinks';
 import { JsonLd } from '@/components/structures/JsonLd';
 import { PageTitle } from '@/components/structures/PageTitle';
+import { ArticleCategoryLinkList } from '@/components/ui/features/ArticleCategoryLinkList/ArticleCategoryLinkList';
 import { ArticleList } from '@/components/ui/lists/ArticleList';
 import { DEFAULT_JSON_LD, SITE_NAME, URL_ORIGIN } from '@/constants/meta';
 import { generateOgpImage } from '@/libs/generate-ogp';
@@ -32,7 +32,7 @@ export default async function Page() {
         </p>
       </PageTitle>
       <div className="space-y-8">
-        <CategoryLinks />
+        <ArticleCategoryLinkList />
         <ArticleList type="og-thumbnail" list={blogs} />
       </div>
     </>

@@ -1,20 +1,26 @@
 import { AnchorHTMLAttributes } from 'react';
 
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
+import clsx from 'clsx';
 import Link, { LinkProps } from 'next/link';
 
 interface Props extends Omit<LinkProps, 'className'> {
   children: React.ReactNode;
+  color?: 'primary' | 'secondary';
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target'];
 }
 
-export const Button = ({ children, ...props }: Readonly<Props>) => {
+export const Button = ({ children, color = 'primary', ...props }: Readonly<Props>) => {
   const isNewTab = props.target === '_blank';
 
   return (
     <Link
       {...props}
-      className="group/button bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover) text-high-contrast pl-28PX pr-20PX block w-full max-w-80 rounded-full py-3 align-middle text-sm no-underline transition-colors"
+      className={clsx([
+        'group/button text-high-contrast pl-28PX pr-20PX block w-full max-w-80 rounded-full py-3 align-middle text-sm no-underline transition-colors',
+        color === 'primary' && 'bg-(--x-color-background-tertiary) hover:bg-(--x-color-background-tertiary-hover)',
+        color === 'secondary' && 'bg-(--x-color-background-secondary) hover:bg-(--x-color-background-primary)',
+      ])}
       rel={isNewTab ? 'noopener noreferrer' : undefined}
     >
       <span className="mx-auto grid w-fit grid-cols-[auto_0.875rem] place-items-center gap-1.5 [--x-fill:var(--color-high-contrast)]">

@@ -1,18 +1,21 @@
 import { ARTICLE_CATEGORY_LABEL_MAPPING } from '@/constants/articles';
 import Link from 'next/link';
+import { useId } from 'react';
 
-type Props = {
+interface Props {
   currentCategory?: string;
   currentYear?: string;
-};
+}
 
-export const CategoryLinks = ({ currentCategory }: Props) => {
+export const ArticleCategoryLinkList = ({ currentCategory }: Props) => {
+  const id = useId();
+
   return (
     <div className="flex flex-wrap gap-y-2">
       <p>
-        <b>カテゴリ：</b>
+        <b id={id}>記事カテゴリ：</b>
       </p>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-2" aria-labelledby={id}>
         {Object.entries(ARTICLE_CATEGORY_LABEL_MAPPING).map(([category, label]) => (
           <li key={category}>
             {category === currentCategory ? (
@@ -22,7 +25,7 @@ export const CategoryLinks = ({ currentCategory }: Props) => {
             ) : (
               <Link
                 href={`/articles/${category}`}
-                className="bg-panel-primary hover:bg-panel-primary-hover border-primary rounded-md border px-4 py-2"
+                className="bg-panel-primary hover:bg-panel-primary-hover border-primary rounded-md border px-4 py-2 no-underline hover:underline"
               >
                 {label}
               </Link>

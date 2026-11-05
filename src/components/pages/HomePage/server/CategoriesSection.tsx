@@ -1,3 +1,5 @@
+import { Button } from '@/components/ui/buttons/Button';
+import { ArticleCategoryLinkList } from '@/components/ui/features/ArticleCategoryLinkList';
 import { Picture } from '@/components/ui/features/Picture';
 import { SvgIcon } from '@/components/ui/media/SvgIcon';
 import { CATEGORIES_SECTION_HEADING_ID } from '@/constants/id';
@@ -55,26 +57,28 @@ const ArticleListForTop = async () => {
             `/generated-ogp${article.pathname}.png`);
 
         return (
-          <li className="relative grid" key={article.pathname}>
+          <li className="not-dark:[box-shadow:0_0_2px_1px_rgb(0_0_0/0.1)] relative grid" key={article.pathname}>
             <Link href={article.pathname} className="group flex flex-col rounded-sm no-underline">
-              <div className="bg-primary aspect-1200/630 overflow-hidden rounded-sm">
+              <div className="bg-primary aspect-1200/630 not-dark:rounded-b-none overflow-hidden rounded-sm">
                 {thumbnail !== undefined && (
                   <Picture src={thumbnail} alt="" width={1200} height={630} className="block size-full object-cover" />
                 )}
               </div>
-              <div className="px-1PX mt-1.5 grow">
+              <div className="px-1PX not-dark:bg-primary not-dark:px-8PX grow pt-1.5">
                 <span className="w400:tracking-wide group-hover:underline group-focus:underline">{title}</span>
               </div>
-              <div className="px-1PX w400:gap-x-6PX w400:flex w400:flex-wrap w400:justify-end ml-auto mt-0.5">
-                <time
-                  dateTime={article.publishedAt}
-                  className="text-primary leading-23px align-middle font-mono text-sm"
-                >
-                  {intl.format(new Date(article.publishedAt))}
-                </time>{' '}
-                <span className="text-primary pb-5px p-4px text-12px ml-auto block w-fit content-center border border-solid text-center align-middle font-mono leading-none">
-                  {resolveCategoryName(article.pathname)}
-                </span>
+              <div className="not-dark:bg-primary not-dark:px-8PX not-dark:pb-8PX rounded-b-sm">
+                <div className="px-1PX w400:gap-x-6PX w400:flex w400:flex-wrap w400:justify-end ml-auto mt-0.5 w-fit">
+                  <time
+                    dateTime={article.publishedAt}
+                    className="text-primary leading-23px align-middle font-mono text-sm"
+                  >
+                    {intl.format(new Date(article.publishedAt))}
+                  </time>{' '}
+                  <span className="text-primary pb-5px p-4px text-12px ml-auto block w-fit content-center border border-solid text-center align-middle font-mono leading-none">
+                    {resolveCategoryName(article.pathname)}
+                  </span>
+                </div>
               </div>
             </Link>
           </li>
@@ -148,11 +152,11 @@ export const CategoriesSection = () => {
           </ul>
 
           <div className="w640:mt-64px w640:pl-1 mt-12 pl-2">
-            <h3 className={clsx(['text-xl font-bold', 'w640:text-[2rem]'])}>Articles</h3>
+            <h3 className={clsx(['mb-paragraph text-xl font-bold', 'w640:text-[2rem]'])}>Articles</h3>
 
-            <p className="mt-paragraph">
-              最近更新された記事の一覧です。<Link href="/articles">記事一覧はこちら</Link>。
-            </p>
+            <ArticleCategoryLinkList />
+
+            <p className="mt-paragraph">最近更新された記事の一覧です。</p>
 
             <ul
               className={clsx([
@@ -164,6 +168,12 @@ export const CategoriesSection = () => {
             >
               <ArticleListForTop />
             </ul>
+
+            <p className="w640:mt-72px w640:place-items-end mt-8 grid place-items-center">
+              <Button href="/articles/" color="secondary">
+                記事一覧をもっと見る
+              </Button>
+            </p>
           </div>
         </div>
       </div>

@@ -110,9 +110,9 @@ export const BookMarkSection = () => {
                 <a
                   href={href}
                   {...prop}
-                  className="bg-panel-primary hover:bg-panel-primary-hover border-primary transition-bg @w280:rounded-l @w280:rounded-r-none @w280:last:rounded-r grid grow content-center rounded-t border px-3 py-1.5 no-underline last:rounded focus:relative focus:z-10"
+                  className="bg-panel-primary hover:bg-panel-primary-hover border-primary transition-bg @w280:rounded-l @w280:rounded-r-none @w280:last:rounded-r group grid grow content-center rounded-t border px-3 py-1.5 no-underline last:rounded focus:relative focus:z-10"
                 >
-                  {title}
+                  <span className="group-hover:underline">{title}</span>
                   <span className="text-secondary text-2xs leading-18px inline-block no-underline">
                     {new URL(href).hostname}
                   </span>
