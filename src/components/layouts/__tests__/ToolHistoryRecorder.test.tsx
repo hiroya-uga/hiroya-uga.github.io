@@ -36,8 +36,16 @@ vi.mock('@/components/ui/dialogs/Confirm', () => ({
   },
 }));
 
+const stubDisplayModeStandalone = (matches: boolean) => {
+  vi.stubGlobal(
+    'matchMedia',
+    vi.fn().mockImplementation((query: string) => ({ matches, media: query })),
+  );
+};
+
 beforeEach(() => {
   localStorage.clear();
+  stubDisplayModeStandalone(false);
   mockPathname = '/tools/css-units';
   vi.useFakeTimers({ shouldAdvanceTime: true });
 });
@@ -154,6 +162,20 @@ describe('ToolHistoryRecorder', () => {
 
     expect(screen.getByRole('alertdialog')).toBeInTheDocument();
     expect(screen.getByText('ツールの閲覧履歴をトップページに表示しますか？')).toBeInTheDocument();
+  });
+
+  it('PWA(standalone)で起動しているときは確認ダイアログを表示しない', async () => {
+    stubDisplayModeStandalone(true);
+    addHistoryToStorage('/tools/css-units');
+    addHistoryToStorage('/tools/css-units');
+
+    render(<ToolHistoryRecorder />);
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(300);
+    });
+
+    expect(screen.queryByRole('alertdialog')).toBeNull();
   });
 
   it('「利用する」を選ぶとhomeとshownに記録する', async () => {

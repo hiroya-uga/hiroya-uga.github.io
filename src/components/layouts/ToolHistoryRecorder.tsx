@@ -52,7 +52,10 @@ export const ToolHistoryRecorder = () => {
     const usageCount = getUsageCount(history);
     const home = getLocalStorage('home');
     const shown = getLocalStorage('shown');
+    // PWAにはトップページ導線がなく、履歴の設定を促しても意味がない
+    const isStandalone = globalThis.window.matchMedia('(display-mode: standalone)').matches;
     const shouldPromptHistoryEnable =
+      isStandalone === false &&
       USAGE_COUNT_TO_PROMPT_HISTORY_ENABLE <= usageCount &&
       home?.['recent-tools-section-is-enabled'] !== true &&
       shown?.['recent-tools-section-prompt'] !== true;
