@@ -240,7 +240,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const url = `${URL_ORIGIN}/articles/${category}/${year}/${fileName}`;
   const categoryName = resolveCategoryName(category);
-  const ogImage = await generateOgpImage(['articles', ...slug], post.meta.title, categoryName, post.meta.ogImage);
+  const ogImage = await generateOgpImage(
+    ['articles', ...slug],
+    post.meta.title,
+    categoryName,
+    post.meta.ogImage,
+    post.meta.ogImageGenerate !== false,
+  );
 
   const title = `${post.meta.title.replaceAll('\n', '')} | ${categoryName} | ${SITE_NAME}`;
   const description =

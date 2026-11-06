@@ -15,6 +15,7 @@ export type ArticleFrontMatter = {
   publishedAt: string;
   description?: string;
   ogImage?: string;
+  ogImageGenerate?: boolean;
   topics?: string[];
   updatedAt?: string;
 };

@@ -39,6 +39,7 @@ export async function generateOgpImage(
   title: string,
   categoryName?: string,
   baseImage?: string,
+  decorate = true,
 ): Promise<string> {
   const width = 1200;
   const height = 630;
@@ -63,6 +64,11 @@ export async function generateOgpImage(
     const src = path.join(process.cwd(), 'public', filePath);
 
     ctx.drawImage(await loadImage(src), 0, 0, width, height);
+
+    if (decorate === false) {
+      return writeOgpImage(canvas, slug);
+    }
+
     ctx.drawImage(await screen, 0, 0, width, height);
 
     // if (isSvg) {
@@ -213,7 +219,10 @@ export async function generateOgpImage(
     }
   }
 
-  // 書き出し
+  return writeOgpImage(canvas, slug);
+}
+
+function writeOgpImage(canvas: ReturnType<typeof createCanvas>, slug: string[]) {
   const buffer = canvas.toBuffer('image/png');
   const pathname = slug.slice(0, -1);
   const outPath = path.join(process.cwd(), 'public', 'generated-ogp', ...pathname, `${slug[slug.length - 1]}.png`);
