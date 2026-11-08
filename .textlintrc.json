@@ -1,5 +1,8 @@
 {
   "plugins": ["jsx"],
+  "filters": {
+    "comments": true
+  },
   "rules": {
     "no-doubled-joshi": true,
     "sentence-length": true,
