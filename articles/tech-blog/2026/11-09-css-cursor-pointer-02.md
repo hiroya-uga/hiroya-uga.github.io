@@ -77,7 +77,7 @@ Issueの中でも、colmtuite氏によって次のような指摘がされてい
 > nsull: but design systems like Bootstrap/Tailwind is morelike 60/40 in favor of default
 > 出典：[css-meeting-botによるコメント（The full IRC log of that discussion） - w3c/csswg-drafts#14251](https://github.com/w3c/csswg-drafts/issues/14251#issuecomment-6322899089)
 
-npmで配布されているモジュールでは`pointer`が圧倒的に多い一方、BootstrapやTailwindのようなデザインシステムでは6:4で`default`のほうが優勢だったようです。
+npmで配布されているモジュールでは`pointer`が圧倒的に多い一方、BootstrapやTailwindのようなデザインシステムでは60対40で`default`のほうが優勢だったようです。
 
 ## それでもCSSWGの決定を受け入れていこう
 
