@@ -85,7 +85,7 @@ npmで配布されているモジュールでは`pointer`が圧倒的に多い�
 
 [リンクでないUIならば、カーソルを指ポインタにするべきではない。](/articles/tech-blog/2026/11-09-css-cursor-pointer-01)の記事内で紹介しているCodePenには含めませんでしたが、実はすでにリンクでなくても指ポインタになる例外が存在します。
 
-当時の状況を考えると、画像で表現されたボタンの多くが押せると認識しづらかったためでしょうか？`input[type="image"]`は送信ボタンとして振る舞うにもかかわらず、たいていのブラウザCSSでは指ポインタになります。
+当時の状況を考えると、画像で表現されたボタンの多くが押せると認識しづらかったためでしょうか。`input[type="image"]`は送信ボタンとして振る舞うにもかかわらず、たいていのブラウザCSSでは指ポインタになります。
 
 [[Example] Default value of cursor (with input[type="image"])](https://codepen.io/hiroya_uga/pen/pveGzPL?tab=result)
 
