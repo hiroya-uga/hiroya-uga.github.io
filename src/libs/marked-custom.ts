@@ -729,17 +729,38 @@ const overrideListExtension: TokenizerAndRendererExtension = {
     }
 
     const isAllImages = t.items.every((item) => /^!\[.*?\]\(.*?\)$/.test(item.text.trim()));
-    const isImageViewer = isAllImages && t.items.length === 2;
+    const imageData = isAllImages
+      ? t.items.map((item) => {
+          const match = item.text.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
+          return {
+            alt: match?.[1] ?? '',
+            url: match?.[2] ?? '',
+          };
+        })
+      : [];
 
-    if (isImageViewer) {
-      const imageData = t.items.map((item) => {
-        const match = item.text.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
-        return {
-          alt: match?.[1] ?? '',
-          url: match?.[2] ?? '',
-        };
-      });
+    if (3 <= imageData.length) {
+      const slides = imageData
+        .map(
+          (image) => `<li class="image-carousel__item">
+          ${getLazyLoadMarkup({
+            href: image.url,
+            alt: image.alt,
+            controls: true,
+          })}
+          <span class="image-carousel__caption" aria-hidden="true">${image.alt}</span>
+        </li>`,
+        )
+        .join('\n');
 
+      return `<div class="image-carousel">
+        <ul class="image-carousel__list">
+        ${slides}
+        </ul>
+      </div>`;
+    }
+
+    if (imageData.length === 2) {
       return `<div class="image-diff-viewer" title="画像比較ビューア">
         <p class="image-diff-viewer__item">
           <span class="image-diff-viewer__alt" aria-hidden="true">${imageData[0].alt.replace('比較画像1：', '')}</span>

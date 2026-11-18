@@ -368,13 +368,17 @@ describe('marked-custom', () => {
       expect(html).toContain('<ul>');
     });
 
-    test('画像3枚以上のリストは通常の ul になる', () => {
+    test('画像3枚以上のリストは image-carousel になる', () => {
       const html = markedParse(
         FILE,
         '- ![a](https://example.com/a.png)\n- ![b](https://example.com/b.png)\n- ![c](https://example.com/c.png)',
       ) as string;
       expect(html).not.toContain('class="image-diff-viewer"');
-      expect(html).toContain('<ul>');
+      expect(html).toContain('class="image-carousel"');
+      expect(html.match(/class="image-carousel__item"/g)).toHaveLength(3);
+      expect(html).toContain('alt="a"');
+      expect(html).toContain('alt="b"');
+      expect(html).toContain('alt="c"');
     });
 
     test('テキスト混在のリストは通常の ul になる', () => {

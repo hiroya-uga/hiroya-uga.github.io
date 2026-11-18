@@ -248,7 +248,8 @@ html:has(.container) {
   }
 
   p:has(customされたimg要素ˆ-ˆ),
-  [class~="image-diff-viewer"] {
+  [class~="image-diff-viewer"],
+  [class~="image-carousel"] {
     position: relative;
     margin-inline: var(--x-negative-margin-inline);
   }
@@ -502,6 +503,148 @@ html:has(.container) {
         outline-offset: var(--x-outline-offset, 2px);
         box-shadow: 0 0 0 2px var(--x-color-background-secondary);
       }
+    }
+  }
+
+  [class~="image-carousel"] {
+    --x-marker-area: 32px;
+
+    [class~="image-carousel__list"] {
+      display: grid;
+      grid-auto-columns: 100%;
+      grid-auto-flow: column;
+      width: fit-content;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      counter-reset: image-carousel;
+      scroll-snap-type: x mandatory;
+      box-shadow:
+        0 0 1px rgb(0 0 0 / 0.2),
+        0 0 12px rgb(0 0 0 / 0.1);
+
+      @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+      }
+
+      /* 未対応ブラウザでは前後ボタンが出ないため、スクロールバーを操作手段として残す */
+      @supports (scroll-marker-group: after) {
+        scroll-marker-group: after;
+        scrollbar-width: none;
+      }
+    }
+
+    [class~="image-carousel__item"] {
+      position: relative;
+      display: grid;
+      /* 列幅は画像の幅に揃え、スライド幅を超える場合は縮める */
+      grid-template-rows: auto 1fr;
+      grid-template-columns: minmax(0, max-content);
+      justify-content: center;
+      width: fit-content;
+      padding-left: 0;
+      margin-bottom: 0;
+      counter-increment: image-carousel;
+      scroll-snap-align: center;
+
+      &::before {
+        display: none;
+      }
+
+      &::scroll-marker {
+        width: 8px;
+        height: 8px;
+        content: "" / "画像" counter(image-carousel);
+        background-color: var(--border-color-secondary);
+        border-radius: 50%;
+      }
+
+      &::scroll-marker:target-current {
+        background-color: var(--color-primary);
+      }
+
+      &::scroll-marker:focus-visible {
+        outline: 2px solid var(--x-color-text-link);
+        outline-offset: 2px;
+      }
+    }
+
+    [class~="image-carousel__caption"] {
+      display: block;
+      /* width: 0 で列幅の計算から外し、min-width で画像の幅まで広げる。長い代替テキストで列が広がるのを防ぐ */
+      width: 0;
+      min-width: 100%;
+      padding: 0.175rem var(--spacing-content-inline);
+      font-size: 0.75rem;
+      color: #fff;
+      background: rgb(0 0 0 / 0.7);
+
+      /* 画像の表示サイズに関するブレークポイント */
+      @media screen and (width >= 600px) {
+        padding-inline: 0.5rem;
+      }
+    }
+
+    /* 画像の表示サイズに関するブレークポイント */
+    @media screen and (width >= 600px) {
+      customされたimg要素ˆ-ˆ {
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+
+      [class~="image-carousel__caption"] {
+        border-radius: 0 0 0.5rem 0.5rem;
+        transition: border-radius 0.3s ease-out;
+
+        @supports (corner-shape: squircle) {
+          corner-shape: squircle;
+        }
+      }
+    }
+
+    [class~="image-carousel__list"]::scroll-marker-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      height: var(--x-marker-area);
+      margin: 8px 0 0;
+    }
+
+    /* 包含ブロックは .image-carousel。マーカー群の高さを除いた画像領域の中央に置く */
+    [class~="image-carousel__list"]::scroll-button(*) {
+      position: absolute;
+      top: calc(100% - var(--x-marker-area));
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: var(--x-marker-area);
+      height: var(--x-marker-area);
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1;
+      color: var(--x-color-text-primary);
+      background: var(--background-color-panel-primary);
+      border: 1px solid var(--border-color-secondary);
+      border-radius: 50%;
+    }
+
+    [class~="image-carousel__list"]::scroll-button(*):disabled {
+      cursor: default;
+      opacity: 0.3;
+    }
+
+    [class~="image-carousel__list"]::scroll-button(*):focus-visible {
+      outline: 2px solid var(--x-color-text-link);
+      outline-offset: 2px;
+    }
+
+    [class~="image-carousel__list"]::scroll-button(inline-start) {
+      inset-inline-start: 8px;
+      content: "←" / "前の画像";
+    }
+
+    [class~="image-carousel__list"]::scroll-button(inline-end) {
+      inset-inline-end: 8px;
+      content: "→" / "次の画像";
     }
   }
 

@@ -310,8 +310,8 @@ export const CustomImage = () => {
             }
 
             svg {
-              width: 1.25rem;
-              height: 1.25rem;
+              width: 20px;
+              height: 20px;
               padding: 8px;
               border-radius: 50%;
             }
@@ -343,7 +343,7 @@ export const CustomImage = () => {
 
           @media screen and (min-width: 640px) {
             :host button {
-              padding: 0.25rem;
+              padding: 4px;
             }
           }
           `,
