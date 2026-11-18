@@ -1,5 +1,15 @@
 version: 1
 rules:
+  - expected: ニコン
+    patterns:
+      - /(?<![A-Za-z0-9] ?)Nikon(?! ?[A-Za-z0-9])/
+    specs:
+      - from: Nikon Z6
+        to: Nikon Z6
+      - from: Canon Nikon Sony
+        to: Canon Nikon Sony
+      - from: Nikonのカメラ
+        to: ニコンのカメラ
   - expected: $1利用者
     patterns:
       - /([ァ-ヶー]+)(?<!スーパー|エンド|ヘビー|ライト|パワー|アクティブ|コア|ターゲット|テスト|ベータ|ゲスト)ユーザー?/
